@@ -1,0 +1,55 @@
+' Gambas class file
+
+' ### CHOOSE INSTALL TYPE FORM ###
+
+PUBLIC SUB Form_Show()
+
+' set button focus:
+frmMain.Button2.SetFocus
+
+' set some background colours:
+TextLabel1.BackColor = Global.HTMLBG 
+lblSubTitle.BackColor = Global.LogoBG
+Panel1.BackColor = Global.LogoBG
+
+END
+
+PUBLIC SUB Form_Resize()
+
+' Resize the html message:
+TextLabel1.Width = ScrollView1.ClientWidth
+TextLabel1.Adjust 
+
+END
+
+PUBLIC SUB Button1_Click() ' Full-automatic.
+
+Global.enumINSTMODE = 1 ' Full-automatic install mode.
+
+Utils.DrivePartInfo
+IF Global.DiskInfo.Count > 1 THEN frmDriveSelect.ShowModal
+
+frmMain.Button2.Enabled = FALSE ' Disable Choices.
+frmMain.Button6.Enabled = TRUE ' Enable Go for it!.
+frmMain.Button6_Click ' Advance to Go for it!.
+
+END
+
+PUBLIC SUB Button2_Click() ' Semi-automatic.
+
+Global.enumINSTMODE = 1 ' Semi-automatic install mode.
+frmMain.Button2.Enabled = FALSE ' Disable Choices.
+frmMain.Button3.Enabled = TRUE ' Enable Partitions.
+frmMain.Button3_Click ' Advance to Partitions.
+
+END
+
+PUBLIC SUB Button3_Click() ' Advanced.
+
+Global.enumINSTMODE = 1 ' Advanced install mode.
+'frmMain.Button2.Enabled = FALSE ' Disable Choices
+frmMain.Button3.Enabled = TRUE ' Enable Partitions
+frmMain.Button3_Click ' Advance to Partitions
+
+END
+

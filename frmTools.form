@@ -1,0 +1,114 @@
+# Gambas Form File 1.0
+
+{ Form Form
+  MoveScaled(41.375,35.625,98.625,64.625)
+  'Move(331,285,789,517)
+  Font = Font["Luxi Sans"]
+  Background = &HFFFFFF&
+  Text = ("")
+  Border = Window.None
+  Arrangement = Arrange.Horizontal
+  { ScrollView1 ScrollView
+    MoveScaled(2,2,55,56)
+    'Move(16,16,440,448)
+    Background = &HDFFFFF&
+    Expand = True
+    ScrollBar = Scroll.Vertical
+    { TextLabel1 TextLabel
+      MoveScaled(0,0,56,50)
+      'Move(0,0,448,400)
+      Font = Font["Luxi Sans,14"]
+      Background = &HDFFFFF&
+      Padding = 10
+      AutoResize = True
+      Text = ("<center><h3><b>Vector Linux repair tools:</b></h3></center>\n\n<b><u>Distro repair tools:</u></b>\n<ul>\n<li><b>Repair LILO:</b> Repair <b>Linux Loader</b> boot manager of an existing Vector Linux installation.</li>\n<li><b>Restore packages:</b> Restore original packages from the install CD, to fix a broken upgrade.</li>\n</ul>\n<b><u>Backup / restore tools:</u></b>\n<ul>\n<li><b>Backup /home:</b> Backup your /home directory for safekeeping.</li>\n<li><b>Restore /home:</b> Restore your /home directory from a previous backup. <font color=\"#FF0000\">WARNING: The existing /home directory will be OVERWRITTEN during restore. You have been WARNED.</font></li>\n</ul>\n<b><u>Miscellaneous tools:</u></b> \n<ul>\n<li><b>Tool 5:</b> Tool number 5 to fix something or other.</li>\n<li><b>Tool 6:</b> Tool number 6 to fix something or other.</li>\n</ul>\n")
+    }
+  }
+  { VBox1 VBox
+    MoveScaled(58,1,29,61)
+    'Move(464,8,232,488)
+    { lblSubTitle Label
+      MoveScaled(0,0,29,4)
+      'Move(0,0,232,32)
+      Font = Font["Luxi Sans,Bold,12"]
+      Background = &H0055FF&
+      Text = ("VL Tools")
+      Alignment = Align.Center
+      Border = Border.Etched
+    }
+    { Panel1 Panel
+      MoveScaled(0,4,29,50)
+      'Move(0,32,232,400)
+      Font = Font["Luxi Sans"]
+      Background = &H0055FF&
+      Expand = True
+      Border = Border.Etched
+      { Frame1 Frame
+        MoveScaled(2,1,25,15)
+        'Move(16,8,200,120)
+        Font = Font["Luxi Sans,14"]
+        Text = ("Distro repair")
+        { Button2 Button
+          MoveScaled(1,9,23,5)
+          'Move(8,72,184,40)
+          Font = Font["Luxi Sans,14"]
+          Background = Color.ButtonBackground
+          Foreground = Color.ButtonForeground
+          Text = ("Restore packages")
+        }
+        { Button1 Button
+          MoveScaled(1,3,23,5)
+          'Move(8,24,184,40)
+          Font = Font["Luxi Sans,14"]
+          Background = Color.ButtonBackground
+          Foreground = Color.ButtonForeground
+          Text = ("Repair LILO")
+        }
+      }
+      { Frame2 Frame
+        MoveScaled(2,16,25,15)
+        'Move(16,128,200,120)
+        Font = Font["Luxi Sans,14"]
+        Text = ("Backup / restore")
+        { Button3 Button
+          MoveScaled(1,3,23,5)
+          'Move(8,24,184,40)
+          Font = Font["Luxi Sans,14"]
+          Background = Color.ButtonBackground
+          Foreground = Color.ButtonForeground
+          Text = ("Backup /home")
+        }
+        { Button4 Button
+          MoveScaled(1,9,23,5)
+          'Move(8,72,184,40)
+          Font = Font["Luxi Sans,14"]
+          Background = Color.ButtonBackground
+          Foreground = Color.ButtonForeground
+          Text = ("Restore /home")
+        }
+      }
+      { Frame3 Frame
+        MoveScaled(2,31,25,15)
+        'Move(16,248,200,120)
+        Font = Font["Luxi Sans,14"]
+        Text = ("Miscellaneous")
+        { Button5 Button
+          MoveScaled(1,3,23,5)
+          'Move(8,24,184,40)
+          Font = Font["Luxi Sans,14"]
+          Background = Color.ButtonBackground
+          Foreground = Color.ButtonForeground
+          Text = ("Tool 5")
+        }
+        { Button6 Button
+          MoveScaled(1,9,23,5)
+          'Move(8,72,184,40)
+          Font = Font["Luxi Sans,14"]
+          Background = Color.ButtonBackground
+          Foreground = Color.ButtonForeground
+          Text = ("(Make FHS tree)")
+        }
+      }
+    }
+  }
+}

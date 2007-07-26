@@ -1,0 +1,118 @@
+# Gambas Form File 1.0
+
+{ Form Form
+  MoveScaled(0,37.125,91.375,68.375)
+  'Move(0,297,731,547)
+  Font = Font["Luxi Sans"]
+  Text = ("")
+  Icon = Picture["installer3.png"]
+  Border = Window.Fixed
+  FullScreen = True
+  Arrangement = Arrange.Vertical
+  { picTitle PictureBox
+    MoveScaled(0,0,101,8)
+    'Move(0,0,808,64)
+    Background = &H528DC8&
+    Picture = Picture["VL.png"]
+    Alignment = Align.Center
+    Border = Border.Etched
+  }
+  { pnlSteps Panel
+    MoveScaled(1,9,85,4.375)
+    'Move(8,72,680,35)
+    Arrangement = Arrange.Horizontal
+    Border = Border.Etched
+    { Button1 Button
+      MoveScaled(0,0,9,4)
+      'Move(0,0,72,32)
+      Font = Font["Luxi Sans,12"]
+      Tag = "1"
+      Expand = True
+      Text = ("Welcome!")
+    }
+    { Button2 Button
+      MoveScaled(9,0,9,4)
+      'Move(72,0,72,32)
+      Enabled = False
+      Font = Font["Luxi Sans,12"]
+      Tag = "2"
+      Expand = True
+      Text = ("The choice")
+    }
+    { Button3 Button
+      MoveScaled(18,0,9,4)
+      'Move(144,0,72,32)
+      Enabled = False
+      Font = Font["Luxi Sans,12"]
+      Tag = "3"
+      Expand = True
+      Text = ("Partitions")
+    }
+    { Button4 Button
+      MoveScaled(27,0,9,4)
+      'Move(216,0,72,32)
+      Enabled = False
+      Font = Font["Luxi Sans,12"]
+      Tag = "4"
+      Expand = True
+      Text = ("Packages")
+    }
+    { Button5 Button
+      MoveScaled(36,0,9,4)
+      'Move(288,0,72,32)
+      Enabled = False
+      Font = Font["Luxi Sans,12"]
+      Tag = "5"
+      Expand = True
+      Text = ("Configure")
+    }
+    { Button6 Button
+      MoveScaled(45,0,9,4)
+      'Move(360,0,72,32)
+      Enabled = False
+      Font = Font["Luxi Sans,12"]
+      Tag = "6"
+      Expand = True
+      Text = ("Go for it!")
+    }
+    { Separator1 Separator
+      MoveScaled(54,0,1.125,4)
+      'Move(432,0,9,32)
+    }
+    { Button7 Button
+      MoveScaled(55,0,9,4)
+      'Move(440,0,72,32)
+      Font = Font["Luxi Sans,12"]
+      Tag = "7"
+      Expand = True
+      Text = ("Tools")
+    }
+    { Separator2 Separator
+      MoveScaled(64,0,1.125,4)
+      'Move(512,0,9,32)
+    }
+    { butExit Button
+      MoveScaled(65,0,8.375,4)
+      'Move(520,0,67,32)
+      Font = Font["Luxi Sans,12"]
+      Expand = True
+      Text = ("Exit")
+    }
+  }
+  { pnlContainer Panel
+    MoveScaled(6,16,70,33)
+    'Move(48,128,560,264)
+    Font = Font["Luxi Sans"]
+    Expand = True
+    Arrangement = Arrange.Fill
+    Border = Border.Etched
+  }
+  { picSlogan PictureBox
+    MoveScaled(0,52,82,5)
+    'Move(0,416,656,40)
+    Background = &H528DC8&
+    Picture = Picture["slogan.png"]
+    Alignment = Align.Center
+    Border = Border.Etched
+  }
+}

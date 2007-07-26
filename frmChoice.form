@@ -1,0 +1,73 @@
+# Gambas Form File 1.0
+
+{ Form Form
+  MoveScaled(43.125,3.375,101.625,65.125)
+  'Move(345,27,813,521)
+  Font = Font["Luxi Sans"]
+  Background = &HFFFFFF&
+  Text = ("")
+  Border = Window.None
+  Arrangement = Arrange.Horizontal
+  { ScrollView1 ScrollView
+    MoveScaled(0,0,60,61)
+    'Move(0,0,480,488)
+    Font = Font["Luxi Sans,12"]
+    Background = &HDFFFFF&
+    Expand = True
+    ScrollBar = Scroll.Vertical
+    { TextLabel1 TextLabel
+      MoveScaled(0,0,73,52)
+      'Move(0,0,584,416)
+      Font = Font["Luxi Sans,14"]
+      Background = &HDFFFFF&
+      Padding = 10
+      AutoResize = True
+      Text = ("<center><h3><b>You have 3 choices:</b></h3></center>\n\n<ul>\n<li><b><u>Full-automatic install:</u></b> Our easiest install yet; choose this option if you want to use your entire hard disk for VL. Your system will be automatically set up, partitions and all. <font color=\"#FF0000\">WARNING: this option will DELETE everything on your hard disk, or offer a choice if there are multiple disks.</font> There will of course be a confirmation dialog in case you selected this option by mistake.</li>\n<li><b><u>Semi-automatic install:</u></b> With this option, you manually partition your drives with gparted, but the rest of the setup will be pretty automatic.</li>\n<li><b><u>Advanced install:</u></b> For the technically savvy user that must do everything by hand. You can control most aspects of the install. However, there will be assisted options available all the way through, so this is a very flexible install.</li>\n</ul>\n")
+    }
+  }
+  { VBox1 VBox
+    MoveScaled(62,2,29,61)
+    'Move(496,16,232,488)
+    { lblSubTitle Label
+      MoveScaled(0,0,32,4)
+      'Move(0,0,256,32)
+      Font = Font["Luxi Sans,Bold,12"]
+      Background = &H0055FF&
+      Text = ("Choose install type")
+      Alignment = Align.Center
+      Border = Border.Etched
+    }
+    { Panel1 Panel
+      MoveScaled(0,4,29,50)
+      'Move(0,32,232,400)
+      Font = Font["Luxi Sans"]
+      Background = &H0055FF&
+      Expand = True
+      Border = Border.Etched
+      { Frame2 Frame
+        MoveScaled(2,1,25,21)
+        'Move(16,8,200,168)
+        Font = Font["Luxi Sans,14"]
+        Text = ("Install types")
+        { Button1 Button
+          MoveScaled(1,3,23,5)
+          'Move(8,24,184,40)
+          Font = Font["Luxi Sans,14"]
+          Text = ("Full-automatic")
+        }
+        { Button2 Button
+          MoveScaled(1,9,23,5)
+          'Move(8,72,184,40)
+          Font = Font["Luxi Sans,14"]
+          Text = ("Semi-automatic")
+        }
+        { Button3 Button
+          MoveScaled(1,15,23,5)
+          'Move(8,120,184,40)
+          Font = Font["Luxi Sans,14"]
+          Text = ("Advanced")
+        }
+      }
+    }
+  }
+}
