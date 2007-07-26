@@ -1,0 +1,41 @@
+' Gambas class file
+
+' ### WELCOME FORM ###
+
+PUBLIC SUB Form_Show()
+
+IF Global.flagStarted THEN butStart.Enabled = FALSE
+
+' set button focus:
+butStart.SetFocus
+
+' set some background colours:
+TextLabel1.BackColor = Global.HTMLBG 
+lblSubTitle.BackColor = Global.LogoBG
+PictureBox1.BackColor = Global.LogoBG
+Panel1.BackColor = Global.LogoBG
+
+END
+
+PUBLIC SUB Form_Resize()
+
+' Resize the html message:
+TextLabel1.Width = ScrollView1.ClientWidth
+TextLabel1.Adjust 
+
+PictureBox1.Move(0, 0, Panel1.ClientWidth, Panel1.ClientHeight)
+PictureBox1.Refresh
+
+END
+
+PUBLIC SUB butStart_Click()
+
+butStart.Enabled = FALSE
+Global.flagStarted = TRUE
+frmMain.Button2.Enabled = TRUE ' Enable "Choices".
+frmMain.Button2_Click ' Advance to "Choices".
+
+END
+
+
+

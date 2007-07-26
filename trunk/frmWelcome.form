@@ -1,0 +1,64 @@
+# Gambas Form File 1.0
+
+{ Form Form
+  MoveScaled(21.625,26.125,98.625,64.625)
+  'Move(173,209,789,517)
+  Font = Font["Luxi Sans"]
+  Background = &HFFFFFF&
+  Text = ("")
+  Border = Window.None
+  Arrangement = Arrange.Horizontal
+  { ScrollView1 ScrollView
+    MoveScaled(2,2,55,56)
+    'Move(16,16,440,448)
+    Background = &HDFFFFF&
+    Expand = True
+    ScrollBar = Scroll.Vertical
+    { TextLabel1 TextLabel
+      MoveScaled(0,0,56,50)
+      'Move(0,0,448,400)
+      Font = Font["Luxi Sans,14"]
+      Background = &HDFFFFF&
+      Padding = 10
+      AutoResize = True
+      Text = ("<center><h3><b>Dear Vector Linux user:</b></h3></center>\n\n<p>\nWe have worked very hard to make this install as quick and easy as possible. We hope you will also like its looks. To install, click on the <b><font color=\"#0000FF\">START</font></b> button below the VL logo. Use the buttons on the top row to return to a previous stage. If you have already installed VL and just need to use some of the rescue functions, head on over to the <b><font color=\"#0000FF\">Tools</font></b> button.\n</p><br>\n\n<center><h3><b>About:</b></h3></center>\n\n<p>\nVector Linux is a small, but full-featured and VERY fast, Linux operating system for x86 PCs, based on one of the original Linux distributions, Slackware. VL is bloat free, easy to install, configure and maintain, with automatic hardware configuration, unique administration tools and easy package management via the Gslapt/slapt-get system.\n</p><br>\n\n<center><h3><b>Credits:</b></h3></center>\n\n<p>\nInstaller made in Gambas2 by Joe1962 and Uelsk8s, Gambas is the copyright of Benoit Minisini.\n</p>\n\n<p>\nThe Vector Linux Community members that made this release possible: Vector (Founder), Tigger (SOHO Architect), Kocil (Dynamite Man), JohnB316 (SOHO Chief), Joe1962 (VL-hot Chief), Uelsk8s (LIVE Chief), Barlas, Berke, Cintyram, Freakyc, Gamfa, GbHill, Hanumizzle, Inggy, Jbcolmena, Jaos, JohnVan, Keffin, Lagagnon, Lost&LovinLinux, Lyn, Mamahoohoo, Maf3000, Monty67, Mutiny, Niiler, PastorEd, Paul, Ren, Shalow_Hal, Suse-Refugee, TonyH9904, UKBill, Vanger, Verbl-Kint, VxT, WebMouse, Wile_Coyote, YaP, Yiannis, Zarniwoop.\n</p>\n")
+    }
+  }
+  { VBox1 VBox
+    MoveScaled(60,2,29,68)
+    'Move(480,16,232,544)
+    { lblSubTitle Label
+      MoveScaled(0,0,29,4)
+      'Move(0,0,232,32)
+      Font = Font["Luxi Sans,Bold,12"]
+      Background = &H0055FF&
+      Text = ("Welcome to Vector Linux!")
+      Alignment = Align.Center
+      Border = Border.Etched
+    }
+    { Panel1 Panel
+      MoveScaled(0,0,29,50)
+      'Move(0,0,232,400)
+      Font = Font["Luxi Sans"]
+      Background = &H0055FF&
+      Expand = True
+      Arrangement = Arrange.Fill
+      Border = Border.Etched
+      { PictureBox1 PictureBox
+        MoveScaled(0,0,29,50)
+        'Move(0,0,232,400)
+        Background = &H0055FF&
+        Expand = True
+        Picture = Picture["VL-logo-shine.png"]
+        Alignment = Align.Center
+      }
+    }
+    { butStart Button
+      MoveScaled(3,55,23,7)
+      'Move(24,440,184,56)
+      Font = Font["Luxi Sans,20"]
+      Text = ("START")
+      Default = True
+    }
+  }
+}
