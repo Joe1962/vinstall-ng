@@ -26,7 +26,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: frmChoice.class:92
+#: frmChoice.class:91
 msgid ""
 "<center><h3><b>You have 3 choices:</b></h3></center>\n"
 "\n"
@@ -47,23 +47,23 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmChoice.class:103
+#: frmChoice.class:102
 msgid "Choose install type"
 msgstr ""
 
-#: frmChoice.class:118
+#: frmChoice.class:117
 msgid "Install types"
 msgstr ""
 
-#: frmChoice.class:123
+#: frmChoice.class:122
 msgid "Full-automatic"
 msgstr ""
 
-#: frmChoice.class:129
+#: frmChoice.class:128
 msgid "Semi-automatic"
 msgstr ""
 
-#: frmChoice.class:135
+#: frmChoice.class:134
 msgid "Advanced"
 msgstr ""
 
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-#: frmPackages.class:99
+#: frmPackages.class:97
 msgid ""
 "<center><h3><b>Package selection strategies:</b></h3></center>\n"
 "\n"
@@ -203,31 +203,31 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmPackages.class:111
+#: frmPackages.class:109
 msgid "Package selection"
 msgstr ""
 
-#: frmPackages.class:126
+#: frmPackages.class:124
 msgid "Assisted selection"
 msgstr ""
 
-#: frmPackages.class:131
+#: frmPackages.class:129
 msgid "All packages"
 msgstr ""
 
-#: frmPackages.class:137
+#: frmPackages.class:135
 msgid "By groups"
 msgstr ""
 
-#: frmPackages.class:144
+#: frmPackages.class:142
 msgid "Advanced selection"
 msgstr ""
 
-#: frmPackages.class:149 frmPartitions.class:266
+#: frmPackages.class:147 frmPartitions.class:266
 msgid "Manual"
 msgstr ""
 
-#: frmPackages.class:155
+#: frmPackages.class:153
 msgid "No extras"
 msgstr ""
 

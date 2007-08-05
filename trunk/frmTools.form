@@ -1,8 +1,7 @@
-# Gambas Form File 1.0
+# Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(41.375,35.625,98.625,64.625)
-  'Move(331,285,789,517)
+  MoveScaled(41.2857,35.5714,98.5714,64.5714)
   Font = Font["Luxi Sans"]
   Background = &HFFFFFF&
   Text = ("")
@@ -10,13 +9,11 @@
   Arrangement = Arrange.Horizontal
   { ScrollView1 ScrollView
     MoveScaled(2,2,55,56)
-    'Move(16,16,440,448)
     Background = &HDFFFFF&
     Expand = True
     ScrollBar = Scroll.Vertical
     { TextLabel1 TextLabel
       MoveScaled(0,0,56,50)
-      'Move(0,0,448,400)
       Font = Font["Luxi Sans,14"]
       Background = &HDFFFFF&
       Padding = 10
@@ -26,10 +23,8 @@
   }
   { VBox1 VBox
     MoveScaled(58,1,29,61)
-    'Move(464,8,232,488)
     { lblSubTitle Label
       MoveScaled(0,0,29,4)
-      'Move(0,0,232,32)
       Font = Font["Luxi Sans,Bold,12"]
       Background = &H0055FF&
       Text = ("VL Tools")
@@ -38,27 +33,23 @@
     }
     { Panel1 Panel
       MoveScaled(0,4,29,50)
-      'Move(0,32,232,400)
       Font = Font["Luxi Sans"]
       Background = &H0055FF&
       Expand = True
       Border = Border.Etched
       { Frame1 Frame
         MoveScaled(2,1,25,15)
-        'Move(16,8,200,120)
         Font = Font["Luxi Sans,14"]
         Text = ("Distro repair")
-        { Button2 Button
+        { btnRestorePkgs Button
           MoveScaled(1,9,23,5)
-          'Move(8,72,184,40)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground
           Text = ("Restore packages")
         }
-        { Button1 Button
+        { btnBMRepair Button
           MoveScaled(1,3,23,5)
-          'Move(8,24,184,40)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground
@@ -67,20 +58,17 @@
       }
       { Frame2 Frame
         MoveScaled(2,16,25,15)
-        'Move(16,128,200,120)
         Font = Font["Luxi Sans,14"]
         Text = ("Backup / restore")
-        { Button3 Button
+        { btnHomeBak Button
           MoveScaled(1,3,23,5)
-          'Move(8,24,184,40)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground
           Text = ("Backup /home")
         }
-        { Button4 Button
+        { btnHomeRstr Button
           MoveScaled(1,9,23,5)
-          'Move(8,72,184,40)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground
@@ -89,12 +77,10 @@
       }
       { Frame3 Frame
         MoveScaled(2,31,25,15)
-        'Move(16,248,200,120)
         Font = Font["Luxi Sans,14"]
         Text = ("Miscellaneous")
         { Button5 Button
           MoveScaled(1,3,23,5)
-          'Move(8,24,184,40)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground
@@ -102,7 +88,6 @@
         }
         { Button6 Button
           MoveScaled(1,9,23,5)
-          'Move(8,72,184,40)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground

@@ -5,7 +5,7 @@
 PUBLIC SUB Form_Show()
 
 ' set button focus:
-frmMain.Button7.SetFocus
+frmMain.btnTools.SetFocus
 
 ' set some background colours:
 TextLabel1.BackColor = Global.HTMLBG 
@@ -23,25 +23,25 @@ TextLabel1.Adjust
 
 END
 
-PUBLIC SUB Button1_Click() ' Repair LILO:
+PUBLIC SUB btnBMRepair_Click() ' Repair LILO:
 
 
 
 END
 
-PUBLIC SUB Button2_Click() ' Restore packages:
+PUBLIC SUB btnRestorePkgs_Click() ' Restore packages:
 
 
 
 END
 
-PUBLIC SUB Button3_Click() 'Backup /home:
+PUBLIC SUB btnHomeBak_Click() 'Backup /home:
 
 
 
 END
 
-PUBLIC SUB Button4_Click() 'Restore /home:
+PUBLIC SUB btnHomeRstr_Click() 'Restore /home:
 
 
 

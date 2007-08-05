@@ -9,7 +9,7 @@
 ' Version Date: Febuuary 2006
 ' Version History:
 '
-' TWEAKED BY JOE1962
+' TWEAKED BY JOE1962, easuter
 '
 '''
 ' Licence Information
@@ -155,13 +155,13 @@ PRIVATE FUNCTION DefaultValue_Read() AS String
   RETURN TextBox1.Text
 END
 
-PUBLIC SUB ButtonOK_Click()
+PUBLIC SUB btnOK_Click()
   ' Set the value to be returned by the Input static method
   returnValue = TextBox1.Text
   ME.Close
 END
 
-PUBLIC SUB ButtonCancel_Click()
+PUBLIC SUB btnCancel_Click()
   ME.Close
 END
 

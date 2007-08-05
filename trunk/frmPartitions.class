@@ -8,7 +8,7 @@ PUBLIC ttime AS Date
 PUBLIC SUB Form_Show()
 
 ' set button focus:
-frmMain.Button3.SetFocus
+frmMain.btnPartitions.SetFocus
 
 ' set some background colours:
 TextLabel1.BackColor = Global.HTMLBG 
@@ -25,7 +25,7 @@ TextLabel1.Adjust
 
 END
 
-PUBLIC SUB Button1_Click() 'Full disk:
+PUBLIC SUB btnFullDisk_Click() 'Full disk:
 
 ' Check for button execution:
 IF Global.flagBUTTExec = TRUE THEN RETURN
@@ -33,16 +33,16 @@ IF Global.flagBUTTExec = TRUE THEN RETURN
 ' Flag button execution:
 Global.flagBUTTExec = TRUE
 
-frmMain.Button3.Enabled = FALSE 'Disable "Partitions".
-frmMain.Button4.Enabled = TRUE 'Enable "Packages".
-frmMain.Button4_Click 'Advance to "Packages".
+frmMain.btnPartitions.Enabled = FALSE 'Disable "Partitions".
+frmMain.btnPackages.Enabled = TRUE 'Enable "Packages".
+frmMain.btnPackages_Click 'Advance to "Packages".
 
 ' Unflag button execution:
 Global.flagBUTTExec = FALSE
 
 END
 
-PUBLIC SUB Button2_Click() 'Free space:
+PUBLIC SUB btnFreeSpace_Click() 'Free space:
 
 ' Check for button execution:
 IF Global.flagBUTTExec = TRUE THEN RETURN
@@ -50,16 +50,16 @@ IF Global.flagBUTTExec = TRUE THEN RETURN
 ' Flag button execution:
 Global.flagBUTTExec = TRUE
 
-frmMain.Button3.Enabled = FALSE 'Disable "Partitions".
-frmMain.Button4.Enabled = TRUE 'Enable "Packages".
-frmMain.Button4_Click 'Advance to "Packages".
+frmMain.btnPartitions.Enabled = FALSE 'Disable "Partitions".
+frmMain.btnPackages.Enabled = TRUE 'Enable "Packages".
+frmMain.btnPackages_Click 'Advance to "Packages".
 
 ' Unflag button execution:
 Global.flagBUTTExec = FALSE
 
 END
 
-PUBLIC SUB Button3_Click() 'GParted:
+PUBLIC SUB btnGParted_Click() 'GParted:
 
 ' Check for button execution:
 IF Global.flagBUTTExec = TRUE THEN RETURN
@@ -100,7 +100,7 @@ Global.flagBUTTExec = FALSE
 
 END
 
-PUBLIC SUB Button4_Click() 'cfdisk:
+PUBLIC SUB btnCfdisk_Click() 'cfdisk:
 
 ' Check for button execution:
 IF Global.flagBUTTExec = TRUE THEN RETURN
@@ -140,7 +140,7 @@ Global.flagBUTTExec = FALSE
 
 END
 
-PUBLIC SUB Button5_Click() 'Preset strategies:
+PUBLIC SUB btnPreset_Click() 'Preset strategies:
 
 ' Check for button execution:
 IF Global.flagBUTTExec = TRUE THEN RETURN
@@ -157,7 +157,7 @@ Global.flagBUTTExec = FALSE
 
 END
 
-PUBLIC SUB Button6_Click() 'No partitioning:
+PUBLIC SUB btnNoPart_Click() 'No partitioning:
 
 ' Check for button execution:
 IF Global.flagBUTTExec = TRUE THEN RETURN

@@ -5,7 +5,7 @@
 PUBLIC SUB Form_Show()
 
 ' set button focus:
-frmMain.Button2.SetFocus
+frmMain.btnChoice.SetFocus
 
 ' set some background colours:
 TextLabel1.BackColor = Global.HTMLBG 
@@ -22,34 +22,33 @@ TextLabel1.Adjust
 
 END
 
-PUBLIC SUB Button1_Click() ' Full-automatic.
+PUBLIC SUB btnFullAuto_Click() ' Full-automatic.
 
 Global.enumINSTMODE = 1 ' Full-automatic install mode.
 
 Utils.DrivePartInfo
 IF Global.DiskInfo.Count > 1 THEN frmDriveSelect.ShowModal
 
-frmMain.Button2.Enabled = FALSE ' Disable Choices.
-frmMain.Button6.Enabled = TRUE ' Enable Go for it!.
-frmMain.Button6_Click ' Advance to Go for it!.
+frmMain.btnChoice.Enabled = FALSE ' Disable Choices.
+frmMain.btnGo.Enabled = TRUE ' Enable Go for it!.
+frmMain.btnGo_Click ' Advance to Go for it!.
 
 END
 
-PUBLIC SUB Button2_Click() ' Semi-automatic.
+PUBLIC SUB btnSemiAuto_Click() ' Semi-automatic.
 
 Global.enumINSTMODE = 1 ' Semi-automatic install mode.
-frmMain.Button2.Enabled = FALSE ' Disable Choices.
-frmMain.Button3.Enabled = TRUE ' Enable Partitions.
-frmMain.Button3_Click ' Advance to Partitions.
+frmMain.btnChoice.Enabled = FALSE ' Disable Choices.
+frmMain.btnPartitions.Enabled = TRUE ' Enable Partitions.
+frmMain.btnPartitions_Click ' Advance to Partitions.
 
 END
 
-PUBLIC SUB Button3_Click() ' Advanced.
+PUBLIC SUB btnAdvanced_Click() ' Advanced.
 
 Global.enumINSTMODE = 1 ' Advanced install mode.
-'frmMain.Button2.Enabled = FALSE ' Disable Choices
-frmMain.Button3.Enabled = TRUE ' Enable Partitions
-frmMain.Button3_Click ' Advance to Partitions
+frmMain.btnPartitions.Enabled = TRUE ' Enable Partitions
+frmMain.btnPartitions_Click ' Advance to Partitions
 
 END
 

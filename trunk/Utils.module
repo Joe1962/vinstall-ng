@@ -146,42 +146,42 @@ PUBLIC SUB BUTTdisable()
 BUTTsave
 
 ' Then disable:
-frmMain.Button1.Enabled = FALSE
-frmMain.Button2.Enabled = FALSE
-frmMain.Button3.Enabled = FALSE
-frmMain.Button4.Enabled = FALSE
-frmMain.Button5.Enabled = FALSE
-frmMain.Button6.Enabled = FALSE
-frmMain.Button7.Enabled = FALSE
-frmMain.ButExit.Enabled = FALSE
+frmMain.btnWelcome.Enabled = FALSE
+frmMain.btnChoice.Enabled = FALSE
+frmMain.btnPartitions.Enabled = FALSE
+frmMain.btnPackages.Enabled = FALSE
+frmMain.btnConfigure.Enabled = FALSE
+frmMain.btnGo.Enabled = FALSE
+frmMain.btnTools.Enabled = FALSE
+frmMain.btnExit.Enabled = FALSE
 
 END
 
 PUBLIC SUB BUTTsave()
 ' Save state of all frmMain buttons:
 
-frmMain.Button1.Tag = frmMain.Button1.Enabled
-frmMain.Button2.Tag = frmMain.Button2.Enabled
-frmMain.Button3.Tag = frmMain.Button3.Enabled
-frmMain.Button4.Tag = frmMain.Button4.Enabled
-frmMain.Button5.Tag = frmMain.Button5.Enabled
-frmMain.Button6.Tag = frmMain.Button6.Enabled
-frmMain.Button7.Tag = frmMain.Button7.Enabled
-frmMain.ButExit.Tag = frmMain.ButExit.Enabled
+frmMain.btnWelcome.Tag = frmMain.btnWelcome.Enabled
+frmMain.btnChoice.Tag = frmMain.btnChoice.Enabled
+frmMain.btnPartitions.Tag = frmMain.btnPartitions.Enabled
+frmMain.btnPackages.Tag = frmMain.btnPackages.Enabled
+frmMain.btnConfigure.Tag = frmMain.btnConfigure.Enabled
+frmMain.btnGo.Tag = frmMain.btnGo.Enabled
+frmMain.btnTools.Tag = frmMain.btnTools.Enabled
+frmMain.btnExit.Tag = frmMain.btnExit.Enabled
 
 END
 
 PUBLIC SUB BUTTrest()
 ' Restore saved state of all frmMain buttons:
 
-frmMain.Button1.Enabled = frmMain.Button1.Tag
-frmMain.Button2.Enabled = frmMain.Button2.Tag
-frmMain.Button3.Enabled = frmMain.Button3.Tag
-frmMain.Button4.Enabled = frmMain.Button4.Tag
-frmMain.Button5.Enabled = frmMain.Button5.Tag
-frmMain.Button6.Enabled = frmMain.Button6.Tag
-frmMain.Button7.Enabled = frmMain.Button7.Tag
-frmMain.ButExit.Enabled = frmMain.ButExit.Tag
+frmMain.btnWelcome.Enabled = frmMain.btnWelcome.Tag
+frmMain.btnChoice.Enabled = frmMain.btnChoice.Tag
+frmMain.btnPartitions.Enabled = frmMain.btnPartitions.Tag
+frmMain.btnPackages.Enabled = frmMain.btnPackages.Tag
+frmMain.btnConfigure.Enabled = frmMain.btnConfigure.Tag
+frmMain.btnGo.Enabled = frmMain.btnGo.Tag
+frmMain.btnTools.Enabled = frmMain.btnTools.Tag
+frmMain.btnExit.Enabled = frmMain.btnExit.Tag
 
 END
 

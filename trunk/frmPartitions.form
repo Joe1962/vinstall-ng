@@ -1,8 +1,7 @@
-# Gambas Form File 1.0
+# Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(4.125,6.125,90.625,78.375)
-  'Move(33,49,725,627)
+  MoveScaled(4,6,90.5714,78.2857)
   Font = Font["Luxi Sans"]
   Background = &HFFFFFF&
   Text = ("")
@@ -10,13 +9,11 @@
   Arrangement = Arrange.Horizontal
   { ScrollView1 ScrollView
     MoveScaled(1,2,59,66)
-    'Move(8,16,472,528)
     Background = &HDFFFFF&
     Expand = True
     ScrollBar = Scroll.Vertical
     { TextLabel1 TextLabel
       MoveScaled(0,0,68,50)
-      'Move(0,0,544,400)
       Font = Font["Luxi Sans,14"]
       Background = &HDFFFFF&
       Padding = 10
@@ -26,11 +23,9 @@
   }
   { VBox1 VBox
     MoveScaled(61,1,29,68)
-    'Move(488,8,232,544)
     Font = Font["Luxi Sans"]
     { lblSubTitle Label
       MoveScaled(0,0,29,4)
-      'Move(0,0,232,32)
       Font = Font["Luxi Sans,Bold,12"]
       Background = &H0055FF&
       Text = ("Partitioning mode")
@@ -39,27 +34,23 @@
     }
     { Panel1 Panel
       MoveScaled(0,4,29,62)
-      'Move(0,32,232,496)
       Font = Font["Luxi Sans"]
       Background = &H0055FF&
       Expand = True
       Border = Border.Etched
       { Frame1 Frame
         MoveScaled(2,1,25,15)
-        'Move(16,8,200,120)
         Font = Font["Luxi Sans,14"]
         Text = ("Automatic")
-        { Button1 Button
+        { btnFullDisk Button
           MoveScaled(1,3,23,5)
-          'Move(8,24,184,40)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground
           Text = ("Full disk")
         }
-        { Button2 Button
+        { btnFreeSpace Button
           MoveScaled(1,9,23,5)
-          'Move(8,72,184,40)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground
@@ -68,20 +59,17 @@
       }
       { Frame2 Frame
         MoveScaled(2,16,25,15)
-        'Move(16,128,200,120)
         Font = Font["Luxi Sans,14"]
         Text = ("Manual")
-        { Button3 Button
+        { btnGParted Button
           MoveScaled(1,3,23,5)
-          'Move(8,24,184,40)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground
           Text = ("GParted")
         }
-        { Button4 Button
+        { btnCfdisk Button
           MoveScaled(1,9,23,5)
-          'Move(8,72,184,40)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground
@@ -90,20 +78,17 @@
       }
       { Frame3 Frame
         MoveScaled(2,31,25,15)
-        'Move(16,248,200,120)
         Font = Font["Luxi Sans,14"]
         Text = ("Others")
-        { Button5 Button
+        { btnPreset Button
           MoveScaled(1,3,23,5)
-          'Move(8,24,184,40)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground
           Text = ("Preset strategies")
         }
-        { Button6 Button
+        { btnNoPart Button
           MoveScaled(1,9,23,5)
-          'Move(8,72,184,40)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground

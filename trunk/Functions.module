@@ -14,16 +14,16 @@ ELSE IF capacity < 1000000 THEN ' Kilobytes:
 ELSE IF capacity < 1000000000 THEN ' Megabytes:
    RETURN Format$(capacity / 1048576, "###,###,###,###") & ";MB"
    'gridDisk[m + 1,units].Text = "MB"
-ELSE ' Gigabytes:
+ELSE IF capacity < 1000000000000 ' Gigabytes:
    RETURN Format$(capacity / 1073741824, "####,###,###,###") & ";GB"
+ELSE 'Terabytes
+   RETURN Format$(capacity / 1099511627776, "####,###,###,###") & ";TB"
 END IF
-
-' What about Terabytes? LOL.
 
 END
 
 PUBLIC FUNCTION getPartType(t AS String) AS String
-' Return partition type string from partition type code:
+' Return partition type (t) string from partition type code:
 
 IF Trim$(t) = "0" THEN RETURN "Empty"
 IF Trim$(t) = "1" THEN RETURN "FAT12"
