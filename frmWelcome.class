@@ -4,10 +4,10 @@
 
 PUBLIC SUB Form_Show()
 
-IF Global.flagStarted THEN butStart.Enabled = FALSE
+IF Global.flagStarted THEN btnStart.Enabled = FALSE
 
 ' set button focus:
-butStart.SetFocus
+btnStart.SetFocus
 
 ' set some background colours:
 TextLabel1.BackColor = Global.HTMLBG 
@@ -28,12 +28,12 @@ PictureBox1.Refresh
 
 END
 
-PUBLIC SUB butStart_Click()
+PUBLIC SUB btnStart_Click()
 
-butStart.Enabled = FALSE
+btnStart.Enabled = FALSE
 Global.flagStarted = TRUE
-frmMain.Button2.Enabled = TRUE ' Enable "Choices".
-frmMain.Button2_Click ' Advance to "Choices".
+frmMain.btnChoice.Enabled = TRUE ' Enable "Choices".
+frmMain.btnChoice_Click ' Advance to "Choices".
 
 END
 

@@ -42,13 +42,13 @@ pnlContainer.Move(0, pnlSteps.Y + pnlSteps.Height, ME.ClientWidth, picSlogan.Y -
 
 END
 
-PUBLIC SUB butExit_Click()
+PUBLIC SUB btnExit_Click()
 
 ME.Close
 
 END
 
-PUBLIC SUB Button1_Click()
+PUBLIC SUB btnWelcome_Click()
 
 IF Global.prevForm <> 1 THEN
    CloseForm(Global.prevForm)
@@ -59,7 +59,7 @@ ENDIF
 
 END
 
-PUBLIC SUB Button2_Click()
+PUBLIC SUB btnChoice_Click()
 
 IF Global.prevForm <> 2 THEN
    CloseForm(Global.prevForm)
@@ -70,7 +70,7 @@ ENDIF
 
 END
 
-PUBLIC SUB Button3_Click()
+PUBLIC SUB btnPartitions_Click()
 
 IF Global.prevForm <> 3 THEN
    CloseForm(Global.prevForm)
@@ -81,7 +81,7 @@ ENDIF
 
 END
 
-PUBLIC SUB Button4_Click()
+PUBLIC SUB btnPackages_Click()
 
 IF Global.prevForm <> 4 THEN
    CloseForm(Global.prevForm)
@@ -92,7 +92,7 @@ ENDIF
 
 END
 
-PUBLIC SUB Button5_Click()
+PUBLIC SUB btnConfigure_Click()
 
 IF Global.prevForm <> 5 THEN
    CloseForm(Global.prevForm)
@@ -103,7 +103,7 @@ ENDIF
 
 END
 
-PUBLIC SUB Button6_Click()
+PUBLIC SUB btnGo_Click()
 
 IF Global.prevForm <> 6 THEN
    CloseForm(Global.prevForm)
@@ -114,7 +114,7 @@ ENDIF
 
 END
 
-PUBLIC SUB Button7_Click()
+PUBLIC SUB btnTools_Click()
 
 IF Global.prevForm <> 7 THEN
    CloseForm(Global.prevForm)

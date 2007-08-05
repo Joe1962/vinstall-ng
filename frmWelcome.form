@@ -1,8 +1,7 @@
-# Gambas Form File 1.0
+# Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(21.625,26.125,98.625,64.625)
-  'Move(173,209,789,517)
+  MoveScaled(21.5714,26,98.5714,64.5714)
   Font = Font["Luxi Sans"]
   Background = &HFFFFFF&
   Text = ("")
@@ -10,13 +9,11 @@
   Arrangement = Arrange.Horizontal
   { ScrollView1 ScrollView
     MoveScaled(2,2,55,56)
-    'Move(16,16,440,448)
     Background = &HDFFFFF&
     Expand = True
     ScrollBar = Scroll.Vertical
     { TextLabel1 TextLabel
       MoveScaled(0,0,56,50)
-      'Move(0,0,448,400)
       Font = Font["Luxi Sans,14"]
       Background = &HDFFFFF&
       Padding = 10
@@ -26,10 +23,8 @@
   }
   { VBox1 VBox
     MoveScaled(60,2,29,68)
-    'Move(480,16,232,544)
     { lblSubTitle Label
       MoveScaled(0,0,29,4)
-      'Move(0,0,232,32)
       Font = Font["Luxi Sans,Bold,12"]
       Background = &H0055FF&
       Text = ("Welcome to Vector Linux!")
@@ -38,7 +33,6 @@
     }
     { Panel1 Panel
       MoveScaled(0,0,29,50)
-      'Move(0,0,232,400)
       Font = Font["Luxi Sans"]
       Background = &H0055FF&
       Expand = True
@@ -46,16 +40,14 @@
       Border = Border.Etched
       { PictureBox1 PictureBox
         MoveScaled(0,0,29,50)
-        'Move(0,0,232,400)
         Background = &H0055FF&
         Expand = True
         Picture = Picture["VL-logo-shine.png"]
         Alignment = Align.Center
       }
     }
-    { butStart Button
+    { btnStart Button
       MoveScaled(3,55,23,7)
-      'Move(24,440,184,56)
       Font = Font["Luxi Sans,20"]
       Text = ("START")
       Default = True

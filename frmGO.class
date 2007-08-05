@@ -5,7 +5,7 @@
 PUBLIC SUB Form_Show()
 
 ' set button focus:
-frmMain.Button6.SetFocus
+frmMain.btnGo.SetFocus
 
 ' set some background colours:
 TextLabel1.BackColor = Global.HTMLBG 
