@@ -1,0 +1,72 @@
+' Gambas class file
+
+' ### VL TOOLS FORM ###
+
+PUBLIC SUB Form_Show()
+
+' set button focus:
+frmMain.btnTools.SetFocus
+
+' set some background colours:
+TextLabel1.BackColor = Global.HTMLBG 
+lblSubTitle.BackColor = Global.LogoBG
+Panel1.BackColor = Global.LogoBG
+
+END
+
+PUBLIC SUB Form_Resize()
+
+' Resize the html message:
+TextLabel1.Width = ScrollView1.ClientWidth
+'TextLabel1.Height = Global.htmlLen
+TextLabel1.Adjust 
+
+END
+
+PUBLIC SUB btnBMRepair_Click() ' Repair LILO:
+
+
+
+END
+
+PUBLIC SUB btnRestorePkgs_Click() ' Restore packages:
+
+
+
+END
+
+PUBLIC SUB btnHomeBak_Click() 'Backup /home:
+
+
+
+END
+
+PUBLIC SUB btnHomeRstr_Click() 'Restore /home:
+
+
+
+END
+
+PUBLIC SUB Button5_Click() ' Tool 5:
+
+
+
+END
+
+PUBLIC SUB Button6_Click() ' Tool 6:
+
+' 4 debug:
+IF Functions.MakeTree(User.Home &/ "fhstree") THEN
+   message.Info("FHS tree created under " & User.Home &/ "fhstree/")
+ELSE
+   message.Error("Error creating FHS tree")
+ENDIF
+
+END
+
+PUBLIC SUB TextLabel1_MouseDown()
+
+
+
+END
+

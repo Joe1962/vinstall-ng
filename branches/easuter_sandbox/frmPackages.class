@@ -1,0 +1,59 @@
+' Gambas class file
+
+' ### PACKAGE SELECTION FORM ###
+
+PUBLIC SUB Form_Show()
+
+' set button focus:
+frmMain.btnPackages.SetFocus
+
+' set some background colours:
+TextLabel1.BackColor = Global.HTMLBG 
+lblSubTitle.BackColor = Global.LogoBG
+Panel1.BackColor = Global.LogoBG
+
+END
+
+PUBLIC SUB Form_Resize()
+
+' Resize the html message:
+TextLabel1.Width = ScrollView1.ClientWidth
+TextLabel1.Adjust 
+
+END
+
+PUBLIC SUB btnAllPkgs_Click() 'All packages:
+
+Global.enumPACKS = 0
+frmMain.btnPackages.Enabled = FALSE
+frmMain.btnConfigure.Enabled = TRUE
+frmMain.btnConfigure_Click
+
+END
+
+PUBLIC SUB btnGroup_Click() 'By groups:
+
+Global.enumPACKS = 1
+frmMain.btnPackages.Enabled = FALSE
+frmMain.btnConfigure.Enabled = TRUE
+frmMain.btnConfigure_Click
+
+END
+
+PUBLIC SUB btnManual_Click() 'Manual:
+
+Global.enumPACKS = 2
+'frmMain.Button4.Enabled = FALSE
+'frmMain.Button5.Enabled = TRUE
+'frmMain.Button5_Click
+
+END
+
+PUBLIC SUB btnNoExtras_Click() 'No extras:
+
+Global.enumPACKS = 3
+frmMain.btnPackages.Enabled = FALSE
+frmMain.btnConfigure.Enabled = TRUE
+frmMain.btnConfigure_Click
+
+END

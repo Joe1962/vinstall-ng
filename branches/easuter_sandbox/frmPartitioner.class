@@ -1,0 +1,28 @@
+' Gambas class file
+
+' ### PARTITIONER FORM ###
+
+
+PUBLIC SUB Embedder1_Error()
+
+message.Error("Error embedding external application, might be due to low memory.")
+ME.Hide
+frmPartitions.Show
+utils.BUTTrest
+frmPartitions.Show
+ME.Close
+
+END
+
+PUBLIC SUB Embedder1_Close()
+
+ME.Hide
+frmPartitions.Show
+utils.BUTTrest
+ME.Close
+
+Utils.DrivePartInfo
+frmPartSelect.ShowModal
+
+END
+

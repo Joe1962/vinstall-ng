@@ -1,0 +1,73 @@
+' Gambas class file
+
+' ### ADDITIONAL CONFIGURATION FORM ###
+
+PUBLIC SUB Form_Show()
+
+' set button focus:
+frmMain.btnConfigure.SetFocus
+
+' set some background colours:
+TextLabel1.BackColor = Global.HTMLBG 
+lblSubTitle.BackColor = Global.LogoBG
+Panel1.BackColor = Global.LogoBG
+
+END
+
+PUBLIC SUB Form_Resize()
+
+' Resize the html message:
+TextLabel1.Width = ScrollView1.ClientWidth
+TextLabel1.Adjust 
+
+END
+
+PUBLIC SUB btnMBR_Click() 'Master Boot Record:
+
+Global.enumLILOMODE = 0
+
+END
+
+PUBLIC SUB btnBootSec_Click() 'VL Boot Sector:
+
+Global.enumLILOMODE = 1
+
+END
+
+PUBLIC SUB btnFloppy_Click() 'Floppy diskette:
+
+Global.enumLILOMODE = 2
+
+END
+
+PUBLIC SUB btnNoBM_Click() 'Do not install:
+
+' Check for button execution:
+IF Global.flagBUTTExec = TRUE THEN RETURN
+
+' Flag button execution:
+Global.flagBUTTExec = TRUE
+
+Global.enumLILOMODE = 3
+
+frmMain.btnConfigure.Enabled = FALSE 'Disable "Configure".
+frmMain.btnGo.Enabled = TRUE 'Enable "Go for it!".
+frmMain.btnGo_Click 'Advance to "Go for it!".
+
+' Unflag button execution:
+Global.flagBUTTExec = FALSE
+
+END
+
+PUBLIC SUB Button5_Click() 'Config 1:
+
+
+
+END
+
+PUBLIC SUB Button6_Click() 'Config 2:
+
+
+
+END
+

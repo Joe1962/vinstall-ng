@@ -1,0 +1,187 @@
+' Gambas module file
+
+' ### SYSTEMWIDE SUBROUTINES ###
+
+PUBLIC SUB DrivePartInfo()
+' Get available drives and partitions with fdisk:
+DIM sTemp AS String
+
+Global.DiskInfo.Clear
+Global.PartInfo.Clear
+
+IF Global.SimulationMode = FALSE THEN
+   EXEC ["fdisk", "-l"] TO sTemp
+ELSE
+   ' 4 debug:
+   ' English:
+   sTemp = Chr$(10)
+   sTemp = sTemp & "Disk /dev/hda: 40,0 GB, 40060403712 bytes" & Chr$(10)
+   sTemp = sTemp & "255 heads, 63 sectors/track, 4870 cylinders" & Chr$(10)
+   sTemp = sTemp & "Units = cylinders of 16065 * 512 = 8225280 bytes" & Chr$(10)
+   sTemp = sTemp & Chr$(10)
+   sTemp = sTemp & "   Device Boot      Start         End      Blocks   Id  System" & Chr$(10)
+   sTemp = sTemp & "/dev/hda1   *           1        1044     8385898+   7  HPFS/NTFS" & Chr$(10)
+   sTemp = sTemp & "/dev/hda2            1045        1110      530145   82  Linux swap" & Chr$(10)
+   sTemp = sTemp & "/dev/hda4            1111        4870    30202200    f  W95 Ext'd (LBA)" & Chr$(10)
+   sTemp = sTemp & "/dev/hda5            1111        2415    10482381   83  Linux" & Chr$(10)
+   sTemp = sTemp & "/dev/hda6            2416        4219    14490598+   c  W95 FAT32 (LBA)" & Chr$(10)
+   sTemp = sTemp & "/dev/hda7            4220        4870     5229126   83  Linux" & Chr$(10)
+   sTemp = sTemp & Chr$(10)
+   sTemp = sTemp & "Disk /dev/sda: 258.0 MB, 258473984 bytes" & Chr$(10)
+   sTemp = sTemp & "8 heads, 62 sectors/track, 1017 cylinders" & Chr$(10)
+   sTemp = sTemp & "Units = cylinders of 496 * 512 = 253952 bytes" & Chr$(10)
+   sTemp = sTemp & Chr$(10)
+   sTemp = sTemp & "   Device Boot      Start         End      Blocks   Id  System" & Chr$(10)
+   sTemp = sTemp & "/dev/sda1               1        1017      252185    b  W95 FAT32" & Chr$(10)
+   ' Spanish:
+   'sTemp = Chr$(10)
+   'sTemp = sTemp & "Disco /dev/hda: 40.0 GB, 40060403712 bytes" & Chr$(10)
+   'sTemp = sTemp & "255 cabezas, 63 sectores/pista, 4870 cilindros" & Chr$(10)
+   'sTemp = sTemp & "Unidades = cilindros de 16065 * 512 = 8225280 bytes" & Chr$(10)
+   'sTemp = sTemp & Chr$(10)
+   'sTemp = sTemp & "Disposit. Inicio    Comienzo      Fin      Bloques  Id  Sistema" & Chr$(10)
+   'sTemp = sTemp & "/dev/hda1   *           1        1044     8385898+   7  HPFS/NTFS" & Chr$(10)
+   'sTemp = sTemp & "/dev/hda2            1045        1110      530145   82  Linux swap" & Chr$(10)
+   'sTemp = sTemp & "/dev/hda4            1111        4870    30202200    f  W95 Ext'd (LBA)" & Chr$(10)
+   'sTemp = sTemp & "/dev/hda5            1111        2415    10482381   83  Linux" & Chr$(10)
+   'sTemp = sTemp & "/dev/hda6            2416        4219    14490598+   c  W95 FAT32 (LBA)" & Chr$(10)
+   'sTemp = sTemp & "/dev/hda7            4220        4870     5229126   83  Linux" & Chr$(10)
+   'sTemp = sTemp & Chr$(10)
+   'sTemp = sTemp & "Disco /dev/sda: 258 MB, 258473984 bytes" & Chr$(10)
+   'sTemp = sTemp & "8 cabezas, 62 sectores/pista, 1017 cilindros" & Chr$(10)
+   'sTemp = sTemp & "Unidades = cilindros de 496 * 512 = 253952 bytes" & Chr$(10)
+   'sTemp = sTemp & Chr$(10)
+   'sTemp = sTemp & "Disposit. Inicio    Comienzo      Fin      Bloques  Id  Sistema" & Chr$(10)
+   'sTemp = sTemp & "/dev/sda1               1        1017      252185    b  W95 FAT32" & Chr$(10)
+ENDIF
+
+' Parse what fdisk has to say:
+Parse_fdisk(sTemp)
+
+END
+
+PUBLIC SUB Parse_fdisk(sTemp AS String)
+' Parse what fdisk has to say:
+DIM vDI AS NEW cDiskInfo
+DIM vPI AS NEW cPartInfo
+DIM arrTemp1 AS NEW String[]
+DIM arrTemp2 AS NEW String[]
+DIM pos AS Long
+DIM n AS Long, m AS Long
+DIM pcounter AS Long
+
+' 4 debug:
+IF Global.DebugMode = TRUE THEN
+   message.Info("Working in Simulation Mode..." & gb.NewLine & sTemp)
+ENDIF
+
+' Parse it:
+arrTemp1 = Split(sTemp, Chr$(10))
+FOR n = 0 TO arrTemp1.Max
+   pos = InStr(arrTemp1[n], "/dev/")
+   IF pos = 1 ' Parse a partition.
+      vPI = NEW cPartInfo
+      arrTemp2 = Split(arrTemp1[n], Space$(1), "", TRUE)
+      vPI.Device = arrTemp2[0]
+      IF Trim(arrTemp2[1]) = "*" THEN
+         vPI.Bootable = TRUE
+         vPI.StartBlock = arrTemp2[2]
+         vPI.EndBlock = arrTemp2[3]
+         IF Right$(arrTemp2[4]) = "+" THEN
+            vPI.Blocks = Val(Left$(arrTemp2[4], Len(arrTemp2[4]) - 1))
+         ELSE
+            vPI.Blocks = Val(arrTemp2[4])
+         ENDIF
+         vPI.ID = arrTemp2[5]
+      ELSE
+         vPI.Bootable = FALSE
+         vPI.StartBlock = arrTemp2[1]
+         vPI.EndBlock = arrTemp2[2]
+         IF Right$(arrTemp2[3]) = "+" THEN
+            vPI.Blocks = Val(Left$(arrTemp2[3], Len(arrTemp2[3]) - 1))
+         ELSE
+            vPI.Blocks = Val(arrTemp2[3])
+         ENDIF
+         vPI.ID = arrTemp2[4]
+      ENDIF
+      Global.PartInfo.Push(vPI)
+   ELSE IF pos > 1 ' Parse a disk drive.
+      vDI = NEW cDiskInfo
+      arrTemp2 = Split(arrTemp1[n], ":,", "", TRUE)
+      vDI.Device = Trim$(Mid$(arrTemp2[0], InStr(arrTemp2[0], "/dev")))
+      IF Val(arrTemp2[2]) > 0 THEN
+         vDI.Bytes = Val(arrTemp2[2])
+      ELSE
+         vDI.Bytes = Val(arrTemp2[3])
+      ENDIF
+      Global.DiskInfo.Push(vDI)
+   ELSE ' Nothing.
+   END IF
+NEXT
+
+' 4 debug:
+IF Global.DebugMode = TRUE THEN
+   FOR n = 0 TO Global.DiskInfo.Max
+      frmGo.TextLabel1.Text &= Global.DiskInfo[n].Device & ": " & Global.DiskInfo[n].Bytes & " bytes" & " <br>"
+   NEXT
+   frmGo.TextLabel1.Text &= "<br>"
+   FOR n = 0 TO Global.PartInfo.Max
+      frmGo.TextLabel1.Text &= Global.PartInfo[n].Device & " <br>"
+      frmGo.TextLabel1.Text &= "Bootable= " & Str(Global.PartInfo[n].Bootable) & " <br>"
+      frmGo.TextLabel1.Text &= "Start block= " & Global.PartInfo[n].StartBlock & " <br>"
+      frmGo.TextLabel1.Text &= "End block= " & Global.PartInfo[n].EndBlock & " <br>"
+      frmGo.TextLabel1.Text &= "Num. Blocks= " & Global.PartInfo[n].Blocks & " <br>"
+      frmGo.TextLabel1.Text &= "Part. ID= " & Global.PartInfo[n].ID & ", " & Functions.getPartType(Global.PartInfo[n].ID) & " <br>"
+      frmGo.TextLabel1.Text &= "<br>"
+   NEXT
+ENDIF
+
+END
+
+
+PUBLIC SUB BUTTdisable()
+' Disable all frmMain buttons:
+
+' Save state first:
+BUTTsave
+
+' Then disable:
+frmMain.btnWelcome.Enabled = FALSE
+frmMain.btnChoice.Enabled = FALSE
+frmMain.btnPartitions.Enabled = FALSE
+frmMain.btnPackages.Enabled = FALSE
+frmMain.btnConfigure.Enabled = FALSE
+frmMain.btnGo.Enabled = FALSE
+frmMain.btnTools.Enabled = FALSE
+frmMain.btnExit.Enabled = FALSE
+
+END
+
+PUBLIC SUB BUTTsave()
+' Save state of all frmMain buttons:
+
+frmMain.btnWelcome.Tag = frmMain.btnWelcome.Enabled
+frmMain.btnChoice.Tag = frmMain.btnChoice.Enabled
+frmMain.btnPartitions.Tag = frmMain.btnPartitions.Enabled
+frmMain.btnPackages.Tag = frmMain.btnPackages.Enabled
+frmMain.btnConfigure.Tag = frmMain.btnConfigure.Enabled
+frmMain.btnGo.Tag = frmMain.btnGo.Enabled
+frmMain.btnTools.Tag = frmMain.btnTools.Enabled
+frmMain.btnExit.Tag = frmMain.btnExit.Enabled
+
+END
+
+PUBLIC SUB BUTTrest()
+' Restore saved state of all frmMain buttons:
+
+frmMain.btnWelcome.Enabled = frmMain.btnWelcome.Tag
+frmMain.btnChoice.Enabled = frmMain.btnChoice.Tag
+frmMain.btnPartitions.Enabled = frmMain.btnPartitions.Tag
+frmMain.btnPackages.Enabled = frmMain.btnPackages.Tag
+frmMain.btnConfigure.Enabled = frmMain.btnConfigure.Tag
+frmMain.btnGo.Enabled = frmMain.btnGo.Tag
+frmMain.btnTools.Enabled = frmMain.btnTools.Tag
+frmMain.btnExit.Enabled = frmMain.btnExit.Tag
+
+END
+
