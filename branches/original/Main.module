@@ -1,0 +1,71 @@
+' Gambas module file
+
+' ### MAIN SUBROUTINES ###
+
+PUBLIC SUB Main()
+
+' Set debugging mode:
+'Global.DebugMode = TRUE
+Global.DebugMode = FALSE
+
+' Simulation mode:
+IF User.Name <> "root" THEN
+   Global.SimulationMode = TRUE
+   message.Warning("You need to be root to run the VL installer" & gb.NewLine & "Switching to simulation mode...")
+ELSE
+   Global.SimulationMode = FALSE
+ENDIF
+
+' Initially no buttons being executed:
+Global.flagBUTTExec = FALSE
+
+' Load the Main window:
+frmMain.Load
+
+' Make always on top:
+'frmMain.TopOnly = TRUE
+
+' Loose the border at 640x480:
+'IF Desktop.Width = 640 THEN frmMain.Border = 0
+
+' Form size or Full Screen:
+'frmMain.FullScreen = TRUE 'Make this default when finished?
+'frmMain.Border = window.Resizable 
+'frmMain.Width = 640 'Only if resizable.
+'frmMain.Height = 480 'Only if rsizable.
+'frmMain.Width = 800 'Only if resizable.
+'frmMain.Height = 600 'Only if resizable.
+'frmMain.Width = 1024 'Only if resizable.
+'frmMain.Height = 768 'Only if resizable.
+
+' Center if not using Full Screen:
+'frmMain.Center
+
+' Pre-load all forms for speed (comment out for less memory use):
+'frmTools.Reparent(frmMain.pnlContainer, 0, 0)
+'frmTools.Hide
+'frmGO.Reparent(frmMain.pnlContainer, 0, 0)
+'frmGO.Hide
+'frmLieLow.Reparent(frmMain.pnlContainer, 0, 0)
+'frmLieLow.Hide
+'frmPackages.Reparent(frmMain.pnlContainer, 0, 0)
+'frmPackages.Hide
+'frmPartitioner.Reparent(frmMain.pnlContainer, 0, 0)
+'frmPartitioner.Hide
+'frmPartitions.Reparent(frmMain.pnlContainer, 0, 0)
+'frmPartitions.Hide
+'frmChoice.Reparent(frmMain.pnlContainer, 0, 0)
+'frmChoice.Hide
+
+' Fit the Welcome window inside the Main one:
+frmWelcome.Reparent(frmMain.pnlContainer, 0, 0)
+
+' Start off with button 1 on Main window:
+Global.prevForm = 1
+
+' And get the show on the road....:
+frmMain.Show
+
+END
+
+

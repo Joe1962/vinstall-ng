@@ -1,0 +1,11 @@
+' Gambas class file
+
+' Structure for partition information array:
+PUBLIC Device AS String
+PUBLIC Bootable AS Boolean
+PUBLIC StartBlock AS Long
+PUBLIC EndBlock AS Long
+PUBLIC Blocks AS Long
+PUBLIC ID AS String
+PUBLIC Mountpoint AS String
+PUBLIC FileSystem AS String

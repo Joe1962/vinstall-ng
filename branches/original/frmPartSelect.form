@@ -1,0 +1,135 @@
+# Gambas Form File 1.0
+
+{ Form Form
+  MoveScaled(54.125,9.375,86,69)
+  'Move(433,75,688,552)
+  Font = Font["Luxi Sans"]
+  Text = ("")
+  Border = Window.Fixed
+  SkipTaskbar = True
+  { mountpoints Menu
+    Text = ("Mountpoints")
+    Visible = False
+    Tag = "mountpoints"
+    { root Menu Gmountpoint
+      Name = "root"
+      Text = ("/")
+      Tag = "/"
+    }
+    { home Menu Gmountpoint
+      Name = "home"
+      Text = ("/home")
+      Tag = "/home"
+    }
+    { var Menu Gmountpoint
+      Name = "var"
+      Text = ("/var")
+      Tag = "/var"
+    }
+    { opt Menu Gmountpoint
+      Name = "opt"
+      Text = ("/opt")
+      Tag = "/opt"
+    }
+    { tmp Menu Gmountpoint
+      Name = "tmp"
+      Text = ("/tmp")
+      Tag = "/tmp"
+    }
+    { boot Menu Gmountpoint
+      Name = "boot"
+      Text = ("/boot")
+      Tag = "/boot"
+    }
+    { usr Menu Gmountpoint
+      Name = "usr"
+      Text = ("/usr")
+      Tag = "/usr"
+    }
+    { share Menu Gmountpoint
+      Name = "share"
+      Text = ("/share")
+      Tag = "/share"
+    }
+  }
+  { filesystem Menu
+    Text = ("FileSystem")
+    Visible = False
+    Tag = "filesystem"
+    { xfs Menu Gfilesystem
+      Name = "xfs"
+      Text = ("xfs")
+      Tag = "xfs"
+    }
+    { reiserfs Menu Gfilesystem
+      Name = "reiserfs"
+      Text = ("reiserfs")
+      Tag = "reiserfs"
+    }
+    { ext3 Menu Gfilesystem
+      Name = "ext3"
+      Text = ("ext3")
+      Tag = "ext3"
+    }
+    { ext2 Menu Gfilesystem
+      Name = "ext2"
+      Text = ("ext2")
+      Tag = "ext2"
+    }
+  }
+  { Label1 Label
+    MoveScaled(0,0,34.625,3)
+    'Move(0,0,277,24)
+    Font = Font["Luxi Sans,Bold,12"]
+    Text = ("Drives")
+    Alignment = Align.Center
+    Border = Border.Raised
+  }
+  { gridDisk GridView
+    MoveScaled(0,3,34.625,13)
+    'Move(0,24,277,104)
+    Font = Font["Luxi Sans,10"]
+    ToolTip = ("Click on select install drive")
+  }
+  { gridPart GridView
+    MoveScaled(0,19,86,50)
+    'Move(0,152,688,400)
+    Font = Font["Luxi Sans,10"]
+    ToolTip = ("Right-click in Mount or FileSystem to set")
+  }
+  { Panel1 Panel
+    MoveScaled(35,0.125,51,7)
+    'Move(280,1,408,56)
+    Font = Font["Luxi Sans"]
+    Border = Border.Etched
+    { btnOK Button
+      MoveScaled(4,1,19,5)
+      'Move(32,8,152,40)
+      Font = Font["Luxi Sans"]
+      Text = ("OK")
+      Default = True
+    }
+    { btnCancel Button
+      MoveScaled(27,1,19,5)
+      'Move(216,8,152,40)
+      Font = Font["Luxi Sans"]
+      Text = ("Cancel")
+      Cancel = True
+    }
+  }
+  { Label2 Label
+    MoveScaled(0,16,86,3)
+    'Move(0,128,688,24)
+    Font = Font["Luxi Sans,Bold,12"]
+    Text = ("Partitions")
+    Alignment = Align.Center
+    Border = Border.Raised
+  }
+  { TextLabel1 TextLabel
+    MoveScaled(35,7,51,9)
+    'Move(280,56,408,72)
+    Font = Font["Luxi Sans,10"]
+    Text = ("<ul>\n<li>Left-click to (un)select drive(s) to install Vector Linux.</li>\n<li>Right-click on Linux partitions to pick mountpoint</li>\n<li>Left-click on other partitions to edit mountpoint</li>\n</ul>\n")
+    Border = Border.Etched
+  }
+}
