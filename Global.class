@@ -42,10 +42,15 @@ STATIC PUBLIC enumLILOMODE AS Long 'Boot manager installation.
 ' 2 = Floppy diskette
 ' 3 = Do not install
 
+'System memory declarations:
+STATIC PUBLIC SysMemory AS Integer
+STATIC PUBLIC SwapMemory AS Integer
+
 ' Drive and partition declarations:
 STATIC PUBLIC DiskInfo AS NEW Object[]
 STATIC PUBLIC PartInfo AS NEW Object[]
 STATIC PUBLIC PARTinst AS NEW Object[]
+STATIC PUBLIC PARTswap AS String
 STATIC PUBLIC PARTroot AS String
 STATIC PUBLIC PARThome AS String
 STATIC PUBLIC PARTvar AS String
@@ -60,5 +65,4 @@ STATIC PUBLIC tproc AS Process
 
 'temp stuff 2 check out:
 STATIC PUBLIC installDrive AS String
-
 

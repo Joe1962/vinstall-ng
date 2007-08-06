@@ -11,6 +11,7 @@ DIM arrTemp AS NEW String[]
 DIM n AS Byte
 DIM m AS Byte
 
+
 'Center form on screen:
 ME.Center
 ME.Caption = "Partition Selection"

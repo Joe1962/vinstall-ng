@@ -14,27 +14,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: frmChoice.class:91
+#: frmChoice.class:93
 msgid "<center><h3><b>You have 3 choices:</b></h3></center>\n\n<ul>\n<li><b><u>Full-automatic install:</u></b> Our easiest install yet; choose this option if you want to use your entire hard disk for VL. Your system will be automatically set up, partitions and all. <font color=\"#FF0000\">WARNING: this option will DELETE everything on your hard disk, or offer a choice if there are multiple disks.</font> There will of course be a confirmation dialog in case you selected this option by mistake.</li>\n<li><b><u>Semi-automatic install:</u></b> With this option, you manually partition your drives with gparted, but the rest of the setup will be pretty automatic.</li>\n<li><b><u>Advanced install:</u></b> For the technically savvy user that must do everything by hand. You can control most aspects of the install. However, there will be assisted options available all the way through, so this is a very flexible install.</li>\n</ul>\n"
 msgstr ""
 
-#: frmChoice.class:102
+#: frmChoice.class:104
 msgid "Choose install type"
 msgstr ""
 
-#: frmChoice.class:117
+#: frmChoice.class:119
 msgid "Install types"
 msgstr ""
 
-#: frmChoice.class:122
+#: frmChoice.class:124
 msgid "Full-automatic"
 msgstr ""
 
-#: frmChoice.class:128
+#: frmChoice.class:130
 msgid "Semi-automatic"
 msgstr ""
 
-#: frmChoice.class:134
+#: frmChoice.class:136
 msgid "Advanced"
 msgstr ""
 

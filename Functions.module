@@ -215,3 +215,17 @@ CATCH ' Failed, usually due to already existing dirs:
 
 END
 
+PUBLIC FUNCTION CalcSwap(sysmem AS Integer) AS Integer
+'Calculate the theoretical swap partition size based on system memory, in megabytes
+
+IF sysmem < 128 THEN 
+   RETURN sysmem * 2.5
+ELSE IF sysmem < 256 AND sysmem > 128 THEN 
+   RETURN sysmem * 2
+ELSE 
+   RETURN 512 'Don't return swap partition sizes above 512MB
+ENDIF 
+  
+END
+
+
