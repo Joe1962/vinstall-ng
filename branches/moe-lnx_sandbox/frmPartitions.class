@@ -1,0 +1,176 @@
+' Gambas class file
+
+' ### PARTITIONING MODE FORM ###
+
+PUBLIC tnum AS Integer[]
+PUBLIC ttime AS Date
+
+PUBLIC SUB Form_Show()
+
+' set button focus:
+frmMain.btnPartitions.SetFocus
+
+' set some background colours:
+TextLabel1.BackColor = Global.HTMLBG 
+lblSubTitle.BackColor = Global.LogoBG
+Panel1.BackColor = Global.LogoBG
+
+END
+
+PUBLIC SUB Form_Resize()
+
+' Resize the html message:
+TextLabel1.Width = ScrollView1.ClientWidth
+TextLabel1.Adjust 
+
+END
+
+PUBLIC SUB btnFullDisk_Click() 'Full disk:
+
+' Check for button execution:
+IF Global.flagBUTTExec = TRUE THEN RETURN
+
+' Flag button execution:
+Global.flagBUTTExec = TRUE
+
+frmMain.btnPartitions.Enabled = FALSE 'Disable "Partitions".
+frmMain.btnPackages.Enabled = TRUE 'Enable "Packages".
+frmMain.btnPackages_Click 'Advance to "Packages".
+
+' Unflag button execution:
+Global.flagBUTTExec = FALSE
+
+END
+
+PUBLIC SUB btnFreeSpace_Click() 'Free space:
+
+' Check for button execution:
+IF Global.flagBUTTExec = TRUE THEN RETURN
+
+' Flag button execution:
+Global.flagBUTTExec = TRUE
+
+frmMain.btnPartitions.Enabled = FALSE 'Disable "Partitions".
+frmMain.btnPackages.Enabled = TRUE 'Enable "Packages".
+frmMain.btnPackages_Click 'Advance to "Packages".
+
+' Unflag button execution:
+Global.flagBUTTExec = FALSE
+
+END
+
+PUBLIC SUB btnGParted_Click() 'GParted:
+
+' Check for button execution:
+IF Global.flagBUTTExec = TRUE THEN RETURN
+
+' Flag button execution:
+Global.flagBUTTExec = TRUE
+
+IF User.Name <> "root" THEN
+   message.Warning("You need to be root to run GParted...", "Exit")
+ELSE
+   Global.tproc = SHELL "gparted"
+   ttime = Now
+   REPEAT
+      'tnum = desktop.Find("/dev/hda - GParted")
+      tnum = desktop.Find("GParted")
+      WAIT 0.1
+      IF DateDiff(ttime, Now, gb.Second) > 25 THEN
+         message.Error("Error executing GParted, could be due to low memory.")
+         BREAK
+      ENDIF
+   UNTIL tnum.Count > 0
+   IF tnum.Count > 0 THEN
+      frmPartitioner.Reparent(frmMain.pnlContainer, 0, 0)
+      frmPartitioner.Embedder1.Embed(tnum[0])
+      ME.Hide
+      frmPartitioner.Show
+      frmPartitioner.Embedder1.Raise
+   ENDIF
+ENDIF
+
+IF Global.DebugMode = TRUE THEN
+   Utils.DrivePartInfo
+   frmPartSelect.ShowModal
+ENDIF
+
+' Unflag button execution:
+Global.flagBUTTExec = FALSE
+
+END
+
+PUBLIC SUB btnCfdisk_Click() 'cfdisk:
+
+' Check for button execution:
+IF Global.flagBUTTExec = TRUE THEN RETURN
+
+' Flag button execution:
+Global.flagBUTTExec = TRUE
+
+IF User.Name <> "root" THEN
+   message.Warning("You need to be root to run cfdisk...", "Exit")
+ELSE
+   utils.BUTTdisable
+'   Global.tproc = SHELL "xterm -e cfdisk"
+'   Global.tproc = EXEC ["xterm", "-e", "cfdisk"]
+   Global.tproc = EXEC ["aterm", "+tr", "+sb", "-fg", "black", "-bg", "white", "-e", "cfdisk"]
+   ttime = Now
+   REPEAT
+      tnum = desktop.Find("cfdisk")
+      WAIT 0.1
+      IF DateDiff(ttime, Now, gb.Second) > 10 THEN
+         message.Error("Error executing cfdisk, could be due to low memory.")
+         frmPartitions.Show
+         utils.BUTTrest
+         BREAK
+      ENDIF
+   UNTIL tnum.Count > 0
+   IF tnum.Count > 0 THEN
+      frmPartitioner.Reparent(frmMain.pnlContainer, 0, 0)
+      frmPartitioner.Embedder1.Embed(tnum[0])
+      ME.Hide
+      frmPartitioner.Show
+      frmPartitioner.Embedder1.SetFocus
+   ENDIF
+ENDIF
+
+' Unflag button execution:
+Global.flagBUTTExec = FALSE
+
+END
+
+PUBLIC SUB btnPreset_Click() 'Preset strategies:
+
+' Check for button execution:
+IF Global.flagBUTTExec = TRUE THEN RETURN
+
+' Flag button execution:
+Global.flagBUTTExec = TRUE
+
+
+' do some stuff...
+
+
+' Unflag button execution:
+Global.flagBUTTExec = FALSE
+
+END
+
+PUBLIC SUB btnNoPart_Click() 'No partitioning:
+
+' Check for button execution:
+IF Global.flagBUTTExec = TRUE THEN RETURN
+
+' Flag button execution:
+Global.flagBUTTExec = TRUE
+
+' Mountpoint selection:
+Utils.DrivePartInfo
+frmPartSelect.ShowModal
+
+' Unflag button execution:
+Global.flagBUTTExec = FALSE
+
+END
+
