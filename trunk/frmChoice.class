@@ -32,6 +32,9 @@ IF Global.DiskInfo.Count > 1 THEN frmDriveSelect.ShowModal
 frmMain.btnChoice.Enabled = FALSE ' Disable Choices.
 frmMain.btnGo.Enabled = TRUE ' Enable Go for it!.
 frmMain.btnGo_Click ' Advance to Go for it!.
+'Debug:
+Utils.GetSysMemory
+frmGo.TextLabel1.Text = "Memory: " & Global.SysMemory & "\n" & "Swap: " & Functions.CalcSwap(Global.SysMemory)
 
 END
 

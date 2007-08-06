@@ -18,15 +18,15 @@ msgstr ""
 msgid "Enter a value:"
 msgstr ""
 
-#: InputBox.class:205 frmDriveSelect.class:126 frmPartSelect.class:371
+#: InputBox.class:205 frmDriveSelect.class:126 frmPartSelect.class:372
 msgid "OK"
 msgstr ""
 
-#: InputBox.class:212 frmDriveSelect.class:133 frmPartSelect.class:378
+#: InputBox.class:212 frmDriveSelect.class:133 frmPartSelect.class:379
 msgid "Cancel"
 msgstr ""
 
-#: frmChoice.class:91
+#: frmChoice.class:93
 msgid ""
 "<center><h3><b>You have 3 choices:</b></h3></center>\n"
 "\n"
@@ -47,23 +47,23 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmChoice.class:102
+#: frmChoice.class:104
 msgid "Choose install type"
 msgstr ""
 
-#: frmChoice.class:117
+#: frmChoice.class:119
 msgid "Install types"
 msgstr ""
 
-#: frmChoice.class:122
+#: frmChoice.class:124
 msgid "Full-automatic"
 msgstr ""
 
-#: frmChoice.class:128
+#: frmChoice.class:130
 msgid "Semi-automatic"
 msgstr ""
 
-#: frmChoice.class:134
+#: frmChoice.class:136
 msgid "Advanced"
 msgstr ""
 
@@ -137,7 +137,7 @@ msgstr ""
 msgid "Config 2"
 msgstr ""
 
-#: frmDriveSelect.class:107 frmPartSelect.class:346
+#: frmDriveSelect.class:107 frmPartSelect.class:347
 msgid "Drives"
 msgstr ""
 
@@ -157,7 +157,7 @@ msgstr ""
 msgid "The choice"
 msgstr ""
 
-#: frmMain.class:225 frmPartSelect.class:386
+#: frmMain.class:225 frmPartSelect.class:387
 msgid "Partitions"
 msgstr ""
 
@@ -231,71 +231,71 @@ msgstr ""
 msgid "No extras"
 msgstr ""
 
-#: frmPartSelect.class:260
+#: frmPartSelect.class:261
 msgid "Mountpoints"
 msgstr ""
 
-#: frmPartSelect.class:266
+#: frmPartSelect.class:267
 msgid "/"
 msgstr ""
 
-#: frmPartSelect.class:272
+#: frmPartSelect.class:273
 msgid "/home"
 msgstr ""
 
-#: frmPartSelect.class:278
+#: frmPartSelect.class:279
 msgid "/var"
 msgstr ""
 
-#: frmPartSelect.class:284
+#: frmPartSelect.class:285
 msgid "/opt"
 msgstr ""
 
-#: frmPartSelect.class:290
+#: frmPartSelect.class:291
 msgid "/tmp"
 msgstr ""
 
-#: frmPartSelect.class:296
+#: frmPartSelect.class:297
 msgid "/boot"
 msgstr ""
 
-#: frmPartSelect.class:302
+#: frmPartSelect.class:303
 msgid "/usr"
 msgstr ""
 
-#: frmPartSelect.class:308
+#: frmPartSelect.class:309
 msgid "/share"
 msgstr ""
 
-#: frmPartSelect.class:314
+#: frmPartSelect.class:315
 msgid "FileSystem"
 msgstr ""
 
-#: frmPartSelect.class:320
+#: frmPartSelect.class:321
 msgid "xfs"
 msgstr ""
 
-#: frmPartSelect.class:326
+#: frmPartSelect.class:327
 msgid "reiserfs"
 msgstr ""
 
-#: frmPartSelect.class:332
+#: frmPartSelect.class:333
 msgid "ext3"
 msgstr ""
 
-#: frmPartSelect.class:338
+#: frmPartSelect.class:339
 msgid "ext2"
 msgstr ""
 
-#: frmPartSelect.class:354
+#: frmPartSelect.class:355
 msgid "Click on select install drive"
 msgstr ""
 
-#: frmPartSelect.class:360
+#: frmPartSelect.class:361
 msgid "Right-click in Mount or FileSystem to set"
 msgstr ""
 
-#: frmPartSelect.class:394
+#: frmPartSelect.class:395
 msgid ""
 "<ul>\n"
 "<li>Left-click to (un)select drive(s) to install Vector Linux.</li>\n"

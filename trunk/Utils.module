@@ -138,6 +138,20 @@ ENDIF
 
 END
 
+PUBLIC SUB GetSysMemory()
+'Find system memory by reading the first line of /proc/meminfo
+DIM hMemInfo AS File
+DIM sLine AS String
+
+OPEN "/proc/meminfo" FOR READ AS #hMemInfo
+   LINE INPUT #hMemInfo, sLine
+CLOSE hMemInfo
+
+sLine = Trim$(Mid$(Left$(sLine, RInStr(sLine, " ")), InStr(sLine, " "))) 'Isolate the memory size string
+Global.SysMemory = Val(sLine) / 1024 'Turn the value into megabytes
+
+END
+
 
 PUBLIC SUB BUTTdisable()
 ' Disable all frmMain buttons:
