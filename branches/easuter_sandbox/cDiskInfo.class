@@ -1,5 +1,0 @@
-' Gambas class file
-
-' Structure for drive information array:
-PUBLIC Device AS String
-PUBLIC Bytes AS Long
