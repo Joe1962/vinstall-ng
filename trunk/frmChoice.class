@@ -24,26 +24,27 @@ END
 
 PUBLIC SUB btnFullAuto_Click() ' Full-automatic.
 
-Global.enumINSTMODE = 1 ' Full-automatic install mode.
+Global.enumINSTMODE = 0 ' Full-automatic install mode.
 
 Utils.DrivePartInfo
-IF Global.DiskInfo.Count > 1 THEN frmDriveSelect.ShowModal
+IF Global.DiskInfo.Count >= 1 THEN frmDriveSelect.ShowModal
 
 frmMain.btnChoice.Enabled = FALSE ' Disable Choices.
 frmMain.btnGo.Enabled = TRUE ' Enable Go for it!.
 frmMain.btnGo_Click ' Advance to Go for it!.
-'Debug:
+
+'Debug
 Utils.GetSysMemory
-frmGo.TextLabel1.Text = "Memory: " & Global.SysMemory & "\n" & "Swap: " & Functions.CalcSwap(Global.SysMemory)
+frmGo.TextLabel1.Text = "Swap(MB): " & Functions.CalcSwap(Global.SysMemory) & " Root(MB): " & Functions.CalcRootSize() & " Packages will ocupy(MB): " & Functions.CalcPaksSize("0;1")       
 
 END
 
 PUBLIC SUB btnSemiAuto_Click() ' Semi-automatic.
 
-Global.enumINSTMODE = 1 ' Semi-automatic install mode.
-frmMain.btnChoice.Enabled = FALSE ' Disable Choices.
-frmMain.btnPartitions.Enabled = TRUE ' Enable Partitions.
-frmMain.btnPartitions_Click ' Advance to Partitions.
+' Global.enumINSTMODE = 1 ' Semi-automatic install mode.
+' frmMain.btnChoice.Enabled = FALSE ' Disable Choices.
+' frmMain.btnPartitions.Enabled = TRUE ' Enable Partitions.
+' frmMain.btnPartitions_Click ' Advance to Partitions.
 
 END
 
