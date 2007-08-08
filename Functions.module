@@ -237,26 +237,33 @@ DIM sPackageRef AS String
 DIM iSize AS Long
 
 iSize = 0
-arsPackages = Split(selected_paks, ";") 'selected_packs is semi-colon delimited
+
 
 'The config file must have the following layout for easy parsing
 '(Package sizes must be in bytes!)
 '
 'Group: Base
-'  Package_0:veclinux/required/veclinux.tlz|856480|Base System
-'  Package_1:veclinux/required/vlconfig.tlz|33792|Config Files
+'  Package_0:veclinux/required/veclinux.tlz|185597952|Base System
+'  Package_1:veclinux/required/vlconfig.tlz|337945|Config Files
 'Group: Dev
 
 OPEN "/tmp/mnt/SOURCE/veclinux/vinstall-ng_packages.conf" FOR READ AS #hPackageConfig
    WHILE NOT Eof(hPackageConfig)
       LINE INPUT #hPackageConfig, sLine
       
-      'Find the sizes that correspond to each package reference by parsing the configuration file
-      FOR EACH sPackageRef IN arsPackages
-         IF InStr(sLine, "Package_" & sPackageRef & ":") > 0 THEN 
+      'Parse the package configuration file based on whether a bulk or individual package selection was made
+      IF InStr(selected_paks, "all") > 0 THEN 
+         IF InStr(sLine, "Package_") > 0 THEN 
             iSize = iSize + Val(Trim$(Mid$(Left$(sLine, RInStr(sLine, "|") - 1), InStr(sLine, "|") + 1)))
-         ENDIF 
-      NEXT 
+         ENDIF
+      ELSE 'Parse individual package selection
+         arsPackages = Split(selected_paks, ";") 'selected_packs is semi-colon delimited when specific packages are selected      
+         FOR EACH sPackageRef IN arsPackages
+            IF InStr(sLine, "Package_" & sPackageRef & ":") > 0 THEN 
+               iSize = iSize + Val(Trim$(Mid$(Left$(sLine, RInStr(sLine, "|") - 1), InStr(sLine, "|") + 1)))
+            ENDIF 
+         NEXT 
+      ENDIF
    WEND 
 CLOSE #hPackageConfig
 
@@ -271,14 +278,16 @@ DIM iTotalSize AS Long
 DIM sTemp AS String
 
 Utils.GetSysMemory
+iTotalSize = 0
 
 IF Global.SimulationMode = TRUE THEN 
-   sTemp = "3800000"
+   sTemp = "38000000"
 ELSE 
    SHELL "fdisk -s " & Global.installDrive TO sTemp
 ENDIF 
 
-iTotalSize = Val(sTemp) * 1024 'Convert to bytes
+iTotalSize = Val(sTemp)
+iTotalSize = iTotalSize * 1024 'Convert to bytes
 
 'Return the size to be used for the root partition, in bytes, with a "safety margin" of 150MB
 iRootSize = iTotalSize - CalcSwap(Global.SysMemory) - 157286400
