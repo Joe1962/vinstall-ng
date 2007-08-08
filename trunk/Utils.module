@@ -147,8 +147,8 @@ OPEN "/proc/meminfo" FOR READ AS #hMemInfo
    LINE INPUT #hMemInfo, sLine
 CLOSE hMemInfo
 
-sLine = Trim$(Mid$(Left$(sLine, RInStr(sLine, " ")), InStr(sLine, " "))) 'Isolate the memory size string
-Global.SysMemory = Val(sLine) / 1024 'Turn the value into megabytes
+sLine = Trim$(Mid$(Left$(sLine, RInStr(sLine, " ")), InStr(sLine, " "))) 'Isolate the memory size string (which is in KB)
+Global.SysMemory = Val(sLine) * 1024 'Convert the value to bytes
 
 END
 
