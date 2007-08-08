@@ -35,7 +35,7 @@ frmMain.btnGo_Click ' Advance to Go for it!.
 
 'Debug
 Utils.GetSysMemory
-frmGo.TextLabel1.Text = "Swap(MB): " & Functions.CalcSwap(Global.SysMemory) & " Root(MB): " & Functions.CalcRootSize() & " Packages will ocupy(MB): " & Functions.CalcPaksSize("0;1")       
+frmGo.TextLabel1.Text = "Swap: " & Functions.AutoUnits(Functions.CalcSwap(Global.SysMemory)) & " Root: " & Functions.AutoUnits(Functions.AutoRootSize()) & " Packages will ocupy: " & Functions.AutoUnits(Functions.CalcPaksSize("all"))
 
 END
 
