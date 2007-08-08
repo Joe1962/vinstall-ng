@@ -215,22 +215,21 @@ CATCH ' Failed, usually due to already existing dirs:
 
 END
 
-PUBLIC FUNCTION CalcSwap(sysmem AS Integer) AS Integer
-'Calculate the theoretical swap partition size based on system memory, in megabytes
+PUBLIC FUNCTION CalcSwap(sysmem AS Long) AS Long
+'Calculate the theoretical swap partition size based on system memory, in bytes
 
-IF sysmem < 128 THEN 
+IF sysmem < 134217728 THEN 
    RETURN sysmem * 2.5
-ELSE IF sysmem < 256 AND sysmem > 128 THEN 
+ELSE IF sysmem < 268435456 AND sysmem > 134217728 THEN 
    RETURN sysmem * 2
 ELSE 
-   RETURN 512 'Don't return swap partition sizes above 512MB
+   RETURN 536870912 'Don't return swap partition sizes above 512MB
 ENDIF 
   
 END
 
 PUBLIC FUNCTION CalcPaksSize(selected_paks AS String) AS Long
 'Calculate the space required by the user's package selection
-'Call the function by separating the package references with semi-colons
 DIM arsPackages AS string[]
 DIM hPackageConfig AS file
 DIM sLine AS String
@@ -238,13 +237,14 @@ DIM sPackageRef AS String
 DIM iSize AS Long
 
 iSize = 0
-arsPackages = Split(selected_paks, ";")
+arsPackages = Split(selected_paks, ";") 'selected_packs is semi-colon delimited
 
-'The config file must have the following layout for easy parsing (example):
+'The config file must have the following layout for easy parsing
+'(Package sizes must be in bytes!)
 '
 'Group: Base
 '  Package_0:veclinux/required/veclinux.tlz|856480|Base System
-'  Package_1:veclinux/required/vlconfig.tlz|33792| Config Files
+'  Package_1:veclinux/required/vlconfig.tlz|33792|Config Files
 'Group: Dev
 
 OPEN "/tmp/mnt/SOURCE/veclinux/vinstall-ng_packages.conf" FOR READ AS #hPackageConfig
@@ -254,29 +254,34 @@ OPEN "/tmp/mnt/SOURCE/veclinux/vinstall-ng_packages.conf" FOR READ AS #hPackageC
       'Find the sizes that correspond to each package reference by parsing the configuration file
       FOR EACH sPackageRef IN arsPackages
          IF InStr(sLine, "Package_" & sPackageRef & ":") > 0 THEN 
-            iSize = iSize + Val(Mid$(Left$(sLine, RInStr(sLine, "|") - 1), InStr(sLine, "|") + 1))
+            iSize = iSize + Val(Trim$(Mid$(Left$(sLine, RInStr(sLine, "|") - 1), InStr(sLine, "|") + 1)))
          ENDIF 
       NEXT 
    WEND 
 CLOSE #hPackageConfig
 
-iSize = iSize / 1024 'Convert the value to megabytes and then return it
 RETURN iSize
 
 END
 
-PUBLIC FUNCTION CalcRootSize() AS Long
+PUBLIC FUNCTION AutoRootSize() AS Long
 'Calculate the size of the theoretical root partition
 DIM iRootSize AS Long
 DIM iTotalSize AS Long
 DIM sTemp AS String
 
 Utils.GetSysMemory
-SHELL "fdisk -s " & Global.installDrive TO sTemp
-iTotalSize = Val(sTemp) / 1024
 
-'Return the size to be used for the root partition, in megabytes, with a "safety margin" of 200MB
-iRootSize = iTotalSize - CalcSwap(Global.SysMemory) - 200
+IF Global.SimulationMode = TRUE THEN 
+   sTemp = "3800000"
+ELSE 
+   SHELL "fdisk -s " & Global.installDrive TO sTemp
+ENDIF 
+
+iTotalSize = Val(sTemp) * 1024 'Convert to bytes
+
+'Return the size to be used for the root partition, in bytes, with a "safety margin" of 150MB
+iRootSize = iTotalSize - CalcSwap(Global.SysMemory) - 157286400
 RETURN iRootSize
 
 END
