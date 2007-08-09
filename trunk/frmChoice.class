@@ -25,6 +25,9 @@ END
 PUBLIC SUB btnFullAuto_Click() ' Full-automatic.
 
 Global.enumINSTMODE = 0 ' Full-automatic install mode.
+Global.enumPARTMODE = 0 'Full-automatic partitioning
+Global.enumPACKS = 0 'All packages selected
+Global.enumLILOMODE = 0 'Install lilo to MBR
 
 Utils.DrivePartInfo
 IF Global.DiskInfo.Count >= 1 THEN frmDriveSelect.ShowModal
@@ -32,10 +35,6 @@ IF Global.DiskInfo.Count >= 1 THEN frmDriveSelect.ShowModal
 frmMain.btnChoice.Enabled = FALSE ' Disable Choices.
 frmMain.btnGo.Enabled = TRUE ' Enable Go for it!.
 frmMain.btnGo_Click ' Advance to Go for it!.
-
-'Debug
-Utils.GetSysMemory
-frmGo.TextLabel1.Text = "Swap: " & Functions.AutoUnits(Functions.CalcSwap(Global.SysMemory)) & " Root: " & Functions.AutoUnits(Functions.AutoRootSize()) & " Packages will ocupy: " & Functions.AutoUnits(Functions.CalcPaksSize("all"))
 
 END
 

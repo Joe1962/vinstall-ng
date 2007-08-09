@@ -26,7 +26,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: frmChoice.class:95
+#: frmChoice.class:94
 msgid ""
 "<center><h3><b>You have 3 choices:</b></h3></center>\n"
 "\n"
@@ -47,23 +47,23 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmChoice.class:106
+#: frmChoice.class:105
 msgid "Choose install type"
 msgstr ""
 
-#: frmChoice.class:121
+#: frmChoice.class:120
 msgid "Install types"
 msgstr ""
 
-#: frmChoice.class:126
+#: frmChoice.class:125
 msgid "Full-automatic"
 msgstr ""
 
-#: frmChoice.class:132
+#: frmChoice.class:131
 msgid "Semi-automatic"
 msgstr ""
 
-#: frmChoice.class:138
+#: frmChoice.class:137
 msgid "Advanced"
 msgstr ""
 

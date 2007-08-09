@@ -16,6 +16,9 @@ ELSE
    Global.SimulationMode = FALSE
 ENDIF
 
+'Get some basic system info processed:
+Utils.GetSysMemory
+
 ' Initially no buttons being executed:
 Global.flagBUTTExec = FALSE
 
