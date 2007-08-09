@@ -222,8 +222,8 @@ IF sysmem < 134217728 THEN
    RETURN sysmem * 2.5
 ELSE IF sysmem < 268435456 AND sysmem > 134217728 THEN 
    RETURN sysmem * 2
-ELSE 
-   RETURN 536870912 'Don't return swap partition sizes above 512MB
+ELSE 'Don't return swap partition sizes above 512MB
+   RETURN 536870912
 ENDIF 
   
 END
@@ -271,26 +271,55 @@ RETURN iSize
 
 END
 
-PUBLIC FUNCTION AutoRootSize() AS Long
-'Calculate the size of the theoretical root partition
+PUBLIC FUNCTION AutoRootSize(partmode AS Integer) AS Long
+'Calculate the size of the theoretical root partition, for the automatic or free-space partitioning modes
 DIM iRootSize AS Long
 DIM iTotalSize AS Long
 DIM sTemp AS String
 
-Utils.GetSysMemory
-iTotalSize = 0
-
-IF Global.SimulationMode = TRUE THEN 
-   sTemp = "38000000"
-ELSE 
-   SHELL "fdisk -s " & Global.installDrive TO sTemp
+IF Global.enumPARTMODE = 0 THEN 'Use entire drive
+   IF Global.SimulationMode = TRUE THEN 
+      sTemp = "3800000"
+   ELSE 'Get real value from fdisk
+      SHELL "fdisk -s " & Global.installDrive TO sTemp
+   ENDIF 
+   
+   iTotalSize = CLng(Val(Trim$(sTemp))) * 1024 'Convert to long integer and turn value into bytes
+   iRootSize = iTotalSize - CalcSwap(Global.SysMemory)
+   
+ELSE IF Global.enumPARTMODE = 1 'Use only free space
+   IF Global.SimulationMode = TRUE THEN 
+      sTemp = "3800000"
+   ELSE 
+      'Do whatever needs to be done to get free space values from available partitions
+   ENDIF
+ELSE
+   Message.Error("Unacceptable partition mode (" & Global.enumPARTMODE & ") for AutoRootSize function.")
 ENDIF 
 
-iTotalSize = Val(sTemp)
-iTotalSize = iTotalSize * 1024 'Convert to bytes
-
-'Return the size to be used for the root partition, in bytes, with a "safety margin" of 150MB
-iRootSize = iTotalSize - CalcSwap(Global.SysMemory) - 157286400
 RETURN iRootSize
 
+END
+
+PUBLIC FUNCTION EnoughSpace() AS Boolean
+'Check whether the space destined to the package installation is enough (with a 150MB "safety" margin)
+DIM iAvailableSpace AS Long
+
+IF Global.enumPARTMODE = 0 THEN
+   iAvailableSpace = AutoRootSize - CalcSwap(Global.SysMemory) - 157286400
+   IF iAvailableSpace > CalcPaksSize("all") THEN 
+      RETURN TRUE
+   ELSE 
+      RETURN FALSE
+   ENDIF 
+'Do the same for other partition modes
+ELSE IF Global.enumPARTMODE = 1 THEN 
+ELSE IF Global.enumPARTMODE = 2 THEN 
+ELSE IF Global.enumPARTMODE = 3 THEN 
+ELSE IF Global.enumPARTMODE = 4 THEN 
+ELSE IF Global.enumPARTMODE = 5 THEN 
+ELSE
+   Message.Error("Invalid partition mode: " & Global.enumPARTMODE)
+ENDIF  
+  
 END
