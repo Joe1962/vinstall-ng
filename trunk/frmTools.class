@@ -25,7 +25,11 @@ END
 
 PUBLIC SUB btnBMRepair_Click() ' Repair LILO:
 'frmMain.btnChoice_Click
-frmMain.btnConfigure_click ' Display the Boot Manager selection window
+'frmMain.btnConfigure_click ' Display the Boot Manager selection window
+' Save us some time and use the existing code via Xdialog ???
+SHELL "/sbin/vliloconf"
+' Might need to just make it appear in the right place
+
 
 END
 

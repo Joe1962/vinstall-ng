@@ -65,5 +65,8 @@ STATIC PUBLIC tproc AS Process
 'temp stuff 2 check out:
 STATIC PUBLIC installDrive AS String
 
+' MBR Selection (When more than one is available)
+STATIC PUBLIC MBRSel AS String
+
 
 
