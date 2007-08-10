@@ -2,9 +2,10 @@
 Title=VL-gui-installer
 Startup=Main
 Icon=vl_logo_icon2.png
-Version=0.0.166
+Version=0.0.171
 Library=gb.qt
 Library=gb.qt.ext
 TabSize=3
 Translate=1
 ControlPublic=1
+ExecPath=/home/moe/Desktop/vl-installer.gambas

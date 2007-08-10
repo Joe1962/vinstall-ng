@@ -67,7 +67,7 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: frmConfig.class:114
+#: frmConfig.class:116
 msgid ""
 "<center><h3><b>Configuration:</b></h3></center>\n"
 "\n"
@@ -101,39 +101,39 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmConfig.class:125
+#: frmConfig.class:127
 msgid "Additional configuration"
 msgstr ""
 
-#: frmConfig.class:140
+#: frmConfig.class:142
 msgid "Boot manager"
 msgstr ""
 
-#: frmConfig.class:147
+#: frmConfig.class:149
 msgid "Master Boot Record"
 msgstr ""
 
-#: frmConfig.class:155
+#: frmConfig.class:157
 msgid "VL Boot Sector"
 msgstr ""
 
-#: frmConfig.class:163
+#: frmConfig.class:165
 msgid "Floppy diskette"
 msgstr ""
 
-#: frmConfig.class:171
+#: frmConfig.class:173
 msgid "Do not install"
 msgstr ""
 
-#: frmConfig.class:178
+#: frmConfig.class:180
 msgid "Other configuration"
 msgstr ""
 
-#: frmConfig.class:185
+#: frmConfig.class:187
 msgid "Config 1"
 msgstr ""
 
-#: frmConfig.class:193
+#: frmConfig.class:195
 msgid "Config 2"
 msgstr ""
 
