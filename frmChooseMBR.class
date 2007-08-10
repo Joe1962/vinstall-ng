@@ -1,0 +1,23 @@
+' Gambas class file
+
+
+PUBLIC SUB btNext_Click()
+
+global.MBRSel = Trim(MBRList.text)
+Message.Info(global.MBRSel) ' Just a sanity check to make sure the right value is parsed
+ME.Close
+' May need to add more code here... to tell it where to go next  
+
+END
+
+PUBLIC SUB btBack_Click()
+
+ME.Close  
+
+END
+
+PUBLIC SUB Form_Open()
+
+ME.title = "Choose MBR"  
+
+END

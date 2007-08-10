@@ -67,6 +67,21 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
+#: frmChooseMBR.class:45
+msgid "Next >"
+msgstr ""
+
+#: frmChooseMBR.class:50
+msgid "< Back"
+msgstr ""
+
+#: frmChooseMBR.class:55
+msgid ""
+"You chose to install the boot manager to your MBR, but you have\n"
+"multiple disks.  Please select the disk you would like to install the "
+"bootmanager in to."
+msgstr ""
+
 #: frmConfig.class:116
 msgid ""
 "<center><h3><b>Configuration:</b></h3></center>\n"
@@ -369,7 +384,7 @@ msgstr ""
 msgid "No partitioning"
 msgstr ""
 
-#: frmTools.class:113
+#: frmTools.class:115
 msgid ""
 "<center><h3><b>Vector Linux repair tools:</b></h3></center>\n"
 "\n"
@@ -394,43 +409,43 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmTools.class:124
+#: frmTools.class:126
 msgid "VL Tools"
 msgstr ""
 
-#: frmTools.class:139
+#: frmTools.class:141
 msgid "Distro repair"
 msgstr ""
 
-#: frmTools.class:146
+#: frmTools.class:148
 msgid "Restore packages"
 msgstr ""
 
-#: frmTools.class:154
+#: frmTools.class:156
 msgid "Repair LILO"
 msgstr ""
 
-#: frmTools.class:161
+#: frmTools.class:163
 msgid "Backup / restore"
 msgstr ""
 
-#: frmTools.class:168
+#: frmTools.class:170
 msgid "Backup /home"
 msgstr ""
 
-#: frmTools.class:176
+#: frmTools.class:178
 msgid "Restore /home"
 msgstr ""
 
-#: frmTools.class:183
+#: frmTools.class:185
 msgid "Miscellaneous"
 msgstr ""
 
-#: frmTools.class:190
+#: frmTools.class:192
 msgid "Tool 5"
 msgstr ""
 
-#: frmTools.class:198
+#: frmTools.class:200
 msgid "(Make FHS tree)"
 msgstr ""
 

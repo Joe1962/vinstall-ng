@@ -1,0 +1,22 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,43)
+  Font = Font["Luxi Mono"]
+  Text = ("")
+  { MbrList ListBox
+    MoveScaled(1,14,62,23)
+  }
+  { btNext Button
+    MoveScaled(53,38,9,3)
+    Text = ("Next >")
+  }
+  { btBack Button
+    MoveScaled(44,38,8,3)
+    Text = ("< Back")
+  }
+  { lbWarn TextLabel
+    MoveScaled(1,1,62,12)
+    Text = ("You chose to install the boot manager to your MBR, but you have\nmultiple disks.  Please select the disk you would like to install the bootmanager in to.")
+  }
+}

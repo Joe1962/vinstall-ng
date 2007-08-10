@@ -14,47 +14,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: frmTools.class:113
+#: frmTools.class:115
 msgid "<center><h3><b>Vector Linux repair tools:</b></h3></center>\n\n<b><u>Distro repair tools:</u></b>\n<ul>\n<li><b>Repair LILO:</b> Repair <b>Linux Loader</b> boot manager of an existing Vector Linux installation.</li>\n<li><b>Restore packages:</b> Restore original packages from the install CD, to fix a broken upgrade.</li>\n</ul>\n<b><u>Backup / restore tools:</u></b>\n<ul>\n<li><b>Backup /home:</b> Backup your /home directory for safekeeping.</li>\n<li><b>Restore /home:</b> Restore your /home directory from a previous backup. <font color=\"#FF0000\">WARNING: The existing /home directory will be OVERWRITTEN during restore. You have been WARNED.</font></li>\n</ul>\n<b><u>Miscellaneous tools:</u></b> \n<ul>\n<li><b>Tool 5:</b> Tool number 5 to fix something or other.</li>\n<li><b>Tool 6:</b> Tool number 6 to fix something or other.</li>\n</ul>\n"
 msgstr ""
 
-#: frmTools.class:124
+#: frmTools.class:126
 msgid "VL Tools"
 msgstr ""
 
-#: frmTools.class:139
+#: frmTools.class:141
 msgid "Distro repair"
 msgstr ""
 
-#: frmTools.class:146
+#: frmTools.class:148
 msgid "Restore packages"
 msgstr ""
 
-#: frmTools.class:154
+#: frmTools.class:156
 msgid "Repair LILO"
 msgstr ""
 
-#: frmTools.class:161
+#: frmTools.class:163
 msgid "Backup / restore"
 msgstr ""
 
-#: frmTools.class:168
+#: frmTools.class:170
 msgid "Backup /home"
 msgstr ""
 
-#: frmTools.class:176
+#: frmTools.class:178
 msgid "Restore /home"
 msgstr ""
 
-#: frmTools.class:183
+#: frmTools.class:185
 msgid "Miscellaneous"
 msgstr ""
 
-#: frmTools.class:190
+#: frmTools.class:192
 msgid "Tool 5"
 msgstr ""
 
-#: frmTools.class:198
+#: frmTools.class:200
 msgid "(Make FHS tree)"
 msgstr ""
 
