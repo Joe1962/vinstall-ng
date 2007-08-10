@@ -25,18 +25,20 @@ END
 PUBLIC SUB btnMBR_Click() 'Master Boot Record:
 
 Global.enumLILOMODE = 0
+Functions.BootMngrSet
 
 END
 
 PUBLIC SUB btnBootSec_Click() 'VL Boot Sector:
 
 Global.enumLILOMODE = 1
-
+Functions.BootMngrSet
 END
 
 PUBLIC SUB btnFloppy_Click() 'Floppy diskette:
 
 Global.enumLILOMODE = 2
+functions.BootMngrSet
 
 END
 

@@ -14,43 +14,43 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: frmConfig.class:114
+#: frmConfig.class:116
 msgid "<center><h3><b>Configuration:</b></h3></center>\n\n<b><u>Linux Loader boot manager setup:</u></b>\n<ul>\n<li><b>Master Boot Record:</b> Install Linux Loader boot manager to the master Boot Record of the bootable hard disk. This is the simplest method and the default action for most common operating systems.</li>\n<li><b>VL Boot sector:</b> Install Linux Loader boot manager to the Boot Sector of the Vector Linux install partition. This will require the following extra steps:\n<ul>\n<li>make the Vector Linux partition bootable using a partition manager.</li>\n<li>add an option to your default boot manager to boot to LiLo in this partition.</li>\n</ul>\n</li>\n<li><b>Floppy diskette:</b> Install Linux Loader boot manager to a floopy diskette in /dev/fd0 (drive A:). You can then boot to the Vector Linux install by simply booting the diskette.</li>\n<li><b>Do not install:</b> Do not install Linux Loader. Select this if you use another boot manager and know how to set up an option to boot the Vector Linux install from it.</li>\n</ul>\n\n<b><u>Other configuration:</u></b>\n<ul>\n<li><b>Config 1:</b> Other configuration selection 1.</li>\n<li><b>Config 2:</b> Other configuration selection 2.</li>\n</ul>\n"
 msgstr ""
 
-#: frmConfig.class:125
+#: frmConfig.class:127
 msgid "Additional configuration"
 msgstr ""
 
-#: frmConfig.class:140
+#: frmConfig.class:142
 msgid "Boot manager"
 msgstr ""
 
-#: frmConfig.class:147
+#: frmConfig.class:149
 msgid "Master Boot Record"
 msgstr ""
 
-#: frmConfig.class:155
+#: frmConfig.class:157
 msgid "VL Boot Sector"
 msgstr ""
 
-#: frmConfig.class:163
+#: frmConfig.class:165
 msgid "Floppy diskette"
 msgstr ""
 
-#: frmConfig.class:171
+#: frmConfig.class:173
 msgid "Do not install"
 msgstr ""
 
-#: frmConfig.class:178
+#: frmConfig.class:180
 msgid "Other configuration"
 msgstr ""
 
-#: frmConfig.class:185
+#: frmConfig.class:187
 msgid "Config 1"
 msgstr ""
 
-#: frmConfig.class:193
+#: frmConfig.class:195
 msgid "Config 2"
 msgstr ""
 
