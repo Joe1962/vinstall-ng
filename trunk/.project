@@ -2,7 +2,7 @@
 Title=VL-gui-installer
 Startup=Main
 Icon=vl_logo_icon2.png
-Version=0.0.178
+Version=0.0.193
 Library=gb.qt
 Library=gb.qt.ext
 TabSize=3
