@@ -65,8 +65,11 @@ STATIC PUBLIC tproc AS Process
 'temp stuff 2 check out:
 STATIC PUBLIC installDrive AS String
 
-' MBR Selection (When more than one is available)
-STATIC PUBLIC MBRSel AS String
+' Boot Manager variables
+STATIC PUBLIC MBRSel AS String ' MBR to use in case there is more than 1
+STATIC PUBLIC RootPart AS String ' Root Partition
+STATIC PUBLIC KernelLoc AS String ' Kernel location in root partition
+STATIC PUBLIC CONSOLENUM AS String ' The boot fb console #
 
 
 

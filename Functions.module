@@ -343,7 +343,8 @@ PUBLIC SUB BootMngrSet()
    IF NOT sRoot_Part OR sRoot_Part <> "" THEN 
    SHELL "mount | awk '{if ($3 == \"/\") {print $1}}'" TO sRoot_Part
    END IF
-      message.Info("I've identified your root partition as " & gb.newline & sRoot_Part)
+      'message.Info("I've identified your root partition as " & gb.newline & sRoot_Part)
+      Global.RootPart = sRoot_Part ' Store the location of the root partition to the global module
      END IF
 ' Figure out where the kernel is
   IF Exist(Boot_DIR & "/vmlinuz") THEN 
@@ -354,7 +355,8 @@ PUBLIC SUB BootMngrSet()
    Message.Info("I can't find a kernel !!! ")
    END IF
    IF sKernel_Loc OR sKernel_Loc <> "" THEN 
-    message.Info("I've located the kernel in " & gb.NewLine & sKernel_Loc)
+   'message.Info("I've located the kernel in " & gb.NewLine & sKernel_Loc)
+   Global.KernelLoc = sKernel_Loc ' Store the location of the kernel to the global module
     END IF
     
 END
