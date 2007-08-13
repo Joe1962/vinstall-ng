@@ -4,7 +4,8 @@
 PUBLIC SUB btNext_Click()
 
 global.MBRSel = Trim(MBRList.text)
-Message.Info(global.MBRSel) ' Just a sanity check to make sure the right value is parsed
+'Message.Info(global.MBRSel) ' Just a sanity check to make sure the right value is parsed
+frmChooseFB.show
 ME.Close
 ' May need to add more code here... to tell it where to go next  
 

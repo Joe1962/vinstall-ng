@@ -22,7 +22,8 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: InputBox.class:212 frmDriveSelect.class:133 frmPartSelect.class:379
+#: InputBox.class:212 frmChooseFB.class:91 frmDriveSelect.class:133
+#: frmPartSelect.class:379
 msgid "Cancel"
 msgstr ""
 
@@ -67,15 +68,71 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: frmChooseMBR.class:46
+#: frmChooseFB.class:76
+msgid "Please Select Boot Mode:"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "Standard  [ The standard Linux Console ]"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "Bootsplash - high  [ 1024x768 image ]"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "Bootsplash - med  [ 800x600 image ]"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "Bootsplash - low    [ 640x480 image ]"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "640 x 480 @ 256"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "800 x 600 @ 256"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "1024 x 768 @ 256"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "640 x 480 @ 32k"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "800 x 600 @ 32k"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "1024 x 768 @ 32k"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "640 x 480 @ 64k"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "800 x 600 @ 64k"
+msgstr ""
+
+#: frmChooseFB.class:81
+msgid "1024 x 768 @ 64k"
+msgstr ""
+
+#: frmChooseFB.class:86 frmChooseMBR.class:47
 msgid "Next >"
 msgstr ""
 
-#: frmChooseMBR.class:51
+#: frmChooseMBR.class:52
 msgid "< Back"
 msgstr ""
 
-#: frmChooseMBR.class:56
+#: frmChooseMBR.class:57
 msgid "Please select the drive you want your boot manager installed to:"
 msgstr ""
 

@@ -1,0 +1,22 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,50)
+  Text = ("")
+  { lbSelfbinfo TextLabel
+    MoveScaled(1,1,62,6)
+    Text = ("Please Select Boot Mode:")
+  }
+  { FBList ListBox
+    MoveScaled(2,10,62,34)
+    List = [("Standard  [ The standard Linux Console ]"), ("Bootsplash - high  [ 1024x768 image ]"), ("Bootsplash - med  [ 800x600 image ]"), ("Bootsplash - low    [ 640x480 image ]"), ("640 x 480 @ 256"), ("800 x 600 @ 256"), ("1024 x 768 @ 256"), ("640 x 480 @ 32k"), ("800 x 600 @ 32k"), ("1024 x 768 @ 32k"), ("640 x 480 @ 64k"), ("800 x 600 @ 64k"), ("1024 x 768 @ 64k")]
+  }
+  { btNext Button
+    MoveScaled(54,46,8,3)
+    Text = ("Next >")
+  }
+  { btCancel Button
+    MoveScaled(45,46,8,3)
+    Text = ("Cancel")
+  }
+}
