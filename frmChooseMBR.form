@@ -5,7 +5,8 @@
   Font = Font["Luxi Mono"]
   Text = ("")
   { MbrList ListBox
-    MoveScaled(1,14,62,23)
+    MoveScaled(1,10,62,27)
+    Font = Font["Luxi Mono"]
   }
   { btNext Button
     MoveScaled(53,38,9,3)
@@ -16,7 +17,7 @@
     Text = ("< Back")
   }
   { lbWarn TextLabel
-    MoveScaled(1,1,62,12)
-    Text = ("You chose to install the boot manager to your MBR, but you have\nmultiple disks.  Please select the disk you would like to install the bootmanager in to.")
+    MoveScaled(1,1,62,8)
+    Text = ("Please select the drive you want your boot manager installed to:")
   }
 }
