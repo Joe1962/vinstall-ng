@@ -277,24 +277,13 @@ DIM iRootSize AS Long
 DIM iTotalSize AS Long
 DIM sTemp AS String
 
-IF Global.enumPARTMODE = 0 THEN 'Use entire drive
-   IF Global.SimulationMode = TRUE THEN 
-      sTemp = "3800000"
-   ELSE 'Get real value from fdisk
-      SHELL "fdisk -s " & Global.installDrive TO sTemp
-   ENDIF 
-   
-   iTotalSize = CLng(Val(Trim$(sTemp))) * 1024 'Convert to long integer and turn value into bytes
+IF partmode = 0 THEN 'Use entire drive
+   iTotalSize = Global.DiskInfo[Global.instDriveIndex - 1].Bytes
    iRootSize = iTotalSize - CalcSwap(Global.SysMemory)
-   
-ELSE IF Global.enumPARTMODE = 1 'Use only free space
-   IF Global.SimulationMode = TRUE THEN 
-      sTemp = "3800000"
-   ELSE 
-      'Do whatever needs to be done to get free space values from available partitions
-   ENDIF
+ELSE IF partmode = 1 'Use only free space on partition
+   'Do whatever needs to be done to get free space values from available partitions
 ELSE
-   Message.Error("Unacceptable partition mode (" & Global.enumPARTMODE & ") for AutoRootSize function.")
+   Message.Error("Unacceptable partition mode (" & partmode & ") for AutoRootSize function.")
 ENDIF 
 
 RETURN iRootSize

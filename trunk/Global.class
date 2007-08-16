@@ -64,6 +64,7 @@ STATIC PUBLIC tproc AS Process
 
 'temp stuff 2 check out:
 STATIC PUBLIC installDrive AS String
+STATIC PUBLIC instDriveIndex AS Long
 
 ' Boot Manager variables
 STATIC PUBLIC MBRSel AS String ' MBR to use in case there is more than 1
