@@ -18,16 +18,16 @@ msgstr ""
 msgid "Enter a value:"
 msgstr ""
 
-#: InputBox.class:205 frmDriveSelect.class:126 frmPartSelect.class:372
+#: InputBox.class:205 frmDriveSelect.class:129 frmPartSelect.class:372
 msgid "OK"
 msgstr ""
 
-#: InputBox.class:212 frmChooseFB.class:91 frmDriveSelect.class:133
+#: InputBox.class:212 frmChooseFB.class:91 frmDriveSelect.class:136
 #: frmPartSelect.class:379
 msgid "Cancel"
 msgstr ""
 
-#: frmChoice.class:94
+#: frmChoice.class:95
 msgid ""
 "<center><h3><b>You have 3 choices:</b></h3></center>\n"
 "\n"
@@ -48,23 +48,23 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmChoice.class:105
+#: frmChoice.class:106
 msgid "Choose install type"
 msgstr ""
 
-#: frmChoice.class:120
+#: frmChoice.class:121
 msgid "Install types"
 msgstr ""
 
-#: frmChoice.class:125
+#: frmChoice.class:126
 msgid "Full-automatic"
 msgstr ""
 
-#: frmChoice.class:131
+#: frmChoice.class:132
 msgid "Semi-automatic"
 msgstr ""
 
-#: frmChoice.class:137
+#: frmChoice.class:138
 msgid "Advanced"
 msgstr ""
 
@@ -206,11 +206,11 @@ msgstr ""
 msgid "Config 2"
 msgstr ""
 
-#: frmDriveSelect.class:107 frmPartSelect.class:347
+#: frmDriveSelect.class:110 frmPartSelect.class:347
 msgid "Drives"
 msgstr ""
 
-#: frmDriveSelect.class:115
+#: frmDriveSelect.class:118
 msgid "Click on a row to select..."
 msgstr ""
 

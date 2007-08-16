@@ -4,6 +4,7 @@
 
 PRIVATE MaxDisks AS Long
 PRIVATE selectedDisk AS String
+PRIVATE selectedDiskIndex AS Long
 
 PUBLIC SUB Form_Open()
 DIM arrTemp AS NEW String[]
@@ -64,6 +65,7 @@ ELSE
    NEXT
    gridDisk[gridDisk.Row, 3].Text = "+++"
    selectedDisk = gridDisk[gridDisk.Row, 0].Text
+   selectedDiskIndex = gridDisk.Row
 ENDIF
 
 END
@@ -72,6 +74,7 @@ PUBLIC SUB btnOK_Click()
 
 IF selectedDisk = "" THEN selectedDisk = gridDisk[1, 0].Text
 Global.installDrive = selectedDisk
+Global.instDriveIndex = selectedDiskIndex
 IF Global.DebugMode = TRUE THEN message.Info(Global.installDrive)
 
 ME.Close(TRUE)
