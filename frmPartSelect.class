@@ -76,9 +76,9 @@ gridPart[0, 0].Text = "Partition"
 gridPart[0, 1].Text = "Size"
 gridPart[0, 2].Text = "Units"
 gridPart[0, 3].Text = "Boot"
-gridPart[0, 4].Text = "Type"
+gridPart[0, 4].Text = "Type & FileSystem"
 gridPart[0, 5].Text = "Mount"
-gridPart[0, 6].Text = "Filesystem"
+gridPart[0, 6].Text = "Format with"
 
 'Set gridPart cell alignment; left for text, right for numbers:
 FOR m = 1 TO gridPart.Rows.Count - 1
@@ -123,13 +123,13 @@ ELSE
                gridPart[m, 1].Text = arrTemp[0]
                gridPart[m, 2].Text = arrTemp[1]
                gridPart[m, 3].Text = IIf(Global.PartInfo[n - 1].Bootable, "B", "")
-               gridPart[m, 4].Text = Functions.getPartType(Global.PartInfo[n - 1].ID)
-               IF gridPart[m, 4].Text = "Linux swap" THEN
+               gridPart[m, 4].Text = Functions.getPartType(Global.PartInfo[n - 1].ID) & " - " & Global.PartInfo[n - 1].FileSystem
+               IF InStr(gridPart[m, 4].Text, "Linux swap") > 0 THEN
                   gridPart[m, 5].Text = "swap"
                   gridPart[m, 6].Text = "swap"
-               ELSE IF gridPart[m, 4].Text = "Linux" THEN
+               ELSE IF InStr(gridPart[m, 4].Text, "Linux") > 0 THEN
                   gridPart[m, 6].Text = "reiserfs"
-                  Global.PartInfo[n - 1].FileSystem = "reiserfs"
+                  Global.PartInfo[n - 1].FormatWithFS = "reiserfs"
                ELSE
                   gridPart[m, 5].Text = Mid$(gridPart[m, 0].Text, 6)
                   gridPart[m, 6].Text = "--------------------"
@@ -152,7 +152,7 @@ FOR n = 1 TO gridPart.Rows.Count - 1
       vPI = NEW cPartInstall
       vPI.Device = gridPart[n, 0].Text
       vPI.Mountpoint = gridPart[n, 5].Text
-      vPI.FileSystem = gridPart[n, 6].Text
+      vPI. = gridPart[n, 6].Text
       Global.PARTinst.Push(vPI)
    ENDIF
 NEXT
@@ -198,7 +198,7 @@ DIM n AS Long
 FOR n = 0 TO Global.PartInfo.Max
    IF Global.PartInfo[n].Device = gridPart[gridPart.Row, 0].Text THEN
       gridPart[gridPart.Row, 6].Text = LAST.Tag
-      Global.PartInfo[n].FileSystem = gridPart[gridPart.Row, 6].Text
+      Global.PartInfo[n].FormatWithFS = gridPart[gridPart.Row, 6].Text
       BREAK
    ENDIF
 NEXT

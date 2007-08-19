@@ -57,6 +57,8 @@ ENDIF
 
 ' Parse what fdisk has to say:
 Parse_fdisk(sTemp)
+'Get filesystem data
+getFileSystems()
 
 END
 
@@ -69,6 +71,7 @@ DIM arrTemp2 AS NEW String[]
 DIM pos AS Long
 DIM n AS Long, m AS Long
 DIM pcounter AS Long
+DIM item AS Integer
 
 ' 4 debug:
 IF Global.DebugMode = TRUE THEN
@@ -79,6 +82,7 @@ ENDIF
 arrTemp1 = Split(sTemp, Chr$(10))
 FOR n = 0 TO arrTemp1.Max
    pos = InStr(arrTemp1[n], "/dev/")
+   
    IF pos = 1 ' Parse a partition.
       vPI = NEW cPartInfo
       arrTemp2 = Split(arrTemp1[n], Space$(1), "", TRUE)
@@ -137,6 +141,45 @@ IF Global.DebugMode = TRUE THEN
 ENDIF
 
 END
+
+PUBLIC SUB getFileSystems()
+'Assign a filesystem to each partition. This will be useful for chosing a method to calculate free space
+DIM arsTemp AS NEW String[]
+DIM arsTemp2 AS NEW String[]
+DIM sTemp AS String
+DIM sTemp2 AS String
+DIM sItem AS String
+DIM idisk AS Long
+DIM ipart AS Long
+
+'To undestand how the arrays see how parted prints drive data ("parted /dev/hda print" to test it).
+FOR idisk = 0 TO Global.DiskInfo.Max
+   sTemp = ""
+   sTemp2 = ""
+   SHELL "parted " & Global.DiskInfo[idisk].Device & " print" TO sTemp
+   arsTemp = Split(sTemp, Chr$(10))
+   FOR EACH sItem IN arsTemp
+      IF InStr(sItem, "Disk ") = 0 AND InStr(sItem, "Information:") = 0 AND InStr(sItem, "Number ") = 0 THEN 'Ignore items with no useful information
+         sTemp2 = Mid$(Left$(sItem, 54), 42) 'The 42nd character is where the filesystem information starts and ends at the 54th character
+         IF sTemp2 <> "" THEN 
+            arsTemp2.Add(Trim$(sTemp2))
+         ENDIF
+      ENDIF
+   NEXT 
+NEXT
+
+FOR ipart = 0 TO arsTemp2.Max
+   IF arsTemp2[ipart] = "" THEN 'A null string means an extended partition was found
+      Global.PartInfo[ipart].Filesystem = "no filesystem"
+   ELSE IF arsTemp2[ipart] = "linux-swap" THEN 
+      Global.PartInfo[ipart].Filesystem = "swap"   
+   ELSE
+      Global.PartInfo[ipart].Filesystem = arsTemp2[ipart]
+   ENDIF
+NEXT
+
+END
+
 
 PUBLIC SUB GetSysMemory()
 'Find system memory by reading the first line of /proc/meminfo
