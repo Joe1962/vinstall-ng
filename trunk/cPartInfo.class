@@ -9,3 +9,4 @@ PUBLIC Blocks AS Long
 PUBLIC ID AS String
 PUBLIC Mountpoint AS String
 PUBLIC FileSystem AS String
+PUBLIC FormatWithFS AS String

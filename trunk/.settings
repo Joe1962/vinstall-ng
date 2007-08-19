@@ -2,8 +2,8 @@
 Count=0
 
 [FFind]
-SearchIn="Project"
-CaseSensitive=False
+SearchIn="Sub"
+CaseSensitive=True
 SearchWord=False
 SearchComment=False
 SearchString=True
