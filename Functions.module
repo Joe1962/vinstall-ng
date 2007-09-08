@@ -215,6 +215,8 @@ CATCH ' Failed, usually due to already existing dirs:
 
 END
 
+
+
 PUBLIC FUNCTION CalcSwap(sysmem AS Long) AS Long
 'Calculate the theoretical swap partition size based on system memory, in bytes
 

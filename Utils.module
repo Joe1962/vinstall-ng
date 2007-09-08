@@ -58,7 +58,7 @@ ENDIF
 ' Parse what fdisk has to say:
 Parse_fdisk(sTemp)
 'Get filesystem data
-getFileSystems()
+'getFileSystems()
 
 END
 
@@ -68,6 +68,8 @@ DIM vDI AS NEW cDiskInfo
 DIM vPI AS NEW cPartInfo
 DIM arrTemp1 AS NEW String[]
 DIM arrTemp2 AS NEW String[]
+DIM arrTemp3 AS NEW String[]
+DIM sTemp2 AS String
 DIM pos AS Long
 DIM n AS Long, m AS Long
 DIM pcounter AS Long
@@ -108,6 +110,18 @@ FOR n = 0 TO arrTemp1.Max
          ENDIF
          vPI.ID = arrTemp2[4]
       ENDIF
+      
+      IF Functions.getPartType(vPI.ID) = "Linux swap" THEN 
+         vPI.FileSystem = "Swap"
+      ELSE IF Functions.getPartType(vPI.ID) = "Extended" THEN 
+         vPI.FileSystem = "Extended"
+      ELSE 
+         SHELL "disktype " & vPI.Device TO sTemp2
+         sTemp2 = Trim$(sTemp2)
+         arrTemp3 = Split(sTemp2, Chr$(10))
+         vPI.FileSystem = Trim$(Left$(arrTemp3[2], InStr(arrTemp3[2], Space$(1)))) 'after being trimmed, the filesystem data will be on line 3 of the buffer (index 2 of the array)
+      ENDIF
+      
       Global.PartInfo.Push(vPI)
    ELSE IF pos > 1 ' Parse a disk drive.
       vDI = NEW cDiskInfo
@@ -139,44 +153,6 @@ IF Global.DebugMode = TRUE THEN
       frmGo.TextLabel1.Text &= "<br>"
    NEXT
 ENDIF
-
-END
-
-PUBLIC SUB getFileSystems()
-'Assign a filesystem to each partition. This will be useful for chosing a method to calculate free space
-DIM arsTemp AS NEW String[]
-DIM arsTemp2 AS NEW String[]
-DIM sTemp AS String
-DIM sTemp2 AS String
-DIM sItem AS String
-DIM idisk AS Long
-DIM ipart AS Long
-
-'To undestand how the arrays see how parted prints drive data ("parted /dev/hda print" to test it).
-FOR idisk = 0 TO Global.DiskInfo.Max
-   sTemp = ""
-   sTemp2 = ""
-   SHELL "parted " & Global.DiskInfo[idisk].Device & " print" TO sTemp
-   arsTemp = Split(sTemp, Chr$(10))
-   FOR EACH sItem IN arsTemp
-      IF InStr(sItem, "Disk ") = 0 AND InStr(sItem, "Information:") = 0 AND InStr(sItem, "Number ") = 0 THEN 'Ignore items with no useful information
-         sTemp2 = Mid$(Left$(sItem, 54), 42) 'The 42nd character is where the filesystem information starts and ends at the 54th character
-         IF sTemp2 <> "" THEN 
-            arsTemp2.Add(Trim$(sTemp2))
-         ENDIF
-      ENDIF
-   NEXT 
-NEXT
-
-FOR ipart = 0 TO arsTemp2.Max
-   IF arsTemp2[ipart] = "" THEN 'A null string means an extended partition was found
-      Global.PartInfo[ipart].Filesystem = "no filesystem"
-   ELSE IF arsTemp2[ipart] = "linux-swap" THEN 
-      Global.PartInfo[ipart].Filesystem = "swap"   
-   ELSE
-      Global.PartInfo[ipart].Filesystem = arsTemp2[ipart]
-   ENDIF
-NEXT
 
 END
 
