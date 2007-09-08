@@ -169,7 +169,7 @@ END
 
 PUBLIC SUB gridPart_Menu()
 
-IF gridPart[gridPart.Row, 4].Text = "Linux" THEN
+IF InStr(gridPart[gridPart.Row, 4].Text, "Linux") THEN
    IF gridPart.Column = 5 THEN
       mountpoints.Popup
    ELSE IF gridPart.Column = 6 THEN
