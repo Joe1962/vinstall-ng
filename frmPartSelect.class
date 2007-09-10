@@ -47,7 +47,7 @@ FOR m = 1 TO MaxDisks
    gridDisk[m, 0].Text = Global.DiskInfo[m - 1].Device
    gridDisk[m, 1].Alignment = Align.Right
    gridDisk[m, 1].Text = Global.DiskInfo[m - 1].Bytes
-   arrTemp = Split(Functions.AutoUnits(Global.DiskInfo[m - 1].Bytes), ";", "", TRUE)
+   arrTemp = Split(Functions.AutoUnits(Global.DiskInfo[m - 1].Bytes), " ", "", TRUE)
    gridDisk[m, 1].Text = arrTemp[0]
    gridDisk[m, 2].Alignment = Align.Left
    gridDisk[m, 2].Text = arrTemp[1]
@@ -59,11 +59,11 @@ gridPart.Columns.Count = 7
 'gridPart.Rows.Count = MaxPartions
 gridPart.Rows.Count = 256
 gridPart.Columns[0].Width = 0.15 * gridPart.ClientWidth
-gridPart.Columns[1].Width = 0.1 * gridPart.ClientWidth
-gridPart.Columns[2].Width = 0.075 * gridPart.ClientWidth
+gridPart.Columns[1].Width = 0.125 * gridPart.ClientWidth
+gridPart.Columns[2].Width = 0.1 * gridPart.ClientWidth
 gridPart.Columns[3].Width = 0.055 * gridPart.ClientWidth
-gridPart.Columns[4].Width = 0.3 * gridPart.ClientWidth 
-gridPart.Columns[5].Width = 0.195 * gridPart.ClientWidth
+gridPart.Columns[4].Width = 0.275 * gridPart.ClientWidth 
+gridPart.Columns[5].Width = 0.17 * gridPart.ClientWidth
 gridPart.Columns[6].Width = 0.125 * gridPart.ClientWidth
 
 'Center gridPart titles alignment:
@@ -74,9 +74,9 @@ NEXT
 'Setup gridPart titles:
 gridPart[0, 0].Text = "Partition"
 gridPart[0, 1].Text = "Size"
-gridPart[0, 2].Text = "Units"
+gridPart[0, 2].Text = "Free Space"
 gridPart[0, 3].Text = "Boot"
-gridPart[0, 4].Text = "Type & FileSystem"
+gridPart[0, 4].Text = "FileSystem"
 gridPart[0, 5].Text = "Mount"
 gridPart[0, 6].Text = "Format with"
 
@@ -85,7 +85,7 @@ FOR m = 1 TO gridPart.Rows.Count - 1
    gridPart.Rows[m].Height = 20
    gridPart[m, 0].Alignment = Align.Left
    gridPart[m, 1].Alignment = Align.Right
-   gridPart[m, 2].Alignment = Align.Left
+   gridPart[m, 2].Alignment = Align.Right
    gridPart[m, 3].Alignment = Align.Center
    gridPart[m, 4].Alignment = Align.Left
    gridPart[m, 5].Alignment = Align.Left
@@ -119,15 +119,21 @@ ELSE
             IF InStr(Global.PartInfo[n - 1].Device, selectedDisk) THEN
                m = m + 1
                gridPart[m, 0].Text = Global.PartInfo[n - 1].Device
-               arrTemp = Split(Functions.AutoUnits(Global.PartInfo[n - 1].Blocks * 1024), ";", "", TRUE)
-               gridPart[m, 1].Text = arrTemp[0]
-               gridPart[m, 2].Text = arrTemp[1]
+               gridPart[m, 1].Text = Functions.AutoUnits(Global.PartInfo[n - 1].Bytes)
+               gridPart[m, 2].Text = Functions.AutoUnits(Global.PartInfo[n - 1].FreeBytes)
                gridPart[m, 3].Text = IIf(Global.PartInfo[n - 1].Bootable, "B", "")
-               gridPart[m, 4].Text = Functions.getPartType(Global.PartInfo[n - 1].ID) & " - " & Global.PartInfo[n - 1].FileSystem
-               IF InStr(gridPart[m, 4].Text, "Linux swap") > 0 THEN
+               IF Functions.getPartType(Global.PartInfo[n - 1].ID) = "Extended" THEN 
+                  gridPart[m, 4].Text = "----Extended----"
+               ELSE IF Functions.getPartType(Global.PartInfo[n - 1].ID) = "Linux swap" THEN 
+                  gridPart[m, 4].Text = "Linux - Swap"
+               ELSE 
+                  gridPart[m, 4].Text = Functions.getPartType(Global.PartInfo[n - 1].ID) & " - " & Global.PartInfo[n - 1].FileSystem
+               ENDIF
+               
+               IF InStr(gridPart[m, 4].Text, "Linux swap") THEN
                   gridPart[m, 5].Text = "swap"
                   gridPart[m, 6].Text = "swap"
-               ELSE IF InStr(gridPart[m, 4].Text, "Linux") > 0 THEN
+               ELSE IF InStr(gridPart[m, 4].Text, "Linux") THEN
                   gridPart[m, 6].Text = "reiserfs"
                   Global.PartInfo[n - 1].FormatWithFS = "reiserfs"
                ELSE

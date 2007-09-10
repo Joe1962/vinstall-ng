@@ -5,7 +5,8 @@ PUBLIC Device AS String
 PUBLIC Bootable AS Boolean
 PUBLIC StartBlock AS Long
 PUBLIC EndBlock AS Long
-PUBLIC Blocks AS Long
+PUBLIC Bytes AS Long
+PUBLIC FreeBytes AS Long
 PUBLIC ID AS String
 PUBLIC Mountpoint AS String
 PUBLIC FileSystem AS String
