@@ -73,7 +73,6 @@ DIM sTemp2 AS String
 DIM pos AS Long
 DIM n AS Long, m AS Long
 DIM pcounter AS Long
-DIM item AS Integer
 
 ' 4 debug:
 IF Global.DebugMode = TRUE THEN
@@ -94,9 +93,9 @@ FOR n = 0 TO arrTemp1.Max
          vPI.StartBlock = arrTemp2[2]
          vPI.EndBlock = arrTemp2[3]
          IF Right$(arrTemp2[4]) = "+" THEN
-            vPI.Blocks = Val(Left$(arrTemp2[4], Len(arrTemp2[4]) - 1))
+            vPI.Bytes = CLng(Val(Left$(arrTemp2[4], Len(arrTemp2[4]) - 1))) * 1024
          ELSE
-            vPI.Blocks = Val(arrTemp2[4])
+            vPI.Bytes = CLng(Val(arrTemp2[4])) * 1024
          ENDIF
          vPI.ID = arrTemp2[5]
       ELSE
@@ -104,23 +103,25 @@ FOR n = 0 TO arrTemp1.Max
          vPI.StartBlock = arrTemp2[1]
          vPI.EndBlock = arrTemp2[2]
          IF Right$(arrTemp2[3]) = "+" THEN
-            vPI.Blocks = Val(Left$(arrTemp2[3], Len(arrTemp2[3]) - 1))
+            vPI.Bytes = CLng(Val(Left$(arrTemp2[3], Len(arrTemp2[3]) - 1))) * 1024
          ELSE
-            vPI.Blocks = Val(arrTemp2[3])
+            vPI.Bytes = CLng(Val(arrTemp2[3])) * 1024
          ENDIF
          vPI.ID = arrTemp2[4]
       ENDIF
       
-      IF Functions.getPartType(vPI.ID) = "Linux swap" THEN 
-         vPI.FileSystem = "Swap"
-      ELSE IF Functions.getPartType(vPI.ID) = "Extended" THEN 
+      IF Functions.getPartType(vPI.ID) = "Extended" THEN 
          vPI.FileSystem = "Extended"
-      ELSE 
+      ELSE IF Functions.getPartType(vPI.ID) = "HPFS/NTFS" THEN 
+         vPI.FileSystem = "NTFS"
+      ELSE      
          SHELL "disktype " & vPI.Device TO sTemp2
          sTemp2 = Trim$(sTemp2)
          arrTemp3 = Split(sTemp2, Chr$(10))
-         vPI.FileSystem = Trim$(Left$(arrTemp3[2], InStr(arrTemp3[2], Space$(1)))) 'after being trimmed, the filesystem data will be on line 3 of the buffer (index 2 of the array)
+         vPI.FileSystem = Trim$(Left$(arrTemp3[2], InStr(arrTemp3[2], Space$(1))))
       ENDIF
+      
+      vPI.FreeBytes = Functions.getFreePartSpace(vPI.Device, vPI.FileSystem)
       
       Global.PartInfo.Push(vPI)
    ELSE IF pos > 1 ' Parse a disk drive.

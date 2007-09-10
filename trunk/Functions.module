@@ -2,22 +2,20 @@
 
 ' ### SYSTEMWIDE FUNCTIONS ###
 
-PUBLIC FUNCTION AutoUnits(capacity AS Long) AS String
-' Return drive/partition size in nicer units as "value;unit" string:
+PUBLIC FUNCTION AutoUnits(value AS Float) AS String
+'Function that will automatically turn a generic size value into something human-readable (in multiples of bytes):
 DIM temp AS Long
 
-IF capacity < 1000 THEN ' Bytes:
-   RETURN Format$(capacity, "###,###,###,###") & ";B"
-ELSE IF capacity < 1000000 THEN ' Kilobytes:
-   RETURN Format$(capacity / 1024, "###,###,###,###") & ";KB"
-   'gridDisk[m + 1,units].Text = "KB"
-ELSE IF capacity < 1000000000 THEN ' Megabytes:
-   RETURN Format$(capacity / 1048576, "###,###,###,###") & ";MB"
-   'gridDisk[m + 1,units].Text = "MB"
-ELSE IF capacity < 1000000000000 ' Gigabytes:
-   RETURN Format$(capacity / 1073741824, "####,###,###,###") & ";GB"
+IF value < 1000 THEN ' Bytes:
+   RETURN value & " B"
+ELSE IF value < 1000000 THEN ' Kilobytes:
+   RETURN Round(value / 1024, -2) & " KB"
+ELSE IF value < 1000000000 THEN ' Megabytes:
+   RETURN Round(value / 1048576, -2) & " MB"
+ELSE IF value < 1000000000000 ' Gigabytes:
+   RETURN Round(value / 1073741824, -2) & " GB"
 ELSE 'Terabytes
-   RETURN Format$(capacity / 1099511627776, "####,###,###,###") & ";TB"
+   RETURN Round(value / 1099511627776, -2) & " TB"
 END IF
 
 END
@@ -215,6 +213,51 @@ CATCH ' Failed, usually due to already existing dirs:
 
 END
 
+PUBLIC FUNCTION getFreePartSpace(device AS String, filesystem AS String) AS Long
+'Calculate the free space on a partition based on its filesystem, and then return the value
+'This is basicaly a Gambas implementation of what GParted does for detecting free space on partitions in C++
+DIM sTemp AS String
+DIM sTemp2 AS String
+DIM sFreeBlocks AS String
+DIM sBlockSize AS String
+DIM arrTemp AS NEW String[]
+DIM iFreeBytes AS Long
+
+device = Trim$(device)
+filesystem = Trim$(filesystem)
+
+'The array's index used ([x]) to get the free blocks and the block size was obtained by studying the ouput of the commands used below
+IF filesystem = "Ext3" OR filesystem = "Ext2" THEN
+   SHELL "dumpe2fs -h " & device TO sTemp
+   sTemp = Trim$(sTemp)
+   arrTemp = Split(sTemp, Chr$(10))
+   sFreeBlocks = Trim$(Mid$(arrTemp[13], RInStr(arrTemp[13], Space$(1))))
+   sBlockSize = Trim$(Mid$(arrTemp[16], RInStr(arrTemp[16], Space$(1))))
+   iFreeBytes = CLng(sFreeBlocks) * CLng(sBlockSize)
+ELSE IF filesystem = "XFS" THEN 
+   SHELL "xfs_db -c 'sb 0' -c 'print blocksize' -c 'print fdblocks' -r " & device TO sTemp
+   sTemp = Trim$(sTemp)
+   arrTemp = Split(sTemp, Chr$(10))
+   sFreeBlocks = Trim$(Mid$(arrTemp[1], RInStr(arrTemp[1], Space$(1))))
+   sBlockSize = Trim$(Mid$(arrTemp[0], RInStr(arrTemp[0], Space$(1))))
+   iFreeBytes = CLng(sFreeBlocks) * CLng(sBlockSize)
+ELSE IF filesystem = "ReiserFS" THEN 
+   SHELL "debugreiserfs " & device TO sTemp
+   sTemp = Trim$(sTemp)
+   arrTemp = Split(sTemp, Chr$(10))
+   sFreeBlocks = Trim$(Mid$(arrTemp[6], RInStr(arrTemp[6], Space$(1))))
+   sBlockSize = Trim$(Mid$(arrTemp[5], RInStr(arrTemp[5], Space$(1))))
+   iFreeBytes = CLng(sFreeBlocks) * CLng(sBlockSize)
+ELSE IF filesystem = "JFS" THEN 
+   iFreeBytes = 0
+ELSE 
+   iFreeBytes = 0
+ENDIF 
+
+RETURN iFreeBytes
+   
+  
+END
 
 
 PUBLIC FUNCTION CalcSwap(sysmem AS Long) AS Long
