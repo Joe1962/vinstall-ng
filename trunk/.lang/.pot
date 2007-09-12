@@ -292,7 +292,7 @@ msgstr ""
 msgid "Advanced selection"
 msgstr ""
 
-#: frmPackages.class:147 frmPartitions.class:266
+#: frmPackages.class:147 frmPartitions.class:265
 msgid "Manual"
 msgstr ""
 
@@ -373,7 +373,7 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmPartitions.class:217
+#: frmPartitions.class:216
 msgid ""
 "<center><h3><b>Available partitioning modes:</b></h3></center>\n"
 "\n"
@@ -384,8 +384,8 @@ msgid ""
 "disk for VL. <font color=\"#FF0000\">WARNING: this option will DELETE "
 "everything on your hard disk, or offer a choice if there are multiple disks. "
 "You have been WARNED.</font></li>\n"
-"<li><b>Free space:</b> using available free (unpartitioned) disk space.</"
-"li>\n"
+"<li><b>Unpartitioned space:</b> using available free (unpartitioned) disk "
+"space.</li>\n"
 "</ul>\n"
 "<b><u>Manual partitioning:</u></b> You have full control of partitioning.\n"
 "<ul>\n"
@@ -402,39 +402,39 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmPartitions.class:229
+#: frmPartitions.class:228
 msgid "Partitioning mode"
 msgstr ""
 
-#: frmPartitions.class:244
+#: frmPartitions.class:243
 msgid "Automatic"
 msgstr ""
 
-#: frmPartitions.class:251
+#: frmPartitions.class:250
 msgid "Full disk"
 msgstr ""
 
-#: frmPartitions.class:259
-msgid "Free space"
+#: frmPartitions.class:258
+msgid "Unpartitioned space"
 msgstr ""
 
-#: frmPartitions.class:273
+#: frmPartitions.class:272
 msgid "GParted"
 msgstr ""
 
-#: frmPartitions.class:281
+#: frmPartitions.class:280
 msgid "cfdisk"
 msgstr ""
 
-#: frmPartitions.class:288
+#: frmPartitions.class:287
 msgid "Others"
 msgstr ""
 
-#: frmPartitions.class:295
+#: frmPartitions.class:294
 msgid "Preset strategies"
 msgstr ""
 
-#: frmPartitions.class:303
+#: frmPartitions.class:302
 msgid "No partitioning"
 msgstr ""
 

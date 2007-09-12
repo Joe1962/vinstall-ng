@@ -24,9 +24,9 @@ Global.PARTinst.Clear
 gridDisk.Columns.Count = 4
 'gridDisk.Rows.Count = MaxDisks
 gridDisk.Rows.Count = 32
-gridDisk.Columns[0].Width = 0.4 * gridDisk.ClientWidth
+gridDisk.Columns[0].Width = 0.35 * gridDisk.ClientWidth
 gridDisk.Columns[1].Width = 0.25 * gridDisk.ClientWidth
-gridDisk.Columns[2].Width = 0.2 * gridDisk.ClientWidth
+gridDisk.Columns[2].Width = 0.25 * gridDisk.ClientWidth
 gridDisk.Columns[3].Width = 0.15 * gridDisk.ClientWidth
 
 'Center gridDisk titles alignment:
@@ -37,7 +37,7 @@ NEXT
 'Setup gridDisk titles:
 gridDisk[0, 0].Text = "Drive"
 gridDisk[0, 1].Text = "Size"
-gridDisk[0, 2].Text = "Units"
+gridDisk[0, 2].Text = "Unallocated"
 gridDisk[0, 3].Text = "Sel."
 
 'Set gridDisk cell alignment; left for text, right for numbers, fill in gridDisk data:
@@ -46,11 +46,11 @@ FOR m = 1 TO MaxDisks
    gridDisk.Rows[m].Height = 20
    gridDisk[m, 0].Text = Global.DiskInfo[m - 1].Device
    gridDisk[m, 1].Alignment = Align.Right
-   gridDisk[m, 1].Text = Global.DiskInfo[m - 1].Bytes
-   arrTemp = Split(Functions.AutoUnits(Global.DiskInfo[m - 1].Bytes), " ", "", TRUE)
-   gridDisk[m, 1].Text = arrTemp[0]
-   gridDisk[m, 2].Alignment = Align.Left
-   gridDisk[m, 2].Text = arrTemp[1]
+   gridDisk[m, 1].Text = Functions.AutoUnits(Global.DiskInfo[m - 1].Bytes)
+   'arrTemp = Split(Functions.AutoUnits(Global.DiskInfo[m - 1].Bytes), " ", "", TRUE)
+   'gridDisk[m, 1].Text = arrTemp[0]
+   gridDisk[m, 2].Alignment = Align.Right
+   gridDisk[m, 2].Text = Functions.AutoUnits(Global.DiskInfo[m - 1].UnallocatedBytes)
    gridDisk[m, 3].Alignment = Align.Center
 NEXT
 

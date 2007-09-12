@@ -3,3 +3,4 @@
 ' Structure for drive information array:
 PUBLIC Device AS String
 PUBLIC Bytes AS Long
+PUBLIC UnallocatedBytes AS Long

@@ -2,7 +2,7 @@
 Count=0
 
 [FFind]
-SearchIn="Module"
+SearchIn="Sub"
 CaseSensitive=True
 SearchWord=False
 SearchComment=False

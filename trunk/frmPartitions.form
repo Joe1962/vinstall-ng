@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(4,6,90.5714,78.2857)
+  MoveScaled(4,6,90.5,78.25)
   Font = Font["Luxi Sans"]
   Background = &HFFFFFF&
   Text = ("")
@@ -18,7 +18,7 @@
       Background = &HDFFFFF&
       Padding = 10
       AutoResize = True
-      Text = ("<center><h3><b>Available partitioning modes:</b></h3></center>\n\n<b><u>Automatic partitioning:</u></b> The installer will handle all partition related decisions for you:\n<ul>\n<li><b>Full disk:</b> Choose this option if you want to use your entire hard disk for VL. <font color=\"#FF0000\">WARNING: this option will DELETE everything on your hard disk, or offer a choice if there are multiple disks. You have been WARNED.</font></li>\n<li><b>Free space:</b> using available free (unpartitioned) disk space.</li>\n</ul>\n<b><u>Manual partitioning:</u></b> You have full control of partitioning.\n<ul>\n<li><b>Using gparted</b> (the advanced graphical partitioner).</li>\n<li><b>Using cfdisk</b> (the traditional partition tool).</li>\n</ul>\n<b><u>Other partitioning:</u></b>\n<ul>\n<li><b>Preset strategies:</b> auto allocates partitions according to most common usage strategy intended for this computer.</li>\n<li><b>No partitioning:</b> If you wish to use existing Linux and swap partitions. <font color=\"#FF0000\">WARNING: The existing Linux partitions will be OVERWRITTEN. You have been WARNED.</font></li>\n</ul>\n")
+      Text = ("<center><h3><b>Available partitioning modes:</b></h3></center>\n\n<b><u>Automatic partitioning:</u></b> The installer will handle all partition related decisions for you:\n<ul>\n<li><b>Full disk:</b> Choose this option if you want to use your entire hard disk for VL. <font color=\"#FF0000\">WARNING: this option will DELETE everything on your hard disk, or offer a choice if there are multiple disks. You have been WARNED.</font></li>\n<li><b>Unpartitioned space:</b> using available free (unpartitioned) disk space.</li>\n</ul>\n<b><u>Manual partitioning:</u></b> You have full control of partitioning.\n<ul>\n<li><b>Using gparted</b> (the advanced graphical partitioner).</li>\n<li><b>Using cfdisk</b> (the traditional partition tool).</li>\n</ul>\n<b><u>Other partitioning:</u></b>\n<ul>\n<li><b>Preset strategies:</b> auto allocates partitions according to most common usage strategy intended for this computer.</li>\n<li><b>No partitioning:</b> If you wish to use existing Linux and swap partitions. <font color=\"#FF0000\">WARNING: The existing Linux partitions will be OVERWRITTEN. You have been WARNED.</font></li>\n</ul>\n")
     }
   }
   { VBox1 VBox
@@ -49,12 +49,12 @@
           Foreground = Color.ButtonForeground
           Text = ("Full disk")
         }
-        { btnFreeSpace Button
+        { btnUnpartSpace Button
           MoveScaled(1,9,23,5)
           Font = Font["Luxi Sans,14"]
           Background = Color.ButtonBackground
           Foreground = Color.ButtonForeground
-          Text = ("Free space")
+          Text = ("Unpartitioned space")
         }
       }
       { Frame2 Frame
