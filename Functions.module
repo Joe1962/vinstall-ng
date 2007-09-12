@@ -232,6 +232,7 @@ DIM sTemp AS String
 DIM sTemp2 AS String
 DIM sFreeBlocks AS String
 DIM sBlockSize AS String
+DIM sUsedBlocks AS String
 DIM arrTemp AS NEW String[]
 DIM iFreeBytes AS Long
 
@@ -281,21 +282,22 @@ ELSE IF sFilesystem = "NTFS" THEN
    SHELL "ntfsresize --info --force --no-progress-bar " & sDevice TO sTemp
    sTemp = Trim$(sTemp)
    arrTemp = Split(sTemp, Chr$(10))
-   PRINT arrTemp[10]
    'It would be a lot easier to use an expression in the output of ntfsresize to identify the number of free bytes, but that is not i18n ready!
    'So "chomp" away portions of the string until the first integer is found (this will be the free space value)
    sTemp = arrTemp[10]
    WHILE Len(sTemp) > 0
       sTemp2 = Trim$(Left$(sTemp, InStr(sTemp, Space$(1))))
       IF IsInteger(Val(sTemp2)) OR IsLong(Val(sTemp2)) THEN 
-         sFreeBlocks = CLng(Val(sTemp2))
+         sUsedBlocks = CLng(Val(sTemp2))
          BREAK
       ELSE 
          sTemp = Trim$(Mid$(sTemp, InStr(sTemp, Space$(1))))
       ENDIF
    WEND      
-   sBlockSize = Trim$(Mid$(Left$(arrTemp[3], RInStr(arrTemp[3], Space$(1))), InStr(arrTemp[3], ":") + 1))
-   iFreeBytes = CLng(sFreeBlocks) * CLng(sBlockSize)
+   'sBlockSize = Trim$(Mid$(Left$(arrTemp[3], RInStr(arrTemp[3], Space$(1))), InStr(arrTemp[3], ":") + 1))
+   sTemp = Trim$(Mid$(arrTemp[5], InStr(arrTemp[5], ":") + 1)) 'Get total partition size
+   sTemp2 = Trim$(Left(sTemp, InStr(sTemp, Space$(1))))
+   iFreeBytes = CLng(sTemp2) - CLng(sUsedBlocks)
 ELSE 
    iFreeBytes = 0
 ENDIF 

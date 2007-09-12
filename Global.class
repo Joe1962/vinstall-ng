@@ -31,7 +31,7 @@ STATIC PUBLIC enumPACKS AS Long 'Package selection mode.
 ' 3 = No extras
 STATIC PUBLIC enumPARTMODE AS Long 'Partitioning mode.
 ' 0 = Full disk
-' 1 = Free space
+' 1 = Unpartitioned space
 ' 2 = GParted
 ' 3 = cfdisk
 ' 4 = Preset strategies

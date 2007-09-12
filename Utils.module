@@ -56,20 +56,22 @@ ELSE
 ENDIF
 
 ' Parse what fdisk has to say:
-Parse_fdisk(sTemp)
-'Get filesystem data
-'getFileSystems()
+ProcessDiskInfo(sTemp)
+
 
 END
 
-PUBLIC SUB Parse_fdisk(sTemp AS String)
-' Parse what fdisk has to say:
+PUBLIC SUB ProcessDiskInfo(sTemp AS String)
+' Parse what fdisk has to say, including other commands for useful hard-drive/partition information
 DIM vDI AS NEW cDiskInfo
 DIM vPI AS NEW cPartInfo
 DIM arrTemp1 AS NEW String[]
 DIM arrTemp2 AS NEW String[]
 DIM arrTemp3 AS NEW String[]
 DIM sTemp2 AS String
+DIM iDisk AS Long
+DIM iPart AS Long
+DIM iDiskUsedBytes AS Long
 DIM pos AS Long
 DIM n AS Long, m AS Long
 DIM pcounter AS Long
@@ -79,7 +81,7 @@ IF Global.DebugMode = TRUE THEN
    message.Info("Working in Simulation Mode..." & gb.NewLine & sTemp)
 ENDIF
 
-' Parse it:
+' Parse fdisk
 arrTemp1 = Split(sTemp, Chr$(10))
 FOR n = 0 TO arrTemp1.Max
    pos = InStr(arrTemp1[n], "/dev/")
@@ -110,6 +112,7 @@ FOR n = 0 TO arrTemp1.Max
          vPI.ID = arrTemp2[4]
       ENDIF
       
+      'Get filesystem information from "disktype"
       IF Functions.getPartType(vPI.ID) = "Extended" THEN 
          vPI.FileSystem = "Extended"
       ELSE IF Functions.getPartType(vPI.ID) = "HPFS/NTFS" THEN 
@@ -121,7 +124,12 @@ FOR n = 0 TO arrTemp1.Max
          vPI.FileSystem = Trim$(Left$(arrTemp3[2], InStr(arrTemp3[2], Space$(1))))
       ENDIF
       
-      vPI.FreeBytes = Functions.getFreePartSpace(vPI.Device, vPI.FileSystem)
+      'Get free space information for each partition based on the filesystem
+      IF vPI.FileSystem = "Blank" THEN 
+         vPI.FreeBytes = vPI.Bytes
+      ELSE 
+         vPI.FreeBytes = Functions.getFreePartSpace(vPI.Device, vPI.FileSystem)
+      ENDIF
       
       Global.PartInfo.Push(vPI)
    ELSE IF pos > 1 ' Parse a disk drive.
@@ -133,10 +141,28 @@ FOR n = 0 TO arrTemp1.Max
       ELSE
          vDI.Bytes = Val(arrTemp2[3])
       ENDIF
+
       Global.DiskInfo.Push(vDI)
    ELSE ' Nothing.
    END IF
 NEXT
+
+'Get unallocated space on the hard-drives (it would be cool to have this in the main FOR loop...
+'but its only possible after knowing each partiton's size)
+FOR iDisk = 0 TO Global.DiskInfo.Max
+   iDiskUsedBytes = 0 'Reset the used-bytes counter
+   FOR iPart = 0 TO Global.PartInfo.Max
+      IF InStr(Global.PartInfo[iPart].Device, Global.DiskInfo[iDisk].Device) THEN
+         IF Global.PartInfo[iPart].FileSystem <> "Extended" THEN 'Ignore extended partitions, only account for primary and logical ones
+            iDiskUsedBytes = iDiskUsedBytes + Global.PartInfo[iPart].Bytes
+         ENDIF
+      ENDIF 
+   NEXT 
+   Global.DiskInfo[iDisk].UnallocatedBytes = Global.DiskInfo[iDisk].Bytes - iDiskUsedBytes
+   PRINT global.DiskInfo[iDisk].UnallocatedBytes
+NEXT 
+
+
 
 ' 4 debug:
 IF Global.DebugMode = TRUE THEN
