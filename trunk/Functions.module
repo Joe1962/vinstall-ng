@@ -20,6 +20,18 @@ END IF
 
 END
 
+PUBLIC FUNCTION HexToLong(sHexval AS String) AS Long
+'Turn a hexadecimal number into a long integer (thanks to help from Timothy Marshal-Nichols)
+DIM iHexVal AS Long
+
+sHexval = "&H" & Right$(sHexval, 10) 
+iHexVal = CLng(Val(sHexval))
+
+RETURN iHexVal
+  
+END
+
+
 PUBLIC FUNCTION getPartType(t AS String) AS String
 ' Return partition type (t) string from partition type code:
 
@@ -213,8 +225,8 @@ CATCH ' Failed, usually due to already existing dirs:
 
 END
 
-PUBLIC FUNCTION getFreePartSpace(device AS String, filesystem AS String) AS Long
-'Calculate the free space on a partition based on its filesystem, and then return the value
+PUBLIC FUNCTION getFreePartSpace(sDevice AS String, sFilesystem AS String) AS Long
+'Calculate the free space on a partition based on its filesystem, and then return the value as a long integer
 'This is basicaly a Gambas implementation of what GParted does for detecting free space on partitions in C++
 DIM sTemp AS String
 DIM sTemp2 AS String
@@ -223,33 +235,67 @@ DIM sBlockSize AS String
 DIM arrTemp AS NEW String[]
 DIM iFreeBytes AS Long
 
-device = Trim$(device)
-filesystem = Trim$(filesystem)
+sDevice = Trim$(sDevice)
+sFilesystem = Trim$(sFilesystem)
 
 'The array's index used ([x]) to get the free blocks and the block size was obtained by studying the ouput of the commands used below
-IF filesystem = "Ext3" OR filesystem = "Ext2" THEN
-   SHELL "dumpe2fs -h " & device TO sTemp
+IF sFilesystem = "Ext2" OR sFilesystem = "Ext3" THEN
+   SHELL "dumpe2fs -h " & sDevice TO sTemp
    sTemp = Trim$(sTemp)
    arrTemp = Split(sTemp, Chr$(10))
    sFreeBlocks = Trim$(Mid$(arrTemp[13], RInStr(arrTemp[13], Space$(1))))
    sBlockSize = Trim$(Mid$(arrTemp[16], RInStr(arrTemp[16], Space$(1))))
    iFreeBytes = CLng(sFreeBlocks) * CLng(sBlockSize)
-ELSE IF filesystem = "XFS" THEN 
-   SHELL "xfs_db -c 'sb 0' -c 'print blocksize' -c 'print fdblocks' -r " & device TO sTemp
+ELSE IF sFilesystem = "XFS" THEN 
+   SHELL "xfs_db -c 'sb 0' -c 'print blocksize' -c 'print fdblocks' -r " & sDevice TO sTemp
    sTemp = Trim$(sTemp)
    arrTemp = Split(sTemp, Chr$(10))
    sFreeBlocks = Trim$(Mid$(arrTemp[1], RInStr(arrTemp[1], Space$(1))))
    sBlockSize = Trim$(Mid$(arrTemp[0], RInStr(arrTemp[0], Space$(1))))
    iFreeBytes = CLng(sFreeBlocks) * CLng(sBlockSize)
-ELSE IF filesystem = "ReiserFS" THEN 
-   SHELL "debugreiserfs " & device TO sTemp
+ELSE IF sFilesystem = "ReiserFS" THEN 
+   SHELL "debugreiserfs " & sDevice TO sTemp
    sTemp = Trim$(sTemp)
    arrTemp = Split(sTemp, Chr$(10))
    sFreeBlocks = Trim$(Mid$(arrTemp[6], RInStr(arrTemp[6], Space$(1))))
    sBlockSize = Trim$(Mid$(arrTemp[5], RInStr(arrTemp[5], Space$(1))))
    iFreeBytes = CLng(sFreeBlocks) * CLng(sBlockSize)
-ELSE IF filesystem = "JFS" THEN 
-   iFreeBytes = 0
+ELSE IF sFilesystem = "JFS" THEN 
+   SHELL "echo dm | jfs_debugfs " & sDevice TO sTemp
+   sTemp = Trim$(sTemp)
+   arrTemp = Split(sTemp, Chr$(10))
+   sFreeBlocks = Trim$(Mid$(Left$(arrTemp[8], RInStr(arrTemp[8], "[") - 1), InStr(arrTemp[8], ":") + 1))
+   sBlockSize = Trim$(Mid$(arrTemp[2], RInStr(arrTemp[2], Space$(1))))
+   iFreeBytes = HexToLong(sFreeBlocks) * CLng(sBlockSize)
+ELSE IF sFilesystem = "FAT12" OR sFilesystem = "FAT16" OR sFilesystem = "FAT32" THEN 'Who even uses FAT12 on today's hard-drives anyway?!
+   SHELL "dosfsck -v " & sDevice TO sTemp 'The "-a" switch sould also be used to automaticaly repair a FAT partition, but that can take ages...lets see how well it works without it.
+   sTemp = Trim$(sTemp)
+   arrTemp = Split(sTemp, Chr$(10))
+   'Reuse sTemp, can't get sFreeBlocks in one go
+   sTemp = Trim$(Mid$(Left$(arrTemp[20], RInStr(arrTemp[20], "/") - 1), InStr(arrTemp[20], ",") + 1))
+   sTemp2 = Trim$(Mid$(Left$(arrTemp[20], RInStr(arrTemp[20], Space$(1))), RInStr(arrTemp[20], "/") + 1))
+   sFreeBlocks = Str(CLng(Val(sTemp2) - Val(sTemp)))
+   sBlockSize = Trim$(Left$(Trim$(arrTemp[7]), InStr(Trim$(arrTemp[7]), Space$(1))))
+   iFreeBytes = CLng(sFreeBlocks) * CLng(sBlockSize)
+ELSE IF sFilesystem = "NTFS" THEN 
+   SHELL "ntfsresize --info --force --no-progress-bar " & sDevice TO sTemp
+   sTemp = Trim$(sTemp)
+   arrTemp = Split(sTemp, Chr$(10))
+   PRINT arrTemp[10]
+   'It would be a lot easier to use an expression in the output of ntfsresize to identify the number of free bytes, but that is not i18n ready!
+   'So "chomp" away portions of the string until the first integer is found (this will be the free space value)
+   sTemp = arrTemp[10]
+   WHILE Len(sTemp) > 0
+      sTemp2 = Trim$(Left$(sTemp, InStr(sTemp, Space$(1))))
+      IF IsInteger(Val(sTemp2)) OR IsLong(Val(sTemp2)) THEN 
+         sFreeBlocks = CLng(Val(sTemp2))
+         BREAK
+      ELSE 
+         sTemp = Trim$(Mid$(sTemp, InStr(sTemp, Space$(1))))
+      ENDIF
+   WEND      
+   sBlockSize = Trim$(Mid$(Left$(arrTemp[3], RInStr(arrTemp[3], Space$(1))), InStr(arrTemp[3], ":") + 1))
+   iFreeBytes = CLng(sFreeBlocks) * CLng(sBlockSize)
 ELSE 
    iFreeBytes = 0
 ENDIF 
