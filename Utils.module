@@ -159,7 +159,7 @@ FOR iDisk = 0 TO Global.DiskInfo.Max
       ENDIF 
    NEXT 
    Global.DiskInfo[iDisk].UnallocatedBytes = Global.DiskInfo[iDisk].Bytes - iDiskUsedBytes
-   PRINT global.DiskInfo[iDisk].UnallocatedBytes
+   'PRINT global.DiskInfo[iDisk].UnallocatedBytes 'for debug
 NEXT 
 
 

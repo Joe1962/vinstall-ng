@@ -292,7 +292,7 @@ msgstr ""
 msgid "Advanced selection"
 msgstr ""
 
-#: frmPackages.class:147 frmPartitions.class:265
+#: frmPackages.class:147 frmPartitions.class:264
 msgid "Manual"
 msgstr ""
 
@@ -373,7 +373,7 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmPartitions.class:216
+#: frmPartitions.class:215
 msgid ""
 "<center><h3><b>Available partitioning modes:</b></h3></center>\n"
 "\n"
@@ -402,39 +402,39 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmPartitions.class:228
+#: frmPartitions.class:227
 msgid "Partitioning mode"
 msgstr ""
 
-#: frmPartitions.class:243
+#: frmPartitions.class:242
 msgid "Automatic"
 msgstr ""
 
-#: frmPartitions.class:250
+#: frmPartitions.class:249
 msgid "Full disk"
 msgstr ""
 
-#: frmPartitions.class:258
+#: frmPartitions.class:257
 msgid "Unpartitioned space"
 msgstr ""
 
-#: frmPartitions.class:272
+#: frmPartitions.class:271
 msgid "GParted"
 msgstr ""
 
-#: frmPartitions.class:280
+#: frmPartitions.class:279
 msgid "cfdisk"
 msgstr ""
 
-#: frmPartitions.class:287
+#: frmPartitions.class:286
 msgid "Others"
 msgstr ""
 
-#: frmPartitions.class:294
+#: frmPartitions.class:293
 msgid "Preset strategies"
 msgstr ""
 
-#: frmPartitions.class:302
+#: frmPartitions.class:301
 msgid "No partitioning"
 msgstr ""
 

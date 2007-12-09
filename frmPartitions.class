@@ -166,7 +166,6 @@ IF Global.flagBUTTExec = TRUE THEN RETURN
 Global.flagBUTTExec = TRUE
 
 ' Mountpoint selection:
-Utils.DrivePartInfo
 frmPartSelect.ShowModal
 
 ' Unflag button execution:

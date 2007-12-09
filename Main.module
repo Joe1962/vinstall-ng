@@ -25,6 +25,8 @@ Global.flagBUTTExec = FALSE
 ' Load the Main window:
 frmMain.Load
 
+
+
 ' Make always on top:
 'frmMain.TopOnly = TRUE
 
@@ -65,6 +67,9 @@ frmWelcome.Reparent(frmMain.pnlContainer, 0, 0)
 
 ' Start off with button 1 on Main window:
 Global.prevForm = 1
+
+'Gather hard-drive data before showing the interface
+Utils.DrivePartInfo()
 
 ' And get the show on the road....:
 frmMain.Show
