@@ -1,9 +1,12 @@
 [Breakpoints]
 Count=0
 
+[DebugWindow]
+Count=0
+
 [FFind]
-SearchIn="Sub"
-CaseSensitive=True
+SearchIn="Project"
+CaseSensitive=False
 SearchWord=False
 SearchComment=False
 SearchString=True

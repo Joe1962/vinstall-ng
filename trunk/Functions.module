@@ -235,6 +235,7 @@ DIM sBlockSize AS String
 DIM sUsedBlocks AS String
 DIM arrTemp AS NEW String[]
 DIM iFreeBytes AS Long
+DIM i AS Integer
 
 sDevice = Trim$(sDevice)
 sFilesystem = Trim$(sFilesystem)
@@ -269,13 +270,19 @@ ELSE IF sFilesystem = "JFS" THEN
    sBlockSize = Trim$(Mid$(arrTemp[2], RInStr(arrTemp[2], Space$(1))))
    iFreeBytes = HexToLong(sFreeBlocks) * CLng(sBlockSize)
 ELSE IF sFilesystem = "FAT12" OR sFilesystem = "FAT16" OR sFilesystem = "FAT32" THEN 'Who even uses FAT12 on today's hard-drives anyway?!
-   SHELL "dosfsck -v " & sDevice TO sTemp 'The "-a" switch sould also be used to automaticaly repair a FAT partition, but that can take ages...lets see how well it works without it.
+   SHELL "dosfsck -v " & sDevice TO sTemp 'The "-a" switch should also be used to automaticaly repair a FAT partition, but that can take ages...lets see how well it works without it.
    sTemp = Trim$(sTemp)
    arrTemp = Split(sTemp, Chr$(10))
+   'Debug
+   ' FOR i = 0 TO arrTemp.Length - 1
+   '    PRINT arrTemp[i]
+   ' NEXT 
    'Reuse sTemp, can't get sFreeBlocks in one go
-   sTemp = Trim$(Mid$(Left$(arrTemp[20], RInStr(arrTemp[20], "/") - 1), InStr(arrTemp[20], ",") + 1))
-   sTemp2 = Trim$(Mid$(Left$(arrTemp[20], RInStr(arrTemp[20], Space$(1))), RInStr(arrTemp[20], "/") + 1))
-   sFreeBlocks = Str(CLng(Val(sTemp2) - Val(sTemp)))
+   sTemp = Trim$(Mid$(Left$(arrTemp[arrTemp.Length - 1], RInStr(arrTemp[arrTemp.Length - 1], "/") - 1), InStr(arrTemp[arrTemp.Length - 1], ",") + 1))
+   'PRINT sTemp
+   sTemp2 = Trim$(Mid$(Left$(arrTemp[arrTemp.Length - 1], RInStr(arrTemp[arrTemp.Length - 1], Space$(1))), RInStr(arrTemp[arrTemp.Length - 1], "/") + 1))
+   'PRINT sTemp2
+   sFreeBlocks = Str(CLng(Val(sTemp2) - CLng(Val(sTemp))))
    sBlockSize = Trim$(Left$(Trim$(arrTemp[7]), InStr(Trim$(arrTemp[7]), Space$(1))))
    iFreeBytes = CLng(sFreeBlocks) * CLng(sBlockSize)
 ELSE IF sFilesystem = "NTFS" THEN 
@@ -284,6 +291,7 @@ ELSE IF sFilesystem = "NTFS" THEN
    arrTemp = Split(sTemp, Chr$(10))
    'It would be a lot easier to use an expression in the output of ntfsresize to identify the number of free bytes, but that is not i18n ready!
    'So "chomp" away portions of the string until the first integer is found (this will be the free space value)
+   'PRINT arrTemp[10]
    sTemp = arrTemp[10]
    WHILE Len(sTemp) > 0
       sTemp2 = Trim$(Left$(sTemp, InStr(sTemp, Space$(1))))
@@ -406,79 +414,79 @@ ENDIF
   
 END
 
-PUBLIC SUB BootMngrSet()
-' This must determine:
-' * Where the root partition is
-' * Where the kernel is installed
-' * where to install lilo (from global.enumLILOMODE ?? )
-' * Which OS's to display in the boot menu (From user input)
-' * To use bootsplash or to use framebuffer
-' We'll use message.info to display the values for now, we can move those values somewhere else, or dome something more useful with them later
-  DIM sRoot_Part AS String
-  DIM sKernel_Loc AS String
-  DIM ROOT_DIR AS String = "/"
-  DIM Boot_DIR AS String = Root_DIR & "boot"
-  ' Locate the root Partition
-  IF global.enumLILOMODE = 0 THEN 
-  locate_mbr()
-  SHELL "cat /etc/fstab | awk '{if ($2 == \"/\") {print $1}}'" TO sRoot_Part
-   IF NOT sRoot_Part OR sRoot_Part <> "" THEN 
-   SHELL "mount | awk '{if ($3 == \"/\") {print $1}}'" TO sRoot_Part
-   END IF
-      'message.Info("I've identified your root partition as " & gb.newline & sRoot_Part)
-      Global.RootPart = sRoot_Part ' Store the location of the root partition to the global module
-     END IF
-' Figure out where the kernel is
-  IF Exist(Boot_DIR & "/vmlinuz") THEN 
-  sKernel_Loc = Boot_DIR & "/vmlinuz"
-  ELSE IF Exist(ROOT_DIR & "/vmlinuz") THEN 
-  sKernel_Loc = Root_DIR & "/vmlinuz"
-   ELSE 
-   Message.Info("I can't find a kernel !!! ")
-   END IF
-   IF sKernel_Loc OR sKernel_Loc <> "" THEN 
-   'message.Info("I've located the kernel in " & gb.NewLine & sKernel_Loc)
-   Global.KernelLoc = sKernel_Loc ' Store the location of the kernel to the global module
-    END IF
-    
-END
-
-PUBLIC SUB locate_mbr()
-  
-  ' If the user chooses to install bootmanager to MBR
-  ' This routine will analyze whether there are more than 1 MBR available
-  ' and which one to use if true, else, use the one available automatically
-  'SHELL "/sbin/vliloconf"
-  
-DIM disks AS String ' list of the mbrs as string
-DIM MBRs AS String[] ' split the many MBR's
-DIM MBR AS String ' Hold a temporary MBR
-DIM MBRTotal AS Integer ' Total MBRS
-DIM MBRIndex AS Integer ' Current MBR (index)
-DIM UseMBR AS String ' MBR to use.... A better place for this is probabbly somewhere in Global
-DIM findcmd AS String = "fdisk -l | grep Disk | cut -d \" \" -f 2 | cut -c 1-8"
+' PUBLIC SUB BootMngrSet()
+' ' This must determine:
+' ' * Where the root partition is
+' ' * Where the kernel is installed
+' ' * where to install lilo (from global.enumLILOMODE ?? )
+' ' * Which OS's to display in the boot menu (From user input)
+' ' * To use bootsplash or to use framebuffer
+' ' We'll use message.info to display the values for now, we can move those values somewhere else, or dome something more useful with them later
+'   DIM sRoot_Part AS String
+'   DIM sKernel_Loc AS String
+'   DIM ROOT_DIR AS String = "/"
+'   DIM Boot_DIR AS String = Root_DIR & "boot"
+'   ' Locate the root Partition
+'   IF global.enumLILOMODE = 0 THEN 
+'   locate_mbr()
+'   SHELL "cat /etc/fstab | awk '{if ($2 == \"/\") {print $1}}'" TO sRoot_Part
+'    IF NOT sRoot_Part OR sRoot_Part <> "" THEN 
+'    SHELL "mount | awk '{if ($3 == \"/\") {print $1}}'" TO sRoot_Part
+'    END IF
+'       'message.Info("I've identified your root partition as " & gb.newline & sRoot_Part)
+'       Global.RootPart = sRoot_Part ' Store the location of the root partition to the global module
+'      END IF
+' ' Figure out where the kernel is
+'   IF Exist(Boot_DIR & "/vmlinuz") THEN 
+'   sKernel_Loc = Boot_DIR & "/vmlinuz"
+'   ELSE IF Exist(ROOT_DIR & "/vmlinuz") THEN 
+'   sKernel_Loc = Root_DIR & "/vmlinuz"
+'    ELSE 
+'    Message.Info("I can't find a kernel !!! ")
+'    END IF
+'    IF sKernel_Loc OR sKernel_Loc <> "" THEN 
+'    'message.Info("I've located the kernel in " & gb.NewLine & sKernel_Loc)
+'    Global.KernelLoc = sKernel_Loc ' Store the location of the kernel to the global module
+'     END IF
+'     
+' END
 ' 
-'SHELL "fdisk -l | grep Disk | cut -d " " - f 2 | cut -c 1-8" TO disks
-SHELL findcmd TO disks
-'message.Info(disks)
-MBRs = Split(disks, " ") ' Maybe use a blank space (ie " " ) instead ??
-MbrTotal = MBRs.Count
-IF MBRTotal = 0 THEN ' This should never happen.
-'message.Info(disks)
-   message.Error("Cannot find an MBR on this box... You must be on some kind of alien box... ;) ")
-'ELSE IF MBRTotal = 1 ' Located only one MBR
-'   UseMBR = disks ' Obviously, use the one available MBR
-'   Message.Info("The boot manager will be installed to: " & disks)
-'ELSE IF MBRTotal >= 2 THEN ' We found several MBR's here... Your box is loaded with drives out the whazoo!
-ELSE 
-'message.Info(disks)
-FOR MBRIndex = 0 TO MBRs.count - 1
-   MBR = MBRs[MBRIndex]
-   frmChooseMBR.MbrList.Add(MBR) ' populate the list in the form
-   frmChooseMBR.Show ' This form will shoot out a value to Global
-NEXT 
-END IF
-
-END
+' PUBLIC SUB locate_mbr()
+'   
+'   ' If the user chooses to install bootmanager to MBR
+'   ' This routine will analyze whether there are more than 1 MBR available
+'   ' and which one to use if true, else, use the one available automatically
+'   'SHELL "/sbin/vliloconf"
+'   
+' DIM disks AS String ' list of the mbrs as string
+' DIM MBRs AS String[] ' split the many MBR's
+' DIM MBR AS String ' Hold a temporary MBR
+' DIM MBRTotal AS Integer ' Total MBRS
+' DIM MBRIndex AS Integer ' Current MBR (index)
+' DIM UseMBR AS String ' MBR to use.... A better place for this is probabbly somewhere in Global
+' DIM findcmd AS String = "fdisk -l | grep Disk | cut -d \" \" -f 2 | cut -c 1-8"
+' ' 
+' 'SHELL "fdisk -l | grep Disk | cut -d " " - f 2 | cut -c 1-8" TO disks
+' SHELL findcmd TO disks
+' 'message.Info(disks)
+' MBRs = Split(disks, " ") ' Maybe use a blank space (ie " " ) instead ??
+' MbrTotal = MBRs.Count
+' IF MBRTotal = 0 THEN ' This should never happen.
+' 'message.Info(disks)
+'    message.Error("Cannot find an MBR on this box... You must be on some kind of alien box... ;) ")
+' 'ELSE IF MBRTotal = 1 ' Located only one MBR
+' '   UseMBR = disks ' Obviously, use the one available MBR
+' '   Message.Info("The boot manager will be installed to: " & disks)
+' 'ELSE IF MBRTotal >= 2 THEN ' We found several MBR's here... Your box is loaded with drives out the whazoo!
+' ELSE 
+' 'message.Info(disks)
+' FOR MBRIndex = 0 TO MBRs.count - 1
+'    MBR = MBRs[MBRIndex]
+'    frmChooseMBR.MbrList.Add(MBR) ' populate the list in the form
+'    frmChooseMBR.Show ' This form will shoot out a value to Global
+' NEXT 
+' END IF
+' 
+' END
 
 

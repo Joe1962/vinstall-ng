@@ -29,7 +29,7 @@ Global.enumPARTMODE = 0 'Full-automatic partitioning
 Global.enumPACKS = 0 'All packages selected
 Global.enumLILOMODE = 0 'Install lilo to MBR
 
-Utils.DrivePartInfo
+
 IF Global.DiskInfo.Count >= 1 THEN frmDriveSelect.ShowModal
 
 frmMain.btnChoice.Enabled = FALSE ' Disable Choices.
