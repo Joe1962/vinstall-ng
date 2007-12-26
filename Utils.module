@@ -198,6 +198,91 @@ Global.SysMemory = Val(sLine) * 1024 'Convert the value to bytes
 
 END
 
+PUBLIC SUB GetPkgInfo()
+
+DIM vPKG AS NEW cPackageInfo
+DIM hConfFile AS File
+DIM sLine AS String
+DIM i AS Integer
+
+'Parse the bulk and config packages first (these are the most important)
+OPEN Global.SOURCE & "veclinux/SETUP.CONF" FOR READ AS #hConfFile
+   WHILE NOT Eof(hConfFile)
+      LINE INPUT #hConfFile, sLine
+      vPKG = NEW cPackageInfo
+      
+      'The parser needs to understand bash-like comments, so ignore anything to the right of a hash (#):
+      IF InStr(sLine, "#") THEN 
+         sLine = Trim(Right(sLine, InStr(sLine, "#") - 1))
+      ENDIF
+      
+      'Here is an example of what is going to be parsed by this section:
+      ' BULK0='required/veclinux.tlz:971650:Base system (Base System)'
+      ' BULK3='optional/dev.tlz:431371:dev tools (gcc, make, etc)'
+      ' CONF1='required/vlconfig2.tlz:17613:Base system (config Files)'
+      
+      IF InStr(sLine, "BULK") OR InStr(sLine, "CONF") THEN 
+         vPKG.PkgName = Mid(Left(sLine, InStr(sLine, ":") - 1), InStr(sLine, "/") + 1)
+         vPKG.PkgCategory = Mid(Left(sLine, InStr(sLine, "/") - 1), InStr(sLine, "'") + 1)
+         vPKG.PkgComment = Mid(Left(sLine, RInStr(sLine, "'") - 1), RInStr(sLine, ":") + 1)
+         vPKG.PkgPath = Global.SOURCE & "veclinux/" & vPKG.PkgCategory & "/" & vPKG.PkgName
+         vPKG.PkgSize = Val(Mid(Left(sLine, RInStr(sLine, ":") - 1), InStr(sLine, ":") + 1)) * 1024   
+         Global.PackageInfo.Push(vPKG)
+      ENDIF       
+   WEND 
+CLOSE #hConfFile
+
+'Parse the "extra" packages
+OPEN Global.SOURCE & "packages/PACKAGES.TXT" FOR READ AS #hConfFile
+   vPKG = NEW cPackageInfo
+   WHILE NOT Eof(hConfFile)
+      LINE INPUT #hConfFile, sLine
+      
+      vPKG.PkgCategory = "extra"
+      vPKG.PkgComment = ""
+            
+      IF InStr(sLine, "PACKAGE NAME") THEN 
+         vPKG.PkgName = Trim(Mid(sLine, InStr(sLine, ":") + 1))
+      ELSE IF InStr(sLine, "LOCATION") THEN 
+         vPKG.PkgPath = Global.SOURCE & "packages/" & Trim(Mid(sLine, InStr(sLine, "/") + 1)) & "/" & vPKG.PkgName
+      ELSE IF InStr(sLine, "SIZE (uncompressed)") THEN 
+         vPKG.PkgSize = Val(Trim$(Mid(Left(sLine, RInStr(sLine, "K") - 1), InStr(sLine, ":") + 1))) '* 1024
+      ELSE IF Trim(sLine) = "" THEN 'An empty line marks the end of the package info, so push the data before moving on
+         Global.PackageInfo.Push(vPKG)
+         vPKG = NEW cPackageInfo
+      ENDIF      
+   WEND 
+CLOSE #hConfFile
+
+
+'For debugging
+' FOR i = 0 TO Global.PackageInfo.Max
+' PRINT Global.PackageInfo[i].PkgName
+' PRINT Global.PackageInfo[i].PkgCategory
+' PRINT Global.PackageInfo[i].PkgComment
+' PRINT Global.PackageInfo[i].PkgPath
+' PRINT Global.PackageInfo[i].PkgSize
+' PRINT "-----"
+' NEXT
+      
+         
+
+  
+END
+
+
+
+PUBLIC SUB DestroyAllPartitions(dev AS String)
+'THIS WILL DELETE ALL THE PARTITIONS ON A SELECTED DRIVE!
+DIM iPart AS Integer
+
+FOR iPart = 1 TO Global.PartInfo.Length
+   SHELL "parted " & dev & " rm " & iPart
+NEXT 
+  
+END
+
+
 
 PUBLIC SUB BUTTdisable()
 ' Disable all frmMain buttons:
@@ -206,12 +291,12 @@ PUBLIC SUB BUTTdisable()
 BUTTsave
 
 ' Then disable:
-frmMain.btnWelcome.Enabled = FALSE
-frmMain.btnChoice.Enabled = FALSE
-frmMain.btnPartitions.Enabled = FALSE
-frmMain.btnPackages.Enabled = FALSE
-frmMain.btnConfigure.Enabled = FALSE
-frmMain.btnGo.Enabled = FALSE
+frmMain.btnMain_1.Enabled = FALSE
+frmMain.btnMain_2.Enabled = FALSE
+frmMain.btnMain_3.Enabled = FALSE
+frmMain.btnMain_4.Enabled = FALSE
+frmMain.btnMain_5.Enabled = FALSE
+frmMain.btnMain_6.Enabled = FALSE
 frmMain.btnTools.Enabled = FALSE
 frmMain.btnExit.Enabled = FALSE
 
@@ -220,12 +305,12 @@ END
 PUBLIC SUB BUTTsave()
 ' Save state of all frmMain buttons:
 
-frmMain.btnWelcome.Tag = frmMain.btnWelcome.Enabled
-frmMain.btnChoice.Tag = frmMain.btnChoice.Enabled
-frmMain.btnPartitions.Tag = frmMain.btnPartitions.Enabled
-frmMain.btnPackages.Tag = frmMain.btnPackages.Enabled
-frmMain.btnConfigure.Tag = frmMain.btnConfigure.Enabled
-frmMain.btnGo.Tag = frmMain.btnGo.Enabled
+frmMain.btnMain_1.Tag = frmMain.btnMain_1.Enabled
+frmMain.btnMain_2.Tag = frmMain.btnMain_2.Enabled
+frmMain.btnMain_3.Tag = frmMain.btnMain_3.Enabled
+frmMain.btnMain_4.Tag = frmMain.btnMain_4.Enabled
+frmMain.btnMain_5.Tag = frmMain.btnMain_5.Enabled
+frmMain.btnMain_6.Tag = frmMain.btnMain_6.Enabled
 frmMain.btnTools.Tag = frmMain.btnTools.Enabled
 frmMain.btnExit.Tag = frmMain.btnExit.Enabled
 
@@ -234,12 +319,12 @@ END
 PUBLIC SUB BUTTrest()
 ' Restore saved state of all frmMain buttons:
 
-frmMain.btnWelcome.Enabled = frmMain.btnWelcome.Tag
-frmMain.btnChoice.Enabled = frmMain.btnChoice.Tag
-frmMain.btnPartitions.Enabled = frmMain.btnPartitions.Tag
-frmMain.btnPackages.Enabled = frmMain.btnPackages.Tag
-frmMain.btnConfigure.Enabled = frmMain.btnConfigure.Tag
-frmMain.btnGo.Enabled = frmMain.btnGo.Tag
+frmMain.btnMain_1.Enabled = frmMain.btnMain_1.Tag
+frmMain.btnMain_2.Enabled = frmMain.btnMain_2.Tag
+frmMain.btnMain_3.Enabled = frmMain.btnMain_3.Tag
+frmMain.btnMain_4.Enabled = frmMain.btnMain_4.Tag
+frmMain.btnMain_5.Enabled = frmMain.btnMain_5.Tag
+frmMain.btnMain_6.Enabled = frmMain.btnMain_6.Tag
 frmMain.btnTools.Enabled = frmMain.btnTools.Tag
 frmMain.btnExit.Enabled = frmMain.btnExit.Tag
 

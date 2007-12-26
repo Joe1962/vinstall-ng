@@ -14,19 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: frmDriveSelect.class:110
+#: frmDriveSelect.class:115
 msgid "Drives"
 msgstr ""
 
-#: frmDriveSelect.class:118
+#: frmDriveSelect.class:123
 msgid "Click on a row to select..."
 msgstr ""
 
-#: frmDriveSelect.class:129
+#: frmDriveSelect.class:134
 msgid "OK"
 msgstr ""
 
-#: frmDriveSelect.class:136
+#: frmDriveSelect.class:141
 msgid "Cancel"
 msgstr ""
 

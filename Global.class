@@ -59,6 +59,8 @@ STATIC PUBLIC PARTboot AS String
 STATIC PUBLIC PARTusr AS String
 STATIC PUBLIC PARTshare AS String
 
+STATIC PUBLIC PackageInfo AS NEW Object[]
+
 ' Process declarations:
 STATIC PUBLIC tproc AS Process
 
@@ -66,11 +68,18 @@ STATIC PUBLIC tproc AS Process
 STATIC PUBLIC installDrive AS String
 STATIC PUBLIC instDriveIndex AS Long
 
+'select window exit status (set to "ok" or "canceled")
+STATIC PUBLIC frmExitStatus AS String = ""
+
 ' Boot Manager variables
-STATIC PUBLIC MBRSel AS String ' MBR to use in case there is more than 1
-STATIC PUBLIC RootPart AS String ' Root Partition
-STATIC PUBLIC KernelLoc AS String ' Kernel location in root partition
-STATIC PUBLIC CONSOLENUM AS String ' The boot fb console #
+' STATIC PUBLIC MBRSel AS String ' MBR to use in case there is more than 1
+' STATIC PUBLIC RootPart AS String ' Root Partition
+' STATIC PUBLIC KernelLoc AS String ' Kernel location in root partition
+' STATIC PUBLIC CONSOLENUM AS String ' The boot fb console #
+
+'Paths for the installer to find packages and related info files
+STATIC PUBLIC SOURCE AS String = "/tmp/vinstall-source/" '4 debugging and testing
+'STATIC PUBLIC SOURCE AS String = "/mnt/SOURCE/" 'the real thing
 
 
 

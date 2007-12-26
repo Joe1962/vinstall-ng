@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,37,91.2857,68.2857)
+  MoveScaled(0,37,91.1667,68.1667)
   Font = Font["Luxi Sans"]
   Text = ("")
   Icon = Picture["installer3.png"]
@@ -16,17 +16,17 @@
     Border = Border.Etched
   }
   { pnlSteps Panel
-    MoveScaled(1,9,85,4.2857)
+    MoveScaled(1,9,85,4.1667)
     Arrangement = Arrange.Horizontal
     Border = Border.Etched
-    { btnWelcome Button
+    { btnMain_1 Button
       MoveScaled(0,0,9,4)
       Font = Font["Luxi Sans,12"]
       Tag = "1"
       Expand = True
       Text = ("Welcome!")
     }
-    { btnChoice Button
+    { btnMain_2 Button
       MoveScaled(9,0,9,4)
       Enabled = False
       Font = Font["Luxi Sans,12"]
@@ -34,7 +34,7 @@
       Expand = True
       Text = ("The choice")
     }
-    { btnPartitions Button
+    { btnMain_3 Button
       MoveScaled(18,0,9,4)
       Enabled = False
       Font = Font["Luxi Sans,12"]
@@ -42,7 +42,7 @@
       Expand = True
       Text = ("Partitions")
     }
-    { btnPackages Button
+    { btnMain_4 Button
       MoveScaled(27,0,9,4)
       Enabled = False
       Font = Font["Luxi Sans,12"]
@@ -50,7 +50,7 @@
       Expand = True
       Text = ("Packages")
     }
-    { btnConfigure Button
+    { btnMain_5 Button
       MoveScaled(36,0,9,4)
       Enabled = False
       Font = Font["Luxi Sans,12"]
@@ -58,7 +58,7 @@
       Expand = True
       Text = ("Configure")
     }
-    { btnGo Button
+    { btnMain_6 Button
       MoveScaled(45,0,9,4)
       Enabled = False
       Font = Font["Luxi Sans,12"]
@@ -80,7 +80,7 @@
       MoveScaled(64,0,1,4)
     }
     { btnExit Button
-      MoveScaled(65,0,8.2857,4)
+      MoveScaled(65,0,8.1667,4)
       Font = Font["Luxi Sans,12"]
       Expand = True
       Text = ("Exit")
