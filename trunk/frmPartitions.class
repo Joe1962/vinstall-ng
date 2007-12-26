@@ -8,7 +8,7 @@ PUBLIC ttime AS Date
 PUBLIC SUB Form_Show()
 
 ' set button focus:
-frmMain.btnPartitions.SetFocus
+frmMain.btnMain_3.SetFocus
 
 ' set some background colours:
 TextLabel1.BackColor = Global.HTMLBG 
@@ -33,9 +33,9 @@ IF Global.flagBUTTExec = TRUE THEN RETURN
 ' Flag button execution:
 Global.flagBUTTExec = TRUE
 
-frmMain.btnPartitions.Enabled = FALSE 'Disable "Partitions".
-frmMain.btnPackages.Enabled = TRUE 'Enable "Packages".
-frmMain.btnPackages_Click 'Advance to "Packages".
+frmMain.btnMain_3.Enabled = FALSE 'Disable "Partitions".
+frmMain.btnMain_4.Enabled = TRUE 'Enable "Packages".
+frmMain.btnMain_4_Click 'Advance to "Packages".
 
 ' Unflag button execution:
 Global.flagBUTTExec = FALSE
@@ -50,9 +50,9 @@ IF Global.flagBUTTExec = TRUE THEN RETURN
 ' Flag button execution:
 Global.flagBUTTExec = TRUE
 
-frmMain.btnPartitions.Enabled = FALSE 'Disable "Partitions".
-frmMain.btnPackages.Enabled = TRUE 'Enable "Packages".
-frmMain.btnPackages_Click 'Advance to "Packages".
+frmMain.btnMain_3.Enabled = FALSE 'Disable "Partitions".
+frmMain.btnMain_4.Enabled = TRUE 'Enable "Packages".
+frmMain.btnMain_4_Click 'Advance to "Packages".
 
 ' Unflag button execution:
 Global.flagBUTTExec = FALSE

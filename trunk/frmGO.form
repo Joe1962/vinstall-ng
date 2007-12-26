@@ -1,8 +1,7 @@
-# Gambas Form File 1.0
+# Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(29.125,25.375,90.625,64.375)
-  'Move(233,203,725,515)
+  MoveScaled(29,25.3333,90.5,64.3333)
   Font = Font["Luxi Sans"]
   Background = &HFFFFFF&
   Text = ("")
@@ -10,19 +9,16 @@
   Arrangement = Arrange.Horizontal
   { VBox2 VBox
     MoveScaled(1,2,57,60)
-    'Move(8,16,456,480)
     Font = Font["Luxi Sans"]
     Expand = True
     { ScrollView1 ScrollView
       MoveScaled(2,2,58,50)
-      'Move(16,16,464,400)
       Font = Font["Luxi Sans,16"]
       Background = &HDFFFFF&
       Expand = True
       ScrollBar = Scroll.Vertical
       { TextLabel1 TextLabel
         MoveScaled(0,0,58,39)
-        'Move(0,0,464,312)
         Font = Font["Luxi Sans,14"]
         Background = &HDFFFFF&
         Padding = 10
@@ -31,18 +27,15 @@
       }
     }
     { ProgressBar1 ProgressBar
-      MoveScaled(3,55,47,4)
-      'Move(24,440,376,32)
+      MoveScaled(3,55,32,4)
       Font = Font["Luxi Sans"]
     }
   }
   { VBox1 VBox
     MoveScaled(61,2,29,61)
-    'Move(488,16,232,488)
     Font = Font["Luxi Sans"]
     { lblSubTitle Label
       MoveScaled(0,0,29,4)
-      'Move(0,0,232,32)
       Font = Font["Luxi Sans,Bold,12"]
       Background = &H0055FF&
       Text = ("Ready to install!")
@@ -50,12 +43,15 @@
       Border = Border.Etched
     }
     { Panel1 Panel
-      MoveScaled(0,4,29,49.625)
-      'Move(0,32,232,397)
+      MoveScaled(0,4,29,50)
       Font = Font["Luxi Sans"]
       Background = &H0055FF&
       Expand = True
       Border = Border.Etched
+    }
+    { btnStartStop Button
+      MoveScaled(4,54,21,4)
+      Text = ("Begin installation")
     }
   }
 }

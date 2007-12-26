@@ -72,17 +72,22 @@ END
 
 PUBLIC SUB btnOK_Click()
 
-IF selectedDisk = "" THEN selectedDisk = gridDisk[1, 0].Text
-Global.installDrive = selectedDisk
-Global.instDriveIndex = selectedDiskIndex
-IF Global.DebugMode = TRUE THEN message.Info(Global.installDrive)
+IF selectedDisk <> "" THEN 
+   Global.installDrive = selectedDisk
+   Global.instDriveIndex = selectedDiskIndex
+   IF Global.DebugMode = TRUE THEN message.Info(Global.installDrive)
 
-ME.Close(TRUE)
+   Global.frmExitStatus = "ok"
+   ME.Close(TRUE)
+ELSE 
+   Message.Info("No drive selected, please select one by clicking in the grid.")
+ENDIF 
 
 END
 
 PUBLIC SUB btnCancel_Click()
 
+Global.frmExitStatus = "canceled"
 ME.Close()
 
 END

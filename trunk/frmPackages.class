@@ -5,7 +5,7 @@
 PUBLIC SUB Form_Show()
 
 ' set button focus:
-frmMain.btnPackages.SetFocus
+frmMain.btnMain_4.SetFocus
 
 ' set some background colours:
 TextLabel1.BackColor = Global.HTMLBG 
@@ -25,18 +25,18 @@ END
 PUBLIC SUB btnAllPkgs_Click() 'All packages:
 
 Global.enumPACKS = 0
-frmMain.btnPackages.Enabled = FALSE
-frmMain.btnConfigure.Enabled = TRUE
-frmMain.btnConfigure_Click
+frmMain.btnMain_4.Enabled = FALSE
+frmMain.btnMain_5.Enabled = TRUE
+frmMain.btnMain_5_Click
 
 END
 
 PUBLIC SUB btnGroup_Click() 'By groups:
 
 Global.enumPACKS = 1
-frmMain.btnPackages.Enabled = FALSE
-frmMain.btnConfigure.Enabled = TRUE
-frmMain.btnConfigure_Click
+frmMain.btnMain_4.Enabled = FALSE
+frmMain.btnMain_5.Enabled = TRUE
+frmMain.btnMain_5_Click
 
 END
 
@@ -52,8 +52,8 @@ END
 PUBLIC SUB btnNoExtras_Click() 'No extras:
 
 Global.enumPACKS = 3
-frmMain.btnPackages.Enabled = FALSE
-frmMain.btnConfigure.Enabled = TRUE
-frmMain.btnConfigure_Click
+frmMain.btnMain_4.Enabled = FALSE
+frmMain.btnMain_5.Enabled = TRUE
+frmMain.btnMain_5_Click
 
 END
