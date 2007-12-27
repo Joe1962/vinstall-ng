@@ -5,7 +5,7 @@
 PUBLIC SUB Form_Show()
 
 ' set button focus:
-frmMain.btnMain_2.SetFocus
+frmMain.btnMain2.SetFocus
 
 ' set some background colours:
 TextLabel1.BackColor = Global.HTMLBG 
@@ -33,9 +33,15 @@ Global.enumLILOMODE = 0 'Install lilo to MBR
 IF Global.DiskInfo.Count >= 1 THEN frmDriveSelect.ShowModal
 
 IF Global.frmExitStatus = "ok" THEN 
-   frmMain.btnMain_2.Enabled = FALSE ' Disable Choices.
-   frmMain.btnMain_6.Enabled = TRUE ' Enable Go for it!.
-   frmMain.btnMain_6_Click ' Advance to Go for it!.
+   
+   'Check space occupied by packages and make sure there is enough
+   IF Functions.EnoughSpace(0) = TRUE THEN    
+      frmMain.btnMain2.Enabled = FALSE ' Disable Choices.
+      frmMain.btnMain6.Enabled = TRUE ' Enable Go for it!.
+      frmMain.btnMain6_Click ' Advance to Go for it!.
+   ELSE 
+      Message.Error(Global.installDrive & " is not big enough for a full installation" & gb.NewLine & "of VectorLinux. Select a different drive" & gb.NewLine & "or otherwise chose the \"Advanced\" mode" & gb.NewLine & "and unselect packages you don't need.")
+   ENDIF 
 ENDIF 
 
 END
@@ -52,8 +58,8 @@ END
 PUBLIC SUB btnAdvanced_Click() ' Advanced.
 
 Global.enumINSTMODE = 1 ' Advanced install mode.
-frmMain.btnMain_3.Enabled = TRUE ' Enable Partitions
-frmMain.btnMain_3_Click ' Advance to Partitions
+frmMain.btnMain3.Enabled = TRUE ' Enable Partitions
+frmMain.btnMain3_Click ' Advance to Partitions
 
 END
 

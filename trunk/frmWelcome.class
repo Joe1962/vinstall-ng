@@ -32,8 +32,8 @@ PUBLIC SUB btnStart_Click()
 
 btnStart.Enabled = FALSE
 Global.flagStarted = TRUE
-frmMain.btnMain_2.Enabled = TRUE ' Enable "Choices".
-frmMain.btnMain_2_Click ' Advance to "Choices".
+frmMain.btnMain2.Enabled = TRUE ' Enable "Choices".
+frmMain.btnMain2_Click ' Advance to "Choices".
 
 END
 

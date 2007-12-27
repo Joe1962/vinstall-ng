@@ -19,14 +19,14 @@
     MoveScaled(1,9,85,4.1667)
     Arrangement = Arrange.Horizontal
     Border = Border.Etched
-    { btnMain_1 Button
+    { btnMain1 Button
       MoveScaled(0,0,9,4)
       Font = Font["Luxi Sans,12"]
       Tag = "1"
       Expand = True
       Text = ("Welcome!")
     }
-    { btnMain_2 Button
+    { btnMain2 Button
       MoveScaled(9,0,9,4)
       Enabled = False
       Font = Font["Luxi Sans,12"]
@@ -34,7 +34,7 @@
       Expand = True
       Text = ("The choice")
     }
-    { btnMain_3 Button
+    { btnMain3 Button
       MoveScaled(18,0,9,4)
       Enabled = False
       Font = Font["Luxi Sans,12"]
@@ -42,7 +42,7 @@
       Expand = True
       Text = ("Partitions")
     }
-    { btnMain_4 Button
+    { btnMain4 Button
       MoveScaled(27,0,9,4)
       Enabled = False
       Font = Font["Luxi Sans,12"]
@@ -50,7 +50,7 @@
       Expand = True
       Text = ("Packages")
     }
-    { btnMain_5 Button
+    { btnMain5 Button
       MoveScaled(36,0,9,4)
       Enabled = False
       Font = Font["Luxi Sans,12"]
@@ -58,7 +58,7 @@
       Expand = True
       Text = ("Configure")
     }
-    { btnMain_6 Button
+    { btnMain6 Button
       MoveScaled(45,0,9,4)
       Enabled = False
       Font = Font["Luxi Sans,12"]

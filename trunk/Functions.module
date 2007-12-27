@@ -329,27 +329,6 @@ ENDIF
   
 END
 
-' PUBLIC FUNCTION CalcPaksSize(selected_paks AS String) AS Long
-' 'Calculate the space required by the user's package selection
-' DIM arsPackages AS string[]
-' DIM hPackageConfig AS file
-' DIM sLine AS String
-' DIM sPackageRef AS String
-' DIM iSize AS Long
-' 
-' iSize = 0
-' 
-' OPEN Global.SOURCE & "veclinux/SETUP.CONF" FOR READ AS #hPackageConfig
-'    WHILE NOT Eof(hPackageConfig)
-'       LINE INPUT #hPackageConfig, sLine
-'       
-'       
-' CLOSE #hPackageConfig
-' 
-' RETURN iSize
-' 
-' END
-
 PUBLIC FUNCTION AutoRootSize(partmode AS Integer) AS Long
 'Calculate the size of the theoretical root partition, for the automatic or free-space partitioning modes
 DIM iRootSize AS Long
@@ -374,13 +353,13 @@ PUBLIC FUNCTION EnoughSpace(partmode AS Integer) AS Boolean
 DIM iAvailableSpace AS Long
 
 IF partmode = 0 THEN
-   iAvailableSpace = AutoRootSize - CalcSwap(Global.SysMemory) - 157286400
-   ' IF iAvailableSpace > CalcPaksSize("all") THEN 
-   '    RETURN TRUE
-   ' ELSE 
-   '    RETURN FALSE
-   ' ENDIF 
-'Do the same for other partition modes
+   iAvailableSpace = AutoRootSize(0) - CalcSwap(Global.SysMemory) - 157286400
+      IF iAvailableSpace > Global.PkgTotalSize THEN 
+         RETURN TRUE
+      ELSE 
+         RETURN FALSE
+      ENDIF 
+'Do the same for other partition modes (nothing to be done for the other modes yet...)
 ELSE IF partmode = 1 THEN 
 ELSE IF partmode = 2 THEN 
 ELSE IF partmode = 3 THEN 
