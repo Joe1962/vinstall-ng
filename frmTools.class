@@ -24,8 +24,8 @@ TextLabel1.Adjust
 END
 
 PUBLIC SUB btnBMRepair_Click() ' Repair LILO:
-frmMain.btnMain_2_Click
-frmMain.btnMain_5_click ' Display the Boot Manager selection window
+frmMain.btnMain2_Click
+frmMain.btnMain5_click ' Display the Boot Manager selection window
 ' Save us some time and use the existing code via Xdialog ???
 ' Might need to just make it appear in the right place
 

@@ -5,7 +5,7 @@
 PUBLIC SUB Form_Show()
 
 ' set button focus:
-frmMain.btnMain_6.SetFocus
+frmMain.btnMain6.SetFocus
 
 ' set some background colours:
 TextLabel1.BackColor = Global.HTMLBG 
@@ -29,33 +29,30 @@ END
 PUBLIC SUB btnStartStop_Click()
 
 
-' SELECT btnStartStop.Text
-' 
-'    CASE "Begin installation"
-' 
-'    IF Global.enumINSTMODE = 0 THEN 'Do whatever is necessary for the automatic installation   
-' 
-'       SELECT CASE Message.Warning("All partitions on " & Global.installDrive & " will be destroyed!" & gb.NewLine & "Are you sure you want to continue?", "Yes", "No")
-'          CASE 1
-'             IF Functions.EnoughSpace = FALSE THEN 
-'                message.Error(Global.installDrive & " does not have enough space for a full installation of VectorLinux." & gb.NewLine & "Either chose a different device or select the \"Advanced\" installation" & gb.newline &
-'                   "and unselect any packages you don't need.")
-'             ELSE             
-'                btnStartStop.Text = "Cancel"
-'                Form_Resize()
-'                lblSubTitle.Text = "Installing"
-'                
-'             
-'       END SELECT 
-'    ENDIF 
-'    
-'    CASE "Cancel"
-'       SELECT CASE Message.Question("Are you sure you want to abort the installtion?", "Yes", "No")
-'          CASE 1
-'             QUIT 
-'       END SELECT 
-'       
-' END SELECT 
-'          
+SELECT btnStartStop.Text
+
+   CASE "Begin installation"
+
+   IF Global.enumINSTMODE = 0 THEN 'Do whatever is necessary for the automatic installation   
+
+      SELECT CASE Message.Warning("All partitions on " & Global.installDrive & " will be destroyed!" & gb.NewLine & "Are you sure you want to continue?", "Yes", "No")
+         CASE 1            
+            btnStartStop.Text = "Cancel"
+            Form_Resize()
+            lblSubTitle.Text = "Installing"
+         CASE 2
+            frmMain.btnMain1_Click()               
+            
+      END SELECT 
+   ENDIF 
+   
+   CASE "Cancel"
+      SELECT CASE Message.Question("Are you sure you want to abort the installtion?", "Yes", "No")
+         CASE 1
+            QUIT 
+      END SELECT 
+      
+END SELECT 
+         
 
 END

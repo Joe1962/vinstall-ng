@@ -48,7 +48,7 @@ ME.Close
 
 END
 
-PUBLIC SUB btnMain_1_Click()
+PUBLIC SUB btnMain1_Click()
 
 IF Global.prevForm <> 1 THEN
    CloseForm(Global.prevForm)
@@ -59,7 +59,7 @@ ENDIF
 
 END
 
-PUBLIC SUB btnMain_2_Click()
+PUBLIC SUB btnMain2_Click()
 
 IF Global.prevForm <> 2 THEN
    CloseForm(Global.prevForm)
@@ -70,7 +70,7 @@ ENDIF
 
 END
 
-PUBLIC SUB btnMain_3_Click()
+PUBLIC SUB btnMain3_Click()
 
 IF Global.prevForm <> 3 THEN
    CloseForm(Global.prevForm)
@@ -81,7 +81,7 @@ ENDIF
 
 END
 
-PUBLIC SUB btnMain_4_Click()
+PUBLIC SUB btnMain4_Click()
 
 IF Global.prevForm <> 4 THEN
    CloseForm(Global.prevForm)
@@ -92,7 +92,7 @@ ENDIF
 
 END
 
-PUBLIC SUB btnMain_5_Click()
+PUBLIC SUB btnMain5_Click()
 
 IF Global.prevForm <> 5 THEN
    CloseForm(Global.prevForm)
@@ -103,7 +103,7 @@ ENDIF
 
 END
 
-PUBLIC SUB btnMain_6_Click()
+PUBLIC SUB btnMain6_Click()
 
 IF Global.prevForm <> 6 THEN
    CloseForm(Global.prevForm)

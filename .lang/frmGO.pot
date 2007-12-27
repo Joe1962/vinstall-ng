@@ -14,11 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: frmGO.class:120
+#: frmGO.class:117
 msgid "Ready to install!"
 msgstr ""
 
-#: frmGO.class:135
+#: frmGO.class:132
 msgid "Begin installation"
 msgstr ""
 

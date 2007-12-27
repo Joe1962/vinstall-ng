@@ -5,4 +5,6 @@ PUBLIC PkgCategory AS String 'catagories can be required, optional, and extra
 PUBLIC PkgComment AS String 'A comment on the package
 PUBLIC PkgPath AS String ' the install path for the package
 PUBLIC PkgSize AS Long 'Individual package size
-PUBLIC TotalSize AS Long 'Total size of all the packages when uncompressed
+
+'This is in the wrong place?! moved to Global for now....
+'PUBLIC TotalSize AS Long 'Total size of all the packages when uncompressed

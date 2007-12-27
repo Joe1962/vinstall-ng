@@ -59,7 +59,9 @@ STATIC PUBLIC PARTboot AS String
 STATIC PUBLIC PARTusr AS String
 STATIC PUBLIC PARTshare AS String
 
+'Package related stuff
 STATIC PUBLIC PackageInfo AS NEW Object[]
+STATIC PUBLIC PkgTotalSize AS Long = 0 'The total amount of (uncompressed) disk space that will be used when installing ALL the packages
 
 ' Process declarations:
 STATIC PUBLIC tproc AS Process

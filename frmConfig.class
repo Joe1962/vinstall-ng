@@ -5,7 +5,7 @@
 PUBLIC SUB Form_Show()
 
 ' set button focus:
-frmMain.btnMain_5.SetFocus
+frmMain.btnMain5.SetFocus
 
 ' set some background colours:
 TextLabel1.BackColor = Global.HTMLBG 
@@ -52,9 +52,9 @@ Global.flagBUTTExec = TRUE
 
 Global.enumLILOMODE = 3
 
-frmMain.btnMain_5.Enabled = FALSE 'Disable "Configure".
-frmMain.btnMain_6.Enabled = TRUE 'Enable "Go for it!".
-frmMain.btnMain_6_Click 'Advance to "Go for it!".
+frmMain.btnMain5.Enabled = FALSE 'Disable "Configure".
+frmMain.btnMain6.Enabled = TRUE 'Enable "Go for it!".
+frmMain.btnMain6_Click 'Advance to "Go for it!".
 
 ' Unflag button execution:
 Global.flagBUTTExec = FALSE

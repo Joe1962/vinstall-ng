@@ -27,7 +27,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: frmChoice.class:96
+#: frmChoice.class:102
 msgid ""
 "<center><h3><b>You have 3 choices:</b></h3></center>\n"
 "\n"
@@ -48,23 +48,23 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmChoice.class:107
+#: frmChoice.class:113
 msgid "Choose install type"
 msgstr ""
 
-#: frmChoice.class:122
+#: frmChoice.class:128
 msgid "Install types"
 msgstr ""
 
-#: frmChoice.class:127
+#: frmChoice.class:133
 msgid "Full-automatic"
 msgstr ""
 
-#: frmChoice.class:133
+#: frmChoice.class:139
 msgid "Semi-automatic"
 msgstr ""
 
-#: frmChoice.class:139
+#: frmChoice.class:145
 msgid "Advanced"
 msgstr ""
 
@@ -214,11 +214,11 @@ msgstr ""
 msgid "Click on a row to select..."
 msgstr ""
 
-#: frmGO.class:120
+#: frmGO.class:117
 msgid "Ready to install!"
 msgstr ""
 
-#: frmGO.class:135
+#: frmGO.class:132
 msgid "Begin installation"
 msgstr ""
 
