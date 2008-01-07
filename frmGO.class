@@ -8,7 +8,7 @@ PUBLIC SUB Form_Show()
 frmMain.btnMain6.SetFocus
 
 ' set some background colours:
-TextLabel1.BackColor = Global.HTMLBG 
+goTxtLabel.BackColor = Global.HTMLBG 
 lblSubTitle.BackColor = Global.LogoBG
 Panel1.BackColor = Global.LogoBG
 
@@ -17,8 +17,8 @@ END
 PUBLIC SUB Form_Resize()
 
 ' Resize the html message:
-TextLabel1.Width = ScrollView1.ClientWidth
-TextLabel1.Adjust 
+goTxtLabel.Width = ScrollView1.ClientWidth
+goTxtLabel.Adjust 
 
 ' 4 debug:
 ProgressBar1.Value = 0.31
@@ -26,33 +26,32 @@ ProgressBar1.Value = 0.31
 END
 
 
-PUBLIC SUB btnStartStop_Click()
+PUBLIC SUB btnStart_Click()
 
+goTxtLabel.Text = "<center><h3><b>Starting phase one</b></h3></center>"
 
-SELECT btnStartStop.Text
+IF Global.enumINSTMODE = 0 THEN 'Do whatever is necessary for the automatic installation   
 
-   CASE "Begin installation"
+   SELECT CASE Message.Warning("All partitions on " & Global.installDrive & " will be destroyed!" & gb.NewLine & "Are you sure you want to continue?", "Yes", "No")
+      CASE 1            
+         btnStart.Hide
+         Form_Resize()
+         lblSubTitle.Text = "Installing"
+         Utils.DoAutoInstall(frmGO.goTxtLabel)           
+      CASE 2
+         frmMain.btnMain1_Click()                 
+   END SELECT 
+ENDIF 
 
-   IF Global.enumINSTMODE = 0 THEN 'Do whatever is necessary for the automatic installation   
-
-      SELECT CASE Message.Warning("All partitions on " & Global.installDrive & " will be destroyed!" & gb.NewLine & "Are you sure you want to continue?", "Yes", "No")
-         CASE 1            
-            btnStartStop.Text = "Cancel"
-            Form_Resize()
-            lblSubTitle.Text = "Installing"
-         CASE 2
-            frmMain.btnMain1_Click()               
-            
-      END SELECT 
-   ENDIF 
-   
-   CASE "Cancel"
-      SELECT CASE Message.Question("Are you sure you want to abort the installtion?", "Yes", "No")
-         CASE 1
-            QUIT 
-      END SELECT 
-      
-END SELECT 
+'    CASE "Cancel"
+'       SELECT CASE Message.Question("Are you sure you want to abort the installtion?", "Yes", "No")
+'          CASE 1
+'             QUIT 
+'       END SELECT 
+'       
+' END SELECT 
          
 
 END
+
+

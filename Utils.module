@@ -222,33 +222,39 @@ OPEN Global.SOURCE & "veclinux/SETUP.CONF" FOR READ AS #hConfFile
       ' CONF1='required/vlconfig2.tlz:17613:Base system (config Files)'
       
       IF InStr(sLine, "BULK") OR InStr(sLine, "CONF") THEN 
-         vPKG.PkgName = Mid(Left(sLine, InStr(sLine, ":") - 1), InStr(sLine, "/") + 1)
-         vPKG.PkgCategory = Mid(Left(sLine, InStr(sLine, "/") - 1), InStr(sLine, "'") + 1)
-         vPKG.PkgComment = Mid(Left(sLine, RInStr(sLine, "'") - 1), RInStr(sLine, ":") + 1)
-         vPKG.PkgPath = Global.SOURCE & "veclinux/" & vPKG.PkgCategory & "/" & vPKG.PkgName
-         vPKG.PkgSize = Val(Mid(Left(sLine, RInStr(sLine, ":") - 1), InStr(sLine, ":") + 1)) * 1024
-         Global.PkgTotalSize = Global.PkgTotalSize + vPKG.PkgSize
+         vPKG.Selected = TRUE
+         vPKG.Name = Mid(Left(sLine, InStr(sLine, ":") - 1), InStr(sLine, "/") + 1)
+         vPKG.Category = Mid(Left(sLine, InStr(sLine, "/") - 1), InStr(sLine, "'") + 1)
+         vPKG.Comment = Mid(Left(sLine, RInStr(sLine, "'") - 1), RInStr(sLine, ":") + 1)
+         vPKG.Path = Global.SOURCE & "veclinux/" & vPKG.Category & "/" & vPKG.Name
+         vPKG.UncompSize = Val(Mid(Left(sLine, RInStr(sLine, ":") - 1), InStr(sLine, ":") + 1)) * 1024
+         Global.PkgTotalSize = Global.PkgTotalSize + vPKG.UncompSize
          Global.PackageInfo.Push(vPKG) 
       ENDIF       
    WEND 
 CLOSE #hConfFile
 
 'Parse the "extra" packages
+'To see what the PACKAGES.TXT file looks like, visit one of the
+'VL repositories (eg: http://vectorlinux.osuosl.org/veclinux-5.8/packages)
+'or mount a VL installation CD and take a look inside.
+
 OPEN Global.SOURCE & "packages/PACKAGES.TXT" FOR READ AS #hConfFile
    vPKG = NEW cPackageInfo
    WHILE NOT Eof(hConfFile)
       LINE INPUT #hConfFile, sLine
       
-      vPKG.PkgCategory = "extra"
-      vPKG.PkgComment = ""
+      vPKG.Selected = TRUE
+      vPKG.Category = "extra"
+      vPKG.Comment = ""
             
       IF InStr(sLine, "PACKAGE NAME") THEN 
-         vPKG.PkgName = Trim(Mid(sLine, InStr(sLine, ":") + 1))
+         vPKG.Name = Trim(Mid(sLine, InStr(sLine, ":") + 1))
       ELSE IF InStr(sLine, "LOCATION") THEN 
-         vPKG.PkgPath = Global.SOURCE & "packages/" & Trim(Mid(sLine, InStr(sLine, "/") + 1)) & "/" & vPKG.PkgName
+         vPKG.Path = Global.SOURCE & "packages/" & Trim(Mid(sLine, InStr(sLine, "/") + 1)) & "/" & vPKG.Name
       ELSE IF InStr(sLine, "SIZE (uncompressed)") THEN 
-         vPKG.PkgSize = Val(Trim$(Mid(Left(sLine, RInStr(sLine, "K") - 1), InStr(sLine, ":") + 1))) * 1024
-         Global.PkgTotalSize = Global.PkgTotalSize + vPKG.PkgSize
+         vPKG.UncompSize = Val(Trim$(Mid(Left(sLine, RInStr(sLine, "K") - 1), InStr(sLine, ":") + 1))) * 1024
+         Global.PkgTotalSize = Global.PkgTotalSize + vPKG.UncompSize
       ELSE IF Trim(sLine) = "" THEN 'An empty line marks the end of the package info, so push the data before moving on
          Global.PackageInfo.Push(vPKG)
          vPKG = NEW cPackageInfo
@@ -259,28 +265,28 @@ CLOSE #hConfFile
 
 'For debugging
 ' FOR i = 0 TO Global.PackageInfo.Max
-' PRINT Global.PackageInfo[i].PkgName
-' PRINT Global.PackageInfo[i].PkgCategory
-' PRINT Global.PackageInfo[i].PkgComment
-' PRINT Global.PackageInfo[i].PkgPath
-' PRINT Global.PackageInfo[i].PkgSize
+' PRINT Global.PackageInfo[i].Name
+' PRINT Global.PackageInfo[i].Category
+' PRINT Global.PackageInfo[i].Comment
+' PRINT Global.PackageInfo[i].Path
+' PRINT Global.PackageInfo[i].Size
 ' PRINT "-----"
 ' NEXT
       
-         
-
-  
 END
 
+PUBLIC SUB DoAutoInstall(txtlabel AS TextLabel) 'the textlabel indicates where information needs to be written to
 
 
-PUBLIC SUB DestroyAllPartitions(dev AS String)
-'THIS WILL DELETE ALL THE PARTITIONS ON A SELECTED DRIVE!
-DIM iPart AS Integer
+txtlabel.Text &= "<br>Erasing partition table on " & global.installDrive & "..."
+IF Functions.ErasePartTable(global.installDrive) = TRUE THEN
+   txtlabel.Text &= "<b><font color=00CC00>OK</font></b>"
+ELSE 
+   txtlabel.Text &= "<b><font color=FF0000>FAILED</font></b>"
+   RETURN 
+ENDIF 
 
-FOR iPart = 1 TO Global.PartInfo.Length
-   SHELL "parted " & dev & " rm " & iPart
-NEXT 
+   
   
 END
 

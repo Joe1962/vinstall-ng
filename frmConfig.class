@@ -73,3 +73,9 @@ PUBLIC SUB Button6_Click() 'Config 2:
 
 END
 
+
+PUBLIC SUB TextLabel1_MouseDown()
+
+  
+
+END

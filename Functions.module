@@ -371,6 +371,61 @@ ENDIF
   
 END
 
+PUBLIC FUNCTION ErasePartTable(device AS String) AS Boolean
+'Dangerous stuff....this will erase the partition table on a given device, and create a new MSDOS table. Return true if all goes well
+DIM sBuffer AS String
+
+'And here goes one of the ugliest and dirtiest ways of process management:
+SHELL "parted -s " & device & " mklabel msdos" TO sBuffer
+
+IF Trim(sBuffer) = "" THEN 
+   RETURN TRUE
+ELSE IF InStr(sBuffer, "Err") THEN 
+   RETURN FALSE
+ENDIF 
+  
+END
+
+PUBLIC FUNCTION MkPart(device AS String, partnum AS Integer, size AS Long) AS Boolean
+'Create a partition using fdisk. use size=0 to use fdisk's defaults (fill unfartitioned space with new partition)
+
+DIM $fdisk_proc AS Process
+DIM partsize AS String
+
+  
+'Check is the partition already exists:
+IF Exist(global.installDrive & partnum) THEN 
+   RETURN FALSE
+ENDIF 
+
+IF size = 0 THEN 
+   partsize = ""
+ELSE 
+   partsize = "+" & (size * 1024) & "K"
+ENDIF 
+
+SHELL "fdisk " & device FOR WRITE AS "$fdisk_proc"
+
+PRINT #$fdisk_proc, "n";
+PRINT #$fdisk_proc, "p";
+PRINT #$fdisk_proc, partnum;
+PRINT #$fdisk_proc, "";
+PRINT #$fdisk_proc, partsize;
+WAIT 0.5
+PRINT #$fdisk_proc, "w";
+
+'Make sure it was created 
+IF Exist(global.installDrive & partnum) = FALSE THEN 
+   RETURN FALSE
+ELSE 
+   RETURN TRUE
+ENDIF 
+  
+  
+END
+
+
+
 
 ' PUBLIC SUB BootMngrSet()
 ' ' This must determine:

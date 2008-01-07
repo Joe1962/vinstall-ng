@@ -41,6 +41,9 @@ STATIC PUBLIC enumLILOMODE AS Long 'Boot manager installation.
 ' 1 = VL Boot Sector
 ' 2 = Floppy diskette
 ' 3 = Do not install
+STATIC PUBLIC enumSTAGE AS Integer 'Installation stage
+'0 = First stage (partitioning, package installation)
+'1 = Second stage (hardware config, user management)
 
 'System memory declarations:
 STATIC PUBLIC SysMemory AS Integer

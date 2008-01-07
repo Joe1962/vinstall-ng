@@ -214,11 +214,15 @@ msgstr ""
 msgid "Click on a row to select..."
 msgstr ""
 
-#: frmGO.class:117
+#: frmGO.class:116
 msgid "Ready to install!"
 msgstr ""
 
-#: frmGO.class:132
+#: frmGO.class:130
+msgid "TextLabel1"
+msgstr ""
+
+#: frmGO.class:136
 msgid "Begin installation"
 msgstr ""
 
