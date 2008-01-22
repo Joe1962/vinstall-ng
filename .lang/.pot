@@ -18,12 +18,12 @@ msgstr ""
 msgid "Enter a value:"
 msgstr ""
 
-#: InputBox.class:205 frmDriveSelect.class:134 frmPartSelect.class:378
+#: InputBox.class:205 frmDriveSelect.class:134 frmPartSelect.class:385
 msgid "OK"
 msgstr ""
 
 #: InputBox.class:212 frmChooseFB.class:91 frmDriveSelect.class:141
-#: frmPartSelect.class:385
+#: frmPartSelect.class:392
 msgid "Cancel"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgstr ""
 msgid "Please select the drive you want your boot manager installed to:"
 msgstr ""
 
-#: frmConfig.class:116
+#: frmConfig.class:122
 msgid ""
 "<center><h3><b>Configuration:</b></h3></center>\n"
 "\n"
@@ -170,43 +170,43 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: frmConfig.class:127
+#: frmConfig.class:133
 msgid "Additional configuration"
 msgstr ""
 
-#: frmConfig.class:142
+#: frmConfig.class:148
 msgid "Boot manager"
 msgstr ""
 
-#: frmConfig.class:149
+#: frmConfig.class:155
 msgid "Master Boot Record"
 msgstr ""
 
-#: frmConfig.class:157
+#: frmConfig.class:163
 msgid "VL Boot Sector"
 msgstr ""
 
-#: frmConfig.class:165
+#: frmConfig.class:171
 msgid "Floppy diskette"
 msgstr ""
 
-#: frmConfig.class:173
+#: frmConfig.class:179
 msgid "Do not install"
 msgstr ""
 
-#: frmConfig.class:180
+#: frmConfig.class:186
 msgid "Other configuration"
 msgstr ""
 
-#: frmConfig.class:187
+#: frmConfig.class:193
 msgid "Config 1"
 msgstr ""
 
-#: frmConfig.class:195
+#: frmConfig.class:201
 msgid "Config 2"
 msgstr ""
 
-#: frmDriveSelect.class:115 frmPartSelect.class:353
+#: frmDriveSelect.class:115 frmPartSelect.class:360
 msgid "Drives"
 msgstr ""
 
@@ -214,47 +214,43 @@ msgstr ""
 msgid "Click on a row to select..."
 msgstr ""
 
-#: frmGO.class:116
+#: frmGO.class:117
 msgid "Ready to install!"
 msgstr ""
 
-#: frmGO.class:130
-msgid "TextLabel1"
-msgstr ""
-
-#: frmGO.class:136
+#: frmGO.class:137
 msgid "Begin installation"
 msgstr ""
 
-#: frmMain.class:207
+#: frmMain.class:208
 msgid "Welcome!"
 msgstr ""
 
-#: frmMain.class:216
+#: frmMain.class:217
 msgid "The choice"
 msgstr ""
 
-#: frmMain.class:225 frmPartSelect.class:393
+#: frmMain.class:226 frmPartSelect.class:400
 msgid "Partitions"
 msgstr ""
 
-#: frmMain.class:234
+#: frmMain.class:235
 msgid "Packages"
 msgstr ""
 
-#: frmMain.class:243
+#: frmMain.class:244
 msgid "Configure"
 msgstr ""
 
-#: frmMain.class:252
+#: frmMain.class:253
 msgid "Go for it!"
 msgstr ""
 
-#: frmMain.class:264
+#: frmMain.class:265
 msgid "Tools"
 msgstr ""
 
-#: frmMain.class:275
+#: frmMain.class:276
 msgid "Exit"
 msgstr ""
 
@@ -308,71 +304,71 @@ msgstr ""
 msgid "No extras"
 msgstr ""
 
-#: frmPartSelect.class:267
+#: frmPartSelect.class:274
 msgid "Mountpoints"
 msgstr ""
 
-#: frmPartSelect.class:273
+#: frmPartSelect.class:280
 msgid "/"
 msgstr ""
 
-#: frmPartSelect.class:279
+#: frmPartSelect.class:286
 msgid "/home"
 msgstr ""
 
-#: frmPartSelect.class:285
+#: frmPartSelect.class:292
 msgid "/var"
 msgstr ""
 
-#: frmPartSelect.class:291
+#: frmPartSelect.class:298
 msgid "/opt"
 msgstr ""
 
-#: frmPartSelect.class:297
+#: frmPartSelect.class:304
 msgid "/tmp"
 msgstr ""
 
-#: frmPartSelect.class:303
+#: frmPartSelect.class:310
 msgid "/boot"
 msgstr ""
 
-#: frmPartSelect.class:309
+#: frmPartSelect.class:316
 msgid "/usr"
 msgstr ""
 
-#: frmPartSelect.class:315
+#: frmPartSelect.class:322
 msgid "/share"
 msgstr ""
 
-#: frmPartSelect.class:321
+#: frmPartSelect.class:328
 msgid "FileSystem"
 msgstr ""
 
-#: frmPartSelect.class:327
+#: frmPartSelect.class:334
 msgid "xfs"
 msgstr ""
 
-#: frmPartSelect.class:333
+#: frmPartSelect.class:340
 msgid "reiserfs"
 msgstr ""
 
-#: frmPartSelect.class:339
+#: frmPartSelect.class:346
 msgid "ext3"
 msgstr ""
 
-#: frmPartSelect.class:345
+#: frmPartSelect.class:352
 msgid "ext2"
 msgstr ""
 
-#: frmPartSelect.class:361
+#: frmPartSelect.class:368
 msgid "Click on select install drive"
 msgstr ""
 
-#: frmPartSelect.class:367
+#: frmPartSelect.class:374
 msgid "Right-click in Mount or FileSystem to set"
 msgstr ""
 
-#: frmPartSelect.class:401
+#: frmPartSelect.class:408
 msgid ""
 "<ul>\n"
 "<li>Left-click to (un)select drive(s) to install Vector Linux.</li>\n"

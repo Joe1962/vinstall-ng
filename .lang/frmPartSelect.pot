@@ -14,87 +14,87 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: frmPartSelect.class:267
+#: frmPartSelect.class:274
 msgid "Mountpoints"
 msgstr ""
 
-#: frmPartSelect.class:273
+#: frmPartSelect.class:280
 msgid "/"
 msgstr ""
 
-#: frmPartSelect.class:279
+#: frmPartSelect.class:286
 msgid "/home"
 msgstr ""
 
-#: frmPartSelect.class:285
+#: frmPartSelect.class:292
 msgid "/var"
 msgstr ""
 
-#: frmPartSelect.class:291
+#: frmPartSelect.class:298
 msgid "/opt"
 msgstr ""
 
-#: frmPartSelect.class:297
+#: frmPartSelect.class:304
 msgid "/tmp"
 msgstr ""
 
-#: frmPartSelect.class:303
+#: frmPartSelect.class:310
 msgid "/boot"
 msgstr ""
 
-#: frmPartSelect.class:309
+#: frmPartSelect.class:316
 msgid "/usr"
 msgstr ""
 
-#: frmPartSelect.class:315
+#: frmPartSelect.class:322
 msgid "/share"
 msgstr ""
 
-#: frmPartSelect.class:321
+#: frmPartSelect.class:328
 msgid "FileSystem"
 msgstr ""
 
-#: frmPartSelect.class:327
+#: frmPartSelect.class:334
 msgid "xfs"
 msgstr ""
 
-#: frmPartSelect.class:333
+#: frmPartSelect.class:340
 msgid "reiserfs"
 msgstr ""
 
-#: frmPartSelect.class:339
+#: frmPartSelect.class:346
 msgid "ext3"
 msgstr ""
 
-#: frmPartSelect.class:345
+#: frmPartSelect.class:352
 msgid "ext2"
 msgstr ""
 
-#: frmPartSelect.class:353
+#: frmPartSelect.class:360
 msgid "Drives"
 msgstr ""
 
-#: frmPartSelect.class:361
+#: frmPartSelect.class:368
 msgid "Click on select install drive"
 msgstr ""
 
-#: frmPartSelect.class:367
+#: frmPartSelect.class:374
 msgid "Right-click in Mount or FileSystem to set"
 msgstr ""
 
-#: frmPartSelect.class:378
+#: frmPartSelect.class:385
 msgid "OK"
 msgstr ""
 
-#: frmPartSelect.class:385
+#: frmPartSelect.class:392
 msgid "Cancel"
 msgstr ""
 
-#: frmPartSelect.class:393
+#: frmPartSelect.class:400
 msgid "Partitions"
 msgstr ""
 
-#: frmPartSelect.class:401
+#: frmPartSelect.class:408
 msgid "<ul>\n<li>Left-click to (un)select drive(s) to install Vector Linux.</li>\n<li>Right-click on Linux partitions to pick mountpoint</li>\n<li>Left-click on other partitions to edit mountpoint</li>\n</ul>\n"
 msgstr ""
 
