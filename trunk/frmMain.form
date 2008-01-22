@@ -1,11 +1,12 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,37,91.1667,68.1667)
+  MoveScaled(0,37,91.1111,68.1111)
   Font = Font["Luxi Sans"]
+  Expand = True
   Text = ("")
   Icon = Picture["installer3.png"]
-  Border = Window.Fixed
+  Border = Window.None
   FullScreen = True
   Arrangement = Arrange.Vertical
   { picTitle PictureBox
@@ -16,7 +17,7 @@
     Border = Border.Etched
   }
   { pnlSteps Panel
-    MoveScaled(1,9,85,4.1667)
+    MoveScaled(1,9,85,4.1111)
     Arrangement = Arrange.Horizontal
     Border = Border.Etched
     { btnMain1 Button
@@ -80,7 +81,7 @@
       MoveScaled(64,0,1,4)
     }
     { btnExit Button
-      MoveScaled(65,0,8.1667,4)
+      MoveScaled(65,0,8.1111,4)
       Font = Font["Luxi Sans,12"]
       Expand = True
       Text = ("Exit")

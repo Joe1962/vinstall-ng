@@ -14,35 +14,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: frmMain.class:207
+#: frmMain.class:208
 msgid "Welcome!"
 msgstr ""
 
-#: frmMain.class:216
+#: frmMain.class:217
 msgid "The choice"
 msgstr ""
 
-#: frmMain.class:225
+#: frmMain.class:226
 msgid "Partitions"
 msgstr ""
 
-#: frmMain.class:234
+#: frmMain.class:235
 msgid "Packages"
 msgstr ""
 
-#: frmMain.class:243
+#: frmMain.class:244
 msgid "Configure"
 msgstr ""
 
-#: frmMain.class:252
+#: frmMain.class:253
 msgid "Go for it!"
 msgstr ""
 
-#: frmMain.class:264
+#: frmMain.class:265
 msgid "Tools"
 msgstr ""
 
-#: frmMain.class:275
+#: frmMain.class:276
 msgid "Exit"
 msgstr ""
 

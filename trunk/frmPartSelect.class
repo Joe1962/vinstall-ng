@@ -137,7 +137,7 @@ ELSE
                   gridPart[m, 6].Text = "reiserfs"
                   Global.PartInfo[n - 1].FormatWithFS = "reiserfs"
                ELSE
-                  gridPart[m, 5].Text = Mid$(gridPart[m, 0].Text, 6)
+                  'gridPart[m, 5].Text = Mid$(gridPart[m, 0].Text, 6)
                   gridPart[m, 6].Text = "--------------------"
                ENDIF
             ENDIF
@@ -158,9 +158,16 @@ FOR n = 1 TO gridPart.Rows.Count - 1
       vPI = NEW cPartInstall
       vPI.Device = gridPart[n, 0].Text
       vPI.Mountpoint = gridPart[n, 5].Text
-      vPI. = gridPart[n, 6].Text
+      vPI.FormatWithFS = gridPart[n, 6].Text
       Global.PARTinst.Push(vPI)
    ENDIF
+NEXT
+
+FOR n = 1 TO global.PARTinst.Count - 1
+PRINT global.PARTinst[n].Device
+PRINT global.PARTinst[n].Mountpoint
+PRINT global.PARTinst[n].FormatWithFS
+
 NEXT
 
 ME.Close(TRUE)
