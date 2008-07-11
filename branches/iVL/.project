@@ -1,0 +1,20 @@
+# Gambas Project File 2.0
+Title=VectorLinux Installer
+Startup=FrmPartSel
+Version=0.0.1
+Library=gb.gtk
+Library=gb.form
+Library=gb.desktop
+Library=gb.form.dialog
+Library=gb.gtk.ext
+Description=GUI installer for Vector linux
+Authors=M0E-lnx
+TabSize=2
+Translate=1
+Language=en_US
+ControlPublic=1
+ModulePublic=1
+Maintainer=benoit
+Vendor=Princeton
+Address=benoit@localhost
+License=General Public Licence

@@ -1,0 +1,27 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,81,50)
+  Text = ("")
+  { tlBanner TextLabel
+    MoveScaled(1,2,51,4)
+    Text = ("Select your disk partition option")
+  }
+  { rbUseExisting RadioButton
+    MoveScaled(2,8,32,3)
+    Text = ("Use existing disk partitions")
+  }
+  { rbEditPartitions RadioButton
+    MoveScaled(2,12,62,3)
+    Text = ("Modify my disk partitions to make room for new installation")
+  }
+  { tlChoiceExp TextLabel
+    MoveScaled(1,17,76,23)
+    Text = ("TextLabel1")
+  }
+  { btNext Button
+    MoveScaled(70,44,9,3)
+    Text = ("Next")
+    Picture = Picture["icon:/16/right"]
+  }
+}

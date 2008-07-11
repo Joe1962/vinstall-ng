@@ -1,0 +1,79 @@
+' Gambas class file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+
+
+PUBLIC SUB Form_Open()
+  MdlDiskPart.EMBED_GPARTED()
+
+  WITH ME
+    .tlBanner.Text = "<b>Disk Partitioning:</b><br>" &
+    "This portion of the setup process allows you to define an installation target for your new operating system." &
+    "Please use the partition program below to create, resize, or delete partitions, and make room for Vectorlinux."
+    .tlBanner.Adjust
+  END WITH 
+  
+    
+    
+
+END
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .tlBanner.Width = .Width
+    .EmbGPARTED.Move(.tlBanner.Left, .tlBanner.Top + .tlBanner.Height + 4, .ClientWidth - 16, .ClientHeight)
+  END WITH 
+END
+
+PUBLIC SUB EmbGPARTED_Embed()
+
+  FMain.btnext.Enabled = FALSE
+  FMain.btnext.ForeColor = Color.Gray
+  FMain.btback.Enabled = FALSE
+  FMain.btback.ForeColor = Color.Gray
+  FMain.btQuit.Enabled = FALSE
+  FMain.btQuit.ForeColor = Color.Gray
+  
+
+END
+
+PUBLIC SUB EmbGPARTED_Close()
+
+  DIM bReboot AS Boolean
+  bReboot = MdlSetup.CHECK_IF_REBOOT_NEEDED()
+  
+    IF bReboot = TRUE THEN ' need to reboot
+      Message.Info("Your partition setup requires a system reboot. Your computer will now reboot")
+        'SHELL "sudo shutdown -r now"
+    ELSE ' move to the next stage (select which partitions to use as what
+       FrmPartSel.Reparent(ME.Parent)
+       ME.Hide
+        FrmPartSel.Show
+        
+  
+  
+  FMain.btnext.Enabled = TRUE
+  FMain.btnext.ForeColor = Color.Black
+  FMain.btback.Enabled = TRUE
+  FMain.btback.ForeColor = Color.Black
+  FMain.btQuit.Enabled = TRUE
+  FMain.btQuit.ForeColor = Color.Black
+  END IF
+END

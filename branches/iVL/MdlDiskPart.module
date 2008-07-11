@@ -1,0 +1,77 @@
+' Gambas module file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+PUBLIC SUB EMBED_GPARTED()
+  
+  
+  DIM sTitle AS String
+  DIM aHandle AS NEW Pointer[]
+  DIM iHandle AS Integer
+  DIM i AS Integer = 0
+
+  'Desktop.Find("", "GParted")
+  FrmDiskPart.tlBanner.Text = "<h3>Loading gparted .... Please wait</h3>"
+  SHELL "sudo /usr/sbin/gparted"
+  WAIT 3
+      
+  sTitle = "GParted"
+  IF Left(sTitle, 2) = "0x" THEN 
+    iHandle = Val("&" & Mid$(sTitle, 3))
+  ELSE IF Left(sTitle) = "&" THEN 
+    iHandle = Val(sTitle)
+  ELSE
+    'aHandle = Desktop.Find(sTitle)
+    aHandle = Desktop.Find(sTitle)
+    'Message.Info(aHandle[0])
+    IF aHandle.Count = 0 THEN 
+      REPEAT 
+        WAIT 2
+        aHandle = Desktop.Find(sTitle)
+        INC i
+      UNTIL 
+      i = 10 OR aHandle.Count > 0
+        IF aHandle.Count = 0 THEN 
+          Message("Setup is unable to successfully run gslapt on this system. This may be a sign of \n" &
+          "a bad install media. Setup cannot continue.")
+        RETURN 
+        END IF
+      
+    ELSE IF aHandle.Count >= 2 THEN 
+      Message("Several windows found. I take the first one!")
+    ENDIF
+    iHandle = aHandle[0]
+    
+  ENDIF
+  
+  'TRY embEmbedder.Embed(iHandle)
+  TRY FrmDiskPart.EmbGPARTED.Embed(iHandle)
+  
+  IF ERROR THEN Message.Warning(Error.Text)
+  
+END
+
+PUBLIC FUNCTION FIND_DOS_PARTITIONS(sDev AS String) AS Boolean
+  
+  ' this function will find any DOS partitions on the system
+  ' IF THERE ARE ANY DOS PARTITIONS AFTER THE DISK HAS BEEN MODIFIED, WE'LL NEED TO REBOOT
+  ' ELSE, THE INSTALLER CAN SAFELY CONTINUE
+  
+  
+END
+
+

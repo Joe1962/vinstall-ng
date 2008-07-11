@@ -1,0 +1,168 @@
+' Gambas class file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+
+PUBLIC SUB lstInstallableImg_Click()
+
+  DIM sLocation AS String
+  DIM ipos1 AS Integer
+  
+  
+  IF lstInstallableImg.Count > 0 THEN 
+  IF lstInstallableImg.Text <> "No Installable Media Found" THEN   
+  
+  IF InStr(lstInstallableImg.Text, ".iso") OR InStr(lstInstallableImg.Text, ".ISO") = TRUE THEN 
+    sLocation = Left(lstInstallableImg.Text, InStr(lstInstallableImg.Text, " ") - 1)
+  ELSE 
+    ipos1 = RInStr(ME.lstInstallableImg.Text, "/")
+    sLocation = Right(ME.lstInstallableImg.Text, Len(ME.lstInstallableImg.Text) - ipos1)
+  END IF
+  'function to read the file
+  ME.DESCRIBE_DISTRO(sLocation)
+  END IF
+  END IF
+  'Message.Info(File.Load(Temp$(sLocation)))
+  
+  
+  
+  
+
+END
+
+PUBLIC SUB Form_Open()
+
+  
+  ME.Width = ME.Parent.Width
+  ME.Height = ME.Parent.Height
+  FMain.sNextKey = "Prep0"
+  FMain.FrmCurr = ME
+  
+
+
+
+END
+
+PUBLIC SUB DESCRIBE_DISTRO(sLoc AS String)
+  
+  DIM sFile AS String[] = Split(File.Load(Temp$(sLoc)), gb.NewLine)
+  DIM sLine AS String
+  DIM i AS Integer
+  DIM iSep AS String
+  DIM ipos1 AS Integer
+  
+  DIM sDist, sVer, iMinRoot, iMinHome, iMinSwap AS String
+    
+  IF sFile THEN 
+    FOR i = 0 TO sFile.count - 1
+      sLine = Trim(sFile[i])
+        
+          IF InStr(sLine, "\'") = TRUE THEN 
+            iSep = "\'"
+          ELSE IF InStr(sline, "\"") = TRUE THEN 
+            iSep = "\""
+          END IF
+      ipos1 = InStr(sLine, iSep)
+        IF Left(sLine, Len("DISTRO=")) = "DISTRO=" THEN 
+          sDist = Right(sLine, Len(sLine) - InStr(sLine, "=") - 1)
+        ELSE IF Left(sLine, Len("VERSION=")) = "VERSION=" THEN 
+          sVer = Right(sLine, Len(sLine) - InStr(sLine, "=") - 1)  
+        ELSE IF Left(sLine, Len("HD_ROOT_MIN=")) = "HD_ROOT_MIN=" THEN 
+          iMinRoot = Right(sLine, Len(sLine) - InStr(sLine, "=") - 1)
+        ELSE IF Left(sLine, Len("HD_SWAP=")) = "HD_SWAP=" THEN 
+          iMinSwap = Right(sLine, Len(sLine) - InStr(sLine, "=") - 1)
+        ELSE IF Left(sLine, Len("HD_HOME")) = "HD_HOME" THEN 
+          iMinHome = Right(sLine, Len(sLine) - InStr(sLine, "=") - 1)
+          
+        END IF
+    NEXT 
+     IF Right(sDist) LIKE "\'" OR "\"" THEN 
+        sDist = Left(sDist, Len(sDist) - 1)
+      END IF
+      IF Right(sVer) LIKE "\'" OR "\"" THEN 
+        sVer = Left(sVer, Len(sver) - 1)
+      END IF
+    
+    FrmSelISO.tlDistroDesc.Text = "<h3>" & sDist & Space(1) & sVer & "</h3><br>" &
+    "<b>Minimum Disk Space Requirements</b><br>"
+           
+     
+      IF Right(iMinRoot) LIKE "\'" OR "\"" THEN 
+        iMinRoot = Left(iMinRoot, Len(iMinRoot) - 1)
+        FrmSelISO.tlDistroDesc.Text = FrmSelISO.tlDistroDesc.Text & "<br>" & "<b>ROOT: </b>" & iMinRoot & " MB"
+      END IF
+      IF Right(iMinHome) LIKE "\'" OR "\"" THEN 
+        iMinHome = Left(iMinHome, Len(iMinHome) - 1)
+        FrmSelISO.tlDistroDesc.Text = FrmSelISO.tlDistroDesc.Text & "<br><b>HOME: </b>" & iMinHome & " MB"
+      END IF
+      IF Right(iMinSwap) LIKE "\'" OR "\"" THEN 
+        iMinSwap = Left(iMinSwap, Len(iMinSwap) - 1)
+        FrmSelISO.tlDistroDesc.Text = FrmSelISO.tlDistroDesc.Text & "<br><b>SWAP: </b>" & iMinSwap & " MB"
+        
+      END IF
+      
+        
+        
+  ELSE 
+    ' can't read file
+    'Message.Error("Setup is unable to locate the ")
+  END IF
+    
+      
+END
+
+
+PUBLIC SUB btNext_Click()
+  DIM sSel AS String
+  sSel = Right(lstInstallableImg.Text, Len(lstInstallableImg.Text) - RInStr(lstInstallableImg.Text, "/"))
+  PRINT "User selected to install from /dev/" & sSel
+  'RETURN 
+  MdlCore.SET_DECISSION(sSel)
+  WAIT 
+  'read the SETUP.CONF now to set the variables for the real install process to begin
+    
+  
+END
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .Reparent(.Parent)
+    .Resize(.Parent.Width, .Parent.Height)
+'    .btNext.Move(.Left + .Width - .btNext.Width - 8, .top + ME.Height - .btNext.Height - 8)
+    .btResCan.Move(.Left + .Width - .btResCan.Width - 8, .top + .tlBanner.Height + 12, MdlObjSizer.get_object_width(.btResCan.text) + 36)
+    .lstInstallableImg.Move(.left + 4, .btResCan.Top, .Width - (.btResCan.Width + 24))
+    .FullScreen = TRUE
+  END WITH 
+
+END
+
+PUBLIC SUB btResCan_Click()
+
+lstInstallableImg.Clear()
+MdlCore.MEDIA_SCAN
+  
+
+END
+
+PUBLIC SUB Form_Hide()
+
+  FMain.frmLast = ME
+  
+
+END

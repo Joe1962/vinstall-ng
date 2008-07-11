@@ -1,0 +1,503 @@
+' Gambas module file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+
+
+PUBLIC sCatPic AS picture = Picture["icon:/16/linux"]
+PUBLIC sToDopic AS Picture = Picture["images/circle.png"]
+PUBLIC sNowPic AS picture = Picture["images/arrow.png"]
+PUBLIC sDonePic AS Picture = Picture["images/check.png"]
+
+
+PUBLIC SUB SEARCH_LINUX_DRIVES_FOR_MEDIA(sDev AS String)
+  DIM sIsoList AS String[]
+  DIM sResults AS String
+  DIM sISO AS String
+  DIM i AS Integer
+  
+  SHELL "sudo mount " & sDev & Space(1) & ClsGlobal.sSourceMnt WAIT 
+   SHELL "ls " & ClsGlobal.sSourceMnt & "| grep -i vl* | grep -i iso" TO sResults
+  'SHELL "ls / | grep -i VL* | grep -i iso" TO sResults
+    sResults = Trim(sResults)
+      IF InStr(sResults, gb.NewLine) THEN 
+        sIsoList = Split(sResults, gb.NewLine)
+          FOR i = 0 TO sIsoList.Count - 1
+            sISO = Trim(sIsoList[i])
+              IF FrmSelISO.lstInstallableImg.Find(sISO & " on " & sDev) = -1 THEN 
+                FrmSelISO.lstInstallableImg.Add(sISO & " on " & sDev)
+                  ' save the temp file for distro description
+                    SHELL "sudo mount -o loop " & ClsGlobal.sSourceMnt &/ sISO & " /mnt/loop" WAIT 
+                      File.Save(Temp(sISO), SConv(File.Load("/mnt/loop/veclinux/SETUP.CONF")))
+                    SHELL "sudo umount /mnt/loop" WAIT 
+                                
+              END IF
+          NEXT 
+      ELSE ' only one ISO on this drive
+        IF sResults THEN 
+        sISO = Trim(sResults)
+          IF FrmSelISO.lstInstallableImg.Find(sISO & " on " & sDev) = -1 THEN 
+            FrmSelISO.lstInstallableImg.Add(sISO & " on " & sDev)
+             SHELL "sudo mount -o loop " & ClsGlobal.sSourceMnt &/ sISO & " /mnt/loop" WAIT 
+                      File.Save(Temp(sISO), SConv(File.Load("/mnt/loop/veclinux/SETUP.CONF")))
+             SHELL "sudo umount /mnt/loop" WAIT 
+             
+              END IF
+        END IF
+      END IF
+    
+  SHELL "sudo umount " & ClsGlobal.sSourceMnt WAIT 
+    
+END
+
+
+PUBLIC SUB SCAN_LINUX_PARTITIONS()
+  
+DIM sResults AS String
+DIM sPartList AS String[]
+DIM i AS Integer
+DIM sPartition AS String
+
+'SHELL "sudo /sbin/probepart | grep -e \"*Linux$\" | cut -f 1 -d \' \'" TO sResults
+  SHELL "export PATH=$PATH:/sbin && sudo /sbin/probepart | grep -e \" *Linux$\" | cut -f 1 -d \' \'" TO sResults 
+  sResults = Trim(sResults)
+    
+  IF InStr(sResults, gb.NewLine) THEN 
+    sPartList = Split(sResults, gb.NewLine)
+      FOR i = 0 TO sPartList.count - 1
+        sPartition = Trim(sPartList[i])
+          'now scan this partition
+            ME.SEARCH_LINUX_DRIVES_FOR_MEDIA(sPartition)
+      NEXT 
+  ELSE ' only one linux partition found
+    sPartition = Trim(sResults)
+      ME.SEARCH_LINUX_DRIVES_FOR_MEDIA(sPartition)
+  END IF
+      
+
+
+  
+END
+
+
+
+PUBLIC SUB MEDIA_SCAN()
+  
+  DIM sCmd AS String
+  DIM sList AS String
+  DIM sDrives AS String[]
+  DIM sDrive AS String
+  DIM sMountPoint AS String 
+  DIM sDump AS String
+  DIM i AS Integer
+  
+  
+    
+  ClsGlobal.sSourceMnt = User.home &/ "mnt" &/ "cdrom"
+  sMountPoint = ClsGlobal.sSourceMnt
+  
+  sCmd = "cat /proc/sys/dev/cdrom/info | grep \"drive name\" |cut -f2 -d\':\'|xargs -n 2" 
+  SHELL sCmd TO sList
+  sList = Trim(sList)
+  'PRINT sList
+    IF InStr(sList, Space(1)) > 0 THEN 'there is more than one drive
+    sDrives = Split(sList, Space(1))
+            
+      FOR i = 0 TO sDrives.count - 1
+        ' this is where we loop to find SETUP.CONF in the cd
+          'first, clear the mount point (using $HOME/mnt/cdrom for now)
+          sDrive = Trim(sDrives[i])
+        
+          SHELL "sudo mount /dev/" & sDrive & Space(1) & sMountPoint WAIT 
+            IF Exist(sMountPoint &/ "veclinux" &/ "SETUP.CONF") = TRUE THEN 
+               sDump = ME.ID_DISTRO(sMountPoint &/ "veclinux" &/ "SETUP.CONF")
+                'save a copy of SETUP.CONF in a temp disposable file
+                  ' this temp file will be named as the last characters of the drive that contains the distro (ie, hda, sg0, sda)
+                   ' this information will be used FOR reading the file later
+                    
+               File.Save(Temp$(sDrive), DConv(File.Load(sMountPoint &/ "veclinux" &/ "SETUP.CONF")))
+               'Message.Info(File.Load(Temp$(sDrive)))
+               
+               IF FrmSelISO.lstInstallableImg.Find(sDump & " on " & "/dev/" & sDrive) = -1 THEN  'only add the entry if not found
+                FrmSelISO.lstInstallableImg.Add(sDump & " on " & "/dev/" & sDrive)
+              END IF
+              
+              
+            END IF
+          SHELL "sudo umount /dev/" & sDrive WAIT 
+        NEXT 
+      
+    ELSE ' only one drive found
+    END IF
+    
+    
+          'NOW SEARCH FOR ISOS ON THE DRIVES
+    ME.SCAN_LINUX_PARTITIONS()
+ ' shape the main form according to the findings
+ 'warn the user if no installable media was found
+ 
+ IF FrmSelISO.lstInstallableImg.Count = 0 THEN 
+  FrmSelISO.lstInstallableImg.Add("No Installable Media Found")
+  FrmSelISO.tlDistroDesc.Text = "Setup was unable to find any installable media on your system. Please insert your VectorLinux " &
+    "installation CD and click \'" & FrmSelISO.btResCan.Text & "\' to try again"
+  FMain.btnext.Enabled = FALSE
+  FMain.btnext.ForeColor = Color.Gray
+ ELSE 
+  FMain.btnext.Enabled = TRUE
+  FMain.btnext.ForeColor = Color.Black
+ END IF
+
+ 
+  
+END
+
+
+
+PUBLIC SUB main()
+
+ ME.MEDIA_SCAN 
+  FMain.Show
+  'FMain.tvPlan.MoveTo("Prep0")
+FMain.tvPlan["Prep0"].Selected = TRUE
+ 
+ 
+'  FMain.tvPlan["Prep0"].Selected
+END
+
+PUBLIC FUNCTION ID_DISTRO(sPathToSetupConf AS String) AS String
+  
+  DIM sRet AS String
+  DIM sFile AS String[]
+  DIM i AS Integer
+  DIM sLine AS String
+  DIM sName AS String
+  DIM sver AS String
+  DIM isep AS String
+  
+  sFile = Split(DConv(File.Load(sPathToSetupConf)), gb.NewLine)
+  
+  'PRINT "Analyzing contents"
+    FOR i = 0 TO sFile.Count - 1
+      sLine = Trim(sFile[i])
+      
+          IF InStr(sLine, "\'") THEN 
+            isep = "\'"
+          ELSE IF InStr(sLine, "\"") THEN 
+            isep = "\""
+          END IF
+        IF Left(sLine, Len("DISTRO=")) = "DISTRO=" THEN 
+           sName = Right(sLine, Len(sLine) - InStr(sLine, isep))
+           
+        ELSE IF Left(sLine, Len("VERSION=")) = "VERSION=" THEN 
+          sver = Right(sLine, Len(sLine) - InStr(sLine, isep))
+        END IF
+        
+    NEXT 
+       
+          IF Right(sName) = isep THEN 
+          sName = Left(sName, Len(sName) - 1)
+         END IF
+         IF Right(sver) = isep THEN 
+          sver = Left(sver, Len(sver) - 1)
+         END IF
+        
+         
+RETURN sName & Space(1) & sver
+        
+  
+    
+  
+END
+
+
+PUBLIC SUB READ_SETUP_FILE()
+  
+  'This module will read SETUP.CONF and set the necessary variables for the installer to work
+  DIM sFile AS String[]
+  DIM sLine AS String
+  DIM i AS Integer
+  DIM sDistro AS String
+  DIM sVer AS String
+  DIM sBuildDate AS String
+  DIM iMinRoot AS Integer 'may need to be variant-to-integer
+  DIM iMaxRoot AS Integer
+  DIM iMinSwap AS Integer
+  DIM iMinHome AS Integer
+  DIM sVal AS String
+  DIM iPost1 AS Integer
+  DIM sDelm AS String
+  
+  
+  WITH ClsGlobal
+.sBulkDir = .sSourceMnt &/ "veclinux"
+.sDocDir = .sSourceMnt &/ "doc"
+.sPackDir = .sSourceMnt &/ "packages"
+.sReadMePath = .sSourceMnt &/ "README"
+.sSetupConfPath = .sBulkDir &/ "SETUP.CONF"
+END WITH 
+
+  
+  
+  
+ 
+IF Exist(ClsGlobal.sSetupConfPath) THEN 
+  sFile = Split(File.Load(DConv(ClsGlobal.sSetupConfPath)), gb.NewLine)
+    FOR i = 0 TO sFile.Count - 1
+      sLine = Trim(sFile[i])
+                
+          IF InStr(sLine, "\"") THEN 
+            sDelm = "\""
+          ELSE IF InStr(sLine, "\'") THEN 
+            sDelm = "\'"
+          END IF
+        IF Left(sLine) <> "#" THEN 'if line is not commented
+          IF InStr(sLine, "=") THEN 'if there is a "=" in the line
+             sVal = Right(sLine, Len(sLine) - InStr(sLine, sDelm))
+             sVal = Left(sVal, Len(sVal) - 1)
+             'PRINT sVal
+             
+          END IF
+          
+          
+        END IF
+
+          
+          'PRINT sVal
+          
+        
+        IF Left(sLine, Len("DISTRO=")) = "DISTRO=" THEN 
+          sDistro = sVal 
+        ELSE IF Left(sLine, Len("VERSION=")) = "VERSION=" THEN 
+          sVer = sVal 
+        ELSE IF Left(sLine, Len("builddate")) = "builddate" THEN 
+          sBuildDate = sVal 
+        ELSE IF Left(sLine, Len("HD_ROOT_MIN=")) = "HD_ROOT_MIN=" THEN 
+          iMinRoot = sVal
+        ELSE IF Left(sLine, Len("HD_ROOT_MAX")) = "HD_ROOT_MAX" THEN 
+          iMaxRoot = sval 
+        ELSE IF Left(sLine, Len("HD_SWAP")) = "HD_SWAP" THEN 
+          iMinSwap = sval
+        ELSE IF Left(sLine, Len("HD_HOME")) = "HD_HOME" THEN 
+          iMinHome = sval
+          '      BEGIN BULKS HERE ***************
+        ELSE IF Left(sLine, Len("BULK")) = "BULK" THEN 
+        'PRINT "bulk"
+          ClsGlobal.sBulkList = ClsGlobal.sBulkList & "," & sval
+        ELSE IF Left(sLine, Len("CONF")) = "CONF" THEN 
+          ClsGlobal.sConfPkg = ClsGlobal.sConfPkg & "," & sval
+          
+        END IF
+      NEXT 
+      
+        'trim out the list of bulks
+          IF Left(ClsGlobal.sBulkList) = "," THEN 
+            ClsGlobal.sBulkList = Right(ClsGlobal.sBulkList, Len(ClsGlobal.sBulkList) - 1)
+          END IF
+          IF Right(ClsGlobal.sBulkList) = "," THEN 
+            ClsGlobal.sBulkList = Left(ClsGlobal.sBulkList, Len(ClsGlobal.sBulkList) - 1)
+          END IF
+          
+          IF Left(ClsGlobal.sConfPkg) = "," THEN 
+            ClsGlobal.sConfPkg = Right(ClsGlobal.sConfPkg, Len(ClsGlobal.sConfPkg) - 1)
+          END IF
+          IF Right(ClsGlobal.sConfPkg) = "," THEN 
+            ClsGlobal.sConfPkg = Left(ClsGlobal.sConfPkg, Len(ClsGlobal.sConfPkg) - 1)
+          END IF
+    'Do something with all of these variables
+    ' we will need to assign them to the global class
+'    FMain.lstInstallableImg.Add(sDistro & Space(1) & sVer)
+    WITH FrmSelISO.tlDistroDesc
+      .Text = sDistro & Space(1) & sver & "<br>" &
+      "Build Date: " & sBuildDate & "<br>" &
+      "<b>MINIMUM REQUIREMENTS<br>" &
+      "/ " & iMinRoot & "<br>" &
+      "/home " & iMinHome & "<br>" &
+      "swap " & iMinSwap
+    END WITH 
+      ' PRINT sDistro
+      ' PRINT sVer
+      ' PRINT sBuildDate
+      ' PRINT iMinHome
+      ' PRINT iMinRoot
+      ' PRINT iMinSwap
+      ' PRINT ClsGlobal.sBulkList
+      ' PRINT ClsGlobal.sConfPkg
+  ELSE 
+    'File not found
+    Message.Error("Setup is unable to find SETUP.CONF in your install media. This could be symptoms of a bad burn or a bad ISO")
+    RETURN  ' exit
+    
+  END IF
+
+
+END
+
+PUBLIC SUB SET_DECISSION(sSrcLocation AS String)
+  
+  ' This sub will receive a string like "hda") and will read the file in it to 
+  ' set the variables in clsglobal for the one distro that will be installed
+  DIM sFile AS String[]
+  DIM sLine AS String
+  DIM i AS Integer
+  DIM sFilePath AS String = ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF"
+  DIM squotetype AS String
+  DIM sLineVal AS String
+  DIM iRoot AS Variant
+  DIM iswap AS Variant
+  DIM ihome AS Variant
+  
+  ClsGlobal.sBulkList = ""
+  ClsGlobal.sConfPkg = ""
+  'drive should already be mounted
+  'SHELL "sudo mount /dev/" & sDrive & Space(1) & ClsGlobal.sSourceMnt WAIT 
+    IF Exist(sFilePath) THEN 
+      sFile = Split(DConv(File.Load(sFilePath)), gb.NewLine)
+        FOR i = 0 TO sFile.Count - 1
+          sLine = Trim(sFile[i])
+          
+             IF InStr(sLine, "\"") THEN 
+              squotetype = "\""
+             ELSE IF InStr(sLine, "\'") THEN 
+              squotetype = "\'"
+             END IF
+              IF Left(sLine) <> "#" THEN 'if line is not commented
+              IF InStr(sLine, "=") THEN 'if there is a "=" in the line
+                sLineVal = Right(sLine, Len(sLine) - InStr(sLine, squotetype))
+                sLineVal = Left(sLineVal, Len(sLineVal) - 1)
+              END IF
+  
+                  IF Left(sLine, Len("HD_ROOT_MIN=")) = "HD_ROOT_MIN=" THEN 
+                    iRoot = sLineVal                            
+                  ELSE IF Left(sLine, Len("HD_SWAP")) = "HD_SWAP" THEN 
+                    iSwap = sLineVal
+                  ELSE IF Left(sLine, Len("HD_HOME")) = "HD_HOME" THEN 
+                    iHome = sLineVal
+                  ELSE IF Left(sLine, Len("DISTRO=")) = "DISTRO=" THEN 
+                    ClsGlobal.DISTRO = sLineVal
+                  ELSE IF Left(sLine, Len("VERSION=")) = "VERSION=" THEN 
+                    ClsGlobal.VERSION = sLineVal
+                  
+                    '      BEGIN BULKS HERE ***************
+                  ELSE IF Left(sLine, Len("BULK")) = "BULK" THEN 
+                  'PRINT "bulk"
+                    ClsGlobal.sBulkList = ClsGlobal.sBulkList & "," & sLineVal
+                  ELSE IF Left(sLine, Len("CONF")) = "CONF" THEN 
+                    ClsGlobal.sConfPkg = ClsGlobal.sConfPkg & "," & sLineVal
+                    
+                  END IF
+                                        
+          
+              END IF  
+          
+  
+      NEXT  
+      ClsGlobal.iRootMin = CInt(iRoot)
+      ClsGlobal.iHomeMin = CInt(ihome)
+      ClsGlobal.iSwapMin = CInt(iswap)
+      
+    ELSE 'i can't see the file
+      Message.Error("Cannot find SETUP.CONF")
+  END IF
+END
+
+
+PUBLIC SUB PREPARE_INSTALL_LAYOUT()
+WITH FMain.tvPlan
+  .Add("Prep", "Preparation", sCatPic)
+  .Add("Prep0", "Find installation media", sNowPic, "Prep")
+  .Add("Prep1", "Disk Partitioning", sToDopic, "Prep")
+  .Add("Prep2", "Regional Setup", sToDopic, "Prep")
+  .Add("Prep3", "Desktop Selection", sToDopic, "Prep")
+  .Add("Inst", "Installation", sCatPic)
+  .Add("Inst0", "Installation Summary", sToDopic, "Inst")
+  .Add("Inst1", "Install Operating System", sToDopic, "Inst")
+  .Add("Conf", "System Configuration", sCatPic)
+  .Add("Conf0", "Computer Name", sToDopic, "Conf")
+  .Add("Conf1", "System Administrator", sToDopic, "Conf")
+  .Add("Conf2", "Network Configuration", sToDopic, "Conf")
+  .Add("Conf3", "User Accounts", sToDopic, "Conf")
+  .Add("Conf4", "Hardware Configuration", sToDopic, "Conf")
+END WITH 
+
+'expand the treeview
+ FMain.tvPlan.MoveFirst()
+ REPEAT 
+ FMain.tvPlan.Item.Expanded = TRUE
+ UNTIL FMain.tvPlan.MoveBelow()
+ 
+  
+  
+
+' '   
+' ' DIM sLabel AS TextLabel
+' ' DIM X AS Integer
+' ' DIM y AS Integer
+' ' DIM pPic AS PictureBox
+' ' DIM sPrepList AS String = "Find Install Media, License Agreement, Install"
+' ' DIM sPrepArr AS String[] = Split(sPrepList, ",")
+' ' DIM sCurrStep AS String
+' ' DIM i AS Integer
+' '   
+' '   'first category
+' '   X = FMain.ScrollView1.X
+' '   Y = FMain.ScrollView1.y + 4
+' '     FOR i = 0 TO sPrepArr.Count - 1
+' '       sCurrStep = Trim(sPrepArr[i])
+' '         sLabel = NEW TextLabel(FMain.ScrollView1) AS "Preps"
+' '           WITH sLabel
+' '             '.Width = .Parent.Width
+' '             .x = x + 4
+' '             .y = Y + 4
+' '             .Text = sCurrStep
+' '             .Width = MdlObjSizer.get_object_width(.Text)
+' '             .Height = 27
+' '             
+' '           END WITH 
+' '           y = y + sLabel.Height
+' '         NEXT 
+' '         
+' '             
+' '             
+' '       
+
+  
+END
+
+
+
+
+PUBLIC FUNCTION CALCULATE_SWAP(iRam AS Integer) AS Integer
+  
+  DIM iRec AS Integer
+    IF iRam > 196 THEN 
+      iRec = 512
+    ELSE IF iRam > 127 THEN 
+      iRec = 256
+    ELSE IF iRam > 63 THEN 
+      iRec = 128
+    ELSE 
+      iRec = 96
+    END IF
+    
+    RETURN iRec
+    
+  
+END
+
+
+

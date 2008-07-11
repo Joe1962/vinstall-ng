@@ -1,0 +1,91 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,72,55)
+  Text = ("")
+  { tlBanner TextLabel
+    MoveScaled(1,1,70,14)
+    Text = ("Define where the operating system will be installed\n<br>\nLinux is a modular operating system. This means that it has the ability to keep system and user data separately.<br> A recommended setup would included a / (root), a /home, and a swap partitions.\n<br>\nPlease select which partitions you would like to use for your install")
+  }
+  { tlRootPart TextLabel
+    MoveScaled(1,17,13,3)
+    Text = ("Root partition")
+    Alignment = Align.Normal
+  }
+  { bUseCustompart CheckBox
+    MoveScaled(1,21,37,3)
+    Text = ("Use separate /home partition")
+  }
+  { cbSelRoot ComboBox
+    MoveScaled(15,17,14,3)
+    Text = ("")
+  }
+  { btWhatRoot Button
+    MoveScaled(30,17,10,3)
+    ToolTip = ("What is the root partition?\nClick here to find out")
+    Text = ("What is this?")
+    Picture = Picture["icon:/16/question"]
+  }
+  { tlHomePart TextLabel
+    MoveScaled(1,25,12,3)
+    Visible = False
+    Text = ("/home")
+    Alignment = Align.Normal
+  }
+  { cbSelHome ComboBox
+    MoveScaled(14,24,15,1)
+    Visible = False
+    Text = ("")
+  }
+  { btWhathome Button
+    MoveScaled(30,24,10,1)
+    Visible = False
+    Text = ("What is this?")
+    Picture = Picture["icon:/16/question"]
+  }
+  { bAllCustom CheckBox
+    MoveScaled(1,29,25,3)
+    Visible = False
+    Text = ("Specify additional custom partitions (expoert install)")
+  }
+  { tlOptPart TextLabel
+    MoveScaled(1,33,10,3)
+    Text = ("/opt")
+  }
+  { cbselopt ComboBox
+    MoveScaled(12,33,12,2)
+    Text = ("ComboBox1")
+  }
+  { tlvar TextLabel
+    MoveScaled(1,41,10,3)
+    Text = ("/var")
+  }
+  { cbselvar ComboBox
+    MoveScaled(12,41,11,2)
+    Text = ("ComboBox1")
+  }
+  { tlusr TextLabel
+    MoveScaled(1,37,9,3)
+    Text = ("/usr")
+  }
+  { cbselusr ComboBox
+    MoveScaled(12,37,12,2)
+    Text = ("ComboBox1")
+  }
+  { tltmp TextLabel
+    MoveScaled(26,34,10,3)
+    Text = ("/tmp")
+  }
+  { cbseltmp ComboBox
+    MoveScaled(37,34,12,1)
+    Text = ("ComboBox1")
+  }
+  { tlWin TextLabel
+    MoveScaled(26,38,10,3)
+    Text = ("Win")
+  }
+  { cbselwin ComboBox
+    MoveScaled(37,39,11,1)
+    Text = ("ComboBox1")
+  }
+}

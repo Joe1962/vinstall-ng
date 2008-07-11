@@ -1,0 +1,25 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,63,41)
+  Text = ("")
+  FullScreen = True
+  { lstInstallableImg ComboBox
+    MoveScaled(1,7,45,3)
+    Text = ("No installable images found.")
+    ReadOnly = True
+  }
+  { tlBanner TextLabel
+    MoveScaled(1,1,58,5)
+    Text = ("Select which distribution to install from the list below")
+  }
+  { tlDistroDesc TextLabel
+    MoveScaled(1,13,60,22)
+    Text = ("TextLabel1")
+  }
+  { btResCan Button
+    MoveScaled(49,7,13,3)
+    Text = ("Search Again")
+    Picture = Picture["icon:/16/refresh"]
+  }
+}
