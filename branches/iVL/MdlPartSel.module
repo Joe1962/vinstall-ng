@@ -17,3 +17,158 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
+  
+  DIM tl AS TextLabel
+  DIM cb AS ComboBox
+  DIM sPartList AS String[]
+  DIM sPart AS String
+  DIM sSize AS String
+  DIM i AS Integer
+  DIM y AS Integer
+  DIM sDump1 AS String ' partition list dump
+  DIM lbwidth AS Integer = 0
+  DIM sSwapList AS String
+  DIM vSwapSize AS Variant
+  DIM iswapsize AS Float
+  DIM i3drdrowX AS Integer
+  
+  
+  
+  
+  ' We will mount the partitions first, and then figure out their size
+  SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" Linux$\" | cut -f 1 -d \' \'" TO sDump1
+  sDump1 = Trim(sDump1)
+  y = FrmPartSel.y + 24
+    IF InStr(sDump1, gb.NewLine) > 0 THEN 
+      sPartList = Split(sDump1, gb.NewLine)
+        FOR i = 0 TO sPartList.Count - 1
+          sPart = Right(sPartList[i], Len(sPartList[i]) - RInStr(sPartList[i], "/"))
+            'Message.Info(sPart)
+            
+              'make sure the mount point exists
+                IF IsDir("/mnt" &/ sPart) = FALSE THEN 
+                  SHELL "sudo mkdir /mnt" &/ sPart WAIT 
+                END IF
+                ' Now mount the partition
+                SHELL "sudo mount " & Trim(sPartList[i]) & Space(1) & "/mnt" &/ sPart WAIT 
+                    ' get the size using df -h | grep sPart and some sed
+                    ' will embed some bash, but should probabbly be fixed
+                SHELL "export " & sPart & "=$(df -h | grep " & sPart & ") && echo $" & sPart & " | cut -f 2 -d \' \'" TO sSize
+                  'Message(sPart & Space(1) & "[ " & Trim(sSize) & " ]")
+            'create the label and the drop down box here
+              tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "Labels"
+                WITH tl
+                  .Tag = Trim(sPartList[i])
+                  .Text = Trim(sPartList[i]) & Space(1) & "( " & sSize & " )"
+                  .Width = MdlObjSizer.get_object_width(.Text) * 1.25
+                    IF .Width > lbwidth THEN 
+                      lbwidth = .Width
+                    END IF
+                    IF .Width < lbwidth THEN 
+                    .Width = lbwidth
+                    END IF
+                  .Height = 27
+                  .x = .Parent.X
+                  .Alignment = Align.Normal
+                  .y = y
+                END WITH 
+                
+              'create the combobox
+              cb = NEW ComboBox(FrmPartSel.scrollPartitions) AS "MountPoints"
+                WITH cb
+                .tag = Trim(sPartList[i])
+                .x = lbwidth + 24
+                .y = y
+                .Height = tl.Height
+                .Width = tl.Width
+                .ReadOnly = TRUE
+                .Add("/")
+                .Add("/home")
+                .Add("/opt")
+                .Add("/usr")
+                .Add("/var")
+                .Add("/tmp")
+                END WITH 
+                i3drdrowX = cb.x + cb.Width + 8
+              'create the file system options
+                cb = NEW ComboBox(FrmPartSel.scrollPartitions) AS "fsTypes"
+                  WITH cb
+                  .Tag = Trim(sPartList[i])
+                  .x = i3drdrowX
+                  .y = y
+                  .ReadOnly = TRUE
+                  .Width = tl.Width
+                  .Add("XFS")
+                  .Add("ReiserFS")
+                  .Add("Ext2")
+                  .Add("Ext3")
+                  .Add("JFS")
+                  END WITH 
+                  
+                                       
+                ' now umount the partition and delete the mount point
+                  SHELL "sudo umount /mnt" &/ sPart & " && sudo rm -r /mnt" &/ sPart WAIT 
+                ' increase the value of y for the next label
+                y = y + tl.Height + 4
+                  
+                
+        NEXT 
+            
+      ELSE 
+        'only one partition found. This could be trouble
+        
+        
+            
+      END IF
+      
+      SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -i \" *swap$\" | cut -f 1 -d \' \'" TO sSwapList
+        sSwapList = Trim(sSwapList)
+        'Message.Info(sSwapList)
+        IF InStr(sSwapList, gb.NewLine) THEN 
+          'several swap partitions found
+          'how do we deal w/ this?
+        ELSE 
+          spart = Trim(sSwapList)
+          'SHELL "export " & sSwapList & "=$(df -h | grep -i swap) | cut -f 2 -d \' \'" TO vSwapSize
+          SHELL "export PATH=$PATH:/sbin && export sw=$(sudo probepart | grep -i \" *swap$\") && echo $sw | cut -f 4 -d \' \'" TO vSwapSize
+          
+            iswapsize = CInt(vSwapSize)
+            iswapsize = Round(iswapsize / 1024 / 1024, -2)
+            'now create the swap label and combo box
+              tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "swlabel"
+                WITH tl
+                  .x = .Parent.x
+                  .y = y
+                  .Text = sPart & " ( " & CStr(iswapsize) & "G )"
+                  .Width = lbwidth
+                  .Height = 27
+                  .tag = "SwapLbl"
+                  .Alignment = Align.Normal
+                  
+                END WITH 
+              ' now create a combobox with the swap-only option
+                cb = NEW ComboBox(FrmPartSel.scrollPartitions) AS "swapsel"
+                  WITH cb
+                    .y = y
+                    .x = lbwidth + 24
+                    .Width = tl.Width
+                    .tag = "swapSelection"
+                    .ReadOnly = TRUE
+                    .Add("Swap")
+                  END WITH 
+                    
+                
+                
+          'Message.Info("Swap total = " & iswapsize)
+        END IF
+          
+      
+      
+      
+  
+  
+  
+END
+
+
