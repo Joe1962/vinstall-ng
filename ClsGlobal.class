@@ -1,0 +1,42 @@
+' Gambas class file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+STATIC PUBLIC DISTRO AS String = "Vector Linux" ' will be overridden by SETUP.CONF
+STATIC PUBLIC VERSION AS String = "6.0" ' will be overridden by SETUP.CONF
+
+STATIC PUBLIC iRootMin AS Integer = 20000
+STATIC PUBLIC iRootMax AS Integer = 40000
+STATIC PUBLIC iHomeMin AS Integer = 500
+STATIC PUBLIC iSwapMin AS Integer = 64
+
+STATIC PUBLIC sRootMnt AS String 
+STATIC PUBLIC sHomeMnt AS String 
+STATIC PUBLIC sTargetMnt AS String 
+STATIC PUBLIC sSourceMnt AS String 
+STATIC PUBLIC sMediaMnt AS String 
+
+STATIC PUBLIC sBulkList AS String
+STATIC PUBLIC sConfPkg AS String
+
+'Values to these variables is set from mdlcore.main
+STATIC PUBLIC sBulkDir AS String
+STATIC PUBLIC sPackDir AS String
+STATIC PUBLIC sDocDir AS String
+STATIC PUBLIC sSetupConfPath AS String
+STATIC PUBLIC sReadMePath AS String

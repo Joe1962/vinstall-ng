@@ -1,0 +1,13 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,84,55)
+  Text = ("")
+  { tlBanner TextLabel
+    MoveScaled(1,2,81,9)
+    Text = ("Disk Partitioning:")
+  }
+  { EmbGPARTED Embedder
+    MoveScaled(1,13,82,39)
+  }
+}

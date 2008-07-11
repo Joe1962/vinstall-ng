@@ -1,6 +1,0 @@
-' Gambas class file
-
-' Structure for installation partitions information array:
-PUBLIC Device AS String
-PUBLIC Mountpoint AS String
-PUBLIC FormatWithFS AS String

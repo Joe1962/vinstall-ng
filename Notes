@@ -1,0 +1,7 @@
+1. prepare a mount point for cdrom
+2. clear mount point
+3. find cd drives
+4. mount drives one at a time
+loop
+
+TEST

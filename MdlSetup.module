@@ -1,0 +1,75 @@
+' Gambas module file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+ 
+PUBLIC SUB GO_WITH_SELECTED(sDev AS String, sISONAME AS String) ' this will mount the drive and display the license agreement
+  
+  DIM sPathToLic AS String = ClsGlobal.sSourceMnt &/ "COPYING"
+  DIM sAddy AS String = Right(sDev, Len(sDev) - RInStr(sDev, "/"))
+   
+  
+  IF sISONAME OR sISONAME <> "" THEN 
+    'SHELL "sudo mount " & sDev & " /mnt/loop" WAIT ' will switch places here .. the device will mount to loop and the iso will mount to the mount point
+    SHELL "sudo mkdir -p /mnt" &/ sAddy & " && sudo mount " & sDev & Space(1) & "/mnt" &/ sAddy WAIT 
+    SHELL "sudo mount -o loop /mnt" &/ sAddy &/ sISONAME & Space(1) & ClsGlobal.sSourceMnt WAIT 
+      
+    'SHELL "sudo umount /mnt/loop" WAIT 
+  ELSE 
+        
+    SHELL "sudo mount -t iso9660 " & sDev & Space(1) & ClsGlobal.sSourceMnt WAIT 
+  END IF
+  
+  ' display the license agreement text
+  FrmLicense.taLicense.Text = SConv(File.Load(sPathToLic))
+  
+  ' This will also set the default variables for distro name and version to clsglobal
+    MdlCore.SET_DECISSION(ClsGlobal.sSourceMnt)
+  
+
+END
+ 
+ 
+ PUBLIC FUNCTION CHECK_IF_REBOOT_NEEDED() AS Boolean
+ 
+ ' KNOWN BUG:
+ ' This will make the user restart if there are FAT* partitions anywhere on the box
+ ' even if that drive was not modified
+ ' END OF BUG -- FIX SOON
+ 
+ DIM sFATList AS String
+ DIM sFAT32List AS String
+ 
+ SHELL "sudo probepart | grep -e \"^/dev.*FAT32$\" | sed \'s/\\*/ /\'" TO sFAT32List
+ SHELL "sudo probepart | grep -e \"^/dev.*FAT$\" | sed \'s/\\*/ /\'" TO sFATList
+ 
+ sFAT32List = Trim(sFAT32List)
+ sFATList = Trim(sFATList)
+ 
+ IF sFAT32List <> "" THEN 
+  RETURN TRUE ' reboot needed
+ ELSE IF sFATList <> "" THEN 
+  RETURN TRUE ' reboot needed
+ ELSE 
+  RETURN FALSE ' no reboot needed
+ END IF
+ 
+  
+  
+  
+END
+
+

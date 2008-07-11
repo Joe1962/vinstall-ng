@@ -1,0 +1,99 @@
+' Gambas class file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .tlBanner.Width = .ClientWidth - 16
+    '.frmpartitions.Move(.tlBanner.Left, .tlBanner.Top + .tlBanner.Height + 4, .tlBanner.Width, .ClientHeight - .frmpartitions.top - 4)
+    '.tlRootPart.Move(.frmpartitions.Left + 8, .frmpartitions.top + 8, MdlObjSizer.get_object_width(.tlRootPart.Text))
+    .tlRootPart.Move(.tlBanner.Left, .tlBanner.Top + .tlBanner.Height + 8, MdlObjSizer.get_object_width(.tlRootPart.Text))
+    .cbSelRoot.Move(.tlRootPart.Left + .tlRootPart.Width + 8, .tlRootPart.Top)
+    .btWhatRoot.Move(.cbSelRoot.Left + .cbSelRoot.Width + 8, .cbSelRoot.top, MdlObjSizer.get_object_width(.btWhatRoot.text) + 32)
+    .bUseCustompart.Move(.tlRootPart.Left, .tlRootPart.top + .tlRootPart.Height + 4)
+    .tlHomePart.Move(.tlRootPart.Left, .bUseCustompart.Top + .bUseCustompart.Height + 4, .tlRootPart.Width)
+    .cbSelHome.Move(.cbSelRoot.Left, .tlHomePart.top, .cbSelRoot.Width)
+    .btWhathome.Move(.btWhatRoot.Left, .cbSelHome.top, MdlObjSizer.get_object_width(.btWhathome.Text) + 32)
+    .bAllCustom.Move(.bUseCustompart.Left, .tlHomePart.Top + .tlHomePart.Height + 4)
+    .tlOptPart.Move(.bAllCustom.Left, .bAllCustom.top + .bAllCustom.Height + 4, .tlHomePart.Width)
+    .cbselopt.Move(.tlOptPart.Left + .tlOptPart.Width + 4, .tlOptPart.top, cbSelRoot.Width)
+    .tlusr.Move(.tlOptPart.Left, .tlOptPart.top + .tlOptPart.Height + 2, .tlOptPart.Width)
+    .cbselusr.Move(.tlusr.Left + .tlusr.Width + 4, .tlusr.top, .cbselopt.Width)
+    .tlvar.Move(.tlusr.Left, .tlusr.top + .tlusr.Height + 4, .tlusr.Width)
+    .cbselvar.Move(.tlvar.Left + .tlvar.Width + 4, .tlvar.top, .cbselopt.Width)
+    
+    
+    
+    
+    
+  END WITH 
+
+END
+
+PUBLIC SUB Form_Open()
+
+  ME.tlBanner.Adjust
+  ME.bUseCustompart.Text = "Use separate partition for user data. (/home)"
+  ME.bUseCustompart.Width = MdlObjSizer.get_object_width(ME.bUseCustompart.text) + 36
+  ME.bAllCustom.Width = MdlObjSizer.get_object_width(ME.bAllCustom.Text) + 36
+  
+  
+
+END
+
+PUBLIC SUB btWhatRoot_Click()
+
+  Message("<b>About the root partition</b><br><br>" &
+  "The root partition is the very top directory on the drive where the operating system is \ninstalled. " &
+  "This partition contains all the system and application information as well as binaries. \n" &
+  "<i>This is required for ALL installations</i>")
+  
+
+END
+
+PUBLIC SUB btWhathome_Click()
+
+  Message("<b>About the /home partition</b><br><br>" &
+  "The /home partition is where the user data is kept. User settings and personal documents \n" &
+  "are kept here. \n" &
+  "<i>This is optional, but recommended</i>")
+
+END
+
+PUBLIC SUB bUseCustompart_Click()
+
+  IF ME.bUseCustompart.Value = TRUE THEN 
+    WITH ME
+      .tlHomePart.Visible = TRUE
+      .cbSelHome.Visible = TRUE
+      .btWhathome.Visible = TRUE
+      .bAllCustom.Visible = TRUE
+    END WITH 
+  ELSE 
+    WITH ME
+      .tlHomePart.Visible = FALSE
+      .cbSelHome.Visible = FALSE
+      .btWhathome.Visible = FALSE
+      .bAllCustom.Visible = FALSE
+    END WITH 
+  END IF  
+
+END
