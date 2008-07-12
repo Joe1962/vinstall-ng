@@ -9,5 +9,20 @@
   }
   { scrollPartitions ScrollView
     MoveScaled(1,16,69,36)
+    { tlPartRow TextLabel
+      MoveScaled(1,1,14,3)
+      Text = ("<b>Partition</b>")
+      Alignment = Align.Left
+    }
+    { tlPartRow2 TextLabel
+      MoveScaled(19,1,14,3)
+      Text = ("<b>Mount Point</b>")
+      Alignment = Align.Left
+    }
+    { tlPartRow3 TextLabel
+      MoveScaled(39,1,14,3)
+      Text = ("<b>File System</b>")
+      Alignment = Align.Left
+    }
   }
 }

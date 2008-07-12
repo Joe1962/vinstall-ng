@@ -17,6 +17,9 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+PUBLIC oMountPoints AS Object[]
+PUBLIC oFsTypes AS Object[]
+
 PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
   
   DIM tl AS TextLabel
@@ -32,14 +35,20 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
   DIM vSwapSize AS Variant
   DIM iswapsize AS Float
   DIM i3drdrowX AS Integer
+  DIM iX AS Integer
   
-  
+  ' fire up the arrays
+  oFsTypes = NEW Object[]
+  oMountPoints = NEW Object[]
   
   
   ' We will mount the partitions first, and then figure out their size
   SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" Linux$\" | cut -f 1 -d \' \'" TO sDump1
   sDump1 = Trim(sDump1)
-  y = FrmPartSel.y + 24
+  
+      
+    y = FrmPartSel.tlPartRow.top + FrmPartSel.tlPartRow.Height + 8
+  
     IF InStr(sDump1, gb.NewLine) > 0 THEN 
       sPartList = Split(sDump1, gb.NewLine)
         FOR i = 0 TO sPartList.Count - 1
@@ -69,7 +78,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                     .Width = lbwidth
                     END IF
                   .Height = 27
-                  .x = .Parent.X
+                  .x = FrmPartSel.tlPartRow.Left
                   .Alignment = Align.Normal
                   .y = y
                 END WITH 
@@ -78,11 +87,14 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
               cb = NEW ComboBox(FrmPartSel.scrollPartitions) AS "MountPoints"
                 WITH cb
                 .tag = Trim(sPartList[i])
-                .x = lbwidth + 24
+                '.x = lbwidth + 24
+                .X = FrmPartSel.tlPartRow2.Left
                 .y = y
                 .Height = tl.Height
                 .Width = tl.Width
                 .ReadOnly = TRUE
+                .tag = Trim(sPartList[i])
+                .Add("Not Used")
                 .Add("/")
                 .Add("/home")
                 .Add("/opt")
@@ -90,12 +102,14 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 .Add("/var")
                 .Add("/tmp")
                 END WITH 
+                oMountPoints.Add(cb)
                 i3drdrowX = cb.x + cb.Width + 8
               'create the file system options
                 cb = NEW ComboBox(FrmPartSel.scrollPartitions) AS "fsTypes"
                   WITH cb
                   .Tag = Trim(sPartList[i])
-                  .x = i3drdrowX
+                  '.x = i3drdrowX
+                  .x = FrmPartSel.tlPartRow3.Left
                   .y = y
                   .ReadOnly = TRUE
                   .Width = tl.Width
@@ -104,7 +118,9 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                   .Add("Ext2")
                   .Add("Ext3")
                   .Add("JFS")
+                  .Add("Do not format")
                   END WITH 
+                  oFsTypes.Add(cb)
                   
                                        
                 ' now umount the partition and delete the mount point
@@ -138,7 +154,8 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
             'now create the swap label and combo box
               tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "swlabel"
                 WITH tl
-                  .x = .Parent.x
+                  '.x = .Parent.x
+                  .x = FrmPartSel.tlPartRow.Left
                   .y = y
                   .Text = sPart & " ( " & CStr(iswapsize) & "G )"
                   .Width = lbwidth
@@ -151,7 +168,8 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 cb = NEW ComboBox(FrmPartSel.scrollPartitions) AS "swapsel"
                   WITH cb
                     .y = y
-                    .x = lbwidth + 24
+                    '.x = lbwidth + 24
+                    .x = FrmPartSel.tlPartRow2.Left
                     .Width = tl.Width
                     .tag = "swapSelection"
                     .ReadOnly = TRUE
@@ -163,12 +181,50 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
           'Message.Info("Swap total = " & iswapsize)
         END IF
           
-      
-      
-      
+           
   
   
   
 END
+ 
+PUBLIC SUB MountPoints_CLick()
+  
+  DIM sdropdwn AS ComboBox
+  DIM sTag AS String = LAST.tag
+  DIM sText AS String = Trim(LAST.text)
+  
+  IF sText = "Not Used" THEN 
+    FOR EACH sdropdwn IN oFsTypes
+      IF sdropdwn.Tag = sTag THEN 
+        sdropdwn.Enabled = FALSE
+      ELSE 
+        sdropdwn.Enabled = TRUE
+      END IF
+    NEXT 
+  ELSE 
+    FOR EACH sdropdwn IN oFsTypes
+      IF sdropdwn.Tag = sTag THEN 
+        sdropdwn.Enabled = TRUE
+      END IF
+    NEXT 
+  END IF
+  
+END
+
+PUBLIC SUB fsTypes_click()
+  
+  DIM cb AS ComboBox
+    
+IF LAST.text = "Do not format"
+      FOR EACH cb IN oMountPoints
+        IF cb.tag = LAST.tag AND cb.text = "/" THEN 
+          Message.Error("The / partition MUST BE FORMATTED. No way around that")
+          RETURN 
+        END IF
+      NEXT 
+    END IF
+  
+END
+
 
 
