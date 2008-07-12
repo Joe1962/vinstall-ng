@@ -218,7 +218,7 @@ PUBLIC SUB fsTypes_click()
 IF LAST.text = "Do not format"
       FOR EACH cb IN oMountPoints
         IF cb.tag = LAST.tag AND cb.text = "/" THEN 
-          Message.Error("The / partition MUST BE FORMATTED. No way around that")
+          Message.Error("The / partition MUST be formatted no matter what. Please select a filesystem for this partition")
           RETURN 
         END IF
       NEXT 
