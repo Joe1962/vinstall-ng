@@ -113,12 +113,14 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                   .y = y
                   .ReadOnly = TRUE
                   .Width = tl.Width
+                  .Add("Do not format")
                   .Add("XFS")
                   .Add("ReiserFS")
                   .Add("Ext2")
                   .Add("Ext3")
                   .Add("JFS")
-                  .Add("Do not format")
+                  
+                  
                   END WITH 
                   oFsTypes.Add(cb)
                   
@@ -192,10 +194,22 @@ PUBLIC SUB MountPoints_CLick()
   DIM sdropdwn AS ComboBox
   DIM sTag AS String = LAST.tag
   DIM sText AS String = Trim(LAST.text)
-  
+    
+    FOR EACH sdropdwn IN oMountPoints
+      IF LAST.text <> "Not Used" AND LAST.text = sdropdwn.Text AND LAST.tag <> sdropdwn.tag THEN 
+        Message.Error("You have already select a " & LAST.text & " partition. Please " &
+        "select only one")
+        LAST.text = "Not Used"
+      END IF
+      STOP EVENT 
+    NEXT 
+      
+          
+      
   IF sText = "Not Used" THEN 
     FOR EACH sdropdwn IN oFsTypes
       IF sdropdwn.Tag = sTag THEN 
+        sdropdwn.Text = "Do not format"
         sdropdwn.Enabled = FALSE
       ELSE 
         sdropdwn.Enabled = TRUE
@@ -205,6 +219,13 @@ PUBLIC SUB MountPoints_CLick()
     FOR EACH sdropdwn IN oFsTypes
       IF sdropdwn.Tag = sTag THEN 
         sdropdwn.Enabled = TRUE
+      END IF
+    NEXT 
+  END IF
+  IF LAST.text <> "Not Used" THEN 
+    FOR EACH sdropdwn IN oFsTypes
+      IF sdropdwn.tag = LAST.tag THEN 
+        sdropdwn.Text = "XFS"
       END IF
     NEXT 
   END IF
@@ -219,7 +240,9 @@ IF LAST.text = "Do not format"
       FOR EACH cb IN oMountPoints
         IF cb.tag = LAST.tag AND cb.text = "/" THEN 
           Message.Error("The / partition MUST be formatted no matter what. Please select a filesystem for this partition")
-          RETURN 
+            'default it to xfs
+            LAST.text = "XFS"
+          STOP EVENT 
         END IF
       NEXT 
     END IF
