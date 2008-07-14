@@ -16,6 +16,19 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
+PUBLIC sRootAddr AS String
+PUBLIC sRootFrmt AS String
+PUBLIC sHomeAddr AS String
+PUBLIC sHomeFrmt AS String
+PUBLIC sUsrAddr AS String
+PUBLIC sUsrFrmt AS String
+PUBLIC sVarAddr AS String
+PUBLIC sVarFrmt AS String
+PUBLIC sTmpAddr AS String
+PUBLIC sTrmFrmt AS String
+PUBLIC sOptAddr AS String
+PUBLIC sOptFrmt AS String
+
 
 
 
