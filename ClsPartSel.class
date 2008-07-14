@@ -1,0 +1,16 @@
+' Gambas class file
+
+STATIC PUBLIC sRoot AS String
+STATIC PUBLIC fRoot AS String
+STATIC PUBLIC sHome AS String
+STATIC PUBLIC fhome AS String
+STATIC PUBLIC sUsr AS String
+STATIC PUBLIC fUsr AS String
+STATIC PUBLIC sOpt AS String
+STATIC PUBLIC fOpt AS String
+STATIC PUBLIC sVar AS String
+STATIC PUBLIC fVar AS String
+STATIC PUBLIC sTmp AS String
+STATIC PUBLIC fTmp AS String
+
+STATIC PUBLIC sSwap AS String

@@ -164,6 +164,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                   .Height = 27
                   .tag = "SwapLbl"
                   .Alignment = Align.Normal
+                  ClsPartSel.sSwap = sPart
                   
                 END WITH 
               ' now create a combobox with the swap-only option
@@ -176,6 +177,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                     .tag = "swapSelection"
                     .ReadOnly = TRUE
                     .Add("Swap")
+                    
                   END WITH 
                     
                 
@@ -226,9 +228,17 @@ PUBLIC SUB MountPoints_CLick()
     FOR EACH sdropdwn IN oFsTypes
       IF sdropdwn.tag = LAST.tag THEN 
         sdropdwn.Text = "XFS"
+      'Balloon.Info("Select which filesystem to use with this partition", sdropdwn)
+      Balloon("Select which filesystem to use with this partition", sdropdwn)
+      
       END IF
     NEXT 
   END IF
+  
+  'send the value to the form public value
+  ME.SET_SELECTED_PARTITION(LAST.tag, LAST.text)
+  
+  
   
 END
 
@@ -246,6 +256,50 @@ IF LAST.text = "Do not format"
         END IF
       NEXT 
     END IF
+  
+  PRINT "format " & LAST.tag & " as " & LAST.text
+  
+  ME.SET_PARTITION_FORMAT(LAST.tag, LAST.text)
+  
+  
+END
+
+PUBLIC SUB SET_SELECTED_PARTITION(SPartition AS String, sMountPoint AS String)
+  
+  SELECT CASE sMountPoint
+    CASE "/"
+      FrmPartSel.sRootAddr = SPartition
+    CASE "/home"
+      FrmPartSel.sHomeAddr = SPartition
+    CASE "/opt"
+      FrmPartSel.sOptAddr = SPartition
+    CASE "/usr"
+      FrmPartSel.sUsrAddr = SPartition
+    CASE "/var"
+      FrmPartSel.sVarAddr = SPartition
+    CASE "/tmp"
+      FrmPartSel.sTmpAddr = SPartition
+  END SELECT 
+  
+END
+
+PUBLIC SUB SET_PARTITION_FORMAT(sMountPoint AS String, sFormat AS String)
+  
+    SELECT CASE sMountPoint
+      CASE "/" 
+        FrmPartSel.sRootFrmt = sFormat
+      CASE "/home"
+        FrmPartSel.sHomeFrmt = sFormat
+      CASE "/opt"
+        FrmPartSel.sOptFrmt = sFormat
+      CASE "/usr"
+        FrmPartSel.sUsrFrmt = sFormat
+      CASE "/var"
+        FrmPartSel.sVarFrmt = sFormat
+      CASE "/tmp"
+        FrmPartSel.sTrmFrmt = sFormat
+    END SELECT 
+    
   
 END
 
