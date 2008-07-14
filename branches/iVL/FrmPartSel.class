@@ -52,3 +52,49 @@ PUBLIC SUB Form_Open()
   
 
 END
+
+PUBLIC SUB Form_Hide()
+
+  
+
+END
+
+PUBLIC SUB ANALYZE_PARTITION_SETUP()
+  
+  IF NOT sRootAddr THEN 
+    Message.Error("You must select at least one partition for \"/\" This is there the system will be installed to")
+    STOP EVENT 
+  ELSE IF NOT sRootFrmt THEN 
+    Message.Error("You must select which file system type to use with your \"/\" partition.")
+    STOP EVENT 
+  ELSE 
+    ClsPartSel.sRoot = sRootAddr
+    ClsPartSel.fRoot = sRootFrmt
+  END IF 
+  
+  IF sHomeAddr THEN 
+    ClsPartSel.sHome = sHomeAddr
+    ClsPartSel.fhome = sHomeFrmt
+  END IF
+  IF sUsrAddr THEN 
+    ClsPartSel.sUsr = sUsrAddr
+    ClsPartSel.fUsr = sUsrFrmt
+  END IF
+  IF sOptAddr THEN 
+    ClsPartSel.sOpt = sOptAddr
+    ClsPartSel.fOpt = sOptFrmt
+  END IF
+  IF sVarAddr THEN 
+    ClsPartSel.sVar = sVarAddr
+    ClsPartSel.fVar = sVarFrmt
+  END IF
+  IF sTmpAddr THEN 
+    ClsPartSel.sVar = sTmpAddr
+    ClsPartSel.fTmp = sTrmFrmt
+  END IF
+  
+    
+  
+END
+
+
