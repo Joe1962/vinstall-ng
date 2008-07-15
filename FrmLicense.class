@@ -53,7 +53,6 @@ PUBLIC SUB Form_Resize()
     .Reparent(.parent)
     .Resize(.Parent.Width, .Parent.Height)
     .taLicense.Move(.tlbanner.Left, .tlbanner.top + .tlbanner.Height + 4, .ClientWidth - 20, .ClientHeight - .tlbanner.Height - (.rbNo.Height * 4))
-    '.taLicense.Resize(.ClientWidth - (.ClientWidth / 20), .ClientHeight - .tlbanner.Height - (.rbNo.Height * 4))
     .rbNo.Move(.taLicense.Left, .taLicense.Top + (.taLicense.Height + 4), MdlObjSizer.get_object_width(.rbNo.Text) + 24)
     .rbYes.Move(.rbNo.Left, .rbNo.Top + (.rbNo.Height + 4), MdlObjSizer.get_object_width(.rbYes.Text) + 24)
   END WITH 

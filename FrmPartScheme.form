@@ -19,9 +19,4 @@
     MoveScaled(1,17,76,23)
     Text = ("TextLabel1")
   }
-  { btNext Button
-    MoveScaled(70,44,9,3)
-    Text = ("Next")
-    Picture = Picture["icon:/16/right"]
-  }
 }

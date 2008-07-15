@@ -52,6 +52,7 @@ PUBLIC SUB Form_Open()
   ME.Height = ME.Parent.Height
   FMain.sNextKey = "Prep0"
   FMain.FrmCurr = ME
+  FMain.frmNext = FrmPartScheme
   
 
 

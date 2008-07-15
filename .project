@@ -1,6 +1,6 @@
 # Gambas Project File 2.0
 Title=VectorLinux Installer
-Startup=FrmPartSel
+Startup=MdlCore
 Version=0.0.1
 Library=gb.gtk
 Library=gb.form

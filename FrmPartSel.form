@@ -8,7 +8,7 @@
     Text = ("Define where the operating system will be installed\n<br>\nLinux is a modular operating system. This means that it has the ability to keep system and user data separately.<br> A recommended setup would included a / (root), a /home, and a swap partitions.\n<br>\nPlease select which partitions you would like to use for your install")
   }
   { scrollPartitions ScrollView
-    MoveScaled(1,16,69,36)
+    MoveScaled(1,16,69,33)
     { tlPartRow TextLabel
       MoveScaled(1,1,14,3)
       Text = ("<b>Partition</b>")
@@ -24,5 +24,10 @@
       Text = ("<b>File System</b>")
       Alignment = Align.Left
     }
+  }
+  { cbDoWin CheckBox
+    MoveScaled(1,50,57,3)
+    ToolTip = ("Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts")
+    Text = ("Detect and Setup Windows partitions for auto-mounting at boot")
   }
 }

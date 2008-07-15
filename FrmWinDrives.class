@@ -1,6 +1,5 @@
 ' Gambas class file
 
-
 '    This file is part of vinstall-ng
 
 '    vinstall-ng is free software: you can redistribute it and/or modify
@@ -17,19 +16,8 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
-STATIC PUBLIC sRoot AS String
-STATIC PUBLIC fRoot AS String
-STATIC PUBLIC sHome AS String
-STATIC PUBLIC fhome AS String
-STATIC PUBLIC sUsr AS String
-STATIC PUBLIC fUsr AS String
-STATIC PUBLIC sOpt AS String
-STATIC PUBLIC fOpt AS String
-STATIC PUBLIC sVar AS String
-STATIC PUBLIC fVar AS String
-STATIC PUBLIC sTmp AS String
-STATIC PUBLIC fTmp AS String
+PUBLIC SUB Form_Open()
 
-STATIC PUBLIC sSwap AS String
+  MdlWinDrives.LIST_WIN_PARTITIONS
 
-STATIC PUBLIC bDoWin AS Boolean
+END

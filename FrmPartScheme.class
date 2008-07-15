@@ -24,22 +24,25 @@ PUBLIC SUB Form_Resize()
     .rbUseExisting.Move(.tlBanner.Left, .tlBanner.Top + .tlBanner.Height + 8)
     .rbEditPartitions.Move(.rbUseExisting.Left, .rbUseExisting.Top + .rbUseExisting.Height + 4)
     .tlChoiceExp.Move(.rbEditPartitions.Left, .rbEditPartitions.top + .rbEditPartitions.Height + 16, .tlBanner.Width - 10)
-    .btNext.Move(.tlBanner.Left + .tlBanner.Width - .btNext.Width - 8, .ClientHeight - (.btNext.Height * 2))
+
     
   END WITH 
 
 END
 
 PUBLIC SUB Form_Open()
-
+  
+FMain.FrmCurr = ME
+FMain.tvPlan["Prep1"].Selected = TRUE
+FMain.tvPlan["Prep1"].Picture = MdlCore.sNowPic
+FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
+'FMain.frmNext = FrmPartSel
   WITH ME
     .rbEditPartitions.Width = MdlObjSizer.get_object_width(.rbEditPartitions.Text) + 24
     .rbUseExisting.Width = MdlObjSizer.get_object_width(.rbUseExisting.Text) + 24
-    .btNext.Width = MdlObjSizer.get_object_width(.btNext.Text) + 36
   END WITH 
   ME.rbEditPartitions.Value = TRUE
-FMain.btnext.Enabled = FALSE
-FMain.btnext.ForeColor = Color.Gray
+
 END
 
 PUBLIC SUB rbUseExisting_Click()
@@ -48,6 +51,7 @@ PUBLIC SUB rbUseExisting_Click()
   "Select this option if you already have a linux installation that you wish to overwrite or if a linux partition scheme exists in your " &
   "Hard disk. <b>This option will overwrite whatever is in those partitions</b><br><br>" &
   "<i>Use this option if you already prepared your partitions using the VectorLinux installer</i>"
+  FMain.frmNext = FrmPartSel
 
 END
 
@@ -56,6 +60,7 @@ PUBLIC SUB rbEditPartitions_Click()
   ME.tlChoiceExp.Text = "<b>" & rbEditPartitions.Text & "</b><br><br>" &
   "Select this option is you wish to create, more or resize partitions in order to make room for your new VectorLinux " &
   "installation. This option is the safest choice if you have other existing installations that you wish to keep."
+  FMain.frmNext = FrmDiskPart
 
 END
 
@@ -65,19 +70,9 @@ PUBLIC SUB tlChoiceExp_MouseDown()
 
 END
 
-PUBLIC SUB btNext_Click()
 
-  IF ME.rbEditPartitions.Value = TRUE THEN 
-    ' fire up the gparted window
-  FrmDiskPart.Reparent(ME.Parent)
-  ME.Hide
-  FrmDiskPart.Show
-  ELSE IF ME.rbUseExisting.Value THEN 
-    ' Fire wizard to set partitions
-    ' This will also be used after the user has already partitioned the disk
-    FrmPartSel.Reparent(ME.Parent)
-    ME.Hide
-    FrmPartSel.Show
-  END IF
+PUBLIC SUB Form_Hide()
+
+
 
 END

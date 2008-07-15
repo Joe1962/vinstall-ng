@@ -20,6 +20,7 @@ PRIVATE sLast AS String
 PUBLIC sNextKey AS String
 PUBLIC FrmCurr AS Form ' assigned when a form is opened
 PUBLIC frmLast AS Form ' assigned when a form is hidden
+PUBLIC frmNext AS Form ' assined next form for the "next" button in fmain"
 
 PUBLIC SUB _new()
 
@@ -82,23 +83,6 @@ END
 
 PUBLIC SUB tvPlan_Select()
 
-
-'tvPlan[sLast].Picture = MdlCore.sDonePic
-' 
-' 
-' 
-' IF tvPlan.Current.Picture <> MdlCore.sCatPic THEN   
-'   
-'   IF sLast THEN 
-'     tvPlan[sLast].Picture = MdlCore.sDonePic
-'   END IF
-'   
-'   tvPlan.Current.Picture = MdlCore.sNowPic
-
-
-
-'END IF  
-
 END
 
 PUBLIC SUB tvPlan_MouseUp()
@@ -118,37 +102,31 @@ END
 
 
 PUBLIC SUB btnext_Click()
-  DIM FrmNext AS Form
-  DIM sDev AS String
   DIM sISONAME AS String
+  DIM sDev AS String
   
-  'DIM FrmCurr AS Form
-  
-  SELECT CASE ME.sNextKey
-    CASE "Prep0"
-        ' We'll need to mount the ISO or image and then display the form
+  SELECT CASE FrmCurr.Name ' very nice navigation algoritm
+    CASE "FrmSelISO"
         sDev = Right(FrmSelISO.lstInstallableImg.Text, Len(FrmSelISO.lstInstallableImg.Text) - InStr(FrmSelISO.lstInstallableImg.text, "/") + 1)
         IF InStr(FrmSelISO.lstInstallableImg.text, ".iso") OR InStr(FrmSelISO.lstInstallableImg.text, ".ISO") THEN 
-          sISONAME = Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, " ") - 1)
-          MdlSetup.GO_WITH_SELECTED(sDev, sISONAME)
+           sISONAME = Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, " ") - 1)
+           MdlSetup.GO_WITH_SELECTED(sDev, sISONAME)
         ELSE 
-        
-        MdlSetup.GO_WITH_SELECTED(sDev, "")
+          MdlSetup.GO_WITH_SELECTED(sDev, "")
         END IF
-      FrmNext = FrmPartScheme
-      ME.tvPlan.Current.Picture = MdlCore.sDonePic
-      ME.tvPlan["Prep1"].Selected = TRUE
-      ME.tvPlan["Prep1"].Picture = MdlCore.sNowPic
-          
-    CASE "Prep1"
-      FrmNext = FrmDiskPart
-      ME.tvPlan.Current.Picture = MdlCore.sDonePic
-      ME.tvPlan["Prep2"].Picture = MdlCore.sNowPic
-      ME.tvPlan["Prep2"].Selected = TRUE
+    CASE "FrmPartSel"
+        IF NOT ClsPartSel.sRoot OR ClsPartSel.sRoot = "" THEN 
+        Message.Error("You must select a \"/\" partition. This is the target where the system will install to")
+          STOP EVENT 
+        END IF
   END SELECT 
+            
+            
   
-  FrmNext.Reparent(FrmCurr.Parent)
+  frmNext.Reparent(ME.pnlWinHost)
   FrmCurr.Hide
-  FrmNext.Show
+  frmLast = FrmCurr
+  frmNext.Show
+ 
 
 END

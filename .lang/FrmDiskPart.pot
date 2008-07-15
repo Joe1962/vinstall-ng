@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmDiskPart.class:96
+#: FrmDiskPart.class:100
 msgid "Disk Partitioning:"
 msgstr ""
 
