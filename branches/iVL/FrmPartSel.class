@@ -55,7 +55,7 @@ END
 
 PUBLIC SUB Form_Hide()
 
-  
+  ME.ANALYZE_PARTITION_SETUP()
 
 END
 
