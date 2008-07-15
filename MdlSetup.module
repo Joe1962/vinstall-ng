@@ -79,25 +79,14 @@ PUBLIC FUNCTION FORMAT_SELECTED_PARTITIONS() AS Integer
               
     
     SHELL "mkfs." & LCase(ClsPartSel.fRoot) & " || echo \'ERROR\'" TO sDump
-      ' IF hproc.State = Process.Running THEN 
-      '   REPEAT 
-      '     WAIT 
-      '   UNTIL 
-      '     hproc.state = Process.Stopped
-      '       ' do the error checking
-      ' END IF
+      
             GOTO CHECK_OUTPUT
  
  
  IF ClsPartSel.sHome AND ClsPartSel.fhome <> "Do not format" THEN 
   sDump = ""
   SHELL "mkfs." & LCase(ClsPartSel.fhome) & " || echo \'ERROR\'" TO sDump
-    ' IF hproc.State = Process.Running THEN 
-    '   REPEAT 
-    '     WAIT 
-    '   UNTIL 
-    '     hproc.state = Process.Stopped
-    ' END IF
+    
     GOTO CHECK_OUTPUT
   END IF
   
@@ -106,49 +95,28 @@ PUBLIC FUNCTION FORMAT_SELECTED_PARTITIONS() AS Integer
  IF ClsPartSel.sOpt AND ClsPartSel.fOpt <> "Do not format" THEN 
  sDump = ""
   SHELL "mkfs." & LCase(ClsPartSel.fOpt) & " || echo \'ERROR\'" TO sDump
-    ' IF hproc.State = Process.Running THEN 
-    '   REPEAT 
-    '     WAIT 
-    '   UNTIL 
-    '     hproc.state = Process.Stopped
-    ' END IF
-  
+     
         GOTO CHECK_OUTPUT
  END IF
  
  IF ClsPartSel.sUsr AND ClsPartSel.fUsr <> "Do not format" THEN 
   sDump = ""
   SHELL "mkfs." & LCase(ClsPartSel.fUsr) & " || echo \'ERROR\'" TO sDump
-    ' IF hproc.State = Process.Running THEN 
-    '   REPEAT 
-    '     WAIT 
-    '   UNTIL 
-    '   hproc.State = Process.Stopped
-    ' END IF
+    
       GOTO CHECK_OUTPUT
  END IF
  
  IF ClsPartSel.sVar AND ClsPartSel.fVar <> "Do not format" THEN 
   sDump = ""
   SHELL "mkfs." & LCase(ClsPartSel.fVar) & " || echo \'ERROR\'" TO sDump
-    ' IF hproc.State = Process.Running THEN 
-    '   REPEAT 
-    '     WAIT 
-    '   UNTIL 
-    '     hproc.State = Process.Stopped
-    ' END IF
+    
     GOTO CHECK_OUTPUT
   END IF
   
   IF ClsPartSel.sTmp AND ClsPartSel.fTmp <> "Do not format" THEN 
     sDump = ""
        SHELL "mkfs." & LCase(ClsPartSel.fTmp) & " || echo \'FAILED\'" TO sDump
-        ' IF hproc.state = Process.Running THEN 
-        '   REPEAT 
-        '     WAIT 
-        '   UNTIL 
-        '     hproc.state = Process.Stopped
-        ' END IF
+        
           GOTO CHECK_OUTPUT
   END IF
   
@@ -168,7 +136,7 @@ PUBLIC SUB MOUNT_DEFINED_PARTITIONS()
   
   ' this is where we need to set the mount target
   ClsGlobal.sTargetMnt = "/mnt/target"
-    IF Exist(ClsGlobal.sTargetMnt)FALSE THEN 
+    IF Exist(ClsGlobal.sTargetMnt) = FALSE THEN 
       TRY MKDIR ClsGlobal.sTargetMnt
     END IF
     
@@ -209,9 +177,6 @@ PUBLIC SUB MOUNT_DEFINED_PARTITIONS()
   
   
 END
-
-  
-  
 
 
 
@@ -258,13 +223,10 @@ IF ClsPartSel.sTmp THEN
 END IF
 
 sFstab = sFstab & "\n\n" &
-"# Shared Windows/Linux partition"
+"# Shared Windows/Linux partition" &
 "#/dev/hda1   /mnt/dos  msdos  umask=0   0  0 \n" &
 "#/dev/hda1   /mnt/win  vfat   fmask=111,dmask=0,quiet,shortname=mixed,user  0  0 \n" &
 "#/dev/hda1   /mnt/win  ntfs   umask=0   0  0\n" &
-' Add any windows partitions to the fstab file
-' fix me here please
-
 "# Floppy disks \n" &
 "# The 'noauto' option indicates that the file system should not be mounted \n" &
 "# with 'mount -a' 'user' indicates that normal users are allowed to mount \n" &
@@ -274,9 +236,9 @@ sFstab = sFstab & "\n\n" &
 "# If you have a ls-120 floppy drive, it could be on /dev/hda b c d etc.\n" &
 "#/dev/hdd  /mnt/ls120  auto  defaults,noauto,user  0 0 \n\n" &
 "# CDROM, CDWRITER, DVD \n" &
-"/dev/cdrom    /mnt/cdrom  iso9660  defaults,noauto,ro,user  0 0 \n" &
-"#/dev/cdwriter /mnt/cdwriter  iso9660  defaults,noauto,rw,user  0 0 \n" &
-"#/dev/dvd      /mnt/dvd   auto  defaults,noauto,ro,user  0 0\n\n" &
+"/dev/cdrom    /media/cdrom  iso9660  defaults,noauto,ro,user  0 0 \n" &
+"#/dev/cdwriter /media/cdwriter  iso9660  defaults,noauto,rw,user  0 0 \n" &
+"#/dev/dvd      /media/dvd   auto  defaults,noauto,ro,user  0 0\n\n" &
 "# NFS file systems:\n" &
 "#linux01.gwdg.de:/suse/6.3/i386.de  /mnt/nfs  nfs  defaults  0 0\n\n" &
 "# proc file system:\n" &
@@ -290,7 +252,6 @@ sFstab = sFstab & "\n\n" &
 "usbfs /proc/bus/usb usbfs rw,devmode=0666 0 0\n\n" &
 "# example of a VFAT USB pendrive\n" &
 "#/dev/sda1  /mnt/pendrive vfat   fmask=111,dmask=0,noauto,user,quiet,shortname=mixed 0 0\n\n" &
-
 "# Swap partitions\n" &
 "# The 'sw' option means auto activating with 'swapon -a'.\n"
 IF ClsPartSel.sSwap THEN 
@@ -311,14 +272,18 @@ END IF
 END 
 PUBLIC FUNCTION fS_oPTIONS(sType AS String) AS String
   
-    SELECT CASE LCase(sFrmt)
+    DIM sMntOpts AS String
+    
+    SELECT CASE LCase(sType)
       CASE "reiserfs"
         sMntOpts = "noatime"
       CASE "vfat"
         sMntOpts = "fmask=111,dmask=0,gid=users,shortname=mixed,quiet,user"
       CASE "ntfs"
         sMntOpts = "umask=0,gid=users,user"
-      CASE "ext2", "ext3", ELSE 
+      CASE "ext2", "ext3"
+        sMntOpts = "defaults"
+      CASE ELSE 
         sMntOpts = "defaults"
     END SELECT 
     
