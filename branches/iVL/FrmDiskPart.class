@@ -20,6 +20,10 @@
 
 
 PUBLIC SUB Form_Open()
+  
+  FMain.FrmCurr = ME
+  
+  
   MdlDiskPart.EMBED_GPARTED()
 
   WITH ME

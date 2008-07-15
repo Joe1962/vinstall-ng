@@ -184,76 +184,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 
           'Message.Info("Swap total = " & iswapsize)
         END IF
-          
-  ' now, do the WIN partitions
-  ' MOVE THESE PARTITIONS TO A DIFFERENT WINDOW.
-  ' THESE ARE ONLY NEEDED FOR FSTAB
-  sDump1 = ""
-    'FIX THIS COMMAND.... MAY NOT WORK OR NEED MORE ACCURATE DETECTION
-  SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -i \" FAT\" | cut -f 1 -d \' \'" TO sDump1
-    IF sDump1 THEN 
-    sDump1 = Trim(sDump1)
-    y = y + tl.Height * 2 + 4
-        ' create a new text label just to label the separation between windows and linux partitions
-        tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "Separator"
-          WITH tl
-            .Text = "<b>Windows Partitions</b>"
-            .Height = 27
-            .Width = MdlObjSizer.get_object_width(.Text)
-            .x = FrmPartSel.tlPartRow2.Left
-            .y = y
-          END WITH 
-    END IF
-      IF InStr(sDump1, gb.NewLine) THEN ' more than one partition found
-        sPartList = Split(sDump1, gb.NewLine)
-          FOR i = 0 TO sPartList.Count - 1
-            sPart = Right(sPartList[i], Len(sPartList[i]) - RInStr(sPartList[i], "/"))
-                        
-                SHELL "sudo mkdir /mnt" &/ spart & " && sudo mount " & Trim(sPartList[i]) & Space(1) & "/mnt" &/ sPart WAIT 
-                    ' get the size using df -h | grep sPart and some sed
-                    ' will embed some bash, but should probabbly be fixed
-                SHELL "export " & sPart & "=$(df -h | grep " & sPart & ") && echo $" & sPart & " | cut -f 2 -d \' \'" TO sSize
-                SHELL "sudo umount /mnt" &/ spart
-                SHELL "sudo rm -rf /mnt" &/ spart
-            
-              tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "WinPartitions"
-                WITH tl
-                  .Width = tl.Width
-                  .Text = sPart & " ( " & sSize & " )"
-                  .Tag = sPartList[i]
-                  .Height = 27
-                  .x = FrmPartSel.tlPartRow.Left
-                  .y = y
-                END WITH
-                y = y + tl.Height + 4
-                
-          NEXT 
-      ELSE ' only one win partition found
-      
-        sPart = Right(sDump1, Len(sDump1) - RInStr(sDump1, "/"))
-        SHELL "sudo mkdir /mnt" &/ spart & " && sudo mount " & Trim(sDump1) & Space(1) & "/mnt" &/ sPart WAIT 
-        SHELL "export " & sPart & "=$(df -h | grep " & sPart & ") && echo $" & sPart & " | cut -f 2 -d \' \'" TO sSize
-        
-        
-        
-        y = y + tl.Height + 4
-        tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "WinPartitions"
-          WITH tl
-            .Width = lbwidth
-            .Text = sDump1 & " ( " & sSize & " )"
-            .tag = sDump1
-            .Height = 27
-            .x = FrmPartSel.tlPartRow.Left
-            .y = y
-                        
-          END WITH 
-          SHELL "sudo umount /mnt" &/ spart WAIT 
-        SHELL "sudo rm -rf /mnt" &/ spart WAIT 
-  END IF
-        
-           
-  
-  
+
   
 END
  
@@ -323,7 +254,7 @@ IF LAST.text = "Do not format"
       NEXT 
     END IF
   
-  PRINT "format " & LAST.tag & " as " & LAST.text
+  'PRINT "format " & LAST.tag & " as " & LAST.text
   
   ME.SET_PARTITION_FORMAT(LAST.tag, LAST.text)
   

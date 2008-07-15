@@ -14,19 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmSelISO.class:188
+#: FrmSelISO.class:189
 msgid "No installable images found."
 msgstr ""
 
-#: FrmSelISO.class:194
+#: FrmSelISO.class:195
 msgid "Select which distribution to install from the list below"
 msgstr ""
 
-#: FrmSelISO.class:199
+#: FrmSelISO.class:200
 msgid "TextLabel1"
 msgstr ""
 
-#: FrmSelISO.class:204
+#: FrmSelISO.class:205
 msgid "Search Again"
 msgstr ""
 

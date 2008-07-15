@@ -14,19 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmLicense.class:100
+#: FrmLicense.class:99
 msgid "LICENSE AGREEMENT"
 msgstr ""
 
-#: FrmLicense.class:105
+#: FrmLicense.class:104
 msgid "TextArea1"
 msgstr ""
 
-#: FrmLicense.class:111
+#: FrmLicense.class:110
 msgid "Yes, I Agree to the License Agreement"
 msgstr ""
 
-#: FrmLicense.class:116
+#: FrmLicense.class:115
 msgid "No, I Do Not Agree"
 msgstr ""
 

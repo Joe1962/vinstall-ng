@@ -329,14 +329,7 @@ IF Exist(ClsGlobal.sSetupConfPath) THEN
       "/home " & iMinHome & "<br>" &
       "swap " & iMinSwap
     END WITH 
-      ' PRINT sDistro
-      ' PRINT sVer
-      ' PRINT sBuildDate
-      ' PRINT iMinHome
-      ' PRINT iMinRoot
-      ' PRINT iMinSwap
-      ' PRINT ClsGlobal.sBulkList
-      ' PRINT ClsGlobal.sConfPkg
+     
   ELSE 
     'File not found
     Message.Error("Setup is unable to find SETUP.CONF in your install media. This could be symptoms of a bad burn or a bad ISO")
