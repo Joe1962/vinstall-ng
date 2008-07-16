@@ -111,7 +111,7 @@ PUBLIC SUB MEDIA_SCAN()
   ClsGlobal.sSourceMnt = User.home &/ "mnt" &/ "cdrom"
   sMountPoint = ClsGlobal.sSourceMnt
   
-  sCmd = "cat /proc/sys/dev/cdrom/info | grep \"drive name\" |cut -f2 -d\':\'|xargs -n 2" 
+  sCmd = "sudo cat /proc/sys/dev/cdrom/info | grep \"drive name\" |cut -f 2 -d\':\'|xargs -n 2" 
   SHELL sCmd TO sList
   sList = Trim(sList)
   'PRINT sList
@@ -143,6 +143,28 @@ PUBLIC SUB MEDIA_SCAN()
         NEXT 
       
     ELSE ' only one drive found
+    sDrive = Trim(sList)
+        SHELL "sudo mount /dev/" & sDrive & Space(1) & sMountPoint WAIT 
+            IF Exist(sMountPoint &/ "veclinux" &/ "SETUP.CONF") = TRUE THEN 
+               sDump = ME.ID_DISTRO(sMountPoint &/ "veclinux" &/ "SETUP.CONF")
+                'save a copy of SETUP.CONF in a temp disposable file
+                  ' this temp file will be named as the last characters of the drive that contains the distro (ie, hda, sg0, sda)
+                   ' this information will be used FOR reading the file later
+                    
+               File.Save(Temp$(sDrive), DConv(File.Load(sMountPoint &/ "veclinux" &/ "SETUP.CONF")))
+               'Message.Info(File.Load(Temp$(sDrive)))
+               
+               IF FrmSelISO.lstInstallableImg.Find(sDump & " on " & "/dev/" & sDrive) = -1 THEN  'only add the entry if not found
+                FrmSelISO.lstInstallableImg.Add(sDump & " on " & "/dev/" & sDrive)
+              END IF
+              
+              
+            END IF
+          SHELL "sudo umount /dev/" & sDrive WAIT 
+    
+    
+    
+    
     END IF
     
     

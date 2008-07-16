@@ -62,7 +62,7 @@ DIM iMid AS Integer
   WITH ME
     .tlBanner.width = ME.width
     .Frame1.Move(.tlBanner.left + 4, .tlBanner.Top + .tlBanner.Height + 4, .tlBanner.Width - ((.tlBanner.Width / 10) * 7), .Height - (.tlbanner.height + (.tlbanner.height / 2)))
-    .tvPlan.Resize(.Frame1.Width - 20, .Frame1.Height - 30)
+    .tvPlan.Resize(.Frame1.Width - 20, .Frame1.Height - 36)
     .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top, .tlBanner.Width - (.Frame1.Width + 8), .Frame1.Height)
     .btback.Move(.pnlWinHost.Left, .pnlWinHost.Top + .pnlWinHost.Height - (.btback.Height), MdlObjSizer.get_object_width(.btback.text) + 36)
     .btnext.Move(.pnlWinHost.Left + .pnlWinHost.Width - (.btnext.Width + 4), .btback.Top, MdlObjSizer.get_object_width(.btnext.text) + 36)
