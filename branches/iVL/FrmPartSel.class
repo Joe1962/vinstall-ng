@@ -54,6 +54,7 @@ PUBLIC SUB Form_Open()
   ME.cbDoWin.Width = MdlObjSizer.get_object_width(cbDoWin.text) + 24
   MdlPartSel.DISPLAY_PARTITION_OPTIONS
   ME.cbDoWin.Value = FALSE
+  ClsPartSel.bDoWin = FALSE
   
 
 END
@@ -107,11 +108,11 @@ END
 PUBLIC SUB cbDoWin_Click()
 
   ClsPartSel.bDoWin = cbDoWin.Value
-    IF ClsPartSel.bDoWin = TRUE THEN 
-      FMain.frmNext = FrmWinDrives
-    ELSE 
-      ' Move towards installing packages
-    END IF
+    ' ' IF ClsPartSel.bDoWin = TRUE THEN 
+    ' '   FMain.frmNext = FrmWinDrives
+    ' ' ELSE 
+    ' '   ' Move towards installing packages
+    ' ' END IF
   
 
 END

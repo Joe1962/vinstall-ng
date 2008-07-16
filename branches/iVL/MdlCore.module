@@ -25,45 +25,57 @@ PUBLIC sNowPic AS picture = Picture["images/arrow.png"]
 PUBLIC sDonePic AS Picture = Picture["images/check.png"]
 
 
-PUBLIC SUB SEARCH_LINUX_DRIVES_FOR_MEDIA(sDev AS String)
-  DIM sIsoList AS String[]
-  DIM sResults AS String
-  DIM sISO AS String
+
+PUBLIC SUB FIND_ISO_ON_DRIVE(sDrive AS String)
+  
+  DIM sISOList AS String[]
+  DIM sResults, sISO AS String
   DIM i AS Integer
   
-  SHELL "sudo mount " & sDev & Space(1) & ClsGlobal.sSourceMnt WAIT 
-   SHELL "ls " & ClsGlobal.sSourceMnt & "| grep -i vl* | grep -i iso" TO sResults
-  'SHELL "ls / | grep -i VL* | grep -i iso" TO sResults
-    sResults = Trim(sResults)
-      IF InStr(sResults, gb.NewLine) THEN 
-        sIsoList = Split(sResults, gb.NewLine)
-          FOR i = 0 TO sIsoList.Count - 1
-            sISO = Trim(sIsoList[i])
-              IF FrmSelISO.lstInstallableImg.Find(sISO & " on " & sDev) = -1 THEN 
-                FrmSelISO.lstInstallableImg.Add(sISO & " on " & sDev)
-                  ' save the temp file for distro description
-                    SHELL "sudo mount -o loop " & ClsGlobal.sSourceMnt &/ sISO & " /mnt/loop" WAIT 
-                      File.Save(Temp(sISO), SConv(File.Load("/mnt/loop/veclinux/SETUP.CONF")))
-                    SHELL "sudo umount /mnt/loop" WAIT 
-                                
-              END IF
-          NEXT 
-      ELSE ' only one ISO on this drive
-        IF sResults THEN 
-        sISO = Trim(sResults)
-          IF FrmSelISO.lstInstallableImg.Find(sISO & " on " & sDev) = -1 THEN 
-            FrmSelISO.lstInstallableImg.Add(sISO & " on " & sDev)
-             SHELL "sudo mount -o loop " & ClsGlobal.sSourceMnt &/ sISO & " /mnt/loop" WAIT 
-                      File.Save(Temp(sISO), SConv(File.Load("/mnt/loop/veclinux/SETUP.CONF")))
-             SHELL "sudo umount /mnt/loop" WAIT 
-             
-              END IF
-        END IF
-      END IF
-    
   SHELL "sudo umount " & ClsGlobal.sSourceMnt WAIT 
-    
+  SHELL "sudo mount " & sDrive & Space(1) & ClsGlobal.sSourceMnt WAIT 
+    SHELL "ls " & ClsGlobal.sSourceMnt & " | grep -i vl* | grep -i iso" TO sResults
+      sResults = Trim(sResults)
+      'Message(sResults)
+          IF sResults <> "" THEN 
+            IF InStr(sResults, gb.NewLine) THEN 'more than one iso was found... do a loop for each one
+              ' this loop will mount each iso and store it's SETUP.CONF to a temp file
+                sISOList = Split(sResults, gb.NewLine)
+                  FOR i = 0 TO sISOList.count - 1
+                    sIso = Trim(sISOList[i])
+                    SHELL "sudo umount /mnt/loop" WAIT 
+                    SHELL "sudo mount -o loop " & ClsGlobal.sSourceMnt &/ sISO & Space(1) & "/mnt/loop" WAIT 
+                      File.Save(Temp(siso), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
+                    SHELL "sudo umount /mnt/loop" WAIT 
+                      IF FrmSelISO.lstInstallableImg.Find(sISO & " on " & sDrive) = -1 THEN 
+                        FrmSelISO.lstInstallableImg.Add(sISO & " on " & sDrive)
+                      END IF
+                      
+                  NEXT 
+                SHELL "sudo umount " & ClsGlobal.sSourceMnt WAIT 
+                  
+                    
+                    
+            ELSE ' only one iso found
+              SHELL "sudo umount /mnt/loop" WAIT 'clear the mount point
+              SHELL "sudo mount -o loop " & ClsGlobal.sSourceMnt &/ sResults & Space(1) & " /mnt/loop" WAIT 
+                File.Save(Temp(sResults), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
+                'Message(File.Load(Temp(sResults)))
+              SHELL "sudo umount /mnt/loop && sudo umount " & ClsGlobal.sSourceMnt WAIT 
+                  IF FrmSelISO.lstInstallableImg.Find(sResults & " on " & sDrive) = -1 THEN 
+                    FrmSelISO.lstInstallableImg.Add(sResults & " on " & sDrive)
+                  END IF
+            END IF
+            
+          ELSE 'no ISO's found
+            SHELL "sudo umount " & ClsGlobal.sSourceMnt
+            
+          END IF
+            
+  
 END
+
+
 
 
 PUBLIC SUB SCAN_LINUX_PARTITIONS()
@@ -76,22 +88,20 @@ DIM sPartition AS String
 'SHELL "sudo /sbin/probepart | grep -e \"*Linux$\" | cut -f 1 -d \' \'" TO sResults
   SHELL "export PATH=$PATH:/sbin && sudo /sbin/probepart | grep -e \" *Linux$\" | cut -f 1 -d \' \'" TO sResults 
   sResults = Trim(sResults)
-    
+    'Message.Info(sResults)
   IF InStr(sResults, gb.NewLine) THEN 
     sPartList = Split(sResults, gb.NewLine)
       FOR i = 0 TO sPartList.count - 1
         sPartition = Trim(sPartList[i])
-          'now scan this partition
-            ME.SEARCH_LINUX_DRIVES_FOR_MEDIA(sPartition)
+           'now scan this partition
+           ME.FIND_ISO_ON_DRIVE(sPartition)
+            
       NEXT 
   ELSE ' only one linux partition found
     sPartition = Trim(sResults)
-      ME.SEARCH_LINUX_DRIVES_FOR_MEDIA(sPartition)
+      ME.FIND_ISO_ON_DRIVE(sPartition)
   END IF
-      
-
-
-  
+    
 END
 
 
@@ -170,20 +180,7 @@ PUBLIC SUB MEDIA_SCAN()
     
           'NOW SEARCH FOR ISOS ON THE DRIVES
     ME.SCAN_LINUX_PARTITIONS()
- ' shape the main form according to the findings
- 'warn the user if no installable media was found
  
- IF FrmSelISO.lstInstallableImg.Count = 0 THEN 
-  FrmSelISO.lstInstallableImg.Add("No Installable Media Found")
-  FrmSelISO.tlDistroDesc.Text = "Setup was unable to find any installable media on your system. Please insert your VectorLinux " &
-    "installation CD and click \'" & FrmSelISO.btResCan.Text & "\' to try again"
-  FMain.btnext.Enabled = FALSE
-  FMain.btnext.ForeColor = Color.Gray
- ELSE 
-  FMain.btnext.Enabled = TRUE
-  FMain.btnext.ForeColor = Color.Black
- END IF
-
  
   
 END

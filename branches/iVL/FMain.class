@@ -118,6 +118,12 @@ PUBLIC SUB btnext_Click()
         IF NOT ClsPartSel.sRoot OR ClsPartSel.sRoot = "" THEN 
         Message.Error("You must select a \"/\" partition. This is the target where the system will install to")
           STOP EVENT 
+        ELSE 
+          IF ClsPartSel.bDoWin = TRUE THEN 
+            frmNext = FrmWinDrives
+          ELSE 
+            ' move from here to the file copying step
+          END IF
         END IF
   END SELECT 
             
