@@ -23,12 +23,11 @@ PUBLIC SUB lstInstallableImg_Click()
   DIM sLocation AS String
   DIM ipos1 AS Integer
   
-  
   IF lstInstallableImg.Count > 0 THEN 
   IF lstInstallableImg.Text <> "No Installable Media Found" THEN   
-  
-  IF InStr(lstInstallableImg.Text, ".iso") OR InStr(lstInstallableImg.Text, ".ISO") = TRUE THEN 
+    IF InStr(Trim(lstInstallableImg.Text), ".iso") OR InStr(Trim(lstInstallableImg.Text), ".ISO") = TRUE THEN 
     sLocation = Left(lstInstallableImg.Text, InStr(lstInstallableImg.Text, " ") - 1)
+    
   ELSE 
     ipos1 = RInStr(ME.lstInstallableImg.Text, "/")
     sLocation = Right(ME.lstInstallableImg.Text, Len(ME.lstInstallableImg.Text) - ipos1)
@@ -36,11 +35,9 @@ PUBLIC SUB lstInstallableImg_Click()
   'function to read the file
   ME.DESCRIBE_DISTRO(sLocation)
   END IF
+  ELSE 
+    RETURN ' quiet return... we already know there are no images found
   END IF
-  'Message.Info(File.Load(Temp$(sLocation)))
-  
-  
-  
   
 
 END
@@ -54,6 +51,21 @@ PUBLIC SUB Form_Open()
   FMain.FrmCurr = ME
   FMain.frmNext = FrmPartScheme
   
+  ' shape the main form according to the findings
+ 'warn the user if no installable media was found
+ 
+ IF FrmSelISO.lstInstallableImg.Count = 0 THEN 
+  FrmSelISO.lstInstallableImg.Add("No Installable Media Found")
+  FrmSelISO.tlDistroDesc.Text = "Setup was unable to find any installable media on your system. Please insert your VectorLinux " &
+    "installation CD and click \'" & FrmSelISO.btResCan.Text & "\' to try again"
+  FMain.btnext.Enabled = FALSE
+  FMain.btnext.ForeColor = Color.Gray
+ ELSE 
+  FMain.btnext.Enabled = TRUE
+  FMain.btnext.ForeColor = Color.Black
+ END IF
+
+  
 
 
 
@@ -61,7 +73,7 @@ END
 
 PUBLIC SUB DESCRIBE_DISTRO(sLoc AS String)
   
-  DIM sFile AS String[] = Split(File.Load(Temp$(sLoc)), gb.NewLine)
+  DIM sFile AS String[] 
   DIM sLine AS String
   DIM i AS Integer
   DIM iSep AS String
@@ -69,6 +81,16 @@ PUBLIC SUB DESCRIBE_DISTRO(sLoc AS String)
   
   DIM sDist, sVer, iMinRoot, iMinHome, iMinSwap AS String
     
+'    Message.Info(File.Load(Temp(sLoc)))
+'Message.Info(sLoc)
+  IF sLoc <> "" THEN 
+    sFile = Split(File.Load(Temp$(sLoc)), gb.NewLine)
+  ELSE 
+    'can't find Distro ID
+    Message.Error("Unable to identify distro.")
+    RETURN 
+  END IF
+   
   IF sFile THEN 
     FOR i = 0 TO sFile.count - 1
       sLine = Trim(sFile[i])
