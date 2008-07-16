@@ -202,7 +202,23 @@ PUBLIC SUB MountPoints_CLick()
       END IF
       STOP EVENT 
     NEXT 
-      
+    
+    ' set the variable to the global class
+      SELECT CASE LCase(LAST.text)
+        CASE "/"
+          ClsPartSel.sRoot = LCase(LAST.tag)
+        CASE "/home"
+          ClsPartSel.sHome = LCase(LAST.tag)
+        CASE "/usr"
+          ClsPartSel.sUsr = LCase(LAST.tag)
+        CASE "/opt"
+          ClsPartSel.sOpt = LCase(LAST.tag)
+        CASE "/tmp"
+          ClsPartSel.sTmp = LCase(LAST.tag)
+        CASE "/var"
+          ClsPartSel.sVar = LCase(LAST.tag)
+      END SELECT 
+            
           
       
   IF sText = "Not Used" THEN 

@@ -23,8 +23,15 @@ PUBLIC SUB EMBED_GPARTED()
   DIM aHandle AS NEW Pointer[]
   DIM iHandle AS Integer
   DIM i AS Integer = 0
-
+  DIM sDump AS String
   'Desktop.Find("", "GParted")
+  
+  
+    IF Exist("/usr/sbin/gparted") = FALSE THEN 
+      Message.Error("Gparted was not found on this system. Please install gparted and try again")
+      RETURN 
+    END IF
+  
   FrmDiskPart.tlBanner.Text = "<h3>Loading gparted .... Please wait</h3>"
   SHELL "sudo /usr/sbin/gparted"
   WAIT 3

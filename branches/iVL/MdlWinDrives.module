@@ -30,8 +30,8 @@ DIM sPart AS String
 DIM sSize AS String
 DIM lbwidth AS Integer
 
-x = FrmWinDrives.svWinDrives.Left + 4
-y = FrmWinDrives.svWinDrives.Top + 8
+x = 4
+y = 8
 
 
   ' now, do the WIN partitions
@@ -39,9 +39,9 @@ y = FrmWinDrives.svWinDrives.Top + 8
   ' THESE ARE ONLY NEEDED FOR FSTAB
   sDump1 = ""
     'FIX THIS COMMAND.... MAY NOT WORK OR NEED MORE ACCURATE DETECTION
-  SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" *FAT32$\" | cut -f 1 -d \' \'" TO sDump1
+  SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" *FAT32\" | cut -f 1 -d \' \'" TO sDump1
     File.Save(Temp("fat32"), Trim(sDump1))
-    sDump1 = ""
+     sDump1 = ""
   SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" *FAT$\" | cut -f 1 -d \' \'" TO sDump1
     File.Save(Temp("fat"), Trim(sDump1))
     sDump1 = ""
@@ -53,6 +53,7 @@ y = FrmWinDrives.svWinDrives.Top + 8
     File.Load(Temp("ntfs")) & gb.NewLine
     sDump1 = Trim(sDump1)
     
+    'Message.Info(sDump1)
         
     IF sDump1 <> "" THEN 
     sDump1 = Trim(sDump1)
@@ -60,10 +61,10 @@ y = FrmWinDrives.svWinDrives.Top + 8
         ' create a new text label just to label the separation between windows and linux partitions
         tl = NEW TextLabel(FrmWinDrives.svWinDrives) AS "Separator"
           WITH tl
-            .Text = "<b>Windows Partitions</b>"
+            .Text = "<b>Windows Partitions Detected</b>"
             .Height = 27
             .Width = MdlObjSizer.get_object_width(.Text)
-            .x = x
+            .x = FrmWinDrives.svWinDrives.Width / 2 - (.Width / 2)
             .y = y
           END WITH 
     
@@ -119,18 +120,21 @@ y = FrmWinDrives.svWinDrives.Top + 8
       ELSE ' only one win partition found
       
         sPart = Right(sDump1, Len(sDump1) - RInStr(sDump1, "/"))
-        SHELL "sudo mkdir /mnt" &/ spart & " && sudo mount " & Trim(sDump1) & Space(1) & "/mnt" &/ sPart WAIT 
+        'Message(sPart)
+        SHELL "sudo mkdir -p /mnt" &/ spart & " && sudo mount " & Trim(sDump1) & Space(1) & "/mnt" &/ sPart WAIT 
         SHELL "export " & sPart & "=$(df -h | grep " & sPart & ") && echo $" & sPart & " | cut -f 2 -d \' \'" TO sSize
+        sSize = Trim(sSize)
+        'Message(sSize)
         
         
         
-        'y = y + tl.Height + 4
+        y = y + tl.Height + 4
         tl = NEW TextLabel(FrmWinDrives.svWinDrives) AS "WinPartitions"
           WITH tl
-            .Width = lbwidth
             .Text = sDump1 & " ( " & sSize & " )"
             .tag = sDump1
             .Height = 27
+            .Width = MdlObjSizer.get_object_width(.Text) * 1.5
             .x = FrmPartSel.tlPartRow.Left
             .y = y
                         
