@@ -39,22 +39,30 @@ y = 8
   ' THESE ARE ONLY NEEDED FOR FSTAB
   sDump1 = ""
     'FIX THIS COMMAND.... MAY NOT WORK OR NEED MORE ACCURATE DETECTION
-  SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" *FAT32\" | cut -f 1 -d \' \'" TO sDump1
-    File.Save(Temp("fat32"), Trim(sDump1))
-     sDump1 = ""
-  SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" *FAT$\" | cut -f 1 -d \' \'" TO sDump1
-    File.Save(Temp("fat"), Trim(sDump1))
-    sDump1 = ""
-  SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" *NTFS$\" | cut -f 1 -d \' \'" TO sDump1
-    File.Save(Temp("ntfs"), Trim(sDump1))
-    sDump1 = ""
-    sDump1 = File.Load(Temp("fat32")) & gb.NewLine &
-    File.Load(Temp("fat")) & gb.NewLine &
-    File.Load(Temp("ntfs")) & gb.NewLine
-    sDump1 = Trim(sDump1)
+  'SHELL "export PATH=$PATH:/sbin && sudo probepart 2>/dev/null | grep -e \"^/dev\" | grep -v \" Ext\" |grep -v \"raid autodetect\"|grep -v Linux \"" TO sDump1
+  'SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \"^/dev\" | grep -v \" Ext\" | grep -v \"raid autodetect\" | trep -v Linux | cut -f 1 -d \' \'" TO sDump1
+  SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \'/dev\' | grep -v \' Ext\' | grep -v \'raid autodetect\' | grep -v \' Linux\' | cut -f 1 -d \' \' | sed -s'/Disk//'" TO sDump1
+     File.Save(Temp("all"), Trim(sDump1))
+  ' ' ' SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" *FAT32\" | cut -f 1 -d \' \'" TO sDump1
+  ' ' '   File.Save(Temp("fat32"), Trim(sDump1))
+  ' ' '    sDump1 = ""
+  ' ' ' SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" *FAT$\" | cut -f 1 -d \' \'" TO sDump1
+  ' ' '   File.Save(Temp("fat"), Trim(sDump1))
+  ' ' '   sDump1 = ""
+  ' ' ' SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" *NTFS$\" | cut -f 1 -d \' \'" TO sDump1
+  ' ' '   File.Save(Temp("ntfs"), Trim(sDump1))
+  ' ' '   sDump1 = ""
+
+    ' ' ' sDump1 = File.Load(Temp("fat32")) & gb.NewLine &
+    ' ' ' File.Load(Temp("fat")) & gb.NewLine &
+    ' ' ' File.Load(Temp("ntfs")) & gb.NewLine
+    ' ' ' sDump1 = Trim(sDump1)
     
     'Message.Info(sDump1)
-        
+    vObj = NEW Object[]
+sDump1 = File.Load(Temp("all"))
+sDump1 = Trim(sDump1)
+'Message(sDump1)
     IF sDump1 <> "" THEN 
     sDump1 = Trim(sDump1)
     'y = y + tl.Height * 2 + 4
@@ -67,7 +75,7 @@ y = 8
             .x = FrmWinDrives.svWinDrives.Width / 2 - (.Width / 2)
             .y = y
           END WITH 
-    
+    y = y + tl.Height * 2
     'END IF
       IF InStr(sDump1, gb.NewLine) THEN ' more than one partition found
         sPartList = Split(sDump1, gb.NewLine)
@@ -83,8 +91,9 @@ y = 8
             
               tl = NEW TextLabel(FrmWinDrives.svWinDrives) AS "WinPartitions"
                 WITH tl
-                  .Width = tl.Width
+                  
                   .Text = sPart & " ( " & sSize & " )"
+                  .Width = MdlObjSizer.get_object_width(.Text) * 1.5
                   .Tag = sPartList[i]
                   .Height = 27
                   .x = FrmPartSel.tlPartRow.Left
@@ -97,7 +106,7 @@ y = 8
                 ME.vObj.Add(tl)
                 
                 ' now create the combobox to select the mount point
-                  cb = NEW ComboBox
+                  cb = NEW ComboBox(FrmWinDrives.svWinDrives)
                     WITH cb
                       .Width = tl.Width
                       .Tag = sPartList[i]
@@ -106,6 +115,7 @@ y = 8
                       .y = tl.Top
                       .Width = lbwidth
                       .Add("/mnt" &/ sPart)
+                      .ReadOnly = FALSE
                     END WITH 
                 
                 y = y + tl.Height + 4
