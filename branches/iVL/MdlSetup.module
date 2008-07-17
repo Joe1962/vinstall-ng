@@ -34,7 +34,7 @@ PUBLIC SUB GO_WITH_SELECTED(sDev AS String, sISONAME AS String) ' this will moun
   END IF
   
   ' display the license agreement text
-  FrmLicense.taLicense.Text = SConv(File.Load(sPathToLic))
+'  FrmLicense.taLicense.Text = SConv(File.Load(sPathToLic))
   
   ' This will also set the default variables for distro name and version to clsglobal
     MdlCore.SET_DECISSION(ClsGlobal.sSourceMnt)

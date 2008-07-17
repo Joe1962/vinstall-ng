@@ -38,27 +38,9 @@ y = 8
   ' MOVE THESE PARTITIONS TO A DIFFERENT WINDOW.
   ' THESE ARE ONLY NEEDED FOR FSTAB
   sDump1 = ""
-    'FIX THIS COMMAND.... MAY NOT WORK OR NEED MORE ACCURATE DETECTION
-  'SHELL "export PATH=$PATH:/sbin && sudo probepart 2>/dev/null | grep -e \"^/dev\" | grep -v \" Ext\" |grep -v \"raid autodetect\"|grep -v Linux \"" TO sDump1
-  'SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \"^/dev\" | grep -v \" Ext\" | grep -v \"raid autodetect\" | trep -v Linux | cut -f 1 -d \' \'" TO sDump1
-  SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \'/dev\' | grep -v \' Ext\' | grep -v \'raid autodetect\' | grep -v \' Linux\' | cut -f 1 -d \' \' | sed -s'/Disk//'" TO sDump1
-     File.Save(Temp("all"), Trim(sDump1))
-  ' ' ' SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" *FAT32\" | cut -f 1 -d \' \'" TO sDump1
-  ' ' '   File.Save(Temp("fat32"), Trim(sDump1))
-  ' ' '    sDump1 = ""
-  ' ' ' SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" *FAT$\" | cut -f 1 -d \' \'" TO sDump1
-  ' ' '   File.Save(Temp("fat"), Trim(sDump1))
-  ' ' '   sDump1 = ""
-  ' ' ' SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" *NTFS$\" | cut -f 1 -d \' \'" TO sDump1
-  ' ' '   File.Save(Temp("ntfs"), Trim(sDump1))
-  ' ' '   sDump1 = ""
-
-    ' ' ' sDump1 = File.Load(Temp("fat32")) & gb.NewLine &
-    ' ' ' File.Load(Temp("fat")) & gb.NewLine &
-    ' ' ' File.Load(Temp("ntfs")) & gb.NewLine
-    ' ' ' sDump1 = Trim(sDump1)
-    
-    'Message.Info(sDump1)
+      SHELL "PATH=$PATH:/sbin && sudo probepart | grep -e \'/dev\' | grep -v \' Ext\' | grep -v \'raid autodetect\' | grep -v \' Linux\' | cut -f 1 -d \' \' | sed -r \'s/Disk//g\'" TO sdump1
+       File.Save(Temp("all"), Trim(sDump1))
+     
     vObj = NEW Object[]
 sDump1 = File.Load(Temp("all"))
 sDump1 = Trim(sDump1)
@@ -78,7 +60,9 @@ sDump1 = Trim(sDump1)
     y = y + tl.Height * 2
     'END IF
       IF InStr(sDump1, gb.NewLine) THEN ' more than one partition found
-        sPartList = Split(sDump1, gb.NewLine)
+        sPartList = Split(sDump1, gb.NewLine) ' multiple partitions found
+          'initiate the array
+            ClsWinDrives.sWinDrives = NEW String[]  
           FOR i = 0 TO sPartList.Count - 1
             sPart = Right(sPartList[i], Len(sPartList[i]) - RInStr(sPartList[i], "/"))
                         
@@ -92,7 +76,7 @@ sDump1 = Trim(sDump1)
               tl = NEW TextLabel(FrmWinDrives.svWinDrives) AS "WinPartitions"
                 WITH tl
                   
-                  .Text = sPart & " ( " & sSize & " )"
+                  .Text = sPartList[i] & " ( " & sSize & " )"
                   .Width = MdlObjSizer.get_object_width(.Text) * 1.5
                   .Tag = sPartList[i]
                   .Height = 27
@@ -104,9 +88,9 @@ sDump1 = Trim(sDump1)
                   .Width = lbwidth
                 END WITH
                 ME.vObj.Add(tl)
-                
+                ClsWinDrives.sWinDrives.Add(tl.Tag & "|" & "/mnt/" & sPart)
                 ' now create the combobox to select the mount point
-                  cb = NEW ComboBox(FrmWinDrives.svWinDrives)
+                  cb = NEW ComboBox(FrmWinDrives.svWinDrives) AS "WinMntPoints"
                     WITH cb
                       .Width = tl.Width
                       .Tag = sPartList[i]
@@ -164,6 +148,38 @@ sDump1 = Trim(sDump1)
       END WITH 
  END IF
 END 
-           
+       
+PUBLIC SUB WinMntPoints_keyrelease()
+  
+  ME.UPDATE_WIN_ARRAY(LAST.tag, Trim(LAST.text))
+  
+END
+PUBLIC SUB WinMntPoints_Select()
+  
+  ME.UPDATE_WIN_ARRAY(LAST.tag, Trim(LAST.text))
+  
+END
+
+    
   
   
+  
+PUBLIC SUB UPDATE_WIN_ARRAY(sTag AS String, sMntPoint AS String)
+
+DIM i AS Integer
+DIM sLine AS String
+  FOR i = 0 TO ClsWinDrives.sWinDrives.Count - 1
+    sLine = ClsWinDrives.sWinDrives[i]
+      IF Left(sLine, InStr(sLine, "|") - 1) = sTag THEN 
+        sLine = sTag & "|" & sMntPoint
+      PRINT sLine
+      ELSE 
+        sLine = sLine
+      END IF
+  NEXT 
+  
+  ' WARNING: ALTHOUGH THIS WORKS, IT MAY STILL NOT BE SAVING THE DATA TO THE ARRAY.... MAKE SURE THE NEW VALUES ARE
+  ' SAVED. ALSO, MAKE IT WORK WITH A SINGLE PARTITION AS WELL.
+  
+END
+
