@@ -121,12 +121,13 @@ PUBLIC SUB MEDIA_SCAN()
   ClsGlobal.sSourceMnt = User.home &/ "mnt" &/ "cdrom"
   sMountPoint = ClsGlobal.sSourceMnt
   
-  sCmd = "sudo cat /proc/sys/dev/cdrom/info | grep \"drive name\" |cut -f 2 -d\':\'|xargs -n 2" 
+  sCmd = "sudo cat /proc/sys/dev/cdrom/info | grep \"drive name\" |cut -f 2 -d\':\'|xargs -n 2 | sed -r \'s/ /\\n/g\'" 
   SHELL sCmd TO sList
   sList = Trim(sList)
   'PRINT sList
-    IF InStr(sList, Space(1)) > 0 THEN 'there is more than one drive
-    sDrives = Split(sList, Space(1))
+    'IF InStr(sList, Space(1)) > 0 THEN 'there is more than one drive
+    IF InStr(sList, gb.newline) THEN ' More than one cd drive found
+    sDrives = Split(sList, gb.NewLine)
             
       FOR i = 0 TO sDrives.count - 1
         ' this is where we loop to find SETUP.CONF in the cd
@@ -170,7 +171,10 @@ PUBLIC SUB MEDIA_SCAN()
               
               
             END IF
-          SHELL "sudo umount /dev/" & sDrive WAIT 
+          'sHELL "sudo umount /dev/" & sDrive WAIT 
+          SHELL "sudo umount " & ClsGlobal.sSourceMnt WAIT 
+            CATCH 
+              Message( ERROR )
     
     
     
