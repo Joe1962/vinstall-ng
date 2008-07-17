@@ -22,6 +22,7 @@ PUBLIC SUB GO_WITH_SELECTED(sDev AS String, sISONAME AS String) ' this will moun
   DIM sAddy AS String = Right(sDev, Len(sDev) - RInStr(sDev, "/"))
    
   
+  'message.info(sDev)
   IF sISONAME OR sISONAME <> "" THEN 
     'SHELL "sudo mount " & sDev & " /mnt/loop" WAIT ' will switch places here .. the device will mount to loop and the iso will mount to the mount point
     SHELL "sudo mkdir -p /mnt" &/ sAddy & " && sudo mount " & sDev & Space(1) & "/mnt" &/ sAddy WAIT 

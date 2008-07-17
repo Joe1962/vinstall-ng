@@ -51,9 +51,10 @@ PUBLIC SUB EMBED_GPARTED()
         aHandle = Desktop.Find(sTitle)
         INC i
       UNTIL 
-      i = 10 OR aHandle.Count > 0
+      aHandle.Count > 0 OR i = 10
+      'i = 10 OR aHandle.Count > 0
         IF aHandle.Count = 0 THEN 
-          Message("Setup is unable to successfully run gslapt on this system. This may be a sign of \n" &
+          Message("Setup is unable to successfully run gparted on this system. This may be a sign of \n" &
           "a bad install media. Setup cannot continue.")
         RETURN 
         END IF
@@ -67,8 +68,9 @@ PUBLIC SUB EMBED_GPARTED()
   
   'TRY embEmbedder.Embed(iHandle)
   TRY FrmDiskPart.EmbGPARTED.Embed(iHandle)
-  
-  IF ERROR THEN Message.Warning(Error.Text)
+    CATCH 
+      Message.Error(Error.text)
+  'IF ERROR THEN Message.Warning(Error.Text)
   
 END
 
