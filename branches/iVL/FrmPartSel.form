@@ -26,7 +26,7 @@
     }
   }
   { cbDoWin CheckBox
-    MoveScaled(1,50,57,3)
+    MoveScaled(1,50,57,3.375)
     ToolTip = ("Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts")
     Text = ("Detect and Setup Windows partitions for auto-mounting at boot")
   }

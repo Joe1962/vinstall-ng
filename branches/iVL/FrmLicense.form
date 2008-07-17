@@ -13,11 +13,11 @@
     ReadOnly = True
   }
   { rbYes RadioButton
-    MoveScaled(2,50,20,3)
+    MoveScaled(2,51,20,3.375)
     Text = ("Yes, I Agree to the License Agreement")
   }
   { rbNo RadioButton
-    MoveScaled(2,46,20,3)
+    MoveScaled(2,46,20,3.375)
     Text = ("No, I Do Not Agree")
   }
 }

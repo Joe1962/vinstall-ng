@@ -191,6 +191,9 @@ PUBLIC SUB main()
 
  ME.MEDIA_SCAN 
   FMain.Show
+  FMain.SkipTaskbar = TRUE
+  FMain.Maximized = TRUE
+  FMain.Resize(Desktop.Width, Desktop.Height)
   'FMain.tvPlan.MoveTo("Prep0")
 FMain.tvPlan["Prep0"].Selected = TRUE
  

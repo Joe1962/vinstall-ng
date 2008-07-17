@@ -8,11 +8,11 @@
     Text = ("Select your disk partition option")
   }
   { rbUseExisting RadioButton
-    MoveScaled(2,8,32,3)
+    MoveScaled(2,7,32,3.375)
     Text = ("Use existing disk partitions")
   }
   { rbEditPartitions RadioButton
-    MoveScaled(2,12,62,3)
+    MoveScaled(2,12,62,3.375)
     Text = ("Modify my disk partitions to make room for new installation")
   }
   { tlChoiceExp TextLabel
