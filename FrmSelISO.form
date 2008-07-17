@@ -5,7 +5,7 @@
   Text = ("")
   FullScreen = True
   { lstInstallableImg ComboBox
-    MoveScaled(1,7,45,3)
+    MoveScaled(1,7,45,3.375)
     Text = ("No installable images found.")
     ReadOnly = True
   }
@@ -18,7 +18,7 @@
     Text = ("TextLabel1")
   }
   { btResCan Button
-    MoveScaled(49,7,13,3)
+    MoveScaled(49,7,13,3.375)
     Text = ("Search Again")
     Picture = Picture["icon:/16/refresh"]
   }
