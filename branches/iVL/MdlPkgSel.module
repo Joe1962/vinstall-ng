@@ -1,0 +1,67 @@
+' Gambas module file
+
+  
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC options AS Object[]
+PUBLIC SUB LIST_PACKAGE_SELECTION()
+  
+  DIM cb AS CheckBox
+  DIM i, ii, cby AS Integer
+  DIM sFIle AS String[]
+  DIM sCurrLine AS String[]
+  DIM sLine, sPkg, sDesc AS String
+  DIM vsize AS Variant
+  DIM isize AS Integer
+  
+  cby = 4
+  'File.Save(Temp("SETUP.CONF"), DConv(File.Load(ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF")))
+  'Message(File.Load(Temp("SETUP.CONF")))
+    
+    sFIle = Split(File.Load(Temp("SETUP.CONF")), gb.NewLine)
+      FOR i = 0 TO sFIle.count - 1
+        sLine = Trim(sFIle[i])
+          IF Left(sLine, Len("BULK")) = "BULK" THEN 
+            sCurrLine = Split(sLine, ":")
+              'line format is File_name.tlz:Size_kb:Description
+              sPkg = sCurrLine[0]
+              sDesc = sCurrLine[2]
+              vsize = sCurrLine[1]
+                IF InStr(sDesc, "\'") THEN 
+                  sDesc = Left(sDesc, Len(sDesc) - 1)
+                END IF
+                IF InStr(sPkg, "optional/") THEN 
+                
+              cb = NEW CheckBox(FrmPkgSel.scrlInstallOpts) AS "OptBulks"
+                  WITH cb
+                    .Text = sDesc & Space(1) & "[ " & CStr(vsize) & " KB ]"
+                    .Width = MdlObjSizer.get_object_width(.Text) + 24
+                    .x = 4
+                    .y = cby
+                    .Height = 27
+                    .Tag = sPkg
+                    .Value = TRUE
+                  END WITH 
+                  cby = cby + cb.Height + 4
+                END IF
+            END IF
+        NEXT 
+        
+    
+  
+  
+  
+END
