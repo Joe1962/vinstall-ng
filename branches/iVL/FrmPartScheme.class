@@ -41,7 +41,7 @@ FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
     .rbEditPartitions.Width = MdlObjSizer.get_object_width(.rbEditPartitions.Text) + 24
     .rbUseExisting.Width = MdlObjSizer.get_object_width(.rbUseExisting.Text) + 24
   END WITH 
-  ME.rbEditPartitions.Value = TRUE
+ME.rbUseExisting_Click()
 
 END
 

@@ -3,11 +3,12 @@
 { Form Form
   MoveScaled(0,0,67,56)
   Text = ("")
+  { svWinDrives ScrollView
+    MoveScaled(1,8,64,43)
+    Expand = True
+  }
   { tlBanner TextLabel
     MoveScaled(1,2,65,5)
     Text = ("Select the windows partitions you would like to mount during boot")
-  }
-  { svWinDrives ScrollView
-    MoveScaled(1,8,64,39)
   }
 }
