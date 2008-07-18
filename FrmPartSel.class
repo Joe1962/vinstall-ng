@@ -33,12 +33,15 @@ PUBLIC sOptFrmt AS String
 
 
 PUBLIC SUB Form_Resize()
-
+  DIM cb AS ComboBox
+  DIM iWidth AS Integer = 0
   WITH ME
     .tlBanner.Width = .ClientWidth - 16
-    .scrollPartitions.Width = .tlBanner.Width
-    .scrollPartitions.Height = .ClientHeight - (.tlBanner.Height + .cbDoWin.Height + 32)
-    .cbDoWin.Move(.scrollPartitions.Left, .ClientHeight - .cbDoWin.Height - 8)
+   .scrollPartitions.Resize(.ClientWidth - 12, .ClientHeight - .tlBanner.Height - (cbDoWin.Height * 2))
+   .cbDoWin.Move(.scrollPartitions.Left, .ClientHeight - .cbDoWin.Height - 8)
+   .tlPartRow.Move(4, 4)
+   .tlPartRow3.Move(ME.scrollPartitions.Left + ME.scrollPartitions.Width - (.tlPartRow3.Width * 2), .tlpartrow.top)
+   .tlPartRow2.Move((.tlPartRow.Width + .tlPartRow3.Left) / 3, tlpartrow.top)
 
     
   END WITH 
@@ -49,7 +52,7 @@ PUBLIC SUB Form_Open()
 
 
   FMain.FrmCurr = ME
-    
+  ME.Resize(ME.Parent.Width, ME.Parent.Height - (ME.cbDoWin.height * 3))  
   ME.tlBanner.Adjust
   ME.cbDoWin.Width = MdlObjSizer.get_object_width(cbDoWin.text) + 24
   MdlPartSel.DISPLAY_PARTITION_OPTIONS

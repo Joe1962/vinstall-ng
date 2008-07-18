@@ -18,6 +18,7 @@
 
        
 PUBLIC vObj AS Object[]          
+PUBLIC oWMntPoints AS Object[]
 PUBLIC SUB LIST_WIN_PARTITIONS()
 DIM tl AS TextLabel
 DIM cb AS ComboBox
@@ -29,6 +30,7 @@ DIM sPartList AS String[]
 DIM sPart AS String
 DIM sSize AS String
 DIM lbwidth AS Integer
+DIM cbx AS Integer = FrmPartSel.scrollPartitions.Width / 2
 
 x = 4
 y = 8
@@ -38,7 +40,7 @@ y = 8
   ' MOVE THESE PARTITIONS TO A DIFFERENT WINDOW.
   ' THESE ARE ONLY NEEDED FOR FSTAB
   sDump1 = ""
-      SHELL "PATH=$PATH:/sbin &&  probepart | grep -e \'/dev\' | grep -v \' Ext\' | grep -v \'raid autodetect\' | grep -v \' Linux\' | cut -f 1 -d \' \' | sed -r \'s/Disk//g\'" TO sdump1
+      SHELL "PATH=$PATH:/sbin && probepart | grep -e \'/dev\' | grep -v \' Ext\' | grep -v \'raid autodetect\' | grep -v \' Linux\' | cut -f 1 -d \' \' | sed -r \'s/Disk//g\'" TO sdump1
        File.Save(Temp("all"), Trim(sDump1))
      
     vObj = NEW Object[]
@@ -55,9 +57,12 @@ sDump1 = Trim(sDump1)
             .Height = 27
             .Width = MdlObjSizer.get_object_width(.Text)
             .x = FrmWinDrives.svWinDrives.Width / 2 - (.Width / 2)
+            
             .y = y
+            cbx = .x + .Width - (.Width / 2)
           END WITH 
     y = y + tl.Height * 2
+    
     'END IF
       IF InStr(sDump1, gb.NewLine) THEN ' more than one partition found
         sPartList = Split(sDump1, gb.NewLine) ' multiple partitions found
@@ -66,56 +71,65 @@ sDump1 = Trim(sDump1)
           FOR i = 0 TO sPartList.Count - 1
             sPart = Right(sPartList[i], Len(sPartList[i]) - RInStr(sPartList[i], "/"))
                         
-                SHELL " mkdir /mnt" &/ spart & " &&  mount " & Trim(sPartList[i]) & Space(1) & "/mnt" &/ sPart WAIT 
+                SHELL "mkdir /mnt" &/ spart & " && mount " & Trim(sPartList[i]) & Space(1) & "/mnt" &/ sPart WAIT 
                     ' get the size using df -h | grep sPart and some sed
                     ' will embed some bash, but should probabbly be fixed
                 SHELL "export " & sPart & "=$(df -h | grep " & sPart & ") && echo $" & sPart & " | cut -f 2 -d \' \'" TO sSize
-                SHELL " umount /mnt" &/ spart
-                SHELL " rm -rf /mnt" &/ spart
+                SHELL "umount /mnt" &/ spart WAIT 
+                'SHELL "rm -rf /mnt" &/ spart WAIT 
+                TRY RMDIR "/mnt" &/ sPart
+                    
             
               tl = NEW TextLabel(FrmWinDrives.svWinDrives) AS "WinPartitions"
                 WITH tl
                   
                   .Text = sPartList[i] & " ( " & sSize & " )"
-                  .Width = MdlObjSizer.get_object_width(.Text) * 1.5
+                  .Width = MdlObjSizer.get_object_width(.Text) ' * 1.5                
                   .Tag = sPartList[i]
                   .Height = 27
                   .x = FrmPartSel.tlPartRow.Left
                   .y = y
-                    IF .Width > lbwidth THEN 
+                  cbx = .x + tl.Width * 1.5
+                  IF .Width > lbwidth THEN 
                     lbwidth = .Width
-                    END IF
-                  .Width = lbwidth
+                  ELSE 
+                    .Width = lbwidth
+                  END IF
+                                    ME.vObj.Add(tl)
                 END WITH
-                ME.vObj.Add(tl)
+                  
+                
                 ClsWinDrives.sWinDrives.Add(tl.Tag & "|" & "/mnt/" & sPart)
                 ' now create the combobox to select the mount point
                   cb = NEW ComboBox(FrmWinDrives.svWinDrives) AS "WinMntPoints"
+                  oWMntPoints = NEW Object[]
                     WITH cb
-                      .Width = tl.Width
                       .Tag = sPartList[i]
                       .Height = 27
-                      .x = tl.Left + tl.Width + 8
+                      '.x = FrmPartSel.scrollPartitions.Width / 2 'lbwidth + 12
+                      .x = FrmPartSel.tlPartRow2.Left
                       .y = tl.Top
-                      .Width = lbwidth
                       .Add("/mnt" &/ sPart)
+                      .Width = MdlObjSizer.get_object_width("/mnt" &/ sPart) * 2
                       .ReadOnly = FALSE
+'                      .border = border.Plain
+                      ME.oWMntPoints.Add(cb)
                     END WITH 
-                
+                  
                 y = y + tl.Height + 4
-                
+                  
                 
                 
           NEXT 
-                    
           
           
           
       ELSE ' only one win partition found
       
+      
         sPart = Right(sDump1, Len(sDump1) - RInStr(sDump1, "/"))
         'Message(sPart)
-        SHELL " mkdir -p /mnt" &/ spart & " &&  mount " & Trim(sDump1) & Space(1) & "/mnt" &/ sPart WAIT 
+        SHELL "mkdir -p /mnt" &/ spart & " && mount " & Trim(sDump1) & Space(1) & "/mnt" &/ sPart WAIT 
         SHELL "export " & sPart & "=$(df -h | grep " & sPart & ") && echo $" & sPart & " | cut -f 2 -d \' \'" TO sSize
         sSize = Trim(sSize)
         'Message(sSize)
@@ -131,10 +145,10 @@ sDump1 = Trim(sDump1)
             .Width = MdlObjSizer.get_object_width(.Text) * 1.5
             .x = FrmPartSel.tlPartRow.Left
             .y = y
-                        
+                                   
           END WITH 
-          SHELL " umount /mnt" &/ spart WAIT 
-        SHELL " rm -rf /mnt" &/ spart WAIT 
+          SHELL "umount /mnt" &/ spart WAIT 
+        SHELL "rm -rf /mnt" &/ spart WAIT 
   END IF
  ELSE 
   ' no widnows partitions found
@@ -145,8 +159,17 @@ sDump1 = Trim(sDump1)
         .Height = 27
         .x = y
         .y = y
+        
       END WITH 
+      
+      
  END IF
+ 
+ 
+ 
+
+ 
+ 
 END 
        
 PUBLIC SUB WinMntPoints_keyrelease()
