@@ -25,13 +25,13 @@ PUBLIC SUB GO_WITH_SELECTED(sDev AS String, sISONAME AS String) ' this will moun
   'message.info(sDev)
   IF sISONAME OR sISONAME <> "" THEN 
     'SHELL "sudo mount " & sDev & " /mnt/loop" WAIT ' will switch places here .. the device will mount to loop and the iso will mount to the mount point
-    SHELL "sudo mkdir -p /mnt" &/ sAddy & " && sudo mount " & sDev & Space(1) & "/mnt" &/ sAddy WAIT 
-    SHELL "sudo mount -o loop /mnt" &/ sAddy &/ sISONAME & Space(1) & ClsGlobal.sSourceMnt WAIT 
+    SHELL " mkdir -p /mnt" &/ sAddy & " &&  mount " & sDev & Space(1) & "/mnt" &/ sAddy WAIT 
+    SHELL " mount -o loop /mnt" &/ sAddy &/ sISONAME & Space(1) & ClsGlobal.sSourceMnt WAIT 
       
     'SHELL "sudo umount /mnt/loop" WAIT 
   ELSE 
         
-    SHELL "sudo mount -t iso9660 " & sDev & Space(1) & ClsGlobal.sSourceMnt WAIT 
+    SHELL " mount -t iso9660 " & sDev & Space(1) & ClsGlobal.sSourceMnt WAIT 
   END IF
   
   ' display the license agreement text
@@ -54,8 +54,8 @@ END
  DIM sFATList AS String
  DIM sFAT32List AS String
  
- SHELL "sudo probepart | grep -e \"^/dev.*FAT32$\" | sed \'s/\\*/ /\'" TO sFAT32List
- SHELL "sudo probepart | grep -e \"^/dev.*FAT$\" | sed \'s/\\*/ /\'" TO sFATList
+ SHELL " probepart | grep -e \"^/dev.*FAT32$\" | sed \'s/\\*/ /\'" TO sFAT32List
+ SHELL " probepart | grep -e \"^/dev.*FAT$\" | sed \'s/\\*/ /\'" TO sFATList
  
  sFAT32List = Trim(sFAT32List)
  sFATList = Trim(sFATList)

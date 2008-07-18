@@ -27,7 +27,7 @@ PUBLIC SUB _new()
 END
 
 PUBLIC SUB Form_Open()
-ClsGlobal.sSourceMnt = User.Home &/ "mnt" &/ "cdrom"
+ClsGlobal.sSourceMnt = "/mnt" &/ "cdrom"
 FrmSelISO.Reparent(ME.pnlWinHost)
 FrmSelISO.Width = pnlWinHost.Width
 FrmSelISO.Height = pnlWinHost.Height

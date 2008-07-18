@@ -33,7 +33,7 @@ PUBLIC SUB EMBED_GPARTED()
     END IF
   
   FrmDiskPart.tlBanner.Text = "<h3>Loading gparted .... Please wait</h3>"
-  SHELL "sudo /usr/sbin/gparted"
+  SHELL " /usr/sbin/gparted"
   WAIT 3
       
   sTitle = "GParted"

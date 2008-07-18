@@ -42,7 +42,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
   
   
   ' We will mount the partitions first, and then figure out their size
-  SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -e \" Linux$\" | cut -f 1 -d \' \'" TO sDump1
+  SHELL "export PATH=$PATH:/sbin &&  probepart | grep -e \" Linux$\" | cut -f 1 -d \' \'" TO sDump1
   sDump1 = Trim(sDump1)
   
       
@@ -56,10 +56,10 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
             
               'make sure the mount point exists
                 IF IsDir("/mnt" &/ sPart) = FALSE THEN 
-                  SHELL "sudo mkdir /mnt" &/ sPart WAIT 
+                  SHELL " mkdir /mnt" &/ sPart WAIT 
                 END IF
                 ' Now mount the partition
-                SHELL "sudo mount " & Trim(sPartList[i]) & Space(1) & "/mnt" &/ sPart WAIT 
+                SHELL " mount " & Trim(sPartList[i]) & Space(1) & "/mnt" &/ sPart WAIT 
                     ' get the size using df -h | grep sPart and some sed
                     ' will embed some bash, but should probabbly be fixed
                 SHELL "export " & sPart & "=$(df -h | grep " & sPart & ") && echo $" & sPart & " | cut -f 2 -d \' \'" TO sSize
@@ -125,7 +125,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                   
                                        
                 ' now umount the partition and delete the mount point
-                  SHELL "sudo umount /mnt" &/ sPart & " && sudo rm -r /mnt" &/ sPart WAIT 
+                  SHELL " umount /mnt" &/ sPart & " &&  rm -r /mnt" &/ sPart WAIT 
                 ' increase the value of y for the next label
                 y = y + tl.Height + 4
                   
@@ -139,7 +139,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
             
       END IF
       
-      SHELL "export PATH=$PATH:/sbin && sudo probepart | grep -i \" *swap$\" | cut -f 1 -d \' \'" TO sSwapList
+      SHELL "export PATH=$PATH:/sbin &&  probepart | grep -i \" *swap$\" | cut -f 1 -d \' \'" TO sSwapList
         sSwapList = Trim(sSwapList)
         'Message.Info(sSwapList)
         IF InStr(sSwapList, gb.NewLine) THEN 
@@ -148,7 +148,8 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
         ELSE 
           spart = Trim(sSwapList)
           'SHELL "export " & sSwapList & "=$(df -h | grep -i swap) | cut -f 2 -d \' \'" TO vSwapSize
-          SHELL "export PATH=$PATH:/sbin && export sw=$(sudo probepart | grep -i \" *swap$\") && echo $sw | cut -f 4 -d \' \'" TO vSwapSize
+          'SHELL "export PATH=$PATH:/sbin && export sw=$(sudo probepart | grep -i \" *swap$\") && echo $sw | cut -f 4 -d \' \'" TO vSwapSize
+          SHELL "export PATH=$PATH:/sbin && export sw=$( probepart | grep -i \" *swap$\") && echo $sw | cut -f 4 -d \' \'| sed -e \'s/\\([[:digit:]]\\)+/\\1/\'" TO vSwapSize
           
             iswapsize = CInt(vSwapSize)
             iswapsize = Round(iswapsize / 1024 / 1024, -2)
