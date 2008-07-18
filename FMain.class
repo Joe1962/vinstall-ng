@@ -134,7 +134,8 @@ PUBLIC SUB btnext_Click()
           IF ClsPartSel.bDoWin = TRUE THEN 
             frmNext = FrmWinDrives
           ELSE 
-            ' move from here to the file copying step
+            ' move to package selection
+            frmNext = FrmPkgSel
           END IF
         END IF
   END SELECT 

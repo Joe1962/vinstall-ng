@@ -382,6 +382,7 @@ PUBLIC SUB SET_DECISSION(sSrcLocation AS String)
   'drive should already be mounted
   'SHELL "sudo mount /dev/" & sDrive & Space(1) & ClsGlobal.sSourceMnt WAIT 
     IF Exist(sFilePath) THEN 
+        File.Save(Temp("SETUP.CONF"), File.Load(sFilePath))
       sFile = Split(DConv(File.Load(sFilePath)), gb.NewLine)
         FOR i = 0 TO sFile.Count - 1
           sLine = Trim(sFile[i])
