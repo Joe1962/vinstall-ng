@@ -38,7 +38,7 @@ y = 8
   ' MOVE THESE PARTITIONS TO A DIFFERENT WINDOW.
   ' THESE ARE ONLY NEEDED FOR FSTAB
   sDump1 = ""
-      SHELL "PATH=$PATH:/sbin && sudo probepart | grep -e \'/dev\' | grep -v \' Ext\' | grep -v \'raid autodetect\' | grep -v \' Linux\' | cut -f 1 -d \' \' | sed -r \'s/Disk//g\'" TO sdump1
+      SHELL "PATH=$PATH:/sbin &&  probepart | grep -e \'/dev\' | grep -v \' Ext\' | grep -v \'raid autodetect\' | grep -v \' Linux\' | cut -f 1 -d \' \' | sed -r \'s/Disk//g\'" TO sdump1
        File.Save(Temp("all"), Trim(sDump1))
      
     vObj = NEW Object[]
@@ -66,12 +66,12 @@ sDump1 = Trim(sDump1)
           FOR i = 0 TO sPartList.Count - 1
             sPart = Right(sPartList[i], Len(sPartList[i]) - RInStr(sPartList[i], "/"))
                         
-                SHELL "sudo mkdir /mnt" &/ spart & " && sudo mount " & Trim(sPartList[i]) & Space(1) & "/mnt" &/ sPart WAIT 
+                SHELL " mkdir /mnt" &/ spart & " &&  mount " & Trim(sPartList[i]) & Space(1) & "/mnt" &/ sPart WAIT 
                     ' get the size using df -h | grep sPart and some sed
                     ' will embed some bash, but should probabbly be fixed
                 SHELL "export " & sPart & "=$(df -h | grep " & sPart & ") && echo $" & sPart & " | cut -f 2 -d \' \'" TO sSize
-                SHELL "sudo umount /mnt" &/ spart
-                SHELL "sudo rm -rf /mnt" &/ spart
+                SHELL " umount /mnt" &/ spart
+                SHELL " rm -rf /mnt" &/ spart
             
               tl = NEW TextLabel(FrmWinDrives.svWinDrives) AS "WinPartitions"
                 WITH tl
@@ -115,7 +115,7 @@ sDump1 = Trim(sDump1)
       
         sPart = Right(sDump1, Len(sDump1) - RInStr(sDump1, "/"))
         'Message(sPart)
-        SHELL "sudo mkdir -p /mnt" &/ spart & " && sudo mount " & Trim(sDump1) & Space(1) & "/mnt" &/ sPart WAIT 
+        SHELL " mkdir -p /mnt" &/ spart & " &&  mount " & Trim(sDump1) & Space(1) & "/mnt" &/ sPart WAIT 
         SHELL "export " & sPart & "=$(df -h | grep " & sPart & ") && echo $" & sPart & " | cut -f 2 -d \' \'" TO sSize
         sSize = Trim(sSize)
         'Message(sSize)
@@ -133,8 +133,8 @@ sDump1 = Trim(sDump1)
             .y = y
                         
           END WITH 
-          SHELL "sudo umount /mnt" &/ spart WAIT 
-        SHELL "sudo rm -rf /mnt" &/ spart WAIT 
+          SHELL " umount /mnt" &/ spart WAIT 
+        SHELL " rm -rf /mnt" &/ spart WAIT 
   END IF
  ELSE 
   ' no widnows partitions found
