@@ -1,0 +1,26 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Text = ("")
+  { tlBanner TextLabel
+    MoveScaled(1,2,55,5)
+    Text = ("TextLabel1")
+    Alignment = Align.Normal
+  }
+  { rbFull RadioButton
+    MoveScaled(1,8,40,4.5)
+    Text = ("Full Install")
+  }
+  { rbCustom RadioButton
+    MoveScaled(1,14,55,4.5)
+    Text = ("Custom Install")
+  }
+  { tlActionDesc TextLabel
+    MoveScaled(1,21,63,7)
+    Text = ("")
+  }
+  { scrlInstallOpts ScrollView
+    MoveScaled(1,30,52,28)
+  }
+}

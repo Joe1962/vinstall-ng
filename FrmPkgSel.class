@@ -1,0 +1,57 @@
+' Gambas class file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+PUBLIC SUB Form_Open()
+
+  WITH ME
+    .tlBanner.Text = "Choose your installation mode"
+      .rbFull_Click()
+  END WITH 
+  MdlPkgSel.LIST_PACKAGE_SELECTION
+
+END
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .tlBanner.Width = .ClientWidth - 8
+    .rbFull.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 8, MdlObjSizer.get_object_width(.rbfull.text) + 36)
+    .rbCustom.Move(.tlBanner.Left, .rbFull.top + .rbFull.Height + 4, MdlObjSizer.get_object_width(.rbcustom.text) + 36)
+    .tlActionDesc.Width = .tlBanner.Width - 4
+    .scrlInstallOpts.Move(.tlActionDesc.Left, .tlActionDesc.top + .tlActionDesc.Height + 8, .tlActionDesc.Width, .ClientHeight - (.tlActionDesc.top + (.tlActionDesc.height * 1.5)))
+  
+  END WITH 
+
+END
+
+PUBLIC SUB rbFull_Click()
+
+  tlActionDesc.Text = "Installs everything in your VectorLinux media to your system"
+  tlActionDesc.Adjust
+  scrlInstallOpts.Visible = FALSE
+  
+
+END
+
+PUBLIC SUB rbCustom_Click()
+
+  tlActionDesc.Text = "Choose your optional components to install."
+  tlActionDesc.Adjust
+  scrlInstallOpts.Visible = TRUE
+
+END
