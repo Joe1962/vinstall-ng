@@ -133,6 +133,8 @@ END
 
 
 PUBLIC SUB MOUNT_DEFINED_PARTITIONS()
+
+
   
   ' this is where we need to set the mount target
   ClsGlobal.sTargetMnt = "/mnt/target"
@@ -186,7 +188,9 @@ PUBLIC FUNCTION WRITE_NEW_FSTAB()
   DIM sPartition AS String
   DIM sMountPoint AS String
   DIM sMntOpts AS String
-  
+  DIM i AS Integer
+  DIM sWinPart AS String
+  DIM sWinMntPnt AS String
   DIM sFstab AS String
   
   sFstab = "# /etc/fstab: static file system information.\n" &
@@ -226,7 +230,17 @@ sFstab = sFstab & "\n\n" &
 "# Shared Windows/Linux partition" &
 "#/dev/hda1   /mnt/dos  msdos  umask=0   0  0 \n" &
 "#/dev/hda1   /mnt/win  vfat   fmask=111,dmask=0,quiet,shortname=mixed,user  0  0 \n" &
-"#/dev/hda1   /mnt/win  ntfs   umask=0   0  0\n" &
+"#/dev/hda1   /mnt/win  ntfs   umask=0   0  0\n" 
+    IF ClsWinDrives.sWinDrives THEN 
+      FOR i = 0 TO ClsWinDrives.sWinDrives.Count - 1
+        sWinPart = Trim(Left(ClsWinDrives.sWinDrives[i], InStr(ClsWinDrives.sWinDrives[i], "|") - 1))
+        sWinMntPnt = Trim(Right(ClsWinDrives.sWinDrives[i], Len(ClsWinDrives.sWinDrives[i]) - InStr(ClsWinDrives.sWinDrives[i], "|")))
+        Message("Mount " & sWinPart & " to " & sWinMntPnt)
+        ' if this is right... then add it to the file
+      NEXT 
+    END IF
+
+sFstab = sFstab & "\n\n" &
 "# Floppy disks \n" &
 "# The 'noauto' option indicates that the file system should not be mounted \n" &
 "# with 'mount -a' 'user' indicates that normal users are allowed to mount \n" &

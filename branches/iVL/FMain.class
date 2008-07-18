@@ -39,9 +39,25 @@ WITH ME
   .btQuit.Text = "Exit Installation"
 END WITH 
 'ME.TreeView1.BackColor = Color.Transparent
-
+ME.AUTOSIZE_LEFT_PANE
 
 END
+
+PUBLIC SUB AUTOSIZE_LEFT_PANE()
+  
+  DIM iWidth AS Integer
+  ' this will find widest child in treeview
+    ME.tvPlan.MoveFirst()
+      REPEAT 
+        IF MdlObjSizer.get_object_width(tvPlan.Item.Text) > iWidth THEN 
+          iWidth = MdlObjSizer.get_object_width(tvPlan.item.Text)
+        END IF
+      UNTIL ME.tvPlan.MoveBelow()
+  
+    ME.tvPlan.Width = iWidth + (iWidth / 20)
+    ME.Frame1.Width = iWidth + (iWidth / 10)
+END
+
 
 PUBLIC SUB ComboBox1_Click()
 
@@ -59,15 +75,20 @@ DIM iMid AS Integer
   WITH ME
     .btQuit.Width = MdlObjSizer.get_object_width(.btQuit.Text) + 36
   END WITH 
-  
+  'ME.AUTOSIZE_LEFT_PANE
 
   WITH ME
     .tlBanner.width = ME.width
-    .Frame1.Move(.tlBanner.left + 4, .tlBanner.Top + .tlBanner.Height + 4, .tlBanner.Width - ((.tlBanner.Width / 10) * 7), .Height - (.tlbanner.height + (.tlbanner.height / 2)))
-    .tvPlan.Resize(.Frame1.Width - 20, .Frame1.Height - 36)
+    '.Frame1.Move(.tlBanner.left + 4, .tlBanner.Top + .tlBanner.Height + 4, .tlBanner.Width - ((.tlBanner.Width / 10) * 7), .Height - (.tlbanner.height + (.tlbanner.height / 2)))
+    .Frame1.Resize(MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 1.5))
+    .tvPlan.Move(4, 30, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
+    '.tvPlan.Resize(.Frame1.Width - (.Frame1.Width / 20), Frame1.Height - (.Frame1.Height / 20))
+    '.tvPlan.Resize(.Frame1.Width - 20, .Frame1.Height - 36)
+    '.tvPlan.Width = MdlCore.iLeftWidth + (MdlCore.iLeftWidth / 20)
+    '.Frame1.Width = .tvPlan.Width + (.tvPlan.Width / 20)
     .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top, .tlBanner.Width - (.Frame1.Width + 8), .Frame1.Height)
     .btback.Move(.pnlWinHost.Left, .pnlWinHost.Top + .pnlWinHost.Height - (.btback.Height), MdlObjSizer.get_object_width(.btback.text) + 36)
-    .btnext.Move(.pnlWinHost.Left + .pnlWinHost.Width - (.btnext.Width + 4), .btback.Top, MdlObjSizer.get_object_width(.btnext.text) + 36)
+    .btnext.Move(.pnlWinHost.Left + .pnlWinHost.Width - (.btnext.Width + 8), .btback.Top, MdlObjSizer.get_object_width(.btnext.text) + 36)
     ' for the quit button, it'll get a little tricky
       ' we want that one right in the middle
     .btQuit.Move(.pnlWinHost.Left + (.pnlWinHost.Width / 2) - (.btQuit.Width / 2), .btback.top)
