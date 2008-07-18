@@ -23,6 +23,7 @@ PUBLIC sCatPic AS picture = Picture["icon:/16/linux"]
 PUBLIC sToDopic AS Picture = Picture["images/circle.png"]
 PUBLIC sNowPic AS picture = Picture["images/arrow.png"]
 PUBLIC sDonePic AS Picture = Picture["images/check.png"]
+PUBLIC iLeftWidth AS Integer
 
 
 
@@ -375,7 +376,7 @@ PUBLIC SUB SET_DECISSION(sSrcLocation AS String)
   DIM iRoot AS Variant
   DIM iswap AS Variant
   DIM ihome AS Variant
-  
+  DIM iWidth AS Integer
   ClsGlobal.sBulkList = ""
   ClsGlobal.sConfPkg = ""
   'drive should already be mounted
@@ -432,6 +433,7 @@ END
 
 
 PUBLIC SUB PREPARE_INSTALL_LAYOUT()
+DIM iWidth AS Integer
 WITH FMain.tvPlan
   .Add("Prep", "Preparation", sCatPic)
   .Add("Prep0", "Find installation media", sNowPic, "Prep")
@@ -453,44 +455,17 @@ END WITH
  FMain.tvPlan.MoveFirst()
  REPEAT 
  FMain.tvPlan.Item.Expanded = TRUE
+  IF MdlObjSizer.get_object_width(FMain.tvPlan.Item.Text) > iWidth THEN 
+    iWidth = MdlObjSizer.get_object_width(FMain.tvPlan.Item.Text)
+  END IF
  UNTIL FMain.tvPlan.MoveBelow()
  
-  
-  
+ iLeftWidth = iWidth
+ fmain.tvPlan.Width = iWidth + (iWidth / 20)
+ fmain.Frame1.Width = iWidth + (iWidth / 10)
+ 
+ 
 
-' '   
-' ' DIM sLabel AS TextLabel
-' ' DIM X AS Integer
-' ' DIM y AS Integer
-' ' DIM pPic AS PictureBox
-' ' DIM sPrepList AS String = "Find Install Media, License Agreement, Install"
-' ' DIM sPrepArr AS String[] = Split(sPrepList, ",")
-' ' DIM sCurrStep AS String
-' ' DIM i AS Integer
-' '   
-' '   'first category
-' '   X = FMain.ScrollView1.X
-' '   Y = FMain.ScrollView1.y + 4
-' '     FOR i = 0 TO sPrepArr.Count - 1
-' '       sCurrStep = Trim(sPrepArr[i])
-' '         sLabel = NEW TextLabel(FMain.ScrollView1) AS "Preps"
-' '           WITH sLabel
-' '             '.Width = .Parent.Width
-' '             .x = x + 4
-' '             .y = Y + 4
-' '             .Text = sCurrStep
-' '             .Width = MdlObjSizer.get_object_width(.Text)
-' '             .Height = 27
-' '             
-' '           END WITH 
-' '           y = y + sLabel.Height
-' '         NEXT 
-' '         
-' '             
-' '             
-' '       
-
-  
 END
 
 
