@@ -38,6 +38,7 @@ PUBLIC SUB GO_WITH_SELECTED(sDev AS String, sISONAME AS String) ' this will moun
   
   ' This will also set the default variables for distro name and version to clsglobal
     MdlCore.SET_DECISSION(ClsGlobal.sSourceMnt)
+
   
 
 END
