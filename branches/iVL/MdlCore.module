@@ -58,9 +58,12 @@ PUBLIC SUB FIND_ISO_ON_DRIVE(sDrive AS String)
                     
                     
             ELSE ' only one iso found
+                IF IsDir("/mnt/loop") = FALSE THEN 
+                  TRY MKDIR "/mnt/loop"
+                END IF
               SHELL "umount /mnt/loop" WAIT 'clear the mount point
               SHELL "mount -o loop " & ClsGlobal.sSourceMnt &/ sResults & Space(1) & " /mnt/loop" WAIT 
-                File.Save(Temp(sResults), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
+                  File.Save(Temp(sResults), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
                 'Message(File.Load(Temp(sResults)))
               SHELL "umount /mnt/loop && umount " & ClsGlobal.sSourceMnt WAIT 
                   IF FrmSelISO.lstInstallableImg.Find(sResults & " on " & sDrive) = -1 THEN 
