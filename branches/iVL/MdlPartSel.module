@@ -42,7 +42,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
   
   
   ' We will mount the partitions first, and then figure out their size
-  SHELL " probepart | grep -e \" Linux$\" | cut -f 1 -d \' \'" TO sDump1
+  SHELL " probepart | grep -e \" Linux$\" | cut -f 1 -d \' \' | grep /dev" TO sDump1
   sDump1 = Trim(sDump1)
   
       
@@ -139,7 +139,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
             
       END IF
       
-      SHELL " probepart | grep -i \" *swap$\" | cut -f 1 -d \' \'" TO sSwapList
+      SHELL " probepart | grep -i \" *swap$\" | cut -f 1 -d \' \' | grep -e /dev" TO sSwapList
         sSwapList = Trim(sSwapList)
         'Message.Info(sSwapList)
         IF InStr(sSwapList, gb.NewLine) THEN 

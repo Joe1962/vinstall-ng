@@ -54,8 +54,8 @@ END
  DIM sFATList AS String
  DIM sFAT32List AS String
  
- SHELL "probepart | grep -e \"^/dev.*FAT32$\" | sed \'s/\\*/ /\'" TO sFAT32List
- SHELL "probepart | grep -e \"^/dev.*FAT$\" | sed \'s/\\*/ /\'" TO sFATList
+ SHELL "probepart | grep -e \"^/dev.*FAT32$\" | sed \'s/\\*/ /\' | grep -e \"/dev\"" TO sFAT32List
+ SHELL "probepart | grep -e \"^/dev.*FAT$\" | sed \'s/\\*/ /\'|grep -e \" /dev\"" TO sFATList
  
  sFAT32List = Trim(sFAT32List)
  sFATList = Trim(sFATList)
