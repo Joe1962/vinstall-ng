@@ -1,0 +1,14 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Text = ("")
+  { tlbanner TextLabel
+    MoveScaled(1,1,23,6)
+    Text = ("TextLabel1")
+  }
+  { scrPkgs ScrollView
+    MoveScaled(0,8,50,22)
+    Expand = True
+  }
+}
