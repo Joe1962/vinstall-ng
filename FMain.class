@@ -155,8 +155,14 @@ PUBLIC SUB btnext_Click()
             ELSE 
               ' now we are ready to summarize
               Message("Going for a simple install")
+              MdlSummarize.SUMMARIZE_INSTALL
               frmNext = FrmSummary
             END IF
+    CASE "FrmPkgsel2"
+      ' summarize the build
+        MdlSummarize.SUMMARIZE_INSTALL
+        frmNext = FrmSummary
+        'frmNext = install
   END SELECT 
             
             

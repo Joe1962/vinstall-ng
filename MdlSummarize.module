@@ -17,6 +17,47 @@
 
 PUBLIC SUB SUMMARIZE_INSTALL()
   
+DIM sText AS String
+  
+  
+  sText = "PARTITIONING LAYOUT:<br>" &
+  ClsPartSel.sRoot & " = / (" & ClsPartSel.fRoot & ")<br>"
+  '"/ = " & ClsPartSel.sRoot & " <br>" 
+    IF ClsPartSel.sHome THEN 
+      sText = sText & ClsPartSel.sHome & " = /home (" & ClsPartSel.fhome & ")<br>"
+    END IF
+    IF ClsPartSel.sOpt THEN 
+      sText = sText & ClsPartSel.sOpt & " = /opt (" & ClsPartSel.fOpt & ")<br>"
+    END IF
+    IF ClsPartSel.sUsr THEN 
+      sText = sText & ClsPartSel.sUsr & " = /usr (" & ClsPartSel.fUsr & ")<br>"
+    END IF
+    IF ClsPartSel.sTmp THEN 
+      sText = sText & ClsPartSel.sTmp & " = /tmp (" & ClsPartSel.fTmp & ")<br>"
+    END IF
+    IF ClsPartSel.sVar THEN 
+      sText = sText & ClsPartSel.sVar & " = /var (" & ClsPartSel.sVar & ")<br>"
+    END IF
+    
+    sText = sText & "<br><br><br><br>"
+    
+    IF ClsWinDrives.sWinDrives THEN 
+    sText = sText & "OPTIONAL WINDOWS PARTITIONS TO BE MOUNTED AT BOOT TIME.<br>"
+      'list all the windows partitions here
+    END IF
+    
+    IF ClsPkgSel.bCustom = TRUE THEN 
+      sText = sText & "INSTALL TYPE: Custom<br>"
+    ELSE 
+      sText = sText & "INSTALL TYPE: Full<br>"
+    END IF
+    
+    
+    
+    
+    
+  FrmSummary.tlSummary.Text = sText
+  
   
   
 END
