@@ -1,0 +1,58 @@
+' Gambas class file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC SUB Form_Open()
+
+  WITH ME
+    .tlbanner.Text = "Select your indivirual packages to install. <br>To install them all, just click next"
+    .tlbanner.Adjust
+    '.tlbanner.Border = Border.Plain
+    '.tlbanner.Width = MdlObjSizer.get_object_width(.tlbanner.Text)
+    
+  END WITH 
+  FMain.FrmCurr = ME
+  MdlPkgSel.LIST_PACKAGE_SELECTION()
+END
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .tlbanner.Width = .ClientWidth - 16
+    '.tlbanner.Move(.ClientX + 4, .clienty + 4, .ClientWidth - 18)
+    '.tlbanner.Move(4, 16, FrmPartSel.scrollPartitions.Width - 60)
+    .scrPkgs.Move(.tlbanner.Left, .tlbanner.top + (.tlbanner.Height * 2), .tlbanner.Width - 4, .ClientH - (.tlbanner.Height * 1.5)) ', .tlbanner.Width - 8, .ClientHeight - .tlbanner.height - 8)
+    '.scrPkgs.Resize(FrmPkgSel.scrlInstallOpts.Width, .ClientHeight - (.tlbanner.Height))
+'    .VPanel1.Move(2, .tlbanner.Height * 2)
+    '.scrPkgs.Width = .tlbanner.Width
+    '.scrPkgs.Height = .ClientHeight - .tlbanner.Height - 4
+  END WITH   
+
+END
+
+PUBLIC SUB Form_Show()
+  WITH ME
+    .tlbanner.Text = "Select your indivirual packages to install. <br>To install them all, just click next"
+    .tlbanner.Adjust
+    '.tlbanner.Border = Border.Plain
+    '.tlbanner.Width = MdlObjSizer.get_object_width(.tlbanner.Text)
+    
+  END WITH 
+  FMain.FrmCurr = ME
+  MdlPkgSel.LIST_PACKAGE_SELECTION()
+  
+
+END

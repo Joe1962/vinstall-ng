@@ -154,6 +154,7 @@ PUBLIC SUB MEDIA_SCAN()
               
             END IF
           SHELL "umount /dev/" & sDrive WAIT 
+          'SHELL "umount " & sDrive WAIT 
         NEXT 
       
     ELSE ' only one drive found
@@ -174,7 +175,8 @@ PUBLIC SUB MEDIA_SCAN()
               
               
             END IF
-          SHELL "umount /dev/" & clsglobal.sSourceMnt WAIT 
+          'SHELL "umount /dev/" & clsglobal.sSourceMnt WAIT 
+          SHELL "umount " & ClsGlobal.sSourceMnt WAIT 
     
     
     

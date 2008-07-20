@@ -14,15 +14,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmPkgSel.class:77
+#: FrmPkgSel.class:84
 msgid "TextLabel1"
 msgstr ""
 
-#: FrmPkgSel.class:83
+#: FrmPkgSel.class:90
 msgid "Full Install"
 msgstr ""
 
-#: FrmPkgSel.class:88
+#: FrmPkgSel.class:95
 msgid "Custom Install"
 msgstr ""
 
