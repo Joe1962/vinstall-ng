@@ -32,10 +32,13 @@ FrmSelISO.Reparent(ME.pnlWinHost)
 FrmSelISO.Width = pnlWinHost.Width
 FrmSelISO.Height = pnlWinHost.Height
 FrmSelISO.Show
+
 MdlCore.PREPARE_INSTALL_LAYOUT
 WITH ME
   .btback.Enabled = FALSE
   .btback.ForeColor = Color.Gray
+  .Frame1.BackColor = Color.Transparent
+  .tvPlan.BackColor = Color.transparent
   .btQuit.Text = "Exit Installation"
 END WITH 
 'ME.TreeView1.BackColor = Color.Transparent
@@ -81,12 +84,12 @@ DIM iMid AS Integer
     .tlBanner.width = ME.width
     '.Frame1.Move(.tlBanner.left + 4, .tlBanner.Top + .tlBanner.Height + 4, .tlBanner.Width - ((.tlBanner.Width / 10) * 7), .Height - (.tlbanner.height + (.tlbanner.height / 2)))
     .Frame1.Resize(MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 1.5))
-    .tvPlan.Move(4, 30, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
+    .tvPlan.Move(4, 24, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
     '.tvPlan.Resize(.Frame1.Width - (.Frame1.Width / 20), Frame1.Height - (.Frame1.Height / 20))
     '.tvPlan.Resize(.Frame1.Width - 20, .Frame1.Height - 36)
     '.tvPlan.Width = MdlCore.iLeftWidth + (MdlCore.iLeftWidth / 20)
     '.Frame1.Width = .tvPlan.Width + (.tvPlan.Width / 20)
-    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top, .tlBanner.Width - (.Frame1.Width + 8), .Frame1.Height)
+    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top, .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 2)))
     .btback.Move(.pnlWinHost.Left, .pnlWinHost.Top + .pnlWinHost.Height - (.btback.Height), MdlObjSizer.get_object_width(.btback.text) + 36)
     .btnext.Move(.pnlWinHost.Left + .pnlWinHost.Width - (.btnext.Width + 8), .btback.Top, MdlObjSizer.get_object_width(.btnext.text) + 36)
     ' for the quit button, it'll get a little tricky
@@ -137,7 +140,23 @@ PUBLIC SUB btnext_Click()
             ' move to package selection
             frmNext = FrmPkgSel
           END IF
+          
         END IF
+    CASE "FrmPkgSel"
+        'here we check what kind of install it is, simple  or custom
+            'IF FrmPkgSel.rbCustom.Value = TRUE THEN 
+            
+          IF ClsPkgSel.bCustom = TRUE THEN 
+              'get the list of selected bulks only
+              'MdlPkgSel.GET_USER_BULK_SELECTION()
+              'Message("Going for a custom install")
+              MdlPkgSel.GET_USER_BULK_SELECTION()
+              frmNext = FrmPkgsel2
+            ELSE 
+              ' now we are ready to summarize
+              Message("Going for a simple install")
+              frmNext = FrmSummary
+            END IF
   END SELECT 
             
             

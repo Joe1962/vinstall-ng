@@ -23,17 +23,17 @@
     MoveScaled(28,9,66,56)
   }
   { btnext Button
-    MoveScaled(89,69,8,3.375)
+    MoveScaled(89,69,8,3.3333)
     Text = ("Next")
     Picture = Picture["icon:/16/right"]
   }
   { btback Button
-    MoveScaled(28,67,8,3.375)
+    MoveScaled(28,67,8,3.3333)
     Text = ("Back")
     Picture = Picture["icon:/16/left"]
   }
   { btQuit Button
-    MoveScaled(54,67,11,3.375)
+    MoveScaled(54,67,11,3.3333)
     Text = ("Exit")
     Picture = Picture["icon:/16/cancel"]
   }
