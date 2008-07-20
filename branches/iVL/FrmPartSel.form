@@ -9,24 +9,9 @@
   }
   { scrollPartitions ScrollView
     MoveScaled(1,16,69,33)
-    { tlPartRow TextLabel
-      MoveScaled(1,1,14,3)
-      Text = ("<b>Partition</b>")
-      Alignment = Align.Left
-    }
-    { tlPartRow2 TextLabel
-      MoveScaled(19,1,14,3)
-      Text = ("<b>Mount Point</b>")
-      Alignment = Align.Left
-    }
-    { tlPartRow3 TextLabel
-      MoveScaled(39,1,14,3)
-      Text = ("<b>File System</b>")
-      Alignment = Align.Left
-    }
   }
   { cbDoWin CheckBox
-    MoveScaled(1,50,57,3.375)
+    MoveScaled(1,50,57,3.3333)
     ToolTip = ("Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts")
     Text = ("Detect and Setup Windows partitions for auto-mounting at boot")
   }
