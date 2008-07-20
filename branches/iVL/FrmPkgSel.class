@@ -22,8 +22,7 @@ PUBLIC SUB Form_Open()
     .tlBanner.Text = "Choose your installation mode"
       .rbFull_Click()
   END WITH 
-  MdlPkgSel.LIST_PACKAGE_SELECTION
-
+  FMain.FrmCurr = ME
 END
 
 PUBLIC SUB Form_Resize()
@@ -44,7 +43,7 @@ PUBLIC SUB rbFull_Click()
   tlActionDesc.Text = "Installs everything in your VectorLinux media to your system"
   tlActionDesc.Adjust
   scrlInstallOpts.Visible = FALSE
-  
+  ClsPkgSel.bCustom = FALSE
 
 END
 
@@ -53,5 +52,13 @@ PUBLIC SUB rbCustom_Click()
   tlActionDesc.Text = "Choose your optional components to install."
   tlActionDesc.Adjust
   scrlInstallOpts.Visible = TRUE
+  MdlPkgSel.LIST_BULK_SELECTION
+  ClsPkgSel.bCustom = TRUE
+
+END
+
+PUBLIC SUB Form_Hide()
+
+  
 
 END

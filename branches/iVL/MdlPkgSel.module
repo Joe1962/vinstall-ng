@@ -16,8 +16,9 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
-PUBLIC options AS Object[]
-PUBLIC SUB LIST_PACKAGE_SELECTION()
+PUBLIC Bulks AS Object[]
+PUBLIC Pkgs AS Object[]
+PUBLIC SUB LIST_BULK_SELECTION()
   
   DIM cb AS CheckBox
   DIM i, ii, cby AS Integer
@@ -30,10 +31,11 @@ PUBLIC SUB LIST_PACKAGE_SELECTION()
   cby = 4
   'File.Save(Temp("SETUP.CONF"), DConv(File.Load(ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF")))
   'Message(File.Load(Temp("SETUP.CONF")))
+  Bulks = NEW Object[]
     
     sFIle = Split(File.Load(Temp("SETUP.CONF")), gb.NewLine)
       FOR i = 0 TO sFIle.count - 1
-        sLine = Trim(sFIle[i])
+        sLine = Trim(sFIle[i]) 
           IF Left(sLine, Len("BULK")) = "BULK" THEN 
             sCurrLine = Split(sLine, ":")
               'line format is File_name.tlz:Size_kb:Description
@@ -52,16 +54,110 @@ PUBLIC SUB LIST_PACKAGE_SELECTION()
                     .x = 4
                     .y = cby
                     .Height = 27
-                    .Tag = sPkg
+                    .Tag = Right(sPkg, Len(sPkg) - InStr(sPkg, "=") - 1)
                     .Value = TRUE
                   END WITH 
+                    ME.Bulks.Add(cb)
                   cby = cby + cb.Height + 4
                 END IF
             END IF
         NEXT 
         
+END
+
+
+PUBLIC SUB LIST_PACKAGE_SELECTION()
+  
+    DIM cb AS CheckBox
+    DIM sName, sDesc, sLoc, sSize AS String
+    DIM i, y AS Integer
+    DIM sRawFile AS String[]
+    DIM sLine AS String
     
+    ' THis one is kind of tricky.. it will read the whole PACKAGES.TXT
+     y = 4
+    File.Save(Temp("PACKAGES.TXT"), DConv(File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT")))
+    'Message(File.Load(Temp("PACKAGES.TXT")))
+      sRawFile = Split(File.Load(Temp("PACKAGES.TXT")), "\n")
+        ME.Pkgs = NEW Object[]
+        FOR i = 0 TO sRawFile.Count - 1
+          sLine = Trim(sRawFile[i])
+            IF InStr(sLine, "PACKAGE NAME:") THEN 
+                sName = Trim(Right(sLine, Len(sLine) - InStr(sLine, ":")))
+                sLoc = Trim(Right(sRawFile[i + 1], Len(sRawFile[i + 1]) - InStr(sRawFile[i + 1], ":")))
+                    IF Left(sLoc, 2) = "./" THEN 
+                      sLoc = Right(sLoc, Len(sLoc) - 2)
+                    END IF
+                sSize = Trim(Right(sRawFile[i + 2], Len(sRawFile[i + 2]) - InStr(sRawFile[i + 2], ":")))
+                'Message(sName & " in " & sLoc)
+              cb = NEW CheckBox(FrmPkgsel2.scrPkgs) AS "Packages"
+                WITH cb
+                  .Text = sName & " [ " & sSize & " ]" 'Trim(Right(sLine, Len(sLine) - InStr(sLine, ":")))
+                  .Tag = sLoc &/ sName
+                  .x = 4
+                  .y = y
+                  .Height = 27
+                  .Width = MdlObjSizer.get_object_width(.Text) * 2
+                  .Value = TRUE
+                END WITH 
+                ME.Pkgs.Add(cb)
+                y = y + cb.Height + 4
+                
+            END IF
+           
+        NEXT 
   
+END
+
+
+PUBLIC SUB Packages_click()
   
+    'Message(LAST.tag)
+      
+  
+END
+
+
+
+
+PUBLIC SUB OptBulks_click()
+  
+  IF ClsPkgSel.arrBulks THEN 
+    ClsPkgSel.arrBulks.Clear
+  END IF
+  ME.GET_USER_BULK_SELECTION
+  
+END
+
+
+PUBLIC SUB GET_USER_BULK_SELECTION()
+  
+  DIM cb AS CheckBox
+  DIM sList AS String
+  DIM sItem AS String
+  DIM i AS Integer
+    ' start the list
+    ClsPkgSel.arrBulks = NEW String[]
+    FOR EACH cb IN ME.Bulks
+      IF cb.Value = TRUE THEN 
+        ClsPkgSel.arrBulks.Add(cb.tag)
+    END IF
+    NEXT 
+    
+    FOR i = 0 TO ClsPkgSel.arrBulks.count - 1
+      sItem = ClsPkgSel.arrBulks[i]
+        IF sItem LIKE " " THEN 
+          ClsPkgSel.arrBulks.Delete(ClsPkgSel.arrBulks.Find(sItem))
+        ELSE 
+        sList = sList & ", " & sItem
+        ENDIF
+    NEXT 
+      IF Left(sList) = "," THEN 
+        sList = Right(sList, Len(sList) - 1)
+      ELSE IF Right(sList) = "," THEN 
+        sList = Left(sList, Len(sList) - 1)
+      END IF
+    sList = Trim(sList)
+        
   
 END
