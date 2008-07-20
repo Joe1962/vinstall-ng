@@ -14,23 +14,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FMain.class:192
+#: FMain.class:198
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:205
-msgid "Vector Linux Install"
-msgstr ""
-
-#: FMain.class:215
-msgid "Next"
+#: FMain.class:211
+msgid "VectorLinux Install"
 msgstr ""
 
 #: FMain.class:221
-msgid "Back"
+msgid "Next"
 msgstr ""
 
 #: FMain.class:227
+msgid "Back"
+msgstr ""
+
+#: FMain.class:233
 msgid "Exit"
 msgstr ""
 
