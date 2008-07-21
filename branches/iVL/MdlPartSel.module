@@ -184,7 +184,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
           spart = Trim(sSwapList)
           'SHELL "export " & sSwapList & "=$(df -h | grep -i swap) | cut -f 2 -d \' \'" TO vSwapSize
           SHELL " export sw=$(probepart | grep -i \" *swap$\") && echo $sw | cut -f 4 -d \' \'" TO vSwapSize
-          
+ 
             iswapsize = CInt(vSwapSize)
             iswapsize = Round(iswapsize / 1024 / 1024, -2)
             'now create the swap label and combo box

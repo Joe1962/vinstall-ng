@@ -82,15 +82,11 @@ DIM iMid AS Integer
 
   WITH ME
     .tlBanner.width = ME.width
-    '.Frame1.Move(.tlBanner.left + 4, .tlBanner.Top + .tlBanner.Height + 4, .tlBanner.Width - ((.tlBanner.Width / 10) * 7), .Height - (.tlbanner.height + (.tlbanner.height / 2)))
     .Frame1.Resize(MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 1.5))
     .tvPlan.Move(4, 24, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
-    '.tvPlan.Resize(.Frame1.Width - (.Frame1.Width / 20), Frame1.Height - (.Frame1.Height / 20))
-    '.tvPlan.Resize(.Frame1.Width - 20, .Frame1.Height - 36)
-    '.tvPlan.Width = MdlCore.iLeftWidth + (MdlCore.iLeftWidth / 20)
-    '.Frame1.Width = .tvPlan.Width + (.tvPlan.Width / 20)
     .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top, .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 2)))
-    .btback.Move(.pnlWinHost.Left, .pnlWinHost.Top + .pnlWinHost.Height - (.btback.Height), MdlObjSizer.get_object_width(.btback.text) + 36)
+    .btback.Move(.pnlWinHost.Left, .Frame1.top + .Frame1.Height - .btback.Height, MdlObjSizer.get_object_width(.btback.text) + 36)
+    '.btback.Move(.pnlWinHost.Left, .pnlWinHost.Top + .pnlWinHost.Height - (.btback.Height), MdlObjSizer.get_object_width(.btback.text) + 36)
     .btnext.Move(.pnlWinHost.Left + .pnlWinHost.Width - (.btnext.Width + 8), .btback.Top, MdlObjSizer.get_object_width(.btnext.text) + 36)
     ' for the quit button, it'll get a little tricky
       ' we want that one right in the middle
@@ -163,6 +159,9 @@ PUBLIC SUB btnext_Click()
         MdlSummarize.SUMMARIZE_INSTALL
         frmNext = FrmSummary
         'frmNext = install
+    CASE "FrmWinDrives"
+      'Move on to selecting packages
+        frmNext = FrmPkgSel
   END SELECT 
             
             

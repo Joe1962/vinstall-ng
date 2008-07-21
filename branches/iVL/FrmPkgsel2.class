@@ -32,13 +32,8 @@ PUBLIC SUB Form_Resize()
 
   WITH ME
     .tlbanner.Width = .ClientWidth - 16
-    '.tlbanner.Move(.ClientX + 4, .clienty + 4, .ClientWidth - 18)
-    '.tlbanner.Move(4, 16, FrmPartSel.scrollPartitions.Width - 60)
-    .scrPkgs.Move(.tlbanner.Left, .tlbanner.top + (.tlbanner.Height * 2), .tlbanner.Width - 4, .ClientH - (.tlbanner.Height * 1.5)) ', .tlbanner.Width - 8, .ClientHeight - .tlbanner.height - 8)
-    '.scrPkgs.Resize(FrmPkgSel.scrlInstallOpts.Width, .ClientHeight - (.tlbanner.Height))
-'    .VPanel1.Move(2, .tlbanner.Height * 2)
-    '.scrPkgs.Width = .tlbanner.Width
-    '.scrPkgs.Height = .ClientHeight - .tlbanner.Height - 4
+    .scrPkgs.Move(.tlbanner.Left, .tlbanner.top + (.tlbanner.Height * 1.5), .tlbanner.Width - 4, .ClientHeight - (.tlbanner.Height * 4)) ', .tlbanner.Width - 8, .ClientHeight - .tlbanner.height - 8)
+    
   END WITH   
 
 END
@@ -53,6 +48,12 @@ PUBLIC SUB Form_Show()
   END WITH 
   FMain.FrmCurr = ME
   MdlPkgSel.LIST_PACKAGE_SELECTION()
+  
+
+END
+
+PUBLIC SUB scrPkgs_MouseDown()
+
   
 
 END

@@ -57,12 +57,31 @@ sDump1 = Trim(sDump1)
             .Height = 27
             .Width = MdlObjSizer.get_object_width(.Text)
             .x = FrmWinDrives.svWinDrives.Width / 2 - (.Width / 2)
-            
             .y = y
             cbx = .x + .Width - (.Width / 2)
           END WITH 
-    y = y + tl.Height * 2
+          
+    y = y + tl.Height + 8
     
+      tl = NEW TextLabel(FrmWinDrives.svWinDrives) AS "Headers"
+        WITH tl
+          .x = x
+          .y = y
+          .text = "<B>PARTITION</B>"
+          .Width = MdlObjSizer.get_object_width(.Text) * 1.5
+          .Height = 27
+        END WITH 
+          cbx = x + (tl.Width) * 2
+      tl = NEW TextLabel(FrmWinDrives.svWinDrives) AS "Headers"
+        WITH tl
+          .x = cbx
+          .y = y
+          .text = "<b>MOUNT TO </B>"
+          .Width = MdlObjSizer.get_object_width(.Text) * 1.5
+          .Height = 27
+        END WITH 
+        y = y + tl.Height + 8
+          
     'END IF
       IF InStr(sDump1, gb.NewLine) THEN ' more than one partition found
         sPartList = Split(sDump1, gb.NewLine) ' multiple partitions found
@@ -87,9 +106,9 @@ sDump1 = Trim(sDump1)
                   .Width = MdlObjSizer.get_object_width(.Text) ' * 1.5                
                   .Tag = sPartList[i]
                   .Height = 27
-                  .x = FrmPartSel.tlPartRow.Left
+                  .x = x 'FrmPartSel.tlPartRow.Left
                   .y = y
-                  cbx = .x + tl.Width * 1.5
+                  
                   IF .Width > lbwidth THEN 
                     lbwidth = .Width
                   ELSE 
@@ -107,17 +126,18 @@ sDump1 = Trim(sDump1)
                       .Tag = sPartList[i]
                       .Height = 27
                       '.x = FrmPartSel.scrollPartitions.Width / 2 'lbwidth + 12
-                      .x = FrmPartSel.tlPartRow2.Left
+                      .x = cbx 'x + tl.Width + 8 'FrmPartSel.tlPartRow2.Left
                       .y = tl.Top
                       .Add("/mnt" &/ sPart)
-                      .Width = MdlObjSizer.get_object_width("/mnt" &/ sPart) * 2
+                      .Add("Do not mount")
+                      .Width = MdlObjSizer.get_object_width("Do not mount") * 2
                       .ReadOnly = FALSE
 '                      .border = border.Plain
                       ME.oWMntPoints.Add(cb)
                     END WITH 
                   
                 y = y + tl.Height + 4
-                  
+                '
                 
                 
           NEXT 
@@ -182,10 +202,6 @@ PUBLIC SUB WinMntPoints_Select()
   ME.UPDATE_WIN_ARRAY(LAST.tag, Trim(LAST.text))
   
 END
-
-    
-  
-  
   
 PUBLIC SUB UPDATE_WIN_ARRAY(sTag AS String, sMntPoint AS String)
 
