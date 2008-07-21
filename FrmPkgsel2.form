@@ -4,7 +4,7 @@
   MoveScaled(0,0,64,64)
   Text = ("")
   { tlbanner TextLabel
-    MoveScaled(1,1,23,6)
+    MoveScaled(1,1,43,5)
     Text = ("TextLabel1")
   }
   { scrPkgs ScrollView
