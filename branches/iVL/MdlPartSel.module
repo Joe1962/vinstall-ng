@@ -309,22 +309,25 @@ END
 PUBLIC SUB fsTypes_click()
   
   DIM cb AS ComboBox
-    
-IF LAST.text = "Do not format"
-      FOR EACH cb IN oMountPoints
-        IF cb.tag = LAST.tag AND cb.text = "/" THEN 
-          Message.Error("The / partition MUST be formatted no matter what. Please select a filesystem for this partition")
-            'default it to xfs
-            LAST.text = "XFS"
-          STOP EVENT 
-        END IF
-      NEXT 
-    END IF
-  
-  'PRINT "format " & LAST.tag & " as " & LAST.text
-  
-  ME.SET_PARTITION_FORMAT(LAST.tag, LAST.text)
-  
+    FOR EACH cb IN oMountPoints
+      IF cb.Tag = LAST.tag THEN 
+        SELECT CASE cb.Text
+          CASE "/"
+            ClsPartSel.fRoot = LAST.text
+          CASE "/home"
+            ClsPartSel.fhome = LAST.text
+          CASE "/var"
+            ClsPartSel.fVar = LAST.text
+          CASE "/tmp"
+            ClsPartSel.fTmp = LAST.text
+          CASE "/opt"
+            ClsPartSel.fOpt = LAST.text
+          CASE "/usr"
+            ClsPartSel.fUsr = LAST.text
+        END SELECT 
+      END IF
+    NEXT 
+      
   
 END
 
@@ -333,37 +336,70 @@ PUBLIC SUB SET_SELECTED_PARTITION(SPartition AS String, sMountPoint AS String)
   SELECT CASE sMountPoint
     CASE "/"
       FrmPartSel.sRootAddr = SPartition
+      ClsPartSel.sRoot = SPartition
     CASE "/home"
       FrmPartSel.sHomeAddr = SPartition
+      ClsPartSel.sHome = SPartition
     CASE "/opt"
       FrmPartSel.sOptAddr = SPartition
+      ClsPartSel.sOpt = SPartition
     CASE "/usr"
       FrmPartSel.sUsrAddr = SPartition
+      ClsPartSel.sUsr = SPartition
     CASE "/var"
       FrmPartSel.sVarAddr = SPartition
+      ClsPartSel.sVar = SPartition
     CASE "/tmp"
       FrmPartSel.sTmpAddr = SPartition
+      ClsPartSel.sTmp = SPartition
   END SELECT 
   
 END
+
+PUBLIC SUB SET_LINUX_PARTITION_TYPES()
+  
+  DIM cb AS ComboBox
+  DIM cc AS ComboBox
+    FOR EACH cb IN oMountPoints
+        FOR EACH cc IN oFsTypes
+          IF cb.tag = cc.tag THEN 
+            ME.SET_PARTITION_FORMAT(cb.text, cc.Text)
+          END IF
+        NEXT 
+    NEXT 
+    
+
+        
+  
+END
+
+
+
 
 PUBLIC SUB SET_PARTITION_FORMAT(sMountPoint AS String, sFormat AS String)
   
     SELECT CASE sMountPoint
       CASE "/" 
         FrmPartSel.sRootFrmt = sFormat
+        ClsPartSel.fRoot = sFormat
       CASE "/home"
         FrmPartSel.sHomeFrmt = sFormat
+        ClsPartSel.fHome = sFormat
       CASE "/opt"
         FrmPartSel.sOptFrmt = sFormat
+        ClsPartSel.fOpt = sFormat
       CASE "/usr"
         FrmPartSel.sUsrFrmt = sFormat
+        ClsPartSel.fUsr = sFormat
       CASE "/var"
         FrmPartSel.sVarFrmt = sFormat
+        ClsPartSel.fVar = sFormat
       CASE "/tmp"
         FrmPartSel.sTrmFrmt = sFormat
+        ClsPartSel.fTmp = sFormat
     END SELECT 
-    
+    'Message("Set " & sMountPoint & " as " & sFormat)  
+    'Message(ClsPartSel.sRoot & ClsPartSel.fRoot)
   
 END
 

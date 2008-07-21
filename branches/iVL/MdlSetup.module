@@ -274,13 +274,7 @@ IF ClsPartSel.sSwap THEN
    ClsPartSel.sSwap & Space(5) & "none" & Space(5) & "swap" & Space(5) & "sw" & Space(5) & "0" & Space(5) & "0"
 END IF
 ' Wheewww!... that's the whole fstab there... Please fix the win partitions
-
-
-
-
-
-
-  
+ 
   
   
   

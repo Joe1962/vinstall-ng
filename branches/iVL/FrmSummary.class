@@ -25,6 +25,11 @@ PUBLIC SUB Form_Open()
     .tlBanner.Adjust
     .tlSummary.Adjust
   END WITH 
+  
+  FMain.FrmCurr = ME
+  FMain.tvPlan["Inst0"].Selected = TRUE
+  FMain.tvPlan["Prep2"].Picture = MdlCore.sDonePic
+  FMain.tvPlan["Inst0"].Picture = MdlCore.sNowPic
 
 END
 
@@ -32,7 +37,10 @@ PUBLIC SUB Form_Resize()
 
   WITH ME
     .tlBanner.Width = .ClientWidth - 4
-    .tlSummary.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 4, .tlBanner.Width, .ClientH - 16)
+    .scrSumm.Move(.tlBanner.left, .tlBanner.top + .tlBanner.Height + 4, .tlBanner.Width - 32, .ClientHeight - .tlBanner.Height * 2)
+    .tlSummary.Move(4, 4)
+    '.tlSummary.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 4, .tlBanner.Width, .ClientH - 16)
+    
   END WITH 
 
 END

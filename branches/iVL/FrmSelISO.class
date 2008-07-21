@@ -58,16 +58,16 @@ PUBLIC SUB Form_Open()
   ' shape the main form according to the findings
  'warn the user if no installable media was found
  
- IF FrmSelISO.lstInstallableImg.Count = 0 THEN 
-  FrmSelISO.lstInstallableImg.Add("No Installable Media Found")
-  FrmSelISO.tlDistroDesc.Text = "Setup was unable to find any installable media on your system. Please insert your VectorLinux " &
-    "installation CD and click \'" & FrmSelISO.btResCan.Text & "\' to try again"
-  FMain.btnext.Enabled = FALSE
-  FMain.btnext.ForeColor = Color.Gray
- ELSE 
-  FMain.btnext.Enabled = TRUE
-  FMain.btnext.ForeColor = Color.Black
- END IF
+ ' ' IF FrmSelISO.lstInstallableImg.Count = 0 THEN 
+ ' '  FrmSelISO.lstInstallableImg.Add("No Installable Media Found")
+ ' '  FrmSelISO.tlDistroDesc.Text = "Setup was unable to find any installable media on your system. Please insert your VectorLinux " &
+ ' '    "installation CD and click \'" & FrmSelISO.btResCan.Text & "\' to try again"
+ ' '  FMain.btnext.Enabled = FALSE
+ ' '  FMain.btnext.ForeColor = Color.Gray
+ ' ' ELSE 
+ ' '  FMain.btnext.Enabled = TRUE
+ ' '  FMain.btnext.ForeColor = Color.Black
+ ' ' END IF
 
   
 
