@@ -50,7 +50,8 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
     y = 4
     x = 8
   
-    IF InStr(sDump1, gb.NewLine) > 0 THEN 
+'    IF InStr(sDump1, gb.NewLine) > 0 THEN 
+    IF sDump1 <> "" THEN 
       sPartList = Split(sDump1, gb.NewLine)
 
           ' create header labels
