@@ -46,11 +46,14 @@ PUBLIC SUB FIND_ISO_ON_DRIVE(sDrive AS String)
                     sIso = Trim(sISOList[i])
                     SHELL "umount /mnt/loop" WAIT 
                     SHELL "mount -o loop " & ClsGlobal.sSourceMnt &/ sISO & Space(1) & "/mnt/loop" WAIT 
-                      File.Save(Temp(siso), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
-                    SHELL "umount /mnt/loop" WAIT 
-                      IF FrmSelISO.lstInstallableImg.Find(sISO & " on " & sDrive) = -1 THEN 
+                        IF Exist("/mnt/loop/veclinux/SETUP.CONF") = TRUE THEN 
+                            IF FrmSelISO.lstInstallableImg.Find(sISO & " on " & sDrive) = -1 THEN 
+                            File.Save(Temp(siso), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
                         FrmSelISO.lstInstallableImg.Add(sISO & " on " & sDrive)
                       END IF
+                        END IF
+                    SHELL "umount /mnt/loop" WAIT 
+                      
                       
                   NEXT 
                 SHELL "umount " & ClsGlobal.sSourceMnt WAIT 
@@ -90,9 +93,10 @@ DIM i AS Integer
 DIM sPartition AS String
 
 'SHELL "sudo /sbin/probepart | grep -e \"*Linux$\" | cut -f 1 -d \' \'" TO sResults
-  SHELL " /sbin/probepart | grep -e \" *Linux$\" | cut -f 1 -d \' \' | grep -e \" /dev\"" TO sResults 
+  SHELL "/sbin/probepart | grep -e \" Linux$\" | cut -f 1 -d \' \' | grep /dev" TO sResults 
+  
   sResults = Trim(sResults)
-    'Message.Info(sResults)
+  'Message.Info(sResults)
   IF InStr(sResults, gb.NewLine) THEN 
     sPartList = Split(sResults, gb.NewLine)
       FOR i = 0 TO sPartList.count - 1
@@ -119,7 +123,6 @@ PUBLIC SUB MEDIA_SCAN()
   DIM sMountPoint AS String 
   DIM sDump AS String
   DIM i AS Integer
-  
   
     
   ClsGlobal.sSourceMnt = "/mnt" &/ "cdrom"
@@ -153,7 +156,8 @@ PUBLIC SUB MEDIA_SCAN()
               
               
             END IF
-          SHELL "umount /dev/" & sDrive WAIT 
+           SHELL "umount " & sMountPoint WAIT    
+          'SHELL "umount /dev/" & sDrive WAIT 
           'SHELL "umount " & sDrive WAIT 
         NEXT 
       
@@ -177,15 +181,12 @@ PUBLIC SUB MEDIA_SCAN()
             END IF
           'SHELL "umount /dev/" & clsglobal.sSourceMnt WAIT 
           SHELL "umount " & ClsGlobal.sSourceMnt WAIT 
-    
-    
-    
-    
+      
+  
     END IF
     
     
-          'NOW SEARCH FOR ISOS ON THE DRIVES
-    ME.SCAN_LINUX_PARTITIONS()
+              
  
  
   
@@ -194,15 +195,37 @@ END
 
 
 PUBLIC SUB main()
-
- ME.MEDIA_SCAN 
   FMain.Show
-  FMain.SkipTaskbar = TRUE
-  FMain.Maximized = TRUE
-  FMain.Resize(Desktop.Width, Desktop.Height)
+'  FMain.Maximized = TRUE
+'  FMain.Resize(Desktop.Width, Desktop.Height)
   'FMain.tvPlan.MoveTo("Prep0")
 FMain.tvPlan["Prep0"].Selected = TRUE
- 
+'Balloon("Scanning drives for media ... please wait", fmain.pnlWinHost)
+FrmSelISO.tlDistroDesc.Text = "<b>Scanning system for installable media. Please wait ...</b>"
+
+WAIT 1
+  FrmSelISO.lstInstallableImg.Enabled = FALSE
+  FrmSelISO.btResCan.Enabled = FALSE
+  fmain.btnext.Enabled = FALSE
+  fmain.btQuit.Enabled = FALSE
+ ME.SCAN_LINUX_PARTITIONS() ' find ISO's on the drives first 
+ ME.MEDIA_SCAN 
+ FrmSelISO.lstInstallableImg.Enabled = TRUE
+ FrmSelISO.btResCan.Enabled = TRUE
+ fmain.btnext.Enabled = TRUE
+ fmain.btQuit.Enabled = TRUE
+ IF FrmSelISO.lstInstallableImg.Count = 0 THEN 
+  FrmSelISO.lstInstallableImg.Add("No Installable Media Found")
+  FrmSelISO.tlDistroDesc.Text = "Setup was unable to find any installable media on your system. Please insert your VectorLinux " &
+    "installation CD and click \'" & FrmSelISO.btResCan.Text & "\' to try again"
+  FMain.btnext.Enabled = FALSE
+  FMain.btnext.ForeColor = Color.Gray
+ ELSE 
+  FMain.btnext.Enabled = TRUE
+  FMain.btnext.ForeColor = Color.Black
+ END IF
+
+
  
 '  FMain.tvPlan["Prep0"].Selected
 END

@@ -27,10 +27,18 @@ PUBLIC SUB _new()
 END
 
 PUBLIC SUB Form_Open()
+DIM iImg AS Image
 ClsGlobal.sSourceMnt = "/mnt" &/ "cdrom"
 FrmSelISO.Reparent(ME.pnlWinHost)
 FrmSelISO.Width = pnlWinHost.Width
 FrmSelISO.Height = pnlWinHost.Height
+iImg = Image.Load("images/installer.png").Stretch(600, 80)
+'iImg.Resize(600, 80)
+PictureBox1.Resize(iImg.Width, iImg.Height)
+PictureBox1.Picture = iImg.Picture
+
+PictureBox1.Stretch = TRUE
+
 FrmSelISO.Show
 
 MdlCore.PREPARE_INSTALL_LAYOUT
@@ -82,15 +90,17 @@ DIM iMid AS Integer
 
   WITH ME
     .tlBanner.width = ME.width
-    .Frame1.Resize(MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 1.5))
+    .Frame1.Move(4, .PictureBox1.top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 1.5))
+    '.Frame1.Resize(MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 1.5))
     .tvPlan.Move(4, 24, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
-    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top, .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 2)))
+    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top + (.tlBanner.Height / 2), .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 2)))
     .btback.Move(.pnlWinHost.Left, .Frame1.top + .Frame1.Height - .btback.Height, MdlObjSizer.get_object_width(.btback.text) + 36)
-    '.btback.Move(.pnlWinHost.Left, .pnlWinHost.Top + .pnlWinHost.Height - (.btback.Height), MdlObjSizer.get_object_width(.btback.text) + 36)
     .btnext.Move(.pnlWinHost.Left + .pnlWinHost.Width - (.btnext.Width + 8), .btback.Top, MdlObjSizer.get_object_width(.btnext.text) + 36)
     ' for the quit button, it'll get a little tricky
       ' we want that one right in the middle
     .btQuit.Move(.pnlWinHost.Left + (.pnlWinHost.Width / 2) - (.btQuit.Width / 2), .btback.top)
+    '.PictureBox1.Move(Desktop.Width / 2 - (.PictureBox1.Width / 2), 4)
+    .PictureBox1.Move(.ClientWidth / 2 - (.PictureBox1.Width / 2), 4)
   END WITH 
 END
 
@@ -130,6 +140,8 @@ PUBLIC SUB btnext_Click()
         Message.Error("You must select a \"/\" partition. This is the target where the system will install to")
           STOP EVENT 
         ELSE 
+            ' set the partition types
+            MdlPartSel.SET_LINUX_PARTITION_TYPES()
           IF ClsPartSel.bDoWin = TRUE THEN 
             frmNext = FrmWinDrives
           ELSE 
@@ -149,8 +161,7 @@ PUBLIC SUB btnext_Click()
               MdlPkgSel.GET_USER_BULK_SELECTION()
               frmNext = FrmPkgsel2
             ELSE 
-              ' now we are ready to summarize
-              Message("Going for a simple install")
+              ' Going for simple install. Now we are ready to summarize
               MdlSummarize.SUMMARIZE_INSTALL
               frmNext = FrmSummary
             END IF

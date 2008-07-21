@@ -209,6 +209,7 @@ DIM i AS Integer
 DIM sLine AS String
   FOR i = 0 TO ClsWinDrives.sWinDrives.Count - 1
     sLine = ClsWinDrives.sWinDrives[i]
+    'FORMAT: <partition_address>|<mount_point>
       IF Left(sLine, InStr(sLine, "|") - 1) = sTag THEN 
         sLine = sTag & "|" & sMntPoint
       PRINT sLine
