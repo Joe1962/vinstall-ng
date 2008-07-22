@@ -40,3 +40,5 @@ STATIC PUBLIC sPackDir AS String
 STATIC PUBLIC sDocDir AS String
 STATIC PUBLIC sSetupConfPath AS String
 STATIC PUBLIC sReadMePath AS String
+
+STATIC PUBLIC sBackNav AS Object[]

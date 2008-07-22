@@ -14,19 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmPartScheme.class:97
+#: FrmPartScheme.class:105
 msgid "Select your disk partition option"
 msgstr ""
 
-#: FrmPartScheme.class:102
+#: FrmPartScheme.class:110
 msgid "Use existing disk partitions"
 msgstr ""
 
-#: FrmPartScheme.class:107
+#: FrmPartScheme.class:115
 msgid "Modify my disk partitions to make room for new installation"
 msgstr ""
 
-#: FrmPartScheme.class:112
+#: FrmPartScheme.class:120
 msgid "TextLabel1"
 msgstr ""
 

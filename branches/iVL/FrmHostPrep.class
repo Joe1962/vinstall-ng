@@ -1,0 +1,101 @@
+' Gambas class file
+
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+PUBLIC SUB Form_Open()
+
+FMain.FrmCurr = ME
+FMain.tvPlan["Prep3"].Picture = MdlCore.sDonePic
+FMain.tvPlan["Inst0"].picture = MdlCore.sNowPic
+FMain.tvPlan["Inst0"].Selected = TRUE
+
+
+
+  ' may need to move this code to another event. The FormOpen event only happens once.
+  ME.PREPARE_ALL_PARTITIONS()
+  
+END
+
+
+PUBLIC SUB PREPARE_ALL_PARTITIONS()
+  
+  DIM sList AS String[]
+  DIM i, iretval AS Integer
+  DIM sPart, sFormat AS String
+  
+    sList = NEW String[]
+    
+      IF ClsPartSel.sRoot THEN 
+        sList.Add(ClsPartSel.sRoot & ";" & ClsPartSel.fRoot)
+      END IF
+      IF ClsPartSel.sHome THEN 
+        sList.Add(ClsPartSel.sHome & ";" & ClsPartSel.fHome)
+      END IF
+      IF ClsPartSel.sUsr THEN 
+        sList.Add(ClsPartSel.sUsr & ";" & ClsPartSel.fUsr)
+      END IF
+      IF ClsPartSel.sOpt THEN 
+        sList.Add(ClsPartSel.sOpt & ";" & ClsPartSel.fOpt)
+      END IF
+      IF ClsPartSel.sTmp THEN 
+        sList.Add(ClsPartSel.sTmp & ";" & ClsPartSel.fTmp)
+      END IF
+      IF ClsPartSel.sVar THEN 
+        sList.Add(ClsPartSel.sVar & ";" & ClsPartSel.fVar)
+      END IF
+      
+  ' now that we have the list in the array, let's do each one
+  FOR i = 0 TO sList.Count - 1
+    sPart = Left(sList[i], InStr(sList[i], ";") - 1)
+    sFormat = Right(sList[i], Len(sList[i]) - InStr(sList[i], ";"))
+      iretval = MdlPartFrmt.FORMAT_PARTITION(sPart, sFormat) ' do the formatting
+        IF iretval <> 0 THEN 
+          RETURN ' stop right there there's been an error.
+        END IF
+  NEXT         
+  
+  
+  IF iretval AND iretval <> 0 THEN 
+    ' there has been an error. Do not move from here
+    RETURN 
+  ELSE 
+    'move on to installing.. first, make fstab
+  END IF
+  
+END
+
+
+
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .tlbanner.Move(4, 8, .ClientWidth - 8)
+    .frmStatus.Move(.tlbanner.Left, .tlbanner.Height * 1.5, .tlbanner.Width, .tlbanner.Height * 6)
+    .tlStatus.move(4, 24, .frmStatus.Width - 8, .frmStatus.Height - 36)
+    
+  END WITH 
+
+END
+
+PUBLIC SUB Form_Show()
+
+  Form_Open()
+  
+
+END

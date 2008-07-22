@@ -33,3 +33,5 @@ STATIC PUBLIC fTmp AS String
 STATIC PUBLIC sSwap AS String
 
 STATIC PUBLIC bDoWin AS Boolean
+
+STATIC PUBLIC sPartitionArray AS String[]

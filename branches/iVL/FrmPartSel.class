@@ -61,6 +61,8 @@ PUBLIC SUB Form_Open()
   MdlPartSel.DISPLAY_PARTITION_OPTIONS
   ME.cbDoWin.Value = FALSE
   ClsPartSel.bDoWin = FALSE
+  FMain.btback.Enabled = TRUE
+FMain.btback.ForeColor = Color.Black
   
 
 END
@@ -123,3 +125,9 @@ PUBLIC SUB cbDoWin_Click()
 
 END
 
+
+PUBLIC SUB Form_Show()
+
+  Form_Open
+
+END

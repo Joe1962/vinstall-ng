@@ -1,0 +1,21 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,78,51)
+  Text = ("")
+  { tlBanner TextLabel
+    MoveScaled(6,1,63,3)
+    Text = ("Vectorlinux is currently being installed to your system... Please wait")
+  }
+  { FrmProg Frame
+    MoveScaled(1,10,76,19)
+    Text = ("")
+    { tlCurrPkg TextLabel
+      MoveScaled(1,1,45,3.375)
+      Text = ("TextLabel1")
+    }
+    { pbInstallProg ProgressBar
+      MoveScaled(1,7,25,3)
+    }
+  }
+}

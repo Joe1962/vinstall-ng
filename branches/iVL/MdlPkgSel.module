@@ -177,12 +177,10 @@ PUBLIC SUB GET_USER_PKG_SELECTION()
           ClsPkgSel.arrPkgs.Add(cb.Tag)
         END IF
       NEXT 
-    
-      
-      
-      
-          
-    
+       
   
 END
+
+
+
 

@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmSummary.class:65
+#: FrmSummary.class:73
 msgid "TextLabel1"
 msgstr ""
 

@@ -1,0 +1,76 @@
+' Gambas module file
+
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+  PRIVATE hproc AS Process
+  PRIVATE sDump AS String
+  PRIVATE sErr AS String
+PUBLIC FUNCTION FORMAT_PARTITION(sAddr AS String, sFS AS String) AS Integer ' will return 1 for trouble, 0 for clear
+  
+  DIM sCommand AS String
+
+  
+    'Umount the volume first
+    SHELL "umount " & sAddr WAIT 
+    SELECT CASE LCase(sFS)
+      CASE "ext2"
+        sCommand = "mke2fs -q " & sAddr
+      CASE "ext3"
+        sCommand = "mke2fs -q -j " & saddr
+      CASE "reiserfs"
+        sCommand = "mkreiserfs --format 3.6 -ff " & sAddr
+      CASE "xfs"
+        sCommand = "mkfs.xfs -f " & sAddr
+    END SELECT 
+    
+  hproc = SHELL sCommand & " | echo \'FAILED\'" FOR READ 
+    WAIT 
+      IF hproc.State = Process.Running THEN 
+        REPEAT 
+          FrmHostPrep.tlStatus.Text = "Formatting " & sAddr & " as " & sFS
+          
+          WAIT 
+        UNTIL 
+          hproc.State = Process.Stopped
+      sDump = Trim(sDump)
+      sErr = Trim(sErr)
+    IF InStr(sDump, "FAILED") > 0 AND sErr <> "" THEN 
+      'error here
+      Message.Error("There has been an error wile trying to format " & sAddr & " to " & sFS & gb.NewLine &
+      sErr)
+        FrmHostPrep.tlStatus.Text = "Unable to format " & saddr 
+      RETURN 1
+    ELSE 
+      RETURN 0
+    END IF
+  END IF
+  
+END
+
+PUBLIC SUB process_read()
+  
+  DIM sLine AS String
+    READ #LAST, sLine, -256
+  sDump = sDump & gb.NewLine & sLine
+  
+  
+END
+
+PUBLIC SUB Process_error(errormsg AS String)
+  sErr = sErr & gb.NewLine & sErr
+   
+END
+
