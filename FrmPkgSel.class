@@ -26,6 +26,8 @@ PUBLIC SUB Form_Open()
   FMain.tvPlan["Prep2"].Selected = TRUE
   FMain.tvPlan["Prep1"].Picture = MdlCore.sDonePic
   FMain.tvPlan["Prep2"].Picture = MdlCore.sNowPic
+  FMain.btback.Enabled = TRUE
+FMain.btback.ForeColor = Color.Black
 
 END
 
@@ -64,5 +66,11 @@ END
 PUBLIC SUB Form_Hide()
 
   
+
+END
+
+PUBLIC SUB Form_Show()
+
+  Form_Open()
 
 END

@@ -22,6 +22,8 @@ ME.Resize(ME.ClientWidth - 12, ME.ClientH - 12)
   MdlWinDrives.LIST_WIN_PARTITIONS
   'ME.Resize(ME.Parent.Width - 12, ME.Parent.Height - 12)
   FMain.FrmCurr = ME
+  FMain.btback.Enabled = TRUE
+FMain.btback.ForeColor = Color.Black
   
 
 END

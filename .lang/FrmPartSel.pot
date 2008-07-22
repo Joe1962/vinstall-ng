@@ -14,15 +14,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmPartSel.class:143
+#: FrmPartSel.class:151
 msgid "Define where the operating system will be installed\n<br>\nLinux is a modular operating system. This means that it has the ability to keep system and user data separately.<br> A recommended setup would included a / (root), a /home, and a swap partitions.\n<br>\nPlease select which partitions you would like to use for your install"
 msgstr ""
 
-#: FrmPartSel.class:152
+#: FrmPartSel.class:160
 msgid "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
 msgstr ""
 
-#: FrmPartSel.class:153
+#: FrmPartSel.class:161
 msgid "Detect and Setup Windows partitions for auto-mounting at boot"
 msgstr ""
 

@@ -36,6 +36,8 @@ FMain.FrmCurr = ME
 FMain.tvPlan["Prep1"].Selected = TRUE
 FMain.tvPlan["Prep1"].Picture = MdlCore.sNowPic
 FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
+FMain.btback.Enabled = TRUE
+FMain.btback.ForeColor = Color.Black
 'FMain.frmNext = FrmPartSel
   WITH ME
     .rbEditPartitions.Width = MdlObjSizer.get_object_width(.rbEditPartitions.Text) + 24
@@ -74,5 +76,11 @@ END
 PUBLIC SUB Form_Hide()
 
 
+
+END
+
+PUBLIC SUB Form_Show()
+
+  Form_Open()
 
 END

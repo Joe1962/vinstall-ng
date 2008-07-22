@@ -54,6 +54,9 @@ PUBLIC SUB Form_Open()
   FMain.sNextKey = "Prep0"
   FMain.FrmCurr = ME
   FMain.frmNext = FrmPartScheme
+  IF ClsGlobal.sBackNav.Find(ME) = -1 THEN 
+  ClsGlobal.sBackNav.Add(ME)
+  END IF
   
   ' shape the main form according to the findings
  'warn the user if no installable media was found
@@ -191,5 +194,11 @@ PUBLIC SUB Form_Hide()
 
   FMain.frmLast = ME
   
+
+END
+
+PUBLIC SUB Form_Show()
+
+  Form_Open()
 
 END

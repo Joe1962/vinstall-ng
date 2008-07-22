@@ -28,6 +28,8 @@ END
 
 PUBLIC SUB Form_Open()
 DIM iImg AS Image
+
+ClsGlobal.sBackNav = NEW Object[]
 ClsGlobal.sSourceMnt = "/mnt" &/ "cdrom"
 FrmSelISO.Reparent(ME.pnlWinHost)
 FrmSelISO.Width = pnlWinHost.Width
@@ -90,9 +92,12 @@ DIM iMid AS Integer
 
   WITH ME
     .tlBanner.width = ME.width
-    .Frame1.Move(4, .PictureBox1.top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 1.5))
+    .Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.5, .ClientHeight - .PictureBox1.Height * 1.5)
+    '.Frame1.Move(4, .PictureBox1.top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 2))
     '.Frame1.Resize(MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 1.5))
-    .tvPlan.Move(4, 24, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
+    .tvPlan.Move(4, 24, .Frame1.Width - 8, .Frame1.Height - 28) ' THIS WILL LEAVE 16PIX ON TOP AND BOTTOM AND 2 ON LEFT AND RIGHT
+    '.tvPlan.Move(4, 24, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
+    
     .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top + (.tlBanner.Height / 2), .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 2)))
     .btback.Move(.pnlWinHost.Left, .Frame1.top + .Frame1.Height - .btback.Height, MdlObjSizer.get_object_width(.btback.text) + 36)
     .btnext.Move(.pnlWinHost.Left + .pnlWinHost.Width - (.btnext.Width + 8), .btback.Top, MdlObjSizer.get_object_width(.btnext.text) + 36)
@@ -173,6 +178,10 @@ PUBLIC SUB btnext_Click()
     CASE "FrmWinDrives"
       'Move on to selecting packages
         frmNext = FrmPkgSel
+    CASE "FrmSummary"
+        frmNext = FrmHostPrep ' prepare host
+            
+        
   END SELECT 
             
             
@@ -180,7 +189,27 @@ PUBLIC SUB btnext_Click()
   frmNext.Reparent(ME.pnlWinHost)
   FrmCurr.Hide
   frmLast = FrmCurr
+    'IF ClsGlobal.sBackNav.Find(FrmCurr) = -1 THEN 
+     ' ClsGlobal.sBackNav.Add(FrmCurr)
+    'END IF
+    IF ClsGlobal.sBackNav.Find(frmNext) = -1 THEN 
+    ClsGlobal.sBackNav.Add(frmNext)
+    END IF
   frmNext.Show
- 
+  
+
+END
+
+PUBLIC SUB btback_Click()
+
+  DIM iKey AS Integer
+  DIM frm AS Form
+    iKey = ClsGlobal.sBackNav.Find(FrmCurr)
+      IF iKey <> -1 THEN 
+        frm = ClsGlobal.sBackNav[iKey - 1]
+      FrmCurr.Hide
+      frm.Show
+      END IF
+        
 
 END

@@ -30,6 +30,8 @@ PUBLIC SUB Form_Open()
   FMain.tvPlan["Inst0"].Selected = TRUE
   FMain.tvPlan["Prep2"].Picture = MdlCore.sDonePic
   FMain.tvPlan["Inst0"].Picture = MdlCore.sNowPic
+  FMain.btback.Enabled = TRUE
+FMain.btback.ForeColor = Color.Black
 
 END
 
@@ -42,5 +44,11 @@ PUBLIC SUB Form_Resize()
     '.tlSummary.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 4, .tlBanner.Width, .ClientH - 16)
     
   END WITH 
+
+END
+
+PUBLIC SUB Form_Show()
+
+  Form_Open()
 
 END

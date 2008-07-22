@@ -25,6 +25,8 @@ PUBLIC SUB Form_Open()
     
   END WITH 
   FMain.FrmCurr = ME
+  FMain.btback.Enabled = TRUE
+FMain.btback.ForeColor = Color.Black
   MdlPkgSel.LIST_PACKAGE_SELECTION()
 END
 
