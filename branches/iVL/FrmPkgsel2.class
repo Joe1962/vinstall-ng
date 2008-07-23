@@ -26,6 +26,8 @@ PUBLIC SUB Form_Open()
   END WITH 
   FMain.FrmCurr = ME
   FMain.btback.Enabled = TRUE
+  FMain.tvPlan["Prep2"].Picture = MdlCore.sNowPic
+  FMain.tvPlan["Prep2"].Selected = TRUE
 FMain.btback.ForeColor = Color.Black
   MdlPkgSel.LIST_PACKAGE_SELECTION()
 END
@@ -57,5 +59,11 @@ END
 PUBLIC SUB scrPkgs_MouseDown()
 
   
+
+END
+
+PUBLIC SUB Form_Hide()
+
+  FMain.tvPlan["Prep2"].Picture = MdlCore.sDonePic
 
 END

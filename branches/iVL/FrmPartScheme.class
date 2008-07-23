@@ -75,7 +75,7 @@ END
 
 PUBLIC SUB Form_Hide()
 
-
+FMain.tvPlan["Prep1"].Picture = MdlCore.sDonePic
 
 END
 

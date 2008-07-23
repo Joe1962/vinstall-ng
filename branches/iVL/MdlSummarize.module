@@ -86,7 +86,7 @@ END
           sLine = ClsWinDrives.sWinDrives[i]
           spart = Trim(Left(sLine, InStr(sLine, "|") - 1))
           sMntPnt = Right(sLine, Len(sLine) - InStr(sLine, "|"))
-          sRet = sRet & gb.NewLine & spart & " will be mounted to " & sMntPnt
+          sRet = sRet & "<br>" & spart & " will be mounted to " & sMntPnt
           'Message.Info(sLine)
         NEXT 
         sRet = Trim(sRet)
