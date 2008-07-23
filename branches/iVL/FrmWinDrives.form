@@ -8,7 +8,7 @@
     Expand = True
   }
   { tlBanner TextLabel
-    MoveScaled(1,2,65,5)
+    MoveScaled(1,1,65,5)
     Text = ("Select the windows partitions you would like to mount during boot")
   }
 }

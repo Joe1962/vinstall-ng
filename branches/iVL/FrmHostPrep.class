@@ -20,14 +20,20 @@
 PUBLIC SUB Form_Open()
 
 FMain.FrmCurr = ME
-FMain.tvPlan["Prep3"].Picture = MdlCore.sDonePic
+FMain.tvPlan["Prep2"].Picture = MdlCore.sDonePic
 FMain.tvPlan["Inst0"].picture = MdlCore.sNowPic
 FMain.tvPlan["Inst0"].Selected = TRUE
 
 
 
   ' may need to move this code to another event. The FormOpen event only happens once.
-  ME.PREPARE_ALL_PARTITIONS()
+  'ME.PREPARE_ALL_PARTITIONS()
+  WAIT 
+  FrmInstallSys.Reparent(ME.Parent)
+  ME.Hide
+  FrmInstallSys.Show
+'  ME.Hide
+  
   
 END
 

@@ -3,17 +3,16 @@
 { Form Form
   MoveScaled(0,0,64,64)
   Text = ("")
-  Arrangement = Arrange.Vertical
   { tlBanner TextLabel
     MoveScaled(1,1,27,10)
     Text = ("TextLabel1")
-    Alignment = Align.Left
+    Alignment = Align.TopLeft
   }
   { scrSumm ScrollView
-    MoveScaled(1,12,61,43)
-    Arrangement = Arrange.Vertical
+    MoveScaled(0,12,61,43)
     { tlSummary TextLabel
-      MoveScaled(1,2,55,85)
+      MoveScaled(2,1,55,85)
+      Expand = True
       Text = ("TextLabel1")
     }
   }

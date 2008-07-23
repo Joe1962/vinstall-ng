@@ -30,18 +30,21 @@ PUBLIC SUB Form_Open()
   ' 2: Write /etc/fstab
   ' 3: Install packages
   
-  sRes = MdlInstallSys.MOUNT_DEFINED_PARTITIONS()
-    IF sRes AND sRes <> 0 THEN 
-      RETURN ' exit... there was an error mounting
-    END IF
+  ' CAN'T TEST THIS UNTIL I GET A GOOD TESTING ENVIRONMENT
+  ' ' ' ' ' ' ' ' ' sRes = MdlInstallSys.MOUNT_DEFINED_PARTITIONS()
+  ' ' ' ' ' ' ' ' '   IF sRes AND sRes <> 0 THEN 
+  ' ' ' ' ' ' ' ' '     RETURN ' exit... there was an error mounting
+  ' ' ' ' ' ' ' ' '   END IF
   sRes = 0
   sRes = MdlInstallSys.WRITE_NEW_FSTAB()
     IF sRes AND sRes <> 0 THEN 
-      RETURN 
+      Message("Error writing fstab")
+       RETURN 
     END IF
   sRes = 0
   sRes = MdlInstallSys.INSTALL_BULK_PACKAGES()
     IF sRes AND sRes <> 0 THEN 
+      Message("Error installing bulk packages")
       RETURN 
     END IF
   sRes = 0

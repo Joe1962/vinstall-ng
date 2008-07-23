@@ -31,17 +31,25 @@ PUBLIC SUB Form_Open()
   FMain.tvPlan["Prep2"].Picture = MdlCore.sDonePic
   FMain.tvPlan["Inst0"].Picture = MdlCore.sNowPic
   FMain.btback.Enabled = TRUE
-FMain.btback.ForeColor = Color.Black
+' FMain.btback.ForeColor = Color.Black
 
 END
 
 PUBLIC SUB Form_Resize()
 
   WITH ME
-    .tlBanner.Width = .ClientWidth - 4
-    .scrSumm.Move(.tlBanner.left, .tlBanner.top + .tlBanner.Height + 4, .tlBanner.Width - 32, .ClientHeight - .tlBanner.Height * 2)
-    .tlSummary.Move(4, 4)
+    .tlBanner.Move(4, 4, .ClientWidth - 8)
+    '.scrSumm.Move(4, .tlBanner.top + (.tlBanner.Height + 8), .tlBanner.Width - (.tlBanner.Width / 2), .ClientH - .tlBanner.Height * 1.5)
+    '.tlBanner.Width = .ClientWidth - 8
+    '.scrSumm.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 8, .tlBanner.Width - 300, .ClientHeight - .tlBanner.Height * 1.5)
+    .scrSumm.Move(.tlBanner.left, .tlBanner.top + .tlBanner.Height + 4, .tlBanner.Width - 4, .ClientHeight - .tlBanner.Height * 2)
+    '.scrSumm.Move(4, .tlBanner.top + .tlBanner.Height + 4)
+    '.scrSumm.Resize(.ClientWidth - 16, .tlBanner.top + .tlBanner.Height + 4)
+    .tlSummary.Move(2, 4)
     '.tlSummary.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 4, .tlBanner.Width, .ClientH - 16)
+    
+    
+    
     
   END WITH 
 

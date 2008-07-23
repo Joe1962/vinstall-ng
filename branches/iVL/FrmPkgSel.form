@@ -4,23 +4,23 @@
   MoveScaled(0,0,64,64)
   Text = ("")
   { tlBanner TextLabel
-    MoveScaled(1,2,55,5)
+    MoveScaled(1,1,55,5)
     Text = ("TextLabel1")
     Alignment = Align.Normal
   }
   { rbFull RadioButton
-    MoveScaled(1,8,40,3)
+    MoveScaled(1,7,40,3.375)
     Text = ("Full Install")
   }
   { rbCustom RadioButton
-    MoveScaled(1,11,55,3)
+    MoveScaled(1,12,55,3.375)
     Text = ("Custom Install")
   }
   { tlActionDesc TextLabel
-    MoveScaled(1,15,63,6)
+    MoveScaled(1,17,63,6)
     Text = ("")
   }
   { scrlInstallOpts ScrollView
-    MoveScaled(1,22,52,28)
+    MoveScaled(1,24,52,28)
   }
 }
