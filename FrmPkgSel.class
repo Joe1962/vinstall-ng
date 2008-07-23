@@ -65,8 +65,10 @@ END
 
 PUBLIC SUB Form_Hide()
 
+  IF ClsPkgSel.bCustom = FALSE THEN
   
-
+  FMain.tvPlan["Prep2"].Picture = MdlCore.sDonePic
+  END IF
 END
 
 PUBLIC SUB Form_Show()

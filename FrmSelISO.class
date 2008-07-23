@@ -54,6 +54,8 @@ PUBLIC SUB Form_Open()
   FMain.sNextKey = "Prep0"
   FMain.FrmCurr = ME
   FMain.frmNext = FrmPartScheme
+'  FMain.tvPlan["Prep0"].Selected = TRUE
+ ' FMain.tvPlan["Prep0"].Picture = MdlCore.sNowPic
   IF ClsGlobal.sBackNav.Find(ME) = -1 THEN 
   ClsGlobal.sBackNav.Add(ME)
   END IF
@@ -193,6 +195,8 @@ END
 PUBLIC SUB Form_Hide()
 
   FMain.frmLast = ME
+  FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
+  
   
 
 END

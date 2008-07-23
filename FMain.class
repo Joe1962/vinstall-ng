@@ -44,12 +44,16 @@ PictureBox1.Stretch = TRUE
 FrmSelISO.Show
 
 MdlCore.PREPARE_INSTALL_LAYOUT
+
 WITH ME
   .btback.Enabled = FALSE
   .btback.ForeColor = Color.Gray
   .Frame1.BackColor = Color.Transparent
   .tvPlan.BackColor = Color.transparent
   .btQuit.Text = "Exit Installation"
+  .tvPlan["Prep0"].Selected = TRUE
+  .tvPlan["Prep0"].Picture = MdlCore.sNowPic
+  
 END WITH 
 'ME.TreeView1.BackColor = Color.Transparent
 ME.AUTOSIZE_LEFT_PANE
@@ -98,7 +102,7 @@ DIM iMid AS Integer
     .tvPlan.Move(4, 24, .Frame1.Width - 8, .Frame1.Height - 28) ' THIS WILL LEAVE 16PIX ON TOP AND BOTTOM AND 2 ON LEFT AND RIGHT
     '.tvPlan.Move(4, 24, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
     
-    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top + (.tlBanner.Height / 2), .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 2)))
+    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top + (.tlBanner.Height / 2), .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 3.5)))
     .btback.Move(.pnlWinHost.Left, .Frame1.top + .Frame1.Height - .btback.Height, MdlObjSizer.get_object_width(.btback.text) + 36)
     .btnext.Move(.pnlWinHost.Left + .pnlWinHost.Width - (.btnext.Width + 8), .btback.Top, MdlObjSizer.get_object_width(.btnext.text) + 36)
     ' for the quit button, it'll get a little tricky
@@ -192,8 +196,10 @@ PUBLIC SUB btnext_Click()
     'IF ClsGlobal.sBackNav.Find(FrmCurr) = -1 THEN 
      ' ClsGlobal.sBackNav.Add(FrmCurr)
     'END IF
+      IF FrmCurr.Name <> "FrmDiskPart" THEN 
     IF ClsGlobal.sBackNav.Find(frmNext) = -1 THEN 
     ClsGlobal.sBackNav.Add(frmNext)
+    END IF
     END IF
   frmNext.Show
   

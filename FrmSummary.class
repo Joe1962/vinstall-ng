@@ -50,5 +50,12 @@ END
 PUBLIC SUB Form_Show()
 
   Form_Open()
+  
+
+END
+
+PUBLIC SUB Form_Hide()
+
+  FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
 
 END

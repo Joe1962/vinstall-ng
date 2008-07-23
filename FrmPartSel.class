@@ -63,13 +63,13 @@ PUBLIC SUB Form_Open()
   ClsPartSel.bDoWin = FALSE
   FMain.btback.Enabled = TRUE
 FMain.btback.ForeColor = Color.Black
-  
+  FMain.tvPlan["Prep1"].Selected = TRUE
+  FMain.tvPlan["Prep1"].Picture = MdlCore.sNowPic
 
 END
 
 PUBLIC SUB Form_Hide()
-  
-
+  FMain.tvPlan["Prep2"].Picture = MdlCore.sDonePic
 END
 
 PUBLIC FUNCTION ANALYZE_PARTITION_SETUP() AS Integer
