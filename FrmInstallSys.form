@@ -4,7 +4,7 @@
   MoveScaled(0,0,78,51)
   Text = ("")
   { tlBanner TextLabel
-    MoveScaled(6,1,63,3)
+    MoveScaled(1,1,63,3)
     Text = ("Vectorlinux is currently being installed to your system... Please wait")
   }
   { FrmProg Frame

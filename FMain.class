@@ -102,7 +102,8 @@ DIM iMid AS Integer
     .tvPlan.Move(4, 24, .Frame1.Width - 8, .Frame1.Height - 28) ' THIS WILL LEAVE 16PIX ON TOP AND BOTTOM AND 2 ON LEFT AND RIGHT
     '.tvPlan.Move(4, 24, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
     
-    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top + (.tlBanner.Height / 2), .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 3.5)))
+    '.pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top + (.tlBanner.Height / 2), .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 3.5)))
+    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.Top, .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlBanner.Height + (.btback.Height * 3.5)))
     .btback.Move(.pnlWinHost.Left, .Frame1.top + .Frame1.Height - .btback.Height, MdlObjSizer.get_object_width(.btback.text) + 36)
     .btnext.Move(.pnlWinHost.Left + .pnlWinHost.Width - (.btnext.Width + 8), .btback.Top, MdlObjSizer.get_object_width(.btnext.text) + 36)
     ' for the quit button, it'll get a little tricky

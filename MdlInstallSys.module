@@ -15,12 +15,17 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+ PRIVATE hproc AS Process
+ PRIVATE sDump AS String
+ PRIVATE sErr AS String
+ 
+
 PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
 
-
-  
+ 
   ' this is where we need to set the mount target
-  ClsGlobal.sTargetMnt = "/mnt/target"
+  'ClsGlobal.sTargetMnt = "/mnt/target"
+  ClsGlobal.sTargetMnt = "/home/moises/mnt/target" ' just for testing now.
     IF Exist(ClsGlobal.sTargetMnt) = FALSE THEN 
       TRY MKDIR ClsGlobal.sTargetMnt
     END IF
@@ -29,12 +34,13 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
     
     SHELL "umount " & ClsGlobal.sTargetMnt WAIT 'clear the mount point
     
-    SHELL "mount " & ClsPartSel.sRoot & Space(1) & ClsGlobal.sTargetMnt & Space(1) & " -t " & ClsPartSel.fRoot WAIT  'moun the root partition first
-    IF ClsPartSel.sHome THEN 
-        SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "home" WAIT 
-      SHELL "mount " & ClsPartSel.sHome & Space(1) & ClsGlobal.sTargetMnt &/ "home -t " & ClsPartSel.fhome WAIT 'mount the home partition if defined
+    '/DISABLED FOR TESTING INSTALL ONLY
+    ' ' ' ' SHELL "mount " & ClsPartSel.sRoot & Space(1) & ClsGlobal.sTargetMnt & Space(1) & " -t " & ClsPartSel.fRoot WAIT  'moun the root partition first
+    ' ' ' ' IF ClsPartSel.sHome THEN 
+    ' ' ' '     SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "home" WAIT 
+    ' ' ' '   SHELL "mount " & ClsPartSel.sHome & Space(1) & ClsGlobal.sTargetMnt &/ "home -t " & ClsPartSel.fhome WAIT 'mount the home partition if defined
       
-    END IF
+    ' ' ' '     END IF
     IF ClsPartSel.sUsr THEN 
       SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "usr" WAIT 
       SHELL "mount " & ClsPartSel.sUsr & Space(1) & ClsGlobal.sTargetMnt &/ "usr -t" & ClsPartSel.fUsr WAIT ' mount the user partition
@@ -59,7 +65,7 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
     
     'WRITE THE NEW FSTAB NOW, RIGHT BEFORE INSTALLING PACKAGES.
     
-    'ME.WRITE_NEW_FSTAB() ' do this from the install form
+    ME.WRITE_NEW_FSTAB() ' do this from the install form
     
     
   
@@ -160,12 +166,25 @@ IF ClsPartSel.sSwap THEN
   sFstab = sFstab & gb.NewLine &
    ClsPartSel.sSwap & Space(5) & "none" & Space(5) & "swap" & Space(5) & "sw" & Space(5) & "0" & Space(5) & "0"
 END IF
+
+sFstab = sFstab & "\n"
 ' Wheewww!... that's the whole fstab there... Please fix the win partitions
  
+ 'Message(sFstab)
+ 
+ IF NOT ClsGlobal.sTargetMnt OR ClsGlobal.sTargetMnt = "" THEN 
+  ClsGlobal.sTargetMnt = "/home/moises/mnt/target"
+ END IF
+ 
+ ';Message(ClsGlobal.sTargetMnt &/ "etc")
   ' now save the file to /etc/fstab
+      IF Exist(ClsGlobal.sTargetMnt &/ "etc") = FALSE THEN 
+        MKDIR ClsGlobal.sTargetMnt &/ "etc"
+      END IF
     TRY File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "fstab", SConv(sFstab))
       CATCH 
-        RETURN 1
+      PRINT ERROR 
+        '.RETURN 1
         
   
 END 
@@ -192,10 +211,91 @@ PUBLIC FUNCTION fS_oPTIONS(sType AS String) AS String
 END
 
 PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
-  
-  
-  
+  DIM i AS Integer
+  DIM sShell AS String
+  DIM sPKG AS String
+  DIM sDump AS String
+  DIM sBulkList AS String
+  DIM sType AS String
+  DIM sList AS String[]
+  DIM sBulk AS String
+  DIM sBulkPath AS String = ClsGlobal.sSourceMnt &/ "veclinux" &/ "required"
+    
+    SHELL "ls -m " & sBulkPath TO sBulkList
+      sList = Split(sBulkList, ",")
+        FOR i = 0 TO sList.Count - 1
+          sBulk = Trim(sList[i])
+            sType = File.Ext(sBulkPath &/ sBulk)
+                ' SELECT CASE sType
+                '   CASE "tlz", "lzm", "lzma"
+                    sShell = "lzmadec " & sBulkPath &/ sBulk & " | tar -xp -C " & ClsGlobal.sTargetMnt
+                    'Message(sBulkPath &/ sBulk & " | tar -xp -C " & ClsGlobal.sTargetMnt)
+'                 END SELECT 
+            'Message(sShell)
+            'Message(ClsGlobal.sSourceMnt &/ "veclinux" &/ "required" &/ sBulk)
+            
+            'Message("type = " & sType & " command = " & sShell)
+            hproc = SHELL sShell FOR READ 
+              WAIT 
+                IF hproc.State = Process.Running THEN 
+                  REPEAT 
+                    WAIT 
+                      PRINT "Installing " & sBulk
+                  UNTIL 
+                  hproc.State = Process.Stopped
+                END IF
+        NEXT 
+                
+    
+  ' ' '     
+  ' ' ' 
+  ' ' '   IF ClsPkgSel.bCustom = TRUE THEN 
+  ' ' '     ' need to get the list of packages selected by user
+  ' ' '   ELSE 
+  ' ' '     ' do the optional bulks first
+  ' ' '           
+  ' ' '       'FOR EACH sPKG IN RDir(ClsGlobal.sSourceMnt &/ "veclinux" &/ "optional")
+  ' ' '           SELECT CASE File.Ext(sPkg)
+  ' ' '             CASE "tlz", "lzm", "lzma"
+  ' ' '               sShell = "lzmadec < " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "optional" &/ sPkg & " | tar -xp -C " & ClsGlobal.sTargetMnt
+  ' ' '                 
+  ' ' '             CASE "bz2", "tbz2", "tbz"
+  ' ' '               sShell = "tar -xpjf " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "optional" &/ sPkg & " -C " & ClsGlobal.sTargetMnt
+  ' ' '           END SELECT 
+  ' ' '           
+  ' ' '           'FrmInstallSys.tlCurrPkg.Text = "Installing " & sPkg
+  ' ' '           
+  ' ' '           'hproc = SHELL sShell
+  ' ' '           Message(sShell)
+  ' ' '           RETURN 1
+  ' ' '            ME.INSTALL_TO_HOST(sShell)
+  ' ' '            
+  ' ' '           ' '   WAIT 
+  ' ' '           ' '     IF hproc.State = Process.Running THEN 
+  ' ' '           ' '       REPEAT 
+  ' ' '           ' '     ' IF hproc.State = Process.Running THEN 
+  ' ' '           ' '         FrmInstallSys.pbInstallProg.Value = FrmInstallSys.pbInstallProg.Value + 0.00001
+  ' ' '           ' '           WAIT 
+  ' ' '           ' '      '   END IF
+  ' ' '           ' '         UNTIL hproc.State = Process.Stopped
+  ' ' '           ' '       'END IF
+  ' ' '           ' '     
+  ' ' '           ' '     sDump = Trim(sDump)
+  ' ' '           ' '     sErr = Trim(sErr)
+  ' ' '           ' '       IF serr <> "" THEN 
+  ' ' '           ' '         Message("There has been an error installing " & sPkg & gb.NewLine & "<b>Error:</b>" & gb.NewLine & serr)
+  ' ' '           ' '         RETURN 1
+  ' ' '           ' '       END IF
+  ' ' '           ' '    'Message(sPkg & " is installed")
+  ' ' '           ' '         END IF
+  ' ' '       NEXT 
+  ' ' '       'RETURN 
+  ' ' '       
+  ' ' ' END IF
+  ' ' ' 
 END
+
+
 
 PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
   
@@ -203,4 +303,25 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
   
 END
 
+PUBLIC FUNCTION INSTALL_TO_HOST(sCmnd AS String) AS Integer
 
+  hproc = SHELL sCmnd FOR READ 
+  
+  
+END
+
+PUBLIC SUB Process_read()
+  
+  DIM sLine AS String
+  READ #LAST, sLine, -256
+  sDump = sDump & gb.NewLine & sLine
+  PRINT sLine
+  
+  
+END
+
+PUBLIC SUB process_error(msg AS String)
+
+  sErr = sErr & gb.NewLine & sErr
+  PRINT MSG
+END 
