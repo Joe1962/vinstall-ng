@@ -5,3 +5,17 @@
 (09:55:32 AM) uelsk8s: 5 $MNTPNT/veclinux/required/vlconfig2.tlz
 (09:55:57 AM) uelsk8s: because they are not listed in packages.txt for the user to select from
 (09:56:13 AM) uelsk8s: they have to be installed or the install will break
+
+
+10:38:40 AM) uelsk8s: :)
+(10:39:45 AM) uelsk8s: mbused() {
+(10:39:46 AM) uelsk8s:   MB=0
+(10:39:46 AM) uelsk8s:   for DEV in $DEVICES ; do
+(10:39:46 AM) uelsk8s:     line=`df | grep $DEV` 
+(10:39:46 AM) uelsk8s:     if [ "$line" ]; then
+(10:39:46 AM) uelsk8s:       mb1=`echo $line | cut -f 3 -d ' '`
+(10:39:48 AM) uelsk8s:       MB=`expr $MB '+' $mb1`
+(10:39:50 AM) uelsk8s:     fi
+(10:39:52 AM) uelsk8s:   done;
+(10:39:54 AM) uelsk8s:   echo $MB
+(10:39:56 AM) uelsk8s: }
