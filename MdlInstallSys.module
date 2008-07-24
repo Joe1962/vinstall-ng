@@ -247,29 +247,36 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                 sPakDesc = sEntry[2]
             'PRINT sBasePath &/ sPakPath & " = " & sPakDesc & " size= " & CStr(sPakSize)    
                       ' figure out the sizing and the progrss meter
+                      iTotalSize = 0
+                      sTargetSize = 0
+                      
                         SHELL "export gsize=$(df| grep /dev/hda3) && echo $gsize | cut -f3 -d \' \'" TO sTargetSize
                           'Message(CStr(sTargetSize))
                           iTotalSize = CInt(sTargetSize) + CInt(sPakSize)
                           
+                          
                         'RETURN 
                 PRINT "Installing " & sPakPath & " Total size (KB) = " & CStr(sPakSize)
+                FrmInstallSys.tlCurrPkg.Text = "Installing " & sPakDesc & " ... "
               hproc = SHELL "lzmadec <" & sBasePath &/ sPakPath & " | tar -xp -C " & ClsGlobal.sTargetMnt
                 WAIT 1
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
-                      WAIT 
+                      WAIT 3
                           ' get the actual size at each snap
                             SHELL "export tsize=$(df | grep /dev/hda3) && echo $tsize | cut -f3 -d \' \'" TO iCurrSize
                             iCurrSize = Trim(CStr(iCurrSize))
-                            iVal = CInt(iTotalSize) / CInt(iCurrSize)
+                            'iVal = Round(CInt(iCurrSize) / CInt(iTotalSize), -2) 'CInt(iTotalSize) / CInt(iCurrSize)
+                            iVal = Round((iTotalSize - iCurrSize) / iTotalSize, -2)
                             'FrmInstallSys.pbInstallProg.Value = (CInt(iCurrSize) / CInt(iTotalSize)) * 0.100
                             'PRINT CStr(iCurrSize) & "/" & CStr(iTotalSize) & " = " & iVal & "%"
-                            PRINT CStr(iTotalSize) & "/" & CStr(iCurrSize) & " = " & iVal & "%"
+                            PRINT CStr(iTotalSize) & "/" & CStr(iCurrSize) & " = " & iVal 
+                            FrmInstallSys.pbInstallProg.Value = iVal
                     
                     UNTIL 
                       hproc.State = Process.Stopped
                   END IF
-                PRINT sPak & " is installed... "
+                PRINT sPakDesc & " is installed... "
            'PRINT "Needs to install " & sPak
           END IF
     NEXT 
