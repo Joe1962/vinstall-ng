@@ -181,11 +181,11 @@ sFstab = sFstab & "\n"
       IF Exist(ClsGlobal.sTargetMnt &/ "etc") = FALSE THEN 
         MKDIR ClsGlobal.sTargetMnt &/ "etc"
       END IF
-    TRY File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "fstab", SConv(sFstab))
-      CATCH 
-      PRINT ERROR 
+    File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "fstab", SConv(sFstab))
+      'CATCH 
+      'PRINT ERROR 
         '.RETURN 1
-        
+  RETURN 0     
   
 END 
 PUBLIC FUNCTION fS_oPTIONS(sType AS String) AS String
@@ -210,89 +210,101 @@ PUBLIC FUNCTION fS_oPTIONS(sType AS String) AS String
   
 END
 
-PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
+
+PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
+  
+  'Will need to read SETUP.CONF to determine what to do here
+  
+  DIM sFile AS String[]
+  DIM sEntry AS String[]
+  DIM sPak AS String
+  DIM sPakPath AS String
+  DIM sPakSize AS Variant
+  DIM sTargetSize AS Variant
+  DIM iTotalSize AS Integer
+  DIM iCurrSize AS Variant
+  DIM sPakDesc AS String
   DIM i AS Integer
+  DIM ii AS Integer
+  DIM sLine AS String
+  DIM sBulkPath AS String
+  DIM sConfPath AS String
+  DIM sOptPkgPath AS String
+  DIM iVal AS Float
+  DIM sBasePath AS String = ClsGlobal.sSourceMnt &/ "veclinux"
+  ClsGlobal.sTargetMnt = "/home/moises/mnt/target"
+    sFile = Split(File.Load(Temp$("SETUP.CONF")), "\n")
+      FOR i = 0 TO sFile.count - 1
+        sLine = Trim(sFile[i])
+          IF Left(sLine, Len("BULK") + 1) LIKE "BULK" & "*[0-9]*" THEN 
+            'sLine = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
+            'sLine = Left(sLine, Len(sLine) - 1)
+              sPak = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
+              sPak = Left(sPak, Len(sPak) - 1)
+              sEntry = Split(sPak, ":")
+                sPakPath = sEntry[0]
+                sPakSize = sEntry[1]
+                sPakDesc = sEntry[2]
+            'PRINT sBasePath &/ sPakPath & " = " & sPakDesc & " size= " & CStr(sPakSize)    
+                      ' figure out the sizing and the progrss meter
+                        SHELL "export gsize=$(df| grep /dev/hda3) && echo $gsize | cut -f3 -d \' \'" TO sTargetSize
+                          'Message(CStr(sTargetSize))
+                          iTotalSize = CInt(sTargetSize) + CInt(sPakSize)
+                          
+                        'RETURN 
+                PRINT "Installing " & sPakPath & " Total size (KB) = " & CStr(sPakSize)
+              hproc = SHELL "lzmadec <" & sBasePath &/ sPakPath & " | tar -xp -C " & ClsGlobal.sTargetMnt
+                WAIT 1
+                  IF hproc.State = Process.Running THEN 
+                    REPEAT 
+                      WAIT 
+                          ' get the actual size at each snap
+                            SHELL "export tsize=$(df | grep /dev/hda3) && echo $tsize | cut -f3 -d \' \'" TO iCurrSize
+                            iCurrSize = Trim(CStr(iCurrSize))
+                            iVal = CInt(iTotalSize) / CInt(iCurrSize)
+                            'FrmInstallSys.pbInstallProg.Value = (CInt(iCurrSize) / CInt(iTotalSize)) * 0.100
+                            'PRINT CStr(iCurrSize) & "/" & CStr(iTotalSize) & " = " & iVal & "%"
+                            PRINT CStr(iTotalSize) & "/" & CStr(iCurrSize) & " = " & iVal & "%"
+                    
+                    UNTIL 
+                      hproc.State = Process.Stopped
+                  END IF
+                PRINT sPak & " is installed... "
+           'PRINT "Needs to install " & sPak
+          END IF
+    NEXT 
+  
+  
+END
+
+
+
+
+
+
+PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
+  DIM sPkg AS String
   DIM sShell AS String
-  DIM sPKG AS String
-  DIM sDump AS String
-  DIM sBulkList AS String
-  DIM sType AS String
-  DIM sList AS String[]
-  DIM sBulk AS String
-  DIM sBulkPath AS String = ClsGlobal.sSourceMnt &/ "veclinux" &/ "required"
-    
-    SHELL "ls -m " & sBulkPath TO sBulkList
-      sList = Split(sBulkList, ",")
-        FOR i = 0 TO sList.Count - 1
-          sBulk = Trim(sList[i])
-            sType = File.Ext(sBulkPath &/ sBulk)
-                ' SELECT CASE sType
-                '   CASE "tlz", "lzm", "lzma"
-                    sShell = "lzmadec " & sBulkPath &/ sBulk & " | tar -xp -C " & ClsGlobal.sTargetMnt
-                    'Message(sBulkPath &/ sBulk & " | tar -xp -C " & ClsGlobal.sTargetMnt)
-'                 END SELECT 
-            'Message(sShell)
-            'Message(ClsGlobal.sSourceMnt &/ "veclinux" &/ "required" &/ sBulk)
+  DIM hBulkInst AS Process
+  DIM sExt AS String
+  DIM sCMD AS String
+  
+  ClsGlobal.sTargetMnt = "/home/moises/mnt/target"
+  
+  PRINT "Installing bulk packages ... "
+  FOR EACH sPkg IN RDir(ClsGlobal.sSourceMnt &/ "veclinux" &/ "required")
+      sExt = Trim(File.Ext(ClsGlobal.sSourceMnt &/ "veclinux" &/ "required" &/ sPkg))
+        SELECT CASE sExt
+          CASE "tlz", "lzm", "lzma"
+            sCMD = "lzmadec <" & ClsGlobal.sSourceMnt &/ "veclinux" &/ "required" &/ sPkg & " | tar -xp -C " & ClsGlobal.sTargetMnt
+        END SELECT 
+        PRINT "Installing " & sPkg
+          hBulkInst = SHELL sCMD WAIT 
             
-            'Message("type = " & sType & " command = " & sShell)
-            hproc = SHELL sShell FOR READ 
-              WAIT 
-                IF hproc.State = Process.Running THEN 
-                  REPEAT 
-                    WAIT 
-                      PRINT "Installing " & sBulk
-                  UNTIL 
-                  hproc.State = Process.Stopped
-                END IF
-        NEXT 
-                
-    
-  ' ' '     
-  ' ' ' 
-  ' ' '   IF ClsPkgSel.bCustom = TRUE THEN 
-  ' ' '     ' need to get the list of packages selected by user
-  ' ' '   ELSE 
-  ' ' '     ' do the optional bulks first
-  ' ' '           
-  ' ' '       'FOR EACH sPKG IN RDir(ClsGlobal.sSourceMnt &/ "veclinux" &/ "optional")
-  ' ' '           SELECT CASE File.Ext(sPkg)
-  ' ' '             CASE "tlz", "lzm", "lzma"
-  ' ' '               sShell = "lzmadec < " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "optional" &/ sPkg & " | tar -xp -C " & ClsGlobal.sTargetMnt
-  ' ' '                 
-  ' ' '             CASE "bz2", "tbz2", "tbz"
-  ' ' '               sShell = "tar -xpjf " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "optional" &/ sPkg & " -C " & ClsGlobal.sTargetMnt
-  ' ' '           END SELECT 
-  ' ' '           
-  ' ' '           'FrmInstallSys.tlCurrPkg.Text = "Installing " & sPkg
-  ' ' '           
-  ' ' '           'hproc = SHELL sShell
-  ' ' '           Message(sShell)
-  ' ' '           RETURN 1
-  ' ' '            ME.INSTALL_TO_HOST(sShell)
-  ' ' '            
-  ' ' '           ' '   WAIT 
-  ' ' '           ' '     IF hproc.State = Process.Running THEN 
-  ' ' '           ' '       REPEAT 
-  ' ' '           ' '     ' IF hproc.State = Process.Running THEN 
-  ' ' '           ' '         FrmInstallSys.pbInstallProg.Value = FrmInstallSys.pbInstallProg.Value + 0.00001
-  ' ' '           ' '           WAIT 
-  ' ' '           ' '      '   END IF
-  ' ' '           ' '         UNTIL hproc.State = Process.Stopped
-  ' ' '           ' '       'END IF
-  ' ' '           ' '     
-  ' ' '           ' '     sDump = Trim(sDump)
-  ' ' '           ' '     sErr = Trim(sErr)
-  ' ' '           ' '       IF serr <> "" THEN 
-  ' ' '           ' '         Message("There has been an error installing " & sPkg & gb.NewLine & "<b>Error:</b>" & gb.NewLine & serr)
-  ' ' '           ' '         RETURN 1
-  ' ' '           ' '       END IF
-  ' ' '           ' '    'Message(sPkg & " is installed")
-  ' ' '           ' '         END IF
-  ' ' '       NEXT 
-  ' ' '       'RETURN 
-  ' ' '       
-  ' ' ' END IF
-  ' ' ' 
+  NEXT 
+  
+  
+  
 END
 
 

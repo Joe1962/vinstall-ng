@@ -1,0 +1,7 @@
+(09:55:32 AM) uelsk8s: 1 ... $MNTPNT/veclinux/required veclinux.tlz, then vlconfig.tlz
+(09:55:32 AM) uelsk8s: 2 $MNTPNT/veclinux/optional
+(09:55:32 AM) uelsk8s: 3 $mntpnt/packages/* (except required)
+(09:55:32 AM) uelsk8s: 4 $mntpint/packages/required
+(09:55:32 AM) uelsk8s: 5 $MNTPNT/veclinux/required/vlconfig2.tlz
+(09:55:57 AM) uelsk8s: because they are not listed in packages.txt for the user to select from
+(09:56:13 AM) uelsk8s: they have to be installed or the install will break

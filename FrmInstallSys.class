@@ -35,23 +35,28 @@ PUBLIC SUB Form_Open()
   ' ' ' ' ' ' ' ' '   IF sRes AND sRes <> 0 THEN 
   ' ' ' ' ' ' ' ' '     RETURN ' exit... there was an error mounting
   ' ' ' ' ' ' ' ' '   END IF
-  sRes = 0
-  sRes = MdlInstallSys.WRITE_NEW_FSTAB()
-    IF sRes AND sRes <> 0 THEN 
-      Message("Error writing fstab")
-       RETURN 
-    END IF
-  sRes = 0
-  sRes = MdlInstallSys.INSTALL_BULK_PACKAGES()
+  'sRes = 0
+  'sRes = MdlInstallSys.WRITE_NEW_FSTAB()
+  '  IF sRes AND sRes <> 0 THEN 
+  '    Message("Error writing fstab")
+  '     RETURN 
+  '  END IF
+  'sRes = 0
+  WAIT 3
+  IF ClsPkgSel.bCustom = TRUE THEN 
+    ' DO THE CUSTOM INSTALL
+  ELSE 
+    sRes = MdlInstallSys.PERFORM_FULL_INSTALL()
+  END IF
     IF sRes AND sRes <> 0 THEN 
       Message("Error installing bulk packages")
       RETURN 
     END IF
-  sRes = 0
-  sRes = MdlInstallSys.INSTALL_PACKAGES()
-    IF sRes AND sRes <> 0 THEN 
-      RETURN 
-    END IF
+  ' sRes = 0
+  ' sRes = MdlInstallSys.INSTALL_PACKAGES()
+  '   IF sRes AND sRes <> 0 THEN 
+  '     RETURN 
+  '   END IF
     
   ' DONE WITH INSTALLATION. REBOOT THE SYSTEM.
   
