@@ -134,6 +134,17 @@ END
 
 
 
+PUBLIC SUB SHOW_PROGRESS_CONTROLS()
+  
+  WITH FrmInstallSys
+  .tlCurrStepLbl.Visible = TRUE
+    .pbInstallProg.Visible = TRUE
+    .tlCurrPkg2.Visible = TRUE
+    .pbInstallProg2.Visible = TRUE
+  END WITH 
+  
+END
+
 
 
 

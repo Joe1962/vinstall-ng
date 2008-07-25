@@ -136,6 +136,11 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 .Add("/usr")
                 .Add("/var")
                 .Add("/tmp")
+                    IF InStr(FrmSelISO.lstInstallableImg.Text, .tag) THEN 
+                      .Enabled = FALSE
+                    ELSE 
+                      .Enabled = TRUE
+                    END IF
                 END WITH 
                 oMountPoints.Add(cb)
                 i3drdrowX = cb.x + cb.Width + 8

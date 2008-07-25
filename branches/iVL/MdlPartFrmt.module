@@ -79,6 +79,7 @@
       MdlInstallSys.MOUNT_DEFINED_PARTITIONS() ' let the game begin
     
   END IF
+  'MdlInstallSys.MOUNT_DEFINED_PARTITIONS
   
 END
 
