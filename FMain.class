@@ -35,11 +35,11 @@ ClsGlobal.sSourceMnt = "/mnt" &/ "cdrom"
 FrmSelISO.Reparent(ME.pnlWinHost)
 FrmSelISO.Width = pnlWinHost.Width
 FrmSelISO.Height = pnlWinHost.Height
-iImg = Image.Load("images/installer.png").Stretch(600, 80)
+iImg = Image.Load("images/installer.png").Stretch(400, 50)
 'iImg.Resize(600, 80)
 PictureBox1.Resize(iImg.Width, iImg.Height)
 PictureBox1.Picture = iImg.Picture
-
+PictureBox1.Background = Color.SelectedBackground
 PictureBox1.Stretch = TRUE
 
 FrmSelISO.Show
@@ -54,6 +54,7 @@ WITH ME
   .btQuit.Text = "Exit Installation"
   .tvPlan["Prep0"].Selected = TRUE
   .tvPlan["Prep0"].Picture = MdlCore.sNowPic
+  .tlBanner.Height = .PictureBox1.Height
   
 END WITH 
 'ME.TreeView1.BackColor = Color.Transparent
@@ -112,6 +113,8 @@ DIM iMid AS Integer
     .btQuit.Move(.pnlWinHost.Left + (.pnlWinHost.Width / 2) - (.btQuit.Width / 2), .btback.top)
     '.PictureBox1.Move(Desktop.Width / 2 - (.PictureBox1.Width / 2), 4)
     .PictureBox1.Move(.ClientWidth / 2 - (.PictureBox1.Width / 2), 4)
+    .tlBanner.Height = .PictureBox1.Height
+    .tlBanner.top = .PictureBox1.Top
   END WITH 
 END
 

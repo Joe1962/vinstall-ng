@@ -13,29 +13,27 @@
   }
   { tlBanner TextLabel
     MoveScaled(0,0,26,7)
-    Visible = False
     Font = Font["+6"]
     Background = Color.SelectedBackground
     Foreground = Color.SelectedForeground
-    Text = ("VectorLinux Install")
+    Text = ("")
     Alignment = Align.Center
-    Transparent = True
   }
   { pnlWinHost VBox
     MoveScaled(28,9,66,56)
   }
   { btnext Button
-    MoveScaled(49,67,8,3.1)
+    MoveScaled(49,67,8,3)
     Text = ("Next")
     Picture = Picture["icon:/16/right"]
   }
   { btback Button
-    MoveScaled(28,67,8,3.1)
+    MoveScaled(28,67,8,3)
     Text = ("Back")
     Picture = Picture["icon:/16/left"]
   }
   { btQuit Button
-    MoveScaled(38,67,11,3.1)
+    MoveScaled(38,67,11,3)
     Text = ("Exit")
     Picture = Picture["icon:/16/cancel"]
   }
