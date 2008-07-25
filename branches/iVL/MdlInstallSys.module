@@ -243,11 +243,6 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
   DIM sOptPkgPath AS String
   DIM iVal AS Float
   DIM sBasePath AS String = ClsGlobal.sSourceMnt &/ "veclinux"
-  DIM iProgress AS Float
-  DIM iMBProgress AS Float
-  DIM ipct AS Float
-  DIM iMinpct AS Float = ".01"
-  DIM iMaxpct AS Float = ".99"
       
       WITH FrmInstallSys
         .Resize(FMain.pnlWinHost.Width, FMain.pnlWinHost.Height)
@@ -291,29 +286,9 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
                       WAIT 2
-                          ' get the actual size at each snap
-                            SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO iCurrSize
-                            iCurrSize = Trim(CStr(iCurrSize))
-                            iProgress = CInt(iCurrSize - sTargetSize)
-                            iMBProgress = iProgress / 1024
-                            IF iMBProgress > CFloat(sPakSize) THEN 
-                              iVal = iMaxpct
-                            ELSE 
-                              ipct = 100 * iMBProgress
-                              iVal = ipct / sPakSize * 10
-                              IF iVal < iMinpct THEN 
-                               iVal = iMinpct
-                              ENDIF 
-                              IF iVal > iMaxpct THEN 
-                                iVal = iMaxpct
-                              ENDIF 
-                            ENDIF 
-                            'FrmInstallSys.pbInstallProg.Value = (CInt(iCurrSize) / CInt(iTotalSize)) * 0.100
-                            'PRINT CStr(iCurrSize) & "/" & CStr(iTotalSize) & " = " & iVal & "%"
+                           UPDATE_STEP_PROGRESS(sTargetSize, sPakSize)
                             PRINT CStr(iCurrSize) & "/" & CStr(iTotalSize) & " = " & iVal & "%"
-                              IF iVal > FrmInstallSys.pbInstallProg.Value THEN 
-                                FrmInstallSys.pbInstallProg.Value = iVal
-                              END IF
+                            
                             
                     UNTIL 
                       hproc.State = Process.Stopped
@@ -337,7 +312,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
   
 END
 
-PUBLIC SUB UPDATE_STEP_PROGRESS(iCurrSize AS Float, iProjectedSize AS Float)
+PUBLIC SUB UPDATE_STEP_PROGRESS(sTargetSize AS Float, sPakSize AS Float)
   
   DIM iMBProgress AS Float
   DIM ipct AS Float
@@ -345,11 +320,27 @@ PUBLIC SUB UPDATE_STEP_PROGRESS(iCurrSize AS Float, iProjectedSize AS Float)
   DIM iMaxpct AS Float = ".99"
   DIM iVal AS Float
   DIM iProgress AS Float
-  DIM sPakSize AS Variant
-  DIM sTargetSize AS Variant
-  DIM iTotalSize AS Integer
-  'DIM iCurrSize AS Variant
-  
+  DIM iCurrSize AS Variant
+ 
+  SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO iCurrSize
+  iCurrSize = Trim(CStr(iCurrSize))
+  iProgress = CInt(iCurrSize - sTargetSize)
+  iMBProgress = iProgress / 1024
+  IF iMBProgress > CFloat(sPakSize) THEN 
+    iVal = iMaxpct
+  ELSE 
+    ipct = 100 * iMBProgress
+    iVal = ipct / sPakSize * 10
+    IF iVal < iMinpct THEN 
+      iVal = iMinpct
+    ENDIF 
+    IF iVal > iMaxpct THEN 
+      iVal = iMaxpct
+    ENDIF 
+  ENDIF 
+  IF iVal > FrmInstallSys.pbInstallProg.Value THEN 
+    FrmInstallSys.pbInstallProg.Value = iVal
+  END IF
   
 END
 
@@ -400,7 +391,46 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
     
   
 END
-
+PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
+  
+    DIM i AS Integer
+    DIM sFile AS String[]
+    DIM sLine AS String
+    DIM sRawFile AS String
+    DIM sTlzPath AS String
+    DIM sTlzName AS String
+    DIM sTlzDesc AS String
+    DIM sTlzBasePath AS String = ClsGlobal.sSourceMnt &/ "packages"
+    
+    'sRawFile = DConv(File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT"))
+    
+      'sFile = Split(sRawFile, "\n")
+       sFile = SHELL "ls /mnt/cdrom/packages/required/*.t?z"
+        FOR i = 0 TO sFile.count - 1
+          sLine = Trim(sFile[i])
+            'IF Left(sLine, Len("PACKAGE NAME")) = "PACKAGE NAME" THEN 
+              sTlzName = Trim(Right(sLine, Len(sLine) - InStr(sLine, "/")))
+              sTlzPath = Trim(Right(sFile[i + 1], Len(sFile[i + 1]) - InStr(sFile[i + 1], "/")))
+              'sTlzPath = Right(sTlzPath, Len(sTlzPath) - 2) ' remove the ./ from the location line
+            'END IF
+          ' now install the package with the information we already have
+              sDump = ""
+              sErr = ""
+              hproc = SHELL "install-pkg " & sTlzBasePath &/ sTlzPath &/ sTlzName & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+                WAIT 1
+                  IF hproc.State = Process.Running THEN 
+                    REPEAT 
+                      WAIT 2
+                          ' figure out the progress again
+                    UNTIL 
+                      hproc.State = Process.Stopped
+                  END IF
+      NEXT 
+            
+    
+    
+  
+END
 
 
 PUBLIC SUB Process_read()
