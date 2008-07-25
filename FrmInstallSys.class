@@ -35,8 +35,9 @@ END
 PUBLIC SUB Form_Open()
    
       ' prepare the system
-      ME.FrmProg.Text = " Preparing system for installation "
       
+      ME.FrmProg.Text = " Preparing system for installation "
+      ME.tlCurrStepLbl.Text = "Current Step"
  
 
 ME.HIDE_PROGRES_CONTROLS()
@@ -84,14 +85,5 @@ PUBLIC SUB HIDE_PROGRES_CONTROLS()
   
 END
 
-PUBLIC SUB SHOW_PROGRESS_CONTROLS()
-  
-  WITH ME
-  .tlCurrStepLbl.Visible = TRUE
-    .pbInstallProg.Visible = TRUE
-    .tlCurrPkg2.Visible = TRUE
-    .pbInstallProg2.Visible = TRUE
-  END WITH 
-  
-END
+
 

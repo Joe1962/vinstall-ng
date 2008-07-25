@@ -66,6 +66,8 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
     'WRITE THE NEW FSTAB NOW, RIGHT BEFORE INSTALLING PACKAGES.
     
     ME.WRITE_NEW_FSTAB() ' do this from the install form
+      'redirect to packages install
+      'ME.INSTALL_PACKAGES()
     
     
   
@@ -190,6 +192,8 @@ sFstab = sFstab & "\n"
       ' perform custom install
     ELSE 
       ME.PERFORM_FULL_INSTALL()
+        're-direct to packages for now
+      'ME.INSTALL_PACKAGES()
     END IF
   
 END 
@@ -249,12 +253,13 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
         .Resize(FMain.pnlWinHost.Width, FMain.pnlWinHost.Height)
       END WITH 
   
-  
+  MdlSetup.SHOW_PROGRESS_CONTROLS()
   
   ClsGlobal.sTargetMnt = "/mnt/target"
     sFile = Split(File.Load(Temp$("SETUP.CONF")), "\n")
       FOR i = 0 TO sFile.count - 1
         sLine = Trim(sFile[i])
+
           IF Left(sLine, Len("BULK") + 1) LIKE "BULK" & "*[0-9]*" THEN 
             'sLine = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
             'sLine = Left(sLine, Len(sLine) - 1)
@@ -264,13 +269,13 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                 sPakPath = sEntry[0]
                 sPakSize = sEntry[1]
                 sPakDesc = sEntry[2]
-            'PRINT sBasePath &/ sPakPath & " = " & sPakDesc & " size= " & CStr(sPakSize)    
+                  'PRINT sBasePath &/ sPakPath & " = " & sPakDesc & " size= " & CStr(sPakSize)    
                       ' figure out the sizing and the progrss meter
                         SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO sTargetSize
                           'Message(CStr(sTargetSize))
                           sTargetSize = Trim(CStr(sTargetSize))
                           sPakSize = Trim(CStr(sPakSize))
-'                          iTotalSize = CFloat(CInt(sTargetSize) + CInt(sPakSize))
+'                 
                           
                         'RETURN 
                 FrmInstallSys.tlCurrPkg.Text = "Installing " & sPakDesc & " ..."
@@ -332,35 +337,22 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
   
 END
 
-
-
-
-
-
-PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
-  DIM sPkg AS String
-  DIM sShell AS String
-  DIM hBulkInst AS Process
-  DIM sExt AS String
-  DIM sCMD AS String
+PUBLIC SUB UPDATE_STEP_PROGRESS(iCurrSize AS Float, iProjectedSize AS Float)
   
-  ClsGlobal.sTargetMnt = "/mnt/target"
-  
-  PRINT "Installing bulk packages ... "
-  FOR EACH sPkg IN RDir(ClsGlobal.sSourceMnt &/ "veclinux" &/ "required")
-      sExt = Trim(File.Ext(ClsGlobal.sSourceMnt &/ "veclinux" &/ "required" &/ sPkg))
-        SELECT CASE sExt
-          CASE "tlz", "lzm", "lzma"
-            sCMD = "lzmadec <" & ClsGlobal.sSourceMnt &/ "veclinux" &/ "required" &/ sPkg & " | tar -xp -C " & ClsGlobal.sTargetMnt
-        END SELECT 
-        PRINT "Installing " & sPkg
-          hBulkInst = SHELL sCMD WAIT 
-            
-  NEXT 
-  
+  DIM iMBProgress AS Float
+  DIM ipct AS Float
+  DIM iMinpct AS Float = ".01"
+  DIM iMaxpct AS Float = ".99"
+  DIM iVal AS Float
+  DIM iProgress AS Float
+  DIM sPakSize AS Variant
+  DIM sTargetSize AS Variant
+  DIM iTotalSize AS Integer
+  'DIM iCurrSize AS Variant
   
   
 END
+
 
 
 
@@ -384,19 +376,24 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
               sTlzName = Trim(Right(sLine, Len(sLine) - InStr(sLine, ":")))
               sTlzPath = Trim(Right(sFile[i + 1], Len(sFile[i + 1]) - InStr(sFile[i + 1], ":")))
               sTlzPath = Right(sTlzPath, Len(sTlzPath) - 2) ' remove the ./ from the location line
-            END IF
+              PRINT " Install " & sTlzBasePath &/ sTlzPath &/ sTlzName 
+                  ' install each package
+                  
+            
           ' now install the package with the information we already have
-              sDump = ""
-              sErr = ""
-              hproc = SHELL "install-pkg " & sTlzBasePath &/ sTlzPath &/ sTlzName & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
-                WAIT 1
-                  IF hproc.State = Process.Running THEN 
-                    REPEAT 
-                      WAIT 2
-                          ' figure out the progress again
-                    UNTIL 
-                      hproc.State = Process.Stopped
-                  END IF
+              
+              ' sDump = ""
+              ' sErr = ""
+              ' hproc = SHELL "install-pkg " & sTlzBasePath &/ sTlzPath &/ sTlzName & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+              '   WAIT 1
+              '     IF hproc.State = Process.Running THEN 
+              '       REPEAT 
+              '         WAIT 2
+              '             ' figure out the progress again
+              '       UNTIL 
+              '         hproc.State = Process.Stopped
+              '     END IF
+          END IF
       NEXT 
             
     
