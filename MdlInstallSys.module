@@ -25,7 +25,7 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
  
   ' this is where we need to set the mount target
   'ClsGlobal.sTargetMnt = "/mnt/target"
-  ClsGlobal.sTargetMnt = "/home/moises/mnt/target" ' just for testing now.
+  ClsGlobal.sTargetMnt = "/mnt/target" ' just for testing now.
     IF Exist(ClsGlobal.sTargetMnt) = FALSE THEN 
       TRY MKDIR ClsGlobal.sTargetMnt
     END IF
@@ -35,12 +35,12 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
     SHELL "umount " & ClsGlobal.sTargetMnt WAIT 'clear the mount point
     
     '/DISABLED FOR TESTING INSTALL ONLY
-    ' ' ' ' SHELL "mount " & ClsPartSel.sRoot & Space(1) & ClsGlobal.sTargetMnt & Space(1) & " -t " & ClsPartSel.fRoot WAIT  'moun the root partition first
-    ' ' ' ' IF ClsPartSel.sHome THEN 
-    ' ' ' '     SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "home" WAIT 
-    ' ' ' '   SHELL "mount " & ClsPartSel.sHome & Space(1) & ClsGlobal.sTargetMnt &/ "home -t " & ClsPartSel.fhome WAIT 'mount the home partition if defined
+    SHELL "mount " & ClsPartSel.sRoot & Space(1) & ClsGlobal.sTargetMnt WAIT  'moun the root partition first
+    IF ClsPartSel.sHome THEN 
+       SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "home" WAIT 
+       SHELL "mount " & ClsPartSel.sHome & Space(1) & ClsGlobal.sTargetMnt &/ "home -t " & ClsPartSel.fhome WAIT 'mount the home partition if defined
       
-    ' ' ' '     END IF
+    END IF
     IF ClsPartSel.sUsr THEN 
       SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "usr" WAIT 
       SHELL "mount " & ClsPartSel.sUsr & Space(1) & ClsGlobal.sTargetMnt &/ "usr -t" & ClsPartSel.fUsr WAIT ' mount the user partition
@@ -173,7 +173,7 @@ sFstab = sFstab & "\n"
  'Message(sFstab)
  
  IF NOT ClsGlobal.sTargetMnt OR ClsGlobal.sTargetMnt = "" THEN 
-  ClsGlobal.sTargetMnt = "/home/moises/mnt/target"
+  ClsGlobal.sTargetMnt = "/mnt/target"
  END IF
  
  ';Message(ClsGlobal.sTargetMnt &/ "etc")
@@ -232,7 +232,12 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
   DIM sOptPkgPath AS String
   DIM iVal AS Float
   DIM sBasePath AS String = ClsGlobal.sSourceMnt &/ "veclinux"
-  ClsGlobal.sTargetMnt = "/home/moises/mnt/target"
+  DIM iProgress AS Float
+  DIM iMBProgress AS Float
+  DIM ipct AS Float
+  DIM iMinpct AS Float = ".01"
+  DIM iMaxpct AS Float = ".99"
+  ClsGlobal.sTargetMnt = "/mnt/target"
     sFile = Split(File.Load(Temp$("SETUP.CONF")), "\n")
       FOR i = 0 TO sFile.count - 1
         sLine = Trim(sFile[i])
@@ -247,36 +252,44 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                 sPakDesc = sEntry[2]
             'PRINT sBasePath &/ sPakPath & " = " & sPakDesc & " size= " & CStr(sPakSize)    
                       ' figure out the sizing and the progrss meter
-                      iTotalSize = 0
-                      sTargetSize = 0
-                      
-                        SHELL "export gsize=$(df| grep /dev/hda3) && echo $gsize | cut -f3 -d \' \'" TO sTargetSize
+                        SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO sTargetSize
                           'Message(CStr(sTargetSize))
                           iTotalSize = CInt(sTargetSize) + CInt(sPakSize)
                           
-                          
                         'RETURN 
+                FrmInstallSys.tlCurrPkg.Text = "Installing " & sPak
                 PRINT "Installing " & sPakPath & " Total size (KB) = " & CStr(sPakSize)
-                FrmInstallSys.tlCurrPkg.Text = "Installing " & sPakDesc & " ... "
               hproc = SHELL "lzmadec <" & sBasePath &/ sPakPath & " | tar -xp -C " & ClsGlobal.sTargetMnt
                 WAIT 1
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
-                      WAIT 3
+                      WAIT 1
                           ' get the actual size at each snap
-                            SHELL "export tsize=$(df | grep /dev/hda3) && echo $tsize | cut -f3 -d \' \'" TO iCurrSize
+                            SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO iCurrSize
                             iCurrSize = Trim(CStr(iCurrSize))
-                            'iVal = Round(CInt(iCurrSize) / CInt(iTotalSize), -2) 'CInt(iTotalSize) / CInt(iCurrSize)
-                            iVal = Round((iTotalSize - iCurrSize) / iTotalSize, -2)
+                            iProgress = CInt(iCurrSize - sTargetSize)
+                            iMBProgress = iProgress / 1024
+                            IF iMBProgress > CFloat(sPakSize) THEN 
+                              iVal = iMaxpct
+                            ELSE 
+                              ipct = 100 * iMBProgress
+                              iVal = ipct / sPakSize * 10
+                              IF iVal < iMinpct THEN 
+                               iVal = iMinpct
+                              ENDIF 
+                              IF iVal > iMaxpct THEN 
+                                iVal = iMaxpct
+                              ENDIF 
+                            ENDIF 
                             'FrmInstallSys.pbInstallProg.Value = (CInt(iCurrSize) / CInt(iTotalSize)) * 0.100
                             'PRINT CStr(iCurrSize) & "/" & CStr(iTotalSize) & " = " & iVal & "%"
-                            PRINT CStr(iTotalSize) & "/" & CStr(iCurrSize) & " = " & iVal 
+                            PRINT CStr(iCurrSize) & "/" & CStr(iTotalSize) & " = " & iVal & "%"
                             FrmInstallSys.pbInstallProg.Value = iVal
-                    
+                            
                     UNTIL 
                       hproc.State = Process.Stopped
                   END IF
-                PRINT sPakDesc & " is installed... "
+                PRINT sPak & " is installed... "
            'PRINT "Needs to install " & sPak
           END IF
     NEXT 
@@ -296,7 +309,7 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
   DIM sExt AS String
   DIM sCMD AS String
   
-  ClsGlobal.sTargetMnt = "/home/moises/mnt/target"
+  ClsGlobal.sTargetMnt = "/mnt/target"
   
   PRINT "Installing bulk packages ... "
   FOR EACH sPkg IN RDir(ClsGlobal.sSourceMnt &/ "veclinux" &/ "required")
