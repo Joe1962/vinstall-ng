@@ -257,13 +257,15 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                           iTotalSize = CInt(sTargetSize) + CInt(sPakSize)
                           
                         'RETURN 
-                FrmInstallSys.tlCurrPkg.Text = "Installing " & sPak
-                PRINT "Installing " & sPakPath & " Total size (KB) = " & CStr(sPakSize)
+                FrmInstallSys.tlCurrPkg.Text = "Installing " & sPakDesc & " ..."
+                FrmInstallSys.pbInstallProg.Value = 0.0
+                
+                PRINT "Installing " & sPakDesc & " Total size (KB) = " & CStr(sPakSize)
               hproc = SHELL "lzmadec <" & sBasePath &/ sPakPath & " | tar -xp -C " & ClsGlobal.sTargetMnt
                 WAIT 1
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
-                      WAIT 1
+                      WAIT 2
                           ' get the actual size at each snap
                             SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO iCurrSize
                             iCurrSize = Trim(CStr(iCurrSize))
@@ -284,7 +286,9 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                             'FrmInstallSys.pbInstallProg.Value = (CInt(iCurrSize) / CInt(iTotalSize)) * 0.100
                             'PRINT CStr(iCurrSize) & "/" & CStr(iTotalSize) & " = " & iVal & "%"
                             PRINT CStr(iCurrSize) & "/" & CStr(iTotalSize) & " = " & iVal & "%"
-                            FrmInstallSys.pbInstallProg.Value = iVal
+                              IF iVal > FrmInstallSys.pbInstallProg.Value THEN 
+                                FrmInstallSys.pbInstallProg.Value = iVal
+                              END IF
                             
                     UNTIL 
                       hproc.State = Process.Stopped
@@ -293,6 +297,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
            'PRINT "Needs to install " & sPak
           END IF
     NEXT 
+  FrmInstallSys.tlBanner.Text = "Finished intalling Bulks"
   
   
 END
