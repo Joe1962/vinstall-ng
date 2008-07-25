@@ -61,7 +61,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
               .Height = 27
               .x = x
               .y = y
-              .Width = MdlObjSizer.get_object_width(.text) * 2.5
+              .Width = MdlObjSizer.get_object_width(.text) * 2.2
             END WITH 
             icol1 = x
             icol2 = x + tl.Width + 4
@@ -71,7 +71,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
               .Height = 27
               .x = icol2
               .y = y
-              .Width = MdlObjSizer.get_object_width(.text) * 2.5
+              .Width = MdlObjSizer.get_object_width(.text) * 2.2
             END WITH 
               icol3 = tl.x + tl.Width + 4
           tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "HEADERS"
@@ -80,7 +80,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
               .Height = 27
               .x = icol3
               .y = y
-              .Width = MdlObjSizer.get_object_width(.text) * 2.5
+              .Width = MdlObjSizer.get_object_width(.text) * 2.2
             END WITH 
             y = y + 20
 
@@ -136,6 +136,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 .Add("/usr")
                 .Add("/var")
                 .Add("/tmp")
+                .Add("Swap")
                     IF InStr(FrmSelISO.lstInstallableImg.Text, .tag) THEN 
                       .Enabled = FALSE
                     ELSE 
@@ -159,7 +160,17 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                   .Add("Ext2")
                   .Add("Ext3")
                   .Add("JFS")
-                  
+                    IF InStr(Trim(FrmSelISO.lstInstallableImg.Text), .Tag) THEN
+                      .Enabled = FALSE
+                    ELSE 
+                      .Enabled = TRUE
+                    END IF
+                          FOR EACH cb IN oFsTypes
+                            IF cb.Tag = .Tag THEN 
+                              cb.Enabled = FALSE
+                            END IF
+                          NEXT 
+                      
                   
                   END WITH 
                   oFsTypes.Add(cb)
@@ -273,19 +284,30 @@ PUBLIC SUB MountPoints_CLick()
           ClsPartSel.sTmp = LCase(LAST.tag)
         CASE "/var"
           ClsPartSel.sVar = LCase(LAST.tag)
+        CASE "Swap"
+            
       END SELECT 
             
           
       
   IF sText = "Not Used" THEN 
     FOR EACH sdropdwn IN oFsTypes
-      IF sdropdwn.Tag = sTag THEN 
-        sdropdwn.Text = "Do not format"
+      IF sdropdwn.Tag LIKE sTag THEN 
         sdropdwn.Enabled = FALSE
+        sdropdwn.Text = "Do not format"
+        
+      
+      ELSE IF sText = "Swap" THEN 
+        IF sdropdwn.Tag = sTag THEN 
+          sdropdwn.Enabled = FALSE
+          sdropdwn.Text = "Swap"
+        END IF
       ELSE 
         sdropdwn.Enabled = TRUE
       END IF
     NEXT 
+  'ELSE 
+  
   ELSE 
     FOR EACH sdropdwn IN oFsTypes
       IF sdropdwn.Tag = sTag THEN 
@@ -293,7 +315,7 @@ PUBLIC SUB MountPoints_CLick()
       END IF
     NEXT 
   END IF
-  IF LAST.text <> "Not Used" THEN 
+  IF LAST.text <> "Not Used" AND LAST.text <> "Swap" THEN 
     FOR EACH sdropdwn IN oFsTypes
       IF sdropdwn.tag = LAST.tag THEN 
         sdropdwn.Text = "XFS"
@@ -302,8 +324,15 @@ PUBLIC SUB MountPoints_CLick()
       
       END IF
     NEXT 
+  ELSE IF LAST.text = "Swap" THEN 
+    FOR EACH sdropdwn IN oFsTypes
+      IF sdropdwn.tag = LAST.tag THEN 
+        sdropdwn.Enabled = FALSE
+        sdropdwn.Text = "Swap"
+      END IF
+    NEXT 
   END IF
-  
+
   'send the value to the form public value
   ME.SET_SELECTED_PARTITION(LAST.tag, LAST.text)
   
@@ -331,6 +360,7 @@ PUBLIC SUB fsTypes_click()
             ClsPartSel.fUsr = LAST.text
         END SELECT 
       END IF
+        
     NEXT 
       
   

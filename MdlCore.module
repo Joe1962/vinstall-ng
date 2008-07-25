@@ -45,6 +45,9 @@ PUBLIC SUB FIND_ISO_ON_DRIVE(sDrive AS String)
                   FOR i = 0 TO sISOList.count - 1
                     sIso = Trim(sISOList[i])
                     SHELL "umount /mnt/loop" WAIT 
+                          IF Exist("/mnt/loop") = FALSE THEN 
+                            MKDIR "/mnt/loop"
+                          END IF
                     SHELL "mount -o loop " & ClsGlobal.sSourceMnt &/ sISO & Space(1) & "/mnt/loop" WAIT 
                         IF Exist("/mnt/loop/veclinux/SETUP.CONF") = TRUE THEN 
                             IF FrmSelISO.lstInstallableImg.Find(sISO & " on " & sDrive) = -1 THEN 
