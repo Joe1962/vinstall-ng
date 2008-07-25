@@ -293,7 +293,7 @@ PUBLIC SUB MountPoints_CLick()
       IF sdropdwn.tag = LAST.tag THEN 
         sdropdwn.Text = "XFS"
       'Balloon.Info("Select which filesystem to use with this partition", sdropdwn)
-      Balloon("Select which filesystem to use with this partition", sdropdwn)
+  '    Balloon("Select which filesystem to use with this partition", sdropdwn)
       
       END IF
     NEXT 

@@ -17,13 +17,14 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
-PUBLIC SUB Form_Open()
-  DIM sRes AS Integer ' we will need to 
+PUBLIC SUB BEGIN_PROCESS()
+  
+   DIM sRes AS Integer ' we will need to 
 
   FMain.FrmCurr = ME
-  FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
-  FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
-  FMain.tvPlan["Inst1"].Selected = TRUE
+  FMain.tvPlan["Inst1"].Picture = MdlCore.sDonePic
+  FMain.tvPlan["Inst2"].Picture = MdlCore.sNowPic
+  FMain.tvPlan["Inst2"].Selected = TRUE
   
   'initiate install procedure
   ' 1: MOUNT PARTITIONS
@@ -43,15 +44,47 @@ PUBLIC SUB Form_Open()
   '  END IF
   'sRes = 0
   WAIT 3
-  IF ClsPkgSel.bCustom = TRUE THEN 
-    ' DO THE CUSTOM INSTALL
-  ELSE 
-    sRes = MdlInstallSys.PERFORM_FULL_INSTALL()
-  END IF
-    IF sRes AND sRes <> 0 THEN 
-      Message("Error installing bulk packages")
-      RETURN 
-    END IF
+  
+  MdlPartFrmt.PREPARE_ALL_PARTITIONS() ' formats partitions and mounts them
+  
+END
+
+
+PUBLIC SUB Form_Open()
+ 
+  ME.Maximized = TRUE
+  
+      ' prepare the system
+      ME.FrmProg.Text = " Preparing system for installation "
+      WITH ME
+        .pbInstallProg.Visible = FALSE
+        .pbInstallProg2.Visible = FALSE
+        .tlCurrPkg2.Visible = FALSE
+        .FrmProg.Width = .ClientWidth - .FrmProg.Left * 2
+        .tlCurrPkg.Move(4, 24, .FrmProg.Width - .tlCurrPkg.Left * 2)
+        .pbInstallProg.Move(.tlCurrPkg.Left, .tlCurrPkg.top + .tlCurrPkg.Height + 4, .tlCurrPkg.width, 27)
+        .tlCurrPkg2.Move(.tlCurrPkg.Left, .pbInstallProg.top + .pbInstallProg.Height * 2, .pbInstallProg.width, 27)
+        .pbInstallProg2.Move(.tlCurrPkg.Left, .tlCurrPkg2.top + .tlCurrPkg2.Height + 8, .tlCurrPkg.width, 27)
+      END WITH 
+  
+      
+  
+  
+  
+    
+        
+  
+  ' 
+  ' IF ClsPkgSel.bCustom = TRUE THEN 
+  '   ' DO THE CUSTOM INSTALL
+  ' ELSE 
+  '   'sRes = MdlInstallSys.PERFORM_FULL_INSTALL()
+  '   MdlInstallSys.MOUNT_DEFINED_PARTITIONS()
+  ' END IF
+    ' IF sRes AND sRes <> 0 THEN 
+    '   Message("Error installing bulk packages")
+    '   RETURN 
+    ' END IF
   ' sRes = 0
   ' sRes = MdlInstallSys.INSTALL_PACKAGES()
   '   IF sRes AND sRes <> 0 THEN 
@@ -61,7 +94,7 @@ PUBLIC SUB Form_Open()
   ' DONE WITH INSTALLATION. REBOOT THE SYSTEM.
   
   
-  
+ME.BEGIN_PROCESS()  
 
 END
 
@@ -75,8 +108,8 @@ PUBLIC SUB Form_Resize()
 
   WITH ME
     .tlBanner.Move(4, 16, .ClientWidth - 16)
-    .FrmProg.Move(.tlBanner.Left, .tlBanner.Height * 2, .ClientWidth - 8)
-    .tlCurrPkg.Move(4, 4, .FrmProg.Width - 8)
+    .FrmProg.Move(.tlBanner.Left, .tlBanner.Height * 4, .ClientWidth - 8)
+    .tlCurrPkg.Move(4, 8, .FrmProg.Width - 8)
     .pbInstallProg.Move(.tlCurrPkg.Left, .tlCurrPkg.Height * 3, .tlCurrPkg.Width, 24)
   END WITH
 END

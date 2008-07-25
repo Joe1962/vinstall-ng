@@ -4,11 +4,11 @@
   MoveScaled(0,0,78,51)
   Text = ("")
   { tlBanner TextLabel
-    MoveScaled(1,1,63,3)
+    MoveScaled(1,1,63,8)
     Text = ("Vectorlinux is currently being installed to your system... Please wait")
   }
   { FrmProg Frame
-    MoveScaled(1,10,76,19)
+    MoveScaled(1,10,76,34)
     Text = ("")
     { tlCurrPkg TextLabel
       MoveScaled(1,1,73,3)
@@ -22,7 +22,7 @@
       MoveScaled(1,13,44,3)
     }
     { tlCurrPkg2 TextLabel
-      MoveScaled(1,9,45,3.1429)
+      MoveScaled(1,9,45,3)
       Text = ("Total progress")
     }
   }

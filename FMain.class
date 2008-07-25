@@ -28,7 +28,8 @@ END
 
 PUBLIC SUB Form_Open()
 DIM iImg AS Image
-
+ME.Maximized = TRUE
+MdlCore.LOCK_GUI()
 ClsGlobal.sBackNav = NEW Object[]
 ClsGlobal.sSourceMnt = "/mnt" &/ "cdrom"
 FrmSelISO.Reparent(ME.pnlWinHost)
@@ -184,7 +185,8 @@ PUBLIC SUB btnext_Click()
       'Move on to selecting packages
         frmNext = FrmPkgSel
     CASE "FrmSummary"
-        frmNext = FrmHostPrep ' prepare host
+      '      frmNext = FrmHostPrep ' prepare host
+      frmNext = FrmInstallSys
             
         
   END SELECT 

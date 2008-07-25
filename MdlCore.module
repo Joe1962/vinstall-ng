@@ -187,7 +187,9 @@ PUBLIC SUB MEDIA_SCAN()
     
     
               
- 
+MdlCore.unlock_gui()
+fmain.btback.Enabled = FALSE
+fmain.btback.ForeColor = Color.Gray
  
   
 END
@@ -519,5 +521,31 @@ PUBLIC FUNCTION CALCULATE_SWAP(iRam AS Integer) AS Integer
   
 END
 
+PUBLIC SUB LOCK_GUI()
+  
+  WITH fmain
+    .btback.Enabled = FALSE
+    .btback.ForeColor = Color.Gray
+    .btnext.Enabled = FALSE
+    .btnext.ForeColor = Color.Gray
+    .btQuit.Enabled = FALSE
+    .btQuit.ForeColor = Color.Gray
+    
+  END WITH     
+  
+END
 
+PUBLIC SUB unlock_gui()
+  
+    WITH fmain
+    .btback.Enabled = TRUE
+    .btback.ForeColor = Color.Black
+    .btnext.Enabled = TRUE
+    .btnext.ForeColor = Color.Black
+    .btQuit.Enabled = TRUE
+    .btQuit.ForeColor = Color.Black
+    
+  END WITH     
+  
+END
 
