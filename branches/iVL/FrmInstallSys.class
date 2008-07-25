@@ -80,3 +80,4 @@ PUBLIC SUB Form_Resize()
     .pbInstallProg.Move(.tlCurrPkg.Left, .tlCurrPkg.Height * 3, .tlCurrPkg.Width, 24)
   END WITH
 END
+

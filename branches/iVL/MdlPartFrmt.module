@@ -31,9 +31,11 @@ PUBLIC FUNCTION FORMAT_PARTITION(sAddr AS String, sFS AS String) AS Integer ' wi
       CASE "ext3"
         sCommand = "mke2fs -q -j " & saddr
       CASE "reiserfs"
-        sCommand = "mkreiserfs --format 3.6 -ff " & sAddr
+        sCommand = "mkreiserfs --format 3.6 -q " & sAddr
       CASE "xfs"
         sCommand = "mkfs.xfs -f " & sAddr
+      CASE "jfs"
+        sCommand = "mkfs.jfs -q " & sAddr  
     END SELECT 
     
   hproc = SHELL sCommand & " | echo \'FAILED\'" FOR READ 

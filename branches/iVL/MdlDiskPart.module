@@ -27,13 +27,13 @@ PUBLIC SUB EMBED_GPARTED()
   'Desktop.Find("", "GParted")
   
   
-    IF Exist("/usr/sbin/gparted") = FALSE THEN 
+    IF Exist("/usr/bin/gparted") = FALSE THEN 
       Message.Error("Gparted was not found on this system. Please install gparted and try again")
       RETURN 
     END IF
   
   FrmDiskPart.tlBanner.Text = "<h3>Loading gparted .... Please wait</h3>"
-  SHELL "/usr/sbin/gparted"
+  SHELL "/usr/bin/gparted"
   WAIT 3
       
   sTitle = "GParted"
