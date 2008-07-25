@@ -26,74 +26,20 @@ PUBLIC SUB BEGIN_PROCESS()
   FMain.tvPlan["Inst2"].Picture = MdlCore.sNowPic
   FMain.tvPlan["Inst2"].Selected = TRUE
   
-  'initiate install procedure
-  ' 1: MOUNT PARTITIONS
-  ' 2: Write /etc/fstab
-  ' 3: Install packages
-  
-  ' CAN'T TEST THIS UNTIL I GET A GOOD TESTING ENVIRONMENT
-  ' ' ' ' ' ' ' ' ' sRes = MdlInstallSys.MOUNT_DEFINED_PARTITIONS()
-  ' ' ' ' ' ' ' ' '   IF sRes AND sRes <> 0 THEN 
-  ' ' ' ' ' ' ' ' '     RETURN ' exit... there was an error mounting
-  ' ' ' ' ' ' ' ' '   END IF
-  'sRes = 0
-  'sRes = MdlInstallSys.WRITE_NEW_FSTAB()
-  '  IF sRes AND sRes <> 0 THEN 
-  '    Message("Error writing fstab")
-  '     RETURN 
-  '  END IF
-  'sRes = 0
-  WAIT 3
-  
+    
   MdlPartFrmt.PREPARE_ALL_PARTITIONS() ' formats partitions and mounts them
   
 END
 
 
 PUBLIC SUB Form_Open()
- 
-  ME.Maximized = TRUE
-  
+   
       ' prepare the system
       ME.FrmProg.Text = " Preparing system for installation "
-      WITH ME
-        .pbInstallProg.Visible = FALSE
-        .pbInstallProg2.Visible = FALSE
-        .tlCurrPkg2.Visible = FALSE
-        .FrmProg.Width = .ClientWidth - .FrmProg.Left * 2
-        .tlCurrPkg.Move(4, 24, .FrmProg.Width - .tlCurrPkg.Left * 2)
-        .pbInstallProg.Move(.tlCurrPkg.Left, .tlCurrPkg.top + .tlCurrPkg.Height + 4, .tlCurrPkg.width, 27)
-        .tlCurrPkg2.Move(.tlCurrPkg.Left, .pbInstallProg.top + .pbInstallProg.Height * 2, .pbInstallProg.width, 27)
-        .pbInstallProg2.Move(.tlCurrPkg.Left, .tlCurrPkg2.top + .tlCurrPkg2.Height + 8, .tlCurrPkg.width, 27)
-      END WITH 
-  
       
-  
-  
-  
-    
-        
-  
-  ' 
-  ' IF ClsPkgSel.bCustom = TRUE THEN 
-  '   ' DO THE CUSTOM INSTALL
-  ' ELSE 
-  '   'sRes = MdlInstallSys.PERFORM_FULL_INSTALL()
-  '   MdlInstallSys.MOUNT_DEFINED_PARTITIONS()
-  ' END IF
-    ' IF sRes AND sRes <> 0 THEN 
-    '   Message("Error installing bulk packages")
-    '   RETURN 
-    ' END IF
-  ' sRes = 0
-  ' sRes = MdlInstallSys.INSTALL_PACKAGES()
-  '   IF sRes AND sRes <> 0 THEN 
-  '     RETURN 
-  '   END IF
-    
-  ' DONE WITH INSTALLATION. REBOOT THE SYSTEM.
-  
-  
+ 
+
+ME.HIDE_PROGRES_CONTROLS()
 ME.BEGIN_PROCESS()  
 
 END
@@ -106,11 +52,46 @@ END
 
 PUBLIC SUB Form_Resize()
 
+    DIM iMinFrameH AS Integer
+        iMinFrameH = ME.tlCurrPkg.Height + ME.tlCurrPkg2.Height + ME.tlCurrStepLbl.Height + ME.pbInstallProg2.Height + ME.tlCurrStepLbl.Height + 36
+    WITH ME
+      .FrmProg.Move(4, .tlBanner.top + .tlBanner.Height + 8, .ClientWidth - (.FrmProg.Left * 2), iMinFrameH)
+      .tlBanner.Move(4, 16, .ClientWidth - (.tlBanner.Left * 2))
+      '.tlBanner.Border = Border.Plain
+      .FrmProg.Move(4, .tlBanner.top + (.tlBanner.Height + 8), .ClientWidth - (.FrmProg.Left * 2))
+      .tlCurrPkg.move(8, 32, .FrmProg.Width - (.tlCurrPkg.Left * 2))
+      .tlCurrStepLbl.Move(.tlCurrPkg.Left, .tlCurrPkg.top + (.tlCurrPkg.Height + 4), MdlObjSizer.get_object_width(.tlCurrStepLbl.Text) + 8, 27)
+      .pbInstallProg.Move(.tlCurrStepLbl.left + (.tlCurrStepLbl.Width), .tlCurrStepLbl.top, .FrmProg.Width - (.tlCurrStepLbl.Width + (.tlcurrsteplbl.left * 2)))
+      .tlCurrPkg2.Move(.tlCurrPkg.Left, .tlCurrPkg.top + (.tlCurrPkg.Height * 2.5), .FrmProg.Width - (.tlCurrPkg.Left * 2))
+      .pbInstallProg2.Move(.tlCurrPkg2.Left, .tlCurrPkg2.top + (.tlCurrPkg2.Height + 2), .tlCurrPkg2.Width, 27)
+      
+      '.pbInstallProg.Move(.tlCurrStepLbl.Left + (.tlCurrStepLbl.Width + 2), .FrmProg.Width - (.tlCurrStepLbl.Width + (.tlCurrStepLbl.left * 2))) '
+      '.pbInstallProg.Move(.tlCurrPkg.Left, .tlCurrPkg.top + (.tlCurrPkg.Height + 2), .tlCurrPkg.Width)
+      
+    END WITH 
+
+
+END
+
+PUBLIC SUB HIDE_PROGRES_CONTROLS()
+  
   WITH ME
-    .tlBanner.Move(4, 16, .ClientWidth - 16)
-    .FrmProg.Move(.tlBanner.Left, .tlBanner.Height * 4, .ClientWidth - 8)
-    .tlCurrPkg.Move(4, 8, .FrmProg.Width - 8)
-    .pbInstallProg.Move(.tlCurrPkg.Left, .tlCurrPkg.Height * 3, .tlCurrPkg.Width, 24)
-  END WITH
+    .tlCurrStepLbl.Visible = FALSE
+    .pbInstallProg.Visible = FALSE
+    .tlCurrPkg2.Visible = FALSE
+    .pbInstallProg2.Visible = FALSE
+  END WITH 
+  
+END
+
+PUBLIC SUB SHOW_PROGRESS_CONTROLS()
+  
+  WITH ME
+  .tlCurrStepLbl.Visible = TRUE
+    .pbInstallProg.Visible = TRUE
+    .tlCurrPkg2.Visible = TRUE
+    .pbInstallProg2.Visible = TRUE
+  END WITH 
+  
 END
 

@@ -5,3 +5,6 @@
 (09:55:32 AM) uelsk8s: 5 $MNTPNT/veclinux/required/vlconfig2.tlz
 (09:55:57 AM) uelsk8s: because they are not listed in packages.txt for the user to select from
 (09:56:13 AM) uelsk8s: they have to be installed or the install will break
+
+
+(07:38:13 AM) uelsk8s: for i in $(ls packages/*/*.tlz|grep -v required);do install-pkg $i $ROOT || echo FAILED;done
