@@ -3,11 +3,17 @@
 { Form Form
   MoveScaled(0,0,84,55)
   Text = ("")
+  Arrangement = Arrange.Vertical
   { tlBanner TextLabel
     MoveScaled(1,2,81,9)
     Text = ("Disk Partitioning:")
   }
-  { EmbGPARTED Embedder
-    MoveScaled(1,13,82,39)
+  { VPanel1 VPanel
+    MoveScaled(1,12,74,48)
+    Expand = True
+    { EmbGPARTED Embedder
+      MoveScaled(6,7,76,32)
+      Expand = True
+    }
   }
 }

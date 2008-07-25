@@ -18,6 +18,10 @@
  PRIVATE hproc AS Process
  PRIVATE sDump AS String
  PRIVATE sErr AS String
+
+PRIVATE iPkgCnt AS Integer
+PRIVATE iPkgNum AS Integer = 0
+  
  
 
 PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
@@ -30,7 +34,7 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
       TRY MKDIR ClsGlobal.sTargetMnt
     END IF
     
-    FrmInstallSys.tlCurrPkg.Text = "Mounting target partitions"
+  '  FrmInstallSys.tlCurrPkg.Text = "Mounting target partitions"
     
     SHELL "umount " & ClsGlobal.sTargetMnt WAIT 'clear the mount point
     
@@ -191,8 +195,10 @@ sFstab = sFstab & "\n"
     IF ClsPkgSel.bCustom = TRUE THEN 
       ' perform custom install
     ELSE 
+        FrmInstallSys.tlCurrPkg.Text = "Vectorlinux is now installing ... Please wait"
       ME.PERFORM_FULL_INSTALL()
         're-direct to packages for now
+        FrmInstallSys.tlCurrPkg.Text = "Installing Additional software... Please wait"
       ME.INSTALL_PACKAGES()
     END IF
   
@@ -242,14 +248,25 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
   DIM sConfPath AS String
   DIM sOptPkgPath AS String
   DIM iVal AS Float
+  
   DIM sBasePath AS String = ClsGlobal.sSourceMnt &/ "veclinux"
       
       WITH FrmInstallSys
         .Resize(FMain.pnlWinHost.Width, FMain.pnlWinHost.Height)
       END WITH 
+  iPkgCnt = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
+    Message.Info("Total packages = " & iPkgCnt)
+  RETURN 
+  ' make sure the progress is revealed at the main window
+    WITH FMain
+    .tvPlan["Inst1"].Picture = MdlCore.sDonePic
+    .tvPlan["Inst2"].Selected = TRUE
+    .tvPlan["Inst2"].Picture = MdlCore.sNowPic
+    END WITH 
+  
   
   MdlSetup.SHOW_PROGRESS_CONTROLS()
-  
+  FrmInstallSys.tlBanner.Text = "Vectorlinux is now being installed. Please wait..."
   ClsGlobal.sTargetMnt = "/mnt/target"
     sFile = Split(File.Load(Temp$("SETUP.CONF")), "\n")
       FOR i = 0 TO sFile.count - 1
@@ -287,8 +304,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                     REPEAT 
                       WAIT 2
                            UPDATE_STEP_PROGRESS(sTargetSize, sPakSize)
-                            
-                            
+                                      
                             
                     UNTIL 
                       hproc.State = Process.Stopped
@@ -298,9 +314,14 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                               "<b>ERROR</b>" & gb.NewLine &
                               sErr)
                               RETURN 1
-                            END IF
+                            ELSE 
+                              FrmInstallSys.pbInstallProg.Value = 1
+                              
                   END IF
                 PRINT sPak & " is installed... "
+                INC iPkgNum
+                              FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
+                            END IF
            'PRINT "Needs to install " & sPak
           END IF
     NEXT 
@@ -391,13 +412,28 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
                       WAIT 1
                       UPDATE_STEP_PROGRESS(sTargetSize, iTlzSize)
                           ' figure out the progress again
+
                     UNTIL 
                       hproc.State = Process.Stopped
+                          IF InStr(sDump, "FAILED") > 0 THEN 
+                            ERROR 
+                            RETURN 1
+                          ELSE 
+                            IF FrmInstallSys.pbInstallProg.Value <> 1 THEN 
+                              FrmInstallSys.pbInstallProg.Value = 1
+                            END IF
+                          END IF
                   END IF
+                                            INC iPkgNum
+                              FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
           END IF
       NEXT 
             
-    
+    ' DONE INSTALLING SOFTWARE. 
+      'Message.Info("Installation complete. Ready for configuration"
+      FrmInstallSys.tlBanner.Text = "Installation phase complete. Ready for configuration"
+      FrmInstallSys.pbInstallProg.Value = 1
+      MdlCore.unlock_gui()
     
   
 END

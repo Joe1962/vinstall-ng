@@ -145,6 +145,59 @@ PUBLIC SUB SHOW_PROGRESS_CONTROLS()
   
 END
 
+PUBLIC FUNCTION UPDATE_OVERALL_PROGRESS(iTotalPkgs AS Integer, iCurrPkg AS Integer) AS Float
+  
+  DIM fRet AS Float
+  fRet = iCurrPkg / iTotalPkgs
+  fRet = Round(fRet, -2)
+  RETURN fRet
+  
+END
+
+
+
+PUBLIC FUNCTION CALCULATE_PACKAGE_COUNT(bCustom AS Boolean) AS Integer
+  
+  DIM sDump AS String
+  DIM sTotalList AS String
+  DIM i AS Integer
+  DIM sList AS String[]
+  DIM iQTY AS Integer
+  
+  ' let's get a package count
+  IF bCustom = FALSE THEN ' DOING A FULL INSTALL
+      SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^BULK" TO sDump
+      sDump = Trim(sDump)
+      sTotalList = sTotalList & sDump
+      sTotalList = Trim(sTotalList)
+      sDump = ""
+      SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^CONF" TO sDump
+        sTotalList = sTotalList & gb.NewLine & Trim(sDump)
+        sDump = ""
+      SHELL "cat " & ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT | grep ^\"PACKAGE NAME\"" TO sDump
+        sTotalList = sTotalList & gb.NewLine & Trim(sDump)
+        sDump = ""
+        ' split the array
+          sList = Split(sTotalList, "\n")
+            FOR i = 0 TO sList.Count - 1
+              IF sList[i] = "" THEN 
+                sList.Delete(i)
+              END IF
+            NEXT 
+            iQTY = sList.Count
+        
+  ELSE ' GOING FOR CUSTOM INSTALL
+  
+  END IF
+            
+        
+       RETURN iQTY   
+      
+  
+  
+END
+
+
 
 
 
