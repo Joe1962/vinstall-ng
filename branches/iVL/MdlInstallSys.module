@@ -193,7 +193,7 @@ sFstab = sFstab & "\n"
     ELSE 
       ME.PERFORM_FULL_INSTALL()
         're-direct to packages for now
-      'ME.INSTALL_PACKAGES()
+      ME.INSTALL_PACKAGES()
     END IF
   
 END 
@@ -287,7 +287,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                     REPEAT 
                       WAIT 2
                            UPDATE_STEP_PROGRESS(sTargetSize, sPakSize)
-                            PRINT CStr(iCurrSize) & "/" & CStr(iTotalSize) & " = " & iVal & "%"
+                            
                             
                             
                     UNTIL 
@@ -341,7 +341,7 @@ PUBLIC SUB UPDATE_STEP_PROGRESS(sTargetSize AS Float, sPakSize AS Float)
   IF iVal > FrmInstallSys.pbInstallProg.Value THEN 
     FrmInstallSys.pbInstallProg.Value = iVal
   END IF
-  
+  PRINT CStr(iCurrSize) & "/" & CStr(sTargetSize + sPakSize) & " = " & iVal & "%"
 END
 
 
@@ -358,6 +358,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
     DIM sTlzDesc AS String
     DIM iTlzSize AS Integer
     DIM sTlzBasePath AS String = ClsGlobal.sSourceMnt &/ "packages"
+    DIM sTargetSize AS Variant
     
     sRawFile = DConv(File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT"))
     
@@ -369,11 +370,16 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
               sTlzPath = Trim(Right(sFile[i + 1], Len(sFile[i + 1]) - InStr(sFile[i + 1], ":")))
               sTlzPath = Right(sTlzPath, Len(sTlzPath) - 2) ' remove the ./ from the location line
               iTlzSize = Trim(Right(sFile[i + 3], Len(sFile[i + 3]) - InStr(sFile[i + 3], ":")))
-              iTlzSize = Left(iTlzSize, Len(iTlzSize) - 1)
-              iTlzSize = Trim(iTlzSize)
+              'iTlzSize = Left(iTlzSize, Len(iTlzSize) - 1)
+              'iTlzSize = Trim(iTlzSize)
+              FrmInstallSys.tlCurrPkg.Text = "Installing " & sTlzName & " ..."
+              FrmInstallSys.pbInstallProg.Value = 0.0
               
               PRINT " Install " & sTlzBasePath &/ sTlzPath &/ sTlzName 
                   ' install each package
+               SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO sTargetSize
+               sTargetSize = Trim(CStr(sTargetSize))
+
           
               
               sDump = ""
@@ -382,7 +388,8 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
                 WAIT 1
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
-                      WAIT 2
+                      WAIT 1
+                      UPDATE_STEP_PROGRESS(sTargetSize, iTlzSize)
                           ' figure out the progress again
                     UNTIL 
                       hproc.State = Process.Stopped
