@@ -222,6 +222,8 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
   
   DIM sFile AS String[]
   DIM sEntry AS String[]
+  DIM stlzList AS String[]
+  DIM sTlz AS String
   DIM sPak AS String
   DIM sPakPath AS String
   DIM sPakSize AS Variant
@@ -324,6 +326,9 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
     NEXT 
   FrmInstallSys.tlBanner.Text = "Finished intalling Bulks"
   
+        ' now to the packages individually
+        
+  
   
 END
 
@@ -361,16 +366,45 @@ END
 
 PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
   
-  
+    DIM i AS Integer
+    DIM sFile AS String[]
+    DIM sLine AS String
+    DIM sRawFile AS String
+    DIM sTlzPath AS String
+    DIM sTlzName AS String
+    DIM sTlzDesc AS String
+    DIM sTlzBasePath AS String = ClsGlobal.sSourceMnt &/ "packages"
+    
+    sRawFile = DConv(File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT"))
+    
+      sFile = Split(sRawFile, "\n")
+        FOR i = 0 TO sFile.count - 1
+          sLine = Trim(sFile[i])
+            IF Left(sLine, Len("PACKAGE NAME")) = "PACKAGE NAME" THEN 
+              sTlzName = Trim(Right(sLine, Len(sLine) - InStr(sLine, ":")))
+              sTlzPath = Trim(Right(sFile[i + 1], Len(sFile[i + 1]) - InStr(sFile[i + 1], ":")))
+              sTlzPath = Right(sTlzPath, Len(sTlzPath) - 2) ' remove the ./ from the location line
+            END IF
+          ' now install the package with the information we already have
+              sDump = ""
+              sErr = ""
+              hproc = SHELL "install-pkg " & sTlzBasePath &/ sTlzPath &/ sTlzName & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+                WAIT 1
+                  IF hproc.State = Process.Running THEN 
+                    REPEAT 
+                      WAIT 2
+                          ' figure out the progress again
+                    UNTIL 
+                      hproc.State = Process.Stopped
+                  END IF
+      NEXT 
+            
+    
+    
   
 END
 
-PUBLIC FUNCTION INSTALL_TO_HOST(sCmnd AS String) AS Integer
 
-  hproc = SHELL sCmnd FOR READ 
-  
-  
-END
 
 PUBLIC SUB Process_read()
   

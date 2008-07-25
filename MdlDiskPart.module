@@ -20,6 +20,7 @@ PUBLIC SUB EMBED_GPARTED()
   
   
   DIM sTitle AS String
+  DIM sTitle1 AS String
   DIM aHandle AS NEW Pointer[]
   DIM iHandle AS Integer
   DIM i AS Integer = 0
@@ -36,14 +37,21 @@ PUBLIC SUB EMBED_GPARTED()
   SHELL "/usr/bin/gparted"
   WAIT 3
       
-  sTitle = "GParted"
-  IF Left(sTitle, 2) = "0x" THEN 
+  sTitle = "/dev/hda - GParted"
+  sTitle1 = "/dev/sda - GParted"
+  
+    'aHandle = Desktop.Find(sTitle)
+    aHandle = Desktop.Find(sTitle)
+      IF aHandle = "" THEN 
+        aHandle = Desktop.Find(sTitle1)
+      END IF
+        
+    IF Left(sTitle, 2) = "0x" THEN 
     iHandle = Val("&" & Mid$(sTitle, 3))
   ELSE IF Left(sTitle) = "&" THEN 
     iHandle = Val(sTitle)
   ELSE
-    'aHandle = Desktop.Find(sTitle)
-    aHandle = Desktop.Find(sTitle)
+    
     'Message.Info(aHandle[0])
     IF aHandle.Count = 0 THEN 
       REPEAT 
@@ -53,7 +61,7 @@ PUBLIC SUB EMBED_GPARTED()
       UNTIL 
       i = 10 OR aHandle.Count > 0
         IF aHandle.Count = 0 THEN 
-          Message("Setup is unable to successfully run gslapt on this system. This may be a sign of \n" &
+          Message("Setup is unable to successfully run gparted on this system. This may be a sign of \n" &
           "a bad install media. Setup cannot continue.")
         RETURN 
         END IF
