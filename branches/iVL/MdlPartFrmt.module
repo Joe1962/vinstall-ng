@@ -18,13 +18,84 @@
   PRIVATE hproc AS Process
   PRIVATE sDump AS String
   PRIVATE sErr AS String
+  
+  PUBLIC SUB PREPARE_ALL_PARTITIONS()
+  
+  DIM sList AS String[]
+  DIM i, iretval AS Integer
+  DIM sPart, sFormat AS String
+  
+    sList = NEW String[]
+    
+      IF ClsPartSel.sRoot THEN 
+        sList.Add(ClsPartSel.sRoot & ";" & ClsPartSel.fRoot)
+      END IF
+      IF ClsPartSel.sHome THEN 
+        sList.Add(ClsPartSel.sHome & ";" & ClsPartSel.fHome)
+      END IF
+      IF ClsPartSel.sUsr THEN 
+        sList.Add(ClsPartSel.sUsr & ";" & ClsPartSel.fUsr)
+      END IF
+      IF ClsPartSel.sOpt THEN 
+        sList.Add(ClsPartSel.sOpt & ";" & ClsPartSel.fOpt)
+      END IF
+      IF ClsPartSel.sTmp THEN 
+        sList.Add(ClsPartSel.sTmp & ";" & ClsPartSel.fTmp)
+      END IF
+      IF ClsPartSel.sVar THEN 
+        sList.Add(ClsPartSel.sVar & ";" & ClsPartSel.fVar)
+      END IF
+      
+  ' now that we have the list in the array, let's do each one
+  FOR i = 0 TO sList.Count - 1
+    sPart = Left(sList[i], InStr(sList[i], ";") - 1)
+    sFormat = Right(sList[i], Len(sList[i]) - InStr(sList[i], ";"))
+      iretval = MdlPartFrmt.FORMAT_PARTITION(sPart, sFormat) ' do the formatting
+        IF iretval <> 0 THEN 
+          RETURN ' stop right there there's been an error.
+        END IF
+  NEXT         
+  
+  
+  IF iretval AND iretval <> 0 THEN 
+    ' there has been an error. Do not move from here
+      'Message("Error formatting partitions")
+      FrmInstallSys.tlBanner.Text = "Error formatting partitions"
+      FrmInstallSys.BackColor = Color.Red
+    RETURN 
+  ELSE 
+    'move on to installing.. first, make fstab
+      FrmInstallSys.tlBanner.Text = "Finished formatting partitions"
+      PRINT "Finished formatting partitions"
+      WAIT 3
+      WITH FrmInstallSys
+        .tlBanner.BackColor = Color.Default
+        .pbInstallProg.Visible = TRUE
+        .pbInstallProg2.Visible = TRUE
+        .tlCurrPkg2.Visible = TRUE
+        .FrmProg.Text = " Installing VectorLinux "
+      END WITH 
+        MdlCore.LOCK_GUI()
+      MdlInstallSys.MOUNT_DEFINED_PARTITIONS() ' let the game begin
+    
+  END IF
+  
+END
+
+  
+  
 PUBLIC FUNCTION FORMAT_PARTITION(sAddr AS String, sFS AS String) AS Integer ' will return 1 for trouble, 0 for clear
   
   DIM sCommand AS String
-
+  DIM sResult AS String
   
     'Umount the volume first
-    SHELL "umount " & sAddr WAIT 
+      SHELL "mount | grep " & sAddr TO sResult
+      sResult = Trim(sResult)
+        IF sResult <> "" THEN 
+        
+          SHELL "umount " & sAddr WAIT 
+        END IF
     SELECT CASE LCase(sFS)
       CASE "ext2"
         sCommand = "mke2fs -q " & sAddr
@@ -37,12 +108,13 @@ PUBLIC FUNCTION FORMAT_PARTITION(sAddr AS String, sFS AS String) AS Integer ' wi
       CASE "jfs"
         sCommand = "mkfs.jfs -q " & sAddr  
     END SELECT 
-    
-  hproc = SHELL sCommand & " | echo \'FAILED\'" FOR READ 
+    PRINT "Formatting " & sAddr & " to " & sFS
+  hproc = SHELL sCommand & " || echo \'FAILED\'" WAIT 'for read
     WAIT 
       IF hproc.State = Process.Running THEN 
         REPEAT 
-          FrmHostPrep.tlStatus.Text = "Formatting " & sAddr & " as " & sFS
+  '        FrmHostPrep.tlStatus.Text = "Formatting " & sAddr & " as " & sFS
+          FrmInstallSys.tlCurrPkg.Text = " Formatting " & sAddr & " as " & sFS
           
           WAIT 
         UNTIL 
@@ -53,9 +125,13 @@ PUBLIC FUNCTION FORMAT_PARTITION(sAddr AS String, sFS AS String) AS Integer ' wi
       'error here
       Message.Error("There has been an error wile trying to format " & sAddr & " to " & sFS & gb.NewLine &
       sErr)
-        FrmHostPrep.tlStatus.Text = "Unable to format " & saddr 
+        'FrmHostPrep.tlStatus.Text = "Unable to format " & saddr 
+        FrmInstallSys.tlCurrPkg.Text = "Unable to format " & sAddr
+        FrmInstallSys.tlBanner.BackColor = Color.Red
       RETURN 1
     ELSE 
+        'Message(" System is ready for VectorLinux")
+    
       RETURN 0
     END IF
   END IF

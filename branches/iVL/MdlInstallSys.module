@@ -185,7 +185,12 @@ sFstab = sFstab & "\n"
       'CATCH 
       'PRINT ERROR 
         '.RETURN 1
-  RETURN 0     
+  'RETURN 0     
+    IF ClsPkgSel.bCustom = TRUE THEN 
+      ' perform custom install
+    ELSE 
+      ME.PERFORM_FULL_INSTALL()
+    END IF
   
 END 
 PUBLIC FUNCTION fS_oPTIONS(sType AS String) AS String
@@ -237,6 +242,13 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
   DIM ipct AS Float
   DIM iMinpct AS Float = ".01"
   DIM iMaxpct AS Float = ".99"
+      
+      WITH FrmInstallSys
+        .Resize(FMain.pnlWinHost.Width, FMain.pnlWinHost.Height)
+      END WITH 
+  
+  
+  
   ClsGlobal.sTargetMnt = "/mnt/target"
     sFile = Split(File.Load(Temp$("SETUP.CONF")), "\n")
       FOR i = 0 TO sFile.count - 1
@@ -254,15 +266,21 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                       ' figure out the sizing and the progrss meter
                         SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO sTargetSize
                           'Message(CStr(sTargetSize))
-                          iTotalSize = CInt(sTargetSize) + CInt(sPakSize)
+                          sTargetSize = Trim(CStr(sTargetSize))
+                          sPakSize = Trim(CStr(sPakSize))
+'                          iTotalSize = CFloat(CInt(sTargetSize) + CInt(sPakSize))
                           
                         'RETURN 
                 FrmInstallSys.tlCurrPkg.Text = "Installing " & sPakDesc & " ..."
                 FrmInstallSys.pbInstallProg.Value = 0.0
                 
                 PRINT "Installing " & sPakDesc & " Total size (KB) = " & CStr(sPakSize)
-              hproc = SHELL "lzmadec <" & sBasePath &/ sPakPath & " | tar -xp -C " & ClsGlobal.sTargetMnt
-                WAIT 1
+                sDump = ""
+                sErr = ""
+                  MdlCore.LOCK_GUI()
+              hproc = SHELL "lzmadec <" & sBasePath &/ sPakPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+              
+                WAIT 2
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
                       WAIT 2
@@ -292,6 +310,13 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                             
                     UNTIL 
                       hproc.State = Process.Stopped
+                          ' error check
+                            IF InStr(sDump, "FAILED") > 0 THEN 
+                              Message.Error("There has been an error extracting " & sPakDesc & gb.NewLine &
+                              "<b>ERROR</b>" & gb.NewLine &
+                              sErr)
+                              RETURN 1
+                            END IF
                   END IF
                 PRINT sPak & " is installed... "
            'PRINT "Needs to install " & sPak

@@ -29,12 +29,13 @@ FMain.tvPlan["Inst0"].Selected = TRUE
   ' may need to move this code to another event. The FormOpen event only happens once.
   'ME.PREPARE_ALL_PARTITIONS()
   WAIT 
-  FrmInstallSys.Reparent(ME.Parent)
-  ME.Hide
-  FrmInstallSys.Show
+  ' FrmInstallSys.Reparent(ME.Parent)
+  ' ME.Hide
+  ' FrmInstallSys.Show
 '  ME.Hide
+ME.Resize(ME.Parent.Width, ME.Parent.Height)  
   
-  
+  ME.PREPARE_ALL_PARTITIONS()
 END
 
 
@@ -81,6 +82,10 @@ PUBLIC SUB PREPARE_ALL_PARTITIONS()
     RETURN 
   ELSE 
     'move on to installing.. first, make fstab
+    FrmInstallSys.Reparent(ME.Parent)
+    ME.Hide
+    FrmInstallSys.Show()
+    
   END IF
   
 END
