@@ -127,8 +127,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 .y = y
                 .Height = tl.Height
                 .Width = tl.Width
-                .ReadOnly = TRUE
-                .tag = Trim(sPartList[i])
+                .ReadOnly = TRUE                
                 .Add("Not Used")
                 .Add("/")
                 .Add("/home")
@@ -160,16 +159,17 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                   .Add("Ext2")
                   .Add("Ext3")
                   .Add("JFS")
+                  '.Add("swap")
                     IF InStr(Trim(FrmSelISO.lstInstallableImg.Text), .Tag) THEN
                       .Enabled = FALSE
                     ELSE 
                       .Enabled = TRUE
                     END IF
-                          FOR EACH cb IN oFsTypes
-                            IF cb.Tag = .Tag THEN 
-                              cb.Enabled = FALSE
-                            END IF
-                          NEXT 
+                          ' FOR EACH cb IN oFsTypes
+                          '   IF cb.Tag = .Tag THEN 
+                          '     cb.Enabled = FALSE
+                          '   END IF
+                          ' NEXT 
                       
                   
                   END WITH 
@@ -192,7 +192,9 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
       END IF
       
       SHELL " probepart | grep -i \" *swap$\" | cut -f 1 -d \' \' | grep -e /dev" TO sSwapList
+          
         sSwapList = Trim(sSwapList)
+          IF sSwapList <> "" THEN 
         'Message.Info(sSwapList)
         IF InStr(sSwapList, gb.NewLine) THEN 
           'several swap partitions found
@@ -201,9 +203,14 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
           spart = Trim(sSwapList)
           'SHELL "export " & sSwapList & "=$(df -h | grep -i swap) | cut -f 2 -d \' \'" TO vSwapSize
           SHELL " export sw=$(probepart | grep -i \" *swap$\") && echo $sw | cut -f 4 -d \' \'" TO vSwapSize
- 
-            iswapsize = CInt(vSwapSize)
-            iswapsize = Round(iswapsize / 1024 / 1024, -2)
+          Message(CStr(vSwapSize))
+                IF vSwapSize <> "" THEN 
+                  'vSwapSize = Trim(CStr(vSwapSize))
+                    Message.Info(vSwapSize)
+                  iswapsize = CInt(vSwapSize)
+                  
+                  iswapsize = Round(iswapsize / 1024 / 1024, -2)
+                END IF
             'now create the swap label and combo box
               tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "swlabel"
                 WITH tl
@@ -236,7 +243,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 
           'Message.Info("Swap total = " & iswapsize)
         END IF
-
+END IF
   FOR EACH cb IN MdlPartSel.oMountPoints
     IF cb.width > iWidth THEN 
       iWidth = cb.Width
@@ -258,20 +265,12 @@ END
 PUBLIC SUB MountPoints_CLick()
   
   DIM sdropdwn AS ComboBox
-  DIM sTag AS String = LAST.tag
-  DIM sText AS String = Trim(LAST.text)
+  'DIM sTag AS String = LAST.tag
+  'DIM sText AS String = Trim(LAST.text)
+  
+ 
     
-    FOR EACH sdropdwn IN oMountPoints
-      IF LAST.text <> "Not Used" AND LAST.text = sdropdwn.Text AND LAST.tag <> sdropdwn.tag THEN 
-        Message.Error("You have already select a " & LAST.text & " partition. Please " &
-        "select only one")
-        LAST.text = "Not Used"
-      END IF
-      STOP EVENT 
-    NEXT 
-    
-    ' set the variable to the global class
-      SELECT CASE LCase(LAST.text)
+    SELECT CASE LAST.text
         CASE "/"
           ClsPartSel.sRoot = LCase(LAST.tag)
         CASE "/home"
@@ -285,53 +284,130 @@ PUBLIC SUB MountPoints_CLick()
         CASE "/var"
           ClsPartSel.sVar = LCase(LAST.tag)
         CASE "Swap"
-            
-      END SELECT 
-            
-          
+          ClsPartSel.sSwap = LCase(LAST.tag)
+            'Message("Swap Flag")            
+            FOR EACH sdropdwn IN oFsTypes
+                IF sdropdwn.Tag = LAST.tag THEN 
+                  sdropdwn.Add("Swap")
+                  sdropdwn.Text = "Swap"
+                  sdropdwn.Enabled = FALSE
+                ELSE 
+                  sdropdwn.Enabled = TRUE
+                    IF sdropdwn.Find("Swap") <> -1 THEN 
+                      sdropdwn.Remove(sdropdwn.Find("Swap"))
+                    END IF
+                END IF
+            NEXT 
+             
+       END SELECT 
       
-  IF sText = "Not Used" THEN 
-    FOR EACH sdropdwn IN oFsTypes
-      IF sdropdwn.Tag LIKE sTag THEN 
-        sdropdwn.Enabled = FALSE
-        sdropdwn.Text = "Do not format"
-        
       
-      ELSE IF sText = "Swap" THEN 
-        IF sdropdwn.Tag = sTag THEN 
-          sdropdwn.Enabled = FALSE
-          sdropdwn.Text = "Swap"
-        END IF
-      ELSE 
-        sdropdwn.Enabled = TRUE
-      END IF
-    NEXT 
-  'ELSE 
-  
-  ELSE 
-    FOR EACH sdropdwn IN oFsTypes
-      IF sdropdwn.Tag = sTag THEN 
-        sdropdwn.Enabled = TRUE
-      END IF
-    NEXT 
-  END IF
-  IF LAST.text <> "Not Used" AND LAST.text <> "Swap" THEN 
-    FOR EACH sdropdwn IN oFsTypes
-      IF sdropdwn.tag = LAST.tag THEN 
-        sdropdwn.Text = "XFS"
-      'Balloon.Info("Select which filesystem to use with this partition", sdropdwn)
-  '    Balloon("Select which filesystem to use with this partition", sdropdwn)
+    
+    ' FOR EACH sdropdwn IN oMountPoints
+    '   IF LAST.text <> "Not Used" AND LAST.text = sdropdwn.Text AND LAST.tag <> sdropdwn.tag THEN 
+    '     Message.Error("You have already select a " & LAST.text & " partition. Please " &
+    '     "select only one")
+    '     LAST.text = "Not Used"
+    '    STOP EVENT 
+    '   ELSE 
+    ' 
+    ' 
+    ' 
+    ' ' set the variable to the global class
+    '   SELECT CASE Trim(LCase(LAST.text))
+    '     CASE "/"
+    '       ClsPartSel.sRoot = LCase(LAST.tag)
+    '     CASE "/home"
+    '       ClsPartSel.sHome = LCase(LAST.tag)
+    '     CASE "/usr"
+    '       ClsPartSel.sUsr = LCase(LAST.tag)
+    '     CASE "/opt"
+    '       ClsPartSel.sOpt = LCase(LAST.tag)
+    '     CASE "/tmp"
+    '       ClsPartSel.sTmp = LCase(LAST.tag)
+    '     CASE "/var"
+    '       ClsPartSel.sVar = LCase(LAST.tag)
+    '     CASE "Swap"
+    '       ClsPartSel.sSwap = LCase(LAST.tag)
+    '         FOR EACH sdropdwn IN oFsTypes
+    '           IF Trim(sdropdwn.Tag) = LAST.tag THEN 
+    '             sdropdwn.Enabled = FALSE
+    '             sdropdwn.Text = "Swap"
+    '           END IF
+    '         NEXT 
+    '          
+    '    END SELECT 
+    ' END IF
+    '   NEXT 
+
+
+       'Message(sTag)
+      '       
+      '     SELECT CASE sText
+      '       CASE "Not Used"
+      '           FOR EACH sdropdwn IN oFsTypes
+      '             IF sdropdwn.Tag = sTag THEN 
+      '               sdropdwn.Enabled = FALSE
+      '               sdropdwn.Text = "Do not format"
+      '             END IF
+      '           NEXT 
+      '       CASE "Swap"
+      '           FOR EACH sdropdwn IN oFsTypes
+      '             IF sdropdwn.Tag = sTag THEN 
+      '               sdropdwn.Enabled = FALSE
+      '               sdropdwn.Text = "Swap"
+      '             END IF
+      '           NEXT 
+      '       CASE ELSE 
+      '           FOR EACH sdropdwn IN oFsTypes
+      '             IF sdropdwn.Tag = sTag THEN 
+      '               sdropdwn.Enabled = TRUE
+      '             END IF
+      '           NEXT 
+      '     END SELECT 
+  '     
+  ' IF sText = "Not Used" THEN 
+  '   FOR EACH sdropdwn IN oFsTypes
+  '     IF sdropdwn.Tag LIKE sTag THEN 
+  '       sdropdwn.Enabled = FALSE
+  '       sdropdwn.Text = "Do not format"
+  '       
+  '     
+  '     ELSE IF sText = "Swap" THEN 
+  '       IF sdropdwn.Tag = sTag THEN 
+  '         sdropdwn.Enabled = FALSE
+  '         sdropdwn.Text = "Swap"
+  '       END IF
+  '     ELSE 
+  '       sdropdwn.Enabled = TRUE
+  '     END IF
+  '   NEXT 
+  ' 'ELSE 
+  ' 
+  ' ELSE 
+  '   FOR EACH sdropdwn IN oFsTypes
+  '     IF sdropdwn.Tag = sTag THEN 
+  '       sdropdwn.Enabled = TRUE
+  '     END IF
+  '   NEXT 
+  ' END IF
+  ' IF LAST.text <> "Not Used" AND LAST.text <> "Swap" THEN 
+  '   FOR EACH sdropdwn IN oFsTypes
+  '     IF sdropdwn.tag = LAST.tag THEN 
+  '       sdropdwn.Text = "XFS"
+  '     'Balloon.Info("Select which filesystem to use with this partition", sdropdwn)
+  ' '    Balloon("Select which filesystem to use with this partition", sdropdwn)
       
-      END IF
-    NEXT 
-  ELSE IF LAST.text = "Swap" THEN 
-    FOR EACH sdropdwn IN oFsTypes
-      IF sdropdwn.tag = LAST.tag THEN 
-        sdropdwn.Enabled = FALSE
-        sdropdwn.Text = "Swap"
-      END IF
-    NEXT 
-  END IF
+'      END IF
+  '   NEXT 
+  ' ELSE IF LAST.text = "Swap" THEN 
+  '   FOR EACH sdropdwn IN oFsTypes
+  '     IF sdropdwn.tag = LAST.tag THEN 
+  '       sdropdwn.Enabled = FALSE
+  '       sdropdwn.Text = "Swap"
+  '     END IF
+  '   NEXT 
+  ' END IF
 
   'send the value to the form public value
   ME.SET_SELECTED_PARTITION(LAST.tag, LAST.text)
@@ -363,7 +439,7 @@ PUBLIC SUB fsTypes_click()
         
     NEXT 
       
-  
+  'Message(LAST.tag)
 END
 
 PUBLIC SUB SET_SELECTED_PARTITION(SPartition AS String, sMountPoint AS String)

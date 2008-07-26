@@ -96,6 +96,7 @@ PUBLIC FUNCTION FORMAT_PARTITION(sAddr AS String, sFS AS String) AS Integer ' wi
   
       FMain.tvPlan["Inst1"].Selected = TRUE
       FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
+      FMain.tvPlan["Inst2"].Picture = MdlCore.sToDopic
   
   
     'Umount the volume first
@@ -172,7 +173,10 @@ PUBLIC FUNCTION FORMAT_PARTITION(sAddr AS String, sFS AS String) AS Integer ' wi
       RETURN 0
     END IF
   END IF
-  
+  ' turn swap on if available
+      IF ClsPartSel.sSwap THEN 
+        SHELL "swapon -a " WAIT 
+      END IF
 END
 
 PUBLIC SUB process_read()

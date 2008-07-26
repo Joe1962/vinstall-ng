@@ -42,7 +42,7 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
     SHELL "mount " & ClsPartSel.sRoot & Space(1) & ClsGlobal.sTargetMnt WAIT  'moun the root partition first
     IF ClsPartSel.sHome THEN 
        SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "home" WAIT 
-       SHELL "mount " & ClsPartSel.sHome & Space(1) & ClsGlobal.sTargetMnt &/ "home -t " & ClsPartSel.fhome WAIT 'mount the home partition if defined
+       SHELL "mount " & ClsPartSel.sHome & Space(1) & ClsGlobal.sTargetMnt &/ "home -t " & LCase(ClsPartSel.fhome) WAIT 'mount the home partition if defined
       
     END IF
     IF ClsPartSel.sUsr THEN 
@@ -90,6 +90,14 @@ PUBLIC FUNCTION WRITE_NEW_FSTAB() AS Integer
   DIM sWinPart AS String
   DIM sWinMntPnt AS String
   DIM sFstab AS String
+  
+  ' make the changes show up on the steps now
+    WITH FMain
+      .tvPlan["Inst2"].Selected = TRUE
+      .tvPlan["Inst2"].Picture = MdlCore.sNowPic
+      .tvPlan["Inst1"].Picture = MdlCore.sDonePic
+    END WITH 
+  
   
   FrmInstallSys.tlCurrPkg.Text = "Writing new /etc/fstab to system"
   
@@ -198,9 +206,9 @@ sFstab = sFstab & "\n"
         FrmInstallSys.tlCurrPkg.Text = "Vectorlinux is now installing ... Please wait"
       ME.PERFORM_FULL_INSTALL()
         're-direct to packages for now
-        FrmInstallSys.tlCurrPkg.Text = "Installing Additional software... Please wait"
-      ME.INSTALL_REQUIRED_PACKAGES()
-      ME.INSTALL_PACKAGES()
+        'FrmInstallSys.tlCurrPkg.Text = "Installing Additional software... Please wait"
+      'ME.INSTALL_REQUIRED_PACKAGES()
+      'ME.INSTALL_PACKAGES()
     END IF
   
 END 
@@ -256,8 +264,8 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
         .Resize(FMain.pnlWinHost.Width, FMain.pnlWinHost.Height)
       END WITH 
   iPkgCnt = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
-    Message.Info("Total packages = " & iPkgCnt)
-  RETURN 
+    'Message.Info("Total packages = " & iPkgCnt)
+  'RETURN 
   ' make sure the progress is revealed at the main window
     WITH FMain
     .tvPlan["Inst1"].Picture = MdlCore.sDonePic
@@ -298,6 +306,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                 sDump = ""
                 sErr = ""
                   MdlCore.LOCK_GUI()
+                  'inc iPkgNum
               hproc = SHELL "lzmadec <" & sBasePath &/ sPakPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
               
                 WAIT 2
@@ -329,7 +338,8 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
   FrmInstallSys.tlBanner.Text = "Finished intalling Bulks"
   
         ' now to the packages individually
-        
+        FrmInstallSys.tlBanner.Text = "Installing additional software."
+  ME.INSTALL_PACKAGES      
   
   
 END
@@ -401,9 +411,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
                   ' install each package
                SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO sTargetSize
                sTargetSize = Trim(CStr(sTargetSize))
-
-          
-              
+       
               sDump = ""
               sErr = ""
               hproc = SHELL "install-pkg " & sTlzBasePath &/ sTlzPath &/ sTlzName & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
@@ -435,7 +443,9 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
       FrmInstallSys.tlBanner.Text = "Installation phase complete. Ready for configuration"
       FrmInstallSys.pbInstallProg.Value = 1
       MdlCore.unlock_gui()
-    
+      
+      FrmInstallSys.tlBanner.Text = "Installing default system configuration and required software."
+  ME.INSTALL_REQUIRED_PACKAGES  
   
 END
 PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
@@ -448,33 +458,47 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
     DIM sTlzName AS String
     DIM sTlzDesc AS String
     DIM sTlzBasePath AS String = ClsGlobal.sSourceMnt &/ "packages"
-    
+    DIM iTlzTotal AS Integer = 0
+    DIM iCurrTlz AS Integer '= 0
+    MdlCore.LOCK_GUI()
     'sRawFile = DConv(File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT"))
      SHELL "ls /mnt/cdrom/packages/required/*.t?z" TO sRawFile
       sFile = Split(sRawFile, "\n")
         'SHELL "ls /mnt/cdrom/packages/required/*.t?z" TO sFile
+        iTlzTotal = sFile.Count
+        
         FOR i = 0 TO sFile.count - 1
           sLine = Trim(sFile[i])
+          INC iPkgNum  
             'IF Left(sLine, Len("PACKAGE NAME")) = "PACKAGE NAME" THEN 
-              sTlzName = Trim(Right(sLine, Len(sLine) - InStr(sLine, "/")))
-              sTlzPath = Trim(Right(sFile[i + 1], Len(sFile[i + 1]) - InStr(sFile[i + 1], "/")))
+              sTlzPath = Trim(sLine)
+              'sTlzName = Trim(Right(sLine, Len(sLine) - RInStr(sLine, "/")))
+              'sTlzPath = Trim(Right(sFile[i + 1], Len(sFile[i + 1]) - InStr(sFile[i + 1], "/")))
               'sTlzPath = Right(sTlzPath, Len(sTlzPath) - 2) ' remove the ./ from the location line
             'END IF
           ' now install the package with the information we already have
           PRINT sTlzName & sTlzPath
               sDump = ""
               sErr = ""
-              FrmInstallSys.tlCurrPkg.Text = "Installing " & sTlzName & " ..."
-              FrmInstallSys.pbInstallProg.Value = 0.0
-              hproc = SHELL "install-pkg " & sTlzName & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+              FrmInstallSys.tlCurrPkg.Text = "Installing " & File.Name(sTlzPath) & " ..."
+              'FrmInstallSys.pbInstallProg.Value = 0.0
+              
+               'figure out the progress again
+                            ' for this one we will need to count the packages, and base our progress on the number of packages
+                            ' installed vs the total number of packags
+                            iCurrTlz = i
+                            FrmInstallSys.pbInstallProg.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iTlzTotal, iCurrTlz)
+                            FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
+              hproc = SHELL "install-pkg " & sTlzPath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
                 WAIT 1
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
                       WAIT 2
-                          ' figure out the progress again
                     UNTIL 
                       hproc.State = Process.Stopped
+'                      INC iPkgNum
                   END IF
+            
       NEXT 
             
     
