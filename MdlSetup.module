@@ -177,6 +177,9 @@ PUBLIC FUNCTION CALCULATE_PACKAGE_COUNT(bCustom AS Boolean) AS Integer
       SHELL "cat " & ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT | grep ^\"PACKAGE NAME\"" TO sDump
         sTotalList = sTotalList & gb.NewLine & Trim(sDump)
         sDump = ""
+        SHELL "ls /mnt/cdrom/packages/required/*.t?z" TO sDump
+        sTotalList = sTotalList & gb.NewLine & Trim(sDump)
+        sDump = ""
         ' split the array
           sList = Split(sTotalList, "\n")
             FOR i = 0 TO sList.Count - 1

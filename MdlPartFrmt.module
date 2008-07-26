@@ -45,11 +45,13 @@
       IF ClsPartSel.sVar THEN 
         sList.Add(ClsPartSel.sVar & ";" & ClsPartSel.fVar)
       END IF
-      
+  FrmInstallSys.tlBanner.Text = "Formatting partitions"    
   ' now that we have the list in the array, let's do each one
   FOR i = 0 TO sList.Count - 1
     sPart = Left(sList[i], InStr(sList[i], ";") - 1)
     sFormat = Right(sList[i], Len(sList[i]) - InStr(sList[i], ";"))
+      FrmInstallSys.tlBanner.Text = "Formatting " & sPart & " with " & sFormat
+      WAIT 1 
       iretval = MdlPartFrmt.FORMAT_PARTITION(sPart, sFormat) ' do the formatting
         IF iretval <> 0 THEN 
           RETURN ' stop right there there's been an error.
@@ -140,14 +142,14 @@ PUBLIC FUNCTION FORMAT_PARTITION(sAddr AS String, sFS AS String) AS Integer ' wi
     
     PRINT "Formatting " & sAddr & " to " & sFS
   hproc = SHELL sCommand & " || echo \'FAILED\'" WAIT 'for read
-    WAIT 
+    WAIT 2
       IF hproc.State = Process.Running THEN 
         REPEAT 
   '        FrmHostPrep.tlStatus.Text = "Formatting " & sAddr & " as " & sFS
           
           FrmInstallSys.tlCurrPkg.Text = " Formatting " & sAddr & " as " & sFS
           
-          WAIT 
+          WAIT 1
         UNTIL 
           hproc.State = Process.Stopped
       sDump = Trim(sDump)

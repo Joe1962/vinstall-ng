@@ -29,7 +29,8 @@ END
 PUBLIC SUB Form_Open()
 DIM iImg AS Image
 ME.Maximized = TRUE
-MdlCore.LOCK_GUI()
+MdlCore.LOCK_GUI
+'MdlCore.LOCK_GUI()
 ClsGlobal.sBackNav = NEW Object[]
 ClsGlobal.sSourceMnt = "/mnt" &/ "cdrom"
 FrmSelISO.Reparent(ME.pnlWinHost)

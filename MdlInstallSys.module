@@ -199,6 +199,7 @@ sFstab = sFstab & "\n"
       ME.PERFORM_FULL_INSTALL()
         're-direct to packages for now
         FrmInstallSys.tlCurrPkg.Text = "Installing Additional software... Please wait"
+      ME.INSTALL_REQUIRED_PACKAGES()
       ME.INSTALL_PACKAGES()
     END IF
   
@@ -273,8 +274,8 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
         sLine = Trim(sFile[i])
 
           IF Left(sLine, Len("BULK") + 1) LIKE "BULK" & "*[0-9]*" THEN 
-            'sLine = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
-            'sLine = Left(sLine, Len(sLine) - 1)
+            sLine = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
+            sLine = Left(sLine, Len(sLine) - 1)
               sPak = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
               sPak = Left(sPak, Len(sPak) - 1)
               sEntry = Split(sPak, ":")
@@ -449,9 +450,9 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
     DIM sTlzBasePath AS String = ClsGlobal.sSourceMnt &/ "packages"
     
     'sRawFile = DConv(File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT"))
-    
-      'sFile = Split(sRawFile, "\n")
-       sFile = SHELL "ls /mnt/cdrom/packages/required/*.t?z"
+     SHELL "ls /mnt/cdrom/packages/required/*.t?z" TO sRawFile
+      sFile = Split(sRawFile, "\n")
+        'SHELL "ls /mnt/cdrom/packages/required/*.t?z" TO sFile
         FOR i = 0 TO sFile.count - 1
           sLine = Trim(sFile[i])
             'IF Left(sLine, Len("PACKAGE NAME")) = "PACKAGE NAME" THEN 
@@ -460,9 +461,12 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
               'sTlzPath = Right(sTlzPath, Len(sTlzPath) - 2) ' remove the ./ from the location line
             'END IF
           ' now install the package with the information we already have
+          PRINT sTlzName & sTlzPath
               sDump = ""
               sErr = ""
-              hproc = SHELL "install-pkg " & sTlzBasePath &/ sTlzPath &/ sTlzName & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+              FrmInstallSys.tlCurrPkg.Text = "Installing " & sTlzName & " ..."
+              FrmInstallSys.pbInstallProg.Value = 0.0
+              hproc = SHELL "install-pkg " & sTlzName & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
                 WAIT 1
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
