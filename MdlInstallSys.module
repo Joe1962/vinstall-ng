@@ -34,8 +34,7 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
       TRY MKDIR ClsGlobal.sTargetMnt
     END IF
     
-  '  FrmInstallSys.tlCurrPkg.Text = "Mounting target partitions"
-    
+   
     SHELL "umount " & ClsGlobal.sTargetMnt WAIT 'clear the mount point
     
     '/DISABLED FOR TESTING INSTALL ONLY
@@ -205,6 +204,7 @@ sFstab = sFstab & "\n"
     ELSE 
         FrmInstallSys.tlCurrPkg.Text = "Vectorlinux is now installing ... Please wait"
       ME.PERFORM_FULL_INSTALL()
+      'ME.INSTALL_CONFIG_PACKAGES
         're-direct to packages for now
         'FrmInstallSys.tlCurrPkg.Text = "Installing Additional software... Please wait"
       'ME.INSTALL_REQUIRED_PACKAGES()
@@ -302,7 +302,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL() AS Integer
                 FrmInstallSys.tlCurrPkg.Text = "Installing " & sPakDesc & " ..."
                 FrmInstallSys.pbInstallProg.Value = 0.0
                 
-                PRINT "Installing " & sPakDesc & " Total size (KB) = " & CStr(sPakSize)
+                                         PRINT "Installing " & sPakDesc & " Total size (KB) = " & CStr(sPakSize)
                 sDump = ""
                 sErr = ""
                   MdlCore.LOCK_GUI()
@@ -373,7 +373,7 @@ PUBLIC SUB UPDATE_STEP_PROGRESS(sTargetSize AS Float, sPakSize AS Float)
   IF iVal > FrmInstallSys.pbInstallProg.Value THEN 
     FrmInstallSys.pbInstallProg.Value = iVal
   END IF
-  PRINT CStr(iCurrSize) & "/" & CStr(sTargetSize + sPakSize) & " = " & iVal & "%"
+                'PRINT CStr(iCurrSize) & "/" & CStr(sTargetSize + sPakSize) & " = " & iVal & "%"
 END
 
 
@@ -470,12 +470,9 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
         FOR i = 0 TO sFile.count - 1
           sLine = Trim(sFile[i])
           INC iPkgNum  
-            'IF Left(sLine, Len("PACKAGE NAME")) = "PACKAGE NAME" THEN 
+            
               sTlzPath = Trim(sLine)
-              'sTlzName = Trim(Right(sLine, Len(sLine) - RInStr(sLine, "/")))
-              'sTlzPath = Trim(Right(sFile[i + 1], Len(sFile[i + 1]) - InStr(sFile[i + 1], "/")))
-              'sTlzPath = Right(sTlzPath, Len(sTlzPath) - 2) ' remove the ./ from the location line
-            'END IF
+  
           ' now install the package with the information we already have
           PRINT sTlzName & sTlzPath
               sDump = ""
@@ -498,13 +495,73 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
                       hproc.State = Process.Stopped
 '                      INC iPkgNum
                   END IF
+    NEXT 
             
-      NEXT 
-            
-    
-    
-  
+            ME.INSTALL_CONFIG_PACKAGES()
 END
+
+
+PUBLIC SUB INSTALL_CONFIG_PACKAGES()
+    DIM sList AS String[]
+    DIM sLinarr AS String[]
+    DIM sRawList AS String
+    DIM sPkg AS String
+    DIM sCOnfLine AS String
+    DIM sPkgPath AS String
+    DIM i AS Integer
+    
+    
+    PRINT "Installing final system configuration"
+    SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^CONF" TO sRawList
+    'Message.Info(sRawList)
+      IF InStr(sRawList, "\n") THEN 
+          PRINT "Multiple config files found ... starting at the top of the list"
+           
+      sList = Split(sRawList, "\n")
+       FOR i = 0 TO sList.count - 1
+        sCOnfLine = Trim(sList[i])
+          IF Left(sCOnfLine, Len("CONF")) = "CONF" THEN 
+            sPkg = Right(sCOnfLine, Len(sCOnfLine) - InStr(sCOnfLine, "\'"))
+                'PRINT sPkg
+             sLinarr = Split(sPkg, ":")
+                sPkgPath = sLinarr[0]
+                  
+               'PRINT sPkgPath
+                          ' now install the packages
+                          INC iPkgNum
+                hproc = SHELL "install-pkg " & ClsGlobal.sSourceMnt &/ "veclinux" &/ sPkgPath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+                 FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
+                WAIT 1
+                  IF hproc.State = Process.Running THEN 
+                    REPEAT 
+                      WAIT 2
+                    UNTIL 
+                      hproc.State = Process.Stopped
+'                      INC iPkgNum
+                  END IF
+          END IF
+       NEXT 
+    ELSE  ' only one line found
+      PRINT "Found a single CONF package... Installing it now"
+        sRawList = Trim(sRawList)
+          sLinarr = Split(sRawList, ":")
+          sPkgPath = Right(sLinarr[0], Len(sLinarr[0]) - InStr(sLinarr[0], "\'"))
+              ' now install the package
+              INC iPkgNum
+                hproc = SHELL "install-pkg " & sPkgPath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+                 FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
+                WAIT 1
+                  IF hproc.State = Process.Running THEN 
+                    REPEAT 
+                      WAIT 2
+                    UNTIL 
+                      hproc.State = Process.Stopped
+'                      INC iPkgNum
+                  END IF
+  END IF
+       
+END
+
 
 
 PUBLIC SUB Process_read()
