@@ -14,3 +14,14 @@ TODO:
   + Modify partition listing so that it hides (or disables) selecting the partition which hosts the ISO to be used for the new install
   + Add option to mount (but not format) linux partitions. (add /mnt/<partition_addr> to the combobox list)
   
+  
+  Required bulkd
+  optional (selected) bulks
+  optional (selected) from PACKAGES.TXT
+  packages/required
+  CONF from SETUP.CONF
+  Kernel (below)
+  
+  
+  
+  + need to copy SOURCE_MNT_POINT/isolinux/kernel/sata to TARGET_MNT_POINT/boot/vmlinuz-2.6.25.7

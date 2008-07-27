@@ -201,6 +201,7 @@ sFstab = sFstab & "\n"
   'RETURN 0     
     IF ClsPkgSel.bCustom = TRUE THEN 
       ' perform custom install
+      MdlInstallCustom.PERFORM_CUSTOM_INSTALL()
     ELSE 
         FrmInstallSys.tlCurrPkg.Text = "Vectorlinux is now installing ... Please wait"
       ME.PERFORM_FULL_INSTALL()

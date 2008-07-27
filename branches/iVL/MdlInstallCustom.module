@@ -1,0 +1,426 @@
+' Gambas module file
+
+  
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+' needs to read arrays from clsPkgsel and install all required packages
+PRIVATE hproc AS Process
+PRIVATE sDump AS String
+PRIVATE sErr AS String
+PRIVATE iPkgCnt AS Integer
+PRIVATE iPkgNum AS Integer
+
+
+PUBLIC SUB PERFORM_CUSTOM_INSTALL()
+  
+  DIM iRet AS Integer = 0
+  
+  ME.CALCULATE_TOTAL_PACKAGES() 
+    'RETURN 
+    
+    WAIT 2
+    iRet = ME.INSTALL_REQUIRED_BULKS()
+        PRINT " INSTALLING REQUIRED BULKS"
+      IF iRet <> 0 THEN 
+        'exit this is an error
+          Message.Error("There as been an error while installing required system software. " & gb.newline &
+          sErr)
+          RETURN 
+      END IF
+    iRet = ME.INSTALL_USER_SELECTED_BULKS()
+      PRINT "INSTALING USER-SELECTED BULK PACKAGES"
+      IF iRet <> 0 THEN 
+        Message.Error("There has been an error while installing optional software to your system. " & gb.newline &
+        sErr)
+        RETURN 
+      END IF
+    iret = ME.INSTALL_USER_SELECTED_PACKAGES()
+    PRINT "INSTALLING OPTIONAL SOFTWARE SELECTED BY USER"
+      IF iRet <> 0 THEN 
+        Message.Error("There has been an error while installing optional software to your system. " & gb.newline &
+        sErr)
+        RETURN 
+      END IF
+      
+    iret = ME.INSTALL_PACKAGES_REQUIRED()
+      PRINT "INSTALLING ADDITIONAL REQUIRED SOFTWARE"
+      IF iret <> 0 THEN 
+        Message.Error("Error while installing required system software. " & gb.NewLine & sErr)
+        RETURN 
+      END IF
+    iret = ME.INSTALL_CONF_PACKAGES()
+        PRINT "INSTALLING CONFIGURATION PACKAGES"
+      IF iret <> 0 THEN 
+        Message.Error("Error while installing system configuration. " & gb.NewLine & sErr)
+        RETURN 
+      END IF
+  iret = ME.INSTALL_KERNELS()
+    PRINT "INSTALLING KERNELS"
+      IF iret <> 0 THEN 
+        Message.Error("Unable to install kernels. " & gb.NewLine & sErr)
+      RETURN 
+      END IF
+  ' Installation complete....
+  Message("Vectorlinux is now installed on your system . Enjoy!")    
+  
+      
+  
+END
+
+PUBLIC FUNCTION INSTALL_KERNELS() AS Integer
+  
+    ' Dont know if I should install all kernels, but for the lack of information now, I will
+    
+    DIM sKerNames AS String
+    DIM sKernels AS String[]
+    DIM sKenVs AS String[]
+    DIM sKernVers AS String
+    DIM sKernNo AS String
+    DIM sKrnLbl AS String
+    DIM sFoundOut AS String
+    DIM sKernName AS String
+    DIM sLabel AS String
+    DIM sKernelPath AS String
+    DIM i AS Integer
+    ClsGlobal.sSourceMnt = "/mnt/cdrom"
+        SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^ISO_KERNEL_" TO sKernames
+        SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^HD_KERNEL_" TO sKernVers
+    sKernames = Trim(sKernames)
+    sKernVers = Trim(sKernVers)
+        sKernels = Split(sKernames, "\n")
+          FOR i = 0 TO sKernels.Count - 1
+            sKrnLbl = Trim(sKernels[i])
+              'sKernNo = Left(sKrnLbl, InStr(sKrnLbl, "="))
+              sKernNo = Left(sKrnLbl, InStr(sKrnLbl, "=") - 1)
+              sKernNo = Trim(sKernNo)
+              sLabel = Right(sKrnLbl, Len(sKrnLbl) - InStr(sKrnLbl, "\'"))
+                sLabel = Left(sLabel, RInStr(sLabel, "\'") - 1)
+              
+                sKernNo = Right(sKernNo) ' this is the number of the kernel
+                  SHELL " cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^HD_KERNEL_" & sKernNo TO sFoundOut
+                    sFoundOut = Trim(sFoundOut)
+                      sKernName = Right(sFoundOut, Len(sFoundOut) - InStr(sFoundOut, "\'"))
+                      sKernName = Left(sKernName, RInStr(sKernName, "\'") - 1)
+                      'Message.Info(sLabel & " - " & sKernName)
+                        
+              ' now copy the kernel to the right place
+                sKernelPath = ClsGlobal.sSourceMnt &/ "isolinux" &/ "kernel" &/ sLabel
+                  IF Exist(sKernelPath) THEN 
+                    sDump = ""
+                    sErr = ""
+                    hproc = SHELL "cp " & sKernelPath & Space(1) & ClsGlobal.sTargetMnt &/ "boot" &/ "vmlinuz-" & sKernName FOR READ
+                        WAIT 3
+                        IF InStr(sDump, "FAILED") > 0 THEN 
+                          RETURN 1
+                        ELSE 
+                          RETURN 0
+                        END IF
+                    
+                  END IF
+                'SHELL "cp " & ClsGlobal.sSourceMnt &/ "isolinux" &/ "kernel" &/ 
+          NEXT               
+    
+  
+END
+
+
+PUBLIC FUNCTION INSTALL_CONF_PACKAGES() AS Integer
+  
+  DIM sOutput, sLine, sPkg, sPkgPath AS String
+  DIM i, iret AS Integer
+  DIM sList, sLinearr AS String[]
+  
+  
+    SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^CONF" TO sOutput
+        sOutput = Trim(sOutput)
+          IF InStr(sOutput, "\n") > 0 THEN 
+            sList = Split(sOutput, "\n")
+              FOR i = 0 TO sList.Count - 1
+                sLine = sList[i]
+                sPkg = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
+                sPkg = Left(sPkg, Len(sPkg) - RInStr(sPkg, "\'"))
+                sLinearr = Split(sPkg, ":")
+                sPkgPath = ClsGlobal.sSourceMnt &/ "veclinux" &/ sLinearr[0]
+                  ' install it now
+                    PRINT " + Install " & sPkgPath
+                  iret = ME.INSTALL_THIS_PACKAGE(sPkgPath)
+                      IF iret <> 0 THEN 
+                        RETURN iret
+                      END IF
+                  PRINT " ! " & sPkgPath & " is installed"
+                
+              NEXT 
+        ELSE ' single CONF line
+        sPkg = Right(sOutput, Len(sOutput) - InStr(sOutput, "\'"))
+        sPkg = Left(sPkg, Len(sPkg) - RInStr(sPkg, "\'"))
+            sLinearr = Split(sPkg, ":")
+            sPkgPath = ClsGlobal.sSourceMnt &/ "veclinux" &/ sLinearr[0]
+              iret = ME.INSTALL_THIS_PACKAGE(sPkgPath)
+                IF iret <> 0 THEN   
+                  RETURN iret
+                END IF
+                  
+        END IF
+          
+        
+  
+END
+
+
+
+PUBLIC FUNCTION INSTALL_PACKAGES_REQUIRED() AS Integer
+
+  DIM i, iRet AS Integer
+  DIM sPkg AS String
+  
+    FOR EACH sPkg IN RDir(ClsGlobal.sSourceMnt &/ "packages" &/ "required")
+      SELECT CASE File.Ext(ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ sPkg)
+        CASE "tlz", "tgz"
+                PRINT " + Install " & ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ sPkg
+            iret = ME.INSTALL_THIS_PACKAGE(ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ sPkg)
+              IF iret <> 0 THEN 
+                RETURN iret
+              END IF
+                PRINT " ! " & ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ sPkg & " is installed"
+      END SELECT 
+    NEXT 
+          
+     
+END
+
+
+
+PUBLIC FUNCTION INSTALL_USER_SELECTED_PACKAGES() AS Integer
+  
+  DIM i, iret AS Integer
+  DIM sPkg AS String
+  DIM sPkgPath AS String = ClsGlobal.sSourceMnt &/ "packages"
+      FOR i = 0 TO ClsPkgSel.arrPkgs.count - 1
+        sPkg = ClsPkgSel.arrPkgs[i]
+            PRINT " + Install " & sPkgPath &/ sPkg
+          iret = ME.INSTALL_THIS_PACKAGE(sPkgPath &/ sPkg)
+              IF iret <> 0 THEN 
+                RETURN iret
+              END IF
+                PRINT " ! " & sPkgPath &/ sPkg & " is installed"
+      NEXT 
+  
+  
+END
+
+
+
+
+PUBLIC FUNCTION INSTALL_USER_SELECTED_BULKS() AS Integer
+  
+  DIM SPkg AS String
+  DIM sPkgPath AS String = ClsGlobal.sSourceMnt &/ "veclinux"
+  DIM i AS Integer
+  DIM iRet AS Integer
+      FOR i = 0 TO ClsPkgSel.arrBulks.Count - 1
+        sPkg = ClsPkgSel.arrBulks[i]
+          'install the packages now
+                PRINT " + Install " & sPkgPath &/ sPkg
+            iRet = ME.INSTALL_THIS_PACKAGE(sPkgPath &/ sPkg)
+              IF iRet <> 0 THEN 
+                RETURN 1
+                END IF
+              PRINT " ! " & sPkgPath &/ sPkg & " is installed"
+      NEXT 
+                  
+END
+
+
+
+
+
+PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
+
+    DIM i AS Integer
+    DIM sOutput AS String
+    DIM sOutArr AS String[]
+    
+    'MdlPkgSel.GET_USER_BULK_SELECTION()
+    'MdlPkgSel.GET_USER_PKG_SELECTION()
+        'Message.Info(ClsPkgSel.arrBulks.Count & " from selected bulks" & "<br>" &
+        'ClsPkgSel.arrPkgs.Count & " from selected packages")
+        'RETURN 
+    PRINT "Calculating package count ... Please wait"
+      SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^BULK | grep required" TO sOutput
+          sOutput = Trim(sOutput)
+            IF InStr(sOutput, "\n") > 0 THEN 
+              sOutArr = Split(sOutput, "\n")
+              i = i + sOutArr.Count
+            ELSE 
+              i = i + 1
+            END IF
+            'Message.Info(i & " from required bulks")
+            'RETURN 
+' count required packages in            
+      sOutArr.Clear
+      sOutput = ""
+      SHELL "ls -m " & ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ "*.t?z" TO sOutput
+      sOutput = Trim(sOutput)
+      
+        sOutArr = Split(sOutput, ",")
+        i = i + sOutArr.Count
+      'Message(i & " from packages/required")
+' Count CONF packages in
+    sOutArr.Clear
+    sOutput = ""
+          SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^CONF" TO sOutput
+            sOutput = Trim(sOutput)
+            IF InStr(sOutput, "\n") > 0 THEN 
+              sOutArr = Split(sOutput, "\n")
+              i = i + sOutArr.Count
+            ELSE 
+              i = i + 1
+            END IF
+' Count user-selected stuff in
+  i = i + ClsPkgSel.arrBulks.Count + ClsPkgSel.arrPkgs.Count
+  iPkgCnt = i
+  
+  PRINT "Total packages to be installed = " & i
+  
+  
+  
+  
+END
+
+
+
+
+
+
+
+PUBLIC FUNCTION INSTALL_REQUIRED_BULKS() AS Integer
+  
+  DIM sOutput AS String
+  DIM sList AS String[]
+  DIM sLine AS String[]
+  DIM i AS Integer
+  DIM sBulk AS String
+  DIM sTrimmed AS String
+  DIM sBUlkDesc AS String
+  DIM iRet AS Integer
+  
+  
+    SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^BULK | grep required" TO sOutput
+      sOutput = Trim(sOutput)
+        IF InStr(sOutput, gb.NewLine) THEN 
+          sList = Split(sOutput, gb.NewLine)
+                    'iPkgCnt = iPkgCnt + sList.Count ' add these to the overall package count.
+            FOR i = 0 TO sList.count - 1
+              sTrimmed = Right(sList[i], Len(sList[i]) - InStr(sList[i], "\'"))
+              sTrimmed = Left(sTrimmed, RInStr(sTrimmed, "\'") - 1)
+              '              sTrimmed = Left(sTrimmed, Len(sTrimmed) - RInStr(sTrimmed, "\'"))
+                  sLine = Split(sTrimmed, ":")
+                  sBulk = sLine[0]
+                  sBUlkDesc = sLine[2]
+                        ' do the sizing
+                            
+                      PRINT " + install " & ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulk
+                    iRet = ME.INSTALL_THIS_PACKAGE(ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulk)
+                        
+                      IF iRet <> 0 THEN 
+                        ' error... stop
+                          PRINT "Error while installing " & sBulk & " -> " & sBUlkDesc
+                        RETURN 1
+                          
+                      END IF                  
+                        PRINT " ! " & ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulk & " is installed"
+            NEXT 
+        ELSE ' found only one line
+              iPkgCnt = iPkgCnt + 1 ' add only one to the overall package count
+          sTrimmed = Right(sOutput, Len(sOutput) - InStr(sOutput, "\'"))
+          sTrimmed = Left(sTrimmed, Len(sTrimmed) - RInStr(sTrimmed, "\'"))
+            sLine = Split(sTrimmed, ":")
+              sBulk = sLine[0]
+              sBUlkDesc = sLine[2]
+                iRet = ME.INSTALL_THIS_PACKAGE(ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulk)
+                  IF iRet <> 0 THEN 
+                        ' error... stop
+                          PRINT "Error while installing " & sBulk & " -> " & sBUlkDesc
+                        RETURN 1
+                          
+                      END IF           
+
+      END IF
+END
+
+
+
+
+PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
+  DIM vSize AS Variant
+  DIM vTargetSize AS Variant
+  
+  sDump = ""
+  sErr = ""
+      
+      SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep " & File.Name(sPackagePath) & " | cut -f 2 -d :" TO vSize
+          IF vSize <> "" THEN 
+            SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO vTargetSize
+          END IF
+      
+          
+    INC iPkgNum
+    PRINT "Package " & iPkgNum & " of " & iPkgCnt
+    MdlSetup.SHOW_PROGRESS_CONTROLS()
+    FrmInstallSys.tlCurrPkg.Text = "Processing " & File.Name(sPackagePath)
+  hproc = SHELL "install-pkg " & sPackagePath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+      WAIT 1
+        IF hproc.State = Process.Running THEN 
+          REPEAT 
+            WAIT 1
+                  
+              ' do the progress bar updating here
+                IF vSize <> "" THEN 
+                  MdlInstallSys.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vTargetSize))
+                  FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
+                END IF
+                    
+          UNTIL 
+            hproc.state = Process.Stopped
+                ' now do the error checking here and return a value
+                     
+                  IF InStr(sDump, "FAILED") > 0 THEN 
+                    'ERROR HAS OCCURRED
+                    RETURN 1
+                  ELSE 
+                    RETURN 0
+                  END IF
+        END IF
+END
+
+
+PUBLIC SUB Process_read()
+  
+  DIM sLine AS String
+  READ #LAST, sLine, -256
+  sDump = sDump & gb.NewLine & sLine
+  PRINT sLine
+  
+  
+END
+
+PUBLIC SUB process_error(msg AS String)
+
+  sErr = sErr & gb.NewLine & sErr
+  PRINT MSG
+END 
+
