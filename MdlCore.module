@@ -200,6 +200,8 @@ END
 
 
 PUBLIC SUB main()
+'MdlInstallCustom.INSTALL_KERNELS()
+'RETURN 
   FMain.Show
 '  FMain.Maximized = TRUE
 '  FMain.Resize(Desktop.Width, Desktop.Height)
