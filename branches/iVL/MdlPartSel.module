@@ -203,10 +203,10 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
           spart = Trim(sSwapList)
           'SHELL "export " & sSwapList & "=$(df -h | grep -i swap) | cut -f 2 -d \' \'" TO vSwapSize
           SHELL " export sw=$(probepart | grep -i \" *swap$\") && echo $sw | cut -f 4 -d \' \'" TO vSwapSize
-          Message(CStr(vSwapSize))
+          'Message(CStr(vSwapSize))
                 IF vSwapSize <> "" THEN 
                   'vSwapSize = Trim(CStr(vSwapSize))
-                    Message.Info(vSwapSize)
+                    'Message.Info(vSwapSize)
                   iswapsize = CInt(vSwapSize)
                   
                   iswapsize = Round(iswapsize / 1024 / 1024, -2)
@@ -268,21 +268,34 @@ PUBLIC SUB MountPoints_CLick()
   'DIM sTag AS String = LAST.tag
   'DIM sText AS String = Trim(LAST.text)
   
- 
+   FOR EACH sdropdwn IN oFsTypes
+              IF sdropdwn.tag = LAST.tag THEN 
+                sdropdwn.Enabled = TRUE
+                IF sdropdwn.Find("Swap") <> -1 THEN 
+                  sdropdwn.Remove(sdropdwn.Find("Swap"))
+                END IF
+                sdropdwn.Text = "Do not format"
+              END IF
+            NEXT 
     
     SELECT CASE LAST.text
         CASE "/"
           ClsPartSel.sRoot = LCase(LAST.tag)
-        CASE "/home"
+          
           ClsPartSel.sHome = LCase(LAST.tag)
+                          
         CASE "/usr"
           ClsPartSel.sUsr = LCase(LAST.tag)
+            
         CASE "/opt"
           ClsPartSel.sOpt = LCase(LAST.tag)
+          
         CASE "/tmp"
           ClsPartSel.sTmp = LCase(LAST.tag)
+          
         CASE "/var"
           ClsPartSel.sVar = LCase(LAST.tag)
+          
         CASE "Swap"
           ClsPartSel.sSwap = LCase(LAST.tag)
             'Message("Swap Flag")            
@@ -292,12 +305,16 @@ PUBLIC SUB MountPoints_CLick()
                   sdropdwn.Text = "Swap"
                   sdropdwn.Enabled = FALSE
                 ELSE 
-                  sdropdwn.Enabled = TRUE
-                    IF sdropdwn.Find("Swap") <> -1 THEN 
+                      IF sdropdwn.Text <> "Do not format" AND sdropdwn.Enabled = TRUE THEN 
+                        sdropdwn.Enabled = TRUE
+                    END IF  
+                     IF sdropdwn.Find("Swap") <> -1 THEN 
                       sdropdwn.Remove(sdropdwn.Find("Swap"))
                     END IF
+                  
                 END IF
             NEXT 
+
              
        END SELECT 
       
