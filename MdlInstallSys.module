@@ -29,7 +29,8 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
  
   ' this is where we need to set the mount target
   'ClsGlobal.sTargetMnt = "/mnt/target"
-  ClsGlobal.sTargetMnt = "/mnt/target" ' just for testing now.
+  'ClsGlobal.sTargetMnt = "/mnt/target" 
+  ClsGlobal.sTargetMnt = "/home/moises/mnt/target" ' just for testing now.
     IF Exist(ClsGlobal.sTargetMnt) = FALSE THEN 
       TRY MKDIR ClsGlobal.sTargetMnt
     END IF
@@ -38,12 +39,12 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
     SHELL "umount " & ClsGlobal.sTargetMnt WAIT 'clear the mount point
     
     '/DISABLED FOR TESTING INSTALL ONLY
-    SHELL "mount " & ClsPartSel.sRoot & Space(1) & ClsGlobal.sTargetMnt WAIT  'moun the root partition first
-    IF ClsPartSel.sHome THEN 
-       SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "home" WAIT 
-       SHELL "mount " & ClsPartSel.sHome & Space(1) & ClsGlobal.sTargetMnt &/ "home -t " & LCase(ClsPartSel.fhome) WAIT 'mount the home partition if defined
-      
-    END IF
+    ' SHELL "mount " & ClsPartSel.sRoot & Space(1) & ClsGlobal.sTargetMnt WAIT  'moun the root partition first
+    ' IF ClsPartSel.sHome THEN 
+    '    SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "home" WAIT 
+    '    SHELL "mount " & ClsPartSel.sHome & Space(1) & ClsGlobal.sTargetMnt &/ "home -t " & LCase(ClsPartSel.fhome) WAIT 'mount the home partition if defined
+    '   
+    ' END IF
     IF ClsPartSel.sUsr THEN 
       SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "usr" WAIT 
       SHELL "mount " & ClsPartSel.sUsr & Space(1) & ClsGlobal.sTargetMnt &/ "usr -t" & ClsPartSel.fUsr WAIT ' mount the user partition
@@ -240,26 +241,36 @@ END
 PUBLIC SUB PERFORM_FULL_INSTALL()
   
   DIM iret AS Integer
+    PRINT "Installing bulks"
+    MdlSetup.SHOW_PROGRESS_CONTROLS()
     iret = ME.INSTALL_BULK_PACKAGES()
   IF iret <> 0 THEN 
     PRINT "Error installing bulks ... exit"
     RETURN 
   END IF
+  PRINT "installing packages"
+  MdlSetup.SHOW_PROGRESS_CONTROLS()
   iret = ME.INSTALL_PACKAGES_NEW()
     IF iret <> 0 THEN 
       PRINT "error installing packages ... exit"
       RETURN 
     END IF
+    PRINT "Installing packages/required"
+    MdlSetup.SHOW_PROGRESS_CONTROLS()
   iret = ME.INSTALL_REQUIRED_PACKAGES()
     IF iret <> 0 THEN 
       PRINT "Error installing packages/required ... exit"
       RETURN 
     END IF
+    PRINT "installing CONFIG packages from SETUP.CONF"
+    MdlSetup.SHOW_PROGRESS_CONTROLS()
   iret = ME.INSTALL_CONFIG_PACKAGES()
       IF iret <> 0 THEN 
         PRINT "Error installing config packages ... exit"
         RETURN 
       END IF
+      PRINT "installing kernels"
+      MdlSetup.SHOW_PROGRESS_CONTROLS()
   iret = MdlInstallCustom.INSTALL_KERNELS()
     IF iret <> 0 THEN 
       PRINT "Error installing kernels ... exit "

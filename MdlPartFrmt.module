@@ -30,8 +30,10 @@
     FOR EACH cb IN MdlPartSel.oFsTypes
       sPart = cb.Tag
       sFormat = cb.Text
+        IF cb.text <> "Do not format" THEN 
       PRINT " Formatting " & sPart & " to " & sFormat
         ME.FORMAT_PARTITION(sPart, sFormat)
+      END IF
     NEXT 
     PRINT "Partition formatting complete"
   
