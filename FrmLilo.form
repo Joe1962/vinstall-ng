@@ -1,0 +1,35 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,63,41)
+  Text = ("")
+  FullScreen = True
+  { tlBanner TextLabel
+    MoveScaled(0,0,58,4.5455)
+    Text = ("Configure and install lilo (Linux Boot Loader)")
+  }
+  { LiloTarget ComboBox
+    MoveScaled(1,11,45,3.2727)
+    Text = ("")
+    ReadOnly = True
+    List = [("MBR"), ("Sector"), ("Floppy")]
+  }
+  { YNLiloBox CheckBox
+    MoveScaled(1,5,18,3)
+    Text = ("Don't Install Lilo")
+  }
+  { FBResolution ComboBox
+    MoveScaled(1,18,45,3.2727)
+    Text = ("No installable images found.")
+    ReadOnly = True
+    List = [("Standard"), ("Bootsplash High"), ("Bootsplash Med"), ("Bootsplash Extra high")]
+  }
+  { LiloAppendBox TextBox
+    MoveScaled(1,27,45,3)
+    Text = ("")
+  }
+  { tlBanner2 TextLabel
+    MoveScaled(1,23,58,3)
+    Text = ("Lilo optional parameters: You may add any lilo boot options here. ")
+  }
+}
