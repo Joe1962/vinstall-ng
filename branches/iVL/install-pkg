@@ -1,0 +1,146 @@
+#!/bin/sh
+# This code was captured from installpkg, Slackware 10, By Patric V.
+# Modified by Eko M. Budi to suit old isolinux
+# - exclude directory that will overwrite symlink
+# - get the FILE LIST from previous check
+# - capable to handle tgz, tbz, tlz
+#
+
+if [ -z "$1" ]; then
+  echo "Usage: install-pkg <package> [ROOT]"
+  exit 1
+fi
+
+package=$1
+ROOT=${ROOT:-/}
+[ "$2" ] && ROOT=$2
+ADM_DIR=$ROOT/var/log
+TMP=$ROOT/tmp
+
+mkdir -p $ADM_DIR/packages
+mkdir -p $ADM_DIR/scripts
+mkdir -p $TMP
+
+echo HO 
+
+longname=`basename $package`
+packagetype=${longname##*.}
+shortname=${longname%.*}
+packagebase=`pkgname $longname`
+
+# Test tarball integrity, store the list
+rm -f $TMP/tmplist
+case $packagetype in
+    tlz)
+      lzmadec <$package | /bin/tar-1.13-pkgtools -t >$TMP/tmplist 2>/dev/null
+        ;;
+    tbz|tbz2)
+      tar -tj <$package >$TMP/tmplist 2>/dev/null
+        ;;
+    tgz)
+      tar -tz <$package >$TMP/tmplist 2>/dev/null
+        ;;
+esac
+
+TARERROR=$?
+if [ ! "$TARERROR" = "0" ]; then
+    echo "Package $package is corrupted" >> $flog
+    rm -f $TMP/tmplist
+    return 1
+fi
+
+echo HU
+
+# make sure we're not installing files on top of existing symbolic links
+# and exclude the directories that are a symlink
+# big change, by Eko M. Budi
+rm -f $TMP/exclist
+rm -f $TMP/rmvlist
+cat $TMP/tmplist | while read file ; do
+    if [ -d $ROOT/${file%/} ]; then
+        echo "$file: DIR"
+        if [ -L $ROOT/${file%/} ]; then
+            echo $file >> $TMP/exclist
+        fi
+    elif [ -L "$ROOT/$file" ] ; then
+      echo "$file: SYMLINK"
+      echo $file >> $TMP/rmvlist
+      rm -f "$ROOT/$file"
+    else
+      echo "$file: FILE"
+    fi
+done
+
+echo HI
+
+
+# Extract
+if [ -f $TMP/exclist ]; then
+    EXCLUDED="-X $TMP/exclist"
+else
+    EXCLUDED=""
+fi
+
+case $packagetype in
+    tlz)
+      lzmadec <$package | /bin/tar-1.13-pkgtools -C $ROOT -xlUpv >$TMP/$shortnam
+e 2>/dev/null
+        ;;
+    tbz|tbz2)
+      tar $EXCLUDED -C $ROOT -xjlUpv <$package >$TMP/$shortname 2>/dev/null
+        ;;
+    tgz)
+      tar $EXCLUDED -C $ROOT -xzlUpv <$package >$TMP/$shortname 2>/dev/null
+        ;;
+esac
+
+rm -f $TMP/exclist
+rm -f $TMP/tmplist
+
+# Write the package file database entry and install the package
+echo "PACKAGE NAME: $shortname" > $ADM_DIR/packages/$shortname
+echo "COMPRESSED PACKAGE SIZE: $COMPRESSED" >> $ADM_DIR/packages/$shortname
+echo "UNCOMPRESSED PACKAGE SIZE: $UNCOMPRESSED" >> $ADM_DIR/packages/$shortname
+echo "PACKAGE LOCATION: $package" >> $ADM_DIR/packages/$shortname
+echo "PACKAGE DESCRIPTION:" >> $ADM_DIR/packages/$shortname
+
+# add dependency info
+# big change, by kocil
+if [ -r $ROOT/install/slack-required ]; then
+    grep -ve '^#' $ROOT/install/slack-required | while read LINE; do
+      echo "REQUIRED: $LINE" >> $ADM_DIR/packages/$shortname 2> /dev/null
+    done
+fi
+  
+if [ -r $ROOT/install/slack-desc ]; then
+    cat $ROOT/install/slack-desc | grep "^$packagebase:" >> $ADM_DIR/packages/$s
+hortname 2> /dev/null
+    if [ "$shortname" != "$packagebase" ]; then
+      cat $ROOT/install/slack-desc | grep "^$shortname:" >> $ADM_DIR/packages/$s
+hortname 2> /dev/null
+    fi
+fi
+ 
+echo "FILE LIST:" >> $ADM_DIR/packages/$shortname
+if [ "`cat $TMP/$shortname | grep '^./' | wc -l | tr -d ' '`" = "1" ]; then
+    # Good.  We have a package that meets the Slackware spec.
+    cat $TMP/$shortname >> $ADM_DIR/packages/$shortname
+else
+    # Some dumb bunny built a package with something other than makepkg.  Bad!
+    # Oh well.  Bound to happen.  Par for the course.  Fix it and move on...
+    echo './' >> $ADM_DIR/packages/$shortname
+    cat $TMP/$shortname | grep -v '^./$' | cut -b3- >> $ADM_DIR/packages/$shortn
+ame
+fi
+
+if [ -f $ROOT/install/doinst.sh ]; then
+    echo "Executing install script for $shortname..."
+    (cd $ROOT; sh install/doinst.sh -install)
+    cp $ROOT/install/doinst.sh $ADM_DIR/scripts/$shortname
+    chmod 755 $ADM_DIR/scripts/$shortname
+fi 
+
+# Clean up the mess...
+rm -f $TMP/$shortname
+rm -rf $ROOT/install
+exit 0
