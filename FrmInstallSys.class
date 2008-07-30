@@ -35,12 +35,13 @@ END
 PUBLIC SUB Form_Open()
    
       ' prepare the system
+      ME.HIDE_PROGRES_CONTROLS()
       
       ME.FrmProg.Text = " Preparing system for installation "
       ME.tlCurrStepLbl.Text = "Current Step"
  
 
-ME.HIDE_PROGRES_CONTROLS()
+
 ME.BEGIN_PROCESS()  
 
 END

@@ -96,7 +96,7 @@ DIM i AS Integer
 DIM sPartition AS String
 
 'SHELL "sudo /sbin/probepart | grep -e \"*Linux$\" | cut -f 1 -d \' \'" TO sResults
-  SHELL "/sbin/probepart | grep -e \" Linux$\" | cut -f 1 -d \' \' | grep /dev" TO sResults 
+  SHELL "/sbin/probepart | cut -f 1 -d \' \' | grep /dev" TO sResults 
   
   sResults = Trim(sResults)
   'Message.Info(sResults)
