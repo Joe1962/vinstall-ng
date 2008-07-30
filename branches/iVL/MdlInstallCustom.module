@@ -29,6 +29,13 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
   
   DIM iRet AS Integer = 0
   
+  WITH FMain
+      .tvPlan["Inst2"].Selected = TRUE
+      .tvPlan["Inst2"].Picture = MdlCore.sNowPic
+      .tvPlan["Inst1"].Picture = MdlCore.sDonePic
+    END WITH 
+  
+  
   ME.CALCULATE_TOTAL_PACKAGES() 
     'RETURN 
     
@@ -74,6 +81,8 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
         Message.Error("Unable to install kernels. " & gb.NewLine & sErr)
       RETURN 
       END IF
+      ' write new fstab now
+      MdlInstallSys.WRITE_NEW_FSTAB()
   ' Installation complete....
   Message("Vectorlinux is now installed on your system . Enjoy!")    
   
