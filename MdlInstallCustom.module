@@ -175,7 +175,7 @@ PUBLIC FUNCTION INSTALL_CONF_PACKAGES() AS Integer
               NEXT 
         ELSE ' single CONF line
         sPkg = Right(sOutput, Len(sOutput) - InStr(sOutput, "\'"))
-        sPkg = Left(sPkg, Len(sPkg) - RInStr(sPkg, "\'"))
+        sPkg = Left(sPkg, RInStr(sPkg, "\'") - 1)
             sLinearr = Split(sPkg, ":")
             sPkgPath = ClsGlobal.sSourceMnt &/ "veclinux" &/ sLinearr[0]
               iret = ME.INSTALL_THIS_PACKAGE(sPkgPath)
