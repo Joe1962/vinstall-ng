@@ -393,7 +393,7 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
       PRINT " Installing " & sBulkPath
       MdlSetup.SHOW_PROGRESS_CONTROLS()
       FrmInstallSys.tlCurrPkg.Text = "Installing " & File.Name(sBulkPath)
-        hproc = SHELL "install-pkg " & sBulkPath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ   
+        hproc = SHELL "lzmadec <" & sBulkPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ  
           WAIT 1
             IF hproc.State = Process.Running THEN 
               WAIT 1
