@@ -147,9 +147,9 @@ END
 
 PUBLIC FUNCTION UPDATE_OVERALL_PROGRESS(iTotalPkgs AS Integer, iCurrPkg AS Integer) AS Float
   DIM fRet AS Float
-  ' IF iTotalPkgs = 0 THEN 
-  '   iTotalPkgs = 10
-  ' ENDIF 
+   IF iTotalPkgs = 0 THEN 
+     iTotalPkgs = 30
+   ENDIF 
 
   fRet = iCurrPkg / iTotalPkgs
   fRet = Round(fRet, -2)
@@ -191,7 +191,7 @@ PUBLIC FUNCTION CALCULATE_PACKAGE_COUNT(bCustom AS Boolean) AS Integer
       '         END IF
       '       NEXT 
       '       iQTY = sList.Count
-        SHELL "find /mnt/cdrom -name *.tlz|wc -l" TO iQTY
+        SHELL "find " & ClsGlobal.sSourceMnt & " -name *.tlz|wc -l" TO iQTY
   ELSE ' GOING FOR CUSTOM INSTALL
         
   END IF
