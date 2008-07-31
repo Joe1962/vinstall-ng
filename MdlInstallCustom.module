@@ -244,7 +244,8 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_BULKS() AS Integer
         sPkg = ClsPkgSel.arrBulks[i]
           'install the packages now
                 PRINT " + Install " & sPkgPath &/ sPkg
-            iRet = ME.INSTALL_THIS_PACKAGE(sPkgPath &/ sPkg)
+            'iRet = ME.INSTALL_THIS_PACKAGE(sPkgPath &/ sPkg)
+            iret = ME.INSTALL_THIS_BULK(sPkgPath &/ sPkg)
               IF iRet <> 0 THEN 
                 RETURN 1
                 END IF
@@ -343,7 +344,8 @@ PUBLIC FUNCTION INSTALL_REQUIRED_BULKS() AS Integer
                         ' do the sizing
                             
                       PRINT " + install " & ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulk
-                    iRet = ME.INSTALL_THIS_PACKAGE(ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulk)
+                    'iRet = ME.INSTALL_THIS_PACKAGE(ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulk)
+                    iret = ME.INSTALL_THIS_BULK(ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulk)
                         
                       IF iRet <> 0 THEN 
                         ' error... stop
@@ -374,6 +376,49 @@ END
 
 
 
+PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
+  
+  DIM vSize AS Variant
+  DIM vTargetSize AS Variant
+    SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep " & File.Name(sBulkPath) & " | cut -f 2 -d :" TO vSize
+    vSize = Trim(CStr(vSize))
+    
+    sDump = ""
+    sErr = ""
+      IF vSize <> "" THEN 
+        SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO vTargetSize
+      END IF
+      
+      INC iPkgNum
+      PRINT " Installing " & sBulkPath
+      MdlSetup.SHOW_PROGRESS_CONTROLS()
+      FrmInstallSys.tlCurrPkg.Text = "Installing " & File.Name(sBulkPath)
+        hproc = SHELL "install-pkg " & sBulkPath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ   
+          WAIT 1
+            IF hproc.State = Process.Running THEN 
+              WAIT 1
+                REPEAT 
+                  WAIT 1
+                ' do the progress updating here
+                  IF vSize <> "" THEN 
+                    FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
+                    MdlInstallSys.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vSize))
+                  END IF
+                UNTIL 
+                  hproc.State = Process.Stopped
+              IF InStr(sDump, "FAILED") > 0 THEN 
+                RETURN 1
+              ELSE 
+                RETURN 0
+              END IF
+            END IF
+              
+        
+    
+  
+END
+
+
 PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
   DIM vSize AS Variant
   DIM vTargetSize AS Variant
@@ -399,7 +444,7 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
                   
               ' do the progress bar updating here
                 IF vSize <> "" THEN 
-                  MdlInstallSys.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vTargetSize))
+                  MdlInstallSys.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vSize))
                   FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
                 END IF
                     
