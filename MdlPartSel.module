@@ -281,7 +281,8 @@ PUBLIC SUB MountPoints_CLick()
     SELECT CASE LAST.text
         CASE "/"
           ClsPartSel.sRoot = LCase(LAST.tag)
-          
+        
+        CASE "/home"
           ClsPartSel.sHome = LCase(LAST.tag)
                           
         CASE "/usr"

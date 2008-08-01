@@ -173,35 +173,13 @@ END IF
 sFstab = sFstab & "\n"
 ' Wheewww!... that's the whole fstab there... Please fix the win partitions
  
- 'Message(sFstab)
- 
- ' IF NOT ClsGlobal.sTargetMnt OR ClsGlobal.sTargetMnt = "" THEN 
- '  ClsGlobal.sTargetMnt = "/mnt/target"
- ' END IF
- 
- ';Message(ClsGlobal.sTargetMnt &/ "etc")
+
   ' now save the file to /etc/fstab
       IF Exist(ClsGlobal.sTargetMnt &/ "etc") = FALSE THEN 
         MKDIR ClsGlobal.sTargetMnt &/ "etc"
       END IF
     File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "fstab", SConv(sFstab))
-      'CATCH 
-      'PRINT ERROR 
-        '.RETURN 1
-  'RETURN 0     
-    ' IF ClsPkgSel.bCustom = TRUE THEN 
-    '   ' perform custom install
-    '   MdlInstallCustom.PERFORM_CUSTOM_INSTALL()
-    ' ELSE 
-    '     FrmInstallSys.tlCurrPkg.Text = "Vectorlinux is now installing ... Please wait"
-    '   ME.PERFORM_FULL_INSTALL()
-      'ME.INSTALL_CONFIG_PACKAGES
-        're-direct to packages for now
-        'FrmInstallSys.tlCurrPkg.Text = "Installing Additional software... Please wait"
-      'ME.INSTALL_REQUIRED_PACKAGES()
-      'ME.INSTALL_PACKAGES()
-      
-    ' END IF  
+ 
 END 
 
 
