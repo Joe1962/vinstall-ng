@@ -1,3 +1,60 @@
 ' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
+PUBLIC SUB Form_Open()
+
+MdlConfLilo.DISPLAY_LILO_TARGET_OPTIONS()
+
+END
+
+PUBLIC SUB YNLiloBox_Click()
+
+  IF ME.YNLiloBox.value = TRUE THEN 
+    WITH ME
+      .LiloAppendBox.Enabled = FALSE
+      .LiloTarget.Enabled = FALSE
+      .FBResolution.Enabled = FALSE
+    END WITH 
+    ELSE 
+    WITH ME
+    
+      .LiloAppendBox.Enabled = TRUE
+      .LiloTarget.Enabled = TRUE
+      .FBResolution.Enabled = TRUE
+    END WITH 
+  END IF
+      
+      
+
+END
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .tlTarGet.Alignment = Align.Normal
+    .tlFbMode.Alignment = Align.Normal
+    .tlBanner.Move(4, 4)
+    .tlBanner.Width = .ClientWidth - (.tlBanner.x * 2)
+    .YNLiloBox.Move(.tlBanner.left, .tlBanner.Top + (.tlBanner.Height + 1.5), MdlObjSizer.get_object_width(.YNLiloBox.text) + 36, 28)
+    .tlTarGet.Move(.YNLiloBox.left, .YNLiloBox.top + (.YNLiloBox.Height * 1.5), MdlObjSizer.get_object_width(.tlTarGet.Text) + 8)
+    .LiloTarget.Move(.tlTarGet.Left + .tlTarGet.Width + 2, .tlTarGet.top, .tlBanner.Width - (.tlTarGet.Width + .tlTarGet.left))
+    .tlFbMode.Move(.tlBanner.Left, .tlTarGet.top + .tlTarGet.Height + 8, MdlObjSizer.get_object_width(.tlFbMode.Text) + 8)
+    .FBResolution.Move(.tlFbMode.Left + .tlFbMode.Width + 2, .tlFbMode.top, .tlBanner.Width - (.tlFbMode.Width + .tlFbMode.Left))
+  END WITH 
+
+END

@@ -18,7 +18,38 @@
 
 
 ' PUBLIC Vmlinuz AS Object[]
-' 
+
+PUBLIC SUB DISPLAY_LILO_TARGET_OPTIONS()
+  
+  DIM sList AS String
+  DIM sListarr AS String[]
+  DIM i AS Integer
+  DIM sTarget AS String
+  
+    SHELL "probedisk | grep disk |cut -f 1 -d \\|" TO sList
+      sList = Trim(sList)
+      sListarr = Split(sList, "\n")
+        FOR i = 0 TO sListarr.count - 1
+          sTarget = "MBR of " & Trim(sListarr[i])
+          FrmLilo.LiloTarget.Add(sTarget)
+        NEXT 
+        
+      WITH FrmLilo.LiloTarget
+          IF LCase(ClsPartSel.fRoot) <> "xfs" THEN 
+          .Add("Sector")
+          END IF
+        
+      .Add("Floppy")
+      END WITH 
+  
+  
+END
+
+
+
+
+
+ 
 ' PUBLIC SUB LIST_BULK_SELECTION()
 '   
 '   DIM cb AS CheckBox

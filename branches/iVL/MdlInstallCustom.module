@@ -344,8 +344,13 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
   
   DIM vSize AS Variant
   DIM vTargetSize AS Variant
+  DIM sDesc AS String
   
   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep " & File.Name(sBulkPath) & " | cut -f 2 -d :" TO vSize
+  SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep " & File.Name(sBulkPath) & " | cut -f 3 -d :" TO sDesc
+    IF Right(sDesc) = "\'" THEN 
+        sDesc = Left(sDesc, RInStr(sDesc, "\'") - 1)
+    END IF
   vSize = Trim(CStr(vSize))
   sDump = ""
   sErr = ""
@@ -364,6 +369,7 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
     REPEAT 
       WAIT 1
       ' do the progress updating here
+        FrmInstallSys.tlCurrPkg.Text = Trim(sDesc)
       IF vSize <> "" THEN 
         MdlInstallSys.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vSize))
       END IF

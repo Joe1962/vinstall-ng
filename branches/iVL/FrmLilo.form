@@ -3,23 +3,22 @@
 { Form Form
   MoveScaled(0,0,63,41)
   Text = ("")
-  FullScreen = True
   { tlBanner TextLabel
-    MoveScaled(0,0,58,4.5455)
+    MoveScaled(0,0,58,4.5)
     Text = ("Configure and install lilo (Linux Boot Loader)")
   }
   { LiloTarget ComboBox
-    MoveScaled(1,11,45,3.2727)
+    MoveScaled(13,10,39,3.3333)
     Text = ("")
     ReadOnly = True
-    List = [("MBR"), ("Sector"), ("Floppy")]
+    List = []
   }
   { YNLiloBox CheckBox
     MoveScaled(1,5,18,3)
     Text = ("Don't Install Lilo")
   }
   { FBResolution ComboBox
-    MoveScaled(1,18,45,3.2727)
+    MoveScaled(20,15,32,3.3333)
     Text = ("No installable images found.")
     ReadOnly = True
     List = [("Standard"), ("Bootsplash High"), ("Bootsplash Med"), ("Bootsplash Extra high")]
@@ -29,7 +28,15 @@
     Text = ("")
   }
   { tlBanner2 TextLabel
-    MoveScaled(1,23,58,3)
+    MoveScaled(1,21,58,3)
     Text = ("Lilo optional parameters: You may add any lilo boot options here. ")
+  }
+  { tlTarGet TextLabel
+    MoveScaled(1,10,10,3.3333)
+    Text = ("Target")
+  }
+  { tlFbMode TextLabel
+    MoveScaled(1,15,18,3.3333)
+    Text = ("Video Resolution")
   }
 }
