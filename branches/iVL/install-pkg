@@ -83,8 +83,7 @@ fi
 
 case $packagetype in
     tlz)
-      lzmadec <$package | /bin/tar-1.13-pkgtools -C $ROOT -xlUpv >$TMP/$shortnam
-e 2>/dev/null
+      lzmadec <$package | /bin/tar-1.13-pkgtools -C $ROOT -xlUpv >$TMP/$shortname 2>/dev/null
         ;;
     tbz|tbz2)
       tar $EXCLUDED -C $ROOT -xjlUpv <$package >$TMP/$shortname 2>/dev/null
@@ -113,11 +112,9 @@ if [ -r $ROOT/install/slack-required ]; then
 fi
   
 if [ -r $ROOT/install/slack-desc ]; then
-    cat $ROOT/install/slack-desc | grep "^$packagebase:" >> $ADM_DIR/packages/$s
-hortname 2> /dev/null
+    cat $ROOT/install/slack-desc | grep "^$packagebase:" >> $ADM_DIR/packages/$shortname 2> /dev/null
     if [ "$shortname" != "$packagebase" ]; then
-      cat $ROOT/install/slack-desc | grep "^$shortname:" >> $ADM_DIR/packages/$s
-hortname 2> /dev/null
+      cat $ROOT/install/slack-desc | grep "^$shortname:" >> $ADM_DIR/packages/$shortname 2> /dev/null
     fi
 fi
  
@@ -129,8 +126,7 @@ else
     # Some dumb bunny built a package with something other than makepkg.  Bad!
     # Oh well.  Bound to happen.  Par for the course.  Fix it and move on...
     echo './' >> $ADM_DIR/packages/$shortname
-    cat $TMP/$shortname | grep -v '^./$' | cut -b3- >> $ADM_DIR/packages/$shortn
-ame
+    cat $TMP/$shortname | grep -v '^./$' | cut -b3- >> $ADM_DIR/packages/$shortname
 fi
 
 if [ -f $ROOT/install/doinst.sh ]; then

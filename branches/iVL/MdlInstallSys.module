@@ -276,11 +276,15 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
     END IF
     
     ' WRITE THE FSTAB NOW
-    MdlInstallSys.WRITE_NEW_FSTAB()
-    FrmInstallSys.pbInstallProg.Value = 1
-        FrmInstallSys.pbInstallProg2.Value = 1
+  MdlInstallSys.WRITE_NEW_FSTAB()
+  FrmInstallSys.pbInstallProg.Value = 1
+  FrmInstallSys.pbInstallProg2.Value = 1
   Message.Info("Vectorlinux is now installed in your system. Please Exit the installer")
-  MdlCore.unlock_gui()    
+  WITH FMain
+    .btQuit.Enabled = TRUE
+    .btQuit.ForeColor = Color.Black
+  END WITH 
+  'MdlCore.unlock_gui()      
 END
 
 

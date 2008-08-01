@@ -1,7 +1,7 @@
 # Gambas Project File 2.0
 Title=VectorLinux Installer
 Startup=MdlCore
-Version=0.0.29
+Version=0.0.30
 Library=gb.gtk
 Library=gb.form
 Library=gb.debug
@@ -16,7 +16,7 @@ Translate=1
 Language=en_US
 ControlPublic=1
 ModulePublic=1
-ExecPath=/home/uel/svn-installer/installer.gambas
+ExecPath=/root/svn-installer2/installer.gambas
 Maintainer=benoit
 Vendor=Princeton
 Address=benoit@localhost
