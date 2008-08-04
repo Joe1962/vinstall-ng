@@ -8,7 +8,7 @@
     Text = ("Configure and install lilo (Linux Boot Loader)")
   }
   { LiloTarget ComboBox
-    MoveScaled(13,10,39,3.3333)
+    MoveScaled(13,10,39,3.1667)
     Text = ("")
     ReadOnly = True
     List = []
@@ -18,10 +18,10 @@
     Text = ("Don't Install Lilo")
   }
   { FBResolution ComboBox
-    MoveScaled(20,15,32,3.3333)
-    Text = ("No installable images found.")
+    MoveScaled(20,15,32,3.1667)
+    Text = ("")
     ReadOnly = True
-    List = [("Standard"), ("Bootsplash High"), ("Bootsplash Med"), ("Bootsplash Extra high")]
+    List = [("Standard"), ("Bootsplash Med"), ("Bootsplash High"), ("Bootsplash Extra high")]
   }
   { LiloAppendBox TextBox
     MoveScaled(1,27,45,3)
@@ -32,11 +32,15 @@
     Text = ("Lilo optional parameters: You may add any lilo boot options here. ")
   }
   { tlTarGet TextLabel
-    MoveScaled(1,10,10,3.3333)
+    MoveScaled(1,10,10,3.1667)
     Text = ("Target")
   }
   { tlFbMode TextLabel
-    MoveScaled(1,15,18,3.3333)
+    MoveScaled(1,15,18,3.1667)
     Text = ("Video Resolution")
+  }
+  { Button1 Button
+    MoveScaled(47,34,7,2)
+    Text = ("Button1")
   }
 }

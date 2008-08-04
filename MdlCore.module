@@ -481,7 +481,7 @@ WITH FMain.tvPlan
   .Add("Inst1", "Prepare Host", sToDopic, "Inst")
   .Add("Inst2", "Install Operating System", sToDopic, "Inst")
   .Add("Conf", "System Configuration", sCatPic)
-  .Add("Conf0", "Computer Name", sToDopic, "Conf")
+  .Add("Conf0", "Boot Menu Options", sToDopic, "Conf")
   .Add("Conf1", "System Administrator", sToDopic, "Conf")
   .Add("Conf2", "Network Configuration", sToDopic, "Conf")
   .Add("Conf3", "User Accounts", sToDopic, "Conf")

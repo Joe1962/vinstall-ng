@@ -205,5 +205,20 @@ END
 
 
 
+PUBLIC SUB RUN_CREDITS(sCreditFile AS String, tlOutput AS TextLabel)
+  
+  DIM sFile AS String[] = Split(File.Load(sCreditFile), "\n")
+  DIM i AS Integer
+  
+  FOR i = 0 TO sFile.count - 1
+    tlOutput.Text = tlOutput.Text & Space(1) & Trim(sFile[i])
+  NEXT 
+  tlOutput.Width = MdlObjSizer.get_object_width(tlOutput.Text) + 24
+  tlOutput.Border = Border.Plain
+  
+  
+  
+  
+END
 
 

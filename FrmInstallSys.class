@@ -35,15 +35,16 @@ END
 PUBLIC SUB Form_Open()
    
       ' prepare the system
-      ME.HIDE_PROGRES_CONTROLS()
+      'ME.HIDE_PROGRES_CONTROLS()
       
       ME.FrmProg.Text = " Preparing system for installation "
       ME.tlCurrStepLbl.Text = "Current Step"
  
 
 
-ME.BEGIN_PROCESS()  
-
+'ME.BEGIN_PROCESS()  
+MdlSetup.RUN_CREDITS("/mnt/loop/CREDIT", ME.tlCredits)
+ME.tmCredits.Enabled = TRUE
 END
 
 PUBLIC SUB Form_Show()
@@ -88,3 +89,14 @@ END
 
 
 
+
+PUBLIC SUB tmCredits_Timer()
+
+  DEC ME.sclCredits.x
+   
+    
+   IF ME.sclCredits.x < - ME.tlCredits.Width + ME.tlCredits.x THEN
+     ME.sclCredits.x = ME.sclCredits.Width
+   ENDIF
+
+END
