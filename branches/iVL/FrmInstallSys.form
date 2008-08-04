@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,78,51)
+  MoveScaled(0,0,90,66)
   Text = ("")
   { tlBanner TextLabel
     MoveScaled(1,1,63,5)
@@ -11,7 +11,7 @@
     MoveScaled(1,10,76,34)
     Text = ("")
     { tlCurrPkg TextLabel
-      MoveScaled(2,1,73,3.375)
+      MoveScaled(2,1,73,3.3333)
       Text = ("Installing ...")
     }
     { pbInstallProg ProgressBar
@@ -19,15 +19,31 @@
       Label = False
     }
     { pbInstallProg2 ProgressBar
-      MoveScaled(1,19,44,3.375)
+      MoveScaled(1,19,44,3.3333)
     }
     { tlCurrPkg2 TextLabel
-      MoveScaled(1,15,45,3.375)
+      MoveScaled(1,15,45,3.3333)
       Text = ("Total progress")
     }
     { tlCurrStepLbl TextLabel
       MoveScaled(2,5,11,3)
       Text = ("Current Step ")
     }
+  }
+  { frmCredits Frame
+    MoveScaled(2,47,81,13)
+    Text = ("VectorLinux ... Brought to you by ")
+    { sclCredits ScrollView
+      MoveScaled(2,3,77,8)
+      { tlCredits TextLabel
+        MoveScaled(1,1,53,4)
+        Text = ("TextLabel1")
+      }
+    }
+  }
+  { tmCredits #Timer
+    #X = 480
+    #Y = 120
+    Delay = 300
   }
 }

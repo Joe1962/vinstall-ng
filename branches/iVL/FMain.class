@@ -171,8 +171,7 @@ PUBLIC SUB btnext_Click()
             
           IF ClsPkgSel.bCustom = TRUE THEN 
               'get the list of selected bulks only
-              'MdlPkgSel.GET_USER_BULK_SELECTION()
-              'Message("Going for a custom install")
+              
               MdlPkgSel.GET_USER_BULK_SELECTION()
               frmNext = FrmPkgsel2
             ELSE 
@@ -191,7 +190,14 @@ PUBLIC SUB btnext_Click()
     CASE "FrmSummary"
       '      frmNext = FrmHostPrep ' prepare host
       frmNext = FrmInstallSys
-            
+    
+    'POST INSTALL CONFIGURATION
+    CASE "FrmInstallSys"
+      frmNext = FrmLilo
+      
+    CASE "FrmLilo"
+      frmNext = FrmLiloOsList
+      
         
   END SELECT 
             

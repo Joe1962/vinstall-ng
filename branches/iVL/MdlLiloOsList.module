@@ -1,0 +1,132 @@
+' Gambas module file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PRIVATE cbarr AS Object[]
+PRIVATE sText AS String
+PUBLIC SUB LIST_LILO_OS_CHOICES()
+  
+  DIM sFatList AS String
+  DIM arrFat AS String[]
+  DIM sNTFSLst AS String
+  DIM arrNTFS AS String[]
+  DIM sLinuxList AS String
+  DIM arrLinux AS String[]
+  DIM i AS Integer
+  DIM sLiloLabel AS String
+  DIM sLiloDesc AS String
+  DIM svmLinuz AS String
+  DIM cbLiloItem AS CheckBox
+  DIM x, y AS Integer
+  x = 4
+  y = 4
+  
+  cbarr = NEW Object[]
+  SHELL "fdisk -l | grep -E \'^/dev/.* \\* .*(FAT16)\' | cut -f 1 -d \' \'" TO sFatList
+    sFatList = Trim(sFatList)
+      IF sFatList <> "" THEN 
+        arrFat = Split(sFatList, "\n")
+      END IF
+  SHELL "fdisk -l| grep -E \'^/dev/.* \\* .*(FAT32|HPFS|NTFS|Win)\' | cut -f 1 -d \' \'" TO sNTFSLst
+    sNTFSLst = Trim(sNTFSLst)
+      IF sNTFSLst <> "" THEN 
+        arrNTFS = Split(sNTFSLst, "\n")
+      END IF
+  SHELL "fdisk -l |grep -E \'83 *Linux\' | cut -f 1 -d \' \'" TO sLinuxList
+    'sLinuxList = Trim(sLinuxList)
+    
+    'RETURN 
+      IF sLinuxList <> "" THEN 
+        arrLinux = Split(sLinuxList, "\n")
+      END IF
+      
+    'FOR TESTING PURPOSES, ONLY DO THE LINUX DRIVES
+      'create a temporary monunt dir
+      TRY MKDIR "/tmp/lilo_tmp"
+    FOR i = 0 TO arrLinux.Count - 1
+      SHELL "mount " & arrLinux[i] & Space(1) & "/tmp/lilo_tmp" WAIT 
+        ' now check for a vmlinuz
+        IF Exist("/tmp/lilo_tmp/boot/vmlinuz") = TRUE THEN 
+        sLiloDesc = ME.ID_DISTRO("/tmp/lilo_tmp")
+          cbLiloItem = NEW CheckBox(FrmLiloOsList.scrlOsList) AS "OsList"
+            WITH cbLiloItem
+              .x = x
+              .y = y
+                IF sLiloDesc <> "Linux" THEN 
+                  .Text = sLiloDesc & Space(1) & "Linux" & Space(1) & "on" & Space(1) & arrLinux[i]
+                 ELSE 
+                  .Text = sLiloDesc
+                END IF
+              .tag = arrLinux[i]
+              .Height = 27
+              .Width = MdlObjSizer.get_object_width(.text) + 36 ' allow room for the checkbox
+              .Value = TRUE
+              
+            END WITH 
+            cbarr.Add(cbLiloItem)
+            y = y + cbLiloItem.Height + 4
+            
+        END IF
+        
+        SHELL "umount /tmp/lilo_tmp" WAIT 
+    NEXT 
+        
+    
+  
+  
+END
+
+PUBLIC SUB OsList_click()
+  DIM iH AS Integer = 28
+  DIM box AS CheckBox
+  
+   
+          
+        
+  
+  
+END
+
+
+PUBLIC FUNCTION ID_DISTRO(sWhereIsItMounted AS String) AS String
+  
+  DIM sBasePath AS String = sWhereIsItMounted &/ "etc"
+  DIM sDesc AS String
+      
+      IF Exist(sBasePath &/ "vector-version") THEN 
+        sDesc = "Vector"
+      ELSE IF Exist(sBasePath &/ "sysconfig" &/ "vector") THEN 
+        sDesc = "Vector"
+      ELSE IF Exist(sBasePath &/ "slackware-version") THEN 
+        sDesc = "Slackware"
+      ELSE IF Exist(sBasePath &/ "Suse-release") OR Exist(sBasePath &/ "UnitedLinux-release") THEN 
+        sDesc = "SuSe"
+      ELSE IF Exist(sBasePath &/ "gentoo-release") THEN 
+        sDesc = "Gentoo"
+      ELSE IF Exist(sBasePath &/ "debian_version") THEN 
+        sDesc = "Debian"
+      ELSE IF Exist(sBasePath &/ "mandrake-release") THEN 
+        sDesc = "Makdrake"
+      ELSE IF Exist(sBasePath &/ "redhat-release") THEN 
+        sDesc = "RedHat"
+      ELSE IF Exist(sBasePath &/ "fedora-release") THEN 
+        sDesc = "Fedora"
+      ELSE 
+        sDesc = "Linux"
+      END IF
+      RETURN sDesc
+  
+END
