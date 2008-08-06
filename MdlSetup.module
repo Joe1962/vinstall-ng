@@ -211,10 +211,10 @@ PUBLIC SUB RUN_CREDITS(sCreditFile AS String, tlOutput AS TextLabel)
   DIM i AS Integer
   
   FOR i = 0 TO sFile.count - 1
-    tlOutput.Text = tlOutput.Text & Space(1) & Trim(sFile[i])
+    tlOutput.Text = tlOutput.Text & Space(3) & Trim(sFile[i])
   NEXT 
   tlOutput.Width = MdlObjSizer.get_object_width(tlOutput.Text) + 24
-  tlOutput.Border = Border.Plain
+  'tlOutput.Border = Border.Plain
   
   
   
