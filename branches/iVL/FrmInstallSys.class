@@ -91,12 +91,20 @@ END
 
 
 PUBLIC SUB tmCredits_Timer()
+  
+  DIM X AS Integer
+  X = ME.sclCredits.ScrollX
 
-  DEC ME.sclCredits.x
-   
+  INC ME.sclCredits.ScrollX
+      IF X = ME.sclCredits.Scrollx THEN 
+        ME.sclCredits.scrollx = 0
+      END IF
+      
     
-   IF ME.sclCredits.x < - ME.tlCredits.Width + ME.tlCredits.x THEN
-     ME.sclCredits.x = ME.sclCredits.Width
-   ENDIF
+   
+   '  
+   ' IF ME.sclCredits.ScrollX < - ME.tlCredits.Width + ME.tlCredits.x THEN
+   '   ME.sclCredits.Scrollx = ME.sclCredits.Width
+   ' ENDIF
 
 END
