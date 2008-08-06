@@ -9,8 +9,11 @@
   }
   { VPanel1 VPanel
     MoveScaled(1,13,71,43)
-    { scrlOsList ScrollView
-      MoveScaled(0,0,71,40)
+    { scrlOsList ListContainer
+      MoveScaled(2,0,58,15)
+    }
+    { scrlOsListold ScrollView
+      MoveScaled(3,18,71,19)
       Expand = True
     }
   }

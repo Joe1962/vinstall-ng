@@ -205,20 +205,29 @@ END
 
 
 
+
+
 PUBLIC SUB RUN_CREDITS(sCreditFile AS String, tlOutput AS TextLabel)
   
   DIM sFile AS String[] = Split(File.Load(sCreditFile), "\n")
   DIM i AS Integer
   
   FOR i = 0 TO sFile.count - 1
-    tlOutput.Text = tlOutput.Text & Space(3) & Trim(sFile[i])
+      IF Left(Trim(sFile[i]), Len("M0E-lnx")) = "M0E-lnx" THEN 
+              sFile[i] = "M0E-lnx  [ vpackager, vasmCC, GUI installer ]"
+      ELSE IF Left(Trim(sFile[i]), Len("Uelsk8s")) = "Uelsk8s" THEN 
+          sFile[i] = "Uelks8s [ vlthemeswitch, ISO Master, Gui Installer ]"
+      ELSE 
+        sFile[i] = sFile[i]
+      END IF
+    tlOutput.Text = tlOutput.Text & Space(12) & " *** " & sFile[i]
+'    tlOutput.Text = sFile[i]
+    'WAIT 20
   NEXT 
   tlOutput.Width = MdlObjSizer.get_object_width(tlOutput.Text) + 24
   'tlOutput.Border = Border.Plain
   
-  
-  
-  
+    
 END
 
 
