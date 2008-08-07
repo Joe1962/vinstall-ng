@@ -166,6 +166,9 @@ sFstab = sFstab & "\n\n" &
 "# Swap partitions\n" &
 "# The 'sw' option means auto activating with 'swapon -a'.\n"
 IF ClsPartSel.sSwap THEN 
+  ' take a second here to throw the swap line to the current running system
+  SHELL "echo \'" & ClsPartSel.sSwap & Space(5) & "none" & Space(5) & "swap" & Space(5) & "sw" & Space(5) & "0" & Space(5) & "0" & "\' >> /etc/fstab" WAIT
+  'write the same line to the future fstab
   sFstab = sFstab & gb.NewLine &
    ClsPartSel.sSwap & Space(5) & "none" & Space(5) & "swap" & Space(5) & "sw" & Space(5) & "0" & Space(5) & "0"
 END IF

@@ -31,6 +31,10 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
   DIM svmLinuz AS String
   DIM cbLiloItem AS CheckBox
   DIM x, y AS Integer
+  DIM ibtX AS Integer
+  DIM txtAppnd AS TextBox
+  DIM cbInclude AS CheckBox
+  DIM tl AS TextLabel
   x = 4
   y = 4
   
@@ -61,23 +65,74 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
         ' now check for a vmlinuz
         IF Exist("/tmp/lilo_tmp/boot/vmlinuz") = TRUE THEN 
         sLiloDesc = ME.ID_DISTRO("/tmp/lilo_tmp")
-          cbLiloItem = NEW CheckBox(FrmLiloOsList.scrlOsList) AS "OsList"
-            WITH cbLiloItem
-              .x = x
-              .y = y
-                IF sLiloDesc <> "Linux" THEN 
-                  .Text = sLiloDesc & Space(1) & "Linux" & Space(1) & "on" & Space(1) & arrLinux[i]
-                 ELSE 
-                  .Text = sLiloDesc
-                END IF
-              .tag = arrLinux[i]
-              .Height = 27
-              .Width = MdlObjSizer.get_object_width(.text) + 36 ' allow room for the checkbox
-              .Value = TRUE
-              
-            END WITH 
-            cbarr.Add(cbLiloItem)
-            y = y + cbLiloItem.Height + 4
+          FrmLilo.TabStrip1.Count = i + 1
+          FrmLilo.TabStrip1[i].text = sLiloDesc & " Linux"
+          
+            cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "IncludeOS"
+              WITH cbInclude
+                .text = "Include this operating system in the boot menu"
+                .Height = 27
+                .Value = TRUE
+                .Move(4, 4, MdlObjSizer.get_object_width(.text) + 24)
+              END WITH 
+            
+          
+            tl = NEW TextLabel(FrmLilo.TabStrip1) AS "Label"
+              WITH tl
+                .text = "Name"
+                .Move(cbInclude.left, cbInclude.top + cbInclude.Height + 4, MdlObjSizer.get_object_width(.text))
+                .Height = 27
+                .Alignment = Align.Normal
+                .BackColor = Color.Default
+              END WITH 
+            txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "NameBox"
+              WITH txtAppnd
+                .Width = tl.Width * 4
+                .text = sLiloDesc
+                .Height = tl.Height
+                .x = tl.left + tl.Width + 8
+                .y = tl.Top
+              END WITH 
+            tl = NEW TextLabel(FrmLilo.TabStrip1) AS "AppndLbl"
+              WITH tl
+                .text = "Kernel boot options"
+                .Move(4, txtAppnd.top + txtAppnd.Height + 4, MdlObjSizer.get_object_width(.text))
+                .Height = 27
+                .Alignment = Align.Normal
+              END WITH 
+            txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "AppendBox"
+              WITH txtAppnd
+                .Move(tl.Left + tl.Width + 8, tl.top, tl.Width)
+                .text = "splash=silent"
+                .Height = 27
+              END WITH 
+                
+            
+          ' ' ' 
+          ' ' ' 'Message.Info(FrmLilo.TabStrip1.Count)
+          ' ' '  FrmLilo.TabStrip1[FrmLilo.TabStrip1.Count].text = sLiloDesc
+          ' ' ' RETURN 
+          ' ' ' cbLiloItem = NEW CheckBox(FrmLiloOsList.scrlOsList) AS "OsList"
+          ' ' ' 
+          ' ' ' 
+          ' ' '   WITH cbLiloItem
+          ' ' '     .x = x
+          ' ' '     .y = y
+          ' ' '       IF sLiloDesc <> "Linux" THEN 
+          ' ' '         .Text = sLiloDesc & Space(1) & "Linux" & Space(1) & "on" & Space(1) & arrLinux[i]
+          ' ' '        ELSE 
+          ' ' '         .Text = sLiloDesc
+          ' ' '       END IF
+          ' ' '       
+          ' ' '     .tag = arrLinux[i]
+          ' ' '     .Height = 27
+          ' ' '     .Width = MdlObjSizer.get_object_width(.text) + 36 ' allow room for the checkbox
+          ' ' '     .Value = TRUE
+          ' ' '                                 
+          ' ' '   END WITH 
+          ' ' '  
+          ' ' '   cbarr.Add(cbLiloItem)
+          ' ' '   y = y + cbLiloItem.Height + 4
             
         END IF
         
@@ -90,14 +145,8 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
 END
 
 PUBLIC SUB OsList_click()
-  DIM iH AS Integer = 28
-  DIM box AS CheckBox
-  
-   
-          
-        
-  
-  
+
+
 END
 
 
