@@ -75,7 +75,7 @@ PUBLIC SUB EMBED_GPARTED()
   'ENDIF
   
   'TRY embEmbedder.Embed(iHandle)
-  IF aHandle <> 0 THEN 
+  IF iHandle <> ""
   TRY FrmDiskPart.EmbGPARTED.Embed(iHandle)
   
   IF ERROR THEN Message.Warning(Error.Text)
