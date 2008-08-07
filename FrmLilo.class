@@ -24,7 +24,7 @@ PUBLIC SUB Form_Open()
 '   FMain.tvPlan["Inst2"].Picture = MdlCore.sDonePic
   
 MdlConfLilo.DISPLAY_LILO_TARGET_OPTIONS()
-
+MdlLiloOsList.LIST_LILO_OS_CHOICES()
 END
 
 PUBLIC SUB YNLiloBox_Click()
@@ -67,8 +67,8 @@ PUBLIC SUB Form_Resize()
 END
 
 PUBLIC SUB Button1_Click()
-
-  ME.Hide
-  FrmLiloOsList.Show
+MdlLiloOsList.LIST_LILO_OS_CHOICES
+  'ME.Hide
+  'FrmLiloOsList.Show
 
 END

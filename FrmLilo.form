@@ -1,14 +1,14 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,63,41)
+  MoveScaled(0,0,64,61)
   Text = ("")
   { tlBanner TextLabel
     MoveScaled(0,0,58,4.5)
     Text = ("Configure and install lilo (Linux Boot Loader)")
   }
   { LiloTarget ComboBox
-    MoveScaled(13,10,39,3.1667)
+    MoveScaled(13,10,39,3.125)
     Text = ("")
     ReadOnly = True
     List = []
@@ -18,29 +18,35 @@
     Text = ("Don't Install Lilo")
   }
   { FBResolution ComboBox
-    MoveScaled(20,15,32,3.1667)
+    MoveScaled(20,15,32,3.125)
     Text = ("")
     ReadOnly = True
     List = [("Standard"), ("Bootsplash Med"), ("Bootsplash High"), ("Bootsplash Extra high")]
   }
   { LiloAppendBox TextBox
-    MoveScaled(1,27,45,3)
+    MoveScaled(1,26,57,3)
     Text = ("")
   }
   { tlBanner2 TextLabel
-    MoveScaled(1,21,58,3)
+    MoveScaled(1,20,58,3)
     Text = ("Lilo optional parameters: You may add any lilo boot options here. ")
   }
   { tlTarGet TextLabel
-    MoveScaled(1,10,10,3.1667)
+    MoveScaled(1,10,10,3.125)
     Text = ("Target")
   }
   { tlFbMode TextLabel
-    MoveScaled(1,15,18,3.1667)
+    MoveScaled(1,15,18,3.125)
     Text = ("Video Resolution")
   }
   { Button1 Button
-    MoveScaled(47,34,7,2)
+    MoveScaled(55,57,7,2)
     Text = ("Button1")
+  }
+  { TabStrip1 TabStrip
+    MoveScaled(1,26,61,32)
+    Index = 0
+    Text = ("Tab 0")
+    Index = 0
   }
 }
