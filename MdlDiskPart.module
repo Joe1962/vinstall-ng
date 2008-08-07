@@ -25,61 +25,53 @@ PUBLIC SUB EMBED_GPARTED()
   DIM iHandle AS Integer
   DIM i AS Integer = 0
   DIM sDump AS String
+  DIM sWins AS String = "GParted,/dev/sda - GParted,/dev/hda - GParted"
+  DIM sWons AS String[] = Split(sWins, ",")
   'Desktop.Find("", "GParted")
   
   
-    IF Exist("/usr/bin/gparted") = FALSE THEN 
+    IF Exist("/usr/sbin/gparted") = FALSE THEN 
       Message.Error("Gparted was not found on this system. Please install gparted and try again")
       RETURN 
     END IF
   
   FrmDiskPart.tlBanner.Text = "<h3>Loading gparted .... Please wait</h3>"
-  SHELL "/usr/bin/gparted"
-  WAIT 3
+  SHELL "/usr/sbin/gparted"
+  WAIT
       
-  sTitle = "/dev/hda - GParted"
-  sTitle1 = "/dev/sda - GParted"
-  sTitle2 = "GParted"
-    'aHandle = Desktop.Find(sTitle)
-    aHandle = Desktop.Find(sTitle)
-  ' ' '     IF aHandle = "" THEN 
-  ' ' '       aHandle = Desktop.Find(sTitle1)
-  ' ' '     END IF
-  ' ' '       
-  ' ' '   IF Left(sTitle, 2) = "0x" THEN 
-  ' ' '   iHandle = Val("&" & Mid$(sTitle, 3))
-  ' ' ' ELSE IF Left(sTitle) = "&" THEN 
-  ' ' '   iHandle = Val(sTitle)
-  ' ' ' ELSE
-    
-    'Message.Info(aHandle[0])
-    
+      i = 0
+  aHandle = Desktop.Find(sWons[i])
     IF aHandle.Count = 0 THEN 
-        aHandle = Desktop.Find(sTitle1)
+      REPEAT 
+        WAIT 2
+        INC i
+        aHandle = Desktop.Find(sWons[i])
+      UNTIL 
+      aHandle.Count > 0 OR i = sWons.count - 1
     END IF
-    IF aHandle.Count = 0 THEN 
-      aHandle = Desktop.Find(sTitle2) ' gparted cannot find drives, but it loaded ;)
-    'END IF
+    
       
         IF aHandle.Count = 0 THEN 
           Message("Setup is unable to successfully run gparted on this system. This may be a sign of \n" &
           "a bad install media. Setup cannot continue.")
         RETURN 
-        END IF
+        'END IF
       
     ELSE IF aHandle.Count >= 2 THEN 
       Message("Several windows found. I take the first one!")
     ENDIF
+    'ELSE 
     iHandle = aHandle[0]
     
   'ENDIF
   
   'TRY embEmbedder.Embed(iHandle)
-  IF iHandle <> ""
+  
   TRY FrmDiskPart.EmbGPARTED.Embed(iHandle)
   
-  IF ERROR THEN Message.Warning(Error.Text)
-  END IF
+  CATCH 
+  Message.Error(Error.Text & gb.NewLine & Error.Where)
+  
 END
 
 PUBLIC FUNCTION FIND_DOS_PARTITIONS(sDev AS String) AS Boolean
