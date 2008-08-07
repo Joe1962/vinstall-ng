@@ -17,6 +17,8 @@
 
 PRIVATE cbarr AS Object[]
 PRIVATE sText AS String
+PUBLIC txtAppends AS Object[]
+PUBLIC iAppendLeft AS Integer
 PUBLIC SUB LIST_LILO_OS_CHOICES()
   
   DIM sFatList AS String
@@ -38,6 +40,7 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
   x = 4
   y = 4
   
+txtAppends = NEW Object[]  
   FrmLilo.TabStrip1.Count = 1
   
   cbarr = NEW Object[]
@@ -73,6 +76,8 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
             ELSE 
           FrmLilo.TabStrip1[i].text = sLiloDesc
           END IF
+          WITH FrmLilo.TabStrip1
+            .Index = i
           
           tl = NEW TextLabel(FrmLilo.TabStrip1) AS "OSIntro"
             WITH tl
@@ -113,47 +118,29 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
                 .Move(4, txtAppnd.top + txtAppnd.Height + 4, MdlObjSizer.get_object_width(.text))
                 .Height = 27
                 .Alignment = Align.Normal
+                ME.iAppendLeft = .x + .Width + 4
               END WITH 
-            txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "AppendBox"
+              
+              txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "AppendBox"
               WITH txtAppnd
                 
                 .Move(tl.Left + tl.Width + 8, tl.top, tl.Width)
                   IF FrmLilo.sVidMode <> "Standard" THEN 
                   .Enabled = TRUE
                 .text = "splash=silent"
+                .Width = FrmLilo.TabStrip1.Width - tl.Width
                   ELSE 
                   .Enabled = FALSE
-                  .Text = "not available"
+                  .Text = "not available in \'Standard\' Resolution mode"
+                  .Width = MdlObjSizer.get_object_width(.text) + 12
                   END IF
                 .Height = 27
+                txtAppends.Add(txtAppnd)
               END WITH 
                 
-            
-          ' ' ' 
-          ' ' ' 'Message.Info(FrmLilo.TabStrip1.Count)
-          ' ' '  FrmLilo.TabStrip1[FrmLilo.TabStrip1.Count].text = sLiloDesc
-          ' ' ' RETURN 
-          ' ' ' cbLiloItem = NEW CheckBox(FrmLiloOsList.scrlOsList) AS "OsList"
-          ' ' ' 
-          ' ' ' 
-          ' ' '   WITH cbLiloItem
-          ' ' '     .x = x
-          ' ' '     .y = y
-          ' ' '       IF sLiloDesc <> "Linux" THEN 
-          ' ' '         .Text = sLiloDesc & Space(1) & "Linux" & Space(1) & "on" & Space(1) & arrLinux[i]
-          ' ' '        ELSE 
-          ' ' '         .Text = sLiloDesc
-          ' ' '       END IF
-          ' ' '       
-          ' ' '     .tag = arrLinux[i]
-          ' ' '     .Height = 27
-          ' ' '     .Width = MdlObjSizer.get_object_width(.text) + 36 ' allow room for the checkbox
-          ' ' '     .Value = TRUE
-          ' ' '                                 
-          ' ' '   END WITH 
-          ' ' '  
-          ' ' '   cbarr.Add(cbLiloItem)
-          ' ' '   y = y + cbLiloItem.Height + 4
+          
+        END WITH ' end jacking with the tabstrip itself
+        
             
         END IF
         
@@ -164,6 +151,16 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
   
   
 END
+
+PUBLIC SUB IncludeOs_click()
+  IF LAST.value = FALSE THEN 
+Message("Excluding " & FrmLilo.TabStrip1.Current.text & " from the boot menu")
+END IF
+  
+  
+END
+
+
 
 PUBLIC SUB OsList_click()
 

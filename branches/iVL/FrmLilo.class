@@ -20,6 +20,8 @@ PUBLIC sLiloTrgt AS String
 
 PUBLIC SUB Form_Open()
 
+
+
 ' FMain.FrmCurr = ME
 '   FMain.tvPlan["Conf0"].Selected = TRUE
 '   FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
@@ -78,9 +80,24 @@ MdlLiloOsList.LIST_LILO_OS_CHOICES
 END
 
 PUBLIC SUB FBResolution_Click()
-
+  DIM box AS TextBox
   ME.sVidMode = Trim(ME.FBResolution.Text)
-  MdlLiloOsList.LIST_LILO_OS_CHOICES()
+  'MdlLiloOsList.LIST_LILO_OS_CHOICES()
+  IF Trim(ME.FBResolution.Text) = "Standard" THEN 
+    FOR EACH box IN MdlLiloOsList.txtAppends
+      box.Enabled = FALSE
+      box.text = "Not available in \'Standard\' resolution mode"
+      box.Width = MdlObjSizer.get_object_width(box.text) + 12
+    NEXT 
+    
+  ELSE 
+    FOR EACH box IN MdlLiloOsList.txtAppends
+      box.Enabled = TRUE
+      box.text = "splash=silent"
+      box.Width = box.Parent.Width - MdlLiloOsList.iAppendLeft - 12 
+    NEXT 
+  END IF
+    
   
 
 END
