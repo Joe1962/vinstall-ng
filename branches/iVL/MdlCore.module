@@ -51,8 +51,11 @@ PUBLIC SUB FIND_ISO_ON_DRIVE(sDrive AS String)
                     SHELL "mount -o loop " & ClsGlobal.sSourceMnt &/ sISO & Space(1) & "/mnt/loop" WAIT 
                         IF Exist("/mnt/loop/veclinux/SETUP.CONF") = TRUE THEN 
                             IF FrmSelISO.lstInstallableImg.Find(sISO & " on " & sDrive) = -1 THEN 
+                              
                             File.Save(Temp(siso), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
+                           
                         FrmSelISO.lstInstallableImg.Add(sISO & " on " & sDrive)
+                        
                       END IF
                         END IF
                     SHELL "umount /mnt/loop" WAIT 
