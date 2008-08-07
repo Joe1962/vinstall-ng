@@ -59,7 +59,7 @@ PUBLIC SUB EMBED_GPARTED()
     END IF
     IF aHandle.Count = 0 THEN 
       aHandle = Desktop.Find(sTitle2) ' gparted cannot find drives, but it loaded ;)
-    END IF
+    'END IF
       
         IF aHandle.Count = 0 THEN 
           Message("Setup is unable to successfully run gparted on this system. This may be a sign of \n" &
@@ -75,10 +75,11 @@ PUBLIC SUB EMBED_GPARTED()
   'ENDIF
   
   'TRY embEmbedder.Embed(iHandle)
+  IF aHandle <> 0 THEN 
   TRY FrmDiskPart.EmbGPARTED.Embed(iHandle)
   
   IF ERROR THEN Message.Warning(Error.Text)
-  
+  END IF
 END
 
 PUBLIC FUNCTION FIND_DOS_PARTITIONS(sDev AS String) AS Boolean
