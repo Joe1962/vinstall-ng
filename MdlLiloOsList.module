@@ -73,12 +73,21 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
             ELSE 
           FrmLilo.TabStrip1[i].text = sLiloDesc
           END IF
+          
+          tl = NEW TextLabel(FrmLilo.TabStrip1) AS "OSIntro"
+            WITH tl
+              .text = "Operating system resides in " & arrLinux[i]
+              .Move(4, 4, MdlObjSizer.get_object_width(.text) + 4, 27)
+            END WITH 
+              
+              
+          
             cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "IncludeOS"
               WITH cbInclude
                 .text = "Include this operating system in the boot menu"
                 .Height = 27
                 .Value = TRUE
-                .Move(4, 4, MdlObjSizer.get_object_width(.text) + 24)
+                .Move(4, tl.top + tl.Height + 4, MdlObjSizer.get_object_width(.text) + 24)
               END WITH 
             
           
