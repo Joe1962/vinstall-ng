@@ -68,8 +68,11 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
         IF Exist("/tmp/lilo_tmp/boot/vmlinuz") = TRUE THEN 
         sLiloDesc = ME.ID_DISTRO("/tmp/lilo_tmp")
           FrmLilo.TabStrip1.Count = i + 1
+            IF sLiloDesc <> "Linux" THEN 
           FrmLilo.TabStrip1[i].text = sLiloDesc & " Linux"
-          
+            ELSE 
+          FrmLilo.TabStrip1[i].text = sLiloDesc
+          END IF
             cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "IncludeOS"
               WITH cbInclude
                 .text = "Include this operating system in the boot menu"
