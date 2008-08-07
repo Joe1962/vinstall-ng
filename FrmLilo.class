@@ -15,6 +15,8 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
+PUBLIC sVidMode AS String
+PUBLIC sLiloTrgt AS String
 
 PUBLIC SUB Form_Open()
 
@@ -22,9 +24,10 @@ PUBLIC SUB Form_Open()
 '   FMain.tvPlan["Conf0"].Selected = TRUE
 '   FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
 '   FMain.tvPlan["Inst2"].Picture = MdlCore.sDonePic
-  
+  ME.sVidMode = "Standard"
 MdlConfLilo.DISPLAY_LILO_TARGET_OPTIONS()
 MdlLiloOsList.LIST_LILO_OS_CHOICES()
+
 END
 
 PUBLIC SUB YNLiloBox_Click()
@@ -60,8 +63,9 @@ PUBLIC SUB Form_Resize()
     .LiloTarget.Move(.tlTarGet.Left + .tlTarGet.Width + 2, .tlTarGet.top, .tlBanner.Width - (.tlTarGet.Width + .tlTarGet.left))
     .tlFbMode.Move(.tlBanner.Left, .tlTarGet.top + .tlTarGet.Height + 8, MdlObjSizer.get_object_width(.tlFbMode.Text) + 8)
     .FBResolution.Move(.tlFbMode.Left + .tlFbMode.Width + 2, .tlFbMode.top, .tlBanner.Width - (.tlFbMode.Width + .tlFbMode.Left))
-    .tlBanner2.Move(.tlFbMode.left, .FBResolution.top + .FBResolution.Height + 16, MdlObjSizer.get_object_width(.tlBanner2.Text) + 36)
-    .LiloAppendBox.Move(.tlBanner2.left, .tlBanner2.top + .tlBanner2.Height + 4, .ClientWidth - (.LiloAppendBox.x) * 2)
+    .TabStrip1.Move(.tlFbMode.Left, .tlFbMode.top + .tlFbMode.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - .tlBanner.Height * 5)
+    '.tlBanner2.Move(.tlFbMode.left, .FBResolution.top + .FBResolution.Height + 16, MdlObjSizer.get_object_width(.tlBanner2.Text) + 36)
+    '.LiloAppendBox.Move(.tlBanner2.left, .tlBanner2.top + .tlBanner2.Height + 4, .ClientWidth - (.LiloAppendBox.x) * 2)
   END WITH 
 
 END
@@ -70,5 +74,13 @@ PUBLIC SUB Button1_Click()
 MdlLiloOsList.LIST_LILO_OS_CHOICES
   'ME.Hide
   'FrmLiloOsList.Show
+
+END
+
+PUBLIC SUB FBResolution_Click()
+
+  ME.sVidMode = Trim(ME.FBResolution.Text)
+  MdlLiloOsList.LIST_LILO_OS_CHOICES()
+  
 
 END
