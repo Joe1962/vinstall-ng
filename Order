@@ -1,27 +1,12 @@
-(09:55:32 AM) uelsk8s: 1 ... $MNTPNT/veclinux/required veclinux.tlz, then vlconfig.tlz
-(09:55:32 AM) uelsk8s: 2 $MNTPNT/veclinux/optional
-(09:55:32 AM) uelsk8s: 3 $mntpnt/packages/* (except required)
-(09:55:32 AM) uelsk8s: 4 $mntpint/packages/required
-(09:55:32 AM) uelsk8s: 5 $MNTPNT/veclinux/required/vlconfig2.tlz
-(09:55:57 AM) uelsk8s: because they are not listed in packages.txt for the user to select from
-(09:56:13 AM) uelsk8s: they have to be installed or the install will break
-
-
-(07:38:13 AM) uelsk8s: for i in $(ls packages/*/*.tlz|grep -v required);do install-pkg $i $ROOT || echo FAILED;done
-
-TODO:
-  + Add option to format partition to swap
-  + Modify partition listing so that it hides (or disables) selecting the partition which hosts the ISO to be used for the new install
-  + Add option to mount (but not format) linux partitions. (add /mnt/<partition_addr> to the combobox list)
-  
-  
-  Required bulkd
-  optional (selected) bulks
-  optional (selected) from PACKAGES.TXT
-  packages/required
-  CONF from SETUP.CONF
-  Kernel (below)
-  
-  
-  
-  + need to copy SOURCE_MNT_POINT/isolinux/kernel/sata to TARGET_MNT_POINT/boot/vmlinuz-2.6.25.7
+HOW TO GENERATE LILO.CONF IDEA
+1) Populate the tabstrip in FrmLilo with all the OSs found in the system
+2) let the usr customize each OS's append lines and other options?
+3) Provide a button for the user to press when done. On this event, the following needs to happen
+   * Run through each tab in the tabstrip and determine if the checkbox has been ticked on or off
+      + if off, then exclude that entire section from the lilo.conf else
+      - Generate a lilo.conf entry with the information in that tab
+Hope this works.
+For WINDOWS partitions (installations) simply list the install location
+    (maybe look for WINDOWS or WINDOWS\SYSTEM32 to be sure it's a real install)
+    and do not offer any other options. just to include / exclude from the menu
+    
