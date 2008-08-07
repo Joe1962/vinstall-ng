@@ -38,6 +38,8 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
   x = 4
   y = 4
   
+  FrmLilo.TabStrip1.Count = 1
+  
   cbarr = NEW Object[]
   SHELL "fdisk -l | grep -E \'^/dev/.* \\* .*(FAT16)\' | cut -f 1 -d \' \'" TO sFatList
     sFatList = Trim(sFatList)
@@ -102,8 +104,15 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
               END WITH 
             txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "AppendBox"
               WITH txtAppnd
+                
                 .Move(tl.Left + tl.Width + 8, tl.top, tl.Width)
+                  IF FrmLilo.sVidMode <> "Standard" THEN 
+                  .Enabled = TRUE
                 .text = "splash=silent"
+                  ELSE 
+                  .Enabled = FALSE
+                  .Text = "not available"
+                  END IF
                 .Height = 27
               END WITH 
                 

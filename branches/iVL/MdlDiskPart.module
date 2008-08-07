@@ -20,7 +20,7 @@ PUBLIC SUB EMBED_GPARTED()
   
   
   DIM sTitle AS String
-  DIM sTitle1 AS String
+  DIM sTitle1, sTitle2 AS String
   DIM aHandle AS NEW Pointer[]
   DIM iHandle AS Integer
   DIM i AS Integer = 0
@@ -39,27 +39,28 @@ PUBLIC SUB EMBED_GPARTED()
       
   sTitle = "/dev/hda - GParted"
   sTitle1 = "/dev/sda - GParted"
-  
+  sTitle2 = "GParted"
     'aHandle = Desktop.Find(sTitle)
     aHandle = Desktop.Find(sTitle)
-      IF aHandle = "" THEN 
-        aHandle = Desktop.Find(sTitle1)
-      END IF
-        
-    IF Left(sTitle, 2) = "0x" THEN 
-    iHandle = Val("&" & Mid$(sTitle, 3))
-  ELSE IF Left(sTitle) = "&" THEN 
-    iHandle = Val(sTitle)
-  ELSE
+  ' ' '     IF aHandle = "" THEN 
+  ' ' '       aHandle = Desktop.Find(sTitle1)
+  ' ' '     END IF
+  ' ' '       
+  ' ' '   IF Left(sTitle, 2) = "0x" THEN 
+  ' ' '   iHandle = Val("&" & Mid$(sTitle, 3))
+  ' ' ' ELSE IF Left(sTitle) = "&" THEN 
+  ' ' '   iHandle = Val(sTitle)
+  ' ' ' ELSE
     
     'Message.Info(aHandle[0])
+    
     IF aHandle.Count = 0 THEN 
-      REPEAT 
-        WAIT 2
-        aHandle = Desktop.Find(sTitle)
-        INC i
-      UNTIL 
-      i = 10 OR aHandle.Count > 0
+        aHandle = Desktop.Find(sTitle1)
+    END IF
+    IF aHandle.Count = 0 THEN 
+      aHandle = Desktop.Find(sTitle2) ' gparted cannot find drives, but it loaded ;)
+    END IF
+      
         IF aHandle.Count = 0 THEN 
           Message("Setup is unable to successfully run gparted on this system. This may be a sign of \n" &
           "a bad install media. Setup cannot continue.")
@@ -71,7 +72,7 @@ PUBLIC SUB EMBED_GPARTED()
     ENDIF
     iHandle = aHandle[0]
     
-  ENDIF
+  'ENDIF
   
   'TRY embEmbedder.Embed(iHandle)
   TRY FrmDiskPart.EmbGPARTED.Embed(iHandle)

@@ -23,14 +23,6 @@
     ReadOnly = True
     List = [("Standard"), ("Bootsplash Med"), ("Bootsplash High"), ("Bootsplash Extra high")]
   }
-  { LiloAppendBox TextBox
-    MoveScaled(1,26,57,3)
-    Text = ("")
-  }
-  { tlBanner2 TextLabel
-    MoveScaled(1,20,58,3)
-    Text = ("Lilo optional parameters: You may add any lilo boot options here. ")
-  }
   { tlTarGet TextLabel
     MoveScaled(1,10,10,3.125)
     Text = ("Target")
@@ -44,7 +36,7 @@
     Text = ("Button1")
   }
   { TabStrip1 TabStrip
-    MoveScaled(1,26,61,32)
+    MoveScaled(1,20,61,32)
     Index = 0
     Text = ("Tab 0")
     Index = 0
