@@ -18,6 +18,7 @@
 PRIVATE cbarr AS Object[]
 PRIVATE sText AS String
 PUBLIC txtAppends AS Object[]
+PUBLIC txtNames AS Object[]
 PUBLIC iAppendLeft AS Integer
 PUBLIC SUB LIST_LILO_OS_CHOICES()
   
@@ -37,10 +38,12 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
   DIM txtAppnd AS TextBox
   DIM cbInclude AS CheckBox
   DIM tl AS TextLabel
+  DIM sShortAddr AS String
   x = 4
   y = 4
   
 txtAppends = NEW Object[]  
+txtNames = NEW Object[]
   FrmLilo.TabStrip1.Count = 1
   
   cbarr = NEW Object[]
@@ -66,22 +69,23 @@ txtAppends = NEW Object[]
       'create a temporary monunt dir
       TRY MKDIR "/tmp/lilo_tmp"
     FOR i = 0 TO arrLinux.Count - 1
+      sShortAddr = Right(arrLinux[i], Len(arrLinux[i]) - RInStr(arrLinux[i], "/"))
       SHELL "mount " & arrLinux[i] & Space(1) & "/tmp/lilo_tmp" WAIT 
         ' now check for a vmlinuz
         IF Exist("/tmp/lilo_tmp/boot/vmlinuz") = TRUE THEN 
         sLiloDesc = ME.ID_DISTRO("/tmp/lilo_tmp")
           FrmLilo.TabStrip1.Count = i + 1
-            IF sLiloDesc <> "Linux" THEN 
-          FrmLilo.TabStrip1[i].text = sLiloDesc & " Linux"
-            ELSE 
-          FrmLilo.TabStrip1[i].text = sLiloDesc
-          END IF
+            
+          FrmLilo.TabStrip1[i].text = sLiloDesc & "-" & sShortAddr
+            
+          FrmLilo.TabStrip1[i].text = sLiloDesc & "-" & sShortAddr
+          
           WITH FrmLilo.TabStrip1
             .Index = i
           
           tl = NEW TextLabel(FrmLilo.TabStrip1) AS "OSIntro"
             WITH tl
-              .text = "Operating system resides in " & arrLinux[i]
+              .text = "Operating system installed in " & arrLinux[i]
               .Move(4, 4, MdlObjSizer.get_object_width(.text) + 4, 27)
             END WITH 
               
@@ -107,11 +111,15 @@ txtAppends = NEW Object[]
             txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "NameBox"
               WITH txtAppnd
                 .Width = tl.Width * 4
-                .text = sLiloDesc
+                .text = FrmLilo.TabStrip1.Current.text 'sLiloDesc
                 .Height = tl.Height
                 .x = tl.left + tl.Width + 8
                 .y = tl.Top
+                .MaxLength = 15
+                .tag = arrLinux[i]
+                
               END WITH 
+              txtNames.Add(txtAppnd)
             tl = NEW TextLabel(FrmLilo.TabStrip1) AS "AppndLbl"
               WITH tl
                 .text = "Kernel boot options"
@@ -127,12 +135,13 @@ txtAppends = NEW Object[]
                 .Move(tl.Left + tl.Width + 8, tl.top, tl.Width)
                   IF FrmLilo.sVidMode <> "Standard" THEN 
                   .Enabled = TRUE
-                .text = "splash=silent"
+                .text = .text & " splash=silent"
                 .Width = FrmLilo.TabStrip1.Width - tl.Width
                   ELSE 
-                  .Enabled = FALSE
-                  .Text = "not available in \'Standard\' Resolution mode"
-                  .Width = MdlObjSizer.get_object_width(.text) + 12
+                  '.Enabled = FALSE
+                  '.Text = "not available in \'Standard\' Resolution mode"
+                  .Text = .text & Replace(.text, "splash=silent", "")
+                  .Width = FrmLilo.TabStrip1.Width - tl.Width
                   END IF
                 .Height = 27
                 txtAppends.Add(txtAppnd)
@@ -157,6 +166,22 @@ PUBLIC SUB IncludeOs_click()
 Message("Excluding " & FrmLilo.TabStrip1.Current.text & " from the boot menu")
 END IF
   
+  
+END
+
+PUBLIC SUB NameBox_keyrelease()
+  
+  DIM tx AS TextBox
+    FOR EACH tx IN txtNames
+      IF tx.tag = LAST.tag THEN 
+        tx.text = Replace(LAST.text, " ", "")
+        FrmLilo.TabStrip1.Current.text = LAST.text
+      END IF
+        
+        
+    NEXT 
+      
+    
   
 END
 

@@ -85,15 +85,22 @@ PUBLIC SUB FBResolution_Click()
   'MdlLiloOsList.LIST_LILO_OS_CHOICES()
   IF Trim(ME.FBResolution.Text) = "Standard" THEN 
     FOR EACH box IN MdlLiloOsList.txtAppends
-      box.Enabled = FALSE
-      box.text = "Not available in \'Standard\' resolution mode"
-      box.Width = MdlObjSizer.get_object_width(box.text) + 12
+      'box.Enabled = FALSE
+      box.text = Replace(box.text, "splash=silent", "") '"Not available in \'Standard\' resolution mode"
+      box.Width = box.Parent.Width - MdlLiloOsList.iAppendLeft - 12 
     NEXT 
     
   ELSE 
     FOR EACH box IN MdlLiloOsList.txtAppends
       box.Enabled = TRUE
-      box.text = "splash=silent"
+        IF InStr(box.text, "splash=") = FALSE THEN 
+          IF box.text <> "" THEN 
+            box.text = box.text & " splash=silent"
+          ELSE 
+            box.text = "splash=silent"
+          END IF
+      
+        END IF
       box.Width = box.Parent.Width - MdlLiloOsList.iAppendLeft - 12 
     NEXT 
   END IF
