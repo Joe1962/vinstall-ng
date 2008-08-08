@@ -29,7 +29,10 @@ PUBLIC SUB Form_Open()
   ME.sVidMode = "Standard"
 MdlConfLilo.DISPLAY_LILO_TARGET_OPTIONS()
 MdlLiloOsList.LIST_LILO_OS_CHOICES()
-
+ME.tlList.text = "The following Operating Systems have been detected on this computer. Choose your desired option " &
+"for each one of them by clicking on each tab. To proceed with the default pre-set values, simply click \'" & FMain.btnext.text & "\'"
+ME.tlList.Adjust
+ME.TabStrip1.Index = 0
 END
 
 PUBLIC SUB YNLiloBox_Click()
@@ -66,7 +69,8 @@ PUBLIC SUB Form_Resize()
     .LiloTarget.Move(.tlTarGet.Left + .tlTarGet.Width + 2, .tlTarGet.top, .tlBanner.Width - (.tlTarGet.Width + .tlTarGet.left))
     .tlFbMode.Move(.tlBanner.Left, .tlTarGet.top + .tlTarGet.Height + 8, MdlObjSizer.get_object_width(.tlFbMode.Text) + 8)
     .FBResolution.Move(.tlFbMode.Left + .tlFbMode.Width + 2, .tlFbMode.top, .tlBanner.Width - (.tlFbMode.Width + .tlFbMode.Left))
-    .TabStrip1.Move(.tlFbMode.Left, .tlFbMode.top + .tlFbMode.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - .tlBanner.Height * 5)
+    .tlList.Move(.tlFbMode.Left, .tlFbMode.top + .tlFbMode.Height + 12, .tlBanner.Width)
+    .TabStrip1.Move(.tlList.Left, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - .tlBanner.Height * 6)
     '.tlBanner2.Move(.tlFbMode.left, .FBResolution.top + .FBResolution.Height + 16, MdlObjSizer.get_object_width(.tlBanner2.Text) + 36)
     '.LiloAppendBox.Move(.tlBanner2.left, .tlBanner2.top + .tlBanner2.Height + 4, .ClientWidth - (.LiloAppendBox.x) * 2)
   END WITH 
@@ -106,6 +110,12 @@ PUBLIC SUB FBResolution_Click()
     NEXT 
   END IF
     
+  
+
+END
+
+PUBLIC SUB tlBanner_MouseDown()
+
   
 
 END
