@@ -44,7 +44,7 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
   
 txtAppends = NEW Object[]  
 txtNames = NEW Object[]
-  FrmLilo.TabStrip1.Count = 1
+  'FrmLilo.TabStrip1.Count = 1
   
   cbarr = NEW Object[]
   SHELL "fdisk -l | grep -E \'^/dev/.* \\* .*(FAT16)\' | cut -f 1 -d \' \'" TO sFatList
@@ -73,16 +73,13 @@ txtNames = NEW Object[]
       SHELL "mount " & arrLinux[i] & Space(1) & "/tmp/lilo_tmp" WAIT 
         ' now check for a vmlinuz
         IF Exist("/tmp/lilo_tmp/boot/vmlinuz") = TRUE THEN 
+          FrmLilo.TabStrip1.Count = FrmLilo.TabStrip1.count + 1 'arrLinux.Count - 1
+          
         sLiloDesc = ME.ID_DISTRO("/tmp/lilo_tmp")
-          FrmLilo.TabStrip1.Count = i + 1
-            
-          FrmLilo.TabStrip1[i].text = sLiloDesc & "-" & sShortAddr
-            
-          FrmLilo.TabStrip1[i].text = sLiloDesc & "-" & sShortAddr
           
-          WITH FrmLilo.TabStrip1
+        WITH FrmLilo.TabStrip1
             .Index = i
-          
+            .text = sLiloDesc & "-" & sShortAddr
           tl = NEW TextLabel(FrmLilo.TabStrip1) AS "OSIntro"
             WITH tl
               .text = "Operating system installed in " & arrLinux[i]
@@ -156,7 +153,16 @@ txtNames = NEW Object[]
         SHELL "umount /tmp/lilo_tmp" WAIT 
     NEXT 
         
-    
+    FOR i = 0 TO FrmLilo.TabStrip1.Count - 1
+      WITH FrmLilo.TabStrip1
+        .Index = i
+          IF .Children.Count < 1 THEN 
+            FrmLilo.TabStrip1[i].Visible = FALSE
+          END IF
+      END WITH 
+      NEXT 
+        
+ 
   
   
 END

@@ -36,14 +36,15 @@ PUBLIC SUB YNLiloBox_Click()
 
   IF ME.YNLiloBox.value = TRUE THEN 
     WITH ME
-      .LiloAppendBox.Enabled = FALSE
+'      .LiloAppendBox.Enabled = FALSE
       .LiloTarget.Enabled = FALSE
       .FBResolution.Enabled = FALSE
+      .TabStrip1.Enabled = FALSE
     END WITH 
     ELSE 
     WITH ME
-    
-      .LiloAppendBox.Enabled = TRUE
+      .TabStrip1.Enabled = TRUE
+      '.LiloAppendBox.Enabled = TRUE
       .LiloTarget.Enabled = TRUE
       .FBResolution.Enabled = TRUE
     END WITH 
