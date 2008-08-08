@@ -19,9 +19,6 @@
     Text = ("")
     Alignment = Align.Center
   }
-  { pnlWinHost VBox
-    MoveScaled(28,9,66,56)
-  }
   { btnext Button
     MoveScaled(49,67,8,3)
     Text = ("Next")
@@ -40,5 +37,11 @@
   { PictureBox1 PictureBox
     MoveScaled(36,1,54,8)
     Stretch = True
+  }
+  { pnlwinhost Panel
+    MoveScaled(27,10,56,41)
+    Expand = True
+    Arrangement = Arrange.Fill
+    Border = Border.Plain
   }
 }

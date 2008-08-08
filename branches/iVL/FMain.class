@@ -28,7 +28,8 @@ END
 
 PUBLIC SUB Form_Open()
 DIM iImg AS Image
-ME.Maximized = TRUE
+'ME.Maximized = TRUE
+
 MdlCore.LOCK_GUI
 'MdlCore.LOCK_GUI()
 ClsGlobal.sBackNav = NEW Object[]
@@ -42,10 +43,16 @@ PictureBox1.Resize(iImg.Width, iImg.Height)
 PictureBox1.Picture = iImg.Picture
 PictureBox1.Background = Color.SelectedBackground
 PictureBox1.Stretch = TRUE
-
-FrmSelISO.Show
-
 MdlCore.PREPARE_INSTALL_LAYOUT
+FrmSelISO.Show
+'FrmSelISO.Hide
+
+
+'STOP EVENT 
+ME.Width = 800
+ME.Height = 600
+
+
 
 WITH ME
   .btback.Enabled = FALSE
@@ -60,6 +67,12 @@ WITH ME
 END WITH 
 'ME.TreeView1.BackColor = Color.Transparent
 ME.AUTOSIZE_LEFT_PANE
+WITH FrmLilo
+.Reparent(Fmain.pnlWinHost)
+.Width = Fmain.pnlWinHost.Width
+.Height = Fmain.pnlWinHost.Height
+.Show
+END WITH 
 
 END
 
@@ -96,7 +109,7 @@ DIM iMid AS Integer
     .btQuit.Width = MdlObjSizer.get_object_width(.btQuit.Text) + 36
   END WITH 
   'ME.AUTOSIZE_LEFT_PANE
-
+'ME.pnlWinHost.Resize(ME.ClientWidth - ME.Frame1.Width - (ME.Frame1.left * 8), ME.ClientH - ME.tlBanner.Height - (ME.btback.Height * 8))
   WITH ME
     .tlBanner.width = ME.width
     .Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.5, .ClientHeight - .PictureBox1.Height * 1.5)
@@ -106,7 +119,7 @@ DIM iMid AS Integer
     '.tvPlan.Move(4, 24, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
     
     '.pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top + (.tlBanner.Height / 2), .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 3.5)))
-    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.Top, .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlBanner.Height + (.btback.Height * 3.5)))
+    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.Top, .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlBanner.Height + (.btback.Height * 3)))
     .btback.Move(.pnlWinHost.Left, .Frame1.top + .Frame1.Height - .btback.Height, MdlObjSizer.get_object_width(.btback.text) + 36)
     .btnext.Move(.pnlWinHost.Left + .pnlWinHost.Width - (.btnext.Width + 8), .btback.Top, MdlObjSizer.get_object_width(.btnext.text) + 36)
     ' for the quit button, it'll get a little tricky
@@ -117,6 +130,7 @@ DIM iMid AS Integer
     .tlBanner.Height = .PictureBox1.Height
     .tlBanner.top = .PictureBox1.Top
   END WITH 
+
 END
 
 

@@ -21,6 +21,7 @@ PUBLIC txtAppends AS Object[]
 PUBLIC txtNames AS Object[]
 PUBLIC iAppendLeft AS Integer
 PUBLIC cbWins AS Object[]
+PUBLIC bVlCliOption AS Boolean
 
 PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
   DIM sFatList AS String
@@ -84,7 +85,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                           .Value = TRUE
                         END WITH 
                  END WITH ' end jacking with the tabstrip
-                  
+            NEXT                   
       END IF
   SHELL "fdisk -l| grep -E \'^/dev/.* \\* .*(FAT32|HPFS|NTFS|Win)\' | cut -f 1 -d \' \'" TO sNTFSLst
     sNTFSLst = Trim(sNTFSLst)
@@ -203,17 +204,18 @@ txtNames = NEW Object[]
               txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "AppendBox"
               WITH txtAppnd
                 
-                .Move(tl.Left + tl.Width + 8, tl.top, tl.Width)
-                  IF FrmLilo.sVidMode <> "Standard" THEN 
-                  .Enabled = TRUE
-                .text = .text & " splash=silent"
-                .Width = FrmLilo.TabStrip1.Width - tl.Width
-                  ELSE 
-                  '.Enabled = FALSE
-                  '.Text = "not available in \'Standard\' Resolution mode"
-                  .Text = .text & Replace(.text, "splash=silent", "")
-                  .Width = FrmLilo.TabStrip1.Width - tl.Width
-                  END IF
+                .Move(tl.Left + tl.Width + 8, tl.top, FrmLilo.TabStrip1.Width - (tl.Width * 1.5))
+                '.Width = FrmLilo.TabStrip1.Width - tl.Width - (tl.left * 4)
+                '   IF FrmLilo.sVidMode <> "Standard" THEN 
+                '   .Enabled = TRUE
+                ' .text = .text & " splash=silent"
+                ' '.Width = FrmLilo.TabStrip1.Width - tl.Width - (tl.left * 4)
+                '   ELSE 
+                '   '.Enabled = FALSE
+                '   '.Text = "not available in \'Standard\' Resolution mode"
+                '   .Text = .text & Replace(.text, "splash=silent", "")
+                '  ' .Width = FrmLilo.TabStrip1.Width - tl.Width - (tl.left * 2)
+                '   END IF
                 .Height = 27
                 txtAppends.Add(txtAppnd)
               END WITH 
@@ -230,6 +232,7 @@ txtNames = NEW Object[]
                     .Height = 27
                     .Move(4, tl.top + tl.Height + 12)
                   END WITH 
+                  
               END IF
             END IF
                   
@@ -256,6 +259,14 @@ txtNames = NEW Object[]
   
   
 END
+
+PUBLIC SUB VlCliOption_click()
+    
+  bVlCliOption = LAST.value
+  PRINT bVlCliOption
+  
+END
+
 
 PUBLIC SUB IncludeOs_click()
   IF LAST.value = FALSE THEN 
