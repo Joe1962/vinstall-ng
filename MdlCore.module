@@ -211,7 +211,11 @@ PUBLIC SUB main()
   'FMain.tvPlan.MoveTo("Prep0")
 FMain.tvPlan["Prep0"].Selected = TRUE
 'Balloon("Scanning drives for media ... please wait", fmain.pnlWinHost)
+
+RETURN 
 FrmSelISO.tlDistroDesc.Text = "<b>Scanning system for installable media. Please wait ...</b>"
+
+
 
 WAIT 1
   FrmSelISO.lstInstallableImg.Enabled = FALSE
