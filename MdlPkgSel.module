@@ -73,6 +73,7 @@ PUBLIC SUB LIST_PACKAGE_SELECTION()
     DIM i, y AS Integer
     DIM sRawFile AS String[]
     DIM sLine AS String
+
     
     ' THis one is kind of tricky.. it will read the whole PACKAGES.TXT
      y = 4
@@ -97,7 +98,7 @@ PUBLIC SUB LIST_PACKAGE_SELECTION()
                   .x = 4
                   .y = y
                   .Height = 27
-                  .Width = MdlObjSizer.get_object_width(.Text) * 2
+                  .Width = MdlObjSizer.get_object_width(.Text) * 1.5
                   .Value = TRUE
                 END WITH 
                 ME.Pkgs.Add(cb)
@@ -111,14 +112,57 @@ END
 
 
 PUBLIC SUB Packages_click()
+
+
   
     IF ClsPkgSel.arrPkgs THEN 
       ClsPkgSel.arrPkgs.Clear
     END IF
     ME.GET_USER_PKG_SELECTION()
-      
+    
+    ' Now display a description here
+    
+    
+    'PRINT sDump  
   
 END
+
+PUBLIC SUB Packages_enter()
+  
+DIM sSearch AS String
+DIM sDump AS String
+DIM sArr AS String[]
+DIM i AS Integer
+DIM sDesc AS String
+
+
+
+  
+  sSearch = Right(LAST.tag, Len(LAST.tag) - InStr(LAST.tag, "/"))
+  
+   ' IF InStr(sSearch, "-") = < 3 THEN 
+    
+  sSearch = Left(sSearch, InStr(sSearch, "-") - 1)
+  
+  
+  '  ELSE 
+  'sSearch = Left(sSearch, InStr(sSearch, "-") - InStr(sSearch, "-") - 1) ' this will not work
+  'end if
+  SHELL "cat " & ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT | grep -m 8 \'" & sSearch & ":\' | cut -f2- -d \':\'" TO sDump
+  sArr = Split(sDump, "\n")
+    FOR i = 0 TO sArr.count - 1
+      IF InStr(sArr[i], ":") = FALSE THEN 
+        sDesc = sDesc & sArr[i]
+      END IF
+    NEXT 
+    
+  sDesc = Trim(sDesc) 
+  
+    FrmPkgsel2.tlPkgDesc.Text = sDesc
+    
+  
+END
+
 
 
 
@@ -129,6 +173,8 @@ PUBLIC SUB OptBulks_click()
     ClsPkgSel.arrBulks.Clear
   END IF
   ME.GET_USER_BULK_SELECTION
+  
+  PRINT LAST.tag
   
 END
 

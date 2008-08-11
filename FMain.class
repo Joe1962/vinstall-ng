@@ -67,12 +67,13 @@ WITH ME
 END WITH 
 'ME.TreeView1.BackColor = Color.Transparent
 ME.AUTOSIZE_LEFT_PANE
-WITH FrmLilo
-.Reparent(Fmain.pnlWinHost)
-.Width = Fmain.pnlWinHost.Width
-.Height = Fmain.pnlWinHost.Height
-.Show
-END WITH 
+' ' ' 
+' ' ' WITH FrmLilo
+' ' ' .Reparent(Fmain.pnlWinHost)
+' ' ' .Width = Fmain.pnlWinHost.Width
+' ' ' .Height = Fmain.pnlWinHost.Height
+' ' ' .Show
+' ' ' END WITH 
 
 END
 
@@ -83,7 +84,7 @@ PUBLIC SUB AUTOSIZE_LEFT_PANE()
     ME.tvPlan.MoveFirst()
       REPEAT 
         IF MdlObjSizer.get_object_width(tvPlan.Item.Text) > iWidth THEN 
-          iWidth = MdlObjSizer.get_object_width(tvPlan.item.Text)
+          iWidth = MdlObjSizer.get_object_width(tvPlan.item.Text) + 24
         END IF
       UNTIL ME.tvPlan.MoveBelow()
   

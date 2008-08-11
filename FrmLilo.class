@@ -37,14 +37,11 @@ MdlLiloOsList.bVlCliOption = FALSE
 
 
 ME.TabStrip1.Index = 0
-ME.Maximized = TRUE
+'ME.Maximized = TRUE
 FBResolution_Click()
 FBResolution.text = "Standard"
+
 END
-
-
-
-
 
 
 
@@ -56,6 +53,7 @@ PUBLIC SUB YNLiloBox_Click()
       .LiloTarget.Enabled = FALSE
       .FBResolution.Enabled = FALSE
       .TabStrip1.Enabled = FALSE
+      .sbTimer.Enabled = FALSE
     END WITH 
     ELSE 
     WITH ME
@@ -63,6 +61,7 @@ PUBLIC SUB YNLiloBox_Click()
       '.LiloAppendBox.Enabled = TRUE
       .LiloTarget.Enabled = TRUE
       .FBResolution.Enabled = TRUE
+      .sbTimer.Enabled = TRUE
     END WITH 
   END IF
       
@@ -137,5 +136,11 @@ END
 PUBLIC SUB tlBanner_MouseDown()
 
   
+
+END
+
+PUBLIC SUB Form_Menu()
+
+  MdlConfLilo.WRITE_LILO_DOT_CONF
 
 END

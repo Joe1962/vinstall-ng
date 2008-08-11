@@ -22,7 +22,7 @@ PUBLIC SUB Form_Open()
     .tlbanner.Adjust
     '.tlbanner.Border = Border.Plain
     '.tlbanner.Width = MdlObjSizer.get_object_width(.tlbanner.Text)
-    
+    .Maximized = TRUE
   END WITH 
   FMain.FrmCurr = ME
   FMain.btback.Enabled = TRUE
@@ -30,13 +30,15 @@ PUBLIC SUB Form_Open()
   FMain.tvPlan["Prep2"].Selected = TRUE
 FMain.btback.ForeColor = Color.Black
   MdlPkgSel.LIST_PACKAGE_SELECTION()
+  
 END
 
 PUBLIC SUB Form_Resize()
 
   WITH ME
     .tlbanner.Width = .ClientWidth - 16
-    .scrPkgs.Move(.tlbanner.Left, .tlbanner.top + (.tlbanner.Height * 1.5), .tlbanner.Width - 4, .ClientHeight - (.tlbanner.Height * 4)) ', .tlbanner.Width - 8, .ClientHeight - .tlbanner.height - 8)
+    .scrPkgs.Move(.tlbanner.Left, .tlbanner.top + (.tlbanner.Height + 8), .tlbanner.Width - 4, .ClientHeight - (.tlbanner.Height * 4.5)) ', .tlbanner.Width - 8, .ClientHeight - .tlbanner.height - 8)
+    .frmDesc.Move(.scrPkgs.Left, scrPkgs.top + scrPkgs.Height + 8, scrPkgs.Width, .ClientH - (.tlbanner.Height + .scrPkgs.Height + 24))
     
   END WITH   
 
@@ -56,11 +58,7 @@ PUBLIC SUB Form_Show()
 
 END
 
-PUBLIC SUB scrPkgs_MouseDown()
 
-  
-
-END
 
 PUBLIC SUB Form_Hide()
 
