@@ -12,17 +12,17 @@
     Text = ("Don't Install Lilo")
   }
   { TabStrip1 TabStrip
-    MoveScaled(1,38,61,28)
+    MoveScaled(2,27,61,28)
     Index = 0
     Text = ("Tab 0")
     Index = 0
   }
   { tlList TextLabel
-    MoveScaled(1,26,57,6)
+    MoveScaled(1,19,57,6)
     Text = ("TextLabel1")
   }
   { LiloTarget ComboBox
-    MoveScaled(13,9,31,3.125)
+    MoveScaled(13,9,19,3)
     Text = ("")
     ReadOnly = True
     List = []
@@ -32,25 +32,26 @@
     Text = ("Target")
   }
   { tlFbMode TextLabel
-    MoveScaled(1,14,18,3.125)
+    MoveScaled(33,9,18,3.125)
     Text = ("Video Resolution")
   }
   { FBResolution ComboBox
-    MoveScaled(20,14,21,3.125)
+    MoveScaled(52,9,21,3.125)
     Text = ("")
     ReadOnly = True
     List = [("Standard"), ("Bootsplash Med"), ("Bootsplash High"), ("Bootsplash Extra high")]
   }
   { tlTimeOUt TextLabel
-    MoveScaled(1,20,18,3.125)
+    MoveScaled(1,14,18,3.125)
     Text = ("Prompt Timeout")
     Alignment = Align.Normal
   }
   { sbTimer SpinBox
-    MoveScaled(20,20,9,3)
+    MoveScaled(20,14,9,3)
+    Value = 3
   }
   { tlTimoutSec TextLabel
-    MoveScaled(30,20,7,3.125)
+    MoveScaled(30,14,7,3.125)
     Text = ("Seconds")
     Alignment = Align.Normal
   }

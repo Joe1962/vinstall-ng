@@ -1,0 +1,11 @@
++ Lilo Config Window
+    * Find all other linuxes installed - DONE
+    * Create a lilo entry for each (each tab will make one one lilo entry) - DONE
+    * Copy all kernels and initrds to /boot/tamu ??? -HELP ME!!!
+      + /boot/tamu/initrd-hda1
+      + /boot/tamu/vmlinux-hda1
+    * Read the tabstrip to create the lilo.conf
+    * Store lilo.conf to /etc
+    * Run lilo.
+    
+    

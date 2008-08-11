@@ -19,9 +19,11 @@ PRIVATE cbarr AS Object[]
 PRIVATE sText AS String
 PUBLIC txtAppends AS Object[]
 PUBLIC txtNames AS Object[]
+PUBLIC txtInitrds AS Object[]
 PUBLIC iAppendLeft AS Integer
 PUBLIC cbWins AS Object[]
 PUBLIC bVlCliOption AS Boolean
+PUBLIC bIncluded AS Object[]
 
 PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
   DIM sFatList AS String
@@ -125,6 +127,8 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
   
 txtAppends = NEW Object[]  
 txtNames = NEW Object[]
+txtInitrds = NEW Object[]
+bIncluded = NEW Object[]
   'FrmLilo.TabStrip1.Count = 1
   
   cbarr = NEW Object[]
@@ -169,8 +173,9 @@ txtNames = NEW Object[]
                 .Height = 27
                 .Value = TRUE
                 .Move(4, tl.top + tl.Height + 4, MdlObjSizer.get_object_width(.text) + 24)
+                .tag = arrLinux[i]
               END WITH 
-            
+              ME.bIncluded.Add(cbInclude)
           
             tl = NEW TextLabel(FrmLilo.TabStrip1) AS "Label"
               WITH tl
@@ -192,33 +197,46 @@ txtNames = NEW Object[]
                 
               END WITH 
               txtNames.Add(txtAppnd)
+              
+            tl = NEW TextLabel(FrmLilo.TabStrip1) AS "InitdLbl"
+              WITH tl
+                .text = "Initial Ram Disk"
+                .Move(txtAppnd.Left + txtAppnd.Width + 8, txtAppnd.top, MdlObjSizer.get_object_width(.text))
+                .Height = 27
+                .Alignment = Align.Normal
+              END WITH 
+              
+            txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "initrdBox"
+              WITH txtAppnd
+                .text = "initrd-" & sShortAddr
+                .Move(tl.Left + tl.Width + 4, tl.top, 250, 27)
+                .tag = arrLinux[i]
+              END WITH
+                ME.txtInitrds.Add(txtAppnd)
+        
             tl = NEW TextLabel(FrmLilo.TabStrip1) AS "AppndLbl"
               WITH tl
                 .text = "Kernel boot options"
                 .Move(4, txtAppnd.top + txtAppnd.Height + 4, MdlObjSizer.get_object_width(.text))
                 .Height = 27
                 .Alignment = Align.Normal
+                
                 ME.iAppendLeft = .x + .Width + 4
+                
               END WITH 
               
               txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "AppendBox"
               WITH txtAppnd
                 
                 .Move(tl.Left + tl.Width + 8, tl.top, FrmLilo.TabStrip1.Width - (tl.Width * 1.5))
-                '.Width = FrmLilo.TabStrip1.Width - tl.Width - (tl.left * 4)
-                '   IF FrmLilo.sVidMode <> "Standard" THEN 
-                '   .Enabled = TRUE
-                ' .text = .text & " splash=silent"
-                ' '.Width = FrmLilo.TabStrip1.Width - tl.Width - (tl.left * 4)
-                '   ELSE 
-                '   '.Enabled = FALSE
-                '   '.Text = "not available in \'Standard\' Resolution mode"
-                '   .Text = .text & Replace(.text, "splash=silent", "")
-                '  ' .Width = FrmLilo.TabStrip1.Width - tl.Width - (tl.left * 2)
-                '   END IF
+                
                 .Height = 27
+                .tag = arrLinux[i]
                 txtAppends.Add(txtAppnd)
               END WITH 
+              
+                        
+          
           
           ' Add an option to boot the recently installed OS to CLI mode
           ClsPartSel.sRoot = "/dev/hda1"
@@ -231,6 +249,7 @@ txtNames = NEW Object[]
                     .Width = MdlObjSizer.get_object_width(.text) + 36
                     .Height = 27
                     .Move(4, tl.top + tl.Height + 12)
+                    .tag = arrLinux[i]
                   END WITH 
                   
               END IF
@@ -278,16 +297,6 @@ END
 
 PUBLIC SUB NameBox_keyrelease()
   
-  DIM tx AS TextBox
-    FOR EACH tx IN txtNames
-      IF tx.tag = LAST.tag THEN 
-        tx.text = Replace(LAST.text, " ", "")
-        FrmLilo.TabStrip1.Current.text = LAST.text
-      END IF
-        
-        
-    NEXT 
-      
     
   
 END

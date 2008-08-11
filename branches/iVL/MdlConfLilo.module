@@ -51,7 +51,71 @@ END
 PUBLIC SUB WRITE_LILO_DOT_CONF()
 
 DIM sFile AS String
-DIM sEntryLbl, sEntryApnd, sEntryRoot, sEntryInitrd AS String
+DIM tb AS TextBox
+DIM sShortAddr AS String
+DIM sMatchTag AS String
+DIM bInc AS CheckBox
+DIM cb AS CheckBox
+DIM sEntryLbl, sEntryApnd, sEntryRoot, sEntryInitrd, sSection AS String
+DIM i AS Integer
+DIM sCliSection AS String
+  FOR i = 0 TO FrmLilo.TabStrip1.Count - 2
+    WITH FrmLilo.TabStrip1
+      .Index = i
+      sShortAddr = Right(.text, Len(.text) - InStr(.text, "-"))
+      sMatchTag = "/dev" &/ sShortAddr
+        FOR EACH bInc IN MdlLiloOsList.bIncluded
+            IF bInc.tag = sMatchTag THEN 
+              IF bInc.value = TRUE THEN ' include this OS
+                
+                ' collect the information about this one entry now
+                sEntryRoot = sMatchTag
+                  FOR EACH tb IN MdlLiloOsList.txtNames
+                    IF tb.tag = sMatchTag THEN 
+                      sEntryLbl = tb.Text
+                    END IF
+                  NEXT 
+                  FOR EACH tb IN MdlLiloOsList.txtInitrds
+                    IF tb.tag = sMatchTag THEN 
+                      sEntryInitrd = tb.Text
+                    END IF
+                  NEXT 
+                  FOR EACH tb IN MdlLiloOsList.txtAppends
+                    IF tb.tag = sMatchTag
+                      sEntryApnd = tb.Text
+                    END IF
+                  NEXT 
+                  
+                    ' now put it all in one variable
+                    sSection = "image = /boot/tamu/vmlinuz-" & sShortAddr & gb.NewLine &
+                    "root = " & sMatchTag & gb.NewLine &
+                    "label = " & sEntryLbl & gb.NewLine &
+                    "append = \"" & sEntryApnd & "\"" & gb.NewLine &
+                    "initrd = " & sEntryInitrd & gb.NewLine &
+                    "read-only"
+                  'Message(sSection)                               
+                  
+                  
+                  FOR EACH cb IN MdlLiloOsList.bVlCliOption
+                      IF cb.Tag = sMatchTag THEN 
+                        IF cb.Value = TRUE THEN 
+                        sCliSection = Replace(sSection, "append = \"" & sEntryApnd & "\"", "append = \"2 splash=silent\"")
+                        sCliSection = Replace(sCliSection, "label = " & sEntryLbl, label = sEntryLbl & "-tui")
+                        END IF
+                      END IF
+                  NEXT 
+
+sFile = sFile & gb.NewLine & sSection & gb.NewLine                      
+                    
+              END IF
+            END IF
+              
+        NEXT 
+      'Message(FrmLilo.TabStrip1.text)
+    END WITH 
+  NEXT 
+Message.Delete(sFile)
+  
 
 
   
