@@ -29,6 +29,7 @@ PUBLIC SUB Form_Open()
   ME.sVidMode = "Standard"
 MdlConfLilo.DISPLAY_LILO_TARGET_OPTIONS()
 MdlLiloOsList.LIST_LILO_OS_CHOICES()
+MdlLiloOsList.LIST_WIN_INSTALL_CHOICES(ME.TabStrip1.Count)
 ME.tlList.text = "The following Operating Systems have been detected on this computer. Choose your desired option " &
 "for each one of them by clicking on each tab. To proceed with the default pre-set values, simply click \'" & FMain.btnext.text & "\'"
 ME.tlList.Adjust
@@ -96,7 +97,7 @@ PUBLIC SUB Form_Resize()
     '.tlTimoutSec.Move(.sbTimer.left + .sbTimer.Width + 4, .sbTimer.top, MdlObjSizer.get_object_width(.tlTimoutSec.text) + 8)
     .tlList.Move(.tlTimeOUt.left, .tlTimeOUt.top + .tlTimeOUt.Height + 8, .tlBanner.Width)
     '.tlList.Move(.tlFbMode.Left, .tlFbMode.top + .tlFbMode.Height + 12, .tlBanner.Width)
-    .TabStrip1.Move(.tlList.Left, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - .tlBanner.Height * 5.5)
+    .TabStrip1.Move(.tlList.Left, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - (.tlBanner.Height * 6))
 
   END WITH 
 

@@ -89,17 +89,23 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                  END WITH ' end jacking with the tabstrip
             NEXT                   
       END IF
-  SHELL "fdisk -l| grep -E \'^/dev/.* \\* .*(FAT32|HPFS|NTFS|Win)\' | cut -f 1 -d \' \'" TO sNTFSLst
+  SHELL "fdisk -l| grep -E \'^/dev/.* * .*(FAT32|HPFS|NTFS|Win)\' | cut -f 1 -d \' \'" TO sNTFSLst
     sNTFSLst = Trim(sNTFSLst)
+      'Message(sNTFSLst)
       IF sNTFSLst <> "" THEN 
         arrNTFS = Split(sNTFSLst, "\n")
         iTotalEntries = iTotalEntries + (arrNTFS.Count - 1)
       END IF
   
-  IF iTotalEntries = 0 THEN 
-    RETURN ' no need to proceed if no windows installs were found
-  END IF
-  
+    
+    FOR i = 0 TO arrNTFS.count - 1
+     
+      WITH FrmLilo.TabStrip1
+        .count = .count + 1
+        .index = .count
+        .text = "Windows"
+      END WITH 
+    NEXT 
 
   
 END
@@ -162,6 +168,7 @@ bIncluded = NEW Object[]
               .Move(4, 16, MdlObjSizer.get_object_width(.text) + 4, 27)
               '.BackColor = Color.SelectedBackground
               .Alignment = Align.Normal
+              .Background = Color.Background
               '.ForeColor = Color.SelectedForeground
             END WITH 
               
@@ -174,6 +181,7 @@ bIncluded = NEW Object[]
                 .Value = TRUE
                 .Move(4, tl.top + tl.Height + 4, MdlObjSizer.get_object_width(.text) + 24)
                 .tag = arrLinux[i]
+                .Background = Color.Background
               END WITH 
               ME.bIncluded.Add(cbInclude)
           
@@ -183,7 +191,7 @@ bIncluded = NEW Object[]
                 .Move(cbInclude.left, cbInclude.top + cbInclude.Height + 4, MdlObjSizer.get_object_width(.text))
                 .Height = 27
                 .Alignment = Align.Normal
-                .BackColor = Color.Default
+                .Background = Color.Background
               END WITH 
             txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "NameBox"
               WITH txtAppnd
@@ -204,6 +212,7 @@ bIncluded = NEW Object[]
                 .Move(txtAppnd.Left + txtAppnd.Width + 8, txtAppnd.top, MdlObjSizer.get_object_width(.text))
                 .Height = 27
                 .Alignment = Align.Normal
+                .Background = Color.Background
               END WITH 
               
             txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "initrdBox"
@@ -220,6 +229,7 @@ bIncluded = NEW Object[]
                 .Move(4, txtAppnd.top + txtAppnd.Height + 4, MdlObjSizer.get_object_width(.text))
                 .Height = 27
                 .Alignment = Align.Normal
+                .Background = Color.Background
                 
                 ME.iAppendLeft = .x + .Width + 4
                 
@@ -234,12 +244,10 @@ bIncluded = NEW Object[]
                 .tag = arrLinux[i]
                 txtAppends.Add(txtAppnd)
               END WITH 
-              
-                        
-          
+            
           
           ' Add an option to boot the recently installed OS to CLI mode
-          ClsPartSel.sRoot = "/dev/hda1" ' for testing only
+          ClsPartSel.sRoot = "/dev/hda6" ' for testing only 
             IF sLiloDesc LIKE "Vector" THEN 
               IF arrLinux[i] = ClsPartSel.sRoot THEN 
                 cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "VlCliOption"
@@ -250,6 +258,7 @@ bIncluded = NEW Object[]
                     .Height = 27
                     .Move(4, tl.top + tl.Height + 12)
                     .tag = arrLinux[i]
+                    .Background = Color.Background
                   END WITH 
                   
               END IF
