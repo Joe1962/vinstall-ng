@@ -98,15 +98,15 @@ DIM sCliSection AS String
                 
                         IF sMatchTag = ClsPartSel.sRoot THEN 
                            IF MdlLiloOsList.bVlCliOption = TRUE THEN 
-                             sCliSection = Replace(sSection, "append = \"" & sEntryApnd & "\"", "append = \"2 splash=silent\"")
+                             sCliSection = Replace(sSection, "append = \"" & sEntryApnd & "\"", "append = \"2 " & sEntryApnd & "\"") 'splash=silent\"")
                              sCliSection = Replace(sCliSection, "label = " & sEntryLbl, "label = " & sEntryLbl & "-tui")
                             END IF   
                         ELSE 
                             sCliSection = ""     
                         END IF
-                                      
+            sFile = sFile & gb.NewLine & sSection & gb.NewLine & gb.NewLine & sCliSection & gb.NewLine                      
               END IF
-          sFile = sFile & gb.NewLine & sSection & gb.NewLine & gb.NewLine & sCliSection & gb.NewLine                      
+          
             END IF
             
         NEXT 
