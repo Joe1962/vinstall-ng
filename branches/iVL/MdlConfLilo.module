@@ -95,26 +95,27 @@ DIM sCliSection AS String
                     "read-only"
                   'Message(sSection)                               
                   
-                  
-                  FOR EACH cb IN MdlLiloOsList.bVlCliOption
-                      IF cb.Tag = sMatchTag THEN 
-                        IF cb.Value = TRUE THEN 
-                        sCliSection = Replace(sSection, "append = \"" & sEntryApnd & "\"", "append = \"2 splash=silent\"")
-                        sCliSection = Replace(sCliSection, "label = " & sEntryLbl, label = sEntryLbl & "-tui")
+                
+                        IF sMatchTag = ClsPartSel.sRoot THEN 
+                           IF MdlLiloOsList.bVlCliOption = TRUE THEN 
+                             sCliSection = Replace(sSection, "append = \"" & sEntryApnd & "\"", "append = \"2 splash=silent\"")
+                             sCliSection = Replace(sCliSection, "label = " & sEntryLbl, "label = " & sEntryLbl & "-tui")
+                            END IF   
+                        ELSE 
+                            sCliSection = ""     
                         END IF
-                      END IF
-                  NEXT 
-
-sFile = sFile & gb.NewLine & sSection & gb.NewLine                      
-                    
+                                      
               END IF
+          sFile = sFile & gb.NewLine & sSection & gb.NewLine & gb.NewLine & sCliSection & gb.NewLine                      
             END IF
-              
+            
         NEXT 
       'Message(FrmLilo.TabStrip1.text)
     END WITH 
+  
   NEXT 
-Message.Delete(sFile)
+'sFile = sFile & gb.NewLine & sSection & gb.NewLine & gb.NewLine & sCliSection & gb.NewLine                      
+Message(sfile)
   
 
 
