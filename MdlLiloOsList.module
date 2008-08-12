@@ -239,7 +239,7 @@ bIncluded = NEW Object[]
           
           
           ' Add an option to boot the recently installed OS to CLI mode
-          ClsPartSel.sRoot = "/dev/hda1"
+          ClsPartSel.sRoot = "/dev/hda1" ' for testing only
             IF sLiloDesc LIKE "Vector" THEN 
               IF arrLinux[i] = ClsPartSel.sRoot THEN 
                 cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "VlCliOption"
