@@ -7,5 +7,5 @@
     * Read the tabstrip to create the lilo.conf
     * Store lilo.conf to /etc
     * Run lilo.
-    
+**** DO WE STILL NEED TO DETECT FAT16 PARTITIONS? WHO IS STILL RUNNING DOS/WIN95/98?    
     
