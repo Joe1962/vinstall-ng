@@ -96,20 +96,49 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
       IF sNTFSLst <> "" THEN 
         arrNTFS = Split(sNTFSLst, "\n")
         iTotalEntries = iTotalEntries + (arrNTFS.Count - 1)
-      END IF
+      'ELSE 
+      'END IF
   
     
     FOR i = 0 TO arrNTFS.count - 1
       idx = FrmLilo.TabStrip1.count - 1
-     
-      WITH FrmLilo.TabStrip1
-        .count = .count + 1
-        .index = idx
-        .text = "Windows"
-      END WITH 
+          SHELL "mkdir /mnt" &/ sWinAddr WAIT 
+          SHELL "mount " & sWinPart & Space(1) & "/mnt" &/ sWinAddr WAIT 
+            IF Exist("/mnt" &/ sWinAddr &/ "windows" &/ "system32" &/ "winver.exe") = TRUE THEN 
+              ' this is indeed a windows installation
+                   
+                  WITH FrmLilo.TabStrip1
+                    .count = .count + 1
+                    .index = idx
+                    .text = "Windows-" & sWinAddr
+                    ' Populate the new windows tab with just one
+                      tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinPartLbl"
+                        WITH tl
+                          .Move(4, 8)
+                          .text = "Windows installation found in " & sWinPart
+                          .Height = 27
+                          .Width = MdlObjSizer.get_object_width(.text)
+                          .BackColor = Color.Background
+                        END WITH 
+                          
+                      cb = NEW CheckBox(FrmLilo.TabStrip1)
+                        WITH cb
+                          .Move(4, tl.top + tl.Height + 12)
+                          .tag = sWinPart
+                          .text = "Include this installation in the boot menu"
+                          .Width = MdlObjSizer.get_object_width(.text) + 36
+                          .Height = 24
+                          .Value = TRUE
+                        END WITH 
+                  END WITH 
+            END IF
+        ' now, unmount the partition
+        SHELL "umount /mnt" &/ sWinAddr WAIT 
+        ' I guess it's ok to leave the dir in there, since all of this will dissapear after the insallation is done
+        
     NEXT 
 
-  
+  END IF
 END
 
 
@@ -249,7 +278,7 @@ bIncluded = NEW Object[]
             
           
           ' Add an option to boot the recently installed OS to CLI mode
-          ClsPartSel.sRoot = "/dev/hda6" ' for testing only 
+          ClsPartSel.sRoot = "/dev/hda1" ' for testing only 
             IF sLiloDesc LIKE "Vector" THEN 
               IF arrLinux[i] = ClsPartSel.sRoot THEN 
                 cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "VlCliOption"
@@ -293,7 +322,7 @@ END
 PUBLIC SUB VlCliOption_click()
     
   bVlCliOption = LAST.value
-  PRINT bVlCliOption
+  'PRINT bVlCliOption
   
 END
 
