@@ -82,10 +82,53 @@ PUBLIC FUNCTION WRITE_NEW_FSTAB() AS Integer
   DIM sPartition AS String
   DIM sMountPoint AS String
   DIM sMntOpts AS String
-  DIM i AS Integer
+  DIM i, ii AS Integer
   DIM sWinPart AS String
   DIM sWinMntPnt AS String
   DIM sFstab AS String
+  DIM sPartFmt AS String
+
+    
+            
+        
+    
+
+  
+  ' MAKE SURE THE PARTITIONS TYPES ARE DETECTED CORRECTLY
+      
+    IF ClsPartSel.fRoot LIKE "do not format" THEN 
+    SHELL "part=$(parted " & Left(ClsPartSel.sRoot, Len(ClsPartSel.sRoot) - 1) & " print | grep &\' " & Right(ClsPartSel.sroot) & "\' ; echo $part | cut -f 6 -d \' \'" TO sPartFmt
+      sPartFmt = Trim(sPartFmt)
+      ClsPartSel.fRoot = sPartFmt
+    END IF
+        IF ClsPartSel.sHome AND ClsPartSel.fhome LIKE "do not format" THEN 
+    SHELL "part=$(parted " & Left(ClsPartSel.sHome, Len(ClsPartSel.sHome) - 1) & " print | grep &\' " & Right(ClsPartSel.sHome) & "\' ; echo $part | cut -f 6 -d \' \'" TO sPartFmt
+      sPartFmt = Trim(sPartFmt)
+      ClsPartSel.fhome = sPartFmt
+    END IF
+        IF ClsPartSel.fUsr AND ClsPartSel.fUsr LIKE "do not format" THEN 
+    SHELL "part=$(parted " & Left(ClsPartSel.sUsr, Len(ClsPartSel.sUsr) - 1) & " print | grep &\' " & Right(ClsPartSel.sUsr) & "\' ; echo $part | cut -f 6 -d \' \'" TO sPartFmt
+      sPartFmt = Trim(sPartFmt)
+      ClsPartSel.fUsr = sPartFmt
+    END IF
+    IF ClsPartSel.fVar AND ClsPartSel.fVar LIKE "do not format" THEN 
+    SHELL "part=$(parted " & Left(ClsPartSel.sVar, Len(ClsPartSel.sVar) - 1) & " print | grep &\' " & Right(ClsPartSel.sVar) & "\' ; echo $part | cut -f 6 -d \' \'" TO sPartFmt
+      sPartFmt = Trim(sPartFmt)
+      ClsPartSel.fVar = sPartFmt
+    END IF
+    IF ClsPartSel.fOpt AND ClsPartSel.fOpt LIKE "do not format" THEN 
+    SHELL "part=$(parted " & Left(ClsPartSel.sOpt, Len(ClsPartSel.sOpt) - 1) & " print | grep &\' " & Right(ClsPartSel.sOpt) & "\' ; echo $part | cut -f 6 -d \' \'" TO sPartFmt
+      sPartFmt = Trim(sPartFmt)
+      ClsPartSel.fOpt = sPartFmt
+    END IF
+    IF ClsPartSel.fTmp AND ClsPartSel.fTmp LIKE "do not format" THEN 
+    SHELL "part=$(parted " & Left(ClsPartSel.sTmp, Len(ClsPartSel.sTmp) - 1) & " print | grep &\' " & Right(ClsPartSel.sTmp) & "\' ; echo $part | cut -f 6 -d \' \'" TO sPartFmt
+      sPartFmt = Trim(sPartFmt)
+      ClsPartSel.fTmp = sPartFmt
+      
+    END IF
+  
+  
   
   ' make the changes show up on the steps now  
   FrmInstallSys.tlCurrPkg.Text = "Writing new /etc/fstab to system"
@@ -105,8 +148,11 @@ PUBLIC FUNCTION WRITE_NEW_FSTAB() AS Integer
 "#not be checked(such AS MS - initrd / mnt OR NFS file systems)a 0.\n\n\n" &
 "#The Linux partitions\n"
 
+
+
 sFstab = sFstab & gb.NewLine & 
 ClsPartSel.sRoot & " / " & LCase(ClsPartSel.fRoot) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fRoot)) & " 0 1" & gb.NewLine
+  
 IF ClsPartSel.sHome THEN 
   sFstab = sFstab & gb.NewLine & ClsPartSel.sHome & " /home " & LCase(ClsPartSel.fhome) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fhome)) & " 0 2"
 END IF
