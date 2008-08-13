@@ -37,6 +37,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
   DIM tb AS TextBox
   DIM sWinPart AS String
   DIM sWinAddr AS String
+  DIM idx AS Integer
   
     ' I'd like to verify that there is actually a windows isntall there... rather than simply listing every partition
   ' But I guess listing partitions will do for now
@@ -99,10 +100,11 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
   
     
     FOR i = 0 TO arrNTFS.count - 1
+      idx = FrmLilo.TabStrip1.count - 1
      
       WITH FrmLilo.TabStrip1
         .count = .count + 1
-        .index = .count
+        .index = idx
         .text = "Windows"
       END WITH 
     NEXT 
