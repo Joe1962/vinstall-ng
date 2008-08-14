@@ -60,7 +60,81 @@ DIM sEntryLbl, sEntryApnd, sEntryRoot, sEntryInitrd, sSection AS String
 DIM i AS Integer
 DIM sCliSection AS String
 DIM sWinSection AS String
+DIM sBootAddr AS String
 
+
+
+
+
+FOR EACH bInc IN MdlLiloOsList.bIncluded
+sShortAddr = Right(bInc.tag, Len(bInc.tag) - RInStr(bInc.tag, "/"))
+  IF bInc.tag = ClsPartSel.sRoot THEN 
+          sBootAddr = "/boot"
+        ELSE 
+          sBootAddr = "/boot/tamu"
+        END IF
+
+  IF bInc.value = TRUE THEN 
+    FOR EACH tb IN MdlLiloOsList.txtNames
+      IF tb.Tag = bInc.tag THEN 
+       sEntryLbl = tb.Text
+      END IF
+    NEXT 
+    FOR EACH tb IN MdlLiloOsList.txtAppends
+      IF tb.Tag = bInc.tag THEN 
+        sEntryApnd = tb.Text
+      END IF
+    NEXT 
+    sEntryRoot = bInc.Tag
+    FOR EACH tb IN MdlLiloOsList.txtInitrds
+      IF tb.tag = bInc.tag THEN 
+        sEntryInitrd = tb.Text
+      END IF
+    NEXT 
+        ' now put it in a section
+      
+        sSection = "image = " & sBootAddr &/ "vmlinuz-" & sShortAddr & gb.NewLine &
+                    "root = " & bInc.tag & gb.NewLine &
+                    "label = " & sEntryLbl & gb.NewLine &
+                    "append = \"" & sEntryApnd & "\"" & gb.NewLine &
+                    "initrd = " & sEntryInitrd & gb.NewLine &
+                    "read-only" & " \n \n"
+        
+                    
+        IF bInc.tag = ClsPartSel.sRoot AND MdlLiloOsList.bVlCliOption = TRUE THEN 
+          sCliSection = Replace(sSection, "append = \"" & sEntryApnd & "\"", "append = \"2 " & sEntryApnd & "\"") 'splash=silent\"")
+          sCliSection = Replace(sCliSection, "label = " & sEntryLbl, "label = " & sEntryLbl & "-tui")
+          sCliSection = sCliSection & gb.NewLine
+        ELSE 
+          sCliSection = ""
+        END IF
+                             
+    ELSE 
+      sSection = ""
+    
+  END IF
+ sFile = sFile & sCliSection & sSection
+NEXT 
+
+FOR EACH binc IN MdlLiloOsList.arrWinInstalls
+  IF binc.Value = TRUE THEN 
+    FOR EACH tb IN MdlLiloOsList.arrWinLabels
+      IF tb.tag = binc.tag THEN 
+        sEntryLbl = tb.Tag
+      END IF
+    NEXT 
+      sWinSection = "other = " & tb.Tag & gb.NewLine &
+        "label = " & tb.Text & gb.NewLine &
+        "table = " & tb.Tag & "\n" & gb.NewLine
+  ELSE 
+    sWinSection = ""
+  END IF
+sFile = sFile & sWinSection
+NEXT 
+
+
+Message(sFile)
+RETURN 
 FrmLilo.TabStrip1.Index = 0
   FOR i = 0 TO FrmLilo.TabStrip1.Count - 2
     WITH FrmLilo.TabStrip1
