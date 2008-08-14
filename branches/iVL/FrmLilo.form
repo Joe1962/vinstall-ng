@@ -55,4 +55,15 @@
     Text = ("Seconds")
     Alignment = Align.Normal
   }
+  { tlDefBoot TextLabel
+    MoveScaled(33,14,18,3.125)
+    Text = ("Boot Default")
+    Alignment = Align.Normal
+  }
+  { cbDefBoot ComboBox
+    MoveScaled(52,13,21,3.125)
+    Text = ("")
+    ReadOnly = True
+    List = []
+  }
 }

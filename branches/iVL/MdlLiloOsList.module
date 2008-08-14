@@ -26,6 +26,7 @@ PUBLIC bVlCliOption AS Boolean
 PUBLIC bIncluded AS Object[]
 PUBLIC arrWinInstalls AS Object[]
 PUBLIC arrWinLabels AS Object[]
+PRIVATE sTmpTxt AS String
 
 PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
   DIM sFatList AS String
@@ -177,7 +178,7 @@ END
 PUBLIC SUB WinLbl_keyrelease()
   
   LAST.text = Replace(LAST.text, " ", "")
-  
+  ME.list_boot_options
 END
 
 
@@ -194,7 +195,7 @@ PUBLIC SUB bIncludeThisWin_click()
     NEXT 
   END IF
   'PRINT LAST.tag
-  
+  ME.list_boot_options
 END
 
 
@@ -376,6 +377,37 @@ bIncluded = NEW Object[]
   
 END
 
+
+PUBLIC SUB list_boot_options()
+  DIM tb AS TextBox
+  DIM cb AS CheckBox
+  
+  FrmLilo.cbDefBoot.Clear()
+  
+  FOR EACH cb IN ME.bIncluded
+    IF cb.Value = TRUE THEN 
+      FOR EACH tb IN ME.txtNames
+        IF tb.tag = cb.tag THEN 
+          IF FrmLilo.cbDefBoot.Find(tb.text) = -1 THEN 
+          FrmLilo.cbDefBoot.Add(tb.text)
+          END IF
+        END IF
+      NEXT 
+    ELSE IF cb.Value = FALSE THEN 
+        FOR EACH tb IN ME.txtNames
+          IF FrmLilo.cbDefBoot.Find(tb.text) <> -1 THEN 
+            FrmLilo.cbDefBoot.Remove(FrmLilo.cbDefBoot.Find(tb.text))
+          END IF
+        NEXT 
+    END IF
+  NEXT 
+  
+  
+END
+
+
+
+
 PUBLIC SUB VlCliOption_click()
     
   bVlCliOption = LAST.value
@@ -385,18 +417,21 @@ END
 
 
 PUBLIC SUB IncludeOs_click()
-  IF LAST.value = FALSE THEN 
-Message("Excluding " & FrmLilo.TabStrip1.Current.text & " from the boot menu")
-END IF
-  
+
+  ME.list_boot_options
   
 END
 
 PUBLIC SUB NameBox_keyrelease()
   
     LAST.text = Replace(LAST.text, " ", "")
+    ME.list_boot_options
+    
   
 END
+
+
+
 
 
 
