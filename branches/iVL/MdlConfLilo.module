@@ -19,6 +19,22 @@
 
 ' PUBLIC Vmlinuz AS Object[]
 
+PRIVATE sDotConf AS String
+
+PUBLIC FUNCTION WRITE_LILO_DOT_CONF() AS Integer
+  
+  DIM sGlbl AS String
+  DIM iTimeout AS Integer
+  DIM sTrgt AS String
+  DIM sFB AS String
+  
+  
+END
+
+
+
+
+
 PUBLIC SUB DISPLAY_LILO_TARGET_OPTIONS()
   
   DIM sList AS String
@@ -48,7 +64,7 @@ PUBLIC SUB DISPLAY_LILO_TARGET_OPTIONS()
   
 END
 
-PUBLIC SUB WRITE_LILO_DOT_CONF()
+PUBLIC SUB GENERATE_LILO_DOT_CONF()
 
 DIM sFile AS String
 DIM tb AS TextBox
@@ -132,98 +148,8 @@ FOR EACH binc IN MdlLiloOsList.arrWinInstalls
 sFile = sFile & sWinSection
 NEXT 
 
+sDotConf = Trim(sFile)  
 
-Message(sFile)
-RETURN 
-FrmLilo.TabStrip1.Index = 0
-  FOR i = 0 TO FrmLilo.TabStrip1.Count - 2
-    WITH FrmLilo.TabStrip1
-      .Index = i
-      sShortAddr = Right(.text, Len(.text) - InStr(.text, "-"))
-      sMatchTag = "/dev" &/ sShortAddr
-        FOR EACH bInc IN MdlLiloOsList.bIncluded
-            IF bInc.tag = sMatchTag THEN 
-              IF bInc.value = TRUE THEN ' include this OS
-                
-                ' collect the information about this one entry now
-                sEntryRoot = sMatchTag
-                  FOR EACH tb IN MdlLiloOsList.txtNames
-                    IF tb.tag = sMatchTag THEN 
-                      sEntryLbl = tb.Text
-                    END IF
-                  NEXT 
-                  FOR EACH tb IN MdlLiloOsList.txtInitrds
-                    IF tb.tag = sMatchTag THEN 
-                      sEntryInitrd = tb.Text
-                    END IF
-                  NEXT 
-                  FOR EACH tb IN MdlLiloOsList.txtAppends
-                    IF tb.tag = sMatchTag
-                      sEntryApnd = tb.Text
-                    END IF
-                  NEXT 
-                  
-                    ' now put it all in one variable
-                    sSection = "image = /boot/tamu/vmlinuz-" & sShortAddr & gb.NewLine &
-                    "root = " & sMatchTag & gb.NewLine &
-                    "label = " & sEntryLbl & gb.NewLine &
-                    "append = \"" & sEntryApnd & "\"" & gb.NewLine &
-                    "initrd = " & sEntryInitrd & gb.NewLine &
-                    "read-only"
-                  'Message(sSection)                               
-                  
-                
-                        IF sMatchTag = ClsPartSel.sRoot THEN 
-                           IF MdlLiloOsList.bVlCliOption = TRUE THEN 
-                             sCliSection = Replace(sSection, "append = \"" & sEntryApnd & "\"", "append = \"2 " & sEntryApnd & "\"") 'splash=silent\"")
-                             sCliSection = Replace(sCliSection, "label = " & sEntryLbl, "label = " & sEntryLbl & "-tui")
-                            END IF   
-                        ELSE 
-                            sCliSection = ""     
-                        END IF
-                        
-                        
-                        
-            sFile = sFile & gb.NewLine & sSection & gb.NewLine & gb.NewLine & sCliSection & gb.NewLine                      
-              END IF
-          
-            END IF
-            
-            
-        NEXT 
-      'Message(FrmLilo.TabStrip1.text)
-      IF InStr(.text, "Windows") THEN 
-              FOR EACH cb IN MdlLiloOsList.arrWinInstalls
-  IF cb.value = TRUE THEN 
-    FOR EACH tb IN MdlLiloOsList.arrWinLabels
-      IF tb.tag = cb.tag THEN 
-        sWinSection = "other = " & tb.Tag & gb.NewLine &
-        "label = " & tb.Text & gb.NewLine &
-        "table = " & tb.Tag & gb.NewLine 
-      ELSE 
-        sSection = ""
-      END IF
-    NEXT 
-   END IF
-    sFile = sFile & gb.NewLine & sWinSection & gb.NewLine
-NEXT 
-END IF    
-                        
-    
-    END WITH 
-  
-  NEXT 
-'sFile = sFile & gb.NewLine & sSection & gb.NewLine & gb.NewLine & sCliSection & gb.NewLine                      
-
-
-        
-        
-        
-Message(sfile)
-  
-
-
-  
   
   
 END

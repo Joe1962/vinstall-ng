@@ -89,6 +89,8 @@ PUBLIC FUNCTION WRITE_NEW_FSTAB() AS Integer
   DIM sPartFmt AS String
 
     
+            'FOR testing purposes
+            ClsPartSel.sRoot = "/home/moises/mnt/target"
             
         
     
@@ -97,32 +99,33 @@ PUBLIC FUNCTION WRITE_NEW_FSTAB() AS Integer
   ' MAKE SURE THE PARTITIONS TYPES ARE DETECTED CORRECTLY
       
     IF ClsPartSel.fRoot LIKE "do not format" THEN 
-    SHELL "part=$(parted " & Left(ClsPartSel.sRoot, Len(ClsPartSel.sRoot) - 1) & " print | grep &\' " & Right(ClsPartSel.sroot) & "\' ; echo $part | cut -f 6 -d \' \'" TO sPartFmt
+    SHELL "mount | grep -m 1 \'" & ClsPartSel.sRoot & "\' | cut -f 5 -d \' \'" TO sPartFmt
       sPartFmt = Trim(sPartFmt)
       ClsPartSel.fRoot = sPartFmt
+          
     END IF
         IF ClsPartSel.sHome AND ClsPartSel.fhome LIKE "do not format" THEN 
-    SHELL "part=$(parted " & Left(ClsPartSel.sHome, Len(ClsPartSel.sHome) - 1) & " print | grep &\' " & Right(ClsPartSel.sHome) & "\' ; echo $part | cut -f 6 -d \' \'" TO sPartFmt
+    SHELL "mount | grep -m 1 \'" & ClsPartSel.sHome & "\' | cut -f 5 -d \' \'" TO sPartFmt
       sPartFmt = Trim(sPartFmt)
       ClsPartSel.fhome = sPartFmt
     END IF
         IF ClsPartSel.fUsr AND ClsPartSel.fUsr LIKE "do not format" THEN 
-    SHELL "part=$(parted " & Left(ClsPartSel.sUsr, Len(ClsPartSel.sUsr) - 1) & " print | grep &\' " & Right(ClsPartSel.sUsr) & "\' ; echo $part | cut -f 6 -d \' \'" TO sPartFmt
+    SHELL "mount | grep -m 1 \'" & ClsPartSel.sUsr & "\' | cut -f 5 -d \' \'" TO sPartFmt
       sPartFmt = Trim(sPartFmt)
       ClsPartSel.fUsr = sPartFmt
     END IF
     IF ClsPartSel.fVar AND ClsPartSel.fVar LIKE "do not format" THEN 
-    SHELL "part=$(parted " & Left(ClsPartSel.sVar, Len(ClsPartSel.sVar) - 1) & " print | grep &\' " & Right(ClsPartSel.sVar) & "\' ; echo $part | cut -f 6 -d \' \'" TO sPartFmt
+    SHELL "mount | grep -m 1 \'" & ClsPartSel.sVar & "\' | cut -f 5 -d \' \'" TO sPartFmt
       sPartFmt = Trim(sPartFmt)
       ClsPartSel.fVar = sPartFmt
     END IF
     IF ClsPartSel.fOpt AND ClsPartSel.fOpt LIKE "do not format" THEN 
-    SHELL "part=$(parted " & Left(ClsPartSel.sOpt, Len(ClsPartSel.sOpt) - 1) & " print | grep &\' " & Right(ClsPartSel.sOpt) & "\' ; echo $part | cut -f 6 -d \' \'" TO sPartFmt
+    SHELL "mount | grep -m 1 \'" & ClsPartSel.sOpt & "\' | cut -f 5 -d \' \'" TO sPartFmt
       sPartFmt = Trim(sPartFmt)
       ClsPartSel.fOpt = sPartFmt
     END IF
     IF ClsPartSel.fTmp AND ClsPartSel.fTmp LIKE "do not format" THEN 
-    SHELL "part=$(parted " & Left(ClsPartSel.sTmp, Len(ClsPartSel.sTmp) - 1) & " print | grep &\' " & Right(ClsPartSel.sTmp) & "\' ; echo $part | cut -f 6 -d \' \'" TO sPartFmt
+    SHELL "mount | grep -m 1 \'" & ClsPartSel.sTmp & "\' | cut -f 5 -d \' \'" TO sPartFmt
       sPartFmt = Trim(sPartFmt)
       ClsPartSel.fTmp = sPartFmt
       
