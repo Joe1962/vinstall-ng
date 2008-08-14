@@ -37,17 +37,20 @@ PUBLIC SUB Form_Open()
       
       ' prepare the system
       'ME.HIDE_PROGRES_CONTROLS()
-      
-      ME.FrmProg.Text = " Preparing system for installation "
+      ME.tmCredits.Enabled = TRUE
+MdlSetup.RUN_CREDITS(ClsGlobal.sSourceMnt &/ "CREDIT", ME.tlCredits)
+WAIT 3
+
+      'ME.FrmProg.Text = " Preparing system for installation "
       ME.tlCurrStepLbl.Text = "Current Step"
  
-
+'STOP EVENT 
 
 ME.BEGIN_PROCESS()  ' COMMENTED FOR TESTING PURPOSES
 'MdlSetup.RUN_CREDITS("/mnt/loop/CREDIT", ME.tlCredits)
-MdlSetup.RUN_CREDITS(ClsGlobal.sSourceMnt &/ "CREDIT", ME.tlCredits)
 
-ME.tmCredits.Enabled = TRUE
+
+
 
 
 END
