@@ -41,8 +41,11 @@ ME.TabStrip1.Index = 0
 'ME.Maximized = TRUE
 FBResolution_Click()
 FBResolution.text = "Standard"
-
+MdlLiloOsList.list_boot_options()
 END
+
+
+
 
 
 
@@ -80,12 +83,13 @@ PUBLIC SUB Form_Resize()
     .YNLiloBox.Move(.tlBanner.left, .tlBanner.Top + (.tlBanner.Height + 1.5), MdlObjSizer.get_object_width(.YNLiloBox.text) + 36, 28)
     .tlTarGet.Move(.YNLiloBox.left, .YNLiloBox.top + (.YNLiloBox.Height * 1.5), MdlObjSizer.get_object_width(.tlTarGet.Text))
     .LiloTarget.Move(.tlTarGet.Left + .tlTarGet.Width + 4, .tlTarGet.top, (.tlBanner.Width / 2.75) - (.tlTarGet.Width + .tlTarGet.left))
-    .tlFbMode.Move(.LiloTarget.Left + LiloTarget.Width + 12, .LiloTarget.top, MdlObjSizer.get_object_width(.tlFbMode.text))
+    .tlFbMode.Move(.LiloTarget.Left + LiloTarget.Width + 32, .LiloTarget.top, MdlObjSizer.get_object_width(.tlFbMode.text))
     .FBResolution.Move(.tlFbMode.Left + .tlFbMode.Width + 4, .tlFbMode.top, .tlBanner.Width - .FBResolution.Left * 1.30)
     .tlTimeOUt.Move(.tlTarGet.left, .tlTarGet.top + .tlTarGet.Height + 4, MdlObjSizer.get_object_width(.tlTimeOUt.Text))
     .sbTimer.Move(.tlTimeOUt.Left + .tlTimeOUt.Width + 4, .tlTimeOUt.top, 60)
     .tlTimoutSec.Move(.sbTimer.Left + .sbTimer.Width + 4, .sbTimer.top, MdlObjSizer.get_object_width(.tlTimoutSec.text))
-    
+    .tlDefBoot.Move(.tlFbMode.Left, .sbTimer.top, MdlObjSizer.get_object_width(.tlDefBoot.text), 27)
+    .cbDefBoot.Move(.tlDefBoot.Left + .tlDefBoot.Width + 4, .tlDefBoot.top, .tlBanner.Width - .cbDefBoot.Left * 1.3)
     '.tlFbMode.Move(.tlBanner.Left, .tlTarGet.top + .tlTarGet.Height + 8, MdlObjSizer.get_object_width(.tlFbMode.Text) + 8)
     '.FBResolution.Move(.tlFbMode.Left + .tlFbMode.Width + 2, .tlFbMode.top, (.tlBanner.Width / 2) - (.tlFbMode.Width + .tlFbMode.Left))
     

@@ -27,7 +27,9 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
 
  
   ' this is where we need to set the mount target
-  ClsGlobal.sTargetMnt = "/mnt/target"
+  'ClsGlobal.sTargetMnt = "/mnt/target"
+  
+  
     IF Exist(ClsGlobal.sTargetMnt) = FALSE THEN 
       TRY MKDIR ClsGlobal.sTargetMnt
     END IF   
@@ -68,6 +70,12 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
       'redirect to packages install
       'ME.INSTALL_PACKAGES()
     ' FROM HERE, DECIDE WHICH WAY TO GO
+    
+    ClsGlobal.sTargetMnt = "/home/moises/mnt/target" ' for testing only
+    
+    
+    
+    
       IF ClsPkgSel.bCustom = TRUE THEN 
         MdlInstallCustom.PERFORM_CUSTOM_INSTALL
       ELSE 
