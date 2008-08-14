@@ -24,6 +24,8 @@ PUBLIC iAppendLeft AS Integer
 PUBLIC cbWins AS Object[]
 PUBLIC bVlCliOption AS Boolean
 PUBLIC bIncluded AS Object[]
+PUBLIC arrWinInstalls AS Object[]
+PUBLIC arrWinLabels AS Object[]
 
 PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
   DIM sFatList AS String
@@ -43,7 +45,8 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
   ' But I guess listing partitions will do for now
   
   
-  
+  arrWinInstalls = NEW Object[]
+  arrWinLabels = NEW Object[]
   SHELL "fdisk -l | grep -E \'^/dev/.* \\* .*(FAT16)\' | cut -f 1 -d \' \'" TO sFatList
     sFatList = Trim(sFatList)
       IF sFatList <> "" THEN 
@@ -59,9 +62,10 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                     ' now populate it with the necessary stuff
                       tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinBanner"
                         WITH tl
-                          .text = "Operating system found in " & sWinPart
-                          .Move(4, 12, MdlObjSizer.get_object_width(.text) + 24, 27)
+                          .text = "<b>Windows installation found in " & sWinPart & "</b>"
+                          .Move(4, 16, MdlObjSizer.get_object_width(.text) + 24, 27)
                           .Alignment = Align.Normal
+                          .BackColor = Color.Background
                         END WITH 
                         
                       tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinName"
@@ -69,6 +73,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                           .text = "Name "
                           .Move(tl.left, tl.top + tl.height + 8, MdlObjSizer.get_object_width(.text) + 8, 27)
                           .Alignment = Align.Normal
+                          .BackColor = Color.Background
                         END WITH 
                       
                       tb = NEW TextBox(FrmLilo.TabStrip1) AS "WinNameBox"
@@ -78,6 +83,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                           .Height = 27
                           .Width = MdlObjSizer.get_object_width(.text) * 2
                           .Move(tl.left + tl.Width + 8, tl.top)
+                          .BackColor = Color.Background
                         END WITH 
                           
                       
@@ -86,7 +92,11 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                           .text = "Include this Operating System in the boot menu"
                           .Move(tl.left, tl.top + tl.height, MdlObjSizer.get_object_width(.text) + 36, 27)
                           .Value = TRUE
+                          .BackColor = Color.Background
+                          .tag = sWinPart
                         END WITH 
+                        arrWinInstalls.Add(cb) ' add to the array to find out wether to include or not in the boot menu
+                        
                  END WITH ' end jacking with the tabstrip
             NEXT                   
       END IF
@@ -102,8 +112,11 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
     
     FOR i = 0 TO arrNTFS.count - 1
       idx = FrmLilo.TabStrip1.count - 1
+      sWinPart = arrNTFS[i]
+      sWinAddr = Right(arrNTFS[i], Len(arrNTFS[i]) - RInStr(arrNTFS[i], "/"))
           SHELL "mkdir /mnt" &/ sWinAddr WAIT 
-          SHELL "mount " & sWinPart & Space(1) & "/mnt" &/ sWinAddr WAIT 
+          PRINT "mounting " & sWinAddr
+          SHELL "mount " & "/dev" &/ sWinAddr & Space(1) & "/mnt" &/ sWinAddr WAIT 
             IF Exist("/mnt" &/ sWinAddr &/ "windows" &/ "system32" &/ "winver.exe") = TRUE THEN 
               ' this is indeed a windows installation
                    
@@ -114,22 +127,42 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                     ' Populate the new windows tab with just one
                       tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinPartLbl"
                         WITH tl
-                          .Move(4, 8)
-                          .text = "Windows installation found in " & sWinPart
+                          .Move(4, 24)
+                          .text = "<b>Windows installation found in " & sWinPart & "</b>"
                           .Height = 27
                           .Width = MdlObjSizer.get_object_width(.text)
                           .BackColor = Color.Background
                         END WITH 
                           
-                      cb = NEW CheckBox(FrmLilo.TabStrip1)
+                      cb = NEW CheckBox(FrmLilo.TabStrip1) AS "bIncludeThisWin"
                         WITH cb
                           .Move(4, tl.top + tl.Height + 12)
                           .tag = sWinPart
                           .text = "Include this installation in the boot menu"
                           .Width = MdlObjSizer.get_object_width(.text) + 36
                           .Height = 24
+                          .BackColor = Color.Background
                           .Value = TRUE
                         END WITH 
+                          arrWinInstalls.Add(cb) ' add to the array
+                      tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinLblLbl"
+                        WITH tl
+                        .text = "Label"
+                        .MOVE(4, cb.top + cb.Height + 4, MdlObjSizer.get_object_width(.text), 27)
+                        .BackColor = Color.Background
+                        .Alignment = Align.Normal
+                        END WITH 
+                      tb = NEW TextBox(FrmLilo.TabStrip1) AS "WinLbl"
+                        WITH tb
+                          .text = "Windows-" & sWinAddr
+                          .Move(tl.left + tl.Width + 4, tl.top, 200, 27)
+                          .MaxLength = 15
+                          .tag = sWinPart
+                        END WITH 
+                          arrWinLabels.Add(tb)
+                          
+                        
+                      
                   END WITH 
             END IF
         ' now, unmount the partition
@@ -140,6 +173,23 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
 
   END IF
 END
+
+
+PUBLIC SUB bIncludeThisWin_click()
+  DIM tb AS TextBox
+  IF LAST.value = TRUE THEN 
+    FOR EACH tb IN arrWinLabels
+      IF tb.tag = LAST.tag THEN tb.Enabled = TRUE
+    NEXT 
+  ELSE IF LAST.value = FALSE THEN 
+    FOR EACH tb IN arrWinLabels
+      IF tb.tag = LAST.tag THEN tb.Enabled = FALSE
+    NEXT 
+  END IF
+  'PRINT LAST.tag
+  
+END
+
 
 
 
