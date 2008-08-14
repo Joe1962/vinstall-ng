@@ -59,6 +59,9 @@ DIM cb AS CheckBox
 DIM sEntryLbl, sEntryApnd, sEntryRoot, sEntryInitrd, sSection AS String
 DIM i AS Integer
 DIM sCliSection AS String
+DIM sWinSection AS String
+
+FrmLilo.TabStrip1.Index = 0
   FOR i = 0 TO FrmLilo.TabStrip1.Count - 2
     WITH FrmLilo.TabStrip1
       .Index = i
@@ -104,17 +107,44 @@ DIM sCliSection AS String
                         ELSE 
                             sCliSection = ""     
                         END IF
+                        
+                        
+                        
             sFile = sFile & gb.NewLine & sSection & gb.NewLine & gb.NewLine & sCliSection & gb.NewLine                      
               END IF
           
             END IF
             
+            
         NEXT 
       'Message(FrmLilo.TabStrip1.text)
+      IF InStr(.text, "Windows") THEN 
+              FOR EACH cb IN MdlLiloOsList.arrWinInstalls
+  IF cb.value = TRUE THEN 
+    FOR EACH tb IN MdlLiloOsList.arrWinLabels
+      IF tb.tag = cb.tag THEN 
+        sWinSection = "other = " & tb.Tag & gb.NewLine &
+        "label = " & tb.Text & gb.NewLine &
+        "table = " & tb.Tag & gb.NewLine 
+      ELSE 
+        sSection = ""
+      END IF
+    NEXT 
+   END IF
+    sFile = sFile & gb.NewLine & sWinSection & gb.NewLine
+NEXT 
+END IF    
+                        
+    
     END WITH 
   
   NEXT 
 'sFile = sFile & gb.NewLine & sSection & gb.NewLine & gb.NewLine & sCliSection & gb.NewLine                      
+
+
+        
+        
+        
 Message(sfile)
   
 
