@@ -43,8 +43,9 @@ PUBLIC SUB Form_Open()
  
 
 
-'ME.BEGIN_PROCESS()  
-MdlSetup.RUN_CREDITS("/mnt/loop/CREDIT", ME.tlCredits)
+ME.BEGIN_PROCESS()  ' COMMENTED FOR TESTING PURPOSES
+'MdlSetup.RUN_CREDITS("/mnt/loop/CREDIT", ME.tlCredits)
+MdlSetup.RUN_CREDITS(ClsGlobal.sSourceMnt &/ "CREDIT", ME.tlCredits)
 
 ME.tmCredits.Enabled = TRUE
 

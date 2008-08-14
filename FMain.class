@@ -44,7 +44,8 @@ PictureBox1.Picture = iImg.Picture
 PictureBox1.Background = Color.SelectedBackground
 PictureBox1.Stretch = TRUE
 MdlCore.PREPARE_INSTALL_LAYOUT
-FrmSelISO.Show
+FrmSelISO.Reparent(ME.pnlwinhost)
+'FrmSelISO.Show
 'FrmSelISO.Hide
 
 

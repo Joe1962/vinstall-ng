@@ -14,19 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FMain.class:272
+#: FMain.class:273
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:291
+#: FMain.class:292
 msgid "Next"
 msgstr ""
 
-#: FMain.class:297
+#: FMain.class:298
 msgid "Back"
 msgstr ""
 
-#: FMain.class:303
+#: FMain.class:304
 msgid "Exit"
 msgstr ""
 
