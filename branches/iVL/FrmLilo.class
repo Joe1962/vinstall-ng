@@ -21,7 +21,7 @@ PUBLIC sLiloTrgt AS String
 PUBLIC SUB Form_Open()
 
 
-
+ClsPartSel.sRoot = "/dev/hda1"
 ' FMain.FrmCurr = ME
 '   FMain.tvPlan["Conf0"].Selected = TRUE
 '   FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
@@ -58,6 +58,7 @@ PUBLIC SUB YNLiloBox_Click()
       .FBResolution.Enabled = FALSE
       .TabStrip1.Enabled = FALSE
       .sbTimer.Enabled = FALSE
+      .cbDefBoot.Enabled = FALSE
     END WITH 
     ELSE 
     WITH ME
@@ -66,6 +67,7 @@ PUBLIC SUB YNLiloBox_Click()
       .LiloTarget.Enabled = TRUE
       .FBResolution.Enabled = TRUE
       .sbTimer.Enabled = TRUE
+      .cbDefBoot.Enabled = TRUE
     END WITH 
   END IF
       
@@ -148,5 +150,7 @@ PUBLIC SUB Form_Menu()
 
   'MdlConfLilo.WRITE_LILO_DOT_CONF\
   MdlConfLilo.GENERATE_LILO_DOT_CONF()
+  MdlConfLilo.GATHER_OTHER_LINUX_KERNELS_AND_INITRDS()
+  'MdlConfLilo.WRITE_LILO_DOT_CONF()
 
 END
