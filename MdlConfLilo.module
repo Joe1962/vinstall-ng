@@ -27,6 +27,7 @@ PUBLIC FUNCTION WRITE_LILO_DOT_CONF() AS Integer
   DIM iTimeout AS Integer
   DIM sTrgt AS String
   DIM sFB AS String
+  DIM sDump AS String
   
   sTrgt = Trim(FrmLilo.LiloTarget.text)
     IF InStr(sTrgt, "MBR of") THEN 
@@ -60,7 +61,19 @@ PUBLIC FUNCTION WRITE_LILO_DOT_CONF() AS Integer
   
   
     
-    Message(sOut)
+    'message(sOut)
+    ' Now we want to write the actual file to the root partition
+    File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf", sOut)
+      ' to make sure the new changes are written to the MBR, we need a copy in the local running install
+    File.Save("/etc/lilo.conf", sOut)
+      ' now run lilo
+    SHELL "lilo || echo \'FAILED\'" TO sDump
+      IF InStr(sDump, "FAILED") > 0 THEN 
+        Message.Error("Error while writing lilo configuration. Please boot the system using the <br>install disk" &
+        "And try using \'vliloconf\' once the system is running")
+      END IF
+        
+    
     
 
   
@@ -125,22 +138,24 @@ PUBLIC SUB GATHER_OTHER_LINUX_KERNELS_AND_INITRDS()
               SHELL "mount " & cb.tag & Space(1) & "/mnt" &/ sShortAddr WAIT 
                 SHELL "ls /mnt" &/ sShortAddr &/ "boot" TO sDump
                 'message(sDump)
-                IF Exist("/mnt/ " & sShortAddr &/ "boot" &/ sInitrd0) THEN 
+                                
+                IF Exist("/mnt/" & sShortAddr &/ "boot" &/ sInitrd0) THEN 
+                
                     PRINT "cp /mnt" &/ sShortAddr &/ "boot" &/ sInitrd0 & " to " & ClsGlobal.sTargetMnt &/ "boot" &/ "tamu" &/ tb.text
-                  'SHELL "cp /mnt" &/ sShortAddr &/ sInitrd0 & Space(1) & ClsGlobal.sTargetMnt &/ "boot" &/ "tamu" &/ tb.text
+                  SHELL "cp /mnt" &/ sShortAddr &/ sInitrd0 & Space(1) & ClsGlobal.sTargetMnt &/ "boot" &/ "tamu" &/ tb.text
                 ELSE IF Exist("/mnt" &/ sShortAddr &/ "boot" &/ sInitrd1) THEN 
                   PRINT "cp /mnt" &/ sShortAddr &/ "boot" &/ sInitrd1 & " to " & ClsGlobal.sTargetMnt &/ "boot" &/ "tamu" &/ tb.text
-                  'SHELL "cp /mnt" &/ sShortAddr &/ sInitrd1 & Space(1) & ClsGlobal.sTargetMnt &/ "boot" &/ "tamu" &/ tb.text
+                  SHELL "cp /mnt" &/ sShortAddr &/ sInitrd1 & Space(1) & ClsGlobal.sTargetMnt &/ "boot" &/ "tamu" &/ tb.text
                 ELSE 
                   PRINT "No initrd found"
                 END IF
                 ' now copy the kernel to the same location
                 IF Exist("/mnt" &/ sShortAddr &/ "boot" &/ "vmlinuz") THEN 
                     PRINT "Copy /mnt" &/ sShortAddr &/ "boot" &/ "vmlinuz" & " to " & ClsGlobal.sTargetMnt &/ "boot" &/ "tamu" &/ "vmlinuz-" & sShortaddr
-                  'SHELL "cp -L /mnt" &/ sShortAddr &/ "boot" &/ "vmlinuz" & Space(1) & ClsGlobal.sTargetMnt &/ "boot" &/ "tamu" &/ "vmlinuz-" & sShortAddr WAIT
+                  SHELL "cp -L /mnt" &/ sShortAddr &/ "boot" &/ "vmlinuz" & Space(1) & ClsGlobal.sTargetMnt &/ "boot" &/ "tamu" &/ "vmlinuz-" & sShortAddr WAIT
                 END IF
                   
-              'SHELL "umount /mnt" &/ sShortAddr WAIT 
+              SHELL "umount /mnt" &/ sShortAddr WAIT 
               END IF
             NEXT 
           END IF

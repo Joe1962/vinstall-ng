@@ -40,10 +40,10 @@ PUBLIC SUB EMBED_GPARTED()
   WAIT
       
       i = 0
-  aHandle = Desktop.Find(sWons[i])
+  aHandle = Desktop.Find(Trim(sWons[i]))
     IF aHandle.Count = 0 THEN 
       REPEAT 
-        WAIT 3
+        WAIT 2
         INC i
         aHandle = Desktop.Find(sWons[i])
       UNTIL 

@@ -31,22 +31,23 @@
     }
   }
   { frmCredits Frame
-    MoveScaled(2,47,81,8)
-    Text = ("VectorLinux ... Brought to you by ")
+    MoveScaled(12,45,38,12)
+    Font = Font["-1"]
+    Text = ("")
     { sclCredits ScrollView
-      MoveScaled(1,1,58,5)
+      MoveScaled(2,1,34,8)
       Border = False
       ScrollBar = Scroll.None
       { tlCredits TextLabel
-        MoveScaled(0,0,53,4)
+        MoveScaled(2,1,30,5)
         Text = ("")
         Alignment = Align.Normal
       }
     }
   }
   { tmCredits #Timer
-    #X = 480
-    #Y = 120
+    #X = 632
+    #Y = 80
     Delay = 30
   }
 }

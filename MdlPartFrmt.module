@@ -39,7 +39,8 @@
   
         MdlCore.LOCK_GUI()
       MdlInstallSys.MOUNT_DEFINED_PARTITIONS() ' let the game begin
-    
+      ' begin running the credits
+
 ' ' '   END IF
   'MdlInstallSys.MOUNT_DEFINED_PARTITIONS
   

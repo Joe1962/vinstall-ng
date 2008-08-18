@@ -209,6 +209,7 @@ PUBLIC SUB btnext_Click()
     
     'POST INSTALL CONFIGURATION
     CASE "FrmInstallSys"
+
       frmNext = FrmLilo
       
     CASE "FrmLilo"
