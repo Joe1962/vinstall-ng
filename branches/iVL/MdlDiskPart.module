@@ -25,10 +25,12 @@ PUBLIC SUB EMBED_GPARTED()
   DIM iHandle AS Integer
   DIM i AS Integer = 0
   DIM sDump AS String
-  DIM sWins AS String = "GParted,/dev/sda - GParted,/dev/hda - GParted"
+  DIM sWins AS String = "gpartedbin,Gpartedbin" '" GParted, / dev / sda - GParted, / dev / hda - GParted ""
   DIM sWons AS String[] = Split(sWins, ",")
   'Desktop.Find("", "GParted")
   
+  ' The window can be found on the Desktop WM_CLASS property which can be seen via the xprop application
+  ' We may need to implement this method here instead of the win window title method.
   
     IF Exist("/usr/sbin/gparted") = FALSE THEN 
       Message.Error("Gparted was not found on this system. Please install gparted and try again")
@@ -40,12 +42,12 @@ PUBLIC SUB EMBED_GPARTED()
   WAIT
       
       i = 0
-  aHandle = Desktop.Find(Trim(sWons[i]))
+  aHandle = Desktop.Find("", Trim(sWons[i]))
     IF aHandle.Count = 0 THEN 
       REPEAT 
         WAIT 2
         INC i
-        aHandle = Desktop.Find(sWons[i])
+        aHandle = Desktop.Find("", sWons[i])
       UNTIL 
       aHandle.Count > 0 OR i = sWons.count - 1
     END IF

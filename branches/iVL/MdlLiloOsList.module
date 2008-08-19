@@ -347,7 +347,7 @@ bIncluded = NEW Object[]
             
           
           ' Add an option to boot the recently installed OS to CLI mode
-          ClsPartSel.sRoot = "/dev/hda1" ' for testing only 
+          'ClsPartSel.sRoot = "/dev/sdb" ' for testing only 
             IF sLiloDesc LIKE "Vector" THEN 
               IF arrLinux[i] = ClsPartSel.sRoot THEN 
                 cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "VlCliOption"
@@ -422,8 +422,24 @@ END
 
 
 PUBLIC SUB VlCliOption_click()
-    
+    DIM tb AS TextBox
   bVlCliOption = LAST.value
+  
+    FOR EACH tb IN ME.txtNames
+      IF tb.tag = LAST.tag THEN 
+        IF bVlCliOption = TRUE THEN 
+          IF FrmLilo.cbDefBoot.Find(tb.text & "-tui") = -1 THEN 
+            FrmLilo.cbDefBoot.Add(tb.text & "-tui")
+          END IF
+        ELSE 
+          IF FrmLilo.cbDefBoot.Find(tb.text & "-tui") <> -1 THEN 
+            FrmLilo.cbDefBoot.Remove(FrmLilo.cbDefBoot.Find(tb.text & "-tui"))
+          END IF
+        END IF
+      END IF
+    NEXT 
+  
+  
   'PRINT bVlCliOption
   
 END
