@@ -240,8 +240,12 @@ bIncluded = NEW Object[]
       'create a temporary monunt dir
       TRY MKDIR "/tmp/lilo_tmp"
     FOR i = 0 TO arrLinux.Count - 1
+      IF arrLinux[i] <> "" THEN 
       sShortAddr = Right(arrLinux[i], Len(arrLinux[i]) - RInStr(arrLinux[i], "/"))
+        PRINT "scanning " & arrLinux[i]
+        PRINT "mount " & arrLinux[i] & Space(1) & "/tmp/lilo_tmp"
       SHELL "mount " & arrLinux[i] & Space(1) & "/tmp/lilo_tmp" WAIT 
+      
         ' now check for a vmlinuz
         IF Exist("/tmp/lilo_tmp/boot/vmlinuz") = TRUE THEN 
           FrmLilo.TabStrip1.Count = FrmLilo.TabStrip1.count + 1 'arrLinux.Count - 1
@@ -368,6 +372,7 @@ bIncluded = NEW Object[]
         END IF
         
         SHELL "umount /tmp/lilo_tmp" WAIT 
+        END IF
     NEXT 
         
     FOR i = 0 TO FrmLilo.TabStrip1.Count - 1
@@ -377,6 +382,7 @@ bIncluded = NEW Object[]
             FrmLilo.TabStrip1[i].Visible = FALSE
           END IF
       END WITH 
+    
       NEXT 
         
  
