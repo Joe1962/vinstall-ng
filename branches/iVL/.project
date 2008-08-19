@@ -1,6 +1,6 @@
 # Gambas Project File 2.0
 Title=VectorLinux Installer
-Startup=MdlCore
+Startup=FrmLilo
 Version=0.0.33
 Library=gb.gtk
 Library=gb.form
@@ -16,7 +16,7 @@ Translate=1
 Language=en_US
 ControlPublic=1
 ModulePublic=1
-Maintainer=benoit
-Vendor=Princeton
-Address=benoit@localhost
+Maintainer=M0E-lnx
+Vendor=VectorLinux
+Address=M0E.lnx@gmail.com
 License=General Public Licence
