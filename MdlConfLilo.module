@@ -68,7 +68,12 @@ PUBLIC FUNCTION WRITE_LILO_DOT_CONF() AS Integer
     
     'message(sOut)
     ' Now we want to write the actual file to the root partition
+      IF Exist(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf") THEN 
+        TRY MOVE ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf" TO ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.dist"
+      END IF
+      
     File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf", sOut)
+      IF ERROR THEN Message.Error(Error.Text & gb.NewLine & Error.Where)
       ' to make sure the new changes are written to the MBR, we need a copy in the local running install
     'File.Save("/etc/lilo.conf", sOut)
       ' now run lilo
@@ -85,6 +90,8 @@ PUBLIC SUB EXECUTE_LILO()
   SHELL "chroot " & ClsGlobal.sTargetMnt & "; /sbin/lilo || echo \'FAILED\'" TO sDump
     IF InStr(sDump, "FAILED") > 0 THEN 
       Message.Error("Lilo returned an error. Please see below" & gb.NewLine & sDump)
+    ELSE 
+      Message("Boot loader has been setup successfully")
     END IF
     
   

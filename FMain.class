@@ -213,7 +213,14 @@ PUBLIC SUB btnext_Click()
       frmNext = FrmLilo
       
     CASE "FrmLilo"
-      frmNext = FrmLiloOsList
+        ' Now that lilo has been setup, write it to the config
+        MdlConfLilo.GENERATE_LILO_DOT_CONF
+        MdlConfLilo.GATHER_OTHER_LINUX_KERNELS_AND_INITRDS()
+        MdlConfLilo.WRITE_LILO_DOT_CONF()
+        MdlConfLilo.EXECUTE_LILO()
+        
+    
+      'frmNext = FrmLiloOsList
       
         
   END SELECT 
