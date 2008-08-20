@@ -36,9 +36,9 @@ ClsGlobal.sBackNav = NEW Object[]
 ClsGlobal.sSourceMnt = "/mnt" &/ "cdrom" 'FOR TESTING ONLY
 '/ THE FOLLOWING LINES HAVE BEEN COMMENTED FOR TESTING ONLY
 
-' ' ' FrmSelISO.Reparent(ME.pnlWinHost)
-' ' ' FrmSelISO.Width = pnlWinHost.Width
-' ' ' FrmSelISO.Height = pnlWinHost.Height
+FrmSelISO.Reparent(ME.pnlWinHost)
+FrmSelISO.Width = pnlWinHost.Width
+FrmSelISO.Height = pnlWinHost.Height
 
 iImg = Image.Load("images/installer.png").Stretch(400, 50)
 'iImg.Resize(600, 80)
@@ -72,12 +72,12 @@ END WITH
 'ME.TreeView1.BackColor = Color.Transparent
 ME.AUTOSIZE_LEFT_PANE
 ' ' ' / THE FOLLOWING LINES HAVE BEEN IMPLEMENTED FOR TESTING PURPOSES
-WITH FrmLilo
-.Reparent(Fmain.pnlWinHost)
-.Width = Fmain.pnlWinHost.Width
-.Height = Fmain.pnlWinHost.Height
-.Show
-END WITH 
+' ' ' WITH FrmLilo
+' ' ' .Reparent(Fmain.pnlWinHost)
+' ' ' .Width = Fmain.pnlWinHost.Width
+' ' ' .Height = Fmain.pnlWinHost.Height
+' ' ' .Show
+' ' ' END WITH 
 
 END
 

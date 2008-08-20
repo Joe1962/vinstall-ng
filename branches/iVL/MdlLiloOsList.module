@@ -253,7 +253,7 @@ bIncluded = NEW Object[]
         sLiloDesc = ME.ID_DISTRO("/tmp/lilo_tmp")
           
         WITH FrmLilo.TabStrip1
-            .Index = i
+            .Index = FrmLilo.TabStrip1.count - 1
             .text = sLiloDesc & "-" & sShortAddr
           tl = NEW TextLabel(FrmLilo.TabStrip1) AS "OSIntro"
             WITH tl
