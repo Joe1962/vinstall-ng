@@ -33,10 +33,13 @@ DIM iImg AS Image
 MdlCore.LOCK_GUI
 'MdlCore.LOCK_GUI()
 ClsGlobal.sBackNav = NEW Object[]
-ClsGlobal.sSourceMnt = "/mnt" &/ "cdrom"
-FrmSelISO.Reparent(ME.pnlWinHost)
-FrmSelISO.Width = pnlWinHost.Width
-FrmSelISO.Height = pnlWinHost.Height
+ClsGlobal.sSourceMnt = "/mnt" &/ "cdrom" 'FOR TESTING ONLY
+'/ THE FOLLOWING LINES HAVE BEEN COMMENTED FOR TESTING ONLY
+
+' ' ' FrmSelISO.Reparent(ME.pnlWinHost)
+' ' ' FrmSelISO.Width = pnlWinHost.Width
+' ' ' FrmSelISO.Height = pnlWinHost.Height
+
 iImg = Image.Load("images/installer.png").Stretch(400, 50)
 'iImg.Resize(600, 80)
 PictureBox1.Resize(iImg.Width, iImg.Height)
@@ -44,7 +47,7 @@ PictureBox1.Picture = iImg.Picture
 PictureBox1.Background = Color.SelectedBackground
 PictureBox1.Stretch = TRUE
 MdlCore.PREPARE_INSTALL_LAYOUT
-FrmSelISO.Reparent(ME.pnlwinhost)
+
 'FrmSelISO.Show
 'FrmSelISO.Hide
 
@@ -68,13 +71,13 @@ WITH ME
 END WITH 
 'ME.TreeView1.BackColor = Color.Transparent
 ME.AUTOSIZE_LEFT_PANE
-' ' ' 
-' ' ' WITH FrmLilo
-' ' ' .Reparent(Fmain.pnlWinHost)
-' ' ' .Width = Fmain.pnlWinHost.Width
-' ' ' .Height = Fmain.pnlWinHost.Height
-' ' ' .Show
-' ' ' END WITH 
+' ' ' / THE FOLLOWING LINES HAVE BEEN IMPLEMENTED FOR TESTING PURPOSES
+WITH FrmLilo
+.Reparent(Fmain.pnlWinHost)
+.Width = Fmain.pnlWinHost.Width
+.Height = Fmain.pnlWinHost.Height
+.Show
+END WITH 
 
 END
 

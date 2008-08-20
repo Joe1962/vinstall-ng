@@ -72,6 +72,9 @@ PUBLIC FUNCTION WRITE_LILO_DOT_CONF() AS Integer
         TRY MOVE ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf" TO ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.dist"
       END IF
       
+      ' THE FOLLOWING LINE IS FOR TESTING ONLY
+      ClsGlobal.sTargetMnt = "/tmp"
+      
     File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf", sOut)
       IF ERROR THEN Message.Error(Error.Text & gb.NewLine & Error.Where)
       ' to make sure the new changes are written to the MBR, we need a copy in the local running install

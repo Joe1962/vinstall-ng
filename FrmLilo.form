@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,70,69)
+  MoveScaled(0,0,74,69)
   Text = ("")
   { tlBanner TextLabel
     MoveScaled(1,1,58,4.4286)
@@ -12,7 +12,7 @@
     Text = ("Don't Install Lilo")
   }
   { TabStrip1 TabStrip
-    MoveScaled(2,27,61,28)
+    MoveScaled(1,27,71,40)
     Index = 0
     Text = ("Tab 0")
     Index = 0
