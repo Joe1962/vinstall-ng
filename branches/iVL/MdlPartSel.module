@@ -191,7 +191,8 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
             
       END IF
       
-      SHELL " probepart | grep -i \" *swap$\" | cut -f 1 -d \' \' | grep -e /dev" TO sSwapList
+      'SHELL " probepart | grep -i \" *swap$\" | cut -f 1 -d \' \' | grep -e /dev" TO sSwapList
+       SHELL "probepart | grep -i \"swap\" | cut -f 1 -d \' \' | grep -e \"/dev\"" TO sSwapList
           
         sSwapList = Trim(sSwapList)
           IF sSwapList <> "" THEN 
