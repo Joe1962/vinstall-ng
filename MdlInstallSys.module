@@ -222,8 +222,8 @@ sFstab = sFstab & "\n\n" &
 "# The 'sw' option means auto activating with 'swapon -a'.\n"
   ' This will add all the swap partitions to fstab
   FOR EACH cb IN MdlPartSel.oSwaps
-    sFstab = sFstab & gb.NewLine &
-    cb.Tag & Space(1) & "none" & Space(1) & "swap" & Space(1) & "sw" * Space(1) & "0" & Space(1) & "0" & gb.NewLine
+    sFstab = sFstab & "\n" &
+    cb.Tag & Space(1) & "none" & Space(1) & "swap" & Space(1) & "sw" & Space(1) & "0" & Space(1) & "0" & gb.NewLine
   NEXT 
   
   

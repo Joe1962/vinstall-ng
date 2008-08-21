@@ -56,20 +56,27 @@ PUBLIC SUB EMBED_GPARTED()
   FrmDiskPart.tlBanner.Text = "<h3>Loading gparted ... Please wait</h3>"
   SHELL "/usr/sbin/gparted"
   WAIT 1
-    aHandle = Desktop.Find("GParted")
-      IF aHandle.count = 0 THEN 
-        WAIT 1
-          aHandle = Desktop.Find("GParted")
-            IF aHandle.Count = 0 THEN 
-             ' this is too much... let's try to find it using the drive name
-             aHandle = Desktop.Find(sType & " - GParted")
-            END IF
-      END IF
+  
+      aHandle = Desktop.Find( LIKE "gparted")
+      Message(aHandle.count)
+     RETURN 
       
-      
-      'aHandle = Desktop.Find("*" & " - GParted", "gpartedbin")
-   aHandle = Desktop.Find(sType & " - GParted")
-        
+   ' ' ' 
+   ' ' ' 
+   ' ' '  aHandle = Desktop.Find("GParted")
+   ' ' '    IF aHandle.count = 0 THEN 
+   ' ' '      WAIT 1
+   ' ' '        aHandle = Desktop.Find("GParted")
+   ' ' '          IF aHandle.Count = 0 THEN 
+   ' ' '           ' this is too much... let's try to find it using the drive name
+   ' ' '           aHandle = Desktop.Find(sType & " - GParted")
+   ' ' '          END IF
+   ' ' '    END IF
+   ' ' '    
+   ' ' '    
+   ' ' '    'aHandle = Desktop.Find("*" & " - GParted", "gpartedbin")
+   ' ' ' aHandle = Desktop.Find(sType & " - GParted")
+   ' ' '      
       
   '     i = 0
   ' aHandle = Desktop.Find("", Trim(sWons[i]))
