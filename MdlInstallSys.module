@@ -59,10 +59,7 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
       SHELL "mount " & ClsPartSel.sTmp & Space(1) & ClsGlobal.sTargetMnt &/ "tmp -t " & ClsPartSel.fTmp WAIT 
     END IF
       
-    ' see if there is a swap partition and use it
-      IF ClsPartSel.sSwap THEN 
-        SHELL "swapon -a " WAIT 
-      END IF
+    
     
     'WRITE THE NEW FSTAB NOW, RIGHT BEFORE INSTALLING PACKAGES.
     
@@ -71,7 +68,7 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
       'ME.INSTALL_PACKAGES()
     ' FROM HERE, DECIDE WHICH WAY TO GO
     
-    ClsGlobal.sTargetMnt = "/home/moises/mnt/target" ' for testing only
+    'ClsGlobal.sTargetMnt = "/home/moises/mnt/target" ' for testing only
     
     
     
