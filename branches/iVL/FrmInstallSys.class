@@ -26,12 +26,12 @@ PUBLIC SUB BEGIN_PROCESS()
   FMain.tvPlan["Inst2"].Picture = MdlCore.sNowPic
   FMain.tvPlan["Inst2"].Selected = TRUE
   
-  
+  MdlInstallSys.ACTIVATE_SWAP_SPACE() ' activate swap for the current install
   
   
     
     
-  'MdlPartFrmt.PREPARE_ALL_PARTITIONS() ' formats partitions and mounts them
+  MdlPartFrmt.PREPARE_ALL_PARTITIONS() ' formats partitions and mounts them
   
 END
 
@@ -49,7 +49,7 @@ FMain.FrmCurr = ME
  
 'STOP EVENT 
 
-'ME.BEGIN_PROCESS()  ' COMMENTED FOR TESTING PURPOSES
+ME.BEGIN_PROCESS()  ' COMMENTED FOR TESTING PURPOSES
 
 
 
