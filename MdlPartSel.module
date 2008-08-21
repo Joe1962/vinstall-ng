@@ -18,6 +18,7 @@
 
 PUBLIC oMountPoints AS Object[]
 PUBLIC oFsTypes AS Object[]
+PUBLIC oSwaps AS Object[]
 
 PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
   
@@ -37,10 +38,12 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
   DIM iX AS Integer
   DIM iWidth AS Integer  
   DIM iCol1, icol2, iCol3 AS Integer
+  DIM sSwaps AS String[]
+  DIM ii AS Integer
   ' fire up the arrays
   oFsTypes = NEW Object[]
   oMountPoints = NEW Object[]
-  
+  oSwaps = NEW Object[]
   
   ' We will mount the partitions first, and then figure out their size
   SHELL " probepart | grep -e \" Linux$\" | cut -f 1 -d \' \' | grep /dev" TO sDump1
@@ -135,6 +138,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 .Add("/usr")
                 .Add("/var")
                 .Add("/tmp")
+                .Add("/mnt" &/ Right(.tag, Len(.tag) - RInStr(.tag, "/"))) ' Add option to mount linux partitions to /mnt/xdx
                 .Add("Swap")
                     IF InStr(FrmSelISO.lstInstallableImg.Text, .tag) THEN 
                       .Enabled = FALSE
@@ -196,55 +200,40 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
           
         sSwapList = Trim(sSwapList)
           IF sSwapList <> "" THEN 
-        'Message.Info(sSwapList)
-        IF InStr(sSwapList, gb.NewLine) THEN 
+          
+' ' '         Message.Info(sSwapList)
+        'IF InStr(sSwapList, gb.NewLine) THEN 
           'several swap partitions found
           'how do we deal w/ this?
-        ELSE 
-          spart = Trim(sSwapList)
-          'SHELL "export " & sSwapList & "=$(df -h | grep -i swap) | cut -f 2 -d \' \'" TO vSwapSize
-          SHELL " export sw=$(probepart | grep -i \" *swap$\") && echo $sw | cut -f 4 -d \' \'" TO vSwapSize
-          'Message(CStr(vSwapSize))
-                IF vSwapSize <> "" THEN 
-                  'vSwapSize = Trim(CStr(vSwapSize))
-                    'Message.Info(vSwapSize)
-                  iswapsize = CInt(vSwapSize)
-                  
-                  iswapsize = Round(iswapsize / 1024 / 1024, -2)
-                END IF
-            'now create the swap label and combo box
-              tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "swlabel"
-                WITH tl
-                  '.x = .Parent.x
-                  .x = icol1 'FrmPartSel.tlPartRow.Left
-                  .y = y
-                  .Text = sPart & " ( " & CStr(iswapsize) & "G )"
-                  .Width = lbwidth
-                  .Height = 27
-                  .tag = "SwapLbl"
-                  .Alignment = Align.Normal
-                  ClsPartSel.sSwap = sPart
-                  
-                END WITH 
-              
-              ' now create a combobox with the swap-only option
-                cb = NEW ComboBox(FrmPartSel.scrollPartitions) AS "swapsel"
-                  WITH cb
-                    .y = y
-                    '.x = lbwidth + 24
-                    .x = icol2 'FrmPartSel.tlPartRow2.Left
-                    .Width = tl.Width
-                    .tag = "swapSelection"
-                    .ReadOnly = TRUE
-                    .Add("Swap")
+            sSwaps = Split(sSwapList, "\n")
+              FOR ii = 0 TO sSwaps.count - 1
+                  sPart = Trim(sSwaps[ii])
+                'SHELL "export sw=$(parted " & Left(sSwaps[i], Len(sSwaps[i]) - 1) & " print | grep ^\' " & Right(sSwaps[i]) & "); echo $sw | cut -f 4 -d \' \'" TO vSwapSize
+                SHELL "export sw=$(parted " & Left(sPart, Len(sPart) - 1) & " print | grep ^\' " & Right(sPart) & "\'); echo $sw | cut -f 4 -d \' \'" TO vSwapSize
+                  tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "swlabel"
+                    WITH tl
+                      .x = icol1
+                      .y = y
+                      .text = sPart & " ( " & CStr(vSwapSize) & " )"
+                      .Width = lbwidth
+                      .Height = 27
+                      .Alignment = Align.Normal
+                      .tag = sSwaps[ii]
+                    END WITH 
                     
-                  END WITH 
-                    
-                
-                
-          'Message.Info("Swap total = " & iswapsize)
+                    cb = NEW ComboBox(FrmPartSel.scrollPartitions) AS "swapsel"
+                      WITH cb
+                      .y = y
+                      .x = icol2
+                      .width = tl.Width
+                      .ReadOnly = TRUE
+                      .Add("Swap")
+                      .tag = sPart
+                    END WITH 
+                    ME.oSwaps.Add(cb)
+            NEXT 
         END IF
-END IF
+      
   FOR EACH cb IN MdlPartSel.oMountPoints
     IF cb.width > iWidth THEN 
       iWidth = cb.Width
@@ -262,6 +251,18 @@ END IF
 
   
 END
+
+PUBLIC SUB swapsel_click()
+  
+  DIM cb AS ComboBox
+  ' we need to set at least one swap partition
+  FOR EACH cb IN ME.oSwaps
+    ClsPartSel.sSwap = cb.Tag
+  NEXT 
+  
+  
+END
+
  
 PUBLIC SUB MountPoints_CLick()
   
@@ -306,6 +307,7 @@ PUBLIC SUB MountPoints_CLick()
                   sdropdwn.Add("Swap")
                   sdropdwn.Text = "Swap"
                   sdropdwn.Enabled = FALSE
+                      
                 ELSE 
                       IF sdropdwn.Text <> "Do not format" AND sdropdwn.Enabled = TRUE THEN 
                         sdropdwn.Enabled = TRUE

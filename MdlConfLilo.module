@@ -73,7 +73,7 @@ PUBLIC FUNCTION WRITE_LILO_DOT_CONF() AS Integer
       END IF
       
       ' THE FOLLOWING LINE IS FOR TESTING ONLY
-      ClsGlobal.sTargetMnt = "/tmp"
+      'ClsGlobal.sTargetMnt = "/tmp"
       
     File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf", sOut)
       IF ERROR THEN Message.Error(Error.Text & gb.NewLine & Error.Where)

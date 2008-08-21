@@ -28,6 +28,7 @@ PUBLIC SUB EMBED_GPARTED()
   DIM sWins AS String = "gpartedbin,Gpartedbin" '" GParted, / dev / sda - GParted, / dev / hda - GParted ""
   DIM sWons AS String[] = Split(sWins, ",")
   DIM sType AS String
+  'DIM sTypeArr AS String[]
   'Desktop.Find("", "GParted")
   
   ' The window can be found on the Desktop WM_CLASS property which can be seen via the xprop application
@@ -39,7 +40,13 @@ PUBLIC SUB EMBED_GPARTED()
   SHELL "probedisk | grep -v \'cdrom\' | cut -f 1 -d \'|\' | grep \'a\'" TO sType
     stype = Trim(sType)
       'Message(sType)
-    
+   IF stype = "" THEN 
+      Message.Error("VectorLinux is unable to determine the type of hard disks on your system. <br>" &
+      "It is still possible to install VectorLinux on your system, but you need to pre-partition your disks first")
+   ELSE IF InStr(sType, "\n") > 0 THEN 
+    ' more than one type of disk was found... by default, gparted will load using /dev/hda first
+      sType = "/dev/hda"
+    END IF 
    
     IF Exist("/usr/sbin/gparted") = FALSE THEN 
       Message.Error("Gparted was not found on this system. Please install gparted and try again")

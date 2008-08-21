@@ -21,7 +21,7 @@ PUBLIC sLiloTrgt AS String
 PUBLIC SUB Form_Open()
 
 
-ClsPartSel.sRoot = "/dev/sdb1" ' 
+'ClsPartSel.sRoot = "/dev/sdb1" ' 
  FMain.FrmCurr = ME
    FMain.tvPlan["Conf0"].Selected = TRUE
    FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
