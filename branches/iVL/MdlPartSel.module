@@ -231,6 +231,8 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                       .tag = sPart
                     END WITH 
                     ME.oSwaps.Add(cb)
+                    
+                    y = y + cb.Height + 4
             NEXT 
         END IF
       
