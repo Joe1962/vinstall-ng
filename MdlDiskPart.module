@@ -57,9 +57,9 @@ PUBLIC SUB EMBED_GPARTED()
   SHELL "/usr/sbin/gparted"
   WAIT 1
   
-      aHandle = Desktop.Find( LIKE "gparted")
-      Message(aHandle.count)
-     RETURN 
+      aHandle = Desktop.Find("", "*partedbi*", "")
+      'Message(aHandle.count)
+     'RETURN 
       
    ' ' ' 
    ' ' ' 
