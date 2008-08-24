@@ -194,7 +194,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
         
             
       END IF
-      
+
       'SHELL " probepart | grep -i \" *swap$\" | cut -f 1 -d \' \' | grep -e /dev" TO sSwapList
        SHELL "probepart | grep -i \"swap\" | cut -f 1 -d \' \' | grep -e \"/dev\"" TO sSwapList
           
@@ -219,8 +219,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                       .Height = 27
                       .Alignment = Align.Normal
                       .tag = sSwaps[ii]
-                    END WITH 
-                    
+                    END WITH   
                     cb = NEW ComboBox(FrmPartSel.scrollPartitions) AS "swapsel"
                       WITH cb
                       .y = y
@@ -230,12 +229,13 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                       .Add("Swap")
                       .tag = sPart
                     END WITH 
+                    y = y + cb.height + 4
                     ME.oSwaps.Add(cb)
                     
                     y = y + cb.Height + 4
             NEXT 
         END IF
-      
+
   FOR EACH cb IN MdlPartSel.oMountPoints
     IF cb.width > iWidth THEN 
       iWidth = cb.Width
@@ -358,7 +358,8 @@ PUBLIC SUB fsTypes_click()
 END
 
 PUBLIC SUB SET_SELECTED_PARTITION(SPartition AS String, sMountPoint AS String)
-  
+  DIM i AS Integer
+  i = 0
   SELECT CASE sMountPoint
     CASE "/"
       FrmPartSel.sRootAddr = SPartition
@@ -378,6 +379,9 @@ PUBLIC SUB SET_SELECTED_PARTITION(SPartition AS String, sMountPoint AS String)
     CASE "/tmp"
       FrmPartSel.sTmpAddr = SPartition
       ClsPartSel.sTmp = SPartition
+    'CASE LIKE "/mnt/"
+     ' ClsPartSel.sLinuxPart[i] = SPartition
+      'INC i
   END SELECT 
   
 END

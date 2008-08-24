@@ -56,11 +56,19 @@ PUBLIC SUB EMBED_GPARTED()
   FrmDiskPart.tlBanner.Text = "<h3>Loading gparted ... Please wait</h3>"
   SHELL "/usr/sbin/gparted"
   WAIT 1
-  
+
       aHandle = Desktop.Find("", "*partedbi*", "")
+     i = 0
+     IF aHandle.Count = 0 THEN 'lets give it a chance to start
+       REPEAT 
+         WAIT 2
+         aHandle = Desktop.Find("", "*partedbi*", "")
+         INC i
+       UNTIL 
+       aHandle.Count > 0 OR i > 5
+     END IF
       'Message(aHandle.count)
      'RETURN 
-      
    ' ' ' 
    ' ' ' 
    ' ' '  aHandle = Desktop.Find("GParted")
@@ -90,7 +98,6 @@ PUBLIC SUB EMBED_GPARTED()
   '     aHandle.Count > 0 OR i = sWons.count - 1
   '   END IF
     
-      
         IF aHandle.Count = 0 THEN 
           Message("Setup is unable to successfully run gparted on this system. This may be a sign of \n" &
           "a bad install media. Setup cannot continue.")

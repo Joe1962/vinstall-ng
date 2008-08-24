@@ -85,10 +85,14 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
   ' Installation complete....
   FrmInstallSys.pbInstallProg.Value = 1
   FrmInstallSys.pbInstallProg2.Value = 1
-  Message("Vectorlinux is now installed on your system . Enjoy!")  
+  'Message.Info("packages have been installed in your system. Please click next to configure it.")
+  FrmInstallSys.tlBanner.Text = "Vectorlinux is now installed in your system. Please click next to configure it."
+  FrmInstallSys.tlCurrPkg.Text = "packages have been installed in your system. Please click next to configure it."
   WITH FMain
     .btQuit.Enabled = TRUE
     .btQuit.ForeColor = Color.Black
+    .btnext.Enabled = TRUE
+    .btnext.ForeColor = Color.Black
   END WITH   
   'MdlCore.unlock_gui()  
 END
@@ -401,7 +405,10 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
   PRINT "Package " & iPkgNum & " of " & iPkgCnt
   MdlSetup.SHOW_PROGRESS_CONTROLS()
   FrmInstallSys.tlCurrPkg.Text = "Processing " & File.Name(sPackagePath)
-  hproc = SHELL "install-pkg " & sPackagePath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+  'hproc = SHELL "install-pkg " & sPackagePath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+  IF Right(sPackagePath, 3) LIKE "t?z" THEN
+    hproc = SHELL "installpkg " & sPackagePath & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+  ENDIF 
   WAIT 1
   IF hproc.State = Process.Running THEN 
     REPEAT 

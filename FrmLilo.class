@@ -37,11 +37,15 @@ ME.TabStrip1.Index = 0
 MdlLiloOsList.bVlCliOption = FALSE
 
 
-ME.TabStrip1.Index = 0
+
 'ME.Maximized = TRUE
 FBResolution_Click()
-FBResolution.text = "Standard"
+FBResolution.text = "Bootsplash High"
+FBResolution_Click()
 MdlLiloOsList.list_boot_options()
+ME.TabStrip1.Index = 0
+ME.TabStrip1.Linux.Click()
+ME.cbDefBoot.Text = "Linux"
 END
 
 
