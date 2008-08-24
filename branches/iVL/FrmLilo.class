@@ -44,7 +44,7 @@ FBResolution.text = "Bootsplash High"
 FBResolution_Click()
 MdlLiloOsList.list_boot_options()
 ME.TabStrip1.Index = 0
-ME.TabStrip1.Linux.Click()
+'ME.TabStrip1.Linux.Click() 'set the focus to the Linux tab HOW?
 ME.cbDefBoot.Text = "Linux"
 END
 

@@ -58,7 +58,8 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
     RETURN 
   END IF
       
-  iret = ME.INSTALL_PACKAGES_REQUIRED()
+  'iret = ME.INSTALL_PACKAGES_REQUIRED()
+  iret = MdlInstallSys.INSTALL_REQUIRED_PACKAGES()
   PRINT "INSTALLING ADDITIONAL REQUIRED SOFTWARE"
   IF iret <> 0 THEN 
     Message.Error("Error while installing required system software. " & gb.NewLine & sErr)
