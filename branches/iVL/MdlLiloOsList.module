@@ -251,10 +251,14 @@ bIncluded = NEW Object[]
           FrmLilo.TabStrip1.Count = FrmLilo.TabStrip1.count + 1 'arrLinux.Count - 1
           
         sLiloDesc = ME.ID_DISTRO("/tmp/lilo_tmp")
-          
+        
         WITH FrmLilo.TabStrip1
             .Index = FrmLilo.TabStrip1.count - 1
+            IF arrLinux[i] = ClsPartSel.sRoot THEN
+            .text = "Linux"
+            ELSE 
             .text = sLiloDesc & "-" & sShortAddr
+            ENDIF 
           tl = NEW TextLabel(FrmLilo.TabStrip1) AS "OSIntro"
             WITH tl
               .text = "<b>Operating system installed in " & arrLinux[i] & "</b>"

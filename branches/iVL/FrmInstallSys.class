@@ -21,6 +21,7 @@ PUBLIC SUB BEGIN_PROCESS()
   
    DIM sRes AS Integer ' we will need to 
 
+  MdlCore.lock_gui()
   FMain.FrmCurr = ME
   FMain.tvPlan["Inst1"].Picture = MdlCore.sDonePic
   FMain.tvPlan["Inst2"].Picture = MdlCore.sNowPic
