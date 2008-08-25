@@ -238,6 +238,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                       .width = tl.Width
                       .ReadOnly = TRUE
                       .Add("Swap")
+                      .Add("Not Used")
                       .tag = sPart
                     END WITH 
                     y = y + cb.height + 4
