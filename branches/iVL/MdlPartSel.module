@@ -41,6 +41,9 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
   DIM sSwaps AS String[]
   DIM ii AS Integer
   DIM sDrive, sPartNo, sBlank AS String
+  
+  
+
   ' fire up the arrays
   oFsTypes = NEW Object[]
   oMountPoints = NEW Object[]
@@ -244,7 +247,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                     y = y + cb.height + 4
                     ME.oSwaps.Add(cb)
                     
-                    y = y + cb.Height + 4
+                    'y = y + cb.Height + 4
             NEXT 
         END IF
 

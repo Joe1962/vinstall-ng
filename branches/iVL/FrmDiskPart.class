@@ -17,7 +17,7 @@
 
 
 
-
+PRIVATE sRevText AS String
 
 PUBLIC SUB Form_Open()
   
@@ -31,9 +31,10 @@ PUBLIC SUB Form_Open()
     "This portion of the setup process allows you to define an installation target for your new operating system." &
     "Please use the partition program below to create, resize, or delete partitions, and make room for Vectorlinux."
     .tlBanner.Adjust
+    
   END WITH 
   
-    
+    sRevText = ME.tlBanner.text
     
 
 END
@@ -61,14 +62,26 @@ END
 PUBLIC SUB EmbGPARTED_Close()
 
   DIM bReboot AS Boolean
+  
+    FrmDiskPart.tlBanner.Text = "<h3><br>Analyzing system partitioning scheme... Please wait<br>This will take a few seconds...</h3>"
+    FrmDiskPart.tlBanner.Refresh
+    FrmDiskPart.tlBanner.Adjust
+    'Message("Exiting GParted")
+    WAIT 1
+  
   bReboot = MdlSetup.CHECK_IF_REBOOT_NEEDED()
   
     IF bReboot = TRUE THEN ' need to reboot
       Message.Info("Your partition setup requires a system reboot. Your computer will now reboot")
         'SHELL "sudo shutdown -r now"
     ELSE ' move to the next stage (select which partitions to use as what
+  
        FrmPartSel.Reparent(ME.Parent)
+        
+       
+        
        ME.Hide
+      
         FrmPartSel.Show
         
   

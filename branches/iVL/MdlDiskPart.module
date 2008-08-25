@@ -28,6 +28,7 @@ PUBLIC SUB EMBED_GPARTED()
   DIM sWins AS String = "gpartedbin,Gpartedbin" '" GParted, / dev / sda - GParted, / dev / hda - GParted ""
   DIM sWons AS String[] = Split(sWins, ",")
   DIM sType AS String
+  DIM sTypes AS String[]
   'DIM sTypeArr AS String[]
   'Desktop.Find("", "GParted")
   
@@ -37,7 +38,7 @@ PUBLIC SUB EMBED_GPARTED()
   ' For now, try to determine what type of drive thsi is..
   ' The following line will get the first listed drive (/dev/sda or /dev/hda) and use that
   ' as a starting point to search for a running instance of gparted
-  SHELL "probedisk | grep -v \'cdrom\' | cut -f 1 -d \'|\' | grep \'a\'" TO sType
+  SHELL "probedisk | grep -v \'cdrom\' | cut -f 1 -d \'|\'" TO sType
     stype = Trim(sType)
       'Message(sType)
    IF stype = "" THEN 
@@ -57,46 +58,32 @@ PUBLIC SUB EMBED_GPARTED()
   SHELL "/usr/sbin/gparted"
   WAIT 1
 
+  sTypes = Split(sType, "\n")
+
       aHandle = Desktop.Find("", "*parted*", "")
      i = 0
      IF aHandle.Count = 0 THEN 'lets give it a chance to start
        REPEAT 
-         WAIT 2
-         aHandle = Desktop.Find("", "*partedbi*", "")
+         WAIT 1
+         aHandle = Desktop.Find("", "*parted*", "")
          INC i
        UNTIL 
        aHandle.Count > 0 OR i > 5
      END IF
-      'Message(aHandle.count)
-     'RETURN 
-   ' ' ' 
-   ' ' ' 
-   ' ' '  aHandle = Desktop.Find("GParted")
-   ' ' '    IF aHandle.count = 0 THEN 
-   ' ' '      WAIT 1
-   ' ' '        aHandle = Desktop.Find("GParted")
-   ' ' '          IF aHandle.Count = 0 THEN 
-   ' ' '           ' this is too much... let's try to find it using the drive name
-   ' ' '           aHandle = Desktop.Find(sType & " - GParted")
-   ' ' '          END IF
-   ' ' '    END IF
-   ' ' '    
-   ' ' '    
-   ' ' '    'aHandle = Desktop.Find("*" & " - GParted", "gpartedbin")
-   ' ' ' aHandle = Desktop.Find(sType & " - GParted")
-   ' ' '      
-      
-  '     i = 0
-  ' aHandle = Desktop.Find("", Trim(sWons[i]))
-  ' WAIT 
-  '   IF aHandle.Count = 0 THEN 
-  '     REPEAT 
-  '       WAIT 2
-  '       INC i
-  '       aHandle = Desktop.Find("", sWons[i])
-  '     UNTIL 
-  '     aHandle.Count > 0 OR i = sWons.count - 1
-  '   END IF
+     
+     IF aHandle.count = 0 ' still struggling here
+      'FOR i = 0 TO sTypes.Count - 1
+        i = 0
+        REPEAT 
+        aHandle = Desktop.Find(Trim(sTypes[i]) & " - GParted")
+        INC i
+        UNTIL aHandle.coun > 0 OR i = sTypes.Count - 1
+     END IF
+        
+  IF aHandle.count = 0 THEN 
+    aHandle = Desktop.Find("GParted") ' one last attempt
+  END IF
+   
     
         IF aHandle.Count = 0 THEN 
           Message("Setup is unable to successfully run gparted on this system. This may be a sign of \n" &
