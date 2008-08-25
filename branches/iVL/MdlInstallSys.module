@@ -90,6 +90,7 @@ PUBLIC FUNCTION WRITE_NEW_FSTAB() AS Integer
   DIM sFstab AS String
   DIM sPartFmt AS String
   DIM cb AS ComboBox
+  DIM sRes, sDrive, sBlank, sPartNo AS String
 
     
             'FOR testing purposes
@@ -180,6 +181,26 @@ IF ClsPartSel.sLinuxPart THEN
     sLinMntPnt = ClsPartSel.sLinuxPart[i]
   NEXT 
 ENDIF 
+
+' nOW LETS' GET THE REST OF THE PARTITIONS IN THERE
+FOR EACH CB IN MdlPartSel.oMountPoints
+    
+  IF InStr(cb.text, "/mnt/") = TRUE THEN 
+    sDrive = Left(cb.tag, Len("/dev/hda"))
+    sPartNo = Right(cb.tag, Len(cb.tag) - Len(sDrive))
+        IF Len(sPartNo) > 1 THEN 
+          sBlank = ""
+        ELSE 
+          sBlank = " "
+        END IF
+    
+        SHELL "export sfmt=$(parted " & sDrive & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $sfmt | cut -f 6 -d \' \'" TO sRes
+      
+        sFstab = sFstab & gb.NewLine & cb.tag & Space(1) & cb.Text & Space(1) & sRes & Space(1) & ME.fS_oPTIONS(sRes) & Space(1) & " 0 2 "
+    TRY MKDIR ClsGlobal.sTargetMnt &/ cb.Text
+  END IF
+NEXT 
+
 sFstab = sFstab & "\n\n" &
 "# Shared Windows/Linux partition" &
 "#/dev/hda1   /mnt/dos  msdos  umask=0   0  0 \n" &
@@ -224,8 +245,10 @@ sFstab = sFstab & "\n\n" &
 "# The 'sw' option means auto activating with 'swapon -a'.\n"
   ' This will add all the swap partitions to fstab
   FOR EACH cb IN MdlPartSel.oSwaps
+    IF cb.text <> "Not Used" THEN 
     sFstab = sFstab & "\n" &
     cb.Tag & Space(1) & "none" & Space(1) & "swap" & Space(1) & "sw" & Space(1) & "0" & Space(1) & "0" & gb.NewLine
+    END IF
   NEXT 
   
   

@@ -227,7 +227,7 @@ PUBLIC SUB btnext_Click()
       
         
   END SELECT 
-            
+                       
             
   
   frmNext.Reparent(ME.pnlWinHost)
