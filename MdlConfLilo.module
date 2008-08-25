@@ -120,7 +120,7 @@ PUBLIC SUB DISPLAY_LILO_TARGET_OPTIONS()
   DIM sTarget AS String
   DIM sDump AS String
   
-    SHELL "probedisk | grep -v cdrom |cut -f 1 -d \\|" TO sList
+    SHELL "probedisk | grep -v cdrom |cut -f 1 -d \'|\'" TO sList
       sList = Trim(sList)
       sListarr = Split(sList, "\n")
         FOR i = 0 TO sListarr.count - 1
