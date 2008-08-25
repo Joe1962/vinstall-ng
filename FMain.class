@@ -169,6 +169,29 @@ PUBLIC SUB btnext_Click()
         ELSE 
           MdlSetup.GO_WITH_SELECTED(sDev, "")
         END IF
+      frmNext = FrmPartScheme
+      
+      
+    CASE "FrmPartScheme"
+        ' The next form is defined from the radio buttons in Frm PartScheme. But let's see if we can display some status text
+        
+        'FMain.MovieBox1.Refresh
+        WITH FrmPartScheme
+          IF .rbEditPartitions.Value = TRUE THEN 
+            .tlChoiceExp.text = .tlChoiceExp.text & gb.NewLine & gb.NewLine & "<h3><br><br>Please wait while setup attampts to run the partitioning utility</h3>"
+          ELSE IF .rbUseExisting.Value = TRUE THEN 
+            .tlChoiceExp.Text = .tlChoiceExp.Text & gb.NewLine & gb.NewLine & "<h3><br><br><hr>Please wait while setup analyses your current partition setup. <br>This may take a while ...</h3>"
+            
+          END IF
+       
+          
+          
+        END WITH 
+        'FMain.MovieBox1.Playing = TRUE
+        WAIT 
+               
+              
+              
     CASE "FrmPartSel"
         IF NOT ClsPartSel.sRoot OR ClsPartSel.sRoot = "" THEN 
         Message.Error("You must select a \"/\" partition. This is the target where the system will install to")
@@ -228,6 +251,7 @@ PUBLIC SUB btnext_Click()
         
   END SELECT 
                        
+            
             
   
   frmNext.Reparent(ME.pnlWinHost)

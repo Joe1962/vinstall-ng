@@ -35,10 +35,12 @@ PUBLIC sOptFrmt AS String
 PUBLIC SUB Form_Resize()
   DIM cb AS ComboBox
   DIM iWidth AS Integer = 0
+  
   WITH ME
-    .tlBanner.Width = .ClientWidth - 16
-   .scrollPartitions.Resize(.tlBanner.Width - 4, .ClientHeight - .tlBanner.Height - (cbDoWin.Height * 3))
+    .tlBanner.Width = .ClientWidth - .btHelp.Width - 16
+   .scrollPartitions.Resize(.tlBanner.Width + 4 + .btHelp.Width, .ClientHeight - .tlBanner.Height - (cbDoWin.Height * 3))
    .cbDoWin.Move(.scrollPartitions.Left, .ClientHeight - .cbDoWin.Height - 8)
+   .btHelp.Move(.tlBanner.Left + .tlBanner.Width + 4, .tlBanner.top) '+ (.tlBanner.Height / 3))
 '   .tlPartRow.Move(4, 4)
 '   .tlPartRow2.Move(.tlPartRow.Left + (.tlPartRow.Width * 1.5), .tlPartRow.top)
 '   .tlPartRow3.Move(.tlPartRow2.left + (.tlPartRow3.Width * 1.9), .tlPartRow.top)
@@ -130,4 +132,22 @@ PUBLIC SUB Form_Show()
 
   Form_Open
 
+END
+
+PUBLIC SUB btHelp_Click()
+
+  Message("<h3>ABOUT SYSTEM PARTITIONING IN LINUX</H3>" &
+  "Linux is a modular operating system. This means that is has the ability to store system and <br>" &
+  "user data separately for added data security. You may install the system to a single partition <br>" &
+  "by simply selecting a \"/\" value on this screen. The rest is optional. The following is a <br>" &
+  "suggested setup for a typical Linux installation<br><br>" &
+  "<b>/</b> - Used to store system data. This particular install requires a minimum of <i>" & ClsGlobal.iRootMin & "M</i> for this<br>" &
+  "but you should considear a higher value to make sure you have room to install additional software<br>" &
+  "in case you wish to.<br>" &
+  "<b>/home</b> - Used to store user documents, pictures, videos. Give yourself as much room as you want<br>" &
+  "Typically, you want to use the largest partition for this.<br>" &
+  "<b>swap</b> - Using a swap partition is suggested if your total RAM is less than 1GB. Suggested ammount<br>" &
+  "for this is <i>" & ClsGlobal.iSwapMin & "M </i> but can also be calculated as 2 times your ammount of RAM")
+   
+  
 END
