@@ -57,7 +57,7 @@ PUBLIC SUB EMBED_GPARTED()
   SHELL "/usr/sbin/gparted"
   WAIT 1
 
-      aHandle = Desktop.Find("", "*partedbi*", "")
+      aHandle = Desktop.Find("", "*parted*", "")
      i = 0
      IF aHandle.Count = 0 THEN 'lets give it a chance to start
        REPEAT 
