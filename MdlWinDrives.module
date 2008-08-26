@@ -24,23 +24,116 @@ DIM tl AS TextLabel
 DIM cb AS ComboBox
 DIM y AS Integer
 DIM x AS Integer
-DIM i AS Integer
-DIM sDump1 AS String
+DIM i, ii AS Integer
+DIM sDump1, sDump2 AS String
 DIM sPartList AS String[]
 DIM sPart AS String
 DIM sSize AS String
 DIM lbwidth AS Integer
 DIM cbx AS Integer = FrmPartSel.scrollPartitions.Width / 2
+DIM sDisks, sResults, sLine AS String[]
+DIM sPartNo, sBlank, sPartaddr, sPartSize, sPartType, sTempLine AS String
+DIM tlwidth AS Integer
 
 x = 4
 y = 8
 
+ME.oWMntPoints = NEW Object[]
 
   ' now, do the WIN partitions
   ' MOVE THESE PARTITIONS TO A DIFFERENT WINDOW.
   ' THESE ARE ONLY NEEDED FOR FSTAB
+  
+  SHELL "probepart | grep -i fat | cut -f 1 -d \' \'" TO sDump1
+  IF sDump1 <> "" THEN 
+    sDump1 = Trim(sDump1)
+    'y = y + tl.Height * 2 + 4
+        ' create a new text label just to label the separation between windows and linux partitions
+        tl = NEW TextLabel(FrmWinDrives.svWinDrives) AS "Separator"
+          WITH tl
+            .Text = "<b>Windows Partitions Detected</b>"
+            .Height = 27
+            .Width = MdlObjSizer.get_object_width(.Text)
+            .x = FrmWinDrives.svWinDrives.Width / 2 - (.Width / 2)
+            .y = y
+            cbx = .x + .Width - (.Width / 2)
+            
+            
+          END WITH 
+          
+    y = y + tl.Height + 8
+    
+      tl = NEW TextLabel(FrmWinDrives.svWinDrives) AS "Headers"
+        WITH tl
+          .x = x
+          .y = y
+          .text = "<B>PARTITION</B>"
+          .Width = MdlObjSizer.get_object_width(.Text) * 1.5
+          .Height = 27
+        END WITH 
+          cbx = x + (tl.Width) * 2
+          tlwidth = tl.Width
+      tl = NEW TextLabel(FrmWinDrives.svWinDrives) AS "Headers"
+        WITH tl
+          .x = cbx
+          .y = y
+          .text = "<b>MOUNT TO </B>"
+          .Width = MdlObjSizer.get_object_width(.Text) * 1.5
+          .Height = 27
+        END WITH 
+        y = y + tl.Height + 8
+  'END IF
+        ' Begin listing individual partitions
+    sDisks = Split(sDump1, "\n")
+    'Message(sDump1)
+      FOR i = 0 TO sDisks.count - 1
+        sPartNo = Right(sDisks[i], Len(sDisks[i]) - Len("/dev/hda"))
+          IF Len(sPartNo) > 1 THEN 
+            sBlank = ""
+          ELSE 
+            sBlank = " "
+          END IF
+            SHELL "export s=$(parted " & Left(sDisks[i], Len("/dev/hda")) & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $s | cut -f 4 -d \' \'" TO sPartsize
+              tl = NEW TextLabel(FrmWinDrives.svWinDrives)
+                WITH tl
+                .y = y
+                .x = x
+                .text = sDisks[i] & " [ " & sPartsize & " ]"
+                .Width = 200
+                .Height = 21
+                .tag = sDisks[i]
+                .Alignment = Align.Normal
+                END WITH 
+              cb = NEW ComboBox(FrmWinDrives.svWinDrives)
+                WITH cb
+                  .x = cbx
+                  .y = tl.top
+                  .Width = tl.Width * 0.75
+                  .Height = 21
+                  .tag = sDisks[i]
+                  .Add("/mnt" &/ Right(.tag, Len(.tag) - RInStr(.tag, "/")))                  
+                  .Add("Do not mount")
+                  
+                  '.ReadOnly = TRUE
+                END WITH 
+                  ME.oWMntPoints.Add(cb)
+                
+                
+            
+    y = y + tl.Height + 4            
+    NEXT 
+        ' now do ntfs partitions the same way
+        
+    
+    
+  END IF
+    RETURN 
+            
+  
+  
+  
   sDump1 = ""
-      SHELL "PATH=$PATH:/sbin && probepart | grep -e \'/dev\' | grep -v \' Ext\' | grep -v \'raid autodetect\' | grep -v \' Linux\' | cut -f 1 -d \' \' | sed -r \'s/Disk//g\'" TO sdump1
+      SHELL "probepart | grep -e \'/dev\' | grep -v \' Ext\' | grep -v \'raid autodetect\' | grep -v \' Linux\' | cut -f 1 -d \' \' | sed -r \'s/Disk//g\'" TO sdump1
        File.Save(Temp("all"), Trim(sDump1))
      
     vObj = NEW Object[]

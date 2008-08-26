@@ -41,12 +41,6 @@ PUBLIC SUB Form_Resize()
    .scrollPartitions.Resize(.tlBanner.Width + 4 + .btHelp.Width, .ClientHeight - .tlBanner.Height - (cbDoWin.Height * 3))
    .cbDoWin.Move(.scrollPartitions.Left, .ClientHeight - .cbDoWin.Height - 8)
    .btHelp.Move(.tlBanner.Left + .tlBanner.Width + 4, .tlBanner.top) '+ (.tlBanner.Height / 3))
-'   .tlPartRow.Move(4, 4)
-'   .tlPartRow2.Move(.tlPartRow.Left + (.tlPartRow.Width * 1.5), .tlPartRow.top)
-'   .tlPartRow3.Move(.tlPartRow2.left + (.tlPartRow3.Width * 1.9), .tlPartRow.top)
-   ' .tlPartRow.Move(4, 4)
-   ' .tlPartRow3.Move(ME.scrollPartitions.Left + ME.scrollPartitions.Width - (.tlPartRow3.Width * 2), .tlpartrow.top)
-   ' .tlPartRow2.Move((.tlPartRow.Width + .tlPartRow3.Left) / 3, tlpartrow.top)
 
     
   END WITH 
