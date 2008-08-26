@@ -206,14 +206,26 @@ sFstab = sFstab & "\n\n" &
 "#/dev/hda1   /mnt/dos  msdos  umask=0   0  0 \n" &
 "#/dev/hda1   /mnt/win  vfat   fmask=111,dmask=0,quiet,shortname=mixed,user  0  0 \n" &
 "#/dev/hda1   /mnt/win  ntfs   umask=0   0  0\n" 
-    IF ClsWinDrives.sWinDrives THEN 
-      FOR i = 0 TO ClsWinDrives.sWinDrives.Count - 1
-        sWinPart = Trim(Left(ClsWinDrives.sWinDrives[i], InStr(ClsWinDrives.sWinDrives[i], "|") - 1))
-        sWinMntPnt = Trim(Right(ClsWinDrives.sWinDrives[i], Len(ClsWinDrives.sWinDrives[i]) - InStr(ClsWinDrives.sWinDrives[i], "|")))
-        'Message("Mount " & sWinPart & " to " & sWinMntPnt)
-        ' if this is right... then add it to the file
-      NEXT 
-    END IF
+
+' LET'S GET THE WINDOWS PARTITIONS IN HERE
+FOR EACH cb IN MdlWinDrives.oWMntPoints
+  IF cb.text <> "Do not mount" THEN 
+    sDrive = Left(cb.tag, Len("/dev/hda"))
+    spartNo = Right(cb.tag, Len(cb.tag) - Len(sDrive))
+      IF Len(sPartNo) > 1 THEN 
+        sBlank = "" 
+      ELSE 
+        sBlank = " " 
+      END IF
+      SHELL "export sfmt=$(parted " & sDrive & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $sfmt | cut -f 6 -d \' \'" TO sRes
+        IF sRes = "fat32" OR sRes = "fat16" THEN sRes = "vfat"
+      sFstab = sFstab & "\n" & 
+      cb.tag & Space(1) & cb.text & Space(1) & sRes & Space(1) & ME.fS_oPTIONS(sRes) & " 0  0 "
+  END IF
+      ' create the mount point for the target
+      TRY MKDIR ClsGlobal.sTargetMnt &/ cb.Text
+NEXT 
+  
 
 sFstab = sFstab & "\n\n" &
 "# Floppy disks \n" &
@@ -251,15 +263,7 @@ sFstab = sFstab & "\n\n" &
     END IF
   NEXT 
   
-  
-
-' ' ' IF ClsPartSel.sSwap THEN 
-' ' '   ' take a second here to throw the swap line to the current running system
-' ' '   SHELL "echo \'" & ClsPartSel.sSwap & Space(5) & "none" & Space(5) & "swap" & Space(5) & "sw" & Space(5) & "0" & Space(5) & "0" & "\' >> /etc/fstab" WAIT
-' ' '   'write the same line to the future fstab
-' ' '   sFstab = sFstab & gb.NewLine &
-' ' '    ClsPartSel.sSwap & Space(5) & "none" & Space(5) & "swap" & Space(5) & "sw" & Space(5) & "0" & Space(5) & "0"
-' ' ' END IF
+ 
 
 sFstab = sFstab & "\n"
 ' Wheewww!... that's the whole fstab there... Please fix the win partitions
@@ -281,7 +285,7 @@ PUBLIC FUNCTION fS_oPTIONS(sType AS String) AS String
     SELECT CASE LCase(sType)
       CASE "reiserfs"
         sMntOpts = "noatime"
-      CASE "vfat"
+      CASE "vfat", "fat32", "fat16"
         sMntOpts = "fmask=111,dmask=0,gid=users,shortname=mixed,quiet,user"
       CASE "ntfs"
         sMntOpts = "umask=0,gid=users,user"
@@ -363,7 +367,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
   FrmInstallSys.pbInstallProg2.Value = 1
   'Message.Info("Vectorlinux is now installed in your system. Please click next to configure it.")
   FrmInstallSys.tlBanner.Text = "Vectorlinux is now installed in your system. Please click next to configure it."
-  FrmInstallSys.tlCurrPkg.Text = "packages have been Installed. Please click next to move on to System Configuration."
+  FrmInstallSys.tlCurrPkg.Text = "packages have been installed in your system. Please click next to configure it."
   WITH FMain
     .btQuit.Enabled = TRUE
     .btQuit.ForeColor = Color.Black
