@@ -28,7 +28,7 @@ END
 
 PUBLIC SUB Form_Open()
 DIM iImg AS Image
-'ME.Maximized = TRUE
+ME.Maximized = TRUE
 
 MdlCore.LOCK_GUI
 'MdlCore.LOCK_GUI()
