@@ -103,7 +103,7 @@ PUBLIC SUB EXECUTE_LILO()
   SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
   'SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
   sOut = "#!/bin/bash \n" &
-  "/sbin/config-stage1 vector-virgin-light"
+  "/sbin/config-stage1 vector-virgin-heavy"
   File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
   'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
   SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"

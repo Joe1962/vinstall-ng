@@ -171,12 +171,12 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                   .y = y
                   .ReadOnly = TRUE
                   .Width = tl.Width
-                  .Add("Do not format")
                   .Add("XFS")
                   .Add("ReiserFS")
                   .Add("Ext2")
                   .Add("Ext3")
                   .Add("JFS")
+                  .Add("Do not format")
                   '.Add("swap")
                     IF InStr(Trim(FrmSelISO.lstInstallableImg.Text), .Tag) THEN
                       .Enabled = FALSE
