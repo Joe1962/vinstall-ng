@@ -89,7 +89,7 @@ PUBLIC FUNCTION WRITE_NEW_FSTAB() AS Integer
   DIM sWinMntPnt AS String
   DIM sFstab AS String
   DIM sPartFmt AS String
-  DIM cb AS ComboBox
+  DIM cb, mt AS ComboBox
   DIM sRes, sDrive, sBlank, sPartNo AS String
 
     
@@ -157,46 +157,57 @@ PUBLIC FUNCTION WRITE_NEW_FSTAB() AS Integer
 
 
 
-sFstab = sFstab & gb.NewLine & 
-ClsPartSel.sRoot & " / " & LCase(ClsPartSel.fRoot) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fRoot)) & " 0 1" & gb.NewLine
-  
-IF ClsPartSel.sHome THEN 
-  sFstab = sFstab & gb.NewLine & ClsPartSel.sHome & " /home " & LCase(ClsPartSel.fhome) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fhome)) & " 0 2"
-END IF
-IF ClsPartSel.sUsr THEN 
-  sFstab = sFstab & gb.NewLine & ClsPartSel.sUsr & " /usr " & LCase(ClsPartSel.fUsr) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fUsr)) & " 0 2 "
-END IF
-IF ClsPartSel.sOpt THEN 
-  sFstab = sFstab & gb.NewLine & ClsPartSel.sopt & " /opt " & LCase(ClsPartSel.fOpt) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fOpt)) & " 0 2 "
-END IF
-IF ClsPartSel.sVar THEN 
-  sFstab = sFstab & gb.NewLine & ClsPartSel.sVar & " /var " & LCase(ClsPartSel.fVar) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fVar)) & " 0 2 "
-END IF
-IF ClsPartSel.sTmp THEN 
-  sFstab = sFstab & gb.NewLine & ClsPartSel.sTmp & " /tmp " & LCase(ClsPartSel.fTmp) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fTmp)) & " 0 2 "
-END IF
-IF ClsPartSel.sLinuxPart THEN 
-  FOR i = 0 TO ClsPartSel.sLinuxPart.Count - 1
-    sLinPart = ClsPartSel.sLinuxPart[i]
-    sLinMntPnt = ClsPartSel.sLinuxPart[i]
-  NEXT 
-ENDIF 
+sFstab = sFstab & gb.NewLine
+' ' ' ClsPartSel.sRoot & Space(5) & "/" & Space(5) & LCase(ClsPartSel.fRoot) & Space(5) & ME.fS_oPTIONS(LCase(ClsPartSel.fRoot)) & Space(5) & "0 1" & gb.NewLine
+' ' '   
+' ' ' IF ClsPartSel.sHome THEN 
+' ' '   sFstab = sFstab & gb.NewLine & ClsPartSel.sHome & " /home " & LCase(ClsPartSel.fhome) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fhome)) & " 0 2"
+' ' ' END IF
+' ' ' IF ClsPartSel.sUsr THEN 
+' ' '   sFstab = sFstab & gb.NewLine & ClsPartSel.sUsr & " /usr " & LCase(ClsPartSel.fUsr) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fUsr)) & " 0 2 "
+' ' ' END IF
+' ' ' IF ClsPartSel.sOpt THEN 
+' ' '   sFstab = sFstab & gb.NewLine & ClsPartSel.sopt & " /opt " & LCase(ClsPartSel.fOpt) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fOpt)) & " 0 2 "
+' ' ' END IF
+' ' ' IF ClsPartSel.sVar THEN 
+' ' '   sFstab = sFstab & gb.NewLine & ClsPartSel.sVar & " /var " & LCase(ClsPartSel.fVar) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fVar)) & " 0 2 "
+' ' ' END IF
+' ' ' IF ClsPartSel.sTmp THEN 
+' ' '   sFstab = sFstab & gb.NewLine & ClsPartSel.sTmp & " /tmp " & LCase(ClsPartSel.fTmp) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fTmp)) & " 0 2 "
+' ' ' END IF
+' ' ' IF ClsPartSel.sLinuxPart THEN 
+' ' '   FOR i = 0 TO ClsPartSel.sLinuxPart.Count - 1
+' ' '     sLinPart = ClsPartSel.sLinuxPart[i]
+' ' '     sLinMntPnt = ClsPartSel.sLinuxPart[i]
+' ' '   NEXT 
+' ' ' ENDIF 
 
 ' nOW LETS' GET THE REST OF THE PARTITIONS IN THERE
 FOR EACH CB IN MdlPartSel.oMountPoints
+    IF cb.text <> "Not Used" THEN 
+      
     
-  IF InStr(cb.text, "/mnt/") = TRUE THEN 
+  'IF Left(Trim(cb.text), Len("/mnt")) = "/mnt" THEN 
     sDrive = Left(cb.tag, Len("/dev/hda"))
     sPartNo = Right(cb.tag, Len(cb.tag) - Len(sDrive))
+    
         IF Len(sPartNo) > 1 THEN 
           sBlank = ""
         ELSE 
           sBlank = " "
         END IF
-    
-        SHELL "export sfmt=$(parted " & sDrive & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $sfmt | cut -f 6 -d \' \'" TO sRes
+            
+            FOR EACH mt IN MdlPartSel.oFsTypes
+              IF mt.Tag = cb.Tag THEN 
+                IF mt.text = "Do not format" THEN                   
+                  SHELL "export sfmt=$(parted " & sDrive & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $sfmt | cut -f 6 -d \' \'" TO sRes
+                ELSE 
+                  sRes = LCase(mt.text)
+                END IF
+              END IF
+            NEXT                 
       
-        sFstab = sFstab & gb.NewLine & cb.tag & Space(1) & cb.Text & Space(1) & sRes & Space(1) & ME.fS_oPTIONS(sRes) & Space(1) & " 0 2 "
+        sFstab = sFstab & cb.tag & Space(5) & Trim(cb.Text) & Space(5) & Trim(sRes) & Space(5) & ME.fS_oPTIONS(sRes) & Space(5) & " 0 2 " & "\n"
     TRY MKDIR ClsGlobal.sTargetMnt &/ cb.Text
   END IF
 NEXT 
@@ -208,6 +219,7 @@ sFstab = sFstab & "\n\n" &
 "#/dev/hda1   /mnt/win  ntfs   umask=0   0  0\n" 
 
 ' LET'S GET THE WINDOWS PARTITIONS IN HERE
+  IF MdlWinDrives.oWMntPoints THEN 
 FOR EACH cb IN MdlWinDrives.oWMntPoints
   IF cb.text <> "Do not mount" THEN 
     sDrive = Left(cb.tag, Len("/dev/hda"))
@@ -218,14 +230,19 @@ FOR EACH cb IN MdlWinDrives.oWMntPoints
         sBlank = " " 
       END IF
       SHELL "export sfmt=$(parted " & sDrive & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $sfmt | cut -f 6 -d \' \'" TO sRes
-        IF sRes = "fat32" OR sRes = "fat16" THEN sRes = "vfat"
+      sRes = Trim(sRes)
+        IF sRes = "fat32" THEN 
+          sRes = "vfat"
+        ELSE IF sRes = "fat16" THEN 
+          sRes = "vfat"
+        END IF
       sFstab = sFstab & "\n" & 
-      cb.tag & Space(1) & cb.text & Space(1) & sRes & Space(1) & ME.fS_oPTIONS(sRes) & " 0  0 "
+      cb.tag & Space(5) & Trim(cb.text) & Space(5) & Trim(sRes) & Space(5) & ME.fS_oPTIONS(sRes) & " 0  0 "
   END IF
       ' create the mount point for the target
       TRY MKDIR ClsGlobal.sTargetMnt &/ cb.Text
 NEXT 
-  
+  END IF
 
 sFstab = sFstab & "\n\n" &
 "# Floppy disks \n" &
@@ -270,10 +287,11 @@ sFstab = sFstab & "\n"
  
 
   ' now save the file to /etc/fstab
-      IF Exist(ClsGlobal.sTargetMnt &/ "etc") = FALSE THEN 
-        MKDIR ClsGlobal.sTargetMnt &/ "etc"
-      END IF
-    File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "fstab", SConv(sFstab))
+    ' ' '   IF Exist(ClsGlobal.sTargetMnt &/ "etc") = FALSE THEN 
+    ' ' '     MKDIR ClsGlobal.sTargetMnt &/ "etc"
+    ' ' '   END IF
+    ' ' ' File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "fstab", SConv(sFstab))
+    File.Save("/home/vluser/Area-51/fstab", SConv(sFstab))
  
 END 
 

@@ -27,6 +27,7 @@ PUBLIC bIncluded AS Object[]
 PUBLIC arrWinInstalls AS Object[]
 PUBLIC arrWinLabels AS Object[]
 PRIVATE sTmpTxt AS String
+PUBLIC iVlTag AS Integer
 
 PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
   DIM sFatList AS String
@@ -173,6 +174,11 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
     NEXT 
 
   END IF
+  
+  
+  
+  
+  
 END
 
 PUBLIC SUB WinLbl_keyrelease()
@@ -364,8 +370,9 @@ bIncluded = NEW Object[]
                     .tag = arrLinux[i]
                     .Background = Color.Background
                   END WITH 
-                  
+                  ME.iVlTag = FrmLilo.TabStrip1.Index    
               END IF
+              
             END IF
                   
                   

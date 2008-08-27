@@ -33,7 +33,7 @@ MdlLiloOsList.LIST_WIN_INSTALL_CHOICES(ME.TabStrip1.Count)
 ME.tlList.text = "The following Operating Systems have been detected on this computer. Choose your desired option " &
 "for each one of them by clicking on each tab. To proceed with the default pre-set values, simply click \'" & FMain.btnext.text & "\'"
 ME.tlList.Adjust
-ME.TabStrip1.Index = 0
+ME.TabStrip1.Index = MdlLiloOsList.iVltag
 MdlLiloOsList.bVlCliOption = FALSE
 
 
