@@ -14,19 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmPartSel.class:172
+#: FrmPartSel.class:168
 msgid "Please select the partitions you wish to use and how to use them"
 msgstr ""
 
-#: FrmPartSel.class:181
+#: FrmPartSel.class:177
 msgid "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
 msgstr ""
 
-#: FrmPartSel.class:182
+#: FrmPartSel.class:178
 msgid "Detect and Setup Windows partitions for auto-mounting at boot"
 msgstr ""
 
-#: FrmPartSel.class:187
+#: FrmPartSel.class:183
 msgid "Help"
 msgstr ""
 

@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmWinDrives.class:74
+#: FrmWinDrives.class:69
 msgid "Select the windows partitions you would like to mount during boot"
 msgstr ""
 
