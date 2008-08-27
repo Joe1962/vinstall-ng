@@ -139,10 +139,12 @@ DIM sDesc AS String
 
   
   sSearch = Right(LAST.tag, Len(LAST.tag) - InStr(LAST.tag, "/"))
-  
+  'Message(sSearch)
+  SHELL "pkgname " & sSearch TO sSearch
+  sSearch = Trim(sSearch)
    ' IF InStr(sSearch, "-") = < 3 THEN 
     
-  sSearch = Left(sSearch, InStr(sSearch, "-") - 1)
+  'sSearch = Left(sSearch, InStr(sSearch, "-") - 1)
   
   
   '  ELSE 

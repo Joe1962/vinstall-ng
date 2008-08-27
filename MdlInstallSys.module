@@ -287,11 +287,11 @@ sFstab = sFstab & "\n"
  
 
   ' now save the file to /etc/fstab
-    ' ' '   IF Exist(ClsGlobal.sTargetMnt &/ "etc") = FALSE THEN 
-    ' ' '     MKDIR ClsGlobal.sTargetMnt &/ "etc"
-    ' ' '   END IF
-    ' ' ' File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "fstab", SConv(sFstab))
-    File.Save("/home/vluser/Area-51/fstab", SConv(sFstab))
+      IF Exist(ClsGlobal.sTargetMnt &/ "etc") = FALSE THEN 
+        MKDIR ClsGlobal.sTargetMnt &/ "etc"
+      END IF
+    File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "fstab", SConv(sFstab))
+' ' ' ' ' ' ' ' ' ' ' ' '     File.Save("/home/vluser/Area-51/fstab", SConv(sFstab)) ' test line
  
 END 
 

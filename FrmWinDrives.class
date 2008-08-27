@@ -45,8 +45,3 @@ PUBLIC SUB VPanel1_MouseDown()
 
 END
 
-PUBLIC SUB Form_Menu()
-
-  MdlInstallSys.WRITE_NEW_FSTAB()
-
-END

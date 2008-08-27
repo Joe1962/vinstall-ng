@@ -146,8 +146,4 @@ PUBLIC SUB btHelp_Click()
   
 END
 
-PUBLIC SUB Form_Menu()
 
-  MdlInstallSys.WRITE_NEW_FSTAB()
-
-END
