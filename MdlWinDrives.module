@@ -31,7 +31,7 @@ DIM sPart AS String
 DIM sSize AS String
 DIM lbwidth AS Integer
 DIM cbx AS Integer = FrmPartSel.scrollPartitions.Width / 2
-DIM sDisks, sResults, sLine AS String[]
+DIM sDisks, sResults, sLine, wintfs AS String[]
 DIM sPartNo, sBlank, sPartaddr, sPartSize, sPartType, sTempLine AS String
 DIM tlwidth AS Integer
 
@@ -124,25 +124,26 @@ ME.oWMntPoints = NEW Object[]
     NEXT 
         ' now do ntfs partitions the same way
         sDump1 = ""
-        sDisks.Clear
+        'sDisks.Clear
         SHELL "probepart | grep -i ntfs | cut -f 1 -d \' \'" TO sDump1
-        sDisks = Split(sDump1, "\n")
-          FOR i = 0 TO sDisks.Count - 1
-             sPartNo = Right(sDisks[i], Len(sDisks[i]) - Len("/dev/hda"))
+        sDump = Trim(sDump1)
+        wintfs = Split(sDump1, "\n")
+          FOR i = 0 TO wintfs.Count - 1
+             sPartNo = Right(wintfs[i], Len(wintfs[i]) - Len("/dev/hda"))
           IF Len(sPartNo) > 1 THEN 
             sBlank = ""
           ELSE 
             sBlank = " "
           END IF
-            SHELL "export s=$(parted " & Left(sDisks[i], Len("/dev/hda")) & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $s | cut -f 4 -d \' \'" TO sPartsize
+            SHELL "export s=$(parted " & Left(wintfs[i], Len("/dev/hda")) & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $s | cut -f 4 -d \' \'" TO sPartsize
               tl = NEW TextLabel(FrmWinDrives.svWinDrives)
                 WITH tl
                 .y = y
                 .x = x
-                .text = sDisks[i] & " [ " & sPartsize & " ]"
+                .text = wintfs[i] & " [ " & sPartsize & " ]"
                 .Width = 200
                 .Height = 21
-                .tag = sDisks[i]
+                .tag = wintfs[i]
                 .Alignment = Align.Normal
                 END WITH 
               cb = NEW ComboBox(FrmWinDrives.svWinDrives)
@@ -151,7 +152,7 @@ ME.oWMntPoints = NEW Object[]
                   .y = tl.top
                   .Width = tl.Width * 0.75
                   .Height = 21
-                  .tag = sDisks[i]
+                  .tag = wintfs[i]
                   .Add("/mnt" &/ Right(.tag, Len(.tag) - RInStr(.tag, "/")))                  
                   .Add("Do not mount")
                   

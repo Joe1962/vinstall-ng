@@ -8,6 +8,7 @@
     Text = ("Process Overview")
     { tvPlan TreeView
       MoveScaled(1,2,22,56)
+      Expand = True
       Border = False
     }
   }
