@@ -142,14 +142,7 @@ DIM sDesc AS String
   'Message(sSearch)
   SHELL "pkgname " & sSearch TO sSearch
   sSearch = Trim(sSearch)
-   ' IF InStr(sSearch, "-") = < 3 THEN 
-    
-  'sSearch = Left(sSearch, InStr(sSearch, "-") - 1)
   
-  
-  '  ELSE 
-  'sSearch = Left(sSearch, InStr(sSearch, "-") - InStr(sSearch, "-") - 1) ' this will not work
-  'end if
   SHELL "cat " & ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT | grep -m 8 \'" & sSearch & ":\' | cut -f2- -d \':\'" TO sDump
   sArr = Split(sDump, "\n")
     FOR i = 0 TO sArr.count - 1
