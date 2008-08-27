@@ -171,12 +171,12 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                   .y = y
                   .ReadOnly = TRUE
                   .Width = tl.Width
-                  .Add("XFS")
-                  .Add("ReiserFS")
-                  .Add("Ext2")
-                  .Add("Ext3")
-                  .Add("JFS")
                   .Add("Do not format")
+                  .Add("reiserfs")
+                  .Add("ext2")
+                  .Add("ext3")
+                  .Add("jfs")
+                  .Add("xfs")
                   '.Add("swap")
                     IF InStr(Trim(FrmSelISO.lstInstallableImg.Text), .Tag) THEN
                       .Enabled = FALSE
@@ -287,6 +287,16 @@ PUBLIC SUB MountPoints_CLick()
   'DIM sTag AS String = LAST.tag
   'DIM sText AS String = Trim(LAST.text)
   
+  FOR EACH sdropdwn IN ME.oMountPoints
+    IF LAST.text <> "Not Used" AND LAST.text = sdropdwn.Text AND LAST.tag <> sdropdwn.tag THEN 
+      
+      Message.Error("Please select only one " & LAST.text & " partition")
+      LAST.text = "Not Used"
+      STOP EVENT 
+    END IF
+  NEXT 
+   
+   
    FOR EACH sdropdwn IN oFsTypes
               IF sdropdwn.tag = LAST.tag THEN 
                 sdropdwn.Enabled = TRUE
@@ -295,6 +305,8 @@ PUBLIC SUB MountPoints_CLick()
                 END IF
                 sdropdwn.Text = "Do not format"
               END IF
+   
+   
             NEXT 
     
     SELECT CASE LAST.text
