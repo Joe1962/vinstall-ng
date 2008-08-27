@@ -32,7 +32,7 @@ PUBLIC SUB FIND_ISO_ON_DRIVE(sDrive AS String)
   DIM sISOList AS String[]
   DIM sResults, sISO AS String
   DIM i AS Integer
-  
+  'Message(ClsGlobal.sSourceMnt)
   SHELL "umount " & ClsGlobal.sSourceMnt WAIT 
   SHELL "mount " & sDrive & Space(1) & ClsGlobal.sSourceMnt WAIT 
     SHELL "ls " & ClsGlobal.sSourceMnt & " | grep -i vl* | grep -i iso" TO sResults
@@ -99,11 +99,12 @@ DIM i AS Integer
 DIM sPartition AS String
 
 'SHELL "sudo /sbin/probepart | grep -e \"*Linux$\" | cut -f 1 -d \' \'" TO sResults
-  SHELL "/sbin/probepart | cut -f 1 -d \' \' | grep /dev" TO sResults 
-  
+  'SHELL "/sbin/probepart |grep -i extended | grep -i swap | cut -f 1 -d \' \' | grep /dev" TO sResults 
+  SHELL "probepart | grep -v -i \'swap\' | grep -v -i \'ext\' |grep \'/dev\'| grep -v \'Disk\'| cut -f 1 -d \' \'" TO sResults
+  'Message(sResults)
   sResults = Trim(sResults)
   'Message.Info(sResults)
-  IF InStr(sResults, gb.NewLine) THEN 
+  'IF InStr(sResults, gb.NewLine) THEN 
     sPartList = Split(sResults, gb.NewLine)
       FOR i = 0 TO sPartList.count - 1
         sPartition = Trim(sPartList[i])
@@ -111,10 +112,10 @@ DIM sPartition AS String
            ME.FIND_ISO_ON_DRIVE(sPartition)
             
       NEXT 
-  ELSE ' only one linux partition found
-    sPartition = Trim(sResults)
-      ME.FIND_ISO_ON_DRIVE(sPartition)
-  END IF
+  'ELSE ' only one linux partition found
+  '  sPartition = Trim(sResults)
+  '    ME.FIND_ISO_ON_DRIVE(sPartition)
+  'END IF
     
 END
 
@@ -131,7 +132,7 @@ PUBLIC SUB MEDIA_SCAN()
   DIM i AS Integer
   
     
-  ClsGlobal.sSourceMnt = "/mnt" &/ "cdrom"
+  ClsGlobal.sSourceMnt = "/mnt/source"
   sMountPoint = ClsGlobal.sSourceMnt
   
   sCmd = "cat /proc/sys/dev/cdrom/info | grep \"drive name\" |cut -f 2 -d\':\'|xargs -n 2" 
@@ -214,7 +215,7 @@ FMain.tvPlan["Prep0"].Selected = TRUE
 
 'RETURN 
 FrmSelISO.tlDistroDesc.Text = "<b>Scanning system for installable media. Please wait ...</b>"
-
+IF Exist(ClsGlobal.sSourceMnt) = FALSE THEN TRY MKDIR ClsGlobal.sSourceMnt
 
 
 WAIT 1

@@ -28,7 +28,7 @@ STATIC PUBLIC iSwapMin AS Integer = 64
 STATIC PUBLIC sRootMnt AS String 
 STATIC PUBLIC sHomeMnt AS String 
 STATIC PUBLIC sTargetMnt AS String 
-STATIC PUBLIC sSourceMnt AS String 
+STATIC PUBLIC sSourceMnt AS String = "/mnt/source" 
 STATIC PUBLIC sMediaMnt AS String 
 
 STATIC PUBLIC sBulkList AS String

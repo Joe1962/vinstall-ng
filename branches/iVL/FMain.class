@@ -33,7 +33,7 @@ ME.Maximized = TRUE
 MdlCore.LOCK_GUI
 'MdlCore.LOCK_GUI()
 ClsGlobal.sBackNav = NEW Object[]
-ClsGlobal.sSourceMnt = "/mnt" &/ "cdrom" 'FOR TESTING ONLY
+'ClsGlobal.sSourceMnt = "/mnt" &/ "source" 'FOR TESTING ONLY
 '/ THE FOLLOWING LINES HAVE BEEN COMMENTED FOR TESTING ONLY
 
 FrmSelISO.Reparent(ME.pnlWinHost)
@@ -70,7 +70,7 @@ WITH ME
   
 END WITH 
 'ME.TreeView1.BackColor = Color.Transparent
-ME.AUTOSIZE_LEFT_PANE
+''ME.AUTOSIZE_LEFT_PANE()
 ' ' ' / THE FOLLOWING LINES HAVE BEEN IMPLEMENTED FOR TESTING PURPOSES
 ' ' ' WITH FrmLilo
 ' ' ' .Reparent(Fmain.pnlWinHost)
@@ -79,21 +79,26 @@ ME.AUTOSIZE_LEFT_PANE
 ' ' ' .Show
 ' ' ' END WITH 
 
+
+
 END
 
 PUBLIC SUB AUTOSIZE_LEFT_PANE()
+
+
   
   DIM iWidth AS Integer
   ' this will find widest child in treeview
     ME.tvPlan.MoveFirst()
       REPEAT 
         IF MdlObjSizer.get_object_width(tvPlan.Item.Text) > iWidth THEN 
-          iWidth = MdlObjSizer.get_object_width(tvPlan.item.Text) + 24
+          iWidth = MdlObjSizer.get_object_width(tvPlan.item.Text) + 12
         END IF
       UNTIL ME.tvPlan.MoveBelow()
-  
-    ME.tvPlan.Width = iWidth + (iWidth / 20)
-    ME.Frame1.Width = iWidth + (iWidth / 10)
+  'Message(iWidth)
+    'ME.tvPlan.Width = iWidth + (iWidth / 5)
+    ME.tvPlan.Width = iWidth + 6
+    ME.Frame1.Width = iWidth + 12
 END
 
 
@@ -117,10 +122,10 @@ DIM iMid AS Integer
 'ME.pnlWinHost.Resize(ME.ClientWidth - ME.Frame1.Width - (ME.Frame1.left * 8), ME.ClientH - ME.tlBanner.Height - (ME.btback.Height * 8))
   WITH ME
     .tlBanner.width = ME.width
-    .Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.5, .ClientHeight - .PictureBox1.Height * 1.5)
+  .Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.7, .ClientHeight - .PictureBox1.Height * 1.5)
     '.Frame1.Move(4, .PictureBox1.top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 2))
     '.Frame1.Resize(MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 1.5))
-    .tvPlan.Move(4, 24, .Frame1.Width - 8, .Frame1.Height - 28) ' THIS WILL LEAVE 16PIX ON TOP AND BOTTOM AND 2 ON LEFT AND RIGHT
+  .tvPlan.Move(4, 24, .Frame1.Width - 8, .Frame1.Height - 28) ' THIS WILL LEAVE 16PIX ON TOP AND BOTTOM AND 2 ON LEFT AND RIGHT
     '.tvPlan.Move(4, 24, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
     
     '.pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top + (.tlBanner.Height / 2), .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 3.5)))

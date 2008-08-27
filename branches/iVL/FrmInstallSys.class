@@ -41,7 +41,7 @@ PUBLIC SUB Form_Open()
    
 FMain.FrmCurr = ME
 
-      ClsGlobal.sSourceMnt = "/mnt/cdrom"
+      'ClsGlobal.sSourceMnt = "/mnt/cdrom"
       'ME.FrmProg.Text = " Preparing system for installation "
       ME.tlCurrStepLbl.Text = "Current Step"
       'ME.show_credits
@@ -49,6 +49,9 @@ FMain.FrmCurr = ME
       'ME.tmCredits.Enabled = TRUE
  
 'STOP EVENT 
+
+MdlSetup.RUN_CREDITS(ClsGlobal.sSourceMnt &/ "CREDIT", ME.tlCredits)
+WAIT 
 
 ME.BEGIN_PROCESS()  ' COMMENTED FOR TESTING PURPOSES
 
@@ -76,8 +79,10 @@ PUBLIC SUB Form_Resize()
       .pbInstallProg.Move(.tlCurrStepLbl.left + (.tlCurrStepLbl.Width), .tlCurrStepLbl.top, .FrmProg.Width - (.tlCurrStepLbl.Width + (.tlcurrsteplbl.left * 2)))
       .tlCurrPkg2.Move(.tlCurrPkg.Left, .tlCurrPkg.top + (.tlCurrPkg.Height * 2.5), .FrmProg.Width - (.tlCurrPkg.Left * 2))
       .pbInstallProg2.Move(.tlCurrPkg2.Left, .tlCurrPkg2.top + (.tlCurrPkg2.Height + 2), .tlCurrPkg2.Width, 27)
-      .frmCredits.Move(.FrmProg.left, .FrmProg.top + .FrmProg.Height + 16, .FrmProg.Width)
-      .sclCredits.Move(8, 24, .frmCredits.Width - (.sclCredits.left * 2))
+'      .frmCredits.Move(.FrmProg.left, .FrmProg.top + .FrmProg.Height + 16, .FrmProg.Width)
+      '.scrlCredits.move(8, 24, .FrmProg.Width - (.scrlCredits.left * 2))
+      .scrlCredits.Move(.FrmProg.left, .FrmProg.top + FrmProg.Height + 24, .FrmProg.Width)
+      
       .tlCredits.Move(8, 4)
       
       '.pbInstallProg.Move(.tlCurrStepLbl.Left + (.tlCurrStepLbl.Width + 2), .FrmProg.Width - (.tlCurrStepLbl.Width + (.tlCurrStepLbl.left * 2))) '
@@ -104,25 +109,25 @@ END
 
 PUBLIC SUB tmCredits_Timer()
   
-  ' ' DIM i AS Integer = ME.FrmProg.left + 20
-  ' ' 
-  ' ' IF ME.tlCredits.x < (i) - (ME.tlCredits.Width) THEN ME.tlCredits.x = (frmCredits.Width - 12)
-  ' '   tlCredits.x = frmCredits.left + 4 + (tlCredits.x - 10)
-  ' ' 
-  
+  ' ' ' DIM i AS Integer = ME.FrmProg.left + 20
+  ' ' ' 
+  ' ' ' IF ME.tlCredits.x < (i) - (ME.tlCredits.Width) THEN ME.tlCredits.x = (frmCredits.Width - 12)
+  ' ' '   tlCredits.x = frmCredits.left + 4 + (tlCredits.x - 10)
+  ' ' ' 
+  ' ' ' 
   
   
   
   
   DIM X AS Integer
-  X = ME.sclCredits.ScrollX
-  
-  INC ME.sclCredits.ScrollX
-      IF X = ME.sclCredits.Scrollx THEN 
-        ME.sclCredits.scrollx = 0
+  X = ME.scrlCredits.ScrollX
+  'REPEAT 
+  INC ME.scrlCredits.ScrollX
+      IF X = ME.scrlCredits.Scrollx THEN 
+        ME.scrlCredits.scrollx = 0
         ME.tmCredits.Enabled = FALSE
       END IF
-      
+  'UNTIL tmCredits.Enabled = FALSE
     
    
    '  

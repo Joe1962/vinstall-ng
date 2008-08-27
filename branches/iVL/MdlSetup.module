@@ -211,6 +211,7 @@ PUBLIC SUB RUN_CREDITS(sCreditFile AS String, tlOutput AS TextLabel)
   
   DIM sFile AS String[] = Split(File.Load(sCreditFile), "\n")
   DIM i AS Integer
+  tlOutput.Text = ""
   
   FOR i = 0 TO sFile.count - 1
       IF Left(Trim(sFile[i]), Len("M0E-lnx")) = "M0E-lnx" THEN 
@@ -222,14 +223,13 @@ PUBLIC SUB RUN_CREDITS(sCreditFile AS String, tlOutput AS TextLabel)
       END IF
       'tlOutput.text = tlOutput.text & "<br>" & sFile[i]
       'tlOutput.Adjust
-    tlOutput.Text = tlOutput.Text & Space(12) & " *** " & sFile[i]
+    tlOutput.Text = tlOutput.Text & " ~ " & sFile[i]
 '    tlOutput.Text = sFile[i]
-    'WAIT 20
+    
   NEXT 
   tlOutput.Width = MdlObjSizer.get_object_width(tlOutput.Text) + 24
-  'tlOutput.Border = Border.Plain
-  'FrmInstallSys.tmCredits.Enabled = TRUE
-  'FrmInstallSys.tmCredits.Start
+  WAIT 
+  FrmInstallSys.tmCredits.Enabled = TRUE
     
 END
 

@@ -196,9 +196,18 @@ FOR EACH CB IN MdlPartSel.oMountPoints
         ELSE 
           sBlank = " "
         END IF
-            
+             IF cb.tag = ClsPartSel.sRoot THEN 
+                FOR EACH mt IN MdlPartFrmt.oFsTypes
+                  IF mt.tag = cb.tag THEN 
+                    sFstab = sFstab & "\n" & 
+                    mt.tag & Space(5) & Trim(mt.text) & Space(5) & "defaults 0 1" & "\n"
+                  END IF
+                NEXT 
+             ELSE 
             FOR EACH mt IN MdlPartSel.oFsTypes
               IF mt.Tag = cb.Tag THEN 
+                
+                
                 IF mt.text = "Do not format" THEN                   
                   SHELL "export sfmt=$(parted " & sDrive & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $sfmt | cut -f 6 -d \' \'" TO sRes
                 ELSE 
@@ -206,8 +215,9 @@ FOR EACH CB IN MdlPartSel.oMountPoints
                 END IF
               END IF
             NEXT                 
-      
+        
         sFstab = sFstab & cb.tag & Space(5) & Trim(cb.Text) & Space(5) & Trim(sRes) & Space(5) & ME.fS_oPTIONS(sRes) & Space(5) & " 0 2 " & "\n"
+    END IF
     TRY MKDIR ClsGlobal.sTargetMnt &/ cb.Text
   END IF
 NEXT 
@@ -235,6 +245,8 @@ FOR EACH cb IN MdlWinDrives.oWMntPoints
           sRes = "vfat"
         ELSE IF sRes = "fat16" THEN 
           sRes = "vfat"
+        ELSE IF sRes LIKE "ntfs" THEN 
+          sRes = "ntfs-3g"
         END IF
       sFstab = sFstab & "\n" & 
       cb.tag & Space(5) & Trim(cb.text) & Space(5) & Trim(sRes) & Space(5) & ME.fS_oPTIONS(sRes) & " 0  0 "
@@ -307,6 +319,8 @@ PUBLIC FUNCTION fS_oPTIONS(sType AS String) AS String
         sMntOpts = "fmask=111,dmask=0,gid=users,shortname=mixed,quiet,user"
       CASE "ntfs"
         sMntOpts = "umask=0,gid=users,user"
+      CASE "ntfs-3g"
+        sMntOpts = "defaults,allow_other,umask=0,users,nls=utf8,noexec"
       CASE "ext2", "ext3"
         sMntOpts = "defaults"
       CASE ELSE 
