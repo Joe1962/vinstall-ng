@@ -126,7 +126,7 @@ ME.oWMntPoints = NEW Object[]
         sDump1 = ""
         'sDisks.Clear
         SHELL "probepart | grep -i ntfs | cut -f 1 -d \' \'" TO sDump1
-        sDump = Trim(sDump1)
+        sDump1 = Trim(sDump1)
         wintfs = Split(sDump1, "\n")
           FOR i = 0 TO wintfs.Count - 1
              sPartNo = Right(wintfs[i], Len(wintfs[i]) - Len("/dev/hda"))
