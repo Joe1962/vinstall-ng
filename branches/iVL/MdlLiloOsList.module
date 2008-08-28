@@ -370,7 +370,7 @@ bIncluded = NEW Object[]
                     .tag = arrLinux[i]
                     .Background = Color.Background
                   END WITH 
-                  ME.iVlTag = FrmLilo.TabStrip1.Index    
+                  ME.iVlTag = FrmLilo.TabStrip1.Index - 1
               END IF
               
             END IF

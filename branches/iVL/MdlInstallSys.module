@@ -92,51 +92,7 @@ PUBLIC FUNCTION WRITE_NEW_FSTAB() AS Integer
   DIM cb, mt AS ComboBox
   DIM sRes, sDrive, sBlank, sPartNo AS String
 
-    
-            'FOR testing purposes
-            'ClsPartSel.sRoot = "/mnt/target"
-            
-        
-    
-
-  
-  ' MAKE SURE THE PARTITIONS TYPES ARE DETECTED CORRECTLY
-      
-    IF ClsPartSel.fRoot LIKE "do not format" THEN 
-    SHELL "mount | grep -m 1 \'" & ClsPartSel.sRoot & "\' | cut -f 5 -d \' \'" TO sPartFmt
-      sPartFmt = Trim(sPartFmt)
-      ClsPartSel.fRoot = sPartFmt
-          
-    END IF
-        IF ClsPartSel.sHome AND ClsPartSel.fhome LIKE "do not format" THEN 
-    SHELL "mount | grep -m 1 \'" & ClsPartSel.sHome & "\' | cut -f 5 -d \' \'" TO sPartFmt
-      sPartFmt = Trim(sPartFmt)
-      ClsPartSel.fhome = sPartFmt
-    END IF
-        IF ClsPartSel.fUsr AND ClsPartSel.fUsr LIKE "do not format" THEN 
-    SHELL "mount | grep -m 1 \'" & ClsPartSel.sUsr & "\' | cut -f 5 -d \' \'" TO sPartFmt
-      sPartFmt = Trim(sPartFmt)
-      ClsPartSel.fUsr = sPartFmt
-    END IF
-    IF ClsPartSel.fVar AND ClsPartSel.fVar LIKE "do not format" THEN 
-    SHELL "mount | grep -m 1 \'" & ClsPartSel.sVar & "\' | cut -f 5 -d \' \'" TO sPartFmt
-      sPartFmt = Trim(sPartFmt)
-      ClsPartSel.fVar = sPartFmt
-    END IF
-    IF ClsPartSel.fOpt AND ClsPartSel.fOpt LIKE "do not format" THEN 
-    SHELL "mount | grep -m 1 \'" & ClsPartSel.sOpt & "\' | cut -f 5 -d \' \'" TO sPartFmt
-      sPartFmt = Trim(sPartFmt)
-      ClsPartSel.fOpt = sPartFmt
-    END IF
-    IF ClsPartSel.fTmp AND ClsPartSel.fTmp LIKE "do not format" THEN 
-    SHELL "mount | grep -m 1 \'" & ClsPartSel.sTmp & "\' | cut -f 5 -d \' \'" TO sPartFmt
-      sPartFmt = Trim(sPartFmt)
-      ClsPartSel.fTmp = sPartFmt
-      
-    END IF
-  
-  
-  
+ 
   ' make the changes show up on the steps now  
   FrmInstallSys.tlCurrPkg.Text = "Writing new /etc/fstab to system"
   
@@ -158,29 +114,7 @@ PUBLIC FUNCTION WRITE_NEW_FSTAB() AS Integer
 
 
 sFstab = sFstab & gb.NewLine
-' ' ' ClsPartSel.sRoot & Space(5) & "/" & Space(5) & LCase(ClsPartSel.fRoot) & Space(5) & ME.fS_oPTIONS(LCase(ClsPartSel.fRoot)) & Space(5) & "0 1" & gb.NewLine
-' ' '   
-' ' ' IF ClsPartSel.sHome THEN 
-' ' '   sFstab = sFstab & gb.NewLine & ClsPartSel.sHome & " /home " & LCase(ClsPartSel.fhome) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fhome)) & " 0 2"
-' ' ' END IF
-' ' ' IF ClsPartSel.sUsr THEN 
-' ' '   sFstab = sFstab & gb.NewLine & ClsPartSel.sUsr & " /usr " & LCase(ClsPartSel.fUsr) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fUsr)) & " 0 2 "
-' ' ' END IF
-' ' ' IF ClsPartSel.sOpt THEN 
-' ' '   sFstab = sFstab & gb.NewLine & ClsPartSel.sopt & " /opt " & LCase(ClsPartSel.fOpt) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fOpt)) & " 0 2 "
-' ' ' END IF
-' ' ' IF ClsPartSel.sVar THEN 
-' ' '   sFstab = sFstab & gb.NewLine & ClsPartSel.sVar & " /var " & LCase(ClsPartSel.fVar) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fVar)) & " 0 2 "
-' ' ' END IF
-' ' ' IF ClsPartSel.sTmp THEN 
-' ' '   sFstab = sFstab & gb.NewLine & ClsPartSel.sTmp & " /tmp " & LCase(ClsPartSel.fTmp) & " " & ME.fS_oPTIONS(LCase(ClsPartSel.fTmp)) & " 0 2 "
-' ' ' END IF
-' ' ' IF ClsPartSel.sLinuxPart THEN 
-' ' '   FOR i = 0 TO ClsPartSel.sLinuxPart.Count - 1
-' ' '     sLinPart = ClsPartSel.sLinuxPart[i]
-' ' '     sLinMntPnt = ClsPartSel.sLinuxPart[i]
-' ' '   NEXT 
-' ' ' ENDIF 
+
 
 ' nOW LETS' GET THE REST OF THE PARTITIONS IN THERE
 FOR EACH CB IN MdlPartSel.oMountPoints
@@ -200,7 +134,7 @@ FOR EACH CB IN MdlPartSel.oMountPoints
                 FOR EACH mt IN MdlPartFrmt.oFsTypes
                   IF mt.tag = cb.tag THEN 
                     sFstab = sFstab & "\n" & 
-                    mt.tag & Space(5) & Trim(mt.text) & Space(5) & "defaults 0 1" & "\n"
+                    mt.tag & Space(5) & Space(5) & "/" & Space(5) & Trim(mt.text) & Space(5) & "defaults 0 1" & "\n"
                   END IF
                 NEXT 
              ELSE 

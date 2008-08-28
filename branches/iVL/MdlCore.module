@@ -112,10 +112,7 @@ DIM sPartition AS String
            ME.FIND_ISO_ON_DRIVE(sPartition)
             
       NEXT 
-  'ELSE ' only one linux partition found
-  '  sPartition = Trim(sResults)
-  '    ME.FIND_ISO_ON_DRIVE(sPartition)
-  'END IF
+
     
 END
 
