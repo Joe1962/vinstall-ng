@@ -312,7 +312,11 @@ PUBLIC SUB MountPoints_CLick()
     SELECT CASE LAST.text
         CASE "/"
           ClsPartSel.sRoot = LCase(LAST.tag)
-        
+              FOR EACH sdropdwn IN ME.oFsTypes
+                IF sdropdwn.tag = LAST.tag THEN 
+                  sdropdwn.Text = "reiserfs"
+                END IF
+              NEXT 
         CASE "/home"
           ClsPartSel.sHome = LCase(LAST.tag)
                           

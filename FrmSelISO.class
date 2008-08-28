@@ -39,6 +39,8 @@ PUBLIC SUB lstInstallableImg_Click()
     RETURN ' quiet return... we already know there are no images found
   END IF
   
+'Message(Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, "/") - 4))
+
 
 END
 
@@ -59,6 +61,12 @@ PUBLIC SUB Form_Open()
   IF ClsGlobal.sBackNav.Find(ME) = -1 THEN 
   ClsGlobal.sBackNav.Add(ME)
   END IF
+ 
+  IF lstInstallableImg.count = 1 THEN 
+    tlBanner.Text = "Click \'" & FMain.btnext.text & "\' to begin installating " &
+    Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, "/") - 4)
+  END IF 
+ 
  
 
 END
