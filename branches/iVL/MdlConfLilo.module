@@ -107,8 +107,8 @@ PUBLIC SUB EXECUTE_LILO()
   File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
   'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
   SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
-  Message("Vectorlinux has been installed click OK to reboot")
-  SHELL "reboot"
+  'Message("Vectorlinux has been installed click OK to reboot")
+  'SHELL "reboot"
 END
 
 
