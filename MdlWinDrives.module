@@ -45,6 +45,7 @@ ME.oWMntPoints = NEW Object[]
   ' THESE ARE ONLY NEEDED FOR FSTAB
   
   SHELL "probepart | grep -i fat | cut -f 1 -d \' \'" TO sDump1
+  'message(sDump1)
   IF sDump1 <> "" THEN 
     sDump1 = Trim(sDump1)
     'y = y + tl.Height * 2 + 4
@@ -93,6 +94,9 @@ ME.oWMntPoints = NEW Object[]
           ELSE 
             sBlank = " "
           END IF
+          IF Len(sPartNo) < 1 THEN
+            BREAK 
+          ENDIF 
             SHELL "export s=$(parted " & Left(sDisks[i], Len("/dev/hda")) & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $s | cut -f 4 -d \' \'" TO sPartsize
               tl = NEW TextLabel(FrmWinDrives.svWinDrives)
                 WITH tl

@@ -135,6 +135,7 @@ FOR EACH CB IN MdlPartSel.oMountPoints
                   IF mt.tag = cb.tag THEN 
                     sFstab = sFstab & "\n" & 
                     mt.tag & Space(5) & Space(5) & "/" & Space(5) & Trim(mt.text) & Space(5) & "defaults 0 1" & "\n"
+
                   END IF
                 NEXT 
              ELSE 
