@@ -252,7 +252,10 @@ PUBLIC SUB btnext_Click()
         
     
       'frmNext = FrmLiloOsList
-      
+       frmNext = FrmZoneSet
+       
+    CASE "FrmZoneSet"
+       MdlZoneSet.TIME_ZONES
         
   END SELECT 
                        

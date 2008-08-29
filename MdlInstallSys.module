@@ -131,7 +131,7 @@ FOR EACH CB IN MdlPartSel.oMountPoints
           sBlank = " "
         END IF
              IF cb.tag = ClsPartSel.sRoot THEN 
-                FOR EACH mt IN MdlPartFrmt.oFsTypes
+                FOR EACH mt IN MdlPartSel.oFsTypes
                   IF mt.tag = cb.tag THEN 
                     sFstab = sFstab & "\n" & 
                     mt.tag & Space(5) & Space(5) & "/" & Space(5) & Trim(mt.text) & Space(5) & "defaults 0 1" & "\n"
