@@ -255,7 +255,8 @@ PUBLIC SUB btnext_Click()
        frmNext = FrmZoneSet
        
     CASE "FrmZoneSet"
-       MdlZoneSet.TIME_ZONES
+       'MdlZoneSet.TIME_ZONES()
+       frmNext = FrmSelISO
         
   END SELECT 
                        
