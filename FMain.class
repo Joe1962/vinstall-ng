@@ -256,7 +256,11 @@ PUBLIC SUB btnext_Click()
        
     CASE "FrmZoneSet"
        'MdlZoneSet.TIME_ZONES()
-       frmNext = FrmSelISO
+       frmNext = FrmRootPass
+       
+    CASE "FrmRootPass"
+    
+       frmNext = FrmRootPass
         
   END SELECT 
                        

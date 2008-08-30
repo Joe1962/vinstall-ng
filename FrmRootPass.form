@@ -1,0 +1,36 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Text = ("")
+  { Frame1 Frame
+    MoveScaled(1,1,62,30)
+    Text = ("Set Root Password")
+    { TextLabel1 TextLabel
+      MoveScaled(3,3,29,11)
+      Text = ("Choose a password for the root account. You must enter the Root Password twice to ensure accuracy.")
+    }
+    { tbPasswd1 TextBox
+      MoveScaled(35,6,21,2)
+      Text = ("")
+      Password = True
+    }
+    { TextLabel2 TextLabel
+      MoveScaled(35,3,12,2)
+      Text = ("Enter Password")
+    }
+    { Button1 Button
+      MoveScaled(46,18,11,2)
+      Text = ("Set Password")
+    }
+  }
+  { tbPasswd2 TextBox
+    MoveScaled(36,14,21,2)
+    Text = ("")
+    Password = True
+  }
+  { TextLabel3 TextLabel
+    MoveScaled(36,11,15,2)
+    Text = ("ReEnter Password")
+  }
+}
