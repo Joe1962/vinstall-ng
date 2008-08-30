@@ -11,5 +11,7 @@ END
 PUBLIC SUB lbTmZone_Click()
 
   Message(ME.lbTmZone.Text)
+  MdlZoneSet.SET_ZONE(ME.lbTmZone.Text)
+  MdlZoneSet.WRITE_CONF()
 
 END
