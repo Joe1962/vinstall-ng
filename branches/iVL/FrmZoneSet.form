@@ -3,20 +3,28 @@
 { Form Form
   MoveScaled(0,0,64,55)
   Text = ("")
+  { Frame1 Frame
+    MoveScaled(1,1,62,53)
+    Text = ("Set Hardware Clock and TimeZone")
+  }
+  { TextLabel1 TextLabel
+    MoveScaled(3,5,34,11)
+    Text = ("Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way.")
+  }
+  { TextLabel2 TextLabel
+    MoveScaled(3,21,23,13)
+    Text = ("Choose the correct timezone for the area in which you live.")
+  }
+  { Button1 Button
+    MoveScaled(49,50,12,3)
+    Text = ("Set TimeZone")
+  }
+  { lbTmZone ListBox
+    MoveScaled(29,18,32,23)
+  }
   { cbHwClock ComboBox
     MoveScaled(40,8,21,2)
     Text = ("ComboBox1")
     List = [("LocalTime"), ("UTC")]
-  }
-  { TextLabel1 TextLabel
-    MoveScaled(1,2,34,11)
-    Text = ("Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way.")
-  }
-  { TextLabel2 TextLabel
-    MoveScaled(1,17,23,13)
-    Text = ("Choose the correct timezone for the area in which you live.")
-  }
-  { lbTmZone ListBox
-    MoveScaled(29,16,32,30)
   }
 }

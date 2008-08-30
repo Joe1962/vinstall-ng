@@ -2,6 +2,7 @@
 
 
 PUBLIC SUB Form_Open()
+  Fmain.frmcurr = ME
   
   MdlZoneSet.TIME_ZONES()
   ME.lbTmZone.Index = 9
@@ -10,8 +11,15 @@ END
 
 PUBLIC SUB lbTmZone_Click()
 
-  Message(ME.lbTmZone.Text)
+  'Message(ME.lbTmZone.Text)
+
+
+END
+
+PUBLIC SUB Button1_Click()
+
   MdlZoneSet.SET_ZONE(ME.lbTmZone.Text)
   MdlZoneSet.WRITE_CONF()
-
+  Message("TimeZone " & ME.lbTmZone.Text & " Was set.")
+  
 END

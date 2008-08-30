@@ -1,0 +1,23 @@
+' Gambas class file
+
+PUBLIC SUB Form_Open()
+  Fmain.frmcurr = ME
+END 
+
+
+PUBLIC SUB Button1_Click()
+  IF ME.tbPasswd1.Text = "" THEN 
+    Message("Enter a Password for root.")
+  ELSE 
+    IF ME.tbPasswd1.Text = ME.tbPasswd2.Text THEN 
+      SHELL "chroot /mnt/target /sbin/passwdx root " & ME.tbPasswd1.Text
+      Message("Root password Set.")
+      ME.tbPasswd1.Clear
+      ME.tbPasswd2.Clear
+    ELSE 
+      Message("Passwords do not match")
+      ME.tbPasswd1.Clear
+      ME.tbPasswd2.Clear
+    ENDIF 
+  ENDIF 
+END
