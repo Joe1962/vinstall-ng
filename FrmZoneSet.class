@@ -1,2 +1,15 @@
 ' Gambas class file
 
+
+PUBLIC SUB Form_Open()
+  
+  MdlZoneSet.TIME_ZONES()
+  ME.lbTmZone.Index = 9
+END
+
+
+PUBLIC SUB lbTmZone_Click()
+
+  Message(ME.lbTmZone.Text)
+
+END
