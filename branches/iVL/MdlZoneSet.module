@@ -24,21 +24,44 @@ PUBLIC sTimeZones AS String = "US/Alaska,US/Aleutian,US/Arizona,US/Central,US/Ea
 "right/America/Dominica,right/America/Edmonton,right/America/Eirunepe,right/America/El_Salvador,right/America/Ensenada,right/America/Fort_Wayne,right/America/Fortaleza,right/America/Glace_Bay,right/America/Godthab,right/America/Goose_Bay,right/America/Grand_Turk,right/America/Grenada,right/America/Guadeloupe,right/America/Guatemala,right/America/Guayaquil,right/America/Guyana,right/America/Halifax,right/America/Havana,right/America/Hermosillo,right/America/Indiana/Indianapolis,right/America/Indiana/Knox,right/America/Indiana/Marengo,right/America/Indiana/Vevay,right/America/Indianapolis,right/America/Inuvik,right/America/Iqaluit,right/America/Jamaica,right/America/Jujuy,right/America/Juneau,right/America/Kentucky/Louisville,right/America/Kentucky/Monticello,right/America/Knox_IN,right/America/La_Paz,right/America/Lima,right/America/Los_Angeles,right/America/Louisville,right/America/Maceio,right/America/Managua,right/America/Manaus,right/America/Martinique,right/America/Mazatlan,right/America/Mendoza,right/America/Menominee,right/America/Merida,right/America/Mexico_City,right/America/Miquelon,right/America/Monterrey,right/America/Montevideo,right/America/Montreal,right/America/Montserrat,right/America/Nassau,right/America/New_York,right/America/Nipigon,right/America/Nome,right/America/Noronha,right/America/Panama,right/America/Pangnirtung,right/America/Paramaribo,right/America/Phoenix,right/America/Port-au-Prince,right/America/Port_of_Spain,right/America/Porto_Acre,right/America/Porto_Velho,right/America/Puerto_Rico,right/America/Rainy_River,right/America/Rankin_Inlet,right/America/Recife,right/America/Regina,right/America/Rosario,right/America/Santiago,right/America/Santo_Domingo,right/America/Sao_Paulo,right/America/Scoresbysund,right/America/Shiprock,right/America/St_Johns,right/America/St_Kitts,right/America/St_Lucia,right/America/St_Thomas,right/America/St_Vincent,right/America/Swift_Current,right/America/Tegucigalpa,right/America/Thule,right/America/Thunder_Bay,right/America/Tijuana,right/America/Tortola,right/America/Vancouver,right/America/Virgin,right/America/Whitehorse,right/America/Winnipeg,right/America/Yakutat,right/America/Yellowknife,right/Antarctica/Casey,right/Antarctica/Davis,right/Antarctica/DumontDUrville,right/Antarctica/Mawson,right/Antarctica/McMurdo,right/Antarctica/Palmer,right/Antarctica/South_Pole,right/Antarctica/Syowa,right/Arctic/Longyearbyen,right/Asia/Aden,right/Asia/Almaty,right/Asia/Amman,right/Asia/Anadyr,right/Asia/Aqtau,right/Asia/Aqtobe,right/Asia/Ashgabat,right/Asia/Ashkhabad,right/Asia/Baghdad,right/Asia/Bahrain,right/Asia/Baku,right/Asia/Bangkok,right/Asia/Beirut,right/Asia/Bishkek,right/Asia/Brunei,right/Asia/Calcutta,right/Asia/Chungking,right/Asia/Colombo,right/Asia/Dacca,right/Asia/Damascus,right/Asia/Dhaka,right/Asia/Dili,right/Asia/Dubai,right/Asia/Dushanbe,right/Asia/Gaza,right/Asia/Harbin,right/Asia/Hong_Kong,right/Asia/Hovd,right/Asia/Irkutsk,right/Asia/Istanbul,right/Asia/Jakarta,right/Asia/Jayapura,right/Asia/Jerusalem,right/Asia/Kabul,right/Asia/Kamchatka,right/Asia/Karachi,right/Asia/Kashgar,right/Asia/Katmandu,right/Asia/Krasnoyarsk,right/Asia/Kuala_Lumpur,right/Asia/Kuching,right/Asia/Kuwait,right/Asia/Macao,right/Asia/Macau,right/Asia/Magadan,right/Asia/Makassar,right/Asia/Manila,right/Asia/Muscat,right/Asia/Nicosia,right/Asia/Novosibirsk,right/Asia/Omsk,right/Asia/Oral,right/Asia/Phnom_Penh,right/Asia/Pyongyang,right/Asia/Qatar,right/Asia/Qyzylorda,right/Asia/Rangoon,right/Asia/Riyadh,right/Asia/Riyadh87," &
 "right/Asia/Riyadh88,right/Asia/Riyadh89,right/Asia/Saigon,right/Asia/Samarkand,right/Asia/Seoul,right/Asia/Shanghai,right/Asia/Singapore,right/Asia/Taipei,right/Asia/Tashkent,right/Asia/Tbilisi,right/Asia/Tehran,right/Asia/Tel_Aviv,right/Asia/Thimbu,right/Asia/Thimphu,right/Asia/Tokyo,right/Asia/Ujung_Pandang,right/Asia/Ulaanbaatar,right/Asia/Ulan_Bator,right/Asia/Urumqi,right/Asia/Vientiane,right/Asia/Vladivostok,right/Asia/Yakutsk,right/Asia/Yekaterinburg,right/Asia/Yerevan,right/Atlantic/Azores,right/Atlantic/Bermuda,right/Atlantic/Canary,right/Atlantic/Cape_Verde,right/Atlantic/Faeroe,right/Atlantic/Jan_Mayen,right/Atlantic/Madeira,right/Atlantic/Reykjavik,right/Atlantic/South_Georgia,right/Atlantic/St_Helena,right/Atlantic/Stanley,right/Australia/ACT,right/Australia/Adelaide,right/Australia/Brisbane,right/Australia/Broken_Hill,right/Australia/Canberra,right/Australia/Darwin,right/Australia/Hobart,right/Australia/LHI,right/Australia/Lindeman,right/Australia/Lord_Howe,right/Australia/Melbourne,right/Australia/NSW,right/Australia/North,right/Australia/Perth,right/Australia/Queensland,right/Australia/South,right/Australia/Sydney,right/Australia/Tasmania,right/Australia/Victoria,right/Australia/West,right/Australia/Yancowinna,right/Brazil/Acre,right/Brazil/DeNoronha,right/Brazil/East,right/Brazil/West,right/CET,right/CST6CDT,right/Canada/Atlantic,right/Canada/Central,right/Canada/East-Saskatchewan,right/Canada/Eastern,right/Canada/Mountain,right/Canada/Newfoundland,right/Canada/Pacific,right/Canada/Saskatchewan,right/Canada/Yukon,right/Chile/Continental,right/Chile/EasterIsland,right/Cuba,right/EET,right/EST,right/EST5EDT,right/Egypt,right/Eire,right/Etc/GMT,right/Etc/GMT+0,right/Etc/GMT+1,right/Etc/GMT+10,right/Etc/GMT+11,right/Etc/GMT+12,right/Etc/GMT+2,right/Etc/GMT+3,right/Etc/GMT+4,right/Etc/GMT+5,right/Etc/GMT+6,right/Etc/GMT+7,right/Etc/GMT+8,right/Etc/GMT+9,right/Etc/GMT-0,right/Etc/GMT-1,right/Etc/GMT-10,right/Etc/GMT-11,right/Etc/GMT-12,right/Etc/GMT-13,right/Etc/GMT-14,right/Etc/GMT-2,right/Etc/GMT-3,right/Etc/GMT-4,right/Etc/GMT-5,right/Etc/GMT-6,right/Etc/GMT-7,right/Etc/GMT-8,right/Etc/GMT-9,right/Etc/GMT0,right/Etc/Greenwich,right/Etc/UCT,right/Etc/UTC,right/Etc/Universal,right/Etc/Zulu,right/Europe/Amsterdam,right/Europe/Andorra,right/Europe/Athens,right/Europe/Belfast,right/Europe/Belgrade,right/Europe/Berlin,right/Europe/Bratislava,right/Europe/Brussels,right/Europe/Bucharest,right/Europe/Budapest,right/Europe/Chisinau,right/Europe/Copenhagen,right/Europe/Dublin,right/Europe/Gibraltar,right/Europe/Helsinki,right/Europe/Istanbul,right/Europe/Kaliningrad,right/Europe/Kiev,right/Europe/Lisbon,right/Europe/Ljubljana,right/Europe/London,right/Europe/Luxembourg,right/Europe/Madrid,right/Europe/Malta,right/Europe/Minsk,right/Europe/Monaco,right/Europe/Moscow,right/Europe/Nicosia,right/Europe/Oslo,right/Europe/Paris,right/Europe/Prague,right/Europe/Riga,right/Europe/Rome,right/Europe/Samara,right/Europe/San_Marino,right/Europe/Sarajevo,right/Europe/Simferopol,right/Europe/Skopje,right/Europe/Sofia,right/Europe/Stockholm,right/Europe/Tallinn,right/Europe/Tirane,right/Europe/Tiraspol,right/Europe/Uzhgorod,right/Europe/Vaduz,right/Europe/Vatican,right/Europe/Vienna,right/Europe/Vilnius,right/Europe/Warsaw,right/Europe/Zagreb,right/Europe/Zaporozhye,right/Europe/Zurich,right/Factory,right/GB,right/GB-Eire,right/GMT,right/GMT+0,right/GMT-0,right/GMT0,right/Greenwich,right/HST,right/Hongkong,right/Iceland,right/Indian/Antananarivo,right/Indian/Chagos,right/Indian/Christmas,right/Indian/Cocos,right/Indian/Comoro,right/Indian/Kerguelen," &
 "right/Indian/Mahe,right/Indian/Maldives,right/Indian/Mauritius,right/Indian/Mayotte,right/Indian/Reunion,right/Iran,right/Israel,right/Jamaica,right/Japan,right/Kwajalein,right/Libya,right/MET,right/MST,right/MST7MDT,right/Mexico/BajaNorte,right/Mexico/BajaSur,right/Mexico/General,right/Mideast/Riyadh87,right/Mideast/Riyadh88,right/Mideast/Riyadh89,right/NZ,right/NZ-CHAT,right/Navajo,right/PRC,right/PST8PDT,right/Pacific/Apia,right/Pacific/Auckland,right/Pacific/Chatham,right/Pacific/Easter,right/Pacific/Efate,right/Pacific/Enderbury,right/Pacific/Fakaofo,right/Pacific/Fiji,right/Pacific/Funafuti,right/Pacific/Galapagos,right/Pacific/Gambier,right/Pacific/Guadalcanal,right/Pacific/Guam,right/Pacific/Honolulu,right/Pacific/Johnston,right/Pacific/Kiritimati,right/Pacific/Kosrae,right/Pacific/Kwajalein,right/Pacific/Majuro,right/Pacific/Marquesas,right/Pacific/Midway,right/Pacific/Nauru,right/Pacific/Niue,right/Pacific/Norfolk,right/Pacific/Noumea,right/Pacific/Pago_Pago,right/Pacific/Palau,right/Pacific/Pitcairn,right/Pacific/Ponape,right/Pacific/Port_Moresby,right/Pacific/Rarotonga,right/Pacific/Saipan,right/Pacific/Samoa,right/Pacific/Tahiti,right/Pacific/Tarawa,right/Pacific/Tongatapu,right/Pacific/Truk,right/Pacific/Wake,right/Pacific/Wallis,right/Pacific/Yap,right/Poland,right/Portugal,right/ROC,right/ROK,right/Singapore,right/SystemV/AST4,right/SystemV/AST4ADT,right/SystemV/CST6,right/SystemV/CST6CDT,right/SystemV/EST5,right/SystemV/EST5EDT,right/SystemV/HST10,right/SystemV/MST7,right/SystemV/MST7MDT,right/SystemV/PST8,right/SystemV/PST8PDT,right/SystemV/YST9,right/SystemV/YST9YDT,right/Turkey,right/UCT,right/US/Alaska,right/US/Aleutian,right/US/Arizona,right/US/Central,right/US/East-Indiana,right/US/Eastern,right/US/Hawaii,right/US/Indiana-Starke,right/US/Michigan,right/US/Mountain,right/US/Pacific,right/US/Samoa,right/UTC,right/Universal,right/W-SU,right/WET,right/Zulu"
-
+PUBLIC sTimeLink AS String = "localtime-copied-from"
+PUBLIC sTimeZone AS String = "localtime"
+PUBLIC sTZConf AS String = "/etc/hardwareclock"
 
 
 PUBLIC SUB TIME_ZONES()
 
-DIM stz AS String[]
-DIM i AS Integer = 0
+  DIM stz AS String[]
+  DIM i AS Integer = 0
 
-stz = Split(sTimeZones, ",")
+  stz = Split(sTimeZones, ",")
 
-FOR EACH stz
-  FrmZoneSet.lbTmZone.add(stz[i])
-  INC i
-NEXT 
+  FOR EACH stz
+    FrmZoneSet.lbTmZone.add(stz[i])
+    INC i
+  NEXT 
 
-'Message(FrmZoneSet.lbTmZone.Text)
+  'Message(FrmZoneSet.lbTmZone.Text)
 
 END 
+
+
+PUBLIC SUB SET_ZONE(sZone AS String)
+  SHELL "cd " & ClsGlobal.sTargetMnt & "/etc;rm " & sTimeLink & ";ln -s /usr/share/zoneinfo/" & sZone & Space(1) & sTimeLink 
+  PRINT "linking /usr/share/zoneinfo/" & sZone & " to /etc/" & sTimeLink
+  SHELL "cd " & ClsGlobal.sTargetMnt & "/etc;rm " & sTimeZone & ";cp /usr/share/zoneinfo/" & sZone & Space(1) & sTimeZone
+  PRINT "copying /usr/share/zoneinfo/" & sZone & " to /etc/" & sTimeZone  
+END  
+
+PUBLIC SUB WRITE_CONF()
+  
+  DIM sConf AS String = "# /etc/hardwareclock \n" &
+    "# \n" &
+    "# Tells how the hardware clock time is stored. \n" &
+    "# You should run vzoneset to edit this file. \n\n" &
+    FrmZoneSet.cbHwClock.Text
+    
+  File.Save(ClsGlobal.sTargetMnt & sTZConf, SConv(sConf))
+END
+
+  
