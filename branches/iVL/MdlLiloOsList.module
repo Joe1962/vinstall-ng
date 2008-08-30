@@ -358,7 +358,7 @@ bIncluded = NEW Object[]
           
           ' Add an option to boot the recently installed OS to CLI mode
           'ClsPartSel.sRoot = "/dev/sdb" ' for testing only 
-            IF sLiloDesc LIKE "Vector" THEN 
+            'IF sLiloDesc LIKE "Vector" THEN 
               IF arrLinux[i] = ClsPartSel.sRoot THEN 
                 cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "VlCliOption"
                   WITH cbInclude
@@ -372,18 +372,11 @@ bIncluded = NEW Object[]
                   END WITH 
                   ME.iVlTag = FrmLilo.TabStrip1.Index - 1
               END IF
-              
-            END IF
-                  
-                  
-          
+            'END IF          
         END WITH ' end jacking with the tabstrip itself
-        
-            
-        END IF
-        
-        SHELL "umount /tmp/lilo_tmp" WAIT 
-        END IF
+     END IF
+     SHELL "umount /tmp/lilo_tmp" WAIT 
+    END IF
     NEXT 
         
     FOR i = 0 TO FrmLilo.TabStrip1.Count - 1
