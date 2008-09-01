@@ -32,7 +32,8 @@ PUBLIC SUB Button1_Click()
       ELSE 
         IF ME.tbPasswd1.Text = ME.tbPasswd2.Text THEN 
           IF IsDir(sPicdir) THEN 
-            SHELL "ln -s " & sPicdir & "/default3.png " & sPicdir &/ ME.tbUsername.Text & ".face.icon"
+            SHELL "cd " & sPicdir & " && ln -s root1.png root.face.icon"          
+            SHELL "cd " & sPicdir & " && ln -s default3.png " & ME.tbUsername.Text & ".face.icon"
           ENDIF 
           SHELL "chroot /mnt/target groupdel " & ME.tbUsername.Text WAIT 
           SHELL "chroot /mnt/target groupadd -g " & iUID & Space(1) & ME.tbUsername.Text WAIT 
@@ -53,5 +54,9 @@ PUBLIC SUB Button1_Click()
       ENDIF 
     ENDIF
   ENDIF  
+  SHELL "umount " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
+  SHELL "umount " & ClsGlobal.sTargetMnt &/ "proc" WAIT
+  Message("Vectorlinux has been installed click OK to reboot")
+  SHELL "reboot"
 END
   

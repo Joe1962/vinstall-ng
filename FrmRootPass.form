@@ -4,33 +4,32 @@
   MoveScaled(0,0,64,64)
   Text = ("")
   { Frame1 Frame
-    MoveScaled(1,1,62,30)
+    MoveScaled(1,1,62,31)
     Text = ("Set Root Password")
+    { TextLabel2 TextLabel
+      MoveScaled(35,3,12,2)
+      Text = ("Enter Password")
+    }
     { TextLabel1 TextLabel
-      MoveScaled(3,3,29,11)
+      MoveScaled(1,4,29,11)
       Text = ("Choose a password for the root account. You must enter the Root Password twice to ensure accuracy.")
+    }
+    { TextLabel3 TextLabel
+      MoveScaled(35,11,14,2)
+      Text = ("Re-Enter Password")
     }
     { tbPasswd1 TextBox
       MoveScaled(35,6,21,2)
       Text = ("")
       Password = True
     }
-    { TextLabel2 TextLabel
-      MoveScaled(35,3,12,2)
-      Text = ("Enter Password")
+    { tbPasswd2 TextBox
+      MoveScaled(35,14,21,2)
+      Text = ("")
     }
     { Button1 Button
-      MoveScaled(46,18,11,2)
+      MoveScaled(44,22,11,2)
       Text = ("Set Password")
     }
-  }
-  { tbPasswd2 TextBox
-    MoveScaled(36,14,21,2)
-    Text = ("")
-    Password = True
-  }
-  { TextLabel3 TextLabel
-    MoveScaled(36,11,15,2)
-    Text = ("ReEnter Password")
   }
 }

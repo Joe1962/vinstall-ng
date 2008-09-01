@@ -19,7 +19,7 @@ PUBLIC sVidMode AS String
 PUBLIC sLiloTrgt AS String
 
 PUBLIC SUB Form_Open()
-
+    DIM sOut AS String
 
 'ClsPartSel.sRoot = "/dev/sdb1" ' 
  FMain.FrmCurr = ME
@@ -34,8 +34,19 @@ ME.tlList.text = "The following Operating Systems have been detected on this com
 "for each one of them by clicking on each tab. To proceed with the default pre-set values, simply click \'" & FMain.btnext.text & "\'"
 ME.tlList.Adjust
 ME.TabStrip1.Index = MdlLiloOsList.iVltag
-MdlLiloOsList.bVlCliOption = FALSE
+MdlLiloOsList.bVlCliOption = TRUE
 
+SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
+SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT
+  
+SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
+SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
+  'SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
+sOut = "#!/bin/bash \n" &
+"/sbin/config-stage1 gui-installer"
+File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
+'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
+SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
 
 
 'ME.Maximized = TRUE
