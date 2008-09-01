@@ -89,8 +89,7 @@ PUBLIC SUB EXECUTE_LILO()
   DIM sOut AS String
   DIM sDump AS String
   
-  SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
-  SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT 
+ 
   SHELL "chroot " & ClsGlobal.sTargetMnt & " /sbin/lilo || echo \'FAILED\'" TO sDump
     IF InStr(sDump, "FAILED") > 0 THEN 
       Message.Error("Lilo returned an error. Please see below" & gb.NewLine & sDump)
@@ -99,14 +98,6 @@ PUBLIC SUB EXECUTE_LILO()
     END IF
   'SHELL "umount " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
   'SHELL "umount " & ClsGlobal.sTargetMnt &/ "proc" WAIT
-  SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
-  SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
-  'SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
-  sOut = "#!/bin/bash \n" &
-  "/sbin/config-stage1 vector-virgin-heavy"
-  File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
-  'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
-  SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
   'Message("Vectorlinux has been installed click OK to reboot")
   'SHELL "reboot"
 END
