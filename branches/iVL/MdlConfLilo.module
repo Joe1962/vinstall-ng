@@ -97,8 +97,8 @@ PUBLIC SUB EXECUTE_LILO()
     ELSE 
       Message("Boot loader has been setup successfully")
     END IF
-  SHELL "umount " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
-  SHELL "umount " & ClsGlobal.sTargetMnt &/ "proc" WAIT
+  'SHELL "umount " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
+  'SHELL "umount " & ClsGlobal.sTargetMnt &/ "proc" WAIT
   SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
   SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
   'SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"

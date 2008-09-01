@@ -33,6 +33,7 @@ ME.Maximized = TRUE
 MdlCore.LOCK_GUI
 'MdlCore.LOCK_GUI()
 ClsGlobal.sBackNav = NEW Object[]
+ClsGlobal.sSourceMnt = "/mnt/cdrom"
 'ClsGlobal.sSourceMnt = "/mnt" &/ "source" 'FOR TESTING ONLY
 '/ THE FOLLOWING LINES HAVE BEEN COMMENTED FOR TESTING ONLY
 
@@ -260,7 +261,11 @@ PUBLIC SUB btnext_Click()
        
     CASE "FrmRootPass"
     
-       frmNext = FrmRootPass
+       frmNext = FrmUserAdd
+       
+    CASE "FrmUserAdd"
+    
+       frmNext = FrmLilo
         
   END SELECT 
                        

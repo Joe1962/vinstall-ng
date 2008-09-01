@@ -1,0 +1,44 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Text = ("")
+  { Frame1 Frame
+    MoveScaled(1,1,62,37)
+    Text = ("Add Users")
+    { TextLabel1 TextLabel
+      MoveScaled(2,2,29,18)
+      Text = ("Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue.")
+    }
+    { TextLabel2 TextLabel
+      MoveScaled(36,2,12,2)
+      Text = ("Username")
+    }
+    { tbUsername TextBox
+      MoveScaled(36,5,15,2)
+      Text = ("")
+    }
+    { TextLabel3 TextLabel
+      MoveScaled(36,10,16,2)
+      Text = ("Enter Password")
+    }
+    { tbPasswd1 TextBox
+      MoveScaled(36,14,16,2)
+      Text = ("")
+      Password = True
+    }
+    { TextLabel4 TextLabel
+      MoveScaled(36,18,14,2)
+      Text = ("ReEnter Password")
+    }
+    { tbPasswd2 TextBox
+      MoveScaled(36,21,16,2)
+      Text = ("")
+      Password = True
+    }
+    { Button1 Button
+      MoveScaled(38,27,14,1)
+      Text = ("Create User")
+    }
+  }
+}
