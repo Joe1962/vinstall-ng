@@ -129,7 +129,7 @@ PUBLIC SUB MEDIA_SCAN()
   DIM i AS Integer
   
     
-  ClsGlobal.sSourceMnt = "/mnt/source"
+  'ClsGlobal.sSourceMnt = "/mnt/source"
   sMountPoint = ClsGlobal.sSourceMnt
   
   sCmd = "cat /proc/sys/dev/cdrom/info | grep \"drive name\" |cut -f 2 -d\':\'|xargs -n 2" 

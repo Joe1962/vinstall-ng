@@ -1,10 +1,10 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,64,55)
+  MoveScaled(0,0,81,55)
   Text = ("")
   { Frame1 Frame
-    MoveScaled(1,1,62,53)
+    MoveScaled(1,1,79,53)
     Text = ("Set Hardware Clock and TimeZone")
   }
   { TextLabel1 TextLabel

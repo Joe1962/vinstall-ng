@@ -10,7 +10,8 @@ PUBLIC SUB Button1_Click()
     Message("Enter a Password for root.")
   ELSE 
     IF ME.tbPasswd1.Text = ME.tbPasswd2.Text THEN 
-      SHELL "chroot /mnt/target /sbin/passwdx root " & ME.tbPasswd1.Text
+      'Message("chroot /mnt/target /sbin/passwdx root " & ME.tbPasswd1.Text)
+      SHELL "chroot /mnt/target /sbin/passwdx root " & ME.tbPasswd1.Text WAIT 
       Message("Root password Set.")
       ME.tbPasswd1.Clear
       ME.tbPasswd2.Clear

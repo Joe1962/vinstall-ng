@@ -1,0 +1,57 @@
+' Gambas class file
+PUBLIC iUID AS Integer = 1000
+
+PUBLIC SUB Form_Open()
+  Fmain.frmcurr = ME
+END 
+
+
+PUBLIC SUB Button1_Click()
+  DIM sCAPS AS String
+  DIM sCHAR AS String
+  DIM sLogE AS String
+  DIM sPicdir AS String = "/mnt/target/usr/share/apps/kdm/pics/users/"
+  DIM sGroups AS String = "plugdev,disk,cdrom,floppy,lp,scanner,audio,video,games"
+
+  
+  IF ME.tbUsername.Text = "" THEN 
+    Message("Enter a UserName")
+  ELSE 
+    SHELL "echo " & ME.tbUsername.Text & "| grep -e \'[A-Z]\'" TO sCAPS
+    SHELL "echo " & ME.tbUsername.Text & "| grep -e \'[^a-z0-9_-]\'" TO sCHAR
+    SHELL "grep -e ^" & ME.tbUsername.Text & " /mnt/target/etc/passwd" TO sLogE 
+    IF sCAPS <> "" THEN
+      Message("Username contains illegal characters (CAPITAL)")
+    ELSE IF sCHAR <> "" THEN
+      Message("Username contains illegal characters")
+    ELSE IF sLogE <> "" THEN
+      Message("Username already exists")
+    ELSE   
+      IF ME.tbPasswd1.Text = "" THEN 
+        Message("Enter a Password.")
+      ELSE 
+        IF ME.tbPasswd1.Text = ME.tbPasswd2.Text THEN 
+          IF IsDir(sPicdir) THEN 
+            SHELL "ln -s " & sPicdir & "/default3.png " & sPicdir &/ ME.tbUsername.Text & ".face.icon"
+          ENDIF 
+          SHELL "chroot /mnt/target groupdel " & ME.tbUsername.Text WAIT 
+          SHELL "chroot /mnt/target groupadd -g " & iUID & Space(1) & ME.tbUsername.Text WAIT 
+          'Message("chroot /mnt/target /usr/sbin/useradd -m -s /bin/bash -u " & iUID & " -g " & ME.tbUsername.Text & " -G " & sGroups & ME.tbUsername.Text)
+          SHELL "chroot /mnt/target /usr/sbin/useradd -m -s /bin/bash -u " & iUID & " -g " & ME.tbUsername.Text & " -G " & sGroups & Space(1) & ME.tbUsername.Text WAIT 
+          'Message("chroot /mnt/target /sbin/passwdx " & ME.tbUsername.Text & Space(1) & ME.tbPasswd1.Text)
+          SHELL "chroot /mnt/target /sbin/passwdx " & ME.tbUsername.Text & Space(1) & ME.tbPasswd1.Text WAIT 
+          Message("user " & ME.tbUsername.Text & " was created.")
+          ME.tbUsername.Clear
+          ME.tbPasswd1.Clear
+          ME.tbPasswd2.Clear
+          INC iUID
+        ELSE 
+          Message("Passwords do not match")
+          ME.tbPasswd1.Clear
+          ME.tbPasswd2.Clear
+        ENDIF 
+      ENDIF 
+    ENDIF
+  ENDIF  
+END
+  
