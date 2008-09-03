@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,64,64)
+  MoveScaled(0,0,74,44)
   Text = ("")
   { Frame1 Frame
     MoveScaled(1,1,62,31)
@@ -15,7 +15,7 @@
       Text = ("Choose a password for the root account. You must enter the Root Password twice to ensure accuracy.")
     }
     { TextLabel3 TextLabel
-      MoveScaled(35,11,14,2)
+      MoveScaled(35,9,14,2)
       Text = ("Re-Enter Password")
     }
     { tbPasswd1 TextBox
@@ -24,11 +24,11 @@
       Password = True
     }
     { tbPasswd2 TextBox
-      MoveScaled(35,14,21,2)
+      MoveScaled(35,12,21,2)
       Text = ("")
     }
     { Button1 Button
-      MoveScaled(44,22,11,2)
+      MoveScaled(50,28,11,2)
       Text = ("Set Password")
     }
   }

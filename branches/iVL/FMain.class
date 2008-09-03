@@ -257,6 +257,8 @@ PUBLIC SUB btnext_Click()
        
     CASE "FrmZoneSet"
        'MdlZoneSet.TIME_ZONES()
+       MdlZoneSet.SET_ZONE(Trim(FrmZoneSet.lbTmZone.text))
+       MdlZoneSet.WRITE_CONF()
        frmNext = FrmRootPass
        
     CASE "FrmRootPass"
