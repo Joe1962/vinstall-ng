@@ -60,3 +60,29 @@ PUBLIC SUB Button1_Click()
   SHELL "reboot"
 END
   
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .Frame1.Move(4, 4, .ClientWidth - (.Frame1.left * 2), .ClientHeight - (.Frame1.Height * 2))
+    .TextLabel1.Move(4, 12, .Frame1.Width - (.TextLabel1.Left * 2))
+    
+    .TextLabel2.Move(4, .TextLabel1.top + .TextLabel1.Height + 16, 130)
+    .tbUsername.Move(.TextLabel2.Left + .TextLabel2.Width + 4, .TextLabel2.top, 150)
+    '.tbUsername.Move(.tTextLabel2.left + .TextLabel2.Width + 4, .TextLabel2.top, 150)
+
+    .TextLabel3.Move(4, .tbPasswd1.top + .tbPasswd1.Height + 4, 130)
+    .tbPasswd1.Move(.TextLabel3.Left + .TextLabel3.Width + 4, .TextLabel3.Top)
+    .tbPasswd2.Move(.tbPasswd1.left, .TextLabel3.top, .tbPasswd1.Width)
+    .TextLabel4.Move(4, .tbPasswd2.top + .tbPasswd2.Height + 4, .TextLabel1.Width)
+    
+    
+  END WITH 
+
+END
+
+PUBLIC SUB tbUsername_KeyPress()
+
+  
+
+END

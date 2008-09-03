@@ -17,9 +17,31 @@ PUBLIC SUB lbTmZone_Click()
 END
 
 PUBLIC SUB Button1_Click()
+' THis is not necessary, since the next button on the main window handles this
 
   MdlZoneSet.SET_ZONE(ME.lbTmZone.Text)
   MdlZoneSet.WRITE_CONF()
   Message("TimeZone " & ME.lbTmZone.Text & " Was set.")
   
+END
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .Frame1.Move(4, 4, .ClientWidth - (.Frame1.left * 2), .ClientHeight - (.Frame1.top * 2))
+    .TextLabel1.Move(4, 18, .Frame1.Width - (.TextLabel1.Left * 2))
+    .cbHwClock.Move(.TextLabel1.left, .TextLabel1.top + .TextLabel1.Height + 4, (.TextLabel1.width / 2))
+    .TextLabel2.Move(4, .cbHwClock.top + cbHwClock.Height + 8, .TextLabel1.Width)
+    .lbTmZone.Move(4, .TextLabel2.top + .TextLabel2.Height + 4, .cbHwClock.Width)
+    
+    
+  .TextLabel1.Adjust()
+  END WITH 
+
+END
+
+PUBLIC SUB cbHwClock_Click()
+
+  
+
 END
