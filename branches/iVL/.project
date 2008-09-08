@@ -1,6 +1,6 @@
 # Gambas Project File 2.0
 Title=VectorLinux Installer
-Startup=FrmUserAdd
+Startup=FrmZoneSet
 Version=0.0.54
 Library=gb.gtk
 Library=gb.form

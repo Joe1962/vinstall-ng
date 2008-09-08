@@ -11,33 +11,33 @@
       Text = ("Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue.")
     }
     { TextLabel2 TextLabel
-      MoveScaled(2,17,12,2)
+      MoveScaled(2,17,12,3)
       Text = ("Username")
     }
     { tbUsername TextBox
-      MoveScaled(14,17,15,2)
+      MoveScaled(14,17,15,3)
       Text = ("")
     }
     { TextLabel3 TextLabel
-      MoveScaled(2,20,16,2)
+      MoveScaled(2,20,16,3)
       Text = ("Enter Password")
     }
     { tbPasswd1 TextBox
-      MoveScaled(16,20,16,2)
+      MoveScaled(16,20,16,3)
       Text = ("")
       Password = True
     }
     { TextLabel4 TextLabel
-      MoveScaled(2,23,14,2)
+      MoveScaled(2,23,14,3)
       Text = ("ReEnter Password")
     }
     { tbPasswd2 TextBox
-      MoveScaled(16,23,16,2)
+      MoveScaled(16,23,16,3)
       Text = ("")
       Password = True
     }
     { Button1 Button
-      MoveScaled(45,29,14,1)
+      MoveScaled(2,27,14,1)
       Text = ("Create User")
     }
   }

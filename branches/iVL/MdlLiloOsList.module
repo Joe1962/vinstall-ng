@@ -84,7 +84,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                           .MaxLength = 15
                           .Height = 27
                           .Width = MdlObjSizer.get_object_width(.text) * 2
-                          .Move(tl.left + tl.Width + 8, tl.top)
+                          .Move(tl.left + tl.Width + 8, tl.top)                          
                           .BackColor = Color.Background
                         END WITH 
                           
