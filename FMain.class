@@ -245,12 +245,18 @@ PUBLIC SUB btnext_Click()
       frmNext = FrmLilo
       
     CASE "FrmLilo"
+      'make sure lilo has not been bypassed
+        IF FrmLilo.YNLiloBox.Value = FALSE THEN 
+    
         ' Now that lilo has been setup, write it to the config
         MdlConfLilo.GENERATE_LILO_DOT_CONF
         MdlConfLilo.GATHER_OTHER_LINUX_KERNELS_AND_INITRDS()
         MdlConfLilo.WRITE_LILO_DOT_CONF()
         MdlConfLilo.EXECUTE_LILO()
-        
+        ELSE 
+          ' lilo installation / setup has been skipped
+          FrmLilo.tlBanner.Text = "<b>Skipping lilo setup</b>"
+        END IF
     
       'frmNext = FrmLiloOsList
        frmNext = FrmZoneSet
@@ -267,7 +273,7 @@ PUBLIC SUB btnext_Click()
        
     CASE "FrmUserAdd"
     
-       frmNext = FrmLilo
+'      frmNext = FrmLilo ' this is already done
         
   END SELECT 
                        
