@@ -20,6 +20,7 @@
     { cbHwClock ComboBox
       MoveScaled(1,11,34,3)
       Text = ("ComboBox1")
+      ReadOnly = True
       List = [("LocalTime"), ("UTC")]
     }
     { Button1 Button
