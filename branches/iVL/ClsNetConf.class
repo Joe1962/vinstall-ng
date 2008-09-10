@@ -1,5 +1,4 @@
 ' Gambas class file
-
 '    This file is part of vinstall-ng
 
 '    vinstall-ng is free software: you can redistribute it and/or modify
@@ -14,30 +13,4 @@
 
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
-
-PUBLIC SUB Form_Open()
-
-  DIM iID AS Integer = ME.Embedder1.Id
-  
-  SHELL "$PWD/adduser.gambas " & iID & Space(1) & ME.ClientWidth & Space(1) & ME.clientHeight
-  MdlCore.LOCK_GUI()
-  
-  
-  
-
-END
-
-PUBLIC SUB Form_Resize()
-
-  WITH ME
-    .Embedder1.Move(0, 2, .ClientWidth - 4, .ClientHeight - 24)
-  END WITH 
-
-END
-
-PUBLIC SUB Embedder1_Close()
-
-  MdlCore.unlock_gui()
-  
-
-END
+STATIC PUBLIC strHostName AS String
