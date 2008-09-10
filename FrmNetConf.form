@@ -1,0 +1,52 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Text = ("")
+  { tlHostNameLbl TextLabel
+    MoveScaled(1,6,16,3)
+    Text = ("Computer Name")
+  }
+  { txtHostName TextBox
+    MoveScaled(18,6,28,3)
+    Text = ("")
+  }
+  { FrmIpSettings Frame
+    MoveScaled(1,11,62,33)
+    Text = (" TCP/IP Settings")
+    { cbIpSettings ComboBox
+      MoveScaled(1,3,16,2)
+      Text = ("")
+      ReadOnly = True
+      List = [("DHCP"), ("STATIC")]
+    }
+    { txtStaticIp TextBox
+      MoveScaled(25,6,19,3)
+      Text = ("")
+    }
+    { tlIpAddress TextLabel
+      MoveScaled(2,7,14,2)
+      Text = ("IP Address")
+    }
+    { tlSubNetMask TextLabel StaticSettings
+      Name = "tlSubNetMask"
+      MoveScaled(2,10,14,3)
+      Text = ("SubNet Mask")
+    }
+    { tlGatewayAddr TextLabel StaticSettings
+      Name = "tlGatewayAddr"
+      MoveScaled(2,14,17,3)
+      Text = ("Gateway Address")
+    }
+    { txtSubnetNask TextBox StaticSettings
+      Name = "txtSubnetNask"
+      MoveScaled(25,9,19,3)
+      Text = ("")
+    }
+    { txtGatewayaddr TextBox StaticSettings
+      Name = "txtGatewayaddr"
+      MoveScaled(25,13,19,3)
+      Text = ("")
+    }
+  }
+}
