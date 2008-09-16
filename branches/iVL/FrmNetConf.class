@@ -13,48 +13,28 @@
 
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
-PRIVATE arrStaticOb AS object[]
+
+
+PUBLIC FUNCTION GET_CURRENT_HOST_NAME() AS String
+  DIM sRes AS String
+  IF Exist("/etc/HOSTNAME") THEN 
+    sRes = File.Load(DConv("/etc/HOSTNAME"))
+      IF sRes = "" THEN 
+        sRes = "Vector.Linux.net"
+      END IF
+  ELSE 
+    sRes = "Vector.Linux.net"
+  END IF
+    RETURN sRes
+      
+END
+
 
 PUBLIC SUB Form_Open()
-DIM obj AS Object
-arrStaticOb = NEW Object[] 
-
-  WITH ME
-    arrStaticOb.Add(.txtGatewayaddr)
-    arrStaticOb.Add(.txtSubnetNask)
-    arrStaticOb.Add(.tlGatewayAddr)
-    arrStaticOb.Add(.tlSubNetMask)
-    arrStaticOb.Add(.tlIpAddress)
-    arrStaticOb.Add(.txtStaticIp)
-  END WITH 
-FOR EACH obj IN arrStaticOb
-  obj.Visible = FALSE
-NEXT   
     
-
+    ME.txtHostName.text = ME.GET_CURRENT_HOST_NAME()
+    MdlNetConf.LIST_NETWORK_INTERFACES
+  IF ERROR THEN Message(Error.text & "\n" & Error.where)
+  
 END
 
-PUBLIC SUB tlHostNameLbl_MouseDown()
-
-  
-
-END
-
-PUBLIC SUB cbIpSettings_Click()
-  DIM tb AS TextBox
-  DIM tl AS TextLabel
-  DIM obj AS Object
-  IF ME.cbIpSettings.text = "STATIC" THEN 
-    
-      FOR EACH obj IN arrStaticOb
-        obj.Visible = TRUE
-      NEXT
-  
-  ELSE 
-    FOR EACH obj IN arrStaticOb
-      obj.Visible = FALSE
-    NEXT 
-  END IF
-  
-
-END
