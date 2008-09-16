@@ -17,20 +17,31 @@
 
 PUBLIC SUB Form_Open()
 
-  DIM iID AS Integer = ME.Embedder1.Id
+ 
+  ME.EMBED_VASMCC_MODULE()
+  'btAddUser.Visible = FALSE
+
+END
+
+
+PUBLIC SUB EMBED_VASMCC_MODULE()
+  
+   DIM iID AS Integer = ME.Embedder1.Id
   
   SHELL "$PWD/adduser.gambas " & iID & Space(1) & ME.ClientWidth & Space(1) & ME.clientHeight
   MdlCore.LOCK_GUI()
   
   
-  
-
 END
+
+
 
 PUBLIC SUB Form_Resize()
 
   WITH ME
     .Embedder1.Move(0, 2, .ClientWidth - 4, .ClientHeight - 24)
+    .btAddUser.Move(4, .top + .ClientHeight - (.btAddUser.Height * 2), MdlObjSizer.get_object_width(.btAddUser.text) + 24)
+    
   END WITH 
 
 END
@@ -38,6 +49,36 @@ END
 PUBLIC SUB Embedder1_Close()
 
   MdlCore.unlock_gui()
+  btAddUser.Show
+  Embedder1.Hide
+  
   
 
+END
+
+PUBLIC SUB btAddUser_Click()
+
+  ME.EMBED_VASMCC_MODULE()
+  ME.Embedder1.show
+  ME.btAddUser.Hide
+  'btAddUser.Visible = FALSE
+
+END
+
+PUBLIC SUB Embedder1_Leave()
+
+  'ME.Embedder1.Visible = FALSE
+  'btAddUser.Visible = TRUE
+  Embedder1.Hide
+  btAddUser.show
+  'ME.Refresh
+
+END
+
+PUBLIC SUB Embedder1_Embed()
+
+  'btAddUser.Visible = FALSE
+  Embedder1.show
+  btAddUser.Hide
+  'btAddUser.lower
 END
