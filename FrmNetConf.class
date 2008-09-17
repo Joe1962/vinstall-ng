@@ -18,7 +18,12 @@
 PUBLIC FUNCTION GET_CURRENT_HOST_NAME() AS String
   DIM sRes AS String
   IF Exist("/etc/HOSTNAME") THEN 
-    sRes = File.Load(DConv("/etc/HOSTNAME"))
+    File.Save(Temp("Host"), SConv(File.load("/etc/HOSTNAME")))
+    
+    
+    sRes = DConv(File.Load(Temp("Host")))
+    
+    'sRes = File.Load(DConv("/etc/HOSTNAME"))
       IF sRes = "" THEN 
         sRes = "Vector.Linux.net"
       END IF

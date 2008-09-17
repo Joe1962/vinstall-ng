@@ -13,7 +13,13 @@
 
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
-
+PRIVATE ileft AS Integer
+PRIVATE itop AS Integer
+PUBLIC objCombos AS Object[]
+PUBLIC objtxtIps AS Object[]
+PUBLIC objtxtNetMasks AS Object[]
+PUBLIC objtxtDNS AS Object[]
+PUBLIC objFrames AS Object[]
 PUBLIC SUB LIST_NETWORK_INTERFACES()
   
   ' This SUB will detect network interfaces and offer setup options for each one of them
@@ -27,8 +33,14 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     DIM tl AS TextLabel
     DIM tb AS TextBox
     DIM cb AS ComboBox
-    DIM i, ii AS Integer
+    DIM i, ii, y, x AS Integer
     DIM pTabPic AS picture = Picture["images/ethernet.png"]
+    
+    'initiate the arrays
+    objCombos = NEW Object[]
+    objFrames = NEW Object[]
+    
+    
     
     SHELL "ifconfig -a | grep eth" TO seths
       File.Save(Temp("eths"), Trim(seths))
@@ -67,28 +79,79 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       .Height = 21
                       .Alignment = Align.Normal
                       .Width = MdlObjSizer.get_object_width(.text)
-                      
+                      y = .top + .Height + 4
                     END WITH
                   tb = NEW TextBox(FrmNetConf.TSNetDevices) AS "txtDevAddresses"
                     WITH tb
-                    .Move(tl.left + tl.Width + 4, tl.top)
+                    .Move(tl.left + tl.Width + 8, tl.top)
                     .text = DConv(sDevAddr)
                     .ReadOnly = TRUE
                     .Width = MdlObjSizer.get_object_width(.text) + 24
                     .Height = tl.Height
+                    x = .Left
                     END WITH
+                  tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "ConfModeLbl"
+                    WITH tl
+                      .Move(4, y)
+                      .text = "Setup Mode"
+                      .height = 21
+                      .Width = MdlObjSizer.get_object_width(.text)
+                      .Alignment = Align.Normal
+                      'y = .top + .Height + 4
+                     iLeft = .Left
+                    END WITH 
+                  cb = NEW ComboBox(FrmNetConf.TSNetDevices) AS "MethodSel"
+                    WITH cb
+                      .Move(x, y)
+                      .width = tb.Width
+                      .Height = 21
+                      .ReadOnly = TRUE
+                      .list = ["DHCP", "STATIC"]
+                      .tag = sDev
+                      y = .top + .Height + 4
+                      itop = y
+                    END WITH 
+                    objCombos.Add(cb)
+                    
           END WITH 
                   
          
          NEXT 
   FrmNetConf.TSNetDevices[FrmNetConf.TSNetDevices.count - 1].Delete ' Ugly hack to delete the trailing blank tab
   
-          
-        
-        
-        
-        
           IF ERROR THEN Message(Error.text & gb.newline & Error.where) 
   
   
 END
+PUBLIC SUB MethodSel_Click()
+  
+  DIM frmDetails AS Frame
+  DIM txtbox AS TextBox
+  DIM tl AS TextLabel
+  
+  IF LAST.text = "STATIC" THEN 
+  frmDetails = NEW Frame(FrmNetConf.TSNetDevices) AS "STaticDetails"
+    WITH frmDetails
+      .Move(ileft, itop + 8)
+      .text = "Settings for Static Method"
+      .Width = .Parent.Width - (.left * 2.5)
+      .Height = 120
+      .tag = LAST.tag
+    END WITH 
+    objFrames.Add(frmDetails)
+  ELSE 
+    
+    FOR EACH frmDetails IN objFrames
+      IF frmDetails.tag = LAST.tag THEN 
+      frmDetails.Delete
+      objFrames.Delete(objFrames.Find(frmDetails))
+    END IF
+        'objFrames.Delete(objFrames.Find(frmDetails))
+        'IF ERROR THEN Message(Error.Text & "\n" & Error.Where)
+    NEXT 
+    
+      
+      
+  END IF
+END
+
