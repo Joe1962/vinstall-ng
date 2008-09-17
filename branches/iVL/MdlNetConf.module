@@ -15,16 +15,19 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 PRIVATE ileft AS Integer
 PRIVATE itop AS Integer
+PRIVATE icbleft AS Integer
 PUBLIC objCombos AS Object[]
 PUBLIC objtxtIps AS Object[]
 PUBLIC objtxtNetMasks AS Object[]
 PUBLIC objtxtDNS AS Object[]
 PUBLIC objFrames AS Object[]
+PUBLIC objtlDetails AS Object[]
+
 PUBLIC SUB LIST_NETWORK_INTERFACES()
   
   ' This SUB will detect network interfaces and offer setup options for each one of them
     DIM seths AS String
-    DIM saths AS String
+    DIM sDump AS String
     DIM sDevList AS String[]
     DIM sLine AS String[]
     DIM sDev AS String
@@ -33,40 +36,43 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     DIM tl AS TextLabel
     DIM tb AS TextBox
     DIM cb AS ComboBox
-    DIM i, ii, y, x AS Integer
+    DIM i, ii, y, x, cbwidth AS Integer
     DIM pTabPic AS picture = Picture["images/ethernet.png"]
     
     'initiate the arrays
     objCombos = NEW Object[]
     objFrames = NEW Object[]
+    objtlDetails = NEW Object[]
     
     
     
-    SHELL "ifconfig -a | grep eth" TO seths
-      File.Save(Temp("eths"), Trim(seths))
+    SHELL "ifconfig -a | grep ^[a-z] | grep -v ^lo" TO seths
+      File.Save(Temp("eths"), Trim(seths)) 
       
       sDevList = Split(File.Load(DConv(Temp("eths"))), gb.NewLine)
-      'Message(DConv(File.load(Temp("eths"))))
-    'sEths = Trim(seths)
-    'sDevList.Clear
-    
-      'sDevList = Split(seths, "\n")
-        'FrmNetConf.TsNetDevices.count = sDevList.count - 1
-        'PRINT FrmNetConf.TSNetDevices.count
-        'PRINT sDevList.Count - 1
-        'FrmNetConf.TsNetDevices.index = 0
+      
         FOR i = 0 TO sDevList.count - 1
           sLine = Split(sDevList[i], " ")
           sDev = sLine[0]
            sDevAddr = sLine[10] ' This may be off depending on which box this runs one... needs careful testing 
-         
+                ' try to detect wirelesss here
+                  sDump = ""
+                  SHELL "iwconfig " & sDev & " > /tmp/iwdump 2>&1" WAIT 
+                    'Message(File.Load("/tmp/iwdump"))
+                     sDump = Trim(File.Load("/tmp/iwdump"))
+                    IF InStr(sDump, "no wireless extensions") > 0 THEN 
+                      sType = "Wired"
+                    ELSE 
+                      sType = "Wireless"
+                    END IF
+              
           WITH FrmNetConf.TSNetDevices
             PRINT .Count
           
             
             .index = i 
             '.text = Left(sDevList[i], 4)
-            .text = sDev
+            .text = sDev 
               IF sDevList[i] <> "" THEN 
                 INC .Count
               END IF
@@ -89,7 +95,27 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                     .Width = MdlObjSizer.get_object_width(.text) + 24
                     .Height = tl.Height
                     x = .Left
+                    cbwidth = .Width
                     END WITH
+                    
+                  tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DevTYpeLbl"
+                    WITH tl
+                      .Move(x + tb.Width + 8, tb.top)
+                      .text = "Interface Type"
+                      .Height = 21
+                      .Width = MdlObjSizer.get_object_width(.text)
+                      .Alignment = Align.Normal
+                    END WITH 
+                  tb = NEW TextBox(FrmNetConf.TSNetDevices) AS "txtDevType"
+                    WITH tb
+                      .Move(tl.left + tl.width + 8, tl.top)
+                      .text = sType
+                      .Width = MdlObjSizer.get_object_width(.text) + 24
+                      .Height = 21
+                      .ReadOnly = TRUE
+                      .tag = sDev
+                    END WITH
+                    
                   tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "ConfModeLbl"
                     WITH tl
                       .Move(4, y)
@@ -103,14 +129,17 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                   cb = NEW ComboBox(FrmNetConf.TSNetDevices) AS "MethodSel"
                     WITH cb
                       .Move(x, y)
-                      .width = tb.Width
+                      .width = cbwidth
                       .Height = 21
                       .ReadOnly = TRUE
                       .list = ["DHCP", "STATIC"]
                       .tag = sDev
-                      y = .top + .Height + 4
-                      itop = y
+                      'y = .top + .Height + 4
+                      'itop = y
+                      icbleft = .Left
                     END WITH 
+                    y = cb.top + cb.Height + 4
+                    itop = y
                     objCombos.Add(cb)
                     
           END WITH 
@@ -121,13 +150,14 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
   
           IF ERROR THEN Message(Error.text & gb.newline & Error.where) 
   
-  
+  KILL "/tmp/iwdump"
 END
 PUBLIC SUB MethodSel_Click()
   
   DIM frmDetails AS Frame
   DIM txtbox AS TextBox
   DIM tl AS TextLabel
+  DIM itxtleft AS Integer
   
   IF LAST.text = "STATIC" THEN 
   frmDetails = NEW Frame(FrmNetConf.TSNetDevices) AS "STaticDetails"
@@ -135,10 +165,45 @@ PUBLIC SUB MethodSel_Click()
       .Move(ileft, itop + 8)
       .text = "Settings for Static Method"
       .Width = .Parent.Width - (.left * 2.5)
-      .Height = 120
+      .Height = 180
       .tag = LAST.tag
     END WITH 
     objFrames.Add(frmDetails)
+        'populate the frame for this
+              tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
+                WITH tl
+                  .Move(8, 24)
+                  .text = "IP Address"
+                  .Height = 21
+                  .Width = MdlObjSizer.get_object_width(.text)
+                  .Alignment = Align.Normal
+                END WITH 
+              txtbox = NEW TextBox(frmDetails) AS "txtStatisIpBoxes" ' static IP Address Box
+                WITH txtbox
+                  .tag = LAST.tag
+                  .Move(tl.left + tl.Width + 24, tl.Top)
+                  .text = "192.168.0.1"
+                  .Height = 21
+                  .Width = MdlObjSizer.get_object_width(.text) * 2
+                  .MaxLength = 16
+                END WITH 
+                itxtleft = txtbox.Left
+              tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
+                WITH tl
+                  .text = "Subnet Mask"
+                  .width = MdlObjSizer.get_object_width(.text)
+                  .Height = 21
+                  .Alignment = Align.Normal
+                  .Move(8, txtbox.top + txtbox.Height + 4)
+                END WITH 
+    
+    
+      FOR EACH tl IN objtlDetails
+        IF tl.tag = LAST.tag THEN 
+          objtlDetails.Delete(objtlDetails.Find(tl))
+        END IF
+      NEXT 
+        
   ELSE 
     
     FOR EACH frmDetails IN objFrames
@@ -149,7 +214,18 @@ PUBLIC SUB MethodSel_Click()
         'objFrames.Delete(objFrames.Find(frmDetails))
         'IF ERROR THEN Message(Error.Text & "\n" & Error.Where)
     NEXT 
-    
+        ' create a text label that says the thing will get automatically configured
+        tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DetailLbl"
+          WITH tl
+            .Move(LAST.left - (LAST.width / 2), LAST.top + LAST.height + 12)
+            .text = "<b>Dynamic Host Control Protocol</b><br>Automatic settings via DHCP. <br><br>This will work if you use a cable or DSL modem. If in doubt, choose this option"
+            .border = Border.Etched
+            .Width = MdlObjSizer.get_object_width(.text)
+            .Height = 21 * 4          
+            .Tag = LAST.tag
+            
+          END WITH 
+          objtlDetails.Add(tl)
       
       
   END IF
