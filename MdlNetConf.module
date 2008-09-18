@@ -40,6 +40,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     DIM tl AS TextLabel
     DIM tb AS TextBox
     DIM cb AS ComboBox
+    DIM bCb AS CheckBox
     DIM i, ii, y, x, cbwidth AS Integer
     DIM pTabPic AS picture
     
@@ -95,7 +96,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       .Height = 21
                       .Alignment = Align.Normal
                       .Width = MdlObjSizer.get_object_width(.text)
-                      y = .top + .Height + 4
+                      'y = .top + .Height + 4
                     END WITH
                   tb = NEW TextBox(FrmNetConf.TSNetDevices) AS "txtDevAddresses" ' MAC Address box
                     WITH tb
@@ -108,7 +109,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                     cbwidth = .Width
                         
                     END WITH
-                    
+                                      
                   tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DevTYpeLbl"
                     WITH tl
                       .Move(x + tb.Width + 8, tb.top)
@@ -126,6 +127,22 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       .ReadOnly = TRUE
                       .tag = sDev
                     END WITH
+                    
+                          'add a box here to enable/disable the interface
+                  bCb = NEW CheckBox(FrmNetConf.TSNetDevices) AS "bEnableInterface" ' enable/disable interface box
+                    WITH bCb
+                      .Move(4, tb.top + tb.Height + 4)
+                      .text = "Enabled"
+                      .Value = TRUE
+                      .Height = 21
+                      .Width = MdlObjSizer.get_object_width(.text) + 36
+                      .tag = sDev
+                      y = .top + .Height + 8
+                    END WITH  
+                    
+                    
+                    
+                    
                     
                   tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "ConfModeLbl"
                     WITH tl
@@ -176,7 +193,7 @@ PUBLIC SUB MethodSel_Click()
       .Move(ileft, itop + 8)
       .text = "Settings for Static Method"
       .Width = .Parent.Width - (.left * 2.5)
-      .Height = 180
+      .Height = 130
       .tag = LAST.tag
     END WITH 
     objFrames.Add(frmDetails)
