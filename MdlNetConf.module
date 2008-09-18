@@ -23,6 +23,10 @@ PUBLIC objtxtDNS AS Object[]
 PUBLIC objFrames AS Object[]
 PUBLIC objtlDetails AS Object[]
 
+
+PRIVATE pWiredPic AS Picture = picture["images/ethernet.png"]
+PRIVATE pWirelessPic AS picture = picture["images/wireless.png"]
+
 PUBLIC SUB LIST_NETWORK_INTERFACES()
   
   ' This SUB will detect network interfaces and offer setup options for each one of them
@@ -37,14 +41,18 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     DIM tb AS TextBox
     DIM cb AS ComboBox
     DIM i, ii, y, x, cbwidth AS Integer
-    DIM pTabPic AS picture = Picture["images/ethernet.png"]
+    DIM pTabPic AS picture
+    
     
     'initiate the arrays
     objCombos = NEW Object[]
     objFrames = NEW Object[]
     objtlDetails = NEW Object[]
+    objtxtIps = NEW Object[]
+    objtxtNetMasks = NEW Object[]
+    objtxtDNS = NEW Object[]
     
-    
+       
     
     SHELL "ifconfig -a | grep ^[a-z] | grep -v ^lo" TO seths
       File.Save(Temp("eths"), Trim(seths)) 
@@ -62,8 +70,10 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                      sDump = Trim(File.Load("/tmp/iwdump"))
                     IF InStr(sDump, "no wireless extensions") > 0 THEN 
                       sType = "Wired"
+                      pTabPic = pWiredPic
                     ELSE 
                       sType = "Wireless"
+                      pTabPic = pWirelessPic
                     END IF
               
           WITH FrmNetConf.TSNetDevices
@@ -87,7 +97,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       .Width = MdlObjSizer.get_object_width(.text)
                       y = .top + .Height + 4
                     END WITH
-                  tb = NEW TextBox(FrmNetConf.TSNetDevices) AS "txtDevAddresses"
+                  tb = NEW TextBox(FrmNetConf.TSNetDevices) AS "txtDevAddresses" ' MAC Address box
                     WITH tb
                     .Move(tl.left + tl.Width + 8, tl.top)
                     .text = DConv(sDevAddr)
@@ -96,6 +106,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                     .Height = tl.Height
                     x = .Left
                     cbwidth = .Width
+                        
                     END WITH
                     
                   tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DevTYpeLbl"
@@ -106,7 +117,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       .Width = MdlObjSizer.get_object_width(.text)
                       .Alignment = Align.Normal
                     END WITH 
-                  tb = NEW TextBox(FrmNetConf.TSNetDevices) AS "txtDevType"
+                  tb = NEW TextBox(FrmNetConf.TSNetDevices) AS "txtDevType" ' Interface Type (wireless, wired)
                     WITH tb
                       .Move(tl.left + tl.width + 8, tl.top)
                       .text = sType
@@ -126,7 +137,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       'y = .top + .Height + 4
                      iLeft = .Left
                     END WITH 
-                  cb = NEW ComboBox(FrmNetConf.TSNetDevices) AS "MethodSel"
+                  cb = NEW ComboBox(FrmNetConf.TSNetDevices) AS "MethodSel" ' Setup Method combobox
                     WITH cb
                       .Move(x, y)
                       .width = cbwidth
@@ -157,7 +168,7 @@ PUBLIC SUB MethodSel_Click()
   DIM frmDetails AS Frame
   DIM txtbox AS TextBox
   DIM tl AS TextLabel
-  DIM itxtleft AS Integer
+  DIM itxtleft, itxtwidth AS Integer
   
   IF LAST.text = "STATIC" THEN 
   frmDetails = NEW Frame(FrmNetConf.TSNetDevices) AS "STaticDetails"
@@ -181,13 +192,15 @@ PUBLIC SUB MethodSel_Click()
               txtbox = NEW TextBox(frmDetails) AS "txtStatisIpBoxes" ' static IP Address Box
                 WITH txtbox
                   .tag = LAST.tag
-                  .Move(tl.left + tl.Width + 24, tl.Top)
-                  .text = "192.168.0.1"
+                  .Move((tl.left + tl.Width) * 2, tl.Top)
+                  .text = "192.168.1.100"
                   .Height = 21
                   .Width = MdlObjSizer.get_object_width(.text) * 2
                   .MaxLength = 16
+                    IF objtxtIps.Find(txtbox) = -1 THEN objtxtIps.Add(txtbox) ' add to the array
                 END WITH 
-                itxtleft = txtbox.Left
+                itxtleft = (tl.Left + tl.Width) * 2 'txtbox.Left 
+                itxtwidth = txtbox.Width
               tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
                 WITH tl
                   .text = "Subnet Mask"
@@ -196,8 +209,36 @@ PUBLIC SUB MethodSel_Click()
                   .Alignment = Align.Normal
                   .Move(8, txtbox.top + txtbox.Height + 4)
                 END WITH 
-    
-    
+              txtbox = NEW TextBox(frmDetails) AS "txtDnsMaskBoxes" ' DNS Mask Box
+                WITH txtbox
+                  .Move(itxtleft, tl.top)
+                  .text = "255.255.255.0"
+                  .tag = LAST.tag
+                  .Height = 21
+                  .Width = itxtwidth
+                  .MaxLength = 16
+                    IF objtxtNetMasks.Find(txtbox) = -1 THEN objtxtNetMasks.Add(txtbox) ' add to the array
+                END WITH 
+              tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
+                WITH tl
+                  .Move(8, txtbox.top + txtbox.Height + 4)
+                  .Height = 21
+                  .text = "Gateway Address"
+                  .Width = MdlObjSizer.get_object_width(.text)
+                  .Alignment = Align.Normal
+                END WITH 
+              txtbox = NEW TextBox(frmDetails) AS "txtGatewayAddrBoxes" ' Gateway address box
+                WITH txtbox
+                  .tag = LAST.tag
+                  .Move(itxtleft, tl.top)
+                  .Height = 21
+                  .Width = itxtwidth
+                  .MaxLength = 16
+                  .text = "192.168.1.254"
+                    IF objtxtDNS.Find(txtbox) = -1 THEN objtxtDNS.Add(txtbox) ' add to the array
+                END WITH 
+                  
+                  
       FOR EACH tl IN objtlDetails
         IF tl.tag = LAST.tag THEN 
           objtlDetails.Delete(objtlDetails.Find(tl))
@@ -217,9 +258,11 @@ PUBLIC SUB MethodSel_Click()
         ' create a text label that says the thing will get automatically configured
         tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DetailLbl"
           WITH tl
-            .Move(LAST.left - (LAST.width / 2), LAST.top + LAST.height + 12)
-            .text = "<b>Dynamic Host Control Protocol</b><br>Automatic settings via DHCP. <br><br>This will work if you use a cable or DSL modem. If in doubt, choose this option"
-            .border = Border.Etched
+            '.Move(LAST.left - (LAST.width / 2), LAST.top + LAST.height + 12)
+            .Move(8, LAST.top + LAST.height + 12)
+            .text = "<b>Dynamic Host Control Protocol</b><br>Automatic settings via DHCP. <br><br>This will work if you use a cable or DSL modem on a home network. <br>If in doubt, choose this option"
+            .Adjust
+            '.border = Border.Etched
             .Width = MdlObjSizer.get_object_width(.text)
             .Height = 21 * 4          
             .Tag = LAST.tag
