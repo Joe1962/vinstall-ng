@@ -43,3 +43,9 @@ PUBLIC SUB Form_Open()
   
 END
 
+
+PUBLIC SUB Form_Menu()
+
+  MdlNetConf.WRITE_INET()
+
+END
