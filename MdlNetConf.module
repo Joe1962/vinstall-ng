@@ -17,6 +17,7 @@ PRIVATE ileft AS Integer
 PRIVATE itop AS Integer
 PRIVATE icbleft AS Integer
 PUBLIC objCombos AS Object[]
+PUBLIC objCheckboxes AS Object[]
 PUBLIC objtxtIps AS Object[]
 PUBLIC objtxtNetMasks AS Object[]
 PUBLIC objtxtDNS AS Object[]
@@ -52,7 +53,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     objtxtIps = NEW Object[]
     objtxtNetMasks = NEW Object[]
     objtxtDNS = NEW Object[]
-    
+    objCheckboxes = NEW Object[]
        
     
     SHELL "ifconfig -a | grep ^[a-z] | grep -v ^lo" TO seths
@@ -138,6 +139,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       .Width = MdlObjSizer.get_object_width(.text) + 36
                       .tag = sDev
                       y = .top + .Height + 8
+                      objCheckboxes.Add(bCb)
                     END WITH  
                     
                     
@@ -290,4 +292,100 @@ PUBLIC SUB MethodSel_Click()
       
   END IF
 END
+
+PUBLIC SUB bEnableInterface_click()
+  
+  DIM fFrm AS Frame
+  DIM Comb AS ComboBox
+    FOR EACH fFrm IN objFrames
+      IF fFrm.tag = LAST.tag THEN fFrm.Enabled = LAST.Value
+    NEXT 
+    FOR EACH Comb IN objCombos
+      IF Comb.tag = LAST.tag THEN Comb.Enabled = LAST.Value
+    NEXT 
+END
+
+PUBLIC SUB WRITE_INET()
+  
+  DIM sScript AS String
+  DIM sIP, sGateway, Netmask, sDev AS String
+  DIM sDHCP AS String
+  DIM i AS Integer
+  DIM txt AS TextBox
+  DIM combo AS ComboBox
+  DIM cb AS CheckBox
+  
+    
+    ' Base the function on the objects rather than the tabstrip
+      FOR EACH cb IN objCheckboxes
+        IF cb.value = TRUE THEN 
+          sDev = cb.Tag
+          FOR EACH combo IN objCombos
+            IF combo.tag = cb.tag THEN 
+              SELECT CASE combo.Text
+                CASE "DHCP"
+                  sDHCP = "yes"
+                  sIp = ""
+                  sGateway = ""
+                  Netmask = ""
+                CASE "STATIC"
+                  sDHCP = "no"
+                    ' get the values from each box
+                      FOR EACH txt IN objtxtIps
+                        IF txt.tag = combo.tag THEN sIp = txt.Text
+                      NEXT 
+                      FOR EACH txt IN objtxtNetMasks
+                        IF txt.tag = combo.tag THEN Netmask = txt.Text
+                      NEXT 
+                      FOR EACH txt IN objtxtDNS
+                        IF txt.tag = combo.tag THEN sGateway = txt.Text
+                      NEXT 
+              END SELECT 
+            END IF
+          NEXT 
+              ' Generate the rc.inet[0-9] script
+    sScript = "#!/bin/bash \n" &
+    "# This file is supposed to be created by vnetadd \n" &
+    "# and modified by vnetset. \n" &
+    "# you can modify it by hand, but be careful \n \n \n" &
+    "# This script is part of VectorLinux. Licensed under the terms of the GNU GPL \n" &
+    "# \n\n\n" &
+    "##############################################################\n" &
+    "## The Settings \n" &
+    "DEVICE=" & sDev & "\n" &
+    "DHCP=\"" & sDHCP & "\"\n" &
+    "IPADDR=\"" & sIP & "\"\n" &
+    "NETMASK=\"" & Netmask & "\"\n" &
+    "GATEWAY=\"" & sGateway & "\"\n" &
+    "PROBE=\"no\"" & "\n\n" &
+    "################################################################\n" &
+    "## The Script \n \n" &
+    "## You may make customized script here \n" &
+    "## of source the starndard network script\n\n" &
+    ". /etc/rc.d/functions-network $@ "
+    
+    Message(sScript)
+    
+      END IF
+    NEXT 
+    
+  'ME.SET_HOSTNAME("Test")
+END
+
+PUBLIC SUB SET_HOSTNAME(sHostName AS String)
+  
+  DIM sRes AS String
+    SHELL "skill -n X" TO sRes
+      sRes = Trim(sRes)
+    IF Len(sRes) > 0 THEN 
+      SHELL "echo " & sHostName & " > " & ClsGlobal.sTargetMnt &/ "etc" &/ "HOSTNAME" WAIT 
+    ELSE ' X is not running
+      SHELL "hostname $HOSTNAME; echo " & sHostName & " > " & ClsGlobal.sTargetMnt &/ "etc" &/ "HOSTNAME" WAIT ' This sets the hostname to the current CLI session and saves it for future boots
+    END IF
+    
+  
+END
+
+
+
 
