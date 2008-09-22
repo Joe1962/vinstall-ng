@@ -25,6 +25,7 @@ PUBLIC objFrames AS Object[]
 PUBLIC objtlDetails AS Object[]
 
 
+
 PRIVATE pWiredPic AS Picture = picture["images/ethernet.png"]
 PRIVATE pWirelessPic AS picture = picture["images/wireless.png"]
 
@@ -54,6 +55,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     objtxtNetMasks = NEW Object[]
     objtxtDNS = NEW Object[]
     objCheckboxes = NEW Object[]
+ 
        
     
     SHELL "ifconfig -a | grep ^[a-z] | grep -v ^lo" TO seths
@@ -133,7 +135,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                   bCb = NEW CheckBox(FrmNetConf.TSNetDevices) AS "bEnableInterface" ' enable/disable interface box
                     WITH bCb
                       .Move(4, tb.top + tb.Height + 4)
-                      .text = "Enabled"
+                      .text = "Automatically activate this interface at start-up"
                       .Value = TRUE
                       .Height = 21
                       .Width = MdlObjSizer.get_object_width(.text) + 36
@@ -141,11 +143,8 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       y = .top + .Height + 8
                       objCheckboxes.Add(bCb)
                     END WITH  
-                    
-                    
-                    
-                    
-                    
+                    ' Split the design here for wireless and wired devices
+          'IF sType = "Wireless" THEN                     
                   tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "ConfModeLbl"
                     WITH tl
                       .Move(4, y)
@@ -171,7 +170,17 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                     y = cb.top + cb.Height + 4
                     itop = y
                     objCombos.Add(cb)
-                    
+        ' '  ELSE 
+        '       tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "tlWirelessSecType"
+        '         WITH tl
+        '           .Move(4, y)
+        '           .text = "Security Mode"
+        '           .Width = MdlObjSizer.get_object_width(.text)
+        '           .Height = 21
+        '           .Alignment = Align.Normal
+        '         END WITH 
+        '   END IF
+          
           END WITH 
                   
          
@@ -186,8 +195,9 @@ PUBLIC SUB MethodSel_Click()
   
   DIM frmDetails AS Frame
   DIM txtbox AS TextBox
+  DIM cb AS CheckBox
   DIM tl AS TextLabel
-  DIM itxtleft, itxtwidth AS Integer
+  DIM itxtleft, itxtwidth, imandnsleft, imandnstxtleft AS Integer
   
   IF LAST.text = "STATIC" THEN 
   frmDetails = NEW Frame(FrmNetConf.TSNetDevices) AS "STaticDetails"
@@ -220,6 +230,10 @@ PUBLIC SUB MethodSel_Click()
                 END WITH 
                 itxtleft = (tl.Left + tl.Width) * 2 'txtbox.Left 
                 itxtwidth = txtbox.Width
+                imandnsleft = itxtleft + itxtwidth + 8
+                
+                
+                
               tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
                 WITH tl
                   .text = "Subnet Mask"
@@ -238,6 +252,8 @@ PUBLIC SUB MethodSel_Click()
                   .MaxLength = 16
                     IF objtxtNetMasks.Find(txtbox) = -1 THEN objtxtNetMasks.Add(txtbox) ' add to the array
                 END WITH 
+                
+                
               tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
                 WITH tl
                   .Move(8, txtbox.top + txtbox.Height + 4)
@@ -256,7 +272,7 @@ PUBLIC SUB MethodSel_Click()
                   .text = "192.168.1.254"
                     IF objtxtDNS.Find(txtbox) = -1 THEN objtxtDNS.Add(txtbox) ' add to the array
                 END WITH 
-                  
+                 
                   
       FOR EACH tl IN objtlDetails
         IF tl.tag = LAST.tag THEN 
@@ -295,15 +311,20 @@ END
 
 PUBLIC SUB bEnableInterface_click()
   
-  DIM fFrm AS Frame
-  DIM Comb AS ComboBox
-    FOR EACH fFrm IN objFrames
-      IF fFrm.tag = LAST.tag THEN fFrm.Enabled = LAST.Value
-    NEXT 
-    FOR EACH Comb IN objCombos
-      IF Comb.tag = LAST.tag THEN Comb.Enabled = LAST.Value
-    NEXT 
+  ' ' DIM fFrm AS Frame
+  ' ' DIM Comb AS ComboBox
+  ' '   FOR EACH fFrm IN objFrames
+  ' '     IF fFrm.tag = LAST.tag THEN fFrm.Enabled = LAST.Value
+  ' '   NEXT 
+  ' '   FOR EACH Comb IN objCombos
+  ' '     IF Comb.tag = LAST.tag THEN Comb.Enabled = LAST.Value
+  ' '   NEXT 
+  '''''' ******* Instead of that ^, this will only determing if the inet script will be set executable or not
 END
+
+
+
+
 
 PUBLIC SUB WRITE_INET()
   
@@ -314,6 +335,7 @@ PUBLIC SUB WRITE_INET()
   DIM txt AS TextBox
   DIM combo AS ComboBox
   DIM cb AS CheckBox
+  DIM ii AS Integer = 0
   
     
     ' Base the function on the objects rather than the tabstrip
