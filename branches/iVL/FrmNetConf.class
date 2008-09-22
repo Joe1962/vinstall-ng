@@ -39,13 +39,43 @@ PUBLIC SUB Form_Open()
     
     ME.txtHostName.text = ME.GET_CURRENT_HOST_NAME()
     MdlNetConf.LIST_NETWORK_INTERFACES
+    cbUseManDNS.Value = FALSE
+    tlBanner.text = "<h2>" & tlBanner.text & "</h2>"
   IF ERROR THEN Message(Error.text & "\n" & Error.where)
-  
+    
 END
 
 
 PUBLIC SUB Form_Menu()
 
   MdlNetConf.WRITE_INET()
+
+END
+
+PUBLIC SUB Form_Resize()
+DIM itxtboxleft AS Integer
+
+    WITH ME
+      .tlBanner.Move(8, 10, MdlObjSizer.get_object_width(.tlBanner.text))
+      .tlHostNameLbl.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 8, MdlObjSizer.get_object_width(.tlHostNameLbl.text), 21)
+      .txtHostName.Move(.tlHostNameLbl.left + .tlHostNameLbl.Width + 4, .tlHostNameLbl.top)
+      .cbUseManDNS.Move(.tlHostNameLbl.Left, .tlHostNameLbl.top + .tlHostNameLbl.Height + 10, MdlObjSizer.get_object_width(.cbUseManDNS.text) + 24)
+      .tlPrimaryDNS.Move(.cbUseManDNS.left, .cbUseManDNS.top + .cbUseManDNS.Height + 4, MdlObjSizer.get_object_width(.tlPrimaryDNS.text))
+        itxtboxleft = .tlPrimaryDNS.Left + .tlPrimaryDNS.Width + 24
+      .txtPrimaryDNS.Move(itxtboxleft, .tlPrimaryDNS.Top)
+      .tlSecDNS.Move(.tlPrimaryDNS.Left, .tlPrimaryDNS.top + .tlPrimaryDNS.Height + 4, MdlObjSizer.get_object_width(.tlSecDNS.text))
+      .txtSecDNS.Move(itxtboxleft, .tlSecDNS.top)
+      ' now move the frame
+      .frmNetDevices.Move(.tlSecDNS.Left, .tlSecDNS.top + .tlSecDNS.Height + 8)
+        .frmNetDevices.Width = .ClientWidth - (.frmNetDevices.Left * 2)
+      .TSNetDevices.Width = .ClientWidth - (.frmNetDevices.left * 5) 
+      
+  END WITH 
+END
+
+PUBLIC SUB cbUseManDNS_Click()
+
+    ME.txtPrimaryDNS.Enabled = cbUseManDNS.Value
+    ME.txtSecDNS.Enabled = cbUseManDNS.Value
 
 END

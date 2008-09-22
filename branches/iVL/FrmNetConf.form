@@ -1,18 +1,19 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,94,61)
+  MoveScaled(0,0,94,74)
   Text = ("")
   { tlHostNameLbl TextLabel
-    MoveScaled(1,2,16,3)
+    MoveScaled(1,8,16,3)
     Text = ("Computer Name")
+    Alignment = Align.Normal
   }
   { txtHostName TextBox
-    MoveScaled(18,2,28,3)
+    MoveScaled(18,8,28,3)
     Text = ("")
   }
   { frmNetDevices Frame
-    MoveScaled(1,7,85,49)
+    MoveScaled(1,23,85,49)
     Text = (" Network Interfaces")
     { TSNetDevices TabStrip
       MoveScaled(2,4,81,43)
@@ -20,5 +21,36 @@
       Text = ("Tab 0")
       Index = 0
     }
+  }
+  { cbUseManDNS CheckBox
+    MoveScaled(1,12,39,3)
+    Text = ("Manual DNS Server Specification")
+  }
+  { tlPrimaryDNS TextLabel
+    MoveScaled(2,16,20,3)
+    Text = ("Primary DNS Server")
+    Alignment = Align.Normal
+  }
+  { txtPrimaryDNS TextBox txtManDNSBoxes
+    Name = "txtPrimaryDNS"
+    MoveScaled(24,16,18.5714,3)
+    Enabled = False
+    Text = ("192.168.1.254")
+  }
+  { tlSecDNS TextLabel
+    MoveScaled(2,19,21,3)
+    Text = ("Secondary DNS Server")
+    Alignment = Align.Normal
+  }
+  { txtSecDNS TextBox txtManDNSBoxes
+    Name = "txtSecDNS"
+    MoveScaled(26,19,18.5714,3)
+    Enabled = False
+    Text = ("")
+  }
+  { tlBanner TextLabel
+    MoveScaled(1,1,45,6)
+    Text = ("NETWORK CONFIGURATION")
+    Alignment = Align.Normal
   }
 }
