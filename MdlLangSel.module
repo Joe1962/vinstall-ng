@@ -1,4 +1,4 @@
-' Gambas class file
+' Gambas module file
 
 '    This file is part of vinstall-ng
 
@@ -15,21 +15,16 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
-
-
-PUBLIC SUB Form_Open()
-
-  FMain.FrmCurr = ME
-  tlbanner.text = "<h3>" & tlbanner.text & "</h3>"
-    ME.LIST_LANG_CHOICES()
-
-END
-
-PUBLIC SUB LIST_LANG_CHOICES()
+PUBLIC FUNCTION ID_LANG(LangName AS String) AS String
   
-  ME.lbLangSel.list = ["English", "Spanish", "Italian"]
-    
-    
+  DIM sRes AS String
+    SELECT CASE LangName 
+      CASE "English"
+        sRes = "en_US"
+      CASE "Spanish"
+        sRes = "es_ES"
+    END SELECT 
+    RETURN sRes
+        
   
 END
-

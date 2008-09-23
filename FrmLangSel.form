@@ -3,8 +3,14 @@
 { Form Form
   MoveScaled(0,0,64,64)
   Text = ("")
-  { ListBox1 ListBox
-    MoveScaled(8,9,32,15)
-    List = [("en_US"), ("es_ES")]
+  Picture = Picture["images/langbg.png"]
+  { lbLangSel ListBox
+    MoveScaled(1,8,32,51)
+    List = []
+  }
+  { tlBanner TextLabel
+    MoveScaled(2,2,37,5)
+    Text = ("Select your language")
+    Alignment = Align.Normal
   }
 }
