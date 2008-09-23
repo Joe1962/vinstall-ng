@@ -33,7 +33,7 @@
   }
   { txtPrimaryDNS TextBox txtManDNSBoxes
     Name = "txtPrimaryDNS"
-    MoveScaled(24,16,18.5714,3)
+    MoveScaled(24,16,18.5,3)
     Enabled = False
     Text = ("192.168.1.254")
   }
@@ -44,12 +44,12 @@
   }
   { txtSecDNS TextBox txtManDNSBoxes
     Name = "txtSecDNS"
-    MoveScaled(26,19,18.5714,3)
+    MoveScaled(26,19,18.5,3)
     Enabled = False
     Text = ("")
   }
   { tlBanner TextLabel
-    MoveScaled(1,1,45,6)
+    MoveScaled(1,1,45,5)
     Text = ("NETWORK CONFIGURATION")
     Alignment = Align.Normal
   }

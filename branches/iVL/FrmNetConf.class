@@ -17,38 +17,41 @@
 
 PUBLIC FUNCTION GET_CURRENT_HOST_NAME() AS String
   DIM sRes AS String
-  IF Exist("/etc/HOSTNAME") THEN 
-    File.Save(Temp("Host"), SConv(File.load("/etc/HOSTNAME")))
-    
-    
-    sRes = DConv(File.Load(Temp("Host")))
-    
-    'sRes = File.Load(DConv("/etc/HOSTNAME"))
+  
+    SHELL "hostname" TO sRes
+
+    sRes = Trim(sRes)
       IF sRes = "" THEN 
         sRes = "Vector.Linux.net"
       END IF
-  ELSE 
-    sRes = "Vector.Linux.net"
-  END IF
-    RETURN sRes
+
+    RETURN Trim(sRes)
       
 END
 
 
 PUBLIC SUB Form_Open()
+    FMain.FrmCurr = ME
     
     ME.txtHostName.text = ME.GET_CURRENT_HOST_NAME()
     MdlNetConf.LIST_NETWORK_INTERFACES
     cbUseManDNS.Value = FALSE
     tlBanner.text = "<h2>" & tlBanner.text & "</h2>"
+    FMain.tvPlan["Conf2"].picture = MdlCore.sNowPic
+    FMain.tvPlan["Conf2"].Selected = TRUE
+    
+    
   IF ERROR THEN Message(Error.text & "\n" & Error.where)
+  
+  
     
 END
 
 
 PUBLIC SUB Form_Menu()
 
-  MdlNetConf.WRITE_INET()
+  'MdlNetConf.WRITE_INET() ' only enabled for testing. THis will get triggered on the "next" button's click event
+  'MdlNetConf.SET_DNS_ADDRESSES
 
 END
 
@@ -56,8 +59,8 @@ PUBLIC SUB Form_Resize()
 DIM itxtboxleft AS Integer
 
     WITH ME
-      .tlBanner.Move(8, 10, MdlObjSizer.get_object_width(.tlBanner.text))
-      .tlHostNameLbl.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 8, MdlObjSizer.get_object_width(.tlHostNameLbl.text), 21)
+      .tlBanner.Move(8, 8, MdlObjSizer.get_object_width(.tlBanner.text))
+      .tlHostNameLbl.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 4, MdlObjSizer.get_object_width(.tlHostNameLbl.text), 21)
       .txtHostName.Move(.tlHostNameLbl.left + .tlHostNameLbl.Width + 4, .tlHostNameLbl.top)
       .cbUseManDNS.Move(.tlHostNameLbl.Left, .tlHostNameLbl.top + .tlHostNameLbl.Height + 10, MdlObjSizer.get_object_width(.cbUseManDNS.text) + 24)
       .tlPrimaryDNS.Move(.cbUseManDNS.left, .cbUseManDNS.top + .cbUseManDNS.Height + 4, MdlObjSizer.get_object_width(.tlPrimaryDNS.text))
