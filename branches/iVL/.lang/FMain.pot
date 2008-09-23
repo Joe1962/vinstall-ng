@@ -27,6 +27,6 @@ msgid "Back"
 msgstr ""
 
 #: FMain.class:380
-msgid "Exit"
+msgid "Exit Installation"
 msgstr ""
 
