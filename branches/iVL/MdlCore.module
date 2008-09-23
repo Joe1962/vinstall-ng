@@ -206,7 +206,10 @@ PUBLIC SUB main()
 
 IF Application.Args[1] THEN 
 '  Message(Application.Args[1])
+  System.Language = Application.Args[1]
   frmInit = FrmSelISO
+  
+  'shell "LC_ALL=" & Application.Args[1] & Space(1) & "LANG=" & Application.Args[1]
   
 ELSE 
   frmInit = FrmLangSel

@@ -28,6 +28,14 @@ END
 
 PUBLIC SUB Form_Open()
 DIM iImg AS Image
+
+WITH ME.pnlwinhost
+  '.Background = Color.Transparent
+  .ForeColor = Color.Transparent
+'  .ForeColor = Picture["images/langbg.png"]
+END WITH 
+FrmLangSel.Picture = Picture["images/langbg.png"]
+
 ME.Maximized = TRUE
 
 MdlCore.LOCK_GUI
@@ -168,11 +176,17 @@ END
 PUBLIC SUB btnext_Click()
   DIM sISONAME AS String
   DIM sDev AS String
+  DIM sLang AS String
   
   SELECT CASE FrmCurr.Name ' very nice navigation algoritm
     CASE "FrmLangSel"
-      SHELL "export LANG=" & Trim(FrmLangSel.ListBox1.text) & "; ./" & Application.Args[0] & Space(1) & Trim(FrmLangSel.ListBox1.Text) ' this will set the LANG environment to what the user selects and restart the application.
-      QUIT 
+      sLang = MdlLangSel.ID_LANG(Trim(FrmLangSel.lbLangSel.text))
+      System.Language = sLang
+      ' SHELL "LC_ALL=" & sLang & Space(1) & "LANG=" & sLang & " ./" & Application.Args[0] & Space(1) & sLang ' this will set the LANG environment to what the user selects and restart the application.
+      'SHELL "LC_ALL=" & Application.Args[1] & Space(1) & "LANG=" & Application.Args[1] & Space(1) & "./" & Application.Args[0] & Space(1) & Trim(FrmLangSel.listbox1.text)
+      IF ERROR THEN Message(Error.Text & gb.NewLine & Error.where)
+      'QUIT
+      
     
     CASE "FrmSelISO"
         sDev = Right(FrmSelISO.lstInstallableImg.Text, Len(FrmSelISO.lstInstallableImg.Text) - InStr(FrmSelISO.lstInstallableImg.text, "/") + 1)
