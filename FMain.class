@@ -271,8 +271,15 @@ PUBLIC SUB btnext_Click()
     
        frmNext = FrmUserAdd
        
+       
     CASE "FrmUserAdd"
     
+      frmNext = FrmNetConf
+      
+    CASE "FrmNetConf"
+      MdlNetConf.SET_HOSTNAME
+      MdlNetConf.SET_DNS_ADDRESSES
+      MdlNetConf.WRITE_INET
 '      frmNext = FrmLilo ' this is already done
         
   END SELECT 
