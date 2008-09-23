@@ -21,7 +21,7 @@ PUBLIC sNextKey AS String
 PUBLIC FrmCurr AS Form ' assigned when a form is opened
 PUBLIC frmLast AS Form ' assigned when a form is hidden
 PUBLIC frmNext AS Form ' assined next form for the "next" button in fmain"
-
+PUBLIC frmInit AS Form = MdlCore.frmInit ' initial form (set by the LANG environment)
 PUBLIC SUB _new()
 
 END
@@ -36,10 +36,13 @@ ClsGlobal.sBackNav = NEW Object[]
 ClsGlobal.sSourceMnt = "/mnt/cdrom"
 'ClsGlobal.sSourceMnt = "/mnt" &/ "source" 'FOR TESTING ONLY
 '/ THE FOLLOWING LINES HAVE BEEN COMMENTED FOR TESTING ONLY
+frmInit.Reparent(ME.pnlwinhost)
+frmInit.width = pnlwinhost.Width
+frmInit.height = pnlwinhost.Height
 
-FrmSelISO.Reparent(ME.pnlWinHost)
-FrmSelISO.Width = pnlWinHost.Width
-FrmSelISO.Height = pnlWinHost.Height
+' FrmSelISO.Reparent(ME.pnlWinHost)
+' FrmSelISO.Width = pnlWinHost.Width
+' FrmSelISO.Height = pnlWinHost.Height
 
 iImg = Image.Load("images/installer.png").Stretch(400, 50)
 'iImg.Resize(600, 80)
@@ -167,6 +170,10 @@ PUBLIC SUB btnext_Click()
   DIM sDev AS String
   
   SELECT CASE FrmCurr.Name ' very nice navigation algoritm
+    CASE "FrmLangSel"
+      SHELL "export LANG=" & Trim(FrmLangSel.ListBox1.text) & "; ./" & Application.Args[0] & Space(1) & Trim(FrmLangSel.ListBox1.Text) ' this will set the LANG environment to what the user selects and restart the application.
+      QUIT 
+    
     CASE "FrmSelISO"
         sDev = Right(FrmSelISO.lstInstallableImg.Text, Len(FrmSelISO.lstInstallableImg.Text) - InStr(FrmSelISO.lstInstallableImg.text, "/") + 1)
         IF InStr(FrmSelISO.lstInstallableImg.text, ".iso") OR InStr(FrmSelISO.lstInstallableImg.text, ".ISO") THEN 

@@ -24,7 +24,7 @@ PUBLIC sToDopic AS Picture = Picture["images/circle.png"]
 PUBLIC sNowPic AS picture = Picture["images/arrow.png"]
 PUBLIC sDonePic AS Picture = Picture["images/check.png"]
 PUBLIC iLeftWidth AS Integer
-
+PUBLIC frmInit AS Form
 
 
 PUBLIC SUB FIND_ISO_ON_DRIVE(sDrive AS String)
@@ -201,6 +201,18 @@ END
 
 
 PUBLIC SUB main()
+
+
+
+IF Application.Args[1] THEN 
+'  Message(Application.Args[1])
+  frmInit = FrmSelISO
+  
+ELSE 
+  frmInit = FrmLangSel
+  
+END IF
+
 'MdlInstallCustom.INSTALL_KERNELS()
 'RETURN 
   FMain.Show
