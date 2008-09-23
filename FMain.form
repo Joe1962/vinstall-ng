@@ -21,7 +21,7 @@
     Alignment = Align.Center
   }
   { btnext Button
-    MoveScaled(49,67,8,3)
+    MoveScaled(56,67,8,3)
     Text = ("Next")
     Picture = Picture["icon:/16/right"]
   }
@@ -31,8 +31,8 @@
     Picture = Picture["icon:/16/left"]
   }
   { btQuit Button
-    MoveScaled(38,67,11,3)
-    Text = ("Exit")
+    MoveScaled(38,67,15,3)
+    Text = ("Exit Installation")
     Picture = Picture["icon:/16/cancel"]
   }
   { PictureBox1 PictureBox

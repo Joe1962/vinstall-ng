@@ -67,7 +67,7 @@ WITH ME
   .btback.ForeColor = Color.Gray
   .Frame1.BackColor = Color.Transparent
   .tvPlan.BackColor = Color.transparent
-  .btQuit.Text = "Exit Installation"
+  '.btQuit.Text = "Exit Installation"
   .tvPlan["Prep0"].Selected = TRUE
   .tvPlan["Prep0"].Picture = MdlCore.sNowPic
   .tlBanner.Height = .PictureBox1.Height
