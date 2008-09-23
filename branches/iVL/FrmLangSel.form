@@ -1,0 +1,10 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Text = ("")
+  { ListBox1 ListBox
+    MoveScaled(8,9,32,15)
+    List = [("en_US"), ("es_ES")]
+  }
+}
