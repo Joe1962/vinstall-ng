@@ -23,8 +23,10 @@ PUBLIC SUB lstInstallableImg_Click()
   DIM sLocation AS String
   DIM ipos1 AS Integer
   
+
+  
   IF lstInstallableImg.Count > 0 THEN 
-  IF lstInstallableImg.Text <> "No Installable Media Found" THEN   
+  IF lstInstallableImg.Text <> ("No Installable Media Found") THEN   
     IF InStr(Trim(lstInstallableImg.Text), ".iso") OR InStr(Trim(lstInstallableImg.Text), ".ISO") = TRUE THEN 
     sLocation = Left(lstInstallableImg.Text, InStr(lstInstallableImg.Text, " ") - 1)
     
