@@ -14,3 +14,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: MdlDiskPart.module:53
+msgid "Gparted was not found on this system. Please install gparted and try again"
+msgstr ""
+
+#: MdlDiskPart.module:57
+msgid "<h3>Loading gparted ... Please wait</h3>"
+msgstr ""
+
+#: MdlDiskPart.module:95
+msgid "Several windows found. I will take the first one!"
+msgstr ""
+

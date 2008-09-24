@@ -52,7 +52,7 @@ ME.oWMntPoints = NEW Object[]
         ' create a new text label just to label the separation between windows and linux partitions
         tl = NEW TextLabel(FrmWinDrives.svWinDrives) AS "Separator"
           WITH tl
-            .Text = "<b>Windows Partitions Detected</b>"
+            .Text = ("<b>Windows Partitions Detected</b>")
             .Height = 27
             .Width = MdlObjSizer.get_object_width(.Text)
             .x = FrmWinDrives.svWinDrives.Width / 2 - (.Width / 2)
@@ -68,7 +68,7 @@ ME.oWMntPoints = NEW Object[]
         WITH tl
           .x = x
           .y = y
-          .text = "<B>PARTITION</B>"
+          .text = ("<B>PARTITION</B>")
           .Width = MdlObjSizer.get_object_width(.Text) * 1.5
           .Height = 27
         END WITH 
@@ -78,7 +78,7 @@ ME.oWMntPoints = NEW Object[]
         WITH tl
           .x = cbx
           .y = y
-          .text = "<b>MOUNT TO </B>"
+          .text = ("<b>MOUNT TO </B>")
           .Width = MdlObjSizer.get_object_width(.Text) * 1.5
           .Height = 27
         END WITH 
@@ -158,7 +158,7 @@ ME.oWMntPoints = NEW Object[]
                   .Height = 21
                   .tag = wintfs[i]
                   .Add("/mnt" &/ Right(.tag, Len(.tag) - RInStr(.tag, "/")))                  
-                  .Add("Do not mount")
+                  .Add(("Do not mount"))
                   
                   '.ReadOnly = TRUE
                 END WITH 
@@ -178,7 +178,7 @@ ME.oWMntPoints = NEW Object[]
   ' no widnows partitions found
     tl = NEW TextLabel(FrmWinDrives.svWinDrives)
       WITH tl
-        .Text = "<b>No Windows partitions detected</b>"
+        .Text = ("<b>No Windows partitions detected</b>")
         .Width = MdlObjSizer.get_object_width(.Text)
         .Height = 27
         .x = y

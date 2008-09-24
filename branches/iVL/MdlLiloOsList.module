@@ -64,7 +64,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                     ' now populate it with the necessary stuff
                       tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinBanner"
                         WITH tl
-                          .text = "<b>Windows installation found in " & sWinPart & "</b>"
+                          .text = ("<b>Windows installation found in ") & sWinPart & "</b>"
                           .Move(4, 16, MdlObjSizer.get_object_width(.text) + 24, 27)
                           .Alignment = Align.Normal
                           .BackColor = Color.Background
@@ -72,7 +72,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                         
                       tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinName"
                         WITH tl
-                          .text = "Name "
+                          .text = ("Name ")
                           .Move(tl.left, tl.top + tl.height + 8, MdlObjSizer.get_object_width(.text) + 8, 27)
                           .Alignment = Align.Normal
                           .BackColor = Color.Background
@@ -91,7 +91,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                       
                       cb = NEW CheckBox(FrmLilo.TabStrip1) AS "WinInclude"
                         WITH cb
-                          .text = "Include this Operating System in the boot menu"
+                          .text = ("Include this Operating System in the boot menu")
                           .Move(tl.left, tl.top + tl.height, MdlObjSizer.get_object_width(.text) + 36, 27)
                           .Value = TRUE
                           .BackColor = Color.Background
@@ -130,7 +130,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                       tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinPartLbl"
                         WITH tl
                           .Move(4, 24)
-                          .text = "<b>Windows installation found in " & sWinPart & "</b>"
+                          .text = ("<b>Windows installation found in ") & sWinPart & "</b>"
                           .Height = 27
                           .Width = MdlObjSizer.get_object_width(.text)
                           .BackColor = Color.Background
@@ -140,7 +140,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                         WITH cb
                           .Move(4, tl.top + tl.Height + 12)
                           .tag = sWinPart
-                          .text = "Include this installation in the boot menu"
+                          .text = ("Include this installation in the boot menu")
                           .Width = MdlObjSizer.get_object_width(.text) + 36
                           .Height = 24
                           .BackColor = Color.Background
@@ -149,7 +149,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                           arrWinInstalls.Add(cb) ' add to the array
                       tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinLblLbl"
                         WITH tl
-                        .text = "Label"
+                        .text = ("Label")
                         .MOVE(4, cb.top + cb.Height + 4, MdlObjSizer.get_object_width(.text), 27)
                         .BackColor = Color.Background
                         .Alignment = Align.Normal
@@ -267,7 +267,7 @@ bIncluded = NEW Object[]
             ENDIF 
           tl = NEW TextLabel(FrmLilo.TabStrip1) AS "OSIntro"
             WITH tl
-              .text = "<b>Operating system installed in " & arrLinux[i] & "</b>"
+              .text = ("<b>Operating system installed in ") & arrLinux[i] & "</b>"
               .Move(4, 16, MdlObjSizer.get_object_width(.text) + 4, 27)
               '.BackColor = Color.SelectedBackground
               .Alignment = Align.Normal
@@ -279,7 +279,7 @@ bIncluded = NEW Object[]
           
             cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "IncludeOS"
               WITH cbInclude
-                .text = "Include this operating system in the boot menu"
+                .text = ("Include this operating system in the boot menu")
                 .Height = 27
                 .Value = TRUE
                 .Move(4, tl.top + tl.Height + 4, MdlObjSizer.get_object_width(.text) + 24)
@@ -290,7 +290,7 @@ bIncluded = NEW Object[]
           
             tl = NEW TextLabel(FrmLilo.TabStrip1) AS "Label"
               WITH tl
-                .text = "Name"
+                .text = ("Name")
                 .Move(cbInclude.left, cbInclude.top + cbInclude.Height + 4, MdlObjSizer.get_object_width(.text))
                 .Height = 27
                 .Alignment = Align.Normal
@@ -311,7 +311,7 @@ bIncluded = NEW Object[]
               
             tl = NEW TextLabel(FrmLilo.TabStrip1) AS "InitdLbl"
               WITH tl
-                .text = "Initial Ram Disk"
+                .text = ("Initial Ram Disk")
                 .Move(txtAppnd.Left + txtAppnd.Width + 8, txtAppnd.top, MdlObjSizer.get_object_width(.text))
                 .Height = 27
                 .Alignment = Align.Normal
@@ -335,7 +335,7 @@ bIncluded = NEW Object[]
         
             tl = NEW TextLabel(FrmLilo.TabStrip1) AS "AppndLbl"
               WITH tl
-                .text = "Kernel boot options"
+                .text = ("Kernel boot options")
                 .Move(4, txtAppnd.top + txtAppnd.Height + 4, MdlObjSizer.get_object_width(.text))
                 .Height = 27
                 .Alignment = Align.Normal
@@ -363,7 +363,7 @@ bIncluded = NEW Object[]
                 cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "VlCliOption"
                   WITH cbInclude
                     .Value = FALSE
-                    .text = "Add option to boot this Operating system into Text mode"
+                    .text = ("Add option to boot this Operating system into Text mode")
                     .Width = MdlObjSizer.get_object_width(.text) + 36
                     .Height = 27
                     .Move(4, tl.top + tl.Height + 12)

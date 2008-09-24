@@ -94,7 +94,7 @@ PUBLIC FUNCTION WRITE_NEW_FSTAB() AS Integer
 
  
   ' make the changes show up on the steps now  
-  FrmInstallSys.tlCurrPkg.Text = "Writing new /etc/fstab to system"
+  FrmInstallSys.tlCurrPkg.Text = ("Writing new /etc/fstab to system")
   
   sFstab = "# /etc/fstab: static file system information.\n" &
   "#\n" &
@@ -118,7 +118,7 @@ sFstab = sFstab & gb.NewLine
 
 ' nOW LETS' GET THE REST OF THE PARTITIONS IN THERE
 FOR EACH CB IN MdlPartSel.oMountPoints
-    IF cb.text <> "Not Used" THEN 
+    IF cb.text <> ("Not Used") THEN 
       
     
   'IF Left(Trim(cb.text), Len("/mnt")) = "/mnt" THEN 
@@ -143,7 +143,7 @@ FOR EACH CB IN MdlPartSel.oMountPoints
               IF mt.Tag = cb.Tag THEN 
                 
                 
-                IF mt.text = "Do not format" THEN                   
+                IF mt.text = ("Do not format") THEN                   
                   SHELL "export sfmt=$(parted " & sDrive & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $sfmt | cut -f 6 -d \' \'" TO sRes
                 ELSE 
                   sRes = LCase(mt.text)
@@ -166,7 +166,7 @@ sFstab = sFstab & "\n\n" &
 ' LET'S GET THE WINDOWS PARTITIONS IN HERE
   IF MdlWinDrives.oWMntPoints THEN 
 FOR EACH cb IN MdlWinDrives.oWMntPoints
-  IF cb.text <> "Do not mount" THEN 
+  IF cb.text <> ("Do not mount") THEN 
     sDrive = Left(cb.tag, Len("/dev/hda"))
     spartNo = Right(cb.tag, Len(cb.tag) - Len(sDrive))
       IF Len(sPartNo) > 1 THEN 
@@ -221,7 +221,7 @@ sFstab = sFstab & "\n\n" &
 "# The 'sw' option means auto activating with 'swapon -a'.\n"
   ' This will add all the swap partitions to fstab
   FOR EACH cb IN MdlPartSel.oSwaps
-    IF cb.text <> "Not Used" THEN 
+    IF cb.text <> ("Not Used") THEN 
     sFstab = sFstab & "\n" &
     cb.Tag & Space(1) & "none" & Space(1) & "swap" & Space(1) & "sw" & Space(1) & "0" & Space(1) & "0" & gb.NewLine
     END IF
@@ -333,8 +333,8 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
   FrmInstallSys.pbInstallProg.Value = 1
   FrmInstallSys.pbInstallProg2.Value = 1
   'Message.Info("Vectorlinux is now installed in your system. Please click next to configure it.")
-  FrmInstallSys.tlBanner.Text = "Vectorlinux is now installed in your system. Please click next to configure it."
-  FrmInstallSys.tlCurrPkg.Text = "packages have been installed in your system. Please click next to configure it."
+  FrmInstallSys.tlBanner.Text = ("Vectorlinux is now installed in your system. Please click next to configure it.")
+  FrmInstallSys.tlCurrPkg.Text = ("packages have been installed in your system. Please click next to configure it.")
   WITH FMain
     .btQuit.Enabled = TRUE
     .btQuit.ForeColor = Color.Black
@@ -503,7 +503,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
         .Resize(FMain.pnlWinHost.Width, FMain.pnlWinHost.Height)
       END WITH 
   iPkgCnt = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
-    Message.Info("Total packages = " & iPkgCnt)
+    'Message.Info("Total packages = " & iPkgCnt)
   'RETURN 
   ' make sure the progress is revealed at the main window
     WITH FMain
@@ -513,7 +513,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
     END WITH   
   
   MdlSetup.SHOW_PROGRESS_CONTROLS()
-  FrmInstallSys.tlBanner.Text = "Vectorlinux is now being installed. Please wait..."
+  FrmInstallSys.tlBanner.Text = ("Vectorlinux is now being installed. Please wait...")
   ClsGlobal.sTargetMnt = "/mnt/target"
     sFile = Split(File.Load(Temp$("SETUP.CONF")), "\n")
       FOR i = 0 TO sFile.count - 1
@@ -554,7 +554,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
                       hproc.State = Process.Stopped
                           ' error check
                             IF InStr(sDump, "FAILED") > 0 THEN 
-                              Message.Error("There has been an error extracting " & sPakDesc & gb.NewLine &
+                              Message.Error(("There has been an error extracting ") & sPakDesc & gb.NewLine &
                               "<b>ERROR</b>" & gb.NewLine &
                               sErr)
                               RETURN 1
@@ -568,7 +568,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
            'PRINT "Needs to install " & sPak
           END IF
     NEXT 
-  FrmInstallSys.tlBanner.Text = "Finished intalling Bulks"
+  FrmInstallSys.tlBanner.Text = ("Finished intalling Bulks")
   
         ' now to the packages individually
         ' FrmInstallSys.tlBanner.Text = "Installing additional software."
@@ -671,10 +671,10 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
             
     ' DONE INSTALLING SOFTWARE. 
       'Message.Info("Installation complete. Ready for configuration"
-      FrmInstallSys.tlBanner.Text = "Installation phase complete. Ready for configuration"
+      FrmInstallSys.tlBanner.Text = ("Installation phase complete. Ready for configuration")
       FrmInstallSys.pbInstallProg.Value = 1
       MdlCore.unlock_gui()      
-      FrmInstallSys.tlBanner.Text = "Installing default system configuration and required software."    
+      FrmInstallSys.tlBanner.Text = ("Installing default system configuration and required software.")
 END
 
 
@@ -704,7 +704,7 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
               'sDump = ""
               'sErr = ""
               'FrmInstallSys.tlCurrPkg.Text = "Installing " & File.Name(sTlzPath) & " ..."
-              FrmInstallSys.tlCurrPkg.Text = "Installing Required Packages ..." 
+              FrmInstallSys.tlCurrPkg.Text = ("Installing Required Packages ...")
               'FrmInstallSys.pbInstallProg.Value = 0.0
               
                'figure out the progress again
