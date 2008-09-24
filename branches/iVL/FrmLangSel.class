@@ -22,7 +22,7 @@ PUBLIC SUB Form_Open()
   FMain.FrmCurr = ME
   tlbanner.text = "<h3>" & tlbanner.text & "</h3>"
     ME.LIST_LANG_CHOICES()
-
+  
 END
 
 PUBLIC SUB LIST_LANG_CHOICES()
@@ -33,3 +33,17 @@ PUBLIC SUB LIST_LANG_CHOICES()
   
 END
 
+
+PUBLIC SUB Button1_Click()
+
+  DIM sLang AS String = MdlLangSel.ID_LANG(Trim(ME.lbLangSel.text))
+  System.Language = sLang
+    ME.Close
+    WAIT 1
+    FrmLangSel.Showmodal
+    
+
+
+
+
+END

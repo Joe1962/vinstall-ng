@@ -39,6 +39,7 @@ FrmLangSel.Picture = Picture["images/langbg.png"]
 ME.Maximized = TRUE
 
 MdlCore.LOCK_GUI
+frmInit = FrmLangSel
 'MdlCore.LOCK_GUI()
 ClsGlobal.sBackNav = NEW Object[]
 ClsGlobal.sSourceMnt = "/mnt/cdrom"
@@ -181,7 +182,18 @@ PUBLIC SUB btnext_Click()
   SELECT CASE FrmCurr.Name ' very nice navigation algoritm
     CASE "FrmLangSel"
       sLang = MdlLangSel.ID_LANG(Trim(FrmLangSel.lbLangSel.text))
-      System.Language = sLang
+      ' now need to restart the application to make sure it takes effect
+     
+      SHELL Application.Args[0] & Space(1) & sLang
+      QUIT
+      'System.Language = sLang
+      
+      'FMain.frmNext = FrmSelISO
+    
+      
+      'FrmSelISO.Reparent(FMain.pnlwinhost)
+      'FMain.frmNext = FrmSelISO
+    
       ' SHELL "LC_ALL=" & sLang & Space(1) & "LANG=" & sLang & " ./" & Application.Args[0] & Space(1) & sLang ' this will set the LANG environment to what the user selects and restart the application.
       'SHELL "LC_ALL=" & Application.Args[1] & Space(1) & "LANG=" & Application.Args[1] & Space(1) & "./" & Application.Args[0] & Space(1) & Trim(FrmLangSel.listbox1.text)
       IF ERROR THEN Message(Error.Text & gb.NewLine & Error.where)
@@ -305,10 +317,11 @@ PUBLIC SUB btnext_Click()
         
   END SELECT 
                        
-            
-            
+'         IF frmNext = "" THEN frmNext = FrmSelISO  
+
   
   frmNext.Reparent(ME.pnlWinHost)
+
   FrmCurr.Hide
   frmLast = FrmCurr
     'IF ClsGlobal.sBackNav.Find(FrmCurr) = -1 THEN 
