@@ -40,7 +40,7 @@ PUBLIC SUB Form_Resize()
     .tlBanner.Width = .ClientWidth - .btHelp.Width - 16
    .scrollPartitions.Resize(.tlBanner.Width + 4 + .btHelp.Width, .ClientHeight - .tlBanner.Height - (cbDoWin.Height * 3))
    .cbDoWin.Move(.scrollPartitions.Left, .ClientHeight - .cbDoWin.Height - 8)
-   .btHelp.Move(.tlBanner.Left + .tlBanner.Width + 4, .tlBanner.top) '+ (.tlBanner.Height / 3))
+   .btHelp.Move(.tlBanner.Left + .tlBanner.Width + 4, .tlBanner.top, MdlObjSizer.get_object_width(.btHelp.text) + 32) '+ (.tlBanner.Height / 3))
 
     
   END WITH 
@@ -51,6 +51,7 @@ PUBLIC SUB Form_Open()
 
 
   FMain.FrmCurr = ME
+  ME.btHelp.Width = MdlObjSizer.get_object_width(btHelp.text) + 32
   ME.Resize(ME.Parent.Width, ME.Parent.Height - (ME.cbDoWin.height * 3))  
   ME.tlBanner.Adjust
   ME.cbDoWin.Width = MdlObjSizer.get_object_width(cbDoWin.text) + 24

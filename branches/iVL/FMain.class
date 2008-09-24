@@ -37,9 +37,9 @@ END WITH
 FrmLangSel.Picture = Picture["images/langbg.png"]
 
 ME.Maximized = TRUE
-
+frmInit = MdlCore.frmInit
 MdlCore.LOCK_GUI
-frmInit = FrmLangSel
+'frmInit = FrmLangSel
 'MdlCore.LOCK_GUI()
 ClsGlobal.sBackNav = NEW Object[]
 ClsGlobal.sSourceMnt = "/mnt/cdrom"
