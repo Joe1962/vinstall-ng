@@ -14,3 +14,95 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: MdlCore.module:231
+msgid "<b>Scanning system for installable media. Please wait ...</b>"
+msgstr ""
+
+#: MdlCore.module:247
+msgid "No Installable Media Found"
+msgstr ""
+
+#: MdlCore.module:249
+msgid "Setup was unable to find any installable media on your system. Please insert your VectorLinux "
+msgstr ""
+
+#: MdlCore.module:249
+msgid "installation CD and click '"
+msgstr ""
+
+#: MdlCore.module:249
+msgid "' to try again"
+msgstr ""
+
+#: MdlCore.module:410
+msgid "Build Date: "
+msgstr ""
+
+#: MdlCore.module:410
+msgid "<b>MINIMUM REQUIREMENTS<br>"
+msgstr ""
+
+#: MdlCore.module:415
+msgid "Setup is unable to find SETUP.CONF in your install media. This could be symptoms of a bad burn or a bad ISO"
+msgstr ""
+
+#: MdlCore.module:488
+msgid "Cannot find SETUP.CONF"
+msgstr ""
+
+#: MdlCore.module:496
+msgid "Preparation"
+msgstr ""
+
+#: MdlCore.module:497
+msgid "Find installation media"
+msgstr ""
+
+#: MdlCore.module:498
+msgid "Disk Partitioning"
+msgstr ""
+
+#: MdlCore.module:499
+msgid "Software Selection"
+msgstr ""
+
+#: MdlCore.module:501
+msgid "Installation"
+msgstr ""
+
+#: MdlCore.module:502
+msgid "Installation Summary"
+msgstr ""
+
+#: MdlCore.module:503
+msgid "Prepare Host"
+msgstr ""
+
+#: MdlCore.module:504
+msgid "Install Operating System"
+msgstr ""
+
+#: MdlCore.module:505
+msgid "System Configuration"
+msgstr ""
+
+#: MdlCore.module:506
+msgid "Boot Menu Options"
+msgstr ""
+
+#: MdlCore.module:507
+msgid "System Administrator"
+msgstr ""
+
+#: MdlCore.module:508
+msgid "Network Configuration"
+msgstr ""
+
+#: MdlCore.module:509
+msgid "User Accounts"
+msgstr ""
+
+#: MdlCore.module:510
+msgid "Hardware Configuration"
+msgstr ""
+

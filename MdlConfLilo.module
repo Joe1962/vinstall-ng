@@ -92,9 +92,9 @@ PUBLIC SUB EXECUTE_LILO()
  
   SHELL "chroot " & ClsGlobal.sTargetMnt & " /sbin/lilo || echo \'FAILED\'" TO sDump
     IF InStr(sDump, "FAILED") > 0 THEN 
-      Message.Error("Lilo returned an error. Please see below" & gb.NewLine & sDump)
+      Message.Error(("Lilo returned an error. Please see below") & gb.NewLine & sDump)
     ELSE 
-      Message("Boot loader has been setup successfully")
+      Message(("Boot loader has been setup successfully"))
     END IF
   'SHELL "umount " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
   'SHELL "umount " & ClsGlobal.sTargetMnt &/ "proc" WAIT

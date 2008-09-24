@@ -14,3 +14,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: MdlPartSel.module:67
+msgid "<b>PARTITION</b>"
+msgstr ""
+
+#: MdlPartSel.module:77
+msgid "<b>MOUNT POINT</b>"
+msgstr ""
+
+#: MdlPartSel.module:86
+msgid "<b>FILESYSTEM</b>"
+msgstr ""
+
+#: MdlPartSel.module:148
+msgid "Not Used"
+msgstr ""
+
+#: MdlPartSel.module:174
+msgid "Do not format"
+msgstr ""
+
+#: MdlPartSel.module:293
+msgid "Please select only one "
+msgstr ""
+
+#: MdlPartSel.module:293
+msgid " partition"
+msgstr ""
+

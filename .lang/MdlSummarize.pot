@@ -14,3 +14,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: MdlSummarize.module:28
+msgid "<b><br>PARTITIONING LAYOUT:</b><br>"
+msgstr ""
+
+#: MdlSummarize.module:49
+msgid "<b>OPTIONAL WINDOWS PARTITIONS TO BE MOUNTED AT BOOT TIME.</b><br>"
+msgstr ""
+
+#: MdlSummarize.module:55
+msgid "<b>INSTALL TYPE:</b> Custom<br>"
+msgstr ""
+
+#: MdlSummarize.module:57
+msgid "<br><b>BULK PACKAGES:</b> "
+msgstr ""
+
+#: MdlSummarize.module:61
+msgid "<br><br><b>OPTIONAL PACKAGES:</b>"
+msgstr ""
+
+#: MdlSummarize.module:67
+msgid "<b>INSTALL TYPE:</b> Full<br>"
+msgstr ""
+

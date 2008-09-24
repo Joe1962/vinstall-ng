@@ -42,19 +42,19 @@ PUBLIC SUB EMBED_GPARTED()
     stype = Trim(sType)
       'Message(sType)
    IF stype = "" THEN 
-      Message.Error("VectorLinux is unable to determine the type of hard disks on your system. <br>" &
-      "It is still possible to install VectorLinux on your system, but you need to pre-partition your disks first")
+      Message.Error(("VectorLinux is unable to determine the type of hard disks on your system. <br>" &
+      "It is still possible to install VectorLinux on your system, but you need to pre-partition your disks first"))
    ELSE IF InStr(sType, "\n") > 0 THEN 
     ' more than one type of disk was found... by default, gparted will load using /dev/hda first
       sType = "/dev/hda"
     END IF 
    
     IF Exist("/usr/sbin/gparted") = FALSE THEN 
-      Message.Error("Gparted was not found on this system. Please install gparted and try again")
+      Message.Error(("Gparted was not found on this system. Please install gparted and try again"))
       RETURN 
     END IF
   
-  FrmDiskPart.tlBanner.Text = "<h3>Loading gparted ... Please wait</h3>"
+  FrmDiskPart.tlBanner.Text = ("<h3>Loading gparted ... Please wait</h3>")
   SHELL "/usr/sbin/gparted"
   WAIT 1
 
@@ -86,13 +86,13 @@ PUBLIC SUB EMBED_GPARTED()
    
     
         IF aHandle.Count = 0 THEN 
-          Message("Setup is unable to successfully run gparted on this system. This may be a sign of \n" &
-          "a bad install media. Setup cannot continue.")
+          Message(("Setup is unable to successfully run gparted on this system. This may be a sign of \n" &
+          "a bad install media. Setup cannot continue."))
         RETURN 
         'END IF
       
     ELSE IF aHandle.Count >= 2 THEN 
-      Message("Several windows found. I will take the first one!")
+      Message(("Several windows found. I will take the first one!"))
     ENDIF
     'ELSE 
     iHandle = aHandle[0]

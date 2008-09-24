@@ -228,7 +228,7 @@ FMain.tvPlan["Prep0"].Selected = TRUE
 'Balloon("Scanning drives for media ... please wait", fmain.pnlWinHost)
 
 'RETURN 
-FrmSelISO.tlDistroDesc.Text = "<b>Scanning system for installable media. Please wait ...</b>"
+FrmSelISO.tlDistroDesc.Text = ("<b>Scanning system for installable media. Please wait ...</b>")
 IF Exist(ClsGlobal.sSourceMnt) = FALSE THEN TRY MKDIR ClsGlobal.sSourceMnt
 
 
@@ -244,9 +244,9 @@ WAIT 1
  fmain.btnext.Enabled = TRUE
  fmain.btQuit.Enabled = TRUE
  IF FrmSelISO.lstInstallableImg.Count = 0 THEN 
-  FrmSelISO.lstInstallableImg.Add("No Installable Media Found")
-  FrmSelISO.tlDistroDesc.Text = "Setup was unable to find any installable media on your system. Please insert your VectorLinux " &
-    "installation CD and click \'" & FrmSelISO.btResCan.Text & "\' to try again"
+  FrmSelISO.lstInstallableImg.Add(("No Installable Media Found"))
+  FrmSelISO.tlDistroDesc.Text = ("Setup was unable to find any installable media on your system. Please insert your VectorLinux ")&
+    ("installation CD and click \'") & FrmSelISO.btResCan.Text & ("\' to try again")
   FMain.btnext.Enabled = FALSE
   FMain.btnext.ForeColor = Color.Gray
  ELSE 
@@ -403,8 +403,8 @@ IF Exist(ClsGlobal.sSetupConfPath) THEN
 '    FMain.lstInstallableImg.Add(sDistro & Space(1) & sVer)
     WITH FrmSelISO.tlDistroDesc
       .Text = sDistro & Space(1) & sver & "<br>" &
-      "Build Date: " & sBuildDate & "<br>" &
-      "<b>MINIMUM REQUIREMENTS<br>" &
+      ("Build Date: ") & sBuildDate & "<br>" &
+      ("<b>MINIMUM REQUIREMENTS<br>")&
       "/ " & iMinRoot & "<br>" &
       "/home " & iMinHome & "<br>" &
       "swap " & iMinSwap
@@ -412,7 +412,7 @@ IF Exist(ClsGlobal.sSetupConfPath) THEN
      
   ELSE 
     'File not found
-    Message.Error("Setup is unable to find SETUP.CONF in your install media. This could be symptoms of a bad burn or a bad ISO")
+    Message.Error(("Setup is unable to find SETUP.CONF in your install media. This could be symptoms of a bad burn or a bad ISO"))
     RETURN  ' exit
     
   END IF
@@ -485,7 +485,7 @@ PUBLIC SUB SET_DECISSION(sSrcLocation AS String)
       ClsGlobal.iSwapMin = CInt(iswap)
       
     ELSE 'i can't see the file
-      Message.Error("Cannot find SETUP.CONF")
+      Message.Error(("Cannot find SETUP.CONF"))
   END IF
 END
 
@@ -493,21 +493,21 @@ END
 PUBLIC SUB PREPARE_INSTALL_LAYOUT()
 DIM iWidth AS Integer
 WITH FMain.tvPlan
-  .Add("Prep", "Preparation", sCatPic)
-  .Add("Prep0", "Find installation media", sNowPic, "Prep")
-  .Add("Prep1", "Disk Partitioning", sToDopic, "Prep")
-  .Add("Prep2", "Software Selection", sToDopic, "Prep")
+  .Add("Prep", ("Preparation"), sCatPic)
+  .Add("Prep0", ("Find installation media"), sNowPic, "Prep")
+  .Add("Prep1", ("Disk Partitioning"), sToDopic, "Prep")
+  .Add("Prep2", ("Software Selection"), sToDopic, "Prep")
   '.Add("Prep3", "Desktop Selection", sToDopic, "Prep")
-  .Add("Inst", "Installation", sCatPic)
-  .Add("Inst0", "Installation Summary", sToDopic, "Inst")
-  .Add("Inst1", "Prepare Host", sToDopic, "Inst")
-  .Add("Inst2", "Install Operating System", sToDopic, "Inst")
-  .Add("Conf", "System Configuration", sCatPic)
-  .Add("Conf0", "Boot Menu Options", sToDopic, "Conf")
-  .Add("Conf1", "System Administrator", sToDopic, "Conf")
-  .Add("Conf2", "Network Configuration", sToDopic, "Conf")
-  .Add("Conf3", "User Accounts", sToDopic, "Conf")
-  .Add("Conf4", "Hardware Configuration", sToDopic, "Conf")
+  .Add("Inst", ("Installation"), sCatPic)
+  .Add("Inst0", ("Installation Summary"), sToDopic, "Inst")
+  .Add("Inst1", ("Prepare Host"), sToDopic, "Inst")
+  .Add("Inst2", ("Install Operating System"), sToDopic, "Inst")
+  .Add("Conf", ("System Configuration"), sCatPic)
+  .Add("Conf0", ("Boot Menu Options"), sToDopic, "Conf")
+  .Add("Conf1", ("System Administrator"), sToDopic, "Conf")
+  .Add("Conf2", ("Network Configuration"), sToDopic, "Conf")
+  .Add("Conf3", ("User Accounts"), sToDopic, "Conf")
+  .Add("Conf4", ("Hardware Configuration"), sToDopic, "Conf")
 END WITH 
 
 'expand the treeview

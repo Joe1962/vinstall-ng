@@ -24,7 +24,7 @@ DIM i AS Integer
   'Message(ClsPartSel.fRoot)
   
   
-  sText = "<b><br>PARTITIONING LAYOUT:</b><br>" &
+  sText = ("<b><br>PARTITIONING LAYOUT:</b><br>")&
   ClsPartSel.sRoot & " = / (" & ClsPartSel.fRoot & ")<br>"
   '"/ = " & ClsPartSel.sRoot & " <br>" 
     IF ClsPartSel.sHome THEN 
@@ -46,25 +46,25 @@ DIM i AS Integer
     sText = sText & "<br><br>"
     
     IF ClsWinDrives.sWinDrives THEN 
-    sText = sText & "<b>OPTIONAL WINDOWS PARTITIONS TO BE MOUNTED AT BOOT TIME.</b><br>"
+    sText = sText & ("<b>OPTIONAL WINDOWS PARTITIONS TO BE MOUNTED AT BOOT TIME.</b><br>")
       'list all the windows partitions here
       sText = sText & ME.LIST_WINDOWS_PARTITIONS() & "<bb><br>"
     END IF
     
     IF ClsPkgSel.bCustom = TRUE THEN 
-      sText = sText & "<b>INSTALL TYPE:</b> Custom<br>"
+      sText = sText & ("<b>INSTALL TYPE:</b> Custom<br>")
       
-       sText = sText & "<br><b>BULK PACKAGES:</b> "
+       sText = sText & ("<br><b>BULK PACKAGES:</b> ")
     FOR i = 0 TO ClsPkgSel.arrBulks.Count - 1
       sText = sText & "<br>" & Right(ClsPkgSel.arrBulks[i], Len(ClsPkgSel.arrBulks[i]) - RInStr(ClsPkgSel.arrBulks[i], "/"))
     NEXT 
-    sText = sText & "<br><br><b>OPTIONAL PACKAGES:</b>"
+    sText = sText & ("<br><br><b>OPTIONAL PACKAGES:</b>")
       FOR i = 0 TO ClsPkgSel.arrPkgs.Count - 1
         sText = sText & "<br>" & Right(ClsPkgSel.arrPkgs[i], Len(ClsPkgSel.arrPkgs[i]) - RInStr(ClsPkgSel.arrPkgs[i], "/"))
       NEXT       
       
     ELSE 
-      sText = sText & "<b>INSTALL TYPE:</b> Full<br>"
+      sText = sText & ("<b>INSTALL TYPE:</b> Full<br>")
     END IF
 
                

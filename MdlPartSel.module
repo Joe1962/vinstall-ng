@@ -64,7 +64,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
           ' create header labels
           tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "HEADERS"
             WITH tl
-              .Text = "<b>PARTITION</b>"
+              .Text = ("<b>PARTITION</b>")
               .Height = 27
               .x = x
               .y = y
@@ -74,7 +74,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
             icol2 = x + tl.Width + 4
           tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "HEADERS"
             WITH tl
-              .text = "<b>MOUNT POINT</b>"
+              .text = ("<b>MOUNT POINT</b>")
               .Height = 27
               .x = icol2
               .y = y
@@ -83,7 +83,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
               icol3 = tl.x + tl.Width + 4
           tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "HEADERS"
             WITH tl
-              .text = "<b>FILESYSTEM</b>"
+              .text = ("<b>FILESYSTEM</b>")
               .Height = 27
               .x = icol3
               .y = y
@@ -145,7 +145,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 .Height = tl.Height
                 .Width = tl.Width
                 .ReadOnly = TRUE                
-                .Add("Not Used")
+                .Add(("Not Used"))
                 .Add("/")
                 .Add("/home")
                 .Add("/opt")
@@ -171,7 +171,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                   .y = y
                   .ReadOnly = TRUE
                   .Width = tl.Width
-                  .Add("Do not format")
+                  .Add(("Do not format"))
                   .Add("reiserfs")
                   .Add("ext2")
                   .Add("ext3")
@@ -241,7 +241,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                       .width = tl.Width
                       .ReadOnly = TRUE
                       .Add("Swap")
-                      .Add("Not Used")
+                      .Add(("Not Used"))
                       .tag = sPart
                     END WITH 
                     y = y + cb.height + 4
@@ -290,8 +290,8 @@ PUBLIC SUB MountPoints_CLick()
   FOR EACH sdropdwn IN ME.oMountPoints
     IF LAST.text <> "Not Used" AND LAST.text = sdropdwn.Text AND LAST.tag <> sdropdwn.tag THEN 
       
-      Message.Error("Please select only one " & LAST.text & " partition")
-      LAST.text = "Not Used"
+      Message.Error(("Please select only one ") & LAST.text & (" partition"))
+      LAST.text = ("Not Used")
       STOP EVENT 
     END IF
   NEXT 
@@ -303,7 +303,7 @@ PUBLIC SUB MountPoints_CLick()
                 IF sdropdwn.Find("Swap") <> -1 THEN 
                   sdropdwn.Remove(sdropdwn.Find("Swap"))
                 END IF
-                sdropdwn.Text = "Do not format"
+                sdropdwn.Text = ("Do not format")
               END IF
    
    
@@ -342,7 +342,7 @@ PUBLIC SUB MountPoints_CLick()
                   sdropdwn.Enabled = FALSE
                       
                 ELSE 
-                      IF sdropdwn.Text <> "Do not format" AND sdropdwn.Enabled = TRUE THEN 
+                      IF sdropdwn.Text <> ("Do not format") AND sdropdwn.Enabled = TRUE THEN 
                         sdropdwn.Enabled = TRUE
                     END IF  
                      IF sdropdwn.Find("Swap") <> -1 THEN 

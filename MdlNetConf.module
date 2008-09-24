@@ -73,10 +73,10 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                     'Message(File.Load("/tmp/iwdump"))
                      sDump = Trim(File.Load("/tmp/iwdump"))
                     IF InStr(sDump, "no wireless extensions") > 0 THEN 
-                      sType = "Wired"
+                      sType = ("Wired")
                       pTabPic = pWiredPic
                     ELSE 
-                      sType = "Wireless"
+                      sType = ("Wireless")
                       pTabPic = pWirelessPic
                     END IF
               
@@ -95,7 +95,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                   tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DevAddresses"
                     WITH tl
                       .Move(4, 16)
-                      .text = "Hardware Address"
+                      .text = ("Hardware Address")
                       .Height = 21
                       .Alignment = Align.Normal
                       .Width = MdlObjSizer.get_object_width(.text)
@@ -116,7 +116,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                   tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DevTYpeLbl"
                     WITH tl
                       .Move(x + tb.Width + 8, tb.top)
-                      .text = "Interface Type"
+                      .text = ("Interface Type")
                       .Height = 21
                       .Width = MdlObjSizer.get_object_width(.text)
                       .Alignment = Align.Normal
@@ -135,7 +135,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                   bCb = NEW CheckBox(FrmNetConf.TSNetDevices) AS "bEnableInterface" ' enable/disable interface box
                     WITH bCb
                       .Move(4, tb.top + tb.Height + 4)
-                      .text = "Automatically activate this interface at start-up"
+                      .text = ("Automatically activate this interface at start-up")
                       .Value = TRUE
                       .Height = 21
                       .Width = MdlObjSizer.get_object_width(.text) + 36
@@ -148,7 +148,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                   tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "ConfModeLbl"
                     WITH tl
                       .Move(4, y)
-                      .text = "Setup Mode"
+                      .text = ("Setup Mode")
                       .height = 21
                       .Width = MdlObjSizer.get_object_width(.text)
                       .Alignment = Align.Normal
@@ -203,7 +203,7 @@ PUBLIC SUB MethodSel_Click()
   frmDetails = NEW Frame(FrmNetConf.TSNetDevices) AS "STaticDetails"
     WITH frmDetails
       .Move(ileft, itop + 8)
-      .text = " Static IP Address Settings "
+      .text = (" Static IP Address Settings ")
       .Width = .Parent.Width - (.left * 2.5)
       .Height = 130
       .tag = LAST.tag
@@ -213,7 +213,7 @@ PUBLIC SUB MethodSel_Click()
               tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
                 WITH tl
                   .Move(8, 24)
-                  .text = "IP Address"
+                  .text = ("IP Address")
                   .Height = 21
                   .Width = MdlObjSizer.get_object_width(.text)
                   .Alignment = Align.Normal
@@ -236,7 +236,7 @@ PUBLIC SUB MethodSel_Click()
                 
               tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
                 WITH tl
-                  .text = "Subnet Mask"
+                  .text = ("Subnet Mask")
                   .width = MdlObjSizer.get_object_width(.text)
                   .Height = 21
                   .Alignment = Align.Normal
@@ -258,7 +258,7 @@ PUBLIC SUB MethodSel_Click()
                 WITH tl
                   .Move(8, txtbox.top + txtbox.Height + 4)
                   .Height = 21
-                  .text = "Gateway Address"
+                  .text = ("Gateway Address")
                   .Width = MdlObjSizer.get_object_width(.text)
                   .Alignment = Align.Normal
                 END WITH 
@@ -295,7 +295,7 @@ PUBLIC SUB MethodSel_Click()
           WITH tl
             '.Move(LAST.left - (LAST.width / 2), LAST.top + LAST.height + 12)
             .Move(8, LAST.top + LAST.height + 12)
-            .text = "<b>Dynamic Host Control Protocol</b><br>Automatic settings via DHCP. <br><br>This will work if you use a cable or DSL modem on a home network. <br>If in doubt, choose this option"
+            .text = ("<b>Dynamic Host Control Protocol</b><br>Automatic settings via DHCP. <br><br>This will work if you use a cable or DSL modem on a home network. <br>If in doubt, choose this option")
             .Adjust
             '.border = Border.Etched
             .Width = MdlObjSizer.get_object_width(.text)
