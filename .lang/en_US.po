@@ -1,0 +1,288 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2002-11-01 04:27+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: FrmNetConf.class:120
+msgid " Network Interfaces"
+msgstr "Network Interfaces"
+
+#: FrmNetConf.class:145
+msgid "192.168.1.254"
+msgstr "-"
+
+#: FrmUserAdd.class:112
+msgid "Add Users"
+msgstr "Add Users"
+
+#: FMain.class:401
+msgid "Back"
+msgstr "Back"
+
+#: FrmLilo.class:251
+msgid "Boot Default"
+msgstr "Boot Default"
+
+#: FrmLilo.class:229
+msgid "Bootsplash Extra high"
+msgstr "Bootsplash Extra High"
+
+#: FrmLilo.class:229
+msgid "Bootsplash High"
+msgstr "Bootsplash High"
+
+#: FrmLilo.class:229
+msgid "Bootsplash Med"
+msgstr "Bootsplash Med"
+
+#: FrmLangSel.class:79
+msgid "Button1"
+msgstr "-"
+
+#: FrmPartSel.class:177
+msgid "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
+msgstr "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
+
+#: FrmRootPass.class:55
+msgid "Choose a password for the root account. You must enter the Root Password twice to ensure accuracy."
+msgstr "Choose a password for the root account. You must enter the Root Password twice to ensure accuracy."
+
+#: FrmUserAdd.class:116
+msgid "Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
+msgstr "Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
+
+#: FrmZoneSet.class:87
+msgid "Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way."
+msgstr "Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way."
+
+#: FrmZoneSet.class:92
+msgid "Choose the correct timezone for the area in which you live."
+msgstr "Choose the correct timezone for the area in which you live."
+
+#: FrmZoneSet.class:101
+msgid "ComboBox1"
+msgstr "-"
+
+#: FrmNetConf.class:109
+msgid "Computer Name"
+msgstr "Computer Name"
+
+#: FrmLilo.class:186
+msgid "Configure and install lilo (Linux Boot Loader)"
+msgstr "Configure and install lilo (Linux Boot Loader)"
+
+#: FrmUserAdd.class:153
+msgid "Create User"
+msgstr "Create User"
+
+#: FrmHostPrep.class:135
+msgid "Current Status"
+msgstr "Current Status"
+
+#: FrmInstallSys.class:211
+msgid "Current Step "
+msgstr "Current Step "
+
+#: FrmPkgSel.class:110
+msgid "Custom Install"
+msgstr "Custom Install"
+
+#: FrmPartSel.class:178
+msgid "Detect and Setup Windows partitions for auto-mounting at boot"
+msgstr "Detect and Setup Windows partitions for auto-mounting at boot"
+
+#: FrmDiskPart.class:115
+msgid "Disk Partitioning:"
+msgstr "Disk Partitioning:"
+
+#: FrmLilo.class:191
+msgid "Don't Install Lilo"
+msgstr "Don't Install Lilo"
+
+#: FrmRootPass.class:50 FrmUserAdd.class:131
+msgid "Enter Password"
+msgstr "Enter Password"
+
+#: FMain.class:407
+msgid "Exit Installation"
+msgstr "Exit Installation"
+
+#: FrmPkgSel.class:105
+msgid "Full Install"
+msgstr "Full Install"
+
+#: .project:2
+msgid "GUI installer for Vector linux"
+msgstr "GUI installer for Vector linux"
+
+#: FrmPartSel.class:183
+msgid "Help"
+msgstr "Help"
+
+#: FrmInstallSys.class:192
+msgid "Installing ..."
+msgstr "Installing ..."
+
+#: FrmLicense.class:99
+msgid "LICENSE AGREEMENT"
+msgstr "LICENSE AGREEMENT"
+
+#: FrmZoneSet.class:103
+msgid "LocalTime"
+msgstr "LocalTime"
+
+#: FrmNetConf.class:132
+msgid "Manual DNS Server Specification"
+msgstr "Manual DNS Server Specification"
+
+#: FrmPartScheme.class:115
+msgid "Modify my disk partitions to make room for new installation"
+msgstr "Modify my disk partitions to make room for new installation"
+
+#: FrmNetConf.class:163
+msgid "NETWORK CONFIGURATION"
+msgstr "NETWORK CONFIGURATION"
+
+#: FrmEmbUsrAdd.class:105
+msgid "New User Account"
+msgstr "New User Account"
+
+#: FMain.class:395
+msgid "Next"
+msgstr "Next"
+
+#: FrmSelISO.class:219
+msgid "No installable images found."
+msgstr "No installable images found."
+
+#: FrmLicense.class:115
+msgid "No, I Do Not Agree"
+msgstr "No, I Do Not Agree"
+
+#: FrmPartSel.class:168
+msgid "Please select the partitions you wish to use and how to use them"
+msgstr "Please select the partitions you wish to use and how to use them"
+
+#: FrmNetConf.class:137
+msgid "Primary DNS Server"
+msgstr "Primary DNS Server"
+
+#: FMain.class:375
+msgid "Process Overview"
+msgstr "Process Overview"
+
+#: FrmLilo.class:234
+msgid "Prompt Timeout"
+msgstr "Prompt Timeout"
+
+#: FrmRootPass.class:60
+msgid "Re-Enter Password"
+msgstr "Re-Enter Password"
+
+#: FrmUserAdd.class:142
+msgid "ReEnter Password"
+msgstr "ReEnter Password"
+
+#: FrmSelISO.class:235
+msgid "Search Again"
+msgstr "Search Again"
+
+#: FrmNetConf.class:150
+msgid "Secondary DNS Server"
+msgstr "Secondary DNS Server"
+
+#: FrmLilo.class:245
+msgid "Seconds"
+msgstr "Seconds"
+
+#: FrmWinDrives.class:69
+msgid "Select the windows partitions you would like to mount during boot"
+msgstr "Select the windows partitions you would like to mount during boot"
+
+#: FrmSelISO.class:225
+msgid "Select which VectorLinux version you wish to install from the list below"
+msgstr "Select which VectorLinux version you wish to install from the list below"
+
+#: FrmPartScheme.class:105
+msgid "Select your disk partition option"
+msgstr "Select your disk partition option"
+
+#: FrmLangSel.class:73
+msgid "Select your language"
+msgstr "Select your language"
+
+#: FrmRootPass.class:76
+msgid "Set Password"
+msgstr "Set Password"
+
+#: FrmRootPass.class:46
+msgid "Set Root Password"
+msgstr "Set Root Password"
+
+#: FrmZoneSet.class:109
+msgid "Set TimeZone"
+msgstr "Set TimeZone"
+
+#: FrmLilo.class:229
+msgid "Standard"
+msgstr "Standard"
+
+#: FrmLilo.class:197 FrmNetConf.class:125
+msgid "Tab 0"
+msgstr "-"
+
+#: FrmLilo.class:215
+msgid "Target"
+msgstr "Target"
+
+#: FrmLicense.class:104
+msgid "TextArea1"
+msgstr "-"
+
+#: FrmSelISO.class:230 FrmSummary.class:87
+msgid "TextLabel1"
+msgstr "-"
+
+#: FrmInstallSys.class:206
+msgid "Total progress"
+msgstr "Total progress"
+
+#: FrmZoneSet.class:103
+msgid "UTC"
+msgstr "UTC"
+
+#: FrmPartScheme.class:110
+msgid "Use existing disk partitions"
+msgstr "Use existing disk partitions"
+
+#: FrmUserAdd.class:121
+msgid "Username"
+msgstr "Username"
+
+#: .project:1
+msgid "VectorLinux Installer"
+msgstr "VectorLinux Installer"
+
+#: FrmInstallSys.class:183
+msgid "Vectorlinux is currently being installed to your system... Please wait"
+msgstr "Vectorlinux is currently being installed to your system... Please wait"
+
+#: FrmHostPrep.class:130
+msgid "Vectorlinux is preparing your system for installation. Please wait."
+msgstr "Vectorlinux is preparing your system for installation. Please wait."
+
+#: FrmLilo.class:221
+msgid "Video Resolution"
+msgstr "Video Resolution"
+
+#: FrmLicense.class:110
+msgid "Yes, I Agree to the License Agreement"
+msgstr "Yes, I Agree to the License Agreement"
+

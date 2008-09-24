@@ -18,19 +18,19 @@ msgstr "Instalador de VectorLinux"
 msgid "GUI installer for Vector linux"
 msgstr "Instaladaor Grafico de VectorLinux"
 
-#: FMain.class:348
+#: FMain.class:375
 msgid "Process Overview"
 msgstr "Resumen del proceso"
 
-#: FMain.class:368
+#: FMain.class:395
 msgid "Next"
 msgstr "Siguiente"
 
-#: FMain.class:374
+#: FMain.class:401
 msgid "Back"
 msgstr "Regreso"
 
-#: FMain.class:380
+#: FMain.class:407
 msgid "Exit Installation"
 msgstr "Cancelar Instalacion"
 
@@ -73,12 +73,12 @@ msgstr "Progreso Total"
 msgid "Current Step "
 msgstr "Ahora procesando"
 
-#: FrmLangSel.class:40
-msgid "en_US"
-msgstr ""
+#: FrmLangSel.class:73
+msgid "Select your language"
+msgstr "Selecciona tu idioma"
 
-#: FrmLangSel.class:40
-msgid "es_ES"
+#: FrmLangSel.class:79
+msgid "Button1"
 msgstr ""
 
 #: FrmLicense.class:99

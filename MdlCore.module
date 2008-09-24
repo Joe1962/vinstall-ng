@@ -201,12 +201,14 @@ END
 
 
 PUBLIC SUB main()
+DIM sLang AS String
 
-
-
+' ' ' 
 IF Application.Args[1] THEN 
+sLang = Trim(Application.Args[1])
 '  Message(Application.Args[1])
-  System.Language = Application.Args[1]
+  System.Language = sLang
+  
   frmInit = FrmSelISO
   
   'shell "LC_ALL=" & Application.Args[1] & Space(1) & "LANG=" & Application.Args[1]

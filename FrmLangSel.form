@@ -13,4 +13,8 @@
     Text = ("Select your language")
     Alignment = Align.Normal
   }
+  { Button1 Button
+    MoveScaled(42,10,10,3)
+    Text = ("Button1")
+  }
 }
