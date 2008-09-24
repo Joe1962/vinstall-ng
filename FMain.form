@@ -39,10 +39,7 @@
     MoveScaled(36,1,54,8)
     Stretch = True
   }
-  { pnlwinhost Panel
-    MoveScaled(27,10,56,41)
-    Expand = True
-    Arrangement = Arrange.Fill
-    Border = Border.Plain
+  { pnlwinhost Workspace
+    MoveScaled(27,10,70,55)
   }
 }
