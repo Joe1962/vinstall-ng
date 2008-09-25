@@ -16,6 +16,8 @@
 PRIVATE ileft AS Integer
 PRIVATE itop AS Integer
 PRIVATE icbleft AS Integer
+PRIVATE iWifix AS Integer
+PRIVATE iwifiy AS Integer
 PUBLIC objCombos AS Object[]
 PUBLIC objCheckboxes AS Object[]
 PUBLIC objtxtIps AS Object[]
@@ -23,6 +25,9 @@ PUBLIC objtxtNetMasks AS Object[]
 PUBLIC objtxtDNS AS Object[]
 PUBLIC objFrames AS Object[]
 PUBLIC objtlDetails AS Object[]
+PUBLIC objcbWifi AS Object[]
+PUBLIC objtxtWifiKey AS Object[]
+PUBLIC objcbWifiessid AS Object[]
 
 
 
@@ -37,7 +42,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     DIM sDevList AS String[]
     DIM sLine AS String[]
     DIM sDev AS String
-    DIM sType AS String
+    DIM sType, sStatus AS String
     DIM sDevAddr AS String
     DIM tl AS TextLabel
     DIM tb AS TextBox
@@ -45,6 +50,9 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     DIM bCb AS CheckBox
     DIM i, ii, y, x, cbwidth AS Integer
     DIM pTabPic AS picture
+    DIM iwifiboxwidth, iwifiboxleft AS Integer
+    DIM sApDump AS String
+    'DIM iwifix, iwifiy, iwifiboxwidth AS Integer
     
     
     'initiate the arrays
@@ -55,18 +63,25 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     objtxtNetMasks = NEW Object[]
     objtxtDNS = NEW Object[]
     objCheckboxes = NEW Object[]
- 
+    objcbWifi = NEW Object[]
+    objtxtWifiKey = NEW Object[]
+    objcbWifiessid = NEW Object[]
        
     
-    SHELL "ifconfig -a | grep ^[a-z] | grep -v ^lo" TO seths
-      File.Save(Temp("eths"), Trim(seths)) 
+    SHELL "export res=$(ifconfig -a | grep ^[a-z] | grep -v ^lo); echo \"$res\" | tr -s \' \'" TO seths
+      'File.Save(Temp("eths"), Trim(seths)) 
+      'Message(File.Load(Temp("eths")))
+      seths = Trim(seths)
       
-      sDevList = Split(File.Load(DConv(Temp("eths"))), gb.NewLine)
+      sDevList = Split(seths, gb.NewLine)
+      'Message(seths)
       
         FOR i = 0 TO sDevList.count - 1
+        'Message(sDevList[i])
           sLine = Split(sDevList[i], " ")
           sDev = sLine[0]
-           sDevAddr = sLine[10] ' This may be off depending on which box this runs one... needs careful testing 
+            'Message(sLine[1])
+           sDevAddr = sLine[4] ' This may be off depending on which box this runs one... needs careful testing 
                 ' try to detect wirelesss here
                   sDump = ""
                   SHELL "iwconfig " & sDev & " > /tmp/iwdump 2>&1" WAIT 
@@ -79,6 +94,17 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       sType = ("Wireless")
                       pTabPic = pWirelessPic
                     END IF
+                    
+                    ' detect status
+                      SHELL "ifplugstatus | grep ^" & sDev & " | cut -f 2 -d \':\'" TO sStatus
+                      'Message(sStatus)
+                        sStatus = Trim(sStatus)
+                          IF InStr(sStatus, "detected") THEN 
+                            sStatus = ("Plugged-in")
+                          ELSE 
+                            sStatus = ("Unplugged")
+                          END IF
+                        
               
           WITH FrmNetConf.TSNetDevices
             PRINT .Count
@@ -110,7 +136,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                     .Height = tl.Height
                     x = .Left
                     cbwidth = .Width
-                        
+                        iwifiboxwidth = .Width
                     END WITH
                                       
                   tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DevTYpeLbl"
@@ -151,7 +177,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       .text = ("Setup Mode")
                       .height = 21
                       .Width = MdlObjSizer.get_object_width(.text)
-                      .Alignment = Align.Normal
+                      .Alignment = Align.BottomLeft
                       'y = .top + .Height + 4
                      iLeft = .Left
                     END WITH 
@@ -170,6 +196,87 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                     y = cb.top + cb.Height + 4
                     itop = y
                     objCombos.Add(cb)
+          IF StYPE = ("Wireless") THEN 
+                tl = NEW TextLabel(FrmNetConf.TSNetDevices)
+                  WITH tl
+                    .text = ("Encryption type")
+                    .Width = MdlObjSizer.get_object_width(.text)
+                    .Height = 21
+                    '.Move(x + cb.Width + 96, y - .Height - 8)
+                    .Move(ileft + 300 + 24, itop + 12)
+                    .Alignment = Align.BottomLeft
+                    '.Border = Border.Plain
+                  END WITH
+                  iWifix = tl.Left
+                  iwifiy = tl.Top
+                cb = NEW ComboBox(FrmNetConf.TSNetDevices) AS "cbWifiEnc"
+                  WITH cb
+                  .ReadOnly = TRUE
+                    .list = [("None"), "WAP", "WEP"]
+                    .Width = tb.Width
+                    .tag = sDev                                      
+                    .Height = tl.Height
+                    .Move(tl.left + tl.Width + 12, tl.top)
+                    
+                    iwifiboxleft = .Left
+                    
+                  END WITH
+                  objcbWifi.Add(cb)
+                  
+                tl = NEW TextLabel(FrmNetConf.TSNetDevices)
+                  WITH tl
+                    .text = ("Encryption key")
+                    .Width = MdlObjSizer.get_object_width(.text)
+                    .Height = 21
+                    .Move(iwifix, iwifiy + .Height + 12)
+                    .Alignment = Align.Normal
+                  END WITH 
+                tb = NEW TextBox(FrmNetConf.TSNetDevices)
+                  WITH tb
+                    .text = ""
+                    .Width = iwifiboxwidth
+                    .Height = 21
+                    .Password = TRUE
+                    .Move(iwifiboxleft, tl.Top)
+                    .Enabled = FALSE
+                    .tag = sDev
+                  END WITH 
+                    objtxtWifiKey.Add(tb)
+                tl = NEW TextLabel(FrmNetConf.TSNetDevices)
+                  WITH tl
+                    .text = ("Access Point")
+                    .Width = MdlObjSizer.get_object_width(.Text)
+                    .Height = 21
+                    .Alignment = Align.Normal
+                    .Move(iWifix, tb.top + tb.Height + 4)
+                  END WITH
+                tb = NEW TextBox(FrmNetConf.TSNetDevices)
+                  WITH tb
+                    .tag = sDev
+                    .ReadOnly = TRUE
+                    .Width = iwifiboxwidth
+                    .Height = 21
+                    .Move(iwifiboxleft, tl.Top)
+                        ' add the access points here
+                  END WITH
+                  objcbWifiessid.Add(tb)
+                
+                
+          END IF
+                
+                    
+                IF sType = ("Wired") THEN 
+                  tl = NEW TextLabel(FrmNetConf.TSNetDevices) 
+                    WITH tl
+                      .text = ("STATUS:") & " <b>" & sStatus & "</b>"
+                      .Width = MdlObjSizer.get_object_width(.text)
+                      .Height = 21
+                      .Move(x + cb.Width + 12, y - .Height - 4)
+                      .Alignment = Align.Normal
+                    END WITH
+                END IF
+                   
+                      
         ' '  ELSE 
         '       tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "tlWirelessSecType"
         '         WITH tl
@@ -204,7 +311,7 @@ PUBLIC SUB MethodSel_Click()
     WITH frmDetails
       .Move(ileft, itop + 8)
       .text = (" Static IP Address Settings ")
-      .Width = .Parent.Width - (.left * 2.5)
+      .Width = 300 '.Parent.Width - (.left * 2.5)
       .Height = 130
       .tag = LAST.tag
     END WITH 
@@ -291,20 +398,21 @@ PUBLIC SUB MethodSel_Click()
         'IF ERROR THEN Message(Error.Text & "\n" & Error.Where)
     NEXT 
         ' create a text label that says the thing will get automatically configured
+        
         tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DetailLbl"
           WITH tl
             '.Move(LAST.left - (LAST.width / 2), LAST.top + LAST.height + 12)
             .Move(8, LAST.top + LAST.height + 12)
-            .text = ("<b>Dynamic Host Control Protocol</b><br>Automatic settings via DHCP. <br><br>This will work if you use a cable or DSL modem on a home network. <br>If in doubt, choose this option")
+            .text = "<b>" & ("Dynamic Host Control Protocol") & "</b><br>" & ("Automatic settings via DHCP.") & "<br><br>" & ("This will work if you use a cable or DSL modem on a home network.") & "<br>" & ("If in doubt, choose this option")
             .Adjust
-            '.border = Border.Etched
-            .Width = MdlObjSizer.get_object_width(.text)
+            .border = Border.Raised
+            .Width = 230 'MdlObjSizer.get_object_width(.text)
             .Height = 21 * 4          
             .Tag = LAST.tag
             
           END WITH 
-          objtlDetails.Add(tl)
-      
+            objtlDetails.Add(tl)
+
       
   END IF
 END
@@ -425,6 +533,21 @@ PUBLIC SUB SET_DNS_ADDRESSES()
         'Message(sFile)
         ' If DHCP is used, then /etc/resolv.conf is generated by dhcpcd
   
+END
+
+
+PUBLIC SUB cbWifiEnc_click()
+  DIM tb AS TextBox
+  
+    IF LAST.text = ("None") THEN 
+    FOR EACH tb IN objtxtWifiKey
+      IF tb.tag = LAST.tag THEN tb.Enabled = FALSE
+    NEXT 
+    ELSE 
+      FOR EACH tb IN objtxtWifiKey
+        IF tb.tag = LAST.tag THEN tb.Enabled = TRUE
+      NEXT 
+    END IF
 END
 
   

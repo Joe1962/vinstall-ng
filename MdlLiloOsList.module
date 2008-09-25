@@ -64,7 +64,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                     ' now populate it with the necessary stuff
                       tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinBanner"
                         WITH tl
-                          .text = ("<b>Windows installation found in ") & sWinPart & "</b>"
+                          .text = "<b>" & ("Windows installation found in ") & sWinPart & "</b>"
                           .Move(4, 16, MdlObjSizer.get_object_width(.text) + 24, 27)
                           .Alignment = Align.Normal
                           .BackColor = Color.Background
@@ -130,7 +130,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                       tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinPartLbl"
                         WITH tl
                           .Move(4, 24)
-                          .text = ("<b>Windows installation found in ") & sWinPart & "</b>"
+                          .text = "<b>" & ("Windows installation found in ") & sWinPart & "</b>"
                           .Height = 27
                           .Width = MdlObjSizer.get_object_width(.text)
                           .BackColor = Color.Background
@@ -267,7 +267,7 @@ bIncluded = NEW Object[]
             ENDIF 
           tl = NEW TextLabel(FrmLilo.TabStrip1) AS "OSIntro"
             WITH tl
-              .text = ("<b>Operating system installed in ") & arrLinux[i] & "</b>"
+              .text = "<b>" & ("Operating system installed in ") & arrLinux[i] & "</b> "
               .Move(4, 16, MdlObjSizer.get_object_width(.text) + 4, 27)
               '.BackColor = Color.SelectedBackground
               .Alignment = Align.Normal

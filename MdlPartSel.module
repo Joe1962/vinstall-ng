@@ -64,7 +64,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
           ' create header labels
           tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "HEADERS"
             WITH tl
-              .Text = ("<b>PARTITION</b>")
+              .Text = "<b>" & ("PARTITION") & "</b>"
               .Height = 27
               .x = x
               .y = y
@@ -74,7 +74,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
             icol2 = x + tl.Width + 4
           tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "HEADERS"
             WITH tl
-              .text = ("<b>MOUNT POINT</b>")
+              .text = "<b>" & ("MOUNT POINT") & "</b>"
               .Height = 27
               .x = icol2
               .y = y
@@ -83,7 +83,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
               icol3 = tl.x + tl.Width + 4
           tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "HEADERS"
             WITH tl
-              .text = ("<b>FILESYSTEM</b>")
+              .text = "<b>" & ("FILESYSTEM") & "</b>"
               .Height = 27
               .x = icol3
               .y = y
@@ -288,7 +288,7 @@ PUBLIC SUB MountPoints_CLick()
   'DIM sText AS String = Trim(LAST.text)
   
   FOR EACH sdropdwn IN ME.oMountPoints
-    IF LAST.text <> "Not Used" AND LAST.text = sdropdwn.Text AND LAST.tag <> sdropdwn.tag THEN 
+    IF LAST.text <> ("Not Used") AND LAST.text = sdropdwn.Text AND LAST.tag <> sdropdwn.tag THEN 
       
       Message.Error(("Please select only one ") & LAST.text & (" partition"))
       LAST.text = ("Not Used")
