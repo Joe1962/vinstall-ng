@@ -48,6 +48,9 @@ END
 
 PUBLIC SUB Form_Open()
 
+  FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
+  FMain.tvPlan["Prep1"].Picture = MdlCore.sNowPic
+  FMain.tvPlan["Prep1"].Selected = TRUE
   
   ME.Width = ME.Parent.Width
   ME.Height = ME.Parent.Height
@@ -55,17 +58,18 @@ PUBLIC SUB Form_Open()
   FMain.btback.Height = ME.btResCan.Height
   FMain.btQuit.Height = FMain.btback.Height
   FMain.btnext.Height = FMain.btback.Height
-  FMain.sNextKey = "Prep0"
+  'FMain.sNextKey = "Prep0"
+
   FMain.FrmCurr = ME
-  'FMain.frmNext = FrmPartScheme
-'  FMain.tvPlan["Prep0"].Selected = TRUE
- ' FMain.tvPlan["Prep0"].Picture = MdlCore.sNowPic
+  MdlCore.LOCK_GUI()
+  MdlCore.Init()
+  MdlCore.unlock_gui()
   IF ClsGlobal.sBackNav.Find(ME) = -1 THEN 
   ClsGlobal.sBackNav.Add(ME)
   END IF
  
   IF lstInstallableImg.count = 1 THEN 
-    tlBanner.Text = "Click \'" & FMain.btnext.text & "\' to begin installating " &
+    tlBanner.Text = ("Click") & Space(1) & "\'" & FMain.btnext.text & "\'" & Space(1) & ("to begin installating ")&
     Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, "/") - 4)
   END IF 
  
@@ -89,7 +93,7 @@ PUBLIC SUB DESCRIBE_DISTRO(sLoc AS String)
     sFile = Split(File.Load(Temp$(sLoc)), gb.NewLine)
   ELSE 
     'can't find Distro ID
-    Message.Error("Unable to identify distro.")
+    Message.Error(("Unable to identify distro."))
     RETURN 
   END IF
    
@@ -124,7 +128,7 @@ PUBLIC SUB DESCRIBE_DISTRO(sLoc AS String)
       END IF
     
     FrmSelISO.tlDistroDesc.Text = "<h3>" & sDist & Space(1) & sVer & "</h3><br>" &
-    "<b>Minimum Disk Space Requirements</b><br>"
+    "<b>" & ("Minimum Disk Space Requirements") & "</b><br>"
            
      
       IF Right(iMinRoot) LIKE "\'" OR "\"" THEN 
@@ -188,7 +192,7 @@ END
 PUBLIC SUB Form_Hide()
 
   FMain.frmLast = ME
-  FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
+  'FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
   
   
 

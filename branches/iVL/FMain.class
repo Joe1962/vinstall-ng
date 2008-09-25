@@ -34,11 +34,11 @@ WITH ME.pnlwinhost
   .ForeColor = Color.Transparent
 '  .ForeColor = Picture["images/langbg.png"]
 END WITH 
-FrmLangSel.Picture = Picture["images/langbg.png"]
+
 
 ME.Maximized = TRUE
 frmInit = MdlCore.frmInit
-MdlCore.LOCK_GUI
+'MdlCore.LOCK_GUI
 'frmInit = FrmLangSel
 'MdlCore.LOCK_GUI()
 ClsGlobal.sBackNav = NEW Object[]
@@ -77,8 +77,8 @@ WITH ME
   .Frame1.BackColor = Color.Transparent
   .tvPlan.BackColor = Color.transparent
   '.btQuit.Text = "Exit Installation"
-  .tvPlan["Prep0"].Selected = TRUE
-  .tvPlan["Prep0"].Picture = MdlCore.sNowPic
+  '.tvPlan["Prep0"].Selected = TRUE
+  '.tvPlan["Prep0"].Picture = MdlCore.sNowPic
   .tlBanner.Height = .PictureBox1.Height
   
 END WITH 
@@ -182,17 +182,15 @@ PUBLIC SUB btnext_Click()
   SELECT CASE FrmCurr.Name ' very nice navigation algoritm
     CASE "FrmLangSel"
       sLang = MdlLangSel.ID_LANG(Trim(FrmLangSel.lbLangSel.text))
+      System.Language = sLang
+      MdlCore.TRANSLATE_HOST_WINDOW
+      
+      frmNext = FrmSelISO
       ' now need to restart the application to make sure it takes effect
      
-      SHELL Application.Args[0] & Space(1) & sLang
-      QUIT
-      'System.Language = sLang
+      'SHELL Application.Args[0] & Space(1) & sLang
+      'QUIT
       
-      'FMain.frmNext = FrmSelISO
-    
-      
-      'FrmSelISO.Reparent(FMain.pnlwinhost)
-      'FMain.frmNext = FrmSelISO
     
       ' SHELL "LC_ALL=" & sLang & Space(1) & "LANG=" & sLang & " ./" & Application.Args[0] & Space(1) & sLang ' this will set the LANG environment to what the user selects and restart the application.
       'SHELL "LC_ALL=" & Application.Args[1] & Space(1) & "LANG=" & Application.Args[1] & Space(1) & "./" & Application.Args[0] & Space(1) & Trim(FrmLangSel.listbox1.text)

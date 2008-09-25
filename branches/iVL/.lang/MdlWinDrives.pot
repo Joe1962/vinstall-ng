@@ -15,22 +15,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: MdlWinDrives.module:55
-msgid "<b>Windows Partitions Detected</b>"
+msgid "Windows Partitions Detected"
 msgstr ""
 
 #: MdlWinDrives.module:71
-msgid "<B>PARTITION</B>"
+msgid "PARTITION"
 msgstr ""
 
 #: MdlWinDrives.module:81
-msgid "<b>MOUNT TO </B>"
+msgid "MOUNT TO"
 msgstr ""
 
-#: MdlWinDrives.module:161
+#: MdlWinDrives.module:119
 msgid "Do not mount"
 msgstr ""
 
 #: MdlWinDrives.module:181
-msgid "<b>No Windows partitions detected</b>"
+msgid "No Windows partitions detected"
 msgstr ""
 

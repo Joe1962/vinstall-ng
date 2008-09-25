@@ -14,6 +14,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: FrmPartScheme.class:55
+msgid "Select this option if you already have a linux installation that you wish to overwrite or if a linux partition scheme exists in your hard disk."
+msgstr ""
+
+#: FrmPartScheme.class:55
+msgid "This option will overwrite any existing data in the selected partitions"
+msgstr ""
+
+#: FrmPartScheme.class:55
+msgid "Use this option if you already prepared your partitions using the VectorLinux installer"
+msgstr ""
+
 #: FrmPartScheme.class:105
 msgid "Select your disk partition option"
 msgstr ""

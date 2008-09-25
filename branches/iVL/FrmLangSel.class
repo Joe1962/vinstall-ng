@@ -34,16 +34,14 @@ PUBLIC SUB LIST_LANG_CHOICES()
 END
 
 
-PUBLIC SUB Button1_Click()
-
-  DIM sLang AS String = MdlLangSel.ID_LANG(Trim(ME.lbLangSel.text))
-  System.Language = sLang
-    ME.Close
-    WAIT 1
-    FrmLangSel.Showmodal
-    
 
 
+PUBLIC SUB Form_Resize()
 
+  WITH ME
+    .tlBanner.Move(8, 4, MdlObjSizer.get_object_width(.tlBanner.text))
+    .lbLangSel.Move(8, .tlBanner.top + .tlBanner.Height + 4)
+    .lbLangSel.Resize((ME.Width / 3), ME.Height - (.tlBanner.Height * 2))
+  END WITH 
 
 END

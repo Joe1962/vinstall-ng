@@ -14,12 +14,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: MdlDiskPart.module:46
+msgid "VectorLinux is unable to determine the type of hard disks on your system."
+msgstr ""
+
+#: MdlDiskPart.module:46
+msgid "It is still possible to install VectorLinux on your system, but you need to pre-partition your disks first"
+msgstr ""
+
 #: MdlDiskPart.module:53
 msgid "Gparted was not found on this system. Please install gparted and try again"
 msgstr ""
 
 #: MdlDiskPart.module:57
-msgid "<h3>Loading gparted ... Please wait</h3>"
+msgid "Loading gparted ... Please wait"
+msgstr ""
+
+#: MdlDiskPart.module:90
+msgid "Setup is unable to successfully run gparted on this system. This may be a sign of "
+msgstr ""
+
+#: MdlDiskPart.module:90
+msgid "a bad install media. Setup cannot continue."
 msgstr ""
 
 #: MdlDiskPart.module:95

@@ -15,15 +15,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: MdlPartSel.module:67
-msgid "<b>PARTITION</b>"
+msgid "PARTITION"
 msgstr ""
 
 #: MdlPartSel.module:77
-msgid "<b>MOUNT POINT</b>"
+msgid "MOUNT POINT"
 msgstr ""
 
 #: MdlPartSel.module:86
-msgid "<b>FILESYSTEM</b>"
+msgid "FILESYSTEM"
 msgstr ""
 
 #: MdlPartSel.module:148

@@ -37,8 +37,8 @@ PUBLIC SUB Form_Open()
     MdlNetConf.LIST_NETWORK_INTERFACES
     cbUseManDNS.Value = FALSE
     tlBanner.text = "<h2>" & tlBanner.text & "</h2>"
-    FMain.tvPlan["Conf2"].picture = MdlCore.sNowPic
-    FMain.tvPlan["Conf2"].Selected = TRUE
+    ' FMain.tvPlan["Conf2"].picture = MdlCore.sNowPic
+    ' FMain.tvPlan["Conf2"].Selected = TRUE
     
     
   IF ERROR THEN Message(Error.text & "\n" & Error.where)
