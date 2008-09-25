@@ -55,54 +55,54 @@ msgid "Preparation"
 msgstr ""
 
 #: MdlCore.module:503
-msgid "Find installation media"
+msgid "Language Selection"
 msgstr ""
 
 #: MdlCore.module:504
-msgid "Disk Partitioning"
+msgid "Find installation media"
 msgstr ""
 
 #: MdlCore.module:505
+msgid "Disk Partitioning"
+msgstr ""
+
+#: MdlCore.module:506
 msgid "Software Selection"
 msgstr ""
 
-#: MdlCore.module:507
+#: MdlCore.module:508
 msgid "Installation"
 msgstr ""
 
-#: MdlCore.module:508
+#: MdlCore.module:509
 msgid "Installation Summary"
 msgstr ""
 
-#: MdlCore.module:509
-msgid "Prepare Host"
-msgstr ""
-
-#: MdlCore.module:510
+#: MdlCore.module:511
 msgid "Install Operating System"
 msgstr ""
 
-#: MdlCore.module:511
+#: MdlCore.module:512
 msgid "System Configuration"
 msgstr ""
 
-#: MdlCore.module:512
+#: MdlCore.module:513
 msgid "Boot Menu Options"
 msgstr ""
 
-#: MdlCore.module:513
+#: MdlCore.module:514
 msgid "System Administrator"
 msgstr ""
 
-#: MdlCore.module:514
+#: MdlCore.module:515
 msgid "Network Configuration"
 msgstr ""
 
-#: MdlCore.module:515
+#: MdlCore.module:516
 msgid "User Accounts"
 msgstr ""
 
-#: MdlCore.module:516
+#: MdlCore.module:517
 msgid "Hardware Configuration"
 msgstr ""
 
