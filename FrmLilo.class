@@ -25,13 +25,13 @@ PUBLIC SUB Form_Open()
  FMain.FrmCurr = ME
    FMain.tvPlan["Conf0"].Selected = TRUE
    FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
-   FMain.tvPlan["Inst2"].Picture = MdlCore.sDonePic
+   FMain.tvPlan["Inst1"].Picture = MdlCore.sDonePic
   ME.sVidMode = "Standard"
 MdlConfLilo.DISPLAY_LILO_TARGET_OPTIONS()
 MdlLiloOsList.LIST_LILO_OS_CHOICES()
 MdlLiloOsList.LIST_WIN_INSTALL_CHOICES(ME.TabStrip1.Count)
-ME.tlList.text = "The following Operating Systems have been detected on this computer. Choose your desired option " &
-"for each one of them by clicking on each tab. To proceed with the default pre-set values, simply click \'" & FMain.btnext.text & "\'"
+ME.tlList.text = ("The following Operating Systems have been detected on this computer. Choose your desired option") & Space(1)&
+("for each one of them by clicking on each tab. To proceed with the default pre-set values, simply click") & Space(1) & "\'" & FMain.btnext.text & "\'"
 ME.tlList.Adjust
 ME.TabStrip1.Index = MdlLiloOsList.iVltag
 MdlLiloOsList.bVlCliOption = TRUE

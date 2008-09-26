@@ -28,6 +28,14 @@ END
 
 PUBLIC SUB Form_Open()
 DIM iImg AS Image
+DIM iWidth AS Integer
+
+
+
+
+
+
+
 
 IF NOT FrmCurr OR FrmCurr = "" THEN FrmCurr = FrmSelISO
 
@@ -60,9 +68,9 @@ MdlCore.PREPARE_INSTALL_LAYOUT
 
 
 'STOP EVENT 
-ME.Width = 800
-ME.Height = 600
-
+' ME.Width = 800
+' ME.Height = 600
+' 
 
 
 WITH ME
@@ -71,10 +79,19 @@ WITH ME
   .Frame1.BackColor = Color.Transparent
   .tvPlan.BackColor = Color.transparent
   .tlBanner.Height = .PictureBox1.Height
+  '.tvPlan.Width = MdlCore.iLeftWidth
   
 END WITH 
 
-
+iWidth = 0
+FMain.tvPlan.MoveFirst()
+ REPEAT 
+ FMain.tvPlan.Item.Expanded = TRUE
+  IF MdlObjSizer.get_object_width(FMain.tvPlan.Item.Text) > iWidth THEN 
+    iWidth = MdlObjSizer.get_object_width(FMain.tvPlan.Item.Text)
+  END IF
+ UNTIL FMain.tvPlan.MoveBelow()
+ 'Message(iWidth)
 
 END
 
