@@ -201,24 +201,10 @@ END
 
 
 PUBLIC SUB main()
-DIM sLang AS String
 
 ' ' ' 
-IF Application.Args[1] THEN 
-sLang = Trim(Application.Args[1])
-'  Message(Application.Args[1])
-  System.Language = sLang
+ 
   
-  frmInit = FrmSelISO
-  
-  'shell "LC_ALL=" & Application.Args[1] & Space(1) & "LANG=" & Application.Args[1]
-  
-ELSE 
-  frmInit = FrmLangSel
-  
-END IF
-
-
   FMain.Show
   
   
@@ -227,12 +213,10 @@ END
 PUBLIC SUB TRANSLATE_HOST_WINDOW()
   
 
-  WITH fmain
-    .tvPlan.Clear
-    
-  END WITH 
-  
-  ME.PREPARE_INSTALL_LAYOUT
+  fmain.Close
+  WAIT 
+  frmInit = FrmSelISO
+  fmain.Show
   
   
   

@@ -29,11 +29,8 @@ END
 PUBLIC SUB Form_Open()
 DIM iImg AS Image
 
-WITH ME.pnlwinhost
-  '.Background = Color.Transparent
-  .ForeColor = Color.Transparent
-'  .ForeColor = Picture["images/langbg.png"]
-END WITH 
+IF NOT FrmCurr OR FrmCurr = "" THEN FrmCurr = FrmSelISO
+
 
 
 ME.Maximized = TRUE
@@ -45,6 +42,8 @@ ClsGlobal.sBackNav = NEW Object[]
 ClsGlobal.sSourceMnt = "/mnt/cdrom"
 'ClsGlobal.sSourceMnt = "/mnt" &/ "source" 'FOR TESTING ONLY
 '/ THE FOLLOWING LINES HAVE BEEN COMMENTED FOR TESTING ONLY
+'IF frmInit = "" OR IsNull(frmInit) THEN frmInit = FrmSelISO
+IF NOT frmInit THEN frmInit = FrmLangSel
 frmInit.Reparent(ME.pnlwinhost)
 frmInit.width = pnlwinhost.Width
 frmInit.height = pnlwinhost.Height
@@ -179,13 +178,27 @@ PUBLIC SUB btnext_Click()
   DIM sDev AS String
   DIM sLang AS String
   
+  IF FrmLangSel.Visible = TRUE THEN 
+  ME.Button1_Click()
+  WAIT 
+ RETURN 
+  
+  END IF
+    
+  
+  
   SELECT CASE FrmCurr.Name ' very nice navigation algoritm
-    CASE "FrmLangSel"
-      sLang = MdlLangSel.ID_LANG(Trim(FrmLangSel.lbLangSel.text))
-      System.Language = sLang
-      MdlCore.TRANSLATE_HOST_WINDOW
+    ' CASE "FrmLangSel"
+    '   sLang = MdlLangSel.ID_LANG(Trim(FrmLangSel.lbLangSel.text))
+    '   System.Language = sLang
+    '   FMain.Close
+    '   'System.Language = sLang
+    '   ''MdlCore.frmInit = FrmSelISO
+    '   'WAIT 
+    '   MdlCore.main
       
-      frmNext = FrmSelISO
+     
+     
       ' now need to restart the application to make sure it takes effect
      
       'SHELL Application.Args[0] & Space(1) & sLang
@@ -194,7 +207,7 @@ PUBLIC SUB btnext_Click()
     
       ' SHELL "LC_ALL=" & sLang & Space(1) & "LANG=" & sLang & " ./" & Application.Args[0] & Space(1) & sLang ' this will set the LANG environment to what the user selects and restart the application.
       'SHELL "LC_ALL=" & Application.Args[1] & Space(1) & "LANG=" & Application.Args[1] & Space(1) & "./" & Application.Args[0] & Space(1) & Trim(FrmLangSel.listbox1.text)
-      IF ERROR THEN Message(Error.Text & gb.NewLine & Error.where)
+'      IF ERROR THEN Message(Error.Text & gb.NewLine & Error.where)
       'QUIT
       
     
@@ -215,9 +228,9 @@ PUBLIC SUB btnext_Click()
         'FMain.MovieBox1.Refresh
         WITH FrmPartScheme
           IF .rbEditPartitions.Value = TRUE THEN 
-            .tlChoiceExp.text = .tlChoiceExp.text & gb.NewLine & gb.NewLine & "<h3><br><br>Please wait while setup attampts to run the partitioning utility</h3>"
+            .tlChoiceExp.text = .tlChoiceExp.text & gb.NewLine & gb.NewLine & "<h3><br><br>" & ("Please wait while setup attampts to run the partitioning utility") & "</h3>"
           ELSE IF .rbUseExisting.Value = TRUE THEN 
-            .tlChoiceExp.Text = .tlChoiceExp.Text & gb.NewLine & gb.NewLine & "<h3><br><br><hr>Please wait while setup analyses your current partition setup. <br>This may take a while ...</h3>"
+            .tlChoiceExp.Text = .tlChoiceExp.Text & gb.NewLine & gb.NewLine & "<h3><br><br><hr>" & ("Please wait while setup analyses your current partition setup.") & " <br>" & ("This may take a while ...") & "</h3>"
             
           END IF
        
@@ -231,7 +244,7 @@ PUBLIC SUB btnext_Click()
               
     CASE "FrmPartSel"
         IF NOT ClsPartSel.sRoot OR ClsPartSel.sRoot = "" THEN 
-        Message.Error("You must select a \"/\" partition. This is the target where the system will install to")
+        Message.Error(("You must select a \"/\" partition. This is the target where the system will install to"))
           STOP EVENT 
         ELSE 
             ' set the partition types
@@ -316,8 +329,9 @@ PUBLIC SUB btnext_Click()
   END SELECT 
                        
 '         IF frmNext = "" THEN frmNext = FrmSelISO  
+'IF frmNext = "" OR IsNull(FrmNetConf) OR NOT frmNext THEN frmNext = FrmSelISO
+'IF FrmCurr.text = "FrmLangSel" THEN STOP EVENT 
 
-  
   frmNext.Reparent(ME.pnlWinHost)
 
   FrmCurr.Hide
@@ -331,7 +345,7 @@ PUBLIC SUB btnext_Click()
     END IF
     END IF
   frmNext.Show
-  
+
 
 END
 
@@ -346,5 +360,22 @@ PUBLIC SUB btback_Click()
       frm.Show
       END IF
         
+
+END
+
+PUBLIC SUB Button1_Click()
+System.Language = MdlLangSel.ID_LANG(Trim(FrmLangSel.lbLangSel.text))
+  'FMain.Delete
+  'FMain.Delete
+  FMain.Close
+  'FrmSelISO.Close
+  
+  'Message(System.Language)
+  MdlCore.frmInit = FrmSelISO
+  MdlCore.main
+  
+   
+  'WAIT 
+ 'FMain.Show
 
 END

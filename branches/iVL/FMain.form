@@ -42,4 +42,9 @@
   { pnlwinhost Workspace
     MoveScaled(27,10,70,55)
   }
+  { Button1 Button
+    MoveScaled(16,71,10,2)
+    Visible = False
+    Text = ("Button1")
+  }
 }
