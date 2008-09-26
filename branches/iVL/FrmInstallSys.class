@@ -23,9 +23,9 @@ PUBLIC SUB BEGIN_PROCESS()
 
   MdlCore.lock_gui()
   FMain.FrmCurr = ME
-  FMain.tvPlan["Inst1"].Picture = MdlCore.sDonePic
-  FMain.tvPlan["Inst2"].Picture = MdlCore.sNowPic
-  FMain.tvPlan["Inst2"].Selected = TRUE
+  FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
+  FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
+  FMain.tvPlan["Inst1"].Selected = TRUE
   
   MdlInstallSys.ACTIVATE_SWAP_SPACE() ' activate swap for the current install
   

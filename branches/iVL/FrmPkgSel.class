@@ -23,9 +23,9 @@ PUBLIC SUB Form_Open()
       .rbFull_Click()
   END WITH 
   FMain.FrmCurr = ME
-  FMain.tvPlan["Prep2"].Selected = TRUE
-  FMain.tvPlan["Prep1"].Picture = MdlCore.sDonePic
-  FMain.tvPlan["Prep2"].Picture = MdlCore.sNowPic
+  FMain.tvPlan["Prep3"].Selected = TRUE
+  FMain.tvPlan["Prep2"].Picture = MdlCore.sDonePic
+  FMain.tvPlan["Prep3"].Picture = MdlCore.sNowPic
   FMain.btback.Enabled = TRUE
 FMain.btback.ForeColor = Color.Black
 

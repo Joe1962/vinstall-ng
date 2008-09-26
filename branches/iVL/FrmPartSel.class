@@ -60,8 +60,8 @@ PUBLIC SUB Form_Open()
   ClsPartSel.bDoWin = FALSE
   FMain.btback.Enabled = TRUE
 FMain.btback.ForeColor = Color.Black
-  FMain.tvPlan["Prep1"].Selected = TRUE
-  FMain.tvPlan["Prep1"].Picture = MdlCore.sNowPic
+  FMain.tvPlan["Prep2"].Selected = TRUE
+  FMain.tvPlan["Prep2"].Picture = MdlCore.sNowPic
 
 END
 

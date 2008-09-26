@@ -48,9 +48,7 @@ frmInit.Reparent(ME.pnlwinhost)
 frmInit.width = pnlwinhost.Width
 frmInit.height = pnlwinhost.Height
 
-' FrmSelISO.Reparent(ME.pnlWinHost)
-' FrmSelISO.Width = pnlWinHost.Width
-' FrmSelISO.Height = pnlWinHost.Height
+
 
 iImg = Image.Load("images/installer.png").Stretch(400, 50)
 'iImg.Resize(600, 80)
@@ -59,9 +57,6 @@ PictureBox1.Picture = iImg.Picture
 PictureBox1.Background = Color.SelectedBackground
 PictureBox1.Stretch = TRUE
 MdlCore.PREPARE_INSTALL_LAYOUT
-
-'FrmSelISO.Show
-'FrmSelISO.Hide
 
 
 'STOP EVENT 
@@ -75,21 +70,9 @@ WITH ME
   .btback.ForeColor = Color.Gray
   .Frame1.BackColor = Color.Transparent
   .tvPlan.BackColor = Color.transparent
-  '.btQuit.Text = "Exit Installation"
-  '.tvPlan["Prep0"].Selected = TRUE
-  '.tvPlan["Prep0"].Picture = MdlCore.sNowPic
   .tlBanner.Height = .PictureBox1.Height
   
 END WITH 
-'ME.TreeView1.BackColor = Color.Transparent
-''ME.AUTOSIZE_LEFT_PANE()
-' ' ' / THE FOLLOWING LINES HAVE BEEN IMPLEMENTED FOR TESTING PURPOSES
-' ' ' WITH FrmLilo
-' ' ' .Reparent(Fmain.pnlWinHost)
-' ' ' .Width = Fmain.pnlWinHost.Width
-' ' ' .Height = Fmain.pnlWinHost.Height
-' ' ' .Show
-' ' ' END WITH 
 
 
 

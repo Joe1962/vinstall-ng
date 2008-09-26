@@ -18,7 +18,7 @@
 PUBLIC SUB Form_Open()
 
   WITH ME
-    .tlbanner.Text = "Select your indivirual packages to install. <br>To install them all, just click next"
+    .tlbanner.Text = ("Select your indivirual packages to install.") & " <br>" & ("To install them all, just click next")
     .tlbanner.Adjust
     '.tlbanner.Border = Border.Plain
     '.tlbanner.Width = MdlObjSizer.get_object_width(.tlbanner.Text)
@@ -26,8 +26,8 @@ PUBLIC SUB Form_Open()
   END WITH 
   FMain.FrmCurr = ME
   FMain.btback.Enabled = TRUE
-  FMain.tvPlan["Prep2"].Picture = MdlCore.sNowPic
-  FMain.tvPlan["Prep2"].Selected = TRUE
+  FMain.tvPlan["Prep3"].Picture = MdlCore.sNowPic
+  FMain.tvPlan["Prep3"].Selected = TRUE
 FMain.btback.ForeColor = Color.Black
   MdlPkgSel.LIST_PACKAGE_SELECTION()
   
