@@ -29,9 +29,9 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
   
   DIM iRet AS Integer = 0
   WITH FMain
-      .tvPlan["Inst2"].Selected = TRUE
-      .tvPlan["Inst2"].Picture = MdlCore.sNowPic
-      .tvPlan["Inst1"].Picture = MdlCore.sDonePic
+      .tvPlan["Inst1"].Selected = TRUE
+      .tvPlan["Inst1"].Picture = MdlCore.sNowPic
+      .tvPlan["Inst0"].Picture = MdlCore.sDonePic
   END WITH 
   ME.CALCULATE_TOTAL_PACKAGES() 
     'RETURN 

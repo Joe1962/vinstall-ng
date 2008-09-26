@@ -494,7 +494,7 @@ END
 
 
 PUBLIC SUB PREPARE_INSTALL_LAYOUT()
-DIM iWidth AS Integer
+DIM iWidth AS Integer = 0
 WITH FMain.tvPlan
   .Add("Prep", ("Preparation"), sCatPic)
   .Add("Prep0", ("Language Selection"), sNowPic, "Prep")
@@ -513,7 +513,8 @@ WITH FMain.tvPlan
   .Add("Conf3", ("User Accounts"), sToDopic, "Conf")
   .Add("Conf4", ("Hardware Configuration"), sToDopic, "Conf")
 END WITH 
-
+iLeftWidth = 0
+iWidth = 0
 'expand the treeview
  FMain.tvPlan.MoveFirst()
  REPEAT 
@@ -524,8 +525,11 @@ END WITH
  UNTIL FMain.tvPlan.MoveBelow()
  
  iLeftWidth = iWidth
- fmain.tvPlan.Width = iWidth + (iWidth / 20)
- fmain.Frame1.Width = iWidth + (iWidth / 10)
+ 'Message(iLeftWidth)
+ 'fmain.tvPlan.Width = iLeftWidth
+ 
+ 'fmain.tvPlan.Width = iWidth + (iWidth / 20)
+ 'fmain.Frame1.Width = iWidth + (iWidth / 10)
  
  
 

@@ -56,7 +56,7 @@ PUBLIC FUNCTION FORMAT_PARTITION(sAddr AS String, sFS AS String) AS Integer ' wi
   
       FMain.tvPlan["Inst1"].Selected = TRUE
       FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
-      FMain.tvPlan["Inst2"].Picture = MdlCore.sToDopic
+      FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
   
   
     'Umount the volume first
