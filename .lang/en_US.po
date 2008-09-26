@@ -18,21 +18,43 @@ msgstr "VectorLinux Installer"
 msgid "GUI installer for Vector linux"
 msgstr "GUI installer for Vector linux"
 
-#: FMain.class:373
+#: FMain.class:225
+msgid "Please wait while setup attampts to run the partitioning utility"
+msgstr ""
+
+#: FMain.class:227
+msgid "Please wait while setup analyses your current partition setup."
+msgstr ""
+
+#: FMain.class:227
+msgid "This may take a while ..."
+msgstr ""
+
+#: FMain.class:241
+msgid ""
+"You must select a \"/\" partition. This is the target where the system will "
+"install to"
+msgstr ""
+
+#: FMain.class:399
 msgid "Process Overview"
 msgstr "Process Overview"
 
-#: FMain.class:393
+#: FMain.class:419
 msgid "Next"
 msgstr "Next"
 
-#: FMain.class:399
+#: FMain.class:425
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:405
+#: FMain.class:431
 msgid "Exit Installation"
 msgstr "Exit Installation"
+
+#: FMain.class:446
+msgid "Button1"
+msgstr "-"
 
 #: FrmDiskPart.class:115
 msgid "Disk Partitioning:"
@@ -72,7 +94,7 @@ msgstr "Total progress"
 msgid "Current Step "
 msgstr "Current Step "
 
-#: FrmLangSel.class:69
+#: FrmLangSel.class:70
 msgid "Select your language"
 msgstr "Select your language"
 
@@ -250,7 +272,7 @@ msgstr "Re-Enter Password"
 msgid "Set Password"
 msgstr "Set Password"
 
-#: FrmSelISO.class:29 MdlCore.module:281
+#: FrmSelISO.class:29 MdlCore.module:249
 msgid "No Installable Media Found"
 msgstr "No Installable Media Found"
 
@@ -358,12 +380,12 @@ msgstr "Lilo returned an error. Please see below"
 msgid "Boot loader has been setup successfully"
 msgstr "Boot loader has been setup successfully"
 
-#: MdlCore.module:265
+#: MdlCore.module:233
 #, fuzzy
 msgid "Scanning system for installable media. Please wait ..."
 msgstr "<b>Scanning system for installable media. Please wait ...</b>"
 
-#: MdlCore.module:283
+#: MdlCore.module:251
 msgid ""
 "Setup was unable to find any installable media on your system. Please insert "
 "your VectorLinux "
@@ -371,26 +393,26 @@ msgstr ""
 "Setup was unable to find any installable media on your system. Please insert "
 "your VectorLinux "
 
-#: MdlCore.module:283
+#: MdlCore.module:251
 #, fuzzy
 msgid "installation CD and click "
 msgstr "installation CD and click '"
 
-#: MdlCore.module:283
+#: MdlCore.module:251
 #, fuzzy
 msgid "to try again"
 msgstr "-"
 
-#: MdlCore.module:444
+#: MdlCore.module:412
 msgid "Build Date: "
 msgstr "Build Date: "
 
-#: MdlCore.module:444
+#: MdlCore.module:412
 #, fuzzy
 msgid "MINIMUM REQUIREMENTS"
 msgstr "<b>MINIMUM REQUIREMENTS<br>"
 
-#: MdlCore.module:449
+#: MdlCore.module:417
 msgid ""
 "Setup is unable to find SETUP.CONF in your install media. This could be "
 "symptoms of a bad burn or a bad ISO"
@@ -398,64 +420,64 @@ msgstr ""
 "Setup is unable to find SETUP.CONF in your install media. This could be "
 "symptoms of a bad burn or a bad ISO"
 
-#: MdlCore.module:522
+#: MdlCore.module:490
 msgid "Cannot find SETUP.CONF"
 msgstr "Cannot find SETUP.CONF"
 
-#: MdlCore.module:530
+#: MdlCore.module:498
 msgid "Preparation"
 msgstr "Preparation"
 
-#: MdlCore.module:531
+#: MdlCore.module:499
 #, fuzzy
 msgid "Language Selection"
 msgstr "Software Selection"
 
-#: MdlCore.module:532
+#: MdlCore.module:500
 msgid "Find installation media"
 msgstr "Find installation media"
 
-#: MdlCore.module:533
+#: MdlCore.module:501
 msgid "Disk Partitioning"
 msgstr "Disk Partitioning"
 
-#: MdlCore.module:534
+#: MdlCore.module:502
 msgid "Software Selection"
 msgstr "Software Selection"
 
-#: MdlCore.module:536
+#: MdlCore.module:504
 msgid "Installation"
 msgstr "Installation"
 
-#: MdlCore.module:537
+#: MdlCore.module:505
 msgid "Installation Summary"
 msgstr "Installation Summary"
 
-#: MdlCore.module:539
+#: MdlCore.module:507
 msgid "Install Operating System"
 msgstr "Install Operating System"
 
-#: MdlCore.module:540
+#: MdlCore.module:508
 msgid "System Configuration"
 msgstr "System Configuration"
 
-#: MdlCore.module:541
+#: MdlCore.module:509
 msgid "Boot Menu Options"
 msgstr "Boot Menu Options"
 
-#: MdlCore.module:542
+#: MdlCore.module:510
 msgid "System Administrator"
 msgstr "System Administrator"
 
-#: MdlCore.module:543
+#: MdlCore.module:511
 msgid "Network Configuration"
 msgstr "Network Configuration"
 
-#: MdlCore.module:544
+#: MdlCore.module:512
 msgid "User Accounts"
 msgstr "User Accounts"
 
-#: MdlCore.module:545
+#: MdlCore.module:513
 msgid "Hardware Configuration"
 msgstr "Hardware Configuration"
 
@@ -852,9 +874,6 @@ msgstr "localtime"
 #~ "<b>Dynamic Host Control Protocol</b><br>Automatic settings via DHCP. "
 #~ "<br><br>This will work if you use a cable or DSL modem on a home network. "
 #~ "<br>If in doubt, choose this option"
-
-#~ msgid "Button1"
-#~ msgstr "-"
 
 #~ msgid "Prepare Host"
 #~ msgstr "Prepare Host"
