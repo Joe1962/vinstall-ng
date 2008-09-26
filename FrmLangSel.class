@@ -19,6 +19,8 @@
 
 PUBLIC SUB Form_Open()
 
+  FMain.tvPlan["Prep0"].Selected = TRUE
+
   FMain.FrmCurr = ME
   tlbanner.text = "<h3>" & tlbanner.text & "</h3>"
     ME.LIST_LANG_CHOICES()

@@ -48,9 +48,7 @@ END
 
 PUBLIC SUB Form_Open()
 
-  FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
-  FMain.tvPlan["Prep1"].Picture = MdlCore.sNowPic
-  FMain.tvPlan["Prep1"].Selected = TRUE
+
   
   ME.Width = ME.Parent.Width
   ME.Height = ME.Parent.Height
@@ -72,7 +70,9 @@ PUBLIC SUB Form_Open()
     tlBanner.Text = ("Click") & Space(1) & "\'" & FMain.btnext.text & "\'" & Space(1) & ("to begin installating ")&
     Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, "/") - 4)
   END IF 
- 
+   FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
+  FMain.tvPlan["Prep1"].Picture = MdlCore.sNowPic
+  FMain.tvPlan["Prep1"].Selected = TRUE
  
 
 END

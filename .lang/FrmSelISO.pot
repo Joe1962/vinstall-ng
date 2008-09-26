@@ -18,11 +18,11 @@ msgstr ""
 msgid "No Installable Media Found"
 msgstr ""
 
-#: FrmSelISO.class:73
+#: FrmSelISO.class:71
 msgid "Click"
 msgstr ""
 
-#: FrmSelISO.class:73
+#: FrmSelISO.class:71
 msgid "to begin installating "
 msgstr ""
 
