@@ -2,6 +2,29 @@
 
 PUBLIC SUB Form_Open()
   Fmain.frmcurr = ME
+  WITH ME
+    .tlbanner.text = "<h3>" & ("System Administrator Password") & "</h3>"
+    .tlBanner.Width = MdlObjSizer.get_object_width(.tlBanner.text)
+    .tlBanner.Height = 42
+    .tlBanner.Raise
+    .tlAboutRoot.text = ("The linux root account is pre-defined to be used as ths system administrator\'s account." &
+        "This account is used to perform system-wide changes such as adding / removing software, system-wide updates," &
+        "managing user accounts, etc.") & "<br><br>" & ("Most other every-day taks do not require administrative priviledges.")&
+        "<br><br>" & ("For added security, use a password that is easy for you to remember, but hard for others to guess")
+    
+    .tlPass1.Alignment = Align.normal
+    .tlPass2.Alignment = Align.Normal
+    .tbPasswd1.Password = TRUE
+    .tbPasswd2.Password = TRUE
+    .tbPasswd1.SetFocus
+    .Button1.Visible = FALSE
+  END WITH 
+  
+    WITH FMain
+      .tvPlan["Conf1"].Picture = MdlCore.sDonePic
+      .tvPlan["Conf2"].picture = MdlCore.sNowPic
+      .tvPlan["Conf2"].Selected = TRUE
+    END WITH 
 END 
 
 
@@ -21,4 +44,27 @@ PUBLIC SUB Button1_Click()
       ME.tbPasswd2.Clear
     ENDIF 
   ENDIF 
+END
+
+PUBLIC SUB Form_Resize()
+  
+    DIM itxtLeft AS Integer
+
+  WITH ME
+    .tlbanner.Move(4, 4)
+    .Frame1.Resize(.ClientWidth - (.Frame1.Left * 2), .tlBanner.Height * 4)
+    .tlAboutRoot.Move(4, 24, .Frame1.Width - (.tlAboutRoot.Left * 2), .Frame1.Height - .tlAboutRoot.top - 8)
+    .tlPass1.Move(.Frame1.left, .Frame1.top + .Frame1.Height + 24, MdlObjSizer.get_object_width(.tlPass1.text), 21)
+    .tlPass2.Move(.tlPass1.Left, .tlPass1.top + .tlPass1.Height + 4, MdlObjSizer.get_object_width(.tlPass2.text), 21)
+      IF .tlPass1.Width > tlPass2.Width THEN 
+      itxtLeft = .tlPass1.Left + .tlPass1.Width + 8
+      ELSE 
+        itxtLeft = .tlPass2.Left + .tlPass2.Width + 8
+      END IF
+      .tbPasswd1.Move(itxtLeft, .tlPass1.top, 160, 21)
+      .tbPasswd2.Move(itxtLeft, .tlPass2.top, 160, 21)
+      
+    
+  END WITH  
+
 END

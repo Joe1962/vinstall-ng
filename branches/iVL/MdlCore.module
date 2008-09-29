@@ -508,10 +508,11 @@ WITH FMain.tvPlan
   .Add("Inst1", ("Install Operating System"), sToDopic, "Inst")
   .Add("Conf", ("System Configuration"), sCatPic)
   .Add("Conf0", ("Boot Menu Options"), sToDopic, "Conf")
-  .Add("Conf1", ("System Administrator"), sToDopic, "Conf")
-  .Add("Conf2", ("Network Configuration"), sToDopic, "Conf")
+  .Add("Conf1", ("Regional Settings"), sToDopic, "Conf")
+  .Add("Conf2", ("System Administrator"), sToDopic, "Conf")
   .Add("Conf3", ("User Accounts"), sToDopic, "Conf")
-  .Add("Conf4", ("Hardware Configuration"), sToDopic, "Conf")
+  .Add("Conf4", ("Network Configuration"), sToDopic, "Conf")
+  .Add("Conf5", ("Hardware Configuration"), sToDoPic, "Conf")
 END WITH 
 iLeftWidth = 0
 iWidth = 0

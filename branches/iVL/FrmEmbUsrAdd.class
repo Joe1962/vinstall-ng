@@ -17,6 +17,13 @@
 
 PUBLIC SUB Form_Open()
 
+  WITH FMain
+    .FrmCurr = ME
+    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
+    .tvPlan["Conf3"].picture = MdlCore.sNowPic
+    .tvPlan["Conf3"].Selected = TRUE
+  END WITH 
+  
  
   ME.EMBED_VASMCC_MODULE()
   'btAddUser.Visible = FALSE

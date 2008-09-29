@@ -76,25 +76,30 @@ msgstr "Vectorlinux is preparing your system for installation. Please wait."
 msgid "Current Status"
 msgstr "Current Status"
 
-#: FrmHostPrep.class:139 FrmInstallSys.class:226 FrmLilo.class:203
-#: FrmPartScheme.class:121 FrmPkgSel.class:99 FrmPkgsel2.class:86
-#: FrmSelISO.class:236 FrmSummary.class:87
+#: FrmHostPrep.class:139 FrmLilo.class:203 FrmPartScheme.class:121
+#: FrmPkgSel.class:99 FrmPkgsel2.class:86 FrmSelISO.class:236
+#: FrmSummary.class:87
 msgid "TextLabel1"
 msgstr "-"
 
-#: FrmInstallSys.class:183
+#: FrmInstallSys.class:50
+#, fuzzy
+msgid "Current Step"
+msgstr "Current Step "
+
+#: FrmInstallSys.class:170
 msgid "Vectorlinux is currently being installed to your system... Please wait"
 msgstr "Vectorlinux is currently being installed to your system... Please wait"
 
-#: FrmInstallSys.class:192
+#: FrmInstallSys.class:179
 msgid "Installing ..."
 msgstr "Installing ..."
 
-#: FrmInstallSys.class:206
+#: FrmInstallSys.class:193
 msgid "Total progress"
 msgstr "Total progress"
 
-#: FrmInstallSys.class:211
+#: FrmInstallSys.class:198
 msgid "Current Step "
 msgstr "Current Step "
 
@@ -353,27 +358,50 @@ msgstr ""
 msgid "To install them all, just click next"
 msgstr ""
 
-#: FrmRootPass.class:46
-msgid "Set Root Password"
-msgstr "Set Root Password"
+#: FrmRootPass.class:6
+#, fuzzy
+msgid "System Administrator Password"
+msgstr "System Administrator"
 
-#: FrmRootPass.class:50 FrmUserAdd.class:131
-msgid "Enter Password"
-msgstr "Enter Password"
-
-#: FrmRootPass.class:55
-msgid ""
-"Choose a password for the root account. You must enter the Root Password "
-"twice to ensure accuracy."
+#: FrmRootPass.class:13
+msgid "Most other every-day taks do not require administrative priviledges."
 msgstr ""
-"Choose a password for the root account. You must enter the Root Password "
-"twice to ensure accuracy."
 
-#: FrmRootPass.class:60
+#: FrmRootPass.class:13
+msgid ""
+"For added security, use a password that is easy for you to remember, but "
+"hard for others to guess"
+msgstr ""
+
+#: FrmRootPass.class:69
+msgid " About the root account "
+msgstr ""
+
+#: FrmRootPass.class:73
+msgid ""
+"The linux root account is pre-assigned to be used as the system "
+"administrator's account. This account is used to perform system-wide changes "
+"such as software upgrades, managing user accounts etc. \n"
+"\n"
+"Most other operations do not require administrative priviledges.\n"
+"The root password must be entered twice for ensured accuracy. When choosing "
+"a root password, think of something easy for you to remember, but hard for "
+"others to guess."
+msgstr ""
+
+#: FrmRootPass.class:79 MdlCore.module:511
+msgid "System Administrator"
+msgstr "System Administrator"
+
+#: FrmRootPass.class:90
 msgid "Re-Enter Password"
 msgstr "Re-Enter Password"
 
-#: FrmRootPass.class:76
+#: FrmRootPass.class:101 FrmUserAdd.class:131
+msgid "Enter Password"
+msgstr "Enter Password"
+
+#: FrmRootPass.class:106
 msgid "Set Password"
 msgstr "Set Password"
 
@@ -441,7 +469,7 @@ msgstr "Create User"
 msgid "Select the windows partitions you would like to mount during boot"
 msgstr "Select the windows partitions you would like to mount during boot"
 
-#: FrmZoneSet.class:87
+#: FrmZoneSet.class:91
 msgid ""
 "Choose how\n"
 "your hardware clock is set up.\n"
@@ -455,23 +483,23 @@ msgstr ""
 "the Coordinated Universal Time (UTC/GMT). Otherwise,\n"
 "Choose localtime since most PCs are setup this way."
 
-#: FrmZoneSet.class:92
+#: FrmZoneSet.class:96
 msgid "Choose the correct timezone for the area in which you live."
 msgstr "Choose the correct timezone for the area in which you live."
 
-#: FrmZoneSet.class:101
+#: FrmZoneSet.class:105
 msgid "ComboBox1"
 msgstr "-"
 
-#: FrmZoneSet.class:103
+#: FrmZoneSet.class:107
 msgid "LocalTime"
 msgstr "LocalTime"
 
-#: FrmZoneSet.class:103
+#: FrmZoneSet.class:107
 msgid "UTC"
 msgstr "UTC"
 
-#: FrmZoneSet.class:109
+#: FrmZoneSet.class:113
 msgid "Set TimeZone"
 msgstr "Set TimeZone"
 
@@ -562,10 +590,6 @@ msgstr "System Configuration"
 #: MdlCore.module:510
 msgid "Boot Menu Options"
 msgstr "Boot Menu Options"
-
-#: MdlCore.module:511
-msgid "System Administrator"
-msgstr "System Administrator"
 
 #: MdlCore.module:512
 msgid "Network Configuration"
@@ -660,7 +684,7 @@ msgstr "INSTALLING KERNELS"
 msgid "Unable to install kernels. "
 msgstr "Unable to install kernels. "
 
-#: MdlInstallCustom.module:90 MdlInstallSys.module:336
+#: MdlInstallCustom.module:90
 msgid ""
 "Vectorlinux is now installed in your system. Please click next to configure "
 "it."
@@ -680,15 +704,15 @@ msgstr ""
 msgid " is installed"
 msgstr " is installed"
 
-#: MdlInstallCustom.module:261
+#: MdlInstallCustom.module:263
 msgid "Calculating package count ... Please wait"
 msgstr "Calculating package count ... Please wait"
 
-#: MdlInstallCustom.module:294
+#: MdlInstallCustom.module:311
 msgid "Total packages to be installed = "
 msgstr "Total packages to be installed = "
 
-#: MdlInstallCustom.module:326
+#: MdlInstallCustom.module:343
 msgid "Error while installing "
 msgstr "Error while installing "
 
@@ -708,37 +732,58 @@ msgstr "Do not format"
 msgid "Do not mount"
 msgstr "Do not mount"
 
-#: MdlInstallSys.module:337
-msgid ""
-"packages have been installed in your system. Please click next to configure "
+#: MdlInstallSys.module:336
+#, fuzzy
+msgid "Vectorlinux is now installed in your system. Please click"
+msgstr ""
+"Vectorlinux is now installed in your system. Please click next to configure "
 "it."
+
+#: MdlInstallSys.module:336
+msgid "to configure it."
+msgstr ""
+
+#: MdlInstallSys.module:337
+#, fuzzy
+msgid "Packages have been installed in your system. Please click"
 msgstr ""
 "packages have been installed in your system. Please click next to configure "
 "it."
 
-#: MdlInstallSys.module:516
+#: MdlInstallSys.module:433
+#, fuzzy
+msgid "Installing"
+msgstr "Installing ..."
+
+#: MdlInstallSys.module:520
 msgid "Vectorlinux is now being installed. Please wait..."
 msgstr "Vectorlinux is now being installed. Please wait..."
 
-#: MdlInstallSys.module:559
-msgid "There has been an error extracting "
+#: MdlInstallSys.module:563
+#, fuzzy
+msgid "There has been an error extracting"
 msgstr "There has been an error extracting "
 
-#: MdlInstallSys.module:571
+#: MdlInstallSys.module:575
 msgid "Finished intalling Bulks"
 msgstr "Finished intalling Bulks"
 
-#: MdlInstallSys.module:674
+#: MdlInstallSys.module:678
 msgid "Installation phase complete. Ready for configuration"
 msgstr "Installation phase complete. Ready for configuration"
 
-#: MdlInstallSys.module:677
+#: MdlInstallSys.module:681
 msgid "Installing default system configuration and required software."
 msgstr "Installing default system configuration and required software."
 
-#: MdlInstallSys.module:707
+#: MdlInstallSys.module:711
 msgid "Installing Required Packages ..."
 msgstr "Installing Required Packages ..."
+
+#: MdlInstallSys.module:764
+#, fuzzy
+msgid "Installing Final configuration files..."
+msgstr "Installing default system configuration and required software."
 
 #: MdlLiloOsList.module:67
 msgid "Windows installation found in "
@@ -939,3 +984,13 @@ msgstr "localtime-copied-from"
 #: MdlZoneSet.module:28
 msgid "localtime"
 msgstr "localtime"
+
+#~ msgid "Set Root Password"
+#~ msgstr "Set Root Password"
+
+#~ msgid ""
+#~ "Choose a password for the root account. You must enter the Root Password "
+#~ "twice to ensure accuracy."
+#~ msgstr ""
+#~ "Choose a password for the root account. You must enter the Root Password "
+#~ "twice to ensure accuracy."
