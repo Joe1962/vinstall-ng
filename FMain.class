@@ -313,7 +313,7 @@ PUBLIC SUB btnext_Click()
        frmNext = FrmRootPass
        
     CASE "FrmRootPass"
-    
+      FrmRootPass.Button1_Click()
        frmNext = FrmUserAdd
        
        

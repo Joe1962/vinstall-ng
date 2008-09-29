@@ -35,7 +35,7 @@ ME.tlList.text = ("The following Operating Systems have been detected on this co
 ME.tlList.Adjust
 ME.TabStrip1.Index = MdlLiloOsList.iVltag
 MdlLiloOsList.bVlCliOption = TRUE
-
+' ' ' 
 SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
 SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT
   
@@ -96,7 +96,7 @@ PUBLIC SUB Form_Resize()
     .tlFbMode.Alignment = Align.Normal
     .tlBanner.Move(4, 4)
     .tlBanner.Width = .ClientWidth - (.tlBanner.x * 2)
-    .YNLiloBox.Move(.tlBanner.left, .tlBanner.Top + (.tlBanner.Height + 1.5), MdlObjSizer.get_object_width(.YNLiloBox.text) + 36, 28)
+    .YNLiloBox.Move(.tlBanner.left, .tlBanner.Top + (.tlBanner.Height + 1.5), MdlObjSizer.get_object_width(.YNLiloBox.text) + 36, 21)
     .tlTarGet.Move(.YNLiloBox.left, .YNLiloBox.top + (.YNLiloBox.Height * 1.5), MdlObjSizer.get_object_width(.tlTarGet.Text))
     .LiloTarget.Move(.tlTarGet.Left + .tlTarGet.Width + 4, .tlTarGet.top, (.tlBanner.Width / 2.75) - (.tlTarGet.Width + .tlTarGet.left))
     .tlFbMode.Move(.LiloTarget.Left + LiloTarget.Width + 32, .LiloTarget.top, MdlObjSizer.get_object_width(.tlFbMode.text))

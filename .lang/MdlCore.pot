@@ -91,11 +91,11 @@ msgid "Boot Menu Options"
 msgstr ""
 
 #: MdlCore.module:511
-msgid "System Administrator"
+msgid "Regional Settings"
 msgstr ""
 
 #: MdlCore.module:512
-msgid "Network Configuration"
+msgid "System Administrator"
 msgstr ""
 
 #: MdlCore.module:513
@@ -103,6 +103,10 @@ msgid "User Accounts"
 msgstr ""
 
 #: MdlCore.module:514
+msgid "Network Configuration"
+msgstr ""
+
+#: MdlCore.module:515
 msgid "Hardware Configuration"
 msgstr ""
 

@@ -33,7 +33,7 @@
   { tmCredits #Timer
     #X = 486
     #Y = 30
-    Delay = 30
+    Delay = 50
   }
   { scrlCredits ScrollView
     MoveScaled(2,48,84,5)

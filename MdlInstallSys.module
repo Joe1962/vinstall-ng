@@ -68,6 +68,9 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
 
     'ClsGlobal.sTargetMnt = "/home/moises/mnt/target" ' for testing only
     
+    
+    MdlSetup.RUN_CREDITS() ' Begin scrolling credits
+    
       IF ClsPkgSel.bCustom = TRUE THEN 
         MdlInstallCustom.PERFORM_CUSTOM_INSTALL
       ELSE 
@@ -274,6 +277,7 @@ PUBLIC SUB ACTIVATE_SWAP_SPACE()
   NEXT 
   SHELL "swapon -a" WAIT 
   
+  
 END
 
 
@@ -333,8 +337,8 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
   FrmInstallSys.pbInstallProg.Value = 1
   FrmInstallSys.pbInstallProg2.Value = 1
   'Message.Info("Vectorlinux is now installed in your system. Please click next to configure it.")
-  FrmInstallSys.tlBanner.Text = ("Vectorlinux is now installed in your system. Please click next to configure it.")
-  FrmInstallSys.tlCurrPkg.Text = ("packages have been installed in your system. Please click next to configure it.")
+  FrmInstallSys.tlBanner.Text = ("Vectorlinux is now installed in your system. Please click") & Space(1) & FMain.btnext.text & Space(1) & ("to configure it.")
+  FrmInstallSys.tlCurrPkg.Text = ("Packages have been installed in your system. Please click") & Space(1) & FMain.btnext.text & Space(1) & ("to configure it.")
   WITH FMain
     .btQuit.Enabled = TRUE
     .btQuit.ForeColor = Color.Black
@@ -408,7 +412,7 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
   'DIM sFile AS String = File.Load(ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF")
   DIM sLine AS String
   
-  MdlSetup.RUN_CREDITS() ' try this
+  
   
      SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^BULK" TO sRawList
      '   sList = Split(File.Load(Temp$("SETUP.CONF")), "\n")  
@@ -558,7 +562,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
                       hproc.State = Process.Stopped
                           ' error check
                             IF InStr(sDump, "FAILED") > 0 THEN 
-                              Message.Error(("There has been an error extracting ") & sPakDesc & gb.NewLine &
+                              Message.Error(("There has been an error extracting") & Space(1) & sPakDesc & gb.NewLine &
                               "<b>ERROR</b>" & gb.NewLine &
                               sErr)
                               RETURN 1
@@ -761,7 +765,7 @@ PUBLIC FUNCTION INSTALL_CONFIG_PACKAGES() AS Integer
           sLinarr = Split(sRawList, ":")
           sPkgPath = Right(sLinarr[0], Len(sLinarr[0]) - InStr(sLinarr[0], "\'"))
               ' now install the package
-              FrmInstallSys.tlCurrPkg.Text = "Installing Final configuration files..."
+              FrmInstallSys.tlCurrPkg.Text = ("Installing Final configuration files...")
               INC iPkgNum
                 'hproc = SHELL "install-pkg " & sPkgPath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
                 ME.BULK_INSTALL(ClsGlobal.sSourceMnt &/ "veclinux" &/ sPkgPath)

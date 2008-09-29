@@ -250,8 +250,10 @@ END
 PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
 
   DIM i AS Integer
+  DIM irs AS Integer
   DIM sOutput AS String
   DIM sOutArr AS String[]
+  DIM cb AS CheckBox
     
   'MdlPkgSel.GET_USER_BULK_SELECTION()
   'MdlPkgSel.GET_USER_PKG_SELECTION()
@@ -289,7 +291,22 @@ PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
     i = i + 1
   END IF
   'Count user-selected stuff in
-  i = i + ClsPkgSel.arrBulks.Count + ClsPkgSel.arrPkgs.Count
+      'we will need to cycle through the arrays for th is for accuracy...
+        irs = 0
+        FOR EACH cb IN MdlPkgSel.Bulks
+          IF cb.value = TRUE THEN INC irs
+            
+          
+        NEXT 
+        i = i + irs
+      ' now do the optional packages
+      irs = 0 ' reset the count
+        FOR EACH cb IN MdlPkgSel.Pkgs
+          IF cb.Value = TRUE THEN INC irs
+            
+        NEXT 
+      i = i + irs ' the count to the total
+  'i = i + ClsPkgSel.arrBulks.Count + ClsPkgSel.arrPkgs.Count
   iPkgCnt = i
   PRINT ("Total packages to be installed = ") & i
 END

@@ -1,35 +1,40 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,74,44)
+  MoveScaled(0,0,87,56)
   Text = ("")
   { Frame1 Frame
-    MoveScaled(1,1,62,31)
-    Text = ("Set Root Password")
-    { TextLabel2 TextLabel
-      MoveScaled(35,3,12,2)
-      Text = ("Enter Password")
+    MoveScaled(1,6,72,22)
+    Text = (" About the root account ")
+    { tlAboutRoot TextLabel
+      MoveScaled(2,3,67,16)
+      Text = ("The linux root account is pre-assigned to be used as the system administrator's account. This account is used to perform system-wide changes such as software upgrades, managing user accounts etc. \n\nMost other operations do not require administrative priviledges.\nThe root password must be entered twice for ensured accuracy. When choosing a root password, think of something easy for you to remember, but hard for others to guess.")
     }
-    { TextLabel1 TextLabel
-      MoveScaled(1,4,29,11)
-      Text = ("Choose a password for the root account. You must enter the Root Password twice to ensure accuracy.")
-    }
-    { TextLabel3 TextLabel
-      MoveScaled(35,9,14,2)
-      Text = ("Re-Enter Password")
-    }
-    { tbPasswd1 TextBox
-      MoveScaled(35,6,21,2)
-      Text = ("")
-      Password = True
-    }
-    { tbPasswd2 TextBox
-      MoveScaled(35,12,21,2)
-      Text = ("")
-    }
-    { Button1 Button
-      MoveScaled(50,28,11,2)
-      Text = ("Set Password")
-    }
+  }
+  { tlBanner TextLabel
+    MoveScaled(2,1,62,4)
+    Text = ("System Administrator")
+  }
+  { tbPasswd2 TextBox
+    MoveScaled(31,35,21,3.5)
+    Text = ("")
+    Password = True
+  }
+  { tlPass2 TextLabel
+    MoveScaled(2,35,22,4)
+    Text = ("Re-Enter Password")
+  }
+  { tbPasswd1 TextBox
+    MoveScaled(29,29,21,3.5)
+    Text = ("")
+    Password = True
+  }
+  { tlPass1 TextLabel
+    MoveScaled(2,30,22,4)
+    Text = ("Enter Password")
+  }
+  { Button1 Button
+    MoveScaled(53,49,11,2)
+    Text = ("Set Password")
   }
 }
