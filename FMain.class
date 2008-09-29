@@ -134,7 +134,8 @@ DIM iMid AS Integer
 'ME.pnlWinHost.Resize(ME.ClientWidth - ME.Frame1.Width - (ME.Frame1.left * 8), ME.ClientH - ME.tlBanner.Height - (ME.btback.Height * 8))
   WITH ME
     .tlBanner.width = ME.width
-  .Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.7, .ClientHeight - .PictureBox1.Height * 1.5)
+  '.Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth *1.7, .ClientHeight - .PictureBox1.Height * 1.5)
+  .Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth + 90, .ClientHeight - .PictureBox1.Height * 1.5)
     '.Frame1.Move(4, .PictureBox1.top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 2))
     '.Frame1.Resize(MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 1.5))
   .tvPlan.Move(4, 24, .Frame1.Width - 8, .Frame1.Height - 28) ' THIS WILL LEAVE 16PIX ON TOP AND BOTTOM AND 2 ON LEFT AND RIGHT
@@ -299,7 +300,7 @@ PUBLIC SUB btnext_Click()
         MdlConfLilo.EXECUTE_LILO()
         ELSE 
           ' lilo installation / setup has been skipped
-          FrmLilo.tlBanner.Text = "<b>Skipping lilo setup</b>"
+          FrmLilo.tlBanner.Text = "<b>" & ("Skipping lilo setup") & "</b>"
         END IF
     
       'frmNext = FrmLiloOsList

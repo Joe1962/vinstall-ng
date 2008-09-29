@@ -37,21 +37,25 @@ PUBLIC SUB BEGIN_PROCESS()
 END
 
 
+
+
+
 PUBLIC SUB Form_Open()
    
 FMain.FrmCurr = ME
+'MdlSetup.RUN_CREDITS
 
       'ClsGlobal.sSourceMnt = "/mnt/cdrom"
       'ME.FrmProg.Text = " Preparing system for installation "
-      ME.tlCurrStepLbl.Text = "Current Step"
+      ME.tlCurrStepLbl.Text = ("Current Step")
       'ME.show_credits
       'MdlSetup.RUN_CREDITS(ClsGlobal.sSourceMnt &/ "CREDIT", ME.tlCredits)
       'ME.tmCredits.Enabled = TRUE
  
 'STOP EVENT 
 
-MdlSetup.RUN_CREDITS(ClsGlobal.sSourceMnt &/ "CREDIT", ME.tlCredits)
-WAIT 
+'MdlSetup.RUN_CREDITS(ClsGlobal.sSourceMnt &/ "CREDIT", ME.tlCredits)
+'WAIT 
 
 ME.BEGIN_PROCESS()  ' COMMENTED FOR TESTING PURPOSES
 
@@ -121,13 +125,13 @@ PUBLIC SUB tmCredits_Timer()
   
   DIM X AS Integer
   X = ME.scrlCredits.ScrollX
-  'REPEAT 
+  REPEAT 
   INC ME.scrlCredits.ScrollX
       IF X = ME.scrlCredits.Scrollx THEN 
         ME.scrlCredits.scrollx = 0
         ME.tmCredits.Enabled = FALSE
       END IF
-  'UNTIL tmCredits.Enabled = FALSE
+  UNTIL tmCredits.Enabled = FALSE
     
    
    '  
@@ -137,22 +141,5 @@ PUBLIC SUB tmCredits_Timer()
 
 END
 
-PUBLIC SUB sclCredits_MouseDown()
 
-  
 
-END
-
-PUBLIC SUB tlCredits_MouseDown()
-
-  
-
-END
-
-PUBLIC SUB Form_Menu()
-  ClsGlobal.sSourceMnt = "/mnt/cdrom"
-  MdlSetup.RUN_CREDITS(ClsGlobal.sSourceMnt &/ "CREDIT", ME.tlCredits)
-  ME.tmCredits.Enabled = TRUE
-  
-
-END

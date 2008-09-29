@@ -18,41 +18,45 @@ msgstr "VectorLinux Installer"
 msgid "GUI installer for Vector linux"
 msgstr "GUI installer for Vector linux"
 
-#: FMain.class:225
+#: FMain.class:232
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr ""
 
-#: FMain.class:227
+#: FMain.class:234
 msgid "Please wait while setup analyses your current partition setup."
 msgstr ""
 
-#: FMain.class:227
+#: FMain.class:234
 msgid "This may take a while ..."
 msgstr ""
 
-#: FMain.class:241
+#: FMain.class:248
 msgid ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
 msgstr ""
 
-#: FMain.class:399
+#: FMain.class:303
+msgid "Skipping lilo setup"
+msgstr ""
+
+#: FMain.class:406
 msgid "Process Overview"
 msgstr "Process Overview"
 
-#: FMain.class:419
+#: FMain.class:426
 msgid "Next"
 msgstr "Next"
 
-#: FMain.class:425
+#: FMain.class:432
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:431
+#: FMain.class:438
 msgid "Exit Installation"
 msgstr "Exit Installation"
 
-#: FMain.class:446
+#: FMain.class:454
 msgid "Button1"
 msgstr "-"
 
@@ -73,7 +77,7 @@ msgid "Current Status"
 msgstr "Current Status"
 
 #: FrmHostPrep.class:139 FrmInstallSys.class:226 FrmLilo.class:203
-#: FrmPartScheme.class:120 FrmPkgSel.class:99 FrmPkgsel2.class:86
+#: FrmPartScheme.class:121 FrmPkgSel.class:99 FrmPkgsel2.class:86
 #: FrmSelISO.class:236 FrmSummary.class:87
 msgid "TextLabel1"
 msgstr "-"
@@ -94,7 +98,7 @@ msgstr "Total progress"
 msgid "Current Step "
 msgstr "Current Step "
 
-#: FrmLangSel.class:70
+#: FrmLangSel.class:72
 msgid "Select your language"
 msgstr "Select your language"
 
@@ -113,6 +117,18 @@ msgstr "Yes, I Agree to the License Agreement"
 #: FrmLicense.class:115
 msgid "No, I Do Not Agree"
 msgstr "No, I Do Not Agree"
+
+#: FrmLilo.class:34
+msgid ""
+"The following Operating Systems have been detected on this computer. Choose "
+"your desired option"
+msgstr ""
+
+#: FrmLilo.class:34
+msgid ""
+"for each one of them by clicking on each tab. To proceed with the default "
+"pre-set values, simply click"
+msgstr ""
 
 #: FrmLilo.class:186
 msgid "Configure and install lilo (Linux Boot Loader)"
@@ -190,33 +206,114 @@ msgstr "Secondary DNS Server"
 msgid "NETWORK CONFIGURATION"
 msgstr "NETWORK CONFIGURATION"
 
-#: FrmPartScheme.class:55
+#: FrmPartScheme.class:56
 msgid ""
 "Select this option if you already have a linux installation that you wish to "
 "overwrite or if a linux partition scheme exists in your hard disk."
 msgstr ""
 
-#: FrmPartScheme.class:55
+#: FrmPartScheme.class:56
 msgid "This option will overwrite any existing data in the selected partitions"
 msgstr ""
 
-#: FrmPartScheme.class:55
+#: FrmPartScheme.class:56
 msgid ""
 "Use this option if you already prepared your partitions using the "
 "VectorLinux installer"
 msgstr ""
 
-#: FrmPartScheme.class:105
+#: FrmPartScheme.class:65
+msgid ""
+"Select this option is you wish to create, more or resize partitions in order "
+"to make room for your new VectorLinux installation."
+msgstr ""
+
+#: FrmPartScheme.class:65
+msgid ""
+"This option is the safest choice if you have other existing installations "
+"that you wish to keep."
+msgstr ""
+
+#: FrmPartScheme.class:106
 msgid "Select your disk partition option"
 msgstr "Select your disk partition option"
 
-#: FrmPartScheme.class:110
+#: FrmPartScheme.class:111
 msgid "Use existing disk partitions"
 msgstr "Use existing disk partitions"
 
-#: FrmPartScheme.class:115
+#: FrmPartScheme.class:116
 msgid "Modify my disk partitions to make room for new installation"
 msgstr "Modify my disk partitions to make room for new installation"
+
+#: FrmPartSel.class:145
+msgid "ABOUT SYSTEM PARTITIONING IN LINUX"
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid ""
+"Linux is a modular operating system. This means that is has the ability to "
+"store system and"
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid ""
+"user data separately for added data security. You may install the system to "
+"a single partition"
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid ""
+"by simply selecting a \"/\" value on this screen. The rest is optional. The "
+"following is a"
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid "suggested setup for a typical Linux installation"
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid ""
+"Used to store system data. This particular install requires a minimum of"
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid "for this"
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid ""
+"but you should considear a higher value to make sure you have room to "
+"install additional software"
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid "in case you wish to."
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid ""
+"Used to store user documents, pictures, videos. Give yourself as much room "
+"as you want"
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid "Typically, you want to use the largest partition for this."
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid ""
+"Using a swap partition is suggested if your total RAM is less than 1GB. "
+"Suggested ammount"
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid "for this is"
+msgstr ""
+
+#: FrmPartSel.class:145
+msgid "but can also be calculated as 2 times your ammount of RAM"
+msgstr ""
 
 #: FrmPartSel.class:169
 msgid "Please select the partitions you wish to use and how to use them"
@@ -248,6 +345,14 @@ msgstr "Full Install"
 msgid "Custom Install"
 msgstr "Custom Install"
 
+#: FrmPkgsel2.class:21
+msgid "Select your indivirual packages to install."
+msgstr ""
+
+#: FrmPkgsel2.class:21
+msgid "To install them all, just click next"
+msgstr ""
+
 #: FrmRootPass.class:46
 msgid "Set Root Password"
 msgstr "Set Root Password"
@@ -272,23 +377,21 @@ msgstr "Re-Enter Password"
 msgid "Set Password"
 msgstr "Set Password"
 
-#: FrmSelISO.class:29 MdlCore.module:249
+#: FrmSelISO.class:29 MdlCore.module:250
 msgid "No Installable Media Found"
 msgstr "No Installable Media Found"
 
-#: FrmSelISO.class:73
+#: FrmSelISO.class:71
 msgid "Click"
 msgstr ""
 
-#: FrmSelISO.class:73
-#, fuzzy
+#: FrmSelISO.class:71
 msgid "to begin installating "
-msgstr "Find installation media"
+msgstr ""
 
 #: FrmSelISO.class:96
-#, fuzzy
 msgid "Unable to identify distro."
-msgstr "Unable to install kernels. "
+msgstr ""
 
 #: FrmSelISO.class:131
 msgid "Minimum Disk Space Requirements"
@@ -380,12 +483,11 @@ msgstr "Lilo returned an error. Please see below"
 msgid "Boot loader has been setup successfully"
 msgstr "Boot loader has been setup successfully"
 
-#: MdlCore.module:233
-#, fuzzy
+#: MdlCore.module:234
 msgid "Scanning system for installable media. Please wait ..."
-msgstr "<b>Scanning system for installable media. Please wait ...</b>"
+msgstr ""
 
-#: MdlCore.module:251
+#: MdlCore.module:252
 msgid ""
 "Setup was unable to find any installable media on your system. Please insert "
 "your VectorLinux "
@@ -393,26 +495,23 @@ msgstr ""
 "Setup was unable to find any installable media on your system. Please insert "
 "your VectorLinux "
 
-#: MdlCore.module:251
-#, fuzzy
+#: MdlCore.module:252
 msgid "installation CD and click "
-msgstr "installation CD and click '"
+msgstr ""
 
-#: MdlCore.module:251
-#, fuzzy
+#: MdlCore.module:252
 msgid "to try again"
-msgstr "-"
+msgstr ""
 
-#: MdlCore.module:412
+#: MdlCore.module:413
 msgid "Build Date: "
 msgstr "Build Date: "
 
-#: MdlCore.module:412
-#, fuzzy
+#: MdlCore.module:413
 msgid "MINIMUM REQUIREMENTS"
-msgstr "<b>MINIMUM REQUIREMENTS<br>"
+msgstr ""
 
-#: MdlCore.module:417
+#: MdlCore.module:418
 msgid ""
 "Setup is unable to find SETUP.CONF in your install media. This could be "
 "symptoms of a bad burn or a bad ISO"
@@ -420,64 +519,63 @@ msgstr ""
 "Setup is unable to find SETUP.CONF in your install media. This could be "
 "symptoms of a bad burn or a bad ISO"
 
-#: MdlCore.module:490
+#: MdlCore.module:491
 msgid "Cannot find SETUP.CONF"
 msgstr "Cannot find SETUP.CONF"
 
-#: MdlCore.module:498
+#: MdlCore.module:499
 msgid "Preparation"
 msgstr "Preparation"
 
-#: MdlCore.module:499
-#, fuzzy
-msgid "Language Selection"
-msgstr "Software Selection"
-
 #: MdlCore.module:500
+msgid "Language Selection"
+msgstr ""
+
+#: MdlCore.module:501
 msgid "Find installation media"
 msgstr "Find installation media"
 
-#: MdlCore.module:501
+#: MdlCore.module:502
 msgid "Disk Partitioning"
 msgstr "Disk Partitioning"
 
-#: MdlCore.module:502
+#: MdlCore.module:503
 msgid "Software Selection"
 msgstr "Software Selection"
 
-#: MdlCore.module:504
+#: MdlCore.module:505
 msgid "Installation"
 msgstr "Installation"
 
-#: MdlCore.module:505
+#: MdlCore.module:506
 msgid "Installation Summary"
 msgstr "Installation Summary"
 
-#: MdlCore.module:507
+#: MdlCore.module:508
 msgid "Install Operating System"
 msgstr "Install Operating System"
 
-#: MdlCore.module:508
+#: MdlCore.module:509
 msgid "System Configuration"
 msgstr "System Configuration"
 
-#: MdlCore.module:509
+#: MdlCore.module:510
 msgid "Boot Menu Options"
 msgstr "Boot Menu Options"
 
-#: MdlCore.module:510
+#: MdlCore.module:511
 msgid "System Administrator"
 msgstr "System Administrator"
 
-#: MdlCore.module:511
+#: MdlCore.module:512
 msgid "Network Configuration"
 msgstr "Network Configuration"
 
-#: MdlCore.module:512
+#: MdlCore.module:513
 msgid "User Accounts"
 msgstr "User Accounts"
 
-#: MdlCore.module:513
+#: MdlCore.module:514
 msgid "Hardware Configuration"
 msgstr "Hardware Configuration"
 
@@ -499,9 +597,8 @@ msgstr ""
 "Gparted was not found on this system. Please install gparted and try again"
 
 #: MdlDiskPart.module:57
-#, fuzzy
 msgid "Loading gparted ... Please wait"
-msgstr "<h3>Loading gparted ... Please wait</h3>"
+msgstr ""
 
 #: MdlDiskPart.module:90
 msgid ""
@@ -644,9 +741,8 @@ msgid "Installing Required Packages ..."
 msgstr "Installing Required Packages ..."
 
 #: MdlLiloOsList.module:67
-#, fuzzy
 msgid "Windows installation found in "
-msgstr "<b>Windows installation found in "
+msgstr ""
 
 #: MdlLiloOsList.module:75
 msgid "Name "
@@ -665,9 +761,8 @@ msgid "Label"
 msgstr "Label"
 
 #: MdlLiloOsList.module:270
-#, fuzzy
 msgid "Operating system installed in "
-msgstr "<b>Operating system installed in "
+msgstr ""
 
 #: MdlLiloOsList.module:282
 msgid "Include this operating system in the boot menu"
@@ -778,19 +873,16 @@ msgid "There has been an error wile trying to format "
 msgstr "There has been an error wile trying to format "
 
 #: MdlPartSel.module:67 MdlWinDrives.module:71
-#, fuzzy
 msgid "PARTITION"
-msgstr "<b>PARTITION</b>"
+msgstr ""
 
 #: MdlPartSel.module:77
-#, fuzzy
 msgid "MOUNT POINT"
-msgstr "<b>MOUNT POINT</b>"
+msgstr ""
 
 #: MdlPartSel.module:86
-#, fuzzy
 msgid "FILESYSTEM"
-msgstr "<b>FILESYSTEM</b>"
+msgstr ""
 
 #: MdlPartSel.module:293
 msgid "Please select only one "
@@ -801,53 +893,44 @@ msgid " partition"
 msgstr " partition"
 
 #: MdlSummarize.module:28
-#, fuzzy
 msgid "PARTITIONING LAYOUT"
-msgstr "<b><br>PARTITIONING LAYOUT:</b><br>"
+msgstr ""
 
 #: MdlSummarize.module:49
-#, fuzzy
 msgid "OPTIONAL WINDOWS PARTITIONS TO BE MOUNTED AT BOOT TIME."
-msgstr "<b>OPTIONAL WINDOWS PARTITIONS TO BE MOUNTED AT BOOT TIME.</b><br>"
+msgstr ""
 
 #: MdlSummarize.module:55
-#, fuzzy
 msgid "INSTALL TYPE:"
-msgstr "<b>INSTALL TYPE:</b> Full<br>"
+msgstr ""
 
 #: MdlSummarize.module:55
-#, fuzzy
 msgid "Custom"
-msgstr "Custom Install"
+msgstr ""
 
 #: MdlSummarize.module:57
-#, fuzzy
 msgid "BULK PACKAGES:"
-msgstr "<br><b>BULK PACKAGES:</b> "
+msgstr ""
 
 #: MdlSummarize.module:61
-#, fuzzy
 msgid "OPTIONAL PACKAGES:"
-msgstr "<br><br><b>OPTIONAL PACKAGES:</b>"
+msgstr ""
 
 #: MdlSummarize.module:67
 msgid "Full"
 msgstr ""
 
 #: MdlWinDrives.module:55
-#, fuzzy
 msgid "Windows Partitions Detected"
-msgstr "<b>Windows Partitions Detected</b>"
+msgstr ""
 
 #: MdlWinDrives.module:81
-#, fuzzy
 msgid "MOUNT TO"
-msgstr "<b>MOUNT POINT</b>"
+msgstr ""
 
 #: MdlWinDrives.module:181
-#, fuzzy
 msgid "No Windows partitions detected"
-msgstr "<b>No Windows partitions detected</b>"
+msgstr ""
 
 #: MdlZoneSet.module:27
 msgid "localtime-copied-from"
@@ -856,24 +939,3 @@ msgstr "localtime-copied-from"
 #: MdlZoneSet.module:28
 msgid "localtime"
 msgstr "localtime"
-
-#~ msgid "<b>INSTALL TYPE:</b> Custom<br>"
-#~ msgstr "<b>INSTALL TYPE:</b> Custom<br>"
-
-#~ msgid "<B>PARTITION</B>"
-#~ msgstr "<B>PARTITION</B>"
-
-#~ msgid "<b>MOUNT TO </B>"
-#~ msgstr "<b>MOUNT TO </B>"
-
-#~ msgid ""
-#~ "<b>Dynamic Host Control Protocol</b><br>Automatic settings via DHCP. "
-#~ "<br><br>This will work if you use a cable or DSL modem on a home network. "
-#~ "<br>If in doubt, choose this option"
-#~ msgstr ""
-#~ "<b>Dynamic Host Control Protocol</b><br>Automatic settings via DHCP. "
-#~ "<br><br>This will work if you use a cable or DSL modem on a home network. "
-#~ "<br>If in doubt, choose this option"
-
-#~ msgid "Prepare Host"
-#~ msgstr "Prepare Host"

@@ -131,18 +131,18 @@ END
 
 PUBLIC SUB btHelp_Click()
 
-  Message("<h3>ABOUT SYSTEM PARTITIONING IN LINUX</H3>" &
-  "Linux is a modular operating system. This means that is has the ability to store system and <br>" &
-  "user data separately for added data security. You may install the system to a single partition <br>" &
-  "by simply selecting a \"/\" value on this screen. The rest is optional. The following is a <br>" &
-  "suggested setup for a typical Linux installation<br><br>" &
-  "<b>/</b> - Used to store system data. This particular install requires a minimum of <i>" & ClsGlobal.iRootMin & "M</i> for this<br>" &
-  "but you should considear a higher value to make sure you have room to install additional software<br>" &
-  "in case you wish to.<br>" &
-  "<b>/home</b> - Used to store user documents, pictures, videos. Give yourself as much room as you want<br>" &
-  "Typically, you want to use the largest partition for this.<br>" &
-  "<b>swap</b> - Using a swap partition is suggested if your total RAM is less than 1GB. Suggested ammount<br>" &
-  "for this is <i>" & ClsGlobal.iSwapMin & "M </i> but can also be calculated as 2 times your ammount of RAM")
+  Message("<h3>" & ("ABOUT SYSTEM PARTITIONING IN LINUX") & "</H3>" &
+  ("Linux is a modular operating system. This means that is has the ability to store system and") & "<br>" &
+  ("user data separately for added data security. You may install the system to a single partition") & "<br>" &
+  ("by simply selecting a \"/\" value on this screen. The rest is optional. The following is a") & "<br>" &
+  ("suggested setup for a typical Linux installation") & "<br><br>" &
+  "<b>/</b> - " & ("Used to store system data. This particular install requires a minimum of") & Space(1) & "<i>" & ClsGlobal.iRootMin & "M</i> " & ("for this") & "<br>" &
+  ("but you should considear a higher value to make sure you have room to install additional software") & "<br>" &
+  ("in case you wish to.") & "<br>" &
+  "<b>/home</b> - " & ("Used to store user documents, pictures, videos. Give yourself as much room as you want") & "<br>" &
+  ("Typically, you want to use the largest partition for this.") & "<br>" &
+  "<b>swap</b> - " & ("Using a swap partition is suggested if your total RAM is less than 1GB. Suggested ammount") & "<br>" &
+  ("for this is") & Space(1) & "<i>" & ClsGlobal.iSwapMin & "M </i>" & Space(1) & ("but can also be calculated as 2 times your ammount of RAM"))
    
   
 END

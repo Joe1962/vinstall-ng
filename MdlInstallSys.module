@@ -285,9 +285,9 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
   ClsGlobal.sTargetMnt = "/mnt/target"
   
   WITH FMain
-      .tvPlan["Inst2"].Selected = TRUE
-      .tvPlan["Inst2"].Picture = MdlCore.sNowPic
-      .tvPlan["Inst1"].Picture = MdlCore.sDonePic
+      .tvPlan["Inst1"].Selected = TRUE
+      .tvPlan["Inst1"].Picture = MdlCore.sNowPic
+      .tvPlan["Inst0"].Picture = MdlCore.sDonePic
     END WITH   
   
     iPkgCnt = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
@@ -408,6 +408,8 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
   'DIM sFile AS String = File.Load(ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF")
   DIM sLine AS String
   
+  MdlSetup.RUN_CREDITS() ' try this
+  
      SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^BULK" TO sRawList
      '   sList = Split(File.Load(Temp$("SETUP.CONF")), "\n")  
       sList = Split(sRawList, "\n")
@@ -428,15 +430,16 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
             INC iPkgNum
             SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO vTargetSize
                 PRINT "installing " & sBulkPath  
-                FrmInstallSys.tlCurrPkg.Text = "Installing " & sBulkDesc & " ..."      
+                FrmInstallSys.tlCurrPkg.Text = ("Installing") & Space(1) & sBulkDesc & " ..."      
                 'ME.BULK_INSTALL(ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulkPath)
                 hproc = SHELL "lzmadec <" & ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulkPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
                 PRINT sBulkPath
                   WAIT 1
                     IF hproc.State = Process.Running THEN 
                       REPEAT 
-                        WAIT 3
+                        WAIT 2
                           ME.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vBulkSize))
+                          
                       UNTIL 
                         hproc.State = Process.Stopped
                         'error check
@@ -445,6 +448,7 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
         FrmInstallSys.pbInstallProg.Value = 1
         WAIT 
         FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)          
+        
       NEXT 
 'RETURN 
  IF InStr(sDump, "FAILED") > 0 THEN 

@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,90,83.3333)
+  MoveScaled(0,0,96,74)
   Text = ("")
   { tlBanner TextLabel
     MoveScaled(1,1,63,5)
@@ -31,8 +31,8 @@
     }
   }
   { tmCredits #Timer
-    #X = 632
-    #Y = 80
+    #X = 486
+    #Y = 30
     Delay = 30
   }
   { scrlCredits ScrollView
@@ -41,7 +41,7 @@
     ScrollBar = Scroll.None
     { tlCredits TextLabel
       MoveScaled(1,1,46,3.5)
-      Text = ("TextLabel1")
+      Text = ("")
     }
   }
 }
