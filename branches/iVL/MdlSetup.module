@@ -38,7 +38,8 @@ PUBLIC SUB GO_WITH_SELECTED(sDev AS String, sISONAME AS String) ' this will moun
   
   ' This will also set the default variables for distro name and version to clsglobal
     MdlCore.SET_DECISSION(ClsGlobal.sSourceMnt)
-
+      ' save the credits file to temp
+      File.Save(Temp$("Credits"), DConv(File.Load(ClsGlobal.sSourceMnt &/ "CREDIT")))
   
 
 END
@@ -207,11 +208,17 @@ END
 
 
 
-PUBLIC SUB RUN_CREDITS(sCreditFile AS String, tlOutput AS TextLabel)
+PUBLIC SUB RUN_CREDITS()
   
-  DIM sFile AS String[] = Split(File.Load(sCreditFile), "\n")
+  DIM sCreditFile AS String = DConv(File.Load(Temp("Credits")))  
+  DIM tlOutput AS TextLabel = FrmInstallSys.tlCredits
+  DIM sFile AS String[] = Split(sCreditFile, "\n")
   DIM i AS Integer
   tlOutput.Text = ""
+    
+    ' File.Save(Temp("Credits"), DConv(File.Load("/CREDIT")))
+    ' sCreditFile = File.Load(Temp("Credits"))
+    ' sFile = Split(sCreditFile, "\n")
   
   FOR i = 0 TO sFile.count - 1
       IF Left(Trim(sFile[i]), Len("M0E-lnx")) = "M0E-lnx" THEN 
