@@ -78,6 +78,24 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
       END IF  
 END
 
+PUBLIC SUB WRITE_NEW_DISTRO_ID()
+  
+  DIM sBuildDate AS String
+  DIM sContent AS String
+  
+  SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^builddate | cut -f 2 -d \'=\'" TO sBuildDate
+    sBuildDate = Trim(sBuildDate)
+      sBuildDate = Replace(sBuildDate, "\"", "")
+      sBuildDate = Replace(sBuildDate, "\'", "")
+      
+    sContent = ClsGlobal.DISTRO & Space(1) & ClsGlobal.VERSION & Space(1) & "Built on" & Space(1) & sBuildDate
+        File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "vector-version", SConv(sContent))
+    'Message.Info(sContent)
+  
+END
+
+
+
 
 PUBLIC FUNCTION WRITE_NEW_FSTAB() AS Integer
   

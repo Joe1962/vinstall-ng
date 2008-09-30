@@ -19,6 +19,7 @@
 
 PUBLIC SUB Form_Open()
 
+  
   FMain.tvPlan["Prep0"].Selected = TRUE
 
   FMain.FrmCurr = ME
@@ -45,5 +46,11 @@ PUBLIC SUB Form_Resize()
     .lbLangSel.Move(8, .tlBanner.top + .tlBanner.Height + 4)
     .lbLangSel.Resize((ME.Width / 3), ME.Height - (.tlBanner.Height * 2))
   END WITH 
+
+END
+
+PUBLIC SUB lbLangSel_Select()
+
+  FMain.btnext.Enabled = TRUE
 
 END
