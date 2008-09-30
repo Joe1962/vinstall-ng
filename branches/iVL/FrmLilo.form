@@ -4,11 +4,11 @@
   MoveScaled(0,0,74,69)
   Text = ("")
   { tlBanner TextLabel
-    MoveScaled(1,1,58,4.4286)
+    MoveScaled(1,1,58,4)
     Text = ("Configure and install lilo (Linux Boot Loader)")
   }
   { YNLiloBox CheckBox
-    MoveScaled(1,5,18,3)
+    MoveScaled(1,7,18,3)
     Text = ("Don't Install Lilo")
   }
   { TabStrip1 TabStrip
@@ -18,54 +18,57 @@
     Index = 0
   }
   { tlList TextLabel
-    MoveScaled(1,19,57,6)
+    MoveScaled(1,21,57,6)
     Text = ("TextLabel1")
   }
   { LiloTarget ComboBox
-    MoveScaled(13,9,19,3)
+    MoveScaled(13,11,19,3)
     Text = ("")
     ReadOnly = True
     List = []
   }
   { tlTarGet TextLabel
-    MoveScaled(1,9,10,3)
+    MoveScaled(1,11,10,3)
     Text = ("Target")
-    Alignment = Align.Normal
+    Alignment = Align.BottomLeft
   }
   { tlFbMode TextLabel
-    MoveScaled(33,9,18,3)
+    MoveScaled(33,11,18,3)
     Text = ("Video Resolution")
     Alignment = Align.Normal
   }
   { FBResolution ComboBox
-    MoveScaled(52,9,21,3)
+    MoveScaled(52,11,21,3)
     Text = ("")
     ReadOnly = True
     List = [("Standard"), ("Bootsplash Med"), ("Bootsplash High"), ("Bootsplash Extra high")]
   }
   { tlTimeOUt TextLabel
-    MoveScaled(1,14,18,3)
+    MoveScaled(1,16,18,3)
     Text = ("Prompt Timeout")
     Alignment = Align.Normal
   }
   { sbTimer SpinBox
-    MoveScaled(20,14,9,3)
+    MoveScaled(20,16,9,3)
     Value = 3
   }
   { tlTimoutSec TextLabel
-    MoveScaled(30,14,7,3)
+    MoveScaled(30,16,7,3)
     Text = ("Seconds")
     Alignment = Align.Normal
   }
   { tlDefBoot TextLabel
-    MoveScaled(33,14,18,3)
+    MoveScaled(33,16,18,3)
     Text = ("Boot Default")
     Alignment = Align.Normal
   }
   { cbDefBoot ComboBox
-    MoveScaled(52,13,21,3)
+    MoveScaled(52,15,21,3)
     Text = ("")
     ReadOnly = True
     List = []
+  }
+  { hrSep Separator
+    MoveScaled(11,5,19,1)
   }
 }

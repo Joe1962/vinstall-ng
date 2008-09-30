@@ -18,22 +18,23 @@
 
 PUBLIC SUB Form_Open()
   Fmain.frmcurr = ME
+    ME.tlbanner.Text = "<h3>" & ("Timezone configuration") & "</h3>"
     WITH FMain
-      .tvPlan["Conf0"].Picture = MdlCore.sDonePic
-      .tvPlan["Conf1"].picture = MdlCore.sNowPic
-      .tvPlan["Conf1"].Selected = TRUE
+      ' .tvPlan["Conf0"].Picture = MdlCore.sDonePic
+      ' .tvPlan["Conf1"].picture = MdlCore.sNowPic
+      ' .tvPlan["Conf1"].Selected = TRUE
     END WITH 
       
-  
+  FMain.btnext.Enabled = FALSE
   MdlZoneSet.TIME_ZONES()
-  ME.lbTmZone.Index = 9
+  'ME.lbTmZone.Index = 9
 END
 
 
 PUBLIC SUB lbTmZone_Click()
 
   'Message(ME.lbTmZone.Text)
-
+  FMain.btnext.Enabled = TRUE
 
 END
 
@@ -49,13 +50,16 @@ END
 PUBLIC SUB Form_Resize()
 
   WITH ME
-    .Frame1.Move(4, 4, .ClientWidth - (.Frame1.left * 2), .ClientHeight - (.Frame1.top * 2))
-    .TextLabel1.Move(4, 18, .Frame1.Width - (.TextLabel1.Left * 2))
+    '.Frame1.Move(4, 4, .ClientWidth - (.Frame1.left * 2), .ClientHeight - (.Frame1.top * 2))
+    .tlbanner.Move(4, 4, .ClientWidth - (.tlbanner.Left * 2))
+    .hrsep.Move(4, .tlbanner.top + .tlbanner.Height, .tlbanner.Width)
+    .TextLabel1.Move(4, .hrsep.top + .hrsep.Height + 8, .hrsep.Width)
     .TextLabel1.Adjust
     .cbHwClock.Move(.TextLabel1.left, .TextLabel1.top + .TextLabel1.Height + 4, (.TextLabel1.width / 2), 21)
     .TextLabel2.Move(4, .cbHwClock.top + cbHwClock.Height + 8, .TextLabel1.Width)
     .lbTmZone.Move(4, .TextLabel2.top + .TextLabel2.Height + 4, .cbHwClock.Width)
-    .lbTmZone.Height = .Frame1.Height - (.TextLabel1.Height + .cbHwClock.Height + (.TextLabel2.Height * 4))
+    '.lbTmZone.Height = .Frame1.Height - (.TextLabel1.Height + .cbHwClock.Height + (.TextLabel2.Height * 4))
+    .lbTmZone.Height = .ClientHeight - (.lbTmZone.top + .TextLabel1.Height)
     
     
     

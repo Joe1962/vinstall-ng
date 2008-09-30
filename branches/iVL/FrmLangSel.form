@@ -13,4 +13,7 @@
     Text = ("Select your language")
     Alignment = Align.Normal
   }
+  { Separator1 Separator
+    MoveScaled(1,5,61,2)
+  }
 }

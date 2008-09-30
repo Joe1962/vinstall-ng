@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,114.2857,74)
+  MoveScaled(0,0,114.1429,74)
   Text = ("")
   { tlHostNameLbl TextLabel
     MoveScaled(1,8,16,3)
@@ -49,8 +49,11 @@
     Text = ("")
   }
   { tlBanner TextLabel
-    MoveScaled(1,1,45,5)
-    Text = ("NETWORK CONFIGURATION")
+    MoveScaled(1,1,45,4)
+    Text = ("Network Configuration")
     Alignment = Align.Normal
+  }
+  { hrSep Separator
+    MoveScaled(13,6,33,1)
   }
 }

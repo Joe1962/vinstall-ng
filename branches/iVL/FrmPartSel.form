@@ -4,14 +4,14 @@
   MoveScaled(0,0,72,55)
   Text = ("")
   { tlBanner TextLabel
-    MoveScaled(1,1,61,3.8571)
+    MoveScaled(1,1,61,3.7143)
     Text = ("Please select the partitions you wish to use and how to use them")
   }
   { scrollPartitions ScrollView
-    MoveScaled(1,6,69,41)
+    MoveScaled(1,9,69,38)
   }
   { cbDoWin CheckBox
-    MoveScaled(1,50,57,3.2857)
+    MoveScaled(1,50,57,3.1429)
     ToolTip = ("Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts")
     Text = ("Detect and Setup Windows partitions for auto-mounting at boot")
   }
@@ -19,5 +19,8 @@
     MoveScaled(63,1,8,3)
     Text = ("Help")
     Picture = Picture["icon:/small/help"]
+  }
+  { hrSep Separator
+    MoveScaled(3,6,19,1)
   }
 }

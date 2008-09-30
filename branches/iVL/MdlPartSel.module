@@ -54,7 +54,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
   sDump1 = Trim(sDump1)
   
       
-    y = 4
+    y = 8
     x = 8
   
 '    IF InStr(sDump1, gb.NewLine) > 0 THEN 

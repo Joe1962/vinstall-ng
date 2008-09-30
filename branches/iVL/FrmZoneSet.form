@@ -3,30 +3,33 @@
 { Form Form
   MoveScaled(0,0,81,55)
   Text = ("")
-  { Frame1 Frame
-    MoveScaled(1,2,78,52)
+  { Button1 Button
+    MoveScaled(49,46,12,3)
+    Visible = False
+    Text = ("Set TimeZone")
+  }
+  { lbTmZone ListBox
+    MoveScaled(1,23,32,23)
+  }
+  { TextLabel2 TextLabel
+    MoveScaled(1,19,41,3)
+    Text = ("Choose the correct timezone for the area in which you live.")
+  }
+  { cbHwClock ComboBox
+    MoveScaled(1,15,34,3.4286)
+    Text = ("ComboBox1")
+    ReadOnly = True
+    List = [("LocalTime"), ("UTC")]
+  }
+  { TextLabel1 TextLabel
+    MoveScaled(1,7,74,8)
+    Text = ("Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way.")
+  }
+  { tlbanner TextLabel
+    MoveScaled(2,1,27,3.4286)
     Text = ("")
-    { TextLabel1 TextLabel
-      MoveScaled(1,2,74,8)
-      Text = ("Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way.")
-    }
-    { TextLabel2 TextLabel
-      MoveScaled(1,15,41,3)
-      Text = ("Choose the correct timezone for the area in which you live.")
-    }
-    { lbTmZone ListBox
-      MoveScaled(1,19,32,23)
-    }
-    { cbHwClock ComboBox
-      MoveScaled(1,11,34,3.5)
-      Text = ("ComboBox1")
-      ReadOnly = True
-      List = [("LocalTime"), ("UTC")]
-    }
-    { Button1 Button
-      MoveScaled(47,47,12,3)
-      Visible = False
-      Text = ("Set TimeZone")
-    }
+  }
+  { hrsep Separator
+    MoveScaled(22,5,13,1)
   }
 }

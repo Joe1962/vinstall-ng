@@ -5,18 +5,21 @@
   Text = ("")
   { tlBanner TextLabel
     MoveScaled(1,1,51,4)
-    Text = ("Select your disk partition option")
+    Text = ("Disk Partitioning Options")
   }
   { rbUseExisting RadioButton
-    MoveScaled(1,6,32,3.1429)
+    MoveScaled(1,7,32,3.1429)
     Text = ("Use existing disk partitions")
   }
   { rbEditPartitions RadioButton
-    MoveScaled(1,10,62,3.1429)
+    MoveScaled(1,11,62,3.1429)
     Text = ("Modify my disk partitions to make room for new installation")
   }
   { tlChoiceExp TextLabel
     MoveScaled(1,16,76,27)
     Text = ("TextLabel1")
+  }
+  { hrsep Separator
+    MoveScaled(43,6,23,1)
   }
 }
