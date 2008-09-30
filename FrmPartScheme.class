@@ -20,7 +20,9 @@
 PUBLIC SUB Form_Resize()
 
   WITH ME
-    .tlBanner.Width = .ClientWidth - 10
+    '.tlBanner.Width = .ClientWidth - 10
+    .tlBanner.Move(4, 8, .ClientWidth - (.tlBanner.Left * 2))
+    .hrsep.Move(.tlBanner.left, .tlBanner.top + .tlBanner.Height - (.hrsep.Height), .tlBanner.Width)
     .rbUseExisting.Move(.tlBanner.Left, .tlBanner.Top + .tlBanner.Height + 8)
     .rbEditPartitions.Move(.rbUseExisting.Left, .rbUseExisting.Top + .rbUseExisting.Height + 4)
     .tlChoiceExp.Move(.rbEditPartitions.Left, .rbEditPartitions.top + .rbEditPartitions.Height * 4, .tlBanner.Width - 10)
@@ -32,6 +34,7 @@ END
 
 PUBLIC SUB Form_Open()
   
+  ME.tlBanner.text = "<h3>" & ME.tlBanner.text & "</h3>"
 FMain.FrmCurr = ME
 FMain.tvPlan["Prep2"].Selected = TRUE
 FMain.tvPlan["Prep2"].Picture = MdlCore.sNowPic

@@ -20,8 +20,9 @@ PUBLIC sLiloTrgt AS String
 
 PUBLIC SUB Form_Open()
     DIM sOut AS String
-
-'ClsPartSel.sRoot = "/dev/sdb1" ' 
+  
+  ME.tlBanner.Text = "<h3>" & tlBanner.text & "</h3>"
+  'ClsPartSel.sRoot = "/dev/sdb1" ' 
  FMain.FrmCurr = ME
    FMain.tvPlan["Conf0"].Selected = TRUE
    FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
@@ -96,18 +97,19 @@ PUBLIC SUB Form_Resize()
     .tlFbMode.Alignment = Align.Normal
     .tlBanner.Move(4, 4)
     .tlBanner.Width = .ClientWidth - (.tlBanner.x * 2)
-    .YNLiloBox.Move(.tlBanner.left, .tlBanner.Top + (.tlBanner.Height + 1.5), MdlObjSizer.get_object_width(.YNLiloBox.text) + 36, 21)
+    .hrsep.Move(4, .tlBanner.top + .tlBanner.Height - 4, .tlBanner.Width)
+    .YNLiloBox.Move(.tlBanner.left, .hrSep.Top + .hrSep.Height + 4, MdlObjSizer.get_object_width(.YNLiloBox.text) + 36, 21)
     .tlTarGet.Move(.YNLiloBox.left, .YNLiloBox.top + (.YNLiloBox.Height * 1.5), MdlObjSizer.get_object_width(.tlTarGet.Text))
     .LiloTarget.Move(.tlTarGet.Left + .tlTarGet.Width + 4, .tlTarGet.top, (.tlBanner.Width / 2.75) - (.tlTarGet.Width + .tlTarGet.left))
     .tlFbMode.Move(.LiloTarget.Left + LiloTarget.Width + 32, .LiloTarget.top, MdlObjSizer.get_object_width(.tlFbMode.text))
     .FBResolution.Move(.tlFbMode.Left + .tlFbMode.Width + 4, .tlFbMode.top, .tlBanner.Width - .FBResolution.Left * 1.30)
-    .tlTimeOUt.Move(.tlTarGet.left, .tlTarGet.top + .tlTarGet.Height + 4, MdlObjSizer.get_object_width(.tlTimeOUt.Text))
+    .tlTimeOUt.Move(.tlTarGet.left, .tlTarGet.top + .tlTarGet.Height + 12, MdlObjSizer.get_object_width(.tlTimeOUt.Text))
     .sbTimer.Move(.tlTimeOUt.Left + .tlTimeOUt.Width + 4, .tlTimeOUt.top, 60)
     .tlTimoutSec.Move(.sbTimer.Left + .sbTimer.Width + 4, .sbTimer.top, MdlObjSizer.get_object_width(.tlTimoutSec.text))
     .tlDefBoot.Move(.tlFbMode.Left, .sbTimer.top, MdlObjSizer.get_object_width(.tlDefBoot.text), 27)
     .cbDefBoot.Move(.tlDefBoot.Left + .tlDefBoot.Width + 4, .tlDefBoot.top, .tlBanner.Width - .cbDefBoot.Left * 1.3)
     
-    .tlList.Move(.tlTimeOUt.left, .tlTimeOUt.top + .tlTimeOUt.Height + 8, .tlBanner.Width)
+    .tlList.Move(.tlTimeOUt.left, .tlTimeOUt.top + .tlTimeOUt.Height + 12, .tlBanner.Width)
     
     .TabStrip1.Move(.tlList.Left, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - (.tlBanner.Height * 6))
 
@@ -120,7 +122,7 @@ PUBLIC SUB FBResolution_Click()
   DIM box AS TextBox
   ME.sVidMode = Trim(ME.FBResolution.Text)
   'MdlLiloOsList.LIST_LILO_OS_CHOICES()
-  IF Trim(ME.FBResolution.Text) = "Standard" THEN 
+  IF Trim(ME.FBResolution.Text) = ("Standard") THEN 
     FOR EACH box IN MdlLiloOsList.txtAppends
       'box.Enabled = FALSE
       box.text = Replace(box.text, "splash=silent", "") '"Not available in \'Standard\' resolution mode"

@@ -50,6 +50,8 @@ PUBLIC SUB Form_Open()
 
 
   
+  ME.tlBanner.text = "<h3>" & tlBanner.text & "</h3>"
+  
   ME.Width = ME.Parent.Width
   ME.Height = ME.Parent.Height
   ME.btResCan.Height = ME.lstInstallableImg.Height
@@ -67,7 +69,7 @@ PUBLIC SUB Form_Open()
   END IF
  
   IF lstInstallableImg.count = 1 THEN 
-    tlBanner.Text = ("Click") & Space(1) & "\'" & FMain.btnext.text & "\'" & Space(1) & ("to begin installating ")&
+    tlBanner.Text = ("Click") & Space(1) & "\'" & FMain.btnext.text & "\'" & Space(1) & ("to begin installating") & Space(1)&
     Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, "/") - 4)
   END IF 
    FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
@@ -171,12 +173,16 @@ END
 PUBLIC SUB Form_Resize()
 
   WITH ME
-    .Reparent(.Parent)
-    .Resize(.Parent.Width, .Parent.Height)
+    '.Reparent(.Parent)
+    '.Resize(.Parent.Width, .Parent.Height)
+    
 '    .btNext.Move(.Left + .Width - .btNext.Width - 8, .top + ME.Height - .btNext.Height - 8)
-    .btResCan.Move(.Left + .Width - .btResCan.Width - 8, .top + .tlBanner.Height + 12, MdlObjSizer.get_object_width(.btResCan.text) + 36)
-    .lstInstallableImg.Move(.left + 4, .btResCan.Top, .Width - (.btResCan.Width + 24))
-    .FullScreen = TRUE
+    .tlBanner.Move(4, 8, MdlObjSizer.get_object_width(.tlBanner.text))
+    .hrSep.Move(4, .tlBanner.top + .tlBanner.Height - .hrSep.Height, .ClientWidth - (.hrSep.x * 2))
+    .btResCan.Move(.Left + .Width - .btResCan.Width - 8, .top + .tlBanner.Height + 48, MdlObjSizer.get_object_width(.btResCan.text) + 36)
+    .lstInstallableImg.Move(.left + 4, .btResCan.Top, .Width - (.btResCan.Width + 24), 21)
+    .tlDistroDesc.Move(.lstInstallableImg.Left * 2, .lstInstallableImg.top + .lstInstallableImg.Height + 48)
+    '.FullScreen = TRUE
   END WITH 
 
 END

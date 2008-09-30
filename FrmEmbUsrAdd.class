@@ -17,17 +17,23 @@
 
 PUBLIC SUB Form_Open()
 
+  ME.tlbanner.Text = "<h3>" & ("User Accounts") & "</h3>"
+  ME.tlExp.Text = "<h3>" & ("Create initial user accounts") & "</h3><br>" &
+  ("Click the button below to create a new user account.") & "<br>" &
+  ("New user accounts can also be created after the install process is completed.")
+  ME.tlExp.Visible = FALSE
+
   WITH FMain
     .FrmCurr = ME
-    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
-    .tvPlan["Conf3"].picture = MdlCore.sNowPic
-    .tvPlan["Conf3"].Selected = TRUE
+    ' .tvPlan["Conf2"].Picture = MdlCore.sDonePic
+    ' .tvPlan["Conf3"].picture = MdlCore.sNowPic
+    ' .tvPlan["Conf3"].Selected = TRUE
   END WITH 
   
  
   ME.EMBED_VASMCC_MODULE()
-  'btAddUser.Visible = FALSE
-
+    'btAddUser.Visible = FALSE
+  
 END
 
 
@@ -46,8 +52,13 @@ END
 PUBLIC SUB Form_Resize()
 
   WITH ME
-    .Embedder1.Move(0, 2, .ClientWidth - 4, .ClientHeight - 24)
-    .btAddUser.Move(4, .top + .ClientHeight - (.btAddUser.Height * 2), MdlObjSizer.get_object_width(.btAddUser.text) + 24)
+    .tlbanner.Move(4, 4, .ClientWidth - (.tlbanner.Left * 2))
+    .hrsep.Move(4, .tlbanner.top + (.tlbanner.Height - .hrsep.Height), .tlbanner.Width)
+    .tlExp.Move(8, .hrsep.top + .hrsep.Height + 32, .ClientWidth - (.tlExp.Left * 2))
+    
+    .Embedder1.Move(4, .hrsep.top + .hrsep.Height + 8, .hrsep.Width, .clientHeight - ((.hrsep.top) + .tlbanner.Height + .btAddUser.Height + .hrsep.height))
+    .btAddUser.Move(.ClientWidth / 2 - (.btAddUser.Width / 2), .tlExp.top + .tlExp.Height + 12, MdlObjSizer.get_object_width(.btAddUser.text) + 36)
+   
     
   END WITH 
 
@@ -58,6 +69,7 @@ PUBLIC SUB Embedder1_Close()
   MdlCore.unlock_gui()
   btAddUser.Show
   Embedder1.Hide
+  ME.tlExp.Show
   
   
 
@@ -68,6 +80,7 @@ PUBLIC SUB btAddUser_Click()
   ME.EMBED_VASMCC_MODULE()
   ME.Embedder1.show
   ME.btAddUser.Hide
+  ME.tlExp.Hide
   'btAddUser.Visible = FALSE
 
 END

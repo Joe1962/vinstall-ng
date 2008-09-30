@@ -18,6 +18,7 @@
 
 PUBLIC SUB Form_Open()
 
+ME.tlBanner.Text = "<h3>" & tlbanner.text & "</h3>"
 ME.Resize(ME.ClientWidth - 12, ME.ClientH - 12)
   MdlWinDrives.LIST_WIN_PARTITIONS
   'ME.Resize(ME.Parent.Width - 12, ME.Parent.Height - 12)
@@ -31,9 +32,10 @@ END
 PUBLIC SUB Form_Resize()
 
   WITH ME
-    .tlBanner.Width = .ClientW - 4
-    '.svWinDrives.Resize(.ClientWidth - 4, .ClientHeight - (.tlBanner.Width * 1.5))
-    .svWinDrives.Move(.tlBanner.Left, .tlBanner.top + (.tlBanner.Height + 4), .tlBanner.Width - 20, .ClientH - (.tlbanner.height * 2))
+    
+    .tlBanner.Move(4, 4, .ClientWidth - (.tlBanner.Left * 2))
+    .hrSep.Move(4, .tlBanner.top + .tlBanner.Height, .tlBanner.Width)
+    .svWinDrives.Move(.tlBanner.Left, .tlBanner.top + (.tlBanner.Height + 12), .tlBanner.Width - 20, .ClientH - (.tlbanner.height * 2))
     
   END WITH 
 

@@ -21,9 +21,9 @@ PUBLIC SUB Form_Open()
   END WITH 
   
     WITH FMain
-      .tvPlan["Conf1"].Picture = MdlCore.sDonePic
-      .tvPlan["Conf2"].picture = MdlCore.sNowPic
-      .tvPlan["Conf2"].Selected = TRUE
+      ' .tvPlan["Conf1"].Picture = MdlCore.sDonePic
+      ' .tvPlan["Conf2"].picture = MdlCore.sNowPic
+      ' .tvPlan["Conf2"].Selected = TRUE
     END WITH 
 END 
 
@@ -51,7 +51,8 @@ PUBLIC SUB Form_Resize()
     DIM itxtLeft AS Integer
 
   WITH ME
-    .tlbanner.Move(4, 4)
+    .tlbanner.Move(4, 4, .ClientWidth - (.tlBanner.Left * 2))
+    .hrSep.Move(4, .tlBanner.top + .tlBanner.Height - .hrSep.Height * 2, .tlBanner.Width)
     .Frame1.Resize(.ClientWidth - (.Frame1.Left * 2), .tlBanner.Height * 4)
     .tlAboutRoot.Move(4, 24, .Frame1.Width - (.tlAboutRoot.Left * 2), .Frame1.Height - .tlAboutRoot.top - 8)
     .tlPass1.Move(.Frame1.left, .Frame1.top + .Frame1.Height + 24, MdlObjSizer.get_object_width(.tlPass1.text), 21)

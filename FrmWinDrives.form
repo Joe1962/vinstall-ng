@@ -11,4 +11,7 @@
     MoveScaled(1,1,65,5)
     Text = ("Select the windows partitions you would like to mount during boot")
   }
+  { hrSep Separator
+    MoveScaled(24,6,25,1)
+  }
 }

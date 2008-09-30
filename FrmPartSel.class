@@ -37,7 +37,11 @@ PUBLIC SUB Form_Resize()
   DIM iWidth AS Integer = 0
   
   WITH ME
-    .tlBanner.Width = .ClientWidth - .btHelp.Width - 16
+  
+    '.tlBanner.Width = .ClientWidth - .btHelp.Width - 16
+    .tlBanner.Move(4, 4, .ClientWidth - ((.tlBanner.Left * 2) + .btHelp.Width + 16))
+    .hrSep.Move(4, .tlBanner.top + .tlBanner.Height, .tlBanner.Width + .btHelp.Width)
+    .scrollPartitions.Move(4, .hrSep.top + .hrSep.Height + 8, .ClientWidth - (.hrSep.Left * 2), .ClientHeight - (.hrSep.top + (.cbDoWin.Height * 2)))
    .scrollPartitions.Resize(.tlBanner.Width + 4 + .btHelp.Width, .ClientHeight - .tlBanner.Height - (cbDoWin.Height * 3))
    .cbDoWin.Move(.scrollPartitions.Left, .ClientHeight - .cbDoWin.Height - 8)
    .btHelp.Move(.tlBanner.Left + .tlBanner.Width + 4, .tlBanner.top, MdlObjSizer.get_object_width(.btHelp.text) + 32) '+ (.tlBanner.Height / 3))
@@ -49,7 +53,7 @@ END
 
 PUBLIC SUB Form_Open()
 
-
+  ME.tlBanner.text = "<h3>" & tlBanner.text & "</h3>"
   FMain.FrmCurr = ME
   ME.btHelp.Width = MdlObjSizer.get_object_width(btHelp.text) + 32
   ME.Resize(ME.Parent.Width, ME.Parent.Height - (ME.cbDoWin.height * 3))  

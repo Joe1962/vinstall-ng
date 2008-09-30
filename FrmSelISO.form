@@ -5,7 +5,7 @@
   Text = ("")
   FullScreen = True
   { lstInstallableImg ComboBox
-    MoveScaled(1,7,45,3.2857)
+    MoveScaled(1,10,45,3.1429)
     Text = ("No installable images found.")
     ReadOnly = True
   }
@@ -14,12 +14,15 @@
     Text = ("Select which VectorLinux version you wish to install from the list below")
   }
   { tlDistroDesc TextLabel
-    MoveScaled(1,13,60,22)
+    MoveScaled(1,16,60,22)
     Text = ("TextLabel1")
   }
   { btResCan Button
-    MoveScaled(49,7,13,3.2857)
+    MoveScaled(49,10,13,3.1429)
     Text = ("Search Again")
     Picture = Picture["icon:/16/refresh"]
+  }
+  { hrSep Separator
+    MoveScaled(2,7,43,1)
   }
 }
