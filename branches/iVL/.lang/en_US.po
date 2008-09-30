@@ -18,45 +18,45 @@ msgstr "VectorLinux Installer"
 msgid "GUI installer for Vector linux"
 msgstr "GUI installer for Vector linux"
 
-#: FMain.class:232
+#: FMain.class:229
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr ""
 
-#: FMain.class:234
+#: FMain.class:231
 msgid "Please wait while setup analyses your current partition setup."
 msgstr ""
 
-#: FMain.class:234
+#: FMain.class:231
 msgid "This may take a while ..."
 msgstr ""
 
-#: FMain.class:248
+#: FMain.class:245
 msgid ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
 msgstr ""
 
-#: FMain.class:303
+#: FMain.class:300
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:406
+#: FMain.class:404
 msgid "Process Overview"
 msgstr "Process Overview"
 
-#: FMain.class:426
+#: FMain.class:424
 msgid "Next"
 msgstr "Next"
 
-#: FMain.class:432
+#: FMain.class:430
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:438
+#: FMain.class:436
 msgid "Exit Installation"
 msgstr "Exit Installation"
 
-#: FMain.class:454
+#: FMain.class:452
 msgid "Button1"
 msgstr "-"
 
@@ -64,7 +64,7 @@ msgstr "-"
 msgid "Disk Partitioning:"
 msgstr "Disk Partitioning:"
 
-#: FrmEmbUsrAdd.class:105
+#: FrmEmbUsrAdd.class:112
 msgid "New User Account"
 msgstr "New User Account"
 
@@ -103,7 +103,7 @@ msgstr "Total progress"
 msgid "Current Step "
 msgstr "Current Step "
 
-#: FrmLangSel.class:72
+#: FrmLangSel.class:79
 msgid "Select your language"
 msgstr "Select your language"
 
@@ -143,7 +143,7 @@ msgstr "Configure and install lilo (Linux Boot Loader)"
 msgid "Don't Install Lilo"
 msgstr "Don't Install Lilo"
 
-#: FrmLilo.class:197 FrmNetConf.class:125
+#: FrmLilo.class:197 FrmNetConf.class:129
 msgid "Tab 0"
 msgstr "-"
 
@@ -183,31 +183,31 @@ msgstr "Seconds"
 msgid "Boot Default"
 msgstr "Boot Default"
 
-#: FrmNetConf.class:109
+#: FrmNetConf.class:113
 msgid "Computer Name"
 msgstr "Computer Name"
 
-#: FrmNetConf.class:120
+#: FrmNetConf.class:124
 msgid " Network Interfaces"
 msgstr "Network Interfaces"
 
-#: FrmNetConf.class:132
+#: FrmNetConf.class:136
 msgid "Manual DNS Server Specification"
 msgstr "Manual DNS Server Specification"
 
-#: FrmNetConf.class:137
+#: FrmNetConf.class:141
 msgid "Primary DNS Server"
 msgstr "Primary DNS Server"
 
-#: FrmNetConf.class:145
+#: FrmNetConf.class:149
 msgid "192.168.1.254"
 msgstr "-"
 
-#: FrmNetConf.class:150
+#: FrmNetConf.class:154
 msgid "Secondary DNS Server"
 msgstr "Secondary DNS Server"
 
-#: FrmNetConf.class:163
+#: FrmNetConf.class:167
 msgid "NETWORK CONFIGURATION"
 msgstr "NETWORK CONFIGURATION"
 
@@ -373,11 +373,11 @@ msgid ""
 "hard for others to guess"
 msgstr ""
 
-#: FrmRootPass.class:69
+#: FrmRootPass.class:93
 msgid " About the root account "
 msgstr ""
 
-#: FrmRootPass.class:73
+#: FrmRootPass.class:97
 msgid ""
 "The linux root account is pre-assigned to be used as the system "
 "administrator's account. This account is used to perform system-wide changes "
@@ -389,19 +389,19 @@ msgid ""
 "others to guess."
 msgstr ""
 
-#: FrmRootPass.class:79 MdlCore.module:511
+#: FrmRootPass.class:103 MdlCore.module:512
 msgid "System Administrator"
 msgstr "System Administrator"
 
-#: FrmRootPass.class:90
+#: FrmRootPass.class:114
 msgid "Re-Enter Password"
 msgstr "Re-Enter Password"
 
-#: FrmRootPass.class:101 FrmUserAdd.class:131
+#: FrmRootPass.class:125 FrmUserAdd.class:131
 msgid "Enter Password"
 msgstr "Enter Password"
 
-#: FrmRootPass.class:106
+#: FrmRootPass.class:130
 msgid "Set Password"
 msgstr "Set Password"
 
@@ -469,7 +469,7 @@ msgstr "Create User"
 msgid "Select the windows partitions you would like to mount during boot"
 msgstr "Select the windows partitions you would like to mount during boot"
 
-#: FrmZoneSet.class:91
+#: FrmZoneSet.class:97
 msgid ""
 "Choose how\n"
 "your hardware clock is set up.\n"
@@ -483,23 +483,23 @@ msgstr ""
 "the Coordinated Universal Time (UTC/GMT). Otherwise,\n"
 "Choose localtime since most PCs are setup this way."
 
-#: FrmZoneSet.class:96
+#: FrmZoneSet.class:102
 msgid "Choose the correct timezone for the area in which you live."
 msgstr "Choose the correct timezone for the area in which you live."
 
-#: FrmZoneSet.class:105
+#: FrmZoneSet.class:111
 msgid "ComboBox1"
 msgstr "-"
 
-#: FrmZoneSet.class:107
+#: FrmZoneSet.class:113
 msgid "LocalTime"
 msgstr "LocalTime"
 
-#: FrmZoneSet.class:107
+#: FrmZoneSet.class:113
 msgid "UTC"
 msgstr "UTC"
 
-#: FrmZoneSet.class:113
+#: FrmZoneSet.class:119
 msgid "Set TimeZone"
 msgstr "Set TimeZone"
 
@@ -591,15 +591,19 @@ msgstr "System Configuration"
 msgid "Boot Menu Options"
 msgstr "Boot Menu Options"
 
-#: MdlCore.module:512
-msgid "Network Configuration"
-msgstr "Network Configuration"
+#: MdlCore.module:511
+msgid "Regional Settings"
+msgstr ""
 
 #: MdlCore.module:513
 msgid "User Accounts"
 msgstr "User Accounts"
 
 #: MdlCore.module:514
+msgid "Network Configuration"
+msgstr "Network Configuration"
+
+#: MdlCore.module:515
 msgid "Hardware Configuration"
 msgstr "Hardware Configuration"
 
@@ -716,71 +720,71 @@ msgstr "Total packages to be installed = "
 msgid "Error while installing "
 msgstr "Error while installing "
 
-#: MdlInstallSys.module:97
+#: MdlInstallSys.module:118
 msgid "Writing new /etc/fstab to system"
 msgstr "Writing new /etc/fstab to system"
 
-#: MdlInstallSys.module:121 MdlPartSel.module:148
+#: MdlInstallSys.module:142 MdlPartSel.module:148
 msgid "Not Used"
 msgstr "Not Used"
 
-#: MdlInstallSys.module:146 MdlPartFrmt.module:33 MdlPartSel.module:174
+#: MdlInstallSys.module:167 MdlPartFrmt.module:33 MdlPartSel.module:174
 msgid "Do not format"
 msgstr "Do not format"
 
-#: MdlInstallSys.module:169 MdlWinDrives.module:119
+#: MdlInstallSys.module:190 MdlWinDrives.module:119
 msgid "Do not mount"
 msgstr "Do not mount"
 
-#: MdlInstallSys.module:336
+#: MdlInstallSys.module:358
 #, fuzzy
 msgid "Vectorlinux is now installed in your system. Please click"
 msgstr ""
 "Vectorlinux is now installed in your system. Please click next to configure "
 "it."
 
-#: MdlInstallSys.module:336
+#: MdlInstallSys.module:358
 msgid "to configure it."
 msgstr ""
 
-#: MdlInstallSys.module:337
+#: MdlInstallSys.module:359
 #, fuzzy
 msgid "Packages have been installed in your system. Please click"
 msgstr ""
 "packages have been installed in your system. Please click next to configure "
 "it."
 
-#: MdlInstallSys.module:433
+#: MdlInstallSys.module:455
 #, fuzzy
 msgid "Installing"
 msgstr "Installing ..."
 
-#: MdlInstallSys.module:520
+#: MdlInstallSys.module:542
 msgid "Vectorlinux is now being installed. Please wait..."
 msgstr "Vectorlinux is now being installed. Please wait..."
 
-#: MdlInstallSys.module:563
+#: MdlInstallSys.module:585
 #, fuzzy
 msgid "There has been an error extracting"
 msgstr "There has been an error extracting "
 
-#: MdlInstallSys.module:575
+#: MdlInstallSys.module:597
 msgid "Finished intalling Bulks"
 msgstr "Finished intalling Bulks"
 
-#: MdlInstallSys.module:678
+#: MdlInstallSys.module:700
 msgid "Installation phase complete. Ready for configuration"
 msgstr "Installation phase complete. Ready for configuration"
 
-#: MdlInstallSys.module:681
+#: MdlInstallSys.module:703
 msgid "Installing default system configuration and required software."
 msgstr "Installing default system configuration and required software."
 
-#: MdlInstallSys.module:711
+#: MdlInstallSys.module:733
 msgid "Installing Required Packages ..."
 msgstr "Installing Required Packages ..."
 
-#: MdlInstallSys.module:764
+#: MdlInstallSys.module:786
 #, fuzzy
 msgid "Installing Final configuration files..."
 msgstr "Installing default system configuration and required software."
