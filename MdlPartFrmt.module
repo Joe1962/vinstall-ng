@@ -117,7 +117,7 @@ PUBLIC FUNCTION FORMAT_PARTITION(sAddr AS String, sFS AS String) AS Integer ' wi
       sErr = Trim(sErr)
     IF InStr(sDump, "FAILED") > 0 AND sErr <> "" THEN 
       'error here
-      Message.Error(("There has been an error wile trying to format ") & sAddr & " to " & sFS & gb.NewLine &
+      Message.Error(("There has been an error while trying to format ") & sAddr & " to " & sFS & gb.NewLine &
       sErr)
         'FrmHostPrep.tlStatus.Text = "Unable to format " & saddr 
         FrmInstallSys.tlCurrPkg.Text = "Unable to format " & sAddr
