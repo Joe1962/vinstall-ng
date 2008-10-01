@@ -311,10 +311,10 @@ PUBLIC SUB btnext_Click()
        
     CASE "FrmRootPass"
       FrmRootPass.Button1_Click()
-       frmNext = FrmUserAdd
+       frmNext = FrmEmbUsrAdd
        
        
-    CASE "FrmUserAdd"
+    CASE "FrmEmbUsrAdd"
     
       frmNext = FrmNetConf
       

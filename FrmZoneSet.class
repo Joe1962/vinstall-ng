@@ -20,9 +20,9 @@ PUBLIC SUB Form_Open()
   Fmain.frmcurr = ME
     ME.tlbanner.Text = "<h3>" & ("Timezone configuration") & "</h3>"
     WITH FMain
-      ' .tvPlan["Conf0"].Picture = MdlCore.sDonePic
-      ' .tvPlan["Conf1"].picture = MdlCore.sNowPic
-      ' .tvPlan["Conf1"].Selected = TRUE
+      .tvPlan["Conf0"].Picture = MdlCore.sDonePic
+      .tvPlan["Conf1"].picture = MdlCore.sNowPic
+      .tvPlan["Conf1"].Selected = TRUE
     END WITH 
       
   FMain.btnext.Enabled = FALSE

@@ -69,7 +69,7 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
     'ClsGlobal.sTargetMnt = "/home/moises/mnt/target" ' for testing only
     
     
-    MdlSetup.RUN_CREDITS() ' Begin scrolling credits
+    'MdlSetup.RUN_CREDITS() ' Begin scrolling credits
     
       IF ClsPkgSel.bCustom = TRUE THEN 
         MdlInstallCustom.PERFORM_CUSTOM_INSTALL
@@ -718,7 +718,7 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
     DIM iCurrTlz AS Integer '= 0
     MdlCore.LOCK_GUI()
     'sRawFile = DConv(File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT"))
-     SHELL "ls /mnt/cdrom/packages/required/*.t?z" TO sRawFile
+     SHELL "ls " & ClsGlobal.sSourceMnt &/ "packages/required/*.t?z" TO sRawFile
       sFile = Split(sRawFile, "\n")
         iTlzTotal = sFile.Count        
         FOR i = 0 TO sFile.count - 1
