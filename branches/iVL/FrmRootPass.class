@@ -35,13 +35,14 @@ PUBLIC SUB Button1_Click()
     IF ME.tbPasswd1.Text = ME.tbPasswd2.Text THEN 
       'Message("chroot /mnt/target /sbin/passwdx root " & ME.tbPasswd1.Text)
       SHELL "chroot /mnt/target /sbin/passwdx root " & ME.tbPasswd1.Text WAIT 
-      Message("Root password Set.")
+      'Message("Root password Set.")
       ME.tbPasswd1.Clear
       ME.tbPasswd2.Clear
     ELSE 
-      Message("Passwords do not match")
+      Message.Error(("Passwords do not match. Please enter the same password twice for accuracy."))
       ME.tbPasswd1.Clear
       ME.tbPasswd2.Clear
+      ME.tbPasswd1.SetFocus
     ENDIF 
   ENDIF 
 END
@@ -52,7 +53,7 @@ PUBLIC SUB Form_Resize()
 
   WITH ME
     .tlbanner.Move(4, 4, .ClientWidth - (.tlBanner.Left * 2))
-    .hrSep.Move(4, .tlBanner.top + .tlBanner.Height - .hrSep.Height * 2, .tlBanner.Width)
+    .hrSep.Move(4, .tlBanner.top + .tlBanner.Height, .tlBanner.Width)
     .Frame1.Resize(.ClientWidth - (.Frame1.Left * 2), .tlBanner.Height * 4)
     .tlAboutRoot.Move(4, 24, .Frame1.Width - (.tlAboutRoot.Left * 2), .Frame1.Height - .tlAboutRoot.top - 8)
     .tlPass1.Move(.Frame1.left, .Frame1.top + .Frame1.Height + 24, MdlObjSizer.get_object_width(.tlPass1.text), 21)
@@ -62,8 +63,8 @@ PUBLIC SUB Form_Resize()
       ELSE 
         itxtLeft = .tlPass2.Left + .tlPass2.Width + 8
       END IF
-      .tbPasswd1.Move(itxtLeft, .tlPass1.top, 160, 21)
-      .tbPasswd2.Move(itxtLeft, .tlPass2.top, 160, 21)
+      .tbPasswd1.Move(itxtLeft, .tlPass1.top, 200, 21)
+      .tbPasswd2.Move(itxtLeft, .tlPass2.top, 200, 21)
       
     
   END WITH  

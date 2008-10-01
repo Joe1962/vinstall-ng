@@ -28,6 +28,7 @@ PUBLIC objtlDetails AS Object[]
 PUBLIC objcbWifi AS Object[]
 PUBLIC objtxtWifiKey AS Object[]
 PUBLIC objcbWifiessid AS Object[]
+PUBLIC objIntTypes AS Object[]
 
 
 
@@ -66,6 +67,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     objcbWifi = NEW Object[]
     objtxtWifiKey = NEW Object[]
     objcbWifiessid = NEW Object[]
+    objIntTypes = NEW Object[]
        
     
     SHELL "export res=$(ifconfig -a | grep ^[a-z] | grep -v ^lo); echo \"$res\" | tr -s \' \'" TO seths
@@ -156,7 +158,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       .ReadOnly = TRUE
                       .tag = sDev
                     END WITH
-                    
+                      objIntTypes.Add(tb)
                           'add a box here to enable/disable the interface
                   bCb = NEW CheckBox(FrmNetConf.TSNetDevices) AS "bEnableInterface" ' enable/disable interface box
                     WITH bCb
@@ -188,8 +190,9 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       .Height = 21
                       .ReadOnly = TRUE
                       .list = ["DHCP", "STATIC"]
+                                            
                       .tag = sDev
-                      'y = .top + .Height + 4
+                      '.ReadOnly = TRUE
                       'itop = y
                       icbleft = .Left
                     END WITH 
@@ -274,6 +277,26 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       .Move(x + cb.Width + 12, y - .Height - 4)
                       .Alignment = Align.Normal
                     END WITH
+                    
+                  tl = NEW TextLabel(FrmNetConf.TSNetDevices)
+                  WITH tl
+            
+                    .Move(12, y + 8)
+                      IF sType = ("Wired") THEN 
+                        .Width = .Parent.Width - (.left * 2)
+                      ELSE 
+                        .Width = 250
+                      END IF
+                  .text = "<b>" & ("Dynamic Host Control Protocol") & "</b><br>" & ("Automatic settings via DHCP.") & "<br><br>" & ("This will work if you use a cable or DSL modem on a home network.") & "<br>" & ("If in doubt, choose this option")
+                  .Adjust
+                  '.border = Border.Raised
+                  .Height = 21 * 6          
+                  .Tag = LAST.tag
+                  
+                  
+            
+                END WITH 
+                  
                 END IF
                    
                       
@@ -297,23 +320,39 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
           IF ERROR THEN Message(Error.text & gb.newline & Error.where) 
   
   KILL "/tmp/iwdump"
+  
 END
+
+
+
 PUBLIC SUB MethodSel_Click()
   
   DIM frmDetails AS Frame
   DIM txtbox AS TextBox
   DIM cb AS CheckBox
   DIM tl AS TextLabel
-  DIM itxtleft, itxtwidth, imandnsleft, imandnstxtleft AS Integer
+  DIM itxtleft, itxtwidth, imandnsleft, imandnstxtleft, itlwidth AS Integer
   
   IF LAST.text = "STATIC" THEN 
   frmDetails = NEW Frame(FrmNetConf.TSNetDevices) AS "STaticDetails"
     WITH frmDetails
       .Move(ileft, itop + 8)
       .text = (" Static IP Address Settings ")
-      .Width = 300 '.Parent.Width - (.left * 2.5)
+          FOR EACH txtbox IN objIntTypes
+            IF txtbox.tag = LAST.tag THEN 
+              IF txtbox.text = ("Wired") THEN 
+                .Width = FrmNetConf.TSNetDevices.Width - (ileft * 3)
+              ELSE 
+                .Width = 300
+              END IF
+            END IF
+          NEXT 
+                
+        
+      '.Width = 300 '.Parent.Width - (.left * 2.5)
       .Height = 130
       .tag = LAST.tag
+      
     END WITH 
     objFrames.Add(frmDetails)
         'populate the frame for this
@@ -399,16 +438,30 @@ PUBLIC SUB MethodSel_Click()
     NEXT 
         ' create a text label that says the thing will get automatically configured
         
+      
         tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DetailLbl"
           WITH tl
             '.Move(LAST.left - (LAST.width / 2), LAST.top + LAST.height + 12)
             .Move(8, LAST.top + LAST.height + 12)
+              FOR EACH txtbox IN objIntTypes
+                  IF txtbox.tag = LAST.tag THEN 
+                    IF txtbox.text = ("Wired") THEN 
+                      itlwidth = FrmNetConf.TSNetDevices.Width - (tl.left * 2)
+                    ELSE 
+                      itlwidth = 250
+                    END IF
+                  END IF
+        NEXT 
             .text = "<b>" & ("Dynamic Host Control Protocol") & "</b><br>" & ("Automatic settings via DHCP.") & "<br><br>" & ("This will work if you use a cable or DSL modem on a home network.") & "<br>" & ("If in doubt, choose this option")
             .Adjust
             .border = Border.Raised
-            .Width = 230 'MdlObjSizer.get_object_width(.text)
-            .Height = 21 * 4          
+            .Width = itlwidth  
+            '.Width = 230 'MdlObjSizer.get_object_width(.text)
+            .Height = 21 * 6          
             .Tag = LAST.tag
+            .Visible = TRUE
+            .Raise
+            
             
           END WITH 
             objtlDetails.Add(tl)

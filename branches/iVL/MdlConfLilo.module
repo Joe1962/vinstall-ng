@@ -282,3 +282,21 @@ sDotConf = Trim(sFile)
   
 END
 
+PUBLIC SUB PERFORM_BINDING()
+  
+  DIM sOut AS String
+  
+SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
+SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT
+  
+SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
+SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
+  'SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
+sOut = "#!/bin/bash \n" &
+"/sbin/config-stage1 gui-installer"
+File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
+'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
+SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
+  
+END
+

@@ -31,7 +31,9 @@ END
 
 
 PUBLIC SUB Form_Open()
+  DIM cb AS ComboBox
     FMain.FrmCurr = ME
+    
     
     WITH FMain 
     .tvPlan["Conf3"].Picture = MdlCore.sDonePic
@@ -47,7 +49,10 @@ PUBLIC SUB Form_Open()
     
   IF ERROR THEN Message(Error.text & "\n" & Error.where)
   
-  
+  WAIT 
+    FOR EACH cb IN MdlNetConf.objCombos
+      cb.Refresh
+    NEXT 
     
 END
 
@@ -74,9 +79,11 @@ DIM itxtboxleft AS Integer
       .tlSecDNS.Move(.tlPrimaryDNS.Left, .tlPrimaryDNS.top + .tlPrimaryDNS.Height + 4, MdlObjSizer.get_object_width(.tlSecDNS.text))
       .txtSecDNS.Move(itxtboxleft, .tlSecDNS.top)
       ' now move the frame
-      .frmNetDevices.Move(.tlSecDNS.Left, .tlSecDNS.top + .tlSecDNS.Height + 8)
-        .frmNetDevices.Width = .ClientWidth - (.frmNetDevices.Left * 2)
-      .TSNetDevices.Width = .ClientWidth - (.frmNetDevices.left * 5) 
+      .frmNetDevices.Move(.tlSecDNS.Left, .tlSecDNS.top + .tlSecDNS.Height + 8, .ClientWidth - (.frmNetDevices.Left * 2), .ClientH - .frmNetDevices.top - 32)
+      
+      .TSNetDevices.Move(8, 20, .frmNetDevices.Width - (.TSNetDevices.Left * 2))
+      .TSNetDevices.Height = .frmNetDevices.Height - (.TSNetDevices.y * 2)
+    
       
   END WITH 
 END

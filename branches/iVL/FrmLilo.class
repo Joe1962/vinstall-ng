@@ -19,7 +19,7 @@ PUBLIC sVidMode AS String
 PUBLIC sLiloTrgt AS String
 
 PUBLIC SUB Form_Open()
-    DIM sOut AS String
+    
   
   ME.tlBanner.Text = "<h3>" & tlBanner.text & "</h3>"
   'ClsPartSel.sRoot = "/dev/sdb1" ' 
@@ -37,17 +37,7 @@ ME.tlList.Adjust
 ME.TabStrip1.Index = MdlLiloOsList.iVltag
 MdlLiloOsList.bVlCliOption = TRUE
 ' ' ' 
-SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
-SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT
-  
-SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
-SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
-  'SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
-sOut = "#!/bin/bash \n" &
-"/sbin/config-stage1 gui-installer"
-File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
-'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
-SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
+'
 
 
 'ME.Maximized = TRUE
@@ -92,6 +82,8 @@ END
 
 PUBLIC SUB Form_Resize()
 
+  DIM cbleft, cbwidth AS Integer
+
   WITH ME
     .tlTarGet.Alignment = Align.Normal
     .tlFbMode.Alignment = Align.Normal
@@ -102,16 +94,20 @@ PUBLIC SUB Form_Resize()
     .tlTarGet.Move(.YNLiloBox.left, .YNLiloBox.top + (.YNLiloBox.Height * 1.5), MdlObjSizer.get_object_width(.tlTarGet.Text))
     .LiloTarget.Move(.tlTarGet.Left + .tlTarGet.Width + 4, .tlTarGet.top, (.tlBanner.Width / 2.75) - (.tlTarGet.Width + .tlTarGet.left))
     .tlFbMode.Move(.LiloTarget.Left + LiloTarget.Width + 32, .LiloTarget.top, MdlObjSizer.get_object_width(.tlFbMode.text))
-    .FBResolution.Move(.tlFbMode.Left + .tlFbMode.Width + 4, .tlFbMode.top, .tlBanner.Width - .FBResolution.Left * 1.30)
+    
+    .FBResolution.Move(.tlFbMode.Left + .tlFbMode.Width + 4, .tlFbMode.top, .ClientWidth - (.FBResolution.Left + (.FBResolution.Width * 0.75)))
+    cbleft = .FBResolution.Left
+    cbwidth = .FBResolution.Width
     .tlTimeOUt.Move(.tlTarGet.left, .tlTarGet.top + .tlTarGet.Height + 12, MdlObjSizer.get_object_width(.tlTimeOUt.Text))
     .sbTimer.Move(.tlTimeOUt.Left + .tlTimeOUt.Width + 4, .tlTimeOUt.top, 60)
     .tlTimoutSec.Move(.sbTimer.Left + .sbTimer.Width + 4, .sbTimer.top, MdlObjSizer.get_object_width(.tlTimoutSec.text))
     .tlDefBoot.Move(.tlFbMode.Left, .sbTimer.top, MdlObjSizer.get_object_width(.tlDefBoot.text), 27)
-    .cbDefBoot.Move(.tlDefBoot.Left + .tlDefBoot.Width + 4, .tlDefBoot.top, .tlBanner.Width - .cbDefBoot.Left * 1.3)
+    
+    .cbDefBoot.Move(cbleft, .tlDefBoot.top, cbwidth, 21)
     
     .tlList.Move(.tlTimeOUt.left, .tlTimeOUt.top + .tlTimeOUt.Height + 12, .tlBanner.Width)
     
-    .TabStrip1.Move(.tlList.Left, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - (.tlBanner.Height * 6))
+    .TabStrip1.Move(.tlList.Left, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - (.tlBanner.Height * 8))
 
   END WITH 
 
