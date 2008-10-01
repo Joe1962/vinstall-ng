@@ -18,6 +18,14 @@ msgstr ""
 msgid "Choose your installation mode"
 msgstr ""
 
+#: FrmPkgSel.class:51
+msgid "Installs everything in your VectorLinux media to your system"
+msgstr ""
+
+#: FrmPkgSel.class:60
+msgid "Choose your optional components to install."
+msgstr ""
+
 #: FrmPkgSel.class:101
 msgid "TextLabel1"
 msgstr ""

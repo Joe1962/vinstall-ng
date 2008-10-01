@@ -37,7 +37,7 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
     'RETURN 
   WAIT 2  
   iRet = ME.INSTALL_REQUIRED_BULKS()
-  PRINT (" INSTALLING REQUIRED BULKS")
+  PRINT " INSTALLING REQUIRED BULKS"
   IF iRet <> 0 THEN 
     'exit this is an error
      Message.Error(("There as been an error while installing required system software. ") & gb.newline & sErr)
@@ -45,36 +45,36 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
   END IF
   
   iRet = ME.INSTALL_USER_SELECTED_BULKS()
-  PRINT ("INSTALING USER-SELECTED BULK PACKAGES")
+  PRINT "INSTALING USER-SELECTED BULK PACKAGES"
   IF iRet <> 0 THEN 
     Message.Error(("There has been an error while installing optional software to your system. ") & gb.newline & sErr)
     RETURN 
   END IF
   
   iret = ME.INSTALL_USER_SELECTED_PACKAGES()
-  PRINT ("INSTALLING OPTIONAL SOFTWARE SELECTED BY USER")
+  PRINT "INSTALLING OPTIONAL SOFTWARE SELECTED BY USER"
   IF iRet <> 0 THEN 
-    Message.Error(("There has been an error while installing optional software to your system. ") & gb.newline & sErr)
+    Message.Error(("There has been an error while installing optional software to your system.") & gb.newline & sErr)
     RETURN 
   END IF
       
   'iret = ME.INSTALL_PACKAGES_REQUIRED()
   iret = MdlInstallSys.INSTALL_REQUIRED_PACKAGES()
-  PRINT ("INSTALLING ADDITIONAL REQUIRED SOFTWARE")
+  PRINT "INSTALLING ADDITIONAL REQUIRED SOFTWARE"
   IF iret <> 0 THEN 
     Message.Error(("Error while installing required system software. ") & gb.NewLine & sErr)
     RETURN 
   END IF
   
   iret = ME.INSTALL_CONF_PACKAGES()
-  PRINT ("INSTALLING CONFIGURATION PACKAGES")
+  PRINT "INSTALLING CONFIGURATION PACKAGES"
   IF iret <> 0 THEN 
     Message.Error(("Error while installing system configuration. ") & gb.NewLine & sErr)
     RETURN 
   END IF
   
   iret = ME.INSTALL_KERNELS()
-  PRINT ("INSTALLING KERNELS")
+  PRINT "INSTALLING KERNELS"
   IF iret <> 0 THEN 
     Message.Error(("Unable to install kernels. ") & gb.NewLine & sErr)
     RETURN 
@@ -173,7 +173,7 @@ PUBLIC FUNCTION INSTALL_CONF_PACKAGES() AS Integer
       IF iret <> 0 THEN 
         RETURN iret
       END IF
-      PRINT " ! " & sPkgPath & (" is installed")
+      PRINT " ! " & sPkgPath & " is installed"
     NEXT 
   ELSE ' single CONF line
     sPkg = Right(sOutput, Len(sOutput) - InStr(sOutput, "\'"))
@@ -202,7 +202,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES_REQUIRED() AS Integer
       IF iret <> 0 THEN 
         RETURN iret
       END IF
-      PRINT " ! " & ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ sPkg & (" is installed")
+      PRINT " ! " & ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ sPkg & " is installed"
     END SELECT 
   NEXT 
 END
@@ -221,7 +221,7 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_PACKAGES() AS Integer
     IF iret <> 0 THEN 
       RETURN iret
     END IF
-    PRINT " ! " & sPkgPath &/ sPkg & (" is installed")
+    PRINT " ! " & sPkgPath &/ sPkg & " is installed"
   NEXT 
 END
 
@@ -242,7 +242,7 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_BULKS() AS Integer
     IF iRet <> 0 THEN 
       RETURN 1
     END IF
-    PRINT " ! " & sPkgPath &/ sPkg & (" is installed")
+    PRINT " ! " & sPkgPath &/ sPkg & " is installed"
   NEXT 
 END
 
@@ -343,7 +343,7 @@ PUBLIC FUNCTION INSTALL_REQUIRED_BULKS() AS Integer
         PRINT ("Error while installing ") & sBulk & " -> " & sBUlkDesc
         RETURN 1
       END IF                  
-      PRINT " ! " & ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulk & (" is installed")
+      PRINT " ! " & ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulk & " is installed"
     NEXT 
   ELSE ' found only one line
     iPkgCnt = iPkgCnt + 1 ' add only one to the overall package count

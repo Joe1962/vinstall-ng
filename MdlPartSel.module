@@ -290,7 +290,7 @@ PUBLIC SUB MountPoints_CLick()
   FOR EACH sdropdwn IN ME.oMountPoints
     IF LAST.text <> ("Not Used") AND LAST.text = sdropdwn.Text AND LAST.tag <> sdropdwn.tag THEN 
       
-      Message.Error(("Please select only one ") & LAST.text & (" partition"))
+      Message.Error(("Please select only one ") & LAST.text & Space(1) & ("partition"))
       LAST.text = ("Not Used")
       STOP EVENT 
     END IF

@@ -1,2 +1,3 @@
 - Fixed problem with ucase(string) in partitioning scheme window
 - Updated binary
+- Removed blank spaces off strings (to keep translations in consistency)

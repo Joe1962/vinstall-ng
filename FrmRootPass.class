@@ -25,6 +25,7 @@ PUBLIC SUB Form_Open()
       .tvPlan["Conf2"].picture = MdlCore.sNowPic
       .tvPlan["Conf2"].Selected = TRUE
     END WITH 
+    ME.Frame1.text = gb.Space(1) & ("About the root account") & gb.space(1)
 END 
 
 
