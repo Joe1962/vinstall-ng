@@ -31,8 +31,8 @@
     }
   }
   { tmCredits #Timer
-    #X = 486
-    #Y = 30
+    #X = 560
+    #Y = 77
     Delay = 50
   }
   { scrlCredits ScrollView
@@ -40,8 +40,11 @@
     Border = False
     ScrollBar = Scroll.None
     { tlCredits TextLabel
-      MoveScaled(1,1,46,3.5)
+      MoveScaled(1,1,46,3.4286)
       Text = ("")
     }
+  }
+  { hrsep Separator
+    MoveScaled(2,6,48,2)
   }
 }
