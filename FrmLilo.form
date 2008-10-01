@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,74,69)
+  MoveScaled(0,0,86,69)
   Text = ("")
   { tlBanner TextLabel
     MoveScaled(1,1,58,4)

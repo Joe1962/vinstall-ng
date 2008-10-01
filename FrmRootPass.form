@@ -12,11 +12,11 @@
     }
   }
   { tlBanner TextLabel
-    MoveScaled(2,1,62,3.4286)
+    MoveScaled(2,1,62,3.3333)
     Text = ("System Administrator")
   }
   { tbPasswd2 TextBox
-    MoveScaled(31,37,21,3.4286)
+    MoveScaled(31,37,21,3.3333)
     Text = ("")
     Password = True
   }
@@ -25,7 +25,7 @@
     Text = ("Re-Enter Password")
   }
   { tbPasswd1 TextBox
-    MoveScaled(29,31,21,3.4286)
+    MoveScaled(29,31,21,3.3333)
     Text = ("")
     Password = True
   }
@@ -38,6 +38,6 @@
     Text = ("Set Password")
   }
   { hrSep Separator
-    MoveScaled(39,5,15,1)
+    MoveScaled(2,5,15,1)
   }
 }

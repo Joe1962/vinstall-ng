@@ -291,7 +291,8 @@ PUBLIC SUB btnext_Click()
         IF FrmLilo.YNLiloBox.Value = FALSE THEN 
     
         ' Now that lilo has been setup, write it to the config
-        MdlConfLilo.GENERATE_LILO_DOT_CONF
+        MdlConfLilo.PERFORM_BINDING()
+        MdlConfLilo.GENERATE_LILO_DOT_CONF()
         MdlConfLilo.GATHER_OTHER_LINUX_KERNELS_AND_INITRDS()
         MdlConfLilo.WRITE_LILO_DOT_CONF()
         MdlConfLilo.EXECUTE_LILO()

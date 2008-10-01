@@ -1,0 +1,20 @@
+ISSUES / PROBLEMS
+* Embedding the vasmCC useradd.gambas module results in the installer trying to create user accounts
+   on the running environment, not the resulting installation - THIS IS VERY BAD
+* Positioning of the following objects in frmNetconf must be fixed to keep keep them from overlaping their lables to the left
+    - combobox to select config method
+    - textboxes for static IP settings.
+        \- wireless settings section must be moved to the right if this happens
+
+        
+   
+
+
+
+LOCALIZATION NOTES
+How to set localizations for different window managers
+
+GNOME - set LANG and LC_CALL
+XFCE4 - set LANG and LC_CALL
+LXDE  - set LANG and LC_CALL (Translations are limited for lxde)
+KDE   - set LANG and LC_CALL. Also set KDE_LANG to the desired language.
