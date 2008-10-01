@@ -1,6 +1,2 @@
-- Fixed combobox sizes in lilo setup form.
-- Moved binding mount of /proc and /dev to it's own sub in MdlConfLIlo instead of the forms open() event
-  This sub will get executed only if the user chooses to install/setup lilo and right before setting it up.
-- FrmRootPass Eliminated message "Password is set". Will only display error message if passwords do not match.
-- Fixed problem with tabstrip width in netconf window
-
+- Fixed problem with ucase(string) in partitioning scheme window
+- Updated binary
