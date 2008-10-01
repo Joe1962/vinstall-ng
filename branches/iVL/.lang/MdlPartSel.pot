@@ -39,6 +39,6 @@ msgid "Please select only one "
 msgstr ""
 
 #: MdlPartSel.module:293
-msgid " partition"
+msgid "partition"
 msgstr ""
 

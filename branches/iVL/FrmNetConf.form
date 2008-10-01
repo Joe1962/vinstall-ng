@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,114.1429,74)
+  MoveScaled(0,0,114,74)
   Text = ("")
   { tlHostNameLbl TextLabel
     MoveScaled(1,8,16,3)
@@ -14,7 +14,7 @@
   }
   { frmNetDevices Frame
     MoveScaled(1,20,85,49)
-    Text = (" Network Interfaces")
+    Text = ("")
     { TSNetDevices TabStrip
       MoveScaled(2,4,81,43)
       Index = 0
@@ -33,7 +33,7 @@
   }
   { txtPrimaryDNS TextBox txtManDNSBoxes
     Name = "txtPrimaryDNS"
-    MoveScaled(24,16,18.4286,3)
+    MoveScaled(24,16,18.3333,3)
     Enabled = False
     Text = ("192.168.1.254")
   }
@@ -44,7 +44,7 @@
   }
   { txtSecDNS TextBox txtManDNSBoxes
     Name = "txtSecDNS"
-    MoveScaled(68,15,18.4286,3)
+    MoveScaled(68,15,18.3333,3)
     Enabled = False
     Text = ("")
   }

@@ -48,7 +48,7 @@ END
 
 PUBLIC SUB rbFull_Click()
 
-  tlActionDesc.Text = "Installs everything in your VectorLinux media to your system"
+  tlActionDesc.Text = ("Installs everything in your VectorLinux media to your system")
   tlActionDesc.Adjust
   scrlInstallOpts.Visible = FALSE
   ClsPkgSel.bCustom = FALSE
@@ -57,7 +57,7 @@ END
 
 PUBLIC SUB rbCustom_Click()
 
-  tlActionDesc.Text = "Choose your optional components to install."
+  tlActionDesc.Text = ("Choose your optional components to install.")
   tlActionDesc.Adjust
   scrlInstallOpts.Visible = TRUE
   MdlPkgSel.LIST_BULK_SELECTION

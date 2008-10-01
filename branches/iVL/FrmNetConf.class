@@ -53,6 +53,7 @@ PUBLIC SUB Form_Open()
     FOR EACH cb IN MdlNetConf.objCombos
       cb.Refresh
     NEXT 
+    ME.frmNetDevices.Text = gb.Space(1) & ("Network Interfaces") & Space(1)
     
 END
 
