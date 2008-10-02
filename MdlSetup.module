@@ -192,7 +192,7 @@ PUBLIC FUNCTION CALCULATE_PACKAGE_COUNT(bCustom AS Boolean) AS Integer
       '         END IF
       '       NEXT 
       '       iQTY = sList.Count
-        SHELL "find " & ClsGlobal.sSourceMnt & " -name *.tlz|wc -l" TO iQTY
+        SHELL "find " & ClsGlobal.sSourceMnt & " -name \"*.tlz\"|wc -l" TO iQTY
   ELSE ' GOING FOR CUSTOM INSTALL
         
   END IF

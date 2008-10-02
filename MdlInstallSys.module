@@ -505,13 +505,15 @@ PUBLIC SUB PACKAGE_INSTALL(sPath_To_Package AS String)
   sErr = ""
   INC iPkgNum
   'hproc = SHELL "install-pkg " & sPath_To_Package & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ 
-  IF Right(sPath_To_Package, 3) LIKE "t?z" THEN 
-    hproc = SHELL "installpkg " & sPath_To_Package & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" WAIT 'FOR READ   
-        WAIT 
-        sDump = File.Load("/tmp/installdump")
-          IF InStr(sDump, "FAILED") > 0 THEN 
-            Message.Error(("Unable to install") & Space(1) & sPath_To_Package)
-          END IF
+  'IF Right(sPath_To_Package, 3) LIKE "t?z" THEN 
+  IF File.Ext(sPath_To_Package) LIKE "t?z" THEN 
+    'SHELL "echo \"\" > /tmp/installdump"
+  hproc = SHELL " installpkg " & sPath_To_Package & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" WAIT 'FOR READ   
+        ' WAIT 
+        ' sDump = File.Load("/tmp/installdump")
+        '   IF InStr(sDump, "FAILED") > 0 THEN 
+        '     Message.Error(("Unable to install") & Space(1) & sPath_To_Package)
+        '   END IF
   ENDIF 
 END
 
@@ -739,19 +741,21 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
     SHELL "echo \"\" > /tmp/installdump" WAIT 
     'sRawFile = DConv(File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT"))
      SHELL "ls " & ClsGlobal.sSourceMnt &/ "packages/required/*.t?z" TO sRawFile
+      sRawFile = Trim(sRawFile)
       sFile = Split(sRawFile, "\n")
         iTlzTotal = sFile.Count        
         FOR i = 0 TO sFile.count - 1
           sLine = Trim(sFile[i])
           'INC iPkgNum  
           sTlzPath = Trim(sLine)
+          sTlzName = File.Name(sTlzPath)
           ' now install the package with the information we already have
           PRINT sTlzName & sTlzPath
               'sDump = ""
               'sErr = ""
               'FrmInstallSys.tlCurrPkg.Text = "Installing " & File.Name(sTlzPath) & " ..."
-              FrmInstallSys.tlCurrPkg.Text = ("Installing Required Packages ...")
-              'FrmInstallSys.pbInstallProg.Value = 0.0
+              FrmInstallSys.tlCurrPkg.Text = ("Installing Required Package ...") & sTlzName
+               FrmInstallSys.pbInstallProg.Value = 0.0
               
                'figure out the progress again
                             ' for this one we will need to count the packages, and base our progress on the number of packages
@@ -759,7 +763,8 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
                             'iCurrTlz = i
                             
               'hproc = SHELL "install-pkg " & sTlzPath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
-              ME.PACKAGE_INSTALL(sTlzPath)
+              'ME.PACKAGE_INSTALL(sTlzPath) ' Do this locally instead
+                hproc = SHELL "installpkg " & sTlzPath & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'WAIT 
                 WAIT 1
                   IF hproc.State = Process.Running THEN 
                     REPEAT 

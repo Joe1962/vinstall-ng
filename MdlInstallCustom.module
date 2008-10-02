@@ -259,11 +259,7 @@ PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
   DIM sOutArr AS String[]
   DIM cb AS CheckBox
     
-  'MdlPkgSel.GET_USER_BULK_SELECTION()
-  'MdlPkgSel.GET_USER_PKG_SELECTION()
-  'Message.Info(ClsPkgSel.arrBulks.Count & " from selected bulks" & "<br>" &
-  'ClsPkgSel.arrPkgs.Count & " from selected packages")
-  'RETURN 
+
   PRINT ("Calculating package count ... Please wait")
   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^BULK | grep required" TO sOutput
   sOutput = Trim(sOutput)
