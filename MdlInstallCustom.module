@@ -136,14 +136,18 @@ PUBLIC FUNCTION INSTALL_KERNELS() AS Integer
      sKernelPath = ClsGlobal.sSourceMnt &/ "isolinux" &/ "kernel" &/ sLabel
      IF Exist(sKernelPath) THEN 
        sDump = ""
+       SHELL "echo \"\" > /tmp/installdump" WAIT 
        sErr = ""
-       hproc = SHELL "cp " & sKernelPath & Space(1) & ClsGlobal.sTargetMnt &/ "boot" &/ "vmlinuz-" & sKernName FOR READ
+       hproc = SHELL "cp " & sKernelPath & Space(1) & ClsGlobal.sTargetMnt &/ "boot" &/ "vmlinuz-" & sKernName & " 2> /tmp/installdump" 'FOR READ
        WAIT 3
-       IF InStr(sDump, "FAILED") > 0 THEN 
-         RETURN 1 
-       ELSE
-         RETURN 0
-       END IF
+          IF hproc.State = Process.Stopped THEN 
+            sDump = File.Load("/tmp/installdump")
+              IF InStr(sDump, "FAILED") > 0 THEN 
+                RETURN 1 
+              ELSE
+                RETURN 0
+              END IF
+            END IF
      END IF
      'SHELL "cp " & ClsGlobal.sSourceMnt &/ "isolinux" &/ "kernel" &/ 
   NEXT               
@@ -370,24 +374,27 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
   
   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep " & File.Name(sBulkPath) & " | cut -f 2 -d :" TO vSize
   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep " & File.Name(sBulkPath) & " | cut -f 3 -d :" TO sDesc
-    IF Right(sDesc) = "\'" THEN 
-        sDesc = Left(sDesc, RInStr(sDesc, "\'") - 1)
-    END IF
+    ' IF Right(sDesc) = "\'" THEN 
+    '     sDesc = Left(sDesc, RInStr(sDesc, "\'") - 1)
+    ' END IF
+    sDesc = Replace(sDesc, "\'", "")
   vSize = Trim(CStr(vSize))
   sDump = ""
+  SHELL "echo \"\" > /tmp/installdump" WAIT 
   sErr = ""
   IF vSize <> "" THEN 
-    SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO vTargetSize
+    SHELL "export gsize=$(df| grep " & ClsGlobal.sTargetMnt & " ) && echo $gsize | cut -f3 -d \' \'" TO vTargetSize
   END IF
   FrmInstallSys.pbInstallProg.Value = 0
   INC iPkgNum
   PRINT " Installing " & sBulkPath
-  MdlSetup.SHOW_PROGRESS_CONTROLS()
+        MdlSetup.SHOW_PROGRESS_CONTROLS()
   FrmInstallSys.tlCurrPkg.Text = "Installing " & File.Name(sBulkPath)
-  hproc = SHELL "lzmadec <" & sBulkPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ  
+  hproc = SHELL "lzmadec <" & sBulkPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ  
   WAIT 1
   IF hproc.State = Process.Running THEN 
     WAIT 1
+      'sDump = File.Load("/tmp/installdump")
     REPEAT 
       WAIT 1
       ' do the progress updating here
@@ -397,6 +404,7 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
       END IF
     UNTIL 
       hproc.State = Process.Stopped
+        sDump = File.Load("/tmp/installdump")
       IF InStr(sDump, "FAILED") > 0 THEN 
         RETURN 1
       ELSE
@@ -411,7 +419,9 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
   DIM vSize AS Variant
   DIM vTargetSize AS Variant
   
+  
   sDump = ""
+  SHELL "echo \"\" > /tmp/installdump" WAIT 
   sErr = ""
       
   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep " & File.Name(sPackagePath) & " | cut -f 2 -d :" TO vSize
@@ -425,7 +435,7 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
   FrmInstallSys.tlCurrPkg.Text = "Processing " & File.Name(sPackagePath)
   'hproc = SHELL "install-pkg " & sPackagePath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
   IF Right(sPackagePath, 3) LIKE "t?z" THEN
-    hproc = SHELL "installpkg " & sPackagePath & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+    hproc = SHELL "installpkg " & sPackagePath & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ
   ENDIF 
   WAIT 1
   IF hproc.State = Process.Running THEN 
@@ -438,6 +448,8 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
     UNTIL 
       hproc.state = Process.Stopped
       ' now do the error checking here and return a value
+          sDump = File.Load("/tmp/installdump")
+          
       IF InStr(sDump, "FAILED") > 0 THEN 
         'ERROR HAS OCCURRED
         RETURN 1
@@ -451,13 +463,20 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
 END
 
 
-PUBLIC SUB Process_read()
-  
-  DIM sLine AS String
-  READ #LAST, sLine, -256
-  sDump = sDump & gb.NewLine & sLine
-  PRINT sLine
-END
+' PUBLIC SUB Process_read()
+'   
+'   DIM sLine AS String
+'   READ #LAST, sLine, -256
+'   sDump = sDump & gb.NewLine & sLine
+'   PRINT sLine
+' END
+' PUBLIC SUB Process_kill()
+'   
+'   DIM sDump AS String = File.Load("/tmp/installdump")
+'     IF InStr(sDump, "FAILED") > 0 THEN 
+'       Message.Error("The install process has returned an error.")
+'   
+' END
 
 PUBLIC SUB process_error(msg AS String)
 

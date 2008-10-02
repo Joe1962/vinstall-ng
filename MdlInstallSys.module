@@ -406,6 +406,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES_NEW() AS Integer
         WAIT 
         FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
         NEXT 
+        INC iPkgNum
         'error check
                 IF InStr(sDump, "FAILED") > 0 THEN 
                   PRINT sPkgName & " failed to install " 
@@ -454,7 +455,7 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
                 PRINT "installing " & sBulkPath  
                 FrmInstallSys.tlCurrPkg.Text = ("Installing") & Space(1) & sBulkDesc & " ..."      
                 'ME.BULK_INSTALL(ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulkPath)
-                hproc = SHELL "lzmadec <" & ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulkPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+                hproc = SHELL "lzmadec <" & ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulkPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ
                 PRINT sBulkPath
                   WAIT 1
                     IF hproc.State = Process.Running THEN 
@@ -486,17 +487,31 @@ PUBLIC SUB BULK_INSTALL(sPath_to_bulk AS String)
     sDump = ""
     sErr = ""
   
-    hproc = SHELL "lzmadec <" & sPath_to_bulk & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ  
+    hproc = SHELL "lzmadec <" & sPath_to_bulk & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" WAIT  'FOR READ  
+      WAIT 
+      sDump = File.Load("/tmp/installdump")
+        IF InStr(sDump, "FAILED") > 0 THEN 
+          Message.Error(("Error occurred while installing") & Space(1) & sPath_to_bulk)
+          RETURN 
+        END IF
+        
 END
 
 
 PUBLIC SUB PACKAGE_INSTALL(sPath_To_Package AS String)
   
   sDump = ""
+  SHELL "echo \"\" > /tmp/installdump" WAIT 
   sErr = ""
+  INC iPkgNum
   'hproc = SHELL "install-pkg " & sPath_To_Package & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ 
   IF Right(sPath_To_Package, 3) LIKE "t?z" THEN 
-    hproc = SHELL "installpkg " & sPath_To_Package & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ   
+    hproc = SHELL "installpkg " & sPath_To_Package & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" WAIT 'FOR READ   
+        WAIT 
+        sDump = File.Load("/tmp/installdump")
+          IF InStr(sDump, "FAILED") > 0 THEN 
+            Message.Error(("Unable to install") & Space(1) & sPath_To_Package)
+          END IF
   ENDIF 
 END
 
@@ -569,7 +584,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
                 sErr = ""
                   MdlCore.LOCK_GUI()
                   'inc iPkgNum
-              hproc = SHELL "lzmadec <" & sBasePath &/ sPakPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+              hproc = SHELL "lzmadec <" & sBasePath &/ sPakPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ
               
                 WAIT 2
                   IF hproc.State = Process.Running THEN 
@@ -579,6 +594,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
                     UNTIL 
                       hproc.State = Process.Stopped
                           ' error check
+                            sDump = File.Load("/tmp/installdump")
                             IF InStr(sDump, "FAILED") > 0 THEN 
                               Message.Error(("There has been an error extracting") & Space(1) & sPakDesc & gb.NewLine &
                               "<b>ERROR</b>" & gb.NewLine &
@@ -631,7 +647,7 @@ PUBLIC SUB UPDATE_STEP_PROGRESS(sTargetSize AS Float, sPakSize AS Float)
   IF iVal > FrmInstallSys.pbInstallProg.Value THEN 
     FrmInstallSys.pbInstallProg.Value = iVal
   END IF
-  PRINT CStr(iCurrSize) & "/" & CStr(sTargetSize + sPakSize) & " = " & iVal & "%"
+  'PRINT CStr(iCurrSize) & "/" & CStr(sTargetSize + sPakSize) & " = " & iVal & "%"
 END
 
 
@@ -667,20 +683,23 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
                   ' install each package
                SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO sTargetSize
                sTargetSize = Trim(CStr(sTargetSize))
-       
+              SHELL "echo \"\" > /tmp/installdump" WAIT 
               sDump = ""
               sErr = ""
               'hproc = SHELL "install-pkg " & sTlzBasePath &/ sTlzPath &/ sTlzName & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
-              hproc = SHELL "installpkg " & sTlzBasePath &/ sTlzPath &/ sTlzName & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+              hproc = SHELL "installpkg " & sTlzBasePath &/ sTlzPath &/ sTlzName & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" WAIT 'FOR READ
                 WAIT 1
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
                       WAIT 1
                       UPDATE_STEP_PROGRESS(sTargetSize, iTlzSize)
+                      
                           ' figure out the progress again
 
                     UNTIL 
                       hproc.State = Process.Stopped
+                        sDump = File.Load("/tmp/installdump")
+                        
                           IF InStr(sDump, "FAILED") > 0 THEN 
                             ERROR 
                             RETURN 1
@@ -717,13 +736,14 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
     DIM iTlzTotal AS Integer = 0
     DIM iCurrTlz AS Integer '= 0
     MdlCore.LOCK_GUI()
+    SHELL "echo \"\" > /tmp/installdump" WAIT 
     'sRawFile = DConv(File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT"))
      SHELL "ls " & ClsGlobal.sSourceMnt &/ "packages/required/*.t?z" TO sRawFile
       sFile = Split(sRawFile, "\n")
         iTlzTotal = sFile.Count        
         FOR i = 0 TO sFile.count - 1
           sLine = Trim(sFile[i])
-          INC iPkgNum  
+          'INC iPkgNum  
           sTlzPath = Trim(sLine)
           ' now install the package with the information we already have
           PRINT sTlzName & sTlzPath
@@ -736,7 +756,7 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
                'figure out the progress again
                             ' for this one we will need to count the packages, and base our progress on the number of packages
                             ' installed vs the total number of packags
-                            iCurrTlz = i
+                            'iCurrTlz = i
                             
               'hproc = SHELL "install-pkg " & sTlzPath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
               ME.PACKAGE_INSTALL(sTlzPath)
@@ -754,7 +774,7 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
         NEXT 
         FrmInstallSys.pbInstallProg.Value = 1
         WAIT 1
-            
+            sDump = File.Load("/tmp/installdump")
             IF InStr(sDump, "FAILED") > 0 THEN 
             PRINT "Error installing packages/required"
               RETURN 1
@@ -772,7 +792,7 @@ PUBLIC FUNCTION INSTALL_CONFIG_PACKAGES() AS Integer
     DIM sCOnfLine AS String
     DIM sPkgPath AS String
     DIM i AS Integer
-        
+        SHELL "echo \"\" > /tmp/installdump" WAIT 
     PRINT "Installing final system configuration"
     SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^CONF" TO sRawList
     'Message.Info(sRawList)
@@ -796,6 +816,7 @@ PUBLIC FUNCTION INSTALL_CONFIG_PACKAGES() AS Integer
                       hproc.State = Process.Stopped
                   END IF
   ' END IF
+    sDump = File.Load("/tmp/installdump")
     IF InStr(sDump, "FAILED") > 0 THEN 
       RETURN 1
     ELSE 
@@ -804,13 +825,13 @@ PUBLIC FUNCTION INSTALL_CONFIG_PACKAGES() AS Integer
 END
 
 
-PUBLIC SUB Process_read()
-  
-  DIM sLine AS String
-  READ #LAST, sLine, -256
-  sDump = sDump & gb.NewLine & sLine
-  PRINT sLine    
-END
+' ' PUBLIC SUB Process_read()
+' '   
+' '   DIM sLine AS String
+' '   READ #LAST, sLine, -256
+' '   sDump = sDump & gb.NewLine & sLine
+' '   PRINT sLine    
+' ' END
 
 PUBLIC SUB process_error(msg AS String)
 
