@@ -41,7 +41,9 @@ PUBLIC SUB EMBED_VASMCC_MODULE()
   
    DIM iID AS Integer = ME.Embedder1.Id
   
-  SHELL "$PWD/adduser.gambas " & iID & Space(1) & ME.ClientWidth & Space(1) & ME.clientHeight
+  SHELL "cp $PWD/adduser.gambas " & ClsGlobal.sTargetMnt &/ "usr" &/ "bin" WAIT 
+  'SHELL "$PWD/adduser.gambas " & iID & Space(1) & ME.ClientWidth & Space(1) & ME.clientHeight
+  SHELL "chroot " & ClsGlobal.sTargetMnt & "; /usr/bin/adduser.gambas " & iID & Space(1) & ME.ClientWidth & Space(1) & ME.ClientH
   MdlCore.LOCK_GUI()
   
   
