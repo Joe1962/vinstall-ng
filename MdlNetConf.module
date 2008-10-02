@@ -337,7 +337,7 @@ PUBLIC SUB MethodSel_Click()
   frmDetails = NEW Frame(FrmNetConf.TSNetDevices) AS "STaticDetails"
     WITH frmDetails
       .Move(ileft, itop + 8)
-      .text = gb.Space(1) & ("Static IP Address Settings") & gb.Space(1)
+      .text = Space(1) & ("Static IP Address Settings") & Space(1)
           FOR EACH txtbox IN objIntTypes
             IF txtbox.tag = LAST.tag THEN 
               IF txtbox.text = ("Wired") THEN 
