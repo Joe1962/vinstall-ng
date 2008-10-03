@@ -66,7 +66,9 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
     RETURN 
   END IF
   
-  iret = ME.INSTALL_CONF_PACKAGES()
+  'iret = ME.INSTALL_CONF_PACKAGES()
+    '/ USE THE FUNCTION IN MDLINSTALLSYS.MODULE DOES THE EXACT SAME THING AND HAS PROGRESS UPDATING
+    iret = MdlInstallSys.INSTALL_CONFIG_PACKAGES()
   PRINT "INSTALLING CONFIGURATION PACKAGES"
   IF iret <> 0 THEN 
     Message.Error(("Error while installing system configuration. ") & gb.NewLine & sErr)
@@ -154,43 +156,43 @@ PUBLIC FUNCTION INSTALL_KERNELS() AS Integer
 END
 
 
-PUBLIC FUNCTION INSTALL_CONF_PACKAGES() AS Integer
-  
-  DIM sOutput, sLine, sPkg, sPkgPath AS String
-  DIM i, iret AS Integer
-  DIM sList, sLinearr AS String[]
-  
-  SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^CONF" TO sOutput
-  sOutput = Trim(sOutput)
-  IF InStr(sOutput, "\n") > 0 THEN 
-    sList = Split(sOutput, "\n")
-    FOR i = 0 TO sList.Count - 1
-      sLine = sList[i]
-      sPkg = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
-      sPkg = Left(sPkg, RInStr(sPkg, "\'") - 1)                
-      sLinearr = Split(sPkg, ":")
-      sPkgPath = ClsGlobal.sSourceMnt &/ "veclinux" &/ sLinearr[0]
-      ' install it now
-      PRINT " + Install " & sPkgPath
-      'iret = ME.INSTALL_THIS_PACKAGE(sPkgPath)
-      iret = ME.INSTALL_THIS_BULK(sPkgPath)
-      IF iret <> 0 THEN 
-        RETURN iret
-      END IF
-      PRINT " ! " & sPkgPath & " is installed"
-    NEXT 
-  ELSE ' single CONF line
-    sPkg = Right(sOutput, Len(sOutput) - InStr(sOutput, "\'"))
-    sPkg = Left(sPkg, RInStr(sPkg, "\'") - 1)
-    sLinearr = Split(sPkg, ":")
-    sPkgPath = ClsGlobal.sSourceMnt &/ "veclinux" &/ sLinearr[0]
-    'iret = ME.INSTALL_THIS_PACKAGE(sPkgPath)
-    iret = ME.INSTALL_THIS_BULK(sPkgPath)
-    IF iret <> 0 THEN   
-      RETURN iret
-    END IF
-  END IF
-END
+' ' PUBLIC FUNCTION INSTALL_CONF_PACKAGES() AS Integer
+' '   
+' '   DIM sOutput, sLine, sPkg, sPkgPath AS String
+' '   DIM i, iret AS Integer
+' '   DIM sList, sLinearr AS String[]
+' '   
+' '   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^CONF" TO sOutput
+' '   sOutput = Trim(sOutput)
+' '   IF InStr(sOutput, "\n") > 0 THEN 
+' '     sList = Split(sOutput, "\n")
+' '     FOR i = 0 TO sList.Count - 1
+' '       sLine = sList[i]
+' '       sPkg = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
+' '       sPkg = Left(sPkg, RInStr(sPkg, "\'") - 1)                
+' '       sLinearr = Split(sPkg, ":")
+' '       sPkgPath = ClsGlobal.sSourceMnt &/ "veclinux" &/ sLinearr[0]
+' '       ' install it now
+' '       PRINT " + Install " & sPkgPath
+' '       'iret = ME.INSTALL_THIS_PACKAGE(sPkgPath)
+' '       iret = ME.INSTALL_THIS_BULK(sPkgPath)
+' '       IF iret <> 0 THEN 
+' '         RETURN iret
+' '       END IF
+' '       PRINT " ! " & sPkgPath & " is installed"
+' '     NEXT 
+' '   ELSE ' single CONF line
+' '     sPkg = Right(sOutput, Len(sOutput) - InStr(sOutput, "\'"))
+' '     sPkg = Left(sPkg, RInStr(sPkg, "\'") - 1)
+' '     sLinearr = Split(sPkg, ":")
+' '     sPkgPath = ClsGlobal.sSourceMnt &/ "veclinux" &/ sLinearr[0]
+' '     'iret = ME.INSTALL_THIS_PACKAGE(sPkgPath)
+' '     iret = ME.INSTALL_THIS_BULK(sPkgPath)
+' '     IF iret <> 0 THEN   
+' '       RETURN iret
+' '     END IF
+' '   END IF
+' ' END
 
 
 PUBLIC FUNCTION INSTALL_PACKAGES_REQUIRED() AS Integer
