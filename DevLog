@@ -1,3 +1,2 @@
-- Fixed problem with ucase(string) in partitioning scheme window
-- Updated binary
-- Removed blank spaces off strings (to keep translations in consistency)
+- Fixed problem with prograssbar while installing packages and packages/required for full install
+- Fixed progressbar meter at installing CONF packages
