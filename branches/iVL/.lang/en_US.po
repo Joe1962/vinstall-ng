@@ -84,7 +84,7 @@ msgid ""
 msgstr ""
 "New user accounts can also be created after the install process is completed."
 
-#: FrmEmbUsrAdd.class:128
+#: FrmEmbUsrAdd.class:130
 msgid "New User Account"
 msgstr "New User Account"
 
@@ -718,30 +718,30 @@ msgstr "Several windows found. I will take the first one!"
 msgid "There as been an error while installing required system software. "
 msgstr "There as been an error while installing required system software. "
 
-#: MdlInstallCustom.module:50
+#: MdlInstallCustom.module:51
 msgid ""
 "There has been an error while installing optional software to your system. "
 msgstr ""
 "There has been an error while installing optional software to your system. "
 
-#: MdlInstallCustom.module:57
+#: MdlInstallCustom.module:59
 msgid ""
 "There has been an error while installing optional software to your system."
 msgstr ""
 
-#: MdlInstallCustom.module:65
+#: MdlInstallCustom.module:67
 msgid "Error while installing required system software. "
 msgstr "Error while installing required system software. "
 
-#: MdlInstallCustom.module:72
+#: MdlInstallCustom.module:76
 msgid "Error while installing system configuration. "
 msgstr "Error while installing system configuration. "
 
-#: MdlInstallCustom.module:79
+#: MdlInstallCustom.module:83
 msgid "Unable to install kernels. "
 msgstr "Unable to install kernels. "
 
-#: MdlInstallCustom.module:90
+#: MdlInstallCustom.module:94
 msgid ""
 "Vectorlinux is now installed in your system. Please click next to configure "
 "it."
@@ -749,7 +749,7 @@ msgstr ""
 "Vectorlinux is now installed in your system. Please click next to configure "
 "it."
 
-#: MdlInstallCustom.module:91
+#: MdlInstallCustom.module:95
 msgid ""
 "packages have been Installed. Please click next to move on to System "
 "Configuration."
@@ -757,15 +757,15 @@ msgstr ""
 "packages have been Installed. Please click next to move on to System "
 "Configuration."
 
-#: MdlInstallCustom.module:263
+#: MdlInstallCustom.module:376
 msgid "Calculating package count ... Please wait"
 msgstr "Calculating package count ... Please wait"
 
-#: MdlInstallCustom.module:311
+#: MdlInstallCustom.module:424
 msgid "Total packages to be installed = "
 msgstr "Total packages to be installed = "
 
-#: MdlInstallCustom.module:343
+#: MdlInstallCustom.module:456
 msgid "Error while installing "
 msgstr "Error while installing "
 
@@ -785,47 +785,58 @@ msgstr "Do not format"
 msgid "Do not mount"
 msgstr "Do not mount"
 
-#: MdlInstallSys.module:358
+#: MdlInstallSys.module:361
 msgid "Vectorlinux is now installed in your system. Please click"
 msgstr "Vectorlinux is now installed in your system. Please click"
 
-#: MdlInstallSys.module:358
+#: MdlInstallSys.module:361
 msgid "to configure it."
 msgstr "to configure it."
 
-#: MdlInstallSys.module:359
+#: MdlInstallSys.module:362
 msgid "Packages have been installed in your system. Please click"
 msgstr "Packages have been installed to your system. Please click"
 
-#: MdlInstallSys.module:455
+#: MdlInstallSys.module:468
 msgid "Installing"
 msgstr "Installing"
 
-#: MdlInstallSys.module:542
+#: MdlInstallSys.module:506
+#, fuzzy
+msgid "Error occurred while installing"
+msgstr "Error while installing "
+
+#: MdlInstallSys.module:571
 msgid "Vectorlinux is now being installed. Please wait..."
 msgstr "Vectorlinux is now being installed. Please wait..."
 
-#: MdlInstallSys.module:585
+#: MdlInstallSys.module:615
 msgid "There has been an error extracting"
 msgstr "There has been an error extracting"
 
-#: MdlInstallSys.module:597
+#: MdlInstallSys.module:627
 msgid "Finished intalling Bulks"
 msgstr "Finished intalling Bulks"
 
-#: MdlInstallSys.module:700
+#: MdlInstallSys.module:733
 msgid "Installation phase complete. Ready for configuration"
 msgstr "Installation phase complete. Ready for configuration"
 
-#: MdlInstallSys.module:703
+#: MdlInstallSys.module:736
 msgid "Installing default system configuration and required software."
 msgstr "Installing default system configuration and required software."
 
-#: MdlInstallSys.module:733
-msgid "Installing Required Packages ..."
+#: MdlInstallSys.module:772
+#, fuzzy
+msgid "Installing Required Package ..."
 msgstr "Installing Required Packages ..."
 
-#: MdlInstallSys.module:786
+#: MdlInstallSys.module:783
+#, fuzzy
+msgid "Failed to install"
+msgstr "Unable to install kernels. "
+
+#: MdlInstallSys.module:822
 msgid "Installing Final configuration files..."
 msgstr "Installing final configuration files ..."
 
