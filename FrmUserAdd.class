@@ -1,8 +1,29 @@
 ' Gambas class file
+
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
 PUBLIC iUID AS Integer = 1000
 
 PUBLIC SUB Form_Open()
   Fmain.frmcurr = ME
+    WITH ME
+      .tlBanner.Text = "<h3>" & ("Create User Accounts") & "</h3>"
+    END WITH 
 END 
 
 
@@ -62,18 +83,45 @@ END
   
 
 PUBLIC SUB Form_Resize()
+  
+  DIM iboxleft AS Integer
+  DIM iboxwidth AS Integer
+  
 
-  WITH ME
-    .Frame1.Move(4, 4, .ClientWidth - (.Frame1.left * 2), .ClientHeight - (.Frame1.Height * 2))
-    .TextLabel1.Move(4, 12, .Frame1.Width - (.TextLabel1.Left * 2))
+  WITH ME 
+  
+    .tlBanner.Move(4, 4, .ClientWidth - (.tlBanner.left * 2))
+    .hrSep.Move(4, .tlBanner.top + .tlBanner.Height, .tlBanner.Width)
+    .tlExp.Move(4, .hrSep.top + .hrSep.Height + 12, .hrSep.Width)
+    .TextLabel2.Move(4, .tlExp.top + .tlExp.Height + 8, MdlObjSizer.get_object_width(.TextLabel2.text) * 2)
+    .tbUsername.Move(.TextLabel2.Left + .TextLabel2.Width + 4, .TextLabel2.top, .TextLabel2.Width * 1.75)
+    iboxleft = .tbUsername.Left
+    iboxwidth = .tbUsername.Width
+    .TextLabel3.Move(4, .TextLabel2.top + .TextLabel2.Height + 4, .TextLabel2.Width)
+    .tbPasswd1.Move(iboxleft, .TextLabel3.top, iboxwidth)
+    .TextLabel4.Move(4, .TextLabel3.top + .TextLabel3.height + 4, .TextLabel2.Width)
+    .tbPasswd2.Move(iboxleft, .TextLabel4.top, iboxwidth)
+    .tlUserID.Move(4, .TextLabel4.top + .TextLabel4.Height + 4, .TextLabel2.Width)
+    .cbUserID.Move(iboxleft, .tlUserID.top, iboxwidth * 0.45)
+    .tbUsrID.Move(.cbUserID.Left + .cbUserID.Width + 4, .cbUserID.top, iboxwidth - (.cbUserID.Width + 4))
+    .bUsePic.Move(4, .tbUsrID.top + .tbUsrID.Height + 4, MdlObjSizer.get_object_width(.bUsePic.Text) + 36)
+    .tbPicPath.Move(4, .bUsePic.top + .bUsePic.Height + 2, .TextLabel2.Width + iboxwidth + 8)
+    .btBrowse.Move(.tbPicPath.Left + .tbPicPath.Width + 4, .tbPicPath.top, MdlObjSizer.get_object_width(.btBrowse.text) + 36)
     
-    .TextLabel2.Move(4, .TextLabel1.top + .TextLabel1.Height + 16, 130)
-    .tbUsername.Move(.TextLabel2.left + .TextLabel2.Width + 4, .TextLabel2.top, 150)
-    .TextLabel3.Move(4, .TextLabel2.top + .TextLabel2.Height + 4, 130)
-    .tbPasswd1.Move(.TextLabel3.left + .TextLabel3.Width + 4, .TextLabel3.top, 150)
-    .TextLabel4.Move(4, .TextLabel3.top + .TextLabel3.Height + 4, 130)
-    .tbPasswd2.Move(.TextLabel4.left + .TextLabel4.Width + 4, .TextLabel4.top, 150)
-    .Button1.Move(.TextLabel4.left, .TextLabel4.top + .TextLabel4.Height + 8, MdlObjSizer.get_object_width(.button1.text) + 24)
+    
+    
+    
+    
+    '.Frame1.Move(4, 4, .ClientWidth - (.Frame1.left * 2), .ClientHeight - (.Frame1.Height * 2))
+'    .TextLabel1.Move(4, 12, .Frame1.Width - (.TextLabel1.Left * 2))
+    
+    ' .TextLabel2.Move(4, .TextLabel1.top + .TextLabel1.Height + 16, 130)
+    ' .tbUsername.Move(.TextLabel2.left + .TextLabel2.Width + 4, .TextLabel2.top, 150)
+    ' .TextLabel3.Move(4, .TextLabel2.top + .TextLabel2.Height + 4, 130)
+    ' .tbPasswd1.Move(.TextLabel3.left + .TextLabel3.Width + 4, .TextLabel3.top, 150)
+    ' .TextLabel4.Move(4, .TextLabel3.top + .TextLabel3.Height + 4, 130)
+    ' .tbPasswd2.Move(.TextLabel4.left + .TextLabel4.Width + 4, .TextLabel4.top, 150)
+    ' .Button1.Move(.TextLabel4.left, .TextLabel4.top + .TextLabel4.Height + 8, MdlObjSizer.get_object_width(.button1.text) + 24)
     
   
     
@@ -84,5 +132,30 @@ END
 PUBLIC SUB tbUsername_KeyPress()
 
   
+
+END
+
+PUBLIC SUB cbUserID_Click()
+
+  IF Trim(cbUserID.text) = ("Auto") THEN 
+    ME.tbUsrID.Visible = FALSE
+  ELSE 
+    ME.tbUsrID.Visible = TRUE
+END IF
+
+END
+
+PUBLIC SUB bUsePic_Click()
+
+  WITH ME
+    .tbPicPath.Visible = bUsePic.Value
+    .btBrowse.Visible = .bUsePic.Value
+  END WITH 
+
+END
+
+PUBLIC SUB Form_Menu()
+
+  MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS()
 
 END
