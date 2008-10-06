@@ -55,3 +55,10 @@ PUBLIC SUB lbLangSel_Select()
   FMain.btnext.Enabled = TRUE
 
 END
+
+PUBLIC SUB lbLangSel_KeyRelease()
+
+ 
+  
+
+END

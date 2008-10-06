@@ -18,8 +18,8 @@
  PRIVATE hproc AS Process
  PRIVATE sDump AS String
  PRIVATE sErr AS String
- PRIVATE iPkgCnt AS Integer
- PRIVATE iPkgNum AS Integer = 0
+ PUBLIC iPkgCnt AS Integer
+ PUBLIC iPkgNum AS Integer = 0
   
  
 
@@ -789,6 +789,7 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
             
             INC iPkgNum
             FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
+            
             
             'Message(sTlzPath & "<br>" & sTlzName)
           NEXT 
