@@ -1,44 +1,85 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,72,47)
+  MoveScaled(0,0,76,67)
   Text = ("")
-  { Frame1 Frame
-    MoveScaled(1,2,62,37)
-    Text = ("Add Users")
-    { TextLabel1 TextLabel
-      MoveScaled(2,2,55,8)
-      Text = ("Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue.")
-    }
-    { TextLabel2 TextLabel
-      MoveScaled(2,17,12,3)
-      Text = ("Username")
-    }
-    { tbUsername TextBox
-      MoveScaled(14,17,15,3)
-      Text = ("")
-    }
-    { TextLabel3 TextLabel
-      MoveScaled(2,20,16,3)
-      Text = ("Enter Password")
-    }
-    { tbPasswd1 TextBox
-      MoveScaled(16,20,16,3)
-      Text = ("")
-      Password = True
-    }
-    { TextLabel4 TextLabel
-      MoveScaled(2,23,14,3)
-      Text = ("ReEnter Password")
-    }
-    { tbPasswd2 TextBox
-      MoveScaled(16,23,16,3)
-      Text = ("")
-      Password = True
-    }
-    { Button1 Button
-      MoveScaled(2,27,14,1)
-      Text = ("Create User")
-    }
+  { tlExp TextLabel
+    MoveScaled(3,12,55,8)
+    Text = ("Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue.")
+  }
+  { tbUsername TextBox
+    MoveScaled(23,20,15,3)
+    Text = ("")
+  }
+  { TextLabel2 TextLabel
+    MoveScaled(2,21,12,3)
+    Text = ("Username")
+    Alignment = Align.Normal
+  }
+  { TextLabel3 TextLabel
+    MoveScaled(2,24,16,3)
+    Text = ("Enter Password")
+    Alignment = Align.Normal
+  }
+  { tbPasswd1 TextBox
+    MoveScaled(16,24,16,3)
+    Text = ("")
+    Password = True
+  }
+  { tbPasswd2 TextBox
+    MoveScaled(16,27,16,3)
+    Text = ("")
+    Password = True
+  }
+  { TextLabel4 TextLabel
+    MoveScaled(2,27,14,3)
+    Text = ("ReEnter Password")
+    Alignment = Align.Normal
+  }
+  { Button1 Button
+    MoveScaled(1,63,14,1)
+    Text = ("Create User")
+  }
+  { tlBanner TextLabel
+    MoveScaled(1,2,55,4)
+    Text = ("")
+  }
+  { hrSep Separator
+    MoveScaled(30,8,12,1)
+  }
+  { tlUserID TextLabel
+    MoveScaled(2,31,12,3)
+    Text = ("User ID")
+    Alignment = Align.Normal
+  }
+  { cbUserID ComboBox
+    MoveScaled(16,31,16,2)
+    Text = ("")
+    ReadOnly = True
+    List = [("Auto"), ("Manual")]
+  }
+  { tbUsrID TextBox
+    MoveScaled(34,31,13,3)
+    Visible = False
+    Text = ("")
+  }
+  { bUsePic CheckBox
+    MoveScaled(2,35,45,3)
+    Text = ("User Picture ID for Login greeting")
+  }
+  { tbPicPath TextBox
+    MoveScaled(2,39,55,3)
+    Visible = False
+    Text = ("")
+  }
+  { btBrowse Button
+    MoveScaled(57,39,10,3)
+    Visible = False
+    Text = ("Select")
+    Picture = Picture["icon:/16/directory"]
+  }
+  { fGroupSel Frame
+    MoveScaled(2,44,69,17)
+    Text = ("User Rights Management")
   }
 }

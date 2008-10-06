@@ -1,0 +1,71 @@
+' Gambas module file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+PUBLIC objGrps AS Object[]
+
+PUBLIC SUB DISPLAY_USER_GROUP_OPTIONS()
+DIM sGrpList AS String = "cdrom,floppy,lp,scanner,audio,video,game,adm,sys,wheel"
+DIM sGrpArr AS String[]
+DIM i AS Integer
+DIM sLabel, sComment, sToolTip AS String
+DIM cb AS CheckBox
+DIM x, y AS Integer
+
+objGrps = NEW Object[]
+sGrpArr = Split(sGrpList, ",")
+FOR i = 0 TO sGrpArr.Count - 1
+  sLabel = Trim(sGrpArr[i])
+    SELECT CASE sLabel
+      CASE "cdrom"
+      sComment = ("This user can access CD/DVD devices")
+      CASE "floppy"
+      sComment = ("This user can access floppy disks")
+      CASE "lp"
+      sComment = ("This user is allowed to print")
+      CASE "scanner"
+      sComment = ("This user can access scanner devices")
+      CASE "audio"
+      sComment = ("This user is allowed to change audio settings")
+      CASE "video"
+      sComment = ("This user is allowed to change video settings")
+      CASE "game"
+      sComment = ("This user is allowed to play restricted games")
+      CASE "adm"
+        sComment = ("Restricted administrator (backup)")
+      CASE "sys"
+      sComment = ("This user is a system administrator")
+      CASE "wheel"
+      sComment = ("Elite user")
+END SELECT 
+  x = 4
+  y = 12
+cb = NEW CheckBox(FrmUserAdd.fGroupSel)
+  WITH cb
+  .text = sLabel
+  .Value = FALSE
+  .Height = 18
+  .Width = MdlObjSizer.get_object_width(.text) + 24
+  .Move(x, y)
+  .ToolTip = sComment
+  y = y + 4
+  END WITH 
+  objGrps.Add(cb)
+  'y = y + cb.Height + 4
+NEXT       
+      
+
+  
+END
