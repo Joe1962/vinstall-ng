@@ -1,2 +1,1 @@
-- Fixed problem with prograssbar while installing packages and packages/required for full install
-- Fixed progressbar meter at installing CONF packages
+- Fixed progressbar values for custom installation.
