@@ -4,22 +4,16 @@
   MoveScaled(0,0,76,67)
   Text = ("")
   { tlExp TextLabel
-    MoveScaled(3,12,55,8)
+    MoveScaled(1,9,55,8)
     Text = ("Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue.")
   }
   { tbUsername TextBox
-    MoveScaled(23,20,15,3)
+    MoveScaled(16,18,15,3)
     Text = ("")
   }
-  { TextLabel2 TextLabel
-    MoveScaled(2,21,12,3)
-    Text = ("Username")
-    Alignment = Align.Normal
-  }
-  { TextLabel3 TextLabel
-    MoveScaled(2,24,16,3)
-    Text = ("Enter Password")
-    Alignment = Align.Normal
+  { tbRealname TextBox
+    MoveScaled(17,21,15,3)
+    Text = ("")
   }
   { tbPasswd1 TextBox
     MoveScaled(16,24,16,3)
@@ -31,29 +25,8 @@
     Text = ("")
     Password = True
   }
-  { TextLabel4 TextLabel
-    MoveScaled(2,27,14,3)
-    Text = ("ReEnter Password")
-    Alignment = Align.Normal
-  }
-  { Button1 Button
-    MoveScaled(1,63,14,1)
-    Text = ("Create User")
-  }
-  { tlBanner TextLabel
-    MoveScaled(1,2,55,4)
-    Text = ("")
-  }
-  { hrSep Separator
-    MoveScaled(30,8,12,1)
-  }
-  { tlUserID TextLabel
-    MoveScaled(2,31,12,3)
-    Text = ("User ID")
-    Alignment = Align.Normal
-  }
   { cbUserID ComboBox
-    MoveScaled(16,31,16,2)
+    MoveScaled(16,31,16,3)
     Text = ("")
     ReadOnly = True
     List = [("Auto"), ("Manual")]
@@ -81,5 +54,51 @@
   { fGroupSel Frame
     MoveScaled(2,44,69,17)
     Text = ("User Rights Management")
+  }
+  { Button1 Button
+    MoveScaled(1,63,14,3)
+    Text = ("Create User")
+    Picture = Picture["icon:/16/add"]
+  }
+  { btClrFrm Button
+    MoveScaled(17,63,12,3)
+    Text = ("Clear Form")
+    Picture = Picture["icon:/16/clear"]
+  }
+  { TextLabel2 TextLabel
+    MoveScaled(2,18,12,3)
+    Text = ("Username")
+    Alignment = Align.Normal
+  }
+  { TextLabel3 TextLabel
+    MoveScaled(2,24,16,3)
+    Text = ("Enter Password")
+    Alignment = Align.Normal
+  }
+  { TextLabel4 TextLabel
+    MoveScaled(2,27,14,3)
+    Text = ("ReEnter Password")
+    Alignment = Align.Normal
+  }
+  { tlBanner TextLabel
+    MoveScaled(1,2,55,4)
+    Text = ("")
+  }
+  { hrSep Separator
+    MoveScaled(30,8,12,1)
+  }
+  { tlUserID TextLabel
+    MoveScaled(2,31,12,3)
+    Text = ("User ID")
+    Alignment = Align.BottomLeft
+  }
+  { pbUsrPic PictureBox
+    MoveScaled(58,21,8,8)
+    Stretch = True
+  }
+  { tlRealName TextLabel
+    MoveScaled(2,21,12,3)
+    Text = ("Real Name")
+    Alignment = Align.Normal
   }
 }

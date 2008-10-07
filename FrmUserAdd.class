@@ -24,6 +24,8 @@ PUBLIC SUB Form_Open()
     WITH ME
       .tlBanner.Text = "<h3>" & ("Create User Accounts") & "</h3>"
     END WITH 
+    WAIT 1
+    MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS()
 END 
 
 
@@ -95,18 +97,27 @@ PUBLIC SUB Form_Resize()
     .tlExp.Move(4, .hrSep.top + .hrSep.Height + 12, .hrSep.Width)
     .TextLabel2.Move(4, .tlExp.top + .tlExp.Height + 8, MdlObjSizer.get_object_width(.TextLabel2.text) * 2)
     .tbUsername.Move(.TextLabel2.Left + .TextLabel2.Width + 4, .TextLabel2.top, .TextLabel2.Width * 1.75)
+    
     iboxleft = .tbUsername.Left
     iboxwidth = .tbUsername.Width
-    .TextLabel3.Move(4, .TextLabel2.top + .TextLabel2.Height + 4, .TextLabel2.Width)
+    .tlRealName.Move(4, .TextLabel2.top + .TextLabel2.Height + 2, .TextLabel2.Width)
+    .tbRealname.Move(iboxleft, .tlRealName.top, iboxwidth)
+    .TextLabel3.Move(4, .tlRealName.top + .tlRealName.Height + 2, .TextLabel2.Width)
     .tbPasswd1.Move(iboxleft, .TextLabel3.top, iboxwidth)
-    .TextLabel4.Move(4, .TextLabel3.top + .TextLabel3.height + 4, .TextLabel2.Width)
+    .TextLabel4.Move(4, .TextLabel3.top + .TextLabel3.height + 2, .TextLabel2.Width)
     .tbPasswd2.Move(iboxleft, .TextLabel4.top, iboxwidth)
-    .tlUserID.Move(4, .TextLabel4.top + .TextLabel4.Height + 4, .TextLabel2.Width)
+    .tlUserID.Move(4, .TextLabel4.top + .TextLabel4.Height + 2, .TextLabel2.Width)
     .cbUserID.Move(iboxleft, .tlUserID.top, iboxwidth * 0.45)
     .tbUsrID.Move(.cbUserID.Left + .cbUserID.Width + 4, .cbUserID.top, iboxwidth - (.cbUserID.Width + 4))
-    .bUsePic.Move(4, .tbUsrID.top + .tbUsrID.Height + 4, MdlObjSizer.get_object_width(.bUsePic.Text) + 36)
+    .bUsePic.Move(4, .tbUsrID.top + .tbUsrID.Height + 8, MdlObjSizer.get_object_width(.bUsePic.Text) + 36)
     .tbPicPath.Move(4, .bUsePic.top + .bUsePic.Height + 2, .TextLabel2.Width + iboxwidth + 8)
+    '.tbPicPath.Move(4, .bUsePic.top + .bUsePic.height + 2, .tlBanner.Width - (.btBrowse.Width + 4))
     .btBrowse.Move(.tbPicPath.Left + .tbPicPath.Width + 4, .tbPicPath.top, MdlObjSizer.get_object_width(.btBrowse.text) + 36)
+    .fGroupSel.Move(4, .tbPicPath.top + .tbPicPath.Height + 4, .ClientW - (.fGroupSel.Left * 2), .ClientH - (.fGroupSel.top + .Button1.Height + .Button1.height))
+    .Button1.Move(4, .fGroupSel.top + .fGroupSel.Height + 8, MdlObjSizer.get_object_width(.Button1.Text) + 36)
+    .btClrFrm.Move(.Button1.Left + .Button1.Width + 4, .Button1.top, MdlObjSizer.get_object_width(.btClrFrm.text) + 36)
+    '.pbUsrPic.Move(.tbUsername.Left + (.tbUsername.Width + 2), .tbUsername.top)
+    .pbUsrPic.Move(.btBrowse.Left + .btBrowse.Width, tbUsername.top)
     
     
     
@@ -157,5 +168,36 @@ END
 PUBLIC SUB Form_Menu()
 
   MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS()
+
+END
+
+PUBLIC SUB btBrowse_Click()
+'ClsGlobal.sTargetMnt = "/"
+  'IF Dialog.OpenFile() THEN RETURN 
+    Dialog.Title = ("Select picture for user Login")
+    Dialog.path = ClsGlobal.sTargetMnt &/ "usr" &/ "share" &/ "apps" &/ "kdm" &/ "pics" &/ "users"
+    Dialog.Filter = ["*.png", "Picture Files", "*.jpg", "JPEG Graphics"]
+    IF Dialog.OpenFile() THEN RETURN 
+    tbPicPath.text = Replace(Dialog.path, ClsGlobal.sSourceMnt, "")
+    ME.pbUsrPic.Picture = Picture[Dialog.Path]
+    
+'  END IF
+
+END
+
+PUBLIC SUB btClrFrm_Click()
+DIM cb AS CheckBox
+
+  WITH ME
+    .tbPasswd1.Clear
+    .tbPasswd2.Clear
+    .tbRealname.Clear
+    .tbPicPath.Clear
+    .tbUsername.Clear
+  END WITH 
+    FOR EACH cb IN MdlUsrAdd.objGrps
+      cb.Delete
+    NEXT 
+    MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS
 
 END
