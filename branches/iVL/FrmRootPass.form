@@ -15,29 +15,29 @@
     MoveScaled(2,1,62,3.1667)
     Text = ("System Administrator")
   }
-  { tbPasswd2 TextBox
-    MoveScaled(31,37,21,3.1667)
-    Text = ("")
-    Password = True
-  }
-  { tbPasswd1 TextBox
-    MoveScaled(29,31,21,3.1667)
-    Text = ("")
-    Password = True
-  }
-  { tlPass2 TextLabel
-    MoveScaled(2,37,22,4)
-    Text = ("Re-Enter Password")
-  }
-  { tlPass1 TextLabel
-    MoveScaled(2,32,22,4)
-    Text = ("Enter Password")
+  { hrSep Separator
+    MoveScaled(2,5,15,1)
   }
   { Button1 Button
     MoveScaled(53,51,11,2)
     Text = ("Set Password")
   }
-  { hrSep Separator
-    MoveScaled(2,5,15,1)
+  { tbPasswd2 TextBox
+    MoveScaled(29,6,21,3.1667)
+    Text = ("")
+    Password = True
+  }
+  { tbPasswd1 TextBox
+    MoveScaled(30,0,21,3.1667)
+    Text = ("")
+    Password = True
+  }
+  { tlPass1 TextLabel
+    MoveScaled(0,1,22,4)
+    Text = ("Enter Password")
+  }
+  { tlPass2 TextLabel
+    MoveScaled(0,6,22,4)
+    Text = ("Re-Enter Password")
   }
 }

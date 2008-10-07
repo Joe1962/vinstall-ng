@@ -17,7 +17,7 @@
 PUBLIC objGrps AS Object[]
 
 PUBLIC SUB DISPLAY_USER_GROUP_OPTIONS()
-DIM sGrpList AS String = "cdrom,floppy,lp,scanner,audio,video,game,adm,sys,wheel,plugdev,disk"
+DIM sGrpList AS String = "cdrom,floppy,lp,scanner,audio,video,games,adm,sys,wheel,plugdev,disk"
 DIM sGrpArr AS String[]
 DIM i AS Integer
 DIM sLabel, sComment, sToolTip AS String
@@ -51,7 +51,7 @@ FOR i = 0 TO sGrpArr.Count - 1
       CASE "video"
       sComment = ("This user is allowed to change video settings")
       bdefval = TRUE
-      CASE "game"
+      CASE "games"
       sComment = ("This user is allowed to play restricted games")
       bdefval = TRUE
       CASE "adm"

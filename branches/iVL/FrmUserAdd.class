@@ -30,6 +30,8 @@ PUBLIC SUB Form_Open()
   END WITH 
     WITH ME
       .tlBanner.Text = "<h3>" & ("Create User Accounts") & "</h3>"
+      .tbPicPath.Visible = FALSE
+      .btBrowse.Visible = FALSE
     END WITH 
     'WAIT 3
     
@@ -63,18 +65,18 @@ PUBLIC SUB Button1_Click()
     END IF
     
     SHELL "echo " & ME.tbUsername.Text & "| grep -e \'[^a-z0-9_-]\'" TO sCHAR
-    SHELL "grep -e ^" & ME.tbUsername.Text & " /mnt/target/etc/passwd" TO sLogE 
+    SHELL "grep -e ^" & ME.tbUsername.Text & ClsGlobal.sTargetMnt &/ "etc/passwd" TO sLogE 
     
    IF sCHAR <> "" THEN
       Message(("Username contains illegal characters"))
-      STOP EVENT 
+      RETURN 
     ELSE IF sLogE <> "" THEN
       Message(("Username already exists"))
-      STOP EVENT 
+      RETURN 
     ELSE   
       IF ME.tbPasswd1.Text = "" THEN 
         Message(("Enter a Password."))
-        STOP EVENT 
+        RETURN 
       ELSE 
         IF ME.tbPasswd1.Text = ME.tbPasswd2.Text THEN 
         
@@ -83,7 +85,8 @@ PUBLIC SUB Button1_Click()
             'SHELL "cd " & sPicdir & " && ln -s root1.png root.face.icon"          ' This needs to go somewhere else
               
             'SHELL "cd " & sPicdir & " ; ln -s default3.png " & ME.tbUsername.Text & ".face.icon"
-            SHELL "cd " & sPicdir & "; ln -s " & tbPicPath.Text & Space(1) & tbUsername.Text & ".face.icon" WAIT 
+            
+            SHELL "cd " & sPicdir & "; ln -s " & Replace(tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & tbUsername.Text & ".face.icon" WAIT 
             
           ENDIF 
           
@@ -94,15 +97,21 @@ PUBLIC SUB Button1_Click()
                   END IF
               NEXT 
                 sGroups = Right(sGroups, Len(sGroups) - 1)
-                Message(sGroups)
+                'Message(sGroups)
                 
                 
                   
           
-          SHELL "chroot /mnt/target groupdel " & ME.tbUsername.Text WAIT 
-          SHELL "chroot /mnt/target groupadd -g " & iUID & Space(1) & ME.tbUsername.Text WAIT 
+          SHELL "chroot /mnt/target  /usr/sbin/groupdel " & ME.tbUsername.Text & " &> /dev/null" WAIT 
+          'SHELL "chroot /mnt/target /usr/sbin/groupadd -g " & iUID & Space(1) & ME.tbUsername.Text WAIT 
+          SHELL "chroot /mnt/target /usr/sbin/groupadd " & ME.tbUsername.Text & " &> /dev/null" WAIT 
           'Message("chroot /mnt/target /usr/sbin/useradd -m -s /bin/bash -u " & iUID & " -g " & ME.tbUsername.Text & " -G " & sGroups & ME.tbUsername.Text)
-          SHELL "chroot /mnt/target /usr/sbin/useradd -m -s /bin/bash -u " & iUID & " -g " & ME.tbUsername.Text & " -G " & sGroups & Space(1) & ME.tbUsername.Text WAIT 
+          'SHELL "chroot /mnt/target  /usr/sbin/useradd -m -s /bin/bash -u " & iUID & " -g " & ME.tbUsername.Text & " -G " & sGroups & Space(1) & ME.tbUsername.Text WAIT 
+          SHELL "chroot /mnt/target /usr/sbin/useradd -m -c " & "\'" & ME.tbRealname.text & "\'" & " -g " & ME.tbUsername.text &
+          " -p " & ME.tbPasswd1.text & " -G " & "\'" & sGroups & "\' " & ME.tbUsername.Text WAIT 
+        '  sDocmd = "useradd -m -c " & "\'" & sname & "\'" & " -g " & slogin & " -p " & ME.txtpass1.Text & 
+       '" -G " & "\'" & sgrparse & "\' " & slogin
+          
           'Message("chroot /mnt/target /sbin/passwdx " & ME.tbUsername.Text & Space(1) & ME.tbPasswd1.Text)
           SHELL "chroot /mnt/target /sbin/passwdx " & ME.tbUsername.Text & Space(1) & ME.tbPasswd1.Text WAIT 
           Message("user " & ME.tbUsername.Text & " was created.")
@@ -135,7 +144,7 @@ PUBLIC SUB Form_Resize()
     .hrSep.Move(4, .tlBanner.top + .tlBanner.Height, .tlBanner.Width)
     .tlExp.Move(4, .hrSep.top + .hrSep.Height + 12, .hrSep.Width)
     .TextLabel2.Move(4, .tlExp.top + .tlExp.Height + 8, MdlObjSizer.get_object_width(.TextLabel2.text) * 2.5)
-    .tbUsername.Move(.TextLabel2.Left + .TextLabel2.Width + 4, .TextLabel2.top, .TextLabel2.Width * 1.75)
+    .tbUsername.Move(.TextLabel2.Left + .TextLabel2.Width + 4, .TextLabel2.top, .TextLabel2.Width * 1.25)
     
     iboxleft = .tbUsername.Left
     iboxwidth = .tbUsername.Width

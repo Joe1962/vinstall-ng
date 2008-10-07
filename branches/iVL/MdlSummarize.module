@@ -52,7 +52,7 @@ DIM i AS Integer
     END IF
     
     IF ClsPkgSel.bCustom = TRUE THEN 
-      sText = sText & "<b>" & ("INSTALL TYPE:") & "</b>" & Space(1) & ("Custom") & "<br>)"
+      sText = sText & "<b>" & ("INSTALL TYPE:") & "</b>" & Space(1) & ("Custom") & "<br>"
       
        sText = sText & "<br><b>" & ("BULK PACKAGES:") & "</b> "
     FOR i = 0 TO ClsPkgSel.arrBulks.Count - 1
