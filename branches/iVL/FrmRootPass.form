@@ -20,14 +20,14 @@
     Text = ("")
     Password = True
   }
-  { tlPass2 TextLabel
-    MoveScaled(2,37,22,4)
-    Text = ("Re-Enter Password")
-  }
   { tbPasswd1 TextBox
     MoveScaled(29,31,21,3.1667)
     Text = ("")
     Password = True
+  }
+  { tlPass2 TextLabel
+    MoveScaled(2,37,22,4)
+    Text = ("Re-Enter Password")
   }
   { tlPass1 TextLabel
     MoveScaled(2,32,22,4)

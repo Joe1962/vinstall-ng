@@ -312,12 +312,13 @@ PUBLIC SUB btnext_Click()
        
     CASE "FrmRootPass"
       FrmRootPass.Button1_Click()
-       frmNext = FrmEmbUsrAdd
+       frmNext = FrmUserAdd
        
        
-    CASE "FrmEmbUsrAdd"
+    CASE "FrmUserAdd"
     
       frmNext = FrmNetConf
+      
       
     CASE "FrmNetConf"
       MdlNetConf.SET_HOSTNAME
