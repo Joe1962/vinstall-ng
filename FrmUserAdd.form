@@ -25,20 +25,9 @@
     Text = ("")
     Password = True
   }
-  { cbUserID ComboBox
-    MoveScaled(16,31,16,3)
-    Text = ("")
-    ReadOnly = True
-    List = [("Auto"), ("Manual")]
-  }
-  { tbUsrID TextBox
-    MoveScaled(34,31,13,3)
-    Visible = False
-    Text = ("")
-  }
   { bUsePic CheckBox
     MoveScaled(2,35,45,3)
-    Text = ("User Picture ID for Login greeting")
+    Text = ("Use Picture ID for Login greeting")
   }
   { tbPicPath TextBox
     MoveScaled(2,39,55,3)
@@ -54,6 +43,11 @@
   { fGroupSel Frame
     MoveScaled(2,44,69,17)
     Text = ("User Rights Management")
+    { btgrpHelp Button
+      MoveScaled(58,2,9,3)
+      Text = ("Help")
+      Picture = Picture["icon:/16/help"]
+    }
   }
   { Button1 Button
     MoveScaled(1,63,14,3)
@@ -67,7 +61,7 @@
   }
   { TextLabel2 TextLabel
     MoveScaled(2,18,12,3)
-    Text = ("Username")
+    Text = ("Login Name")
     Alignment = Align.Normal
   }
   { TextLabel3 TextLabel
@@ -86,11 +80,6 @@
   }
   { hrSep Separator
     MoveScaled(30,8,12,1)
-  }
-  { tlUserID TextLabel
-    MoveScaled(2,31,12,3)
-    Text = ("User ID")
-    Alignment = Align.BottomLeft
   }
   { pbUsrPic PictureBox
     MoveScaled(58,21,8,8)

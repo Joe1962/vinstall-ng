@@ -38,14 +38,14 @@ PUBLIC SUB lbTmZone_Click()
 
 END
 
-PUBLIC SUB Button1_Click()
-' THis is not necessary, since the next button on the main window handles this
-
-  MdlZoneSet.SET_ZONE(ME.lbTmZone.Text)
-  MdlZoneSet.WRITE_CONF()
-  'Message("TimeZone " & ME.lbTmZone.Text & " Was set.")
-  
-END
+' ' ' PUBLIC SUB Button1_Click()
+' ' ' ' THis is not necessary, since the next button on the main window handles this
+' ' ' 
+' ' '   MdlZoneSet.SET_ZONE(ME.lbTmZone.Text)
+' ' '   MdlZoneSet.WRITE_CONF()
+' ' '   'Message("TimeZone " & ME.lbTmZone.Text & " Was set.")
+' ' '   
+' ' ' END
 
 PUBLIC SUB Form_Resize()
 

@@ -34,23 +34,23 @@ msgstr ""
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:405
+#: FMain.class:406
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:425
+#: FMain.class:426
 msgid "Next"
 msgstr ""
 
-#: FMain.class:431
+#: FMain.class:432
 msgid "Back"
 msgstr ""
 
-#: FMain.class:437
+#: FMain.class:438
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:453
+#: FMain.class:454
 msgid "Button1"
 msgstr ""
 

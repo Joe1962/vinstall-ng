@@ -21,10 +21,19 @@ PUBLIC iUID AS Integer = 1000
 
 PUBLIC SUB Form_Open()
   Fmain.frmcurr = ME
+  
+  WITH FMain
+    .FrmCurr = ME
+    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
+    .tvPlan["Conf3"].picture = MdlCore.sNowPic
+    .tvPlan["Conf3"].Selected = TRUE
+  END WITH 
     WITH ME
       .tlBanner.Text = "<h3>" & ("Create User Accounts") & "</h3>"
     END WITH 
-    WAIT 1
+    'WAIT 3
+    
+    
     MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS()
 END 
 
@@ -33,31 +42,63 @@ PUBLIC SUB Button1_Click()
   DIM sCAPS AS String
   DIM sCHAR AS String
   DIM sLogE AS String
-  DIM sPicdir AS String = "/mnt/target/usr/share/apps/kdm/pics/users/"
-  DIM sGroups AS String = "plugdev,disk,cdrom,floppy,lp,scanner,audio,video,games"
+  DIM sPicdir AS String = ClsGlobal.sTargetMnt &/ "usr/share/apps/kdm/pics/users/"
+  DIM sGroups AS String '= '"plugdev,disk,cdrom,floppy,lp,scanner,audio,video,games"
+  DIM cb AS CheckBox
 
+   
+  
   
   IF ME.tbUsername.Text = "" THEN 
-    Message("Enter a UserName")
+    Message(("Enter the login name that this user will use to login to this system."))
   ELSE 
-    SHELL "echo " & ME.tbUsername.Text & "| grep -e \'[A-Z]\'" TO sCAPS
+    'SHELL "echo " & ME.tbUsername.Text & "| grep -e \'[A-Z]\'" TO sCAPS
+    IF ME.tbUsername.text LIKE "*[A-Z]*" THEN
+    'IF ME.tbUsername.textNOT LIKE "*[a-z0-9_-]*" THEN 
+    Message.Error(("Login name field contains illegal characters. Please use only lowercase letters and numbers")) 
+    STOP EVENT 
+    'ELSE IF ME.tbUsernameNOT LIKE "*[a-z0-9_-]*" THEN 
+      
+    
+    END IF
+    
     SHELL "echo " & ME.tbUsername.Text & "| grep -e \'[^a-z0-9_-]\'" TO sCHAR
     SHELL "grep -e ^" & ME.tbUsername.Text & " /mnt/target/etc/passwd" TO sLogE 
-    IF sCAPS <> "" THEN
-      Message("Username contains illegal characters (CAPITAL)")
-    ELSE IF sCHAR <> "" THEN
-      Message("Username contains illegal characters")
+    
+   IF sCHAR <> "" THEN
+      Message(("Username contains illegal characters"))
+      STOP EVENT 
     ELSE IF sLogE <> "" THEN
-      Message("Username already exists")
+      Message(("Username already exists"))
+      STOP EVENT 
     ELSE   
       IF ME.tbPasswd1.Text = "" THEN 
-        Message("Enter a Password.")
+        Message(("Enter a Password."))
+        STOP EVENT 
       ELSE 
         IF ME.tbPasswd1.Text = ME.tbPasswd2.Text THEN 
-          IF IsDir(sPicdir) THEN 
-            SHELL "cd " & sPicdir & " && ln -s root1.png root.face.icon"          
-            SHELL "cd " & sPicdir & " && ln -s default3.png " & ME.tbUsername.Text & ".face.icon"
+        
+          'IF IsDir(sPicdir) THEN 
+          IF bUsePic.Value = TRUE THEN 
+            'SHELL "cd " & sPicdir & " && ln -s root1.png root.face.icon"          ' This needs to go somewhere else
+              
+            'SHELL "cd " & sPicdir & " ; ln -s default3.png " & ME.tbUsername.Text & ".face.icon"
+            SHELL "cd " & sPicdir & "; ln -s " & tbPicPath.Text & Space(1) & tbUsername.Text & ".face.icon" WAIT 
+            
           ENDIF 
+          
+            'COMPILE LIST OF GROUPS THIS USER WILL BELONG TO
+                FOR EACH cb IN MdlUsrAdd.objGrps
+                  IF cb.Value = TRUE THEN 
+                    sGroups = sGroups & "," & cb.Text
+                  END IF
+              NEXT 
+                sGroups = Right(sGroups, Len(sGroups) - 1)
+                Message(sGroups)
+                
+                
+                  
+          
           SHELL "chroot /mnt/target groupdel " & ME.tbUsername.Text WAIT 
           SHELL "chroot /mnt/target groupadd -g " & iUID & Space(1) & ME.tbUsername.Text WAIT 
           'Message("chroot /mnt/target /usr/sbin/useradd -m -s /bin/bash -u " & iUID & " -g " & ME.tbUsername.Text & " -G " & sGroups & ME.tbUsername.Text)
@@ -65,9 +106,7 @@ PUBLIC SUB Button1_Click()
           'Message("chroot /mnt/target /sbin/passwdx " & ME.tbUsername.Text & Space(1) & ME.tbPasswd1.Text)
           SHELL "chroot /mnt/target /sbin/passwdx " & ME.tbUsername.Text & Space(1) & ME.tbPasswd1.Text WAIT 
           Message("user " & ME.tbUsername.Text & " was created.")
-          ME.tbUsername.Clear
-          ME.tbPasswd1.Clear
-          ME.tbPasswd2.Clear
+         btClrFrm_Click() ' clear the form
           INC iUID
         ELSE 
           Message("Passwords do not match")
@@ -80,7 +119,7 @@ PUBLIC SUB Button1_Click()
   SHELL "umount " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
   SHELL "umount " & ClsGlobal.sTargetMnt &/ "proc" WAIT
   Message("Vectorlinux has been installed click OK to reboot")
-  SHELL "reboot"
+  'SHELL "reboot"
 END
   
 
@@ -95,7 +134,7 @@ PUBLIC SUB Form_Resize()
     .tlBanner.Move(4, 4, .ClientWidth - (.tlBanner.left * 2))
     .hrSep.Move(4, .tlBanner.top + .tlBanner.Height, .tlBanner.Width)
     .tlExp.Move(4, .hrSep.top + .hrSep.Height + 12, .hrSep.Width)
-    .TextLabel2.Move(4, .tlExp.top + .tlExp.Height + 8, MdlObjSizer.get_object_width(.TextLabel2.text) * 2)
+    .TextLabel2.Move(4, .tlExp.top + .tlExp.Height + 8, MdlObjSizer.get_object_width(.TextLabel2.text) * 2.5)
     .tbUsername.Move(.TextLabel2.Left + .TextLabel2.Width + 4, .TextLabel2.top, .TextLabel2.Width * 1.75)
     
     iboxleft = .tbUsername.Left
@@ -106,10 +145,12 @@ PUBLIC SUB Form_Resize()
     .tbPasswd1.Move(iboxleft, .TextLabel3.top, iboxwidth)
     .TextLabel4.Move(4, .TextLabel3.top + .TextLabel3.height + 2, .TextLabel2.Width)
     .tbPasswd2.Move(iboxleft, .TextLabel4.top, iboxwidth)
-    .tlUserID.Move(4, .TextLabel4.top + .TextLabel4.Height + 2, .TextLabel2.Width)
-    .cbUserID.Move(iboxleft, .tlUserID.top, iboxwidth * 0.45)
-    .tbUsrID.Move(.cbUserID.Left + .cbUserID.Width + 4, .cbUserID.top, iboxwidth - (.cbUserID.Width + 4))
-    .bUsePic.Move(4, .tbUsrID.top + .tbUsrID.Height + 8, MdlObjSizer.get_object_width(.bUsePic.Text) + 36)
+    '.tlUserID.Move(4, .TextLabel4.top + .TextLabel4.Height + 2, .TextLabel2.Width)
+    '.cbUserID.Move(iboxleft, .tlUserID.top, iboxwidth * 0.45)
+    '.tbUsrID.Move(.cbUserID.Left + .cbUserID.Width + 4, .cbUserID.top, iboxwidth - (.cbUserID.Width + 4))
+    .bUsePic.Move(4, .tbPasswd2.top + .tbPasswd2.Height + 4, MdlObjSizer.get_object_width(.bUsePic.Text) + 36)
+    '.tbPicPath.Move(4,.tb
+    '.bUsePic.Move(4, .tbUsrID.top + .tbUsrID.Height + 8, MdlObjSizer.get_object_width(.bUsePic.Text) + 36)
     .tbPicPath.Move(4, .bUsePic.top + .bUsePic.Height + 2, .TextLabel2.Width + iboxwidth + 8)
     '.tbPicPath.Move(4, .bUsePic.top + .bUsePic.height + 2, .tlBanner.Width - (.btBrowse.Width + 4))
     .btBrowse.Move(.tbPicPath.Left + .tbPicPath.Width + 4, .tbPicPath.top, MdlObjSizer.get_object_width(.btBrowse.text) + 36)
@@ -118,21 +159,7 @@ PUBLIC SUB Form_Resize()
     .btClrFrm.Move(.Button1.Left + .Button1.Width + 4, .Button1.top, MdlObjSizer.get_object_width(.btClrFrm.text) + 36)
     '.pbUsrPic.Move(.tbUsername.Left + (.tbUsername.Width + 2), .tbUsername.top)
     .pbUsrPic.Move(.btBrowse.Left + .btBrowse.Width, tbUsername.top)
-    
-    
-    
-    
-    
-    '.Frame1.Move(4, 4, .ClientWidth - (.Frame1.left * 2), .ClientHeight - (.Frame1.Height * 2))
-'    .TextLabel1.Move(4, 12, .Frame1.Width - (.TextLabel1.Left * 2))
-    
-    ' .TextLabel2.Move(4, .TextLabel1.top + .TextLabel1.Height + 16, 130)
-    ' .tbUsername.Move(.TextLabel2.left + .TextLabel2.Width + 4, .TextLabel2.top, 150)
-    ' .TextLabel3.Move(4, .TextLabel2.top + .TextLabel2.Height + 4, 130)
-    ' .tbPasswd1.Move(.TextLabel3.left + .TextLabel3.Width + 4, .TextLabel3.top, 150)
-    ' .TextLabel4.Move(4, .TextLabel3.top + .TextLabel3.Height + 4, 130)
-    ' .tbPasswd2.Move(.TextLabel4.left + .TextLabel4.Width + 4, .TextLabel4.top, 150)
-    ' .Button1.Move(.TextLabel4.left, .TextLabel4.top + .TextLabel4.Height + 8, MdlObjSizer.get_object_width(.button1.text) + 24)
+    .btgrpHelp.Move(.fGroupSel.Width - (.btgrpHelp.Width + 4), 12)
     
   
     
@@ -146,15 +173,7 @@ PUBLIC SUB tbUsername_KeyPress()
 
 END
 
-PUBLIC SUB cbUserID_Click()
 
-  IF Trim(cbUserID.text) = ("Auto") THEN 
-    ME.tbUsrID.Visible = FALSE
-  ELSE 
-    ME.tbUsrID.Visible = TRUE
-END IF
-
-END
 
 PUBLIC SUB bUsePic_Click()
 
@@ -199,5 +218,39 @@ DIM cb AS CheckBox
       cb.Delete
     NEXT 
     MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS
+
+END
+
+PUBLIC SUB tbPasswd2_LostFocus()
+
+  ' run a test here to see if passwords match
+    IF tbPasswd1.Text <> tbPasswd2.Text THEN 
+      Message.Error(("Your password selections do not match. Please enter the same password twice"))
+    END IF
+    STOP EVENT 
+
+END
+
+PUBLIC SUB tbUsername_KeyRelease()
+
+  IF Key.text = Space(1) THEN 
+    tbUsername.Text = Replace(tbUsername.text, Space(1), "")
+  END IF
+
+END
+
+PUBLIC SUB btBrowse_Enter()
+
+  'Balloon.Info("Test message in a ballooon control here", fGroupSel)
+
+END
+
+PUBLIC SUB btgrpHelp_Click()
+
+  DIM sMsg AS String = "<h3>" & fGroupSel.Text & "</h3>" & "<br><br>" &
+  ("Groups are a way of administering permissions for your users. You grant the user") & "<br>" &
+  ("permission to do certain things by adding them to certain groups.") & "<br><br>" &
+  ("Select which groups you want this user to be a part of here")
+  Message(sMsg, ("OK"))
 
 END
