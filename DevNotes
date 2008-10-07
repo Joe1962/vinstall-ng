@@ -5,6 +5,7 @@ ISSUES / PROBLEMS
     - combobox to select config method
     - textboxes for static IP settings.
         \- wireless settings section must be moved to the right if this happens
+* Item positioning for smaller window resolutions is off (needs testing in smaller window resolutions)
 
         
    
