@@ -1,0 +1,36 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Text = ("")
+  { tlBanner TextLabel
+    MoveScaled(1,1,19,4)
+    Text = ("")
+  }
+  { hrsep Separator
+    MoveScaled(10,6,10,1)
+  }
+  { frmProg Frame
+    MoveScaled(1,9,60,27)
+    Text = ("")
+    { tlCurrPkg TextLabel
+      MoveScaled(2,1,16,3)
+      Text = ("")
+    }
+    { tlCurrStepLbl TextLabel
+      MoveScaled(2,6,15,2.25)
+      Text = ("Current Step")
+    }
+    { pbInstallProg ProgressBar
+      MoveScaled(14,7,9,2)
+      Label = False
+    }
+    { tlCurrPkg2 TextLabel
+      MoveScaled(2,11,11,3)
+      Text = ("Total Progress")
+    }
+    { pbInstallProg2 ProgressBar
+      MoveScaled(14,11,9,3)
+    }
+  }
+}

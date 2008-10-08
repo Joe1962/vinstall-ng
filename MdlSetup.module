@@ -240,4 +240,29 @@ PUBLIC SUB RUN_CREDITS()
     
 END
 
+PUBLIC SUB BEGIN_INSTALLATION()
+  
+  
+   WITH FrmInstallSys
+    .tlBanner.Move(4, 4, .ClientWidth - (.tlBanner.left * 2))
+    .hrsep.Move(4, .tlBanner.top + .tlBanner.Height, .tlBanner.Width)
+    .frmProg.Move(4, .hrsep.top + .hrsep.Height + (.tlBanner.Height * 2), .ClientWidth - (.frmProg.left * 2), .ClientHeight - (.frmProg.top * 2)) '- .tlBanner.Height))
+    .tlCurrPkg.Move(4, 24, .frmProg.Width - (.tlCurrPkg.left * 2))
+    .tlCurrStepLbl.Move(4, .tlCurrPkg.top + .tlCurrPkg.Height + 8, MdlObjSizer.get_object_width(.tlCurrStepLbl.text))
+    .pbInstallProg.Move(.tlCurrStepLbl.Left + .tlCurrStepLbl.Width + 8, .tlCurrStepLbl.top, .frmProg.Width - (.pbInstallProg.Left + (.tlCurrStepLbl.left * 2)))
+    .tlCurrPkg2.Move(4, .tlCurrStepLbl.Top + (.tlCurrStepLbl.Height * 2), MdlObjSizer.get_object_width(.tlCurrPkg2.text))
+    .pbInstallProg2.Move(.tlCurrPkg2.left + .tlCurrPkg2.Width + 8, .tlCurrPkg2.top, .frmProg.Width - (.pbInstallProg2.left + (.tlCurrPkg2.left * 2)))
+    '.pbInstallProg2.Move(4, .tlCurrPkg2.top + .tlCurrPkg2.Height + 2, .frmProg.Width - (.pbInstallProg2.left * 2))
+    
+  END WITH 
+  
+  
+  MdlCore.LOCK_GUI()
+    FrmInstallSys.tlCurrPkg.text = ("Activating swap space")
+  MdlInstallSys.ACTIVATE_SWAP_SPACE()
+    FrmInstallSys.tlCurrPkg.text = ("Preparing filesystems")
+  MdlPartFrmt.PREPARE_ALL_PARTITIONS() ' This will start the install process
+  
+  
+END
 

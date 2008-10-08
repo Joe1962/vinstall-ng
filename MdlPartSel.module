@@ -68,26 +68,28 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
               .Height = 27
               .x = x
               .y = y
-              .Width = MdlObjSizer.get_object_width(.text) * 2.2
+              .Width = MdlObjSizer.get_object_width("/dev/hda1 (100 GB)")
+              '.Width = MdlObjSizer.get_object_width(.text) '* 1.5
             END WITH 
             icol1 = x
-            icol2 = x + tl.Width + 4
+            icol2 = x + (tl.Width * 1.25)
           tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "HEADERS"
             WITH tl
               .text = "<b>" & ("MOUNT POINT") & "</b>"
               .Height = 27
               .x = icol2
               .y = y
-              .Width = MdlObjSizer.get_object_width(.text) * 2.2
+              .Width = MdlObjSizer.get_object_width(.text) '* 1.5
             END WITH 
-              icol3 = tl.x + tl.Width + 4
+              icol3 = tl.left + (tl.Width * 1.5)
+              'iboxwidth = tl.Width
           tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "HEADERS"
             WITH tl
               .text = "<b>" & ("FILESYSTEM") & "</b>"
               .Height = 27
               .x = icol3
               .y = y
-              .Width = MdlObjSizer.get_object_width(.text) * 2.2
+              .Width = MdlObjSizer.get_object_width(.text) '* 1.5
             END WITH 
             y = y + 20
 
@@ -104,18 +106,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
         
         
           sPart = Right(sPartList[i], Len(sPartList[i]) - RInStr(sPartList[i], "/"))
-            'Message.Info(sPart)
             
-              ' ' ' 'make sure the mount point exists
-              ' ' '   IF IsDir("/mnt" &/ sPart) = FALSE THEN 
-              ' ' '     SHELL "mkdir /mnt" &/ sPart WAIT 
-              ' ' '   END IF
-              ' ' '   ' Now mount the partition
-              ' ' '   SHELL "mount " & Trim(sPartList[i]) & Space(1) & "/mnt" &/ sPart WAIT 
-              ' ' '       ' get the size using df -h | grep sPart and some sed
-              ' ' '       ' will embed some bash, but should probabbly be fixed
-              ' ' '   SHELL "export " & sPart & "=$(df -h | grep " & sPart & ") && echo $" & sPart & " | cut -f 2 -d \' \'" TO sSize
-              ' ' '     'Message(sPart & Space(1) & "[ " & Trim(sSize) & " ]")
               SHELL "export size=$(parted " & sDrive & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $size | cut -f 4 -d \' \'" TO sSize
             'create the label and the drop down box here
               tl = NEW TextLabel(FrmPartSel.scrollPartitions) AS "Labels"
@@ -143,7 +134,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 .X = icol2 'FrmPartSel.tlPartRow2.Left
                 .y = y
                 .Height = tl.Height
-                .Width = tl.Width
+                .Width = MdlObjSizer.get_object_width(("Do not format")) * 1.5 'tl.Width"
                 .ReadOnly = TRUE                
                 .Add(("Not Used"))
                 .Add("/")
@@ -238,7 +229,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                       WITH cb
                       .y = y
                       .x = icol2
-                      .width = tl.Width
+                      .width = MdlObjSizer.get_object_width(("Do not format")) * 1.5 'tl.Width
                       .ReadOnly = TRUE
                       .Add("Swap")
                       .Add(("Not Used"))

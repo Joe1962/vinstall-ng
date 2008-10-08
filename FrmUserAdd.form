@@ -4,7 +4,7 @@
   MoveScaled(0,0,76,67)
   Text = ("")
   { tlExp TextLabel
-    MoveScaled(1,9,55,8)
+    MoveScaled(1,9,55,6)
     Text = ("Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue.")
   }
   { tbUsername TextBox

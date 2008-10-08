@@ -94,8 +94,8 @@ PUBLIC SUB Form_Resize()
     .tlTarGet.Move(.YNLiloBox.left, .YNLiloBox.top + (.YNLiloBox.Height * 1.5), MdlObjSizer.get_object_width(.tlTarGet.Text))
     .LiloTarget.Move(.tlTarGet.Left + .tlTarGet.Width + 4, .tlTarGet.top, (.tlBanner.Width / 2.75) - (.tlTarGet.Width + .tlTarGet.left))
     .tlFbMode.Move(.LiloTarget.Left + LiloTarget.Width + 32, .LiloTarget.top, MdlObjSizer.get_object_width(.tlFbMode.text))
-    
-    .FBResolution.Move(.tlFbMode.Left + .tlFbMode.Width + 4, .tlFbMode.top, .ClientWidth - (.FBResolution.Left + (.FBResolution.Width * 0.75)))
+    .FBResolution.Move(.tlFbMode.Left + .tlFbMode.Width + 8, .tlFbMode.top, .ClientWidth - (.FBResolution.Left + 16))
+    '.FBResolution.Move(.tlFbMode.Left + .tlFbMode.Width + 4, .tlFbMode.top, .ClientWidth - (.FBResolution.Left + (.FBResolution.Width * 0.75)))
     cbleft = .FBResolution.Left
     cbwidth = .FBResolution.Width
     .tlTimeOUt.Move(.tlTarGet.left, .tlTarGet.top + .tlTarGet.Height + 12, MdlObjSizer.get_object_width(.tlTimeOUt.Text))

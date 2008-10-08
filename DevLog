@@ -1,1 +1,5 @@
-- Fixed problem with user accounts not getting created.
+- Optimized the following windows for 800x600 resolution (failsafe)
+  + Lilo Config window
+  + Root Password setting
+- Other acheivements
+  + Managed to break the FrmInstallSys window
