@@ -31,7 +31,7 @@ END
 
 PUBLIC SUB Button1_Click()
   IF ME.tbPasswd1.Text = "" THEN 
-    Message("Enter a Password for root.")
+    Message(("Enter a Password for root."))
   ELSE 
     IF ME.tbPasswd1.Text = ME.tbPasswd2.Text THEN 
       'Message("chroot /mnt/target /sbin/passwdx root " & ME.tbPasswd1.Text)
@@ -55,7 +55,8 @@ PUBLIC SUB Form_Resize()
   WITH ME
     .tlbanner.Move(4, 4, .ClientWidth - (.tlBanner.Left * 2))
     .hrSep.Move(4, .tlBanner.top + .tlBanner.Height, .tlBanner.Width)
-    .Frame1.Resize(.ClientWidth - (.Frame1.Left * 2), .tlBanner.Height * 4)
+    '.Frame1.Resize(.ClientWidth - (.Frame1.Left * 2), .tlBanner.Height * 4)
+    .Frame1.Move(4, hrSep.top + .hrSep.Height + .tlBanner.Height, .ClientW - (.Frame1.left * 2), tlbanner.height * 4)
     .tlAboutRoot.Move(4, 24, .Frame1.Width - (.tlAboutRoot.Left * 2), .Frame1.Height - .tlAboutRoot.top - 8)
     .tlPass1.Move(.Frame1.left, .Frame1.top + .Frame1.Height + 24, MdlObjSizer.get_object_width(.tlPass1.text), 21)
     .tlPass2.Move(.tlPass1.Left, .tlPass1.top + .tlPass1.Height + 4, MdlObjSizer.get_object_width(.tlPass2.text), 21)
