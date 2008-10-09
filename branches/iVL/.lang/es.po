@@ -26,13 +26,21 @@ msgstr "Acerca de la cuenta del usuario root"
 msgid "Access Point"
 msgstr "Punto de Accesso (Access Point)"
 
-#: FrmUserAdd.class:112
-msgid "Add Users"
-msgstr "Agregar Usuarios"
+#: MdlSetup.module:261
+msgid "Activating swap space"
+msgstr "Activando la partición Swap"
 
 #: MdlLiloOsList.module:366
 msgid "Add option to boot this Operating system into Text mode"
 msgstr "Añadir una opción para arrancar este sistema operativo en modo texto"
+
+#: MdlUsrAdd.module:73
+msgid "Allow user to mount / un-mount Pendrive (USB Sticks)"
+msgstr "Permitir al usuario montar o desmontar Pendrives (USB Sticks)"
+
+#: MdlUsrAdd.module:76
+msgid "Allow user to mount / un-mount Removable HD Storage Devices"
+msgstr "Permitir al usuario montar o desmontar Dispositivos de Almacenamiento Externos (HD Storage)"
 
 #: MdlNetConf.module:290
 msgid "Automatic settings via DHCP."
@@ -46,7 +54,7 @@ msgstr "Activar esta interfaz automáticamente al arrancar"
 msgid "BULK PACKAGES:"
 msgstr "Paquetes por categoría"
 
-#: FMain.class:431
+#: FMain.class:435
 msgid "Back"
 msgstr "Regresar"
 
@@ -78,11 +86,11 @@ msgstr "Resolución del arranque gráfico (bootsplash) media"
 msgid "Build Date: "
 msgstr "Compilado el: "
 
-#: FMain.class:453
+#: FMain.class:457
 msgid "Button1"
 msgstr ""
 
-#: MdlInstallCustom.module:376
+#: MdlInstallCustom.module:458
 msgid "Calculating package count ... Please wait"
 msgstr "Calculando el número de paquetes ... Por favor espere"
 
@@ -94,15 +102,15 @@ msgstr "No se pudo encontrar SETUP.CONF"
 msgid "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
 msgstr "Selecciona esta casilla si hay una instalación Windows en tu sistema o otra partición Windows (FAT, FAT32, NTFS) que quieras montar automáticamente al arrancar el ordenador"
 
-#: FrmUserAdd.class:116
+#: FrmUserAdd.class:299
 msgid "Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
 msgstr "Elige un nombre único para cada usuario. Es necesario ingresar las contraseñas dos veces. Puedes crear todas las cuentas de usuarios que desees"
 
-#: FrmZoneSet.class:120
+#: FrmZoneSet.class:113
 msgid "Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way."
 msgstr "Elige como funciona el reloj de esta máquina. Si tienes dudas elige UTC/GMT"
 
-#: FrmZoneSet.class:108
+#: FrmZoneSet.class:101
 msgid "Choose the correct timezone for the area in which you live."
 msgstr "Selecciona la zona horaria del área donde vives"
 
@@ -114,6 +122,10 @@ msgstr "Selecciona el modo de instalación"
 msgid "Choose your optional components to install."
 msgstr "Selecciona los componentes opcionales a instalar."
 
+#: FrmUserAdd.class:361
+msgid "Clear Form"
+msgstr "Limpiar Formulario"
+
 #: FrmSelISO.class:73
 msgid "Click"
 msgstr "Haz click en"
@@ -122,7 +134,7 @@ msgstr "Haz click en"
 msgid "Click the button below to create a new user account."
 msgstr "Presiona el botón para crear una nueva cuenta de usuario."
 
-#: FrmZoneSet.class:113
+#: FrmZoneSet.class:106
 msgid "ComboBox1"
 msgstr "-"
 
@@ -134,9 +146,13 @@ msgstr "Nombre Local"
 msgid "Configure and install lilo (Linux Boot Loader)"
 msgstr "Confuguración de LILO"
 
-#: FrmUserAdd.class:153
+#: FrmUserAdd.class:355
 msgid "Create User"
 msgstr "Agregar Usuario"
+
+#: FrmUserAdd.class:32
+msgid "Create User Accounts"
+msgstr "Limiar cuentas de usuario"
 
 #: FrmEmbUsrAdd.class:23
 msgid "Create initial user accounts"
@@ -146,11 +162,11 @@ msgstr "Crear la cuenta del usuario inicial"
 msgid "Current Status"
 msgstr "Estado Actual"
 
-#: FrmInstallSys.class:70
+#: FrmInstallSys.class:75 FrmInstallSysN.class:72
 msgid "Current Step"
 msgstr "Este paso"
 
-#: FrmInstallSys.class:220
+#: FrmInstallSys.class:250
 msgid "Current Step "
 msgstr "Este paso"
 
@@ -178,7 +194,7 @@ msgstr "Opciones de particionado de disco"
 msgid "Disk Partitioning:"
 msgstr "Particionado de disco:"
 
-#: MdlInstallSys.module:167 MdlPartFrmt.module:33 MdlPartSel.module:174
+#: MdlInstallSys.module:167 MdlPartFrmt.module:33 MdlPartSel.module:137
 msgid "Do not format"
 msgstr "No Formatear"
 
@@ -194,6 +210,10 @@ msgstr "No quiero instalar LILO"
 msgid "Dynamic Host Control Protocol"
 msgstr "Dynamic Host Control Protocol (DHCP)"
 
+#: MdlUsrAdd.module:70
+msgid "Elite user"
+msgstr "Usuario Privilegiado"
+
 #: MdlNetConf.module:231
 msgid "Encryption key"
 msgstr "Clave encriptada"
@@ -202,31 +222,43 @@ msgstr "Clave encriptada"
 msgid "Encryption type"
 msgstr "Tipo de encriptación"
 
-#: FrmRootPass.class:129 FrmUserAdd.class:131
+#: FrmRootPass.class:134 FrmUserAdd.class:373
 msgid "Enter Password"
 msgstr "Ingresa contraseña"
+
+#: FrmRootPass.class:34
+msgid "Enter a Password for root."
+msgstr "Ingresa una contraseña para root."
+
+#: FrmUserAdd.class:78
+msgid "Enter a Password."
+msgstr "Ingresa una contraseña."
+
+#: FrmUserAdd.class:55
+msgid "Enter the login name that this user will use to login to this system."
+msgstr "Ingresa el nombre de usuario que será utilizado para registrarse en el sistema."
 
 #: MdlInstallSys.module:506
 msgid "Error occurred while installing"
 msgstr "Ha ocurrido un error durante la instalación"
 
-#: MdlInstallCustom.module:456
+#: MdlInstallCustom.module:538
 msgid "Error while installing "
 msgstr "Error al instalar "
 
-#: MdlInstallCustom.module:67
+#: MdlInstallCustom.module:71
 msgid "Error while installing required system software. "
 msgstr "Error al instalar el software base. "
 
-#: MdlInstallCustom.module:76
+#: MdlInstallCustom.module:80
 msgid "Error while installing system configuration. "
 msgstr "Error al instalar la configuración del sistema. "
 
-#: FMain.class:437
+#: FMain.class:441
 msgid "Exit Installation"
 msgstr "Cancelar Instalación"
 
-#: MdlPartSel.module:86
+#: MdlPartSel.module:88
 msgid "FILESYSTEM"
 msgstr "Sistema de archivos"
 
@@ -266,6 +298,10 @@ msgstr "Dirección de Puerta de Enlace"
 msgid "Gparted was not found on this system. Please install gparted and try again"
 msgstr "No se encontró Gparted en el sistema.  Por favor, instala Gparted y prueba de nuevo"
 
+#: FrmUserAdd.class:262
+msgid "Groups are a way of administering permissions for your users. You grant the user"
+msgstr "Los Grupos son un método para administrar los permisos de los usuarios. Le garantizas a cada usuario"
+
 #: MdlNetConf.module:126
 msgid "Hardware Address"
 msgstr "Dirección MAC"
@@ -274,7 +310,7 @@ msgstr "Dirección MAC"
 msgid "Hardware Configuration"
 msgstr "Configuración de hardware"
 
-#: FrmPartSel.class:189
+#: FrmPartSel.class:189 FrmUserAdd.class:348
 msgid "Help"
 msgstr "Ayuda"
 
@@ -326,11 +362,11 @@ msgstr "Fase de instalación completada.  Vamos a por la configuración"
 msgid "Installing"
 msgstr "Instalando"
 
-#: FrmInstallSys.class:201
+#: FrmInstallSys.class:255
 msgid "Installing ..."
 msgstr "Instalando..."
 
-#: MdlInstallSys.module:822
+#: MdlInstallSys.module:823
 msgid "Installing Final configuration files..."
 msgstr "Instalando los últimos ficheros de configuración ..."
 
@@ -341,6 +377,10 @@ msgstr "Instalando paquetes requeridos ..."
 #: MdlInstallSys.module:736
 msgid "Installing default system configuration and required software."
 msgstr "Instalando el software necesario y las configuraciones por defecto."
+
+#: MdlInstallCustom.module:268
+msgid "Installing user-selected package"
+msgstr "Instalando paquetes selecionados por el usuario"
 
 #: FrmPkgSel.class:51
 msgid "Installs everything in your VectorLinux media to your system"
@@ -382,15 +422,23 @@ msgstr "Linux es un sistema operativo modular. Esto significa que tiene la capac
 msgid "Loading gparted ... Please wait"
 msgstr "Cargando Gparted ... Por favor espere"
 
-#: FrmZoneSet.class:115
+#: FrmZoneSet.class:108
 msgid "LocalTime"
 msgstr "Hora Local"
+
+#: FrmUserAdd.class:367
+msgid "Login Name"
+msgstr "Nombre de usuario"
+
+#: FrmUserAdd.class:60
+msgid "Login name field contains illegal characters. Please use only lowercase letters and numbers"
+msgstr "Tu nombre de usuario contiene caracteres ilegales. Por favor utiliza solo letras minúsculas y números"
 
 #: MdlCore.module:413
 msgid "MINIMUM REQUIREMENTS"
 msgstr "Requerimientos mínimos del sistema"
 
-#: MdlPartSel.module:77
+#: MdlPartSel.module:78
 msgid "MOUNT POINT"
 msgstr "Punto de montaje"
 
@@ -438,7 +486,7 @@ msgstr "Nueva cuenta de usuario"
 msgid "New user accounts can also be created after the install process is completed."
 msgstr "Podras crear nuevas cuentas de usuario también luego del proceso de instalación."
 
-#: FMain.class:425
+#: FMain.class:429
 msgid "Next"
 msgstr "Siguiente"
 
@@ -462,9 +510,13 @@ msgstr "No estoy de acuerdo"
 msgid "None"
 msgstr "Ninguno"
 
-#: MdlInstallSys.module:142 MdlPartSel.module:148
+#: MdlInstallSys.module:142 MdlPartSel.module:139
 msgid "Not Used"
 msgstr "Sin usar"
+
+#: FrmUserAdd.class:263
+msgid "OK"
+msgstr ""
 
 #: MdlSummarize.module:61
 msgid "OPTIONAL PACKAGES:"
@@ -494,7 +546,7 @@ msgstr "Los paquetes han sido instalados en tu sistema. Por favor haga click"
 msgid "Passwords do not match. Please enter the same password twice for accuracy."
 msgstr "Las contraseñas no coinciden. Por favor ingrese la misma contraseña dos veces para estar seguros de que es la que Usted verdaderamente desea."
 
-#: MdlPartSel.module:293
+#: MdlPartSel.module:284
 msgid "Please select only one "
 msgstr "Por favor, seleccione solo una"
 
@@ -502,11 +554,11 @@ msgstr "Por favor, seleccione solo una"
 msgid "Please select the partitions you wish to use and how to use them"
 msgstr "For favor, seleccione las secciones del disco que desea usar, y también como usarlas"
 
-#: FMain.class:231
+#: FMain.class:233
 msgid "Please wait while setup analyses your current partition setup."
 msgstr "Por favor espere mientras el instalador analiza su particonado actual."
 
-#: FMain.class:229
+#: FMain.class:231
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr "Por favor espere, el instalador intentará ejecutar la herramienta de particionado"
 
@@ -518,11 +570,15 @@ msgstr "Conectado"
 msgid "Preparation"
 msgstr "Preparación"
 
+#: MdlSetup.module:263
+msgid "Preparing filesystems"
+msgstr "Preparando sistemas de archivos"
+
 #: FrmNetConf.class:151
 msgid "Primary DNS Server"
 msgstr "Servidor de nombres primario (DNS)"
 
-#: FMain.class:405
+#: FMain.class:409
 msgid "Process Overview"
 msgstr "Resumen del proceso"
 
@@ -530,17 +586,25 @@ msgstr "Resumen del proceso"
 msgid "Prompt Timeout"
 msgstr "Esperar"
 
-#: FrmRootPass.class:118
+#: FrmRootPass.class:139
 msgid "Re-Enter Password"
 msgstr "Vuelva a ingresar la contraseña"
 
-#: FrmUserAdd.class:142
+#: FrmUserAdd.class:379
 msgid "ReEnter Password"
 msgstr "Vuelva a ingresar la contraseña"
+
+#: FrmUserAdd.class:399
+msgid "Real Name"
+msgstr "Nombre Real"
 
 #: MdlCore.module:511
 msgid "Regional Settings"
 msgstr "Opciones de regionalización"
+
+#: MdlUsrAdd.module:64
+msgid "Restricted administrator (backup)"
+msgstr ""
 
 #: MdlNetConf.module:274
 msgid "STATUS:"
@@ -562,6 +626,14 @@ msgstr "Servidor de nombres (DNS) secundario"
 msgid "Seconds"
 msgstr "Segundos"
 
+#: FrmUserAdd.class:338
+msgid "Select"
+msgstr "Seleciona"
+
+#: FrmUserAdd.class:205
+msgid "Select picture for user Login"
+msgstr "Selecciona una imagen para el usuario"
+
 #: FrmWinDrives.class:72
 msgid "Select the windows partitions you would like to mount during boot"
 msgstr "Selecciona qué volumenes usados por Windows deseas acceder desde Linux"
@@ -578,21 +650,21 @@ msgstr "Selecciona esta opción si deseas crear o redimensionar particiones para
 msgid "Select which VectorLinux version you wish to install from the list below"
 msgstr "Selectiona la imagen que deseas instalar de la lista"
 
+#: FrmUserAdd.class:262
+msgid "Select which groups you want this user to be a part of here"
+msgstr "Selecciona los grupos de los que este usuario será parte"
+
 #: FrmPkgsel2.class:21
 msgid "Select your indivirual packages to install."
 msgstr "Selecciona paquetes individuales para su instalación."
 
-#: FrmLangSel.class:81
+#: FrmLangSel.class:88
 msgid "Select your language"
 msgstr "Selecciona tu idioma"
 
-#: FrmRootPass.class:134
+#: FrmRootPass.class:117
 msgid "Set Password"
 msgstr "Define tu contraseña"
-
-#: FrmZoneSet.class:99
-msgid "Set TimeZone"
-msgstr "Configura la Zona Horaria"
 
 #: MdlNetConf.module:179
 msgid "Setup Mode"
@@ -614,7 +686,7 @@ msgstr "El instalador no ha podido encontrar ningún medio instalable en tu sist
 msgid "Several windows found. I will take the first one!"
 msgstr "Se han encontrado varios windows.  Cogeré el primero!"
 
-#: FMain.class:301
+#: FMain.class:303
 msgid "Skipping lilo setup"
 msgstr "Salteando configuración de LILO"
 
@@ -634,7 +706,7 @@ msgstr "Confiduración de IP estática"
 msgid "Subnet Mask"
 msgstr "Máscara de subred"
 
-#: FrmRootPass.class:107 MdlCore.module:512
+#: FrmRootPass.class:108 MdlCore.module:512
 msgid "System Administrator"
 msgstr "Administrador del sistema"
 
@@ -666,7 +738,7 @@ msgstr "-"
 msgid "The following Operating Systems have been detected on this computer. Choose your desired option"
 msgstr "los siguientes Sistemas Operativos han sido detectados en su ordenador. Selecciona la opción deseada"
 
-#: FrmRootPass.class:101
+#: FrmRootPass.class:102
 msgid "The linux root account is pre-assigned to be used as the system administrator's account. This account is used to perform system-wide changes such as software upgrades, managing user accounts etc. \n\nMost other operations do not require administrative priviledges.\nThe root password must be entered twice for ensured accuracy. When choosing a root password, think of something easy for you to remember, but hard for others to guess."
 msgstr "La cuenta root en los sistemas Linux está diseñada como la cuenta del administrador del sistema. Es utilizada para realizar tareas de mantenimiento del sistema globales, tales como actualizaciones de software, gestionar los permisos o crear nuevos usuarios, etc. \n\nLa mayoría de las otras operaciones no requieren privilegios de administrador.\nLa contraseña para el usuario root deberá ser ingresada dos veces para asegurar que es la contraseña deseada. Al elegir la contraseña de administrador, piensa en algo fácil de recordar, pero al mismo tiempo difícil de adivinar para los otros. "
 
@@ -690,7 +762,7 @@ msgstr "Ha ocurrido un error durante la instalación del software opcional. "
 msgid "There has been an error while trying to format "
 msgstr "Ha ocurrido un error mientras se intentaba formatear la partición."
 
-#: FMain.class:231
+#: FMain.class:233
 msgid "This may take a while ..."
 msgstr "Esto puede tardar unos minutos ..."
 
@@ -701,6 +773,38 @@ msgstr "Esta opción es la más segura si quieres conservar otras instalaciones.
 #: FrmPartScheme.class:59
 msgid "This option will overwrite any existing data in the selected partitions"
 msgstr "Esta opción sobreescribirá los datos de las particiones seleccionadas"
+
+#: MdlUsrAdd.module:43
+msgid "This user can access CD/DVD devices"
+msgstr "Este usuario puede utilizar dispositivos de CD/DVD"
+
+#: MdlUsrAdd.module:46
+msgid "This user can access floppy disks"
+msgstr "Este usuario puede utilizar dispositivos de disco blando (floppy disks)"
+
+#: MdlUsrAdd.module:52
+msgid "This user can access scanner devices"
+msgstr "Este usuario puede utilizar dispositivos de scaneado de imágenes"
+
+#: MdlUsrAdd.module:67
+msgid "This user is a system administrator"
+msgstr "Este usuario es administrador del sistema"
+
+#: MdlUsrAdd.module:55
+msgid "This user is allowed to change audio settings"
+msgstr "Este usuario tiene permitido cambiar las configuraciones de audio"
+
+#: MdlUsrAdd.module:58
+msgid "This user is allowed to change video settings"
+msgstr "Este usuario tiene permitido cambiar las configuraciones de video"
+
+#: MdlUsrAdd.module:61
+msgid "This user is allowed to play restricted games"
+msgstr "Este usuario puede jugar juegos restringidos"
+
+#: MdlUsrAdd.module:49
+msgid "This user is allowed to print"
+msgstr "Este usuario puede utilizar dispositivos de impresión"
 
 #: MdlNetConf.module:290
 msgid "This will work if you use a cable or DSL modem on a home network."
@@ -714,11 +818,15 @@ msgstr "Configuración de la Zona Horaria"
 msgid "To install them all, just click next"
 msgstr "Para instalarlos todos, simplemente presiona Sigiente"
 
-#: MdlInstallCustom.module:424
+#: FrmInstallSysN.class:82
+msgid "Total Progress"
+msgstr "Progreso Total"
+
+#: MdlInstallCustom.module:506
 msgid "Total packages to be installed = "
 msgstr "Paquetes a instalar = "
 
-#: FrmInstallSys.class:215
+#: FrmInstallSys.class:240
 msgid "Total progress"
 msgstr "Progreso Total"
 
@@ -726,7 +834,7 @@ msgstr "Progreso Total"
 msgid "Typically, you want to use the largest partition for this."
 msgstr "Normalmente querrías utilizar tu partición más grande para esto."
 
-#: FrmZoneSet.class:115
+#: FrmZoneSet.class:108
 msgid "UTC"
 msgstr "UTC"
 
@@ -734,13 +842,17 @@ msgstr "UTC"
 msgid "Unable to identify distro."
 msgstr "No se pudo detectar la distribución."
 
-#: MdlInstallCustom.module:83
+#: MdlInstallCustom.module:87
 msgid "Unable to install kernels. "
 msgstr "No se pudieron instalar los kernels. "
 
 #: MdlNetConf.module:107
 msgid "Unplugged"
 msgstr "Desconectado"
+
+#: FrmUserAdd.class:326
+msgid "Use Picture ID for Login greeting"
+msgstr "Utilizar una imágen para el usuario en el gestor de sesiones"
 
 #: FrmPartScheme.class:115
 msgid "Use existing disk partitions"
@@ -762,9 +874,17 @@ msgstr "Utilizada para almacenar los ficheros del usuario, documentos, imágenes
 msgid "User Accounts"
 msgstr "Usuarios"
 
-#: FrmUserAdd.class:121
-msgid "Username"
-msgstr "Nombre de usuario"
+#: FrmUserAdd.class:344
+msgid "User Rights Management"
+msgstr "Administración de los Permisos de Usuario"
+
+#: FrmUserAdd.class:74
+msgid "Username already exists"
+msgstr "El nombre de usuario ya existe"
+
+#: FrmUserAdd.class:71
+msgid "Username contains illegal characters"
+msgstr "El nombre de usuario contiene caracteres ilegales"
 
 #: FrmPartSel.class:149
 msgid "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested ammount"
@@ -778,7 +898,7 @@ msgstr "Instalador de VectorLinux"
 msgid "VectorLinux is unable to determine the type of hard disks on your system."
 msgstr "El instalador no ha podido determinar el tipo de disco duro en tu sistema."
 
-#: FrmInstallSys.class:192
+#: FrmInstallSys.class:223
 msgid "Vectorlinux is currently being installed to your system... Please wait"
 msgstr "Por favor espere mientras VectorLinux se instala en su sistema"
 
@@ -790,7 +910,7 @@ msgstr "Vectorlinux se está instalando.  Por favor, espere ..."
 msgid "Vectorlinux is now installed in your system. Please click"
 msgstr "VectorLinux ha sido instalado e tu sistema. Por favor presiona"
 
-#: MdlInstallCustom.module:94
+#: MdlInstallCustom.module:98
 msgid "Vectorlinux is now installed in your system. Please click next to configure it."
 msgstr "Vectorlinux se ha instalado en tu ordenador.  Por favor, clica next para configurarlo."
 
@@ -826,9 +946,13 @@ msgstr "Escribiendo el nuevo /etc/fstab en el sistema"
 msgid "Yes, I Agree to the License Agreement"
 msgstr "De acuerdo"
 
-#: FMain.class:245
+#: FMain.class:247
 msgid "You must select a \"/\" partition. This is the target where the system will install to"
 msgstr "Debes seleccionar una partición para \"/\" (raíz). Allí sera instalado el sistema operativo"
+
+#: FrmUserAdd.class:237
+msgid "Your password selections do not match. Please enter the same password twice"
+msgstr "Sus contraseñas no coinciden. Por favor ingrese la misma contraseña dos veces."
 
 #: MdlDiskPart.module:90
 msgid "a bad install media. Setup cannot continue."
@@ -874,13 +998,17 @@ msgstr "Hora local"
 msgid "localtime-copied-from"
 msgstr "Hora-local-copiada-de"
 
-#: MdlInstallCustom.module:95
+#: MdlInstallCustom.module:99
 msgid "packages have been Installed. Please click next to move on to System Configuration."
 msgstr "paquetes han sido instalados.  Por favor presiona Siguiente para configurar el sistema."
 
-#: MdlPartSel.module:293
+#: MdlPartSel.module:284
 msgid "partition"
 msgstr "partición"
+
+#: FrmUserAdd.class:262
+msgid "permission to do certain things by adding them to certain groups."
+msgstr "permisos para realizar determinadas acciones agregándolo a un grupo o a varios grupos determinados."
 
 #: FrmPartSel.class:149
 msgid "suggested setup for a typical Linux installation"

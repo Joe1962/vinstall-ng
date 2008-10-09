@@ -18,19 +18,19 @@ msgstr "VectorLinux Installer"
 msgid "GUI installer for Vector linux"
 msgstr "GUI installer for Vector linux"
 
-#: FMain.class:229
+#: FMain.class:231
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr "Please wait while setup attempts to run the partitioning utility"
 
-#: FMain.class:231
+#: FMain.class:233
 msgid "Please wait while setup analyses your current partition setup."
 msgstr "Please wait while setup analyses your current partition setup."
 
-#: FMain.class:231
+#: FMain.class:233
 msgid "This may take a while ..."
 msgstr "This may take a while ..."
 
-#: FMain.class:245
+#: FMain.class:247
 msgid ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
@@ -38,27 +38,27 @@ msgstr ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
 
-#: FMain.class:301
+#: FMain.class:303
 msgid "Skipping lilo setup"
 msgstr "Skipping lilo setup per user request"
 
-#: FMain.class:405
+#: FMain.class:409
 msgid "Process Overview"
 msgstr "Process Overview"
 
-#: FMain.class:425
+#: FMain.class:429
 msgid "Next"
 msgstr "Next"
 
-#: FMain.class:431
+#: FMain.class:435
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:437
+#: FMain.class:441
 msgid "Exit Installation"
 msgstr "Exit Installation"
 
-#: FMain.class:453
+#: FMain.class:457
 msgid "Button1"
 msgstr "-"
 
@@ -102,27 +102,32 @@ msgstr "Current Status"
 msgid "TextLabel1"
 msgstr "-"
 
-#: FrmInstallSys.class:70
+#: FrmInstallSys.class:75 FrmInstallSysN.class:72
 msgid "Current Step"
 msgstr "Current Step"
 
-#: FrmInstallSys.class:192
+#: FrmInstallSys.class:223
 msgid "Vectorlinux is currently being installed to your system... Please wait"
 msgstr "Vectorlinux is currently being installed to your system... Please wait"
 
-#: FrmInstallSys.class:201
-msgid "Installing ..."
-msgstr "Installing ..."
-
-#: FrmInstallSys.class:215
+#: FrmInstallSys.class:240
 msgid "Total progress"
 msgstr "Total progress"
 
-#: FrmInstallSys.class:220
+#: FrmInstallSys.class:250
 msgid "Current Step "
 msgstr "Current Step "
 
-#: FrmLangSel.class:81
+#: FrmInstallSys.class:255
+msgid "Installing ..."
+msgstr "Installing ..."
+
+#: FrmInstallSysN.class:82
+#, fuzzy
+msgid "Total Progress"
+msgstr "Total progress"
+
+#: FrmLangSel.class:88
 msgid "Select your language"
 msgstr "Select your language"
 
@@ -383,7 +388,7 @@ msgstr ""
 msgid "Detect and Setup Windows partitions for auto-mounting at boot"
 msgstr "Detect and Setup Windows partitions for auto-mounting at boot"
 
-#: FrmPartSel.class:189
+#: FrmPartSel.class:189 FrmUserAdd.class:348
 msgid "Help"
 msgstr "Help"
 
@@ -435,12 +440,17 @@ msgstr ""
 msgid "About the root account"
 msgstr ""
 
+#: FrmRootPass.class:34
+#, fuzzy
+msgid "Enter a Password for root."
+msgstr "Enter Password"
+
 #: FrmRootPass.class:43
 msgid ""
 "Passwords do not match. Please enter the same password twice for accuracy."
 msgstr ""
 
-#: FrmRootPass.class:101
+#: FrmRootPass.class:102
 msgid ""
 "The linux root account is pre-assigned to be used as the system "
 "administrator's account. This account is used to perform system-wide changes "
@@ -460,21 +470,21 @@ msgstr ""
 "a root password, think of something easy for you to remember, but hard for "
 "others to guess."
 
-#: FrmRootPass.class:107 MdlCore.module:512
+#: FrmRootPass.class:108 MdlCore.module:512
 msgid "System Administrator"
 msgstr "System Administrator"
 
-#: FrmRootPass.class:118
-msgid "Re-Enter Password"
-msgstr "Re-Enter Password"
+#: FrmRootPass.class:117
+msgid "Set Password"
+msgstr "Set Password"
 
-#: FrmRootPass.class:129 FrmUserAdd.class:131
+#: FrmRootPass.class:134 FrmUserAdd.class:373
 msgid "Enter Password"
 msgstr "Enter Password"
 
-#: FrmRootPass.class:134
-msgid "Set Password"
-msgstr "Set Password"
+#: FrmRootPass.class:139
+msgid "Re-Enter Password"
+msgstr "Re-Enter Password"
 
 #: FrmSelISO.class:29 MdlCore.module:250
 msgid "No Installable Media Found"
@@ -510,11 +520,62 @@ msgstr ""
 msgid "Search Again"
 msgstr "Search Again"
 
-#: FrmUserAdd.class:112
-msgid "Add Users"
-msgstr "Add Users"
+#: FrmUserAdd.class:32
+#, fuzzy
+msgid "Create User Accounts"
+msgstr "User Accounts"
 
-#: FrmUserAdd.class:116
+#: FrmUserAdd.class:55
+msgid "Enter the login name that this user will use to login to this system."
+msgstr ""
+
+#: FrmUserAdd.class:60
+msgid ""
+"Login name field contains illegal characters. Please use only lowercase "
+"letters and numbers"
+msgstr ""
+
+#: FrmUserAdd.class:71
+msgid "Username contains illegal characters"
+msgstr ""
+
+#: FrmUserAdd.class:74
+msgid "Username already exists"
+msgstr ""
+
+#: FrmUserAdd.class:78
+#, fuzzy
+msgid "Enter a Password."
+msgstr "Enter Password"
+
+#: FrmUserAdd.class:205
+msgid "Select picture for user Login"
+msgstr ""
+
+#: FrmUserAdd.class:237
+msgid ""
+"Your password selections do not match. Please enter the same password twice"
+msgstr ""
+
+#: FrmUserAdd.class:262
+msgid ""
+"Groups are a way of administering permissions for your users. You grant the "
+"user"
+msgstr ""
+
+#: FrmUserAdd.class:262
+msgid "permission to do certain things by adding them to certain groups."
+msgstr ""
+
+#: FrmUserAdd.class:262
+msgid "Select which groups you want this user to be a part of here"
+msgstr ""
+
+#: FrmUserAdd.class:263
+msgid "OK"
+msgstr ""
+
+#: FrmUserAdd.class:299
 msgid ""
 "Choose a unique name for each user. Enter the password for twice for "
 "accuracy. You can make as many users as you want, and when you are finished "
@@ -524,17 +585,38 @@ msgstr ""
 "accuracy. You can make as many users as you want, and when you are finished "
 "click next to continue."
 
-#: FrmUserAdd.class:121
-msgid "Username"
-msgstr "Username"
+#: FrmUserAdd.class:326
+msgid "Use Picture ID for Login greeting"
+msgstr ""
 
-#: FrmUserAdd.class:142
+#: FrmUserAdd.class:338
+msgid "Select"
+msgstr ""
+
+#: FrmUserAdd.class:344
+msgid "User Rights Management"
+msgstr ""
+
+#: FrmUserAdd.class:355
+msgid "Create User"
+msgstr "Create User"
+
+#: FrmUserAdd.class:361
+msgid "Clear Form"
+msgstr ""
+
+#: FrmUserAdd.class:367
+msgid "Login Name"
+msgstr ""
+
+#: FrmUserAdd.class:379
 msgid "ReEnter Password"
 msgstr "ReEnter Password"
 
-#: FrmUserAdd.class:153
-msgid "Create User"
-msgstr "Create User"
+#: FrmUserAdd.class:399
+#, fuzzy
+msgid "Real Name"
+msgstr "Name"
 
 #: FrmWinDrives.class:72
 msgid "Select the windows partitions you would like to mount during boot"
@@ -544,27 +626,23 @@ msgstr "Select the windows partitions you would like to mount during boot"
 msgid "Timezone configuration"
 msgstr "Timezone configuration"
 
-#: FrmZoneSet.class:99
-msgid "Set TimeZone"
-msgstr "Set TimeZone"
-
-#: FrmZoneSet.class:108
+#: FrmZoneSet.class:101
 msgid "Choose the correct timezone for the area in which you live."
 msgstr "Choose the correct timezone for the area in which you live."
 
-#: FrmZoneSet.class:113
+#: FrmZoneSet.class:106
 msgid "ComboBox1"
 msgstr "-"
 
-#: FrmZoneSet.class:115
+#: FrmZoneSet.class:108
 msgid "LocalTime"
 msgstr "LocalTime"
 
-#: FrmZoneSet.class:115
+#: FrmZoneSet.class:108
 msgid "UTC"
 msgstr "UTC"
 
-#: FrmZoneSet.class:120
+#: FrmZoneSet.class:113
 msgid ""
 "Choose how\n"
 "your hardware clock is set up.\n"
@@ -729,19 +807,19 @@ msgid ""
 "There has been an error while installing optional software to your system."
 msgstr ""
 
-#: MdlInstallCustom.module:67
+#: MdlInstallCustom.module:71
 msgid "Error while installing required system software. "
 msgstr "Error while installing required system software. "
 
-#: MdlInstallCustom.module:76
+#: MdlInstallCustom.module:80
 msgid "Error while installing system configuration. "
 msgstr "Error while installing system configuration. "
 
-#: MdlInstallCustom.module:83
+#: MdlInstallCustom.module:87
 msgid "Unable to install kernels. "
 msgstr "Unable to install kernels. "
 
-#: MdlInstallCustom.module:94
+#: MdlInstallCustom.module:98
 msgid ""
 "Vectorlinux is now installed in your system. Please click next to configure "
 "it."
@@ -749,7 +827,7 @@ msgstr ""
 "Vectorlinux is now installed in your system. Please click next to configure "
 "it."
 
-#: MdlInstallCustom.module:95
+#: MdlInstallCustom.module:99
 msgid ""
 "packages have been Installed. Please click next to move on to System "
 "Configuration."
@@ -757,15 +835,20 @@ msgstr ""
 "packages have been Installed. Please click next to move on to System "
 "Configuration."
 
-#: MdlInstallCustom.module:376
+#: MdlInstallCustom.module:268
+#, fuzzy
+msgid "Installing user-selected package"
+msgstr "Installing Required Packages ..."
+
+#: MdlInstallCustom.module:458
 msgid "Calculating package count ... Please wait"
 msgstr "Calculating package count ... Please wait"
 
-#: MdlInstallCustom.module:424
+#: MdlInstallCustom.module:506
 msgid "Total packages to be installed = "
 msgstr "Total packages to be installed = "
 
-#: MdlInstallCustom.module:456
+#: MdlInstallCustom.module:538
 msgid "Error while installing "
 msgstr "Error while installing "
 
@@ -773,11 +856,11 @@ msgstr "Error while installing "
 msgid "Writing new /etc/fstab to system"
 msgstr "Writing new /etc/fstab to system"
 
-#: MdlInstallSys.module:142 MdlPartSel.module:148
+#: MdlInstallSys.module:142 MdlPartSel.module:139
 msgid "Not Used"
 msgstr "Not Used"
 
-#: MdlInstallSys.module:167 MdlPartFrmt.module:33 MdlPartSel.module:174
+#: MdlInstallSys.module:167 MdlPartFrmt.module:33 MdlPartSel.module:137
 msgid "Do not format"
 msgstr "Do not format"
 
@@ -836,7 +919,7 @@ msgstr "Installing Required Packages ..."
 msgid "Failed to install"
 msgstr "Unable to install kernels. "
 
-#: MdlInstallSys.module:822
+#: MdlInstallSys.module:823
 msgid "Installing Final configuration files..."
 msgstr "Installing final configuration files ..."
 
@@ -976,20 +1059,28 @@ msgstr ""
 msgid "PARTITION"
 msgstr "PARTITION"
 
-#: MdlPartSel.module:77
+#: MdlPartSel.module:78
 msgid "MOUNT POINT"
 msgstr "MOUNT POINT"
 
-#: MdlPartSel.module:86
+#: MdlPartSel.module:88
 msgid "FILESYSTEM"
 msgstr "FYLESYSTEM"
 
-#: MdlPartSel.module:293
+#: MdlPartSel.module:284
 msgid "Please select only one "
 msgstr "Please select only one "
 
-#: MdlPartSel.module:293
+#: MdlPartSel.module:284
 msgid "partition"
+msgstr ""
+
+#: MdlSetup.module:261
+msgid "Activating swap space"
+msgstr ""
+
+#: MdlSetup.module:263
+msgid "Preparing filesystems"
 msgstr ""
 
 #: MdlSummarize.module:28
@@ -1020,6 +1111,56 @@ msgstr "OPTIONAL PACKAGES:"
 msgid "Full"
 msgstr "Full"
 
+#: MdlUsrAdd.module:43
+msgid "This user can access CD/DVD devices"
+msgstr ""
+
+#: MdlUsrAdd.module:46
+msgid "This user can access floppy disks"
+msgstr ""
+
+#: MdlUsrAdd.module:49
+msgid "This user is allowed to print"
+msgstr ""
+
+#: MdlUsrAdd.module:52
+msgid "This user can access scanner devices"
+msgstr ""
+
+#: MdlUsrAdd.module:55
+msgid "This user is allowed to change audio settings"
+msgstr ""
+
+#: MdlUsrAdd.module:58
+msgid "This user is allowed to change video settings"
+msgstr ""
+
+#: MdlUsrAdd.module:61
+msgid "This user is allowed to play restricted games"
+msgstr ""
+
+#: MdlUsrAdd.module:64
+#, fuzzy
+msgid "Restricted administrator (backup)"
+msgstr "System Administrator"
+
+#: MdlUsrAdd.module:67
+#, fuzzy
+msgid "This user is a system administrator"
+msgstr "System Administrator"
+
+#: MdlUsrAdd.module:70
+msgid "Elite user"
+msgstr ""
+
+#: MdlUsrAdd.module:73
+msgid "Allow user to mount / un-mount Pendrive (USB Sticks)"
+msgstr ""
+
+#: MdlUsrAdd.module:76
+msgid "Allow user to mount / un-mount Removable HD Storage Devices"
+msgstr ""
+
 #: MdlWinDrives.module:55
 msgid "Windows Partitions Detected"
 msgstr "Windows Partitions Detected"
@@ -1039,3 +1180,12 @@ msgstr "localtime-copied-from"
 #: MdlZoneSet.module:28
 msgid "localtime"
 msgstr "localtime"
+
+#~ msgid "Add Users"
+#~ msgstr "Add Users"
+
+#~ msgid "Username"
+#~ msgstr "Username"
+
+#~ msgid "Set TimeZone"
+#~ msgstr "Set TimeZone"
