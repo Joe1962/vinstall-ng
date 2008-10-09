@@ -80,25 +80,7 @@ PUBLIC FUNCTION FORMAT_PARTITION(sAddr AS String, sFS AS String) AS Integer ' wi
       CASE "swap"
         sCommand = "mkswap -L swap-space " & sAddr
     END SELECT 
-    
-        ' fix the form
-        
-        iMinFrameH = FrmInstallSys.tlCurrPkg.Height + FrmInstallSys.tlCurrPkg2.Height + frminstallsys.tlCurrStepLbl.Height + FrmInstallSys.pbInstallProg2.Height + FrmInstallSys.tlCurrStepLbl.Height + 36
-    WITH FrmInstallSys
-      .FrmProg.Move(4, .tlBanner.top + .tlBanner.Height + 8, .ClientWidth - (.FrmProg.Left * 2), iMinFrameH)
-      .tlBanner.Move(4, 16, .ClientWidth - (.tlBanner.Left * 2))
-      '.tlBanner.Border = Border.Plain
-      .FrmProg.Move(4, .tlBanner.top + (.tlBanner.Height + 8), .ClientWidth - (.FrmProg.Left * 2))
-      .tlCurrPkg.move(8, 32, .FrmProg.Width - (.tlCurrPkg.Left * 2))
-      .tlCurrStepLbl.Move(.tlCurrPkg.Left, .tlCurrPkg.top + (.tlCurrPkg.Height + 4), MdlObjSizer.get_object_width(.tlCurrStepLbl.Text) + 8, 27)
-      .pbInstallProg.Move(.tlCurrStepLbl.left + (.tlCurrStepLbl.Width), .tlCurrStepLbl.top, .FrmProg.Width - (.tlCurrStepLbl.Width + (.tlcurrsteplbl.left * 2)))
-      .tlCurrPkg2.Move(.tlCurrPkg.Left, .tlCurrPkg.top + (.tlCurrPkg.Height * 2.5), .FrmProg.Width - (.tlCurrPkg.Left * 2))
-      .pbInstallProg2.Move(.tlCurrPkg2.Left, .tlCurrPkg2.top + (.tlCurrPkg2.Height + 2), .tlCurrPkg2.Width, 27)
-      
-      '.pbInstallProg.Move(.tlCurrStepLbl.Left + (.tlCurrStepLbl.Width + 2), .FrmProg.Width - (.tlCurrStepLbl.Width + (.tlCurrStepLbl.left * 2))) '
-      '.pbInstallProg.Move(.tlCurrPkg.Left, .tlCurrPkg.top + (.tlCurrPkg.Height + 2), .tlCurrPkg.Width)
-      
-    END WITH 
+
     
     
     PRINT "Formatting " & sAddr & " to " & sFS
