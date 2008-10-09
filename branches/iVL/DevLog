@@ -1,5 +1,4 @@
-- Optimized the following windows for 800x600 resolution (failsafe)
-  + Lilo Config window
-  + Root Password setting
-- Other acheivements
-  + Managed to break the FrmInstallSys window
+- Implemented keyboard shortcuts for zoneset list
+- Some fixes to the Install window (stalls for a second before the process begins, objects are out of place
+  as the form loads, but then snap into place when the install begins
+  

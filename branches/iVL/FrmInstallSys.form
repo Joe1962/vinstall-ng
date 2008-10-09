@@ -3,7 +3,6 @@
 { Form Form
   MoveScaled(0,0,96,74)
   Text = ("")
-  Maximized = True
   { tlBanner TextLabel
     MoveScaled(1,1,63,7)
     Text = ("Vectorlinux is currently being installed to your system... Please wait")
@@ -11,41 +10,23 @@
   { hrsep Separator
     MoveScaled(2,8,48,2)
   }
-  { FrmProg Frame
-    MoveScaled(1,11,76,34)
-    Text = ("")
-    { pbInstallProg2 ProgressBar
-      MoveScaled(0,18,44,3)
-    }
-    { tlCurrPkg2 TextLabel
-      MoveScaled(1,14,45,3)
-      Text = ("Total progress")
-    }
-    { pbInstallProg ProgressBar
-      MoveScaled(13,10,31,2)
-      Label = False
-    }
-    { tlCurrStepLbl TextLabel
-      MoveScaled(1,9,11,3)
-      Text = ("Current Step ")
-    }
-    { tlCurrPkg TextLabel
-      MoveScaled(1,0,73,6)
-      Text = ("Installing ...")
-    }
+  { pbInstallProg2 ProgressBar
+    MoveScaled(2,35,44,3)
   }
-  { tmCredits #Timer
-    #X = 560
-    #Y = 77
-    Delay = 50
+  { tlCurrPkg2 TextLabel
+    MoveScaled(3,31,45,3)
+    Text = ("Total progress")
   }
-  { scrlCredits ScrollView
-    MoveScaled(2,56,84,5)
-    Border = False
-    ScrollBar = Scroll.None
-    { tlCredits TextLabel
-      MoveScaled(-2,0,46,3.375)
-      Text = ("")
-    }
+  { pbInstallProg ProgressBar
+    MoveScaled(15,27,31,2)
+    Label = False
+  }
+  { tlCurrPkg TextLabel
+    MoveScaled(3,17,73,6)
+    Text = ("Installing ...")
+  }
+  { tlCurrStepLbl TextLabel
+    MoveScaled(3,26,11,3)
+    Text = ("Current Step ")
   }
 }

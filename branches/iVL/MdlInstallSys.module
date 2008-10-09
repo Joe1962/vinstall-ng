@@ -72,7 +72,7 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
     'MdlSetup.RUN_CREDITS() ' Begin scrolling credits
     
       IF ClsPkgSel.bCustom = TRUE THEN 
-        MdlInstallCustom.PERFORM_CUSTOM_INSTALL
+        MdlInstallCustom.PERFORM_CUSTOM_INSTALL()
       ELSE 
         MdlInstallSys.PERFORM_FULL_INSTALL()
       END IF  
@@ -861,6 +861,6 @@ END
 
 PUBLIC SUB process_error(msg AS String)
 
-  sErr = sErr & gb.NewLine & sErr
+'  sErr = sErr & gb.NewLine & sErr
   PRINT MSG
 END 

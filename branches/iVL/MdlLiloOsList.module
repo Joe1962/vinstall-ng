@@ -223,6 +223,7 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
   DIM cbInclude AS CheckBox
   DIM tl AS TextLabel
   DIM sShortAddr AS String
+  
   x = 4
   y = 4
   
@@ -348,7 +349,7 @@ bIncluded = NEW Object[]
               txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "AppendBox"
               WITH txtAppnd
                 
-                .Move(tl.Left + tl.Width + 8, tl.top, FrmLilo.TabStrip1.Width - (tl.Width * 1.5))
+                .Move(tl.Left + tl.Width + 8, tl.top, tl.Width * 1.25)
                 
                 .Height = 27
                 .tag = arrLinux[i]

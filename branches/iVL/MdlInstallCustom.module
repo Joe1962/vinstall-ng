@@ -28,6 +28,7 @@ PRIVATE iPkgNum AS Integer
 PUBLIC SUB PERFORM_CUSTOM_INSTALL()
   
   DIM iRet AS Integer = 0
+  
   WITH FMain
       .tvPlan["Inst1"].Selected = TRUE
       .tvPlan["Inst1"].Picture = MdlCore.sNowPic

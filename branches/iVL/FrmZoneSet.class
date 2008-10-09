@@ -74,3 +74,58 @@ PUBLIC SUB cbHwClock_Click()
   
 
 END
+
+PUBLIC SUB lbTmZone_KeyPress()
+
+
+ 
+  DIM i AS Integer
+  
+  'i = 0
+  IF Key.text > "z" OR Key.text < " " THEN RETURN  ' not searchable
+  
+    i = lbTmZone.Index
+      DO
+        INC i
+          IF i >= lbTmZone.Count THEN i = 0 'back to top
+          IF i = lbTmZone.Index THEN RETURN  ' no other match found
+          IF lbTmZone[i].text LIKE Key.Text & "*" THEN 
+          lbTmZone.Index = i
+          RETURN 
+          END IF
+        LOOP 
+' ' ' ' '       
+' ' ' ' '     
+' ' ' ' '   
+' ' ' ' ' 'Message(lbTmZone[2].text)
+' ' ' ' '   
+' ' ' ' '   lbTmZone.Index = 0
+' ' ' ' '     REPEAT 
+' ' ' ' '       'INC lbTmZone.Index
+' ' ' ' '       
+' ' ' ' '         IF lbTmZone[lbTmZone.Index].text LIKE Key.Text & "*" THEN 
+' ' ' ' '         
+' ' ' ' '           'Message.Info(lbTmZone.text)
+' ' ' ' '           BREAK 
+' ' ' ' '         END IF
+' ' ' ' '         INC lbTmZone.Index
+' ' ' ' '         IF lbTmZone.Index = lbTmZone.Count THEN RETURN ' nothing found
+' ' ' ' '       UNTIL lbTmZone.Index = lbTmZone.Count
+' ' ' ' '     
+
+  ' DIM iScan AS Integer
+  '   IF Key.text > "z" OR Key.text < " " THEN RETURN '  not scannable
+  '   
+  '   iScan = lbTmZone.Index
+  '     DO
+  '       INC iScan
+  '         IF iScan >= lbTmZone.Count THEN iScan = 0 ' back to top
+  '         IF iScan = lbTmZone.Index THEN RETURN ' went back to were we started
+  '         IF lbTmZone[iScan].text LIKE Key.text & "*[*]*" THEN  ' found a match
+  '         lbTmZone.Index = iScan
+  '         END IF
+  '         RETURN 
+  '       LOOP 
+      
+
+END
