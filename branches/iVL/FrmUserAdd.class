@@ -19,6 +19,10 @@
 
 PUBLIC iUID AS Integer = 1000
 
+PRIVATE otl AS Object[]
+PRIVATE otb AS Object[]
+
+
 PUBLIC SUB Form_Open()
   Fmain.frmcurr = ME
   
@@ -34,7 +38,22 @@ PUBLIC SUB Form_Open()
       .btBrowse.Visible = FALSE
     END WITH 
     'WAIT 3
-    
+    otl = NEW Object[]
+    otb = NEW Object[]
+        WITH otl
+        .Add(ME.TextLabel2)
+        .Add(ME.tlRealName)
+        .Add(ME.TextLabel3)
+        .Add(ME.TextLabel4)
+        '.Add(ME.tlRealName)
+      END WITH 
+    WITH otb
+      .Add(ME.tbPasswd1)
+      .Add(ME.tbPasswd2)
+      .Add(ME.tbRealname)
+      .Add(ME.tbUsername)
+    END WITH 
+        
     
     MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS()
 END 
@@ -135,44 +154,98 @@ END
 PUBLIC SUB Form_Resize()
   
   DIM iboxleft AS Integer
-  DIM iboxwidth AS Integer
-  
+  DIM iboxwidth AS Integer = 250
+  DIM cb AS CheckBox
+  DIM icbspace AS Integer
+  DIM icby AS Integer
+  DIM tl AS TextLabel
+  DIM tb AS TextBox
+  DIM itltop, itlbottom AS Integer
+  'iboxleft = 0
+
+   itltop = tlExp.top + tlExp.Height + 8
+    
+    FOR EACH tl IN otl
+      tl.Move(4, itltop, MdlObjSizer.get_object_width(tl.text))
+        IF tl.Width > iboxleft THEN iboxleft = tl.Left + tl.Width + 8
+      itltop = itltop + tl.Height + 4
+      'itlbottom = itltop + tl.Height + 4
+    NEXT 
+    FOR EACH tl IN otl
+      FOR EACH tb IN otb
+        IF tb.tag = tl.tag THEN tb.Move(iboxleft, tl.top, iboxwidth)
+      NEXT 
+    NEXT 
+
+  FOR EACH tb IN otb
+    IF tb.tag = "line4" THEN itlbottom = tl.top + tl.Height + 8
+  NEXT 
+    
 
   WITH ME 
   
     .tlBanner.Move(4, 4, .ClientWidth - (.tlBanner.left * 2))
     .hrSep.Move(4, .tlBanner.top + .tlBanner.Height, .tlBanner.Width)
     .tlExp.Move(4, .hrSep.top + .hrSep.Height + 12, .hrSep.Width)
-    .TextLabel2.Move(4, .tlExp.top + .tlExp.Height + 8, MdlObjSizer.get_object_width(.TextLabel2.text) * 2.5)
-    .tbUsername.Move(.TextLabel2.Left + .TextLabel2.Width + 4, .TextLabel2.top, .TextLabel2.Width * 1.25)
+
     
-    iboxleft = .tbUsername.Left
-    iboxwidth = .tbUsername.Width
-    .tlRealName.Move(4, .TextLabel2.top + .TextLabel2.Height + 2, .TextLabel2.Width)
-    .tbRealname.Move(iboxleft, .tlRealName.top, iboxwidth)
-    .TextLabel3.Move(4, .tlRealName.top + .tlRealName.Height + 2, .TextLabel2.Width)
-    .tbPasswd1.Move(iboxleft, .TextLabel3.top, iboxwidth)
-    .TextLabel4.Move(4, .TextLabel3.top + .TextLabel3.height + 2, MdlObjSizer.get_object_width(.TextLabel4.text))
-    .tbPasswd2.Move(iboxleft, .TextLabel4.top, iboxwidth)
-    '.tlUserID.Move(4, .TextLabel4.top + .TextLabel4.Height + 2, .TextLabel2.Width)
-    '.cbUserID.Move(iboxleft, .tlUserID.top, iboxwidth * 0.45)
-    '.tbUsrID.Move(.cbUserID.Left + .cbUserID.Width + 4, .cbUserID.top, iboxwidth - (.cbUserID.Width + 4))
-    .bUsePic.Move(4, .tbPasswd2.top + .tbPasswd2.Height + 4, MdlObjSizer.get_object_width(.bUsePic.Text) + 36)
-    '.tbPicPath.Move(4,.tb
-    '.bUsePic.Move(4, .tbUsrID.top + .tbUsrID.Height + 8, MdlObjSizer.get_object_width(.bUsePic.Text) + 36)
+    .bUsePic.Move(4, itlbottom, MdlObjSizer.get_object_width(.bUsePic.Text) + 36)
+
     .tbPicPath.Move(4, .bUsePic.top + .bUsePic.Height + 2, .TextLabel2.Width + iboxwidth + 8)
     '.tbPicPath.Move(4, .bUsePic.top + .bUsePic.height + 2, .tlBanner.Width - (.btBrowse.Width + 4))
     .btBrowse.Move(.tbPicPath.Left + .tbPicPath.Width + 4, .tbPicPath.top, MdlObjSizer.get_object_width(.btBrowse.text) + 36)
-    .fGroupSel.Move(4, .tbPicPath.top + .tbPicPath.Height + 4, .ClientW - (.fGroupSel.Left * 2), .ClientH - (.fGroupSel.top + .Button1.Height))
+    .fGroupSel.Move(4, .tbPicPath.top + .tbPicPath.Height + 4, .ClientW - (.fGroupSel.Left * 2), .ClientH - (.fGroupSel.top + (.Button1.Height)))
     .Button1.Move(4, .fGroupSel.top + .fGroupSel.Height + 8, MdlObjSizer.get_object_width(.Button1.Text) + 36)
     .btClrFrm.Move(.Button1.Left + .Button1.Width + 4, .Button1.top, MdlObjSizer.get_object_width(.btClrFrm.text) + 36)
     '.pbUsrPic.Move(.tbUsername.Left + (.tbUsername.Width + 2), .tbUsername.top)
     .pbUsrPic.Move(.btBrowse.Left + .btBrowse.Width, tbUsername.top)
     .btgrpHelp.Move(.fGroupSel.Width - (.btgrpHelp.Width + 4), 12)
     
+        icby = 4
+        icbspace = 24
+        
+        FOR EACH cb IN MdlUsrAdd.objGrps
+          'icbspace = icbspace + cb.Height + 4
+          IF icbspace >= .fGroupSel.Height * 0.75 THEN 
+            icby = icby + 128
+            icbspace = 24
+          END IF
+          cb.Move(icby, icbspace)
+          icbspace = icbspace + cb.Height + 4
+    NEXT
+    
+ 
+        
+      
+        
+    
+    '     FOR EACH tl IN otl
+    '   IF tl.width > iboxleft THEN 
+    '     iboxleft = tl.Left + tl.Width + 8
+    '   END IF
+    ' NEXT 
+          
+          
+          'FOR EACH tb IN otb
+            
+    ' ' '   FOR EACH cb IN MdlUsrAdd.objGrps
+    ' ' '     
+    ' ' '     'icbspace = icbspace + cb.Width + 4
+    ' ' '       IF icbspace >= .fGroupSel.Width * 0.75 THEN 
+    ' ' '         icby = icby + cb.Height * 2
+    ' ' '         icbspace = 4
+    ' ' '       END IF
+    ' ' '          cb.Move(icbspace, icby)
+    ' ' '          icbspace = icbspace + cb.Width + 4
+    ' ' '          
+    ' ' ' NEXT 
+        
+        
+        
+    
   
     
-  END WITH 
+END WITH 
 
 END
 

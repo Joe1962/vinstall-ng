@@ -28,10 +28,8 @@ DIM bdefval AS Boolean
 objGrps = NEW Object[]
 sGrpArr = Split(sGrpList, ",")
 
-'try to resize the window because the frame is too narrow
-  WITH FrmUserAdd
-    .Resize(.Parent.Width, .Parent.Height)
-  END WITH 
+
+
 
 
 y = 24

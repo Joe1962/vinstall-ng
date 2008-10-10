@@ -9,25 +9,25 @@
   }
   { tbUsername TextBox
     MoveScaled(16,18,15,3)
+    Tag = "line1"
     Text = ("")
   }
   { tbRealname TextBox
     MoveScaled(17,21,15,3)
+    Tag = "line2"
     Text = ("")
   }
   { tbPasswd1 TextBox
     MoveScaled(16,24,16,3)
+    Tag = "line3"
     Text = ("")
     Password = True
   }
   { tbPasswd2 TextBox
     MoveScaled(16,27,16,3)
+    Tag = "line4"
     Text = ("")
     Password = True
-  }
-  { bUsePic CheckBox
-    MoveScaled(2,35,45,3)
-    Text = ("Use Picture ID for Login greeting")
   }
   { tbPicPath TextBox
     MoveScaled(2,39,55,3)
@@ -39,6 +39,10 @@
     Visible = False
     Text = ("Select")
     Picture = Picture["icon:/16/directory"]
+  }
+  { bUsePic CheckBox
+    MoveScaled(2,35,45,3)
+    Text = ("Use Picture ID for Login greeting")
   }
   { fGroupSel Frame
     MoveScaled(2,44,69,17)
@@ -61,16 +65,19 @@
   }
   { TextLabel2 TextLabel
     MoveScaled(2,18,12,3)
+    Tag = "line1"
     Text = ("Login Name")
     Alignment = Align.Normal
   }
   { TextLabel3 TextLabel
     MoveScaled(2,24,16,3)
+    Tag = "line3"
     Text = ("Enter Password")
     Alignment = Align.Normal
   }
   { TextLabel4 TextLabel
     MoveScaled(2,27,14,3)
+    Tag = "line4"
     Text = ("ReEnter Password")
     Alignment = Align.Normal
   }
@@ -87,6 +94,7 @@
   }
   { tlRealName TextLabel
     MoveScaled(2,21,12,3)
+    Tag = "line2"
     Text = ("Real Name")
     Alignment = Align.Normal
   }

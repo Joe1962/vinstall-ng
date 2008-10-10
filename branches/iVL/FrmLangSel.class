@@ -56,9 +56,21 @@ PUBLIC SUB lbLangSel_Select()
 
 END
 
-PUBLIC SUB lbLangSel_KeyRelease()
 
- 
-  
+
+PUBLIC SUB lbLangSel_KeyPress()
+
+  DIM i AS Integer
+    IF Key.text > "z" OR Key.text < " " THEN RETURN 
+      i = LAST.index
+      DO
+        INC i
+          IF i > LAST.count - 1 THEN i = 0
+          IF i = LAST.index THEN RETURN 
+          IF LAST[i].text LIKE Key.Text & "*" THEN 
+            LAST.index = i
+            RETURN 
+          END IF
+        LOOP
 
 END

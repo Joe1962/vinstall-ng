@@ -18,6 +18,7 @@
 PRIVATE cbarr AS Object[]
 PRIVATE sText AS String
 PUBLIC txtAppends AS Object[]
+PUBLIC tlappends AS Object[]
 PUBLIC txtNames AS Object[]
 PUBLIC txtInitrds AS Object[]
 PUBLIC iAppendLeft AS Integer
@@ -223,6 +224,7 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
   DIM cbInclude AS CheckBox
   DIM tl AS TextLabel
   DIM sShortAddr AS String
+  DIM iwidth AS Integer = FrmLilo.TabStrip1.Width
   
   x = 4
   y = 4
@@ -231,6 +233,7 @@ txtAppends = NEW Object[]
 txtNames = NEW Object[]
 txtInitrds = NEW Object[]
 bIncluded = NEW Object[]
+tlappends = NEW Object[]
   'FrmLilo.TabStrip1.Count = 1
   
   cbarr = NEW Object[]
@@ -331,6 +334,7 @@ bIncluded = NEW Object[]
                    .text = "initrd-" & sShortAddr
                   END IF
                 .Visible = FALSE
+                iwidth = .Width
               END WITH
                 ME.txtInitrds.Add(txtAppnd)
         
@@ -341,16 +345,19 @@ bIncluded = NEW Object[]
                 .Height = 27
                 .Alignment = Align.Normal
                 .Background = Color.Background
-                
+                .tag = arrLinux[i]
                 ME.iAppendLeft = .x + .Width + 4
                 
               END WITH 
-              
+                tlappends.Add(tl)
               txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "AppendBox"
               WITH txtAppnd
                 
-                .Move(tl.Left + tl.Width + 8, tl.top, tl.Width * 1.25)
-                
+                '.Move(tl.Left + tl.Width + 8, tl.top, tl.Width * 1.25)
+                '.Move(iAppendLeft, tl.top, iwidth - iAppendLeft - 4)
+                '.Move(4, tl.top + tl.Height + 4, FrmLilo.TabStrip1.Width - (.left * 2))
+                '.Move(tl.left + tl.Width + 4, tl.top, tl.Width)
+                .Move(tl.left + tl.Width + 4, tl.top, tl.Width * 0.5)
                 .Height = 27
                 .tag = arrLinux[i]
                 txtAppends.Add(txtAppnd)
@@ -367,7 +374,8 @@ bIncluded = NEW Object[]
                     .text = ("Add option to boot this Operating system into Text mode")
                     .Width = MdlObjSizer.get_object_width(.text) + 36
                     .Height = 27
-                    .Move(4, tl.top + tl.Height + 12)
+                    .Move(4, tl.top + tl.Height + 4)
+                    
                     .tag = arrLinux[i]
                     .Background = Color.Background
                   END WITH 
@@ -390,7 +398,6 @@ bIncluded = NEW Object[]
     
       NEXT 
         
- 
   
   
 END
