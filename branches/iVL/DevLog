@@ -1,5 +1,3 @@
-- Fixed object position issues on LIlo config window and optimized it for 800x600 resolution
-- Implemented keyboard shortcuts for language selection window
-- Fixed problem in full install procedure (some packages (optional) were getting ommitted)
-- Fixed object position / resizing issue with User add form.
-- Updated Binary
+- Added binded mount of /sys, /dev, /proc, /tmp to target dir to allow password changing / setting of root
+  and user passwords
+- Updated binary
