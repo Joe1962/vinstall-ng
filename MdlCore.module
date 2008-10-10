@@ -19,7 +19,8 @@
 
 
 
-PUBLIC sCatPic AS picture = Picture["icon:/16/linux"]
+'PUBLIC sCatPic AS picture = Picture["icon:/16/linux"]
+PUBLIC sCatPic AS Picture = Picture["images/category.png"]
 PUBLIC sToDopic AS Picture = Picture["images/circle.png"]
 PUBLIC sNowPic AS picture = Picture["images/arrow.png"]
 PUBLIC sDonePic AS Picture = Picture["images/check.png"]

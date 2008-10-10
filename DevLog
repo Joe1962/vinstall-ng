@@ -1,3 +1,2 @@
-- Added binded mount of /sys, /dev, /proc, /tmp to target dir to allow password changing / setting of root
-  and user passwords
+- Updated category image for left pane (oMasta)
 - Updated binary
