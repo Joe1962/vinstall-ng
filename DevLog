@@ -1,4 +1,5 @@
-- Implemented keyboard shortcuts for zoneset list
-- Some fixes to the Install window (stalls for a second before the process begins, objects are out of place
-  as the form loads, but then snap into place when the install begins
-  
+- Fixed object position issues on LIlo config window and optimized it for 800x600 resolution
+- Implemented keyboard shortcuts for language selection window
+- Fixed problem in full install procedure (some packages (optional) were getting ommitted)
+- Fixed object position / resizing issue with User add form.
+- Updated Binary

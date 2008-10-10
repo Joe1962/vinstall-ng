@@ -83,6 +83,8 @@ END
 PUBLIC SUB Form_Resize()
 
   DIM cbleft, cbwidth AS Integer
+  DIM tb AS TextBox
+  DIM tl AS TextLabel
 
   WITH ME
     .tlTarGet.Alignment = Align.Normal
@@ -107,9 +109,18 @@ PUBLIC SUB Form_Resize()
     
     .tlList.Move(.tlTimeOUt.left, .tlTimeOUt.top + .tlTimeOUt.Height + 12, .tlBanner.Width)
     
-    .TabStrip1.Move(.tlList.Left, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - (.tlBanner.Height * 8))
+    '.TabStrip1.Move(.tlList.Left, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - (.tlBanner.Height * 8))
+    .TabStrip1.Move(.tlList.Left, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - (.TabStrip1.top) - (.YNLiloBox.Height * 10))
+    '.TabStrip1.Move(4, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.Left * 2), .ClientHeight - (.TabStrip1.top + (.YNLiloBox.height * 3)))
 
   END WITH 
+  FOR EACH tb IN MdlLiloOsList.txtAppends
+    FOR EACH tl IN MdlLiloOsList.tlappends
+      IF tb.tag = tl.tag THEN 
+        tb.Move(tl.left + tl.Width + 4, tl.top, ME.TabStrip1.Width - tb.left - 8)
+      END IF
+    NEXT 
+  NEXT 
 
 END
 

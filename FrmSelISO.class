@@ -175,13 +175,17 @@ PUBLIC SUB Form_Resize()
   WITH ME
     '.Reparent(.Parent)
     '.Resize(.Parent.Width, .Parent.Height)
-    
+    .btResCan.Width = MdlObjSizer.get_object_width(.btResCan.text) + 36
 '    .btNext.Move(.Left + .Width - .btNext.Width - 8, .top + ME.Height - .btNext.Height - 8)
     .tlBanner.Move(4, 8, MdlObjSizer.get_object_width(.tlBanner.text))
     .hrSep.Move(4, .tlBanner.top + .tlBanner.Height - .hrSep.Height, .ClientWidth - (.hrSep.x * 2))
-    .btResCan.Move(.Left + .Width - .btResCan.Width - 8, .top + .tlBanner.Height + 48, MdlObjSizer.get_object_width(.btResCan.text) + 36)
-    .lstInstallableImg.Move(.left + 4, .btResCan.Top, .Width - (.btResCan.Width + 24), 21)
-    .tlDistroDesc.Move(.lstInstallableImg.Left * 2, .lstInstallableImg.top + .lstInstallableImg.Height + 48)
+    .btResCan.Move(.ClientWidth - (.btResCan.Width + 4), .hrSep.top + .hrSep.Height + 24) ', MdlObjSizer.get_object_width(.btResCan.text) + 36)
+    .lstInstallableImg.Move(4, .btResCan.top, .btResCan.Left - (.lstInstallableImg.left * 2))
+    '.btResCan.Move(.Left + .Width - .btResCan.Width - 8, .top + .tlBanner.Height + 48, MdlObjSizer.get_object_width(.btResCan.text) + 36)
+    '.lstInstallableImg.Move(4, .btResCan.top, .ClientWidth - ((.lstInstallableImg.Left * 2) + .btResCan.Left))
+   ' .lstInstallableImg.Move(.left + 4, .btResCan.Top, .Width - (.btResCan.Width + 24), 21)
+    '.tlDistroDesc.Move(.lstInstallableImg.Left * 2, .lstInstallableImg.top + .lstInstallableImg.Height + 48)
+    .tlDistroDesc.Move(4, .lstInstallableImg.top + .lstInstallableImg.Height + 24, .ClientWidth - (.tlDistroDesc.left * 2), .ClientHeight - (.tldistrodesc.top + .btrescan.height))
     '.FullScreen = TRUE
   END WITH 
 

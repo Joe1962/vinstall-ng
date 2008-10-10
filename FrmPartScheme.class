@@ -25,7 +25,9 @@ PUBLIC SUB Form_Resize()
     .hrsep.Move(.tlBanner.left, .tlBanner.top + .tlBanner.Height - (.hrsep.Height), .tlBanner.Width)
     .rbUseExisting.Move(.tlBanner.Left, .tlBanner.Top + .tlBanner.Height + 8)
     .rbEditPartitions.Move(.rbUseExisting.Left, .rbUseExisting.Top + .rbUseExisting.Height + 4)
-    .tlChoiceExp.Move(.rbEditPartitions.Left, .rbEditPartitions.top + .rbEditPartitions.Height * 4, .tlBanner.Width - 10)
+    .tlChoiceExp.MOVE(4, .rbEditPartitions.top + .rbEditPartitions.Height + 8, .ClientWidth - (.tlChoiceExp.Left * 2), .ClientHeight - .tlChoiceExp.top - .rbEditPartitions.height)
+    
+    '.tlChoiceExp.Move(.rbEditPartitions.Left, .rbEditPartitions.top + .rbEditPartitions.Height * 4, .tlBanner.Width - 10)
 
     
   END WITH 
