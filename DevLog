@@ -1,2 +1,3 @@
-- Fixed stall issue @ user account creation window
+- Fixed milisecond multiplier for LILO conf writer module ( units * 10)
+- Corrected problem with user accounts created without UID value
 - Updated binary
