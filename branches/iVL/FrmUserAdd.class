@@ -67,9 +67,8 @@ PUBLIC SUB Button1_Click()
   DIM sGroups AS String '= '"plugdev,disk,cdrom,floppy,lp,scanner,audio,video,games"
   DIM cb AS CheckBox
 
+'Message("Ateempting to create user now")
    
-  
-  
   IF ME.tbUsername.Text = "" THEN 
     Message(("Enter the login name that this user will use to login to this system."))
   ELSE 
@@ -77,14 +76,14 @@ PUBLIC SUB Button1_Click()
     IF ME.tbUsername.text LIKE "*[A-Z]*" THEN
     'IF ME.tbUsername.textNOT LIKE "*[a-z0-9_-]*" THEN 
     Message.Error(("Login name field contains illegal characters. Please use only lowercase letters and numbers")) 
-    STOP EVENT 
+      RETURN 
     'ELSE IF ME.tbUsernameNOT LIKE "*[a-z0-9_-]*" THEN 
       
     
     END IF
     
     SHELL "echo " & ME.tbUsername.Text & "| grep -e \'[^a-z0-9_-]\'" TO sCHAR
-    SHELL "grep -e ^" & ME.tbUsername.Text & ClsGlobal.sTargetMnt &/ "etc/passwd" TO sLogE 
+    SHELL "grep -e ^" & ME.tbUsername.Text & Space(1) & ClsGlobal.sTargetMnt &/ "etc/passwd" TO sLogE 
     
    IF sCHAR <> "" THEN
       Message(("Username contains illegal characters"))
@@ -122,16 +121,21 @@ PUBLIC SUB Button1_Click()
                   
           
             ' need to do some binding for this to work
-            SHELL "mount -o bind /sys " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
-            SHELL "mount -o bind /tmp " & ClsGlobal.sTargetMnt &/ "tmp" WAIT 
-            SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT 
-            SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
-            
-          SHELL "chroot /mnt/target  /usr/sbin/groupdel " & ME.tbUsername.Text & " &> /dev/null" WAIT 
+            PRINT "Mounting system locations with bind options"
+            SHELL "mount -o bind /sys /mnt/target/sys" WAIT 
+            SHELL "mount -o bind /tmp /mnt/target/tmp" WAIT 
+            SHELL "mount -o bind /proc /mnt/target/proc" WAIT 
+            SHELL "mount -o bind /dev /mnt/target/dev" WAIT 
+            PRINT "Deleting old user group"
+          SHELL "chroot /mnt/target  /usr/sbin/groupdel " & ME.tbUsername.Text WAIT '& " &> /dev/null" WAIT 
           'SHELL "chroot /mnt/target /usr/sbin/groupadd -g " & iUID & Space(1) & ME.tbUsername.Text WAIT 
-          SHELL "chroot /mnt/target /usr/sbin/groupadd " & ME.tbUsername.Text & " &> /dev/null" WAIT 
+          PRINT "Creating new user group"
+          SHELL "chroot /mnt/target /usr/sbin/groupadd " & ME.tbUsername.Text WAIT '& " &> /dev/null" WAIT 
+          
           'Message("chroot /mnt/target /usr/sbin/useradd -m -s /bin/bash -u " & iUID & " -g " & ME.tbUsername.Text & " -G " & sGroups & ME.tbUsername.Text)
+          
           'SHELL "chroot /mnt/target  /usr/sbin/useradd -m -s /bin/bash -u " & iUID & " -g " & ME.tbUsername.Text & " -G " & sGroups & Space(1) & ME.tbUsername.Text WAIT 
+          PRINT "Creating new user account"
           SHELL "chroot /mnt/target /usr/sbin/useradd -m -c " & "\'" & ME.tbRealname.text & "\'" & " -g " & ME.tbUsername.text &
           " -p " & ME.tbPasswd1.text & " -G " & "\'" & sGroups & "\' " & ME.tbUsername.Text WAIT 
         '  sDocmd = "useradd -m -c " & "\'" & sname & "\'" & " -g " & slogin & " -p " & ME.txtpass1.Text & 
@@ -150,10 +154,10 @@ PUBLIC SUB Button1_Click()
       ENDIF 
     ENDIF
   ENDIF  
-  SHELL "umount " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
-  SHELL "umount " & ClsGlobal.sTargetMnt &/ "proc" WAIT
-  SHELL "umount " & ClsGlobal.sTargetMnt &/ "tmp" WAIT 
-  SHELL "umount " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
+  SHELL "umount /mnt/target/dev" WAIT 
+  SHELL "umount /mnt/target/proc" WAIT
+  SHELL "umount /mnt/target/tmp" WAIT 
+  SHELL "umount /mnt/target/sys" WAIT 
   
     SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer.") & "<br>" &
     ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
