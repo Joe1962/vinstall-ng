@@ -32,11 +32,6 @@ DIM iWidth AS Integer
 
 
 
-
-
-
-
-
 IF NOT FrmCurr OR FrmCurr = "" THEN FrmCurr = FrmSelISO
 
 
@@ -323,9 +318,19 @@ PUBLIC SUB btnext_Click()
       
       
     CASE "FrmNetConf"
-      MdlNetConf.SET_HOSTNAME
-      MdlNetConf.SET_DNS_ADDRESSES
-      MdlNetConf.WRITE_INET
+      MdlNetConf.SET_HOSTNAME(FrmNetConf.txtHostName.text)
+      MdlNetConf.SET_DNS_ADDRESSES()
+      MdlNetConf.WRITE_INET()
+      
+          'offer to reboot here
+            SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer.") & "<br>" &
+    ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
+      CASE 1
+        SHELL "shutdown -r now"
+      CASE ELSE 
+      RETURN 
+      'STOP EVENT 
+    END SELECT 
 '      frmNext = FrmLilo ' this is already done
         
   END SELECT 

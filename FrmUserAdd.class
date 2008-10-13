@@ -160,14 +160,14 @@ PUBLIC SUB Button1_Click()
   SHELL "umount /mnt/target/tmp" WAIT 
   SHELL "umount /mnt/target/sys" WAIT 
   
-    SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer.") & "<br>" &
-    ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
-      CASE 1
-        SHELL "shutdown -r now"
-      CASE ELSE 
-      RETURN 
-      'STOP EVENT 
-    END SELECT 
+    ' ' ' SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer.") & "<br>" &
+    ' ' ' ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
+    ' ' '   CASE 1
+    ' ' '     SHELL "shutdown -r now"
+    ' ' '   CASE ELSE 
+    ' ' '   RETURN 
+    ' ' '   'STOP EVENT 
+    ' ' ' END SELECT 
       
         
   
