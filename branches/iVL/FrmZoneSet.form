@@ -11,7 +11,7 @@
     Text = ("Choose the correct timezone for the area in which you live.")
   }
   { cbHwClock ComboBox
-    MoveScaled(1,15,34,3.3333)
+    MoveScaled(1,15,34,3.25)
     Text = ("ComboBox1")
     ReadOnly = True
     List = [("LocalTime"), ("UTC")]
@@ -21,7 +21,7 @@
     Text = ("Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way.")
   }
   { tlbanner TextLabel
-    MoveScaled(2,1,27,3.3333)
+    MoveScaled(2,1,27,3.25)
     Text = ("")
   }
   { hrsep Separator

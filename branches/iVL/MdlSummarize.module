@@ -52,6 +52,7 @@ DIM i AS Integer
     END IF
     
     IF ClsPkgSel.bCustom = TRUE THEN 
+        FrmSummary.tlSummary.Height = FrmSummary.scrSumm.Height * 1.5
       sText = sText & "<b>" & ("INSTALL TYPE:") & "</b>" & Space(1) & ("Custom") & "<br>"
       
        sText = sText & "<br><b>" & ("BULK PACKAGES:") & "</b> "
@@ -64,7 +65,9 @@ DIM i AS Integer
       NEXT       
       
     ELSE 
+      FrmSummary.tlSummary.Height = FrmSummary.scrSumm.Height * 0.75
       sText = sText & "<b>" & ("INSTALL TYPE:") & "</b>" & Space(1) & ("Full") & "<br>"
+      
     END IF
 
                

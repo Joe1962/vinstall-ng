@@ -20,12 +20,18 @@
 PUBLIC SUB BEGIN_PROCESS()
   
    DIM sRes AS Integer ' we will need to 
+   DIM sCredits AS String = DConv(File.Load(ClsGlobal.sSourceMnt &/ "CREDIT"))
 
   MdlCore.lock_gui()
   FMain.FrmCurr = ME
 FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
 FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
 FMain.tvPlan["Inst1"].Selected = TRUE
+  Message(sCredits)
+  ' LOAD CREDITS INTO THE TEXTLABEL
+    FrmCredits.TextLabel1.text = "<b>" & "BROUGHT TO YOU BY" & "</b><br><br><br>" &
+      sCredits
+  RETURN 
   
 MdlInstallSys.ACTIVATE_SWAP_SPACE() ' activate swap for the current install
    
@@ -60,7 +66,11 @@ WAIT 2
 PRINT "Begin installation process"
 ' ' ' MdlSetup.BEGIN_INSTALLATION()
 
+' run external credits here
 
+  FrmCredits.Reparent(ME.embCredits)
+  FrmCredits.Show
+  
 
 END
 
@@ -135,6 +145,8 @@ PUBLIC SUB Form_Resize()
       .tlCurrPkg2.Move(4, .pbInstallProg.top + .pbInstallProg.Height + 24, MdlObjSizer.get_object_width(.tlCurrPkg2.text))
       '.pbInstallProg2.Move(8, .tlCurrPkg2.top + .tlCurrPkg2.Height + 2, .FrmProg.Width - (.pbInstallProg2.x * 2))
       .pbInstallProg2.Move(4, tlCurrPkg2.top + .tlCurrPkg2.Height + 2, .hrsep.Width)
+      .embCredits.Move(.ClientWidth / 2 - (.embCredits.Width / 2), .pbInstallProg2.top + .pbInstallProg2.Height + 8)
+      .embCredits.Height = .ClientH - .embCredits.top - 16
   END WITH 
 
 END
