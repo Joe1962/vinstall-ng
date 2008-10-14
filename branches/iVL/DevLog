@@ -1,7 +1,4 @@
-- Cleaned up redundant unnecessary code in MdlCore
-- Cleaned up unnecessary code from the package selection click() event
-- Tuned the package selection description label
-- Added vertically scrolling credits during installation process ;)
-  * (Bug @ Lost&LovingLinux) ** Maybe gb.gtk bug?
+- Began working on new re-designed installation summary window
+   (Not yet complete... but will be better)
 
 

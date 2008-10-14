@@ -263,12 +263,12 @@ PUBLIC SUB btnext_Click()
               frmNext = FrmPkgsel2
             ELSE 
               ' Going for simple install. Now we are ready to summarize
-              MdlSummarize.SUMMARIZE_INSTALL
+' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' '               MdlSummarize.SUMMARIZE_INSTALL
               frmNext = FrmSummary
             END IF
     CASE "FrmPkgsel2"
       ' summarize the build
-        MdlSummarize.SUMMARIZE_INSTALL
+' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' '         MdlSummarize.SUMMARIZE_INSTALL
         frmNext = FrmSummary
         'frmNext = install
     CASE "FrmWinDrives"

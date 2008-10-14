@@ -14,7 +14,55 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmSummary.class:87
-msgid "TextLabel1"
+#: FrmSummary.class:8
+msgid "Custom"
+msgstr ""
+
+#: FrmSummary.class:12
+msgid "Full"
+msgstr ""
+
+#: FrmSummary.class:28
+msgid "Partition"
+msgstr ""
+
+#: FrmSummary.class:30
+msgid "Size / GiB"
+msgstr ""
+
+#: FrmSummary.class:32
+msgid "Filesystem"
+msgstr ""
+
+#: FrmSummary.class:33
+msgid "Do Not Format"
+msgstr ""
+
+#: FrmSummary.class:34
+msgid "Mount Point"
+msgstr ""
+
+#: FrmSummary.class:40
+msgid "Not Used"
+msgstr ""
+
+#: FrmSummary.class:77
+msgid "Package Name"
+msgstr ""
+
+#: FrmSummary.class:79
+msgid "Size / KiB"
+msgstr ""
+
+#: FrmSummary.class:116
+msgid "Installation Type"
+msgstr ""
+
+#: FrmSummary.class:126
+msgid "Partition Selection Scheme"
+msgstr ""
+
+#: FrmSummary.class:136
+msgid "Software Selection"
 msgstr ""
 

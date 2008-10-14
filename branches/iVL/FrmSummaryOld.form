@@ -1,0 +1,19 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Text = ("")
+  { tlBanner TextLabel
+    MoveScaled(1,1,27,10)
+    Text = ("TextLabel1")
+    Alignment = Align.TopLeft
+  }
+  { scrSumm ScrollView
+    MoveScaled(0,12,61,43)
+    { tlSummary TextLabel
+      MoveScaled(2,1,55,85)
+      Expand = True
+      Text = ("TextLabel1")
+    }
+  }
+}
