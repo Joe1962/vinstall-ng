@@ -17,9 +17,6 @@
 
 
 
-
-
-'PUBLIC sCatPic AS picture = Picture["icon:/16/linux"]
 PUBLIC sCatPic AS Picture = Picture["images/category.png"]
 PUBLIC sToDopic AS Picture = Picture["images/circle.png"]
 PUBLIC sNowPic AS picture = Picture["images/arrow.png"]
@@ -39,53 +36,30 @@ PUBLIC SUB FIND_ISO_ON_DRIVE(sDrive AS String)
     SHELL "ls " & ClsGlobal.sSourceMnt & " | grep -i vl* | grep -i iso" TO sResults
       sResults = Trim(sResults)
       'Message(sResults)
-          IF sResults <> "" THEN 
-            IF InStr(sResults, gb.NewLine) THEN 'more than one iso was found... do a loop for each one
+          'IF sResults <> "" THEN 
+          '  IF InStr(sResults, gb.NewLine) THEN 'more than one iso was found... do a loop for each one
               ' this loop will mount each iso and store it's SETUP.CONF to a temp file
                 sISOList = Split(sResults, gb.NewLine)
                   FOR i = 0 TO sISOList.count - 1
                     sIso = Trim(sISOList[i])
-                    SHELL "umount /mnt/loop" WAIT 
+                    
                           IF Exist("/mnt/loop") = FALSE THEN 
                             MKDIR "/mnt/loop"
                           END IF
+                          SHELL "umount /mnt/loop" WAIT 
                     SHELL "mount -o loop " & ClsGlobal.sSourceMnt &/ sISO & Space(1) & "/mnt/loop" WAIT 
                         IF Exist("/mnt/loop/veclinux/SETUP.CONF") = TRUE THEN 
                             IF FrmSelISO.lstInstallableImg.Find(sISO & " on " & sDrive) = -1 THEN 
-                              
-                            File.Save(Temp(siso), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
-                           
-                        FrmSelISO.lstInstallableImg.Add(sISO & " on " & sDrive)
-                        
-                      END IF
+                               File.Save(Temp(siso), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
+                               FrmSelISO.lstInstallableImg.Add(sISO & " on " & sDrive)
+                            END IF
                         END IF
                     SHELL "umount /mnt/loop" WAIT 
                       
                       
                   NEXT 
                 SHELL "umount " & ClsGlobal.sSourceMnt WAIT 
-                  
-                    
-                    
-            ELSE ' only one iso found
-                IF IsDir("/mnt/loop") = FALSE THEN 
-                  TRY MKDIR "/mnt/loop"
-                END IF
-              SHELL "umount /mnt/loop" WAIT 'clear the mount point
-              SHELL "mount -o loop " & ClsGlobal.sSourceMnt &/ sResults & Space(1) & " /mnt/loop" WAIT 
-                  File.Save(Temp(sResults), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
-                'Message(File.Load(Temp(sResults)))
-              SHELL "umount /mnt/loop && umount " & ClsGlobal.sSourceMnt WAIT 
-                  IF FrmSelISO.lstInstallableImg.Find(sResults & " on " & sDrive) = -1 THEN 
-                    FrmSelISO.lstInstallableImg.Add(sResults & " on " & sDrive)
-                  END IF
-            END IF
-            
-          ELSE 'no ISO's found
-            SHELL "umount " & ClsGlobal.sSourceMnt
-            
-          END IF
-            
+
   
 END
 
@@ -99,8 +73,7 @@ DIM sPartList AS String[]
 DIM i AS Integer
 DIM sPartition AS String
 
-'SHELL "sudo /sbin/probepart | grep -e \"*Linux$\" | cut -f 1 -d \' \'" TO sResults
-  'SHELL "/sbin/probepart |grep -i extended | grep -i swap | cut -f 1 -d \' \' | grep /dev" TO sResults 
+
   SHELL "probepart | grep -v -i \'swap\' | grep -v -i \'ext\' |grep \'/dev\'| grep -v \'Disk\'| cut -f 1 -d \' \'" TO sResults
   'Message(sResults)
   sResults = Trim(sResults)
@@ -137,7 +110,8 @@ PUBLIC SUB MEDIA_SCAN()
   SHELL sCmd TO sList
   sList = Trim(sList)
   'PRINT sList
-    IF InStr(sList, Space(1)) > 0 THEN 'there is more than one drive
+      IF Len(sList) < 1 THEN RETURN 
+    'IF InStr(sList, Space(1)) > 0 THEN 'there is more than one drive
     sDrives = Split(sList, Space(1))
             
       FOR i = 0 TO sDrives.count - 1
@@ -162,35 +136,8 @@ PUBLIC SUB MEDIA_SCAN()
               
             END IF
            SHELL "umount " & sMountPoint WAIT    
-          'SHELL "umount /dev/" & sDrive WAIT 
-          'SHELL "umount " & sDrive WAIT 
+
         NEXT 
-      
-    ELSE ' only one drive found
-    sDrive = Trim(sList)
-        SHELL "mount /dev/" & sDrive & Space(1) & sMountPoint WAIT 
-            IF Exist(sMountPoint &/ "veclinux" &/ "SETUP.CONF") = TRUE THEN 
-               sDump = ME.ID_DISTRO(sMountPoint &/ "veclinux" &/ "SETUP.CONF")
-                'save a copy of SETUP.CONF in a temp disposable file
-                  ' this temp file will be named as the last characters of the drive that contains the distro (ie, hda, sg0, sda)
-                   ' this information will be used FOR reading the file later
-                    
-               File.Save(Temp$(sDrive), DConv(File.Load(sMountPoint &/ "veclinux" &/ "SETUP.CONF")))
-               'Message.Info(File.Load(Temp$(sDrive)))
-               
-               IF FrmSelISO.lstInstallableImg.Find(sDump & " on " & "/dev/" & sDrive) = -1 THEN  'only add the entry if not found
-                FrmSelISO.lstInstallableImg.Add(sDump & " on " & "/dev/" & sDrive)
-              END IF
-              
-              
-            END IF
-          'SHELL "umount /dev/" & clsglobal.sSourceMnt WAIT 
-          SHELL "umount " & ClsGlobal.sSourceMnt WAIT 
-      
-  
-    END IF
-    
-    
               
 MdlCore.unlock_gui()
 fmain.btback.Enabled = FALSE

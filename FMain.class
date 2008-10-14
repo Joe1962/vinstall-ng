@@ -36,7 +36,7 @@ IF NOT FrmCurr OR FrmCurr = "" THEN FrmCurr = FrmSelISO
 
 
 
-ME.Maximized = TRUE
+'ME.Maximized = TRUE
 frmInit = MdlCore.frmInit
 'MdlCore.LOCK_GUI
 'frmInit = FrmLangSel
@@ -70,8 +70,8 @@ WITH ME
   .tvPlan.BackColor = Color.transparent
   .tlBanner.Height = .PictureBox1.Height
   '.tvPlan.Width = MdlCore.iLeftWidth
-  ' .Width = 800
-  ' .Height = 600
+   .Width = 800
+   .Height = 600
   
 END WITH 
 

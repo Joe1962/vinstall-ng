@@ -170,28 +170,7 @@ PUBLIC FUNCTION CALCULATE_PACKAGE_COUNT(bCustom AS Boolean) AS Integer
   
   ' let's get a package count
   IF bCustom = FALSE THEN ' DOING A FULL INSTALL
-      ' SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^BULK" TO sDump
-      ' sDump = Trim(sDump)
-      ' sTotalList = sTotalList & sDump
-      ' sTotalList = Trim(sTotalList)
-      ' sDump = ""
-      ' SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^CONF" TO sDump
-      '   sTotalList = sTotalList & gb.NewLine & Trim(sDump)
-      '   sDump = ""
-      ' SHELL "cat " & ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT | grep ^\"PACKAGE NAME\"" TO sDump
-      '   sTotalList = sTotalList & gb.NewLine & Trim(sDump)
-      '   sDump = ""
-      '   SHELL "ls /mnt/cdrom/packages/required/*.t?z" TO sDump
-      '   sTotalList = sTotalList & gb.NewLine & Trim(sDump)
-      '   sDump = ""
-      '   ' split the array
-      '     sList = Split(sTotalList, "\n")
-      '       FOR i = 0 TO sList.Count - 1
-      '         IF sList[i] = "" THEN 
-      '           sList.Delete(i)
-      '         END IF
-      '       NEXT 
-      '       iQTY = sList.Count
+
         SHELL "find " & ClsGlobal.sSourceMnt & " -name \"*.tlz\"|wc -l" TO iQTY
   ELSE ' GOING FOR CUSTOM INSTALL
         
@@ -241,14 +220,31 @@ PUBLIC SUB RUN_CREDITS()
 END
 
 PUBLIC SUB BEGIN_INSTALLATION()
+    DIM sCreditList AS String = File.Load(ClsGlobal.sSourceMnt &/ "CREDIT")
+    DIM sCredit AS String[] = Split(sCreditList, "\n")
+    DIM i AS Integer
     
+        FrmCredits.TextLabel1.text = "<b>" & ("BROUGHT TO YOU BY") & "</b><br><br><br><br><br>" '& sCreditList
+          FOR i = 0 TO sCredit.count - 1
+              IF InStr(sCredit[i], "M0E-lnx") THEN 
+                sCredit[i] = "<b>" & "M0E-lnx" & "</b><br>" & "[ GUI Installer, vpackager, VASMCC ]"
+              ELSE IF InStr(sCredit[i], "Uelsk8s") THEN 
+                sCredit[i] = "<b>" & "Uelsk8s" & "</b><br>" & "[ GUI Installer, ISO Master, vlthemeswitch ]"
+              ELSE IF Left(sCredit[i], Len("Lost")) = "Lost" THEN 
+                sCredit[i] = "Lost-n-LovinLinux" ' " Lost " & " & " & " LovinLinux ""
+              END IF
+            FrmCredits.TextLabel1.text = FrmCredits.TextLabel1.text & sCredit[i] & "<br><br><br>"
+          NEXT 
+        
+  
+  
   
   MdlCore.LOCK_GUI()
     FrmInstallSys.tlCurrPkg.text = ("Activating swap space")
   MdlInstallSys.ACTIVATE_SWAP_SPACE()
     FrmInstallSys.tlCurrPkg.text = ("Preparing filesystems")
   MdlPartFrmt.PREPARE_ALL_PARTITIONS() ' This will start the install process
-  
+    
   
 END
 

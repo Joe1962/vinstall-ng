@@ -29,4 +29,7 @@
     MoveScaled(3,26,11,3)
     Text = ("Current Step ")
   }
+  { embCredits Panel
+    MoveScaled(12,40,52,32)
+  }
 }
