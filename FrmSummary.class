@@ -1,69 +1,95 @@
 ' Gambas class file
-'    This file is part of vinstall-ng
-
-'    vinstall-ng is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
-'    the Free Software Foundation, either version 2 of the License, or
-'    (at your option) any later version.
-
-'    vinstall-ng  is distributed in the hope that it will be useful,
-'    but WITHOUT ANY WARRANTY; without even the implied warranty of
-'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
-
-'    You should have received a copy of the GNU General Public License
-'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
 PUBLIC SUB Form_Open()
 
-  WITH ME
-    .tlBanner.Text = "Setup is about to begin installing " & ClsGlobal.DISTRO & Space(1)&
-    ClsGlobal.VERSION & " to your system. Please verify that the information below is " &
-    "correct and click \"" & FMain.btnext.Text & "\" to continue. If you need to make" &
-    " changes to your settings, click the \"" & FMain.btback.Text & "\" button."
-    .tlBanner.Adjust
-    .tlSummary.Adjust
-  END WITH 
+
+    IF ClsPkgSel.bCustom = TRUE THEN 
+      ME.TextBox1.text = ("Custom")
+      ME.Frame2.Visible = TRUE
+      ME.prepare_packages_summary()
+    ELSE 
+      ME.TextBox1.text = ("Full")
+      ME.Frame2.Visible = FALSE
+      'ME.GridView2.Visible = FALSE
+    END IF
+ME.prepare_partition_summary()
   
-  FMain.FrmCurr = ME
-  FMain.tvPlan["Inst0"].Selected = TRUE
-  FMain.tvPlan["Prep3"].Picture = MdlCore.sDonePic
-  FMain.tvPlan["Inst0"].Picture = MdlCore.sNowPic
-  FMain.btback.Enabled = TRUE
-' FMain.btback.ForeColor = Color.Black
-
-END
-
-PUBLIC SUB Form_Resize()
-
-  WITH ME
-    .tlBanner.Move(4, 4, .ClientWidth - 8)
-    '.scrSumm.Move(4, .tlBanner.top + (.tlBanner.Height + 8), .tlBanner.Width - (.tlBanner.Width / 2), .ClientH - .tlBanner.Height * 1.5)
-    '.tlBanner.Width = .ClientWidth - 8
-    '.scrSumm.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 8, .tlBanner.Width - 300, .ClientHeight - .tlBanner.Height * 1.5)
-    .scrSumm.Move(.tlBanner.left, .tlBanner.top + .tlBanner.Height + 4, .tlBanner.Width - 4, .ClientHeight - .tlBanner.Height * 2)
-    '.scrSumm.Move(4, .tlBanner.top + .tlBanner.Height + 4)
-    '.scrSumm.Resize(.ClientWidth - 16, .tlBanner.top + .tlBanner.Height + 4)
-    .tlSummary.Move(2, 4)
-    '.tlSummary.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 4, .tlBanner.Width, .ClientH - 16)
-    
-    
-    
-    
-  END WITH 
-
-END
-
-PUBLIC SUB Form_Show()
-
-  Form_Open()
   
 
 END
+PUBLIC SUB prepare_partition_summary()
+    DIM iRow AS Integer = 0
+    DIM cb AS ComboBox
+    DIM cb1 AS ComboBox
+    DIM sPart, sMountPnt, sFsType, sSize AS String
+  
+    ME.GridView1.Columns.count = 4
+        ME.GridView1.Columns[0].text = ("Partition")
+        ME.GridView1.Columns[0].Width = MdlObjSizer.get_object_width("/dev/hda1***")
+        ME.GridView1.Columns[1].text = ("Size / GiB")
+        ME.GridView1.Columns[1].Width = MdlObjSizer.get_object_width(ME.GridView1.Columns[1].text) * 1.5
+        ME.GridView1.Columns[2].text = ("Filesystem")
+        ME.GridView1.Columns[2].Width = MdlObjSizer.get_object_width(("Do Not Format")) * 1.5
+        ME.GridView1.Columns[3].text = ("Mount Point")
+        'ME.GridView1.Columns[3].Width = MdlObjSizer.get_object_width(ME.GridView1.Columns[3].text)
 
-PUBLIC SUB Form_Hide()
-
-'  FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
-
+        ' tricky part to list the partitions on the summary
+              FOR EACH cb IN MdlPartSel.oMountPoints
+                
+                IF cb.text <> ("Not Used") THEN 
+                INC ME.GridView1.Rows.Count
+                  sPart = cb.Tag
+                  sMountPnt = cb.Text
+                    FOR EACH cb1 IN MdlPartSel.oFsTypes
+                      IF cb1.tag = cb.tag THEN sFsType = cb1.Text
+                    NEXT 
+                  WITH ME
+                    .GridView1[irow, 0].text = sPart
+                    .GridView1[irow, 1].text = sSize
+                    .GridView1[irow, 2].text = sFsType
+                    .GridView1[irow, 3].Text = sMountPnt
+                  END WITH 
+                INC irow ' increase this value... this determines the row to use.  
+                END IF
+                
+              NEXT 
+              
+              ' ADD SWAP PARTITIONS HERE.
+              
+                      ' NEED TO ADD WINDOWS PARTITIONS HERE
+                      ' MAYBE CREATE A SEPARATED ROW BY SETTING IT'S BG COLOR TO SOMETHING BRIGHT AND BOLD FORE FONTS
+                      
+                        
+    
+        
+    
 END
+
+PUBLIC SUB prepare_packages_summary()
+  
+    DIM irow AS Integer = 0
+    DIM sPkg, sSize AS String
+    DIM cb AS CheckBox
+    
+      WITH ME.GridView2
+      .Columns.count = 2
+      .Columns[0].Title = ("Package Name")
+      .Columns[0].Width = MdlObjSizer.get_object_width(.Columns[0].text) * 2.5
+      .Columns[1].Title = ("Size / KiB")
+      .Columns[1].Width = MdlObjSizer.get_object_width(.Columns[1].Text) * 1.5
+      END WITH 
+          
+            ' add bulk packages
+            FOR EACH cb IN MdlPkgSel.Bulks
+              IF cb.Value = TRUE THEN 
+                INC ME.GridView2.Rows.Count
+                  GridView2[irow, 0].text = cb.Tag
+                  
+                  INC irow
+              END IF
+              
+            NEXT 
+      
+END
+

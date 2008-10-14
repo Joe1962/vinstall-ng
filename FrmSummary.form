@@ -1,19 +1,29 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,64,64)
+  MoveScaled(0,0,73,61)
   Text = ("")
-  { tlBanner TextLabel
-    MoveScaled(1,1,27,10)
-    Text = ("TextLabel1")
-    Alignment = Align.TopLeft
+  { lbInstallType TextLabel
+    MoveScaled(8,4,13,3)
+    Text = ("Installation Type")
   }
-  { scrSumm ScrollView
-    MoveScaled(0,12,61,43)
-    { tlSummary TextLabel
-      MoveScaled(2,1,55,85)
-      Expand = True
-      Text = ("TextLabel1")
+  { TextBox1 TextBox
+    MoveScaled(22,4,14,3)
+    Text = ("")
+  }
+  { Frame1 Frame
+    MoveScaled(2,8,67,19)
+    Text = ("Partition Selection Scheme")
+    { GridView1 GridView
+      MoveScaled(1,2,65,16)
+      Header = GridView.Horizontal
+    }
+  }
+  { Frame2 Frame
+    MoveScaled(2,29,67,29)
+    Text = ("Software Selection")
+    { GridView2 GridView
+      MoveScaled(1,4,65,25)
     }
   }
 }
