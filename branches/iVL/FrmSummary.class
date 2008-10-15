@@ -4,6 +4,14 @@
 PUBLIC SUB Form_Open()
 
 
+FMain.FrmCurr = ME
+  FMain.tvPlan["Inst0"].Selected = TRUE
+  FMain.tvPlan["Prep3"].Picture = MdlCore.sDonePic
+  FMain.tvPlan["Inst0"].Picture = MdlCore.sNowPic
+  FMain.btback.Enabled = TRUE
+
+
+    ME.tlBanner.text = "<h3>" & ("Installation Summary") & "</h3>"
     IF ClsPkgSel.bCustom = TRUE THEN 
       ME.TextBox1.text = ("Custom")
       ME.Frame2.Visible = TRUE
@@ -22,6 +30,7 @@ PUBLIC SUB prepare_partition_summary()
     DIM iRow AS Integer = 0
     DIM cb AS ComboBox
     DIM cb1 AS ComboBox
+    DIM tl AS TextLabel
     DIM sPart, sMountPnt, sFsType, sSize AS String
   
     ME.GridView1.Columns.count = 4
@@ -30,7 +39,7 @@ PUBLIC SUB prepare_partition_summary()
         ME.GridView1.Columns[1].text = ("Size / GiB")
         ME.GridView1.Columns[1].Width = MdlObjSizer.get_object_width(ME.GridView1.Columns[1].text) * 1.5
         ME.GridView1.Columns[2].text = ("Filesystem")
-        ME.GridView1.Columns[2].Width = MdlObjSizer.get_object_width(("Do Not Format")) * 1.5
+        ME.GridView1.Columns[2].Width = MdlObjSizer.get_object_width(("Filesystem")) * 1.25
         ME.GridView1.Columns[3].text = ("Mount Point")
         'ME.GridView1.Columns[3].Width = MdlObjSizer.get_object_width(ME.GridView1.Columns[3].text)
 
@@ -44,6 +53,13 @@ PUBLIC SUB prepare_partition_summary()
                     FOR EACH cb1 IN MdlPartSel.oFsTypes
                       IF cb1.tag = cb.tag THEN sFsType = cb1.Text
                     NEXT 
+                      FOR EACH tl IN MdlPartSel.oPartLbls
+                        IF tl.tag = cb.tag THEN 
+                          sSize = Mid(tl.text, InStr(tl.text, "("), Len(tl.text) - RInStr(tl.text, "("))
+                          sSize = Trim(Replace(sSize, "(", ""))
+                          sSize = Replace(sSize, "GB", "")
+                        END IF
+                      NEXT 
                   WITH ME
                     .GridView1[irow, 0].text = sPart
                     .GridView1[irow, 1].text = sSize
@@ -54,7 +70,73 @@ PUBLIC SUB prepare_partition_summary()
                 END IF
                 
               NEXT 
-              
+    INC GridView1.Rows.Count
+    'INC irow
+      FOR EACH cb IN MdlPartSel.oSwaps
+        IF cb.text <> ("Not Used") THEN 
+          FOR EACH tl IN MdlPartSel.oTlSwapLbls
+            IF tl.tag = cb.tag THEN 
+              sSize = Mid(tl.text, InStr(tl.text, "("), Len(tl.text) - RInStr(tl.text, "("))
+              sSize = Trim(Replace(sSize, "(", ""))
+              sSize = Replace(sSize, "GB", "")
+              sSize = Replace(sSize, "MB", "")
+            END IF
+          NEXT 
+          spart = cb.Tag
+          sFsType = "swap"
+          sMountPnt = ("None")
+          WITH ME
+            .GridView1[irow, 0].text = sPart
+            .GridView1[irow, 0].BackColor = Color.LightBackground
+            .GridView1[irow, 1].text = sSize
+            .GridView1[irow, 1].BackColor = Color.LightBackground
+            .GridView1[irow, 2].text = sFsType 
+            .GridView1[irow, 2].BackColor = Color.LightBackground
+            .GridView1[irow, 3].Text = sMountPnt
+            .GridView1[irow, 3].BackColor = Color.LightBackground
+        END WITH 
+        INC irow
+      END IF
+    NEXT 
+    
+      IF MdlWinDrives.oWMntPoints THEN 
+    
+    INC GridView1.Rows.Count
+    INC GridView1.Rows.Count
+    
+        FOR EACH cb IN MdlWinDrives.oWMntPoints
+          IF cb.text <> ("Do not mount") THEN 
+            sPart = cb.Tag
+            sMountPnt = cb.Text
+              FOR EACH tl IN MdlWinDrives.tlWnParts
+                IF tl.tag = cb.tag THEN 
+                  sSize = Mid(tl.text, InStr(tl.text, "["), Len(tl.text) - RInStr(tl.text, "["))
+                  sSize = Trim(Replace(sSize, "[", ""))
+                  sSize = Replace(sSize, "GB", "")
+                  sSize = Replace(sSize, "MB", "")
+                END IF
+                
+              NEXT 
+            
+            'sFsType = "Windows"
+              SHELL "l=$(probepart | grep " & cb.tag & "); echo $l | cut -f 6,7 -d \' \'" TO sFsType
+          
+            WITH ME
+            .GridView1[irow, 0].text = sPart
+            .GridView1[irow, 0].BackColor = Color.LightGray
+            .GridView1[irow, 1].BackColor = Color.LightGray
+            .GridView1[irow, 1].Text = sSize
+            .GridView1[irow, 2].BackColor = Color.LightGray
+            .GridView1[irow, 2].text = sFsType
+            .GridView1[irow, 3].text = sMountPnt
+            .GridView1[irow, 3].BackColor = Color.LightGray
+          END WITH 
+        INC irow
+      END IF
+    NEXT 
+    
+    END IF
+      
               ' ADD SWAP PARTITIONS HERE.
               
                       ' NEED TO ADD WINDOWS PARTITIONS HERE
@@ -71,25 +153,64 @@ PUBLIC SUB prepare_packages_summary()
     DIM irow AS Integer = 0
     DIM sPkg, sSize AS String
     DIM cb AS CheckBox
+    DIM sDesc AS String
     
       WITH ME.GridView2
-      .Columns.count = 2
+      .Columns.count = 1
       .Columns[0].Title = ("Package Name")
       .Columns[0].Width = MdlObjSizer.get_object_width(.Columns[0].text) * 2.5
-      .Columns[1].Title = ("Size / KiB")
-      .Columns[1].Width = MdlObjSizer.get_object_width(.Columns[1].Text) * 1.5
+      '.Columns[1].Title = ("Size / KiB")
+      '.Columns[1].Width = MdlObjSizer.get_object_width(.Columns[1].Text) * 1.5
       END WITH 
-          
+            GridView2.Rows.count = 2
+          GridView2[0, 0].BackColor = Color.SelectedBackground
+       '   GridView2[0, 1].BackColor = Color.SelectedBackground
+          GridView2[0, 0].Alignment = Align.Center
+          GridView2[0, 0].text = ("BULK PACKAGES")
+          GridView2.MoveTo(1, 0)
+              irow = 1
             ' add bulk packages
             FOR EACH cb IN MdlPkgSel.Bulks
               IF cb.Value = TRUE THEN 
                 INC ME.GridView2.Rows.Count
-                  GridView2[irow, 0].text = cb.Tag
-                  
+                  GridView2[irow, 0].text = File.BaseName(cb.Tag)
+                    
                   INC irow
               END IF
               
             NEXT 
-      
+        INC GridView2.Rows.Count
+        'irow = irow + 1 ' move the selection to the next line
+          GridView2[irow, 0].BackColor = Color.SelectedBackground
+          GridView2[irow, 0].Alignment = Align.Center
+          GridView2[irow, 0].text = ("USER-SELECTED PACKAGES")
+        INC irow
+            
+            FOR EACH cb IN MdlPkgSel.Pkgs
+              IF cb.Value = TRUE THEN 
+                INC GridView2.Rows.Count
+                  GridView2[irow, 0].text = File.BaseName(cb.tag)
+                  'shell "
+                  INC irow
+              END IF
+              
+            NEXT 
 END
 
+
+PUBLIC SUB Form_Resize()
+ME.lbInstallType.Alignment = Align.Normal
+    WITH ME
+      .tlBanner.Move(4, 4, .ClientWidth - (.tlBanner.left * 2))
+      .hrsep.Move(4, .tlBanner.top + .tlBanner.Height, .tlBanner.Width)
+      .lbInstallType.Move(4, .hrsep.top + .hrsep.Height + 8, MdlObjSizer.get_object_width(.lbInstallType.text))
+      .TextBox1.Move(.lbInstallType.Left + .lbInstallType.Width + 8, .lbInstallType.top, .lbInstallType.Width)
+      .Frame1.Move(4, .TextBox1.top + .TextBox1.Height + 12, .ClientWidth - (.Frame1.Left * 2), (.ClientHeight - .Frame1.top) / 2.5)
+      .GridView1.Move(4, 16, .Frame1.Width - (.GridView1.Left * 2), .Frame1.Height - (.GridView1.top * 2))
+      .Frame2.Move(4, .Frame1.top + .Frame1.Height + 8, .ClientWidth - (.Frame2.Left * 2), (.ClientHeight - .Frame2.Top) - .TextBox1.Height)
+      .GridView2.Move(4, 16, .Frame2.Width - (.GridView2.Left * 2), .Frame2.Height - (.GridView2.top * 2))
+      
+      
+    END WITH       
+
+END

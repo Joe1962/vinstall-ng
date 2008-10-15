@@ -4,15 +4,15 @@
   MoveScaled(0,0,73,61)
   Text = ("")
   { lbInstallType TextLabel
-    MoveScaled(8,4,13,3)
+    MoveScaled(8,6,13,3)
     Text = ("Installation Type")
   }
   { TextBox1 TextBox
-    MoveScaled(22,4,14,3)
+    MoveScaled(22,6,14,3)
     Text = ("")
   }
   { Frame1 Frame
-    MoveScaled(2,8,67,19)
+    MoveScaled(2,10,67,19)
     Text = ("Partition Selection Scheme")
     { GridView1 GridView
       MoveScaled(1,2,65,16)
@@ -20,10 +20,17 @@
     }
   }
   { Frame2 Frame
-    MoveScaled(2,29,67,29)
+    MoveScaled(2,31,67,29)
     Text = ("Software Selection")
     { GridView2 GridView
       MoveScaled(1,4,65,25)
     }
+  }
+  { tlBanner TextLabel
+    MoveScaled(1,1,21,4)
+    Text = ("")
+  }
+  { hrsep Separator
+    MoveScaled(27,4,8,1)
   }
 }

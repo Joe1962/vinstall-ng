@@ -1,4 +1,5 @@
-- Began working on new re-designed installation summary window
-   (Not yet complete... but will be better)
+- New Process Sumary window is complete.
+- Fixed problem with user account/shell not being specified (BUG)
+
 
 
