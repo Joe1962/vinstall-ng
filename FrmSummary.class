@@ -36,7 +36,7 @@ PUBLIC SUB prepare_partition_summary()
     ME.GridView1.Columns.count = 4
         ME.GridView1.Columns[0].text = ("Partition")
         ME.GridView1.Columns[0].Width = MdlObjSizer.get_object_width("/dev/hda1***")
-        ME.GridView1.Columns[1].text = ("Size / GiB")
+        ME.GridView1.Columns[1].text = ("Size")
         ME.GridView1.Columns[1].Width = MdlObjSizer.get_object_width(ME.GridView1.Columns[1].text) * 1.5
         ME.GridView1.Columns[2].text = ("Filesystem")
         ME.GridView1.Columns[2].Width = MdlObjSizer.get_object_width(("Filesystem")) * 1.25
@@ -57,7 +57,7 @@ PUBLIC SUB prepare_partition_summary()
                         IF tl.tag = cb.tag THEN 
                           sSize = Mid(tl.text, InStr(tl.text, "("), Len(tl.text) - RInStr(tl.text, "("))
                           sSize = Trim(Replace(sSize, "(", ""))
-                          sSize = Replace(sSize, "GB", "")
+                          'sSize = Replace(sSize, "GB", "")
                         END IF
                       NEXT 
                   WITH ME
@@ -71,19 +71,22 @@ PUBLIC SUB prepare_partition_summary()
                 
               NEXT 
     INC GridView1.Rows.Count
+    INC GridView1.Rows.Count
+    INC GridView1.Rows.Count
     'INC irow
       FOR EACH cb IN MdlPartSel.oSwaps
         IF cb.text <> ("Not Used") THEN 
-          FOR EACH tl IN MdlPartSel.oTlSwapLbls
-            IF tl.tag = cb.tag THEN 
-              sSize = Mid(tl.text, InStr(tl.text, "("), Len(tl.text) - RInStr(tl.text, "("))
-              sSize = Trim(Replace(sSize, "(", ""))
-              sSize = Replace(sSize, "GB", "")
-              sSize = Replace(sSize, "MB", "")
-            END IF
-          NEXT 
+            FOR EACH tl IN MdlPartSel.oTlSwapLbls
+                IF tl.tag = cb.tag THEN 
+                    sSize = Mid(tl.text, InStr(tl.text, "("), Len(tl.text) - RInStr(tl.text, "("))
+                    sSize = Trim(Replace(sSize, "(", ""))
+              'sSize = Replace(sSize, "GB", "")
+              'sSize = Replace(sSize, "MB", "")
+                END IF
+            NEXT 
+          
           spart = cb.Tag
-          sFsType = "swap"
+          sFsType = "Swap"
           sMountPnt = ("None")
           WITH ME
             .GridView1[irow, 0].text = sPart
@@ -96,12 +99,13 @@ PUBLIC SUB prepare_partition_summary()
             .GridView1[irow, 3].BackColor = Color.LightBackground
         END WITH 
         INC irow
+        'INC GridView1.Rows.Count
       END IF
     NEXT 
     
       IF MdlWinDrives.oWMntPoints THEN 
     
-    INC GridView1.Rows.Count
+    'INC GridView1.Rows.Count
     INC GridView1.Rows.Count
     
         FOR EACH cb IN MdlWinDrives.oWMntPoints
