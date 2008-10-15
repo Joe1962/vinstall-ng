@@ -80,7 +80,7 @@ PUBLIC FUNCTION WRITE_LILO_DOT_CONF() AS Integer
       ' to make sure the new changes are written to the MBR, we need a copy in the local running install
     'File.Save("/etc/lilo.conf", sOut)
       ' now run lilo
-  
+  File.Save("/tmp/target_lilo.conf", sOut)
   
 END
 
@@ -90,7 +90,7 @@ PUBLIC SUB EXECUTE_LILO()
   DIM sDump AS String
   
  
-  SHELL "chroot " & ClsGlobal.sTargetMnt & " /sbin/lilo || echo \'FAILED\'" TO sDump
+  SHELL "chroot " & ClsGlobal.sTargetMnt & " /sbin/lilo -v || echo \'FAILED\' " TO sDump
     IF InStr(sDump, "FAILED") > 0 THEN 
       Message.Error(("Lilo returned an error. Please see below") & gb.NewLine & sDump)
     ELSE 
