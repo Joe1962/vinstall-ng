@@ -19,6 +19,8 @@
 PUBLIC oMountPoints AS Object[]
 PUBLIC oFsTypes AS Object[]
 PUBLIC oSwaps AS Object[]
+PUBLIC oPartLbls AS Object[]
+PUBLIC oTlSwapLbls AS Object[]
 
 PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
   
@@ -48,6 +50,8 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
   oFsTypes = NEW Object[]
   oMountPoints = NEW Object[]
   oSwaps = NEW Object[]
+  oPartLbls = NEW Object[]
+  oTlSwapLbls = NEW Object[]
   
   ' We will mount the partitions first, and then figure out their size
   SHELL " probepart | grep -e \" Linux$\" | cut -f 1 -d \' \' | grep /dev" TO sDump1
@@ -125,7 +129,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                   .Alignment = Align.Normal
                   .y = y
                 END WITH 
-                
+                 ME.oPartLbls.Add(tl)
               'create the combobox
               cb = NEW ComboBox(FrmPartSel.scrollPartitions) AS "MountPoints"
                 WITH cb
@@ -225,6 +229,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                       .Alignment = Align.Normal
                       .tag = sSwaps[ii]
                     END WITH   
+                    oTlSwapLbls.Add(tl)
                     cb = NEW ComboBox(FrmPartSel.scrollPartitions) AS "swapsel"
                       WITH cb
                       .y = y
