@@ -182,28 +182,7 @@ PUBLIC SUB btnext_Click()
   
   
   SELECT CASE FrmCurr.Name ' very nice navigation algoritm
-    ' CASE "FrmLangSel"
-    '   sLang = MdlLangSel.ID_LANG(Trim(FrmLangSel.lbLangSel.text))
-    '   System.Language = sLang
-    '   FMain.Close
-    '   'System.Language = sLang
-    '   ''MdlCore.frmInit = FrmSelISO
-    '   'WAIT 
-    '   MdlCore.main
-      
-     
-     
-      ' now need to restart the application to make sure it takes effect
-     
-      'SHELL Application.Args[0] & Space(1) & sLang
-      'QUIT
-      
-    
-      ' SHELL "LC_ALL=" & sLang & Space(1) & "LANG=" & sLang & " ./" & Application.Args[0] & Space(1) & sLang ' this will set the LANG environment to what the user selects and restart the application.
-      'SHELL "LC_ALL=" & Application.Args[1] & Space(1) & "LANG=" & Application.Args[1] & Space(1) & "./" & Application.Args[0] & Space(1) & Trim(FrmLangSel.listbox1.text)
-'      IF ERROR THEN Message(Error.Text & gb.NewLine & Error.where)
-      'QUIT
-      
+
     
     CASE "FrmSelISO"
         sDev = Right(FrmSelISO.lstInstallableImg.Text, Len(FrmSelISO.lstInstallableImg.Text) - InStr(FrmSelISO.lstInstallableImg.text, "/") + 1)
@@ -324,7 +303,8 @@ PUBLIC SUB btnext_Click()
       
           'offer to reboot here
             SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer.") & "<br>" &
-    ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
+            ("Additional system configuration will take place after you reboot your system.Part of this process must be done in text mode.") & "<br>" &
+            ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
       CASE 1
         SHELL "shutdown -r now"
       CASE ELSE 
