@@ -12,15 +12,15 @@
       Text = ("")
       Alignment = Align.Center
     }
+    { PictureBox1 PictureBox
+      MoveScaled(9,0,28,4)
+      Picture = Picture["images/installer.png"]
+      Stretch = True
+    }
   }
   { Timer1 #Timer
     #X = 376
     #Y = 8
     Delay = 50
-  }
-  { PictureBox1 PictureBox
-    MoveScaled(5,2,41,6)
-    Picture = Picture["images/installer.png"]
-    Stretch = True
   }
 }

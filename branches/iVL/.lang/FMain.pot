@@ -30,47 +30,59 @@ msgstr ""
 msgid "You must select a \"/\" partition. This is the target where the system will install to"
 msgstr ""
 
-#: FMain.class:277
+#: FMain.class:271
+msgid "Please select a default operating system to boot before proceeding"
+msgstr ""
+
+#: FMain.class:272
+msgid "Select an entry from this list"
+msgstr ""
+
+#: FMain.class:284
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:307
-msgid "has been installed on your computer."
+#: FMain.class:314
+msgid "has been installed on your computer. Additional system configuration"
 msgstr ""
 
-#: FMain.class:307
-msgid "Additional system configuration will take place after you reboot your system.Part of this process must be done in text mode."
+#: FMain.class:314
+msgid "will take place after you reboot your system.Part of this process must be done in text mode."
 msgstr ""
 
-#: FMain.class:307
+#: FMain.class:314
 msgid "Would you like to reboot your computer now?"
 msgstr ""
 
-#: FMain.class:307
+#: FMain.class:314
 msgid "Yes"
 msgstr ""
 
-#: FMain.class:307
+#: FMain.class:314
 msgid "No"
 msgstr ""
 
-#: FMain.class:401
+#: FMain.class:319
+msgid "The VectorLinux installer will now exit. Enjoy your new operating system"
+msgstr ""
+
+#: FMain.class:411
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:421
+#: FMain.class:431
 msgid "Next"
 msgstr ""
 
-#: FMain.class:427
+#: FMain.class:437
 msgid "Back"
 msgstr ""
 
-#: FMain.class:433
+#: FMain.class:443
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:449
+#: FMain.class:459
 msgid "Button1"
 msgstr ""
 

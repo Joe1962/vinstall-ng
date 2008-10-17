@@ -37,7 +37,7 @@ PUBLIC SUB prepare_partition_summary()
         ME.GridView1.Columns[0].text = ("Partition")
         ME.GridView1.Columns[0].Width = MdlObjSizer.get_object_width("/dev/hda1***")
         ME.GridView1.Columns[1].text = ("Size")
-        ME.GridView1.Columns[1].Width = MdlObjSizer.get_object_width(ME.GridView1.Columns[1].text) * 1.5
+        ME.GridView1.Columns[1].Width = MdlObjSizer.get_object_width(ME.GridView1.Columns[1].text) * 2
         ME.GridView1.Columns[2].text = ("Filesystem")
         ME.GridView1.Columns[2].Width = MdlObjSizer.get_object_width(("Filesystem")) * 1.25
         ME.GridView1.Columns[3].text = ("Mount Point")

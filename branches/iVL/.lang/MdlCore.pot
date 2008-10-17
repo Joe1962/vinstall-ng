@@ -106,7 +106,3 @@ msgstr ""
 msgid "Network Configuration"
 msgstr ""
 
-#: MdlCore.module:463
-msgid "Hardware Configuration"
-msgstr ""
-

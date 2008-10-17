@@ -18,19 +18,19 @@ msgstr "VectorLinux Installer"
 msgid "GUI installer for Vector linux"
 msgstr "GUI installer for Vector linux"
 
-#: FMain.class:226
+#: FMain.class:205
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr "Please wait while setup attempts to run the partitioning utility"
 
-#: FMain.class:228
+#: FMain.class:207
 msgid "Please wait while setup analyses your current partition setup."
 msgstr "Please wait while setup analyses your current partition setup."
 
-#: FMain.class:228
+#: FMain.class:207
 msgid "This may take a while ..."
 msgstr "This may take a while ..."
 
-#: FMain.class:242
+#: FMain.class:221
 msgid ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
@@ -38,73 +38,70 @@ msgstr ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
 
-#: FMain.class:298
+#: FMain.class:271
+msgid "Please select a default operating system to boot before proceeding"
+msgstr ""
+
+#: FMain.class:272
+msgid "Select an entry from this list"
+msgstr ""
+
+#: FMain.class:284
 msgid "Skipping lilo setup"
 msgstr "Skipping lilo setup per user request"
 
-#: FMain.class:327
+#: FMain.class:314
 #, fuzzy
-msgid "has been installed on your computer."
+msgid "has been installed on your computer. Additional system configuration"
 msgstr "Packages have been installed to your system. Please click"
 
-#: FMain.class:327
+#: FMain.class:314
+msgid ""
+"will take place after you reboot your system.Part of this process must be "
+"done in text mode."
+msgstr ""
+
+#: FMain.class:314
 msgid "Would you like to reboot your computer now?"
 msgstr ""
 
-#: FMain.class:327
+#: FMain.class:314
 msgid "Yes"
 msgstr ""
 
-#: FMain.class:327
+#: FMain.class:314
 #, fuzzy
 msgid "No"
 msgstr "None"
 
-#: FMain.class:421
+#: FMain.class:319
+msgid ""
+"The VectorLinux installer will now exit. Enjoy your new operating system"
+msgstr ""
+
+#: FMain.class:411
 msgid "Process Overview"
 msgstr "Process Overview"
 
-#: FMain.class:441
+#: FMain.class:431
 msgid "Next"
 msgstr "Next"
 
-#: FMain.class:447
+#: FMain.class:437
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:453
+#: FMain.class:443
 msgid "Exit Installation"
 msgstr "Exit Installation"
 
-#: FMain.class:469
+#: FMain.class:459
 msgid "Button1"
 msgstr "-"
 
 #: FrmDiskPart.class:115
 msgid "Disk Partitioning:"
 msgstr "Disk Partitioning:"
-
-#: FrmEmbUsrAdd.class:20 MdlCore.module:461
-msgid "User Accounts"
-msgstr "User Accounts"
-
-#: FrmEmbUsrAdd.class:23
-msgid "Create initial user accounts"
-msgstr "Create initial user accounts"
-
-#: FrmEmbUsrAdd.class:23
-msgid "Click the button below to create a new user account."
-msgstr "Click the button below to create a new user account."
-
-#: FrmEmbUsrAdd.class:23
-msgid ""
-"New user accounts can also be created after the install process is completed."
-msgstr ""
-"New user accounts can also be created after the install process is completed."
-
-#: FrmEmbUsrAdd.class:130
-msgid "New User Account"
-msgstr "New User Account"
 
 #: FrmHostPrep.class:130
 msgid "Vectorlinux is preparing your system for installation. Please wait."
@@ -193,7 +190,7 @@ msgstr "Configure and install lilo (Linux Boot Loader)"
 msgid "Don't Install Lilo"
 msgstr "Don't Install Lilo"
 
-#: FrmLilo.class:207 FrmNetConf.class:139
+#: FrmLilo.class:207 FrmNetConf.class:141
 msgid "Tab 0"
 msgstr "-"
 
@@ -229,31 +226,31 @@ msgstr "Seconds"
 msgid "Boot Default"
 msgstr "Boot Default"
 
-#: FrmNetConf.class:56
+#: FrmNetConf.class:58
 msgid "Network Interfaces"
 msgstr ""
 
-#: FrmNetConf.class:123
+#: FrmNetConf.class:125
 msgid "Computer Name"
 msgstr "Computer Name"
 
-#: FrmNetConf.class:146
+#: FrmNetConf.class:148
 msgid "Manual DNS Server Specification"
 msgstr "Manual DNS Server Specification"
 
-#: FrmNetConf.class:151
+#: FrmNetConf.class:153
 msgid "Primary DNS Server"
 msgstr "Primary DNS Server"
 
-#: FrmNetConf.class:159
+#: FrmNetConf.class:161
 msgid "192.168.1.254"
 msgstr "-"
 
-#: FrmNetConf.class:164
+#: FrmNetConf.class:166
 msgid "Secondary DNS Server"
 msgstr "Secondary DNS Server"
 
-#: FrmNetConf.class:177 MdlCore.module:462
+#: FrmNetConf.class:179 MdlCore.module:462
 msgid "Network Configuration"
 msgstr "Network Configuration"
 
@@ -538,59 +535,72 @@ msgstr ""
 msgid "Search Again"
 msgstr "Search Again"
 
-#: FrmSummary.class:8 MdlSummarize.module:56
+#: FrmSummary.class:14 MdlCore.module:454
+msgid "Installation Summary"
+msgstr "Installation Summary"
+
+#: FrmSummary.class:16 MdlSummarize.module:56
 msgid "Custom"
 msgstr "Custom"
 
-#: FrmSummary.class:12 MdlSummarize.module:69
+#: FrmSummary.class:20 MdlSummarize.module:69
 msgid "Full"
 msgstr "Full"
 
-#: FrmSummary.class:28
+#: FrmSummary.class:37
 #, fuzzy
 msgid "Partition"
 msgstr "Preparation"
 
-#: FrmSummary.class:30
-msgid "Size / GiB"
+#: FrmSummary.class:39
+msgid "Size"
 msgstr ""
 
-#: FrmSummary.class:32
+#: FrmSummary.class:41
 msgid "Filesystem"
 msgstr ""
 
-#: FrmSummary.class:33
-#, fuzzy
-msgid "Do Not Format"
-msgstr "Do not format"
-
-#: FrmSummary.class:34
+#: FrmSummary.class:43
 #, fuzzy
 msgid "Mount Point"
 msgstr "Do not mount"
 
-#: FrmSummary.class:40 MdlInstallSys.module:142 MdlPartSel.module:139
+#: FrmSummary.class:49 MdlInstallSys.module:142 MdlPartSel.module:143
 msgid "Not Used"
 msgstr "Not Used"
 
-#: FrmSummary.class:77
+#: FrmSummary.class:90 MdlNetConf.module:218
+msgid "None"
+msgstr "None"
+
+#: FrmSummary.class:112 MdlInstallSys.module:190 MdlWinDrives.module:123
+msgid "Do not mount"
+msgstr "Do not mount"
+
+#: FrmSummary.class:164
 msgid "Package Name"
 msgstr ""
 
-#: FrmSummary.class:79
-msgid "Size / KiB"
-msgstr ""
+#: FrmSummary.class:173
+#, fuzzy
+msgid "BULK PACKAGES"
+msgstr "BULK PACKAGES:"
 
-#: FrmSummary.class:116
+#: FrmSummary.class:190
+#, fuzzy
+msgid "USER-SELECTED PACKAGES"
+msgstr "BULK PACKAGES:"
+
+#: FrmSummary.class:243
 #, fuzzy
 msgid "Installation Type"
 msgstr "Installation"
 
-#: FrmSummary.class:126
+#: FrmSummary.class:253
 msgid "Partition Selection Scheme"
 msgstr ""
 
-#: FrmSummary.class:136 MdlCore.module:451
+#: FrmSummary.class:263 MdlCore.module:451
 msgid "Software Selection"
 msgstr "Software Selection"
 
@@ -798,10 +808,6 @@ msgstr "Disk Partitioning"
 msgid "Installation"
 msgstr "Installation"
 
-#: MdlCore.module:454
-msgid "Installation Summary"
-msgstr "Installation Summary"
-
 #: MdlCore.module:456
 msgid "Install Operating System"
 msgstr "Install Operating System"
@@ -818,9 +824,9 @@ msgstr "Boot Menu Options"
 msgid "Regional Settings"
 msgstr "Regional Settings"
 
-#: MdlCore.module:463
-msgid "Hardware Configuration"
-msgstr "Hardware Configuration"
+#: MdlCore.module:461
+msgid "User Accounts"
+msgstr "User Accounts"
 
 #: MdlDiskPart.module:46
 msgid ""
@@ -926,13 +932,9 @@ msgstr "Error while installing "
 msgid "Writing new /etc/fstab to system"
 msgstr "Writing new /etc/fstab to system"
 
-#: MdlInstallSys.module:167 MdlPartFrmt.module:33 MdlPartSel.module:137
+#: MdlInstallSys.module:167 MdlPartFrmt.module:33 MdlPartSel.module:141
 msgid "Do not format"
 msgstr "Do not format"
-
-#: MdlInstallSys.module:190 MdlWinDrives.module:119
-msgid "Do not mount"
-msgstr "Do not mount"
 
 #: MdlInstallSys.module:361
 msgid "Vectorlinux is now installed in your system. Please click"
@@ -1069,10 +1071,6 @@ msgstr "Setup Mode"
 msgid "Encryption type"
 msgstr "Encryption type"
 
-#: MdlNetConf.module:218
-msgid "None"
-msgstr "None"
-
 #: MdlNetConf.module:231
 msgid "Encryption key"
 msgstr "Encryption Key"
@@ -1101,19 +1099,19 @@ msgstr "This will work if you use a cable or DSL modem on a home network."
 msgid "If in doubt, choose this option"
 msgstr "If in doubt, choose this option"
 
-#: MdlNetConf.module:340
+#: MdlNetConf.module:330
 msgid "Static IP Address Settings"
 msgstr ""
 
-#: MdlNetConf.module:362
+#: MdlNetConf.module:352
 msgid "IP Address"
 msgstr "IP Address"
 
-#: MdlNetConf.module:385
+#: MdlNetConf.module:375
 msgid "Subnet Mask"
 msgstr "Subnet Mask"
 
-#: MdlNetConf.module:407
+#: MdlNetConf.module:397
 msgid "Gateway Address"
 msgstr "Gateway Address"
 
@@ -1121,23 +1119,23 @@ msgstr "Gateway Address"
 msgid "There has been an error while trying to format "
 msgstr ""
 
-#: MdlPartSel.module:67 MdlWinDrives.module:71
+#: MdlPartSel.module:71 MdlWinDrives.module:74
 msgid "PARTITION"
 msgstr "PARTITION"
 
-#: MdlPartSel.module:78
+#: MdlPartSel.module:82
 msgid "MOUNT POINT"
 msgstr "MOUNT POINT"
 
-#: MdlPartSel.module:88
+#: MdlPartSel.module:92
 msgid "FILESYSTEM"
 msgstr "FYLESYSTEM"
 
-#: MdlPartSel.module:284
+#: MdlPartSel.module:289
 msgid "Please select only one "
 msgstr "Please select only one "
 
-#: MdlPartSel.module:284
+#: MdlPartSel.module:289
 msgid "partition"
 msgstr ""
 
@@ -1223,15 +1221,15 @@ msgstr ""
 msgid "Allow user to mount / un-mount Removable HD Storage Devices"
 msgstr ""
 
-#: MdlWinDrives.module:55
+#: MdlWinDrives.module:58
 msgid "Windows Partitions Detected"
 msgstr "Windows Partitions Detected"
 
-#: MdlWinDrives.module:81
+#: MdlWinDrives.module:84
 msgid "MOUNT TO"
 msgstr "MOUNT TO"
 
-#: MdlWinDrives.module:181
+#: MdlWinDrives.module:186
 msgid "No Windows partitions detected"
 msgstr "No Windows partitions detected"
 
@@ -1242,6 +1240,29 @@ msgstr "localtime-copied-from"
 #: MdlZoneSet.module:28
 msgid "localtime"
 msgstr "localtime"
+
+#~ msgid "Hardware Configuration"
+#~ msgstr "Hardware Configuration"
+
+#~ msgid "Create initial user accounts"
+#~ msgstr "Create initial user accounts"
+
+#~ msgid "Click the button below to create a new user account."
+#~ msgstr "Click the button below to create a new user account."
+
+#~ msgid ""
+#~ "New user accounts can also be created after the install process is "
+#~ "completed."
+#~ msgstr ""
+#~ "New user accounts can also be created after the install process is "
+#~ "completed."
+
+#~ msgid "New User Account"
+#~ msgstr "New User Account"
+
+#, fuzzy
+#~ msgid "Do Not Format"
+#~ msgstr "Do not format"
 
 #~ msgid "Add Users"
 #~ msgstr "Add Users"
