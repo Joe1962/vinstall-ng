@@ -110,6 +110,8 @@ PUBLIC SUB DISPLAY_LILO_TARGET_OPTIONS()
   DIM i AS Integer
   DIM sTarget AS String
   DIM sDump AS String
+  DIM cb AS ComboBox
+  DIM cb1 AS ComboBox
   
     SHELL "probedisk | grep -v cdrom |cut -f 1 -d \'|\'" TO sList
       sList = Trim(sList)
@@ -120,9 +122,22 @@ PUBLIC SUB DISPLAY_LILO_TARGET_OPTIONS()
         NEXT 
         
       WITH FrmLilo.LiloTarget
-          IF LCase(ClsPartSel.fRoot) <> "xfs" THEN 
-          .Add("Sector")
-          END IF
+          'IF LCase(ClsPartSel.fRoot) <> "xfs" THEN 
+              FOR EACH cb IN MdlPartSel.oMountPoints
+                IF cb.text = "/" THEN 
+                    FOR EACH cb1 IN MdlPartSel.oFsTypes
+                      IF cb1.tag = cb.tag THEN 
+                      IF cb1.text <> "xfs" THEN .Add("Sector")
+                      END IF
+                    NEXT 
+                END IF
+          NEXT 
+                
+          '.Add("Sector")
+'          END IF
+          
+          
+          
       SHELL "lsdev | grep floppy" TO sDump
       IF sDump <> "" THEN   
       .Add("Floppy")

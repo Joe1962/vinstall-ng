@@ -299,17 +299,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                   
                 END IF
                    
-                      
-        ' '  ELSE 
-        '       tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "tlWirelessSecType"
-        '         WITH tl
-        '           .Move(4, y)
-        '           .text = "Security Mode"
-        '           .Width = MdlObjSizer.get_object_width(.text)
-        '           .Height = 21
-        '           .Alignment = Align.Normal
-        '         END WITH 
-        '   END IF
+
           
           END WITH 
                   
@@ -468,19 +458,6 @@ PUBLIC SUB MethodSel_Click()
 
       
   END IF
-END
-
-PUBLIC SUB bEnableInterface_click()
-  
-  ' ' DIM fFrm AS Frame
-  ' ' DIM Comb AS ComboBox
-  ' '   FOR EACH fFrm IN objFrames
-  ' '     IF fFrm.tag = LAST.tag THEN fFrm.Enabled = LAST.Value
-  ' '   NEXT 
-  ' '   FOR EACH Comb IN objCombos
-  ' '     IF Comb.tag = LAST.tag THEN Comb.Enabled = LAST.Value
-  ' '   NEXT 
-  '''''' ******* Instead of that ^, this will only determing if the inet script will be set executable or not
 END
 
 

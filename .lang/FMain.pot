@@ -14,59 +14,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FMain.class:226
+#: FMain.class:205
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr ""
 
-#: FMain.class:228
+#: FMain.class:207
 msgid "Please wait while setup analyses your current partition setup."
 msgstr ""
 
-#: FMain.class:228
+#: FMain.class:207
 msgid "This may take a while ..."
 msgstr ""
 
-#: FMain.class:242
+#: FMain.class:221
 msgid "You must select a \"/\" partition. This is the target where the system will install to"
 msgstr ""
 
-#: FMain.class:298
+#: FMain.class:277
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:327
+#: FMain.class:307
 msgid "has been installed on your computer."
 msgstr ""
 
-#: FMain.class:327
+#: FMain.class:307
+msgid "Additional system configuration will take place after you reboot your system.Part of this process must be done in text mode."
+msgstr ""
+
+#: FMain.class:307
 msgid "Would you like to reboot your computer now?"
 msgstr ""
 
-#: FMain.class:327
+#: FMain.class:307
 msgid "Yes"
 msgstr ""
 
-#: FMain.class:327
+#: FMain.class:307
 msgid "No"
 msgstr ""
 
-#: FMain.class:421
+#: FMain.class:401
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:441
+#: FMain.class:421
 msgid "Next"
 msgstr ""
 
-#: FMain.class:447
+#: FMain.class:427
 msgid "Back"
 msgstr ""
 
-#: FMain.class:453
+#: FMain.class:433
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:469
+#: FMain.class:449
 msgid "Button1"
 msgstr ""
 

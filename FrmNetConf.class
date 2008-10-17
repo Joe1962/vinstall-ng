@@ -42,7 +42,9 @@ PUBLIC SUB Form_Open()
   END WITH 
     
     ME.txtHostName.text = ME.GET_CURRENT_HOST_NAME()
+      
     MdlNetConf.LIST_NETWORK_INTERFACES()
+    'CATCH 
     cbUseManDNS.Value = FALSE
     tlBanner.text = "<h3>" & tlBanner.text & "</h3>"
    
