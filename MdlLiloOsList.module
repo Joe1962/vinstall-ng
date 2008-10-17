@@ -420,8 +420,8 @@ PUBLIC SUB list_boot_options()
       NEXT 
     ELSE IF cb.Value = FALSE THEN 
         FOR EACH tb IN ME.txtNames
-          IF FrmLilo.cbDefBoot.Find(tb.text) <> -1 THEN 
-            FrmLilo.cbDefBoot.Remove(FrmLilo.cbDefBoot.Find(tb.text))
+          IF FrmLilo.cbDefBoot.Find(Trim(tb.text)) <> -1 THEN 
+            FrmLilo.cbDefBoot.Remove(FrmLilo.cbDefBoot.Find(Trim(tb.text)))
           END IF
         NEXT 
     END IF
@@ -459,7 +459,13 @@ END
 
 PUBLIC SUB IncludeOs_click()
 
-  ME.list_boot_options
+  'ME.list_boot_options()
+      IF LAST.value = TRUE THEN 
+        IF FrmLilo.cbDefBoot.Find(FrmLilo.TabStrip1.text) = -1 THEN FrmLilo.cbDefBoot.Add(FrmLilo.TabStrip1.text)
+      ELSE 
+        IF FrmLilo.cbDefBoot.Find(FrmLilo.TabStrip1.text) <> -1 THEN FrmLilo.cbDefBoot.Remove(FrmLilo.cbDefBoot.Find(FrmLilo.TabStrip1.text))
+      END IF
+      
   
 END
 

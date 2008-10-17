@@ -527,8 +527,8 @@ PUBLIC SUB WRITE_INET()
     'Message(sScript)
       File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "rc.d" &/ "rc.inet" & ii, sScript)
         IF cb.Value = TRUE THEN 
-          SHELL "chmod +x /tmp/rc.inet" & ii WAIT 
-        
+          '''SHELL "chmod +x /tmp/rc.inet" & ii WAIT  ''' This is the wrong path
+          SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "etc" &/ "rc.d" &/ "rc.inet" & ii WAIT
       END IF
       INC ii
     NEXT 

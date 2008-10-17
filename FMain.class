@@ -202,9 +202,9 @@ PUBLIC SUB btnext_Click()
         
         WITH FrmPartScheme
           IF .rbEditPartitions.Value = TRUE THEN 
-            .tlChoiceExp.text = .tlChoiceExp.text & gb.NewLine & gb.NewLine & "<h3><br><br>" & ("Please wait while setup attampts to run the partitioning utility") & "</h3>"
+            .tlChoiceExp.text = .tlChoiceExp.text & gb.NewLine & gb.NewLine & "<b><br><br>" & ("Please wait while setup attampts to run the partitioning utility") & "</b>"
           ELSE IF .rbUseExisting.Value = TRUE THEN 
-            .tlChoiceExp.Text = .tlChoiceExp.Text & gb.NewLine & gb.NewLine & "<h3><br><br><hr>" & ("Please wait while setup analyses your current partition setup.") & " <br>" & ("This may take a while ...") & "</h3>"
+            .tlChoiceExp.Text = .tlChoiceExp.Text & gb.NewLine & gb.NewLine & "<b><br><br><hr>" & ("Please wait while setup analyses your current partition setup.") & " <br>" & ("This may take a while ...") & "</b>"
             
           END IF
        
@@ -220,6 +220,7 @@ PUBLIC SUB btnext_Click()
         IF NOT ClsPartSel.sRoot OR ClsPartSel.sRoot = "" THEN 
         Message.Error(("You must select a \"/\" partition. This is the target where the system will install to"))
           STOP EVENT 
+          RETURN 
         ELSE 
             ' set the partition types
             MdlPartSel.SET_LINUX_PARTITION_TYPES()
@@ -265,7 +266,13 @@ PUBLIC SUB btnext_Click()
     CASE "FrmLilo"
       'make sure lilo has not been bypassed
         IF FrmLilo.YNLiloBox.Value = FALSE THEN 
-    
+            ' do some simple checks to make sure nothing is left blank before proceeding
+                IF FrmLilo.cbDefBoot.text = "" THEN 
+                    Message.Warning(("Please select a default operating system to boot before proceeding"))
+                    Balloon.Info(("Select an entry from this list"), FrmLilo.cbDefBoot)
+                    STOP EVENT 
+                    RETURN 
+                END IF
         ' Now that lilo has been setup, write it to the config
         MdlConfLilo.PERFORM_BINDING()
         MdlConfLilo.GENERATE_LILO_DOT_CONF()
@@ -302,13 +309,15 @@ PUBLIC SUB btnext_Click()
       MdlNetConf.WRITE_INET()
       
           'offer to reboot here
-            SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer.") & "<br>" &
-            ("Additional system configuration will take place after you reboot your system.Part of this process must be done in text mode.") & "<br>" &
+            SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer. Additional system configuration") & "<br>" &
+            ("will take place after you reboot your system.Part of this process must be done in text mode.") & "<br><br>" &
             ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
       CASE 1
         SHELL "shutdown -r now"
       CASE ELSE 
-      RETURN 
+      'RETURN 
+        Message.Info(("The VectorLinux installer will now exit. Enjoy your new operating system"))
+        QUIT ' dirty quit event 
       'STOP EVENT 
     END SELECT 
 '      frmNext = FrmLilo ' this is already done
@@ -321,6 +330,7 @@ PUBLIC SUB btnext_Click()
 
   frmNext.Reparent(ME.pnlWinHost)
   frmNext.ResizeScaled(pnlwinhost.Width, pnlwinhost.Height)
+
 
   FrmCurr.Hide
   frmLast = FrmCurr
