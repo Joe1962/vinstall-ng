@@ -299,6 +299,16 @@ PUBLIC SUB btnext_Click()
        
        
     CASE "FrmUserAdd"
+      
+        IF MdlUsrAdd.iUsrAccts = 0 THEN 
+            SELECT CASE Message.Question(("You have not created any user accounts for this system yet. It is recommended that you") & "<br>" &
+            ("create at least one.") & "<br><br>" & ("Would you like to continue anyway?"), ("Yes"), ("No"))
+            
+              CASE 2
+                RETURN 
+            END SELECT 
+      END IF
+                
     
       frmNext = FrmNetConf
       

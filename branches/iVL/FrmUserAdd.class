@@ -24,8 +24,9 @@ PRIVATE otb AS Object[]
 
 
 PUBLIC SUB Form_Open()
-  Fmain.frmcurr = ME
   
+  Fmain.frmcurr = ME
+  MdlUsrAdd.iUsrAccts = 0
   WITH FMain
     .FrmCurr = ME
     .tvPlan["Conf2"].Picture = MdlCore.sDonePic
@@ -66,6 +67,10 @@ PUBLIC SUB Button1_Click()
   DIM sPicdir AS String = ClsGlobal.sTargetMnt &/ "usr/share/apps/kdm/pics/users/"
   DIM sGroups AS String '= '"plugdev,disk,cdrom,floppy,lp,scanner,audio,video,games"
   DIM cb AS CheckBox
+
+
+    ' increment the number of user accounts created
+    INC MdlUsrAdd.iUsrAccts
 
 'Message("Ateempting to create user now")
    
@@ -160,15 +165,7 @@ PUBLIC SUB Button1_Click()
   SHELL "umount /mnt/target/tmp" WAIT 
   SHELL "umount /mnt/target/sys" WAIT 
   
-    ' ' ' SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer.") & "<br>" &
-    ' ' ' ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
-    ' ' '   CASE 1
-    ' ' '     SHELL "shutdown -r now"
-    ' ' '   CASE ELSE 
-    ' ' '   RETURN 
-    ' ' '   'STOP EVENT 
-    ' ' ' END SELECT 
-      
+
         
   
 END
@@ -224,19 +221,28 @@ PUBLIC SUB Form_Resize()
     .pbUsrPic.Move(.btBrowse.Left + .btBrowse.Width, tbUsername.top)
     .btgrpHelp.Move(.fGroupSel.Width - (.btgrpHelp.Width + 4), 12)
     
-        icby = 4
-        icbspace = 24
+        icby = 16
+        icbspace = 4
         
         FOR EACH cb IN MdlUsrAdd.objGrps
-          'icbspace = icbspace + cb.Height + 4
-          IF icbspace >= .fGroupSel.Height * 0.75 THEN 
-            icby = icby + 128
-            icbspace = 24
+          IF icbspace >= .fGroupSel.Width * 0.75 THEN 
+            icbspace = 4
+            icby = icby + cb.Height + 4
           END IF
-          cb.Move(icby, icbspace)
-          icbspace = icbspace + cb.Height + 4
-    NEXT
-    
+          cb.Move(icbspace, icby)
+          icbspace = icbspace + 116
+    NEXT 
+    '     
+    ' '     FOR EACH cb IN MdlUsrAdd.objGrps
+    ' '       'icbspace = icbspace + cb.Height + 4
+    ' '       IF icbspace >= .fGroupSel.Height * 0.60 THEN 
+    ' '         icby = icby + 128
+    ' '         icbspace = 24
+    ' '       END IF
+    ' '       cb.Move(icby, icbspace)
+    ' '       icbspace = icbspace + cb.Height + 4
+    ' ' NEXT
+    ' 
  
         
       

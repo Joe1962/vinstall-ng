@@ -41,7 +41,8 @@ PUBLIC SUB Form_Resize()
     WITH ME
       '.PictureBox1.Move(.ClientWidth / 2 - (.PictureBox1.Width / 2), 4)
       .ScrollView1.Move(.ClientWidth / 2 - (.ScrollView1.Width / 2), 8)
-      .PictureBox1.Move(.ScrollView1.Width / 2 - (.PictureBox1.Width / 2), 12)
+      .PictureBox1.Move(.ScrollView1.Width / 2 - (.PictureBox1.Width / 2), .ScrollView1.Height + .PictureBox1.Height)
+      .TextLabel1.Move(.ScrollView1.Width / 2 - (.TextLabel1.Width / 2), .PictureBox1.Top + .PictureBox1.Height * 2)
       '.TextLabel1.Move(
       '.ScrollView1.Move(.ClientWidth / 2 - (.ScrollView1.Width / 2), .PictureBox1.top + .PictureBox1.Height + 8)
       .ScrollView1.Height = .ClientH - .ScrollView1.top - 12
