@@ -14,6 +14,9 @@
 
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC iUsrAccts AS Integer 
+
 PUBLIC objGrps AS Object[]
 
 PUBLIC SUB DISPLAY_USER_GROUP_OPTIONS()
@@ -75,11 +78,11 @@ FOR i = 0 TO sGrpArr.Count - 1
       bdefval = TRUE
 END SELECT 
   'x = 4
-      IF htotal > FrmUserAdd.width THEN 
-        x = 4
-        y = y + 24
-        htotal = x
-      END IF
+      ' ' ' IF htotal > FrmUserAdd.fGroupSel.Width * 0.75 THEN 
+      ' ' '   x = 4
+      ' ' '   y = y + 25
+      ' ' '   htotal = x
+      ' ' ' END IF
   'y = 12
 cb = NEW CheckBox(FrmUserAdd.fGroupSel)
   WITH cb
@@ -87,10 +90,10 @@ cb = NEW CheckBox(FrmUserAdd.fGroupSel)
   .Value = bdefval
   .Height = 21
   .Width = MdlObjSizer.get_object_width(.text) + 24
-  .Move(x, y)
+  '.Move(x, y)
   .ToolTip = sComment
   'y = y + cb.Height
-  x = x + 100
+  x = x + 128
   htotal = htotal + x
   END WITH 
   objGrps.Add(cb)
@@ -98,12 +101,23 @@ cb = NEW CheckBox(FrmUserAdd.fGroupSel)
 NEXT       
       
 
-  
-END
+  ' now move the objects to their places
+  x = 4
+  htotal = 4
+  y = 16
+    FOR EACH cb IN objGrps
+      cb.Move(x, y)
+      x = x + 116
+      htotal = x
+        IF htotal >= FrmUserAdd.fGroupSel.Width * 0.75 THEN 
+          htotal = 4
+          x = 4
+          y = y + cb.Height + 4
+        END IF
+    NEXT 
+        
 
-PUBLIC FUNCTION CREATE_NEW_ACCOUNT()
-  
-  
+
   
 END
 
