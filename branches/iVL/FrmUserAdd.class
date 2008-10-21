@@ -327,7 +327,7 @@ DIM cb AS CheckBox
     .bUsePic.Value = FALSE
     .tbPicPath.Text = ""
     .tbPicPath.Visible = FALSE
-    .pbUsrPic.Picture.Clear
+    '.pbUsrPic.c
     .pbUsrPic.Visible = FALSE
   END WITH 
     FOR EACH cb IN MdlUsrAdd.objGrps
