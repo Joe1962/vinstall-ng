@@ -109,7 +109,7 @@ NEXT
       cb.Move(x, y)
       x = x + 116
       htotal = x
-        IF htotal >= FrmUserAdd.fGroupSel.Width * 0.75 THEN 
+        IF htotal >= FrmUserAdd.fGroupSel.Width * 0.70 THEN 
           htotal = 4
           x = 4
           y = y + cb.Height + 4

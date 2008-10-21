@@ -225,7 +225,7 @@ PUBLIC SUB Form_Resize()
         icbspace = 4
         
         FOR EACH cb IN MdlUsrAdd.objGrps
-          IF icbspace >= .fGroupSel.Width * 0.75 THEN 
+          IF icbspace >= .fGroupSel.Width * 0.70 THEN 
             icbspace = 4
             icby = icby + cb.Height + 4
           END IF
@@ -324,6 +324,11 @@ DIM cb AS CheckBox
     .tbRealname.Clear
     .tbPicPath.Clear
     .tbUsername.Clear
+    .bUsePic.Value = FALSE
+    .tbPicPath.Text = ""
+    .tbPicPath.Visible = FALSE
+    .pbUsrPic.Picture.Clear
+    .pbUsrPic.Visible = FALSE
   END WITH 
     FOR EACH cb IN MdlUsrAdd.objGrps
       cb.Delete

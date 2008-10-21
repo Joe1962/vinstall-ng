@@ -294,6 +294,11 @@ PUBLIC SUB btnext_Click()
        frmNext = FrmRootPass
        
     CASE "FrmRootPass"
+      IF FrmRootPass.tbPasswd1.Text <> FrmRootPass.tbPasswd2.Text THEN 
+          Balloon.Error(("Passwords do not match. Please enter the same password twice"), FrmRootPass.tbPasswd2)
+          FrmRootPass.tbPasswd2.SelectAll
+                RETURN 
+      END IF
       FrmRootPass.Button1_Click()
        frmNext = FrmUserAdd
        
