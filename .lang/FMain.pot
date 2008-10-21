@@ -42,59 +42,63 @@ msgstr ""
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:305
+#: FMain.class:298
+msgid "Passwords do not match. Please enter the same password twice"
+msgstr ""
+
+#: FMain.class:310
 msgid "You have not created any user accounts for this system yet. It is recommended that you"
 msgstr ""
 
-#: FMain.class:305
+#: FMain.class:310
 msgid "create at least one."
 msgstr ""
 
-#: FMain.class:305
+#: FMain.class:310
 msgid "Would you like to continue anyway?"
 msgstr ""
 
-#: FMain.class:305
+#: FMain.class:310
 msgid "Yes"
 msgstr ""
 
-#: FMain.class:305
+#: FMain.class:310
 msgid "No"
 msgstr ""
 
-#: FMain.class:324
+#: FMain.class:329
 msgid "has been installed on your computer. Additional system configuration"
 msgstr ""
 
-#: FMain.class:324
+#: FMain.class:329
 msgid "will take place after you reboot your system.Part of this process must be done in text mode."
 msgstr ""
 
-#: FMain.class:324
+#: FMain.class:329
 msgid "Would you like to reboot your computer now?"
 msgstr ""
 
-#: FMain.class:329
+#: FMain.class:334
 msgid "The VectorLinux installer will now exit. Enjoy your new operating system"
 msgstr ""
 
-#: FMain.class:421
+#: FMain.class:426
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:441
+#: FMain.class:446
 msgid "Next"
 msgstr ""
 
-#: FMain.class:447
+#: FMain.class:452
 msgid "Back"
 msgstr ""
 
-#: FMain.class:453
+#: FMain.class:458
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:469
+#: FMain.class:474
 msgid "Button1"
 msgstr ""
 
