@@ -121,3 +121,24 @@ NEXT
   
 END
 
+PUBLIC FUNCTION CREATE_USER_ON_A_SNAP() AS Boolean
+    DIM bcont AS Boolean
+      DIM tb AS TextBox
+      
+        FOR EACH tb IN FrmUserAdd.otb
+          IF tb.Text = "" THEN 
+            bcont = FALSE
+            BREAK 
+          ELSE 
+            bcont = TRUE
+          END IF
+        NEXT 
+        
+        'IF NOT bcont THEN bcont = TRUE
+        RETURN bcont
+        
+          'Message.Error("Please 
+  
+END
+
+
