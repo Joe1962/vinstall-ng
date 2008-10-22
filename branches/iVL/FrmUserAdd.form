@@ -55,6 +55,7 @@
   }
   { Button1 Button
     MoveScaled(1,63,14,3)
+    Enabled = False
     Text = ("Create User")
     Picture = Picture["icon:/16/add"]
   }

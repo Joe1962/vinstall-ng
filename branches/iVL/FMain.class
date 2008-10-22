@@ -36,7 +36,7 @@ IF NOT FrmCurr OR FrmCurr = "" THEN FrmCurr = FrmSelISO
 
 
 
-'ME.Maximized = TRUE
+ME.Maximized = TRUE
 frmInit = MdlCore.frmInit
 'MdlCore.LOCK_GUI
 'frmInit = FrmLangSel
@@ -306,12 +306,18 @@ PUBLIC SUB btnext_Click()
     CASE "FrmUserAdd"
       
         IF MdlUsrAdd.iUsrAccts = 0 THEN 
-            SELECT CASE Message.Question(("You have not created any user accounts for this system yet. It is recommended that you") & "<br>" &
-            ("create at least one.") & "<br><br>" & ("Would you like to continue anyway?"), ("Yes"), ("No"))
-            
+          'IF FrmUserAdd.tbUsername.text = "" THEN 
+          IF MdlUsrAdd.CREATE_USER_ON_A_SNAP() = FALSE THEN 
+            SELECT CASE Message.Question(("You have not created any user accounts for this system yet. There is not enough information") & "<br>" &
+            ("to create an account here. It is recommended that you create at least one.") & "<br>" &
+             "<br>" & ("Would you like to continue anyway?"), ("Yes"), ("No"))
+                       
               CASE 2
                 RETURN 
             END SELECT 
+            ELSE IF MdlUsrAdd.CREATE_USER_ON_A_SNAP() = TRUE THEN 
+              FrmUserAdd.Button1_Click()
+            END IF
       END IF
                 
     
@@ -377,6 +383,9 @@ PUBLIC SUB btback_Click()
     iKey = ClsGlobal.sBackNav.Find(FrmCurr)
       IF iKey <> -1 THEN 
         frm = ClsGlobal.sBackNav[iKey - 1]
+          WITH FMain
+            .tvPlan.MoveBack
+          END WITH 
       FrmCurr.Hide
       frm.Show
       END IF

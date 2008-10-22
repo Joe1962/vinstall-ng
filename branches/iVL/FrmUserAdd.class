@@ -20,7 +20,7 @@
 PUBLIC iUID AS Integer = 1000
 
 PRIVATE otl AS Object[]
-PRIVATE otb AS Object[]
+PUBLIC otb AS Object[]
 
 
 PUBLIC SUB Form_Open()
@@ -75,13 +75,18 @@ PUBLIC SUB Button1_Click()
 'Message("Ateempting to create user now")
    
   IF ME.tbUsername.Text = "" THEN 
-    Message(("Enter the login name that this user will use to login to this system."))
+  Balloon.Error(("Enter the login name that this user will user to login to this system."), ME.tbUsername)
+    'Message(("Enter the login name that this user will use to login to this system."))
+    RETURN 
+    STOP EVENT 
   ELSE 
     'SHELL "echo " & ME.tbUsername.Text & "| grep -e \'[A-Z]\'" TO sCAPS
     IF ME.tbUsername.text LIKE "*[A-Z]*" THEN
     'IF ME.tbUsername.textNOT LIKE "*[a-z0-9_-]*" THEN 
-    Message.Error(("Login name field contains illegal characters. Please use only lowercase letters and numbers")) 
+    Balloon.Error(("Login name field contains illegal characters. Please use only lowercase letters and numbers"), ME.tbUsername)
+    'Message.Error(("Login name field contains illegal characters. Please use only lowercase letters and numbers")) 
       RETURN 
+      STOP EVENT 
     'ELSE IF ME.tbUsernameNOT LIKE "*[a-z0-9_-]*" THEN 
       
     
@@ -94,11 +99,11 @@ PUBLIC SUB Button1_Click()
       Message(("Username contains illegal characters"))
       RETURN 
     ELSE IF sLogE <> "" THEN
-      Message(("Username already exists"))
+      Message(("User account for") & Space(1) & ME.tbUsername.Text & Space(1) & ("already exists"))
       RETURN 
     ELSE   
       IF ME.tbPasswd1.Text = "" THEN 
-        Message(("Enter a Password."))
+        Message(("Enter a password for") & Space(1) & ME.tbUsername.text)
         RETURN 
       ELSE 
         IF ME.tbPasswd1.Text = ME.tbPasswd2.Text THEN 
@@ -126,12 +131,12 @@ PUBLIC SUB Button1_Click()
                   
           
             ' need to do some binding for this to work
-            PRINT "Mounting system locations with bind options"
+            'PRINT "Mounting system locations with bind options"
             SHELL "mount -o bind /sys /mnt/target/sys" WAIT 
             SHELL "mount -o bind /tmp /mnt/target/tmp" WAIT 
             SHELL "mount -o bind /proc /mnt/target/proc" WAIT 
             SHELL "mount -o bind /dev /mnt/target/dev" WAIT 
-            PRINT "Deleting old user group"
+            'PRINT "Deleting old user group"
             
           SHELL "chroot /mnt/target  /usr/sbin/groupdel " & ME.tbUsername.Text WAIT '& " &> /dev/null" WAIT 
           'SHELL "chroot /mnt/target /usr/sbin/groupadd -g " & iUID & Space(1) & ME.tbUsername.Text WAIT 
@@ -149,13 +154,16 @@ PUBLIC SUB Button1_Click()
           
           'Message("chroot /mnt/target /sbin/passwdx " & ME.tbUsername.Text & Space(1) & ME.tbPasswd1.Text)
           SHELL "chroot /mnt/target /sbin/passwdx " & ME.tbUsername.Text & Space(1) & ME.tbPasswd1.Text WAIT 
-          Message("user " & ME.tbUsername.Text & " was created.")
+          Message(("User account for") & Space(1) & ME.tbUsername.Text & Space(1) & ("was created."))
          btClrFrm_Click() ' clear the form
           INC iUID
         ELSE 
-          Message("Passwords do not match")
+          Message(("Passwords do not match"))
+          Balloon.Info(("Enter the same password twice"), ME.tbPasswd1)
           ME.tbPasswd1.Clear
           ME.tbPasswd2.Clear
+          RETURN 
+          STOP EVENT 
         ENDIF 
       ENDIF 
     ENDIF
@@ -295,11 +303,7 @@ PUBLIC SUB bUsePic_Click()
 
 END
 
-PUBLIC SUB Form_Menu()
 
-  MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS()
-
-END
 
 PUBLIC SUB btBrowse_Click()
 'ClsGlobal.sTargetMnt = "/"
@@ -329,6 +333,8 @@ DIM cb AS CheckBox
     .tbPicPath.Visible = FALSE
     '.pbUsrPic.c
     .pbUsrPic.Visible = FALSE
+    .Button1.Enabled = FALSE
+    .Button1.ForeColor = Color.Gray
   END WITH 
     FOR EACH cb IN MdlUsrAdd.objGrps
       cb.Delete
@@ -368,5 +374,26 @@ PUBLIC SUB btgrpHelp_Click()
   ("permission to do certain things by adding them to certain groups.") & "<br><br>" &
   ("Select which groups you want this user to be a part of here")
   Message(sMsg, ("OK"))
+
+END
+
+PUBLIC SUB tbUsername_LostFocus()
+
+  WITH ME
+    .Button1.Enabled = TRUE
+    .Button1.ForeColor = Color.Black
+  END WITH 
+END
+
+PUBLIC SUB Form_Show()
+
+    Fmain.frmcurr = ME
+  
+  WITH FMain
+    .FrmCurr = ME
+    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
+    .tvPlan["Conf3"].picture = MdlCore.sNowPic
+    .tvPlan["Conf3"].Selected = TRUE
+  END WITH 
 
 END

@@ -165,3 +165,13 @@ PUBLIC SUB Form_Menu()
   'MdlConfLilo.WRITE_LILO_DOT_CONF()
 
 END
+
+PUBLIC SUB Form_Show()
+
+   FMain.FrmCurr = ME
+   FMain.tvPlan["Conf0"].Selected = TRUE
+   FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
+   FMain.tvPlan["Inst1"].Picture = MdlCore.sDonePic
+  ME.sVidMode = "Standard"
+
+END

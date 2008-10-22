@@ -24,7 +24,7 @@ PUBLIC SUB Form_Open()
       .tvPlan["Conf1"].picture = MdlCore.sNowPic
       .tvPlan["Conf1"].Selected = TRUE
     END WITH 
-      
+      MdlCore.unlock_gui() ' unlock the back button
   FMain.btnext.Enabled = FALSE
   MdlZoneSet.TIME_ZONES()
   'ME.lbTmZone.Index = 9
@@ -127,5 +127,18 @@ PUBLIC SUB lbTmZone_KeyPress()
   '         RETURN 
   '       LOOP 
       
+
+END
+
+PUBLIC SUB Form_Show()
+
+  Fmain.frmcurr = ME
+    ME.tlbanner.Text = "<h3>" & ("Timezone configuration") & "</h3>"
+    WITH FMain
+      .tvPlan["Conf0"].Picture = MdlCore.sDonePic
+      .tvPlan["Conf1"].picture = MdlCore.sNowPic
+      .tvPlan["Conf1"].Selected = TRUE
+    END WITH 
+  
 
 END
