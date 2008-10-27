@@ -50,52 +50,71 @@ msgstr ""
 msgid "Skipping lilo setup"
 msgstr "Skipping lilo setup per user request"
 
-#: FMain.class:314
+#: FMain.class:298
+msgid "Passwords do not match. Please enter the same password twice"
+msgstr ""
+
+#: FMain.class:313
+msgid ""
+"You have not created any user accounts for this system yet. There is not "
+"enough information"
+msgstr ""
+
+#: FMain.class:313
+msgid ""
+"to create an account here. It is recommended that you create at least one."
+msgstr ""
+
+#: FMain.class:313
+msgid "Would you like to continue anyway?"
+msgstr ""
+
+#: FMain.class:313
+msgid "Yes"
+msgstr ""
+
+#: FMain.class:313
+#, fuzzy
+msgid "No"
+msgstr "None"
+
+#: FMain.class:335
 #, fuzzy
 msgid "has been installed on your computer. Additional system configuration"
 msgstr "Packages have been installed to your system. Please click"
 
-#: FMain.class:314
+#: FMain.class:335
 msgid ""
 "will take place after you reboot your system.Part of this process must be "
 "done in text mode."
 msgstr ""
 
-#: FMain.class:314
+#: FMain.class:335
 msgid "Would you like to reboot your computer now?"
 msgstr ""
 
-#: FMain.class:314
-msgid "Yes"
-msgstr ""
-
-#: FMain.class:314
-#, fuzzy
-msgid "No"
-msgstr "None"
-
-#: FMain.class:319
+#: FMain.class:340
 msgid ""
 "The VectorLinux installer will now exit. Enjoy your new operating system"
 msgstr ""
 
-#: FMain.class:411
+#: FMain.class:437
 msgid "Process Overview"
 msgstr "Process Overview"
 
-#: FMain.class:431
+#: FMain.class:457
 msgid "Next"
 msgstr "Next"
 
-#: FMain.class:437
+#: FMain.class:463
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:443
+#: FMain.class:469
 msgid "Exit Installation"
 msgstr "Exit Installation"
 
-#: FMain.class:459
+#: FMain.class:485
 msgid "Button1"
 msgstr "-"
 
@@ -111,7 +130,7 @@ msgstr "Vectorlinux is preparing your system for installation. Please wait."
 msgid "Current Status"
 msgstr "Current Status"
 
-#: FrmHostPrep.class:139 FrmLilo.class:213 FrmPartScheme.class:127
+#: FrmHostPrep.class:139 FrmLilo.class:223 FrmPartScheme.class:127
 #: FrmPkgSel.class:101 FrmPkgsel2.class:86 FrmSelISO.class:247
 #: FrmSummaryOld.class:87
 msgid "TextLabel1"
@@ -142,7 +161,7 @@ msgstr "Current Step "
 msgid "Total Progress"
 msgstr "Total progress"
 
-#: FrmLangSel.class:100
+#: FrmLangSel.class:116
 msgid "Select your language"
 msgstr "Select your language"
 
@@ -182,47 +201,47 @@ msgstr ""
 msgid "Standard"
 msgstr "Standard"
 
-#: FrmLilo.class:196
+#: FrmLilo.class:206
 msgid "Configure and install lilo (Linux Boot Loader)"
 msgstr "Configure and install lilo (Linux Boot Loader)"
 
-#: FrmLilo.class:201
+#: FrmLilo.class:211
 msgid "Don't Install Lilo"
 msgstr "Don't Install Lilo"
 
-#: FrmLilo.class:207 FrmNetConf.class:141
+#: FrmLilo.class:217 FrmNetConf.class:141
 msgid "Tab 0"
 msgstr "-"
 
-#: FrmLilo.class:225
+#: FrmLilo.class:235
 msgid "Target"
 msgstr "Target"
 
-#: FrmLilo.class:231
+#: FrmLilo.class:241
 msgid "Video Resolution"
 msgstr "Video Resolution"
 
-#: FrmLilo.class:239
+#: FrmLilo.class:249
 msgid "Bootsplash Med"
 msgstr "Bootsplash Med"
 
-#: FrmLilo.class:239
+#: FrmLilo.class:249
 msgid "Bootsplash High"
 msgstr "Bootsplash High"
 
-#: FrmLilo.class:239
+#: FrmLilo.class:249
 msgid "Bootsplash Extra high"
 msgstr "Bootsplash Extra High"
 
-#: FrmLilo.class:244
+#: FrmLilo.class:254
 msgid "Prompt Timeout"
 msgstr "Prompt Timeout"
 
-#: FrmLilo.class:255
+#: FrmLilo.class:265
 msgid "Seconds"
 msgstr "Seconds"
 
-#: FrmLilo.class:261
+#: FrmLilo.class:271
 msgid "Boot Default"
 msgstr "Boot Default"
 
@@ -403,7 +422,7 @@ msgstr ""
 msgid "Detect and Setup Windows partitions for auto-mounting at boot"
 msgstr "Detect and Setup Windows partitions for auto-mounting at boot"
 
-#: FrmPartSel.class:189 FrmUserAdd.class:448
+#: FrmPartSel.class:189 FrmUserAdd.class:486
 msgid "Help"
 msgstr "Help"
 
@@ -465,11 +484,11 @@ msgid ""
 "Passwords do not match. Please enter the same password twice for accuracy."
 msgstr ""
 
-#: FrmRootPass.class:107 MdlCore.module:460
+#: FrmRootPass.class:118 MdlCore.module:460
 msgid "System Administrator"
 msgstr "System Administrator"
 
-#: FrmRootPass.class:120
+#: FrmRootPass.class:131
 msgid ""
 "The linux root account is pre-assigned to be used as the system "
 "administrator's account. This account is used to perform system-wide changes "
@@ -489,15 +508,15 @@ msgstr ""
 "a root password, think of something easy for you to remember, but hard for "
 "others to guess."
 
-#: FrmRootPass.class:126 FrmUserAdd.class:475
+#: FrmRootPass.class:137 FrmUserAdd.class:514
 msgid "Enter Password"
 msgstr "Enter Password"
 
-#: FrmRootPass.class:131
+#: FrmRootPass.class:142
 msgid "Re-Enter Password"
 msgstr "Re-Enter Password"
 
-#: FrmRootPass.class:148
+#: FrmRootPass.class:159
 msgid "Set Password"
 msgstr "Set Password"
 
@@ -604,62 +623,80 @@ msgstr ""
 msgid "Software Selection"
 msgstr "Software Selection"
 
-#: FrmUserAdd.class:36
+#: FrmUserAdd.class:37
 #, fuzzy
 msgid "Create User Accounts"
 msgstr "User Accounts"
 
-#: FrmUserAdd.class:73
-msgid "Enter the login name that this user will use to login to this system."
+#: FrmUserAdd.class:78
+msgid "Enter the login name that this user will user to login to this system."
 msgstr ""
 
-#: FrmUserAdd.class:78
+#: FrmUserAdd.class:86
 msgid ""
 "Login name field contains illegal characters. Please use only lowercase "
 "letters and numbers"
 msgstr ""
 
-#: FrmUserAdd.class:89
+#: FrmUserAdd.class:99
 msgid "Username contains illegal characters"
 msgstr ""
 
-#: FrmUserAdd.class:92
-msgid "Username already exists"
+#: FrmUserAdd.class:102
+#, fuzzy
+msgid "User account for"
+msgstr "User Accounts"
+
+#: FrmUserAdd.class:102
+msgid "already exists"
 msgstr ""
 
-#: FrmUserAdd.class:96
+#: FrmUserAdd.class:106
 #, fuzzy
-msgid "Enter a Password."
+msgid "Enter a password for"
 msgstr "Enter Password"
 
-#: FrmUserAdd.class:301
+#: FrmUserAdd.class:157
+msgid "was created."
+msgstr ""
+
+#: FrmUserAdd.class:161
+msgid "Passwords do not match"
+msgstr ""
+
+#: FrmUserAdd.class:162
+#, fuzzy
+msgid "Enter the same password twice"
+msgstr "Enter Password"
+
+#: FrmUserAdd.class:311
 msgid "Select picture for user Login"
 msgstr ""
 
-#: FrmUserAdd.class:333
+#: FrmUserAdd.class:350
 msgid ""
 "Your password selections do not match. Please enter the same password twice"
 msgstr ""
 
-#: FrmUserAdd.class:358
+#: FrmUserAdd.class:375
 msgid ""
 "Groups are a way of administering permissions for your users. You grant the "
 "user"
 msgstr ""
 
-#: FrmUserAdd.class:358
+#: FrmUserAdd.class:375
 msgid "permission to do certain things by adding them to certain groups."
 msgstr ""
 
-#: FrmUserAdd.class:358
+#: FrmUserAdd.class:375
 msgid "Select which groups you want this user to be a part of here"
 msgstr ""
 
-#: FrmUserAdd.class:359
+#: FrmUserAdd.class:376
 msgid "OK"
 msgstr ""
 
-#: FrmUserAdd.class:395
+#: FrmUserAdd.class:433
 msgid ""
 "Choose a unique name for each user. Enter the password for twice for "
 "accuracy. You can make as many users as you want, and when you are finished "
@@ -669,35 +706,35 @@ msgstr ""
 "accuracy. You can make as many users as you want, and when you are finished "
 "click next to continue."
 
-#: FrmUserAdd.class:433
+#: FrmUserAdd.class:471
 msgid "Select"
 msgstr ""
 
-#: FrmUserAdd.class:439
+#: FrmUserAdd.class:477
 msgid "Use Picture ID for Login greeting"
 msgstr ""
 
-#: FrmUserAdd.class:444
+#: FrmUserAdd.class:482
 msgid "User Rights Management"
 msgstr ""
 
-#: FrmUserAdd.class:455
+#: FrmUserAdd.class:494
 msgid "Create User"
 msgstr "Create User"
 
-#: FrmUserAdd.class:461
+#: FrmUserAdd.class:500
 msgid "Clear Form"
 msgstr ""
 
-#: FrmUserAdd.class:468
+#: FrmUserAdd.class:507
 msgid "Login Name"
 msgstr ""
 
-#: FrmUserAdd.class:482
+#: FrmUserAdd.class:521
 msgid "ReEnter Password"
 msgstr "ReEnter Password"
 
-#: FrmUserAdd.class:503
+#: FrmUserAdd.class:542
 #, fuzzy
 msgid "Real Name"
 msgstr "Name"
@@ -710,23 +747,23 @@ msgstr "Select the windows partitions you would like to mount during boot"
 msgid "Timezone configuration"
 msgstr "Timezone configuration"
 
-#: FrmZoneSet.class:156
+#: FrmZoneSet.class:169
 msgid "Choose the correct timezone for the area in which you live."
 msgstr "Choose the correct timezone for the area in which you live."
 
-#: FrmZoneSet.class:161
+#: FrmZoneSet.class:174
 msgid "ComboBox1"
 msgstr "-"
 
-#: FrmZoneSet.class:163
+#: FrmZoneSet.class:176
 msgid "LocalTime"
 msgstr "LocalTime"
 
-#: FrmZoneSet.class:163
+#: FrmZoneSet.class:176
 msgid "UTC"
 msgstr "UTC"
 
-#: FrmZoneSet.class:168
+#: FrmZoneSet.class:181
 msgid ""
 "Choose how\n"
 "your hardware clock is set up.\n"
@@ -991,47 +1028,40 @@ msgstr "Unable to install kernels. "
 msgid "Installing Final configuration files..."
 msgstr "Installing final configuration files ..."
 
-#: MdlLiloOsList.module:68
-msgid "Windows installation found in "
+#: MdlLiloOsList.module:136
+#, fuzzy
+msgid "Windows installation found in"
 msgstr "Windows installation found in "
 
-#: MdlLiloOsList.module:76
-msgid "Name "
-msgstr "Name "
-
-#: MdlLiloOsList.module:95
-msgid "Include this Operating System in the boot menu"
-msgstr "Include this Operating System in the boot menu"
-
-#: MdlLiloOsList.module:144
+#: MdlLiloOsList.module:146
 msgid "Include this installation in the boot menu"
 msgstr "Include this installation in the boot menu"
 
-#: MdlLiloOsList.module:153
+#: MdlLiloOsList.module:155
 msgid "Label"
 msgstr "Label"
 
-#: MdlLiloOsList.module:274
+#: MdlLiloOsList.module:276
 msgid "Operating system installed in "
 msgstr "Operating system installed in"
 
-#: MdlLiloOsList.module:286
+#: MdlLiloOsList.module:288
 msgid "Include this operating system in the boot menu"
 msgstr "Include this operating system in the boot menu"
 
-#: MdlLiloOsList.module:297
+#: MdlLiloOsList.module:299
 msgid "Name"
 msgstr "Name"
 
-#: MdlLiloOsList.module:318
+#: MdlLiloOsList.module:320
 msgid "Initial Ram Disk"
 msgstr "Initial Ram Disk"
 
-#: MdlLiloOsList.module:343
+#: MdlLiloOsList.module:345
 msgid "Kernel boot options"
 msgstr "Kernel boot options"
 
-#: MdlLiloOsList.module:374
+#: MdlLiloOsList.module:376
 msgid "Add option to boot this Operating system into Text mode"
 msgstr "Add option to boot this Operating system into Text mode"
 
@@ -1171,53 +1201,53 @@ msgstr "BULK PACKAGES:"
 msgid "OPTIONAL PACKAGES:"
 msgstr "OPTIONAL PACKAGES:"
 
-#: MdlUsrAdd.module:41
+#: MdlUsrAdd.module:44
 msgid "This user can access CD/DVD devices"
 msgstr ""
 
-#: MdlUsrAdd.module:44
+#: MdlUsrAdd.module:47
 msgid "This user can access floppy disks"
 msgstr ""
 
-#: MdlUsrAdd.module:47
+#: MdlUsrAdd.module:50
 msgid "This user is allowed to print"
 msgstr ""
 
-#: MdlUsrAdd.module:50
+#: MdlUsrAdd.module:53
 msgid "This user can access scanner devices"
 msgstr ""
 
-#: MdlUsrAdd.module:53
+#: MdlUsrAdd.module:56
 msgid "This user is allowed to change audio settings"
 msgstr ""
 
-#: MdlUsrAdd.module:56
+#: MdlUsrAdd.module:59
 msgid "This user is allowed to change video settings"
 msgstr ""
 
-#: MdlUsrAdd.module:59
+#: MdlUsrAdd.module:62
 msgid "This user is allowed to play restricted games"
 msgstr ""
 
-#: MdlUsrAdd.module:62
+#: MdlUsrAdd.module:65
 #, fuzzy
 msgid "Restricted administrator (backup)"
 msgstr "System Administrator"
 
-#: MdlUsrAdd.module:65
+#: MdlUsrAdd.module:68
 #, fuzzy
 msgid "This user is a system administrator"
 msgstr "System Administrator"
 
-#: MdlUsrAdd.module:68
+#: MdlUsrAdd.module:71
 msgid "Elite user"
 msgstr ""
 
-#: MdlUsrAdd.module:71
+#: MdlUsrAdd.module:74
 msgid "Allow user to mount / un-mount Pendrive (USB Sticks)"
 msgstr ""
 
-#: MdlUsrAdd.module:74
+#: MdlUsrAdd.module:77
 msgid "Allow user to mount / un-mount Removable HD Storage Devices"
 msgstr ""
 
@@ -1240,6 +1270,12 @@ msgstr "localtime-copied-from"
 #: MdlZoneSet.module:28
 msgid "localtime"
 msgstr "localtime"
+
+#~ msgid "Name "
+#~ msgstr "Name "
+
+#~ msgid "Include this Operating System in the boot menu"
+#~ msgstr "Include this Operating System in the boot menu"
 
 #~ msgid "Hardware Configuration"
 #~ msgstr "Hardware Configuration"

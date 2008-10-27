@@ -24,14 +24,32 @@ PUBLIC SUB Form_Open()
 
   FMain.FrmCurr = ME
   tlbanner.text = "<h3>" & tlbanner.text & "</h3>"
-    ME.LIST_LANG_CHOICES()
-  
+    
+  'ME.lblangsel.Columns.Count = 2
+      
+    
+ME.LIST_LANG_CHOICES()
 END
 
 PUBLIC SUB LIST_LANG_CHOICES()
   
-  ME.lbLangSel.list = ["English", "Spanish", "Italian"]
+    DIM sLangCode, sLangName AS String
+    DIM i AS Integer
     
+    i = 0
+    FOR EACH sLangCode IN RDir(".lang", "*.mo")
+      'Message(sLangCode)
+      SELECT CASE File.BaseName(".lang" &/ sLangCode)
+        CASE "en_US"
+          sLangName = "US English"
+        CASE "es"
+          sLangName = "Spanish"
+      END SELECT 
+      
+    ME.lblangsel.Add(File.BaseName(sLangCode), sLangName)
+    
+   
+NEXT 
     
   
 END
@@ -44,8 +62,10 @@ PUBLIC SUB Form_Resize()
   WITH ME
     .tlBanner.Move(8, 4, MdlObjSizer.get_object_width(.tlBanner.text))
     .Separator1.Move(8, .tlBanner.top + .tlBanner.Height - .Separator1.Height, .ClientWidth - (.Separator1.Left * 2))
+    '.GridView1.Move(8, .tlBanner.top + .tlBanner.Height + 4)
+    '.GridView1.Resize((ME.Width / 3), ME.Height - (.tlBanner.Height * 2))
     .lbLangSel.Move(8, .tlBanner.top + .tlBanner.Height + 4)
-    .lbLangSel.Resize((ME.Width / 3), ME.Height - (.tlBanner.Height * 2))
+   .lbLangSel.Resize((ME.Width / 3), ME.Height - (.tlBanner.Height * 2))
   END WITH 
 
 END
@@ -53,24 +73,25 @@ END
 PUBLIC SUB lbLangSel_Select()
 
   FMain.btnext.Enabled = TRUE
+  'Message(LAST.current.key)
 
 END
 
 
 
-PUBLIC SUB lbLangSel_KeyPress()
-
-  DIM i AS Integer
-    IF Key.text > "z" OR Key.text < " " THEN RETURN 
-      i = LAST.index
-      DO
-        INC i
-          IF i > LAST.count - 1 THEN i = 0
-          IF i = LAST.index THEN RETURN 
-          IF LAST[i].text LIKE Key.Text & "*" THEN 
-            LAST.index = i
-            RETURN 
-          END IF
-        LOOP
-
-END
+' ' ' PUBLIC SUB lbLangSel_KeyPress()
+' ' ' 
+' ' '   DIM i AS Integer
+' ' '     IF Key.text > "z" OR Key.text < " " THEN RETURN 
+' ' '       i = LAST.index
+' ' '       DO
+' ' '         INC i
+' ' '           IF i > LAST.count - 1 THEN i = 0
+' ' '           IF i = LAST.index THEN RETURN 
+' ' '           IF LAST[i].text LIKE Key.Text & "*" THEN 
+' ' '             LAST.index = i
+' ' '             RETURN 
+' ' '           END IF
+' ' '         LOOP
+' ' ' 
+' ' ' END
