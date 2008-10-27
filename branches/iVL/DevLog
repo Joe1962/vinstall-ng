@@ -1,5 +1,9 @@
-- New Process Sumary window is complete.
-- Fixed problem with user account/shell not being specified (BUG)
+- Re-worked the language selection
+  * Changed the listview for a columnview
+    \- This will eliminate the need to create an array
+        with a long list of languages. Instead, the installer will
+	look in it's .lang dir and list all the .mo files, then it
+	will populate the columnview using only the languages found.
 
 
 

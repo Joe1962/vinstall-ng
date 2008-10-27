@@ -394,18 +394,18 @@ PUBLIC SUB btback_Click()
 END
 
 PUBLIC SUB Button1_Click()
-System.Language = MdlLangSel.ID_LANG(Trim(FrmLangSel.lbLangSel.text))
-  'FMain.Delete
-  'FMain.Delete
+
+DIM sLang AS String = FrmLangSel.lblangsel.Current.Key
+
+IF sLang = "es" THEN sLang = "es_ES"
+System.Language = sLang
+
   FMain.Close
   'FrmSelISO.Close
   
   'Message(System.Language)
   MdlCore.frmInit = FrmSelISO
   MdlCore.main
-  
-   
-  'WAIT 
- 'FMain.Show
+
 
 END

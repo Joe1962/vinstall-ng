@@ -4,10 +4,6 @@
   MoveScaled(0,0,64,64)
   Text = ("")
   Picture = Picture["images/langbg.png"]
-  { lbLangSel ListBox
-    MoveScaled(1,8,32,51)
-    List = []
-  }
   { tlBanner TextLabel
     MoveScaled(2,2,37,5)
     Text = ("Select your language")
@@ -15,5 +11,8 @@
   }
   { Separator1 Separator
     MoveScaled(1,5,61,2)
+  }
+  { lblangsel ColumnView
+    MoveScaled(1,8,36,41)
   }
 }
