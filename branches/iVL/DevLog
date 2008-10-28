@@ -7,3 +7,8 @@
 
 
 
+-I added the non-gui config code to run in the BG when lilo window starts.
+ this is how it is done in old installer. 
+ we still need vhalswitch, ALSA-config(this should be done in xterm IMO), vxconf, hwinit??, and runlevel??.
+ we can skip last 2 IMO
+ I added code to mount all needed binds to liloconfig and stoppped mount/umount in root, and useradd.
