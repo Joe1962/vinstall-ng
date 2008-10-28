@@ -1,0 +1,88 @@
+' Gambas class file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+PRIVATE sRevText AS String
+
+PUBLIC SUB Form_Open()
+  
+  FMain.FrmCurr = ME
+  
+  
+  MdlDiskPart.EMBED_ALSA()
+
+  WITH ME
+    .tlBanner.Text = "<b>ALSA Config:</b><br>" &
+    "Advanced Linux Sound Architecture:" &
+    "This portion of the setup process allows you to sutup your soundcard for your new operating system." &
+    "Please use the setup program below to setup the sound system."
+    .tlBanner.Adjust
+    
+  END WITH 
+  
+    sRevText = ME.tlBanner.text
+    
+
+END
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .tlBanner.Width = .Width
+    .EmbALSA.Move(.tlBanner.Left, .tlBanner.Top + .tlBanner.Height + 4, .ClientWidth - 16, .ClientHeight)
+  END WITH 
+END
+
+PUBLIC SUB EmbALSA_Embed()
+
+  FMain.btnext.Enabled = FALSE
+  FMain.btnext.ForeColor = Color.Gray
+  FMain.btback.Enabled = FALSE
+  FMain.btback.ForeColor = Color.Gray
+  FMain.btQuit.Enabled = FALSE
+  FMain.btQuit.ForeColor = Color.Gray
+  
+
+END
+
+PUBLIC SUB EmbALSA_Close()
+
+  DIM bReboot AS Boolean
+  
+    FrmDiskPart.tlBanner.Text = "<h3><br>Analyzing system partitioning scheme... Please wait<br>This will take a few seconds...</h3>"
+    FrmDiskPart.tlBanner.Refresh
+    FrmDiskPart.tlBanner.Adjust
+    'Message("Exiting GParted")
+    WAIT 1
+        
+       
+        
+       ME.Hide
+      
+        FrmPartSel.Show
+        
+  
+  
+  FMain.btnext.Enabled = TRUE
+  FMain.btnext.ForeColor = Color.Black
+  FMain.btback.Enabled = TRUE
+  FMain.btback.ForeColor = Color.Black
+  FMain.btQuit.Enabled = TRUE
+  FMain.btQuit.ForeColor = Color.Black
+  'END IF
+END
