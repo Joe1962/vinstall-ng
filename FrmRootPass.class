@@ -36,10 +36,10 @@ PUBLIC SUB Button1_Click()
     IF ME.tbPasswd1.Text = ME.tbPasswd2.Text THEN 
       'Message("chroot /mnt/target /sbin/passwdx root " & ME.tbPasswd1.Text)
           ' bind mounting necessary here
-          SHELL "mount -o bind /sys " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
-          SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT 
-          SHELL "mount -o bind /tmp " & ClsGlobal.sTargetMnt &/ "tmp" WAIT 
-          SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
+          'SHELL "mount -o bind /sys " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
+          'SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT 
+          'SHELL "mount -o bind /tmp " & ClsGlobal.sTargetMnt &/ "tmp" WAIT 
+          'SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
       SHELL "chroot /mnt/target /sbin/passwdx root " & ME.tbPasswd1.Text WAIT 
       'Message("Root password Set.")
       ME.tbPasswd1.Clear
@@ -51,10 +51,10 @@ PUBLIC SUB Button1_Click()
       ME.tbPasswd1.SetFocus
     ENDIF 
   ENDIF 
-  SHELL "umount " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
-  SHELL "umount " & ClsGlobal.sTargetMnt &/ "proc" WAIT
-  SHELL "umount " & ClsGlobal.sTargetMnt &/ "tmp" WAIT 
-  SHELL "umount " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
+  'SHELL "umount " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
+  'SHELL "umount " & ClsGlobal.sTargetMnt &/ "proc" WAIT
+  'SHELL "umount " & ClsGlobal.sTargetMnt &/ "tmp" WAIT 
+  'SHELL "umount " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
 END
 
 PUBLIC SUB Form_Resize()

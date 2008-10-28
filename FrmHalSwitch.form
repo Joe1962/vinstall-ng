@@ -1,0 +1,18 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Text = ("")
+  { TextBox1 TextBox
+    MoveScaled(1,1,46,9)
+    Text = ("Would you like to use Vl-Hot or HAL to manage your removable devices?")
+  }
+  { RadioButton1 RadioButton
+    MoveScaled(2,17,15,3)
+    Text = ("HAL")
+  }
+  { RadioButton2 RadioButton
+    MoveScaled(2,23,16,3)
+    Text = ("VL-Hot")
+  }
+}

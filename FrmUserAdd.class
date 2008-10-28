@@ -132,10 +132,10 @@ PUBLIC SUB Button1_Click()
           
             ' need to do some binding for this to work
             'PRINT "Mounting system locations with bind options"
-            SHELL "mount -o bind /sys /mnt/target/sys" WAIT 
-            SHELL "mount -o bind /tmp /mnt/target/tmp" WAIT 
-            SHELL "mount -o bind /proc /mnt/target/proc" WAIT 
-            SHELL "mount -o bind /dev /mnt/target/dev" WAIT 
+            'SHELL "mount -o bind /sys /mnt/target/sys" WAIT 
+            'SHELL "mount -o bind /tmp /mnt/target/tmp" WAIT 
+            'SHELL "mount -o bind /proc /mnt/target/proc" WAIT 
+            'SHELL "mount -o bind /dev /mnt/target/dev" WAIT 
             'PRINT "Deleting old user group"
             
           SHELL "chroot /mnt/target  /usr/sbin/groupdel " & ME.tbUsername.Text WAIT '& " &> /dev/null" WAIT 
@@ -168,10 +168,10 @@ PUBLIC SUB Button1_Click()
       ENDIF 
     ENDIF
   ENDIF  
-  SHELL "umount /mnt/target/dev" WAIT 
-  SHELL "umount /mnt/target/proc" WAIT
-  SHELL "umount /mnt/target/tmp" WAIT 
-  SHELL "umount /mnt/target/sys" WAIT 
+  'SHELL "umount /mnt/target/dev" WAIT 
+  'SHELL "umount /mnt/target/proc" WAIT
+  'SHELL "umount /mnt/target/tmp" WAIT 
+  'SHELL "umount /mnt/target/sys" WAIT 
   
 
         
