@@ -1,2 +1,72 @@
 ' Gambas class file
 
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC SUB cbSetupMethod_Click()
+DIM sMsg AS String
+  SELECT CASE cbSetupMethod.Text  
+    CASE "Vesa"
+        smsg = ("Uses the default (failsafe) configuration.")
+    CASE "Probe"
+        smsg = ("Probe hardware to setup your Graphical Environment using your preffered settings")
+    CASE "Fbdev"
+      smsg = ("Use the console framebuffer driver")
+    CASE ELSE 
+      smsg = ""
+  END SELECT 
+  ME.tlChoiceExp.text = sMsg
+    ME.tlChoiceExp.Width = MdlObjSizer.get_object_width(sMsg)
+END
+
+PUBLIC SUB Form_Open()
+  DIM sOut AS String
+  DIM sFileIn AS String[]
+  DIM sLine AS String
+  DIM i, imark, ii AS Integer
+  
+  Message.Warning(("We will now setup your graphical user interface. Your screen may flicker during this process"))
+  
+  'SHELL "/usr/bin/X -configure :2 2>/dev/null" WAIT'  let's assume  this produced a basic xorg.conf
+  'SHELL "cat /etc/X11.xorg.conf.new | grep ^Driver |cut -f 2 -d \':\'" TO sOut
+  
+  sFileIn = Split(DConv(File.Load("/etc/X11/xorg.conf")), "\n")
+    FOR i = 0 TO sFileIn.Count - 1
+        
+    'PRINT sFileIn[i]
+      IF InStr(sFileIn[i], "Section \"Device\"") THEN 
+      'PRINT sFileIn[i]
+      'imark = i
+        'ii = 1
+        REPEAT 
+          IF InStr(sFileIn[i + ii], "Driver") = FALSE THEN 
+            INC ii
+          END IF
+          UNTIL InStr(sFileIn[i + ii], "Driver") OR InStr(sFileIn[i + ii], "EndSection") '= TRUE
+          'Message("Found Driver: " & sFileIn[i + ii])
+          sOut = Trim(Mid(sFileIn[i + ii], InStr(sFileIn[i + ii], "\"") + 1, Len(sFileIn[i + ii]) - InStr(sFileIn[i + ii], "\"") - 1))
+        'END IF
+    END IF
+  NEXT 
+        
+        
+  FrmXconf.cbSetupMethod.Add(sOut)
+  FrmXconf.cbSetupMethod.text = sOut
+  
+  'Message(sOut)
+  
+
+END

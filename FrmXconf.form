@@ -1,6 +1,79 @@
 # Gambas Form File 2.0
 
-{ FrmXconf Form
-  MoveScaled(0, 0, 64, 64)
-  Border = Window.Resizable
+{ Form Form
+  MoveScaled(0,0,89,59)
+  Text = ("")
+  Arrangement = Arrange.Vertical
+  { hbBanner HBox
+    MoveScaled(1,1,77,6)
+    { TlBanner TextLabel
+      MoveScaled(1,1,27,3)
+      Text = ("Graphical Interface Settings")
+    }
+    { hrsep Separator
+      MoveScaled(3,4,14,1)
+    }
+  }
+  { Panel1 Panel
+    MoveScaled(1,8,69,13)
+    Arrangement = Arrange.Horizontal
+    AutoResize = True
+    { Frame1 Frame
+      MoveScaled(0,0,63,11)
+      Expand = True
+      Text = ("")
+      { tlChoiceExp TextLabel
+        MoveScaled(1,6,48,3)
+        Text = ("")
+      }
+      { cbSetupMethod ComboBox
+        MoveScaled(14,1,22,3)
+        Text = ("")
+        ReadOnly = True
+        List = [("Vesa"), ("Fbdev")]
+      }
+      { tlSetupMethod TextLabel
+        MoveScaled(1,1,13,3)
+        Text = ("Video Driver")
+        Alignment = Align.Normal
+      }
+    }
+  }
+  { Panel2 Panel
+    MoveScaled(1,21,83,34)
+    Arrangement = Arrange.Horizontal
+    AutoResize = True
+    { Frame2 Frame
+      MoveScaled(0,0,35,25)
+      Expand = True
+      Text = ("Keyboard Layout")
+      { cvKbdLayout ColumnView
+        MoveScaled(1,2,32,21)
+        Expand = True
+      }
+    }
+    { Panel3 Panel
+      MoveScaled(38,2,38,22)
+      { tlColorDepth TextLabel
+        MoveScaled(0,2,11,3)
+        Text = ("Color Depth")
+        Alignment = Align.Normal
+      }
+      { tlScreenRes TextLabel
+        MoveScaled(0,5,18,3)
+        Text = ("Screen Resolution")
+        Alignment = Align.Normal
+      }
+      { cbScreenRes ComboBox
+        MoveScaled(21,5,15,3)
+        Text = ("")
+        List = [("1920x1280"), ("1600x1200"), ("1280x1024"), ("1440x900"), ("1280x800"), ("1024x768"), ("800x600"), ("640x480")]
+      }
+      { cbColorDepth ComboBox
+        MoveScaled(12,2,24,3)
+        Text = ("")
+        List = [("24 bit True Color"), ("16 bit Pseudo Color"), ("8 bit 256 Color"), ("4 bit 16 Color"), ("1 bit Mono B/W")]
+      }
+    }
+  }
 }

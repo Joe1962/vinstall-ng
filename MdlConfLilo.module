@@ -69,7 +69,8 @@ PUBLIC FUNCTION WRITE_LILO_DOT_CONF() AS Integer
     'message(sOut)
     ' Now we want to write the actual file to the root partition
       IF Exist(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf") THEN 
-        TRY MOVE ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf" TO ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.dist"
+        IF Exist(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf.dist") THEN KILL ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf.dist"
+        TRY MOVE ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf" TO ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf.dist"
       END IF
       
       ' THE FOLLOWING LINE IS FOR TESTING ONLY
@@ -80,11 +81,11 @@ PUBLIC FUNCTION WRITE_LILO_DOT_CONF() AS Integer
       ' to make sure the new changes are written to the MBR, we need a copy in the local running install
     'File.Save("/etc/lilo.conf", sOut)
       ' now run lilo
-  File.Save("/tmp/target_lilo.conf", sOut)
+  'File.Save("/tmp/target_lilo.conf", sOut)
   
 END
 
-PUBLIC SUB EXECUTE_LILO()
+PUBLIC FUNCTION EXECUTE_LILO() AS Integer
   
   DIM sOut AS String
   DIM sDump AS String
@@ -93,8 +94,10 @@ PUBLIC SUB EXECUTE_LILO()
   SHELL "chroot " & ClsGlobal.sTargetMnt & " /sbin/lilo -v || echo \'FAILED\' " TO sDump
     IF InStr(sDump, "FAILED") > 0 THEN 
       Message.Error(("Lilo returned an error. Please see below") & gb.NewLine & sDump)
+      RETURN 1
     ELSE 
       Message(("Boot loader has been setup successfully"))
+      RETURN 0
     END IF
   'SHELL "umount " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
   'SHELL "umount " & ClsGlobal.sTargetMnt &/ "proc" WAIT
@@ -211,7 +214,7 @@ DIM i AS Integer
 DIM sCliSection AS String
 DIM sWinSection AS String
 DIM sBootAddr AS String
-
+DIM cbox AS ComboBox
 
 
 
@@ -259,15 +262,18 @@ sShortAddr = Right(bInc.tag, Len(bInc.tag) - RInStr(bInc.tag, "/"))
                     "read-only" & " \n \n"
   ENDIF 
         
-                    
-        IF bInc.tag = ClsPartSel.sRoot AND MdlLiloOsList.bVlCliOption = TRUE THEN 
+          FOR EACH cbox IN MdlPartSel.oMountPoints
+            IF cbox.text = "/" AND bInc.tag = cbox.tag THEN 
+                    IF MdlLiloOsList.bVlCliOption = TRUE THEN
+        'IF bInc.tag = ClsPartSel.sRoot AND MdlLiloOsList.bVlCliOption = TRUE THEN 
           sCliSection = Replace(sSection, "append = \"" & sEntryApnd & "\"", "append = \"2 " & sEntryApnd & "\"") 'splash=silent\"")
           sCliSection = Replace(sCliSection, "label = " & sEntryLbl, "label = " & sEntryLbl & "-tui")
           sCliSection = sCliSection & gb.NewLine
         ELSE 
           sCliSection = ""
         END IF
-                             
+        END IF 
+  NEXT                    
     ELSE 
       sSection = ""
     
