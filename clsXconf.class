@@ -1,0 +1,3 @@
+' Gambas class file
+
+STATIC PUBLIC sVidID AS String
