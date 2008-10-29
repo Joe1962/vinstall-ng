@@ -4,26 +4,24 @@
   MoveScaled(0,0,89,59)
   Text = ("")
   Arrangement = Arrange.Vertical
-  { hbBanner HBox
-    MoveScaled(1,1,77,6)
+  { hbBanner Panel
+    MoveScaled(1,1,86,4)
+    Arrangement = Arrange.Horizontal
     { TlBanner TextLabel
-      MoveScaled(1,1,27,3)
+      MoveScaled(1,0,27,3)
       Text = ("Graphical Interface Settings")
-    }
-    { hrsep Separator
-      MoveScaled(3,4,14,1)
     }
   }
   { Panel1 Panel
-    MoveScaled(1,8,69,13)
+    MoveScaled(0,6,69,13)
     Arrangement = Arrange.Horizontal
     AutoResize = True
     { Frame1 Frame
-      MoveScaled(0,0,63,11)
+      MoveScaled(0,0,69,13)
       Expand = True
       Text = ("")
       { tlChoiceExp TextLabel
-        MoveScaled(1,6,48,3)
+        MoveScaled(1,5,58,3)
         Text = ("")
       }
       { cbSetupMethod ComboBox

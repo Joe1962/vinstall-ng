@@ -16,6 +16,8 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+
+
 PUBLIC SUB cbSetupMethod_Click()
 DIM sMsg AS String
   SELECT CASE cbSetupMethod.Text  
@@ -26,7 +28,7 @@ DIM sMsg AS String
     CASE "Fbdev"
       smsg = ("Use the console framebuffer driver")
     CASE ELSE 
-      smsg = ""
+      smsg = clsXconf.sVidID
   END SELECT 
   ME.tlChoiceExp.text = sMsg
     ME.tlChoiceExp.Width = MdlObjSizer.get_object_width(sMsg)
@@ -38,7 +40,7 @@ PUBLIC SUB Form_Open()
   DIM sLine AS String
   DIM i, imark, ii AS Integer
   
-  Message.Warning(("We will now setup your graphical user interface. Your screen may flicker during this process"))
+  'Message.Warning(("We will now setup your graphical user interface. Your screen may flicker during this process"))
   
   'SHELL "/usr/bin/X -configure :2 2>/dev/null" WAIT'  let's assume  this produced a basic xorg.conf
   'SHELL "cat /etc/X11.xorg.conf.new | grep ^Driver |cut -f 2 -d \':\'" TO sOut
@@ -56,8 +58,19 @@ PUBLIC SUB Form_Open()
             INC ii
           END IF
           UNTIL InStr(sFileIn[i + ii], "Driver") OR InStr(sFileIn[i + ii], "EndSection") '= TRUE
-          'Message("Found Driver: " & sFileIn[i + ii])
           sOut = Trim(Mid(sFileIn[i + ii], InStr(sFileIn[i + ii], "\"") + 1, Len(sFileIn[i + ii]) - InStr(sFileIn[i + ii], "\"") - 1))
+          Message(sOut)
+            ' look for the indentifier string
+            ii = 0
+            REPEAT 
+              IF InStr(sFileIn[i + ii], "Identifier") = FALSE THEN 
+                INC ii
+              END IF
+            UNTIL InStr(sFileIn[i + ii], "Identifier") OR InStr(sFileIn[i + ii], "EndSection")
+            clsXconf.sVidID = Trim(Mid(sFileIn[i + ii], InStr(sFileIn[i + ii], "\"") + 1, Len(sFileIn[i + ii]) - InStr(sFileIn[i + ii], "\"") - 1))
+            'Message(sID)
+          'Message("Found Driver: " & sFileIn[i + ii])
+          
         'END IF
     END IF
   NEXT 
@@ -68,5 +81,14 @@ PUBLIC SUB Form_Open()
   
   'Message(sOut)
   
+
+END
+
+PUBLIC SUB Form_Resize()
+
+    WITH ME
+    .TlBanner.Move(4, 24, .hbBanner.Width - (.TlBanner.Left * 2))
+    
+    END WITH 
 
 END
