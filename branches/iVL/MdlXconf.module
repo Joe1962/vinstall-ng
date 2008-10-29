@@ -16,3 +16,8 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
+PUBLIC SUB LIST_KBD_LAYOUT()
+  
+  ' Read /etc/X11/xkb/rules/xorg.lst
+  
+END

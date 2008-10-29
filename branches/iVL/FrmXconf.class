@@ -54,19 +54,20 @@ PUBLIC SUB Form_Open()
       'imark = i
         'ii = 1
         REPEAT 
-          IF InStr(sFileIn[i + ii], "Driver") = FALSE THEN 
+          'IF InStr(sFileIn[i + ii], "Driver") = FALSE THEN 
+          IF Left(sFileIn[i + ii], Len("Driver")) <> "Driver" THEN 
             INC ii
           END IF
-          UNTIL InStr(sFileIn[i + ii], "Driver") OR InStr(sFileIn[i + ii], "EndSection") '= TRUE
+          UNTIL Left(sFileIn[i + ii], Len("Driver")) = "Driver" OR InStr(sFileIn[i + ii], "EndSection") '= TRUE
           sOut = Trim(Mid(sFileIn[i + ii], InStr(sFileIn[i + ii], "\"") + 1, Len(sFileIn[i + ii]) - InStr(sFileIn[i + ii], "\"") - 1))
-          Message(sOut)
+          'Message(sOut)
             ' look for the indentifier string
             ii = 0
             REPEAT 
-              IF InStr(sFileIn[i + ii], "Identifier") = FALSE THEN 
+              IF Left(Trim(sFileIn[i + ii]), Len("Identifier")) <> "Identifier" THEN 
                 INC ii
               END IF
-            UNTIL InStr(sFileIn[i + ii], "Identifier") OR InStr(sFileIn[i + ii], "EndSection")
+            UNTIL Left(Trim(sFileIn[i + ii]), Len("Identifier")) = "Identifier" OR InStr(sFileIn[i + ii], "EndSection")
             clsXconf.sVidID = Trim(Mid(sFileIn[i + ii], InStr(sFileIn[i + ii], "\"") + 1, Len(sFileIn[i + ii]) - InStr(sFileIn[i + ii], "\"") - 1))
             'Message(sID)
           'Message("Found Driver: " & sFileIn[i + ii])
