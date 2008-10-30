@@ -460,7 +460,7 @@ WITH FMain.tvPlan
   .Add("Conf2", ("System Administrator"), sToDopic, "Conf")
   .Add("Conf3", ("User Accounts"), sToDopic, "Conf")
   .Add("Conf4", ("Network Configuration"), sToDopic, "Conf")
-  '.Add("Conf5", ("Hardware Configuration"), sToDoPic, "Conf")
+  .Add("Conf5", ("Final Hardware Configuration"), sToDoPic, "Conf")
 END WITH 
 iLeftWidth = 0
 iWidth = 0
