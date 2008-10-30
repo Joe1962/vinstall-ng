@@ -4,15 +4,23 @@
   MoveScaled(0,0,84,55)
   Text = ("")
   Arrangement = Arrange.Vertical
-  { tlBanner TextLabel
-    MoveScaled(1,2,81,9)
-    Text = ("Alsa Config:")
+  { pnlBanner Panel
+    MoveScaled(1,1,75,9)
+    Arrangement = Arrange.Vertical
+    { tlBanner TextLabel
+      MoveScaled(1,0,36,6)
+      Text = ("")
+    }
+    { Separator1 Separator
+      MoveScaled(1,7,13,1)
+    }
   }
-  { VPanel1 VPanel
-    MoveScaled(1,12,74,48)
+  { pnlAlsa Panel
+    MoveScaled(1,9,78,33)
     Expand = True
+    Arrangement = Arrange.Horizontal
     { EmbALSA Embedder
-      MoveScaled(6,7,76,32)
+      MoveScaled(0,0,76,32)
       Expand = True
     }
   }

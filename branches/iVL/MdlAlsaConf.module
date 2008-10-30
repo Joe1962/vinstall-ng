@@ -1,0 +1,129 @@
+' Gambas module file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC SUB EMBED_ALSACONFIG()
+  
+  DIM aHandle AS NEW Pointer[]
+  DIM iHandle AS Integer
+  DIM i AS Integer = 0
+  DIM sDump AS String
+  
+  SHELL "chroot /mnt/target /usr/bin/xterm -e alsaconf"
+  
+  aHandle = Desktop.Find("alsaconf")
+    IF aHandle.Count = 0 THEN 
+      REPEAT 
+        WAIT 1
+        aHandle = Desktop.Find("*alsaconf")
+        INC i
+      UNTIL aHandle.Count > 0 OR i = 3
+    END IF
+    iHandle = aHandle[0]
+    
+    TRY FrmAlsaConf.EmbALSA.Embed(iHandle)
+      CATCH 
+      Message(Error.where & "\n" & Error.Text)
+       ' Message(("Error trying to launch sound configuration utility"))
+    'END IF
+  
+  
+  
+  
+  
+  ' ' ' DIM sWins AS String = "gpartedbin,Gpartedbin" '" GParted, / dev / sda - GParted, / dev / hda - GParted ""
+  ' ' ' DIM sWons AS String[] = Split(sWins, ",")
+  ' ' ' DIM sType AS String
+  ' ' ' DIM sTypes AS String[]
+  'DIM sTypeArr AS String[]
+  'Desktop.Find("", "GParted")
+  
+  ' The window can be found on the Desktop WM_CLASS property which can be seen via the xprop application
+  ' We may need to implement this method here instead of the win window title method.
+  
+  ' For now, try to determine what type of drive thsi is..
+  ' The following line will get the first listed drive (/dev/sda or /dev/hda) and use that
+  ' as a starting point to search for a running instance of gparted
+  ' ' ' ' SHELL "probedisk | grep -v \'cdrom\' | cut -f 1 -d \'|\'" TO sType
+  ' ' ' '   stype = Trim(sType)
+  ' ' ' '     'Message(sType)
+  ' ' ' '  IF stype = "" THEN 
+  ' ' ' '     Message.Error(("VectorLinux is unable to determine the type of hard disks on your system.") & " <br>" &
+  ' ' ' '     ("It is still possible to install VectorLinux on your system, but you need to pre-partition your disks first"))
+  ' ' ' '  ELSE IF InStr(sType, "\n") > 0 THEN 
+  ' ' ' '   ' more than one type of disk was found... by default, gparted will load using /dev/hda first
+  ' ' ' '     sType = "/dev/hda"
+  ' ' ' '   END IF 
+  ' ' ' '  
+  ' ' ' '   IF Exist("/usr/sbin/gparted") = FALSE THEN 
+  ' ' ' '     Message.Error(("Gparted was not found on this system. Please install gparted and try again"))
+  ' ' ' '     RETURN 
+  ' ' ' '   END IF
+  ' ' ' ' 
+  ' ' ' ' FrmDiskPart.tlBanner.Text = "<h3>" & ("Loading gparted ... Please wait") & "</h3>"
+  ' ' ' ' SHELL "/usr/sbin/gparted"
+  ' ' ' ' WAIT 1
+  ' ' ' ' 
+  ' ' ' ' sTypes = Split(sType, "\n")
+  ' ' ' ' 
+  ' ' ' '     aHandle = Desktop.Find("", "*parted*", "")
+  ' ' ' '    i = 0
+  ' ' ' '    IF aHandle.Count = 0 THEN 'lets give it a chance to start
+  ' ' ' '      REPEAT 
+  ' ' ' '        WAIT 1
+  ' ' ' '        aHandle = Desktop.Find("", "*parted*", "")
+  ' ' ' '        INC i
+  ' ' ' '      UNTIL 
+  ' ' ' '      aHandle.Count > 0 OR i > 5
+  ' ' ' '    END IF
+  ' ' ' '    
+  ' ' ' '    IF aHandle.count = 0 ' still struggling here
+  ' ' ' '     'FOR i = 0 TO sTypes.Count - 1
+  ' ' ' '       i = 0
+  ' ' ' '       REPEAT 
+  ' ' ' '       aHandle = Desktop.Find(Trim(sTypes[i]) & " - GParted")
+  ' ' ' '       INC i
+  ' ' ' '       UNTIL aHandle.coun > 0 OR i = sTypes.Count - 1
+  ' ' ' '    END IF
+  ' ' ' '       
+  ' ' ' ' IF aHandle.count = 0 THEN 
+  ' ' ' '   aHandle = Desktop.Find("GParted") ' one last attempt
+  ' ' ' ' END IF
+  ' ' ' '  
+  ' ' ' '   
+  ' ' ' '       IF aHandle.Count = 0 THEN 
+  ' ' ' '         Message(("Setup is unable to successfully run gparted on this system. This may be a sign of ") & "\n" &
+  ' ' ' '         ("a bad install media. Setup cannot continue."))
+  ' ' ' '       RETURN 
+  ' ' ' '       'END IF
+  ' ' ' '     
+  ' ' ' '   ELSE IF aHandle.Count >= 2 THEN 
+  ' ' ' '     Message(("Several windows found. I will take the first one!"))
+  ' ' ' '   ENDIF
+  ' ' ' '   'ELSE 
+  ' ' ' '   iHandle = aHandle[0]
+  ' ' ' '   
+  ' ' ' ' 'ENDIF
+  ' ' ' ' 
+  ' ' ' ' 'TRY embEmbedder.Embed(iHandle)
+  ' ' ' ' 
+  ' ' ' ' TRY FrmDiskPart.EmbGPARTED.Embed(iHandle)
+  ' ' ' ' 
+  ' ' ' ' CATCH 
+  ' ' ' ' Message.Error(Error.Text & gb.NewLine & Error.Where)
+  ' ' ' ' 
+END
+

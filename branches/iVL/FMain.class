@@ -330,19 +330,14 @@ PUBLIC SUB btnext_Click()
       MdlNetConf.WRITE_INET()
       
           'offer to reboot here
-            SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer. Additional system configuration") & "<br>" &
-            ("will take place after you reboot your system.Part of this process must be done in text mode.") & "<br><br>" &
-            ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
-      CASE 1
-        SHELL "shutdown -r now"
-      CASE ELSE 
-      'RETURN 
-        Message.Info(("The VectorLinux installer will now exit. Enjoy your new operating system"))
-        QUIT ' dirty quit event 
-      'STOP EVENT 
-    END SELECT 
+          frmNext = FrmAlsaConf
 '      frmNext = FrmLilo ' this is already done
-        
+
+  CASE "FrmAlsaConf"
+  
+  frmNext = FrmXconf
+
+  
   END SELECT 
                        
 '         IF frmNext = "" THEN frmNext = FrmSelISO  
@@ -375,6 +370,27 @@ PUBLIC SUB btnext_Click()
 
 
 END
+
+
+PUBLIC SUB END_INSTALLER()
+  
+    SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer. Additional system configuration") & "<br>" &
+            ("will take place after you reboot your system.Part of this process must be done in text mode.") & "<br><br>" &
+            ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
+      CASE 1
+        SHELL "shutdown -r now"
+      CASE ELSE 
+      RETURN 
+        Message.Info(("The VectorLinux installer will now exit. Enjoy your new operating system"))
+        QUIT ' dirty quit event 
+      'STOP EVENT 
+    END SELECT 
+  
+  
+END
+
+
+
 
 PUBLIC SUB btback_Click()
 
