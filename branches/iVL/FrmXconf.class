@@ -76,12 +76,13 @@ PUBLIC SUB Form_Open()
     END IF
   NEXT 
         
-        
-  FrmXconf.cbSetupMethod.Add(sOut)
-  FrmXconf.cbSetupMethod.text = sOut
+        IF sOut <> "EndSectio" THEN 
+          FrmXconf.cbSetupMethod.Add(sOut)
+          FrmXconf.cbSetupMethod.text = sOut
+        END IF
   
   'Message(sOut)
-  
+  FrmXconf.cbSetupMethod_Click()
 
 END
 
