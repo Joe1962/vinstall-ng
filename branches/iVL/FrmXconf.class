@@ -94,3 +94,10 @@ PUBLIC SUB Form_Resize()
     END WITH 
 
 END
+
+PUBLIC SUB cbColorDepth_Click()
+
+'Message(Trim(Left(cbcolordepth.text, 2)))
+
+
+END
