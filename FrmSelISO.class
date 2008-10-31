@@ -69,7 +69,7 @@ PUBLIC SUB Form_Open()
   ClsGlobal.sBackNav.Add(ME)
   END IF
  
-  IF lstInstallableImg.count = 1 AND lstInstallableImg.Find(("No Installable Media Found")) <> -1 THEN 
+  IF lstInstallableImg.count = 1 AND lstInstallableImg.Find(("No Installable Media Found")) = -1 THEN 
     tlBanner.Text = ("Click") & Space(1) & "\'" & FMain.btnext.text & "\'" & Space(1) & ("to begin installating") & Space(1)&
     Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, "/") - 4)
   ELSE IF lstInstallableImg.Find(("No Installable Media Found")) <> -1 THEN 
@@ -79,6 +79,7 @@ PUBLIC SUB Form_Open()
     FMain.btnext.ForeColor = Color.Gray
     FMain.btback.ForeColor = Color.Gray
     ELSE 
+      tlBanner.text = "<b>" & ("Installable media found.") & "</b>"
       WITH FMain
         .btback.Enabled = FALSE
           .btback.ForeColor = Color.Gray
