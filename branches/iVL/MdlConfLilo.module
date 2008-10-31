@@ -316,18 +316,19 @@ SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT
 SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup" WAIT 
 SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup" WAIT 
 sOut = "#!/bin/bash \n" &
+"DISPLAY=" & gb.NewLine &
 "chmod +x /etc/rc.d/rc.udev" & gb.NewLine &
 "/etc/rc.d/rc.udev restart" & gb.NewLine &
 "/etc/rc.d/rc.modules" & gb.NewLine &
 "/sbin/vlsetup" & gb.NewLine &
+"/sbin/vhwconf" & gb.NewLine &
 "sh /var/log/scripts/gsb-desktop* & 2>/dev/null" & gb.NewLine &
 "rm -r /root/.mc 2>/dev/null" & gb.NewLine &
 "for i in /usr/share/icons/*;do cd $i 2>/dev/null && if [ -e convert.sh ];then sh convert.sh & 2>/dev/null;fi;done" & gb.NewLine &
 "for i in /var/log/scripts/x11-fonts*;do sh $i &>/dev/null;done" & gb.NewLine &
 "update-mime-database /usr/share/mime/" & gb.NewLine &
 "cd /usr/lib && ln -sf preloadable_libintl.so libgnuintl.so.8 && rm libintl.so 2>/dev/null; ln -s preloadable_libintl.so libintl.so" & gb.NewLine &
-"/sbin/vhwconf" & gb.NewLine &
-"/sbin/valsaconf-quiet"
+"/sbin/valsaconf-quiet" & gb.NewLine
 File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng", sOut)
 'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng"
 SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng" WAIT 
@@ -338,7 +339,7 @@ SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT
 SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
 SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
 sOut = "#!/bin/bash \n" &
-"/sbin/config-stage1 gui-installer"
+"/sbin/config-stage1 gui-installer" & gb.NewLine
 File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
 'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
 SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
