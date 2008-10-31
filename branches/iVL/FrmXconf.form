@@ -38,12 +38,16 @@
     }
   }
   { Panel2 Panel
-    MoveScaled(1,17,83,34)
-    Arrangement = Arrange.Row
+    MoveScaled(1,17,83,5)
     AutoResize = True
     { tlColorDepth TextLabel
       MoveScaled(0,0,11,3)
       Text = ("Color Depth")
+      Alignment = Align.Normal
+    }
+    { tlScreenRes TextLabel
+      MoveScaled(38,0,18,3)
+      Text = ("Screen Resolution")
       Alignment = Align.Normal
     }
     { cbColorDepth ComboBox
@@ -51,15 +55,18 @@
       Text = ("")
       List = [("24 bit True Color"), ("16 bit Pseudo Color"), ("8 bit 256 Color"), ("4 bit 16 Color"), ("1 bit Mono B/W")]
     }
-    { tlScreenRes TextLabel
-      MoveScaled(0,4,18,3)
-      Text = ("Screen Resolution")
-      Alignment = Align.Normal
-    }
     { cbScreenRes ComboBox
-      MoveScaled(18,4,15,3)
+      MoveScaled(56,0,15,3)
       Text = ("")
       List = [("1920x1280"), ("1600x1200"), ("1440x900"), ("1280x1024"), ("1280x800"), ("1024x768"), ("800x600"), ("640x480")]
+    }
+  }
+  { pblKbdSets Panel
+    MoveScaled(2,23,78,29)
+    Expand = True
+    Arrangement = Arrange.Horizontal
+    { cvKbLayout ColumnView
+      MoveScaled(0,0,29,28)
     }
   }
 }
