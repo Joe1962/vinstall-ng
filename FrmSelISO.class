@@ -26,7 +26,8 @@ PUBLIC SUB lstInstallableImg_Click()
 
   
   IF lstInstallableImg.Count > 0 THEN 
-  IF lstInstallableImg.Text <> ("No Installable Media Found") THEN   
+  'IF lstInstallableImg.Text <> ("No Installable Media Found") THEN   
+  IF lstInstallableImg.Find(("No Installable Media Found")) = -1
     IF InStr(Trim(lstInstallableImg.Text), ".iso") OR InStr(Trim(lstInstallableImg.Text), ".ISO") = TRUE THEN 
     sLocation = Left(lstInstallableImg.Text, InStr(lstInstallableImg.Text, " ") - 1)
     
@@ -68,15 +69,22 @@ PUBLIC SUB Form_Open()
   ClsGlobal.sBackNav.Add(ME)
   END IF
  
-  IF lstInstallableImg.count = 1 AND lstInstallableImg.Find(("No Installable Media Found")) = -1 THEN 
+  IF lstInstallableImg.count = 1 AND lstInstallableImg.Find(("No Installable Media Found")) <> -1 THEN 
     tlBanner.Text = ("Click") & Space(1) & "\'" & FMain.btnext.text & "\'" & Space(1) & ("to begin installating") & Space(1)&
     Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, "/") - 4)
-  ELSE 
+  ELSE IF lstInstallableImg.Find(("No Installable Media Found")) <> -1 THEN 
     tlBanner.Text = "<b>" & ("Unable to locate any installable media.") & "</b>"
     FMain.btnext.Enabled = FALSE
     FMain.btback.Enabled = FALSE
     FMain.btnext.ForeColor = Color.Gray
     FMain.btback.ForeColor = Color.Gray
+    ELSE 
+      WITH FMain
+        .btback.Enabled = FALSE
+          .btback.ForeColor = Color.Gray
+          .btnext.Enabled = TRUE
+          .btnext.ForeColor = Color.Black
+      END WITH 
   END IF 
    FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
   FMain.tvPlan["Prep1"].Picture = MdlCore.sNowPic

@@ -316,21 +316,21 @@ SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT
 SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup" WAIT 
 SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup" WAIT 
 sOut = "#!/bin/bash \n" &
-"chmod +x /etc/rc.d/rc.udev" &
-"/etc/rc.d/rc.udev restart" &
-"/etc/rc.d/rc.modules" &
-"/sbin/vlsetup" &
-"sh /var/log/scripts/gsb-desktop* & 2>/dev/null" &
-"rm -r /root/.mc 2>/dev/null" &
-"for i in /usr/share/icons/*;do cd $i 2>/dev/null && if [ -e convert.sh ];then sh convert.sh & 2>/dev/null;fi;done" &
-"for i in /var/log/scripts/x11-fonts*;do sh $i &>/dev/null;done" &
-"update-mime-database /usr/share/mime/" &
-"cd /usr/lib && ln -sf preloadable_libintl.so libgnuintl.so.8 && rm libintl.so 2>/dev/null; ln -s preloadable_libintl.so libintl.so" &
-"/sbin/vhwconf" &
+"chmod +x /etc/rc.d/rc.udev" & gb.NewLine &
+"/etc/rc.d/rc.udev restart" & gb.NewLine &
+"/etc/rc.d/rc.modules" & gb.NewLine &
+"/sbin/vlsetup" & gb.NewLine &
+"sh /var/log/scripts/gsb-desktop* & 2>/dev/null" & gb.NewLine &
+"rm -r /root/.mc 2>/dev/null" & gb.NewLine &
+"for i in /usr/share/icons/*;do cd $i 2>/dev/null && if [ -e convert.sh ];then sh convert.sh & 2>/dev/null;fi;done" & gb.NewLine &
+"for i in /var/log/scripts/x11-fonts*;do sh $i &>/dev/null;done" & gb.NewLine &
+"update-mime-database /usr/share/mime/" & gb.NewLine &
+"cd /usr/lib && ln -sf preloadable_libintl.so libgnuintl.so.8 && rm libintl.so 2>/dev/null; ln -s preloadable_libintl.so libintl.so" & gb.NewLine &
+"/sbin/vhwconf" & gb.NewLine &
 "/sbin/valsaconf-quiet"
 File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng", sOut)
-SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng"
-SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng"
+'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng"
+SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng" WAIT 
 
 SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT 
 SHELL "chroot /mnt/target /var/log/setup/config-vinstall-ng &"
@@ -340,7 +340,7 @@ SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
 sOut = "#!/bin/bash \n" &
 "/sbin/config-stage1 gui-installer"
 File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
-SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
+'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
 SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
 'SHELL "chroot /mnt/target " WAIT
 
