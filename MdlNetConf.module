@@ -35,6 +35,8 @@ PUBLIC objIntTypes AS Object[]
 PRIVATE pWiredPic AS Picture = picture["images/ethernet.png"]
 PRIVATE pWirelessPic AS picture = picture["images/wireless.png"]
 
+
+
 PUBLIC SUB LIST_NETWORK_INTERFACES()
   
   ' This SUB will detect network interfaces and offer setup options for each one of them

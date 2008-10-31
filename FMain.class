@@ -261,10 +261,11 @@ PUBLIC SUB btnext_Click()
     'POST INSTALL CONFIGURATION
     CASE "FrmInstallSys"
       MdlInstallSys.WRITE_NEW_DISTRO_ID()
+      MdlConfLilo.PERFORM_BINDING()
       frmNext = FrmLilo
       
     CASE "FrmLilo"
-      MdlConfLilo.PERFORM_BINDING()
+
       'make sure lilo has not been bypassed
         IF FrmLilo.YNLiloBox.Value = FALSE THEN 
             ' do some simple checks to make sure nothing is left blank before proceeding
@@ -283,7 +284,7 @@ PUBLIC SUB btnext_Click()
           ' lilo installation / setup has been skipped
           FrmLilo.tlBanner.Text = "<b>" & ("Skipping lilo setup") & "</b>"
         END IF
-    
+       SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
       'frmNext = FrmLiloOsList
        frmNext = FrmZoneSet
        
@@ -320,7 +321,8 @@ PUBLIC SUB btnext_Click()
             END IF
       END IF
                 
-    
+      SHELL "cp /mnt/target/etc/modules.conf >/etc/modules.conf" WAIT 
+      SHELL "ifconfig eth0 up" WAIT 
       frmNext = FrmNetConf
       
       
