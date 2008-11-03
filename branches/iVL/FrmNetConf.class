@@ -18,7 +18,7 @@
 PUBLIC FUNCTION GET_CURRENT_HOST_NAME() AS String
   DIM sRes AS String
   
-    SHELL "hostname" TO sRes
+    SHELL "chroot " & ClsGlobal.sTargetMnt & " hostname" TO sRes
 
     sRes = Trim(sRes)
       IF sRes = "" THEN 
