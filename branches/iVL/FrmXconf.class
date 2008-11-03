@@ -132,6 +132,84 @@ END IF
   
 END
 
+PUBLIC SUB LIST_KBD_VARIANTS()
+  
+   DIM sFile AS String '= File.Load("/etc/X11/xkb/rules/xorg.lst")
+  DIM i, ii AS Integer
+  DIM sArr AS String[] '= Split(sFile, "\n")
+
+
+      
+      sFile = File.Load("/tmp/kbd.file")
+      sarr = Split(sFile, "\n")
+      
+  
+      ii = 1
+      FOR i = 0 TO sArr.count - 1
+      'PRINT sArr[i]
+        'IF Left(sArr[i], Len("!  Layout")) = "!  Layout" THEN 
+  IF Left(sArr[i]) = "!" AND InStr(sArr[i], "variant") THEN 
+      'REPEAT 
+          IF Trim(sarr[i + ii]) <> "" THEN 
+          REPEAT 
+            'PRINT sarr[i + ii]
+            ME.cvKbdVar.Add(Left(sarr[i + ii], InStr(sarr[i + ii], ":")), Right(sarr[i + ii], Len(sarr[i + ii]) - InStr(sarr[i + ii], ":")))
+            INC ii
+          'END IF
+          UNTIL Trim(sarr[i + ii]) = "" OR InStr(sarr[i + ii], "option") = TRUE
+          END IF
+END IF
+        NEXT 
+  
+END
+
+
+
+PUBLIC SUB LIST_KBD_MODELS()
+  
+  DIM sFile AS String '= File.Load("/etc/X11/xkb/rules/xorg.lst")
+  DIM i, ii AS Integer
+  DIM sArr AS String[] '= Split(sFile, "\n")
+  'DIM sHack AS String
+  
+  '     ' ugly hack to get a good list begins here
+  '     sHack = "#!/bin/bash \n" &
+  ' "echo /dev/null > /tmp/kbd.file \n" &
+  '     "while read code desc1 desc2 junk \n" &
+  '     "do \n" &
+  '     "echo \"$code\" \"$desc1\" \"$desc2\" \"$junk\" >> /tmp/kbd.file \n" &
+  '     "done < /etc/X11/xkb/rules/xorg.lst"
+  '     
+  '     File.Save("/tmp/kbd_strip.sh", sHack)
+  '     SHELL "chmod +x /tmp/kbd_strip.sh" WAIT 
+  '     SHELL "sh /tmp/kbd_strip.sh" WAIT 
+      
+      ' END OF UGLY HACK HERE
+      
+      sFile = File.Load("/tmp/kbd.file")
+      sarr = Split(sFile, "\n")
+      
+  
+      ii = 1
+      FOR i = 0 TO sArr.count - 1
+      'PRINT sArr[i]
+        'IF Left(sArr[i], Len("!  Layout")) = "!  Layout" THEN 
+  IF Left(sArr[i]) = "!" AND InStr(sArr[i], "model") THEN 
+      'REPEAT 
+          IF Trim(sarr[i + ii]) <> "" THEN 
+          REPEAT 
+            'PRINT sarr[i + ii]
+            ME.cvKeybdModel.add(Left(sarr[i + ii], InStr(sarr[i + ii], " ")), Right(sarr[i + ii], Len(sarr[i + ii]) - InStr(sarr[i + ii], " ")))
+            INC ii
+          'END IF
+          UNTIL Trim(sarr[i + ii]) = "" OR InStr(sarr[i + ii], "layout") = TRUE
+          END IF
+END IF
+        NEXT 
+    
+    
+  
+END
 
 
 
@@ -141,6 +219,7 @@ PUBLIC SUB Form_Resize()
 
     WITH ME
     .TlBanner.Move(4, 24, .hbBanner.Width - (.TlBanner.Left * 2))
+    '.cvKbLayout.Move(4, 18, .frmkbdlay.Width - (.frmkbdlay.Left * 4))
     
     END WITH 
 
@@ -156,11 +235,31 @@ END
 PUBLIC SUB Form_Menu()
 
   ME.LIST_KBD_LAYOUTS
+  ME.LIST_KBD_MODELS
+  ME.LIST_KBD_VARIANTS
 
 END
 
 PUBLIC SUB Frame1_Menu()
 
   'ME.LIST_KBD_LAYOUTS
+
+END
+
+PUBLIC SUB cvKbdVar_Click()
+
+  Message(LAST.current.key)
+
+END
+
+PUBLIC SUB cvKeybdModel_Click()
+
+  Message(LAST.current.key)
+
+END
+
+PUBLIC SUB cvKbLayout_Click()
+
+  Message(LAST.current.key)
 
 END

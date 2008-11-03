@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,89,59)
+  MoveScaled(0,0,103,59)
   Text = ("")
   Arrangement = Arrange.Vertical
   { hbBanner Panel
@@ -13,15 +13,15 @@
     }
   }
   { Panel1 Panel
-    MoveScaled(0,6,69,10)
+    MoveScaled(0,6,98,10)
     Arrangement = Arrange.Horizontal
     AutoResize = True
     { Frame1 Frame
-      MoveScaled(0,0,69,9)
+      MoveScaled(2,0,85,9)
       Expand = True
       Text = ("")
       { tlChoiceExp TextLabel
-        MoveScaled(1,5,58,3)
+        MoveScaled(1,5,35,3)
         Text = ("")
       }
       { cbSetupMethod ComboBox
@@ -35,38 +35,59 @@
         Text = ("Video Driver")
         Alignment = Align.Normal
       }
-    }
-  }
-  { Panel2 Panel
-    MoveScaled(1,17,83,5)
-    AutoResize = True
-    { tlColorDepth TextLabel
-      MoveScaled(0,0,11,3)
-      Text = ("Color Depth")
-      Alignment = Align.Normal
-    }
-    { tlScreenRes TextLabel
-      MoveScaled(38,0,18,3)
-      Text = ("Screen Resolution")
-      Alignment = Align.Normal
-    }
-    { cbColorDepth ComboBox
-      MoveScaled(10,0,24,3)
-      Text = ("")
-      List = [("24 bit True Color"), ("16 bit Pseudo Color"), ("8 bit 256 Color"), ("4 bit 16 Color"), ("1 bit Mono B/W")]
-    }
-    { cbScreenRes ComboBox
-      MoveScaled(56,0,15,3)
-      Text = ("")
-      List = [("1920x1280"), ("1600x1200"), ("1440x900"), ("1280x1024"), ("1280x800"), ("1024x768"), ("800x600"), ("640x480")]
+      { tlColorDepth TextLabel
+        MoveScaled(42,1,11,3)
+        Text = ("Color Depth")
+        Alignment = Align.Normal
+      }
+      { cbColorDepth ComboBox
+        MoveScaled(52,1,24,3)
+        Text = ("")
+        List = [("24 bit True Color"), ("16 bit Pseudo Color"), ("8 bit 256 Color"), ("4 bit 16 Color"), ("1 bit Mono B/W")]
+      }
+      { tlScreenRes TextLabel
+        MoveScaled(42,4,18,3)
+        Text = ("Screen Resolution")
+        Alignment = Align.Normal
+      }
+      { cbScreenRes ComboBox
+        MoveScaled(60,4,16,3)
+        Text = ("")
+        List = [("1920x1280"), ("1600x1200"), ("1440x900"), ("1280x1024"), ("1280x800"), ("1024x768"), ("800x600"), ("640x480")]
+      }
     }
   }
   { pblKbdSets Panel
-    MoveScaled(2,23,78,29)
+    MoveScaled(1,17,96,27)
     Expand = True
     Arrangement = Arrange.Horizontal
-    { cvKbLayout ColumnView
-      MoveScaled(0,0,29,28)
+    AutoResize = True
+    { frmkbdlay Frame
+      MoveScaled(0,0,30,25)
+      Expand = True
+      Text = ("Keyboard Layout")
+      { cvKbLayout ColumnView
+        MoveScaled(1,3,28,20)
+        Expand = True
+      }
+    }
+    { frmKbdMod Frame
+      MoveScaled(33,0,32,24)
+      Expand = True
+      Text = ("Keyboard Model")
+      { cvKeybdModel ColumnView
+        MoveScaled(1,3,29,21)
+        Expand = True
+      }
+    }
+    { frmkeyVar Frame
+      MoveScaled(67,1,27,23)
+      Expand = True
+      Text = ("Keyboard Variant")
+      { cvKbdVar ColumnView
+        MoveScaled(8,3,11,21)
+        Expand = True
+      }
     }
   }
 }
