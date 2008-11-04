@@ -86,7 +86,7 @@ msgstr "Activando la partición Swap"
 msgid "Add option to boot this Operating system into Text mode"
 msgstr "Añadir una opción para arrancar este sistema operativo en modo texto"
 
-#: FrmDone.class:35
+#: FrmDone.class:38
 msgid "After reboot you can use vasm or vasmCC to fine tune your installation."
 msgstr "Luego de reiniciar, puedes utilizar Vasm o VasmCC para ultimar los detalles de la instalación "
 
@@ -196,7 +196,7 @@ msgstr "Haz click en"
 
 #: FrmXconf.class:322
 msgid "Color Depth"
-msgstr ""
+msgstr "Profundidad de color"
 
 #: FrmZoneSet.class:174
 msgid "ComboBox1"
@@ -318,7 +318,7 @@ msgstr "Error al instalar el software base. "
 msgid "Error while installing system configuration. "
 msgstr "Error al instalar la configuración del sistema. "
 
-#: FrmDone.class:29
+#: FrmDone.class:32
 msgid "Exit"
 msgstr "Salir"
 
@@ -442,7 +442,7 @@ msgstr "Resumen del proceso"
 msgid "Installation Type"
 msgstr "Tipo de instalación"
 
-#: FrmDone.class:58
+#: FrmDone.class:73
 msgid "Installation is finished"
 msgstr "La instalación ha finalizado "
 
@@ -668,7 +668,7 @@ msgstr "For favor, seleccione las secciones del disco que desea usar, y también
 
 #: FrmAlsaConf.class:36
 msgid "Please use the setup program below to setup the sound system."
-msgstr ""
+msgstr "Pro favo utiliza el siguiente software para configurar el sistema de sonido. "
 
 #: FMain.class:213
 msgid "Please wait while setup analyses your current partition setup."
@@ -696,7 +696,7 @@ msgstr "Servidor de nombres primario (DNS)"
 
 #: FrmXconf.class:27
 msgid "Probe hardware to setup your Graphical Environment using your preffered settings"
-msgstr ""
+msgstr "Testear tu hardware para configurar tu Entorno Gráfico con tus configuraciones predefinidas "
 
 #: FMain.class:494
 msgid "Process Overview"
@@ -722,9 +722,9 @@ msgstr "Nombre Real"
 msgid "Regional Settings"
 msgstr "Opciones de regionalización"
 
-#: FMain.class:177 FrmDone.class:25
+#: FMain.class:177 FrmDone.class:28
 msgid "Restart"
-msgstr ""
+msgstr "Reiniciar"
 
 #: MdlUsrAdd.module:65
 msgid "Restricted administrator (backup)"
@@ -740,7 +740,7 @@ msgstr "Buscando medios de instalación en el sistema. Por favor espere ..."
 
 #: FrmXconf.class:328
 msgid "Screen Resolution"
-msgstr ""
+msgstr "Resolución de la pantalla "
 
 #: FrmSelISO.class:267
 msgid "Search Again"
@@ -912,7 +912,7 @@ msgstr "Esta opción sobreescribirá los datos de las particiones seleccionadas"
 
 #: FrmAlsaConf.class:36
 msgid "This portion of the setup process allows you to sutup your soundcard for your new operating system."
-msgstr ""
+msgstr "Esta parte de la instlación te permite configurar tu tarjeta de sonido para tunuevo sistema operativo. "
 
 #: MdlUsrAdd.module:44
 msgid "This user can access CD/DVD devices"
@@ -992,7 +992,7 @@ msgstr "No se pudieron instalar los kernels. "
 
 #: FrmSelISO.class:76
 msgid "Unable to locate any installable media."
-msgstr ""
+msgstr "No se ha podido encontrar un medio de instalación. "
 
 #: MdlNetConf.module:109
 msgid "Unplugged"
@@ -1008,7 +1008,7 @@ msgstr "Utilizar las particiones existentes en mi disco duro"
 
 #: FrmXconf.class:29
 msgid "Use the console framebuffer driver"
-msgstr ""
+msgstr "Utilizar el controlador Framebuffer para la consola "
 
 #: FrmPartScheme.class:61
 msgid "Use this option if you already prepared your partitions using the VectorLinux installer"
@@ -1032,7 +1032,7 @@ msgstr "Administración de los Permisos de Usuario"
 
 #: FrmUserAdd.class:102
 msgid "User account for"
-msgstr ""
+msgstr "Cuenta de usuario para "
 
 #: FrmUserAdd.class:99
 msgid "Username contains illegal characters"
@@ -1138,7 +1138,7 @@ msgstr ""
 msgid "You must select a \"/\" partition. This is the target where the system will install to"
 msgstr "Debes seleccionar una partición para \"/\" (raíz). Allí sera instalado el sistema operativo"
 
-#: FrmDone.class:35
+#: FrmDone.class:38
 msgid "Your computer needs to be restarted so that you can use your new operating system. Click"
 msgstr ""
 
@@ -1182,7 +1182,7 @@ msgstr "para esto"
 msgid "for this is"
 msgstr "para esto es"
 
-#: FrmDone.class:35
+#: FrmDone.class:38
 msgid "has been installed to your system. Your new system has been configured with the default factory settings."
 msgstr ""
 
@@ -1230,11 +1230,11 @@ msgstr "para configurarla."
 msgid "to create an account here. It is recommended that you create at least one."
 msgstr ""
 
-#: FrmDone.class:35
+#: FrmDone.class:38
 msgid "to restart your computer at a later time"
 msgstr ""
 
-#: FrmDone.class:35
+#: FrmDone.class:38
 msgid "to restart your computer now or click"
 msgstr ""
 

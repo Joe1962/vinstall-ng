@@ -156,7 +156,7 @@ msgstr ""
 msgid "to restart your computer at a later time"
 msgstr ""
 
-#: FrmDone.class:67
+#: FrmDone.class:73
 #, fuzzy
 msgid "Installation is finished"
 msgstr "Installation"
