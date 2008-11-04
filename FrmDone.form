@@ -1,0 +1,25 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,79,52)
+  Text = ("")
+  Arrangement = Arrange.Vertical
+  { tlBanner TextLabel
+    MoveScaled(0,0,25,3)
+    Text = ("Installation is finished")
+  }
+  { Separator1 Separator
+    MoveScaled(0,3,31,1)
+  }
+  { PnlMsg Panel
+    MoveScaled(1,5,74,24)
+    Expand = True
+    Arrangement = Arrange.Horizontal
+    { tlMsg TextLabel
+      MoveScaled(1,2,67,16)
+      Expand = True
+      AutoResize = True
+      Text = ("")
+    }
+  }
+}

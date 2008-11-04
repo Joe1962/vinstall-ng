@@ -128,6 +128,7 @@ PUBLIC SUB DISPLAY_LILO_TARGET_OPTIONS()
           'IF LCase(ClsPartSel.fRoot) <> "xfs" THEN 
               FOR EACH cb IN MdlPartSel.oMountPoints
                 IF cb.text = "/" THEN 
+                  ClsPartSel.sRoot = cb.Tag ' make sure this is set... we will need it later
                     FOR EACH cb1 IN MdlPartSel.oFsTypes
                       IF cb1.tag = cb.tag THEN 
                       IF cb1.text <> "xfs" THEN .Add("Sector")
@@ -262,18 +263,18 @@ sShortAddr = Right(bInc.tag, Len(bInc.tag) - RInStr(bInc.tag, "/"))
                     "read-only" & " \n \n"
   ENDIF 
         
-          FOR EACH cbox IN MdlPartSel.oMountPoints
-            IF cbox.text = "/" AND bInc.tag = cbox.tag THEN 
-                    IF MdlLiloOsList.bVlCliOption = TRUE THEN
-        'IF bInc.tag = ClsPartSel.sRoot AND MdlLiloOsList.bVlCliOption = TRUE THEN 
-          sCliSection = Replace(sSection, "append = \"" & sEntryApnd & "\"", "append = \"2 " & sEntryApnd & "\"") 'splash=silent\"")
-          sCliSection = Replace(sCliSection, "label = " & sEntryLbl, "label = " & sEntryLbl & "-tui")
-          sCliSection = sCliSection & gb.NewLine
+          'FOR EACH cbox IN MdlPartSel.oMountPoints
+          '  IF cbox.text = "/" AND cbox.tag = ClsPartSel.sRoot THEN 
+           '         IF MdlLiloOsList.bVlCliOption = TRUE THEN
+        IF bInc.tag = ClsPartSel.sRoot AND MdlLiloOsList.bVlCliOption = TRUE THEN 
+                        sCliSection = Replace(sSection, "append = \"" & sEntryApnd & "\"", "append = \"2 " & sEntryApnd & "\"") 'splash=silent\"")
+                        sCliSection = Replace(sCliSection, "label = " & sEntryLbl, "label = " & sEntryLbl & "-tui")
+                        sCliSection = sCliSection & gb.NewLine
         ELSE 
-          sCliSection = ""
+                      sCliSection = ""
         END IF
-        END IF 
-  NEXT                    
+        'END IF 
+  'NEXT                    
     ELSE 
       sSection = ""
     

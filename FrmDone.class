@@ -1,4 +1,4 @@
-' Gambas module file
+' Gambas class file
 
 '    This file is part of vinstall-ng
 
@@ -15,10 +15,16 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
-PUBLIC SUB QUIET_XORG_CONFIGURATION()
+
+
+PUBLIC SUB Form_Open()
+
+  FMain.FrmCurr = ME
   
-  SHELL "chroot " & ClsGlobal.sTargetMnt & " X -configure :2" WAIT 
-      IF Exist(ClsGlobal.sTargetMnt &/ "etc" &/ "X11" &/ "xorg.conf") THEN MOVE ClsGlobal.sTargetMnt &/ "etc" &/ "X11" &/ "xorg.conf" TO ClsGlobal.sTargetMnt &/ "etc" &/ "X11" &/ "xorg.conf.dist"
-  COPY ClsGlobal.sTargetMnt &/ "root" &/ "xorg.conf.new" TO ClsGlobal.sTargetMnt &/ "etc" &/ "X11" &/ "xorg.conf"
-  
+  tlbanner.text = "<b>" & tlbanner.text & "</b>"
+  WITH ME.tlMsg
+    .Text = ClsGlobal.DISTRO & Space(1) & ("has been installed to your system. Your new system has been configured with the default factory settings.") & "<br><br>" &
+    ("After reboot you can use vasm or vasmCC to fine tune your installation.")
+  END WITH 
+
 END

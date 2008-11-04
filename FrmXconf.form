@@ -13,81 +13,42 @@
     }
   }
   { Panel1 Panel
-    MoveScaled(0,6,98,10)
-    Arrangement = Arrange.Horizontal
+    MoveScaled(0,7,98,31)
     AutoResize = True
-    { Frame1 Frame
-      MoveScaled(2,0,85,9)
-      Expand = True
+    { tlSetupMethod TextLabel
+      MoveScaled(0,0,13,3.4286)
+      Text = ("Video Driver")
+      Alignment = Align.Normal
+    }
+    { tlChoiceExp TextLabel
+      MoveScaled(0,4,35,3)
       Text = ("")
-      { tlChoiceExp TextLabel
-        MoveScaled(1,5,35,3)
-        Text = ("")
-      }
-      { cbSetupMethod ComboBox
-        MoveScaled(14,1,22,3)
-        Text = ("Vesa")
-        ReadOnly = True
-        List = [("Vesa"), ("Fbdev")]
-      }
-      { tlSetupMethod TextLabel
-        MoveScaled(1,1,13,3)
-        Text = ("Video Driver")
-        Alignment = Align.Normal
-      }
-      { tlColorDepth TextLabel
-        MoveScaled(42,1,11,3)
-        Text = ("Color Depth")
-        Alignment = Align.Normal
-      }
-      { cbColorDepth ComboBox
-        MoveScaled(52,1,24,3)
-        Text = ("")
-        List = [("24 bit True Color"), ("16 bit Pseudo Color"), ("8 bit 256 Color"), ("4 bit 16 Color"), ("1 bit Mono B/W")]
-      }
-      { tlScreenRes TextLabel
-        MoveScaled(42,4,18,3)
-        Text = ("Screen Resolution")
-        Alignment = Align.Normal
-      }
-      { cbScreenRes ComboBox
-        MoveScaled(60,4,16,3)
-        Text = ("")
-        List = [("1920x1280"), ("1600x1200"), ("1440x900"), ("1280x1024"), ("1280x800"), ("1024x768"), ("800x600"), ("640x480")]
-      }
     }
-  }
-  { pblKbdSets Panel
-    MoveScaled(1,17,96,27)
-    Expand = True
-    Arrangement = Arrange.Horizontal
-    AutoResize = True
-    { frmkbdlay Frame
-      MoveScaled(0,0,30,25)
-      Expand = True
-      Text = ("Keyboard Layout")
-      { cvKbLayout ColumnView
-        MoveScaled(1,3,28,20)
-        Expand = True
-      }
+    { tlColorDepth TextLabel
+      MoveScaled(0,9,11,3)
+      Text = ("Color Depth")
+      Alignment = Align.Normal
     }
-    { frmKbdMod Frame
-      MoveScaled(33,0,32,24)
-      Expand = True
-      Text = ("Keyboard Model")
-      { cvKeybdModel ColumnView
-        MoveScaled(1,3,29,21)
-        Expand = True
-      }
+    { tlScreenRes TextLabel
+      MoveScaled(0,12,18,3)
+      Text = ("Screen Resolution")
+      Alignment = Align.Normal
     }
-    { frmkeyVar Frame
-      MoveScaled(67,1,27,23)
-      Expand = True
-      Text = ("Keyboard Variant")
-      { cvKbdVar ColumnView
-        MoveScaled(8,3,11,21)
-        Expand = True
-      }
+    { cbColorDepth ComboBox
+      MoveScaled(10,9,24,3)
+      Text = ("")
+      List = [("24 bit True Color"), ("16 bit Pseudo Color"), ("8 bit 256 Color"), ("4 bit 16 Color"), ("1 bit Mono B/W")]
+    }
+    { cbSetupMethod ComboBox
+      MoveScaled(13,0,22,3.4286)
+      Text = ("Vesa")
+      ReadOnly = True
+      List = [("Vesa"), ("Fbdev")]
+    }
+    { cbScreenRes ComboBox
+      MoveScaled(18,12,16,3)
+      Text = ("")
+      List = [("1920x1280"), ("1600x1200"), ("1440x900"), ("1280x1024"), ("1280x800"), ("1024x768"), ("800x600"), ("640x480")]
     }
   }
 }

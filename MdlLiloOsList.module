@@ -484,10 +484,6 @@ PUBLIC SUB NameBox_keyrelease()
 END
 
 
-
-
-
-
 PUBLIC SUB OsList_click()
 
 
