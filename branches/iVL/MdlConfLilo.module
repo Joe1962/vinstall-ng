@@ -329,22 +329,24 @@ sOut = "#!/bin/bash \n" &
 "for i in /var/log/scripts/x11-fonts*;do sh $i &>/dev/null;done" & gb.NewLine &
 "update-mime-database /usr/share/mime/" & gb.NewLine &
 "cd /usr/lib && ln -sf preloadable_libintl.so libgnuintl.so.8 && rm libintl.so 2>/dev/null; ln -s preloadable_libintl.so libintl.so" & gb.NewLine &
-"/sbin/valsaconf-quiet" & gb.NewLine
+"/sbin/valsaconf-quiet" & gb.NewLine &
+"echo done >/tmp/status" & gb.NewLine
+
 File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng", sOut)
 'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng"
 SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng" WAIT 
-
 SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT 
 SHELL "chroot /mnt/target /var/log/setup/config-vinstall-ng &"
-SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
-SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
-SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
-sOut = "#!/bin/bash \n" &
-"/sbin/config-stage1 gui-installer" & gb.NewLine
-File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
-'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
-SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
-'SHELL "chroot /mnt/target " WAIT
+
+' SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
+' SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
+' SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
+' sOut = "#!/bin/bash \n" &
+' "/sbin/config-stage1 gui-installer" & gb.NewLine
+' File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
+' 'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
+' SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
+' 'SHELL "chroot /mnt/target " WAIT
 
 END
 
