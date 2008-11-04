@@ -45,3 +45,9 @@ PUBLIC SUB tlMsg_MouseDown()
   
 
 END
+
+PUBLIC SUB PnlMsg_MouseDown()
+
+  
+
+END
