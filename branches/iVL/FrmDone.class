@@ -20,6 +20,9 @@
 PUBLIC SUB Form_Open()
 
   FMain.FrmCurr = ME
+  Fmain.tvPlan["Conf4"].Picture = MdlCore.sDonePic
+  Fmain.tvPlan["Conf5"].Picture = MdlCore.sNowPic
+  Fmain.tvPlan["Conf5"].Selected = TRUE
   
   tlbanner.text = "<b>" & tlbanner.text & "</b>"
   FMain.btnext.Text = ("Restart")
@@ -34,5 +37,11 @@ PUBLIC SUB Form_Open()
     ("Your computer needs to be restarted so that you can use your new operating system. Click") & Space(1) & FMain.btnext.text & Space(1)&
     ("to restart your computer now or click") & Space(1) & FMain.btQuit.Text & Space(1) & ("to restart your computer at a later time")
   END WITH 
+
+END
+
+PUBLIC SUB tlMsg_MouseDown()
+
+  
 
 END
