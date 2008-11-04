@@ -1,14 +1,4 @@
-- Re-worked the language selection
-  * Changed the listview for a columnview
-    \- This will eliminate the need to create an array
-        with a long list of languages. Instead, the installer will
-	look in it's .lang dir and list all the .mo files, then it
-	will populate the columnview using only the languages found.
-
-
-
--I added the non-gui config code to run in the BG when lilo window starts.
- this is how it is done in old installer. 
- we still need vhalswitch, ALSA-config(this should be done in xterm IMO), vxconf, hwinit??, and runlevel??.
- we can skip last 2 IMO
- I added code to mount all needed binds to liloconfig and stoppped mount/umount in root, and useradd.
+- Restored code to automatically list the translations provided by looking in .lang
+- Modified the way the installer ends. Added final message window instead of a message.warning
+- Added warning right before quietly configuring X letting the user know that the screen may flicker.
+- Updated binary

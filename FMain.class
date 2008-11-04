@@ -172,6 +172,12 @@ PUBLIC SUB btnext_Click()
   DIM sDev AS String
   DIM sLang AS String
   
+  tvPlan.Refresh()
+  
+  IF LAST.TEXT = ("Restart") THEN 
+  EXEC "shutdown -r now"
+  ELSE 
+  
   IF FrmLangSel.Visible = TRUE THEN 
   ME.Button1_Click()
   WAIT 
@@ -333,12 +339,17 @@ PUBLIC SUB btnext_Click()
       
       
       ' CONFIGURE X QUIETLY HERE
+          Message.Warning(("VectorLinux will now try to detect and configure your graphics hardware.") & "<br>" &
+          ("Your screen may flicker or go blank during this process for a few seconds during this process."))
+      
         MdlXconf.QUIET_XORG_CONFIGURATION()
       
       frmNext = FrmDone
       
       CASE "FrmDone"
           'offer to reboot here
+                   
+          
           ME.END_INSTALLER()
           frmNext = FrmAlsaConf
 '      frmNext = FrmLilo ' this is already done
@@ -376,25 +387,34 @@ PUBLIC SUB btnext_Click()
       WAIT 1
       MdlSetup.BEGIN_INSTALLATION()
     END IF
-      
 
+END IF
+tvPlan.Refresh()
 
 END
 
 
 PUBLIC SUB END_INSTALLER()
-  
-    SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer. Additional system configuration") & "<br>" &
-            ("will take place after you reboot your system.Part of this process must be done in text mode.") & "<br><br>" &
-            ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
-      CASE 1
-        SHELL "shutdown -r now"
-      CASE ELSE 
-      RETURN 
-        Message.Info(("The VectorLinux installer will now exit. Enjoy your new operating system"))
-        QUIT ' dirty quit event 
-      'STOP EVENT 
-    END SELECT 
+
+    ' Check for /tmp/status in the target installation
+      IF Exist(ClsGlobal.sTargetMnt &/ "tmp" &/ "status") = FALSE THEN 
+        REPEAT 
+          WAIT 
+        UNTIL Exist(ClsGlobal.sTargetMnt &/ "tmp" &/ "status") = TRUE
+      END IF
+
+    ' ' ' ' ' 
+    ' ' ' ' ' SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer. Additional system configuration") & "<br>" &
+    ' ' ' ' '         ("will take place after you reboot your system.Part of this process must be done in text mode.") & "<br><br>" &
+    ' ' ' ' '         ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
+    ' ' ' ' '   CASE 1
+    ' ' ' ' '     SHELL "shutdown -r now"
+    ' ' ' ' '   CASE ELSE 
+    ' ' ' ' '   RETURN 
+    ' ' ' ' '     Message.Info(("The VectorLinux installer will now exit. Enjoy your new operating system"))
+    ' ' ' ' '     QUIT ' dirty quit event 
+    ' ' ' ' '   'STOP EVENT 
+    ' ' ' ' ' END SELECT 
   
   
 END

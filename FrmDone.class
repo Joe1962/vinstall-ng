@@ -22,9 +22,17 @@ PUBLIC SUB Form_Open()
   FMain.FrmCurr = ME
   
   tlbanner.text = "<b>" & tlbanner.text & "</b>"
+  FMain.btnext.Text = ("Restart")
+  FMain.btnext.Width = MdlObjSizer.get_object_width(FMain.btnext.Text) + 36
+  FMain.btback.Enabled = FALSE
+  FMain.btback.ForeColor = Color.Gray
+  FMain.btQuit.Text = ("Exit")
+  FMain.btQuit.Width = MdlObjSizer.get_object_width(FMain.btQuit.Text) + 36
   WITH ME.tlMsg
     .Text = ClsGlobal.DISTRO & Space(1) & ("has been installed to your system. Your new system has been configured with the default factory settings.") & "<br><br>" &
-    ("After reboot you can use vasm or vasmCC to fine tune your installation.")
+    ("After reboot you can use vasm or vasmCC to fine tune your installation.") & "<br><br>" &
+    ("Your computer needs to be restarted so that you can use your new operating system. Click") & Space(1) & FMain.btnext.text & Space(1)&
+    ("to restart your computer now or click") & Space(1) & FMain.btQuit.Text & Space(1) & ("to restart your computer at a later time")
   END WITH 
 
 END
