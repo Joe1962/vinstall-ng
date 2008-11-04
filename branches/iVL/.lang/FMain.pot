@@ -66,39 +66,39 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: FMain.class:382
+#: FMain.class:389
 msgid "has been installed on your computer. Additional system configuration"
 msgstr ""
 
-#: FMain.class:382
+#: FMain.class:389
 msgid "will take place after you reboot your system.Part of this process must be done in text mode."
 msgstr ""
 
-#: FMain.class:382
+#: FMain.class:389
 msgid "Would you like to reboot your computer now?"
 msgstr ""
 
-#: FMain.class:387
+#: FMain.class:394
 msgid "The VectorLinux installer will now exit. Enjoy your new operating system"
 msgstr ""
 
-#: FMain.class:454
+#: FMain.class:474
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:474
+#: FMain.class:495
 msgid "Next"
 msgstr ""
 
-#: FMain.class:480
+#: FMain.class:501
 msgid "Back"
 msgstr ""
 
-#: FMain.class:486
+#: FMain.class:507
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:502
+#: FMain.class:523
 msgid "Button1"
 msgstr ""
 

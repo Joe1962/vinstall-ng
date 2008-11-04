@@ -568,11 +568,11 @@ PUBLIC SUB UPDATE_HOSTS_FILE(sHostName AS String)
     "# By the way, Arnt Gulbrandsen <agrulbra@nvg.unit.no> says that 127.0.0.1 should NEVER \n" &
     "# be named with the name of the machine. It causes problem sor some programs, irc and \n" &
     "# reputedly talk. :^) \n#\n#\n" &
-    "# For loopbacking." &
+    "# For loopbacking. \n" &
     "127.0.0.1" & Space(5) & "localhost" & "\n" &
     "#\n#\n" &
     "# This next entry is technically wrong, but good enough to get TCP/IP applications to quit complaining \n" &
-    "# that they can\'t clarify the hostname on a loopback-only system \n#\n#\n#" &
+    "# that they can\'t clarify the hostname on a loopback-only system \n#\n#\n# \n" &
     "127.0.0.1" & Space(5) & sHostName & Space(5) & sHostName & "\n#\n#" &
     "# End of hosts." 
     

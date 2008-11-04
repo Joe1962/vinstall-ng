@@ -9,6 +9,7 @@
     { tvPlan TreeView
       MoveScaled(1,2,22,56)
       Expand = True
+      Mode = Select.None
       Border = False
     }
   }

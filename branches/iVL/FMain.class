@@ -331,6 +331,13 @@ PUBLIC SUB btnext_Click()
       MdlNetConf.SET_DNS_ADDRESSES()
       MdlNetConf.WRITE_INET()
       
+      
+      ' CONFIGURE X QUIETLY HERE
+        MdlXconf.QUIET_XORG_CONFIGURATION()
+      
+      frmNext = FrmDone
+      
+      CASE "FrmDone"
           'offer to reboot here
           ME.END_INSTALLER()
           frmNext = FrmAlsaConf
@@ -426,5 +433,18 @@ System.Language = sLang
   MdlCore.frmInit = FrmSelISO
   MdlCore.main
 
+
+END
+
+PUBLIC SUB tvPlan_MouseDown()
+
+  tvPlan.MoveLast()
+  RETURN 
+
+END
+
+PUBLIC SUB tvPlan_Click()
+
+STOP EVENT 
 
 END
