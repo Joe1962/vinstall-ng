@@ -18,19 +18,23 @@ msgstr "VectorLinux Installer"
 msgid "GUI installer for Vector linux"
 msgstr "GUI installer for Vector linux"
 
-#: FMain.class:205
+#: FMain.class:177 FrmDone.class:28
+msgid "Restart"
+msgstr ""
+
+#: FMain.class:211
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr "Please wait while setup attempts to run the partitioning utility"
 
-#: FMain.class:207
+#: FMain.class:213
 msgid "Please wait while setup analyses your current partition setup."
 msgstr "Please wait while setup analyses your current partition setup."
 
-#: FMain.class:207
+#: FMain.class:213
 msgid "This may take a while ..."
 msgstr "This may take a while ..."
 
-#: FMain.class:221
+#: FMain.class:227
 msgid ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
@@ -38,89 +42,136 @@ msgstr ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
 
-#: FMain.class:271
+#: FMain.class:279
 msgid "Please select a default operating system to boot before proceeding"
 msgstr ""
 
-#: FMain.class:272
+#: FMain.class:280
 msgid "Select an entry from this list"
 msgstr ""
 
-#: FMain.class:284
+#: FMain.class:291
 msgid "Skipping lilo setup"
 msgstr "Skipping lilo setup per user request"
 
-#: FMain.class:298
+#: FMain.class:305
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
-#: FMain.class:313
+#: FMain.class:320
 msgid ""
 "You have not created any user accounts for this system yet. There is not "
 "enough information"
 msgstr ""
 
-#: FMain.class:313
+#: FMain.class:320
 msgid ""
 "to create an account here. It is recommended that you create at least one."
 msgstr ""
 
-#: FMain.class:313
+#: FMain.class:320
 msgid "Would you like to continue anyway?"
 msgstr ""
 
-#: FMain.class:313
+#: FMain.class:320
 msgid "Yes"
 msgstr ""
 
-#: FMain.class:313
+#: FMain.class:320
 #, fuzzy
 msgid "No"
 msgstr "None"
 
-#: FMain.class:335
-#, fuzzy
-msgid "has been installed on your computer. Additional system configuration"
-msgstr "Packages have been installed to your system. Please click"
-
-#: FMain.class:335
+#: FMain.class:343
 msgid ""
-"will take place after you reboot your system.Part of this process must be "
-"done in text mode."
+"VectorLinux will now try to detect and configure your graphics hardware."
 msgstr ""
 
-#: FMain.class:335
-msgid "Would you like to reboot your computer now?"
-msgstr ""
-
-#: FMain.class:340
+#: FMain.class:343
 msgid ""
-"The VectorLinux installer will now exit. Enjoy your new operating system"
+"Your screen may flicker or go blank during this process for a few seconds "
+"during this process."
 msgstr ""
 
-#: FMain.class:437
+#: FMain.class:494
 msgid "Process Overview"
 msgstr "Process Overview"
 
-#: FMain.class:457
+#: FMain.class:514
 msgid "Next"
 msgstr "Next"
 
-#: FMain.class:463
+#: FMain.class:520
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:469
+#: FMain.class:526
 msgid "Exit Installation"
 msgstr "Exit Installation"
 
-#: FMain.class:485
+#: FMain.class:542
 msgid "Button1"
 msgstr "-"
+
+#: FrmAlsaConf.class:36
+msgid ""
+"This portion of the setup process allows you to sutup your soundcard for "
+"your new operating system."
+msgstr ""
+
+#: FrmAlsaConf.class:36
+msgid "Please use the setup program below to setup the sound system."
+msgstr ""
 
 #: FrmDiskPart.class:115
 msgid "Disk Partitioning:"
 msgstr "Disk Partitioning:"
+
+#: FrmDone.class:32
+msgid "Exit"
+msgstr ""
+
+#: FrmDone.class:38
+#, fuzzy
+msgid ""
+"has been installed to your system. Your new system has been configured with "
+"the default factory settings."
+msgstr "Packages have been installed to your system. Please click"
+
+#: FrmDone.class:38
+msgid "After reboot you can use vasm or vasmCC to fine tune your installation."
+msgstr ""
+
+#: FrmDone.class:38
+msgid ""
+"Your computer needs to be restarted so that you can use your new operating "
+"system. Click"
+msgstr ""
+
+#: FrmDone.class:38
+msgid "to restart your computer now or click"
+msgstr ""
+
+#: FrmDone.class:38
+msgid "to restart your computer at a later time"
+msgstr ""
+
+#: FrmDone.class:67
+#, fuzzy
+msgid "Installation is finished"
+msgstr "Installation"
+
+#: FrmHalSwitch.class:20
+msgid "Would you like to use Vl-Hot or HAL to manage your removable devices?"
+msgstr ""
+
+#: FrmHalSwitch.class:25
+msgid "HAL"
+msgstr ""
+
+#: FrmHalSwitch.class:30
+msgid "VL-Hot"
+msgstr ""
 
 #: FrmHostPrep.class:130
 msgid "Vectorlinux is preparing your system for installation. Please wait."
@@ -131,7 +182,7 @@ msgid "Current Status"
 msgstr "Current Status"
 
 #: FrmHostPrep.class:139 FrmLilo.class:223 FrmPartScheme.class:127
-#: FrmPkgSel.class:101 FrmPkgsel2.class:86 FrmSelISO.class:247
+#: FrmPkgSel.class:101 FrmPkgsel2.class:86 FrmSelISO.class:262
 #: FrmSummaryOld.class:87
 msgid "TextLabel1"
 msgstr "-"
@@ -161,7 +212,7 @@ msgstr "Current Step "
 msgid "Total Progress"
 msgstr "Total progress"
 
-#: FrmLangSel.class:116
+#: FrmLangSel.class:123
 msgid "Select your language"
 msgstr "Select your language"
 
@@ -520,37 +571,47 @@ msgstr "Re-Enter Password"
 msgid "Set Password"
 msgstr "Set Password"
 
-#: FrmSelISO.class:29 MdlCore.module:198
+#: FrmSelISO.class:30 MdlCore.module:198
 msgid "No Installable Media Found"
 msgstr "No Installable Media Found"
 
-#: FrmSelISO.class:73
+#: FrmSelISO.class:74
 msgid "Click"
 msgstr "Click"
 
-#: FrmSelISO.class:73
+#: FrmSelISO.class:74
 msgid "to begin installating"
 msgstr "to begin installating"
 
-#: FrmSelISO.class:98
+#: FrmSelISO.class:76
+#, fuzzy
+msgid "Unable to locate any installable media."
+msgstr "Unable to install kernels. "
+
+#: FrmSelISO.class:82
+#, fuzzy
+msgid "Installable media found."
+msgstr "No Installable Media Found"
+
+#: FrmSelISO.class:113
 msgid "Unable to identify distro."
 msgstr "Unable to identify distro."
 
-#: FrmSelISO.class:133
+#: FrmSelISO.class:148
 msgid "Minimum Disk Space Requirements"
 msgstr "Minimum Disk Space Requirements"
 
-#: FrmSelISO.class:236
+#: FrmSelISO.class:251
 msgid "No installable images found."
 msgstr "No installable images found."
 
-#: FrmSelISO.class:242
+#: FrmSelISO.class:257
 msgid ""
 "Select which VectorLinux version you wish to install from the list below"
 msgstr ""
 "Select which VectorLinux version you wish to install from the list below"
 
-#: FrmSelISO.class:252
+#: FrmSelISO.class:267
 msgid "Search Again"
 msgstr "Search Again"
 
@@ -588,7 +649,7 @@ msgstr "Do not mount"
 msgid "Not Used"
 msgstr "Not Used"
 
-#: FrmSummary.class:90 MdlNetConf.module:218
+#: FrmSummary.class:90 MdlNetConf.module:220
 msgid "None"
 msgstr "None"
 
@@ -743,6 +804,97 @@ msgstr "Name"
 msgid "Select the windows partitions you would like to mount during boot"
 msgstr "Select the windows partitions you would like to mount during boot"
 
+#: FrmXconf.class:25
+msgid "Uses the default (failsafe) configuration."
+msgstr ""
+
+#: FrmXconf.class:27
+msgid ""
+"Probe hardware to setup your Graphical Environment using your preffered "
+"settings"
+msgstr ""
+
+#: FrmXconf.class:29
+msgid "Use the console framebuffer driver"
+msgstr ""
+
+#: FrmXconf.class:301
+msgid "Graphical Interface Settings"
+msgstr ""
+
+#: FrmXconf.class:311
+msgid "Video Driver"
+msgstr ""
+
+#: FrmXconf.class:322
+msgid "Color Depth"
+msgstr ""
+
+#: FrmXconf.class:328
+#, fuzzy
+msgid "Screen Resolution"
+msgstr "Video Resolution"
+
+#: FrmXconf.class:335
+msgid "24 bit True Color"
+msgstr ""
+
+#: FrmXconf.class:335
+msgid "16 bit Pseudo Color"
+msgstr ""
+
+#: FrmXconf.class:335
+msgid "8 bit 256 Color"
+msgstr ""
+
+#: FrmXconf.class:335
+msgid "4 bit 16 Color"
+msgstr ""
+
+#: FrmXconf.class:335
+msgid "1 bit Mono B/W"
+msgstr ""
+
+#: FrmXconf.class:340
+msgid "Vesa"
+msgstr ""
+
+#: FrmXconf.class:342
+msgid "Fbdev"
+msgstr ""
+
+#: FrmXconf.class:348
+msgid "1920x1280"
+msgstr ""
+
+#: FrmXconf.class:348
+msgid "1600x1200"
+msgstr ""
+
+#: FrmXconf.class:348
+msgid "1440x900"
+msgstr ""
+
+#: FrmXconf.class:348
+msgid "1280x1024"
+msgstr ""
+
+#: FrmXconf.class:348
+msgid "1280x800"
+msgstr ""
+
+#: FrmXconf.class:348
+msgid "1024x768"
+msgstr ""
+
+#: FrmXconf.class:348
+msgid "800x600"
+msgstr ""
+
+#: FrmXconf.class:348
+msgid "640x480"
+msgstr ""
+
 #: FrmZoneSet.class:21
 msgid "Timezone configuration"
 msgstr "Timezone configuration"
@@ -777,11 +929,11 @@ msgstr ""
 "the Coordinated Universal Time (UTC/GMT). Otherwise,\n"
 "Choose localtime since most PCs are setup this way."
 
-#: MdlConfLilo.module:95
+#: MdlConfLilo.module:96
 msgid "Lilo returned an error. Please see below"
 msgstr "Lilo returned an error. Please see below"
 
-#: MdlConfLilo.module:97
+#: MdlConfLilo.module:99
 msgid "Boot loader has been setup successfully"
 msgstr "Boot loader has been setup successfully"
 
@@ -864,6 +1016,11 @@ msgstr "Regional Settings"
 #: MdlCore.module:461
 msgid "User Accounts"
 msgstr "User Accounts"
+
+#: MdlCore.module:463
+#, fuzzy
+msgid "Final Hardware Configuration"
+msgstr "Hardware Configuration"
 
 #: MdlDiskPart.module:46
 msgid ""
@@ -1041,107 +1198,107 @@ msgstr "Include this installation in the boot menu"
 msgid "Label"
 msgstr "Label"
 
-#: MdlLiloOsList.module:276
+#: MdlLiloOsList.module:277
 msgid "Operating system installed in "
 msgstr "Operating system installed in"
 
-#: MdlLiloOsList.module:288
+#: MdlLiloOsList.module:289
 msgid "Include this operating system in the boot menu"
 msgstr "Include this operating system in the boot menu"
 
-#: MdlLiloOsList.module:299
+#: MdlLiloOsList.module:300
 msgid "Name"
 msgstr "Name"
 
-#: MdlLiloOsList.module:320
+#: MdlLiloOsList.module:321
 msgid "Initial Ram Disk"
 msgstr "Initial Ram Disk"
 
-#: MdlLiloOsList.module:345
+#: MdlLiloOsList.module:346
 msgid "Kernel boot options"
 msgstr "Kernel boot options"
 
-#: MdlLiloOsList.module:376
+#: MdlLiloOsList.module:379
 msgid "Add option to boot this Operating system into Text mode"
 msgstr "Add option to boot this Operating system into Text mode"
 
-#: MdlNetConf.module:93
+#: MdlNetConf.module:95
 msgid "Wired"
 msgstr "Wired"
 
-#: MdlNetConf.module:96
+#: MdlNetConf.module:98
 msgid "Wireless"
 msgstr "Wireless"
 
-#: MdlNetConf.module:105
+#: MdlNetConf.module:107
 msgid "Plugged-in"
 msgstr "Plugged-in"
 
-#: MdlNetConf.module:107
+#: MdlNetConf.module:109
 msgid "Unplugged"
 msgstr "Unplugged"
 
-#: MdlNetConf.module:126
+#: MdlNetConf.module:128
 msgid "Hardware Address"
 msgstr "Hardware Address"
 
-#: MdlNetConf.module:147
+#: MdlNetConf.module:149
 msgid "Interface Type"
 msgstr "Interface Type"
 
-#: MdlNetConf.module:166
+#: MdlNetConf.module:168
 msgid "Automatically activate this interface at start-up"
 msgstr "Automatically activate this interface at start-up"
 
-#: MdlNetConf.module:179
+#: MdlNetConf.module:181
 msgid "Setup Mode"
 msgstr "Setup Mode"
 
-#: MdlNetConf.module:205
+#: MdlNetConf.module:207
 msgid "Encryption type"
 msgstr "Encryption type"
 
-#: MdlNetConf.module:231
+#: MdlNetConf.module:233
 msgid "Encryption key"
 msgstr "Encryption Key"
 
-#: MdlNetConf.module:250
+#: MdlNetConf.module:252
 msgid "Access Point"
 msgstr "ESSID"
 
-#: MdlNetConf.module:274
+#: MdlNetConf.module:276
 msgid "STATUS:"
 msgstr "STATUS:"
 
-#: MdlNetConf.module:290
+#: MdlNetConf.module:292
 msgid "Dynamic Host Control Protocol"
 msgstr "Dynamic Host Control Protocol"
 
-#: MdlNetConf.module:290
+#: MdlNetConf.module:292
 msgid "Automatic settings via DHCP."
 msgstr "Automatic settings via DHCP."
 
-#: MdlNetConf.module:290
+#: MdlNetConf.module:292
 msgid "This will work if you use a cable or DSL modem on a home network."
 msgstr "This will work if you use a cable or DSL modem on a home network."
 
-#: MdlNetConf.module:290
+#: MdlNetConf.module:292
 msgid "If in doubt, choose this option"
 msgstr "If in doubt, choose this option"
 
-#: MdlNetConf.module:330
+#: MdlNetConf.module:332
 msgid "Static IP Address Settings"
 msgstr ""
 
-#: MdlNetConf.module:352
+#: MdlNetConf.module:354
 msgid "IP Address"
 msgstr "IP Address"
 
-#: MdlNetConf.module:375
+#: MdlNetConf.module:377
 msgid "Subnet Mask"
 msgstr "Subnet Mask"
 
-#: MdlNetConf.module:397
+#: MdlNetConf.module:399
 msgid "Gateway Address"
 msgstr "Gateway Address"
 
@@ -1276,9 +1433,6 @@ msgstr "localtime"
 
 #~ msgid "Include this Operating System in the boot menu"
 #~ msgstr "Include this Operating System in the boot menu"
-
-#~ msgid "Hardware Configuration"
-#~ msgstr "Hardware Configuration"
 
 #~ msgid "Create initial user accounts"
 #~ msgstr "Create initial user accounts"

@@ -10,929 +10,305 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .project:1
-msgid "VectorLinux Installer"
-msgstr "Instalador de VectorLinux"
+#: FrmXconf.class:335
+msgid "1 bit Mono B/W"
+msgstr "1 bit Mono "
 
-#: .project:2
-msgid "GUI installer for Vector linux"
-msgstr "Instaladaor Gráfico de VectorLinux"
-
-#: FMain.class:205
-msgid "Please wait while setup attampts to run the partitioning utility"
-msgstr ""
-"Por favor espere, el instalador intentará ejecutar la herramienta de "
-"particionado"
-
-#: FMain.class:207
-msgid "Please wait while setup analyses your current partition setup."
-msgstr "Por favor espere mientras el instalador analiza su particonado actual."
-
-#: FMain.class:207
-msgid "This may take a while ..."
-msgstr "Esto puede tardar unos minutos ..."
-
-#: FMain.class:221
-msgid ""
-"You must select a \"/\" partition. This is the target where the system will "
-"install to"
-msgstr ""
-"Debes seleccionar una partición para \"/\" (raíz). Allí sera instalado el "
-"sistema operativo"
-
-#: FMain.class:271
-msgid "Please select a default operating system to boot before proceeding"
-msgstr "Por favor selectione el sistema operativo que se iniciara por defecto"
-
-#: FMain.class:272
-msgid "Select an entry from this list"
-msgstr "Seleccione una de esta opciones"
-
-#: FMain.class:284
-msgid "Skipping lilo setup"
-msgstr "Salteando configuración de LILO"
-
-#: FMain.class:298
-#, fuzzy
-msgid "Passwords do not match. Please enter the same password twice"
-msgstr ""
-"Las contraseñas no coinciden. Por favor ingrese la misma contraseña dos "
-"veces para estar seguros de que es la que Usted verdaderamente desea."
-
-#: FMain.class:313
-msgid ""
-"You have not created any user accounts for this system yet. There is not "
-"enough information"
+#: FrmXconf.class:348
+msgid "1024x768"
 msgstr ""
 
-#: FMain.class:313
-msgid ""
-"to create an account here. It is recommended that you create at least one."
+#: FrmXconf.class:348
+msgid "1280x1024"
 msgstr ""
 
-#: FMain.class:313
-#, fuzzy
-msgid "Would you like to continue anyway?"
-msgstr "Deseas reiniciar ahora?"
-
-#: FMain.class:313
-msgid "Yes"
-msgstr "Sí"
-
-#: FMain.class:313
-msgid "No"
-msgstr "No"
-
-#: FMain.class:335
-msgid "has been installed on your computer. Additional system configuration"
-msgstr "se ha instalado en este ordenador. Configuracion adicional del systema"
-
-#: FMain.class:335
-msgid ""
-"will take place after you reboot your system.Part of this process must be "
-"done in text mode."
+#: FrmXconf.class:348
+msgid "1280x800"
 msgstr ""
-"occurira en el arranque inicial. Parte de este proceso debe hacerce en modo "
-"texto."
 
-#: FMain.class:335
-msgid "Would you like to reboot your computer now?"
-msgstr "Deseas reiniciar ahora?"
-
-#: FMain.class:340
-msgid ""
-"The VectorLinux installer will now exit. Enjoy your new operating system"
+#: FrmXconf.class:348
+msgid "1440x900"
 msgstr ""
-"El instalador de Vector Linux ha terminado sus funciones. Que disfrute su "
-"nuevo sistema operativo."
 
-#: FMain.class:437
-msgid "Process Overview"
-msgstr "Resumen del proceso"
+#: FrmXconf.class:335
+msgid "16 bit Pseudo Color"
+msgstr ""
 
-#: FMain.class:457
-msgid "Next"
-msgstr "Siguiente"
+#: FrmXconf.class:348
+msgid "1600x1200"
+msgstr ""
 
-#: FMain.class:463
+#: FrmNetConf.class:161
+msgid "192.168.1.254"
+msgstr "-"
+
+#: FrmXconf.class:348
+msgid "1920x1280"
+msgstr ""
+
+#: FrmXconf.class:335
+msgid "24 bit True Color"
+msgstr ""
+
+#: FrmXconf.class:335
+msgid "4 bit 16 Color"
+msgstr ""
+
+#: FrmXconf.class:348
+msgid "640x480"
+msgstr ""
+
+#: FrmXconf.class:335
+msgid "8 bit 256 Color"
+msgstr ""
+
+#: FrmXconf.class:348
+msgid "800x600"
+msgstr ""
+
+#: FrmPartSel.class:149
+msgid "ABOUT SYSTEM PARTITIONING IN LINUX"
+msgstr "Acerca del particionado en Linux"
+
+#: FrmRootPass.class:28
+msgid "About the root account"
+msgstr "Acerca de la cuenta del usuario root"
+
+#: MdlNetConf.module:252
+msgid "Access Point"
+msgstr "Punto de Accesso (Access Point)"
+
+#: MdlSetup.module:243
+msgid "Activating swap space"
+msgstr "Activando la partición Swap"
+
+#: MdlLiloOsList.module:379
+msgid "Add option to boot this Operating system into Text mode"
+msgstr "Añadir una opción para arrancar este sistema operativo en modo texto"
+
+#: FrmDone.class:35
+msgid "After reboot you can use vasm or vasmCC to fine tune your installation."
+msgstr "Luego de reiniciar, puedes utilizar Vasm o VasmCC para ultimar los detalles de la instalación "
+
+#: MdlUsrAdd.module:74
+msgid "Allow user to mount / un-mount Pendrive (USB Sticks)"
+msgstr "Permitir al usuario montar o desmontar Pendrives (USB Sticks)"
+
+#: MdlUsrAdd.module:77
+msgid "Allow user to mount / un-mount Removable HD Storage Devices"
+msgstr "Permitir al usuario montar o desmontar Dispositivos de Almacenamiento Externos (HD Storage)"
+
+#: MdlNetConf.module:292
+msgid "Automatic settings via DHCP."
+msgstr "Configuración automática utilizando DHCP"
+
+#: MdlNetConf.module:168
+msgid "Automatically activate this interface at start-up"
+msgstr "Activar esta interfaz automáticamente al arrancar"
+
+#: MdlSetup.module:227
+msgid "BROUGHT TO YOU BY"
+msgstr "Créditos "
+
+#: FrmSummary.class:173
+msgid "BULK PACKAGES"
+msgstr "PAQUETES POR CATEGORIA"
+
+#: MdlSummarize.module:58
+msgid "BULK PACKAGES:"
+msgstr "Paquetes por categoría"
+
+#: FMain.class:520
 msgid "Back"
 msgstr "Regresar"
 
-#: FMain.class:469
-msgid "Exit Installation"
-msgstr "Cancelar Instalación"
+#: FrmLilo.class:271
+msgid "Boot Default"
+msgstr "Arranque por defecto"
 
-#: FMain.class:485
-msgid "Button1"
-msgstr "-"
+#: MdlCore.module:458
+msgid "Boot Menu Options"
+msgstr "Opciones de arranque"
 
-#: FrmDiskPart.class:115
-msgid "Disk Partitioning:"
-msgstr "Particionado de disco:"
-
-#: FrmHostPrep.class:130
-msgid "Vectorlinux is preparing your system for installation. Please wait."
-msgstr ""
-"Por favor espere mientras VectorLinux prepara su sistema para instalacion"
-
-#: FrmHostPrep.class:135
-msgid "Current Status"
-msgstr "Estado Actual"
-
-#: FrmHostPrep.class:139 FrmLilo.class:223 FrmPartScheme.class:127
-#: FrmPkgSel.class:101 FrmPkgsel2.class:86 FrmSelISO.class:247
-#: FrmSummaryOld.class:87
-msgid "TextLabel1"
-msgstr "-"
-
-#: FrmInstallSys.class:57 FrmInstallSysN.class:72
-msgid "Current Step"
-msgstr "Este paso"
-
-#: FrmInstallSys.class:181
-msgid "Vectorlinux is currently being installed to your system... Please wait"
-msgstr "Por favor espere mientras VectorLinux se instala en su sistema"
-
-#: FrmInstallSys.class:194
-msgid "Total progress"
-msgstr "Progreso Total"
-
-#: FrmInstallSys.class:204
-msgid "Installing ..."
-msgstr "Instalando..."
-
-#: FrmInstallSys.class:209
-msgid "Current Step "
-msgstr "Este paso"
-
-#: FrmInstallSysN.class:82
-msgid "Total Progress"
-msgstr "Progreso Total"
-
-#: FrmLangSel.class:116
-msgid "Select your language"
-msgstr "Selecciona tu idioma"
-
-#: FrmLicense.class:99
-msgid "LICENSE AGREEMENT"
-msgstr "Aceptación de licencia"
-
-#: FrmLicense.class:104
-msgid "TextArea1"
-msgstr "-"
-
-#: FrmLicense.class:110
-msgid "Yes, I Agree to the License Agreement"
-msgstr "De acuerdo"
-
-#: FrmLicense.class:115
-msgid "No, I Do Not Agree"
-msgstr "No estoy de acuerdo"
-
-#: FrmLilo.class:35
-msgid ""
-"The following Operating Systems have been detected on this computer. Choose "
-"your desired option"
-msgstr ""
-"los siguientes Sistemas Operativos han sido detectados en su ordenador. "
-"Selecciona la opción deseada"
-
-#: FrmLilo.class:35
-msgid ""
-"for each one of them by clicking on each tab. To proceed with the default "
-"pre-set values, simply click"
-msgstr ""
-"para cada uno de ellos seleccionando cada pestaña. Para continuar con los "
-"valores seleccionados por defecto simplemente haz click en "
-
-#: FrmLilo.class:132
-msgid "Standard"
-msgstr "Estandar"
-
-#: FrmLilo.class:206
-msgid "Configure and install lilo (Linux Boot Loader)"
-msgstr "Confuguración de LILO"
-
-#: FrmLilo.class:211
-msgid "Don't Install Lilo"
-msgstr "No quiero instalar LILO"
-
-#: FrmLilo.class:217 FrmNetConf.class:141
-msgid "Tab 0"
-msgstr "-"
-
-#: FrmLilo.class:235
-msgid "Target"
-msgstr "-"
-
-#: FrmLilo.class:241
-msgid "Video Resolution"
-msgstr "Resolucion de pantalla"
+#: MdlConfLilo.module:99
+msgid "Boot loader has been setup successfully"
+msgstr "El cargador de arranque ha sido configurado con éxito"
 
 #: FrmLilo.class:249
-msgid "Bootsplash Med"
-msgstr "Resolución del arranque gráfico (bootsplash) media"
+msgid "Bootsplash Extra high"
+msgstr "Resolución del arranque gráfico (bootsplash) súper alta"
 
 #: FrmLilo.class:249
 msgid "Bootsplash High"
 msgstr "Resolución del arranque gráfico (bootsplash) alta"
 
 #: FrmLilo.class:249
-msgid "Bootsplash Extra high"
-msgstr "Resolución del arranque gráfico (bootsplash) súper alta"
-
-#: FrmLilo.class:254
-msgid "Prompt Timeout"
-msgstr "Esperar"
-
-#: FrmLilo.class:265
-msgid "Seconds"
-msgstr "Segundos"
-
-#: FrmLilo.class:271
-msgid "Boot Default"
-msgstr "Arranque por defecto"
-
-#: FrmNetConf.class:58
-msgid "Network Interfaces"
-msgstr "Dispositivos de red"
-
-#: FrmNetConf.class:125
-msgid "Computer Name"
-msgstr "Nombre Local"
-
-#: FrmNetConf.class:148
-msgid "Manual DNS Server Specification"
-msgstr "Configuración Manual de servidores de nombres (DNS)"
-
-#: FrmNetConf.class:153
-msgid "Primary DNS Server"
-msgstr "Servidor de nombres primario (DNS)"
-
-#: FrmNetConf.class:161
-msgid "192.168.1.254"
-msgstr "-"
-
-#: FrmNetConf.class:166
-msgid "Secondary DNS Server"
-msgstr "Servidor de nombres (DNS) secundario"
-
-#: FrmNetConf.class:179 MdlCore.module:462
-msgid "Network Configuration"
-msgstr "Configuración de red"
-
-#: FrmPartScheme.class:61
-msgid ""
-"Select this option if you already have a linux installation that you wish to "
-"overwrite or if a linux partition scheme exists in your hard disk."
-msgstr ""
-"Selecciona esta opción si ya dispones de una instalación de Linux que "
-"quieras sobreescribir o si las particines Linux ya existen en tu disco duro."
-
-#: FrmPartScheme.class:61
-msgid "This option will overwrite any existing data in the selected partitions"
-msgstr "Esta opción sobreescribirá los datos de las particiones seleccionadas"
-
-#: FrmPartScheme.class:61
-msgid ""
-"Use this option if you already prepared your partitions using the "
-"VectorLinux installer"
-msgstr ""
-"Usa esta opción si ya haz preparado tus particiones utilizando el instalador "
-"de VectorLinux"
-
-#: FrmPartScheme.class:70
-msgid ""
-"Select this option is you wish to create, more or resize partitions in order "
-"to make room for your new VectorLinux installation."
-msgstr ""
-"Selecciona esta opción si deseas crear o redimensionar particiones para "
-"conseguir espacio para tu nueva instalación de VectorLinux."
-
-#: FrmPartScheme.class:70
-msgid ""
-"This option is the safest choice if you have other existing installations "
-"that you wish to keep."
-msgstr "Esta opción es la más segura si quieres conservar otras instalaciones."
-
-#: FrmPartScheme.class:112
-msgid "Disk Partitioning Options"
-msgstr "Opciones de particionado de disco"
-
-#: FrmPartScheme.class:117
-msgid "Use existing disk partitions"
-msgstr "Utilizar las particiones existentes en mi disco duro"
-
-#: FrmPartScheme.class:122
-msgid "Modify my disk partitions to make room for new installation"
-msgstr "Modificaré mi disco duro para hacer lugar para la nueva instalación"
-
-#: FrmPartSel.class:149
-msgid "ABOUT SYSTEM PARTITIONING IN LINUX"
-msgstr "Acerca del particionado en Linux"
-
-#: FrmPartSel.class:149
-msgid ""
-"Linux is a modular operating system. This means that is has the ability to "
-"store system and"
-msgstr ""
-"Linux es un sistema operativo modular. Esto significa que tiene la capacidad "
-"de alojar el sistema y"
-
-#: FrmPartSel.class:149
-msgid ""
-"user data separately for added data security. You may install the system to "
-"a single partition"
-msgstr ""
-"datos del usuario separadamente para incrementar la seguridad de sus datos. "
-"Puedes instalar el sistema en una única partición"
-
-#: FrmPartSel.class:149
-msgid ""
-"by simply selecting a \"/\" value on this screen. The rest is optional. The "
-"following is a"
-msgstr ""
-"simplemente seleccionando un valor para \"/\" en esta pantalla. El resto es "
-"opcional. Lo siguiente es un"
-
-#: FrmPartSel.class:149
-msgid "suggested setup for a typical Linux installation"
-msgstr "configuración recomendada para una instalación típica de Linux"
-
-#: FrmPartSel.class:149
-msgid ""
-"Used to store system data. This particular install requires a minimum of"
-msgstr ""
-"Utilizada para almacenar los datos del sistema. Esta instalación en "
-"particular requiere un mínimo de"
-
-#: FrmPartSel.class:149
-msgid "for this"
-msgstr "para esto"
-
-#: FrmPartSel.class:149
-msgid ""
-"but you should considear a higher value to make sure you have room to "
-"install additional software"
-msgstr ""
-"pero deberías considerar un valor más alto para asegurarte espacio para "
-"software adicional que desees instlar luego"
-
-#: FrmPartSel.class:149
-msgid "in case you wish to."
-msgstr "en caso que lo desees."
-
-#: FrmPartSel.class:149
-msgid ""
-"Used to store user documents, pictures, videos. Give yourself as much room "
-"as you want"
-msgstr ""
-"Utilizada para almacenar los ficheros del usuario, documentos, imágenes, "
-"videos, etc. Puedes asignar tanto espacio como desees"
-
-#: FrmPartSel.class:149
-msgid "Typically, you want to use the largest partition for this."
-msgstr "Normalmente querrías utilizar tu partición más grande para esto."
-
-#: FrmPartSel.class:149
-msgid ""
-"Using a swap partition is suggested if your total RAM is less than 1GB. "
-"Suggested ammount"
-msgstr ""
-"Utilizar una partición Swap es recomendado si tu cantidad de memoria RAM es "
-"inferior a 1GB. El monto sugerido "
-
-#: FrmPartSel.class:149
-msgid "for this is"
-msgstr "para esto es"
-
-#: FrmPartSel.class:149
-msgid "but can also be calculated as 2 times your ammount of RAM"
-msgstr ""
-"pero también puede ser calculada duplicando el tamaño de tu memoria RAM"
-
-#: FrmPartSel.class:174
-msgid "Please select the partitions you wish to use and how to use them"
-msgstr ""
-"For favor, seleccione las secciones del disco que desea usar, y también como "
-"usarlas"
-
-#: FrmPartSel.class:183
-msgid ""
-"Check this box if you have a Windows installation on your system or any "
-"other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as "
-"soon as your computer starts"
-msgstr ""
-"Selecciona esta casilla si hay una instalación Windows en tu sistema o otra "
-"partición Windows (FAT, FAT32, NTFS) que quieras montar automáticamente al "
-"arrancar el ordenador"
-
-#: FrmPartSel.class:184
-msgid "Detect and Setup Windows partitions for auto-mounting at boot"
-msgstr "Detectar volúmenes con sistemas Windows"
-
-#: FrmPartSel.class:189 FrmUserAdd.class:486
-msgid "Help"
-msgstr "Ayuda"
-
-#: FrmPkgSel.class:22
-msgid "Choose your installation mode"
-msgstr "Selecciona el modo de instalación"
-
-#: FrmPkgSel.class:51
-msgid "Installs everything in your VectorLinux media to your system"
-msgstr "Instalar todo lo que incluye el medio de instalación en tu disco duro"
-
-#: FrmPkgSel.class:60
-msgid "Choose your optional components to install."
-msgstr "Selecciona los componentes opcionales a instalar."
-
-#: FrmPkgSel.class:107
-msgid "Full Install"
-msgstr "Instalacion Completa"
-
-#: FrmPkgSel.class:112
-msgid "Custom Install"
-msgstr "Instalación Personalizada"
-
-#: FrmPkgsel2.class:21
-msgid "Select your indivirual packages to install."
-msgstr "Selecciona paquetes individuales para su instalación."
-
-#: FrmPkgsel2.class:21
-msgid "To install them all, just click next"
-msgstr "Para instalarlos todos, simplemente presiona Sigiente"
-
-#: FrmRootPass.class:6
-msgid "System Administrator Password"
-msgstr "Contraseña del administrador del sistema"
-
-#: FrmRootPass.class:13
-msgid "Most other every-day taks do not require administrative priviledges."
-msgstr "Las tareas diarias no requieren privilegios de administrador"
-
-#: FrmRootPass.class:13
-msgid ""
-"For added security, use a password that is easy for you to remember, but "
-"hard for others to guess"
-msgstr ""
-"Por motivos de seguridad, deberías utilizar una clave fácil de recordar, "
-"pero difícil de adivinar"
-
-#: FrmRootPass.class:28
-msgid "About the root account"
-msgstr "Acerca de la cuenta del usuario root"
-
-#: FrmRootPass.class:34
-msgid "Enter a Password for root."
-msgstr "Ingresa una contraseña para root."
-
-#: FrmRootPass.class:48
-msgid ""
-"Passwords do not match. Please enter the same password twice for accuracy."
-msgstr ""
-"Las contraseñas no coinciden. Por favor ingrese la misma contraseña dos "
-"veces para estar seguros de que es la que Usted verdaderamente desea."
-
-#: FrmRootPass.class:118 MdlCore.module:460
-msgid "System Administrator"
-msgstr "Administrador del sistema"
-
-#: FrmRootPass.class:131
-msgid ""
-"The linux root account is pre-assigned to be used as the system "
-"administrator's account. This account is used to perform system-wide changes "
-"such as software upgrades, managing user accounts etc. \n"
-"\n"
-"Most other operations do not require administrative priviledges.\n"
-"The root password must be entered twice for ensured accuracy. When choosing "
-"a root password, think of something easy for you to remember, but hard for "
-"others to guess."
-msgstr ""
-"La cuenta root en los sistemas Linux está diseñada como la cuenta del "
-"administrador del sistema. Es utilizada para realizar tareas de "
-"mantenimiento del sistema globales, tales como actualizaciones de software, "
-"gestionar los permisos o crear nuevos usuarios, etc. \n"
-"\n"
-"La mayoría de las otras operaciones no requieren privilegios de "
-"administrador.\n"
-"La contraseña para el usuario root deberá ser ingresada dos veces para "
-"asegurar que es la contraseña deseada. Al elegir la contraseña de "
-"administrador, piensa en algo fácil de recordar, pero al mismo tiempo "
-"difícil de adivinar para los otros. "
-
-#: FrmRootPass.class:137 FrmUserAdd.class:514
-msgid "Enter Password"
-msgstr "Ingresa contraseña"
-
-#: FrmRootPass.class:142
-msgid "Re-Enter Password"
-msgstr "Vuelva a ingresar la contraseña"
-
-#: FrmRootPass.class:159
-msgid "Set Password"
-msgstr "Define tu contraseña"
-
-#: FrmSelISO.class:29 MdlCore.module:198
-msgid "No Installable Media Found"
-msgstr "No se encontró ningún medio instalable"
-
-#: FrmSelISO.class:73
-msgid "Click"
-msgstr "Haz click en"
-
-#: FrmSelISO.class:73
-msgid "to begin installating"
-msgstr "para comenzar la instalación"
-
-#: FrmSelISO.class:98
-msgid "Unable to identify distro."
-msgstr "No se pudo detectar la distribución."
-
-#: FrmSelISO.class:133
-msgid "Minimum Disk Space Requirements"
-msgstr "Requerimientos mínimos de espacio en disco"
-
-#: FrmSelISO.class:236
-msgid "No installable images found."
-msgstr "No se encontró ninguna imagen que se pueda instalar"
-
-#: FrmSelISO.class:242
-msgid ""
-"Select which VectorLinux version you wish to install from the list below"
-msgstr "Selectiona la imagen que deseas instalar de la lista"
-
-#: FrmSelISO.class:252
-msgid "Search Again"
-msgstr "Buscar nuevamente"
-
-#: FrmSummary.class:14 MdlCore.module:454
-msgid "Installation Summary"
-msgstr "Resumen del proceso"
-
-#: FrmSummary.class:16 MdlSummarize.module:56
-msgid "Custom"
-msgstr "Personalisado"
-
-#: FrmSummary.class:20 MdlSummarize.module:69
-msgid "Full"
-msgstr "Completa"
-
-#: FrmSummary.class:37
-msgid "Partition"
-msgstr "Partición"
-
-#: FrmSummary.class:39
-msgid "Size"
-msgstr "Tamano"
-
-#: FrmSummary.class:41
-msgid "Filesystem"
-msgstr "Sistema de Archivos"
-
-#: FrmSummary.class:43
-msgid "Mount Point"
-msgstr "Punto de montaje"
-
-#: FrmSummary.class:49 MdlInstallSys.module:142 MdlPartSel.module:143
-msgid "Not Used"
-msgstr "Sin usar"
-
-#: FrmSummary.class:90 MdlNetConf.module:218
-msgid "None"
-msgstr "Ninguno"
-
-#: FrmSummary.class:112 MdlInstallSys.module:190 MdlWinDrives.module:123
-msgid "Do not mount"
-msgstr "No montar"
-
-#: FrmSummary.class:164
-msgid "Package Name"
-msgstr "Nombre del paquete"
-
-#: FrmSummary.class:173
-msgid "BULK PACKAGES"
-msgstr "PAQUETES POR CATEGORIA"
-
-#: FrmSummary.class:190
-msgid "USER-SELECTED PACKAGES"
-msgstr "PAQUETES INDIVIDUALES"
-
-#: FrmSummary.class:243
-msgid "Installation Type"
-msgstr "Tipo de instalación"
-
-#: FrmSummary.class:253
-msgid "Partition Selection Scheme"
-msgstr "Selección del esquema de particionado"
-
-#: FrmSummary.class:263 MdlCore.module:451
-msgid "Software Selection"
-msgstr "Selección de software"
-
-#: FrmUserAdd.class:37
-msgid "Create User Accounts"
-msgstr "Limiar cuentas de usuario"
-
-#: FrmUserAdd.class:78
-#, fuzzy
-msgid "Enter the login name that this user will user to login to this system."
-msgstr ""
-"Ingresa el nombre de usuario que será utilizado para registrarse en el "
-"sistema."
-
-#: FrmUserAdd.class:86
-msgid ""
-"Login name field contains illegal characters. Please use only lowercase "
-"letters and numbers"
-msgstr ""
-"Tu nombre de usuario contiene caracteres ilegales. Por favor utiliza solo "
-"letras minúsculas y números"
-
-#: FrmUserAdd.class:99
-msgid "Username contains illegal characters"
-msgstr "El nombre de usuario contiene caracteres ilegales"
-
-#: FrmUserAdd.class:102
-#, fuzzy
-msgid "User account for"
-msgstr "Usuarios"
-
-#: FrmUserAdd.class:102
-#, fuzzy
-msgid "already exists"
-msgstr "El nombre de usuario ya existe"
-
-#: FrmUserAdd.class:106
-#, fuzzy
-msgid "Enter a password for"
-msgstr "Ingresa una contraseña para root."
-
-#: FrmUserAdd.class:157
-msgid "was created."
-msgstr ""
-
-#: FrmUserAdd.class:161
-msgid "Passwords do not match"
-msgstr ""
-
-#: FrmUserAdd.class:162
-#, fuzzy
-msgid "Enter the same password twice"
-msgstr "Ingresa una contraseña."
-
-#: FrmUserAdd.class:311
-msgid "Select picture for user Login"
-msgstr "Selecciona una imagen para el usuario"
-
-#: FrmUserAdd.class:350
-msgid ""
-"Your password selections do not match. Please enter the same password twice"
-msgstr ""
-"Sus contraseñas no coinciden. Por favor ingrese la misma contraseña dos "
-"veces."
-
-#: FrmUserAdd.class:375
-msgid ""
-"Groups are a way of administering permissions for your users. You grant the "
-"user"
-msgstr ""
-"Los Grupos son un método para administrar los permisos de los usuarios. Le "
-"garantizas a cada usuario"
-
-#: FrmUserAdd.class:375
-msgid "permission to do certain things by adding them to certain groups."
-msgstr ""
-"permisos para realizar determinadas acciones agregándolo a un grupo o a "
-"varios grupos determinados."
-
-#: FrmUserAdd.class:375
-msgid "Select which groups you want this user to be a part of here"
-msgstr "Selecciona los grupos de los que este usuario será parte"
-
-#: FrmUserAdd.class:376
-msgid "OK"
-msgstr "OK"
-
-#: FrmUserAdd.class:433
-msgid ""
-"Choose a unique name for each user. Enter the password for twice for "
-"accuracy. You can make as many users as you want, and when you are finished "
-"click next to continue."
-msgstr ""
-"Elige un nombre único para cada usuario. Es necesario ingresar las "
-"contraseñas dos veces. Puedes crear todas las cuentas de usuarios que desees"
-
-#: FrmUserAdd.class:471
-msgid "Select"
-msgstr "Seleciona"
-
-#: FrmUserAdd.class:477
-msgid "Use Picture ID for Login greeting"
-msgstr "Utilizar una imágen para el usuario en el gestor de sesiones"
-
-#: FrmUserAdd.class:482
-msgid "User Rights Management"
-msgstr "Administración de los Permisos de Usuario"
-
-#: FrmUserAdd.class:494
-msgid "Create User"
-msgstr "Agregar Usuario"
-
-#: FrmUserAdd.class:500
-msgid "Clear Form"
-msgstr "Limpiar Formulario"
-
-#: FrmUserAdd.class:507
-msgid "Login Name"
-msgstr "Nombre de usuario"
-
-#: FrmUserAdd.class:521
-msgid "ReEnter Password"
-msgstr "Vuelva a ingresar la contraseña"
-
-#: FrmUserAdd.class:542
-msgid "Real Name"
-msgstr "Nombre Real"
-
-#: FrmWinDrives.class:72
-msgid "Select the windows partitions you would like to mount during boot"
-msgstr "Selecciona qué volumenes usados por Windows deseas acceder desde Linux"
-
-#: FrmZoneSet.class:21
-msgid "Timezone configuration"
-msgstr "Configuración de la Zona Horaria"
-
-#: FrmZoneSet.class:169
-msgid "Choose the correct timezone for the area in which you live."
-msgstr "Selecciona la zona horaria del área donde vives"
-
-#: FrmZoneSet.class:174
-msgid "ComboBox1"
-msgstr "-"
-
-#: FrmZoneSet.class:176
-msgid "LocalTime"
-msgstr "Hora Local"
-
-#: FrmZoneSet.class:176
-msgid "UTC"
-msgstr "UTC"
-
-#: FrmZoneSet.class:181
-msgid ""
-"Choose how\n"
-"your hardware clock is set up.\n"
-"Choose UTC if you know that the clock is set up to\n"
-"the Coordinated Universal Time (UTC/GMT). Otherwise,\n"
-"Choose localtime since most PCs are setup this way."
-msgstr ""
-"Elige como funciona el reloj de esta máquina. Si tienes dudas elige UTC/GMT"
-
-#: MdlConfLilo.module:95
-msgid "Lilo returned an error. Please see below"
-msgstr "Lilo ha devuelto un error.  Por favor, lee más abajo"
-
-#: MdlConfLilo.module:97
-msgid "Boot loader has been setup successfully"
-msgstr "El cargador de arranque ha sido configurado con éxito"
-
-#: MdlCore.module:182
-msgid "Scanning system for installable media. Please wait ..."
-msgstr "Buscando medios de instalación en el sistema. Por favor espere ..."
-
-#: MdlCore.module:200
-msgid ""
-"Setup was unable to find any installable media on your system. Please insert "
-"your VectorLinux "
-msgstr ""
-"El instalador no ha podido encontrar ningún medio instalable en tu sistema.  "
-"Por favor inserta Vectorlinux"
-
-#: MdlCore.module:200
-msgid "installation CD and click "
-msgstr "CD de instalación y haz click en"
-
-#: MdlCore.module:200
-msgid "to try again"
-msgstr "para intentarlo nuevamente"
+msgid "Bootsplash Med"
+msgstr "Resolución del arranque gráfico (bootsplash) media"
 
 #: MdlCore.module:361
 msgid "Build Date: "
 msgstr "Compilado el: "
 
-#: MdlCore.module:361
-msgid "MINIMUM REQUIREMENTS"
-msgstr "Requerimientos mínimos del sistema"
+#: FMain.class:542
+msgid "Button1"
+msgstr "-"
 
-#: MdlCore.module:366
-msgid ""
-"Setup is unable to find SETUP.CONF in your install media. This could be "
-"symptoms of a bad burn or a bad ISO"
-msgstr ""
-"El instalador no puede encontrar SETUP.CONF en el medio de instalación.  Eso "
-"puede ser síntoma de una mala grabación de la ISO"
+#: MdlInstallCustom.module:459
+msgid "Calculating package count ... Please wait"
+msgstr "Calculando el número de paquetes ... Por favor espere"
 
 #: MdlCore.module:439
 msgid "Cannot find SETUP.CONF"
 msgstr "No se pudo encontrar SETUP.CONF"
 
-#: MdlCore.module:447
-msgid "Preparation"
-msgstr "Preparación"
+#: FrmPartSel.class:183
+msgid "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
+msgstr "Selecciona esta casilla si hay una instalación Windows en tu sistema o otra partición Windows (FAT, FAT32, NTFS) que quieras montar automáticamente al arrancar el ordenador"
 
-#: MdlCore.module:448
-msgid "Language Selection"
-msgstr "Seleccion de idioma"
+#: FrmUserAdd.class:433
+msgid "Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
+msgstr "Elige un nombre único para cada usuario. Es necesario ingresar las contraseñas dos veces. Puedes crear todas las cuentas de usuarios que desees"
 
-#: MdlCore.module:449
-msgid "Find installation media"
-msgstr "Buscar medio de instalación"
+#: FrmZoneSet.class:181
+msgid "Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way."
+msgstr "Elige como funciona el reloj de esta máquina. Si tienes dudas elige UTC/GMT"
+
+#: FrmZoneSet.class:169
+msgid "Choose the correct timezone for the area in which you live."
+msgstr "Selecciona la zona horaria del área donde vives"
+
+#: FrmPkgSel.class:22
+msgid "Choose your installation mode"
+msgstr "Selecciona el modo de instalación"
+
+#: FrmPkgSel.class:60
+msgid "Choose your optional components to install."
+msgstr "Selecciona los componentes opcionales a instalar."
+
+#: FrmUserAdd.class:500
+msgid "Clear Form"
+msgstr "Limpiar Formulario"
+
+#: FrmSelISO.class:74
+msgid "Click"
+msgstr "Haz click en"
+
+#: FrmXconf.class:322
+msgid "Color Depth"
+msgstr ""
+
+#: FrmZoneSet.class:174
+msgid "ComboBox1"
+msgstr "-"
+
+#: FrmNetConf.class:125
+msgid "Computer Name"
+msgstr "Nombre Local"
+
+#: FrmLilo.class:206
+msgid "Configure and install lilo (Linux Boot Loader)"
+msgstr "Confuguración de LILO"
+
+#: FrmUserAdd.class:494
+msgid "Create User"
+msgstr "Agregar Usuario"
+
+#: FrmUserAdd.class:37
+msgid "Create User Accounts"
+msgstr "Limiar cuentas de usuario"
+
+#: FrmHostPrep.class:135
+msgid "Current Status"
+msgstr "Estado Actual"
+
+#: FrmInstallSys.class:57 FrmInstallSysN.class:72
+msgid "Current Step"
+msgstr "Este paso"
+
+#: FrmInstallSys.class:209
+msgid "Current Step "
+msgstr "Este paso"
+
+#: FrmSummary.class:16 MdlSummarize.module:56
+msgid "Custom"
+msgstr "Personalisado"
+
+#: FrmPkgSel.class:112
+msgid "Custom Install"
+msgstr "Instalación Personalizada"
+
+#: FrmPartSel.class:184
+msgid "Detect and Setup Windows partitions for auto-mounting at boot"
+msgstr "Detectar volúmenes con sistemas Windows"
 
 #: MdlCore.module:450
 msgid "Disk Partitioning"
 msgstr "Particionado de disco"
 
-#: MdlCore.module:453
-msgid "Installation"
-msgstr "Instalación"
+#: FrmPartScheme.class:112
+msgid "Disk Partitioning Options"
+msgstr "Opciones de particionado de disco"
 
-#: MdlCore.module:456
-msgid "Install Operating System"
-msgstr "Instalación del sistema operativo"
+#: FrmDiskPart.class:115
+msgid "Disk Partitioning:"
+msgstr "Particionado de disco:"
 
-#: MdlCore.module:457
-msgid "System Configuration"
-msgstr "Configurar el sistema"
+#: MdlInstallSys.module:167 MdlPartFrmt.module:33 MdlPartSel.module:141
+msgid "Do not format"
+msgstr "No Formatear"
 
-#: MdlCore.module:458
-msgid "Boot Menu Options"
-msgstr "Opciones de arranque"
+#: FrmSummary.class:112 MdlInstallSys.module:190 MdlWinDrives.module:123
+msgid "Do not mount"
+msgstr "No montar"
 
-#: MdlCore.module:459
-msgid "Regional Settings"
-msgstr "Opciones de regionalización"
+#: FrmLilo.class:211
+msgid "Don't Install Lilo"
+msgstr "No quiero instalar LILO"
 
-#: MdlCore.module:461
-msgid "User Accounts"
-msgstr "Usuarios"
+#: MdlNetConf.module:292
+msgid "Dynamic Host Control Protocol"
+msgstr "Dynamic Host Control Protocol (DHCP)"
 
-#: MdlDiskPart.module:46
-msgid ""
-"VectorLinux is unable to determine the type of hard disks on your system."
-msgstr ""
-"El instalador no ha podido determinar el tipo de disco duro en tu sistema."
+#: MdlUsrAdd.module:71
+msgid "Elite user"
+msgstr "Usuario Privilegiado"
 
-#: MdlDiskPart.module:46
-msgid ""
-"It is still possible to install VectorLinux on your system, but you need to "
-"pre-partition your disks first"
-msgstr ""
-"Es posible instalar VectorLinux entu sistema, pero derías particionar el "
-"disco primero"
+#: MdlNetConf.module:233
+msgid "Encryption key"
+msgstr "Clave encriptada"
 
-#: MdlDiskPart.module:53
-msgid ""
-"Gparted was not found on this system. Please install gparted and try again"
-msgstr ""
-"No se encontró Gparted en el sistema.  Por favor, instala Gparted y prueba "
-"de nuevo"
+#: MdlNetConf.module:207
+msgid "Encryption type"
+msgstr "Tipo de encriptación"
 
-#: MdlDiskPart.module:57
-msgid "Loading gparted ... Please wait"
-msgstr "Cargando Gparted ... Por favor espere"
+#: FrmRootPass.class:137 FrmUserAdd.class:514
+msgid "Enter Password"
+msgstr "Ingresa contraseña"
 
-#: MdlDiskPart.module:90
-msgid ""
-"Setup is unable to successfully run gparted on this system. This may be a "
-"sign of "
-msgstr ""
-"El programa de instalación no pudo ejecutar Gparted en tu sistema. Esto "
-"puede ser señal de"
+#: FrmRootPass.class:34
+msgid "Enter a Password for root."
+msgstr "Ingresa una contraseña para root."
 
-#: MdlDiskPart.module:90
-msgid "a bad install media. Setup cannot continue."
-msgstr ""
-"error en el medio de instalación. El programa de instalación no puede "
-"continuar."
+#: FrmUserAdd.class:106
+msgid "Enter a password for"
+msgstr "Ingresa una contraseña para "
 
-#: MdlDiskPart.module:95
-msgid "Several windows found. I will take the first one!"
-msgstr "Se han encontrado varios windows.  Cogeré el primero!"
+#: FrmUserAdd.class:78
+msgid "Enter the login name that this user will user to login to this system."
+msgstr "Ingresa el nombre de usuario que será utilizado para registrarse en el sistema."
 
-#: MdlInstallCustom.module:44
-msgid "There as been an error while installing required system software. "
-msgstr "Ha ocurrido un error durante la instalación del software base. "
+#: FrmUserAdd.class:162
+msgid "Enter the same password twice"
+msgstr "Ingreasa la misma contraseña dos veces "
 
-#: MdlInstallCustom.module:52
-msgid ""
-"There has been an error while installing optional software to your system. "
-msgstr "Ha ocurrido un error durante la instalación del software opcional. "
+#: MdlInstallSys.module:509
+msgid "Error occurred while installing"
+msgstr "Ha ocurrido un error durante la instalación"
 
-#: MdlInstallCustom.module:60
-msgid ""
-"There has been an error while installing optional software to your system."
-msgstr "Ha ocurrido un error mientras se instalaba el software opcional."
+#: MdlInstallCustom.module:539
+msgid "Error while installing "
+msgstr "Error al instalar "
 
 #: MdlInstallCustom.module:72
 msgid "Error while installing required system software. "
@@ -942,274 +318,601 @@ msgstr "Error al instalar el software base. "
 msgid "Error while installing system configuration. "
 msgstr "Error al instalar la configuración del sistema. "
 
-#: MdlInstallCustom.module:88
-msgid "Unable to install kernels. "
-msgstr "No se pudieron instalar los kernels. "
+#: FrmDone.class:29
+msgid "Exit"
+msgstr "Salir"
 
-#: MdlInstallCustom.module:99
-msgid ""
-"Vectorlinux is now installed in your system. Please click next to configure "
-"it."
-msgstr ""
-"Vectorlinux se ha instalado en tu ordenador.  Por favor, clica next para "
-"configurarlo."
-
-#: MdlInstallCustom.module:100
-msgid ""
-"packages have been Installed. Please click next to move on to System "
-"Configuration."
-msgstr ""
-"paquetes han sido instalados.  Por favor presiona Siguiente para configurar "
-"el sistema."
-
-#: MdlInstallCustom.module:269
-msgid "Installing user-selected package"
-msgstr "Instalando paquetes selecionados por el usuario"
-
-#: MdlInstallCustom.module:459
-msgid "Calculating package count ... Please wait"
-msgstr "Calculando el número de paquetes ... Por favor espere"
-
-#: MdlInstallCustom.module:507
-msgid "Total packages to be installed = "
-msgstr "Paquetes a instalar = "
-
-#: MdlInstallCustom.module:539
-msgid "Error while installing "
-msgstr "Error al instalar "
-
-#: MdlInstallSys.module:118
-msgid "Writing new /etc/fstab to system"
-msgstr "Escribiendo el nuevo /etc/fstab en el sistema"
-
-#: MdlInstallSys.module:167 MdlPartFrmt.module:33 MdlPartSel.module:141
-msgid "Do not format"
-msgstr "No Formatear"
-
-#: MdlInstallSys.module:361
-msgid "Vectorlinux is now installed in your system. Please click"
-msgstr "VectorLinux ha sido instalado e tu sistema. Por favor presiona"
-
-#: MdlInstallSys.module:361
-msgid "to configure it."
-msgstr "para configurarla."
-
-#: MdlInstallSys.module:362
-msgid "Packages have been installed in your system. Please click"
-msgstr "Los paquetes han sido instalados en tu sistema. Por favor haga click"
-
-#: MdlInstallSys.module:471
-msgid "Installing"
-msgstr "Instalando"
-
-#: MdlInstallSys.module:509
-msgid "Error occurred while installing"
-msgstr "Ha ocurrido un error durante la instalación"
-
-#: MdlInstallSys.module:574
-msgid "Vectorlinux is now being installed. Please wait..."
-msgstr "Vectorlinux se está instalando.  Por favor, espere ..."
-
-#: MdlInstallSys.module:618
-msgid "There has been an error extracting"
-msgstr "Ha ourrido un error en la extracción"
-
-#: MdlInstallSys.module:630
-msgid "Finished intalling Bulks"
-msgstr "Instalación de paquetes finalizada"
-
-#: MdlInstallSys.module:736
-msgid "Installation phase complete. Ready for configuration"
-msgstr "Fase de instalación completada.  Vamos a por la configuración"
-
-#: MdlInstallSys.module:739
-msgid "Installing default system configuration and required software."
-msgstr "Instalando el software necesario y las configuraciones por defecto."
-
-#: MdlInstallSys.module:775
-msgid "Installing Required Package ..."
-msgstr "Instalando paquetes requeridos ..."
-
-#: MdlInstallSys.module:786
-msgid "Failed to install"
-msgstr "La instalación ha fallado"
-
-#: MdlInstallSys.module:826
-msgid "Installing Final configuration files..."
-msgstr "Instalando los últimos ficheros de configuración ..."
-
-#: MdlLiloOsList.module:136
-#, fuzzy
-msgid "Windows installation found in"
-msgstr "Instalaciones de Windows encontradas en "
-
-#: MdlLiloOsList.module:146
-msgid "Include this installation in the boot menu"
-msgstr "Incluir esta instalación en el menú de arranque"
-
-#: MdlLiloOsList.module:155
-msgid "Label"
-msgstr "Etiqueta"
-
-#: MdlLiloOsList.module:276
-msgid "Operating system installed in "
-msgstr "Sistema operativo montado en"
-
-#: MdlLiloOsList.module:288
-msgid "Include this operating system in the boot menu"
-msgstr "Incluir este sistema operativo en el menú de arranque"
-
-#: MdlLiloOsList.module:299
-msgid "Name"
-msgstr "Nombre"
-
-#: MdlLiloOsList.module:320
-msgid "Initial Ram Disk"
-msgstr "Disco Ram inicial"
-
-#: MdlLiloOsList.module:345
-msgid "Kernel boot options"
-msgstr "Opciones de arranque de kernel"
-
-#: MdlLiloOsList.module:376
-msgid "Add option to boot this Operating system into Text mode"
-msgstr "Añadir una opción para arrancar este sistema operativo en modo texto"
-
-#: MdlNetConf.module:93
-msgid "Wired"
-msgstr "Cableado"
-
-#: MdlNetConf.module:96
-msgid "Wireless"
-msgstr "Inalámbrico"
-
-#: MdlNetConf.module:105
-msgid "Plugged-in"
-msgstr "Conectado"
-
-#: MdlNetConf.module:107
-msgid "Unplugged"
-msgstr "Desconectado"
-
-#: MdlNetConf.module:126
-msgid "Hardware Address"
-msgstr "Dirección MAC"
-
-#: MdlNetConf.module:147
-msgid "Interface Type"
-msgstr "Tipo de interfaz"
-
-#: MdlNetConf.module:166
-msgid "Automatically activate this interface at start-up"
-msgstr "Activar esta interfaz automáticamente al arrancar"
-
-#: MdlNetConf.module:179
-msgid "Setup Mode"
-msgstr "Modo de configuración"
-
-#: MdlNetConf.module:205
-msgid "Encryption type"
-msgstr "Tipo de encriptación"
-
-#: MdlNetConf.module:231
-msgid "Encryption key"
-msgstr "Clave encriptada"
-
-#: MdlNetConf.module:250
-msgid "Access Point"
-msgstr "Punto de Accesso (Access Point)"
-
-#: MdlNetConf.module:274
-msgid "STATUS:"
-msgstr "Estado Actual:"
-
-#: MdlNetConf.module:290
-msgid "Dynamic Host Control Protocol"
-msgstr "Dynamic Host Control Protocol (DHCP)"
-
-#: MdlNetConf.module:290
-msgid "Automatic settings via DHCP."
-msgstr "Configuración automática utilizando DHCP"
-
-#: MdlNetConf.module:290
-msgid "This will work if you use a cable or DSL modem on a home network."
-msgstr "Esto funcionará si tienes cable o módem DSL en una red casera."
-
-#: MdlNetConf.module:290
-msgid "If in doubt, choose this option"
-msgstr "Si dudas, elige esta opción"
-
-#: MdlNetConf.module:330
-msgid "Static IP Address Settings"
-msgstr "Confiduración de IP estática"
-
-#: MdlNetConf.module:352
-msgid "IP Address"
-msgstr "Dirección IP"
-
-#: MdlNetConf.module:375
-msgid "Subnet Mask"
-msgstr "Máscara de subred"
-
-#: MdlNetConf.module:397
-msgid "Gateway Address"
-msgstr "Dirección de Puerta de Enlace"
-
-#: MdlPartFrmt.module:103
-msgid "There has been an error while trying to format "
-msgstr "Ha ocurrido un error mientras se intentaba formatear la partición."
-
-#: MdlPartSel.module:71 MdlWinDrives.module:74
-msgid "PARTITION"
-msgstr "Partición"
-
-#: MdlPartSel.module:82
-msgid "MOUNT POINT"
-msgstr "Punto de montaje"
+#: FMain.class:526
+msgid "Exit Installation"
+msgstr "Cancelar Instalación"
 
 #: MdlPartSel.module:92
 msgid "FILESYSTEM"
 msgstr "Sistema de archivos"
 
-#: MdlPartSel.module:289
-msgid "Please select only one "
-msgstr "Por favor, seleccione solo una"
+#: MdlInstallSys.module:786
+msgid "Failed to install"
+msgstr "La instalación ha fallado"
 
-#: MdlPartSel.module:289
-msgid "partition"
-msgstr "partición"
+#: FrmXconf.class:342
+msgid "Fbdev"
+msgstr ""
 
-#: MdlSetup.module:227
-msgid "BROUGHT TO YOU BY"
-msgstr "Créditos "
+#: FrmSummary.class:41
+msgid "Filesystem"
+msgstr "Sistema de Archivos"
 
-#: MdlSetup.module:243
-msgid "Activating swap space"
-msgstr "Activando la partición Swap"
+#: MdlCore.module:463
+msgid "Final Hardware Configuration"
+msgstr "Configuración final del hardware "
 
-#: MdlSetup.module:245
-msgid "Preparing filesystems"
-msgstr "Preparando sistemas de archivos"
+#: MdlCore.module:449
+msgid "Find installation media"
+msgstr "Buscar medio de instalación"
 
-#: MdlSummarize.module:28
-msgid "PARTITIONING LAYOUT"
-msgstr "Diseño del particionado"
+#: MdlInstallSys.module:630
+msgid "Finished intalling Bulks"
+msgstr "Instalación de paquetes finalizada"
 
-#: MdlSummarize.module:49
-msgid "OPTIONAL WINDOWS PARTITIONS TO BE MOUNTED AT BOOT TIME."
-msgstr "Particiones Windows que se montarán al inicio del sistema."
+#: FrmRootPass.class:13
+msgid "For added security, use a password that is easy for you to remember, but hard for others to guess"
+msgstr "Por motivos de seguridad, deberías utilizar una clave fácil de recordar, pero difícil de adivinar"
+
+#: FrmSummary.class:20 MdlSummarize.module:69
+msgid "Full"
+msgstr "Completa"
+
+#: FrmPkgSel.class:107
+msgid "Full Install"
+msgstr "Instalacion Completa"
+
+#: .project:2
+msgid "GUI installer for Vector linux"
+msgstr "Instaladaor Gráfico de VectorLinux"
+
+#: MdlNetConf.module:399
+msgid "Gateway Address"
+msgstr "Dirección de Puerta de Enlace"
+
+#: MdlDiskPart.module:53
+msgid "Gparted was not found on this system. Please install gparted and try again"
+msgstr "No se encontró Gparted en el sistema.  Por favor, instala Gparted y prueba de nuevo"
+
+#: FrmXconf.class:301
+msgid "Graphical Interface Settings"
+msgstr "Configuración de la interfaz gráfica de usuario "
+
+#: FrmUserAdd.class:375
+msgid "Groups are a way of administering permissions for your users. You grant the user"
+msgstr "Los Grupos son un método para administrar los permisos de los usuarios. Le garantizas a cada usuario"
+
+#: FrmHalSwitch.class:25
+msgid "HAL"
+msgstr ""
+
+#: MdlNetConf.module:128
+msgid "Hardware Address"
+msgstr "Dirección MAC"
+
+#: FrmPartSel.class:189 FrmUserAdd.class:486
+msgid "Help"
+msgstr "Ayuda"
 
 #: MdlSummarize.module:56
 msgid "INSTALL TYPE:"
 msgstr "Tipo de instalación:"
 
-#: MdlSummarize.module:58
-msgid "BULK PACKAGES:"
-msgstr "Paquetes por categoría"
+#: MdlNetConf.module:354
+msgid "IP Address"
+msgstr "Dirección IP"
+
+#: MdlNetConf.module:292
+msgid "If in doubt, choose this option"
+msgstr "Si dudas, elige esta opción"
+
+#: MdlLiloOsList.module:146
+msgid "Include this installation in the boot menu"
+msgstr "Incluir esta instalación en el menú de arranque"
+
+#: MdlLiloOsList.module:289
+msgid "Include this operating system in the boot menu"
+msgstr "Incluir este sistema operativo en el menú de arranque"
+
+#: MdlLiloOsList.module:321
+msgid "Initial Ram Disk"
+msgstr "Disco Ram inicial"
+
+#: MdlCore.module:456
+msgid "Install Operating System"
+msgstr "Instalación del sistema operativo"
+
+#: FrmSelISO.class:82
+msgid "Installable media found."
+msgstr "Medio de instalación encontrado."
+
+#: MdlCore.module:453
+msgid "Installation"
+msgstr "Instalación "
+
+#: FrmSummary.class:14 MdlCore.module:454
+msgid "Installation Summary"
+msgstr "Resumen del proceso"
+
+#: FrmSummary.class:243
+msgid "Installation Type"
+msgstr "Tipo de instalación"
+
+#: FrmDone.class:58
+msgid "Installation is finished"
+msgstr "La instalación ha finalizado "
+
+#: MdlInstallSys.module:736
+msgid "Installation phase complete. Ready for configuration"
+msgstr "Fase de instalación completada.  Vamos a por la configuración"
+
+#: MdlInstallSys.module:471
+msgid "Installing"
+msgstr "Instalando"
+
+#: FrmInstallSys.class:204
+msgid "Installing ..."
+msgstr "Instalando..."
+
+#: MdlInstallSys.module:826
+msgid "Installing Final configuration files..."
+msgstr "Instalando los últimos ficheros de configuración ..."
+
+#: MdlInstallSys.module:775
+msgid "Installing Required Package ..."
+msgstr "Instalando paquetes requeridos ..."
+
+#: MdlInstallSys.module:739
+msgid "Installing default system configuration and required software."
+msgstr "Instalando el software necesario y las configuraciones por defecto."
+
+#: MdlInstallCustom.module:269
+msgid "Installing user-selected package"
+msgstr "Instalando paquetes selecionados por el usuario"
+
+#: FrmPkgSel.class:51
+msgid "Installs everything in your VectorLinux media to your system"
+msgstr "Instalar todo lo que incluye el medio de instalación en tu disco duro"
+
+#: MdlNetConf.module:149
+msgid "Interface Type"
+msgstr "Tipo de interfaz"
+
+#: MdlDiskPart.module:46
+msgid "It is still possible to install VectorLinux on your system, but you need to pre-partition your disks first"
+msgstr "Es posible instalar VectorLinux entu sistema, pero derías particionar el disco primero"
+
+#: MdlLiloOsList.module:346
+msgid "Kernel boot options"
+msgstr "Opciones de arranque de kernel"
+
+#: FrmLicense.class:99
+msgid "LICENSE AGREEMENT"
+msgstr "Aceptación de licencia"
+
+#: MdlLiloOsList.module:155
+msgid "Label"
+msgstr "Etiqueta"
+
+#: MdlCore.module:448
+msgid "Language Selection"
+msgstr "Seleccion de idioma"
+
+#: MdlConfLilo.module:96
+msgid "Lilo returned an error. Please see below"
+msgstr "Lilo ha devuelto un error.  Por favor, lee más abajo"
+
+#: FrmPartSel.class:149
+msgid "Linux is a modular operating system. This means that is has the ability to store system and"
+msgstr "Linux es un sistema operativo modular. Esto significa que tiene la capacidad de alojar el sistema y"
+
+#: MdlDiskPart.module:57
+msgid "Loading gparted ... Please wait"
+msgstr "Cargando Gparted ... Por favor espere"
+
+#: FrmZoneSet.class:176
+msgid "LocalTime"
+msgstr "Hora Local"
+
+#: FrmUserAdd.class:507
+msgid "Login Name"
+msgstr "Nombre de usuario"
+
+#: FrmUserAdd.class:86
+msgid "Login name field contains illegal characters. Please use only lowercase letters and numbers"
+msgstr "Tu nombre de usuario contiene caracteres ilegales. Por favor utiliza solo letras minúsculas y números"
+
+#: MdlCore.module:361
+msgid "MINIMUM REQUIREMENTS"
+msgstr "Requerimientos mínimos del sistema"
+
+#: MdlPartSel.module:82
+msgid "MOUNT POINT"
+msgstr "Punto de montaje"
+
+#: MdlWinDrives.module:84
+msgid "MOUNT TO"
+msgstr "Montar en"
+
+#: FrmNetConf.class:148
+msgid "Manual DNS Server Specification"
+msgstr "Configuración Manual de servidores de nombres (DNS)"
+
+#: FrmSelISO.class:148
+msgid "Minimum Disk Space Requirements"
+msgstr "Requerimientos mínimos de espacio en disco"
+
+#: FrmPartScheme.class:122
+msgid "Modify my disk partitions to make room for new installation"
+msgstr "Modificaré mi disco duro para hacer lugar para la nueva instalación"
+
+#: FrmRootPass.class:13
+msgid "Most other every-day taks do not require administrative priviledges."
+msgstr "Las tareas diarias no requieren privilegios de administrador"
+
+#: FrmSummary.class:43
+msgid "Mount Point"
+msgstr "Punto de montaje"
+
+#: MdlLiloOsList.module:300
+msgid "Name"
+msgstr "Nombre"
+
+#: FrmNetConf.class:179 MdlCore.module:462
+msgid "Network Configuration"
+msgstr "Configuración de red"
+
+#: FrmNetConf.class:58
+msgid "Network Interfaces"
+msgstr "Dispositivos de red"
+
+#: FMain.class:514
+msgid "Next"
+msgstr "Siguiente"
+
+#: FMain.class:320
+msgid "No"
+msgstr "No"
+
+#: FrmSelISO.class:30 MdlCore.module:198
+msgid "No Installable Media Found"
+msgstr "No se encontró ningún medio instalable"
+
+#: MdlWinDrives.module:186
+msgid "No Windows partitions detected"
+msgstr "Particiones Windows no detectadas en tu sistema"
+
+#: FrmSelISO.class:251
+msgid "No installable images found."
+msgstr "No se encontró ninguna imagen que se pueda instalar"
+
+#: FrmLicense.class:115
+msgid "No, I Do Not Agree"
+msgstr "No estoy de acuerdo"
+
+#: FrmSummary.class:90 MdlNetConf.module:220
+msgid "None"
+msgstr "Ninguno"
+
+#: FrmSummary.class:49 MdlInstallSys.module:142 MdlPartSel.module:143
+msgid "Not Used"
+msgstr "Sin usar"
+
+#: FrmUserAdd.class:376
+msgid "OK"
+msgstr "OK"
 
 #: MdlSummarize.module:62
 msgid "OPTIONAL PACKAGES:"
 msgstr "Paquetes opcionales"
+
+#: MdlSummarize.module:49
+msgid "OPTIONAL WINDOWS PARTITIONS TO BE MOUNTED AT BOOT TIME."
+msgstr "Particiones Windows que se montarán al inicio del sistema."
+
+#: MdlLiloOsList.module:277
+msgid "Operating system installed in "
+msgstr "Sistema operativo montado en"
+
+#: MdlPartSel.module:71 MdlWinDrives.module:74
+msgid "PARTITION"
+msgstr "Partición"
+
+#: MdlSummarize.module:28
+msgid "PARTITIONING LAYOUT"
+msgstr "Diseño del particionado"
+
+#: FrmSummary.class:164
+msgid "Package Name"
+msgstr "Nombre del paquete"
+
+#: MdlInstallSys.module:362
+msgid "Packages have been installed in your system. Please click"
+msgstr "Los paquetes han sido instalados en tu sistema. Por favor haga click"
+
+#: FrmSummary.class:37
+msgid "Partition"
+msgstr "Partición"
+
+#: FrmSummary.class:253
+msgid "Partition Selection Scheme"
+msgstr "Selección del esquema de particionado"
+
+#: FrmUserAdd.class:161
+msgid "Passwords do not match"
+msgstr "Las contraseñas no coinciden "
+
+#: FMain.class:305
+msgid "Passwords do not match. Please enter the same password twice"
+msgstr "Las contraseñas no coinciden. Por favor ingrese la misma contraseña "
+
+#: FrmRootPass.class:48
+msgid "Passwords do not match. Please enter the same password twice for accuracy."
+msgstr "Las contraseñas no coinciden. Por favor ingrese la misma contraseña dos veces para estar seguros de que es la que Usted verdaderamente desea."
+
+#: FMain.class:279
+msgid "Please select a default operating system to boot before proceeding"
+msgstr "Por favor selectione el sistema operativo que se iniciara por defecto"
+
+#: MdlPartSel.module:289
+msgid "Please select only one "
+msgstr "Por favor, seleccione solo una"
+
+#: FrmPartSel.class:174
+msgid "Please select the partitions you wish to use and how to use them"
+msgstr "For favor, seleccione las secciones del disco que desea usar, y también como usarlas"
+
+#: FrmAlsaConf.class:36
+msgid "Please use the setup program below to setup the sound system."
+msgstr ""
+
+#: FMain.class:213
+msgid "Please wait while setup analyses your current partition setup."
+msgstr "Por favor espere mientras el instalador analiza su particonado actual."
+
+#: FMain.class:211
+msgid "Please wait while setup attampts to run the partitioning utility"
+msgstr "Por favor espere, el instalador intentará ejecutar la herramienta de particionado"
+
+#: MdlNetConf.module:107
+msgid "Plugged-in"
+msgstr "Conectado"
+
+#: MdlCore.module:447
+msgid "Preparation"
+msgstr "Preparación"
+
+#: MdlSetup.module:245
+msgid "Preparing filesystems"
+msgstr "Preparando sistemas de archivos"
+
+#: FrmNetConf.class:153
+msgid "Primary DNS Server"
+msgstr "Servidor de nombres primario (DNS)"
+
+#: FrmXconf.class:27
+msgid "Probe hardware to setup your Graphical Environment using your preffered settings"
+msgstr ""
+
+#: FMain.class:494
+msgid "Process Overview"
+msgstr "Resumen del proceso"
+
+#: FrmLilo.class:254
+msgid "Prompt Timeout"
+msgstr "Esperar"
+
+#: FrmRootPass.class:142
+msgid "Re-Enter Password"
+msgstr "Vuelva a ingresar la contraseña"
+
+#: FrmUserAdd.class:521
+msgid "ReEnter Password"
+msgstr "Vuelva a ingresar la contraseña"
+
+#: FrmUserAdd.class:542
+msgid "Real Name"
+msgstr "Nombre Real"
+
+#: MdlCore.module:459
+msgid "Regional Settings"
+msgstr "Opciones de regionalización"
+
+#: FMain.class:177 FrmDone.class:25
+msgid "Restart"
+msgstr ""
+
+#: MdlUsrAdd.module:65
+msgid "Restricted administrator (backup)"
+msgstr "Administrador de sistema con restricciones"
+
+#: MdlNetConf.module:276
+msgid "STATUS:"
+msgstr "Estado Actual:"
+
+#: MdlCore.module:182
+msgid "Scanning system for installable media. Please wait ..."
+msgstr "Buscando medios de instalación en el sistema. Por favor espere ..."
+
+#: FrmXconf.class:328
+msgid "Screen Resolution"
+msgstr ""
+
+#: FrmSelISO.class:267
+msgid "Search Again"
+msgstr "Buscar nuevamente"
+
+#: FrmNetConf.class:166
+msgid "Secondary DNS Server"
+msgstr "Servidor de nombres (DNS) secundario"
+
+#: FrmLilo.class:265
+msgid "Seconds"
+msgstr "Segundos"
+
+#: FrmUserAdd.class:471
+msgid "Select"
+msgstr "Seleciona"
+
+#: FMain.class:280
+msgid "Select an entry from this list"
+msgstr "Seleccione una de esta opciones"
+
+#: FrmUserAdd.class:311
+msgid "Select picture for user Login"
+msgstr "Selecciona una imagen para el usuario"
+
+#: FrmWinDrives.class:72
+msgid "Select the windows partitions you would like to mount during boot"
+msgstr "Selecciona qué volumenes usados por Windows deseas acceder desde Linux"
+
+#: FrmPartScheme.class:61
+msgid "Select this option if you already have a linux installation that you wish to overwrite or if a linux partition scheme exists in your hard disk."
+msgstr "Selecciona esta opción si ya dispones de una instalación de Linux que quieras sobreescribir o si las particines Linux ya existen en tu disco duro."
+
+#: FrmPartScheme.class:70
+msgid "Select this option is you wish to create, more or resize partitions in order to make room for your new VectorLinux installation."
+msgstr "Selecciona esta opción si deseas crear o redimensionar particiones para conseguir espacio para tu nueva instalación de VectorLinux."
+
+#: FrmSelISO.class:257
+msgid "Select which VectorLinux version you wish to install from the list below"
+msgstr "Selectiona la imagen que deseas instalar de la lista"
+
+#: FrmUserAdd.class:375
+msgid "Select which groups you want this user to be a part of here"
+msgstr "Selecciona los grupos de los que este usuario será parte"
+
+#: FrmPkgsel2.class:21
+msgid "Select your indivirual packages to install."
+msgstr "Selecciona paquetes individuales para su instalación."
+
+#: FrmLangSel.class:123
+msgid "Select your language"
+msgstr "Selecciona tu idioma"
+
+#: FrmRootPass.class:159
+msgid "Set Password"
+msgstr "Define tu contraseña"
+
+#: MdlNetConf.module:181
+msgid "Setup Mode"
+msgstr "Modo de configuración"
+
+#: MdlCore.module:366
+msgid "Setup is unable to find SETUP.CONF in your install media. This could be symptoms of a bad burn or a bad ISO"
+msgstr "El instalador no puede encontrar SETUP.CONF en el medio de instalación.  Eso puede ser síntoma de una mala grabación de la ISO"
+
+#: MdlDiskPart.module:90
+msgid "Setup is unable to successfully run gparted on this system. This may be a sign of "
+msgstr "El programa de instalación no pudo ejecutar Gparted en tu sistema. Esto puede ser señal de"
+
+#: MdlCore.module:200
+msgid "Setup was unable to find any installable media on your system. Please insert your VectorLinux "
+msgstr "El instalador no ha podido encontrar ningún medio instalable en tu sistema.  Por favor inserta Vectorlinux"
+
+#: MdlDiskPart.module:95
+msgid "Several windows found. I will take the first one!"
+msgstr "Se han encontrado varios windows.  Cogeré el primero!"
+
+#: FrmSummary.class:39
+msgid "Size"
+msgstr "Tamano"
+
+#: FMain.class:291
+msgid "Skipping lilo setup"
+msgstr "Salteando configuración de LILO"
+
+#: FrmSummary.class:263 MdlCore.module:451
+msgid "Software Selection"
+msgstr "Selección de software"
+
+#: FrmLilo.class:132
+msgid "Standard"
+msgstr "Estandar"
+
+#: MdlNetConf.module:332
+msgid "Static IP Address Settings"
+msgstr "Confiduración de IP estática"
+
+#: MdlNetConf.module:377
+msgid "Subnet Mask"
+msgstr "Máscara de subred"
+
+#: FrmRootPass.class:118 MdlCore.module:460
+msgid "System Administrator"
+msgstr "Administrador del sistema"
+
+#: FrmRootPass.class:6
+msgid "System Administrator Password"
+msgstr "Contraseña del administrador del sistema"
+
+#: MdlCore.module:457
+msgid "System Configuration"
+msgstr "Configurar el sistema"
+
+#: FrmLilo.class:217 FrmNetConf.class:141
+msgid "Tab 0"
+msgstr "-"
+
+#: FrmLilo.class:235
+msgid "Target"
+msgstr "-"
+
+#: FrmLicense.class:104
+msgid "TextArea1"
+msgstr "-"
+
+#: FrmSummaryOld.class:87
+msgid "TextLabel1"
+msgstr "-"
+
+#: FrmLilo.class:35
+msgid "The following Operating Systems have been detected on this computer. Choose your desired option"
+msgstr "los siguientes Sistemas Operativos han sido detectados en su ordenador. Selecciona la opción deseada"
+
+#: FrmRootPass.class:131
+msgid "The linux root account is pre-assigned to be used as the system administrator's account. This account is used to perform system-wide changes such as software upgrades, managing user accounts etc. \n\nMost other operations do not require administrative priviledges.\nThe root password must be entered twice for ensured accuracy. When choosing a root password, think of something easy for you to remember, but hard for others to guess."
+msgstr "La cuenta root en los sistemas Linux está diseñada como la cuenta del administrador del sistema. Es utilizada para realizar tareas de mantenimiento del sistema globales, tales como actualizaciones de software, gestionar los permisos o crear nuevos usuarios, etc. \n\nLa mayoría de las otras operaciones no requieren privilegios de administrador.\nLa contraseña para el usuario root deberá ser ingresada dos veces para asegurar que es la contraseña deseada. Al elegir la contraseña de administrador, piensa en algo fácil de recordar, pero al mismo tiempo difícil de adivinar para los otros. "
+
+#: MdlInstallCustom.module:44
+msgid "There as been an error while installing required system software. "
+msgstr "Ha ocurrido un error durante la instalación del software base. "
+
+#: MdlInstallSys.module:618
+msgid "There has been an error extracting"
+msgstr "Ha ourrido un error en la extracción"
+
+#: MdlInstallCustom.module:60
+msgid "There has been an error while installing optional software to your system."
+msgstr "Ha ocurrido un error mientras se instalaba el software opcional."
+
+#: MdlInstallCustom.module:52
+msgid "There has been an error while installing optional software to your system. "
+msgstr "Ha ocurrido un error durante la instalación del software opcional. "
+
+#: MdlPartFrmt.module:103
+msgid "There has been an error while trying to format "
+msgstr "Ha ocurrido un error mientras se intentaba formatear la partición."
+
+#: FMain.class:213
+msgid "This may take a while ..."
+msgstr "Esto puede tardar unos minutos ..."
+
+#: FrmPartScheme.class:70
+msgid "This option is the safest choice if you have other existing installations that you wish to keep."
+msgstr "Esta opción es la más segura si quieres conservar otras instalaciones."
+
+#: FrmPartScheme.class:61
+msgid "This option will overwrite any existing data in the selected partitions"
+msgstr "Esta opción sobreescribirá los datos de las particiones seleccionadas"
+
+#: FrmAlsaConf.class:36
+msgid "This portion of the setup process allows you to sutup your soundcard for your new operating system."
+msgstr ""
 
 #: MdlUsrAdd.module:44
 msgid "This user can access CD/DVD devices"
@@ -1217,16 +920,15 @@ msgstr "Este usuario puede utilizar dispositivos de CD/DVD"
 
 #: MdlUsrAdd.module:47
 msgid "This user can access floppy disks"
-msgstr ""
-"Este usuario puede utilizar dispositivos de disco blando (floppy disks)"
-
-#: MdlUsrAdd.module:50
-msgid "This user is allowed to print"
-msgstr "Este usuario puede utilizar dispositivos de impresión"
+msgstr "Este usuario puede utilizar dispositivos de disco blando (floppy disks)"
 
 #: MdlUsrAdd.module:53
 msgid "This user can access scanner devices"
 msgstr "Este usuario puede utilizar dispositivos de scaneado de imágenes"
+
+#: MdlUsrAdd.module:68
+msgid "This user is a system administrator"
+msgstr "Este usuario es administrador del sistema"
 
 #: MdlUsrAdd.module:56
 msgid "This user is allowed to change audio settings"
@@ -1240,50 +942,311 @@ msgstr "Este usuario tiene permitido cambiar las configuraciones de video"
 msgid "This user is allowed to play restricted games"
 msgstr "Este usuario puede jugar juegos restringidos"
 
-#: MdlUsrAdd.module:65
-msgid "Restricted administrator (backup)"
-msgstr "Administrador de sistema con restricciones"
+#: MdlUsrAdd.module:50
+msgid "This user is allowed to print"
+msgstr "Este usuario puede utilizar dispositivos de impresión"
 
-#: MdlUsrAdd.module:68
-msgid "This user is a system administrator"
-msgstr "Este usuario es administrador del sistema"
+#: MdlNetConf.module:292
+msgid "This will work if you use a cable or DSL modem on a home network."
+msgstr "Esto funcionará si tienes cable o módem DSL en una red casera."
 
-#: MdlUsrAdd.module:71
-msgid "Elite user"
-msgstr "Usuario Privilegiado"
+#: FrmZoneSet.class:21
+msgid "Timezone configuration"
+msgstr "Configuración de la Zona Horaria"
 
-#: MdlUsrAdd.module:74
-msgid "Allow user to mount / un-mount Pendrive (USB Sticks)"
-msgstr "Permitir al usuario montar o desmontar Pendrives (USB Sticks)"
+#: FrmPkgsel2.class:21
+msgid "To install them all, just click next"
+msgstr "Para instalarlos todos, simplemente presiona Sigiente"
 
-#: MdlUsrAdd.module:77
-msgid "Allow user to mount / un-mount Removable HD Storage Devices"
+#: FrmInstallSysN.class:82
+msgid "Total Progress"
+msgstr "Progreso Total"
+
+#: MdlInstallCustom.module:507
+msgid "Total packages to be installed = "
+msgstr "Paquetes a instalar = "
+
+#: FrmInstallSys.class:194
+msgid "Total progress"
+msgstr "Progreso Total"
+
+#: FrmPartSel.class:149
+msgid "Typically, you want to use the largest partition for this."
+msgstr "Normalmente querrías utilizar tu partición más grande para esto."
+
+#: FrmSummary.class:190
+msgid "USER-SELECTED PACKAGES"
+msgstr "PAQUETES INDIVIDUALES"
+
+#: FrmZoneSet.class:176
+msgid "UTC"
+msgstr "UTC"
+
+#: FrmSelISO.class:113
+msgid "Unable to identify distro."
+msgstr "No se pudo detectar la distribución."
+
+#: MdlInstallCustom.module:88
+msgid "Unable to install kernels. "
+msgstr "No se pudieron instalar los kernels. "
+
+#: FrmSelISO.class:76
+msgid "Unable to locate any installable media."
 msgstr ""
-"Permitir al usuario montar o desmontar Dispositivos de Almacenamiento "
-"Externos (HD Storage)"
+
+#: MdlNetConf.module:109
+msgid "Unplugged"
+msgstr "Desconectado"
+
+#: FrmUserAdd.class:477
+msgid "Use Picture ID for Login greeting"
+msgstr "Utilizar una imágen para el usuario en el gestor de sesiones"
+
+#: FrmPartScheme.class:117
+msgid "Use existing disk partitions"
+msgstr "Utilizar las particiones existentes en mi disco duro"
+
+#: FrmXconf.class:29
+msgid "Use the console framebuffer driver"
+msgstr ""
+
+#: FrmPartScheme.class:61
+msgid "Use this option if you already prepared your partitions using the VectorLinux installer"
+msgstr "Usa esta opción si ya haz preparado tus particiones utilizando el instalador de VectorLinux"
+
+#: FrmPartSel.class:149
+msgid "Used to store system data. This particular install requires a minimum of"
+msgstr "Utilizada para almacenar los datos del sistema. Esta instalación en particular requiere un mínimo de"
+
+#: FrmPartSel.class:149
+msgid "Used to store user documents, pictures, videos. Give yourself as much room as you want"
+msgstr "Utilizada para almacenar los ficheros del usuario, documentos, imágenes, videos, etc. Puedes asignar tanto espacio como desees"
+
+#: MdlCore.module:461
+msgid "User Accounts"
+msgstr "Usuarios"
+
+#: FrmUserAdd.class:482
+msgid "User Rights Management"
+msgstr "Administración de los Permisos de Usuario"
+
+#: FrmUserAdd.class:102
+msgid "User account for"
+msgstr ""
+
+#: FrmUserAdd.class:99
+msgid "Username contains illegal characters"
+msgstr "El nombre de usuario contiene caracteres ilegales"
+
+#: FrmXconf.class:25
+msgid "Uses the default (failsafe) configuration."
+msgstr ""
+
+#: FrmPartSel.class:149
+msgid "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested ammount"
+msgstr "Utilizar una partición Swap es recomendado si tu cantidad de memoria RAM es inferior a 1GB. El monto sugerido "
+
+#: FrmHalSwitch.class:30
+msgid "VL-Hot"
+msgstr ""
+
+#: .project:1
+msgid "VectorLinux Installer"
+msgstr "Instalador de VectorLinux"
+
+#: MdlDiskPart.module:46
+msgid "VectorLinux is unable to determine the type of hard disks on your system."
+msgstr "El instalador no ha podido determinar el tipo de disco duro en tu sistema."
+
+#: FMain.class:343
+msgid "VectorLinux will now try to detect and configure your graphics hardware."
+msgstr ""
+
+#: FrmInstallSys.class:181
+msgid "Vectorlinux is currently being installed to your system... Please wait"
+msgstr "Por favor espere mientras VectorLinux se instala en su sistema"
+
+#: MdlInstallSys.module:574
+msgid "Vectorlinux is now being installed. Please wait..."
+msgstr "Vectorlinux se está instalando.  Por favor, espere ..."
+
+#: MdlInstallSys.module:361
+msgid "Vectorlinux is now installed in your system. Please click"
+msgstr "VectorLinux ha sido instalado e tu sistema. Por favor presiona"
+
+#: MdlInstallCustom.module:99
+msgid "Vectorlinux is now installed in your system. Please click next to configure it."
+msgstr "Vectorlinux se ha instalado en tu ordenador.  Por favor, clica next para configurarlo."
+
+#: FrmHostPrep.class:130
+msgid "Vectorlinux is preparing your system for installation. Please wait."
+msgstr "Por favor espere mientras VectorLinux prepara su sistema para instalacion"
+
+#: FrmXconf.class:340
+msgid "Vesa"
+msgstr ""
+
+#: FrmXconf.class:311
+msgid "Video Driver"
+msgstr ""
+
+#: FrmLilo.class:241
+msgid "Video Resolution"
+msgstr "Resolucion de pantalla"
 
 #: MdlWinDrives.module:58
 msgid "Windows Partitions Detected"
 msgstr "Particiones Windows detectadas"
 
-#: MdlWinDrives.module:84
-msgid "MOUNT TO"
-msgstr "Montar en"
+#: MdlLiloOsList.module:136
+msgid "Windows installation found in"
+msgstr ""
 
-#: MdlWinDrives.module:186
-msgid "No Windows partitions detected"
-msgstr "Particiones Windows no detectadas en tu sistema"
+#: MdlNetConf.module:95
+msgid "Wired"
+msgstr "Cableado"
 
-#: MdlZoneSet.module:27
-msgid "localtime-copied-from"
-msgstr "Hora-local-copiada-de"
+#: MdlNetConf.module:98
+msgid "Wireless"
+msgstr "Inalámbrico"
+
+#: FMain.class:320
+msgid "Would you like to continue anyway?"
+msgstr ""
+
+#: FrmHalSwitch.class:20
+msgid "Would you like to use Vl-Hot or HAL to manage your removable devices?"
+msgstr ""
+
+#: MdlInstallSys.module:118
+msgid "Writing new /etc/fstab to system"
+msgstr "Escribiendo el nuevo /etc/fstab en el sistema"
+
+#: FMain.class:320
+msgid "Yes"
+msgstr "Sí"
+
+#: FrmLicense.class:110
+msgid "Yes, I Agree to the License Agreement"
+msgstr "De acuerdo"
+
+#: FMain.class:320
+msgid "You have not created any user accounts for this system yet. There is not enough information"
+msgstr ""
+
+#: FMain.class:227
+msgid "You must select a \"/\" partition. This is the target where the system will install to"
+msgstr "Debes seleccionar una partición para \"/\" (raíz). Allí sera instalado el sistema operativo"
+
+#: FrmDone.class:35
+msgid "Your computer needs to be restarted so that you can use your new operating system. Click"
+msgstr ""
+
+#: FrmUserAdd.class:350
+msgid "Your password selections do not match. Please enter the same password twice"
+msgstr "Sus contraseñas no coinciden. Por favor ingrese la misma contraseña dos veces."
+
+#: FMain.class:343
+msgid "Your screen may flicker or go blank during this process for a few seconds during this process."
+msgstr ""
+
+#: MdlDiskPart.module:90
+msgid "a bad install media. Setup cannot continue."
+msgstr "error en el medio de instalación. El programa de instalación no puede continuar."
+
+#: FrmUserAdd.class:102
+msgid "already exists"
+msgstr ""
+
+#: FrmPartSel.class:149
+msgid "but can also be calculated as 2 times your ammount of RAM"
+msgstr "pero también puede ser calculada duplicando el tamaño de tu memoria RAM"
+
+#: FrmPartSel.class:149
+msgid "but you should considear a higher value to make sure you have room to install additional software"
+msgstr "pero deberías considerar un valor más alto para asegurarte espacio para software adicional que desees instlar luego"
+
+#: FrmPartSel.class:149
+msgid "by simply selecting a \"/\" value on this screen. The rest is optional. The following is a"
+msgstr "simplemente seleccionando un valor para \"/\" en esta pantalla. El resto es opcional. Lo siguiente es un"
+
+#: FrmLilo.class:35
+msgid "for each one of them by clicking on each tab. To proceed with the default pre-set values, simply click"
+msgstr "para cada uno de ellos seleccionando cada pestaña. Para continuar con los valores seleccionados por defecto simplemente haz click en "
+
+#: FrmPartSel.class:149
+msgid "for this"
+msgstr "para esto"
+
+#: FrmPartSel.class:149
+msgid "for this is"
+msgstr "para esto es"
+
+#: FrmDone.class:35
+msgid "has been installed to your system. Your new system has been configured with the default factory settings."
+msgstr ""
+
+#: FrmPartSel.class:149
+msgid "in case you wish to."
+msgstr "en caso que lo desees."
+
+#: MdlCore.module:200
+msgid "installation CD and click "
+msgstr "CD de instalación y haz click en"
 
 #: MdlZoneSet.module:28
 msgid "localtime"
 msgstr "Hora local"
 
-#~ msgid "Include this Operating System in the boot menu"
-#~ msgstr "Incluir este sistema operativo en el menú de arranque"
+#: MdlZoneSet.module:27
+msgid "localtime-copied-from"
+msgstr "Hora-local-copiada-de"
 
-#~ msgid "Name "
-#~ msgstr "Nombre "
+#: MdlInstallCustom.module:100
+msgid "packages have been Installed. Please click next to move on to System Configuration."
+msgstr "paquetes han sido instalados.  Por favor presiona Siguiente para configurar el sistema."
+
+#: MdlPartSel.module:289
+msgid "partition"
+msgstr "partición"
+
+#: FrmUserAdd.class:375
+msgid "permission to do certain things by adding them to certain groups."
+msgstr "permisos para realizar determinadas acciones agregándolo a un grupo o a varios grupos determinados."
+
+#: FrmPartSel.class:149
+msgid "suggested setup for a typical Linux installation"
+msgstr "configuración recomendada para una instalación típica de Linux"
+
+#: FrmSelISO.class:74
+msgid "to begin installating"
+msgstr "para comenzar la instalación"
+
+#: MdlInstallSys.module:361
+msgid "to configure it."
+msgstr "para configurarla."
+
+#: FMain.class:320
+msgid "to create an account here. It is recommended that you create at least one."
+msgstr ""
+
+#: FrmDone.class:35
+msgid "to restart your computer at a later time"
+msgstr ""
+
+#: FrmDone.class:35
+msgid "to restart your computer now or click"
+msgstr ""
+
+#: MdlCore.module:200
+msgid "to try again"
+msgstr "para intentarlo nuevamente"
+
+#: FrmPartSel.class:149
+msgid "user data separately for added data security. You may install the system to a single partition"
+msgstr "datos del usuario separadamente para incrementar la seguridad de sus datos. Puedes instalar el sistema en una única partición"
+
+#: FrmUserAdd.class:157
+msgid "was created."
+msgstr ""
+
