@@ -34,31 +34,31 @@ END
 PUBLIC SUB LIST_LANG_CHOICES()
   
   
-  ' ' ' ' ' WITH ME.lblangsel
-  ' ' ' ' '   .Add("es_ES", "Spanish")
-  ' ' ' ' '   .Add("en_US", "US English")
-  ' ' ' ' ' END WITH 
+  WITH ME.lblangsel
+    .Add("es_ES", "Spanish")
+    .Add("en_US", "US English")
+  END WITH 
   
   
-    DIM sLangCode, sLangName AS String
-    DIM i AS Integer
-    
-    i = 0
-    FOR EACH sLangCode IN Dir(".lang", "*.mo")
-      'Message(sLangCode)
-      SELECT CASE File.BaseName(".lang" &/ sLangCode)
-        CASE "en_US"
-          sLangName = "US English"
-        CASE "es"
-          sLangName = "Spanish"
-      END SELECT 
-      
-    ME.lblangsel.Add(File.BaseName(sLangCode), sLangName)
-    
-   
-NEXT 
-    
-  
+'     DIM sLangCode, sLangName AS String
+'     DIM i AS Integer
+'     
+'     i = 0
+'     FOR EACH sLangCode IN Dir(".lang", "*.mo")
+'       'Message(sLangCode)
+'       SELECT CASE File.BaseName(".lang" &/ sLangCode)
+'         CASE "en_US"
+'           sLangName = "US English"
+'         CASE "es"
+'           sLangName = "Spanish"
+'       END SELECT 
+'       
+'     ME.lblangsel.Add(File.BaseName(sLangCode), sLangName)
+'     
+'    
+' NEXT 
+'     
+'   
 END
 
 
