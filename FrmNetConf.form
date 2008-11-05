@@ -3,14 +3,20 @@
 { Form Form
   MoveScaled(0,0,114,74)
   Text = ("")
-  { tlHostNameLbl TextLabel
-    MoveScaled(1,8,16,3)
-    Text = ("Computer Name")
+  { tlDomainName TextLabel
+    MoveScaled(47,8,9,3)
+    Text = ("Domain")
     Alignment = Align.Normal
   }
   { txtHostName TextBox
     MoveScaled(18,8,28,3)
     Text = ("")
+    MaxLength = 24
+  }
+  { tbDomain TextBox
+    MoveScaled(58,8,29,3)
+    Text = ("")
+    MaxLength = 24
   }
   { frmNetDevices Frame
     MoveScaled(1,20,85,49)
@@ -33,7 +39,7 @@
   }
   { txtPrimaryDNS TextBox txtManDNSBoxes
     Name = "txtPrimaryDNS"
-    MoveScaled(24,16,18.3333,3)
+    MoveScaled(24,16,18.2857,3)
     Enabled = False
     Text = ("192.168.1.254")
   }
@@ -44,7 +50,7 @@
   }
   { txtSecDNS TextBox txtManDNSBoxes
     Name = "txtSecDNS"
-    MoveScaled(68,15,18.3333,3)
+    MoveScaled(68,15,18.2857,3)
     Enabled = False
     Text = ("")
   }
@@ -55,5 +61,10 @@
   }
   { hrSep Separator
     MoveScaled(13,6,33,1)
+  }
+  { tlHostNameLbl TextLabel
+    MoveScaled(2,8,15,3)
+    Text = ("Computer Name")
+    Alignment = Align.Normal
   }
 }

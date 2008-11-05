@@ -1,0 +1,31 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,72,47)
+  Text = ("")
+  Arrangement = Arrange.Vertical
+  { Panel1 Panel
+    MoveScaled(1,1,68,4)
+    Arrangement = Arrange.Horizontal
+    AutoResize = True
+    { tlBanner TextLabel
+      MoveScaled(1,0,20,3)
+      Expand = True
+      AutoResize = True
+      Text = ("Software Selection")
+      Alignment = Align.Normal
+      Border = Border.Plain
+    }
+  }
+  { Panel2 Panel
+    MoveScaled(1,6,70,28)
+    Expand = True
+    Arrangement = Arrange.Vertical
+    { GridView1 GridView
+      MoveScaled(0,1,64,25)
+      Expand = True
+      Mode = Select.Single
+      Header = GridView.Horizontal
+    }
+  }
+}

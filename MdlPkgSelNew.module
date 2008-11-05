@@ -1,0 +1,18 @@
+' Gambas module file
+
+PUBLIC SUB GET_LIST_OF_SELECTED_PACKAGES()
+  DIM i AS Integer
+  DIM sList AS String
+  
+    'FrmUsrPkgSel.GridView1[0, 0].
+      REPEAT 
+        IF FrmUsrPkgSel.GridView1[i, 0].Picture = FrmUsrPkgSel.pYes THEN 
+          sList = sList & FrmUsrPkgSel.GridView1[i, 1].Text
+        END IF
+        INC i
+        UNTIL i = FrmUsrPkgSel.GridView1.Rows.Count
+        
+        Message(sList)
+        
+        
+END
