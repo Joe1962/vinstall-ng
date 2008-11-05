@@ -366,7 +366,7 @@ PUBLIC SUB btnext_Click()
                    
           
           ME.END_INSTALLER()
-          frmNext = FrmAlsaConf
+          'frmNext = FrmAlsaConf
 '      frmNext = FrmLilo ' this is already done
 
   CASE "FrmAlsaConf"

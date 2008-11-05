@@ -148,7 +148,7 @@ PUBLIC SUB Button1_Click()
           'SHELL "chroot /mnt/target  /usr/sbin/useradd -m -s /bin/bash -u " & iUID & " -g " & ME.tbUsername.Text & " -G " & sGroups & Space(1) & ME.tbUsername.Text WAIT 
           PRINT "Creating new user account"
           SHELL "chroot /mnt/target /usr/sbin/useradd -m -c " & "\'" & ME.tbRealname.text & "\'" & " -g " & ME.tbUsername.text &
-          " -p " & ME.tbPasswd1.text & " -u " & iUID & " -G " & "\'" & sGroups & "\' -s /bin/bash " & ME.tbUsername.Text WAIT 
+          " -p " & ME.tbPasswd1.text & " -u " & iUID & " -G " & "\'users," & sGroups & "\' -s /bin/bash " & ME.tbUsername.Text WAIT 
         '  sDocmd = "useradd -m -c " & "\'" & sname & "\'" & " -g " & slogin & " -p " & ME.txtpass1.Text & 
        '" -G " & "\'" & sgrparse & "\' " & slogin
           
