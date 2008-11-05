@@ -17,15 +17,27 @@
 
 PUBLIC FUNCTION GET_CURRENT_HOST_NAME() AS String
   DIM sRes AS String
+  DIM sDomain AS String
+  DIM sHost AS String
   
-    SHELL "chroot " & ClsGlobal.sTargetMnt & " hostname" TO sRes
-
-    sRes = Trim(sRes)
-      IF sRes = "" THEN 
+    'SHELL "chroot " & ClsGlobal.sTargetMnt & " hostname" TO sRes
+    EXEC ["chroot " & ClsGlobal.sTargetMnt, "hostname"] TO sRes
+    
+    IF sRes = "" THEN 
         sRes = "Vector.Linux.net"
       END IF
 
-    RETURN Trim(sRes)
+
+    sRes = Trim(sRes)
+    IF InStr(sRes, ".") THEN 
+      sHost = Left(sRes, InStr(sRes, ".") - 1)
+      sDomain = Right(sRes, Len(sRes) - InStr(sRes, "."))
+          ' set the default domain name
+          FrmNetConf.tbDomain.Text = sDomain
+      END IF
+    
+      
+    RETURN Trim(sHost)
       
 END
 
@@ -33,13 +45,13 @@ END
 PUBLIC SUB Form_Open()
   DIM cb AS ComboBox
     FMain.FrmCurr = ME
+    ME.tlHostNameLbl.Alignment = Align.Normal
     
-    
-    WITH FMain 
-    .tvPlan["Conf3"].Picture = MdlCore.sDonePic
-    .tvPlan["Conf4"].Picture = MdlCore.sNowPic
-    .tvPlan["Conf4"].Selected = TRUE
-  END WITH 
+  ' '   WITH FMain 
+  ' '   .tvPlan["Conf3"].Picture = MdlCore.sDonePic
+  ' '   .tvPlan["Conf4"].Picture = MdlCore.sNowPic
+  ' '   .tvPlan["Conf4"].Selected = TRUE
+  ' ' END WITH 
     
     ME.txtHostName.text = ME.GET_CURRENT_HOST_NAME()
       
@@ -64,6 +76,7 @@ PUBLIC SUB Form_Menu()
 
   'MdlNetConf.WRITE_INET() ' only enabled for testing. THis will get triggered on the "next" button's click event
   'MdlNetConf.SET_DNS_ADDRESSES
+  'MdlNetConf.UPDATE_HOSTS_FILE(Trim(txtHostName.Text), Trim(tbDomain.Text))
 
 END
 
@@ -75,6 +88,8 @@ DIM itxtboxleft AS Integer
       .hrSep.Move(4, .tlBanner.top + .tlBanner.Height - 4, .tlBanner.Width)
       .tlHostNameLbl.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 8, MdlObjSizer.get_object_width(.tlHostNameLbl.text), 21)
       .txtHostName.Move(.tlHostNameLbl.left + .tlHostNameLbl.Width + 4, .tlHostNameLbl.top)
+      .tlDomainName.Move(.txtHostName.Left + .txtHostName.Width + 24, .txtHostName.top, MdlObjSizer.get_object_width(.tlDomainName.Text))
+      .tbDomain.Move(.tlDomainName.left + .tlDomainName.Width + 4, .tlDomainName.top, .txtHostName.Width)
       .cbUseManDNS.Move(.tlHostNameLbl.Left, .tlHostNameLbl.top + .tlHostNameLbl.Height + 10, MdlObjSizer.get_object_width(.cbUseManDNS.text) + 24)
       .tlPrimaryDNS.Move(.cbUseManDNS.left, .cbUseManDNS.top + .cbUseManDNS.Height + 4, MdlObjSizer.get_object_width(.tlPrimaryDNS.text))
         itxtboxleft = .tlPrimaryDNS.Left + .tlPrimaryDNS.Width + 24
@@ -95,5 +110,34 @@ PUBLIC SUB cbUseManDNS_Click()
 
     ME.txtPrimaryDNS.Enabled = cbUseManDNS.Value
     ME.txtSecDNS.Enabled = cbUseManDNS.Value
+
+END
+
+PUBLIC SUB txtHostName_KeyRelease()
+IF Key.Text THEN 
+  IF Key.text LIKE "*[a-z]*" OR Key.text LIKE "*[A-Z]*" OR Key.text = "-" OR Key.Text = "." OR Key.Text LIKE "*[0-9]*" THEN 
+    'Message("good")
+  ELSE 
+    IF Key.text <> "-" OR Key.Text <> "." THEN 
+    txtHostName.Text = Left(txtHostName.Text, Len(txtHostName.Text) - 1)
+    END IF
+    'Message("Bad")
+  END IF
+END IF
+
+END
+
+PUBLIC SUB tbDomain_KeyRelease()
+
+ IF Key.Text THEN 
+  IF Key.text LIKE "*[a-z]*" OR Key.text LIKE "*[A-Z]*" OR Key.text = "-" OR Key.Text = "." OR Key.Text LIKE "*[0-9]*" THEN 
+    'Message("good")
+  ELSE 
+    IF Key.text <> "-" OR Key.Text <> "." THEN 
+    txtHostName.Text = Left(txtHostName.Text, Len(txtHostName.Text) - 1)
+    END IF
+    'Message("Bad")
+  END IF
+END IF
 
 END

@@ -154,7 +154,7 @@ END
 
 PUBLIC SUB prepare_packages_summary()
   
-    DIM irow AS Integer = 0
+    DIM irow, i AS Integer = 0
     DIM sPkg, sSize AS String
     DIM cb AS CheckBox
     DIM sDesc AS String
@@ -190,15 +190,30 @@ PUBLIC SUB prepare_packages_summary()
           GridView2[irow, 0].text = ("USER-SELECTED PACKAGES")
         INC irow
             
-            FOR EACH cb IN MdlPkgSel.Pkgs
-              IF cb.Value = TRUE THEN 
-                INC GridView2.Rows.Count
-                  GridView2[irow, 0].text = File.BaseName(cb.tag)
-                  'shell "
+        'OLD CODE BASED ON THE CHECKBOX OBJECTS
+        i = 0
+        irow = 0
+        'INC GridView2.Rows.Count
+                REPEAT 
+                  IF FrmUsrPkgSel.GridView1[i, 0].Picture = FrmUsrPkgSel.pYes THEN 
+                  INC GridView2.Rows.Count
+                    GridView2[irow, 0].Text = FrmUsrPkgSel.GridView1[i, 1].Text
+                  END IF
+                  INC i
                   INC irow
-              END IF
-              
-            NEXT 
+                UNTIL i = FrmUsrPkgSel.GridView1.Rows.count - 1
+          
+            ' ' ' 
+            ' ' ' 
+            ' ' ' FOR EACH cb IN MdlPkgSel.Pkgs
+            ' ' '   IF cb.Value = TRUE THEN 
+            ' ' '     INC GridView2.Rows.Count
+            ' ' '       GridView2[irow, 0].text = File.BaseName(cb.tag)
+            ' ' '       'shell "
+            ' ' '       INC irow
+            ' ' '   END IF
+            ' ' '   
+            ' ' ' NEXT 
 END
 
 

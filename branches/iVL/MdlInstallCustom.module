@@ -53,7 +53,8 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
     RETURN 
   END IF
   
-  iret = ME.INSTALL_USER_SELECTED_PACKAGES()
+  'iret = ME.INSTALL_USER_SELECTED_PACKAGES()
+  iret = ME.INSTALL_USER_PACKAGES() ' new code based on the gridview
     'Message("Installing user-selected packages")
   PRINT "INSTALLING OPTIONAL SOFTWARE SELECTED BY USER"
   IF iRet <> 0 THEN 
@@ -243,7 +244,62 @@ END
 ' ' '   NEXT 
 ' ' ' END
 
+
+PUBLIC FUNCTION INSTALL_USER_PACKAGES() AS Integer
+  
+  DIM ii, i, iStepTotal AS Integer
+  DIM sBasePath AS String = ClsGlobal.sTargetMnt &/ "packages"
+  DIM sLoc, spkg, sDump AS String
+  
+  ' get the step total by running though the list and comparing pictures
+  ii = 0
+    REPEAT 
+    IF FrmUsrPkgSel.GridView1[ii, 0].Picture = FrmUsrPkgSel.pYes THEN 
+    INC iStepTotal
+    END IF
+      INC ii
+    UNTIL ii = FrmUsrPkgSel.GridView1.Rows.Count - 1
+    
+  ii = 0    
+  
+  
+  REPEAT 
+    IF FrmUsrPkgSel.GridView1[ii, 0].Picture = FrmUsrPkgSel.pYes THEN 
+      sLoc = FrmUsrPkgSel.GridView1[ii, 4].Text
+      sPkg = FrmUsrPkgSel.GridView1[ii, 5].Text
+      INC i
+        ' install this package
+        EXEC ["echo", " ", " > /tmp/installdump"] WAIT 
+          FrmInstallSys.tlCurrPkg.Text = ("Installing") & Space(1) & FrmUsrPkgSel.GridView1[ii, 1].Text
+              hproc = EXEC ["installpkg", sBasePath &/ sLoc &/ sPkg, " -R ", ClsGlobal.sTargetMnt, " || echo \'FAILED\' 2> /tmp/installdump"]
+                    WAIT 1
+                    IF hproc.State = Process.Running THEN 
+                      REPEAT 
+                        WAIT 
+                    UNTIL hproc.State = Process.Stopped
+                  END IF
+          sDump = File.Load("/tmp/installdump")
+          
+          INC i
+          FrmInstallSys.pbInstallProg.Value = i / iStepTotal
+            IF InStr(sDump, "FAILED") > 0 THEN 
+                  Message.Error("Error installing user-selected package" & Space(1) & sPkg)
+                  RETURN 1
+                ' ELSE 
+                '   RETURN 0
+                END IF
+            
+    END IF
+    INC ii
+  UNTIL ii = FrmUsrPkgSel.GridView1.Rows.Count - 1
+  
+    
+    
+  
+END
+
 PUBLIC FUNCTION INSTALL_USER_SELECTED_PACKAGES() AS Integer
+  
   DIM cb AS CheckBox
   DIM sBasePath AS String = ClsGlobal.sSourceMnt &/ "packages"
   DIM iStepTotal AS Integer = 0
@@ -257,9 +313,7 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_PACKAGES() AS Integer
         INC iStepTotal
       END IF
     NEXT 
-        
-  
-  
+          
     FOR EACH cb IN MdlPkgSel.Pkgs
       IF cb.Value = TRUE THEN 
         ' we will only measure #/##

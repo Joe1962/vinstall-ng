@@ -1,4 +1,2 @@
-- Restored code to automatically list the translations provided by looking in .lang
-- Modified the way the installer ends. Added final message window instead of a message.warning
-- Added warning right before quietly configuring X letting the user know that the screen may flicker.
-- Updated binary
+- Fixed EXEC line that triggers when installer is done
+- Fixed duplicate "During this process" in message.wrarning before setting up X

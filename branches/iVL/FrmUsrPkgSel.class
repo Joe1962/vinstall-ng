@@ -1,0 +1,108 @@
+' Gambas class file
+
+
+PUBLIC pYes AS Picture = Picture.Load("images/16px-check.png")
+PUBLIC pNo AS Picture = Picture.Load("images/16px-Nocheck.png")
+
+
+PUBLIC SUB Form_Open()
+
+FMain.FrmCurr = ME
+
+    WITH ME.GridView1
+    .Columns.count = 6
+    '.Rows.count = 2
+    .Columns[0].Width = 24
+    .Columns[1].Text = ("Package Name")
+    .Columns[2].text = ("Description")
+    .Columns[2].Width = 420
+    .Columns[3].text = ("Size")
+    .Columns[3].Width = 120
+    .Columns[4].Width = 0
+    .Columns[5].Width = 0
+    
+    END WITH 
+ME.LIST_PACKAGES
+END
+
+PUBLIC SUB LIST_PACKAGES()
+  
+    'DIM sFile AS String = File.Load("/tmp/PACKAGES.TXT")
+    DIM sFile AS String = File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT")
+    DIM sPACKAGES AS String[]
+    DIM i, ii AS Integer
+    DIM sLine, sPkg, sDesc, sSize, sLoc AS String
+    
+    sPACKAGES = Split(sFile, "\n")
+      FOR i = 0 TO sPACKAGES.count - 1
+      
+          sLine = Trim(sPACKAGES[i])
+              IF Left(sLine, Len("PACKAGE NAME:")) = "PACKAGE NAME:" THEN 
+                    INC GridView1.Rows.Count
+                    
+                sPkg = Trim(Right(sLine, Len(sLine) - InStr(sLine, ":")))
+                sSize = sPACKAGES[i + 3]
+                sLoc = sPACKAGES[i + 1]
+                sSize = Right(sSize, Len(sSize) - InStr(sSize, ":"))
+                sSize = Replace(sSize, "*[A-Z]", "")
+                sLoc = Right(sLoc, Len(sLoc) - InStr(sLoc, "/"))
+                
+                    ' Add to the list
+                'ME.GridView1[ii, 1].text = sPkg
+                ME.GridView1[ii, 0].Picture = pYes
+                EXEC ["pkgname", sPkg] TO ME.GridView1[ii, 1].Text
+                ME.GridView1[ii, 3].Text = sSize
+                ME.GridView1[ii, 4].Text = sLoc
+                ME.GridView1[ii, 5].Text = sPkg
+              ELSE IF Left(sLine, Len("PACKAGE DESCRIPTION:")) = "PACKAGE DESCRIPTION:" THEN 
+                  sDesc = sPACKAGES[i + 1]
+                  sDesc = Right(sDesc, Len(sDesc) - InStr(sDesc, ":"))
+                  sDesc = Trim(sDesc)
+                        IF InStr(sDesc, "(") THEN 
+                          sDesc = Right(sDesc, Len(sDesc) - InStr(sDesc, "("))
+                          sDesc = Replace(sDesc, ")", "")
+                        END IF
+                                     
+                    ' Add description
+                    ME.GridView1[ii, 2].text = sDesc
+             
+                  
+                  
+                    INC ii
+                    'INC GridView1.Rows.Count
+              END IF
+                    
+                    
+      NEXT 
+              
+              
+        
+    
+  
+  
+END
+
+
+PUBLIC SUB GridView1_Click()
+
+'Message(GridView1.Current.text)
+IF LAST.column = 0 THEN 
+  IF GridView1[LAST.row, LAST.column].Picture = pyes THEN 
+    GridView1[LAST.row, LAST.column].Picture = pNo
+  ELSE IF GridView1[LAST.row, LAST.column].Picture = pNo THEN 
+    GridView1[LAST.row, LAST.column].Picture = pyes
+  END IF
+'GridView1[LAST.row, LAST.column].Refresh()  
+END IF
+
+'Message(GridView1[LAST.row, 4].Text)
+GridView1.Refresh()
+  
+
+END
+
+PUBLIC SUB Form_Menu()
+
+  MdlPkgSelNew.GET_LIST_OF_SELECTED_PACKAGES()
+
+END

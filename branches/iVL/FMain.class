@@ -175,7 +175,8 @@ PUBLIC SUB btnext_Click()
   tvPlan.Refresh()
   
   IF LAST.TEXT = ("Restart") THEN 
-  EXEC "shutdown -r now"
+  'EXEC "shutdown", "-r", " now"
+  EXEC ["shutdown", "-r", "now"]
   ELSE 
   
   IF FrmLangSel.Visible = TRUE THEN 
@@ -246,13 +247,16 @@ PUBLIC SUB btnext_Click()
               'get the list of selected bulks only
               
               MdlPkgSel.GET_USER_BULK_SELECTION()
-              frmNext = FrmPkgsel2
+              'frmNext = FrmPkgsel2
+              frmNext = FrmUsrPkgSel
             ELSE 
               ' Going for simple install. Now we are ready to summarize
 ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' '               MdlSummarize.SUMMARIZE_INSTALL
               frmNext = FrmSummary
             END IF
-    CASE "FrmPkgsel2"
+            
+
+    CASE "FrmPkgsel2", "FrmUsrPkgSel"
       ' summarize the build
 ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' '         MdlSummarize.SUMMARIZE_INSTALL
         frmNext = FrmSummary
@@ -333,14 +337,25 @@ PUBLIC SUB btnext_Click()
       
       
     CASE "FrmNetConf"
-      MdlNetConf.SET_HOSTNAME(FrmNetConf.txtHostName.text)
+        IF Trim(FrmNetConf.txtHostName.Text) = "" THEN 
+          Balloon.Error(("Please specify a hostname for this computer"), FrmNetConf.txtHostName) 
+          RETURN 
+        END IF
+        IF Trim(FrmNetConf.tbDomain.Text) = "" THEN 
+          Balloon.Error(("Please specify the domain this computer belongs to"), FrmNetConf.tbDomain) 
+          RETURN 
+        END IF
+        
+        
+    
+      MdlNetConf.SET_HOSTNAME(FrmNetConf.txtHostName.text, FrmNetConf.tbDomain.Text)
       MdlNetConf.SET_DNS_ADDRESSES()
       MdlNetConf.WRITE_INET()
       
       
       ' CONFIGURE X QUIETLY HERE
           Message.Warning(("VectorLinux will now try to detect and configure your graphics hardware.") & "<br>" &
-          ("Your screen may flicker or go blank during this process for a few seconds during this process."))
+          ("Your screen may flicker or go blank for a few seconds during this process."))
       
         MdlXconf.QUIET_XORG_CONFIGURATION()
       

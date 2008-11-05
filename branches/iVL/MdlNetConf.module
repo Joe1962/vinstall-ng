@@ -530,31 +530,35 @@ PUBLIC SUB WRITE_INET()
       File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "rc.d" &/ "rc.inet" & ii, sScript)
         IF cb.Value = TRUE THEN 
           '''SHELL "chmod +x /tmp/rc.inet" & ii WAIT  ''' This is the wrong path
-          SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "etc" &/ "rc.d" &/ "rc.inet" & ii WAIT
-      END IF
+            SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "etc" &/ "rc.d" &/ "rc.inet" & ii WAIT
+        END IF
       INC ii
     NEXT 
     'INC ii
   'ME.SET_HOSTNAME("Test")
 END
 
-PUBLIC SUB SET_HOSTNAME(sHostName AS String)
+PUBLIC SUB SET_HOSTNAME(sHostName AS String, sDomain AS String)
   
   DIM sRes AS String
     SHELL "skill -n X" TO sRes
       sRes = Trim(sRes)
-    IF Len(sRes) > 0 THEN 
-      SHELL "echo " & sHostName & " > " & ClsGlobal.sTargetMnt &/ "etc" &/ "HOSTNAME" WAIT 
-    ELSE ' X is not running
-      SHELL "hostname $HOSTNAME; echo " & sHostName & " > " & ClsGlobal.sTargetMnt &/ "etc" &/ "HOSTNAME" WAIT ' This sets the hostname to the current CLI session and saves it for future boots
-    END IF
-    ME.UPDATE_HOSTS_FILE(sHostName)
+      
+      EXEC ["echo ", sHostName & "." & sDomain, " >", ClsGlobal.sTargetMnt &/ "etc" &/ "HOSTNAME"] WAIT 
+      
+    ' ' '   
+    ' ' ' IF Len(sRes) > 0 THEN 
+    ' ' '   SHELL "echo " & sHostName & " > " & ClsGlobal.sTargetMnt &/ "etc" &/ "HOSTNAME" WAIT 
+    ' ' ' ELSE ' X is not running
+    ' ' '   SHELL "hostname $HOSTNAME; echo " & sHostName & " > " & ClsGlobal.sTargetMnt &/ "etc" &/ "HOSTNAME" WAIT ' This sets the hostname to the current CLI session and saves it for future boots
+    ' ' ' END IF
+    ME.UPDATE_HOSTS_FILE(sHostName, sDomain)
     
     
   
 END
 
-PUBLIC SUB UPDATE_HOSTS_FILE(sHostName AS String)
+PUBLIC SUB UPDATE_HOSTS_FILE(sHostName AS String, sDomain AS String)
   
     DIM sFileIn, sFileOut AS String
     
@@ -564,7 +568,7 @@ PUBLIC SUB UPDATE_HOSTS_FILE(sHostName AS String)
     "# This file describes a numeber of host-to-address mappings for the TCP/IP subsystem. \n" &
     "# It is mostly used  at boot time, when no name servers are running. On small systems, this \n" &
     "# file can be used instead of a \"named\" name server. Just add the names, addresses and any \n" &
-    "# aliases to this file ...\n #\n#\n#n" &
+    "# aliases to this file ...\n #\n#\n#\n" &
     "# By the way, Arnt Gulbrandsen <agrulbra@nvg.unit.no> says that 127.0.0.1 should NEVER \n" &
     "# be named with the name of the machine. It causes problem sor some programs, irc and \n" &
     "# reputedly talk. :^) \n#\n#\n" &
@@ -573,12 +577,14 @@ PUBLIC SUB UPDATE_HOSTS_FILE(sHostName AS String)
     "#\n#\n" &
     "# This next entry is technically wrong, but good enough to get TCP/IP applications to quit complaining \n" &
     "# that they can\'t clarify the hostname on a loopback-only system \n#\n#\n# \n" &
-    "127.0.0.1" & Space(5) & sHostName & Space(5) & sHostName & "\n#\n#" &
+    "127.0.0.1" & Space(5) & sHostName & "." & sDomain & Space(5) & sHostName & "\n#\n#" &
     "# End of hosts." 
     
     IF Exist(ClsGlobal.sTargetMnt &/ "etc" &/ "hosts") THEN MOVE ClsGlobal.sTargetMnt &/ "etc" &/ "hosts" TO ClsGlobal.sTargetMnt &/ "etc" &/ "hosts.bak"
     IF Exist(ClsGlobal.sTargetMnt &/ "etc" &/ "hosts") THEN KILL ClsGlobal.sTargetMnt &/ "etc" &/ "hosts" 
       
+      Message.Info(sFileIn)
+      RETURN 
       TRY File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "hosts", SConv(sFileIn))
           CATCH 
           Message.Error(Error.where & gb.NewLine & Error.text)
