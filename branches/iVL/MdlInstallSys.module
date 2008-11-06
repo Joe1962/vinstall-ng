@@ -664,6 +664,7 @@ PUBLIC SUB UPDATE_STEP_PROGRESS(sTargetSize AS Float, sPakSize AS Float)
   IF iVal > FrmInstallSys.pbInstallProg.Value THEN 
     FrmInstallSys.pbInstallProg.Value = iVal
   END IF
+  
   'PRINT CStr(iCurrSize) & "/" & CStr(sTargetSize + sPakSize) & " = " & iVal & "%"
 END
 

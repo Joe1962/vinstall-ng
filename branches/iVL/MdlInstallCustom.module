@@ -18,6 +18,8 @@
 
 
 ' needs to read arrays from clsPkgsel and install all required packages
+PUBLIC fPbInc AS Float
+
 PRIVATE hproc AS Process
 PRIVATE sDump AS String
 PRIVATE sErr AS String
@@ -504,8 +506,9 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_BULKS() AS Integer
         IF iret <> 0 THEN 
           RETURN 1
         END IF
-      INC ii
+      
       END IF
+      INC ii
     UNTIL ii = FrmPkgSel.scrlInstallOpts.Rows.Count
   
   
@@ -601,6 +604,9 @@ PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
   'i = i + ClsPkgSel.arrBulks.Count + ClsPkgSel.arrPkgs.Count
   iPkgCnt = i
   PRINT ("Total packages to be installed = ") & i
+  fPbInc = 1 / iPkgCnt
+  PRINT "The total progrssbar will work in increments of " & fPbInc & " on every bulk installed"
+  
 END
 
 
@@ -693,6 +699,7 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
       IF vSize <> "" THEN 
         'MdlInstallSys.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vSize))
         MdlInstallSys.UPDATE_STEP_PROGRESS(vTargetSize, vSize)
+        'FrmInstallSys.pbInstallProg2.Value = FrmInstallSys.pbInstallProg2.Value + (fPbInc / FrmInstallSys.pbInstallProg.Value) '(FrmInstallSys.pbInstallProg.Value / fPbInc)
       END IF
     UNTIL 
       hproc.State = Process.Stopped
