@@ -1,2 +1,1 @@
-- Fixed EXEC line that triggers when installer is done
-- Fixed duplicate "During this process" in message.wrarning before setting up X
+- Implemented new package listing for custom installation

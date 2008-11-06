@@ -248,7 +248,7 @@ END
 PUBLIC FUNCTION INSTALL_USER_PACKAGES() AS Integer
   
   DIM ii, i, iStepTotal AS Integer
-  DIM sBasePath AS String = ClsGlobal.sTargetMnt &/ "packages"
+  DIM sBasePath AS String = ClsGlobal.sSourceMnt &/ "packages"
   DIM sLoc, spkg, sDump AS String
   
   ' get the step total by running though the list and comparing pictures
@@ -269,9 +269,18 @@ PUBLIC FUNCTION INSTALL_USER_PACKAGES() AS Integer
       sPkg = FrmUsrPkgSel.GridView1[ii, 5].Text
       INC i
         ' install this package
-        EXEC ["echo", " ", " > /tmp/installdump"] WAIT 
+        EXEC ["echo \" \" > /tmp/installdump"] WAIT 
           FrmInstallSys.tlCurrPkg.Text = ("Installing") & Space(1) & FrmUsrPkgSel.GridView1[ii, 1].Text
-              hproc = EXEC ["installpkg", sBasePath &/ sLoc &/ sPkg, " -R ", ClsGlobal.sTargetMnt, " || echo \'FAILED\' 2> /tmp/installdump"]
+                FrmInstallSys.pbInstallProg.Value = i / iStepTotal
+          INC iPkgNum
+          FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
+          
+              'hproc = EXEC ["installpkg", sBasePath &/ sLoc &/ sPkg, " -R ", ClsGlobal.sTargetMnt, " || echo \'FAILED\' 2> /tmp/installdump"]
+              'hproc = EXEC ["installpkg -R " & ClsGlobal.sTargetMnt & Space(1) & sBasePath &/ sLoc &/ sPkg & " || echo \'FAILED\' 2> /tmp/installdump"]
+              'hproc = EXEC ["installpkg " & sBasePath &/ sLoc &/ sPkg & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump"]
+              'hproc = EXEC ["installpkg", sBasePath &/ sLoc &/ sPkg, "-R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump"] WAIT 
+              'hproc = EXEC ["installpkg " & sBasePath &/ sLoc &/ sPkg & Space(1) & "-R" & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump"] WAIT 
+              hproc = SHELL "installpkg " & sBasePath &/ sLoc &/ sPkg & Space(1) & "-R" & Space(1) & ClsGlobal.sTargetMnt & Space(1) & "|| echo \'FAILED\' 2> /tmp/installdump" 'WAIT
                     WAIT 1
                     IF hproc.State = Process.Running THEN 
                       REPEAT 
@@ -280,8 +289,9 @@ PUBLIC FUNCTION INSTALL_USER_PACKAGES() AS Integer
                   END IF
           sDump = File.Load("/tmp/installdump")
           
-          INC i
-          FrmInstallSys.pbInstallProg.Value = i / iStepTotal
+          'INC i
+    
+          
             IF InStr(sDump, "FAILED") > 0 THEN 
                   Message.Error("Error installing user-selected package" & Space(1) & sPkg)
                   RETURN 1
@@ -503,7 +513,7 @@ END
 
 PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
 
-  DIM i AS Integer
+  DIM i, ii AS Integer
   DIM irs AS Integer
   DIM sOutput AS String
   DIM sOutArr AS String[]
@@ -563,7 +573,7 @@ PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
         ' ' ' ' ' ' ' FOR EACH cb IN MdlPkgSel.Pkgs
         ' ' ' ' ' ' '   IF cb.Value = TRUE THEN INC irs
         ' ' ' ' ' ' '     
-        NEXT 
+'        NEXT 
       i = i + irs ' the count to the total
   'i = i + ClsPkgSel.arrBulks.Count + ClsPkgSel.arrPkgs.Count
   iPkgCnt = i
@@ -636,10 +646,12 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
     sDesc = Replace(sDesc, "\'", "")
   vSize = Trim(CStr(vSize))
   sDump = ""
-  SHELL "echo \"\" > /tmp/installdump" WAIT 
+  'SHELL "echo \" \" > /tmp/installdump" WAIT 
+  EXEC ["echo \" \" > /tmp/installdump"] WAIT 
   sErr = ""
   IF vSize <> "" THEN 
     SHELL "gsize=$(df| grep " & ClsGlobal.sTargetMnt & " ) && echo $gsize | cut -f3 -d \' \'" TO vTargetSize
+'    EXEC ["gzise=$(df | grep " & ClsGlobal.sTargetMnt & ") && echo $gzise | cut -f3 -d \' \'"] TO vTargetSize
   END IF
   FrmInstallSys.pbInstallProg.Value = 0
   INC iPkgNum
