@@ -14,27 +14,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmPkgSel.class:22
+#: FrmPkgSel.class:25
 msgid "Choose your installation mode"
 msgstr ""
 
-#: FrmPkgSel.class:51
-msgid "Installs everything in your VectorLinux media to your system"
+#: FrmPkgSel.class:70
+msgid "Installs all optional components in your VectorLinux media to your system"
 msgstr ""
 
-#: FrmPkgSel.class:60
+#: FrmPkgSel.class:80
 msgid "Choose your optional components to install."
 msgstr ""
 
-#: FrmPkgSel.class:101
+#: FrmPkgSel.class:195
 msgid "TextLabel1"
 msgstr ""
 
-#: FrmPkgSel.class:107
+#: FrmPkgSel.class:205
 msgid "Full Install"
 msgstr ""
 
-#: FrmPkgSel.class:112
+#: FrmPkgSel.class:210
 msgid "Custom Install"
 msgstr ""
 

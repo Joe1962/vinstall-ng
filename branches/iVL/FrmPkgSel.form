@@ -8,22 +8,23 @@
     Text = ("TextLabel1")
     Alignment = Align.Normal
   }
+  { hrSep Separator
+    MoveScaled(34,6,20,1)
+  }
   { rbFull RadioButton
-    MoveScaled(1,9,40,3.2857)
+    MoveScaled(1,10,40,3.1429)
     Text = ("Full Install")
   }
   { rbCustom RadioButton
-    MoveScaled(1,13,55,3.2857)
+    MoveScaled(1,14,55,3.1429)
     Text = ("Custom Install")
   }
   { tlActionDesc TextLabel
-    MoveScaled(1,17,63,6)
+    MoveScaled(1,19,63,4)
     Text = ("")
   }
-  { scrlInstallOpts ScrollView
-    MoveScaled(1,24,52,28)
-  }
-  { hrSep Separator
-    MoveScaled(34,7,20,1)
+  { scrlInstallOpts GridView
+    MoveScaled(1,27,56,23)
+    Expand = True
   }
 }
