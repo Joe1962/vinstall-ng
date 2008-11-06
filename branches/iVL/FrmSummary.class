@@ -174,15 +174,25 @@ PUBLIC SUB prepare_packages_summary()
           GridView2.MoveTo(1, 0)
               irow = 1
             ' add bulk packages
-            FOR EACH cb IN MdlPkgSel.Bulks
-              IF cb.Value = TRUE THEN 
-                INC ME.GridView2.Rows.Count
-                  GridView2[irow, 0].text = File.BaseName(cb.Tag)
-                    
-                  INC irow
-              END IF
-              
-            NEXT 
+                REPEAT 
+                  IF FrmPkgSel.scrlInstallOpts[i, 0].Picture = FrmPkgSel.pyes THEN 
+                    INC GridView2.Rows.Count
+                    GridView2[irow, 0].text = FrmPkgSel.scrlInstallOpts[i, 1].Text
+                    INC irow
+                  ENDIF 
+                  INC i
+                UNTIL i = FrmPkgSel.scrlInstallOpts.Rows.Count
+                
+            
+            ' ' ' FOR EACH cb IN MdlPkgSel.Bulks
+            ' ' '   IF cb.Value = TRUE THEN 
+            ' ' '     INC ME.GridView2.Rows.Count
+            ' ' '       GridView2[irow, 0].text = File.BaseName(cb.Tag)
+            ' ' '         
+            ' ' '       INC irow
+            ' ' '   END IF
+            ' ' '   
+            ' ' ' NEXT 
         INC GridView2.Rows.Count
         'irow = irow + 1 ' move the selection to the next line
           GridView2[irow, 0].BackColor = Color.SelectedBackground

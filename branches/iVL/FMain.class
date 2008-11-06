@@ -246,7 +246,7 @@ PUBLIC SUB btnext_Click()
           IF ClsPkgSel.bCustom = TRUE THEN 
               'get the list of selected bulks only
               
-              MdlPkgSel.GET_USER_BULK_SELECTION()
+              'MdlPkgSel.GET_USER_BULK_SELECTION()
               'frmNext = FrmPkgsel2
               frmNext = FrmUsrPkgSel
             ELSE 
