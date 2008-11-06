@@ -15,6 +15,9 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+PUBLIC pYes AS picture = Picture.load("images/16px-check.png")
+PUBLIC pNo AS Picture = picture.load("images/16px-Nocheck.png")
+
 
 PUBLIC SUB Form_Open()
 
@@ -23,11 +26,26 @@ PUBLIC SUB Form_Open()
       .rbFull_Click()
   END WITH 
   FMain.FrmCurr = ME
-  FMain.tvPlan["Prep3"].Selected = TRUE
-  FMain.tvPlan["Prep2"].Picture = MdlCore.sDonePic
-  FMain.tvPlan["Prep3"].Picture = MdlCore.sNowPic
+  ' ' FMain.tvPlan["Prep3"].Selected = TRUE
+  ' ' FMain.tvPlan["Prep2"].Picture = MdlCore.sDonePic
+  ' ' FMain.tvPlan["Prep3"].Picture = MdlCore.sNowPic
   FMain.btback.Enabled = TRUE
 FMain.btback.ForeColor = Color.Black
+
+'ME.scrlInstallOpts.Columns.count = 4
+WITH ME.scrlInstallOpts
+.Columns.count = 4
+.Rows.count = 1
+.Header = TRUE
+.Columns[1].text = ("Package")
+.Columns[2].Text = ("Description")
+.Columns[3].Text = ("Size")
+.Columns[0].Width = 32
+.Columns[1].Width = 120
+.Columns[2].Width = 350
+END WITH 
+
+ME.FILL_IN_BULK_LIST()
 
 END
 
@@ -36,10 +54,11 @@ PUBLIC SUB Form_Resize()
   WITH ME
     '.tlBanner.Width = .ClientWidth - 8
     .tlBanner.Move(4, 4, .ClientWidth - (.tlBanner.Left * 2), 27)
-    .hrSep.Move(4, .tlBanner.top + .tlBanner.Height - (.hrSep.H), .tlBanner.Width)
+    .hrSep.Move(4, .tlBanner.top + .tlBanner.Height, .tlBanner.Width)
     .rbFull.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 12, MdlObjSizer.get_object_width(.rbfull.text) + 36)
     .rbCustom.Move(.tlBanner.Left, .rbFull.top + .rbFull.Height + 4, MdlObjSizer.get_object_width(.rbcustom.text) + 36)
-    .tlActionDesc.Width = .tlBanner.Width - 4
+    .tlActionDesc.Move(4, .rbCustom.top + .rbCustom.Height + 12, .tlBanner.Width - 4)
+    '.tlActionDesc.Width = .tlBanner.Width - 4
     .scrlInstallOpts.Move(.tlActionDesc.Left, .tlActionDesc.top + .tlActionDesc.Height + 8, .tlActionDesc.Width - 12, .ClientHeight - (.tlActionDesc.top + (.tlActionDesc.height * 2.75)))
   
   END WITH 
@@ -48,9 +67,10 @@ END
 
 PUBLIC SUB rbFull_Click()
 
-  tlActionDesc.Text = ("Installs everything in your VectorLinux media to your system")
+  tlActionDesc.Text = ("Installs all optional components in your VectorLinux media to your system")
   tlActionDesc.Adjust
-  scrlInstallOpts.Visible = FALSE
+  'scrlInstallOpts.Visible = FALSE
+  scrlInstallOpts.Enabled = FALSE
   ClsPkgSel.bCustom = FALSE
 
 END
@@ -59,11 +79,62 @@ PUBLIC SUB rbCustom_Click()
 
   tlActionDesc.Text = ("Choose your optional components to install.")
   tlActionDesc.Adjust
-  scrlInstallOpts.Visible = TRUE
-  MdlPkgSel.LIST_BULK_SELECTION
+  'scrlInstallOpts.Visible = TRUE
+  scrlInstallOpts.Enabled = TRUE
+  'MdlPkgSel.LIST_BULK_SELECTION
   ClsPkgSel.bCustom = TRUE
 
 END
+
+PUBLIC SUB FILL_IN_BULK_LIST()
+  
+  DIM i, ii AS Integer
+  DIM sBulk AS String
+  DIM sDesc AS String
+  DIM sLine, sSize AS String
+  DIM arrLine AS String[]
+  DIM sBasePath AS String = ClsGlobal.sSourceMnt &/ "veclinux" &/ "optional" '"/mnt/cdrom/veclinux/optional" ' temporary path ... needs to change to global variable
+  DIM sFile AS String[] = Split(File.Load(ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF"), gb.NewLine)
+  DIM fsiZe AS Float
+  
+  FOR i = 0 TO sFile.count - 1
+      sLine = sFile[i]
+        IF Left(sLine, Len("BULK")) = "BULK" AND InStr(sLine, "optional") THEN 
+        
+                 arrLine = Split(sLine, ":")
+              sBulk = Right(arrLine[0], Len(arrLine[0]) - InStr(arrLine[0], "/"))
+              sBulk = File.BaseName(sBulk)
+              sSize = arrLine[1]
+              fsiZe = Round((arrLine[1] / 1024), -2)
+              'Message(fsiZe)
+              sDesc = arrLine[2]
+              sDesc = Replace(sDesc, "\'", "")
+              
+              scrlInstallOpts[ii, 0].Picture = pYes
+              scrlInstallOpts[ii, 1].Text = sBulk
+              scrlInstallOpts[ii, 2].Text = sDesc
+              scrlInstallOpts[ii, 3].Text = fsiZe & " MB"
+              
+              INC ii
+              INC scrlInstallOpts.Rows.Count
+          'Message.Info(sBulk)
+          END IF
+NEXT 
+          
+          
+  
+  
+  
+  
+  
+END
+
+
+
+
+
+
+
 
 PUBLIC SUB Form_Hide()
 
@@ -76,5 +147,28 @@ END
 PUBLIC SUB Form_Show()
 
   Form_Open()
+
+END
+
+PUBLIC SUB Form_Menu()
+
+  ME.FILL_IN_BULK_LIST
+
+END
+
+PUBLIC SUB scrlInstallOpts_Click()
+
+  IF LAST.column = 0 THEN 
+  IF scrlInstallOpts[LAST.row, LAST.column].Picture = pyes THEN 
+    scrlInstallOpts[LAST.row, LAST.column].Picture = pNo
+  ELSE IF scrlInstallOpts[LAST.row, LAST.column].Picture = pNo THEN 
+    scrlInstallOpts[LAST.row, LAST.column].Picture = pyes
+  END IF
+'GridView1[LAST.row, LAST.column].Refresh()  
+END IF
+
+'Message(GridView1[LAST.row, 4].Text)
+scrlInstallOpts.Refresh()
+  
 
 END

@@ -497,18 +497,33 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_BULKS() AS Integer
   DIM i, ii AS Integer
   DIM iRet AS Integer
   
-  FOR i = 0 TO ClsPkgSel.arrBulks.Count - 1
-    sPkg = ClsPkgSel.arrBulks[i]
-    'install the packages now
-    PRINT " + Install " & sPkgPath &/ sPkg
-    'iRet = ME.INSTALL_THIS_PACKAGE(sPkgPath &/ sPkg)
-        iret = ME.INSTALL_THIS_BULK(sPkgPath &/ sPkg)
-    IF iRet <> 0 THEN 
-      RETURN 1
-    END IF
-    PRINT " ! " & sPkgPath &/ sPkg & " is installed"
-  NEXT 
-END
+  REPEAT 
+    IF FrmPkgSel.scrlInstallOpts[ii, 0].Picture = FrmPkgSel.pyes THEN
+      sPkg = FrmPkgSel.scrlInstallOpts[ii, 1].text & ".tlz"
+      iret = ME.INSTALL_THIS_BULK(sPkgPath &/ "optional" &/ sPkg)
+        IF iret <> 0 THEN 
+          RETURN 1
+        END IF
+      INC ii
+      END IF
+    UNTIL ii = FrmPkgSel.scrlInstallOpts.Rows.Count
+  
+  
+  
+' ' ' '   
+' ' ' '   
+' ' ' '   FOR i = 0 TO ClsPkgSel.arrBulks.Count - 1
+' ' ' '     sPkg = ClsPkgSel.arrBulks[i]
+' ' ' '     'install the packages now
+' ' ' '     PRINT " + Install " & sPkgPath &/ sPkg
+' ' ' '     'iRet = ME.INSTALL_THIS_PACKAGE(sPkgPath &/ sPkg)
+' ' ' '         iret = ME.INSTALL_THIS_BULK(sPkgPath &/ sPkg)
+' ' ' '     IF iRet <> 0 THEN 
+' ' ' '       RETURN 1
+' ' ' '     END IF
+' ' ' '     PRINT " ! " & sPkgPath &/ sPkg & " is installed"
+' ' ' '   NEXT 
+ END
 
 
 PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
@@ -551,14 +566,22 @@ PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
     i = i + 1
   END IF
   'Count user-selected stuff in
-      'we will need to cycle through the arrays for th is for accuracy...
-        irs = 0
-        FOR EACH cb IN MdlPkgSel.Bulks
-          IF cb.value = TRUE THEN INC irs
+  
+        REPEAT 
+          IF FrmPkgSel.scrlInstallOpts[ii, 0].Picture = FrmPkgSel.pyes THEN INC irs
+          INC ii
+          UNTIL ii = FrmPkgSel.scrlInstallOpts.Rows.Count
+          i = i + irs
             
-          
-        NEXT 
-        i = i + irs
+  
+      ' ' ' ' 'we will need to cycle through the arrays for th is for accuracy...
+      ' ' ' '   irs = 0
+      ' ' ' '   FOR EACH cb IN MdlPkgSel.Bulks
+      ' ' ' '     IF cb.value = TRUE THEN INC irs
+      ' ' ' '       
+      ' ' ' '     
+      ' ' ' '   NEXT 
+      ' ' ' '   i = i + irs
       ' now do the optional packages
       irs = 0 ' reset the count
        
