@@ -79,7 +79,7 @@ PUBLIC SUB Form_Open()
     FMain.btnext.ForeColor = Color.Gray
     FMain.btback.ForeColor = Color.Gray
     ELSE 
-      tlBanner.text = "<b>" & ("Installable media found.") & "</b>"
+      tlBanner.text = "<b>" & ("Select installation media from the list below") & "</b>"
       WITH FMain
         .btback.Enabled = FALSE
           .btback.ForeColor = Color.Gray
