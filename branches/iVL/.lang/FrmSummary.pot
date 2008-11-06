@@ -66,15 +66,15 @@ msgstr ""
 msgid "USER-SELECTED PACKAGES"
 msgstr ""
 
-#: FrmSummary.class:257
+#: FrmSummary.class:259
 msgid "Installation Type"
 msgstr ""
 
-#: FrmSummary.class:267
+#: FrmSummary.class:269
 msgid "Partition Selection Scheme"
 msgstr ""
 
-#: FrmSummary.class:277
+#: FrmSummary.class:279
 msgid "Software Selection"
 msgstr ""
 
