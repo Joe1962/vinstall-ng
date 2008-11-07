@@ -151,12 +151,34 @@ END
 PUBLIC SUB main()
 
 ' ' ' 
+IF Application.Args[1] = "-C" THEN 
+  ' try to configure
+  'EXEC ["mount", Application.Args[1], "/mnt/target"] WAIT 
+ME.display_config_stage
+  ELSE 
  
   
   FMain.Show
+  END IF
   
   
 END 
+
+PUBLIC SUB display_config_stage()
+  
+  FrmPartSel.Reparent(fmain.pnlwinhost)
+  fmain.frmInit = FrmPartSel
+  fmain.Show
+  fmain.btnext.Enabled = TRUE
+  fmain.btnext.ForeColor = Color.Black
+  'ME.PREPARE_INSTALL_LAYOUT
+  'FrmLilo.Show
+  IF ERROR THEN Message(Error.where & "\n" & Error.Text)
+END
+
+
+
+
 
 PUBLIC SUB TRANSLATE_HOST_WINDOW()
   
