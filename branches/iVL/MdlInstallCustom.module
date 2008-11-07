@@ -282,25 +282,31 @@ PUBLIC FUNCTION INSTALL_USER_PACKAGES() AS Integer
               'hproc = EXEC ["installpkg " & sBasePath &/ sLoc &/ sPkg & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump"]
               'hproc = EXEC ["installpkg", sBasePath &/ sLoc &/ sPkg, "-R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump"] WAIT 
               'hproc = EXEC ["installpkg " & sBasePath &/ sLoc &/ sPkg & Space(1) & "-R" & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump"] WAIT 
-              hproc = SHELL "installpkg " & sBasePath &/ sLoc &/ sPkg & Space(1) & "-R" & Space(1) & ClsGlobal.sTargetMnt & Space(1) & "|| echo \'FAILED\' 2> /tmp/installdump" 'WAIT
+              'hproc = SHELL "installpkg " & sBasePath &/ sLoc &/ sPkg & Space(1) & "-R" & Space(1) & ClsGlobal.sTargetMnt & Space(1) & "|| echo \'FAILED\' 2> /tmp/installdump" 'WAIT
+              hproc = EXEC ["installpkg", "-R", ClsGlobal.sTargetMnt, sBasePath &/ sLoc &/ sPkg] ' WAIT 
+                  'if hpro
                     WAIT 1
                     IF hproc.State = Process.Running THEN 
                       REPEAT 
                         WAIT 
                     UNTIL hproc.State = Process.Stopped
                   END IF
-          sDump = File.Load("/tmp/installdump")
+                  IF hproc.Value > 0 THEN 
+                    Message.Error(sPkg & Space(1) & ("Failed to install. Installation will stop"))
+                    RETURN 1
+                  END IF
+'          sDump = File.Load("/tmp/installdump")
           
           'INC i
     
           
-            IF InStr(sDump, "FAILED") > 0 THEN 
-                  Message.Error("Error installing user-selected package" & Space(1) & sPkg)
-                  RETURN 1
-                ' ELSE 
-                '   RETURN 0
-                END IF
-            
+            ' ' IF InStr(sDump, "FAILED") > 0 THEN 
+            ' '       Message.Error("Error installing user-selected package" & Space(1) & sPkg)
+            ' '       RETURN 1
+            ' '     ' ELSE 
+            ' '     '   RETURN 0
+            ' '     END IF
+            ' ' 
     END IF
     INC ii
   UNTIL ii = FrmUsrPkgSel.GridView1.Rows.Count - 1
@@ -688,6 +694,8 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
         MdlSetup.SHOW_PROGRESS_CONTROLS()
   FrmInstallSys.tlCurrPkg.Text = "Installing " & File.Name(sBulkPath)
   hproc = SHELL "lzmadec <" & sBulkPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ  
+      'hproc = EXEC ["lzmadec", "<", sBulkPath, "|", "tar", "-xp", "-C", clsglobal.sTargetMnt] 'WAIT 
+      'hproc = EXEC ["lzmadec", "<" & sBulkPath & " | tar -xp -C " & ClsGlobal.sTargetMnt]
   WAIT 1
   IF hproc.State = Process.Running THEN 
     WAIT 1
@@ -699,18 +707,23 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
       IF vSize <> "" THEN 
         'MdlInstallSys.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vSize))
         MdlInstallSys.UPDATE_STEP_PROGRESS(vTargetSize, vSize)
-        'FrmInstallSys.pbInstallProg2.Value = FrmInstallSys.pbInstallProg2.Value + (fPbInc / FrmInstallSys.pbInstallProg.Value) '(FrmInstallSys.pbInstallProg.Value / fPbInc)
+        
+        FrmInstallSys.pbInstallProg2.Value = (FrmInstallSys.pbInstallProg2.Value + (fPbInc - (fPbInc * FrmInstallSys.pbInstallProg.Value)) / 100)
       END IF
     UNTIL 
       hproc.State = Process.Stopped
-        sDump = File.Load("/tmp/installdump")
-      IF InStr(sDump, "FAILED") > 0 THEN 
-        RETURN 1
-      ELSE
+        IF hproc.value > 0 THEN 
+            Message.Error(File.BaseName(sBulkPath) & Space(1) & ("failed to install. Installation will stop now"))
+              RETURN 1
+      END IF
+      ' ' '   sDump = File.Load("/tmp/installdump")
+      ' ' ' IF InStr(sDump, "FAILED") > 0 THEN 
+      ' ' '   RETURN 1
+      ' ' ' ELSE
         FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum) 
       RETURN 0
     END IF
-  END IF
+'  END IF
 END
 
 
