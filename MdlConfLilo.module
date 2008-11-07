@@ -126,6 +126,14 @@ PUBLIC SUB DISPLAY_LILO_TARGET_OPTIONS()
         
       WITH FrmLilo.LiloTarget
           'IF LCase(ClsPartSel.fRoot) <> "xfs" THEN 
+          'IF Application.Args[1] <> "" THEN 
+                
+                ' DETECT THE FILESYSTEM OF THE PARTITION BEING MOUNTED AS ROOT HERE
+                
+                
+                
+           ' ELSE 
+          
               FOR EACH cb IN MdlPartSel.oMountPoints
                 IF cb.text = "/" THEN 
                   ClsPartSel.sRoot = cb.Tag ' make sure this is set... we will need it later
@@ -136,6 +144,9 @@ PUBLIC SUB DISPLAY_LILO_TARGET_OPTIONS()
                     NEXT 
                 END IF
           NEXT 
+        
+        
+      'END IF
                 
           '.Add("Sector")
 '          END IF

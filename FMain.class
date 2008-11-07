@@ -46,6 +46,14 @@ ClsGlobal.sSourceMnt = "/mnt/cdrom"
 'ClsGlobal.sSourceMnt = "/mnt" &/ "source" 'FOR TESTING ONLY
 '/ THE FOLLOWING LINES HAVE BEEN COMMENTED FOR TESTING ONLY
 'IF frmInit = "" OR IsNull(frmInit) THEN frmInit = FrmSelISO
+
+IF Application.Args[1] = "-C" THEN 
+frmInit = FrmPartSel
+FMain.btnext.Enabled = TRUE
+FMain.btnext.ForeColor = Color.Black
+END IF
+
+
 IF NOT frmInit THEN frmInit = FrmLangSel
 frmInit.Reparent(ME.pnlwinhost)
 frmInit.width = pnlwinhost.Width
@@ -85,7 +93,7 @@ FMain.tvPlan.MoveFirst()
  UNTIL FMain.tvPlan.MoveBelow()
  'Message(iWidth)
 FMain.btnext.Enabled = FALSE ' disable the button until a language is selected
-
+IF ERROR THEN Message(Error.Text & "<br>" & Error.Where)
 END
 
 PUBLIC SUB AUTOSIZE_LEFT_PANE()
@@ -186,6 +194,19 @@ PUBLIC SUB btnext_Click()
   
   END IF
     
+  IF Application.Args[1] = "-C" THEN 
+    ' navigation for configuration
+              SELECT CASE FrmCurr.Name
+                CASE "FrmPartSel"
+                    frmNext = FrmLilo
+              END SELECT 
+              
+              'FrmCurr.Hide
+              frmNext.Reparent(FrmCurr.Parent)
+              frmNext.Show
+              
+    
+  ELSE 
   
   
   SELECT CASE FrmCurr.Name ' very nice navigation algoritm
@@ -403,6 +424,7 @@ PUBLIC SUB btnext_Click()
       MdlSetup.BEGIN_INSTALLATION()
     END IF
 
+  END IF
 END IF
 tvPlan.Refresh()
 

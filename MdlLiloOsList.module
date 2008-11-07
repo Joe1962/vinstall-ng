@@ -370,6 +370,8 @@ tlappends = NEW Object[]
           ' Add an option to boot the recently installed OS to CLI mode
           'ClsPartSel.sRoot = "/dev/sdb" ' for testing only 
             'IF sLiloDesc LIKE "Vector" THEN 
+            'IF Application.Args[1] = "" THEN 
+            
               FOR EACH cb IN MdlPartSel.oMountPoints
                 IF cb.text = "/" AND cb.tag = arrLinux[i] THEN
               'IF arrLinux[i] = ClsPartSel.sRoot THEN 
@@ -387,6 +389,15 @@ tlappends = NEW Object[]
                   ME.iVlTag = FrmLilo.TabStrip1.Index - 1
               END IF
             NEXT 
+            
+        'ELSE 
+                ' DETECT THE FILESYSTEM ON THE ROOT PARTITION HERE
+                
+                
+        'END IF
+            
+            
+            
             'END IF          
         END WITH ' end jacking with the tabstrip itself
      END IF
