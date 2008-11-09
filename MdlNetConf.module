@@ -583,8 +583,8 @@ PUBLIC SUB UPDATE_HOSTS_FILE(sHostName AS String, sDomain AS String)
     IF Exist(ClsGlobal.sTargetMnt &/ "etc" &/ "hosts") THEN MOVE ClsGlobal.sTargetMnt &/ "etc" &/ "hosts" TO ClsGlobal.sTargetMnt &/ "etc" &/ "hosts.bak"
     IF Exist(ClsGlobal.sTargetMnt &/ "etc" &/ "hosts") THEN KILL ClsGlobal.sTargetMnt &/ "etc" &/ "hosts" 
       
-      Message.Info(sFileIn)
-      RETURN 
+      'Message.Info(sFileIn)
+      'RETURN 
       TRY File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "hosts", SConv(sFileIn))
           CATCH 
           Message.Error(Error.where & gb.NewLine & Error.text)

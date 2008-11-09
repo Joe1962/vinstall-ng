@@ -21,11 +21,11 @@ PUBLIC FUNCTION GET_CURRENT_HOST_NAME() AS String
   DIM sHost AS String
   
     'SHELL "chroot " & ClsGlobal.sTargetMnt & " hostname" TO sRes
-    EXEC ["chroot " & ClsGlobal.sTargetMnt, "hostname"] TO sRes
+    'EXEC ["chroot " & ClsGlobal.sTargetMnt, "hostname"] TO sRes
     
-    IF sRes = "" THEN 
+    'IF sRes = "" THEN 
         sRes = "Vector.Linux.net"
-      END IF
+     ' END IF
 
 
     sRes = Trim(sRes)
@@ -141,3 +141,4 @@ PUBLIC SUB tbDomain_KeyRelease()
 END IF
 
 END
+

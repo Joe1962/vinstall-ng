@@ -354,6 +354,7 @@ PUBLIC SUB btnext_Click()
                 
       SHELL "cp /mnt/target/etc/modules.conf >/etc/modules.conf" WAIT 
       SHELL "ifconfig eth0 up" WAIT 
+      SHELL "chmod 700 /mnt/target/home/*"
       frmNext = FrmNetConf
       
       

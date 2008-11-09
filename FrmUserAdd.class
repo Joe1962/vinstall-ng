@@ -113,8 +113,10 @@ PUBLIC SUB Button1_Click()
             'SHELL "cd " & sPicdir & " && ln -s root1.png root.face.icon"          ' This needs to go somewhere else
               
             'SHELL "cd " & sPicdir & " ; ln -s default3.png " & ME.tbUsername.Text & ".face.icon"
-            
+            'this next line is for kdm
             SHELL "cd " & sPicdir & "; ln -s " & Replace(tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & tbUsername.Text & ".face.icon" WAIT 
+            'this next line is for gdm
+            SHELL "cd /mnt/target/home/" & tbUsername.Text & "; cp " & Replace(tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & ".face" WAIT 
             
           ENDIF 
           
