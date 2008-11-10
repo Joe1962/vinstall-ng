@@ -25,12 +25,16 @@
     Arrangement = Arrange.Horizontal
     { SidePanel1 SidePanel
       MoveScaled(1,1,26,63)
+      Background = Color.Background
       Arrangement = Arrange.Vertical
       Orientation = Align.Left
       { tvPlan TreeView
         MoveScaled(1,0,23,56)
         Expand = True
         Mode = Select.None
+      }
+      { HBox2 HBox
+        MoveScaled(1,56,72,6.8571)
       }
     }
     { PnlRight Panel
@@ -42,23 +46,37 @@
         MoveScaled(5,2,30,26)
         Expand = True
       }
-      { ToolBar1 ToolBar
-        MoveScaled(1,44,56,3)
+      { HBox1 HBox
+        MoveScaled(2,43,53,3)
         { btback Button
           MoveScaled(0,0,8,3)
+          Expand = True
           Text = ("Back")
           Picture = Picture["icon:/16/left"]
         }
+        { Panel3 Panel
+          MoveScaled(10,1,4,2)
+          Expand = True
+        }
         { btQuit Button
           MoveScaled(16,0,15,3)
+          Expand = True
           Text = ("Exit Installation")
           Picture = Picture["icon:/16/cancel"]
         }
+        { Panel4 Panel
+          MoveScaled(33,0,6,2)
+          Expand = True
+        }
         { btnext Button
-          MoveScaled(37,0,8,3)
+          MoveScaled(44,0,8,3)
+          Expand = True
           Text = ("Next")
           Picture = Picture["icon:/16/right"]
         }
+      }
+      { HBox3 HBox
+        MoveScaled(7,46,12,2)
       }
     }
   }
