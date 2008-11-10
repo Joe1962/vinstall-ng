@@ -1,4 +1,3 @@
-- Changed method of displaying the left panel.
-  It is now resizable and can be completely hidden.
-  This allows more room on the right panel for smaller
-  screen resolutions.
+- Fixed object positioning woes in install window.
+- Added a little space between embedded forms and the navigation buttons
+- Fixed object positioning woes in Partition selection window

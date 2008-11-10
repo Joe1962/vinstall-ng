@@ -3,24 +3,33 @@
 { Form Form
   MoveScaled(0,0,72,55)
   Text = ("")
-  { tlBanner TextLabel
-    MoveScaled(1,1,59,5)
-    Text = ("Please select the partitions you wish to use and how to use them")
+  Arrangement = Arrange.Vertical
+  { HPanel1 HPanel
+    MoveScaled(3,1,60,7)
+    { tlBanner TextLabel
+      MoveScaled(0,0,59,5)
+      Text = ("Please select the partitions you wish to use and how to use them")
+    }
+    { btHelp Button
+      MoveScaled(62,0,8,3)
+      Text = ("Help")
+      Picture = Picture["icon:/small/help"]
+    }
+    { hrSep Separator
+      MoveScaled(2,6,19,1)
+    }
   }
   { scrollPartitions ScrollView
     MoveScaled(1,9,69,38)
+    Expand = True
+    ScrollBar = Scroll.Vertical
   }
-  { cbDoWin CheckBox
-    MoveScaled(1,50,57,3.125)
-    ToolTip = ("Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts")
-    Text = ("Detect and Setup Windows partitions for auto-mounting at boot")
-  }
-  { btHelp Button
-    MoveScaled(63,1,8,3)
-    Text = ("Help")
-    Picture = Picture["icon:/small/help"]
-  }
-  { hrSep Separator
-    MoveScaled(3,7,19,1)
+  { HBox1 HBox
+    MoveScaled(1,50,68,4)
+    { cbDoWin CheckBox
+      MoveScaled(1,0,57,3)
+      ToolTip = ("Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts")
+      Text = ("Detect and Setup Windows partitions for auto-mounting at boot")
+    }
   }
 }

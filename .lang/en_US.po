@@ -18,23 +18,23 @@ msgstr "VectorLinux Installer"
 msgid "GUI installer for Vector linux"
 msgstr "GUI installer for Vector linux"
 
-#: FMain.class:177 FrmDone.class:28
+#: FMain.class:188 FrmDone.class:28
 msgid "Restart"
 msgstr ""
 
-#: FMain.class:211
+#: FMain.class:236
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr "Please wait while setup attempts to run the partitioning utility"
 
-#: FMain.class:213
+#: FMain.class:238
 msgid "Please wait while setup analyses your current partition setup."
 msgstr "Please wait while setup analyses your current partition setup."
 
-#: FMain.class:213
+#: FMain.class:238
 msgid "This may take a while ..."
 msgstr "This may take a while ..."
 
-#: FMain.class:227
+#: FMain.class:252
 msgid ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
@@ -42,74 +42,77 @@ msgstr ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
 
-#: FMain.class:279
+#: FMain.class:307
 msgid "Please select a default operating system to boot before proceeding"
 msgstr ""
 
-#: FMain.class:280
+#: FMain.class:308
 msgid "Select an entry from this list"
 msgstr ""
 
-#: FMain.class:291
+#: FMain.class:319
 msgid "Skipping lilo setup"
 msgstr "Skipping lilo setup per user request"
 
-#: FMain.class:305
+#: FMain.class:333
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
-#: FMain.class:320
+#: FMain.class:348
 msgid ""
 "You have not created any user accounts for this system yet. There is not "
 "enough information"
 msgstr ""
 
-#: FMain.class:320
+#: FMain.class:348
 msgid ""
 "to create an account here. It is recommended that you create at least one."
 msgstr ""
 
-#: FMain.class:320
+#: FMain.class:348
 msgid "Would you like to continue anyway?"
 msgstr ""
 
-#: FMain.class:320
+#: FMain.class:348
 msgid "Yes"
 msgstr ""
 
-#: FMain.class:320
+#: FMain.class:348
 #, fuzzy
 msgid "No"
 msgstr "None"
 
-#: FMain.class:343
+#: FMain.class:366
+msgid "Please specify a hostname for this computer"
+msgstr ""
+
+#: FMain.class:370
+msgid "Please specify the domain this computer belongs to"
+msgstr ""
+
+#: FMain.class:383
 msgid ""
 "VectorLinux will now try to detect and configure your graphics hardware."
 msgstr ""
 
-#: FMain.class:343
+#: FMain.class:383
 msgid ""
-"Your screen may flicker or go blank during this process for a few seconds "
-"during this process."
+"Your screen may flicker or go blank for a few seconds during this process."
 msgstr ""
 
-#: FMain.class:494
-msgid "Process Overview"
-msgstr "Process Overview"
-
-#: FMain.class:514
-msgid "Next"
-msgstr "Next"
-
-#: FMain.class:520
+#: FMain.class:606
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:526
+#: FMain.class:618
 msgid "Exit Installation"
 msgstr "Exit Installation"
 
-#: FMain.class:542
+#: FMain.class:630
+msgid "Next"
+msgstr "Next"
+
+#: FMain.class:644
 msgid "Button1"
 msgstr "-"
 
@@ -131,32 +134,38 @@ msgstr "Disk Partitioning:"
 msgid "Exit"
 msgstr ""
 
-#: FrmDone.class:38
+#: FrmDone.class:39
 #, fuzzy
 msgid ""
 "has been installed to your system. Your new system has been configured with "
 "the default factory settings."
 msgstr "Packages have been installed to your system. Please click"
 
-#: FrmDone.class:38
+#: FrmDone.class:39
 msgid "After reboot you can use vasm or vasmCC to fine tune your installation."
 msgstr ""
 
-#: FrmDone.class:38
+#: FrmDone.class:39
 msgid ""
 "Your computer needs to be restarted so that you can use your new operating "
 "system. Click"
 msgstr ""
 
-#: FrmDone.class:38
+#: FrmDone.class:39
 msgid "to restart your computer now or click"
 msgstr ""
 
-#: FrmDone.class:38
+#: FrmDone.class:39
 msgid "to restart your computer at a later time"
 msgstr ""
 
-#: FrmDone.class:73
+#: FrmDone.class:39
+msgid ""
+"If you installed from  CD-ROM/R/RW media, please remove de disk before "
+"restarting."
+msgstr ""
+
+#: FrmDone.class:74
 #, fuzzy
 msgid "Installation is finished"
 msgstr "Installation"
@@ -181,31 +190,31 @@ msgstr "Vectorlinux is preparing your system for installation. Please wait."
 msgid "Current Status"
 msgstr "Current Status"
 
-#: FrmHostPrep.class:139 FrmLilo.class:223 FrmPartScheme.class:127
-#: FrmPkgSel.class:101 FrmPkgsel2.class:86 FrmSelISO.class:262
+#: FrmHostPrep.class:139 FrmLilo.class:224 FrmPartScheme.class:127
+#: FrmPkgSel.class:195 FrmPkgsel2.class:86 FrmSelISO.class:262
 #: FrmSummaryOld.class:87
 msgid "TextLabel1"
 msgstr "-"
 
-#: FrmInstallSys.class:57 FrmInstallSysN.class:72
+#: FrmInstallSys.class:59 FrmInstallSysN.class:72
 msgid "Current Step"
 msgstr "Current Step"
 
-#: FrmInstallSys.class:181
+#: FrmInstallSys.class:192
 msgid "Vectorlinux is currently being installed to your system... Please wait"
 msgstr "Vectorlinux is currently being installed to your system... Please wait"
 
-#: FrmInstallSys.class:194
-msgid "Total progress"
-msgstr "Total progress"
-
-#: FrmInstallSys.class:204
+#: FrmInstallSys.class:206
 msgid "Installing ..."
 msgstr "Installing ..."
 
-#: FrmInstallSys.class:209
+#: FrmInstallSys.class:217
 msgid "Current Step "
 msgstr "Current Step "
+
+#: FrmInstallSys.class:239
+msgid "Total progress"
+msgstr "Total progress"
 
 #: FrmInstallSysN.class:82
 #, fuzzy
@@ -216,22 +225,6 @@ msgstr "Total progress"
 msgid "Select your language"
 msgstr "Select your language"
 
-#: FrmLicense.class:99
-msgid "LICENSE AGREEMENT"
-msgstr "LICENSE AGREEMENT"
-
-#: FrmLicense.class:104
-msgid "TextArea1"
-msgstr "-"
-
-#: FrmLicense.class:110
-msgid "Yes, I Agree to the License Agreement"
-msgstr "Yes, I Agree to the License Agreement"
-
-#: FrmLicense.class:115
-msgid "No, I Do Not Agree"
-msgstr "No, I Do Not Agree"
-
 #: FrmLilo.class:35
 msgid ""
 "The following Operating Systems have been detected on this computer. Choose "
@@ -248,81 +241,85 @@ msgstr ""
 "for each one of them by clicking on each tab. To proceed with the default "
 "pre-set values, simply click"
 
-#: FrmLilo.class:132
+#: FrmLilo.class:133
 msgid "Standard"
 msgstr "Standard"
 
-#: FrmLilo.class:206
+#: FrmLilo.class:207
 msgid "Configure and install lilo (Linux Boot Loader)"
 msgstr "Configure and install lilo (Linux Boot Loader)"
 
-#: FrmLilo.class:211
+#: FrmLilo.class:212
 msgid "Don't Install Lilo"
 msgstr "Don't Install Lilo"
 
-#: FrmLilo.class:217 FrmNetConf.class:141
+#: FrmLilo.class:218 FrmNetConf.class:195
 msgid "Tab 0"
 msgstr "-"
 
-#: FrmLilo.class:235
+#: FrmLilo.class:236
 msgid "Target"
 msgstr "Target"
 
-#: FrmLilo.class:241
+#: FrmLilo.class:242
 msgid "Video Resolution"
 msgstr "Video Resolution"
 
-#: FrmLilo.class:249
+#: FrmLilo.class:250
 msgid "Bootsplash Med"
 msgstr "Bootsplash Med"
 
-#: FrmLilo.class:249
+#: FrmLilo.class:250
 msgid "Bootsplash High"
 msgstr "Bootsplash High"
 
-#: FrmLilo.class:249
+#: FrmLilo.class:250
 msgid "Bootsplash Extra high"
 msgstr "Bootsplash Extra High"
 
-#: FrmLilo.class:254
+#: FrmLilo.class:255
 msgid "Prompt Timeout"
 msgstr "Prompt Timeout"
 
-#: FrmLilo.class:265
+#: FrmLilo.class:266
 msgid "Seconds"
 msgstr "Seconds"
 
-#: FrmLilo.class:271
+#: FrmLilo.class:272
 msgid "Boot Default"
 msgstr "Boot Default"
 
-#: FrmNetConf.class:58
+#: FrmNetConf.class:70
 msgid "Network Interfaces"
 msgstr ""
 
-#: FrmNetConf.class:125
-msgid "Computer Name"
-msgstr "Computer Name"
+#: FrmNetConf.class:172
+msgid "Domain"
+msgstr ""
 
-#: FrmNetConf.class:148
+#: FrmNetConf.class:202
 msgid "Manual DNS Server Specification"
 msgstr "Manual DNS Server Specification"
 
-#: FrmNetConf.class:153
+#: FrmNetConf.class:207
 msgid "Primary DNS Server"
 msgstr "Primary DNS Server"
 
-#: FrmNetConf.class:161
+#: FrmNetConf.class:215
 msgid "192.168.1.254"
 msgstr "-"
 
-#: FrmNetConf.class:166
+#: FrmNetConf.class:220
 msgid "Secondary DNS Server"
 msgstr "Secondary DNS Server"
 
-#: FrmNetConf.class:179 MdlCore.module:462
+#: FrmNetConf.class:233 MdlCore.module:484
 msgid "Network Configuration"
 msgstr "Network Configuration"
+
+#: FrmNetConf.class:243
+msgid "Computer Name"
+msgstr "Computer Name"
 
 #: FrmPartScheme.class:61
 msgid ""
@@ -477,23 +474,37 @@ msgstr "Detect and Setup Windows partitions for auto-mounting at boot"
 msgid "Help"
 msgstr "Help"
 
-#: FrmPkgSel.class:22
+#: FrmPkgSel.class:25
 msgid "Choose your installation mode"
 msgstr "Choose your installation mode"
 
-#: FrmPkgSel.class:51
-msgid "Installs everything in your VectorLinux media to your system"
+#: FrmPkgSel.class:40
+msgid "Package"
 msgstr ""
 
-#: FrmPkgSel.class:60
+#: FrmPkgSel.class:41 FrmUsrPkgSel.class:17
+#, fuzzy
+msgid "Description"
+msgstr "Preparation"
+
+#: FrmPkgSel.class:42 FrmSummary.class:40 FrmUsrPkgSel.class:19
+msgid "Size"
+msgstr ""
+
+#: FrmPkgSel.class:70
+msgid ""
+"Installs all optional components in your VectorLinux media to your system"
+msgstr ""
+
+#: FrmPkgSel.class:80
 msgid "Choose your optional components to install."
 msgstr ""
 
-#: FrmPkgSel.class:107
+#: FrmPkgSel.class:205
 msgid "Full Install"
 msgstr "Full Install"
 
-#: FrmPkgSel.class:112
+#: FrmPkgSel.class:210
 msgid "Custom Install"
 msgstr "Custom Install"
 
@@ -535,7 +546,7 @@ msgid ""
 "Passwords do not match. Please enter the same password twice for accuracy."
 msgstr ""
 
-#: FrmRootPass.class:118 MdlCore.module:460
+#: FrmRootPass.class:118 MdlCore.module:482
 msgid "System Administrator"
 msgstr "System Administrator"
 
@@ -571,7 +582,7 @@ msgstr "Re-Enter Password"
 msgid "Set Password"
 msgstr "Set Password"
 
-#: FrmSelISO.class:30 MdlCore.module:198
+#: FrmSelISO.class:30 MdlCore.module:220
 msgid "No Installable Media Found"
 msgstr "No Installable Media Found"
 
@@ -590,8 +601,9 @@ msgstr "Unable to install kernels. "
 
 #: FrmSelISO.class:82
 #, fuzzy
-msgid "Installable media found."
-msgstr "No Installable Media Found"
+msgid "Select installation media from the list below"
+msgstr ""
+"Select which VectorLinux version you wish to install from the list below"
 
 #: FrmSelISO.class:113
 msgid "Unable to identify distro."
@@ -615,72 +627,68 @@ msgstr ""
 msgid "Search Again"
 msgstr "Search Again"
 
-#: FrmSummary.class:14 MdlCore.module:454
+#: FrmSummary.class:14 MdlCore.module:476
 msgid "Installation Summary"
 msgstr "Installation Summary"
 
-#: FrmSummary.class:16 MdlSummarize.module:56
+#: FrmSummary.class:17 MdlSummarize.module:56
 msgid "Custom"
 msgstr "Custom"
 
-#: FrmSummary.class:20 MdlSummarize.module:69
+#: FrmSummary.class:21 MdlSummarize.module:69
 msgid "Full"
 msgstr "Full"
 
-#: FrmSummary.class:37
+#: FrmSummary.class:38
 #, fuzzy
 msgid "Partition"
 msgstr "Preparation"
 
-#: FrmSummary.class:39
-msgid "Size"
-msgstr ""
-
-#: FrmSummary.class:41
+#: FrmSummary.class:42
 msgid "Filesystem"
 msgstr ""
 
-#: FrmSummary.class:43
+#: FrmSummary.class:44
 #, fuzzy
 msgid "Mount Point"
 msgstr "Do not mount"
 
-#: FrmSummary.class:49 MdlInstallSys.module:142 MdlPartSel.module:143
+#: FrmSummary.class:50 MdlInstallSys.module:142 MdlPartSel.module:143
 msgid "Not Used"
 msgstr "Not Used"
 
-#: FrmSummary.class:90 MdlNetConf.module:220
+#: FrmSummary.class:91 MdlNetConf.module:220
 msgid "None"
 msgstr "None"
 
-#: FrmSummary.class:112 MdlInstallSys.module:190 MdlWinDrives.module:123
+#: FrmSummary.class:113 MdlInstallSys.module:190 MdlWinDrives.module:123
 msgid "Do not mount"
 msgstr "Do not mount"
 
-#: FrmSummary.class:164
+#: FrmSummary.class:165 FrmUsrPkgSel.class:16
 msgid "Package Name"
 msgstr ""
 
-#: FrmSummary.class:173
+#: FrmSummary.class:174
 #, fuzzy
 msgid "BULK PACKAGES"
 msgstr "BULK PACKAGES:"
 
-#: FrmSummary.class:190
+#: FrmSummary.class:201
 #, fuzzy
 msgid "USER-SELECTED PACKAGES"
 msgstr "BULK PACKAGES:"
 
-#: FrmSummary.class:243
+#: FrmSummary.class:277
 #, fuzzy
 msgid "Installation Type"
 msgstr "Installation"
 
-#: FrmSummary.class:253
+#: FrmSummary.class:287
 msgid "Partition Selection Scheme"
 msgstr ""
 
-#: FrmSummary.class:263 MdlCore.module:451
+#: FrmSummary.class:297 FrmUsrPkgSel.class:135 MdlCore.module:473
 msgid "Software Selection"
 msgstr "Software Selection"
 
@@ -937,11 +945,11 @@ msgstr "Lilo returned an error. Please see below"
 msgid "Boot loader has been setup successfully"
 msgstr "Boot loader has been setup successfully"
 
-#: MdlCore.module:182
+#: MdlCore.module:204
 msgid "Scanning system for installable media. Please wait ..."
 msgstr "Scanning system for installable media. Please wait ..."
 
-#: MdlCore.module:200
+#: MdlCore.module:222
 msgid ""
 "Setup was unable to find any installable media on your system. Please insert "
 "your VectorLinux "
@@ -949,23 +957,23 @@ msgstr ""
 "Setup was unable to find any installable media on your system. Please insert "
 "your VectorLinux "
 
-#: MdlCore.module:200
+#: MdlCore.module:222
 msgid "installation CD and click "
 msgstr "installation CD and click "
 
-#: MdlCore.module:200
+#: MdlCore.module:222
 msgid "to try again"
 msgstr "to try again"
 
-#: MdlCore.module:361
+#: MdlCore.module:383
 msgid "Build Date: "
 msgstr "Build Date: "
 
-#: MdlCore.module:361
+#: MdlCore.module:383
 msgid "MINIMUM REQUIREMENTS"
 msgstr "MINIMUM REQUIREMENTS"
 
-#: MdlCore.module:366
+#: MdlCore.module:388
 msgid ""
 "Setup is unable to find SETUP.CONF in your install media. This could be "
 "symptoms of a bad burn or a bad ISO"
@@ -973,51 +981,51 @@ msgstr ""
 "Setup is unable to find SETUP.CONF in your install media. This could be "
 "symptoms of a bad burn or a bad ISO"
 
-#: MdlCore.module:439
+#: MdlCore.module:461
 msgid "Cannot find SETUP.CONF"
 msgstr "Cannot find SETUP.CONF"
 
-#: MdlCore.module:447
+#: MdlCore.module:469
 msgid "Preparation"
 msgstr "Preparation"
 
-#: MdlCore.module:448
+#: MdlCore.module:470
 msgid "Language Selection"
 msgstr "Language Selection"
 
-#: MdlCore.module:449
+#: MdlCore.module:471
 msgid "Find installation media"
 msgstr "Find installation media"
 
-#: MdlCore.module:450
+#: MdlCore.module:472
 msgid "Disk Partitioning"
 msgstr "Disk Partitioning"
 
-#: MdlCore.module:453
+#: MdlCore.module:475
 msgid "Installation"
 msgstr "Installation"
 
-#: MdlCore.module:456
+#: MdlCore.module:478
 msgid "Install Operating System"
 msgstr "Install Operating System"
 
-#: MdlCore.module:457
+#: MdlCore.module:479
 msgid "System Configuration"
 msgstr "System Configuration"
 
-#: MdlCore.module:458
+#: MdlCore.module:480
 msgid "Boot Menu Options"
 msgstr "Boot Menu Options"
 
-#: MdlCore.module:459
+#: MdlCore.module:481
 msgid "Regional Settings"
 msgstr "Regional Settings"
 
-#: MdlCore.module:461
+#: MdlCore.module:483
 msgid "User Accounts"
 msgstr "User Accounts"
 
-#: MdlCore.module:463
+#: MdlCore.module:485
 #, fuzzy
 msgid "Final Hardware Configuration"
 msgstr "Hardware Configuration"
@@ -1062,34 +1070,34 @@ msgstr "a bad install media. Setup cannot continue."
 msgid "Several windows found. I will take the first one!"
 msgstr "Several windows found. I will take the first one!"
 
-#: MdlInstallCustom.module:44
+#: MdlInstallCustom.module:46
 msgid "There as been an error while installing required system software. "
 msgstr "There as been an error while installing required system software. "
 
-#: MdlInstallCustom.module:52
+#: MdlInstallCustom.module:54
 msgid ""
 "There has been an error while installing optional software to your system. "
 msgstr ""
 "There has been an error while installing optional software to your system. "
 
-#: MdlInstallCustom.module:60
+#: MdlInstallCustom.module:63
 msgid ""
 "There has been an error while installing optional software to your system."
 msgstr ""
 
-#: MdlInstallCustom.module:72
+#: MdlInstallCustom.module:75
 msgid "Error while installing required system software. "
 msgstr "Error while installing required system software. "
 
-#: MdlInstallCustom.module:81
+#: MdlInstallCustom.module:84
 msgid "Error while installing system configuration. "
 msgstr "Error while installing system configuration. "
 
-#: MdlInstallCustom.module:88
+#: MdlInstallCustom.module:91
 msgid "Unable to install kernels. "
 msgstr "Unable to install kernels. "
 
-#: MdlInstallCustom.module:99
+#: MdlInstallCustom.module:102
 msgid ""
 "Vectorlinux is now installed in your system. Please click next to configure "
 "it."
@@ -1097,7 +1105,7 @@ msgstr ""
 "Vectorlinux is now installed in your system. Please click next to configure "
 "it."
 
-#: MdlInstallCustom.module:100
+#: MdlInstallCustom.module:103
 msgid ""
 "packages have been Installed. Please click next to move on to System "
 "Configuration."
@@ -1105,22 +1113,44 @@ msgstr ""
 "packages have been Installed. Please click next to move on to System "
 "Configuration."
 
-#: MdlInstallCustom.module:269
+#: MdlInstallCustom.module:275 MdlInstallSys.module:471
+msgid "Installing"
+msgstr "Installing"
+
+#: MdlInstallCustom.module:295
+msgid "Failed to install. Installation will stop"
+msgstr ""
+
+#: MdlInstallCustom.module:341
 #, fuzzy
 msgid "Installing user-selected package"
 msgstr "Installing Required Packages ..."
 
-#: MdlInstallCustom.module:459
+#: MdlInstallCustom.module:547
 msgid "Calculating package count ... Please wait"
 msgstr "Calculating package count ... Please wait"
 
-#: MdlInstallCustom.module:507
+#: MdlInstallCustom.module:624
 msgid "Total packages to be installed = "
 msgstr "Total packages to be installed = "
 
-#: MdlInstallCustom.module:539
+#: MdlInstallCustom.module:627
+#, fuzzy
+msgid "Total bulks to be installed = "
+msgstr "Total packages to be installed = "
+
+#: MdlInstallCustom.module:630
+#, fuzzy
+msgid "Total pkgs to be installed = "
+msgstr "Total packages to be installed = "
+
+#: MdlInstallCustom.module:665
 msgid "Error while installing "
 msgstr "Error while installing "
+
+#: MdlInstallCustom.module:734
+msgid "failed to install. Installation will stop now"
+msgstr ""
 
 #: MdlInstallSys.module:118
 msgid "Writing new /etc/fstab to system"
@@ -1142,10 +1172,6 @@ msgstr "to configure it."
 msgid "Packages have been installed in your system. Please click"
 msgstr "Packages have been installed to your system. Please click"
 
-#: MdlInstallSys.module:471
-msgid "Installing"
-msgstr "Installing"
-
 #: MdlInstallSys.module:509
 #, fuzzy
 msgid "Error occurred while installing"
@@ -1163,25 +1189,25 @@ msgstr "There has been an error extracting"
 msgid "Finished intalling Bulks"
 msgstr "Finished intalling Bulks"
 
-#: MdlInstallSys.module:736
+#: MdlInstallSys.module:745
 msgid "Installation phase complete. Ready for configuration"
 msgstr "Installation phase complete. Ready for configuration"
 
-#: MdlInstallSys.module:739
+#: MdlInstallSys.module:748
 msgid "Installing default system configuration and required software."
 msgstr "Installing default system configuration and required software."
 
-#: MdlInstallSys.module:775
+#: MdlInstallSys.module:784
 #, fuzzy
 msgid "Installing Required Package ..."
 msgstr "Installing Required Packages ..."
 
-#: MdlInstallSys.module:786
+#: MdlInstallSys.module:795
 #, fuzzy
 msgid "Failed to install"
 msgstr "Unable to install kernels. "
 
-#: MdlInstallSys.module:826
+#: MdlInstallSys.module:835
 msgid "Installing Final configuration files..."
 msgstr "Installing final configuration files ..."
 
@@ -1218,7 +1244,7 @@ msgstr "Initial Ram Disk"
 msgid "Kernel boot options"
 msgstr "Kernel boot options"
 
-#: MdlLiloOsList.module:379
+#: MdlLiloOsList.module:381
 msgid "Add option to boot this Operating system into Text mode"
 msgstr "Add option to boot this Operating system into Text mode"
 
@@ -1326,15 +1352,15 @@ msgstr "Please select only one "
 msgid "partition"
 msgstr ""
 
-#: MdlSetup.module:227
+#: MdlSetup.module:242
 msgid "BROUGHT TO YOU BY"
 msgstr ""
 
-#: MdlSetup.module:243
+#: MdlSetup.module:258
 msgid "Activating swap space"
 msgstr ""
 
-#: MdlSetup.module:245
+#: MdlSetup.module:260
 msgid "Preparing filesystems"
 msgstr ""
 
@@ -1427,6 +1453,25 @@ msgstr "localtime-copied-from"
 #: MdlZoneSet.module:28
 msgid "localtime"
 msgstr "localtime"
+
+#~ msgid "Process Overview"
+#~ msgstr "Process Overview"
+
+#~ msgid "LICENSE AGREEMENT"
+#~ msgstr "LICENSE AGREEMENT"
+
+#~ msgid "TextArea1"
+#~ msgstr "-"
+
+#~ msgid "Yes, I Agree to the License Agreement"
+#~ msgstr "Yes, I Agree to the License Agreement"
+
+#~ msgid "No, I Do Not Agree"
+#~ msgstr "No, I Do Not Agree"
+
+#, fuzzy
+#~ msgid "Installable media found."
+#~ msgstr "No Installable Media Found"
 
 #~ msgid "Name "
 #~ msgstr "Name "

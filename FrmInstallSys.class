@@ -51,7 +51,9 @@ FMain.FrmCurr = ME
 ' FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
 ' FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
 ' FMain.tvPlan["Inst1"].Selected = TRUE
-  ME.tlBanner.Text = "<h3>" & tlBanner.Text & "</h3>"
+  'ME.tlBanner.Text = "<h3>" & tlBanner.Text & "</h3>"
+  ME.tlBanner.Text = "<b>" & ME.tlBanner.Text & "</b>"
+  ME.tlCurrPkg2.Text = "<b>" & tlCurrPkg2.Text & "</b>"
   
 
       ME.tlCurrStepLbl.Text = ("Current Step")
@@ -141,7 +143,7 @@ PUBLIC SUB Form_Resize()
       '.tlCurrPkg.Move(4, 24, .FrmProg.Width - (.tlCurrPkg.Left * 2))
       .tlCurrStepLbl.Move(4, .tlCurrPkg.top + .tlCurrPkg.Height + 4, MdlObjSizer.get_object_width(.tlCurrStepLbl.text))
       '.pbInstallProg.Move(.tlCurrStepLbl.Left + .tlCurrStepLbl.Width + 8, .tlCurrStepLbl.top, .FrmProg.w - (.pbInstallProg.x + (.tlCurrStepLbl.left * 2)))
-      .pbInstallProg.Move(.tlCurrStepLbl.left + .tlCurrStepLbl.Width + 4, tlCurrStepLbl.top + (tlCurrStepLbl.Height / 4), .ClientWidth - (.pbInstallProg.Left - 4), .tlCurrStepLbl.Height / 2) '.hrsep.Width - (pbInstallProg.Left))
+      '.pbInstallProg.Move(.tlCurrStepLbl.left + .tlCurrStepLbl.Width + 4, tlCurrStepLbl.top + (tlCurrStepLbl.Height / 4), .ClientWidth - (.pbInstallProg.Left - 4), .tlCurrStepLbl.Height / 2) '.hrsep.Width - (pbInstallProg.Left))
       .tlCurrPkg2.Move(4, .pbInstallProg.top + .pbInstallProg.Height + 24, MdlObjSizer.get_object_width(.tlCurrPkg2.text))
       '.pbInstallProg2.Move(8, .tlCurrPkg2.top + .tlCurrPkg2.Height + 2, .FrmProg.Width - (.pbInstallProg2.x * 2))
       .pbInstallProg2.Move(4, tlCurrPkg2.top + .tlCurrPkg2.Height + 2, .hrsep.Width)

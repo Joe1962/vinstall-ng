@@ -3,34 +3,57 @@
 { Form Form
   MoveScaled(0,0,96,74)
   Text = ("")
-  { tlBanner TextLabel
-    MoveScaled(1,1,63,7)
-    Text = ("Vectorlinux is currently being installed to your system... Please wait")
+  Arrangement = Arrange.Vertical
+  { HPanel1 HPanel
+    MoveScaled(1,1,94,10)
+    { tlBanner TextLabel
+      MoveScaled(0,0,63,7)
+      Text = ("Vectorlinux is currently being installed to your system... Please wait")
+    }
+    { hrsep Separator
+      MoveScaled(1,7,48,2)
+    }
   }
-  { hrsep Separator
-    MoveScaled(2,8,48,2)
+  { HPanel2 HPanel
+    MoveScaled(1,13,76,7)
+    { tlCurrPkg TextLabel
+      MoveScaled(2,1,73,4)
+      Expand = True
+      Text = ("Installing ...")
+    }
   }
-  { pbInstallProg2 ProgressBar
-    MoveScaled(2,35,44,3)
-  }
-  { tlCurrPkg2 TextLabel
-    MoveScaled(3,31,45,3)
-    Text = ("Total progress")
-  }
-  { pbInstallProg ProgressBar
-    MoveScaled(15,27,31,2)
-    Label = False
-  }
-  { tlCurrPkg TextLabel
-    MoveScaled(3,17,73,6)
-    Text = ("Installing ...")
-  }
-  { tlCurrStepLbl TextLabel
-    MoveScaled(3,26,11,3)
-    Text = ("Current Step ")
-    Alignment = Align.Normal
+  { Panel1 Panel
+    MoveScaled(1,22,94,19)
+    Expand = True
+    Arrangement = Arrange.Row
+    { tlCurrStepLbl TextLabel
+      MoveScaled(1,1,11,3)
+      Text = ("Current Step ")
+      Alignment = Align.Normal
+    }
+    { Panel3 Panel
+      MoveScaled(12,1,3,2)
+    }
+    { pbInstallProg ProgressBar
+      MoveScaled(13,1,31,3)
+      Expand = True
+      Label = False
+    }
+    { Panel4 Panel
+      MoveScaled(31,4,5,4)
+      Expand = True
+    }
+    { tlCurrPkg2 TextLabel
+      MoveScaled(0,12,45,3)
+      Expand = True
+      Text = ("Total progress")
+    }
+    { pbInstallProg2 ProgressBar
+      MoveScaled(0,15,44,3)
+    }
   }
   { embCredits Panel
-    MoveScaled(12,40,52,32)
+    MoveScaled(23,41,52,30)
+    Arrangement = Arrange.Fill
   }
 }
