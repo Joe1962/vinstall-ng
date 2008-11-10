@@ -553,6 +553,8 @@ PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
   ELSE 
     i = i + 1
   END IF
+  'add bulks to ClsGlobal.iBulkCnt 
+  ClsGlobal.iBulkCnt = i
   'Message.Info(i & " from required bulks")
   'RETURN 
   'count required packages in            
@@ -562,6 +564,8 @@ PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
   sOutput = Trim(sOutput)
   sOutArr = Split(sOutput, ",")
   i = i + sOutArr.Count
+  'add pkgs TO ClsGlobal.iPkgCnt 
+  ClsGlobal.iPkgCnt = sOutArr.Count
   'Message(i & " from packages/required")
   'Count CONF packages in
   sOutArr.Clear
@@ -571,8 +575,12 @@ PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
   IF InStr(sOutput, "\n") > 0 THEN 
     sOutArr = Split(sOutput, "\n")
     i = i + sOutArr.Count
+      'add config bulks to ClsGlobal.iPkgCnt cause they are small and at the end 
+       ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + sOutArr.Count
   ELSE 
-    i = i + 1
+    i = i + 1 
+    'add config bulks to ClsGlobal.iPkgCnt cause they are small and at the end 
+    ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + 1
   END IF
   'Count user-selected stuff in
   
@@ -581,6 +589,8 @@ PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
           INC ii
           UNTIL ii = FrmPkgSel.scrlInstallOpts.Rows.Count
           i = i + irs
+          'add bulks to ClsGlobal.iBulkCnt 
+          ClsGlobal.iBulkCnt = ClsGlobal.iBulkCnt + irs
             
   
       ' ' ' ' 'we will need to cycle through the arrays for th is for accuracy...
@@ -607,11 +617,19 @@ PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
         ' ' ' ' ' ' '     
 '        NEXT 
       i = i + irs ' the count to the total
-  'i = i + ClsPkgSel.arrBulks.Count + ClsPkgSel.arrPkgs.Count
+      'i = i + ClsPkgSel.arrBulks.Count + ClsPkgSel.arrPkgs.Count
+      'add pkgs TO ClsGlobal.iPkgCnt 
+      ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + irs
   iPkgCnt = i
   PRINT ("Total packages to be installed = ") & i
   fPbInc = 1 / iPkgCnt
+  PRINT "The total progrssbar will work in increments of " & fPbInc & " on every package installed"
+  PRINT ("Total bulks to be installed = ") & ClsGlobal.iBulkCnt
+  fPbInc = 0.6 / ClsGlobal.iBulkCnt
   PRINT "The total progrssbar will work in increments of " & fPbInc & " on every bulk installed"
+  PRINT ("Total pkgs to be installed = ") & ClsGlobal.iPkgCnt
+  fPbInc = 0.4 / ClsGlobal.iPkgCnt
+  PRINT "The total progrssbar will work in increments of " & fPbInc & " on every pkg installed"
   
 END
 
@@ -706,7 +724,7 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
         FrmInstallSys.tlCurrPkg.Text = Trim(sDesc)
       IF vSize <> "" THEN 
         'MdlInstallSys.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vSize))
-        MdlInstallSys.UPDATE_STEP_PROGRESS(vTargetSize, vSize)
+        MdlInstallSys.UPDATE_STEP_PROGRESS(vTargetSize, vSize, iPkgNum)
         
         FrmInstallSys.pbInstallProg2.Value = (FrmInstallSys.pbInstallProg2.Value + (fPbInc - (fPbInc * FrmInstallSys.pbInstallProg.Value)) / 100)
       END IF
@@ -756,7 +774,7 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
     ' do the progress bar updating here
     IF vSize <> "" THEN 
       'MdlInstallSys.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vSize))
-      MdlInstallSys.UPDATE_STEP_PROGRESS(vTargetSize, CInt(vSize))
+      MdlInstallSys.UPDATE_STEP_PROGRESS(vTargetSize, CInt(vSize), iPkgNum)
       
     END IF
     UNTIL 

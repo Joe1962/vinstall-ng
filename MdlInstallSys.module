@@ -405,7 +405,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES_NEW() AS Integer
                           REPEAT 
                             WAIT 1
                               ' update progress here
-                              ME.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vPgsSize))
+                              ME.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vPgsSize), iPkgNum)
                           UNTIL 
                             hproc.State = Process.Stopped
                         END IF
@@ -476,7 +476,7 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
                     IF hproc.State = Process.Running THEN 
                       REPEAT 
                         WAIT 2
-                          ME.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vBulkSize))
+                          ME.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vBulkSize), iPkgNum)
                           
                       UNTIL 
                         hproc.State = Process.Stopped
@@ -607,7 +607,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
                       WAIT 2
-                           UPDATE_STEP_PROGRESS(sTargetSize, sPakSize)                           
+                           UPDATE_STEP_PROGRESS(sTargetSize, sPakSize, iPkgNum)                           
                     UNTIL 
                       hproc.State = Process.Stopped
                           ' error check
@@ -635,7 +635,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
 END
 
 
-PUBLIC SUB UPDATE_STEP_PROGRESS(sTargetSize AS Float, sPakSize AS Float)
+PUBLIC SUB UPDATE_STEP_PROGRESS(sTargetSize AS Float, sPakSize AS Float, iCurrPkg AS Integer)
   
   DIM iMBProgress AS Float
   DIM ipct AS Float
@@ -644,7 +644,9 @@ PUBLIC SUB UPDATE_STEP_PROGRESS(sTargetSize AS Float, sPakSize AS Float)
   DIM iVal AS Float
   DIM iProgress AS Float
   DIM iCurrSize AS Variant
- 
+  DIM fcur, fRet AS Float
+  DIM fbulk AS Float = 0.6
+   
   SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO iCurrSize
   iCurrSize = Trim(CStr(iCurrSize))
   iProgress = CInt(iCurrSize - sTargetSize)
@@ -663,6 +665,12 @@ PUBLIC SUB UPDATE_STEP_PROGRESS(sTargetSize AS Float, sPakSize AS Float)
   ENDIF 
   IF iVal > FrmInstallSys.pbInstallProg.Value THEN 
     FrmInstallSys.pbInstallProg.Value = iVal
+      IF iCurrPkg <= ClsGlobal.iBulkCnt THEN 
+        fcur = fbulk / ClsGlobal.iBulkCnt
+        fRet = (iCurrPkg - 1) * fcur
+        fRet = Round(fRet, -2)
+        FrmInstallSys.pbInstallProg2.Value = ((iVal * fcur) + fRet)
+      ENDIF 
   END IF
   
   'PRINT CStr(iCurrSize) & "/" & CStr(sTargetSize + sPakSize) & " = " & iVal & "%"
@@ -710,7 +718,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
                       WAIT 1
-                      UPDATE_STEP_PROGRESS(sTargetSize, iTlzSize)
+                      UPDATE_STEP_PROGRESS(sTargetSize, iTlzSize, iPkgNum)
                       
                           ' figure out the progress again
 
@@ -838,7 +846,7 @@ PUBLIC FUNCTION INSTALL_CONFIG_PACKAGES() AS Integer
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
                       WAIT 2
-                        ME.UPDATE_STEP_PROGRESS(itgtsize, sLinArr[1])
+                        ME.UPDATE_STEP_PROGRESS(itgtsize, sLinArr[1], iPkgNum)
                     UNTIL 
                       hproc.State = Process.Stopped
                   END IF

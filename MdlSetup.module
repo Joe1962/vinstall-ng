@@ -148,12 +148,27 @@ END
 
 PUBLIC FUNCTION UPDATE_OVERALL_PROGRESS(iTotalPkgs AS Integer, iCurrPkg AS Integer) AS Float
   DIM fRet AS Float
+  DIM fcur AS Float
+  DIM fpkg AS Float = 0.4
+  DIM fbulk AS Float = 0.6
+  DIM iCPkg AS Integer
    IF iTotalPkgs = 0 THEN 
      iTotalPkgs = 30
    ENDIF 
 
-  fRet = iCurrPkg / iTotalPkgs
-  fRet = Round(fRet, -2)
+  'fRet = iCurrPkg / iTotalPkgs
+  'fRet = Round(fRet, -2)
+  IF iCurrPkg <= ClsGlobal.iBulkCnt THEN 
+    fcur = fbulk / ClsGlobal.iBulkCnt
+    fRet = iCurrPkg * fcur
+    fRet = Round(fRet, -2)
+  ELSE 
+    fcur = fpkg / ClsGlobal.iPkgCnt
+    iCPkg = iCurrPkg - ClsGlobal.iBulkCnt
+    fRet = iCPkg * fcur
+    fRet = Round(fRet, -2)
+    fRet = fRet + 0.6
+  ENDIF 
   RETURN fRet
   
 END
