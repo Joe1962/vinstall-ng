@@ -74,7 +74,7 @@ MdlCore.PREPARE_INSTALL_LAYOUT
 WITH ME
   .btback.Enabled = FALSE
   .btback.ForeColor = Color.Gray
-  .Frame1.BackColor = Color.Transparent
+'  .Frame1.BackColor = Color.Transparent
   .tvPlan.BackColor = Color.transparent
   .tlBanner.Height = .PictureBox1.Height
   '.tvPlan.Width = MdlCore.iLeftWidth
@@ -136,15 +136,15 @@ DIM iMid AS Integer
   WITH ME
     .tlBanner.width = ME.width
   '.Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth *1.7, .ClientHeight - .PictureBox1.Height * 1.5)
-  .Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth + 90, .ClientHeight - .PictureBox1.Height * 1.5)
+  ''''.Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth + 90, .ClientHeight - .PictureBox1.Height * 1.5)
     '.Frame1.Move(4, .PictureBox1.top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 2))
     '.Frame1.Resize(MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 1.5))
-  .tvPlan.Move(4, 24, .Frame1.Width - 8, .Frame1.Height - 28) ' THIS WILL LEAVE 16PIX ON TOP AND BOTTOM AND 2 ON LEFT AND RIGHT
+  ''''.tvPlan.Move(4, 24, .Frame1.Width - 8, .Frame1.Height - 28) ' THIS WILL LEAVE 16PIX ON TOP AND BOTTOM AND 2 ON LEFT AND RIGHT
     '.tvPlan.Move(4, 24, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
     
     '.pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top + (.tlBanner.Height / 2), .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 3.5)))
-    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.Top, .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlBanner.Height + (.btback.Height * 3)))
-    .btback.Move(.pnlWinHost.Left, .Frame1.top + .Frame1.Height - .btback.Height, MdlObjSizer.get_object_width(.btback.text) + 36)
+'''    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.Top, .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlBanner.Height + (.btback.Height * 3)))
+'''    .btback.Move(.pnlWinHost.Left, .Frame1.top + .Frame1.Height - .btback.Height, MdlObjSizer.get_object_width(.btback.text) + 36)
     .btnext.Move(.pnlWinHost.Left + .pnlWinHost.Width - (.btnext.Width + 8), .btback.Top, MdlObjSizer.get_object_width(.btnext.text) + 36)
     ' for the quit button, it'll get a little tricky
       ' we want that one right in the middle
