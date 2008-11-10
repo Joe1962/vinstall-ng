@@ -12,7 +12,8 @@ FMain.FrmCurr = ME
 
 
     ME.tlBanner.text = "<h3>" & ("Installation Summary") & "</h3>"
-    IF ClsPkgSel.bCustom = TRUE THEN 
+    'IF ClsPkgSel.bCustom = TRUE THEN 
+    IF FrmPkgSel.rbCustom.Value = TRUE THEN 
       ME.TextBox1.text = ("Custom")
       ME.Frame2.Visible = TRUE
       ME.prepare_packages_summary()
@@ -242,5 +243,12 @@ ME.lbInstallType.Alignment = Align.Normal
       
       
     END WITH       
+
+END
+
+PUBLIC SUB Form_Show()
+
+  ME.Form_Open()
+  
 
 END
