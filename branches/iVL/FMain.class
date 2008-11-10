@@ -184,7 +184,7 @@ PUBLIC SUB btnext_Click()
   
   IF LAST.TEXT = ("Restart") THEN 
   'EXEC "shutdown", "-r", " now"
-  EXEC ["shutdown", "-r", "now"]
+  EXEC ["init", "6"]
   ELSE 
   
   IF FrmLangSel.Visible = TRUE THEN 
@@ -386,7 +386,9 @@ PUBLIC SUB btnext_Click()
       CASE "FrmDone"
           'offer to reboot here
                    
-          
+          SHELL ["sed", "-i", "'/^$/d'", "/root/gui.log"] WAIT 
+          SHELL ["sed", "-i", "'/^(installer/d'", "/root/gui.log"] WAIT
+          COPY "/root/gui.log" TO "/mnt/target/var/log/setup/gui.log"
           ME.END_INSTALLER()
           'frmNext = FrmAlsaConf
 '      frmNext = FrmLilo ' this is already done

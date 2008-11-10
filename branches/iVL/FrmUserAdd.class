@@ -107,19 +107,7 @@ PUBLIC SUB Button1_Click()
         RETURN 
       ELSE 
         IF ME.tbPasswd1.Text = ME.tbPasswd2.Text THEN 
-        
-          'IF IsDir(sPicdir) THEN 
-          IF bUsePic.Value = TRUE THEN 
-            'SHELL "cd " & sPicdir & " && ln -s root1.png root.face.icon"          ' This needs to go somewhere else
-              
-            'SHELL "cd " & sPicdir & " ; ln -s default3.png " & ME.tbUsername.Text & ".face.icon"
-            'this next line is for kdm
-            SHELL "cd " & sPicdir & "; ln -s " & Replace(tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & tbUsername.Text & ".face.icon" WAIT 
-            'this next line is for gdm
-            SHELL "cd /mnt/target/home/" & tbUsername.Text & "; cp " & Replace(tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & ".face" WAIT 
-            
-          ENDIF 
-          
+
             'COMPILE LIST OF GROUPS THIS USER WILL BELONG TO
                 FOR EACH cb IN MdlUsrAdd.objGrps
                   IF cb.Value = TRUE THEN 
@@ -128,11 +116,7 @@ PUBLIC SUB Button1_Click()
               NEXT 
                 sGroups = Right(sGroups, Len(sGroups) - 1)
                 'Message(sGroups)
-                
-                
-                  
-          
-            ' need to do some binding for this to work
+             'need to do some binding for this to work
             'PRINT "Mounting system locations with bind options"
             'SHELL "mount -o bind /sys /mnt/target/sys" WAIT 
             'SHELL "mount -o bind /tmp /mnt/target/tmp" WAIT 
@@ -156,6 +140,20 @@ PUBLIC SUB Button1_Click()
           
           'Message("chroot /mnt/target /sbin/passwdx " & ME.tbUsername.Text & Space(1) & ME.tbPasswd1.Text)
           SHELL "chroot /mnt/target /sbin/passwdx " & ME.tbUsername.Text & Space(1) & ME.tbPasswd1.Text WAIT 
+          'IF IsDir(sPicdir) THEN 
+          IF bUsePic.Value = TRUE THEN 
+            'SHELL "cd " & sPicdir & " && ln -s root1.png root.face.icon"          ' This needs to go somewhere else
+            'SHELL "cd " & sPicdir & " ; ln -s default3.png " & ME.tbUsername.Text & ".face.icon"
+            'this next line is for kdm
+            SHELL "cd " & sPicdir & "; ln -s " & Replace(tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & tbUsername.Text & ".face.icon" WAIT 
+            'the next lines are for gdm
+            PRINT tbPicPath.Text
+            'SHELL "cp " & Replace(tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & ClsGlobal.sTargetMnt &/ "home/" & tbUsername.Text & "/.face" WAIT 
+            COPY Trim(tbPicPath.Text) TO clsglobal.sTargetMnt &/ "home" &/ tbUsername.text &/ ".face"
+            SHELL "chmod 644 " & ClsGlobal.sTargetMnt &/ "home/" & tbUsername.Text & "/.face" WAIT 
+            SHELL "chroot " & ClsGlobal.sTargetMnt & " chown " & tbUsername.Text & Space(1) &/ "home/" & tbUsername.Text & "/.face" WAIT
+            SHELL "chroot " & ClsGlobal.sTargetMnt & " chgrp " & tbUsername.Text & Space(1) &/ "home/" & tbUsername.Text & "/.face" WAIT
+          ENDIF 
           Message(("User account for") & Space(1) & ME.tbUsername.Text & Space(1) & ("was created."))
          btClrFrm_Click() ' clear the form
           INC iUID
