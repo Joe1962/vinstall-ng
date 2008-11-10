@@ -539,19 +539,11 @@ PUBLIC SUB WRITE_INET()
 END
 
 PUBLIC SUB SET_HOSTNAME(sHostName AS String, sDomain AS String)
-  
-  DIM sRes AS String
-    SHELL "skill -n X" TO sRes
-      sRes = Trim(sRes)
+
+            
+      SHELL "echo " & sHostName & "." & sDomain & " >" & ClsGlobal.sTargetMnt &/ "etc" &/ "HOSTNAME" WAIT 
       
-      EXEC ["echo ", sHostName & "." & sDomain, " >", ClsGlobal.sTargetMnt &/ "etc" &/ "HOSTNAME"] WAIT 
-      
-    ' ' '   
-    ' ' ' IF Len(sRes) > 0 THEN 
-    ' ' '   SHELL "echo " & sHostName & " > " & ClsGlobal.sTargetMnt &/ "etc" &/ "HOSTNAME" WAIT 
-    ' ' ' ELSE ' X is not running
-    ' ' '   SHELL "hostname $HOSTNAME; echo " & sHostName & " > " & ClsGlobal.sTargetMnt &/ "etc" &/ "HOSTNAME" WAIT ' This sets the hostname to the current CLI session and saves it for future boots
-    ' ' ' END IF
+
     ME.UPDATE_HOSTS_FILE(sHostName, sDomain)
     
     

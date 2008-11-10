@@ -1,2 +1,3 @@
-- Updated binary
-  Ready for testing
+- Fixed bug in netconf 
+   Was not setting /etc/HOSTNAME
+- Fixed reverse navigation on package selection window.
