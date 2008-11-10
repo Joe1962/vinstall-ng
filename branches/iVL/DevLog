@@ -1,3 +1,4 @@
-- Fixed bug in netconf 
-   Was not setting /etc/HOSTNAME
-- Fixed reverse navigation on package selection window.
+- Changed method of displaying the left panel.
+  It is now resizable and can be completely hidden.
+  This allows more room on the right panel for smaller
+  screen resolutions.

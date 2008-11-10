@@ -3,48 +3,68 @@
 { Form Form
   MoveScaled(0,0,100,75)
   Text = ("")
-  { tlBanner TextLabel
-    MoveScaled(0,0,26,7)
-    Font = Font["+6"]
-    Background = Color.SelectedBackground
-    Foreground = Color.SelectedForeground
-    Text = ("")
-    Alignment = Align.Center
+  Arrangement = Arrange.Vertical
+  { Panel1 Panel
+    MoveScaled(6,1,88,8)
+    { tlBanner TextLabel
+      MoveScaled(0,0,26,7)
+      Font = Font["+6"]
+      Background = Color.SelectedBackground
+      Foreground = Color.SelectedForeground
+      Text = ("")
+      Alignment = Align.Center
+    }
+    { PictureBox1 PictureBox
+      MoveScaled(24,0,54,8)
+      Stretch = True
+    }
   }
-  { btnext Button
-    MoveScaled(56,67,8,3)
-    Text = ("Next")
-    Picture = Picture["icon:/16/right"]
-  }
-  { btback Button
-    MoveScaled(28,67,8,3)
-    Text = ("Back")
-    Picture = Picture["icon:/16/left"]
-  }
-  { btQuit Button
-    MoveScaled(38,67,15,3)
-    Text = ("Exit Installation")
-    Picture = Picture["icon:/16/cancel"]
-  }
-  { PictureBox1 PictureBox
-    MoveScaled(36,1,54,8)
-    Stretch = True
-  }
-  { pnlwinhost Workspace
-    MoveScaled(27,10,70,55)
+  { Panel2 Panel
+    MoveScaled(3,9,94,60)
+    Expand = True
+    Arrangement = Arrange.Horizontal
+    { SidePanel1 SidePanel
+      MoveScaled(1,1,26,63)
+      Arrangement = Arrange.Vertical
+      Orientation = Align.Left
+      { tvPlan TreeView
+        MoveScaled(1,0,23,56)
+        Expand = True
+        Mode = Select.None
+      }
+    }
+    { PnlRight Panel
+      MoveScaled(31,4,57,48)
+      Expand = True
+      Arrangement = Arrange.Vertical
+      Border = Border.Etched
+      { pnlwinhost Workspace
+        MoveScaled(5,2,30,26)
+        Expand = True
+      }
+      { ToolBar1 ToolBar
+        MoveScaled(1,44,56,3)
+        { btback Button
+          MoveScaled(0,0,8,3)
+          Text = ("Back")
+          Picture = Picture["icon:/16/left"]
+        }
+        { btQuit Button
+          MoveScaled(16,0,15,3)
+          Text = ("Exit Installation")
+          Picture = Picture["icon:/16/cancel"]
+        }
+        { btnext Button
+          MoveScaled(37,0,8,3)
+          Text = ("Next")
+          Picture = Picture["icon:/16/right"]
+        }
+      }
+    }
   }
   { Button1 Button
-    MoveScaled(16,71,10,2)
+    MoveScaled(4,71,10,2)
     Visible = False
     Text = ("Button1")
-  }
-  { Frame1 Frame
-    MoveScaled(0,7,25,62)
-    Text = ("Process Overview")
-    { tvPlan TreeView
-      MoveScaled(2,3,22,56)
-      Expand = True
-      Border = False
-    }
   }
 }

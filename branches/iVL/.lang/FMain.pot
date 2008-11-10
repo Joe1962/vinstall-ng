@@ -86,23 +86,19 @@ msgstr ""
 msgid "Your screen may flicker or go blank for a few seconds during this process."
 msgstr ""
 
-#: FMain.class:541
-msgid "Next"
-msgstr ""
-
-#: FMain.class:547
+#: FMain.class:588
 msgid "Back"
 msgstr ""
 
-#: FMain.class:553
+#: FMain.class:594
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:569
-msgid "Button1"
+#: FMain.class:600
+msgid "Next"
 msgstr ""
 
-#: FMain.class:575
-msgid "Process Overview"
+#: FMain.class:610
+msgid "Button1"
 msgstr ""
 
