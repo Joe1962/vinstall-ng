@@ -135,6 +135,9 @@ DIM iMid AS Integer
 'ME.pnlWinHost.Resize(ME.ClientWidth - ME.Frame1.Width - (ME.Frame1.left * 8), ME.ClientH - ME.tlBanner.Height - (ME.btback.Height * 8))
   WITH ME
     .tlBanner.width = ME.width
+    '.btback.Move(.HBox1.Left, .HBox1.top, MdlObjSizer.get_object_width(.btback.Text) + 36)
+    '.btnext.Move(.HBox1.Width - .btback.Width - 24, .btback.top, MdlObjSizer.get_object_width(.btnext.Text) + 36)
+    
   '.Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth *1.7, .ClientHeight - .PictureBox1.Height * 1.5)
   ''''.Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth + 90, .ClientHeight - .PictureBox1.Height * 1.5)
     '.Frame1.Move(4, .PictureBox1.top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 2))
