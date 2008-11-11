@@ -36,9 +36,6 @@ END
 
 PUBLIC SUB Form_Open()
   
-  
-  MdlSetup.GO_WITH_SELECTED(ClsInstall.sDev, ClsInstall.sISOname)
-  
   ME.tlBanner.text = "<h3>" & ME.tlBanner.text & "</h3>"
 FMain.FrmCurr = ME
 FMain.tvPlan["Prep2"].Selected = TRUE
@@ -62,8 +59,7 @@ PUBLIC SUB rbUseExisting_Click()
   ("Select this option if you already have a linux installation that you wish to overwrite or if a linux partition scheme exists in your hard disk.") & Space(1)&
   "<b>" & ("This option will overwrite any existing data in the selected partitions") & "</b><br><br>" &
   "<i>" & ("Use this option if you already prepared your partitions using the VectorLinux installer") & "</i> "
-  ClsInstall.bUseGparted = FALSE
-  'FMain.frmNext = FrmPartSel
+  FMain.frmNext = FrmPartSel
 
 END
 
@@ -72,8 +68,7 @@ PUBLIC SUB rbEditPartitions_Click()
   ME.tlChoiceExp.Text = "<h3>" & rbEditPartitions.Text & "</h3><br>" &
   ("Select this option is you wish to create, more or resize partitions in order to make room for your new VectorLinux installation.") & Space(1)&
   ("This option is the safest choice if you have other existing installations that you wish to keep.")
-  ClsInstall.bUseGparted = TRUE
-  'FMain.frmNext = FrmDiskPart
+  FMain.frmNext = FrmDiskPart
 
 END
 
