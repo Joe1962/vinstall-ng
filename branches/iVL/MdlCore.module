@@ -219,7 +219,7 @@ WAIT 1
  IF FrmSelISO.lstInstallableImg.Count = 0 THEN 
   FrmSelISO.lstInstallableImg.Add(("No Installable Media Found"))
   FrmSelISO.tlDistroDesc.Text = ("Setup was unable to find any installable media on your system. Please insert your VectorLinux ")&
-    ("installation CD and click ") & "\'" & FrmSelISO.btResCan.Text & "\' " & ("to try again")
+    ("installation CD and click") & Space(1) & "\'" & FrmSelISO.btResCan.Text & "\' " & ("to try again")
   FMain.btnext.Enabled = FALSE
   FMain.btnext.ForeColor = Color.Gray
  ELSE 

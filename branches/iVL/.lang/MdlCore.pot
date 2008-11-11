@@ -27,7 +27,7 @@ msgid "Setup was unable to find any installable media on your system. Please ins
 msgstr ""
 
 #: MdlCore.module:222
-msgid "installation CD and click "
+msgid "installation CD and click"
 msgstr ""
 
 #: MdlCore.module:222
