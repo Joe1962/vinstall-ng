@@ -4,21 +4,22 @@
   MoveScaled(0,0,72,47)
   Text = ("")
   Arrangement = Arrange.Vertical
-  { Panel1 Panel
-    MoveScaled(1,1,68,4)
-    Arrangement = Arrange.Horizontal
-    AutoResize = True
+  { HPanel1 HPanel
+    MoveScaled(1,1,68,10)
     { tlBanner TextLabel
-      MoveScaled(1,0,20,3)
+      MoveScaled(1,0,20,7)
       Expand = True
       AutoResize = True
       Text = ("Software Selection")
       Alignment = Align.Normal
-      Border = Border.Plain
+    }
+    { Separator1 Separator
+      MoveScaled(2,8,10,1)
+      Expand = True
     }
   }
   { Panel2 Panel
-    MoveScaled(1,6,70,28)
+    MoveScaled(1,12,70,28)
     Expand = True
     Arrangement = Arrange.Vertical
     { GridView1 GridView

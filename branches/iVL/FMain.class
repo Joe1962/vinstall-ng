@@ -512,6 +512,7 @@ PUBLIC SUB btback_Click()
           END WITH 
       FrmCurr.Hide
       frm.Show
+      ClsGlobal.sBackNav.Add(frm)
       END IF
 
 END

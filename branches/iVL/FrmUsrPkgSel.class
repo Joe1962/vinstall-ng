@@ -8,7 +8,7 @@ PUBLIC pNo AS Picture = Picture.Load("images/16px-Nocheck.png")
 PUBLIC SUB Form_Open()
 
 FMain.FrmCurr = ME
-
+ME.tlbanner.Text = "<h3>" & ("Select your indivirual packages to install.") & "</h3>" & " <br>" & ("To install them all, just click") & Space(1) & FMain.btnext.text ' next")
     WITH ME.GridView1
     .Columns.count = 6
     '.Rows.count = 2
@@ -20,6 +20,7 @@ FMain.FrmCurr = ME
     .Columns[3].Width = 120
     .Columns[4].Width = 0
     .Columns[5].Width = 0
+    .Columns[5].Resizable = FALSE
     
     END WITH 
 ME.LIST_PACKAGES
@@ -54,6 +55,7 @@ PUBLIC SUB LIST_PACKAGES()
                 ME.GridView1[ii, 3].Text = sSize
                 ME.GridView1[ii, 4].Text = sLoc
                 ME.GridView1[ii, 5].Text = sPkg
+                'ME.GridView1[ii, 5].ForeColor = Color.SelectedBackground
               ELSE IF Left(sLine, Len("PACKAGE DESCRIPTION:")) = "PACKAGE DESCRIPTION:" THEN 
                   sDesc = sPACKAGES[i + 1]
                   sDesc = Right(sDesc, Len(sDesc) - InStr(sDesc, ":"))
@@ -104,5 +106,11 @@ END
 PUBLIC SUB Form_Menu()
 
   MdlPkgSelNew.GET_LIST_OF_SELECTED_PACKAGES()
+
+END
+
+PUBLIC SUB Form_Show()
+
+  ME.Form_Open()
 
 END
