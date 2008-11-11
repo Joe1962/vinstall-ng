@@ -118,9 +118,11 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
       idx = FrmLilo.TabStrip1.count - 1
       sWinPart = arrNTFS[i]
       sWinAddr = Right(arrNTFS[i], Len(arrNTFS[i]) - RInStr(arrNTFS[i], "/"))
-          SHELL "mkdir /mnt" &/ sWinAddr WAIT 
+          'sHELL "mkdir /mnt" &/ sWinAddr WAIT 
+          TRY MKDIR "/mnt" &/ sWinAddr
           PRINT "mounting " & sWinAddr
-          SHELL "mount " & "/dev" &/ sWinAddr & Space(1) & "/mnt" &/ sWinAddr WAIT 
+          'SHELL "mount " & "/dev" &/ sWinAddr & Space(1) & "/mnt" &/ sWinAddr WAIT 
+          EXEC ["mount", "/dev" &/ sWinAddr, "/mnt" &/ sWinAddr] WAIT 
             IF Exist("/mnt" &/ sWinAddr &/ "windows" &/ "system32" &/ "winver.exe") OR Exist("/mnt" &/ sWinAddr &/ "winnt" &/ "system32" &/ "winver.exe") THEN 
             'IF IsDir("/mnt" &/ sWinAddr &/ "windows") = TRUE THEN 
               ' this is indeed a windows installation
