@@ -14,75 +14,75 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "ABOUT SYSTEM PARTITIONING IN LINUX"
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "Linux is a modular operating system. This means that is has the ability to store system and"
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "user data separately for added data security. You may install the system to a single partition"
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "by simply selecting a \"/\" value on this screen. The rest is optional. The following is a"
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "suggested setup for a typical Linux installation"
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "Used to store system data. This particular install requires a minimum of"
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "for this"
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "but you should considear a higher value to make sure you have room to install additional software"
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "in case you wish to."
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "Used to store user documents, pictures, videos. Give yourself as much room as you want"
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "Typically, you want to use the largest partition for this."
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested ammount"
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "for this is"
 msgstr ""
 
-#: FrmPartSel.class:149
+#: FrmPartSel.class:151
 msgid "but can also be calculated as 2 times your ammount of RAM"
 msgstr ""
 
-#: FrmPartSel.class:180
+#: FrmPartSel.class:182
 msgid "Please select the partitions you wish to use and how to use them"
 msgstr ""
 
-#: FrmPartSel.class:185
+#: FrmPartSel.class:187
 msgid "Help"
 msgstr ""
 
-#: FrmPartSel.class:205
+#: FrmPartSel.class:207
 msgid "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
 msgstr ""
 
-#: FrmPartSel.class:206
+#: FrmPartSel.class:208
 msgid "Detect and Setup Windows partitions for auto-mounting at boot"
 msgstr ""
 

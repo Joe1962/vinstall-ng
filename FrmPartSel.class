@@ -59,14 +59,14 @@ PUBLIC SUB Form_Open()
   ME.Resize(ME.Parent.Width, ME.Parent.Height - (ME.cbDoWin.height * 3))  
   ME.tlBanner.Adjust
   ME.cbDoWin.Width = MdlObjSizer.get_object_width(cbDoWin.text) + 24
-  MdlPartSel.DISPLAY_PARTITION_OPTIONS
+  
   ME.cbDoWin.Value = FALSE
   ClsPartSel.bDoWin = FALSE
   FMain.btback.Enabled = TRUE
 FMain.btback.ForeColor = Color.Black
   FMain.tvPlan["Prep2"].Selected = TRUE
   FMain.tvPlan["Prep2"].Picture = MdlCore.sNowPic
-
+MdlPartSel.DISPLAY_PARTITION_OPTIONS
 END
 
 PUBLIC SUB Form_Hide()
@@ -116,7 +116,9 @@ END
 
 PUBLIC SUB cbDoWin_Click()
 
-  ClsPartSel.bDoWin = cbDoWin.Value
+  'ClsPartSel.bDoWin = cbDoWin.Value
+  IF LAST.value = TRUE THEN ClsPartSel.bDoWin = TRUE
+  IF LAST.value = FALSE OR IF LAST.value = NULL THEN ClsPartSel.bDoWin = FALSE
     ' ' IF ClsPartSel.bDoWin = TRUE THEN 
     ' '   FMain.frmNext = FrmWinDrives
     ' ' ELSE 

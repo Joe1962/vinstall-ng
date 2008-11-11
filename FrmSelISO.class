@@ -30,10 +30,14 @@ PUBLIC SUB lstInstallableImg_Click()
   IF lstInstallableImg.Find(("No Installable Media Found")) = -1
     IF InStr(Trim(lstInstallableImg.Text), ".iso") OR InStr(Trim(lstInstallableImg.Text), ".ISO") = TRUE THEN 
     sLocation = Left(lstInstallableImg.Text, InStr(lstInstallableImg.Text, " ") - 1)
-    
+      ClsInstall.sISOname = sLocation
+      ClsInstall.sDev = Trim(Right(lstInstallableImg.Text, Len(lstInstallableImg.Text) - InStr(lstInstallableImg.Text, "/")))
+      
   ELSE 
     ipos1 = RInStr(ME.lstInstallableImg.Text, "/")
     sLocation = Right(ME.lstInstallableImg.Text, Len(ME.lstInstallableImg.Text) - ipos1)
+    ClsInstall.sDev = sLocation
+    ClsInstall.sISOname = ""
   END IF
   'function to read the file
   ME.DESCRIBE_DISTRO(sLocation)
@@ -44,6 +48,7 @@ PUBLIC SUB lstInstallableImg_Click()
   
 'Message(Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, "/") - 4))
 
+'ClsInstall.sDev = sLocation
 
 END
 

@@ -16,7 +16,7 @@
       Picture = Picture["icon:/small/help"]
     }
     { hrSep Separator
-      MoveScaled(2,6,19,1)
+      MoveScaled(5,4,19,1)
     }
   }
   { scrollPartitions ScrollView
