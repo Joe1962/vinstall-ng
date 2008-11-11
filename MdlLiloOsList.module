@@ -228,6 +228,7 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
   DIM sShortAddr AS String
   DIM iwidth AS Integer = FrmLilo.TabStrip1.Width
   DIM cb AS ComboBox
+  DIM tb AS TextBox
   
   x = 4
   y = 4
@@ -241,6 +242,7 @@ tlappends = NEW Object[]
   
   cbarr = NEW Object[]
   
+  'ME.bVlCliOption = FALSE
   SHELL "fdisk -l |grep -E \'83 *Linux\' | cut -f 1 -d \' \'" TO sLinuxList
     'sLinuxList = Trim(sLinuxList)
     
@@ -274,7 +276,7 @@ tlappends = NEW Object[]
             ENDIF 
           tl = NEW TextLabel(FrmLilo.TabStrip1) AS "OSIntro"
             WITH tl
-              .text = "<b>" & ("Operating system installed in ") & arrLinux[i] & "</b> "
+              .text = "<b>" & ("Operating system installed in") & Space(1) & arrLinux[i] & "</b> "
               .Move(4, 16, MdlObjSizer.get_object_width(.text) + 4, 27)
               '.BackColor = Color.SelectedBackground
               .Alignment = Align.Normal
@@ -374,18 +376,33 @@ tlappends = NEW Object[]
             
               FOR EACH cb IN MdlPartSel.oMountPoints
                 IF cb.text = "/" AND cb.tag = arrLinux[i] THEN
+                ClsLilo.sRootInstall = cb.Tag
+                'FrmLilo.cbDefBoot.Add("Linux-tui")
               'IF arrLinux[i] = ClsPartSel.sRoot THEN 
                 cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "VlCliOption"
                   WITH cbInclude
-                    .Value = FALSE
-                    .text = ("Add option to boot this Operating system into Text mode")
+                    .Value = TRUE
+                    .text = ("Add option to boot this Operating system into Text mode.")
                     .Width = MdlObjSizer.get_object_width(.text) + 36
                     .Height = 27
                     .Move(4, tl.top + tl.Height + 4)
-                    
                     .tag = arrLinux[i]
                     .Background = Color.Background
+                    'Message(.tag)
+                        'FOR EACH tb IN txtNames
+                        'Message(tb.tag & "<br>" & tb.Text)
+                        'message
+                          'IF Trim(tb.tag) = Trim(.tag) THEN 
+                          'Message(tb.tag)
+                           '   IF FrmLilo.cbDefBoot.Find(Trim(tb.Text & "-tui")) = -1 THEN 
+                                'FrmLilo.cbDefBoot.Add(tb.text & "-tui")
+                         '       FrmLilo.cbDefBoot.Add(Trim(tb.text) & "-tui")
+                          '    END IF
+                          'FrmLilo.cbDefBoot.Add("Linux-tui")
+'                          END IF
+'                        NEXT 
                   END WITH 
+                  'FrmLilo.cbDefBoot.Add("Linux-tui")
                   ME.iVlTag = FrmLilo.TabStrip1.Index - 1
               END IF
             NEXT 
@@ -452,7 +469,12 @@ END
 
 PUBLIC SUB VlCliOption_click()
     DIM tb AS TextBox
-  bVlCliOption = LAST.value
+  'bVlCliOption = LAST
+  IF LAST.value = TRUE THEN 
+    bVlCliOption = TRUE
+  ELSE 
+    bVlCliOption = FALSE
+  END IF
   
     FOR EACH tb IN ME.txtNames
       IF tb.tag = LAST.tag THEN 
@@ -489,6 +511,7 @@ END
 PUBLIC SUB NameBox_keyrelease()
   
     LAST.text = Replace(LAST.text, " ", "")
+    'FrmLilo.TabStrip1.text = LAST.text
     ME.list_boot_options
     
   

@@ -66,7 +66,8 @@ PUBLIC FUNCTION WRITE_LILO_DOT_CONF() AS Integer
   
   
     
-    'message(sOut)
+    message(sOut)
+    RETURN 
     ' Now we want to write the actual file to the root partition
       IF Exist(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf") THEN 
         IF Exist(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf.dist") THEN KILL ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf.dist"
@@ -277,7 +278,7 @@ sShortAddr = Right(bInc.tag, Len(bInc.tag) - RInStr(bInc.tag, "/"))
           'FOR EACH cbox IN MdlPartSel.oMountPoints
           '  IF cbox.text = "/" AND cbox.tag = ClsPartSel.sRoot THEN 
            '         IF MdlLiloOsList.bVlCliOption = TRUE THEN
-        IF bInc.tag = ClsPartSel.sRoot AND MdlLiloOsList.bVlCliOption = TRUE THEN 
+        IF bInc.tag = ClsLilo.sRootInstall AND MdlLiloOsList.bVlCliOption = TRUE THEN 
                         sCliSection = Replace(sSection, "append = \"" & sEntryApnd & "\"", "append = \"2 " & sEntryApnd & "\"") 'splash=silent\"")
                         sCliSection = Replace(sCliSection, "label = " & sEntryLbl, "label = " & sEntryLbl & "-tui")
                         sCliSection = sCliSection & gb.NewLine
