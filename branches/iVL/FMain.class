@@ -186,7 +186,7 @@ PUBLIC SUB btnext_Click()
   DIM sDev AS String
   DIM sLang AS String
   
-  tvPlan.Refresh()
+  'tvPlan.Refresh()
   
   IF LAST.TEXT = ("Restart") THEN 
   'EXEC "shutdown", "-r", " now"
@@ -239,7 +239,7 @@ PUBLIC SUB btnext_Click()
           IF .rbEditPartitions.Value = TRUE THEN 
             .tlChoiceExp.text = .tlChoiceExp.text & gb.NewLine & gb.NewLine & "<b><br><br>" & ("Please wait while setup attampts to run the partitioning utility") & "</b>"
           ELSE IF .rbUseExisting.Value = TRUE THEN 
-            .tlChoiceExp.Text = .tlChoiceExp.Text & gb.NewLine & gb.NewLine & "<b><br><br><hr>" & ("Please wait while setup analyses your current partition setup.") & " <br>" & ("This may take a while ...") & "</b>"
+            .tlChoiceExp.Text = .tlChoiceExp.Text & gb.NewLine & gb.NewLine & "<b><br><br>" & ("Please wait while setup analyses your current partition setup.") & " <br>" & ("This may take a while ...") & "</b>"
             
           END IF
        
@@ -439,7 +439,7 @@ PUBLIC SUB btnext_Click()
   END IF
 END IF
 tvPlan.Refresh()
-
+ClsGlobal.sBackNav.Add(FrmCurr)
 END
 
 
@@ -473,45 +473,46 @@ END
 
 PUBLIC SUB btback_Click()
 
-  DIM iKey AS Integer
-  DIM frm AS Form
-  
-  SELECT CASE FrmCurr.Name
-    CASE "FrmSummary"
-      'IF FrmPkgSel.rbCustom.Value = TRUE THEN 
-      IF ClsPkgSel.bCustom = TRUE THEN 
-        frm = FrmUsrPkgSel
-       'ELSE IF FrmPkgSel.rbFull.Value = TRUE THEN 
-       ELSE 
-        frm = FrmPkgSel
+   DIM iKey AS Integer
+   DIM frm AS Form
+'   
+'   SELECT CASE FrmCurr.Name
+'     CASE "FrmSummary"
+'       'IF FrmPkgSel.rbCustom.Value = TRUE THEN 
+'       IF ClsPkgSel.bCustom = TRUE THEN 
+'         frm = FrmUsrPkgSel
+'        'ELSE IF FrmPkgSel.rbFull.Value = TRUE THEN 
+'        ELSE 
+'         frm = FrmPkgSel
+'       END IF
+'     'FrmCurr.Close
+'   CASE "FrmUsrPkgSel"
+'   'FrmCurr.Hide
+'     frm = FrmPkgSel
+'   
+' 
+'   
+'   ' ' ' CASE ELSE 
+'   ' ' '   
+'   ' ' ' 
+' 
+' 
+' END SELECT         
+'   frm.Reparent(ME.pnlwinhost)
+'    FrmCurr.Close
+'    frm.Show
+    
+    
+    iKey = ClsGlobal.sBackNav.Find(FrmCurr)
+      IF iKey <> -1 THEN 
+        frm = ClsGlobal.sBackNav[iKey - 1]
+        ClsGlobal.sBackNav.Delete(iKey)
+          WITH FMain
+            .tvPlan.MoveBack
+          END WITH 
+      FrmCurr.Hide
+      frm.Show
       END IF
-    'FrmCurr.Close
-  CASE "FrmUsrPkgSel"
-  'FrmCurr.Hide
-    frm = FrmPkgSel
-  
-
-  
-  ' ' ' CASE ELSE 
-  ' ' '   
-  ' ' ' 
-  ' ' '   iKey = ClsGlobal.sBackNav.Find(FrmCurr)
-  ' ' '     IF iKey <> -1 THEN 
-  ' ' '       frm = ClsGlobal.sBackNav[iKey - 1]
-  ' ' '         WITH FMain
-  ' ' '           .tvPlan.MoveBack
-  ' ' '         END WITH 
-  ' ' '     FrmCurr.Hide
-  ' ' '     frm.Show
-  ' ' '     END IF
-
-END SELECT         
-  frm.Reparent(ME.pnlwinhost)
-   FrmCurr.Close
-   frm.Show
-    
-    
-   
 
 END
 
