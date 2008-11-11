@@ -179,9 +179,37 @@ PUBLIC SUB btQuit_Click()
 
 END
 
-
-
 PUBLIC SUB btnext_Click()
+  DIM frmLast AS Form
+  
+  'Message(pnlwinhost.Children.Type)
+  'frmTemp = FrmCurr
+'  FrmCurr.Close
+'frmlast = FrmCurr
+  IF FrmCurr.name = "FrmLangSel" THEN 
+    ME.Button1_Click()
+    RETURN 
+  ELSE 
+  'END IF
+  'FrmCurr = pnlwinhost.
+'ME.pnlwinhost.Children.Clear
+frmNext = MdlNav.Forward(FrmCurr.Name) '.Reparent(ME.pnlwinhost)
+FrmCurr.Close
+frmNext.Reparent(ME.pnlwinhost)
+  'frmlast.Hide
+  'MdlNav.Forward(FrmCurr.Name).Show()
+  'frmlast.Close
+  'frmlast.Close
+END IF
+  'MdlNav.Forward(FrmCurr.Text).Reparent(ME.pnlwinhost)
+  'MdlNav.Forward(FrmCurr.Text).Show
+  
+  
+END
+
+
+
+PUBLIC SUB btnext_Click_old()
   DIM sISONAME AS String
   DIM sDev AS String
   DIM sLang AS String
@@ -228,8 +256,7 @@ PUBLIC SUB btnext_Click()
           MdlSetup.GO_WITH_SELECTED(sDev, "")
         END IF
       frmNext = FrmPartScheme
-      
-      
+            
     CASE "FrmPartScheme"
         ' The next form is defined from the radio buttons in Frm PartScheme. But let's see if we can display some status text
         

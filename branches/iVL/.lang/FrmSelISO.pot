@@ -18,43 +18,43 @@ msgstr ""
 msgid "No Installable Media Found"
 msgstr ""
 
-#: FrmSelISO.class:74
+#: FrmSelISO.class:79
 msgid "Click"
 msgstr ""
 
-#: FrmSelISO.class:74
+#: FrmSelISO.class:79
 msgid "to begin installating"
 msgstr ""
 
-#: FrmSelISO.class:76
+#: FrmSelISO.class:81
 msgid "Unable to locate any installable media."
 msgstr ""
 
-#: FrmSelISO.class:82
+#: FrmSelISO.class:87
 msgid "Select installation media from the list below"
 msgstr ""
 
-#: FrmSelISO.class:113
+#: FrmSelISO.class:118
 msgid "Unable to identify distro."
 msgstr ""
 
-#: FrmSelISO.class:148
+#: FrmSelISO.class:153
 msgid "Minimum Disk Space Requirements"
 msgstr ""
 
-#: FrmSelISO.class:251
+#: FrmSelISO.class:256
 msgid "No installable images found."
 msgstr ""
 
-#: FrmSelISO.class:257
+#: FrmSelISO.class:262
 msgid "Select which VectorLinux version you wish to install from the list below"
 msgstr ""
 
-#: FrmSelISO.class:262
+#: FrmSelISO.class:267
 msgid "TextLabel1"
 msgstr ""
 
-#: FrmSelISO.class:267
+#: FrmSelISO.class:272
 msgid "Search Again"
 msgstr ""
 
