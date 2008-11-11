@@ -1,1 +1,2 @@
-
+- Fixed bug where the LILO os list was adding a TUI option even when the option was set to false
+- Added auto-width to the left panel.

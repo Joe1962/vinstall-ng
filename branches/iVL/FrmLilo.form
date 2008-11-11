@@ -50,7 +50,7 @@
   }
   { sbTimer SpinBox
     MoveScaled(20,16,9,3)
-    Value = 3
+    Value = 10
   }
   { tlTimoutSec TextLabel
     MoveScaled(30,16,7,3)

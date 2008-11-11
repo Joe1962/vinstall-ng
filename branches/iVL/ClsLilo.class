@@ -15,3 +15,5 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+STATIC PUBLIC sRootInstall AS String
+STATIC PUBLIC bCliOpt AS Boolean

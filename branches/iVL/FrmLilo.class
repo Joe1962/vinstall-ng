@@ -20,7 +20,9 @@ PUBLIC sLiloTrgt AS String
 
 PUBLIC SUB Form_Open()
     
-  
+  IF Application.Args[1] = "-C" THEN 
+    FMain.btnext.Enabled = TRUE
+  END IF
   ME.tlBanner.Text = "<h3>" & tlBanner.text & "</h3>"
   'ClsPartSel.sRoot = "/dev/sdb1" ' 
  FMain.FrmCurr = ME
@@ -161,9 +163,9 @@ END
 PUBLIC SUB Form_Menu()
 
   
-  'MdlConfLilo.GENERATE_LILO_DOT_CONF()
+MdlConfLilo.GENERATE_LILO_DOT_CONF()
 '  MdlConfLilo.GATHER_OTHER_LINUX_KERNELS_AND_INITRDS()
-  'MdlConfLilo.WRITE_LILO_DOT_CONF()
+MdlConfLilo.WRITE_LILO_DOT_CONF()
 
 END
 
@@ -174,5 +176,11 @@ PUBLIC SUB Form_Show()
    FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
    FMain.tvPlan["Inst1"].Picture = MdlCore.sDonePic
   ME.sVidMode = "Standard"
+
+END
+
+PUBLIC SUB Form_MouseWheel()
+
+  
 
 END

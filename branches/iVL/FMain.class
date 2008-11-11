@@ -94,6 +94,7 @@ FMain.tvPlan.MoveFirst()
  'Message(iWidth)
 FMain.btnext.Enabled = FALSE ' disable the button until a language is selected
 IF ERROR THEN Message(Error.Text & "<br>" & Error.Where)
+ME.AUTOSIZE_LEFT_PANE()
 END
 
 PUBLIC SUB AUTOSIZE_LEFT_PANE()
@@ -111,7 +112,9 @@ PUBLIC SUB AUTOSIZE_LEFT_PANE()
   'Message(iWidth)
     'ME.tvPlan.Width = iWidth + (iWidth / 5)
     ME.tvPlan.Width = iWidth + 6
-    ME.Frame1.Width = iWidth + 12
+    'ME.Frame1.Width = iWidth + 12
+    ME.SidePanel1.Width = iWidth + 64
+    'me.SidePane
 END
 
 
