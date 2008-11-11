@@ -214,6 +214,7 @@ PUBLIC SUB btnext_Click()
     
   ELSE 
   
+  IF ERROR THEN Message(Error.Where & "<br>" & Error.Text)
   
   SELECT CASE FrmCurr.Name ' very nice navigation algoritm
 
@@ -283,11 +284,13 @@ PUBLIC SUB btnext_Click()
             END IF
             
 
-    CASE "FrmPkgsel2", "FrmUsrPkgSel"
+    CASE "FrmPkgsel2" ', "FrmUsrPkgSel"
       ' summarize the build
 ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' '         MdlSummarize.SUMMARIZE_INSTALL
         frmNext = FrmSummary
         'frmNext = install
+  CASE "FrmUsrPkgSel"
+    frmNext = FrmSummary
     CASE "FrmWinDrives"
       'Move on to selecting packages
         frmNext = FrmPkgSel
@@ -472,16 +475,43 @@ PUBLIC SUB btback_Click()
 
   DIM iKey AS Integer
   DIM frm AS Form
-    iKey = ClsGlobal.sBackNav.Find(FrmCurr)
-      IF iKey <> -1 THEN 
-        frm = ClsGlobal.sBackNav[iKey - 1]
-          WITH FMain
-            .tvPlan.MoveBack
-          END WITH 
-      FrmCurr.Hide
-      frm.Show
+  
+  SELECT CASE FrmCurr.Name
+    CASE "FrmSummary"
+      'IF FrmPkgSel.rbCustom.Value = TRUE THEN 
+      IF ClsPkgSel.bCustom = TRUE THEN 
+        frm = FrmUsrPkgSel
+       'ELSE IF FrmPkgSel.rbFull.Value = TRUE THEN 
+       ELSE 
+        frm = FrmPkgSel
       END IF
-        
+    'FrmCurr.Close
+  CASE "FrmUsrPkgSel"
+  'FrmCurr.Hide
+    frm = FrmPkgSel
+  
+
+  
+  ' ' ' CASE ELSE 
+  ' ' '   
+  ' ' ' 
+  ' ' '   iKey = ClsGlobal.sBackNav.Find(FrmCurr)
+  ' ' '     IF iKey <> -1 THEN 
+  ' ' '       frm = ClsGlobal.sBackNav[iKey - 1]
+  ' ' '         WITH FMain
+  ' ' '           .tvPlan.MoveBack
+  ' ' '         END WITH 
+  ' ' '     FrmCurr.Hide
+  ' ' '     frm.Show
+  ' ' '     END IF
+
+END SELECT         
+  frm.Reparent(ME.pnlwinhost)
+   FrmCurr.Close
+   frm.Show
+    
+    
+   
 
 END
 
