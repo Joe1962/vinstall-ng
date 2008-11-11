@@ -17,38 +17,9 @@
 PUBLIC FUNCTION Forward(sTrFCurrent AS String) AS Form
   
   DIM fRet AS Form
-  DIM sISONAME, sDev, sLang AS String
-  
     SELECT CASE sTrFCurrent
-   
       CASE "FrmSelISO"
         fRet = FrmPartScheme
-      CASE "FrmPartScheme"
-          IF ClsInstall.bUseGparted = TRUE THEN 
-            Fret = FrmDiskPart
-          ELSE 
-            fRet = FrmPartSel
-          END IF
-    CASE "FrmPartsel"
-          IF NOT ClsPartSel.sRoot OR ClsPartSel.sRoot = "" THEN 
-            Message.Error(("You must select a \"/\" partition. This is the target where the system will install to"))
-          RETURN 
-          END IF
-          MdlPartSel.SET_LINUX_PARTITION_TYPES()
-          IF ClsPartSel.bDoWin = TRUE THEN 
-            fRet = FrmWinDrives
-          ELSE 
-            fRet = FrmPkgSel
-          END IF
-    CASE "FrmDiskPart"
-        'IF MdlSetup.CHECK_IF_REBOOT_NEEDED() = TRUE THEN 
-          ' now need to reboot
-        fRet = FrmPartSel
-    'case
-      
-'    END IF
-          
-        
     END SELECT 
     
     RETURN fRet

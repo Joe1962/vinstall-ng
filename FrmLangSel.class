@@ -80,8 +80,6 @@ END
 PUBLIC SUB lbLangSel_Select()
 
   FMain.btnext.Enabled = TRUE
-  ClsInstall.sLANG = LAST.current.Key
-  System.Language = ClsInstall.sLANG
   'Message(LAST.current.key)
 
 END
