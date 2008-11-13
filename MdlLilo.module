@@ -247,7 +247,7 @@ PUBLIC SUB FILL_IN_WINDOWS_TAB(sDesc AS String, sHostPart AS String)
                 END WITH 
             'y = y + tl.Height + 4
             
-            tb = NEW TextBox(FrmLiloSetup.tsLIloTabs) AS "txtWinNameBox"
+            tb = NEW TextBox(FrmLiloSetup.tsLIloTabs) AS "OsNameTxtBox" ' " txtWinNameBox ""
                 WITH tb
                     .Height = 21
                     .Width = 200
@@ -455,4 +455,33 @@ PUBLIC SUB LIST_DEFAULT_BOOT_OPTIONS()
   
 END
 
+PUBLIC SUB OsNameTxtBox_KeyPress()
+  
+  DIM sOld AS String
+  DIM iKey AS Integer
+  sOld = LAST.Text
+  iKey = FrmLiloSetup.cbBootDefault.Find(sOld)
+  
+  IF iKey <> -1 THEN FrmLiloSetup.cbBootDefault.Remove(iKey)
+  
+  'FrmLiloSetup.cbBootDefault.Add(LAST.text)
+  'IF FrmLiloSetup.cbBootDefault.Find(sOld) <> -1 THEN FrmLiloSetup.cbBootDefault.Remove
+  
+  'Message(sOld)
+  
+  
+END
 
+PUBLIC SUB OsNameTxtBox_KeyRelease()
+  DIM iKey AS Integer
+  
+  iKey = FrmLiloSetup.cbBootDefault.Find(Left(LAST.Text, Len(LAST.text) - 1))
+  IF ikey <> -1 THEN FrmLiloSetup.cbBootDefault.Remove(iKey)
+  FrmLiloSetup.cbBootDefault.Add(LAST.text)
+  
+  
+  'FrmLiloSetup.cbBootDefault.Add(LAST.text)
+  
+  
+  
+END
