@@ -5,7 +5,7 @@
   Text = ("")
   Arrangement = Arrange.Vertical
   { HPanel1 HPanel
-    MoveScaled(1,1,71,7)
+    MoveScaled(1,1,71,6)
     { tlBanner TextLabel
       MoveScaled(1,1,21,3)
       Expand = True
@@ -16,64 +16,81 @@
       Expand = True
     }
   }
-  { HPanel2 HPanel
-    MoveScaled(1,8,88,18)
+  { Panel1 Panel
+    MoveScaled(2,8,84,3)
+    Arrangement = Arrange.Horizontal
     { CheckBox1 CheckBox
-      MoveScaled(1,2,20,3)
+      MoveScaled(0,0,20,3)
       Expand = True
       Text = ("Do not install LILO")
     }
-    { tlVidRes TextLabel
-      MoveScaled(40,4,16,3)
+    { Panel2 Panel
+      MoveScaled(22,0,15,1)
       Expand = True
+      Arrangement = Arrange.Horizontal
+    }
+    { tlVidRes TextLabel
+      MoveScaled(44,0,15,3)
       Text = ("Video Resolution")
       Alignment = Align.Normal
     }
     { cbVideoRes ComboBox
-      MoveScaled(57,4,22,3)
-      Expand = True
-      Text = ("ComboBox1")
+      MoveScaled(61,0,22,3)
+      Text = ("")
     }
+  }
+  { Panel3 Panel
+    MoveScaled(1,11,88,3)
+    Arrangement = Arrange.Horizontal
     { tlLiloTarget TextLabel
-      MoveScaled(1,5,7,3)
-      Expand = True
+      MoveScaled(0,0,7,3)
       Text = ("Target")
       Alignment = Align.Normal
     }
     { cbLIloTarget ComboBox
-      MoveScaled(10,5,26,2)
+      MoveScaled(8,0,26,2)
+      Text = ("")
+    }
+    { Panel4 Panel
+      MoveScaled(35,1,5,2)
       Expand = True
-      Text = ("ComboBox1")
+      Arrangement = Arrange.Horizontal
     }
     { cbDefBoot TextLabel
-      MoveScaled(40,8,17,3)
-      Expand = True
+      MoveScaled(45,0,11,3)
       Text = ("Boot Default")
     }
     { ComboBox1 ComboBox
-      MoveScaled(58,8,21,3)
-      Expand = True
-      Text = ("ComboBox1")
+      MoveScaled(62,0,22,3)
+      Text = ("")
     }
+  }
+  { PnlTop Panel
+    MoveScaled(1,16,88,3)
+    Arrangement = Arrange.Horizontal
     { tlTimeOut TextLabel
-      MoveScaled(1,10,14,3)
-      Expand = True
+      MoveScaled(0,0,14,3)
       Text = ("Prompt Timeout")
       Alignment = Align.Normal
     }
     { SpinBox1 SpinBox
-      MoveScaled(16,10,7,3)
-      Expand = True
+      MoveScaled(15,0,7,3)
     }
     { cbTimeOutSec TextLabel
-      MoveScaled(24,10,8,3)
-      Expand = True
+      MoveScaled(24,0,8,3)
       Text = ("Seconds")
       Alignment = Align.Normal
     }
   }
+  { HBox1 HBox
+    MoveScaled(1,19,88,2)
+    { Separator2 Separator
+      MoveScaled(0,1,83,1)
+      Expand = True
+    }
+  }
   { tsLIloTabs TabStrip
-    MoveScaled(1,28,84,30)
+    MoveScaled(2,25,84,30)
     Expand = True
     Index = 0
     Text = ("Tab 0")

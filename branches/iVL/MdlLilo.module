@@ -23,6 +23,7 @@ PUBLIC arrLinuxTextBoots AS Object[]
 PUBLIC arrWinBootChecks AS Object[]
 PUBLIC arrWinNameTxtBoxes AS Object[]
 PUBLIC arrCbInitrds AS Object[]
+PUBLIC arriDLabels AS Object[]
 PRIVATE i AS Integer ' used for object key
 
 
@@ -30,8 +31,9 @@ PRIVATE i AS Integer ' used for object key
 PUBLIC SUB GENERATE_LILO_DOT_CONF()
   
   DIM tb AS TextBox
-  DIM cb AS CheckBox
-  DIM sSection AS String
+  DIM cb, chbox AS CheckBox
+  
+  DIM sSection, sClisection AS String
   DIM cbox AS ComboBox
   DIM sLabel, sKernel, sInitrd, sAppend AS String
   DIM sBootPath AS String
@@ -47,7 +49,7 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
           FOR EACH tb IN arrLinuxNametxtboxes
                 IF tb.Tag = cb.Tag THEN 
                   sLabel = tb.Text
-                  sKernel = "vmlinuz-" & sLabel
+                  sKernel = "vmlinuz-" & Right(tb.Tag, Len(tb.Tag) - RInStr(tb.Tag, "/"))
                 END IF
           NEXT 
           FOR EACH cbox IN arrCbInitrds
@@ -64,9 +66,23 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
           "append = " & sAppend & "<br>" &
           "initrd = " & sBootPath &/ sInitrd & "<br>" &
           "read only"
+              FOR EACH chbox IN ME.arrLinuxTextBoots
+                IF chbox.Value = TRUE THEN 
+                    IF chbox.tag = cb.Tag THEN 
+                      sClisection = sSection
+                      sClisection = Replace(sClisection, "append = " & sAppend, "append = 2 splash=verbose vga=791")
+                      sClisection = Replace(sClisection, "label = " & sLabel, "label = " & sLabel & "-cli")
+                    ELSE 
+                      sClisection = ""
+                    END IF
+                
+                END IF
+              NEXT 
+                  
+                  
           
           Message(sSection)
-            
+            IF sClisection THEN Message(sClisection)
                 'sSection = "image=" & "boot" &/ tb.Text
                 'Message(sSection)
             END IF
@@ -86,7 +102,7 @@ END
 PUBLIC SUB LIST_LINUX_OS()
   
   DIM sDump, sLinuxPart, sPart, vmlinuz, kernel AS String
-  DIM sOsDesc AS String
+  DIM sOsDesc, sInitrd, sKernelLoc AS String
   DIM x, y, i, ii AS Integer
   DIM sPartitions, sOs AS String[]
   
@@ -96,6 +112,7 @@ PUBLIC SUB LIST_LINUX_OS()
   arrLinuxAppendtxtBoxes = NEW Object[]
   arrLinuxTextBoots = NEW Object[]
   arrCbInitrds = NEW Object[]
+  arriDLabels = NEW Object[]
   
   
   
@@ -107,23 +124,31 @@ PUBLIC SUB LIST_LINUX_OS()
             sLinuxPart = Trim(sPartitions[i])
             sPart = Right(sLinuxpart, Len(sLinuxPart) - RInStr(sLinuxPart, "/"))
               EXEC ["mount", "/dev/" & sPart, "/tmp/lilo_tmp"] WAIT 
-                 
-                               IF IsDir("/tmp/lilo_tmp/boot") THEN 
-                                  FOR EACH vmlinuz IN Dir("/tmp/lilo_tmp/boot", "vmlinuz*", gb.File)
-                                      IF Stat("/tmp/lilo_tmp/boot" &/ vmlinuz).Type <> 6
-                                        sOsDesc = MdlLiloOsList.ID_DISTRO("/tmp/lilo_tmp")
-                                        sOsDesc = Replace(vmlinuz, "vmlinuz", sOsDesc)
+                      
+                               IF IsDir("/tmp/lilo_tmp/boot") THEN                                   
+                                  'FOR EACH vmlinuz IN Dir("/tmp/lilo_tmp/boot", "vmlinuz*", gb.File)
+                                  sOsDesc = MdlLiloOsList.ID_DISTRO("/tmp/lilo_tmp")
+                                  'Message(sOsDesc)
+                                      IF sOsDesc LIKE "vector" THEN 
+                                        sKernelLoc = "/tmp/lilo_tmp/boot"
+                                      ELSE 
+                                        sKernelLoc = "/tmp/lilo_tmp"
+                                      END IF
+                                  FOR EACH vmlinuz IN Dir(sKernelLoc, "vmlinuz")
+                                      'IF Stat("/tmp/lilo_tmp/boot" &/ vmlinuz).Type <> 6
+                                        'sOsDesc = MdlLiloOsList.ID_DISTRO("/tmp/lilo_tmp")
+                                        'sOsDesc = Replace(vmlinuz, "vmlinuz", sOsDesc)
                                         
                                       'Message(Stat("/tmp/lilo_tmp" &/ vmlinuz).Type)
                                        WITH FrmLiloSetup
                                         .tsLIloTabs.Index = .tsLIloTabs.Count - 1
-                                        .tsLIloTabs.Text = sOsDesc & Space(1) & "(" & sPart & ")"
+                                        .tsLIloTabs.Text = sOsDesc & "-" & sPart 
                                         .tsLIloTabs.Count = .tsLIloTabs.Count + 1
                                               ' populate the tabstrip here
                                               ME.FILL_IN_LINUX_TAB(sOsDesc, "/dev" &/ sPart)
                                               
                                        END WITH 
-                                       END IF
+                                       'END IF
                                   NEXT 
                           END IF
               
@@ -152,7 +177,7 @@ PUBLIC SUB LIST_WIN_INSTALLS()
                             'Message(sPartition & " has a windows install")
                             WITH FrmLiloSetup.tsLIloTabs
                               .Index = .Count - 1
-                              .Text = "Windows" & Space(1) & "(" & Right(sPartition, Len(sPartition) - RInStr(sPartition, "/")) & ")"
+                              .Text = "Windows" & Space(1) & "-" & Right(sPartition, Len(sPartition) - RInStr(sPartition, "/")) 
                               .Count = .Count + 1
                             END WITH 
                             ' populate the tab
@@ -248,8 +273,15 @@ END
   DIM hrsep AS Separator
   DIM cbox AS ComboBox
   DIM sDump AS String
+  DIM sInitrdLoc AS String
   'DIM i AS Integer
   'DIM sKernelStr AS String
+  IF sDesc LIKE "vector" THEN 
+      sInitrdLoc = "/tmp/lilo_tmp/boot" 
+  ELSE 
+      sInitrdLoc = "/tmp/lilo_tmp"
+  END IF
+  'Message(sInitrdLoc)
   
   
         ' hack just for testing here
@@ -261,11 +293,13 @@ END
       tl = NEW TextLabel(FrmLiloSetup.tsLIloTabs) AS "osItroLabels"
         WITH tl
          .Move(x, y)
-          .Text = "<h3>" & sDesc & Space(1) & ("installed in") & Space(1) & sHostPart & "</h3>"
+          .Text = "<h3>" & sDesc & Space(1) & "Linux" & Space(1) & ("installed in") & Space(1) & sHostPart & "</h3>"
           .Height = 21
           .Width = MdlObjSizer.get_object_width(.Text) + 36
           .Alignment = Align.Normal
+          .tag = i & sHostPart
         END WITH 
+          arriDLabels.Add(tl)
   y = y + tl.Height + 4
   
     hrsep = NEW Separator(FrmLiloSetup.tsLIloTabs) AS "Separators"
@@ -327,7 +361,7 @@ END
                                     .Height = 21
                                     .Tag = i & sHostPart
                                             ' BROWSE FOR INITRD IMAGES
-                                                FOR EACH sDump IN Dir("/tmp/lilo_tmp/boot/", "initrd*")
+                                                FOR EACH sDump IN Dir(sInitrdLoc, "initrd*")
                                                     IF cbox.Find(Trim(sDump)) = -1 THEN cbox.Add(Trim(sDump))                                            
                                                 NEXT 
                                             
