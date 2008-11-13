@@ -192,7 +192,7 @@ PUBLIC SUB LIST_WIN_INSTALLS()
                     
                     
                     
-                    
+                    EXEC ["sync"] WAIT 
                     EXEC ["umount", sTmpMountPoint] WAIT 
           NEXT 
   
@@ -440,6 +440,17 @@ PUBLIC SUB LIST_DEFAULT_BOOT_OPTIONS()
             END IF
         NEXT 
     END IF
+  NEXT 
+  
+  ' List windows installs now
+  FOR EACH cb IN ME.arrWinBootChecks
+      IF cb.Value = TRUE THEN 
+        FOR EACH tb IN ME.arrWinNameTxtBoxes
+          IF cb.Tag = tb.Tag THEN 
+            IF FrmLiloSetup.cbBootDefault.Find(tb.Text) = -1 THEN FrmLiloSetup.cbBootDefault.Add(tb.Text)
+          END IF
+        NEXT 
+      END IF
   NEXT 
   
 END
