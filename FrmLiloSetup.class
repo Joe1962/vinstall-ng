@@ -18,9 +18,19 @@
 
 PUBLIC SUB Form_Open()
 
+  
+        ' hack just for testing here
+        ClsPartSel.sRoot = "/dev/hdb1"
+        ClsPartSel.fRoot = "reiserfs"
+
+MdlConfLilo.DISPLAY_LILO_TARGET_OPTIONS()
+ME.list_video_modes()
+
+
   MdlLilo.LIST_LINUX_OS()
   MdlLilo.LIST_WIN_INSTALLS()
   ME.CLEANUP_TABSTRIP()
+  MdlLilo.LIST_DEFAULT_BOOT_OPTIONS() ' initial list
 END
 
 PUBLIC SUB CLEANUP_TABSTRIP()
@@ -38,6 +48,22 @@ DIM i AS Integer
   
   
 END
+
+PUBLIC SUB list_video_modes()
+  
+  WITH ME.cbVideoRes
+      .Add(("Standard"))
+      .Add(("Bootsplash Med"))
+      .Add(("Bootsplash High"))
+      .Add(("Bootsplash Extra High"))
+  END WITH 
+      
+  
+END
+
+
+
+
 
 PUBLIC SUB Form_Menu()
 

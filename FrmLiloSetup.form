@@ -17,7 +17,7 @@
     }
   }
   { Panel1 Panel
-    MoveScaled(2,8,84,3)
+    MoveScaled(2,8,84,4)
     Arrangement = Arrange.Horizontal
     { CheckBox1 CheckBox
       MoveScaled(0,0,20,3)
@@ -37,10 +37,11 @@
     { cbVideoRes ComboBox
       MoveScaled(61,0,22,3)
       Text = ("")
+      ReadOnly = True
     }
   }
   { Panel3 Panel
-    MoveScaled(1,11,88,3)
+    MoveScaled(1,12,88,4)
     Arrangement = Arrange.Horizontal
     { tlLiloTarget TextLabel
       MoveScaled(0,0,7,3)
@@ -48,8 +49,9 @@
       Alignment = Align.Normal
     }
     { cbLIloTarget ComboBox
-      MoveScaled(8,0,26,2)
+      MoveScaled(8,0,26,3)
       Text = ("")
+      ReadOnly = True
     }
     { Panel4 Panel
       MoveScaled(35,1,5,2)
@@ -59,10 +61,12 @@
     { cbDefBoot TextLabel
       MoveScaled(45,0,11,3)
       Text = ("Boot Default")
+      Alignment = Align.Normal
     }
-    { ComboBox1 ComboBox
+    { cbBootDefault ComboBox
       MoveScaled(62,0,22,3)
       Text = ("")
+      ReadOnly = True
     }
   }
   { PnlTop Panel
@@ -90,7 +94,7 @@
     }
   }
   { tsLIloTabs TabStrip
-    MoveScaled(2,25,84,30)
+    MoveScaled(2,23,84,30)
     Expand = True
     Index = 0
     Text = ("Tab 0")
