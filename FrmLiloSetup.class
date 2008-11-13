@@ -44,3 +44,9 @@ PUBLIC SUB Form_Menu()
   MdlLilo.GENERATE_LILO_DOT_CONF
 
 END
+
+PUBLIC SUB cbTimeOutSec_MouseDown()
+
+  
+
+END
