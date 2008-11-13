@@ -1,0 +1,378 @@
+' Gambas module file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC arrLinuxIncCheckboxes AS Object[]
+PUBLIC arrLinuxInitrdBoxes AS Object[]
+PUBLIC arrLinuxNametxtboxes AS Object[]
+PUBLIC arrLinuxAppendtxtBoxes AS Object[]
+PUBLIC arrLinuxTextBoots AS Object[]
+PUBLIC arrWinBootChecks AS Object[]
+PUBLIC arrWinNameTxtBoxes AS Object[]
+PUBLIC arrCbInitrds AS Object[]
+PRIVATE i AS Integer ' used for object key
+
+
+
+PUBLIC SUB GENERATE_LILO_DOT_CONF()
+  
+  DIM tb AS TextBox
+  DIM cb AS CheckBox
+  DIM sSection AS String
+  DIM cbox AS ComboBox
+  DIM sLabel, sKernel, sInitrd, sAppend AS String
+  DIM sBootPath AS String
+  
+  
+      FOR EACH cb IN arrLinuxIncCheckboxes
+          IF Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) = ClsPartSel.sRoot THEN 
+            sBootPath = "/boot"
+          ELSE 
+            sBootPath = "/boot/tamu"
+          END IF
+        IF cb.Value = TRUE THEN 
+          FOR EACH tb IN arrLinuxNametxtboxes
+                IF tb.Tag = cb.Tag THEN 
+                  sLabel = tb.Text
+                  sKernel = "vmlinuz-" & sLabel
+                END IF
+          NEXT 
+          FOR EACH cbox IN arrCbInitrds
+              IF cb.Tag = cbox.Tag THEN sInitrd = Trim(cbox.Text) & "-" & sLabel
+          NEXT 
+          FOR EACH tb IN arrLinuxAppendtxtBoxes
+            IF cb.Tag = tb.Tag THEN sAppend = Trim(tb.Text)
+            
+          NEXT 
+          
+          sSection = "image = " & sBootPath &/ sKernel & "<br>" &
+          "root = " & Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) & "<br>" &
+          "label = " & sLabel & "<br>" &
+          "append = " & sAppend & "<br>" &
+          "initrd = " & sBootPath &/ sInitrd & "<br>" &
+          "read only"
+          
+          Message(sSection)
+            
+                'sSection = "image=" & "boot" &/ tb.Text
+                'Message(sSection)
+            END IF
+          NEXT 
+        'END IF
+      'NEXT   
+      
+  
+END
+
+
+
+
+
+
+
+PUBLIC SUB LIST_LINUX_OS()
+  
+  DIM sDump, sLinuxPart, sPart, vmlinuz, kernel AS String
+  DIM sOsDesc AS String
+  DIM x, y, i, ii AS Integer
+  DIM sPartitions, sOs AS String[]
+  
+  arrLinuxIncCheckboxes = NEW Object[]
+  arrLinuxInitrdBoxes = NEW Object[]
+  arrLinuxNametxtboxes = NEW Object[]
+  arrLinuxAppendtxtBoxes = NEW Object[]
+  arrLinuxTextBoots = NEW Object[]
+  arrCbInitrds = NEW Object[]
+  
+  
+  
+  SHELL "fdisk -l |grep -E \'83 *Linux\' | cut -f 1 -d \' \'" TO sDump
+  sDump = Trim(sDump)
+  sPartitions = Split(sDump, gb.NewLine)
+      TRY MKDIR "/tmp/lilo_tmp"
+          FOR i = 0 TO sPartitions.Count - 1
+            sLinuxPart = Trim(sPartitions[i])
+            sPart = Right(sLinuxpart, Len(sLinuxPart) - RInStr(sLinuxPart, "/"))
+              EXEC ["mount", "/dev/" & sPart, "/tmp/lilo_tmp"] WAIT 
+                 
+                               IF IsDir("/tmp/lilo_tmp/boot") THEN 
+                                  FOR EACH vmlinuz IN Dir("/tmp/lilo_tmp/boot", "vmlinuz*", gb.File)
+                                      IF Stat("/tmp/lilo_tmp/boot" &/ vmlinuz).Type <> 6
+                                        sOsDesc = MdlLiloOsList.ID_DISTRO("/tmp/lilo_tmp")
+                                        sOsDesc = Replace(vmlinuz, "vmlinuz", sOsDesc)
+                                        
+                                      'Message(Stat("/tmp/lilo_tmp" &/ vmlinuz).Type)
+                                       WITH FrmLiloSetup
+                                        .tsLIloTabs.Index = .tsLIloTabs.Count - 1
+                                        .tsLIloTabs.Text = sOsDesc & Space(1) & "(" & sPart & ")"
+                                        .tsLIloTabs.Count = .tsLIloTabs.Count + 1
+                                              ' populate the tabstrip here
+                                              ME.FILL_IN_LINUX_TAB(sOsDesc, "/dev" &/ sPart)
+                                              
+                                       END WITH 
+                                       END IF
+                                  NEXT 
+                          END IF
+              
+              EXEC ["umount", "/tmp/lilo_tmp"] WAIT 
+        NEXT        
+  
+END
+
+PUBLIC SUB LIST_WIN_INSTALLS()
+  
+  DIM sWinPartlist, sPartition AS String
+  DIM sWinDrives AS String[]
+  DIM i, ii AS Integer
+  DIM sTmpMountPoint AS String = "/tmp/lilo_tmp"
+  
+  ME.arrWinBootChecks = NEW Object[]
+  ME.arrWinNameTxtBoxes = NEW Object[]
+  
+  SHELL "fdisk -l| grep -E \'^/dev/.* * .*(FAT16|FAT32|HPFS|NTFS|Win)\' | cut -f 1 -d \' \'" TO sWinPartlist
+      sWinPartlist = Trim(sWinPartlist)
+      sWinDrives = Split(sWinPartlist, gb.NewLine)
+          FOR i = 0 TO sWinDrives.Count - 1
+              sPartition = sWinDrives[i]
+                    EXEC ["mount", sPartition, sTmpMountPoint] WAIT 
+                        IF Exist(sTmpMountPoint &/ "winnt" &/ "system32" &/ "winver.exe") OR IF Exist(sTmpMountPoint &/ "WINDOWS" &/ "system32" &/ "winver.exe") THEN 
+                            'Message(sPartition & " has a windows install")
+                            WITH FrmLiloSetup.tsLIloTabs
+                              .Index = .Count - 1
+                              .Text = "Windows" & Space(1) & "(" & Right(sPartition, Len(sPartition) - RInStr(sPartition, "/")) & ")"
+                              .Count = .Count + 1
+                            END WITH 
+                            ' populate the tab
+                                ME.FILL_IN_WINDOWS_TAB("Windows", sPartition)
+                            
+                        END IF
+                    
+                    
+                    
+                    
+                    EXEC ["umount", sTmpMountPoint] WAIT 
+          NEXT 
+  
+END
+
+PUBLIC SUB FILL_IN_WINDOWS_TAB(sDesc AS String, sHostPart AS String)
+  
+  DIM tb AS TextBox
+  DIM tl AS TextLabel
+  DIM cb AS CheckBox
+  DIM hr AS Separator
+  DIM x, y AS Integer
+  
+  x = 4
+  y = 12
+  
+            tl = NEW TextLabel(FrmLiloSetup.tsLIloTabs)
+                WITH tl
+                    .Text = "<h3>" & sDesc & Space(1) & ("installed on") & Space(1) & sHostPart & "</h3>"
+                    .Height = 21
+                    .Width = MdlObjSizer.get_object_width(.Text)
+                    .Move(x, y)
+                END WITH 
+                y = y + tl.Height + 4
+            hr = NEW Separator(FrmLiloSetup.tsLIloTabs)
+              WITH hr
+                .Height = 2
+                .Move(x - 2, y)
+                .Width = FrmLiloSetup.tsLIloTabs.Width - x
+              END WITH 
+  y = y + 16
+  
+            cb = NEW CheckBox(FrmLiloSetup.tsLIloTabs) AS "bBootWinInstall"
+                WITH cb
+                    .Move(x, y)
+                    .Value = TRUE
+                    .Text = ("Include this installation in the boot menu")
+                    .Width = MdlObjSizer.get_object_width(.Text) + 36
+                    .Height = 21
+                    .Tag = sHostPart
+                END WITH 
+                  ME.arrWinBootChecks.Add(cb)
+                y = y + cb.Height + 4
+            
+            tl = NEW TextLabel(FrmLiloSetup.tsLIloTabs)
+                WITH tl
+                    .Text = ("Name")
+                    .Height = 21
+                    .Width = MdlObjSizer.get_object_width(.Text)
+                    .Move(x, y)
+                    .Alignment = Align.Normal
+                END WITH 
+            'y = y + tl.Height + 4
+            
+            tb = NEW TextBox(FrmLiloSetup.tsLIloTabs) AS "txtWinNameBox"
+                WITH tb
+                    .Height = 21
+                    .Width = 200
+                    .Text = sDesc & "-" & Right(sHostPart, Len(sHostPart) - RInStr(sHostPart, "/"))
+                    .MaxLength = 15
+                    .Move(x + tl.Width + 8, y)
+                    .Tag = sHostPart
+                END WITH 
+                ME.arrWinNameTxtBoxes.Add(tb)
+        
+  
+END
+
+
+
+
+
+
+
+
+
+  PUBLIC SUB FILL_IN_LINUX_TAB(sDesc AS String, sHostPart AS String)
+  
+  DIM tb AS TextBox
+  DIM cb AS CheckBox
+  DIM tl AS TextLabel
+  DIM x, y AS Integer
+  DIM hrsep AS Separator
+  DIM cbox AS ComboBox
+  DIM sDump AS String
+  'DIM i AS Integer
+  'DIM sKernelStr AS String
+  
+  
+        ' hack just for testing here
+        ClsPartSel.sRoot = "/dev/hdb1"
+  INC i
+  x = 4
+  y = 12
+      'WITH FrmLiloSetup.tsLIloTabs
+      tl = NEW TextLabel(FrmLiloSetup.tsLIloTabs) AS "osItroLabels"
+        WITH tl
+         .Move(x, y)
+          .Text = "<h3>" & sDesc & Space(1) & ("installed in") & Space(1) & sHostPart & "</h3>"
+          .Height = 21
+          .Width = MdlObjSizer.get_object_width(.Text) + 36
+          .Alignment = Align.Normal
+        END WITH 
+  y = y + tl.Height + 4
+  
+    hrsep = NEW Separator(FrmLiloSetup.tsLIloTabs) AS "Separators"
+      WITH hrsep
+        .Height = 2
+        .Move(x - 2, y, FrmLiloSetup.tsLIloTabs.Width - 4)
+      END WITH 
+      y = y + 16
+  
+  
+      
+      cb = NEW CheckBox(FrmLiloSetup.tsLIloTabs) AS "cbIncCheckboxes"
+        WITH cb
+          .Tag = i & sHostPart
+          .Text = ("Include in boot menu")
+          .Value = TRUE
+          .Width = MdlObjSizer.get_object_width(.Text) + 36
+          .Height = 21
+          .Move(x, y)
+        END WITH 
+          ME.arrLinuxIncCheckboxes.Add(cb)
+          y = y + cb.Height + 4
+        
+                                tl = NEW TextLabel(FrmLiloSetup.tsLIloTabs) AS "NameLabels"
+                                    WITH tl
+                                    .Move(x, y)
+                                    .Text = ("Name")
+                                    .Width = MdlObjSizer.get_object_width(.Text)
+                                    .Height = 21
+                                    .Alignment = Align.Normal
+                                  END WITH 
+                                  'y = y + tl.Height + 4
+                                  
+                                tb = NEW TextBox(FrmLiloSetup.tsLIloTabs) AS "OsNameTxtBox"
+                                      WITH tb
+                                              .Height = 21
+                                              .Width = 200
+                                              .MaxLength = 15
+                                              .Move(x + tl.Width + 8, y)
+                                              .Text = sDesc & "-" & Right(sHostPart, Len(sHostPart) - RInStr(sHostPart, "/"))
+                                              .Tag = i & sHostPart
+                                      END WITH 
+                                      ME.arrLinuxNametxtboxes.Add(tb)
+                                      x = x + tl.Width + 8 + tb.Width
+                                tl = NEW TextLabel(FrmLiloSetup.tsLIloTabs)
+                                    WITH tl
+                                        .Text = ("Initrd")
+                                        .Height = 21
+                                        .Width = MdlObjSizer.get_object_width(.Text)
+                                        .Move(x + 8, y)
+                                        .Alignment = Align.Bottom
+                                    END WITH 
+                                
+                                cbox = NEW ComboBox(FrmLiloSetup.tsLIloTabs)
+                                  WITH cbox
+                                    .Move(x + tl.Width + 16, y)
+                                    .ReadOnly = TRUE
+                                    .Width = 200
+                                    .Height = 21
+                                    .Tag = i & sHostPart
+                                            ' BROWSE FOR INITRD IMAGES
+                                                FOR EACH sDump IN Dir("/tmp/lilo_tmp/boot/", "initrd*")
+                                                    IF cbox.Find(Trim(sDump)) = -1 THEN cbox.Add(Trim(sDump))                                            
+                                                NEXT 
+                                            
+                                         .Sorted = TRUE     
+                                  END WITH 
+                                        ME.arrCbInitrds.Add(cbox)
+                              
+                                      
+                                      x = 4
+                                      y = y + tb.Height + 4
+                                      
+                                      
+                                tl = NEW TextLabel(FrmLiloSetup.tsLIloTabs) AS "AppendLabel"
+                                    WITH tl
+                                      .Text = ("Kernel boot options")
+                                      .Width = MdlObjSizer.get_object_width(.Text)
+                                      .Height = 21
+                                      .Alignment = Align.Normal
+                                      .Move(x, y)
+                                    END WITH 
+                                
+                                tb = NEW TextBox(FrmLiloSetup.tsLIloTabs) AS "txtAppendBox"
+                                    WITH tb
+                                      .Move(x + tl.Width + 8, y, FrmLiloSetup.tsLIloTabs.Width - (x + tl.Width + 8 + 4), 21)
+                                      .Text = ""
+                                      .Tag = i & sHostPart
+                                      .ReadOnly = FALSE
+                                    END WITH 
+                                    ME.arrLinuxAppendtxtBoxes.Add(tb)
+                                y = y + tb.Height + 4
+                                
+          IF sHostPart = ClsPartSel.sRoot THEN 
+              ' ADD A NEW CHECK BOX TO BOOT INTO TEXT MODE
+              cb = NEW CheckBox(FrmLiloSetup.tsLIloTabs) AS "bDoTextMode"
+                  WITH cb
+                  .Move(x, y)
+                  .Value = FALSE
+                  .Text = ("Add option to boot this operating system into text mode")
+                  .Height = 21
+                  .Width = MdlObjSizer.get_object_width(.Text) + 36
+                  .Tag = i & sHostPart
+                  END WITH 
+                    ME.arrLinuxTextBoots.Add(cb)
+        END IF
+        
+  
+END
+

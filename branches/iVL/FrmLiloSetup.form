@@ -1,0 +1,82 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,92,60)
+  Text = ("")
+  Arrangement = Arrange.Vertical
+  { HPanel1 HPanel
+    MoveScaled(1,1,71,7)
+    { tlBanner TextLabel
+      MoveScaled(1,1,21,3)
+      Expand = True
+      Text = ("Bootloaded Setup")
+    }
+    { Separator1 Separator
+      MoveScaled(2,4,22,1)
+      Expand = True
+    }
+  }
+  { HPanel2 HPanel
+    MoveScaled(1,8,88,18)
+    { CheckBox1 CheckBox
+      MoveScaled(1,2,20,3)
+      Expand = True
+      Text = ("Do not install LILO")
+    }
+    { tlVidRes TextLabel
+      MoveScaled(40,4,16,3)
+      Expand = True
+      Text = ("Video Resolution")
+      Alignment = Align.Normal
+    }
+    { cbVideoRes ComboBox
+      MoveScaled(57,4,22,3)
+      Expand = True
+      Text = ("ComboBox1")
+    }
+    { tlLiloTarget TextLabel
+      MoveScaled(1,5,7,3)
+      Expand = True
+      Text = ("Target")
+      Alignment = Align.Normal
+    }
+    { cbLIloTarget ComboBox
+      MoveScaled(10,5,26,2)
+      Expand = True
+      Text = ("ComboBox1")
+    }
+    { cbDefBoot TextLabel
+      MoveScaled(40,8,17,3)
+      Expand = True
+      Text = ("Boot Default")
+    }
+    { ComboBox1 ComboBox
+      MoveScaled(58,8,21,3)
+      Expand = True
+      Text = ("ComboBox1")
+    }
+    { tlTimeOut TextLabel
+      MoveScaled(1,10,14,3)
+      Expand = True
+      Text = ("Prompt Timeout")
+      Alignment = Align.Normal
+    }
+    { SpinBox1 SpinBox
+      MoveScaled(16,10,7,3)
+      Expand = True
+    }
+    { cbTimeOutSec TextLabel
+      MoveScaled(24,10,8,3)
+      Expand = True
+      Text = ("Seconds")
+      Alignment = Align.Normal
+    }
+  }
+  { tsLIloTabs TabStrip
+    MoveScaled(1,28,84,30)
+    Expand = True
+    Index = 0
+    Text = ("Tab 0")
+    Index = 0
+  }
+}

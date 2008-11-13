@@ -18,12 +18,12 @@
 
 
 ' needs to read arrays from clsPkgsel and install all required packages
-'PUBLIC fPbInc AS Float
+PUBLIC fPbInc AS Float
 
 PRIVATE hproc AS Process
 PRIVATE sDump AS String
 PRIVATE sErr AS String
-'PRIVATE iPkgCnt AS Integer
+PRIVATE iPkgCnt AS Integer
 PRIVATE iPkgNum AS Integer
 
 
@@ -36,9 +36,7 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
       .tvPlan["Inst1"].Picture = MdlCore.sNowPic
       .tvPlan["Inst0"].Picture = MdlCore.sDonePic
   END WITH 
-  'pass the pkg count to the function in mdlsetup
-  MdlSetup.CALCULATE_PACKAGE_COUNT(TRUE)
-  'ME.CALCULATE_TOTAL_PACKAGES() 
+  ME.CALCULATE_TOTAL_PACKAGES() 
     'RETURN 
   WAIT 2  
   iRet = ME.INSTALL_REQUIRED_BULKS()
@@ -68,8 +66,8 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
       
   'iret = ME.INSTALL_PACKAGES_REQUIRED()
   ' Make sure we set the right value for the progress bar here
-    'MdlInstallSys.iPkgCnt = iPkgCnt
-    'MdlInstallSys.iPkgNum = iPkgNum
+    MdlInstallSys.iPkgCnt = iPkgCnt
+    MdlInstallSys.iPkgNum = iPkgNum
   iret = MdlInstallSys.INSTALL_REQUIRED_PACKAGES()
   PRINT "INSTALLING ADDITIONAL REQUIRED SOFTWARE"
   
@@ -277,7 +275,7 @@ PUBLIC FUNCTION INSTALL_USER_PACKAGES() AS Integer
           FrmInstallSys.tlCurrPkg.Text = ("Installing") & Space(1) & FrmUsrPkgSel.GridView1[ii, 1].Text
                 FrmInstallSys.pbInstallProg.Value = i / iStepTotal
           INC iPkgNum
-          FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, iPkgNum)
+          FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
           
               'hproc = EXEC ["installpkg", sBasePath &/ sLoc &/ sPkg, " -R ", ClsGlobal.sTargetMnt, " || echo \'FAILED\' 2> /tmp/installdump"]
               'hproc = EXEC ["installpkg -R " & ClsGlobal.sTargetMnt & Space(1) & sBasePath &/ sLoc &/ sPkg & " || echo \'FAILED\' 2> /tmp/installdump"]
@@ -355,7 +353,7 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_PACKAGES() AS Integer
               FrmInstallSys.pbInstallProg.Value = i / iStepTotal
             INC iPkgNum
               'MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
-              FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, iPkgNum)
+              FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
                 IF InStr(sDump, "FAILED") > 0 THEN 
                   Message.Error("Error installing user-selected package" & Space(1) & cb.Text)
                   RETURN 1
@@ -537,103 +535,103 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_BULKS() AS Integer
  END
 
 
-' PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
-' 
-'   DIM i, ii AS Integer
-'   DIM irs AS Integer
-'   DIM sOutput AS String
-'   DIM sOutArr AS String[]
-'   DIM cb AS CheckBox
-'     
-' 
-'   PRINT ("Calculating package count ... Please wait")
-'   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^BULK | grep required" TO sOutput
-'   sOutput = Trim(sOutput)
-'   IF InStr(sOutput, "\n") > 0 THEN 
-'     sOutArr = Split(sOutput, "\n")
-'     i = i + sOutArr.Count
-'   ELSE 
-'     i = i + 1
-'   END IF
-'   'add bulks to ClsGlobal.iBulkCnt 
-'   ClsGlobal.iBulkCnt = i
-'   'Message.Info(i & " from required bulks")
-'   'RETURN 
-'   'count required packages in            
-'   sOutArr.Clear
-'   sOutput = ""
-'   SHELL "ls -m " & ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ "*.t?z" TO sOutput
-'   sOutput = Trim(sOutput)
-'   sOutArr = Split(sOutput, ",")
-'   i = i + sOutArr.Count
-'   'add pkgs TO ClsGlobal.iPkgCnt 
-'   ClsGlobal.iPkgCnt = sOutArr.Count
-'   'Message(i & " from packages/required")
-'   'Count CONF packages in
-'   sOutArr.Clear
-'   sOutput = ""
-'   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^CONF" TO sOutput
-'   sOutput = Trim(sOutput)
-'   IF InStr(sOutput, "\n") > 0 THEN 
-'     sOutArr = Split(sOutput, "\n")
-'     i = i + sOutArr.Count
-'       'add config bulks to ClsGlobal.iPkgCnt cause they are small and at the end 
-'        ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + sOutArr.Count
-'   ELSE 
-'     i = i + 1 
-'     'add config bulks to ClsGlobal.iPkgCnt cause they are small and at the end 
-'     ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + 1
-'   END IF
-'   'Count user-selected stuff in
-'   
-'         REPEAT 
-'           IF FrmPkgSel.scrlInstallOpts[ii, 0].Picture = FrmPkgSel.pyes THEN INC irs
-'           INC ii
-'           UNTIL ii = FrmPkgSel.scrlInstallOpts.Rows.Count
-'           i = i + irs
-'           'add bulks to ClsGlobal.iBulkCnt 
-'           ClsGlobal.iBulkCnt = ClsGlobal.iBulkCnt + irs
-'             
-'   
-'       ' ' ' ' 'we will need to cycle through the arrays for th is for accuracy...
-'       ' ' ' '   irs = 0
-'       ' ' ' '   FOR EACH cb IN MdlPkgSel.Bulks
-'       ' ' ' '     IF cb.value = TRUE THEN INC irs
-'       ' ' ' '       
-'       ' ' ' '     
-'       ' ' ' '   NEXT 
-'       ' ' ' '   i = i + irs
-'       ' now do the optional packages
-'       irs = 0 ' reset the count
-'        
-'         REPEAT 
-'           IF FrmUsrPkgSel.GridView1[ii, 0].Picture = FrmUsrPkgSel.pYes THEN 
-'             INC irs
-'           END IF
-'           INC ii
-'           UNTIL ii = FrmUsrPkgSel.GridView1.Rows.Count
-'           
-'       
-'         ' ' ' ' ' ' ' FOR EACH cb IN MdlPkgSel.Pkgs
-'         ' ' ' ' ' ' '   IF cb.Value = TRUE THEN INC irs
-'         ' ' ' ' ' ' '     
-' '        NEXT 
-'       i = i + irs ' the count to the total
-'       'i = i + ClsPkgSel.arrBulks.Count + ClsPkgSel.arrPkgs.Count
-'       'add pkgs TO ClsGlobal.iPkgCnt 
-'       ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + irs
-'   iPkgCnt = i
-'   PRINT ("Total packages to be installed = ") & i
-'   fPbInc = 1 / iPkgCnt
-'   PRINT "The total progrssbar will work in increments of " & fPbInc & " on every package installed"
-'   PRINT ("Total bulks to be installed = ") & ClsGlobal.iBulkCnt
-'   fPbInc = 0.6 / ClsGlobal.iBulkCnt
-'   PRINT "The total progrssbar will work in increments of " & fPbInc & " on every bulk installed"
-'   PRINT ("Total pkgs to be installed = ") & ClsGlobal.iPkgCnt
-'   fPbInc = 0.4 / ClsGlobal.iPkgCnt
-'   PRINT "The total progrssbar will work in increments of " & fPbInc & " on every pkg installed"
-'   
-' END
+PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
+
+  DIM i, ii AS Integer
+  DIM irs AS Integer
+  DIM sOutput AS String
+  DIM sOutArr AS String[]
+  DIM cb AS CheckBox
+    
+
+  PRINT ("Calculating package count ... Please wait")
+  SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^BULK | grep required" TO sOutput
+  sOutput = Trim(sOutput)
+  IF InStr(sOutput, "\n") > 0 THEN 
+    sOutArr = Split(sOutput, "\n")
+    i = i + sOutArr.Count
+  ELSE 
+    i = i + 1
+  END IF
+  'add bulks to ClsGlobal.iBulkCnt 
+  ClsGlobal.iBulkCnt = i
+  'Message.Info(i & " from required bulks")
+  'RETURN 
+  'count required packages in            
+  sOutArr.Clear
+  sOutput = ""
+  SHELL "ls -m " & ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ "*.t?z" TO sOutput
+  sOutput = Trim(sOutput)
+  sOutArr = Split(sOutput, ",")
+  i = i + sOutArr.Count
+  'add pkgs TO ClsGlobal.iPkgCnt 
+  ClsGlobal.iPkgCnt = sOutArr.Count
+  'Message(i & " from packages/required")
+  'Count CONF packages in
+  sOutArr.Clear
+  sOutput = ""
+  SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^CONF" TO sOutput
+  sOutput = Trim(sOutput)
+  IF InStr(sOutput, "\n") > 0 THEN 
+    sOutArr = Split(sOutput, "\n")
+    i = i + sOutArr.Count
+      'add config bulks to ClsGlobal.iPkgCnt cause they are small and at the end 
+       ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + sOutArr.Count
+  ELSE 
+    i = i + 1 
+    'add config bulks to ClsGlobal.iPkgCnt cause they are small and at the end 
+    ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + 1
+  END IF
+  'Count user-selected stuff in
+  
+        REPEAT 
+          IF FrmPkgSel.scrlInstallOpts[ii, 0].Picture = FrmPkgSel.pyes THEN INC irs
+          INC ii
+          UNTIL ii = FrmPkgSel.scrlInstallOpts.Rows.Count
+          i = i + irs
+          'add bulks to ClsGlobal.iBulkCnt 
+          ClsGlobal.iBulkCnt = ClsGlobal.iBulkCnt + irs
+            
+  
+      ' ' ' ' 'we will need to cycle through the arrays for th is for accuracy...
+      ' ' ' '   irs = 0
+      ' ' ' '   FOR EACH cb IN MdlPkgSel.Bulks
+      ' ' ' '     IF cb.value = TRUE THEN INC irs
+      ' ' ' '       
+      ' ' ' '     
+      ' ' ' '   NEXT 
+      ' ' ' '   i = i + irs
+      ' now do the optional packages
+      irs = 0 ' reset the count
+       
+        REPEAT 
+          IF FrmUsrPkgSel.GridView1[ii, 0].Picture = FrmUsrPkgSel.pYes THEN 
+            INC irs
+          END IF
+          INC ii
+          UNTIL ii = FrmUsrPkgSel.GridView1.Rows.Count
+          
+      
+        ' ' ' ' ' ' ' FOR EACH cb IN MdlPkgSel.Pkgs
+        ' ' ' ' ' ' '   IF cb.Value = TRUE THEN INC irs
+        ' ' ' ' ' ' '     
+'        NEXT 
+      i = i + irs ' the count to the total
+      'i = i + ClsPkgSel.arrBulks.Count + ClsPkgSel.arrPkgs.Count
+      'add pkgs TO ClsGlobal.iPkgCnt 
+      ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + irs
+  iPkgCnt = i
+  PRINT ("Total packages to be installed = ") & i
+  fPbInc = 1 / iPkgCnt
+  PRINT "The total progrssbar will work in increments of " & fPbInc & " on every package installed"
+  PRINT ("Total bulks to be installed = ") & ClsGlobal.iBulkCnt
+  fPbInc = 0.6 / ClsGlobal.iBulkCnt
+  PRINT "The total progrssbar will work in increments of " & fPbInc & " on every bulk installed"
+  PRINT ("Total pkgs to be installed = ") & ClsGlobal.iPkgCnt
+  fPbInc = 0.4 / ClsGlobal.iPkgCnt
+  PRINT "The total progrssbar will work in increments of " & fPbInc & " on every pkg installed"
+  
+END
 
 
 PUBLIC FUNCTION INSTALL_REQUIRED_BULKS() AS Integer
@@ -670,7 +668,7 @@ PUBLIC FUNCTION INSTALL_REQUIRED_BULKS() AS Integer
       PRINT " ! " & ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulk & " is installed"
     NEXT 
   ELSE ' found only one line
-    'iPkgCnt = iPkgCnt + 1 ' add only one to the overall package count
+    iPkgCnt = iPkgCnt + 1 ' add only one to the overall package count
     sTrimmed = Right(sOutput, Len(sOutput) - InStr(sOutput, "\'"))
     sTrimmed = Left(sTrimmed, Len(sTrimmed) - RInStr(sTrimmed, "\'"))
     sLine = Split(sTrimmed, ":")
@@ -728,7 +726,7 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
         'MdlInstallSys.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vSize))
         MdlInstallSys.UPDATE_STEP_PROGRESS(vTargetSize, vSize, iPkgNum)
         
-        FrmInstallSys.pbInstallProg2.Value = (FrmInstallSys.pbInstallProg2.Value + (ClsGlobal.fPbInc - (ClsGlobal.fPbInc * FrmInstallSys.pbInstallProg.Value)) / 100)
+        FrmInstallSys.pbInstallProg2.Value = (FrmInstallSys.pbInstallProg2.Value + (fPbInc - (fPbInc * FrmInstallSys.pbInstallProg.Value)) / 100)
       END IF
     UNTIL 
       hproc.State = Process.Stopped
@@ -740,7 +738,7 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
       ' ' ' IF InStr(sDump, "FAILED") > 0 THEN 
       ' ' '   RETURN 1
       ' ' ' ELSE
-        FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, iPkgNum) 
+        FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum) 
       RETURN 0
     END IF
 '  END IF
@@ -762,7 +760,7 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
   END IF
   FrmInstallSys.pbInstallProg.Value = 0          
   INC iPkgNum
-  PRINT "Package " & iPkgNum & " of " & ClsGlobal.iPkgTot
+  PRINT "Package " & iPkgNum & " of " & iPkgCnt
   MdlSetup.SHOW_PROGRESS_CONTROLS()
   FrmInstallSys.tlCurrPkg.Text = "Processing " & File.Name(sPackagePath)
   'hproc = SHELL "install-pkg " & sPackagePath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
@@ -790,7 +788,7 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
       ELSE
         FrmInstallSys.pbInstallProg.Value = 1
         WAIT  
-        FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, iPkgNum)
+        FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
         RETURN 0
       END IF
   END IF
