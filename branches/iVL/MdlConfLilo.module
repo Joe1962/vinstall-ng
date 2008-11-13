@@ -119,39 +119,20 @@ PUBLIC SUB DISPLAY_LILO_TARGET_OPTIONS()
   
     SHELL "probedisk | grep -v cdrom |cut -f 1 -d \'|\'" TO sList
       sList = Trim(sList)
-      sListarr = Split(sList, "\n")
+      sListarr = Split(sList, "\n").Sort(gb.Ascent)
         FOR i = 0 TO sListarr.count - 1
           sTarget = "MBR of " & Trim(sListarr[i])
-          FrmLilo.LiloTarget.Add(sTarget)
+          'FrmLilo.LiloTarget.Add(sTarget)
+          FrmLiloSetup.cbLIloTarget.Add(sTarget)
         NEXT 
         
-      WITH FrmLilo.LiloTarget
-          'IF LCase(ClsPartSel.fRoot) <> "xfs" THEN 
-          'IF Application.Args[1] <> "" THEN 
+      'WITH FrmLilo.LiloTarget
+      WITH FrmLiloSetup.cbLIloTarget
+          IF LCase(ClsPartSel.fRoot) <> "xfs" THEN 
+  
+                  .Add("Sector")
+           END IF
                 
-                ' DETECT THE FILESYSTEM OF THE PARTITION BEING MOUNTED AS ROOT HERE
-                
-                
-                
-           ' ELSE 
-          
-              FOR EACH cb IN MdlPartSel.oMountPoints
-                IF cb.text = "/" THEN 
-                  ClsPartSel.sRoot = cb.Tag ' make sure this is set... we will need it later
-                    FOR EACH cb1 IN MdlPartSel.oFsTypes
-                      IF cb1.tag = cb.tag THEN 
-                      IF cb1.text <> "xfs" THEN .Add("Sector")
-                      END IF
-                    NEXT 
-                END IF
-          NEXT 
-        
-        
-      'END IF
-                
-          '.Add("Sector")
-'          END IF
-          
           
           
       SHELL "lsdev | grep floppy" TO sDump

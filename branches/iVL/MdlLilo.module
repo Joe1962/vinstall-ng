@@ -163,7 +163,7 @@ PUBLIC SUB LIST_WIN_INSTALLS()
   DIM sWinDrives AS String[]
   DIM i, ii AS Integer
   DIM sTmpMountPoint AS String = "/tmp/lilo_tmp"
-  
+  DIM hproc AS Process
   ME.arrWinBootChecks = NEW Object[]
   ME.arrWinNameTxtBoxes = NEW Object[]
   
@@ -172,7 +172,12 @@ PUBLIC SUB LIST_WIN_INSTALLS()
       sWinDrives = Split(sWinPartlist, gb.NewLine)
           FOR i = 0 TO sWinDrives.Count - 1
               sPartition = sWinDrives[i]
-                    EXEC ["mount", sPartition, sTmpMountPoint] WAIT 
+                    hproc = EXEC ["mount", sPartition, sTmpMountPoint] WAIT 
+                          IF hproc.Value > 0 THEN 
+                            EXEC ["sync"] WAIT 
+                            EXEC ["umount", sPartition] WAIT 
+                            EXEC ["mount", sPartition, sTmpMountPoint] WAIT 
+                    END IF
                         IF Exist(sTmpMountPoint &/ "winnt" &/ "system32" &/ "winver.exe") OR IF Exist(sTmpMountPoint &/ "WINDOWS" &/ "system32" &/ "winver.exe") THEN 
                             'Message(sPartition & " has a windows install")
                             WITH FrmLiloSetup.tsLIloTabs
@@ -283,9 +288,7 @@ END
   END IF
   'Message(sInitrdLoc)
   
-  
-        ' hack just for testing here
-        ClsPartSel.sRoot = "/dev/hdb1"
+
   INC i
   x = 4
   y = 12
@@ -361,11 +364,11 @@ END
                                     .Height = 21
                                     .Tag = i & sHostPart
                                             ' BROWSE FOR INITRD IMAGES
-                                                FOR EACH sDump IN Dir(sInitrdLoc, "initrd*")
+                                                FOR EACH sDump IN Dir(sInitrdLoc, "initrd*").Sort(gb.Ascent)
                                                     IF cbox.Find(Trim(sDump)) = -1 THEN cbox.Add(Trim(sDump))                                            
                                                 NEXT 
-                                            
-                                         .Sorted = TRUE     
+                                         .Sorted = gb.Ascent
+                                         '.Sorted = TRUE     
                                   END WITH 
                                         ME.arrCbInitrds.Add(cbox)
                               
@@ -409,4 +412,36 @@ END
         
   
 END
+
+
+PUBLIC SUB LIST_DEFAULT_BOOT_OPTIONS()
+  
+  DIM cb, cbox AS CheckBox
+  DIM tb AS TextBox
+  
+        FOR EACH cb IN ME.arrLinuxIncCheckboxes
+          IF cb.Value = TRUE THEN 
+              FOR EACH tb IN ME.arrLinuxNametxtboxes
+                IF tb.Tag = cb.Tag THEN 
+                    WITH FrmLiloSetup.cbBootDefault
+                      IF .Find(tb.Text) = -1 THEN .Add(tb.Text)
+                    END WITH 
+              END IF
+          NEXT 
+          FOR EACH cbox IN ME.arrLinuxTextBoots
+            IF cb.Tag = cbox.Tag THEN 
+              IF cbox.Value = TRUE THEN 
+                  FOR EACH tb IN ME.arrLinuxNametxtboxes
+                    IF cbox.Tag = tb.Tag THEN 
+                        IF FrmLiloSetup.cbBootDefault.Find(tb.Text & "-tui") = -1 THEN FrmLiloSetup.cbBootDefault.Add(tb.Text & "-tui")
+                    END IF
+                  NEXT 
+              END IF
+            END IF
+        NEXT 
+    END IF
+  NEXT 
+  
+END
+
 
