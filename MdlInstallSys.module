@@ -312,9 +312,9 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
       .tvPlan["Inst0"].Picture = MdlCore.sDonePic
     END WITH   
   
-    'iPkgCnt = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
+    iPkgCnt = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
     'Message.Info("Total packages = " & iPkgCnt)
-    PRINT "Total packages to be installed " & ClsGlobal.iPkgTot
+    PRINT "Total packages to be installed " & iPkgCnt
     PRINT "Installing bulks"
     MdlSetup.SHOW_PROGRESS_CONTROLS()
     
@@ -446,6 +446,8 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
   'DIM sFile AS String = File.Load(ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF")
   DIM sLine AS String
   
+  
+  
      SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^BULK" TO sRawList
      '   sList = Split(File.Load(Temp$("SETUP.CONF")), "\n")  
       sList = Split(sRawList, "\n")
@@ -475,7 +477,7 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
                       REPEAT 
                         WAIT 2
                           ME.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vBulkSize), iPkgNum)
-                          FrmInstallSys.pbInstallProg2.Value = (FrmInstallSys.pbInstallProg2.Value + (ClsGlobal.fPbInc - (ClsGlobal.fPbInc * FrmInstallSys.pbInstallProg.Value)) / 100)
+                          
                       UNTIL 
                         hproc.State = Process.Stopped
                         'error check

@@ -11,7 +11,7 @@
     MoveScaled(1,7,18,3)
     Text = ("Don't Install Lilo")
   }
-  { TabStrip1 TabStrip
+  { tsOsSetup TabStrip
     MoveScaled(1,27,71,40)
     Index = 0
     Text = ("Tab 0")
