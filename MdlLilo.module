@@ -27,6 +27,60 @@ PUBLIC arriDLabels AS Object[]
 PRIVATE i AS Integer ' used for object key
 
 
+PUBLIC SUB TRIGGER_LILO_SETUP()
+  
+  ME.GENERATE_LILO_DOT_CONF ' Generates and write lilo.conf
+  MdlConfLilo.PERFORM_BINDING() ' Performs binding mounts for LILO setup
+  MdlConfLilo.EXECUTE_LILO() ' Execute lilo in chroot mode
+  
+  
+  
+END
+
+PUBLIC FUNCTION GENERATE_LILO_DOT_CONF_VIDEOMODES_SECTION() AS String
+  
+  DIM sInput AS String = Trim(FrmLiloSetup.cbVideoRes.Text)
+  DIM sVGA AS String
+  DIM sOutput AS String
+    SELECT CASE sInput
+      CASE (("Standard"))
+        svga = "normal"
+      CASE (("Bootsplash Med"))
+        sVga = "788"
+      CASE (("Bootsplash High"))
+        sVga = "791"
+      CASE (("Bootsplash Extra High"))
+      sVga = "794"
+    END SELECT 
+    
+sOutput = "# VESA framebuffer console @ 1024x768x64k \n" &
+"vga = " & sVga & "<br>" &
+"# Normal VGA console n" &
+"#vga = normal \n" &
+"#VESA framebuffer console @ 1024 x768x64k \n" &
+"#vga = 791 \n" &
+"#VESA framebuffer console @ 1024 x768x32k \n" &
+"#vga = 790 \n" &
+"#VESA framebuffer console @ 1024 x768x256 \n" &
+"#vga = 773 \n" &
+"#VESA framebuffer console @ 800 x600x64k \n" &
+"#vga = 788 \n" &
+"#VESA framebuffer console @ 800 x600x32k \n" &
+"#vga = 787 \n" &
+"#VESA framebuffer console @ 800 x600x256 \n" &
+"#vga = 771 \n" &
+"#VESA framebuffer console @ 640 x480x64k \n" &
+"#vga = 785 \n" &
+"#VESA framebuffer console @ 640 x480x32k \n" &
+"#vga = 784 \n" &
+"#VESA framebuffer console @ 640 x480x256 \n" &
+"#vga = 769"
+
+RETURN sOutput
+  
+END
+
+
 
 PUBLIC FUNCTION generate_lilo_dot_conf_header() AS String
     DIM sHeader AS String
@@ -66,7 +120,6 @@ PUBLIC FUNCTION generate_lilo_dot_conf_header() AS String
     "bitmap = /boot/bitmap/boot.bmp \n" 
   END IF
   sHeader = sHeader & "\n" &
-  "vga = 791 \n" &
   "# Begin listing OS Choices \n"
 
     
@@ -81,11 +134,11 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
   
   DIM tb AS TextBox
   DIM cb, chbox AS CheckBox
-DIM sOsEntries AS String  
+  DIM sOsEntries AS String  
   DIM sSection, sClisection, sWinSection AS String
   DIM cbox AS ComboBox
   DIM sLabel, sKernel, sInitrd, sAppend, sTag AS String
-  DIM sBootPath, sHeader, sFile AS String
+  DIM sBootPath, sHeader, sFile, sVidModeSection AS String
   
   
   
@@ -104,7 +157,7 @@ DIM sOsEntries AS String
                 END IF
           NEXT 
           FOR EACH cbox IN arrCbInitrds
-              IF cb.Tag = cbox.Tag THEN sInitrd = Trim(cbox.Text) & "-" & sLabel
+              IF cb.Tag = cbox.Tag THEN sInitrd = Trim(cbox.Text) & "-" & Right(cbox.Tag, Len(cbox.Tag) - RInStr(cbox.tag, "/"))
           NEXT 
           FOR EACH tb IN arrLinuxAppendtxtBoxes
             IF cb.Tag = tb.Tag THEN sAppend = Trim(tb.Text)
@@ -160,8 +213,19 @@ DIM sOsEntries AS String
         'END IF
       'NEXT   
       sHeader = ME.generate_lilo_dot_conf_header()
-      sFile = sHeader & "<br>" & sOsEntries
+      sVidModeSection = ME.GENERATE_LILO_DOT_CONF_VIDEOMODES_SECTION()
+      sFile = sHeader & "<br>" & sVidModeSection & "<br><br>" & sOsEntries
       
+      'Message(sFile)
+      
+        ' move files to the right place
+        ME.COPY_KERNELS_AND_INITRDS()
+          IF Exist(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf") THEN 
+            TRY MOVE ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf" TO ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf.dist"
+          END IF
+            
+        File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf", sFile)
+        
       ' write the file to the target
       
   
@@ -169,6 +233,72 @@ END
 
 
 
+PUBLIC SUB COPY_KERNELS_AND_INITRDS()
+  
+    DIM tb AS TextBox
+    DIM cbox AS ComboBox
+    DIM cb AS CheckBox
+    DIM sKernelPath, sPart, sShortpart AS String
+    DIM sKernel, sInitrd, sKernelLoc AS String
+    
+    
+    ' PREPARE HOST PARTITION
+      'EXEC ["mount", "/dev/sdb8", "/mnt/target"] WAIT 
+      EXEC ["mount", ClsPartSel.sRoot, "/mnt/target"] WAIT 
+      'ClsGlobal.sTargetMnt = "/mnt/target"
+      
+      'ClsPartSel.sRoot = "/dev/sdb8"
+      'ClsPartSel.fRoot = "reiserfs"
+      ' TRY MKDIR ClsGlobal.sTargetMnt &/ "boot"
+      ' TRY MKDIR ClsGlobal.sTargetMnt &/ "boot" &/ "tamu"
+      ' TRY MKDIR ClsGlobal.sTargetMnt &/ "etc"
+      
+
+    FOR EACH cb IN MdlLilo.arrLinuxIncCheckboxes
+      IF cb.Value = TRUE THEN 
+        sPart = Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1)
+        sShortpart = Right(sPart, Len(sPart) - RInStr(sPart, "/"))
+       
+        IF sPart = ClsPartSel.sRoot THEN 
+            sKernelPath = "boot"
+          ELSE 
+            sKernelPath = "boot/tamu"
+        END IF
+        
+        ' get the initrd name  
+      FOR EACH cbox IN MdlLilo.arrCbInitrds
+      'Message(cbox.tag)
+        IF cbox.tag = cb.tag THEN 
+        'Message("Found initrd")
+          sInitrd = Trim(cbox.text)
+          'IF sInitrd = "" THEN sInitrd = "initrd"
+        END IF
+      NEXT 
+      'for each tb in MdlLilo.arr
+          
+              EXEC ["sync"] WAIT 
+              EXEC ["mount", sPart, "/tmp/lilo_tmp"] WAIT 
+                  IF MdlLiloOsList.ID_DISTRO("/tmp/lilo_tmp") LIKE "vector" THEN 
+                      sKernelLoc = "/tmp/lilo_tmp/boot"
+                  ELSE 
+                      sKernelLoc = "/tmp/lilo_tmp"
+                  END IF
+                    
+                    '  EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ "boot/tamu"] WAIT 
+                      EXEC ["cp", sKernelLoc &/ sInitrd, ClsGlobal.sTargetMnt &/ sKernelPath &/ sInitrd & "-" & sShortpart] WAIT 
+                      EXEC ["cp", sKernelLoc &/ "vmlinuz", ClsGlobal.sTargetMnt &/ sKernelPath &/ "vmlinuz-" & sShortpart] WAIT 
+                      
+              
+              EXEC ["sync"] WAIT 
+              EXEC ["umount", "/tmp/lilo_tmp"] WAIT   
+   '   END IF
+    'NEXT 
+  'END IF
+  
+END IF
+NEXT 
+EXEC ["umount", "/mnt/target"] WAIT 
+END
 
 
 
@@ -199,9 +329,13 @@ PUBLIC SUB LIST_LINUX_OS()
             sPart = Right(sLinuxpart, Len(sLinuxPart) - RInStr(sLinuxPart, "/"))
               EXEC ["mount", "/dev/" & sPart, "/tmp/lilo_tmp"] WAIT 
                       
-                               IF IsDir("/tmp/lilo_tmp/boot") THEN                                   
+                               IF IsDir("/tmp/lilo_tmp/boot") THEN   
+                                  IF sPart = ClsPartSel.sRoot THEN 
+                                    sOsDesc = "VectorLinux"                                
+                                  ELSE 
                                   'FOR EACH vmlinuz IN Dir("/tmp/lilo_tmp/boot", "vmlinuz*", gb.File)
                                   sOsDesc = MdlLiloOsList.ID_DISTRO("/tmp/lilo_tmp")
+                                  END IF
                                   'Message(sOsDesc)
                                       IF sOsDesc LIKE "vector" THEN 
                                         sKernelLoc = "/tmp/lilo_tmp/boot"
@@ -416,7 +550,11 @@ END
                                               .Width = 200
                                               .MaxLength = 15
                                               .Move(x + tl.Width + 8, y)
-                                              .Text = sDesc & "-" & Right(sHostPart, Len(sHostPart) - RInStr(sHostPart, "/"))
+                                                IF sHostPart = ClsPartSel.sRoot THEN 
+                                                  .text = "VectorLinux"
+                                                ELSE 
+                                                  .Text = sDesc & "-" & Right(sHostPart, Len(sHostPart) - RInStr(sHostPart, "/"))
+                                                END IF
                                               .Tag = i & sHostPart
                                       END WITH 
                                       ME.arrLinuxNametxtboxes.Add(tb)

@@ -302,7 +302,24 @@ PUBLIC SUB btnext_Click()
     CASE "FrmInstallSys"
       MdlInstallSys.WRITE_NEW_DISTRO_ID()
       MdlConfLilo.PERFORM_BINDING()
-      frmNext = FrmLilo
+      'frmNext = FrmLilo
+      frmNext = FrmLiloSetup
+    
+    CASE "FrmLiloSetup"
+      IF FrmLiloSetup.cbYNLilo.Value = FALSE THEN 
+          IF FrmLiloSetup.cbBootDefault.Text = "" THEN 
+              Message.Warning(("Please select a default operating system to boot before proceeding"))
+              Balloon.Info(("Select an entry from this list"), FrmLiloSetup.cbBootDefault)
+              STOP EVENT 
+              RETURN 
+          END IF
+            'Run the setup
+            MdlLilo.TRIGGER_LILO_SETUP()
+      ELSE 
+      FrmLiloSetup.tlBanner.Text = "<b>" & ("Skipping boot loaded setup") & "</b>"
+      END IF
+          SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
+      frmNext = FrmZoneSet
       
     CASE "FrmLilo"
 
