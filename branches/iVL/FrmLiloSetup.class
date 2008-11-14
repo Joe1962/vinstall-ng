@@ -19,9 +19,14 @@
 PUBLIC SUB Form_Open()
 
   
-        ' hack just for testing here
-        ClsPartSel.sRoot = "/dev/hdb1"
-        ClsPartSel.fRoot = "reiserfs"
+   
+ '        
+ '          ME.tlBanner.Text = "<h3>" & tlBanner.text & "</h3>"
+ '  'ClsPartSel.sRoot = "/dev/sdb1" ' 
+ ' FMain.FrmCurr = ME
+ '   FMain.tvPlan["Conf0"].Selected = TRUE
+ '   FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
+ '   FMain.tvPlan["Inst1"].Picture = MdlCore.sDonePic
 
 MdlConfLilo.DISPLAY_LILO_TARGET_OPTIONS()
 ME.list_video_modes()
@@ -91,3 +96,30 @@ PUBLIC SUB cbYNLilo_Click()
 END WITH 
 END
 
+
+PUBLIC SUB cbVideoRes_Click()
+
+  DIM tb AS TextBox
+  DIM sText AS String
+  
+  IF NOT MdlLilo.arrLinuxAppendtxtBoxes THEN RETURN 
+    SELECT CASE Trim(cbVideoRes.text)
+      CASE (("Standard"))
+          FOR EACH tb IN MdlLilo.arrLinuxAppendtxtBoxes
+            tb.Text = Replace(tb.Text, "splash=silent", "") ' Not available on this mode
+          NEXT 
+      CASE ELSE 
+        FOR EACH tb IN MdlLilo.arrLinuxAppendtxtBoxes
+          IF InStr(tb.Text, "splash=") = FALSE THEN 
+            IF tb.Tag <> "" THEN 
+              tb.Text = tb.Text & " splash=silent"
+            ELSE 
+              tb.Text = "splash=silent"
+            END IF
+          END IF
+        NEXT 
+      END SELECT 
+        
+    
+
+END

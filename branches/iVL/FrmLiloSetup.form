@@ -40,8 +40,11 @@
       ReadOnly = True
     }
   }
+  { HBox2 HBox
+    MoveScaled(2,12,82,1)
+  }
   { Panel3 Panel
-    MoveScaled(1,12,88,4)
+    MoveScaled(1,13,88,4)
     Arrangement = Arrange.Horizontal
     { tlLiloTarget TextLabel
       MoveScaled(0,0,7,3)
@@ -69,8 +72,11 @@
       ReadOnly = True
     }
   }
+  { HBox3 HBox
+    MoveScaled(1,17,85,1)
+  }
   { PnlTop Panel
-    MoveScaled(1,16,88,3)
+    MoveScaled(1,18,88,3)
     Arrangement = Arrange.Horizontal
     { tlTimeOut TextLabel
       MoveScaled(0,0,14,3)
@@ -88,14 +94,14 @@
     }
   }
   { HBox1 HBox
-    MoveScaled(1,19,88,2)
+    MoveScaled(1,21,88,2)
     { Separator2 Separator
       MoveScaled(0,1,83,1)
       Expand = True
     }
   }
   { tsLIloTabs TabStrip
-    MoveScaled(2,23,84,30)
+    MoveScaled(1,26,84,30)
     Expand = True
     Index = 0
     Text = ("Tab 0")

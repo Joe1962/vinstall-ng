@@ -301,14 +301,20 @@ PUBLIC SUB PERFORM_BINDING()
   
   DIM sOut AS String
   
-SHELL "mount -o bind /sys " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
-SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT 
-SHELL "mount -o bind /tmp " & ClsGlobal.sTargetMnt &/ "tmp" WAIT 
-SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
+' SHELL "mount -o bind /sys " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
+EXEC ["mount", "-o", "bind", "/sys", ClsGlobal.sTargetMnt &/ "sys"] WAIT 
+' SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT 
+EXEC ["mount", "-o", "bind", "/proc", ClsGlobal.sTargetMnt &/ "proc"] WAIT 
+' SHELL "mount -o bind /tmp " & ClsGlobal.sTargetMnt &/ "tmp" WAIT 
+EXEC ["mount", "-o", "bind", "/tmp", ClsGlobal.sTargetMnt &/ "tmp"] WAIT 
+' SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
+EXEC ["mount", "-o", "bind", "/dev", ClsGlobal.sTargetMnt &/ "dev"] WAIT 
 
 'We will run the commands neccisary to setup the newly installed system here
-SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup" WAIT 
-SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup" WAIT 
+EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup"] WAIT 
+'SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup" WAIT 
+'SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup" WAIT 
+EXEC ["chmod", "700", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup"] WAIT 
 sOut = "#!/bin/bash \n" &
 "DISPLAY=" & gb.NewLine &
 "chmod +x /etc/rc.d/rc.udev" & gb.NewLine &
