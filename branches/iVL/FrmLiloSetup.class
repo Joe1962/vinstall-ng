@@ -76,3 +76,18 @@ PUBLIC SUB cbTimeOutSec_MouseDown()
   
 
 END
+
+
+PUBLIC SUB cbYNLilo_Click()
+  DIM bVal AS Boolean
+    IF LAST.value = TRUE THEN bval = FALSE
+    IF LAST.value = FALSE THEN bval = TRUE
+  WITH ME
+    .tsLIloTabs.Enabled = bval
+    .cbBootDefault.Enabled = bval
+    .cbLIloTarget.Enabled = bval
+     .cbVideoRes.Enabled = bval
+     .SpinBox1.Enabled = bval
+END WITH 
+END
+
