@@ -26,6 +26,10 @@ STATIC PUBLIC iHomeMin AS Integer = 500
 STATIC PUBLIC iSwapMin AS Integer = 64
 STATIC PUBLIC iPkgCnt AS Integer = 0
 STATIC PUBLIC iBulkCnt AS Integer = 0
+STATIC PUBLIC iPkgTot AS Integer = 0
+STATIC PUBLIC iPkgNum AS Integer = 0
+
+STATIC PUBLIC fPbInc AS Float
 
 STATIC PUBLIC sRootMnt AS String 
 STATIC PUBLIC sHomeMnt AS String 

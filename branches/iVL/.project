@@ -1,8 +1,8 @@
 # Gambas Project File 2.0
 # Compiled with Gambas 2.9.0
 Title=VectorLinux Installer
-Startup=FrmLiloSetup
-Version=0.0.159
+Startup=MdlCore
+Version=0.0.162
 Library=gb.gtk
 Library=gb.form
 Library=gb.debug
@@ -12,12 +12,12 @@ Library=gb.form.mdi
 Library=gb.gtk.ext
 Description=GUI installer for Vector linux
 Authors=M0E-lnx
-Arguments="-C"
 TabSize=2
 Translate=1
 Language=en_US
 ControlPublic=1
 ModulePublic=1
+ExecPath=/root/gui-installer2/installer.gambas
 Maintainer=M0E-lnx
 Vendor=VectorLinux
 Address=M0E.lnx@gmail.com

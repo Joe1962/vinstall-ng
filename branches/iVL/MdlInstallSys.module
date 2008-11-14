@@ -18,8 +18,8 @@
  PRIVATE hproc AS Process
  PRIVATE sDump AS String
  PRIVATE sErr AS String
- PUBLIC iPkgCnt AS Integer
- PUBLIC iPkgNum AS Integer = 0
+ 'PUBLIC iPkgCnt AS Integer
+ 'PUBLIC iPkgNum AS Integer = 0
   
  
 
@@ -312,9 +312,9 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
       .tvPlan["Inst0"].Picture = MdlCore.sDonePic
     END WITH   
   
-    iPkgCnt = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
+    ClsGlobal.iPkgTot = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
     'Message.Info("Total packages = " & iPkgCnt)
-    PRINT "Total packages to be installed " & iPkgCnt
+    PRINT "Total packages to be installed " & ClsGlobal.iPkgTot
     PRINT "Installing bulks"
     MdlSetup.SHOW_PROGRESS_CONTROLS()
     
@@ -395,7 +395,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES_NEW() AS Integer
                 ' now install the package
                  SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO vTargetSize
                     PRINT "installing " & ClsGlobal.sSourceMnt &/ "packages" &/ sPkgPath &/ sPkgName
-                    INC iPkgNum
+                    INC ClsGlobal.iPkgNum
                     'ME.PACKAGE_INSTALL(ClsGlobal.sSourceMnt &/ "packages" &/ sPkgPath &/ sPkgName)
                         ' move the process here locally
                         SHELL "echo \"\" /tmp/installdump" WAIT 
@@ -405,7 +405,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES_NEW() AS Integer
                           REPEAT 
                             WAIT 1
                               ' update progress here
-                              ME.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vPgsSize), iPkgNum)
+                              ME.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vPgsSize), ClsGlobal.iPkgNum)
                           UNTIL 
                             hproc.State = Process.Stopped
                         END IF
@@ -418,9 +418,9 @@ PUBLIC FUNCTION INSTALL_PACKAGES_NEW() AS Integer
             END IF
         FrmInstallSys.pbInstallProg.Value = 1
         WAIT 
-        FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
+        FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)
         NEXT 
-        INC iPkgNum
+        INC ClsGlobal.iPkgNum
         'error check
                 IF InStr(sDump, "FAILED") > 0 THEN 
                   PRINT sPkgName & " failed to install " 
@@ -446,8 +446,6 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
   'DIM sFile AS String = File.Load(ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF")
   DIM sLine AS String
   
-  
-  
      SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^BULK" TO sRawList
      '   sList = Split(File.Load(Temp$("SETUP.CONF")), "\n")  
       sList = Split(sRawList, "\n")
@@ -465,7 +463,7 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
             sBulkDesc = sLineArr[2]
             'PRINT sBulkPath & vBulkSize & sBulkDesc
             FrmInstallSys.pbInstallProg.Value = 0
-            INC iPkgNum
+            INC ClsGlobal.iPkgNum
             SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO vTargetSize
                 PRINT "installing " & sBulkPath  
                 FrmInstallSys.tlCurrPkg.Text = ("Installing") & Space(1) & sBulkDesc & " ..."      
@@ -476,8 +474,8 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
                     IF hproc.State = Process.Running THEN 
                       REPEAT 
                         WAIT 2
-                          ME.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vBulkSize), iPkgNum)
-                          
+                          ME.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vBulkSize), ClsGlobal.iPkgNum)
+                          FrmInstallSys.pbInstallProg2.Value = (FrmInstallSys.pbInstallProg2.Value + (ClsGlobal.fPbInc - (ClsGlobal.fPbInc * FrmInstallSys.pbInstallProg.Value)) / 100)
                       UNTIL 
                         hproc.State = Process.Stopped
                         'error check
@@ -485,7 +483,7 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
                 END IF  
         FrmInstallSys.pbInstallProg.Value = 1
         WAIT 
-        FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)          
+        FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)          
         
       NEXT 
 'RETURN 
@@ -518,7 +516,7 @@ PUBLIC SUB PACKAGE_INSTALL(sPath_To_Package AS String)
   sDump = ""
   SHELL "echo \"\" > /tmp/installdump" WAIT 
   sErr = ""
-  INC iPkgNum
+  INC ClsGlobal.iPkgNum
   'hproc = SHELL "install-pkg " & sPath_To_Package & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ 
   'IF Right(sPath_To_Package, 3) LIKE "t?z" THEN 
   IF File.Ext(sPath_To_Package) LIKE "t?z" THEN 
@@ -560,7 +558,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
       WITH FrmInstallSys
         .Resize(FMain.pnlWinHost.Width, FMain.pnlWinHost.Height)
       END WITH 
-  iPkgCnt = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
+  ClsGlobal.iPkgCnt = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
     'Message.Info("Total packages = " & iPkgCnt)
   'RETURN 
   ' make sure the progress is revealed at the main window
@@ -607,7 +605,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
                       WAIT 2
-                           UPDATE_STEP_PROGRESS(sTargetSize, sPakSize, iPkgNum)                           
+                           UPDATE_STEP_PROGRESS(sTargetSize, sPakSize, ClsGlobal.iPkgNum)                           
                     UNTIL 
                       hproc.State = Process.Stopped
                           ' error check
@@ -621,8 +619,8 @@ PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
                               FrmInstallSys.pbInstallProg.Value = 1                              
                   END IF
                 PRINT sPak & " is installed... "
-                INC iPkgNum
-                              FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
+                INC ClsGlobal.iPkgNum
+                              FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)
                             END IF
            'PRINT "Needs to install " & sPak
           END IF
@@ -718,7 +716,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
                       WAIT 1
-                      UPDATE_STEP_PROGRESS(sTargetSize, iTlzSize, iPkgNum)
+                      UPDATE_STEP_PROGRESS(sTargetSize, iTlzSize, ClsGlobal.iPkgNum)
                       
                           ' figure out the progress again
 
@@ -735,8 +733,8 @@ PUBLIC FUNCTION INSTALL_PACKAGES() AS Integer
                             END IF
                           END IF
                   END IF
-                  INC iPkgNum
-                  FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
+                  INC ClsGlobal.iPkgNum
+                  FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)
           END IF
       NEXT 
             
@@ -799,8 +797,8 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
             
                  
             
-            INC iPkgNum
-            FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
+            INC ClsGlobal.iPkgNum
+            FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)
             
             
             'Message(sTlzPath & "<br>" & sTlzName)
@@ -810,56 +808,52 @@ END
 
 
 PUBLIC FUNCTION INSTALL_CONFIG_PACKAGES() AS Integer
-    DIM sList AS String[]
-    DIM sLinarr AS String[]
-    DIM sRawList AS String
-    DIM sPkg AS String
-    DIM sCOnfLine AS String
-    DIM sPkgPath AS String
-    DIM i, ipkgsize AS Integer
-    DIM itgtsize AS Integer
-        SHELL "echo \"\" > /tmp/installdump" WAIT 
-    'PRINT "Installing final system configuration"
-    SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^CONF" TO sRawList
-    'Message.Info(sRawList)
-    'PRINT sRawList & " config"
 
-      'PRINT "Found a single CONF package... Installing it now"
-        sRawList = Trim(sRawList)
-            sList = Split(sRawList, "\n")
-                FOR i = 0 TO sList.count - 1
-                           
-                    sLinarr = Split(Trim(sList[i]), ":")
-                    sPkgPath = Right(sLinarr[0], Len(sLinarr[0]) - InStr(sLinarr[0], "\'"))
-              ' now install the package
-              FrmInstallSys.tlCurrPkg.Text = ("Installing Final configuration files...") & File.Name(sPkgPath)
-              
-                'hproc = SHELL "install-pkg " & sPkgPath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
-                  SHELL "i=$(df | grep " & ClsGlobal.sSourceMnt & ") ; echo $i | cut -f 3 -d \' \'" TO itgtsize
-                
-                
-                FrmInstallSys.pbInstallProg.Value = i / sList.Count - 1
-                hproc = SHELL "lzmadec <" & ClsGlobal.sSourceMnt &/ "veclinux" &/ sPkgPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ
-                'ME.BULK_INSTALL(ClsGlobal.sSourceMnt &/ "veclinux" &/ sPkgPath)
-                  
-                WAIT 1
-                  IF hproc.State = Process.Running THEN 
-                    REPEAT 
-                      WAIT 2
-                        ME.UPDATE_STEP_PROGRESS(itgtsize, sLinArr[1], iPkgNum)
-                    UNTIL 
-                      hproc.State = Process.Stopped
-                  END IF
-                  INC iPkgNum
-                  FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
-  ' END IF
+  DIM sList AS String[]
+  DIM sLinarr AS String[]
+  DIM sRawList AS String
+  DIM sPkg AS String
+  DIM sCOnfLine AS String
+  DIM sPkgPath AS String
+  DIM i, ipkgsize AS Integer
+  DIM itgtsize AS Integer
+
+  SHELL "echo \"\" > /tmp/installdump" WAIT 
+  'PRINT "Installing final system configuration"
+  SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^CONF" TO sRawList
+  'Message.Info(sRawList)
+  'PRINT sRawList & " config"
+  'PRINT "Found a single CONF package... Installing it now"
+  sRawList = Trim(sRawList)
+  sList = Split(sRawList, "\n")
+  FOR i = 0 TO sList.count - 1
+    sLinarr = Split(Trim(sList[i]), ":")
+    sPkgPath = Right(sLinarr[0], Len(sLinarr[0]) - InStr(sLinarr[0], "\'"))
+    ' now install the package
+    FrmInstallSys.tlCurrPkg.Text = ("Installing Final configuration files...") & File.Name(sPkgPath)
+    'hproc = SHELL "install-pkg " & sPkgPath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
+    SHELL "i=$(df | grep " & ClsGlobal.sSourceMnt & ") ; echo $i | cut -f 3 -d \' \'" TO itgtsize
+    FrmInstallSys.pbInstallProg.Value = i / sList.Count - 1
+    hproc = SHELL "lzmadec <" & ClsGlobal.sSourceMnt &/ "veclinux" &/ sPkgPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ
+    'ME.BULK_INSTALL(ClsGlobal.sSourceMnt &/ "veclinux" &/ sPkgPath)
+    WAIT 1
+    IF hproc.State = Process.Running THEN 
+      REPEAT 
+      WAIT 2
+      'ME.UPDATE_STEP_PROGRESS(itgtsize, sLinArr[1], ClsGlobal.iPkgNum)
+      UNTIL 
+      hproc.State = Process.Stopped
+    END IF
+    INC ClsGlobal.iPkgNum
+    FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)
+    'END IF
     sDump = File.Load("/tmp/installdump")
     IF InStr(sDump, "FAILED") > 0 THEN 
       RETURN 1
     ELSE 
       RETURN 0
-    END IF     
-    NEXT   
+    END IF
+  NEXT
 END
 
 

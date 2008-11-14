@@ -167,7 +167,7 @@ PUBLIC FUNCTION UPDATE_OVERALL_PROGRESS(iTotalPkgs AS Integer, iCurrPkg AS Integ
     iCPkg = iCurrPkg - ClsGlobal.iBulkCnt
     fRet = iCPkg * fcur
     fRet = Round(fRet, -2)
-    fRet = fRet + 0.6
+    fRet = fRet + fbulk
   ENDIF 
   RETURN fRet
   
@@ -176,26 +176,88 @@ END
 
 
 PUBLIC FUNCTION CALCULATE_PACKAGE_COUNT(bCustom AS Boolean) AS Integer
-  
+
+  DIM sOutput AS String
+  DIM sOutArr AS String[]
+  DIM cb AS CheckBox
   DIM sDump AS String
   DIM sTotalList AS String
-  DIM i AS Integer
+  DIM i, ii AS Integer
+  DIM irs AS Integer
   DIM sList AS String[]
-  DIM iQTY AS Integer
   
   ' let's get a package count
-  IF bCustom = FALSE THEN ' DOING A FULL INSTALL
-
-        SHELL "find " & ClsGlobal.sSourceMnt & " -name \"*.tlz\"|wc -l" TO iQTY
+  IF bCustom = FALSE THEN 'DOING A FULL INSTALL
+    'find bulks
+    SHELL "find " & ClsGlobal.sSourceMnt & "/veclinux -name \"*.tlz\"|wc -l" TO ClsGlobal.iBulkCnt
+    'find packages
+    SHELL "find " & ClsGlobal.sSourceMnt & "/packages -name  \"*.tlz\"|wc -l" TO ClsGlobal.iPkgCnt
+    ClsGlobal.iPkgTot = ClsGlobal.iBulkCnt + ClsGlobal.iPkgCnt
+    PRINT ClsGlobal.iPkgTot
   ELSE ' GOING FOR CUSTOM INSTALL
-        
+    PRINT ("Calculating package count ... Please wait")
+    SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^BULK | grep required" TO sOutput
+    sOutput = Trim(sOutput)
+    IF InStr(sOutput, "\n") > 0 THEN 
+      sOutArr = Split(sOutput, "\n")
+      i = i + sOutArr.Count
+    ELSE 
+      i = i + 1
+    END IF
+    'add bulks to ClsGlobal.iBulkCnt 
+    ClsGlobal.iBulkCnt = i
+    'count required packages in            
+    sOutArr.Clear
+    sOutput = ""
+    SHELL "ls -m " & ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ "*.t?z" TO sOutput
+    sOutput = Trim(sOutput)
+    sOutArr = Split(sOutput, ",")
+    i = i + sOutArr.Count
+    'add pkgs TO ClsGlobal.iPkgCnt 
+    ClsGlobal.iPkgCnt = sOutArr.Count
+    'Count CONF packages in
+    sOutArr.Clear
+    sOutput = ""
+    SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^CONF" TO sOutput
+    sOutput = Trim(sOutput)
+    IF InStr(sOutput, "\n") > 0 THEN 
+      sOutArr = Split(sOutput, "\n")
+      i = i + sOutArr.Count
+      'add config bulks to ClsGlobal.iPkgCnt cause they are small and at the end 
+      ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + sOutArr.Count
+    ELSE 
+      i = i + 1 
+      'add config bulks to ClsGlobal.iPkgCnt cause they are small and at the end 
+      ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + 1
+    END IF
+    'Count user-selected bulks
+    REPEAT 
+      IF FrmPkgSel.scrlInstallOpts[ii, 0].Picture = FrmPkgSel.pyes THEN INC irs
+      INC ii
+      UNTIL ii = FrmPkgSel.scrlInstallOpts.Rows.Count
+    i = i + irs
+    'add bulks to ClsGlobal.iBulkCnt 
+    ClsGlobal.iBulkCnt = ClsGlobal.iBulkCnt + irs
+    ' now do the optional packages
+    irs = 0 ' reset the count
+    REPEAT 
+      IF FrmUsrPkgSel.GridView1[ii, 0].Picture = FrmUsrPkgSel.pYes THEN 
+        INC irs
+      END IF
+      INC ii
+      UNTIL ii = FrmUsrPkgSel.GridView1.Rows.Count
+    i = i + irs ' the count to the total
+    'add pkgs TO ClsGlobal.iPkgCnt 
+    ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + irs
+    ClsGlobal.iPkgTot = i
   END IF
-            
-        
-       RETURN iQTY   
-      
-  
-  
+  PRINT ("Total bulks to be installed = ") & ClsGlobal.iBulkCnt
+  ClsGlobal.fPbInc = 0.6 / ClsGlobal.iBulkCnt
+  PRINT "The total progrssbar will work in increments of " & ClsGlobal.fPbInc & " on every bulk installed"
+  PRINT ("Total pkgs to be installed = ") & ClsGlobal.iPkgCnt
+  ClsGlobal.fPbInc = 0.4 / ClsGlobal.iPkgCnt
+  PRINT "The total progrssbar will work in increments of " & ClsGlobal.fPbInc & " on every pkg installed" 
+  RETURN ClsGlobal.iPkgTot
 END
 
 
