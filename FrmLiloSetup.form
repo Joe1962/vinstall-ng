@@ -19,7 +19,7 @@
   { Panel1 Panel
     MoveScaled(2,8,84,4)
     Arrangement = Arrange.Horizontal
-    { CheckBox1 CheckBox
+    { cbYNLilo CheckBox
       MoveScaled(0,0,20,3)
       Expand = True
       Text = ("Do not install LILO")
@@ -79,6 +79,7 @@
     }
     { SpinBox1 SpinBox
       MoveScaled(15,0,7,3)
+      Value = 10
     }
     { cbTimeOutSec TextLabel
       MoveScaled(24,0,8,3)
