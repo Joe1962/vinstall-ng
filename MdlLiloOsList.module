@@ -115,7 +115,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
   
     
     FOR i = 0 TO arrNTFS.count - 1
-      idx = FrmLilo.TabStrip1.count - 1
+      idx = FrmLilo.tsOsSetup.count - 1
       sWinPart = arrNTFS[i]
       sWinAddr = Right(arrNTFS[i], Len(arrNTFS[i]) - RInStr(arrNTFS[i], "/"))
           'sHELL "mkdir /mnt" &/ sWinAddr WAIT 
@@ -127,12 +127,12 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
             'IF IsDir("/mnt" &/ sWinAddr &/ "windows") = TRUE THEN 
               ' this is indeed a windows installation
                    
-                  WITH FrmLilo.TabStrip1
+                  WITH FrmLilo.tsOsSetup
                     .count = .count + 1
                     .index = idx
                     .text = "Windows-" & sWinAddr
                     ' Populate the new windows tab with just one
-                      tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinPartLbl"
+                      tl = NEW TextLabel(FrmLilo.tsOsSetup) AS "WinPartLbl"
                         WITH tl
                           .Move(4, 24)
                           .text = "<b>" & ("Windows installation found in") & Space(1) & sWinPart & "</b>"
@@ -141,7 +141,7 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                           .BackColor = Color.Background
                         END WITH 
                           
-                      cb = NEW CheckBox(FrmLilo.TabStrip1) AS "bIncludeThisWin"
+                      cb = NEW CheckBox(FrmLilo.tsOsSetup) AS "bIncludeThisWin"
                         WITH cb
                           .Move(4, tl.top + tl.Height + 12)
                           .tag = sWinPart
@@ -152,14 +152,14 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
                           .Value = TRUE
                         END WITH 
                           arrWinInstalls.Add(cb) ' add to the array
-                      tl = NEW TextLabel(FrmLilo.TabStrip1) AS "WinLblLbl"
+                      tl = NEW TextLabel(FrmLilo.tsOsSetup) AS "WinLblLbl"
                         WITH tl
                         .text = ("Label")
                         .MOVE(4, cb.top + cb.Height + 4, MdlObjSizer.get_object_width(.text), 27)
                         .BackColor = Color.Background
                         .Alignment = Align.Normal
                         END WITH 
-                      tb = NEW TextBox(FrmLilo.TabStrip1) AS "WinLbl"
+                      tb = NEW TextBox(FrmLilo.tsOsSetup) AS "WinLbl"
                         WITH tb
                           .text = "Windows-" & sWinAddr
                           .Move(tl.left + tl.Width + 4, tl.top, 200, 27)
@@ -228,7 +228,7 @@ PUBLIC SUB LIST_LILO_OS_CHOICES()
   DIM cbInclude AS CheckBox
   DIM tl AS TextLabel
   DIM sShortAddr AS String
-  DIM iwidth AS Integer = FrmLilo.TabStrip1.Width
+  DIM iwidth AS Integer = FrmLilo.tsOsSetup.Width
   DIM cb AS ComboBox
   DIM tb AS TextBox
   
@@ -273,18 +273,18 @@ tlappends = NEW Object[]
             arrDump = Split(sDump, "\n")
             
             FOR ii = 0 TO arrDump.Count - 1
-                  FrmLilo.TabStrip1.Count = FrmLilo.TabStrip1.count + 1 'arrLinux.Count - 1
+                  FrmLilo.tsOsSetup.Count = FrmLilo.tsOsSetup.count + 1 'arrLinux.Count - 1
           
         sLiloDesc = ME.ID_DISTRO("/tmp/lilo_tmp")
         
-        WITH FrmLilo.TabStrip1
-            .Index = FrmLilo.TabStrip1.count - 1
+        WITH FrmLilo.tsOsSetup
+            .Index = FrmLilo.tsOsSetup.count - 1
             IF arrLinux[i] = ClsPartSel.sRoot THEN
             .text = "Linux"
             ELSE 
             .text = sLiloDesc & "-" & sShortAddr
             ENDIF 
-          tl = NEW TextLabel(FrmLilo.TabStrip1) AS "OSIntro"
+          tl = NEW TextLabel(FrmLilo.tsOsSetup) AS "OSIntro"
             WITH tl
               .text = "<b>" & ("Operating system installed in") & Space(1) & arrLinux[i] & "</b> "
               .Move(4, 16, MdlObjSizer.get_object_width(.text) + 4, 27)
@@ -296,7 +296,7 @@ tlappends = NEW Object[]
               
               
           
-            cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "IncludeOS"
+            cbInclude = NEW CheckBox(FrmLilo.tsOsSetup) AS "IncludeOS"
               WITH cbInclude
                 .text = ("Include this operating system in the boot menu")
                 .Height = 27
@@ -307,7 +307,7 @@ tlappends = NEW Object[]
               END WITH 
               ME.bIncluded.Add(cbInclude)
           
-            tl = NEW TextLabel(FrmLilo.TabStrip1) AS "Label"
+            tl = NEW TextLabel(FrmLilo.tsOsSetup) AS "Label"
               WITH tl
                 .text = ("Name")
                 .Move(cbInclude.left, cbInclude.top + cbInclude.Height + 4, MdlObjSizer.get_object_width(.text))
@@ -315,11 +315,11 @@ tlappends = NEW Object[]
                 .Alignment = Align.Normal
                 .Background = Color.Background
               END WITH 
-            txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "NameBox"
+            txtAppnd = NEW TextBox(FrmLilo.tsOsSetup) AS "NameBox"
               WITH txtAppnd
                 .Width = tl.Width * 4
                 .Height = tl.Height
-                .text = FrmLilo.TabStrip1.Current.text 'sLiloDesc
+                .text = FrmLilo.tsOsSetup.Current.text 'sLiloDesc
                 .x = tl.left + tl.Width + 8
                 .y = tl.Top
                 .MaxLength = 15
@@ -328,7 +328,7 @@ tlappends = NEW Object[]
               END WITH 
               txtNames.Add(txtAppnd)
               
-            tl = NEW TextLabel(FrmLilo.TabStrip1) AS "InitdLbl"
+            tl = NEW TextLabel(FrmLilo.tsOsSetup) AS "InitdLbl"
               WITH tl
                 .text = ("Initial Ram Disk")
                 .Move(txtAppnd.Left + txtAppnd.Width + 8, txtAppnd.top, MdlObjSizer.get_object_width(.text))
@@ -338,7 +338,7 @@ tlappends = NEW Object[]
                 .Visible = FALSE
               END WITH 
               
-            txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "initrdBox"
+            txtAppnd = NEW TextBox(FrmLilo.tsOsSetup) AS "initrdBox"
               WITH txtAppnd
                 
                 .Move(tl.Left + tl.Width + 4, tl.top, 250, 27)
@@ -353,7 +353,7 @@ tlappends = NEW Object[]
               END WITH
                 ME.txtInitrds.Add(txtAppnd)
         
-            tl = NEW TextLabel(FrmLilo.TabStrip1) AS "AppndLbl"
+            tl = NEW TextLabel(FrmLilo.tsOsSetup) AS "AppndLbl"
               WITH tl
                 .text = ("Kernel boot options")
                 .Move(4, txtAppnd.top + txtAppnd.Height + 4, MdlObjSizer.get_object_width(.text))
@@ -365,7 +365,7 @@ tlappends = NEW Object[]
                 
               END WITH 
                 tlappends.Add(tl)
-              txtAppnd = NEW TextBox(FrmLilo.TabStrip1) AS "AppendBox"
+              txtAppnd = NEW TextBox(FrmLilo.tsOsSetup) AS "AppendBox"
               WITH txtAppnd
                 
                 '.Move(tl.Left + tl.Width + 8, tl.top, tl.Width * 1.25)
@@ -389,7 +389,7 @@ tlappends = NEW Object[]
                 ClsLilo.sRootInstall = cb.Tag
                 'FrmLilo.cbDefBoot.Add("Linux-tui")
               'IF arrLinux[i] = ClsPartSel.sRoot THEN 
-                cbInclude = NEW CheckBox(FrmLilo.TabStrip1) AS "VlCliOption"
+                cbInclude = NEW CheckBox(FrmLilo.tsOsSetup) AS "VlCliOption"
                   WITH cbInclude
                     .Value = TRUE
                     .text = ("Add option to boot this Operating system into Text mode.")
@@ -413,7 +413,7 @@ tlappends = NEW Object[]
 '                        NEXT 
                   END WITH 
                   'FrmLilo.cbDefBoot.Add("Linux-tui")
-                  ME.iVlTag = FrmLilo.TabStrip1.Index - 1
+                  ME.iVlTag = FrmLilo.tsOsSetup.Index - 1
               END IF
             NEXT 
             
@@ -439,11 +439,11 @@ tlappends = NEW Object[]
 'NEXT ' next in dump
     
     
-    FOR i = 0 TO FrmLilo.TabStrip1.Count - 1
-      WITH FrmLilo.TabStrip1
+    FOR i = 0 TO FrmLilo.tsOsSetup.Count - 1
+      WITH FrmLilo.tsOsSetup
         .Index = i
           IF .Children.Count < 1 THEN 
-            FrmLilo.TabStrip1[i].Visible = FALSE
+            FrmLilo.tsOsSetup[i].Visible = FALSE
           END IF
       END WITH 
     NEXT 
@@ -517,9 +517,9 @@ PUBLIC SUB IncludeOs_click()
 
   'ME.list_boot_options()
       IF LAST.value = TRUE THEN 
-        IF FrmLilo.cbDefBoot.Find(FrmLilo.TabStrip1.text) = -1 THEN FrmLilo.cbDefBoot.Add(FrmLilo.TabStrip1.text)
+        IF FrmLilo.cbDefBoot.Find(FrmLilo.tsOsSetup.text) = -1 THEN FrmLilo.cbDefBoot.Add(FrmLilo.tsOsSetup.text)
       ELSE 
-        IF FrmLilo.cbDefBoot.Find(FrmLilo.TabStrip1.text) <> -1 THEN FrmLilo.cbDefBoot.Remove(FrmLilo.cbDefBoot.Find(FrmLilo.TabStrip1.text))
+        IF FrmLilo.cbDefBoot.Find(FrmLilo.tsOsSetup.text) <> -1 THEN FrmLilo.cbDefBoot.Remove(FrmLilo.cbDefBoot.Find(FrmLilo.tsOsSetup.text))
       END IF
       
   

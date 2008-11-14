@@ -32,11 +32,11 @@ PUBLIC SUB Form_Open()
   ME.sVidMode = "Standard"
 MdlConfLilo.DISPLAY_LILO_TARGET_OPTIONS()
 MdlLiloOsList.LIST_LILO_OS_CHOICES()
-MdlLiloOsList.LIST_WIN_INSTALL_CHOICES(ME.TabStrip1.Count)
+MdlLiloOsList.LIST_WIN_INSTALL_CHOICES(ME.tsOsSetup.Count)
 ME.tlList.text = ("The following Operating Systems have been detected on this computer. Choose your desired option") & Space(1)&
 ("for each one of them by clicking on each tab. To proceed with the default pre-set values, simply click") & Space(1) & "\'" & FMain.btnext.text & "\'"
 ME.tlList.Adjust
-ME.TabStrip1.Index = MdlLiloOsList.iVltag
+ME.tsOsSetup.Index = MdlLiloOsList.iVltag
 MdlLiloOsList.bVlCliOption = TRUE
 
 ' ' ' 
@@ -48,7 +48,7 @@ FBResolution_Click()
 FBResolution.text = "Bootsplash High"
 FBResolution_Click()
 MdlLiloOsList.list_boot_options()
-ME.TabStrip1.Index = 0
+ME.tsOsSetup.Index = 0
 ME.cbDefBoot.Text = "Linux"
 END
 
@@ -64,13 +64,13 @@ PUBLIC SUB YNLiloBox_Click()
 '      .LiloAppendBox.Enabled = FALSE
       .LiloTarget.Enabled = FALSE
       .FBResolution.Enabled = FALSE
-      .TabStrip1.Enabled = FALSE
+      .tsOsSetup.Enabled = FALSE
       .sbTimer.Enabled = FALSE
       .cbDefBoot.Enabled = FALSE
     END WITH 
     ELSE 
     WITH ME
-      .TabStrip1.Enabled = TRUE
+      .tsOsSetup.Enabled = TRUE
       '.LiloAppendBox.Enabled = TRUE
       .LiloTarget.Enabled = TRUE
       .FBResolution.Enabled = TRUE
@@ -113,14 +113,14 @@ PUBLIC SUB Form_Resize()
     .tlList.Move(.tlTimeOUt.left, .tlTimeOUt.top + .tlTimeOUt.Height + 12, .tlBanner.Width)
     
     '.TabStrip1.Move(.tlList.Left, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - (.tlBanner.Height * 8))
-    .TabStrip1.Move(.tlList.Left, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.left * 2), .ClientHeight - (.TabStrip1.top) - (.YNLiloBox.Height * 10))
+    .tsOsSetup.Move(.tlList.Left, .tlList.top + .tlList.Height + 8, .ClientWidth - (.tsOsSetup.left * 2), .ClientHeight - (.tsOsSetup.top) - (.YNLiloBox.Height * 10))
     '.TabStrip1.Move(4, .tlList.top + .tlList.Height + 8, .ClientWidth - (.TabStrip1.Left * 2), .ClientHeight - (.TabStrip1.top + (.YNLiloBox.height * 3)))
 
   END WITH 
   FOR EACH tb IN MdlLiloOsList.txtAppends
     FOR EACH tl IN MdlLiloOsList.tlappends
       IF tb.tag = tl.tag THEN 
-        tb.Move(tl.left + tl.Width + 4, tl.top, ME.TabStrip1.Width - tb.left - 8)
+        tb.Move(tl.left + tl.Width + 4, tl.top, ME.tsOsSetup.Width - tb.left - 8)
       END IF
     NEXT 
   NEXT 
