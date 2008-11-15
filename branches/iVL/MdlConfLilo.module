@@ -300,7 +300,7 @@ END
 PUBLIC SUB PERFORM_BINDING()
   
   DIM sOut AS String
-  
+  DIM cb AS CheckBox
 ' SHELL "mount -o bind /sys " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
 EXEC ["mount", "-o", "bind", "/sys", ClsGlobal.sTargetMnt &/ "sys"] WAIT 
 ' SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT 
@@ -309,6 +309,16 @@ EXEC ["mount", "-o", "bind", "/proc", ClsGlobal.sTargetMnt &/ "proc"] WAIT
 EXEC ["mount", "-o", "bind", "/tmp", ClsGlobal.sTargetMnt &/ "tmp"] WAIT 
 ' SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
 EXEC ["mount", "-o", "bind", "/dev", ClsGlobal.sTargetMnt &/ "dev"] WAIT 
+
+
+' Mount home directory for user accounts
+  FOR EACH cb IN MdlPartSel.oMountPoints
+      IF cb.Text = "/home" THEN 
+        EXEC ["mount", cb.Tag, ClsGlobal.sTargetMnt &/ "home"] WAIT 
+      END IF
+  NEXT 
+      
+
 
 'We will run the commands neccisary to setup the newly installed system here
 EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup"] WAIT 
