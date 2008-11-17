@@ -60,6 +60,7 @@ PUBLIC SUB rbUseExisting_Click()
   "<b>" & ("This option will overwrite any existing data in the selected partitions") & "</b><br><br>" &
   "<i>" & ("Use this option if you already prepared your partitions using the VectorLinux installer") & "</i> "
   FMain.frmNext = FrmPartSel
+  FMain.btnext.Enabled = TRUE
 
 END
 

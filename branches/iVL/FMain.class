@@ -187,6 +187,8 @@ PUBLIC SUB btnext_Click()
   DIM sLang AS String
   
   'tvPlan.Refresh()
+  FMain.btnext.Enabled = FALSE
+  
   
   IF LAST.TEXT = ("Restart") THEN 
   'EXEC "shutdown", "-r", " now"

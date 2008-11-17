@@ -55,6 +55,8 @@ PUBLIC SUB Form_Open()
 
   ME.tlBanner.text = "<h3>" & tlBanner.text & "</h3>"
   FMain.FrmCurr = ME
+    FMain.tvPlan["Prep2"].Selected = TRUE
+  FMain.tvPlan["Prep2"].Picture = MdlCore.sNowPic
   ME.btHelp.Width = MdlObjSizer.get_object_width(btHelp.text) + 32
   ME.Resize(ME.Parent.Width, ME.Parent.Height - (ME.cbDoWin.height * 3))  
   ME.tlBanner.Adjust
@@ -64,9 +66,8 @@ PUBLIC SUB Form_Open()
   ClsPartSel.bDoWin = FALSE
   FMain.btback.Enabled = TRUE
 FMain.btback.ForeColor = Color.Black
-  FMain.tvPlan["Prep2"].Selected = TRUE
-  FMain.tvPlan["Prep2"].Picture = MdlCore.sNowPic
 
+FMain.btnext.Enabled = TRUE
 END
 
 PUBLIC SUB Form_Hide()

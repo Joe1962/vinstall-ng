@@ -8,7 +8,7 @@
     Text = ("Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue.")
   }
   { tbUsername TextBox
-    MoveScaled(16,18,15,3)
+    MoveScaled(17,18,15,3)
     Tag = "line1"
     Text = ("")
   }
@@ -87,10 +87,10 @@
     Text = ("")
   }
   { hrSep Separator
-    MoveScaled(30,8,12,1)
+    MoveScaled(22,7,12,1)
   }
   { pbUsrPic PictureBox
-    MoveScaled(58,21,8,8)
+    MoveScaled(35,19,8,8)
     Stretch = True
   }
   { tlRealName TextLabel

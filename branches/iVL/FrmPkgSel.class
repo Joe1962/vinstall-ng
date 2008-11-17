@@ -46,6 +46,7 @@ WITH ME.scrlInstallOpts
 END WITH 
 
 ME.FILL_IN_BULK_LIST()
+FMain.btnext.Enabled = TRUE
 
 END
 

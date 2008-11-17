@@ -68,6 +68,7 @@ PUBLIC SUB Form_Open()
       cb.Refresh
     NEXT 
     ME.frmNetDevices.Text = Space(1) & ("Network Interfaces") & Space(1)
+    FMain.btnext.Enabled = TRUE
     
 END
 

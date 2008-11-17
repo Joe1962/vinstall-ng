@@ -26,7 +26,7 @@ ME.Resize(ME.ClientWidth - 12, ME.ClientH - 12)
   FMain.btback.Enabled = TRUE
 FMain.btback.ForeColor = Color.Black
   
-
+FMain.btnext.Enabled = TRUE
 END
 
 PUBLIC SUB Form_Resize()

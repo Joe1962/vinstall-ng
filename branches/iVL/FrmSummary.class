@@ -23,7 +23,7 @@ FMain.FrmCurr = ME
       'ME.GridView2.Visible = FALSE
     END IF
 ME.prepare_partition_summary()
-  
+  FMain.btnext.Enabled = TRUE
   
 
 END

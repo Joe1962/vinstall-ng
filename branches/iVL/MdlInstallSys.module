@@ -399,7 +399,8 @@ PUBLIC FUNCTION INSTALL_PACKAGES_NEW() AS Integer
                     'ME.PACKAGE_INSTALL(ClsGlobal.sSourceMnt &/ "packages" &/ sPkgPath &/ sPkgName)
                         ' move the process here locally
                         SHELL "echo \"\" /tmp/installdump" WAIT 
-                          hproc = SHELL "installpkg " & ClsGlobal.sSourceMnt &/ "packages" &/ sPkgPath &/ sPkgName & " -R " & ClsGlobal.sTargetMnt & " 2> /tmp/installdump"
+                          'hproc = SHELL "installpkg " & ClsGlobal.sSourceMnt &/ "packages" &/ sPkgPath &/ sPkgName & " -R " & ClsGlobal.sTargetMnt & " 2> /tmp/installdump"
+                          hproc = EXEC ["installpkg", ClsGlobal.sSourceMnt &/ "packages" &/ sPkgPath &/ sPkgName, "-R", ClsGlobal.sTargetMnt]
                       WAIT 
                         IF hproc.State = Process.Running THEN 
                           REPEAT 
@@ -409,7 +410,8 @@ PUBLIC FUNCTION INSTALL_PACKAGES_NEW() AS Integer
                           UNTIL 
                             hproc.State = Process.Stopped
                         END IF
-                        IF InStr(sDump, "FAILED") > 0 THEN 
+                        'IF InStr(sDump, "FAILED") > 0 THEN 
+                          IF hproc.value > 0 THEN 
                   PRINT sPkgName & " failed to install " 
                   RETURN 1
                 ELSE 
@@ -761,7 +763,7 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
     DIM iTlzTotal AS Integer = 0
     DIM iCurrTlz AS Integer '= 0
     MdlCore.LOCK_GUI()
-    SHELL "echo \"\" > /tmp/installdump" WAIT 
+    'SHELL "echo \"\" > /tmp/installdump" WAIT 
     'sRawFile = DConv(File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT"))
     
       '/ NO PACKAGE SIZE DATA AVAILABLE FOR PACKAGES/REQUIRED.
@@ -778,9 +780,12 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
             sTlzName = File.Name(sTlzPath)
             FrmInstallSys.pbInstallProg.Value = i / iTlzTotal 
               ' clear the dump
-              SHELL "echo \' \' > /tmp/installdump" WAIT 
+              'SHELL "echo \' \' > /tmp/installdump" WAIT 
+              'EXEC "echo", " ", "/tmp/installdump"] WAIT 
               FrmInstallSys.tlCurrPkg.Text = ("Installing Required Package ...") & sTlzName
-              hproc = SHELL "installpkg " & sTlzPath & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'"
+              'hproc = SHELL "installpkg " & sTlzPath & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'"
+              hproc = EXEC ["installpkg", sTlzPath, "-R", ClsGlobal.sTargetMnt]
+              'hproc = exec ["installpkg",sTlzPath,"-R",ClsGlobal.sTargetMnt
                 WAIT 
                   IF hproc.State = Process.Running THEN 
                     REPEAT 
@@ -788,8 +793,9 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
                   UNTIL hproc.State = Process.Stopped
                 END IF
                   sDump = ""
-                  sDump = File.Load("/tmp/installdump")
-                    IF InStr(sDUmp, "FAILED") > 0 THEN 
+                  'sDump = File.Load("/tmp/installdump")
+                   ' IF InStr(sDUmp, "FAILED") > 0 THEN 
+                   IF hproc.Value > 0 THEN 
                         Message.Error(sTlzName & Space(1) & ("Failed to install"))
                         
                       RETURN 1

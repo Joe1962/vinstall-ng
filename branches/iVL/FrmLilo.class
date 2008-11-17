@@ -50,6 +50,7 @@ FBResolution_Click()
 MdlLiloOsList.list_boot_options()
 ME.tsOsSetup.Index = 0
 ME.cbDefBoot.Text = "Linux"
+FMain.btnext.Enabled = TRUE
 END
 
 
