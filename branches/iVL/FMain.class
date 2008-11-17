@@ -394,11 +394,13 @@ PUBLIC SUB btnext_Click()
           RETURN 
         END IF
         
-        
-    
-      MdlNetConf.SET_HOSTNAME(FrmNetConf.txtHostName.text, FrmNetConf.tbDomain.Text)
-      MdlNetConf.SET_DNS_ADDRESSES()
-      MdlNetConf.WRITE_INET()
+        IF MdlNetConf.ifaceCnt = 0 THEN 
+          MdlNetConf.SET_HOSTNAME(FrmNetConf.txtHostName.Text, FrmNetConf.tbDomain.Text)
+      ELSE ' IF MdlNetConf > 0 THEN     
+            MdlNetConf.SET_HOSTNAME(FrmNetConf.txtHostName.text, FrmNetConf.tbDomain.Text)
+            MdlNetConf.SET_DNS_ADDRESSES()
+            MdlNetConf.WRITE_INET()
+      END IF
       
       
       ' CONFIGURE X QUIETLY HERE

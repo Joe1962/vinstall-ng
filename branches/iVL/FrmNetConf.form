@@ -3,68 +3,105 @@
 { Form Form
   MoveScaled(0,0,114,74)
   Text = ("")
-  { tlDomainName TextLabel
-    MoveScaled(47,8,9,3)
-    Text = ("Domain")
-    Alignment = Align.Normal
+  Arrangement = Arrange.Vertical
+  { HPanel1 HPanel
+    MoveScaled(1,1,94,7)
+    { tlBanner TextLabel
+      MoveScaled(1,0,45,4)
+      Expand = True
+      Text = ("Network Configuration")
+      Alignment = Align.Normal
+    }
+    { hrSep Separator
+      MoveScaled(1,5,33,1)
+      Expand = True
+    }
   }
-  { txtHostName TextBox
-    MoveScaled(18,8,28,3)
-    Text = ("")
-    MaxLength = 24
+  { HPanel2 HPanel
+    MoveScaled(1,8,92,4)
+    { tlHostNameLbl TextLabel
+      MoveScaled(0,0,15,3)
+      Text = ("Computer Name")
+      Alignment = Align.Normal
+    }
+    { txtHostName TextBox
+      MoveScaled(16,0,28,3)
+      Text = ("")
+      MaxLength = 24
+    }
+    { Panel3 Panel
+      MoveScaled(45,0,4,3)
+      Arrangement = Arrange.Horizontal
+    }
+    { tlDomainName TextLabel
+      MoveScaled(49,0,9,3)
+      Text = ("Domain")
+      Alignment = Align.Normal
+    }
+    { tbDomain TextBox
+      MoveScaled(59,0,29,3)
+      Text = ("")
+      MaxLength = 24
+    }
   }
-  { tbDomain TextBox
-    MoveScaled(58,8,29,3)
-    Text = ("")
-    MaxLength = 24
+  { HPanel3 HPanel
+    MoveScaled(1,12,80,3)
+    { cbUseManDNS CheckBox
+      MoveScaled(0,0,39,3)
+      Text = ("Manual DNS Server Specification")
+    }
   }
-  { frmNetDevices Frame
-    MoveScaled(1,20,85,49)
-    Text = ("")
+  { Panel2 Panel
+    MoveScaled(1,16,93,6)
+    { txtPrimaryDNS TextBox txtManDNSBoxes
+      Name = "txtPrimaryDNS"
+      MoveScaled(26,0,18.1429,3)
+      Enabled = False
+      Text = ("192.168.1.254")
+    }
+    { tlPrimaryDNS TextLabel
+      MoveScaled(0,0,17,3)
+      Text = ("Primary DNS Server")
+      Alignment = Align.Normal
+    }
+    { txtSecDNS TextBox txtManDNSBoxes
+      Name = "txtSecDNS"
+      MoveScaled(26,3,18.1429,3)
+      Enabled = False
+      Text = ("")
+    }
+    { tlSecDNS TextLabel
+      MoveScaled(0,3,19,3)
+      Text = ("Secondary DNS Server")
+      Alignment = Align.Normal
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(1,24,94,1)
+    { Separator1 Separator
+      MoveScaled(3,0,35,1)
+      Expand = True
+    }
+  }
+  { HPanel5 HPanel
+    MoveScaled(1,26,95,1)
+  }
+  { Panel1 Panel
+    MoveScaled(1,29,105,42)
+    Expand = True
+    Arrangement = Arrange.Horizontal
     { TSNetDevices TabStrip
-      MoveScaled(2,4,81,43)
+      MoveScaled(2,1,70,35)
+      Expand = True
       Index = 0
       Text = ("Tab 0")
       Index = 0
     }
-  }
-  { cbUseManDNS CheckBox
-    MoveScaled(1,12,39,3)
-    Text = ("Manual DNS Server Specification")
-  }
-  { tlPrimaryDNS TextLabel
-    MoveScaled(2,16,20,3)
-    Text = ("Primary DNS Server")
-    Alignment = Align.Normal
-  }
-  { txtPrimaryDNS TextBox txtManDNSBoxes
-    Name = "txtPrimaryDNS"
-    MoveScaled(24,16,18.2857,3)
-    Enabled = False
-    Text = ("192.168.1.254")
-  }
-  { tlSecDNS TextLabel
-    MoveScaled(44,15,21,3)
-    Text = ("Secondary DNS Server")
-    Alignment = Align.Normal
-  }
-  { txtSecDNS TextBox txtManDNSBoxes
-    Name = "txtSecDNS"
-    MoveScaled(68,15,18.2857,3)
-    Enabled = False
-    Text = ("")
-  }
-  { tlBanner TextLabel
-    MoveScaled(1,1,45,4)
-    Text = ("Network Configuration")
-    Alignment = Align.Normal
-  }
-  { hrSep Separator
-    MoveScaled(13,6,33,1)
-  }
-  { tlHostNameLbl TextLabel
-    MoveScaled(2,8,15,3)
-    Text = ("Computer Name")
-    Alignment = Align.Normal
+    { frmNetDevices Frame
+      MoveScaled(4,1,85,40)
+      Visible = False
+      Expand = True
+      Text = ("")
+    }
   }
 }

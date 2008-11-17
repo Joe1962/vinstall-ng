@@ -80,31 +80,31 @@ PUBLIC SUB Form_Menu()
 
 END
 
-PUBLIC SUB Form_Resize()
-DIM itxtboxleft AS Integer
-
-    WITH ME
-      .tlBanner.Move(4, 8, .ClientWidth - (.tlBanner.left * 2))
-      .hrSep.Move(4, .tlBanner.top + .tlBanner.Height - 4, .tlBanner.Width)
-      .tlHostNameLbl.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 8, MdlObjSizer.get_object_width(.tlHostNameLbl.text), 21)
-      .txtHostName.Move(.tlHostNameLbl.left + .tlHostNameLbl.Width + 4, .tlHostNameLbl.top)
-      .tlDomainName.Move(.txtHostName.Left + .txtHostName.Width + 24, .txtHostName.top, MdlObjSizer.get_object_width(.tlDomainName.Text))
-      .tbDomain.Move(.tlDomainName.left + .tlDomainName.Width + 4, .tlDomainName.top, .txtHostName.Width)
-      .cbUseManDNS.Move(.tlHostNameLbl.Left, .tlHostNameLbl.top + .tlHostNameLbl.Height + 10, MdlObjSizer.get_object_width(.cbUseManDNS.text) + 24)
-      .tlPrimaryDNS.Move(.cbUseManDNS.left, .cbUseManDNS.top + .cbUseManDNS.Height + 4, MdlObjSizer.get_object_width(.tlPrimaryDNS.text))
-        itxtboxleft = .tlPrimaryDNS.Left + .tlPrimaryDNS.Width + 24
-      .txtPrimaryDNS.Move(itxtboxleft, .tlPrimaryDNS.Top)
-      .tlSecDNS.Move(.tlPrimaryDNS.Left, .tlPrimaryDNS.top + .tlPrimaryDNS.Height + 4, MdlObjSizer.get_object_width(.tlSecDNS.text))
-      .txtSecDNS.Move(itxtboxleft, .tlSecDNS.top)
-      ' now move the frame
-      .frmNetDevices.Move(.tlSecDNS.Left, .tlSecDNS.top + .tlSecDNS.Height + 8, .ClientWidth - (.frmNetDevices.Left * 2), .ClientH - .frmNetDevices.top - 32)
-      
-      .TSNetDevices.Move(8, 20, .frmNetDevices.Width - (.TSNetDevices.Left * 2))
-      .TSNetDevices.Height = .frmNetDevices.Height - (.TSNetDevices.y * 2)
-    
-      
-  END WITH 
-END
+' PUBLIC SUB Form_Resize()
+' DIM itxtboxleft AS Integer
+' 
+'     WITH ME
+'       .tlBanner.Move(4, 8, .ClientWidth - (.tlBanner.left * 2))
+'       .hrSep.Move(4, .tlBanner.top + .tlBanner.Height - 4, .tlBanner.Width)
+'       .tlHostNameLbl.Move(.tlBanner.Left, .tlBanner.top + .tlBanner.Height + 8, MdlObjSizer.get_object_width(.tlHostNameLbl.text), 21)
+'       .txtHostName.Move(.tlHostNameLbl.left + .tlHostNameLbl.Width + 4, .tlHostNameLbl.top)
+'       .tlDomainName.Move(.txtHostName.Left + .txtHostName.Width + 24, .txtHostName.top, MdlObjSizer.get_object_width(.tlDomainName.Text))
+'       .tbDomain.Move(.tlDomainName.left + .tlDomainName.Width + 4, .tlDomainName.top, .txtHostName.Width)
+'       .cbUseManDNS.Move(.tlHostNameLbl.Left, .tlHostNameLbl.top + .tlHostNameLbl.Height + 10, MdlObjSizer.get_object_width(.cbUseManDNS.text) + 24)
+'       .tlPrimaryDNS.Move(.cbUseManDNS.left, .cbUseManDNS.top + .cbUseManDNS.Height + 4, MdlObjSizer.get_object_width(.tlPrimaryDNS.text))
+'         itxtboxleft = .tlPrimaryDNS.Left + .tlPrimaryDNS.Width + 24
+'       .txtPrimaryDNS.Move(itxtboxleft, .tlPrimaryDNS.Top)
+'       .tlSecDNS.Move(.tlPrimaryDNS.Left, .tlPrimaryDNS.top + .tlPrimaryDNS.Height + 4, MdlObjSizer.get_object_width(.tlSecDNS.text))
+'       .txtSecDNS.Move(itxtboxleft, .tlSecDNS.top)
+'       ' now move the frame
+'       .frmNetDevices.Move(.tlSecDNS.Left, .tlSecDNS.top + .tlSecDNS.Height + 8, .ClientWidth - (.frmNetDevices.Left * 2), .ClientH - .frmNetDevices.top - 32)
+'       
+'       .TSNetDevices.Move(8, 20, .frmNetDevices.Width - (.TSNetDevices.Left * 2))
+'       .TSNetDevices.Height = .frmNetDevices.Height - (.TSNetDevices.y * 2)
+'     
+'       
+'   END WITH 
+' END
 
 PUBLIC SUB cbUseManDNS_Click()
 

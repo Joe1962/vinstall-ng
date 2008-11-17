@@ -30,7 +30,7 @@ PUBLIC objtxtWifiKey AS Object[]
 PUBLIC objcbWifiessid AS Object[]
 PUBLIC objIntTypes AS Object[]
 
-
+PUBLIC ifaceCnt AS Integer
 
 PRIVATE pWiredPic AS Picture = picture["images/ethernet.png"]
 PRIVATE pWirelessPic AS picture = picture["images/wireless.png"]
@@ -75,10 +75,34 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     SHELL "export res=$(ifconfig -a | grep ^[a-z] | grep -v ^lo); echo \"$res\" | tr -s \' \'" TO seths
       'File.Save(Temp("eths"), Trim(seths)) 
       'Message(File.Load(Temp("eths")))
+      
       seths = Trim(seths)
+      
+      IF seths = "" THEN 
+          WITH FrmNetConf
+            .cbUseManDNS.Enabled = FALSE
+            .tlPrimaryDNS.Enabled = FALSE
+            .tlSecDNS.Enabled = FALSE
+          END WITH 
+            tl = NEW TextLabel(FrmNetConf.TSNetDevices)
+              WITH tl
+              .Width = 400
+              .Height = 200
+              .Alignment = Align.Normal
+              .Text = "<b>" & ("No ethernet neworking devices found") & "</b>"
+              .Move(30, 24)
+            END WITH 
+            FrmNetConf.TSNetDevices.Text = "Ethernet"
+                ME.ifaceCnt = 0
+            RETURN 
+      END IF      
+      
+      
       
       sDevList = Split(seths, gb.NewLine)
       'Message(seths)
+      ME.ifaceCnt = sDevList.Count
+      
       
         FOR i = 0 TO sDevList.count - 1
         'Message(sDevList[i])
