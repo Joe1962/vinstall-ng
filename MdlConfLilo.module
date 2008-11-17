@@ -301,6 +301,7 @@ PUBLIC SUB PERFORM_BINDING()
   
   DIM sOut AS String
   DIM cb AS CheckBox
+  DIM cbox AS ComboBox
 ' SHELL "mount -o bind /sys " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
 EXEC ["mount", "-o", "bind", "/sys", ClsGlobal.sTargetMnt &/ "sys"] WAIT 
 ' SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT 
@@ -312,9 +313,9 @@ EXEC ["mount", "-o", "bind", "/dev", ClsGlobal.sTargetMnt &/ "dev"] WAIT
 
 
 ' Mount home directory for user accounts
-  FOR EACH cb IN MdlPartSel.oMountPoints
-      IF cb.Text = "/home" THEN 
-        EXEC ["mount", cb.Tag, ClsGlobal.sTargetMnt &/ "home"] WAIT 
+  FOR EACH cbox IN MdlPartSel.oMountPoints
+      IF cbox.Text = "/home" THEN 
+        EXEC ["mount", CStr(cbox.Tag), ClsGlobal.sTargetMnt &/ "home"] WAIT 
       END IF
   NEXT 
       

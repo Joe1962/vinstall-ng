@@ -271,11 +271,7 @@ PUBLIC SUB RUN_CREDITS()
   DIM sFile AS String[] = Split(sCreditFile, "\n")
   DIM i AS Integer
   tlOutput.Text = ""
-    
-    ' File.Save(Temp("Credits"), DConv(File.Load("/CREDIT")))
-    ' sCreditFile = File.Load(Temp("Credits"))
-    ' sFile = Split(sCreditFile, "\n")
-  
+
   FOR i = 0 TO sFile.count - 1
       IF Left(Trim(sFile[i]), Len("M0E-lnx")) = "M0E-lnx" THEN 
               sFile[i] = "M0E-lnx  [ vpackager, vasmCC, GUI installer ]"

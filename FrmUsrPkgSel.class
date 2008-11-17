@@ -24,6 +24,7 @@ ME.tlbanner.Text = "<h3>" & ("Select your indivirual packages to install.") & "<
     
     END WITH 
 ME.LIST_PACKAGES
+FMain.btnext.Enabled = TRUE
 END
 
 PUBLIC SUB LIST_PACKAGES()

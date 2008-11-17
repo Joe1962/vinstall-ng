@@ -53,6 +53,11 @@ PUBLIC SUB Form_Open()
   
   ME.tlBanner.text = "<h3>" & tlBanner.text & "</h3>"
   
+     FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
+  FMain.tvPlan["Prep1"].Picture = MdlCore.sNowPic
+  FMain.tvPlan["Prep1"].Selected = TRUE
+ 
+  
   ME.Width = ME.Parent.Width
   ME.Height = ME.Parent.Height
   ME.btResCan.Height = ME.lstInstallableImg.Height
@@ -87,10 +92,8 @@ PUBLIC SUB Form_Open()
           .btnext.ForeColor = Color.Black
       END WITH 
   END IF 
-   FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
-  FMain.tvPlan["Prep1"].Picture = MdlCore.sNowPic
-  FMain.tvPlan["Prep1"].Selected = TRUE
- 
+
+FMain.btnext.Enabled = TRUE
 
 END
 

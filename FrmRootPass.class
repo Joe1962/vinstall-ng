@@ -2,6 +2,12 @@
 
 PUBLIC SUB Form_Open()
   Fmain.frmcurr = ME
+  
+    WITH FMain
+      .tvPlan["Conf1"].Picture = MdlCore.sDonePic
+      .tvPlan["Conf2"].picture = MdlCore.sNowPic
+      .tvPlan["Conf2"].Selected = TRUE
+    END WITH 
   WITH ME
     .tlbanner.text = "<h3>" & ("System Administrator Password") & "</h3>"
     .tlBanner.Width = MdlObjSizer.get_object_width(.tlBanner.text)
@@ -20,12 +26,8 @@ PUBLIC SUB Form_Open()
     .Button1.Visible = FALSE
   END WITH 
   
-    WITH FMain
-      .tvPlan["Conf1"].Picture = MdlCore.sDonePic
-      .tvPlan["Conf2"].picture = MdlCore.sNowPic
-      .tvPlan["Conf2"].Selected = TRUE
-    END WITH 
     ME.Frame1.text = Space(1) & ("About the root account") & Space(1)
+    FMain.btnext.Enabled = TRUE
 END 
 
 

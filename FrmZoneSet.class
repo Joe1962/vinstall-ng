@@ -28,6 +28,7 @@ PUBLIC SUB Form_Open()
   FMain.btnext.Enabled = FALSE
   MdlZoneSet.TIME_ZONES()
   'ME.lbTmZone.Index = 9
+  FMain.btnext.Enabled = TRUE
 END
 
 

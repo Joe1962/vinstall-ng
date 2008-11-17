@@ -36,6 +36,7 @@ ME.list_video_modes()
   MdlLilo.LIST_WIN_INSTALLS()
   ME.CLEANUP_TABSTRIP()
   MdlLilo.LIST_DEFAULT_BOOT_OPTIONS() ' initial list
+  FMain.btnext.Enabled = TRUE
 END
 
 PUBLIC SUB CLEANUP_TABSTRIP()

@@ -168,85 +168,6 @@ PUBLIC FUNCTION INSTALL_KERNELS() AS Integer
 END
 
 
-' ' PUBLIC FUNCTION INSTALL_CONF_PACKAGES() AS Integer
-' '   
-' '   DIM sOutput, sLine, sPkg, sPkgPath AS String
-' '   DIM i, iret AS Integer
-' '   DIM sList, sLinearr AS String[]
-' '   
-' '   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^CONF" TO sOutput
-' '   sOutput = Trim(sOutput)
-' '   IF InStr(sOutput, "\n") > 0 THEN 
-' '     sList = Split(sOutput, "\n")
-' '     FOR i = 0 TO sList.Count - 1
-' '       sLine = sList[i]
-' '       sPkg = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
-' '       sPkg = Left(sPkg, RInStr(sPkg, "\'") - 1)                
-' '       sLinearr = Split(sPkg, ":")
-' '       sPkgPath = ClsGlobal.sSourceMnt &/ "veclinux" &/ sLinearr[0]
-' '       ' install it now
-' '       PRINT " + Install " & sPkgPath
-' '       'iret = ME.INSTALL_THIS_PACKAGE(sPkgPath)
-' '       iret = ME.INSTALL_THIS_BULK(sPkgPath)
-' '       IF iret <> 0 THEN 
-' '         RETURN iret
-' '       END IF
-' '       PRINT " ! " & sPkgPath & " is installed"
-' '     NEXT 
-' '   ELSE ' single CONF line
-' '     sPkg = Right(sOutput, Len(sOutput) - InStr(sOutput, "\'"))
-' '     sPkg = Left(sPkg, RInStr(sPkg, "\'") - 1)
-' '     sLinearr = Split(sPkg, ":")
-' '     sPkgPath = ClsGlobal.sSourceMnt &/ "veclinux" &/ sLinearr[0]
-' '     'iret = ME.INSTALL_THIS_PACKAGE(sPkgPath)
-' '     iret = ME.INSTALL_THIS_BULK(sPkgPath)
-' '     IF iret <> 0 THEN   
-' '       RETURN iret
-' '     END IF
-' '   END IF
-' ' END
-
-
-' ' ' PUBLIC FUNCTION INSTALL_PACKAGES_REQUIRED() AS Integer
-' ' ' 
-' ' '   DIM i, iRet AS Integer
-' ' '   DIM sPkg AS String
-' ' '   DIM sDump AS String
-' ' '   DIM ii AS Integer
-' ' '     FOR EACH spkg IN RDir(ClsGlobal.sSetupConfPath &/ "packages" &/ "required", "t?z")
-' ' '       INC ii
-' ' '     NEXT 
-' ' '   
-' ' '   i = 0
-' ' '   FOR EACH sPkg IN RDir(ClsGlobal.sSourceMnt &/ "packages" &/ "required")
-' ' '     SELECT CASE File.Ext(ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ sPkg)
-' ' '     CASE "tlz", "tgz"
-' ' '       INC i
-' ' '       PRINT " + Install " & ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ sPkg
-' ' '       'iret = ME.INSTALL_THIS_PACKAGE(ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ sPkg)
-' ' '       SHELL "echo \"\" > /tmp/installdump" WAIT 
-' ' '       
-' ' '       hproc = SHELL "installpkg " & ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ sPkg & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump"
-' ' '       WAIT 1
-' ' '         IF hproc.State = Process.Running THEN 
-' ' '           REPEAT 
-' ' '             WAIT 
-' ' '           UNTIL hproc.State = Process.Stopped
-' ' '         END IF
-' ' '           sDump = File.Load("/tmp/installdump")
-' ' '             IF InStr(sDump, "FAILED") THEN 
-' ' '               RETURN 1
-' ' '             END IF
-' ' '       
-' ' '       PRINT " ! " & ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ sPkg & " is installed"
-' ' '         FrmInstallSys.pbInstallProg.Value = i / ii
-' ' '         
-' ' '         INC iPkgNum
-' ' '         
-' ' '         FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
-' ' '     END SELECT 
-' ' '   NEXT 
-' ' ' END
 
 
 PUBLIC FUNCTION INSTALL_USER_PACKAGES() AS Integer
@@ -341,7 +262,8 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_PACKAGES() AS Integer
         SHELL "echo \"\" > /tmp/installdump" WAIT 
           'Message.Info(sBasePath &/ cb.tag)
           FrmInstallSys.tlCurrPkg.Text = ("Installing user-selected package") & Space(1) & File.Name(sBasePath &/ cb.Tag)
-        hproc = SHELL "installpkg " & sBasePath &/ cb.tag & Space(1) & "-R" & Space(1) & ClsGlobal.sTargetMnt & Space(1) & "|| echo \'FAILED\' 2> /tmp/installdump" 'WAIT
+        'hproc = SHELL "installpkg " & sBasePath &/ cb.tag & Space(1) & "-R" & Space(1) & ClsGlobal.sTargetMnt & Space(1) & "|| echo \'FAILED\' 2> /tmp/installdump" 'WAIT
+          hproc = EXEC ["installpkg", sBasePath &/ cb.tag, "-R", ClsGlobal.sTargetMnt] 
           ' 
           WAIT 1
             IF hproc.State = Process.running THEN 
@@ -349,14 +271,15 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_PACKAGES() AS Integer
                 WAIT 
               UNTIL hproc.State = Process.Stopped
             END IF
-            sDump = File.Load("/tmp/installdump")
+            'sDump = File.Load("/tmp/installdump")
             ' update step progress
             INC i
               FrmInstallSys.pbInstallProg.Value = i / iStepTotal
             INC iPkgNum
               'MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
               FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, iPkgNum)
-                IF InStr(sDump, "FAILED") > 0 THEN 
+                'IF InStr(sDump, "FAILED") > 0 THEN 
+                IF hproc.Value > 0 THEN 
                   Message.Error("Error installing user-selected package" & Space(1) & cb.Text)
                   RETURN 1
                 ' ELSE 
@@ -369,136 +292,6 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_PACKAGES() AS Integer
     NEXT 
     'Message.Info("End installation of user selected software")
 END
-' ' 
-' ' 
-' '             
-' '   
-' '   DIM i AS Integer
-' '     DIM sFile AS String[]
-' '     DIM sLine AS String
-' '     DIM sRawFile AS String
-' '     DIM sTlzPath AS String
-' '     DIM sTlzName AS String
-' '     DIM sTlzDesc AS String
-' '     DIM iTlzSize AS Integer
-' '     DIM sTlzBasePath AS String = ClsGlobal.sSourceMnt &/ "packages"
-' '     DIM sTargetSize AS Variant
-' '     DIM cb AS CheckBox
-' '     DIM sName AS String
-' '     
-' '     sRawFile = DConv(File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT"))
-' '     
-' '       sFile = Split(sRawFile, "\n")
-' '       
-' '         FOR EACH cb IN MdlPkgSel.Pkgs
-' '           sName = Trim(cb.text)
-' '           
-' '         
-' '         FOR i = 0 TO sFile.count - 1
-' '           sLine = Trim(sFile[i])
-' '           IF InStr(sLine, sName) THEN 
-' '             IF Left(sLine, Len("PACKAGE NAME")) = "PACKAGE NAME" THEN 
-' '               sTlzName = Trim(Right(sLine, Len(sLine) - InStr(sLine, ":")))
-' '               sTlzPath = Trim(Right(sFile[i + 1], Len(sFile[i + 1]) - InStr(sFile[i + 1], ":")))
-' '               sTlzPath = Right(sTlzPath, Len(sTlzPath) - 2) ' remove the ./ from the location line
-' '               iTlzSize = Trim(Right(sFile[i + 3], Len(sFile[i + 3]) - InStr(sFile[i + 3], ":")))
-' '               'iTlzSize = Left(iTlzSize, Len(iTlzSize) - 1)
-' '               'iTlzSize = Trim(iTlzSize)
-' '               FrmInstallSys.tlCurrPkg.Text = "Installing " & sTlzName & " ..."
-' '               FrmInstallSys.pbInstallProg.Value = 0.0
-' '               
-' '               'IF sTlzName = sName THEN 
-' '               Message.Info(sTlzName)
-' '               'RETURN 
-' '               
-' '               PRINT " Install " & sTlzBasePath &/ sTlzPath &/ sTlzName 
-' '                   ' install each package
-' '                SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO sTargetSize
-' '                sTargetSize = Trim(CStr(sTargetSize))
-' '               SHELL "echo \"\" > /tmp/installdump" WAIT 
-' '               sDump = ""
-' '               sErr = ""
-' '               'hproc = SHELL "install-pkg " & sTlzBasePath &/ sTlzPath &/ sTlzName & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
-' '               hproc = SHELL "installpkg " & sTlzBasePath &/ sTlzPath &/ sTlzName & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" WAIT 'FOR READ
-' '                 WAIT 1
-' '                   IF hproc.State = Process.Running THEN 
-' '                     REPEAT 
-' '                       WAIT 1
-' '                       MdlInstallSys.UPDATE_STEP_PROGRESS(sTargetSize, iTlzSize)
-' '                       
-' '                           ' figure out the progress again
-' ' 
-' '                     UNTIL 
-' '                       hproc.State = Process.Stopped
-' '                         sDump = File.Load("/tmp/installdump")
-' '                         
-' '                           IF InStr(sDump, "FAILED") > 0 THEN 
-' '                             ERROR 
-' '                             RETURN 1
-' '                           ELSE 
-' '                             IF FrmInstallSys.pbInstallProg.Value <> 1 THEN 
-' '                               FrmInstallSys.pbInstallProg.Value = 1
-' '                             END IF
-' '                           END IF
-' '                   END IF
-' '                   INC iPkgNum
-' '                   FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
-' '                 END IF
-' '           END IF
-' '       NEXT 
-' '   NEXT 
-' ' END
-' ' 
-' ' 
-' ' 
-' ' 
-' ' ' ' ' PUBLIC FUNCTION INSTALL_USER_SELECTED_PACKAGES_OLD() AS Integer
-' ' ' ' '   
-' ' ' ' '   DIM i, iret AS Integer
-' ' ' ' '   DIM sPkg AS String
-' ' ' ' '   DIM cb AS CheckBox
-' ' ' ' '   DIM sPkgPath AS String = ClsGlobal.sSourceMnt &/ "packages"
-' ' ' ' '   DIM sPkgLoc AS String
-' ' ' ' '   DIM sFile AS String[]
-' ' ' ' '   DIM sLine AS String
-' ' ' ' '   DIM sConfig AS String
-' ' ' ' '   DIM ii AS Integer
-' ' ' ' '        ' needs to read PACKAES.TXT to get package name and location
-' ' ' ' '   
-' ' ' ' '   'sFile = Split(File.Load(ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT"), "\n")
-' ' ' ' '   ii = 0
-' ' ' ' '       sConfig = "WORKINGDIR=" & ClsGlobal.sTargetMnt &/ "home" &/ "ftp" &/ "pub" &/ "veclinux" & "\n" &
-' ' ' ' '       "SOURCE=" & ClsGlobal.sSourceMnt &/ "packages"
-' ' ' ' '       
-' ' ' ' '       File.Save(Temp("sources"))
-' ' ' ' '       IF Exist(ClsGlobal.sTargetMnt &/ "home/ftp/pub/veclinux") = FALSE THEN 
-' ' ' ' '         MKDIR ClsGlobal.sTargetMnt &/ "home/ftp/pub/veclinux"
-' ' ' ' '       END IF
-' ' ' ' '           SHELL "slapt-get -u -c " & Temp("sources") WAIT 
-' ' ' ' '       FOR EACH cb IN MdlPkgSel.Pkgs
-' ' ' ' '         IF cb.value = TRUE THEN 
-' ' ' ' '           'spkg = cb.Text
-' ' ' ' '                 INC ii
-' ' ' ' '         NEXT 
-' ' ' ' '   
-' ' ' ' '     ' now to install them
-' ' ' ' '     
-' ' ' ' '       FOR EACH cb IN MdlPkgSel.Pkgs
-' ' ' ' '         IF cb.Value = TRUE THEN 
-' ' ' ' '           sPkg = 
-' ' ' ' '   
-' ' ' ' '   
-' ' ' ' '   FOR i = 0 TO ClsPkgSel.arrPkgs.count - 1
-' ' ' ' '     sPkg = ClsPkgSel.arrPkgs[i]
-' ' ' ' '     PRINT " + Install " & sPkgPath &/ sPkg
-' ' ' ' '     iret = ME.INSTALL_THIS_PACKAGE(sPkgPath &/ sPkg)
-' ' ' ' '     IF iret <> 0 THEN 
-' ' ' ' '       RETURN iret
-' ' ' ' '     END IF
-' ' ' ' '     PRINT " ! " & sPkgPath &/ sPkg & " is installed"
-' ' ' ' '   NEXT 
-' ' ' ' ' END
-
 
 PUBLIC FUNCTION INSTALL_USER_SELECTED_BULKS() AS Integer
   
@@ -520,120 +313,7 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_BULKS() AS Integer
     UNTIL ii = FrmPkgSel.scrlInstallOpts.Rows.Count
   
   
-  
-' ' ' '   
-' ' ' '   
-' ' ' '   FOR i = 0 TO ClsPkgSel.arrBulks.Count - 1
-' ' ' '     sPkg = ClsPkgSel.arrBulks[i]
-' ' ' '     'install the packages now
-' ' ' '     PRINT " + Install " & sPkgPath &/ sPkg
-' ' ' '     'iRet = ME.INSTALL_THIS_PACKAGE(sPkgPath &/ sPkg)
-' ' ' '         iret = ME.INSTALL_THIS_BULK(sPkgPath &/ sPkg)
-' ' ' '     IF iRet <> 0 THEN 
-' ' ' '       RETURN 1
-' ' ' '     END IF
-' ' ' '     PRINT " ! " & sPkgPath &/ sPkg & " is installed"
-' ' ' '   NEXT 
  END
-
-
-' PUBLIC SUB CALCULATE_TOTAL_PACKAGES()
-' 
-'   DIM i, ii AS Integer
-'   DIM irs AS Integer
-'   DIM sOutput AS String
-'   DIM sOutArr AS String[]
-'   DIM cb AS CheckBox
-'     
-' 
-'   PRINT ("Calculating package count ... Please wait")
-'   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^BULK | grep required" TO sOutput
-'   sOutput = Trim(sOutput)
-'   IF InStr(sOutput, "\n") > 0 THEN 
-'     sOutArr = Split(sOutput, "\n")
-'     i = i + sOutArr.Count
-'   ELSE 
-'     i = i + 1
-'   END IF
-'   'add bulks to ClsGlobal.iBulkCnt 
-'   ClsGlobal.iBulkCnt = i
-'   'Message.Info(i & " from required bulks")
-'   'RETURN 
-'   'count required packages in            
-'   sOutArr.Clear
-'   sOutput = ""
-'   SHELL "ls -m " & ClsGlobal.sSourceMnt &/ "packages" &/ "required" &/ "*.t?z" TO sOutput
-'   sOutput = Trim(sOutput)
-'   sOutArr = Split(sOutput, ",")
-'   i = i + sOutArr.Count
-'   'add pkgs TO ClsGlobal.iPkgCnt 
-'   ClsGlobal.iPkgCnt = sOutArr.Count
-'   'Message(i & " from packages/required")
-'   'Count CONF packages in
-'   sOutArr.Clear
-'   sOutput = ""
-'   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^CONF" TO sOutput
-'   sOutput = Trim(sOutput)
-'   IF InStr(sOutput, "\n") > 0 THEN 
-'     sOutArr = Split(sOutput, "\n")
-'     i = i + sOutArr.Count
-'       'add config bulks to ClsGlobal.iPkgCnt cause they are small and at the end 
-'        ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + sOutArr.Count
-'   ELSE 
-'     i = i + 1 
-'     'add config bulks to ClsGlobal.iPkgCnt cause they are small and at the end 
-'     ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + 1
-'   END IF
-'   'Count user-selected stuff in
-'   
-'         REPEAT 
-'           IF FrmPkgSel.scrlInstallOpts[ii, 0].Picture = FrmPkgSel.pyes THEN INC irs
-'           INC ii
-'           UNTIL ii = FrmPkgSel.scrlInstallOpts.Rows.Count
-'           i = i + irs
-'           'add bulks to ClsGlobal.iBulkCnt 
-'           ClsGlobal.iBulkCnt = ClsGlobal.iBulkCnt + irs
-'             
-'   
-'       ' ' ' ' 'we will need to cycle through the arrays for th is for accuracy...
-'       ' ' ' '   irs = 0
-'       ' ' ' '   FOR EACH cb IN MdlPkgSel.Bulks
-'       ' ' ' '     IF cb.value = TRUE THEN INC irs
-'       ' ' ' '       
-'       ' ' ' '     
-'       ' ' ' '   NEXT 
-'       ' ' ' '   i = i + irs
-'       ' now do the optional packages
-'       irs = 0 ' reset the count
-'        
-'         REPEAT 
-'           IF FrmUsrPkgSel.GridView1[ii, 0].Picture = FrmUsrPkgSel.pYes THEN 
-'             INC irs
-'           END IF
-'           INC ii
-'           UNTIL ii = FrmUsrPkgSel.GridView1.Rows.Count
-'           
-'       
-'         ' ' ' ' ' ' ' FOR EACH cb IN MdlPkgSel.Pkgs
-'         ' ' ' ' ' ' '   IF cb.Value = TRUE THEN INC irs
-'         ' ' ' ' ' ' '     
-' '        NEXT 
-'       i = i + irs ' the count to the total
-'       'i = i + ClsPkgSel.arrBulks.Count + ClsPkgSel.arrPkgs.Count
-'       'add pkgs TO ClsGlobal.iPkgCnt 
-'       ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + irs
-'   iPkgCnt = i
-'   PRINT ("Total packages to be installed = ") & i
-'   fPbInc = 1 / iPkgCnt
-'   PRINT "The total progrssbar will work in increments of " & fPbInc & " on every package installed"
-'   PRINT ("Total bulks to be installed = ") & ClsGlobal.iBulkCnt
-'   fPbInc = 0.6 / ClsGlobal.iBulkCnt
-'   PRINT "The total progrssbar will work in increments of " & fPbInc & " on every bulk installed"
-'   PRINT ("Total pkgs to be installed = ") & ClsGlobal.iPkgCnt
-'   fPbInc = 0.4 / ClsGlobal.iPkgCnt
-'   PRINT "The total progrssbar will work in increments of " & fPbInc & " on every pkg installed"
-'   
-' END
 
 
 PUBLIC FUNCTION INSTALL_REQUIRED_BULKS() AS Integer
@@ -767,7 +447,8 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
   FrmInstallSys.tlCurrPkg.Text = "Processing " & File.Name(sPackagePath)
   'hproc = SHELL "install-pkg " & sPackagePath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
   IF Right(sPackagePath, 3) LIKE "t?z" THEN
-    hproc = SHELL "installpkg " & sPackagePath & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ
+    'hproc = SHELL "installpkg " & sPackagePath & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ
+    hproc = EXEC ["installpkg", sPackagePath, "-R", ClsGlobal.sTargetMnt]
   ENDIF 
   WAIT 1
   IF hproc.State = Process.Running THEN 
@@ -782,9 +463,10 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
     UNTIL 
       hproc.state = Process.Stopped
       ' now do the error checking here and return a value
-          sDump = File.Load("/tmp/installdump")
+          'sDump = File.Load("/tmp/installdump")
           
-      IF InStr(sDump, "FAILED") > 0 THEN 
+      'IF InStr(sDump, "FAILED") > 0 THEN 
+      IF hproc.Value > 0 THEN 
         'ERROR HAS OCCURRED
         RETURN 1
       ELSE
