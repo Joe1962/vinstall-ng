@@ -24,7 +24,7 @@
     Password = True
   }
   { tbPasswd2 TextBox
-    MoveScaled(16,27,16,3)
+    MoveScaled(17,27,16,3)
     Tag = "line4"
     Text = ("")
     Password = True
