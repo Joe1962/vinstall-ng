@@ -47,11 +47,11 @@ PUBLIC SUB Form_Open()
     FMain.FrmCurr = ME
     ME.tlHostNameLbl.Alignment = Align.Normal
     
-  ' '   WITH FMain 
-  ' '   .tvPlan["Conf3"].Picture = MdlCore.sDonePic
-  ' '   .tvPlan["Conf4"].Picture = MdlCore.sNowPic
-  ' '   .tvPlan["Conf4"].Selected = TRUE
-  ' ' END WITH 
+    WITH FMain 
+    .tvPlan["Conf3"].Picture = MdlCore.sDonePic
+    .tvPlan["Conf4"].Picture = MdlCore.sNowPic
+    .tvPlan["Conf4"].Selected = TRUE
+  END WITH 
     
     ME.txtHostName.text = ME.GET_CURRENT_HOST_NAME()
       
@@ -67,7 +67,7 @@ PUBLIC SUB Form_Open()
     FOR EACH cb IN MdlNetConf.objCombos
       cb.Refresh
     NEXT 
-    ME.frmNetDevices.Text = Space(1) & ("Network Interfaces") & Space(1)
+'    ME.frmNetDevices.Text = Space(1) & ("Network Interfaces") & Space(1)
     FMain.btnext.Enabled = TRUE
     
 END

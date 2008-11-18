@@ -55,7 +55,7 @@
     MoveScaled(1,16,93,6)
     { txtPrimaryDNS TextBox txtManDNSBoxes
       Name = "txtPrimaryDNS"
-      MoveScaled(26,0,18.1429,3)
+      MoveScaled(26,0,18.125,3)
       Enabled = False
       Text = ("192.168.1.254")
     }
@@ -66,7 +66,7 @@
     }
     { txtSecDNS TextBox txtManDNSBoxes
       Name = "txtSecDNS"
-      MoveScaled(26,3,18.1429,3)
+      MoveScaled(26,3,18.125,3)
       Enabled = False
       Text = ("")
     }
@@ -91,17 +91,11 @@
     Expand = True
     Arrangement = Arrange.Horizontal
     { TSNetDevices TabStrip
-      MoveScaled(2,1,70,35)
+      MoveScaled(1,0,70,35)
       Expand = True
       Index = 0
       Text = ("Tab 0")
       Index = 0
-    }
-    { frmNetDevices Frame
-      MoveScaled(4,1,85,40)
-      Visible = False
-      Expand = True
-      Text = ("")
     }
   }
 }
