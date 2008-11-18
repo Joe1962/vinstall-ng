@@ -57,6 +57,7 @@ PUBLIC SUB Form_Open()
         
     
     MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS()
+    FMain.btnext.Enabled = TRUE
 END 
 
 
@@ -383,6 +384,7 @@ PUBLIC SUB tbUsername_LostFocus()
     .Button1.Enabled = TRUE
     .Button1.ForeColor = Color.Black
   END WITH 
+  
 END
 
 PUBLIC SUB Form_Show()
