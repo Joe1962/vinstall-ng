@@ -30,7 +30,7 @@ PUBLIC SUB Form_Open()
 
 MdlConfLilo.DISPLAY_LILO_TARGET_OPTIONS()
 ME.list_video_modes()
-
+FMain.FrmCurr = ME
 
   MdlLilo.LIST_LINUX_OS()
   MdlLilo.LIST_WIN_INSTALLS()
