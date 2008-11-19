@@ -30,7 +30,8 @@ PRIVATE i AS Integer ' used for object key
 PUBLIC SUB TRIGGER_LILO_SETUP()
   
   ME.GENERATE_LILO_DOT_CONF ' Generates and write lilo.conf
-  MdlConfLilo.PERFORM_BINDING() ' Performs binding mounts for LILO setup
+  ME.COPY_KERNELS_AND_INITRDS ' copy kernels and initrs to the right place
+  MdlConfLilo.PERFORM_BINDING() ' Performs binding mounts for LILO setup  
   MdlConfLilo.EXECUTE_LILO() ' Execute lilo in chroot mode
   
   
@@ -55,7 +56,7 @@ PUBLIC FUNCTION GENERATE_LILO_DOT_CONF_VIDEOMODES_SECTION() AS String
     
 sOutput = "# VESA framebuffer console @ 1024x768x64k \n" &
 "vga = " & sVga & "\n" &
-"# Normal VGA console n" &
+"# Normal VGA console \n" &
 "#vga = normal \n" &
 "#VESA framebuffer console @ 1024 x768x64k \n" &
 "#vga = 791 \n" &
@@ -74,7 +75,8 @@ sOutput = "# VESA framebuffer console @ 1024x768x64k \n" &
 "#VESA framebuffer console @ 640 x480x32k \n" &
 "#vga = 784 \n" &
 "#VESA framebuffer console @ 640 x480x256 \n" &
-"#vga = 769"
+"#vga = 769 \n" &
+"# Begin listing OS Choices \n" 
 
 RETURN sOutput
   
@@ -119,8 +121,8 @@ PUBLIC FUNCTION generate_lilo_dot_conf_header() AS String
     sHeader = sHeader & "\n" &
     "bitmap = /boot/bitmap/boot.bmp \n" 
   END IF
-  sHeader = sHeader & "\n" &
-  "# Begin listing OS Choices \n"
+  'sHeader = sHeader & "\n" &
+  
 
     
   RETURN sHeader
@@ -169,7 +171,7 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
           "label = " & sLabel & "\n" &
           "append = \"" & sAppend & "\"" & "\n" &
           "initrd = " & sBootPath &/ sInitrd & "\n" &
-          "read only" & "\n"
+          "read-only" & "\n"
               FOR EACH chbox IN ME.arrLinuxTextBoots
                 IF chbox.Value = TRUE THEN 
                     IF chbox.tag = cb.Tag THEN 
@@ -183,7 +185,17 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
                 END IF
               NEXT 
                   
-                  FOR EACH chbox IN ME.arrWinBootChecks
+          
+          'Message(sSection)
+          sOsEntries = sOsEntries & "\n" & sSection & "\n" & sClisection '& "\n" & sWinSection
+          
+          '  IF sClisection THEN Message(sClisection)
+                'sSection = "image=" & "boot" &/ tb.Text
+                'Message(sSection)
+            END IF
+          NEXT 
+          
+                       FOR EACH chbox IN ME.arrWinBootChecks
                       IF chbox.Value = TRUE THEN 
                         FOR EACH tb IN ME.arrWinNameTxtBoxes
                           IF tb.Tag = chbox.tag THEN 
@@ -195,26 +207,16 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
                           ELSE 
                             sWinSection = ""
                           END IF
+                            sOsEntries = sOsEntries & "\n" & sWinSection
+                        
                       NEXT 
                   END IF
               NEXT 
-                            
-                            
-                  
-          
-          'Message(sSection)
-          sOsEntries = sOsEntries & "\n" & sSection & "\n" & sClisection & "\n" & sWinSection
-          
-          '  IF sClisection THEN Message(sClisection)
-                'sSection = "image=" & "boot" &/ tb.Text
-                'Message(sSection)
-            END IF
-          NEXT 
         'END IF
       'NEXT   
       sHeader = ME.generate_lilo_dot_conf_header()
       sVidModeSection = ME.GENERATE_LILO_DOT_CONF_VIDEOMODES_SECTION()
-      sFile = sHeader & "<br>" & sVidModeSection & "<br><br>" & sOsEntries
+      sFile = sHeader & "\n" & sVidModeSection & "\n \n" & sOsEntries
       
       'Message(sFile)
       
@@ -249,9 +251,9 @@ PUBLIC SUB COPY_KERNELS_AND_INITRDS()
       
       'ClsPartSel.sRoot = "/dev/sdb8"
       'ClsPartSel.fRoot = "reiserfs"
-      ' TRY MKDIR ClsGlobal.sTargetMnt &/ "boot"
-      ' TRY MKDIR ClsGlobal.sTargetMnt &/ "boot" &/ "tamu"
-      ' TRY MKDIR ClsGlobal.sTargetMnt &/ "etc"
+      TRY MKDIR ClsGlobal.sTargetMnt &/ "boot"
+      TRY MKDIR ClsGlobal.sTargetMnt &/ "boot" &/ "tamu"
+      'TRY MKDIR ClsGlobal.sTargetMnt &/ "etc"
       
 
     FOR EACH cb IN MdlLilo.arrLinuxIncCheckboxes
