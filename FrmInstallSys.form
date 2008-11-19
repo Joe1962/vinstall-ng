@@ -7,11 +7,13 @@
   { HPanel1 HPanel
     MoveScaled(1,1,94,10)
     { tlBanner TextLabel
-      MoveScaled(0,0,63,7)
+      MoveScaled(0,0,63,5)
+      Expand = True
       Text = ("Vectorlinux is currently being installed to your system... Please wait")
     }
     { hrsep Separator
-      MoveScaled(0,6,48,2)
+      MoveScaled(0,5,48,2)
+      Expand = True
     }
   }
   { HPanel2 HPanel

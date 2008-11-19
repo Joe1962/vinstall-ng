@@ -1,2 +1,3 @@
-- Fixed bug where the LILO os list was adding a TUI option even when the option was set to false
-- Added auto-width to the left panel.
+- Fixed bugs in LILO setup step
+- Fixed syntax errors in generated lilo.conf
+- Optimized Network and Install windows for 800x600 resolutions

@@ -26,8 +26,16 @@ PUBLIC SUB Form_Open()
  ' FMain.FrmCurr = ME
    FMain.tvPlan["Conf0"].Selected = TRUE
    FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
-   FMain.tvPlan["Inst1"].Picture = MdlCore.sDonePic
-
+   FMain.tvPlan["Inst1"].Picture = MdlCore.sDonePic 
+   ' ' ' 
+   ' FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
+' FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
+' FMain.tvPlan["Inst1"].Selected = TRUE
+  'ME.tlBanner.Text = "<h3>" & tlBanner.Text & "</h3
+ME.tlBanner.Text = "<b>" & ME.tlBanner.Text & "</b>"
+ ' ' ' FMain.tvPlan[" Conf0 "].Selected = TRUE"
+   ' ' ' FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
+   ' ' ' FMain.tvPlan["Inst1"].Picture = MdlCore.sDoneP>"
 MdlConfLilo.DISPLAY_LILO_TARGET_OPTIONS()
 ME.list_video_modes()
 FMain.FrmCurr = ME

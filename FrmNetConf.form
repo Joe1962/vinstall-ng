@@ -1,11 +1,11 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,114,74)
+  MoveScaled(0,0,91,74)
   Text = ("")
   Arrangement = Arrange.Vertical
   { HPanel1 HPanel
-    MoveScaled(1,1,94,7)
+    MoveScaled(1,1,86,7)
     { tlBanner TextLabel
       MoveScaled(1,0,45,4)
       Expand = True
@@ -18,7 +18,7 @@
     }
   }
   { HPanel2 HPanel
-    MoveScaled(1,8,92,4)
+    MoveScaled(1,8,87,4)
     { tlHostNameLbl TextLabel
       MoveScaled(0,0,15,3)
       Text = ("Computer Name")
@@ -29,17 +29,13 @@
       Text = ("")
       MaxLength = 24
     }
-    { Panel3 Panel
-      MoveScaled(45,0,4,3)
-      Arrangement = Arrange.Horizontal
-    }
     { tlDomainName TextLabel
-      MoveScaled(49,0,9,3)
+      MoveScaled(45,0,9,3)
       Text = ("Domain")
       Alignment = Align.Normal
     }
     { tbDomain TextBox
-      MoveScaled(59,0,29,3)
+      MoveScaled(56,0,29,3)
       Text = ("")
       MaxLength = 24
     }
@@ -52,10 +48,10 @@
     }
   }
   { Panel2 Panel
-    MoveScaled(1,16,93,6)
+    MoveScaled(1,16,80,6)
     { txtPrimaryDNS TextBox txtManDNSBoxes
       Name = "txtPrimaryDNS"
-      MoveScaled(26,0,18.125,3)
+      MoveScaled(26,0,18,3)
       Enabled = False
       Text = ("192.168.1.254")
     }
@@ -66,7 +62,7 @@
     }
     { txtSecDNS TextBox txtManDNSBoxes
       Name = "txtSecDNS"
-      MoveScaled(26,3,18.125,3)
+      MoveScaled(26,3,18,3)
       Enabled = False
       Text = ("")
     }
@@ -77,17 +73,14 @@
     }
   }
   { HBox1 HBox
-    MoveScaled(1,24,94,1)
+    MoveScaled(1,24,84,1)
     { Separator1 Separator
       MoveScaled(3,0,35,1)
       Expand = True
     }
   }
-  { HPanel5 HPanel
-    MoveScaled(1,26,95,1)
-  }
   { Panel1 Panel
-    MoveScaled(1,29,105,42)
+    MoveScaled(1,27,88,42)
     Expand = True
     Arrangement = Arrange.Horizontal
     { TSNetDevices TabStrip

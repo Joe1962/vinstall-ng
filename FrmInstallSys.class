@@ -48,12 +48,16 @@ PUBLIC SUB Form_Open()
 
 
 FMain.FrmCurr = ME
-' FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
+FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
+FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
+FMain.tvPlan["Inst1"].Selected = TRUE
+ME.tlBanner.Text = "<h3>" & tlBanner.Text & "</h3>"
+  ME.tlBanner.Text = "<b>" & ME.tlBanner.Text & "</b>"
+'  ME.tlCurrPkg2.Text
+ ' FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
 ' FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
 ' FMain.tvPlan["Inst1"].Selected = TRUE
-  'ME.tlBanner.Text = "<h3>" & tlBanner.Text & "</h3>"
-  ME.tlBanner.Text = "<b>" & ME.tlBanner.Text & "</b>"
-  ME.tlCurrPkg2.Text = "<b>" & tlCurrPkg2.Text & "</b>"
+  'ME.tlBanner.Text = "<h3>" & tlBanner.Text & "</h3= "<b>" & tlCurrPkg2.Text & "</b>"
   
 
       ME.tlCurrStepLbl.Text = ("Current Step")
@@ -72,7 +76,13 @@ PRINT "Begin installation process"
 
   FrmCredits.Reparent(ME.embCredits)
   FrmCredits.Show
+  ' temporaryli allow this
+  'FMain.btnext.Enabled = TRUE 
   
+  ' FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
+' FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
+' FMain.tvPlan["Inst1"].Selected = TRUE
+  'ME.tlBanner.Text = "<h3>" & tlBanner.Text & "</h3
 
 END
 
