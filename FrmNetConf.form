@@ -25,17 +25,17 @@
       Alignment = Align.Normal
     }
     { txtHostName TextBox
-      MoveScaled(16,0,28,3)
+      MoveScaled(16,0,22.8571,3)
       Text = ("")
       MaxLength = 24
     }
     { tlDomainName TextLabel
-      MoveScaled(45,0,9,3)
+      MoveScaled(41,0,9,3)
       Text = ("Domain")
       Alignment = Align.Normal
     }
     { tbDomain TextBox
-      MoveScaled(56,0,29,3)
+      MoveScaled(52,0,22.8571,3)
       Text = ("")
       MaxLength = 24
     }
