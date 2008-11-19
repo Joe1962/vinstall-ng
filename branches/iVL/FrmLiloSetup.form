@@ -7,9 +7,9 @@
   { HPanel1 HPanel
     MoveScaled(1,1,71,6)
     { tlBanner TextLabel
-      MoveScaled(1,1,21,3)
+      MoveScaled(1,1,30,3)
       Expand = True
-      Text = ("Bootloaded Setup")
+      Text = ("Boot Manager Configuration")
     }
     { Separator1 Separator
       MoveScaled(2,4,22,1)

@@ -52,7 +52,7 @@ PUBLIC SUB Form_Open()
     .tvPlan["Conf4"].Picture = MdlCore.sNowPic
     .tvPlan["Conf4"].Selected = TRUE
   END WITH 
-    
+
     ME.txtHostName.text = ME.GET_CURRENT_HOST_NAME()
       
     MdlNetConf.LIST_NETWORK_INTERFACES()

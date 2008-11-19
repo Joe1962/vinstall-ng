@@ -54,7 +54,7 @@ PUBLIC FUNCTION GENERATE_LILO_DOT_CONF_VIDEOMODES_SECTION() AS String
     END SELECT 
     
 sOutput = "# VESA framebuffer console @ 1024x768x64k \n" &
-"vga = " & sVga & "<br>" &
+"vga = " & sVga & "\n" &
 "# Normal VGA console n" &
 "#vga = normal \n" &
 "#VESA framebuffer console @ 1024 x768x64k \n" &
@@ -164,18 +164,18 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
             
           NEXT 
           
-          sSection = "image = " & sBootPath &/ sKernel & "<br>" &
-          "root = " & Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) & "<br>" &
-          "label = " & sLabel & "<br>" &
-          "append = " & sAppend & "<br>" &
-          "initrd = " & sBootPath &/ sInitrd & "<br>" &
-          "read only" & "<br>"
+          sSection = "image = " & sBootPath &/ sKernel & "\n" &
+          "root = " & Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) & "\n" &
+          "label = " & sLabel & "\n" &
+          "append = \"" & sAppend & "\"" & "\n" &
+          "initrd = " & sBootPath &/ sInitrd & "\n" &
+          "read only" & "\n"
               FOR EACH chbox IN ME.arrLinuxTextBoots
                 IF chbox.Value = TRUE THEN 
                     IF chbox.tag = cb.Tag THEN 
                       sClisection = sSection
                       sClisection = Replace(sClisection, "append = " & sAppend, "append = 2 splash=verbose vga=791")
-                      sClisection = Replace(sClisection, "label = " & sLabel, "label = " & sLabel & "-cli") & "<br>"
+                      sClisection = Replace(sClisection, "label = " & sLabel, "label = " & sLabel & "-cli") & "\n"
                     ELSE 
                       sClisection = ""
                     END IF
@@ -189,9 +189,9 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
                           IF tb.Tag = chbox.tag THEN 
                               sTag = Right(tb.Tag, Len(tb.Tag) - InStr(tb.Tag, "/") + 1)
                               
-                            sWinSection = "other = " & sTag & "<br>" & 'Right(tb.tag, Len(tb.Tag) - InStr(tb.Tag, "/")) & "<br>" &
-                            "label = " & tb.Text & "<br>" &
-                            "table = " & Left(sTag, 8) & "<br>"
+                            sWinSection = "other = " & sTag & "\n" & 'Right(tb.tag, Len(tb.Tag) - InStr(tb.Tag, "/")) & "<br>" &
+                            "label = " & tb.Text & "\n" &
+                            "table = " & Left(sTag, 8) & "\n"
                           ELSE 
                             sWinSection = ""
                           END IF
@@ -203,7 +203,7 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
                   
           
           'Message(sSection)
-          sOsEntries = sOsEntries & "<br>" & sSection & "<br>" & sClisection & "<br>" & sWinSection
+          sOsEntries = sOsEntries & "\n" & sSection & "\n" & sClisection & "\n" & sWinSection
           
           '  IF sClisection THEN Message(sClisection)
                 'sSection = "image=" & "boot" &/ tb.Text
@@ -668,37 +668,43 @@ PUBLIC SUB LIST_DEFAULT_BOOT_OPTIONS()
 END
 
 
-
-
-PUBLIC SUB OsNameTxtBox_KeyPress()
+PUBLIC SUB OsNameTxtBox_LostFocus()
   
-  DIM sOld AS String
-  DIM iKey AS Integer
-  sOld = LAST.Text
-  iKey = FrmLiloSetup.cbBootDefault.Find(sOld)
-  
-  IF iKey <> -1 THEN FrmLiloSetup.cbBootDefault.Remove(iKey)
-  
-  'FrmLiloSetup.tsLIloTabs.Text = LAST.text
-  
-  'FrmLiloSetup.cbBootDefault.Add(LAST.text)
-  'IF FrmLiloSetup.cbBootDefault.Find(sOld) <> -1 THEN FrmLiloSetup.cbBootDefault.Remove
-  
-  'Message(sOld)
-  
+  FrmLiloSetup.cbBootDefault.Clear()
+  ME.LIST_DEFAULT_BOOT_OPTIONS()
   
 END
 
-PUBLIC SUB OsNameTxtBox_KeyRelease()
-  DIM iKey AS Integer
-  
-  iKey = FrmLiloSetup.cbBootDefault.Find(Left(LAST.Text, Len(LAST.text) - 1))
-  IF ikey <> -1 THEN FrmLiloSetup.cbBootDefault.Remove(iKey)
-  FrmLiloSetup.cbBootDefault.Add(LAST.text)
-  
-  FrmLiloSetup.tsLIloTabs.Text = LAST.text
-  'FrmLiloSetup.cbBootDefault.Add(LAST.text)
-  
-  
-  
-END
+
+' PUBLIC SUB OsNameTxtBox_KeyPress()
+'   
+'   DIM sOld AS String
+'   DIM iKey AS Integer
+'   'sOld = Left(LAST.Text, Len(LAST.text) - 1)
+'   'iKey = FrmLiloSetup.cbBootDefault.Find(sOld)
+'   
+'   'IF iKey <> -1 THEN FrmLiloSetup.cbBootDefault.Remove(iKey)
+'   'FrmLiloSetup.cbBootDefault.Clear()
+'   'ME.LIST_DEFAULT_BOOT_OPTIONS
+'   'FrmLiloSetup.tsLIloTabs.Text = LAST.text
+'   'IF FrmLiloSetup.cbBootDefault.Find(sOld) <> -1 THEN FrmLiloSetup.cbBootDefault.Remove(FrmLiloSetup.cbBootDefault.Find(sOld))
+'   'FrmLiloSetup.cbBootDefault.Add(LAST.text)
+'   'Message(sOld)
+'   
+'   
+' END
+
+ PUBLIC SUB OsNameTxtBox_KeyRelease()
+'   DIM iKey AS Integer
+'   
+'   iKey = FrmLiloSetup.cbBootDefault.Find(Left(LAST.Text, Len(LAST.text) - 1))
+'   IF ikey <> -1 THEN FrmLiloSetup.cbBootDefault.Remove(iKey)
+'   FrmLiloSetup.cbBootDefault.Add(LAST.text)
+FrmLiloSetup.cbBootDefault.Clear()
+ME.LIST_DEFAULT_BOOT_OPTIONS()
+   FrmLiloSetup.tsLIloTabs.Text = LAST.text
+'   'FrmLiloSetup.cbBootDefault.Add(LAST.text)
+'   
+'   
+'   
+ END
