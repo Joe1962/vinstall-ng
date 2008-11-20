@@ -1,3 +1,5 @@
-- Resized (smaller) textboxes for hostname and domain name on Netconf window (for better looks @ lower resolutions
+- Fixed list of user accounts created
+- Fixed LILO errors
+- Added default append line values
 - Updated binary
-
+- Installer is ready for testing.

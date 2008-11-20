@@ -29,9 +29,9 @@ PUBLIC SUB Form_Open()
   MdlUsrAdd.iUsrAccts = 0
   WITH FMain
     .FrmCurr = ME
-    ' .tvPlan["Conf2"].Picture = MdlCore.sDonePic
-    ' .tvPlan["Conf3"].picture = MdlCore.sNowPic
-    ' .tvPlan["Conf3"].Selected = TRUE
+    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
+    .tvPlan["Conf3"].picture = MdlCore.sNowPic
+    .tvPlan["Conf3"].Selected = TRUE
   END WITH 
     WITH ME
       .tlBanner.Text = "<h3>" & ("Create User Accounts") & "</h3>"
@@ -68,7 +68,7 @@ PUBLIC SUB Button1_Click()
   DIM sPicdir AS String = ClsGlobal.sTargetMnt &/ "usr/share/apps/kdm/pics/users/"
   DIM sGroups AS String '= '"plugdev,disk,cdrom,floppy,lp,scanner,audio,video,games"
   DIM cb AS CheckBox
-  DIM tl AS TextBox
+  DIM tl AS TextLabel
   'DIM tly AS Integer
 
 
@@ -159,13 +159,13 @@ PUBLIC SUB Button1_Click()
           ENDIF 
           'Message(("User account for") & Space(1) & ME.tbUsername.Text & Space(1) & ("was created."))
                 ' easy way to create the account here
-                  tl = NEW TextLabel
+                  tl = NEW TextLabel(ME.LstUsers)
                     WITH tl
                       .Text = ME.tbUsername.Text
                       .Height = 21
                       .Width = MdlObjSizer.get_object_width(.Text)
                       .ToolTip = ME.tbRealname.Text
-                      .Move(2, tly)
+                      .Move(4, tly)
                     END WITH 
                     tly = tly + tl.Height + 2
          btClrFrm_Click() ' clear the form
@@ -187,7 +187,7 @@ PUBLIC SUB Button1_Click()
   'SHELL "umount /mnt/target/sys" WAIT 
   
 'ME.LIST_NEW_USER_ACCOUNT()
-        
+  ME.LstUsers.Visible = TRUE      
   
 END
   
