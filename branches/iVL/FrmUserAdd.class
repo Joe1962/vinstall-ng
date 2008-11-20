@@ -96,7 +96,8 @@ PUBLIC SUB Button1_Click()
     END IF
     
     SHELL "echo " & ME.tbUsername.Text & "| grep -e \'[^a-z0-9_-]\'" TO sCHAR
-    SHELL "grep -e ^" & ME.tbUsername.Text & Space(1) & ClsGlobal.sTargetMnt &/ "etc/passwd" TO sLogE 
+    'SHELL "grep -e ^" & ME.tbUsername.Text & Space(1) & ClsGlobal.sTargetMnt &/ "etc/passwd" TO sLogE 
+    SHELL "grep -e ^" & ME.tbUsername.Text & ": " & clsglobal.sTargetMnt &/ "etc" &/ "passwd" TO sLogE
     
    IF sCHAR <> "" THEN
       Message(("Username contains illegal characters"))

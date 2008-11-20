@@ -27,14 +27,15 @@ PUBLIC arriDLabels AS Object[]
 PRIVATE i AS Integer ' used for object key
 
 
-PUBLIC SUB TRIGGER_LILO_SETUP()
+PUBLIC FUNCTION TRIGGER_LILO_SETUP() AS Integer
+  DIM IRET AS Integer
   
   ME.GENERATE_LILO_DOT_CONF ' Generates and write lilo.conf
   ME.COPY_KERNELS_AND_INITRDS ' copy kernels and initrs to the right place
   'Moved binding to FMain.class right after packages finish installing.
   'MdlConfLilo.PERFORM_BINDING() ' Performs binding mounts for LILO setup  
-  MdlConfLilo.EXECUTE_LILO() ' Execute lilo in chroot mode
-  
+  IRET = MdlConfLilo.EXECUTE_LILO() ' Execute lilo in chroot mode
+    RETURN IRET
   
   
 END

@@ -3,6 +3,7 @@
 { Form Form
   MoveScaled(0,0,96,74)
   Text = ("")
+  Maximized = True
   Arrangement = Arrange.Vertical
   { HPanel1 HPanel
     MoveScaled(1,1,94,10)
