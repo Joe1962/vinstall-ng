@@ -38,6 +38,7 @@ PUBLIC SUB Form_Open()
     ("to restart your computer now or click") & Space(1) & FMain.btQuit.Text & Space(1) & ("to restart your computer at a later time") & "<br><br" &
     ("If you installed from  CD-ROM/R/RW media, please remove de disk before restarting.")
   END WITH 
+  FMain.btnext.Enabled = TRUE
 
 END
 
