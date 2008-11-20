@@ -18,7 +18,7 @@
 
 
 PUBLIC iUID AS Integer = 1000
-
+PRIVATE tly AS Integer
 PRIVATE otl AS Object[]
 PUBLIC otb AS Object[]
 
@@ -68,6 +68,8 @@ PUBLIC SUB Button1_Click()
   DIM sPicdir AS String = ClsGlobal.sTargetMnt &/ "usr/share/apps/kdm/pics/users/"
   DIM sGroups AS String '= '"plugdev,disk,cdrom,floppy,lp,scanner,audio,video,games"
   DIM cb AS CheckBox
+  DIM tl AS TextBox
+  'DIM tly AS Integer
 
 
     ' increment the number of user accounts created
@@ -155,7 +157,17 @@ PUBLIC SUB Button1_Click()
             SHELL "chroot " & ClsGlobal.sTargetMnt & " chown " & tbUsername.Text & Space(1) &/ "home/" & tbUsername.Text & "/.face" WAIT
             SHELL "chroot " & ClsGlobal.sTargetMnt & " chgrp " & tbUsername.Text & Space(1) &/ "home/" & tbUsername.Text & "/.face" WAIT
           ENDIF 
-          Message(("User account for") & Space(1) & ME.tbUsername.Text & Space(1) & ("was created."))
+          'Message(("User account for") & Space(1) & ME.tbUsername.Text & Space(1) & ("was created."))
+                ' easy way to create the account here
+                  tl = NEW TextLabel
+                    WITH tl
+                      .Text = ME.tbUsername.Text
+                      .Height = 21
+                      .Width = MdlObjSizer.get_object_width(.Text)
+                      .ToolTip = ME.tbRealname.Text
+                      .Move(2, tly)
+                    END WITH 
+                    tly = tly + tl.Height + 2
          btClrFrm_Click() ' clear the form
           INC iUID
         ELSE 
@@ -174,7 +186,7 @@ PUBLIC SUB Button1_Click()
   'SHELL "umount /mnt/target/tmp" WAIT 
   'SHELL "umount /mnt/target/sys" WAIT 
   
-ME.LIST_NEW_USER_ACCOUNT()
+'ME.LIST_NEW_USER_ACCOUNT()
         
   
 END
@@ -203,12 +215,12 @@ END
               sUsrRlName = arrline[4]
               sUsrHome = arrline[5]
           NEXT 
-        IF iUID >= 1000 THEN 
+        IF iUID >= 500 THEN 
           tl = NEW TextLabel(LstUsers) AS "UserList"
               WITH tl
                   .Height = 21
-                  .Width = LstUsers.Width
                   .Text = sUsrLogin
+                  .Width = MdlObjSizer.get_object_width(.Text)
                   .ToolTip = sUsrRlName & "\n" & "<b>" & "USER ID: " & "</b > " & iUid & 
                           "<b>" & "HOME DIRECTORY: " & "</b>" & sUsrHome
                   .Move(0, tly)
@@ -278,7 +290,7 @@ PUBLIC SUB Form_Resize()
     '.pbUsrPic.Move(.btBrowse.Left + .btBrowse.Width, tbUsername.top)
     .btgrpHelp.Move(.fGroupSel.Width - (.btgrpHelp.Width + 4), 12)
     .pbUsrPic.Move(.btgrpHelp.Left, .btgrpHelp.Top + .btgrpHelp.Height + 2)
-    .LstUsers.Move(iListLeft, iListTop, 200, iListBottom - iListTop)
+    .LstUsers.Move(iListLeft, iListTop, 170, iListBottom - iListTop)
     
         icby = 16
         icbspace = 4
