@@ -177,7 +177,7 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
               FOR EACH chbox IN ME.arrLinuxTextBoots
                 IF chbox.Value = TRUE THEN 
                     IF chbox.tag = cb.Tag THEN
-                    sSection = "image = " & sBootPath &/ sKernel & "\n" &
+                    sClisection = "image = " & sBootPath &/ sKernel & "\n" &
           "root = " & Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) & "\n" &
           "label = " & sLabel & "-tui" & "\n" &
           "append = \"2 splash=verbose\"" & "\n" &
