@@ -95,6 +95,8 @@ FMain.tvPlan.MoveFirst()
 FMain.btnext.Enabled = FALSE ' disable the button until a language is selected
 IF ERROR THEN Message(Error.Text & "<br>" & Error.Where)
 ME.AUTOSIZE_LEFT_PANE()
+ME.Maximized = TRUE
+
 END
 
 PUBLIC SUB AUTOSIZE_LEFT_PANE()
@@ -449,11 +451,14 @@ PUBLIC SUB btnext_Click()
         MdlConfLilo.GENERATE_LILO_DOT_CONF()
         MdlConfLilo.GATHER_OTHER_LINUX_KERNELS_AND_INITRDS()
         MdlConfLilo.WRITE_LILO_DOT_CONF()
-        IF MdlConfLilo.EXECUTE_LILO() <> 0 THEN RETURN 
+        IF MdlConfLilo.EXECUTE_LILO() <> 0 THEN 
+        STOP EVENT         
+        RETURN 
         ELSE 
           ' lilo installation / setup has been skipped
           FrmLilo.tlBanner.Text = "<b>" & ("Skipping lilo setup") & "</b>"
         END IF
+      END IF
        SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
       'frmNext = FrmLiloOsList
        frmNext = FrmZoneSet
@@ -676,5 +681,11 @@ END
 PUBLIC SUB tvPlan_Click()
 
 STOP EVENT 
+
+END
+
+PUBLIC SUB PnlRight_MouseDown()
+
+  
 
 END

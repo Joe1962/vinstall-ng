@@ -72,7 +72,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     objIntTypes = NEW Object[]
        
     
-    'SHELL "export res=$(ifconfig -a | grep ^[a-z] | grep -v ^lo); echo \"$res\" | tr -s \' \'" TO seths
+    SHELL "export res=$(ifconfig -a | grep ^[a-z] | grep -v ^lo); echo \"$res\" | tr -s \' \'" TO seths
       'File.Save(Temp("eths"), Trim(seths)) 
       'Message(File.Load(Temp("eths")))
 
