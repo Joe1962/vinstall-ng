@@ -18,24 +18,12 @@
 
 PUBLIC SUB Form_Open()
 
-  
-   
- '        
- '          ME.tlBanner.Text = "<h3>" & tlBanner.text & "</h3>"
- '  'ClsPartSel.sRoot = "/dev/sdb1" ' 
- ' FMain.FrmCurr = ME
    FMain.tvPlan["Conf0"].Selected = TRUE
    FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
    FMain.tvPlan["Inst1"].Picture = MdlCore.sDonePic 
-   ' ' ' 
-   ' FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
-' FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
-' FMain.tvPlan["Inst1"].Selected = TRUE
-  'ME.tlBanner.Text = "<h3>" & tlBanner.Text & "</h3
+
 ME.tlBanner.Text = "<b>" & ME.tlBanner.Text & "</b>"
- ' ' ' FMain.tvPlan[" Conf0 "].Selected = TRUE"
-   ' ' ' FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
-   ' ' ' FMain.tvPlan["Inst1"].Picture = MdlCore.sDoneP>"
+""
 MdlConfLilo.DISPLAY_LILO_TARGET_OPTIONS()
 ME.list_video_modes()
 FMain.FrmCurr = ME
@@ -46,11 +34,15 @@ FMain.FrmCurr = ME
   MdlLilo.LIST_DEFAULT_BOOT_OPTIONS() ' initial list
   FMain.btnext.Enabled = TRUE
   ME.cbVideoRes.text = "Bootsplash High"
+'    ME.cbBootDefault_Click
+ME.cbVideoRes_Click()
   ME.cbBootDefault.Text = "VectorLinux"
+  
 END
 
 PUBLIC SUB CLEANUP_TABSTRIP()
 DIM i AS Integer
+
 
     ' will remove blank tabstrip
       FOR i = 0 TO ME.tsLIloTabs.Count
@@ -61,7 +53,7 @@ DIM i AS Integer
           END IF
           
       NEXT 
-  
+  ' fix append lines
   
 END
 
@@ -123,7 +115,12 @@ PUBLIC SUB cbVideoRes_Click()
         FOR EACH tb IN MdlLilo.arrLinuxAppendtxtBoxes
           IF InStr(tb.Text, "splash=") = FALSE THEN 
             IF tb.Tag <> "" THEN 
-              tb.Text = tb.Text & " splash=silent"
+              IF tb.Text = "" THEN 
+                  tb.Text = "splash=silent" 
+                ELSE 
+                       tb.Text = tb.Text & " splash=silent"
+              END IF
+              
             ELSE 
               tb.Text = "splash=silent"
             END IF
