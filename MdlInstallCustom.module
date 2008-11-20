@@ -24,7 +24,7 @@ PRIVATE hproc AS Process
 PRIVATE sDump AS String
 PRIVATE sErr AS String
 'PRIVATE iPkgCnt AS Integer
-PRIVATE iPkgNum AS Integer
+'PRIVATE iPkgNum AS Integer
 
 
 PUBLIC SUB PERFORM_CUSTOM_INSTALL()
@@ -41,26 +41,26 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
   'ME.CALCULATE_TOTAL_PACKAGES() 
     'RETURN 
   WAIT 2  
-  iRet = ME.INSTALL_REQUIRED_BULKS()
   PRINT " INSTALLING REQUIRED BULKS"
+  iRet = ME.INSTALL_REQUIRED_BULKS()
   IF iRet <> 0 THEN 
     'exit this is an error
      Message.Error(("There as been an error while installing required system software. ") & gb.newline & sErr)
      RETURN 
   END IF
   
+  PRINT "INSTALING USER-SELECTED BULKS"
   iRet = ME.INSTALL_USER_SELECTED_BULKS()
   'Message("Installing user-selected bulks")
-  PRINT "INSTALING USER-SELECTED BULKS"
   IF iRet <> 0 THEN 
     Message.Error(("There has been an error while installing optional software to your system. ") & gb.newline & sErr)
     RETURN 
   END IF
   
   'iret = ME.INSTALL_USER_SELECTED_PACKAGES()
+  PRINT "INSTALLING OPTIONAL SOFTWARE SELECTED BY USER"
   iret = ME.INSTALL_USER_PACKAGES() ' new code based on the gridview
     'Message("Installing user-selected packages")
-  PRINT "INSTALLING OPTIONAL SOFTWARE SELECTED BY USER"
   IF iRet <> 0 THEN 
     Message.Error(("There has been an error while installing optional software to your system.") & gb.newline & sErr)
     RETURN 
@@ -70,9 +70,8 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
   ' Make sure we set the right value for the progress bar here
     'MdlInstallSys.iPkgCnt = iPkgCnt
     'MdlInstallSys.iPkgNum = iPkgNum
-  iret = MdlInstallSys.INSTALL_REQUIRED_PACKAGES()
   PRINT "INSTALLING ADDITIONAL REQUIRED SOFTWARE"
-  
+  iret = MdlInstallSys.INSTALL_REQUIRED_PACKAGES()
   IF iret <> 0 THEN 
     Message.Error(("Error while installing required system software. ") & gb.NewLine & sErr)
     RETURN 
@@ -80,19 +79,27 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
   
   'iret = ME.INSTALL_CONF_PACKAGES()
     '/ USE THE FUNCTION IN MDLINSTALLSYS.MODULE DOES THE EXACT SAME THING AND HAS PROGRESS UPDATING
-    iret = MdlInstallSys.INSTALL_CONFIG_PACKAGES()
   PRINT "INSTALLING CONFIGURATION PACKAGES"
+  iret = MdlInstallSys.INSTALL_CONFIG_PACKAGES()
   IF iret <> 0 THEN 
     Message.Error(("Error while installing system configuration. ") & gb.NewLine & sErr)
     RETURN 
   END IF
   
-  iret = ME.INSTALL_KERNELS()
   PRINT "INSTALLING KERNELS"
+  iret = ME.INSTALL_KERNELS()
   IF iret <> 0 THEN 
     Message.Error(("Unable to install kernels. ") & gb.NewLine & sErr)
     RETURN 
   END IF
+  
+  PRINT "Binding and config"
+  MdlConfLilo.PERFORM_BINDING()
+  'iret = MdlConfLilo.PERFORM_BINDING()
+  'IF iret <> 0 THEN 
+  '  Message.Error(("Unable to Bind Mount. ") & gb.NewLine & sErr)
+  '  RETURN 
+  'END IF
   
   ' write new fstab now
    MdlInstallSys.WRITE_NEW_FSTAB()
@@ -197,8 +204,8 @@ PUBLIC FUNCTION INSTALL_USER_PACKAGES() AS Integer
         EXEC ["echo \" \" > /tmp/installdump"] WAIT 
           FrmInstallSys.tlCurrPkg.Text = ("Installing") & Space(1) & FrmUsrPkgSel.GridView1[ii, 1].Text
                 FrmInstallSys.pbInstallProg.Value = i / iStepTotal
-          INC iPkgNum
-          FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, iPkgNum)
+          INC ClsGlobal.iPkgNum
+          FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, ClsGlobal.iPkgNum)
           
               'hproc = EXEC ["installpkg", sBasePath &/ sLoc &/ sPkg, " -R ", ClsGlobal.sTargetMnt, " || echo \'FAILED\' 2> /tmp/installdump"]
               'hproc = EXEC ["installpkg -R " & ClsGlobal.sTargetMnt & Space(1) & sBasePath &/ sLoc &/ sPkg & " || echo \'FAILED\' 2> /tmp/installdump"]
@@ -275,9 +282,9 @@ PUBLIC FUNCTION INSTALL_USER_SELECTED_PACKAGES() AS Integer
             ' update step progress
             INC i
               FrmInstallSys.pbInstallProg.Value = i / iStepTotal
-            INC iPkgNum
+            INC ClsGlobal.iPkgNum
               'MdlSetup.UPDATE_OVERALL_PROGRESS(iPkgCnt, iPkgNum)
-              FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, iPkgNum)
+              FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, ClsGlobal.iPkgNum)
                 'IF InStr(sDump, "FAILED") > 0 THEN 
                 IF hproc.Value > 0 THEN 
                   Message.Error("Error installing user-selected package" & Space(1) & cb.Text)
@@ -389,7 +396,7 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
 '    EXEC ["gzise=$(df | grep " & ClsGlobal.sTargetMnt & ") && echo $gzise | cut -f3 -d \' \'"] TO vTargetSize
   END IF
   FrmInstallSys.pbInstallProg.Value = 0
-  INC iPkgNum
+  INC ClsGlobal.iPkgNum
   PRINT " Installing " & sBulkPath
         MdlSetup.SHOW_PROGRESS_CONTROLS()
   FrmInstallSys.tlCurrPkg.Text = "Installing " & File.Name(sBulkPath)
@@ -406,7 +413,7 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
         FrmInstallSys.tlCurrPkg.Text = Trim(sDesc)
       IF vSize <> "" THEN 
         'MdlInstallSys.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vSize))
-        MdlInstallSys.UPDATE_STEP_PROGRESS(vTargetSize, vSize, iPkgNum)
+        MdlInstallSys.UPDATE_STEP_PROGRESS(vTargetSize, vSize, ClsGlobal.iPkgNum)
         
         FrmInstallSys.pbInstallProg2.Value = (FrmInstallSys.pbInstallProg2.Value + (ClsGlobal.fPbInc - (ClsGlobal.fPbInc * FrmInstallSys.pbInstallProg.Value)) / 100)
       END IF
@@ -420,7 +427,7 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(sBulkPath AS String) AS Integer
       ' ' ' IF InStr(sDump, "FAILED") > 0 THEN 
       ' ' '   RETURN 1
       ' ' ' ELSE
-        FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, iPkgNum) 
+        FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, ClsGlobal.iPkgNum) 
       RETURN 0
     END IF
 '  END IF
@@ -441,8 +448,8 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
     SHELL "gsize=$(df| grep " & ClsGlobal.sTargetMnt & " ) && echo $gsize | cut -f3 -d \' \'" TO vTargetSize
   END IF
   FrmInstallSys.pbInstallProg.Value = 0          
-  INC iPkgNum
-  PRINT "Package " & iPkgNum & " of " & ClsGlobal.iPkgTot
+  INC ClsGlobal.iPkgNum
+  PRINT "Package " & ClsGlobal.iPkgNum & " of " & ClsGlobal.iPkgTot
   MdlSetup.SHOW_PROGRESS_CONTROLS()
   FrmInstallSys.tlCurrPkg.Text = "Processing " & File.Name(sPackagePath)
   'hproc = SHELL "install-pkg " & sPackagePath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
@@ -457,7 +464,7 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
     ' do the progress bar updating here
     IF vSize <> "" THEN 
       'MdlInstallSys.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vSize))
-      MdlInstallSys.UPDATE_STEP_PROGRESS(vTargetSize, CInt(vSize), iPkgNum)
+      MdlInstallSys.UPDATE_STEP_PROGRESS(vTargetSize, CInt(vSize), ClsGlobal.iPkgNum)
       
     END IF
     UNTIL 
@@ -472,7 +479,7 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
       ELSE
         FrmInstallSys.pbInstallProg.Value = 1
         WAIT  
-        FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, iPkgNum)
+        FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, ClsGlobal.iPkgNum)
         RETURN 0
       END IF
   END IF

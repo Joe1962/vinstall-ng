@@ -413,7 +413,8 @@ PUBLIC SUB btnext_Click()
     'POST INSTALL CONFIGURATION
     CASE "FrmInstallSys"
       MdlInstallSys.WRITE_NEW_DISTRO_ID()
-      MdlConfLilo.PERFORM_BINDING()
+      'moved binding to end of install in MdlInstallCustom.INSTALL_KERNELS
+      'MdlConfLilo.PERFORM_BINDING() ' Performs binding mounts for system config
       'frmNext = FrmLilo
       frmNext = FrmLiloSetup
     

@@ -315,21 +315,22 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
     ClsGlobal.iPkgTot = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
     'Message.Info("Total packages = " & iPkgCnt)
     PRINT "Total packages to be installed " & ClsGlobal.iPkgTot
+
     PRINT "Installing bulks"
     MdlSetup.SHOW_PROGRESS_CONTROLS()
-    
     iret = ME.INSTALL_BULK_PACKAGES()
   IF iret <> 0 THEN 
     PRINT "Error installing bulks ... exit"
     RETURN 
   END IF
+
   PRINT "installing packages"
-        
   iret = ME.INSTALL_PACKAGES_NEW()
     IF iret <> 0 THEN 
       PRINT "error installing packages ... exit"
       RETURN 
     END IF
+
     PRINT "Installing packages/required"
     'MdlSetup.SHOW_PROGRESS_CONTROLS()
   iret = ME.INSTALL_REQUIRED_PACKAGES()
@@ -337,9 +338,9 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
       PRINT "Error installing packages/required ... exit"
       RETURN 
     END IF
+
     PRINT "installing CONFIG packages from SETUP.CONF"
     'MdlSetup.SHOW_PROGRESS_CONTROLS()
-    
   iret = ME.INSTALL_CONFIG_PACKAGES()
       IF iret <> 0 THEN 
         PRINT "Error installing config packages ... exit"
@@ -353,6 +354,14 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
       RETURN 
     END IF
     
+  PRINT "Binding and config"
+  MdlConfLilo.PERFORM_BINDING()
+  'iret = MdlConfLilo.PERFORM_BINDING()
+  'IF iret <> 0 THEN 
+  '  Message.Error(("Unable to Bind Mount. ") & gb.NewLine & sErr)
+  '  RETURN 
+  'END IF
+  
     ' WRITE THE FSTAB NOW
   MdlInstallSys.WRITE_NEW_FSTAB()
   FrmInstallSys.pbInstallProg.Value = 1
@@ -751,7 +760,7 @@ END
 
 PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
   
-    DIM i AS Integer
+    DIM i, ii AS Integer
     DIM sList AS String[]
     DIM sRawList AS String
     'DIM sRawFile AS String
@@ -782,7 +791,12 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
               ' clear the dump
               'SHELL "echo \' \' > /tmp/installdump" WAIT 
               'EXEC "echo", " ", "/tmp/installdump"] WAIT 
-              FrmInstallSys.tlCurrPkg.Text = ("Installing Required Package ...") & sTlzName
+              IF i > iTlzTotal THEN 
+                ii = iTlzTotal
+              ELSE 
+                ii = (i + 1)
+              ENDIF 
+              FrmInstallSys.tlCurrPkg.Text = ("Installing Required Package ...") & ii & " of " & iTlzTotal 'sTlzName
               'hproc = SHELL "installpkg " & sTlzPath & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'"
               hproc = EXEC ["installpkg", sTlzPath, "-R", ClsGlobal.sTargetMnt]
               'hproc = exec ["installpkg",sTlzPath,"-R",ClsGlobal.sTargetMnt
@@ -804,7 +818,7 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
                  
             
             INC ClsGlobal.iPkgNum
-            FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)
+            FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, ClsGlobal.iPkgNum)
             
             
             'Message(sTlzPath & "<br>" & sTlzName)
@@ -851,7 +865,7 @@ PUBLIC FUNCTION INSTALL_CONFIG_PACKAGES() AS Integer
       hproc.State = Process.Stopped
     END IF
     INC ClsGlobal.iPkgNum
-    FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)
+    'FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)
     'END IF
     sDump = File.Load("/tmp/installdump")
     IF InStr(sDump, "FAILED") > 0 THEN 
