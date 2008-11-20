@@ -45,6 +45,8 @@ FMain.FrmCurr = ME
   ME.CLEANUP_TABSTRIP()
   MdlLilo.LIST_DEFAULT_BOOT_OPTIONS() ' initial list
   FMain.btnext.Enabled = TRUE
+  ME.cbVideoRes.text = "Bootsplash High"
+  ME.cbBootDefault.Text = "VectorLinux"
 END
 
 PUBLIC SUB CLEANUP_TABSTRIP()

@@ -31,7 +31,8 @@ PUBLIC SUB TRIGGER_LILO_SETUP()
   
   ME.GENERATE_LILO_DOT_CONF ' Generates and write lilo.conf
   ME.COPY_KERNELS_AND_INITRDS ' copy kernels and initrs to the right place
-  MdlConfLilo.PERFORM_BINDING() ' Performs binding mounts for LILO setup  
+  'Moved binding to FMain.class right after packages finish installing.
+  'MdlConfLilo.PERFORM_BINDING() ' Performs binding mounts for LILO setup  
   MdlConfLilo.EXECUTE_LILO() ' Execute lilo in chroot mode
   
   
@@ -176,7 +177,7 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
                 IF chbox.Value = TRUE THEN 
                     IF chbox.tag = cb.Tag THEN 
                       sClisection = sSection
-                      sClisection = Replace(sClisection, "append = " & sAppend, "append = 2 splash=verbose vga=791")
+                      sClisection = Replace(sClisection, "append = " & sAppend, "append = \"2 splash=verbose\"")
                       sClisection = Replace(sClisection, "label = " & sLabel, "label = " & sLabel & "-cli") & "\n"
                     ELSE 
                       sClisection = ""
@@ -299,7 +300,7 @@ PUBLIC SUB COPY_KERNELS_AND_INITRDS()
   
 END IF
 NEXT 
-EXEC ["umount", "/mnt/target"] WAIT 
+'EXEC ["umount", "/mnt/target"] WAIT 
 END
 
 
