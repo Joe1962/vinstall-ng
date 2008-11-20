@@ -52,6 +52,10 @@
       Text = ("Help")
       Picture = Picture["icon:/16/help"]
     }
+    { pbUsrPic PictureBox
+      MoveScaled(58,6,8,8)
+      Stretch = True
+    }
   }
   { Button1 Button
     MoveScaled(1,63,14,3)
@@ -89,14 +93,15 @@
   { hrSep Separator
     MoveScaled(22,7,12,1)
   }
-  { pbUsrPic PictureBox
-    MoveScaled(35,19,8,8)
-    Stretch = True
-  }
   { tlRealName TextLabel
     MoveScaled(2,21,12,3)
     Tag = "line2"
     Text = ("Real Name")
     Alignment = Align.Normal
+  }
+  { LstUsers ListContainer
+    MoveScaled(36,18,21,12)
+    Background = Color.Background
+    ToolTip = ("List of created user accounts")
   }
 }
