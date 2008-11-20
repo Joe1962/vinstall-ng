@@ -14,27 +14,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: MdlSetup.module:198
+#: MdlSetup.module:199
 msgid "Calculating package count ... Please wait"
 msgstr ""
 
-#: MdlSetup.module:254
+#: MdlSetup.module:255
 msgid "Total bulks to be installed = "
 msgstr ""
 
-#: MdlSetup.module:257
+#: MdlSetup.module:258
 msgid "Total pkgs to be installed = "
 msgstr ""
 
-#: MdlSetup.module:300
+#: MdlSetup.module:301
 msgid "BROUGHT TO YOU BY"
 msgstr ""
 
-#: MdlSetup.module:316
+#: MdlSetup.module:317
 msgid "Activating swap space"
 msgstr ""
 
-#: MdlSetup.module:318
+#: MdlSetup.module:319
 msgid "Preparing filesystems"
 msgstr ""
 
