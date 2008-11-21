@@ -28,10 +28,10 @@ PUBLIC SUB Form_Open()
   Fmain.frmcurr = ME
   MdlUsrAdd.iUsrAccts = 0
   WITH FMain
-    .FrmCurr = ME
-    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
-    .tvPlan["Conf3"].picture = MdlCore.sNowPic
-    .tvPlan["Conf3"].Selected = TRUE
+    ' .FrmCurr = ME
+    ' .tvPlan["Conf2"].Picture = MdlCore.sDonePic
+    ' .tvPlan["Conf3"].picture = MdlCore.sNowPic
+    ' .tvPlan["Conf3"].Selected = TRUE
   END WITH 
     WITH ME
       .tlBanner.Text = "<h3>" & ("Create User Accounts") & "</h3>"
@@ -58,6 +58,7 @@ PUBLIC SUB Form_Open()
     
     MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS()
     FMain.btnext.Enabled = TRUE
+    ME.tbUsername.SetFocus
 END 
 
 

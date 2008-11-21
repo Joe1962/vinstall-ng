@@ -557,7 +557,13 @@ PUBLIC FUNCTION ID_DISTRO(sWhereIsItMounted AS String) AS String
       ELSE IF Exist(sBasePath &/ "gentoo-release") THEN 
         sDesc = "Gentoo"
       ELSE IF Exist(sBasePath &/ "debian_version") THEN 
-        sDesc = "Debian"
+          SHELL "grep -m 1 cdrom " & sBasePath &/ "apt" &/ "sources.list | cut -d \"[\" -f1 | cut -d \" \" -f 1,2" TO sDesc
+            sDesc = Trim(sDesc)
+              IF sDesc <> ""
+                  sDesc = Replace(sDesc, " ", "_")
+              ELSE 
+                  sDesc = "Debian"
+          END IF
       ELSE IF Exist(sBasePath &/ "mandrake-release") THEN 
         sDesc = "Makdrake"
       ELSE IF Exist(sBasePath &/ "redhat-release") THEN 
