@@ -291,7 +291,9 @@ PUBLIC SUB Form_Resize()
     '.pbUsrPic.Move(.btBrowse.Left + .btBrowse.Width, tbUsername.top)
     .btgrpHelp.Move(.fGroupSel.Width - (.btgrpHelp.Width + 4), 12)
     .pbUsrPic.Move(.btgrpHelp.Left, .btgrpHelp.Top + .btgrpHelp.Height + 2)
-    .LstUsers.Move(iListLeft, iListTop, 170, iListBottom - iListTop)
+    .frmUserList.Move(iListLeft, iListTop, 160, iListBottom - iListTop)
+    .LstUsers.Move(4, 8, 150, .frmUserList.Height - (.LstUsers.Top * 2))
+  '  .LstUsers.Move(iListLeft, iListTop, 150, iListBottom - iListTop)
     
         icby = 16
         icbspace = 4
