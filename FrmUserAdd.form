@@ -102,11 +102,9 @@
   { frmUserList Frame
     MoveScaled(35,16,18.8889,17)
     Text = ("User Accounts")
-    { LstUsers ListContainer
-      MoveScaled(1,3,17,13)
-      Visible = False
-      Background = Color.Background
-      ToolTip = ("List of created user accounts")
+    { LstUsers ScrollView
+      MoveScaled(1,2,17,13)
+      Border = False
     }
   }
 }
