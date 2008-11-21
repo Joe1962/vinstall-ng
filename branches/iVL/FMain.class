@@ -521,11 +521,11 @@ PUBLIC SUB btnext_Click()
       END IF
       
       
-      ' CONFIGURE X QUIETLY HERE
-          Message.Warning(("VectorLinux will now try to detect and configure your graphics hardware.") & "<br>" &
-          ("Your screen may flicker or go blank for a few seconds during this process."))
-      
-        MdlXconf.QUIET_XORG_CONFIGURATION()
+      ' ' ' ' ' CONFIGURE X QUIETLY HERE
+      ' ' ' '     Message.Warning(("VectorLinux will now try to detect and configure your graphics hardware.") & "<br>" &
+      ' ' ' '     ("Your screen may flicker or go blank for a few seconds during this process."))
+      ' ' ' ' 
+      ' ' ' '   MdlXconf.QUIET_XORG_CONFIGURATION()
       
       frmNext = FrmDone
       
