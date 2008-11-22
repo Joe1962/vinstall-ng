@@ -192,7 +192,7 @@ PUBLIC FUNCTION CALCULATE_PACKAGE_COUNT(bCustom AS Boolean) AS Integer
     SHELL "find " & ClsGlobal.sSourceMnt & "/veclinux -name \"*.tlz\"|wc -l" TO ClsGlobal.iBulkCnt
     'find packages
     SHELL "find " & ClsGlobal.sSourceMnt & "/packages -name  \"*.tlz\"|wc -l" TO ClsGlobal.iPkgCnt
-    ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + 1
+    ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + 3 
     ClsGlobal.iPkgTot = ClsGlobal.iBulkCnt + ClsGlobal.iPkgCnt
     PRINT ClsGlobal.iPkgTot
   ELSE ' GOING FOR CUSTOM INSTALL
@@ -249,8 +249,8 @@ PUBLIC FUNCTION CALCULATE_PACKAGE_COUNT(bCustom AS Boolean) AS Integer
       UNTIL ii = FrmUsrPkgSel.GridView1.Rows.Count
     i = i + irs ' the count to the total
     'add pkgs TO ClsGlobal.iPkgCnt 
-    ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + irs + 1
-    ClsGlobal.iPkgTot = i + 1
+    ClsGlobal.iPkgCnt = ClsGlobal.iPkgCnt + irs + 3
+    ClsGlobal.iPkgTot = i + 3
   END IF
   PRINT ("Total bulks to be installed = ") & ClsGlobal.iBulkCnt
   ClsGlobal.fPbInc = 0.6 / ClsGlobal.iBulkCnt

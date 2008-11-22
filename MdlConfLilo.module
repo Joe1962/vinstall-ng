@@ -348,14 +348,15 @@ SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng" W
 SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT 
 SHELL "chroot /mnt/target /var/log/setup/config-vinstall-ng &"
 
-' SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
-' SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
-' SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
-' sOut = "#!/bin/bash \n" &
-' "/sbin/config-stage1 gui-installer" & gb.NewLine
-' File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
+ SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
+ SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
+ SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
+ sOut = "#!/bin/bash \n" &
+ "/sbin/vxconf" &
+ "#/sbin/config-stage1 gui-installer" & gb.NewLine
+ File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
 ' 'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
-' SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
+ SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
 ' 'SHELL "chroot /mnt/target " WAIT
 
 END
