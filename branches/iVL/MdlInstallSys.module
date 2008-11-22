@@ -796,7 +796,7 @@ PUBLIC FUNCTION INSTALL_REQUIRED_PACKAGES() AS Integer
               ELSE 
                 ii = (i + 1)
               ENDIF 
-              FrmInstallSys.tlCurrPkg.Text = ("Installing Required Package ...") & ii & " of " & iTlzTotal 'sTlzName
+              FrmInstallSys.tlCurrPkg.Text = ("Installing Required Package ...") & ii & " of " & (iTlzTotal + 1) 'sTlzName
               'hproc = SHELL "installpkg " & sTlzPath & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\'"
               hproc = EXEC ["installpkg", sTlzPath, "-R", ClsGlobal.sTargetMnt]
               'hproc = exec ["installpkg",sTlzPath,"-R",ClsGlobal.sTargetMnt
@@ -828,52 +828,60 @@ END
 
 
 PUBLIC FUNCTION INSTALL_CONFIG_PACKAGES() AS Integer
-
-  DIM sList AS String[]
-  DIM sLinarr AS String[]
+  
   DIM sRawList AS String
-  DIM sPkg AS String
-  DIM sCOnfLine AS String
-  DIM sPkgPath AS String
-  DIM i, ipkgsize AS Integer
-  DIM itgtsize AS Integer
-
+  DIM sList AS String[]
+  DIM sCount AS String[]
+  DIM sTrimmed AS String
+  DIM sLineArr AS String[]
+  DIM sBulkPath AS String
+  DIM vBulkSize AS Variant
+  DIM sBulkDesc AS String
+  DIM vTargetSize AS Variant
+  DIM i AS Integer
+  'DIM sFile AS String = File.Load(ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF")
+  DIM sLine AS String
+  
   SHELL "echo \"\" > /tmp/installdump" WAIT 
   'PRINT "Installing final system configuration"
   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF" & " | grep ^CONF" TO sRawList
-  'Message.Info(sRawList)
-  'PRINT sRawList & " config"
-  'PRINT "Found a single CONF package... Installing it now"
-  sRawList = Trim(sRawList)
-  sList = Split(sRawList, "\n")
-  FOR i = 0 TO sList.count - 1
-    sLinarr = Split(Trim(sList[i]), ":")
-    sPkgPath = Right(sLinarr[0], Len(sLinarr[0]) - InStr(sLinarr[0], "\'"))
-    ' now install the package
-    FrmInstallSys.tlCurrPkg.Text = ("Installing Final configuration files...") & File.Name(sPkgPath)
-    'hproc = SHELL "install-pkg " & sPkgPath & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\'" FOR READ
-    SHELL "i=$(df | grep " & ClsGlobal.sSourceMnt & ") ; echo $i | cut -f 3 -d \' \'" TO itgtsize
-    FrmInstallSys.pbInstallProg.Value = i / sList.Count - 1
-    hproc = SHELL "lzmadec <" & ClsGlobal.sSourceMnt &/ "veclinux" &/ sPkgPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ
-    'ME.BULK_INSTALL(ClsGlobal.sSourceMnt &/ "veclinux" &/ sPkgPath)
-    WAIT 1
-    IF hproc.State = Process.Running THEN 
-      REPEAT 
-      WAIT 2
-      'ME.UPDATE_STEP_PROGRESS(itgtsize, sLinArr[1], ClsGlobal.iPkgNum)
-      UNTIL 
-      hproc.State = Process.Stopped
-    END IF
-    INC ClsGlobal.iPkgNum
-    'FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)
-    'END IF
-    sDump = File.Load("/tmp/installdump")
-    IF InStr(sDump, "FAILED") > 0 THEN 
-      RETURN 1
-    ELSE 
-      RETURN 0
-    END IF
-  NEXT
+      sList = Split(sRawList, "\n")
+      'PRINT sRawList & "srawlist " & sList.Count
+        FOR i = 0 TO sList.count - 1
+              'sLine = Trim(sList[i])
+              'PRINT sList[i]
+        IF Left(sList[i], Len("BULK")) = "BULK" THEN 
+                
+          sTrimmed = Right(sList[i], Len(sList[i]) - InStr(sList[i], "\'"))
+          sTrimmed = Left(sTrimmed, InStr(sTrimmed, "\'") - 1)
+          sLineArr = Split(sTrimmed, ":")
+            sBulkPath = sLineArr[0]
+            vBulkSize = sLineArr[1]
+            sBulkDesc = sLineArr[2]
+            'PRINT sBulkPath & vBulkSize & sBulkDesc
+            FrmInstallSys.pbInstallProg.Value = 0
+            INC ClsGlobal.iPkgNum
+            SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO vTargetSize
+                PRINT "installing " & sBulkPath  
+                FrmInstallSys.tlCurrPkg.Text = ("Installing") & Space(1) & sBulkDesc & " ..."      
+                'ME.BULK_INSTALL(ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulkPath)
+                hproc = SHELL "lzmadec <" & ClsGlobal.sSourceMnt &/ "veclinux" &/ sBulkPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ
+                PRINT sBulkPath
+                  WAIT 1
+                    IF hproc.State = Process.Running THEN 
+                      REPEAT 
+                        WAIT 2
+                          ME.UPDATE_STEP_PROGRESS(CFloat(vTargetSize), CFloat(vBulkSize), ClsGlobal.iPkgNum)
+                          FrmInstallSys.pbInstallProg2.Value = (FrmInstallSys.pbInstallProg2.Value + (ClsGlobal.fPbInc - (ClsGlobal.fPbInc * FrmInstallSys.pbInstallProg.Value)) / 100)
+                      UNTIL 
+                        hproc.State = Process.Stopped
+                        'error check
+                    END IF
+                END IF  
+        FrmInstallSys.pbInstallProg.Value = 1
+        WAIT
+        'FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)
+   NEXT 
 END
 
 
