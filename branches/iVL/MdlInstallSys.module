@@ -850,7 +850,7 @@ PUBLIC FUNCTION INSTALL_CONFIG_PACKAGES() AS Integer
         FOR i = 0 TO sList.count - 1
               'sLine = Trim(sList[i])
               'PRINT sList[i]
-        IF Left(sList[i], Len("BULK")) = "BULK" THEN 
+        IF Left(sList[i], Len("CONF")) = "CONF" THEN 
                 
           sTrimmed = Right(sList[i], Len(sList[i]) - InStr(sList[i], "\'"))
           sTrimmed = Left(sTrimmed, InStr(sTrimmed, "\'") - 1)

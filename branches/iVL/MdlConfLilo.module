@@ -352,7 +352,7 @@ SHELL "chroot /mnt/target /var/log/setup/config-vinstall-ng &"
  SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
  SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
  sOut = "#!/bin/bash \n" &
- "/sbin/vxconf" &
+ "/sbin/vxconf \n" &
  "#/sbin/config-stage1 gui-installer" & gb.NewLine
  File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
 ' 'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
