@@ -123,8 +123,9 @@ PUBLIC SUB LIST_WIN_INSTALL_CHOICES(iCurrentTabCnt AS Integer)
           PRINT "mounting " & sWinAddr
           'SHELL "mount " & "/dev" &/ sWinAddr & Space(1) & "/mnt" &/ sWinAddr WAIT 
           EXEC ["mount", "/dev" &/ sWinAddr, "/mnt" &/ sWinAddr] WAIT 
-            IF Exist("/mnt" &/ sWinAddr &/ "windows" &/ "system32" &/ "winver.exe") OR IF IsDir("/mnt" &/ sWinAddr &/ "winnt") = TRUE THEN 'Exist("/mnt" &/ sWinAddr &/ "winnt" &/ "system32" &/ "winver.exe") THEN 
+            'IF Exist("/mnt" &/ sWinAddr &/ "windows" &/ "system32" &/ "winver.exe") OR IF IsDir("/mnt" &/ sWinAddr &/ "winnt") = TRUE THEN 'Exist("/mnt" &/ sWinAddr &/ "winnt" &/ "system32" &/ "winver.exe") THEN 
             'IF IsDir("/mnt" &/ sWinAddr &/ "windows") = TRUE THEN 
+            IF IsDir("/mnt" &/ sWinAddr &/ "windows") OR IF IsDir("/mnt" &/ sWinAddr &/ "WINDOWS") OR IF IsDir("/mnt" &/ sWinAddr &/ "winnt") OR IF IsDir("/mnt" &/ sWinAddr &/ "WINNT") = TRUE THEN
               ' this is indeed a windows installation
                    
                   WITH FrmLilo.tsOsSetup

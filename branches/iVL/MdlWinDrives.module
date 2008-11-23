@@ -143,7 +143,11 @@ ME.tlWnParts = NEW Object[]
           ELSE 
             sBlank = " "
           END IF
+            'we need to know if this fails. it fails on a test machine here with "bad partition table"
             SHELL "export s=$(parted " & Left(wintfs[i], Len("/dev/hda")) & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $s | cut -f 4 -d \' \'" TO sPartsize
+            IF sPartSize.len = 0 THEN 
+              sPartSize = "UNKNOWN"
+            ENDIF 
               tl = NEW TextLabel(FrmWinDrives.svWinDrives)
                 WITH tl
                 .y = y
