@@ -396,7 +396,7 @@ PUBLIC SUB LIST_WIN_INSTALLS()
                             EXEC ["umount", sPartition] WAIT 
                             EXEC ["mount", sPartition, sTmpMountPoint] WAIT 
                     END IF
-                        IF Exist(sTmpMountPoint &/ "winnt" &/ "system32" &/ "winver.exe") OR IF Exist(sTmpMountPoint &/ "WINDOWS" &/ "system32" &/ "winver.exe") OR IF IsDir(sTmpMountPoint &/ "winnt") THEN 
+                        IF Exist(sTmpMountPoint &/ "*winnt*" &/ "*system32*" &/ "*winver.exe*") OR IF Exist(sTmpMountPoint &/ "*WINDOWS*" &/ "*system32*" &/ "*winver.exe*") OR IF IsDir(sTmpMountPoint &/ "*winnt*") THEN 
                             'Message(sPartition & " has a windows install")
                             WITH FrmLiloSetup.tsLIloTabs
                               .Index = .Count - 1
