@@ -229,7 +229,7 @@ PUBLIC SUB btnext_Click()
       ELSE 
       FrmLiloSetup.tlBanner.Text = "<b>" & ("Skipping boot loaded setup") & "</b>"
       END IF
-          SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
+          'SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
       frmNext = FrmZoneSet
        
     CASE "FrmZoneSet"
@@ -433,7 +433,7 @@ PUBLIC SUB btnext_Click()
       ELSE 
       FrmLiloSetup.tlBanner.Text = "<b>" & ("Skipping boot loaded setup") & "</b>"
       END IF
-          SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
+          'SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
       frmNext = FrmZoneSet
       
     CASE "FrmLilo"

@@ -303,6 +303,7 @@ PUBLIC SUB PERFORM_BINDING()
   DIM cb AS CheckBox
   DIM cbox AS ComboBox
 ' SHELL "mount -o bind /sys " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
+SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
 EXEC ["mount", "-o", "bind", "/sys", ClsGlobal.sTargetMnt &/ "sys"] WAIT 
 ' SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT 
 EXEC ["mount", "-o", "bind", "/proc", ClsGlobal.sTargetMnt &/ "proc"] WAIT 
