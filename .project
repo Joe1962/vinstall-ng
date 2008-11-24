@@ -2,7 +2,7 @@
 # Compiled with Gambas 2.9.0
 Title=VectorLinux Installer
 Startup=FMain
-Version=0.1.7
+Version=0.1.4
 Library=gb.gtk
 Library=gb.form
 Library=gb.debug

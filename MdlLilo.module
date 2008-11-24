@@ -404,6 +404,7 @@ PUBLIC SUB LIST_WIN_INSTALLS()
                                 'IF sLook LIKE "winnt" OR IF sLook LIKE "windows" THEN 
                                    IF UCase(sLook) LIKE "WINNT" OR IF UCase(sLook) LIKE "WINDOWS" THEN 
                                     'if Exist(sTmpMountPoint &/ sLook &/ 
+                        IF Exist(sTmpMountPoint &/ sLook &/ "system32" &/ "winver.exe") OR Exist(sTmpMountPoint &/ sLook &/ "System32" &/ "winver.exe") OR Exist(sTmpMountPoint &/ sLook &/ "SYSTEM32" &/ "winver.exe") THEN
                         
 '                        IF Exist(sTmpMountPoint &/ LIKE "winnt" &/ LIKE "system32" &/ LIKE "winver") THEN 
                         
@@ -418,7 +419,7 @@ PUBLIC SUB LIST_WIN_INSTALLS()
                             
                         END IF
                       
-'                        END IF
+                        END IF
 '                      END IF
                   NEXT 
                     
