@@ -399,10 +399,11 @@ PUBLIC SUB LIST_WIN_INSTALLS()
                     END IF
                         'IF Exist(sTmpMountPoint &/ "*winnt*" &/ "*system32*" &/ "*winver.exe*") OR IF Exist(sTmpMountPoint &/ "*WINDOWS*" &/ "*system32*" &/ "*winver.exe*") OR IF IsDir(sTmpMountPoint &/ "*winnt*") THEN 
                         'IF Exist(sTmpMountPoint &/ "*[winnt]*" &/ "*[system32]*"
-                            FOR EACH sLook IN Dir(sTmpMountPoint, "*[win]*", gb.Directory)
-                              IF Stat(sTmpMountPoint &/ sLook).Type = gb.Directory THEN 
-                                IF sLook LIKE "winnt" OR IF sLook LIKE "windows" THEN 
-                                   
+                            FOR EACH sLook IN Dir(sTmpMountPoint, "*", gb.Directory)
+                              'IF Stat(sTmpMountPoint &/ sLook).Type = gb.Directory THEN 
+                                'IF sLook LIKE "winnt" OR IF sLook LIKE "windows" THEN 
+                                   IF UCase(sLook) LIKE "WINNT" OR IF UCase(sLook) LIKE "WINDOWS" THEN 
+                                    'if Exist(sTmpMountPoint &/ sLook &/ 
                         
 '                        IF Exist(sTmpMountPoint &/ LIKE "winnt" &/ LIKE "system32" &/ LIKE "winver") THEN 
                         
@@ -417,7 +418,7 @@ PUBLIC SUB LIST_WIN_INSTALLS()
                             
                         END IF
                       
-                        END IF
+'                        END IF
 '                      END IF
                   NEXT 
                     
