@@ -459,7 +459,7 @@ PUBLIC SUB btnext_Click()
           FrmLilo.tlBanner.Text = "<b>" & ("Skipping lilo setup") & "</b>"
         END IF
       END IF
-       SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
+       'SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
       'frmNext = FrmLiloOsList
        frmNext = FrmZoneSet
        
