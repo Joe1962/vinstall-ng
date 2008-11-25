@@ -303,7 +303,7 @@ PUBLIC SUB PERFORM_BINDING()
   DIM cb AS CheckBox
   DIM cbox AS ComboBox
 ' SHELL "mount -o bind /sys " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
-SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
+SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart" WAIT 
 EXEC ["mount", "-o", "bind", "/sys", ClsGlobal.sTargetMnt &/ "sys"] WAIT 
 ' SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT 
 EXEC ["mount", "-o", "bind", "/proc", ClsGlobal.sTargetMnt &/ "proc"] WAIT 
@@ -353,6 +353,14 @@ SHELL "chroot /mnt/target /var/log/setup/config-vinstall-ng &"
  SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
  SHELL "touch " & ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2"
  sOut = "#!/bin/bash \n" &
+ ". /sbin/vasm-functions \n" &
+ "TEXT=\" \n" &
+ "Vector Linux Has been Installed. \n" &
+ " \n" &
+ "On the next screen you will have the option to configure the GUI. \n" &
+ "Enjoy AND happy Vectoring...\" \n" &
+ "$DCMD --backtitle \"$BACKTITLE\" --title \"CONGRATULATIONS\" " &
+ "--msgbox \"$TEXT\" 0 0 2>/dev/NULL  \n" &
  "/sbin/vxconf \n" &
  "#/sbin/config-stage1 gui-installer" & gb.NewLine
  File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
