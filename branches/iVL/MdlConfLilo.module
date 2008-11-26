@@ -121,24 +121,20 @@ PUBLIC SUB DISPLAY_LILO_TARGET_OPTIONS()
       sList = Trim(sList)
       sListarr = Split(sList, "\n").Sort(gb.Ascent)
         FOR i = 0 TO sListarr.count - 1
-          sTarget = "MBR of " & Trim(sListarr[i])
+          sTarget = (("MBR of ")) & Trim(sListarr[i])
           'FrmLilo.LiloTarget.Add(sTarget)
           FrmLiloSetup.cbLIloTarget.Add(sTarget)
         NEXT 
         
       'WITH FrmLilo.LiloTarget
       WITH FrmLiloSetup.cbLIloTarget
-          IF LCase(ClsPartSel.fRoot) <> "xfs" THEN 
-  
-                  .Add("Sector")
-           END IF
-                
+          IF LCase(ClsPartSel.fRoot) <> "xfs" THEN .Add(("Bootsector of ") & ClsPartSel.sRoot)
+                    '.Add(("Bootsector of ")) & ClsPartSel.sRoot
+           'END IF
           
-          
-      SHELL "lsdev | grep floppy" TO sDump
-      IF sDump <> "" THEN   
-      .Add("Floppy")
-      END IF
+      SHELL "lsdev | grep -i floppy" TO sDump
+      IF sDump <> "" THEN .Add(("Floppy"))
+      'END IF
       END WITH 
   
   

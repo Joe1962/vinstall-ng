@@ -23,6 +23,23 @@ PRIVATE otl AS Object[]
 PUBLIC otb AS Object[]
 
 
+PUBLIC SUB CHECK_FOR_EXISTING_USER_ACCOUNTS()
+  
+  DIM sDump AS String
+  
+  'EXEC ["ls", clsglobal.sTargetMnt &/ "home", "|", "grep", "-v", "ftp"] TO sDump
+  SHELL "ls " & clsglobal.sTargetMnt &/ "home | grep -v ftp" TO sDump
+  sDump = Trim(sDump)
+  
+  IF Len(sDump) > 0 THEN FrmUserAdd.btImportAcct.Enabled = TRUE
+  
+  
+  
+END
+
+
+
+
 PUBLIC SUB Form_Open()
   
   Fmain.frmcurr = ME
@@ -189,7 +206,8 @@ PUBLIC SUB Button1_Click()
   'SHELL "umount /mnt/target/sys" WAIT 
   
 'ME.LIST_NEW_USER_ACCOUNT()
-  ME.LstUsers.Visible = TRUE      
+  ME.LstUsers.Visible = TRUE
+  ME.pbUsrPic.Visible = TRUE      
   
 END
   
@@ -288,6 +306,7 @@ PUBLIC SUB Form_Resize()
     .fGroupSel.Move(4, .tbPicPath.top + .tbPicPath.Height + 4, .ClientW - (.fGroupSel.Left * 2), .ClientH - (.fGroupSel.top + (.Button1.Height)))
     .Button1.Move(4, .fGroupSel.top + .fGroupSel.Height + 8, MdlObjSizer.get_object_width(.Button1.Text) + 36)
     .btClrFrm.Move(.Button1.Left + .Button1.Width + 4, .Button1.top, MdlObjSizer.get_object_width(.btClrFrm.text) + 36)
+    .btImportAcct.Move(.btClrFrm.Left + .btClrFrm.W + 4, .btClrFrm.top, MdlObjSizer.get_object_width(.btImportAcct) + 36)
     '.pbUsrPic.Move(.tbUsername.Left + (.tbUsername.Width + 2), .tbUsername.top)
     '.pbUsrPic.Move(.btBrowse.Left + .btBrowse.Width, tbUsername.top)
     .btgrpHelp.Move(.fGroupSel.Width - (.btgrpHelp.Width + 4), 12)
@@ -307,47 +326,6 @@ PUBLIC SUB Form_Resize()
           cb.Move(icbspace, icby)
           icbspace = icbspace + 116
     NEXT 
-    '     
-    ' '     FOR EACH cb IN MdlUsrAdd.objGrps
-    ' '       'icbspace = icbspace + cb.Height + 4
-    ' '       IF icbspace >= .fGroupSel.Height * 0.60 THEN 
-    ' '         icby = icby + 128
-    ' '         icbspace = 24
-    ' '       END IF
-    ' '       cb.Move(icby, icbspace)
-    ' '       icbspace = icbspace + cb.Height + 4
-    ' ' NEXT
-    ' 
- 
-        
-      
-        
-    
-    '     FOR EACH tl IN otl
-    '   IF tl.width > iboxleft THEN 
-    '     iboxleft = tl.Left + tl.Width + 8
-    '   END IF
-    ' NEXT 
-          
-          
-          'FOR EACH tb IN otb
-            
-    ' ' '   FOR EACH cb IN MdlUsrAdd.objGrps
-    ' ' '     
-    ' ' '     'icbspace = icbspace + cb.Width + 4
-    ' ' '       IF icbspace >= .fGroupSel.Width * 0.75 THEN 
-    ' ' '         icby = icby + cb.Height * 2
-    ' ' '         icbspace = 4
-    ' ' '       END IF
-    ' ' '          cb.Move(icbspace, icby)
-    ' ' '          icbspace = icbspace + cb.Width + 4
-    ' ' '          
-    ' ' ' NEXT 
-        
-        
-        
-    
-  
     
 END WITH 
 

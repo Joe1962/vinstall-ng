@@ -100,11 +100,16 @@
     Alignment = Align.Normal
   }
   { frmUserList Frame
-    MoveScaled(35,16,18.8889,17)
+    MoveScaled(35,16,18.8571,17)
     Text = ("User Accounts")
     { LstUsers ScrollView
       MoveScaled(1,2,17,13)
       Border = False
     }
+  }
+  { btImportAcct Button
+    MoveScaled(30,63,24,1)
+    Text = ("Import Existing User Accounts")
+    Picture = Picture["icon:/small/redo"]
   }
 }

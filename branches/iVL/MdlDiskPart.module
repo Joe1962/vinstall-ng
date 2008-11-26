@@ -77,7 +77,7 @@ PUBLIC SUB EMBED_GPARTED()
         REPEAT 
         aHandle = Desktop.Find(Trim(sTypes[i]) & " - GParted")
         INC i
-        UNTIL aHandle.coun > 0 OR i = sTypes.Count - 1
+        UNTIL aHandle.count > 0 OR i = sTypes.Count - 1
      END IF
         
   IF aHandle.count = 0 THEN 
