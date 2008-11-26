@@ -30,7 +30,7 @@ msgstr ""
 msgid "Do not mount"
 msgstr ""
 
-#: MdlWinDrives.module:193
+#: MdlWinDrives.module:141
 msgid "No Windows partitions detected"
 msgstr ""
 

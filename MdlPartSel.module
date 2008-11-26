@@ -44,7 +44,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
   DIM ii AS Integer
   DIM sDrive, sPartNo, sBlank AS String
   
-  
+  MdlCore.WARN_STATUS("")
 
   ' fire up the arrays
   oFsTypes = NEW Object[]
@@ -261,7 +261,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
       
   
 
-
+MdlCore.warn_status_off()
   
 END
 

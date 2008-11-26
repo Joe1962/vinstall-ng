@@ -30,13 +30,14 @@ PRIVATE i AS Integer ' used for object key
 PUBLIC FUNCTION TRIGGER_LILO_SETUP() AS Integer
   DIM IRET AS Integer
   
+  MdlCore.WARN_STATUS("")
   ME.GENERATE_LILO_DOT_CONF ' Generates and write lilo.conf
   ME.COPY_KERNELS_AND_INITRDS ' copy kernels and initrs to the right place
   'Moved binding to FMain.class right after packages finish installing.
   'MdlConfLilo.PERFORM_BINDING() ' Performs binding mounts for LILO setup  
   IRET = MdlConfLilo.EXECUTE_LILO() ' Execute lilo in chroot mode
     RETURN IRET
-  
+  MdlCore.warn_status_off()
   
 END
 

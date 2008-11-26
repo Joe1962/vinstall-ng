@@ -32,7 +32,7 @@ PUBLIC SUB LIST_BULK_SELECTION()
   'File.Save(Temp("SETUP.CONF"), DConv(File.Load(ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF")))
   'Message(File.Load(Temp("SETUP.CONF")))
   Bulks = NEW Object[]
-    
+    MdlCore.WARN_STATUS("")
     sFIle = Split(File.Load(Temp("SETUP.CONF")), gb.NewLine)
       FOR i = 0 TO sFIle.count - 1
         sLine = Trim(sFIle[i]) 
@@ -62,7 +62,7 @@ PUBLIC SUB LIST_BULK_SELECTION()
                 END IF
             END IF
         NEXT 
-        
+        MdlCore.warn_status_off()
 END
 
 
@@ -107,105 +107,6 @@ PUBLIC SUB LIST_PACKAGE_SELECTION()
             END IF
            
         NEXT 
-  
-END
-
-
-' ' ' PUBLIC SUB Packages_click()
-' ' ' 
-' ' ' 
-' ' '   
-' ' '     IF ClsPkgSel.arrPkgs THEN 
-' ' '       ClsPkgSel.arrPkgs.Clear
-' ' '     END IF
-' ' '     ME.GET_USER_PKG_SELECTION()
-' ' '     
-' ' '     ' Now display a description here
-' ' '     
-' ' '     
-' ' '     'PRINT sDump  
-' ' '   
-' ' ' END
-
-PUBLIC SUB Packages_enter()
-  
-DIM sSearch AS String
-DIM sDump AS String
-DIM sArr AS String[]
-DIM i AS Integer
-DIM sDesc AS String
-
-  
-  sSearch = Right(LAST.tag, Len(LAST.tag) - InStr(LAST.tag, "/"))
-  'Message(sSearch)
-  SHELL "pkgname " & sSearch TO sSearch
-  sSearch = Trim(sSearch)
-  
-  SHELL "cat " & ClsGlobal.sSourceMnt &/ "packages" &/ "PACKAGES.TXT | grep -m 8 \'" & sSearch & ":\' | cut -f2- -d \':\'" TO sDump
-  sArr = Split(sDump, "\n")
-    FOR i = 0 TO sArr.count - 1
-      IF InStr(sArr[i], ":") = FALSE THEN 
-        sDesc = sDesc & sArr[i]
-      END IF
-    NEXT 
-    
-  sDesc = Trim(sDesc) 
-    WITH FrmPkgsel2.tlPkgDesc
-      .Move(4, 4, .Parent.Width - (.left * 2), .Parent.Height - (.top * 2))
-      .text = Trim(sDesc)
-      .Alignment = Align.Normal
-    'FrmPkgsel2.tlPkgDesc.Text = sDesc
-    END WITH 
-    
-  
-END
-
-
-
-
-
-' PUBLIC SUB OptBulks_click()
-'   
-'   IF ClsPkgSel.arrBulks THEN 
-'     ClsPkgSel.arrBulks.Clear
-'   END IF
-'   ME.GET_USER_BULK_SELECTION
-'   
-'   PRINT LAST.tag
-'   
-' END
-' ' 
-' ' 
-PUBLIC SUB GET_USER_BULK_SELECTION()
-  
-  DIM cb AS CheckBox
-  DIM sList AS String
-  DIM sItem AS String
-  DIM i AS Integer
-    ' start the list
-    ClsPkgSel.arrBulks = NEW String[]
-    FOR EACH cb IN ME.Bulks
-      IF cb.Value = TRUE THEN 
-        ClsPkgSel.arrBulks.Add(cb.tag)
-    END IF
-    NEXT ' just store them to the array for now. We will read the array at install time
-
-  
-END
-
-PUBLIC SUB GET_USER_PKG_SELECTION()
-  
-  DIM cb AS CheckBox
-  DIM sList, sItem AS String
-  DIM i AS Integer
-  ' simply get the list of packages into the array, and we will read the array while installing packages.
-    ClsPkgSel.arrPkgs = NEW String[]
-      FOR EACH cb IN ME.Pkgs
-        IF cb.value = TRUE THEN 
-          ClsPkgSel.arrPkgs.Add(cb.Tag)
-        END IF
-      NEXT 
-       
   
 END
 

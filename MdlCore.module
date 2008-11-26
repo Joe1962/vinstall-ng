@@ -24,12 +24,27 @@ PUBLIC sDonePic AS Picture = Picture["images/check.png"]
 PUBLIC iLeftWidth AS Integer
 PUBLIC frmInit AS Form
 
+PUBLIC FUNCTION WARN_STATUS(sText AS String)
+  IF NOT sText OR IF sText = "" THEN sText = ("Working ... Please Wait")
+  fmain.tlStatus.Text = (sText)
+  
+END
+PUBLIC SUB warn_status_off()
+  
+  fmain.tlStatus.Text = ""
+  
+END
+
+
 
 PUBLIC SUB FIND_ISO_ON_DRIVE(sDrive AS String)
   
   DIM sISOList AS String[]
   DIM sResults, sISO AS String
   DIM i AS Integer
+  
+  ME.WARN_STATUS("")
+  
   'Message(ClsGlobal.sSourceMnt)
   SHELL "umount " & ClsGlobal.sSourceMnt WAIT 
   SHELL "mount " & sDrive & Space(1) & ClsGlobal.sSourceMnt WAIT 
@@ -60,7 +75,7 @@ PUBLIC SUB FIND_ISO_ON_DRIVE(sDrive AS String)
                   NEXT 
                 SHELL "umount " & ClsGlobal.sSourceMnt WAIT 
 
-  
+  ME.warn_status_off
 END
 
 
@@ -73,6 +88,7 @@ DIM sPartList AS String[]
 DIM i AS Integer
 DIM sPartition AS String
 
+ME.WARN_STATUS("")
 
   SHELL "probepart | grep -v -i \'swap\' | grep -v -i \'ext\' |grep \'/dev\'| grep -v \'Disk\'| cut -f 1 -d \' \'" TO sResults
   'Message(sResults)
@@ -87,7 +103,7 @@ DIM sPartition AS String
             
       NEXT 
 
-    
+   ME.warn_status_off 
 END
 
 
@@ -102,7 +118,7 @@ PUBLIC SUB MEDIA_SCAN()
   DIM sDump AS String
   DIM i AS Integer
   
-    
+    ME.WARN_STATUS("")
   'ClsGlobal.sSourceMnt = "/mnt/source"
   sMountPoint = ClsGlobal.sSourceMnt
   
@@ -142,7 +158,7 @@ PUBLIC SUB MEDIA_SCAN()
 MdlCore.unlock_gui()
 fmain.btback.Enabled = FALSE
 fmain.btback.ForeColor = Color.Gray
- 
+ ME.warn_status_off
   
 END
 
@@ -201,6 +217,7 @@ FMain.tvPlan["Prep0"].Selected = TRUE
 
 
 'RETURN 
+ME.WARN_STATUS("")
 FrmSelISO.tlDistroDesc.Text = "<b>" & ("Scanning system for installable media. Please wait ...") & "</b>"
 IF Exist(ClsGlobal.sSourceMnt) = FALSE THEN TRY MKDIR ClsGlobal.sSourceMnt
 
@@ -227,7 +244,7 @@ WAIT 1
   FMain.btnext.ForeColor = Color.Black
  END IF
 
-
+ME.warn_status_off
  
 '  FMain.tvPlan["Prep0"].Selected
 END

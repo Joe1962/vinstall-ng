@@ -89,6 +89,7 @@ PUBLIC SUB Button1_Click()
   DIM tl AS TextLabel
   'DIM tly AS Integer
 
+MdlCore.WARN_STATUS(("Creating user account ... Please wait"))
 
     ' increment the number of user accounts created
     INC MdlUsrAdd.iUsrAccts
@@ -138,14 +139,7 @@ PUBLIC SUB Button1_Click()
               NEXT 
                 sGroups = Right(sGroups, Len(sGroups) - 1)
                 'Message(sGroups)
-             'need to do some binding for this to work
-            'PRINT "Mounting system locations with bind options"
-            'SHELL "mount -o bind /sys /mnt/target/sys" WAIT 
-            'SHELL "mount -o bind /tmp /mnt/target/tmp" WAIT 
-            'SHELL "mount -o bind /proc /mnt/target/proc" WAIT 
-            'SHELL "mount -o bind /dev /mnt/target/dev" WAIT 
-            'PRINT "Deleting old user group"
-            
+
           SHELL "chroot /mnt/target  /usr/sbin/groupdel " & ME.tbUsername.Text WAIT '& " &> /dev/null" WAIT 
           'SHELL "chroot /mnt/target /usr/sbin/groupadd -g " & iUID & Space(1) & ME.tbUsername.Text WAIT 
           PRINT "Creating new user group"
@@ -164,8 +158,7 @@ PUBLIC SUB Button1_Click()
           SHELL "chroot /mnt/target /sbin/passwdx " & ME.tbUsername.Text & Space(1) & ME.tbPasswd1.Text WAIT 
           'IF IsDir(sPicdir) THEN 
           IF bUsePic.Value = TRUE THEN 
-            'SHELL "cd " & sPicdir & " && ln -s root1.png root.face.icon"          ' This needs to go somewhere else
-            'SHELL "cd " & sPicdir & " ; ln -s default3.png " & ME.tbUsername.Text & ".face.icon"
+   
             'this next line is for kdm
             SHELL "cd " & sPicdir & "; ln -s " & Replace(tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & tbUsername.Text & ".face.icon" WAIT 
             'the next lines are for gdm
@@ -200,15 +193,10 @@ PUBLIC SUB Button1_Click()
       ENDIF 
     ENDIF
   ENDIF  
-  'SHELL "umount /mnt/target/dev" WAIT 
-  'SHELL "umount /mnt/target/proc" WAIT
-  'SHELL "umount /mnt/target/tmp" WAIT 
-  'SHELL "umount /mnt/target/sys" WAIT 
-  
-'ME.LIST_NEW_USER_ACCOUNT()
+
   ME.LstUsers.Visible = TRUE
   ME.pbUsrPic.Visible = TRUE      
-  
+  MdlCore.warn_status_off()
 END
   
   PUBLIC SUB LIST_NEW_USER_ACCOUNT()
