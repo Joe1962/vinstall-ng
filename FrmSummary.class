@@ -32,9 +32,10 @@ PUBLIC SUB prepare_partition_summary()
     DIM cb AS ComboBox
     DIM cb1 AS ComboBox
     DIM tl AS TextLabel
+    DIM bForm AS String
     DIM sPart, sMountPnt, sFsType, sSize AS String
   
-    ME.GridView1.Columns.count = 4
+    ME.GridView1.Columns.count = 5
         ME.GridView1.Columns[0].text = ("Partition")
         ME.GridView1.Columns[0].Width = MdlObjSizer.get_object_width("/dev/hda1***")
         ME.GridView1.Columns[1].text = ("Size")
@@ -42,6 +43,7 @@ PUBLIC SUB prepare_partition_summary()
         ME.GridView1.Columns[2].text = ("Filesystem")
         ME.GridView1.Columns[2].Width = MdlObjSizer.get_object_width(("Filesystem")) * 1.25
         ME.GridView1.Columns[3].text = ("Mount Point")
+        ME.GridView1.Columns[4].Text = ("Format ?")
         'ME.GridView1.Columns[3].Width = MdlObjSizer.get_object_width(ME.GridView1.Columns[3].text)
 
         ' tricky part to list the partitions on the summary
@@ -53,6 +55,11 @@ PUBLIC SUB prepare_partition_summary()
                   sMountPnt = cb.Text
                     FOR EACH cb1 IN MdlPartSel.oFsTypes
                       IF cb1.tag = cb.tag THEN sFsType = cb1.Text
+                      IF cb1.Text <> ("Do Not Format") THEN 
+                        bForm = ("Yes")
+                      ELSE 
+                        bForm = ("No")
+                      END IF
                     NEXT 
                       FOR EACH tl IN MdlPartSel.oPartLbls
                         IF tl.tag = cb.tag THEN 
@@ -66,6 +73,7 @@ PUBLIC SUB prepare_partition_summary()
                     .GridView1[irow, 1].text = sSize
                     .GridView1[irow, 2].text = sFsType
                     .GridView1[irow, 3].Text = sMountPnt
+                    .GridView1[irow, 4].Text = bForm
                   END WITH 
                 INC irow ' increase this value... this determines the row to use.  
                 END IF
@@ -124,7 +132,9 @@ PUBLIC SUB prepare_partition_summary()
               NEXT 
             
             'sFsType = "Windows"
-              SHELL "l=$(probepart | grep " & cb.tag & "); echo $l | cut -f 6,7 -d \' \'" TO sFsType
+              'SHELL "l=$(probepart | grep " & cb.tag & "); echo $l | cut -f 6,7 -d \' \'" TO sFsType
+              SHELL "probepart | grep ^" & cb.Tag & " | tr -s \' \'\"\" | cut -f 6 -d \' \'" TO sFsType
+              sFsType = Trim(sFsType)
           
             WITH ME
             .GridView1[irow, 0].text = sPart
