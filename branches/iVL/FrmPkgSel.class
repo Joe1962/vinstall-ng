@@ -44,10 +44,10 @@ WITH ME.scrlInstallOpts
 .Columns[1].Width = 120
 .Columns[2].Width = 350
 END WITH 
-
+MdlCore.WARN_STATUS("")
 ME.FILL_IN_BULK_LIST()
 FMain.btnext.Enabled = TRUE
-
+MdlCore.warn_status_off()
 END
 
 PUBLIC SUB Form_Resize()

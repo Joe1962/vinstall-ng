@@ -14,7 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FrmDiskPart.class:115
+#: FrmDiskPart.class:58
+msgid "When finished making changes, exit the partitioning application to continue ..."
+msgstr ""
+
+#: FrmDiskPart.class:117
 msgid "Disk Partitioning:"
 msgstr ""
 

@@ -57,6 +57,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     DIM sApDump AS String
     'DIM iwifix, iwifiy, iwifiboxwidth AS Integer
     
+    MdlCore.WARN_STATUS(("Probing your networking hardware ... Please wait"))
     
     'initiate the arrays
     objCombos = NEW Object[]
@@ -340,6 +341,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
           IF ERROR THEN Message(Error.text & gb.newline & Error.where) 
   
   KILL "/tmp/iwdump"
+  MdlCore.warn_status_off()
   
 END
 

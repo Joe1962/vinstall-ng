@@ -35,7 +35,7 @@ PUBLIC SUB Form_Resize()
 END
 
 PUBLIC SUB Form_Open()
-  
+  MdlCore.WARN_STATUS("")
   ME.tlBanner.text = "<h3>" & ME.tlBanner.text & "</h3>"
 FMain.FrmCurr = ME
 FMain.tvPlan["Prep2"].Selected = TRUE
@@ -50,7 +50,7 @@ FMain.btback.ForeColor = Color.Black
     .rbUseExisting.Width = MdlObjSizer.get_object_width(.rbUseExisting.Text) + 24
   END WITH 
 ME.rbUseExisting_Click()
-
+MdlCore.warn_status_off()
 END
 
 PUBLIC SUB rbUseExisting_Click()

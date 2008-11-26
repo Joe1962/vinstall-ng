@@ -189,6 +189,7 @@ PUBLIC SUB btnext_Click()
   DIM sLang AS String
   
   'tvPlan.Refresh()
+  'FMain.tlStatus.Text = ("Working ... Please wait")
   FMain.btnext.Enabled = FALSE
   
   
@@ -314,14 +315,7 @@ PUBLIC SUB btnext_Click()
                     
               END SELECT 
               
-              '  '   .tvPlan["Conf3"].Picture = MdlCore.sDonePic
-  '   .tvPlan["Conf4"].Picture = MdlCore.sNowPic
-  '   .tvPlan["Conf4"].Selected = TRUE
-  ' END WITH     FrmCurr.Hide
-                '   .tvPlan["Conf3"].Picture = MdlCore.sDonePic
-  '   .tvPlan["Conf4"].Picture = MdlCore.sNowPic
-  '   .tvPlan["Conf4"].Selected = TRUE
-  ' END WITH    
+
    frmNext.Reparent(FrmCurr.Parent)
               frmNext.Show
               
@@ -348,7 +342,7 @@ PUBLIC SUB btnext_Click()
         ' The next form is defined from the radio buttons in Frm PartScheme. But let's see if we can display some status text
         
         'FMain.MovieBox1.Refresh
-        
+        MdlCore.WARN_STATUS("")
         WITH FrmPartScheme
           IF .rbEditPartitions.Value = TRUE THEN 
             .tlChoiceExp.text = .tlChoiceExp.text & gb.NewLine & gb.NewLine & "<b><br><br>" & ("Please wait while setup attampts to run the partitioning utility") & "</b>"
@@ -363,7 +357,7 @@ PUBLIC SUB btnext_Click()
         'FMain.MovieBox1.Playing = TRUE
         WAIT 
                
-              
+             MdlCore.warn_status_off() 
               
     CASE "FrmPartSel"
         IF NOT ClsPartSel.sRoot OR ClsPartSel.sRoot = "" THEN 
@@ -372,6 +366,7 @@ PUBLIC SUB btnext_Click()
           RETURN 
         ELSE 
             ' set the partition types
+            MdlCore.WARN_STATUS("")
             MdlPartSel.SET_LINUX_PARTITION_TYPES()
           IF ClsPartSel.bDoWin = TRUE THEN 
             frmNext = FrmWinDrives
@@ -381,16 +376,19 @@ PUBLIC SUB btnext_Click()
           END IF
           
         END IF
+        MdlCore.warn_status_off()
     CASE "FrmPkgSel"
         'here we check what kind of install it is, simple  or custom
             'IF FrmPkgSel.rbCustom.Value = TRUE THEN 
-            
+           ' MdlCore.WARN_STATUS(("Reading available software selection ... Please wait"))
           IF ClsPkgSel.bCustom = TRUE THEN 
               'get the list of selected bulks only
               
               'MdlPkgSel.GET_USER_BULK_SELECTION()
               'frmNext = FrmPkgsel2
+              
               frmNext = FrmUsrPkgSel
+              
             ELSE 
               ' Going for simple install. Now we are ready to summarize
 ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' '               MdlSummarize.SUMMARIZE_INSTALL
@@ -400,6 +398,7 @@ PUBLIC SUB btnext_Click()
 
     CASE "FrmPkgsel2" ', "FrmUsrPkgSel"
       ' summarize the build
+      'MdlCore.WARN_STATUS(("Reading available software selection ... Please wait"))
 ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' '         MdlSummarize.SUMMARIZE_INSTALL
         frmNext = FrmSummary
         'frmNext = install
@@ -577,6 +576,7 @@ PUBLIC SUB btnext_Click()
 END IF
 tvPlan.Refresh()
 ClsGlobal.sBackNav.Add(FrmCurr)
+'FMain.tlStatus.Text = ""
 END
 
 

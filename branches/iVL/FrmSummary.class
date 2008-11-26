@@ -34,7 +34,7 @@ PUBLIC SUB prepare_partition_summary()
     DIM tl AS TextLabel
     DIM bForm AS String
     DIM sPart, sMountPnt, sFsType, sSize AS String
-  
+  MdlCore.WARN_STATUS(("Preparing Installation Summary ... Please wait"))
     ME.GridView1.Columns.count = 5
         ME.GridView1.Columns[0].text = ("Partition")
         ME.GridView1.Columns[0].Width = MdlObjSizer.get_object_width("/dev/hda1***")
@@ -55,7 +55,7 @@ PUBLIC SUB prepare_partition_summary()
                   sMountPnt = cb.Text
                     FOR EACH cb1 IN MdlPartSel.oFsTypes
                       IF cb1.tag = cb.tag THEN sFsType = cb1.Text
-                      IF cb1.Text <> ("Do Not Format") THEN 
+                      IF cb1.Text <> ("Do not Format") THEN 
                         bForm = ("Yes")
                       ELSE 
                         bForm = ("No")
@@ -158,8 +158,7 @@ PUBLIC SUB prepare_partition_summary()
                       ' MAYBE CREATE A SEPARATED ROW BY SETTING IT'S BG COLOR TO SOMETHING BRIGHT AND BOLD FORE FONTS
                       
                         
-    
-        
+    MdlCore.warn_status_off()        
     
 END
 

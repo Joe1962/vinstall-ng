@@ -69,7 +69,7 @@ PUBLIC SUB Form_Open()
     NEXT 
 '    ME.frmNetDevices.Text = Space(1) & ("Network Interfaces") & Space(1)
     FMain.btnext.Enabled = TRUE
-    
+    MdlCore.warn_status_off()
 END
 
 

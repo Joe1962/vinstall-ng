@@ -14,95 +14,95 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FMain.class:195
+#: FMain.class:196
 msgid "Restart"
 msgstr ""
 
-#: FMain.class:222
+#: FMain.class:223
 msgid "Please select a default operating system to boot before proceeding"
 msgstr ""
 
-#: FMain.class:223
+#: FMain.class:224
 msgid "Select an entry from this list"
 msgstr ""
 
-#: FMain.class:230
+#: FMain.class:231
 msgid "Skipping boot loaded setup"
 msgstr ""
 
-#: FMain.class:243
+#: FMain.class:244
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
-#: FMain.class:258
+#: FMain.class:259
 msgid "You have not created any user accounts for this system yet. There is not enough information"
 msgstr ""
 
-#: FMain.class:258
+#: FMain.class:259
 msgid "to create an account here. It is recommended that you create at least one."
 msgstr ""
 
-#: FMain.class:258
+#: FMain.class:259
 msgid "Would you like to continue anyway?"
 msgstr ""
 
-#: FMain.class:258
+#: FMain.class:259
 msgid "Yes"
 msgstr ""
 
-#: FMain.class:258
+#: FMain.class:259
 msgid "No"
 msgstr ""
 
-#: FMain.class:276
+#: FMain.class:277
 msgid "Please specify a hostname for this computer"
 msgstr ""
 
-#: FMain.class:280
+#: FMain.class:281
 msgid "Please specify the domain this computer belongs to"
 msgstr ""
 
-#: FMain.class:295
+#: FMain.class:296
 msgid "VectorLinux will now try to detect and configure your graphics hardware."
 msgstr ""
 
-#: FMain.class:295
+#: FMain.class:296
 msgid "Your screen may flicker or go blank for a few seconds during this process."
 msgstr ""
 
-#: FMain.class:354
+#: FMain.class:348
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr ""
 
-#: FMain.class:356
+#: FMain.class:350
 msgid "Please wait while setup analyses your current partition setup."
 msgstr ""
 
-#: FMain.class:356
+#: FMain.class:350
 msgid "This may take a while ..."
 msgstr ""
 
-#: FMain.class:370
+#: FMain.class:364
 msgid "You must select a \"/\" partition. This is the target where the system will install to"
 msgstr ""
 
-#: FMain.class:459
+#: FMain.class:458
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:784
+#: FMain.class:797
 msgid "Back"
 msgstr ""
 
-#: FMain.class:796
+#: FMain.class:809
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:808
+#: FMain.class:821
 msgid "Next"
 msgstr ""
 
-#: FMain.class:822
+#: FMain.class:835
 msgid "Button1"
 msgstr ""
 
