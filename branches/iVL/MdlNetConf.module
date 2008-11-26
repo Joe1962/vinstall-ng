@@ -267,7 +267,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                     .Height = 21
                     .Password = TRUE
                     .Move(iwifiboxleft, tl.Top)
-                    .Enabled = FALSE
+                    .Enabled = TRUE
                     .tag = sDev
                   END WITH 
                     objtxtWifiKey.Add(tb)
@@ -278,14 +278,18 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                     .Height = 21
                     .Alignment = Align.Normal
                     .Move(iWifix, tb.top + tb.Height + 4)
+                    '.Enabled = TRUE
+                    '.ReadOnly = FALSE
                   END WITH
                 tb = NEW TextBox(FrmNetConf.TSNetDevices)
                   WITH tb
                     .tag = sDev
-                    .ReadOnly = TRUE
+                    '.ReadOnly = TRUE
                     .Width = iwifiboxwidth
                     .Height = 21
                     .Move(iwifiboxleft, tl.Top)
+                    .ReadOnly = FALSE
+                    
                         ' add the access points here
                   END WITH
                   objcbWifiessid.Add(tb)
