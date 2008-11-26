@@ -92,11 +92,11 @@ PUBLIC FUNCTION generate_lilo_dot_conf_header() AS String
     DIM iTimeOut AS Integer
     
     sTarget = Trim(FrmLiloSetup.cbLIloTarget.Text)
-        IF InStr(sTarget, "MBR of") THEN 
+        IF InStr(sTarget, ("MBR of")) THEN 
           sTarget = Right(sTarget, Len(sTarget) - InStr(sTarget, "/") + 1)
-        ELSE IF sTarget = "Sector" THEN 
+        ELSE IF sTarget = ("Bootsector of ") & ClsPartSel.sRoot THEN 
           sTarget = ClsPartSel.sRoot
-        ELSE IF sTarget = "Floppy" THEN 
+        ELSE IF sTarget = ("Floppy") THEN 
           sTarget = "/dev/df0"
         END IF
         
@@ -177,6 +177,12 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
               FOR EACH chbox IN ME.arrLinuxTextBoots
                 IF chbox.Value = TRUE THEN 
                     IF chbox.tag = cb.Tag THEN
+                        ' validate length of -tui entry
+                        IF Len(sLabel) + Len("-tui") > 15 THEN 
+                          Message.warning(("Your option to boot") & Space(1) & sLabel & Space(1) & ("is too long. it has been adjusted to \"Vector-cli\". You can run vasmCC after the first boot to modify your boot options"))
+                          sLabel = "Vector"
+                                                 
+                        END IF
                     sClisection = "image = " & sBootPath &/ sKernel & "\n" &
           "root = " & Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) & "\n" &
           "label = " & sLabel & "-tui" & "\n" &

@@ -1,5 +1,5 @@
-- Fixed list of user accounts created
-- Fixed LILO errors
-- Added default append line values
-- Updated binary
-- Installer is ready for testing.
+- Fixed typo in gparted module
+- Fixed issue with user icon now showing up after first user account.
+- Added auto-modifying of -cli lilo entry if the chosen label is too long. Added warning to user interface to warn accordingly
+- Relabeled "Sector" to "Bootsector of" in LIlo setup
+- Fine tuned lilo target options in the search for a floppy drive
