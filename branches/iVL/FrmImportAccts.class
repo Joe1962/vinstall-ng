@@ -27,7 +27,7 @@ END
 PUBLIC SUB btBrowsePic_Click()
 
   
-
+    IF ME.pbLogin THEN ME.pbLogin.Delete
     dialog.Title = ("Select picture for user Login")
     Dialog.path = ClsGlobal.sTargetMnt &/ "usr" &/ "share" &/ "apps" &/ "kdm" &/ "pics" &/ "users"
     Dialog.Filter = ["*.png", "Picture Files", "*.jpg", "JPEG Graphics"]
