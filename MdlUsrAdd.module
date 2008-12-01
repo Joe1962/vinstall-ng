@@ -19,7 +19,7 @@ PUBLIC iUsrAccts AS Integer
 
 PUBLIC objGrps AS Object[]
 
-PUBLIC SUB DISPLAY_USER_GROUP_OPTIONS()
+PUBLIC FUNCTION DISPLAY_USER_GROUP_OPTIONS(frmParent AS Frame)
 DIM sGrpList AS String = "cdrom,floppy,lp,scanner,audio,video,games,adm,sys,wheel,plugdev,disk"
 DIM sGrpArr AS String[]
 DIM i AS Integer
@@ -84,7 +84,8 @@ END SELECT
       ' ' '   htotal = x
       ' ' ' END IF
   'y = 12
-cb = NEW CheckBox(FrmUserAdd.fGroupSel)
+'cb = NEW CheckBox(FrmUserAdd.fGroupSel)
+cb = NEW CheckBox(frmParent)
   WITH cb
   .text = sLabel
   .Value = bdefval
@@ -104,7 +105,7 @@ NEXT
   ' now move the objects to their places
   x = 4
   htotal = 4
-  y = 16
+  y = 24
     FOR EACH cb IN objGrps
       cb.Move(x, y)
       x = x + 116
@@ -120,6 +121,109 @@ NEXT
 
   
 END
+
+
+' PUBLIC SUB DISPLAY_USER_GROUP_OPTIONS()
+' DIM sGrpList AS String = "cdrom,floppy,lp,scanner,audio,video,games,adm,sys,wheel,plugdev,disk"
+' DIM sGrpArr AS String[]
+' DIM i AS Integer
+' DIM sLabel, sComment, sToolTip AS String
+' DIM cb AS CheckBox
+' DIM x, y, htotal AS Integer
+' DIM bdefval AS Boolean
+' 
+' objGrps = NEW Object[]
+' sGrpArr = Split(sGrpList, ",")
+' 
+' 
+' 
+' 
+' 
+' y = 24
+' x = 4
+' FOR i = 0 TO sGrpArr.Count - 1
+'   sLabel = Trim(sGrpArr[i])
+'     SELECT CASE sLabel
+'       CASE "cdrom"
+'       sComment = ("This user can access CD/DVD devices")
+'       bdefval = TRUE
+'       CASE "floppy"
+'       sComment = ("This user can access floppy disks")
+'       bdefval = TRUE
+'       CASE "lp"
+'       sComment = ("This user is allowed to print")
+'       bdefval = TRUE
+'       CASE "scanner"
+'       sComment = ("This user can access scanner devices")
+'       bdefval = TRUE
+'       CASE "audio"
+'       sComment = ("This user is allowed to change audio settings")
+'       bdefval = TRUE
+'       CASE "video"
+'       sComment = ("This user is allowed to change video settings")
+'       bdefval = TRUE
+'       CASE "games"
+'       sComment = ("This user is allowed to play restricted games")
+'       bdefval = TRUE
+'       CASE "adm"
+'         sComment = ("Restricted administrator (backup)")
+'         bdefval = FALSE
+'       CASE "sys"
+'       sComment = ("This user is a system administrator")
+'       bdefval = FALSE
+'       CASE "wheel"
+'       sComment = ("Elite user")
+'       bdefval = FALSE
+'       CASE "plugdev"
+'       sComment = ("Allow user to mount / un-mount Pendrive (USB Sticks)")
+'       bdefval = TRUE
+'       CASE "disk"
+'       sComment = ("Allow user to mount / un-mount Removable HD Storage Devices")
+'       bdefval = TRUE
+' END SELECT 
+'   'x = 4
+'       ' ' ' IF htotal > FrmUserAdd.fGroupSel.Width * 0.75 THEN 
+'       ' ' '   x = 4
+'       ' ' '   y = y + 25
+'       ' ' '   htotal = x
+'       ' ' ' END IF
+'   'y = 12
+' cb = NEW CheckBox(FrmUserAdd.fGroupSel)
+'   WITH cb
+'   .text = sLabel
+'   .Value = bdefval
+'   .Height = 21
+'   .Width = MdlObjSizer.get_object_width(.text) + 24
+'   '.Move(x, y)
+'   .ToolTip = sComment
+'   'y = y + cb.Height
+'   x = x + 128
+'   htotal = htotal + x
+'   END WITH 
+'   objGrps.Add(cb)
+'   'y = y + cb.Height + 4
+' NEXT       
+'       
+' 
+'   ' now move the objects to their places
+'   x = 4
+'   htotal = 4
+'   y = 16
+'     FOR EACH cb IN objGrps
+'       cb.Move(x, y)
+'       x = x + 116
+'       htotal = x
+'         IF htotal >= FrmUserAdd.fGroupSel.Width * 0.70 THEN 
+'           htotal = 4
+'           x = 4
+'           y = y + cb.Height + 4
+'         END IF
+'     NEXT 
+'         
+' 
+' 
+'   
+' END
 
 PUBLIC FUNCTION CREATE_USER_ON_A_SNAP() AS Boolean
     DIM bcont AS Boolean

@@ -1,0 +1,74 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+PRIVATE pYes AS Picture = FrmPkgSel.pyes
+
+PUBLIC SUB Form_Open()
+
+  'pyes = FrmPkgSel.pYes
+  ME.tlBanner.Text = "<b>" & tlbanner.text & "</b>"
+  ME.size_grid()
+  MdlResetSettings.LIST_RESETABLE_SETTINGS()
+
+END
+PUBLIC SUB size_grid()
+  
+  WITH ME.gvSettings
+    .Columns.count = 3
+    .Columns[0].Width = 32
+    .Columns[1].Width = 400
+    .Columns[2].Width = 1
+    .Rows.Count = 1
+    
+  END WITH 
+  
+END
+
+PUBLIC SUB gvSettings_Click()
+
+  IF LAST.column > 0 THEN RETURN 
+  
+  IF gvSettings[LAST.row, 0].Picture = pyes THEN 
+    'gvSettings[LAST.row, 0].Picture = FrmPkgSel.pNo
+    'gvSettings[LAST.row, 0].Picture = FrmPkgSel.pno
+    gvSettings[LAST.row, 0].Clear()
+    
+  ELSE 
+    gvSettings[LAST.ROW, 0].Picture = pYes
+  END IF
+  gvSettings.Refresh()
+  
+  
+
+END
+
+PUBLIC SUB btDone_Click()
+
+  ME.Close
+
+END
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .tlBanner.Move(4, 4)
+    .gvSettings.Move(4, .tlBanner.top + .tlBanner.Height + 4, .ClientWidth - (.gvSettings.Left * 2), .ClientH - (.gvSettings.Top * 2))
+    .btDone.Move(4, .gvSettings.Top + .gvSettings.Height + 8, MdlObjSizer.get_object_width(.btDone.Text) + 36, 21)
+    '.gvSettings.Columns[1].Width = .gvSettings.Width - (.gvSettings.Columns[0].Width * 1.25)
+  END WITH 
+  
+    
+
+END

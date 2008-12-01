@@ -1,0 +1,67 @@
+' Gambas module file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC pYes AS Picture 
+PUBLIC SUB LIST_RESETABLE_SETTINGS()
+  DIM sFile, sDesc AS String
+  DIM i AS Integer 
+  i = 0
+  pYes = FrmPkgSel.pYes
+      
+      FOR EACH sfile IN Dir(User.home, "*")
+          SELECT CASE sFile
+  
+            CASE ".kde"
+              sDesc = "KDE Settings (Menu, Window decorations, etc)"
+            CASE ".qt"
+              sDesc = "QT Toolkit settings (KDE Visual Effects)"
+            CASE ".gtkrc-*"
+              sDesc = "GTK Tookit theme Settings"
+            CASE ".Xdefaults"
+              sDesc = "X-window basic settings (includes xterm settings)"
+            CASE ".bashrc"
+              sDesc = "Bash init script" 
+            CASE ".asoundrc"
+              sDesc = "Sound system preferences"
+            CASE ".xinitrc"
+              sDesc = "Graphical inteface preferences"
+            CASE "Desktop"
+              sDesc = "Desktop icons, folders, launchers"
+            CASE ".IceWM"
+              sDesc = "IceWM settings, preferences, menu"
+            CASE ".xmms"
+              sDesc = "XMMS Audio player preferences"
+            CASE ".Choices", "Choices"
+              sDesc = "ROX Filer Desktop settings"
+            CASE ".mplayer"
+              sDesc = "MPlayer Multimedia Player Settings"
+          CASE ELSE 
+            sDesc = ""
+
+        END SELECT 
+      IF sDesc THEN    
+           'INC i
+        INC FrmResetSettings.gvSettings.Rows.Count                
+        FrmResetSettings.gvSettings[i, 1].Text = sDesc
+        FrmResetSettings.gvSettings[i, 2].Text = sFile   
+   INC i
+      END IF
+      NEXT 
+      FrmResetSettings.gvSettings.Columns[1].Width = FrmResetSettings.gvSettings.Width - (FrmResetSettings.gvSettings.Columns[0].Width * 1.75)
+  FrmResetSettings.gvSettings.Columns[2].Width = 0
+  DEC FrmResetSettings.gvSettings.Rows.Count
+END
