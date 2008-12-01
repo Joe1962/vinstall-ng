@@ -1,0 +1,100 @@
+' Gambas class file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC SUB Form_Open()
+
+  WITH ME
+    .tlBanner.Text = "<b>" & .tlBanner.Text & "</b>"
+  END WITH 
+  MdlImportAccts.LIST_EXISTING_ACCOUNTS()
+  MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS(ME.frmUsrGrps)
+END
+
+PUBLIC SUB btBrowsePic_Click()
+
+  
+
+    dialog.Title = ("Select picture for user Login")
+    Dialog.path = ClsGlobal.sTargetMnt &/ "usr" &/ "share" &/ "apps" &/ "kdm" &/ "pics" &/ "users"
+    Dialog.Filter = ["*.png", "Picture Files", "*.jpg", "JPEG Graphics"]
+    IF Dialog.OpenFile() THEN RETURN 
+    tbPicPath.text = Replace(Dialog.path, ClsGlobal.sSourceMnt, "")
+    ME.pbLogin = NEW PictureBox(ME)
+    ME.pbLogin.Move(ME.tbPass2.left + ME.tbPass2.Width + 4, ME.tlPasswd2.top, 64, 64)
+    ME.pbLogin.Picture = Picture[dialog.path]
+    ME.pbLogin.Stretch = TRUE
+    
+  
+
+END
+
+
+
+PUBLIC SUB btResetSettings_Click()
+
+
+  FrmResetSettings.Title = ("Reset settings for") & Space(1) & Trim(ME.cbAccntList.Text)
+  FrmResetSettings.ShowDialog()
+
+END
+
+PUBLIC SUB btcancel_Click()
+
+  ME.Close()
+
+END
+
+PUBLIC SUB btImportAccnt_Click()
+
+  IF ME.tbPass1.Text = "" OR ME.tbPass2.Text = "" THEN 
+    Message.Error(("Password fields cannot be blank. Please enter a password for") & Space(1) & ME.cbAccntList.Text)
+    RETURN 
+  END IF
+  IF ME.tbPass1.Text <> ME.tbPass2.Text THEN 
+    Message.Error(("Selected passwords dont match. Please enter the same password twice"))
+    RETURN 
+  ELSE 
+    ME.pbLogin.Delete
+      'pbLogin = NEW PictureBox(ME)
+      'me.pbLogin.Move(
+  MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS(ME.frmUsrGrps)
+    'ME.Close
+    'ME.pbLogin.Picture.Image.Clear
+END IF
+
+
+END
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+  .tlBanner.Move(4, 4)
+  .hrsep.Move(4, .tlBanner.top + .tlBanner.Height + 1, .ClientWidth - (.hrsep.Left * 2))
+  .tlLogin.Move(4, .hrsep.top + 8, MdlObjSizer.get_object_width(.tlLogin.Text))
+  .cbAccntList.Move(.tlLogin.Left + .tlLogin.Width + 8, .tlLogin.Top, .tlLogin.Width * 2.5)
+  .tlPasswd.Move(4, .tlLogin.top + .tlLogin.Height + 8, MdlObjSizer.get_object_width(.tlPasswd.Text))
+  .tbPass1.Move(4, .tlPasswd.top + .tlPasswd.Height + 4, 175)
+  .tlPasswd2.Move(.tbPass1.Left + .tbPass1.Width + 8, .tlPasswd.Top, MdlObjSizer.get_object_width(.tlPasswd2.Text))
+  .tbPass2.Move(.tlPasswd2.Left, .tbPass1.top, 175)
+  .tlPicPath.Move(4, .tbPass1.top + .tbPass1.Height + 8, MdlObjSizer.get_object_width(.tlPicPath.Text))
+  .btBrowsePic.Move(.ClientWidth - .btBrowsePic.Width - 8, .tlPicPath.top + .tlPicPath.Height + 8, MdlObjSizer.get_object_width(.btBrowsePic.Text) + 36)
+  .tbPicPath.Move(4, .btBrowsePic.top, (.ClientWidth - .btBrowsePic.Width) - (.tbPicPath.Left * 2) - 8)
+  .pbLogin.Move(.tbPass2.Left + .tbPass2.Width + 8, .tlPasswd2.top + 4, 48, 48)
+  '.btBrowsePic.Move(.ClientWidth - .btBrowsePic.Width - 8,.tbPass2.top + .tbPass1
+  END WITH 
+
+END

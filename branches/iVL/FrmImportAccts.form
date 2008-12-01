@@ -1,0 +1,84 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,70,59)
+  Text = ("")
+  { tlLogin TextLabel
+    MoveScaled(1,8,9,3)
+    Text = ("Account")
+    Alignment = Align.Normal
+  }
+  { cbAccntList ComboBox
+    MoveScaled(11,8,17,3)
+    Text = ("")
+    ReadOnly = True
+  }
+  { tlPasswd TextLabel
+    MoveScaled(1,12,25,3)
+    Text = ("New Password")
+  }
+  { tbPass1 TextBox
+    MoveScaled(1,15,25,3)
+    Text = ("")
+    Password = True
+  }
+  { tbPass2 TextBox
+    MoveScaled(28,15,25,3)
+    Text = ("")
+    Password = True
+  }
+  { tlPicPath TextLabel
+    MoveScaled(1,19,35,3)
+    Text = ("Select login Image")
+  }
+  { tbPicPath TextBox
+    MoveScaled(1,22,53,3)
+    Text = ("")
+  }
+  { btBrowsePic Button
+    MoveScaled(55,22,11,3)
+    Text = ("Select")
+    Picture = Picture["icon:/small/open"]
+  }
+  { pbLogin PictureBox
+    MoveScaled(54,12,6,6)
+  }
+  { tlPasswd2 TextLabel
+    MoveScaled(28,12,25,3)
+    Text = ("Verify Password")
+  }
+  { ScrollView1 ScrollView
+    MoveScaled(1,26,66,18)
+    Expand = True
+    Border = False
+    { frmUsrGrps Frame
+      MoveScaled(0,0,65,15)
+      Text = ("User Rights Management")
+    }
+  }
+  { btResetSettings Button
+    MoveScaled(1,45,23,3)
+    Text = ("Reset settings")
+    Picture = Picture["icon:/small/undo"]
+  }
+  { btImportAccnt Button
+    MoveScaled(1,49,23,3)
+    Text = ("Import Account")
+    Picture = Picture["icon:/small/redo"]
+  }
+  { btcancel Button
+    MoveScaled(26,49,14,3)
+    Text = ("Cancel")
+    Picture = Picture["icon:/16/cancel"]
+  }
+  { tlBanner TextLabel
+    MoveScaled(0,0,43,3)
+    Expand = True
+    Text = ("Import Existing User Accounts")
+    Alignment = Align.Normal
+  }
+  { hrsep Separator
+    MoveScaled(1,4,16,1)
+    Expand = True
+  }
+}
