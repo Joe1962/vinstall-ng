@@ -18,7 +18,7 @@
 PUBLIC SUB LIST_EXISTING_ACCOUNTS()
   
   DIM sDir AS String
-    FOR EACH sdir IN Dir("/home", "*", gb.Directory)
+    FOR EACH sdir IN Dir(ClsGlobal.sTargetMnt &/ "home", "*", gb.Directory)
       IF sdir <> "ftp" THEN 
         IF FrmImportAccts.cbAccntList.Find(sdir) = -1 THEN 
           FrmImportAccts.cbAccntList.Add(sdir)
