@@ -55,11 +55,11 @@ PUBLIC SUB prepare_partition_summary()
                   sMountPnt = cb.Text
                     FOR EACH cb1 IN MdlPartSel.oFsTypes
                       IF cb1.tag = cb.tag THEN sFsType = cb1.Text
-                      IF cb1.Text <> ("Do not Format") THEN 
-                        bForm = ("Yes")
-                      ELSE 
-                        bForm = ("No")
-                      END IF
+                      ' IF cb1.Text = ("Do not format") THEN 
+                      '   bForm = ("No")
+                      ' ELSE 
+                      '   bForm = ("Yes")
+                      ' END IF
                     NEXT 
                       FOR EACH tl IN MdlPartSel.oPartLbls
                         IF tl.tag = cb.tag THEN 
@@ -72,6 +72,11 @@ PUBLIC SUB prepare_partition_summary()
                     .GridView1[irow, 0].text = sPart
                     .GridView1[irow, 1].text = sSize
                     .GridView1[irow, 2].text = sFsType
+                    IF sFsType = ("Do not format") THEN 
+                      bForm = ("No")
+                    ELSE 
+                      bForm = ("Yes")
+                    END IF
                     .GridView1[irow, 3].Text = sMountPnt
                     .GridView1[irow, 4].Text = bForm
                   END WITH 
