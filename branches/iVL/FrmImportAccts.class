@@ -86,7 +86,8 @@ END IF
       'RETURN 
       ME.CREATE_IMPORTED_ACCOUNT
   MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS(ME.frmUsrGrps)
-  
+    Message.Info(("User account for") & Space(1) & Trim(ME.cbAccntList.Text) & Space(1) & ("successfully imported"))
+    
     'ME.Close
     'ME.pbLogin.Picture.Image.Clear
 END IF
@@ -121,6 +122,7 @@ PUBLIC SUB CREATE_IMPORTED_ACCOUNT()
           EXEC ["rm", "-rf", ClsGlobal.sTargetMnt &/ "home" &/ Trim(ME.cbAccntList.Text) &/ Trim(sSettings[i])] WAIT 
           EXEC ["cp", "-r", ClsGlobal.sTargetMnt &/ "etc" &/ "skel" & Trim(sSettings[i]), ClsGlobal.sTargetMnt &/ "home" &/ Trim(ME.cbAccntList.Text) &/ Trim(sSettings[i])] WAIT 
           EXEC ["chown", Trim(ME.cbAccntList.Text) & ":users", ClsGlobal.sTargetMnt &/ "home" &/ Trim(ME.cbAccntList.Text) &/ Trim(sSettings[i])] WAIT 
+          IF ERROR THEN Message(Error.Where & gb.NewLine & Error.Text)
         NEXT 
       
     
@@ -131,15 +133,16 @@ PUBLIC SUB CREATE_IMPORTED_ACCOUNT()
   SHELL "chroot /mnt/target /usr/sbin/useradd  -g " & Trim(ME.cbAccntList.Text) & " -p " & ME.tbPass1.Text & " -u " & FrmUserAdd.iUID & " -G " & "\'users," & sGroups & "\' -s /bin/bash " & 'ME.tbUsername.Text WAIT 
   Trim(ME.cbAccntList.Text) & " -d /home/" & Trim(ME.cbAccntList.Text) WAIT 
   SHELL "chroot /mnt/target /sbin/passwdx " & Trim(ME.cbAccntList.Text) & Space(1) & ME.tbPass1.Text WAIT 
-  
+  IF ERROR THEN Message.Error(Error.Where & gb.NewLine & Error.Text)
   ' Add the face icon
   IF Len(ME.tbPicPath.Text) > 0 THEN 
           SHELL "cd " & sPicdir & " && ln -s " & Replace(ME.tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & Trim(ME.cbAccntList.Text) & ".face.icon" WAIT  'link for KDM
               ' Tweak for the GDM face icon to work
-          COPY Trim(tbPicPath.Text) TO clsglobal.sTargetMnt &/ "home" &/ Trim(ME.cbAccntList.Text) &/ ".face"
+          TRY COPY Trim(tbPicPath.Text) TO clsglobal.sTargetMnt &/ "home" &/ Trim(ME.cbAccntList.Text) &/ ".face"
           SHELL "chmod 644 " & ClsGlobal.sTargetMnt &/ "home/" & Trim(ME.cbAccntList.Text) &/ ".face" WAIT 
           SHELL "chroot " & ClsGlobal.sTargetMnt & " chown " & Trim(ME.cbAccntList.Text) & Space(1) &/ "home" &/ Trim(ME.cbAccntList.Text) &/ ".face" WAIT
           SHELL "chroot " & ClsGlobal.sTargetMnt & " chgrp " & Trim(ME.cbAccntList.Text) & Space(1) &/ "home/" & Trim(ME.cbAccntList.Text) &/ ".face" WAIT
+          IF ERROR THEN Message.Error(Error.Where & gb.NewLine & Error.Text)
   END IF
     
     ' Increase the value of the iUID

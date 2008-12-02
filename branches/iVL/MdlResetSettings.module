@@ -32,29 +32,29 @@ PUBLIC SUB LIST_RESETABLE_SETTINGS()
           SELECT CASE sFile
   
             CASE ".kde"
-              sDesc = "KDE Settings (Menu, Window decorations, etc)"
+              sDesc = ("KDE Settings (Menu, Window decorations, etc)")
             CASE ".qt"
-              sDesc = "QT Toolkit settings (KDE Visual Effects)"
+              sDesc = ("QT Toolkit settings (KDE Visual Effects)")
             CASE ".gtkrc-*"
-              sDesc = "GTK Tookit theme Settings"
+              sDesc = ("GTK Tookit theme Settings")
             CASE ".Xdefaults"
-              sDesc = "X-window basic settings (includes xterm settings)"
+              sDesc = ("X-window basic settings (includes xterm settings)")
             CASE ".bashrc"
-              sDesc = "Bash init script" 
+              sDesc = ("Bash init script")
             CASE ".asoundrc"
-              sDesc = "Sound system preferences"
+              sDesc = ("Sound system preferences")
             CASE ".xinitrc"
-              sDesc = "Graphical inteface preferences"
+              sDesc = ("Graphical inteface preferences")
             CASE "Desktop"
-              sDesc = "Desktop icons, folders, launchers"
+              sDesc = ("Desktop icons, folders, launchers")
             CASE ".IceWM"
-              sDesc = "IceWM settings, preferences, menu"
+              sDesc = ("IceWM settings, preferences, menu")
             CASE ".xmms"
-              sDesc = "XMMS Audio player preferences"
+              sDesc = ("XMMS Audio player preferences")
             CASE ".Choices", "Choices"
-              sDesc = "ROX Filer Desktop settings"
+              sDesc = ("ROX Filer Desktop settings")
             CASE ".mplayer"
-              sDesc = "MPlayer Multimedia Player Settings"
+              sDesc = ("MPlayer Multimedia Player Settings")
           CASE ELSE 
             sDesc = ""
 
