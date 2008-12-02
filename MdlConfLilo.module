@@ -298,15 +298,22 @@ PUBLIC SUB PERFORM_BINDING()
   DIM sOut AS String
   DIM cb AS CheckBox
   DIM cbox AS ComboBox
-' SHELL "mount -o bind /sys " & ClsGlobal.sTargetMnt &/ "sys" WAIT 
-SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart" WAIT 
+  DIM sArch AS String
+
+EXEC ["uname", "-r"] TO sArch
+IF Exist("/lib" &/ "modules" &/ Trim(sarch)) = FALSE THEN 
+' running hosted install detected
+    TRY MKDIR "/lib" &/ "modules" &/ Trim(sarch)
+    SHELL "mount -o bind /mnt/target/lib/modules" &/ Trim(sarch) & " /lib/modules" &/ Trim(sarch)" && depmod -aq"
+END IF
+              
+
+'SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart" WAIT 
 EXEC ["mount", "-o", "bind", "/sys", ClsGlobal.sTargetMnt &/ "sys"] WAIT 
-' SHELL "mount -o bind /proc " & ClsGlobal.sTargetMnt &/ "proc" WAIT 
 EXEC ["mount", "-o", "bind", "/proc", ClsGlobal.sTargetMnt &/ "proc"] WAIT 
-' SHELL "mount -o bind /tmp " & ClsGlobal.sTargetMnt &/ "tmp" WAIT 
 EXEC ["mount", "-o", "bind", "/tmp", ClsGlobal.sTargetMnt &/ "tmp"] WAIT 
-' SHELL "mount -o bind /dev " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
 EXEC ["mount", "-o", "bind", "/dev", ClsGlobal.sTargetMnt &/ "dev"] WAIT 
+
 
 
 ' Mount home directory for user accounts
