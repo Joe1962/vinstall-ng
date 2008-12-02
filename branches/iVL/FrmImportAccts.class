@@ -127,7 +127,7 @@ PUBLIC SUB CREATE_IMPORTED_ACCOUNT()
   
   SHELL "chroot /mnt/target  /usr/sbin/groupdel " & Trim(ME.cbAccntList.Text) WAIT
   SHELL "chroot /mnt/target /usr/sbin/groupadd " & "-g" & Space(1) & FrmUserAdd.iUID & Space(1) & Trim(ME.cbAccntList.Text) WAIT 
-  SHELL "chroot /mnt/target /usr/sbin/useradd  -g " & Trim(ME.cbAccntList.Text) & " -p " & ME.tbPasswd1.text & " -u " & FrmUserAdd.iUID & " -G " & "\'users," & sGroups & "\' -s /bin/bash " & 'ME.tbUsername.Text WAIT 
+  SHELL "chroot /mnt/target /usr/sbin/useradd  -g " & Trim(ME.cbAccntList.Text) & " -p " & ME.tbPass1.Text & " -u " & FrmUserAdd.iUID & " -G " & "\'users," & sGroups & "\' -s /bin/bash " & 'ME.tbUsername.Text WAIT 
   Trim(ME.cbAccntList.Text) & " -d /home/" & Trim(ME.cbAccntList.Text) WAIT 
   SHELL "chroot /mnt/target /sbin/passwdx " & Trim(ME.cbAccntList.Text) & Space(1) & ME.tbPass1.Text WAIT 
   
