@@ -18,80 +18,80 @@ msgstr "VectorLinux Installer"
 msgid "GUI installer for Vector linux"
 msgstr "GUI installer for Vector linux"
 
-#: FMain.class:196 FrmDone.class:28
+#: FMain.class:199 FrmDone.class:28
 msgid "Restart"
 msgstr ""
 
-#: FMain.class:223
+#: FMain.class:226
 msgid "Please select a default operating system to boot before proceeding"
 msgstr ""
 
-#: FMain.class:224
+#: FMain.class:227
 msgid "Select an entry from this list"
 msgstr ""
 
-#: FMain.class:231
+#: FMain.class:234
 msgid "Skipping boot loaded setup"
 msgstr ""
 
-#: FMain.class:244
+#: FMain.class:247
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
-#: FMain.class:259
+#: FMain.class:262
 msgid ""
 "You have not created any user accounts for this system yet. There is not "
 "enough information"
 msgstr ""
 
-#: FMain.class:259
+#: FMain.class:262
 msgid ""
 "to create an account here. It is recommended that you create at least one."
 msgstr ""
 
-#: FMain.class:259
+#: FMain.class:262
 msgid "Would you like to continue anyway?"
 msgstr ""
 
-#: FMain.class:259 FrmSummary.class:59
+#: FMain.class:262 FrmSummary.class:59
 msgid "Yes"
 msgstr ""
 
-#: FMain.class:259 FrmSummary.class:61
+#: FMain.class:262 FrmSummary.class:61
 msgid "No"
 msgstr ""
 
-#: FMain.class:277
+#: FMain.class:280
 msgid "Please specify a hostname for this computer"
 msgstr ""
 
-#: FMain.class:281
+#: FMain.class:284
 msgid "Please specify the domain this computer belongs to"
 msgstr ""
 
-#: FMain.class:296
+#: FMain.class:299
 msgid ""
 "VectorLinux will now try to detect and configure your graphics hardware."
 msgstr ""
 
-#: FMain.class:296
+#: FMain.class:299
 msgid ""
 "Your screen may flicker or go blank for a few seconds during this process."
 msgstr ""
 
-#: FMain.class:348
+#: FMain.class:351
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr "Please wait while setup attempts to run the partitioning utility"
 
-#: FMain.class:350
+#: FMain.class:353
 msgid "Please wait while setup analyses your current partition setup."
 msgstr "Please wait while setup analyses your current partition setup."
 
-#: FMain.class:350
+#: FMain.class:353
 msgid "This may take a while ..."
 msgstr "This may take a while ..."
 
-#: FMain.class:364
+#: FMain.class:367
 msgid ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
@@ -99,15 +99,15 @@ msgstr ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
 
-#: FMain.class:458
+#: FMain.class:461
 msgid "Skipping lilo setup"
 msgstr "Skipping lilo setup per user request"
 
-#: FMain.class:797
+#: FMain.class:799
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:809
+#: FMain.class:810
 msgid "Exit Installation"
 msgstr "Exit Installation"
 
@@ -203,65 +203,68 @@ msgstr "Current Status"
 msgid "TextLabel1"
 msgstr "-"
 
-#: FrmImportAccts.class:31 FrmUserAdd.class:344
+#: FrmImportAccts.class:33 FrmUserAdd.class:343
 msgid "Select picture for user Login"
 msgstr ""
 
-#: FrmImportAccts.class:50
+#: FrmImportAccts.class:52
 msgid "Reset settings for"
 msgstr ""
 
-#: FrmImportAccts.class:64
+#: FrmImportAccts.class:69
+msgid "Please select an account name from the dropdown list."
+msgstr ""
+
+#: FrmImportAccts.class:74
 msgid "Password fields cannot be blank. Please enter a password for"
 msgstr ""
 
-#: FrmImportAccts.class:68
+#: FrmImportAccts.class:78
 msgid "Selected passwords dont match. Please enter the same password twice"
 msgstr ""
 
-#: FrmImportAccts.class:132
+#: FrmImportAccts.class:259
 #, fuzzy
 msgid "Account"
 msgstr "User Accounts"
 
-#: FrmImportAccts.class:144
+#: FrmImportAccts.class:271
 #, fuzzy
 msgid "New Password"
 msgstr "Set Password"
 
-#: FrmImportAccts.class:161
+#: FrmImportAccts.class:288
 #, fuzzy
 msgid "Select login Image"
 msgstr "Select your language"
 
-#: FrmImportAccts.class:171 FrmUserAdd.class:509
+#: FrmImportAccts.class:298 FrmUserAdd.class:515
 msgid "Select"
 msgstr ""
 
-#: FrmImportAccts.class:181
+#: FrmImportAccts.class:308
 #, fuzzy
 msgid "Verify Password"
 msgstr "Enter Password"
 
-#: FrmImportAccts.class:191 FrmUserAdd.class:520
+#: FrmImportAccts.class:319 FrmUserAdd.class:526
 msgid "User Rights Management"
 msgstr ""
 
-#: FrmImportAccts.class:197
-#, fuzzy
-msgid "Reset settings"
-msgstr "Regional Settings"
+#: FrmImportAccts.class:325
+msgid "Select Settings to reset"
+msgstr ""
 
-#: FrmImportAccts.class:203
+#: FrmImportAccts.class:332
 #, fuzzy
 msgid "Import Account"
 msgstr "User Accounts"
 
-#: FrmImportAccts.class:209
+#: FrmImportAccts.class:339
 msgid "Cancel"
 msgstr ""
 
-#: FrmImportAccts.class:216 FrmUserAdd.class:596
+#: FrmImportAccts.class:347 FrmUserAdd.class:602
 #, fuzzy
 msgid "Import Existing User Accounts"
 msgstr "User Accounts"
@@ -286,7 +289,7 @@ msgstr "Current Step "
 msgid "Total progress"
 msgstr "Total progress"
 
-#: FrmLangSel.class:123
+#: FrmLangSel.class:130
 msgid "Select your language"
 msgstr "Select your language"
 
@@ -545,7 +548,7 @@ msgstr "but can also be calculated as 2 times your ammount of RAM"
 msgid "Please select the partitions you wish to use and how to use them"
 msgstr "Please select the partitions you wish to use and how to use them"
 
-#: FrmPartSel.class:186 FrmUserAdd.class:524
+#: FrmPartSel.class:186 FrmUserAdd.class:530
 msgid "Help"
 msgstr "Help"
 
@@ -604,11 +607,11 @@ msgstr "Select your individual packages to install"
 msgid "To install them all, just click next"
 msgstr "To install them all, just click next"
 
-#: FrmResetSettings.class:92
+#: FrmResetSettings.class:112
 msgid "Select which settings to reset"
 msgstr ""
 
-#: FrmResetSettings.class:101
+#: FrmResetSettings.class:121
 #, fuzzy
 msgid "Done"
 msgstr "None"
@@ -666,7 +669,7 @@ msgstr ""
 "a root password, think of something easy for you to remember, but hard for "
 "others to guess."
 
-#: FrmRootPass.class:134 FrmUserAdd.class:557
+#: FrmRootPass.class:134 FrmUserAdd.class:563
 msgid "Enter Password"
 msgstr "Enter Password"
 
@@ -829,38 +832,38 @@ msgstr ""
 msgid "Enter a password for"
 msgstr ""
 
-#: FrmUserAdd.class:186
+#: FrmUserAdd.class:185
 msgid "Passwords do not match"
 msgstr ""
 
-#: FrmUserAdd.class:187
+#: FrmUserAdd.class:186
 msgid "Enter the same password twice"
 msgstr ""
 
-#: FrmUserAdd.class:383
+#: FrmUserAdd.class:382
 msgid ""
 "Your password selections do not match. Please enter the same password twice"
 msgstr ""
 
-#: FrmUserAdd.class:408
+#: FrmUserAdd.class:407
 msgid ""
 "Groups are a way of administering permissions for your users. You grant the "
 "user"
 msgstr ""
 
-#: FrmUserAdd.class:408
+#: FrmUserAdd.class:407
 msgid "permission to do certain things by adding them to certain groups."
 msgstr ""
 
-#: FrmUserAdd.class:408
+#: FrmUserAdd.class:407
 msgid "Select which groups you want this user to be a part of here"
 msgstr ""
 
-#: FrmUserAdd.class:409
+#: FrmUserAdd.class:408
 msgid "OK"
 msgstr ""
 
-#: FrmUserAdd.class:471
+#: FrmUserAdd.class:477
 msgid ""
 "Choose a unique name for each user. Enter the password for twice for "
 "accuracy. You can make as many users as you want, and when you are finished "
@@ -870,31 +873,31 @@ msgstr ""
 "accuracy. You can make as many users as you want, and when you are finished "
 "click next to continue."
 
-#: FrmUserAdd.class:515
+#: FrmUserAdd.class:521
 msgid "Use Picture ID for Login greeting"
 msgstr ""
 
-#: FrmUserAdd.class:537
+#: FrmUserAdd.class:543
 msgid "Create User"
 msgstr "Create User"
 
-#: FrmUserAdd.class:543
+#: FrmUserAdd.class:549
 msgid "Clear Form"
 msgstr ""
 
-#: FrmUserAdd.class:550
+#: FrmUserAdd.class:556
 msgid "Login Name"
 msgstr ""
 
-#: FrmUserAdd.class:564
+#: FrmUserAdd.class:570
 msgid "ReEnter Password"
 msgstr "ReEnter Password"
 
-#: FrmUserAdd.class:580
+#: FrmUserAdd.class:586
 msgid "Real Name"
 msgstr ""
 
-#: FrmUserAdd.class:586 MdlCore.module:500
+#: FrmUserAdd.class:592 MdlCore.module:500
 msgid "User Accounts"
 msgstr "User Accounts"
 
@@ -1005,23 +1008,23 @@ msgstr ""
 msgid "Timezone configuration"
 msgstr "Timezone configuration"
 
-#: FrmZoneSet.class:170
+#: FrmZoneSet.class:171
 msgid "Choose the correct timezone for the area in which you live."
 msgstr "Choose the correct timezone for the area in which you live."
 
-#: FrmZoneSet.class:175
+#: FrmZoneSet.class:176
 msgid "ComboBox1"
 msgstr "-"
 
-#: FrmZoneSet.class:177
+#: FrmZoneSet.class:178
 msgid "LocalTime"
 msgstr "LocalTime"
 
-#: FrmZoneSet.class:177
+#: FrmZoneSet.class:178
 msgid "UTC"
 msgstr "UTC"
 
-#: FrmZoneSet.class:182
+#: FrmZoneSet.class:183
 msgid ""
 "Choose how\n"
 "your hardware clock is set up.\n"
@@ -1589,6 +1592,10 @@ msgstr "localtime-copied-from"
 #: MdlZoneSet.module:28
 msgid "localtime"
 msgstr "localtime"
+
+#, fuzzy
+#~ msgid "Reset settings"
+#~ msgstr "Regional Settings"
 
 #~ msgid "Installing Final configuration files..."
 #~ msgstr "Installing final configuration files ..."

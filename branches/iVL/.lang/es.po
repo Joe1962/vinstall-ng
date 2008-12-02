@@ -16,85 +16,88 @@ msgstr "Instalador de VectorLinux"
 
 #: .project:2
 msgid "GUI installer for Vector linux"
-msgstr "Instaladaor Gráfico de VectorLinux"
+msgstr "Instaladador Gráfico de VectorLinux"
 
-#: FMain.class:196 FrmDone.class:28
+#: FMain.class:199 FrmDone.class:28
 msgid "Restart"
 msgstr "Reiniciar"
 
-#: FMain.class:223
+#: FMain.class:226
 msgid "Please select a default operating system to boot before proceeding"
 msgstr "Por favor selectione el sistema operativo que se iniciara por defecto"
 
-#: FMain.class:224
+#: FMain.class:227
 msgid "Select an entry from this list"
 msgstr "Seleccione una de esta opciones"
 
-#: FMain.class:231
-#, fuzzy
+#: FMain.class:234
 msgid "Skipping boot loaded setup"
-msgstr "Salteando configuración de LILO"
+msgstr "Salteando configuración del Gestor de Arranque"
 
-#: FMain.class:244
+#: FMain.class:247
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr "Las contraseñas no coinciden. Por favor ingrese la misma contraseña "
 
-#: FMain.class:259
+#: FMain.class:262
 msgid ""
 "You have not created any user accounts for this system yet. There is not "
 "enough information"
 msgstr ""
+"No haz creado cuentas de usuario para este sistema. No hay suficiente "
+"información "
 
-#: FMain.class:259
+#: FMain.class:262
 msgid ""
 "to create an account here. It is recommended that you create at least one."
-msgstr ""
+msgstr "para crear una cuenta aquí. Recomendamos que cree al menos una. "
 
-#: FMain.class:259
+#: FMain.class:262
 msgid "Would you like to continue anyway?"
-msgstr ""
+msgstr "Quieres continuar de todos modos? "
 
-#: FMain.class:259 FrmSummary.class:59
+#: FMain.class:262 FrmSummary.class:59
 msgid "Yes"
 msgstr "Sí"
 
-#: FMain.class:259 FrmSummary.class:61
+#: FMain.class:262 FrmSummary.class:61
 msgid "No"
 msgstr "No"
 
-#: FMain.class:277
+#: FMain.class:280
 msgid "Please specify a hostname for this computer"
-msgstr ""
+msgstr "Ingresa un Nombre de Doinio (Hostname) para este ordenador. "
 
-#: FMain.class:281
+#: FMain.class:284
 msgid "Please specify the domain this computer belongs to"
-msgstr ""
+msgstr "Por favor especifica el dominio al que pertenece esta computadora "
 
-#: FMain.class:296
+#: FMain.class:299
 msgid ""
 "VectorLinux will now try to detect and configure your graphics hardware."
-msgstr ""
+msgstr "VectorLinux intentará detectar y configurar tu hardware de video. "
 
-#: FMain.class:296
+#: FMain.class:299
 msgid ""
 "Your screen may flicker or go blank for a few seconds during this process."
 msgstr ""
+"Tu pantalla puede parpadear o apagarse por unos segundos durante este "
+"proceso. "
 
-#: FMain.class:348
+#: FMain.class:351
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr ""
 "Por favor espere, el instalador intentará ejecutar la herramienta de "
 "particionado"
 
-#: FMain.class:350
+#: FMain.class:353
 msgid "Please wait while setup analyses your current partition setup."
 msgstr "Por favor espere mientras el instalador analiza su particonado actual."
 
-#: FMain.class:350
+#: FMain.class:353
 msgid "This may take a while ..."
 msgstr "Esto puede tardar unos minutos ..."
 
-#: FMain.class:364
+#: FMain.class:367
 msgid ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
@@ -102,17 +105,17 @@ msgstr ""
 "Debes seleccionar una partición para \"/\" (raíz). Allí sera instalado el "
 "sistema operativo"
 
-#: FMain.class:458
+#: FMain.class:461
 msgid "Skipping lilo setup"
 msgstr "Salteando configuración de LILO"
 
-#: FMain.class:797
+#: FMain.class:799
 msgid "Back"
 msgstr "Regresar"
 
-#: FMain.class:809
+#: FMain.class:810
 msgid "Exit Installation"
-msgstr "Cancelar Instalación"
+msgstr "Salir del Instalador "
 
 #: FMain.class:821
 msgid "Next"
@@ -140,6 +143,8 @@ msgid ""
 "When finished making changes, exit the partitioning application to "
 "continue ..."
 msgstr ""
+"Cuando finalices tus cambios, sal del particionador desde el menú o presiona "
+"Control + Q para continuar ... "
 
 #: FrmDiskPart.class:117
 msgid "Disk Partitioning:"
@@ -154,6 +159,8 @@ msgid ""
 "has been installed to your system. Your new system has been configured with "
 "the default factory settings."
 msgstr ""
+"ha sido instalado en tu sistema. Tu ordenador ha sido configurado utilizando "
+"las opciones por defecto. "
 
 #: FrmDone.class:39
 msgid "After reboot you can use vasm or vasmCC to fine tune your installation."
@@ -166,20 +173,24 @@ msgid ""
 "Your computer needs to be restarted so that you can use your new operating "
 "system. Click"
 msgstr ""
+"Su ordenador necesita ser reiniciado así puedes comenzar a utilizar tu nuevo "
+"sistema operativo. Haz click "
 
 #: FrmDone.class:39
 msgid "to restart your computer now or click"
-msgstr ""
+msgstr "para reiniciar su ordenador ahora o haga click. "
 
 #: FrmDone.class:39
 msgid "to restart your computer at a later time"
-msgstr ""
+msgstr "para reiniciar su ordenador luego. "
 
 #: FrmDone.class:39
 msgid ""
 "If you installed from  CD-ROM/R/RW media, please remove de disk before "
 "restarting."
 msgstr ""
+"Si haz instalado VectorLinux desde una unidad de CD / DVD, por favo retira "
+"el disco antes de reiniciar. "
 
 #: FrmDone.class:75
 msgid "Installation is finished"
@@ -188,14 +199,15 @@ msgstr "La instalación ha finalizado "
 #: FrmHalSwitch.class:20
 msgid "Would you like to use Vl-Hot or HAL to manage your removable devices?"
 msgstr ""
+"Deseas utilizar HAL o VL-Hot para controlar tus dispositivos extraibles?"
 
 #: FrmHalSwitch.class:25
 msgid "HAL"
-msgstr ""
+msgstr "-"
 
 #: FrmHalSwitch.class:30
 msgid "VL-Hot"
-msgstr ""
+msgstr "-"
 
 #: FrmHostPrep.class:130
 msgid "Vectorlinux is preparing your system for installation. Please wait."
@@ -212,70 +224,66 @@ msgstr "Estado Actual"
 msgid "TextLabel1"
 msgstr "-"
 
-#: FrmImportAccts.class:31 FrmUserAdd.class:344
+#: FrmImportAccts.class:33 FrmUserAdd.class:343
 msgid "Select picture for user Login"
-msgstr "Selecciona una imagen para el usuario"
+msgstr "Selecciona una imagen "
 
-#: FrmImportAccts.class:50
+#: FrmImportAccts.class:52
 msgid "Reset settings for"
-msgstr ""
+msgstr "Eliminar configuraciones existentes para "
 
-#: FrmImportAccts.class:64
-#, fuzzy
+#: FrmImportAccts.class:69
+msgid "Please select an account name from the dropdown list."
+msgstr "Selecciona un nombre de cuenta de la lista. "
+
+#: FrmImportAccts.class:74
 msgid "Password fields cannot be blank. Please enter a password for"
-msgstr "Las contraseñas no coinciden. Por favor ingrese la misma contraseña "
+msgstr ""
+"La contraseña no puede ser vacía, por favor ingresa una contraseña para "
 
-#: FrmImportAccts.class:68
-#, fuzzy
+#: FrmImportAccts.class:78
 msgid "Selected passwords dont match. Please enter the same password twice"
-msgstr "Las contraseñas no coinciden. Por favor ingrese la misma contraseña "
+msgstr "Las contraseñas ingresadas no coinciden. "
 
-#: FrmImportAccts.class:132
-#, fuzzy
+#: FrmImportAccts.class:259
 msgid "Account"
-msgstr "Usuarios"
+msgstr "Cuenta "
 
-#: FrmImportAccts.class:144
-#, fuzzy
+#: FrmImportAccts.class:271
 msgid "New Password"
-msgstr "Define tu contraseña"
+msgstr "Nueva contraseña "
 
-#: FrmImportAccts.class:161
-#, fuzzy
+#: FrmImportAccts.class:288
 msgid "Select login Image"
-msgstr "Selecciona tu idioma"
+msgstr "Selecciona una imagen para tu usuario "
 
-#: FrmImportAccts.class:171 FrmUserAdd.class:509
+#: FrmImportAccts.class:298 FrmUserAdd.class:515
 msgid "Select"
 msgstr "Seleciona"
 
-#: FrmImportAccts.class:181
-#, fuzzy
+#: FrmImportAccts.class:308
 msgid "Verify Password"
-msgstr "Ingresa contraseña"
+msgstr "Verificar contraseña "
 
-#: FrmImportAccts.class:191 FrmUserAdd.class:520
+#: FrmImportAccts.class:319 FrmUserAdd.class:526
 msgid "User Rights Management"
 msgstr "Administración de los Permisos de Usuario"
 
-#: FrmImportAccts.class:197
-#, fuzzy
-msgid "Reset settings"
-msgstr "Opciones de regionalización"
+#: FrmImportAccts.class:325
+msgid "Select Settings to reset"
+msgstr "Selecciona las configuraciones a sobreescribir "
 
-#: FrmImportAccts.class:203
-#, fuzzy
+#: FrmImportAccts.class:332
 msgid "Import Account"
-msgstr "Usuarios"
+msgstr "Importar cuenta de usuario "
 
-#: FrmImportAccts.class:209
+#: FrmImportAccts.class:339
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar "
 
-#: FrmImportAccts.class:216 FrmUserAdd.class:596
-#, fuzzy
+#: FrmImportAccts.class:347 FrmUserAdd.class:602
 msgid "Import Existing User Accounts"
-msgstr "Limiar cuentas de usuario"
+msgstr "Importar cuentas de usuario existentes "
 
 #: FrmInstallSys.class:63
 msgid "Current Step"
@@ -297,26 +305,25 @@ msgstr "Este paso"
 msgid "Total progress"
 msgstr "Progreso Total"
 
-#: FrmLangSel.class:123
+#: FrmLangSel.class:130
 msgid "Select your language"
 msgstr "Selecciona tu idioma"
 
 #: FrmLicense.class:99
 msgid "LICENSE AGREEMENT"
-msgstr ""
+msgstr "Acuero de Licencia GPL "
 
 #: FrmLicense.class:104
-#, fuzzy
 msgid "TextArea1"
 msgstr "-"
 
 #: FrmLicense.class:110
 msgid "Yes, I Agree to the License Agreement"
-msgstr ""
+msgstr "Si, estoy de acuerdo "
 
 #: FrmLicense.class:115
 msgid "No, I Do Not Agree"
-msgstr ""
+msgstr "No estoy de acuerdo "
 
 #: FrmLilo.class:37
 msgid ""
@@ -372,7 +379,7 @@ msgstr "Resolución del arranque gráfico (bootsplash) súper alta"
 
 #: FrmLilo.class:267 FrmLiloSetup.class:263
 msgid "Prompt Timeout"
-msgstr "Esperar"
+msgstr "Límite de espera "
 
 #: FrmLilo.class:278 FrmLiloSetup.class:274
 msgid "Seconds"
@@ -383,19 +390,16 @@ msgid "Boot Default"
 msgstr "Arranque por defecto"
 
 #: FrmLiloSetup.class:66 MdlLilo.module:56
-#, fuzzy
 msgid "Bootsplash Extra High"
 msgstr "Resolución del arranque gráfico (bootsplash) súper alta"
 
 #: FrmLiloSetup.class:176
-#, fuzzy
 msgid "Boot Manager Configuration"
-msgstr "Configurar el sistema"
+msgstr "Configuración del gestor de inicio (Boot Loader) "
 
 #: FrmLiloSetup.class:192
-#, fuzzy
 msgid "Do not install LILO"
-msgstr "No quiero instalar LILO"
+msgstr "No instalar LILO "
 
 #: FrmNetConf.class:184 MdlCore.module:501
 msgid "Network Configuration"
@@ -407,7 +411,7 @@ msgstr "Nombre Local"
 
 #: FrmNetConf.class:211
 msgid "Domain"
-msgstr ""
+msgstr "Dominio "
 
 #: FrmNetConf.class:227
 msgid "Manual DNS Server Specification"
@@ -561,7 +565,7 @@ msgstr ""
 "For favor, seleccione las secciones del disco que desea usar, y también como "
 "usarlas"
 
-#: FrmPartSel.class:186 FrmUserAdd.class:524
+#: FrmPartSel.class:186 FrmUserAdd.class:530
 msgid "Help"
 msgstr "Ayuda"
 
@@ -585,11 +589,11 @@ msgstr "Selecciona el modo de instalación"
 
 #: FrmPkgSel.class:40
 msgid "Package"
-msgstr ""
+msgstr "Paquete "
 
 #: FrmPkgSel.class:41 FrmUsrPkgSel.class:17
 msgid "Description"
-msgstr ""
+msgstr "Descripción "
 
 #: FrmPkgSel.class:42 FrmSummary.class:41 FrmUsrPkgSel.class:19
 msgid "Size"
@@ -598,7 +602,7 @@ msgstr "Tamano"
 #: FrmPkgSel.class:71
 msgid ""
 "Installs all optional components in your VectorLinux media to your system"
-msgstr ""
+msgstr "Instala todos los componentes disponibles en el CD de instalación. "
 
 #: FrmPkgSel.class:81
 msgid "Choose your optional components to install."
@@ -620,14 +624,13 @@ msgstr "Selecciona paquetes individuales para su instalación."
 msgid "To install them all, just click next"
 msgstr "Para instalarlos todos, simplemente presiona Sigiente"
 
-#: FrmResetSettings.class:92
+#: FrmResetSettings.class:112
 msgid "Select which settings to reset"
-msgstr ""
+msgstr "Selecciona las configuraciones para sobreescribir "
 
-#: FrmResetSettings.class:101
-#, fuzzy
+#: FrmResetSettings.class:121
 msgid "Done"
-msgstr "Ninguno"
+msgstr "Hecho "
 
 #: FrmRootPass.class:12
 msgid "System Administrator Password"
@@ -687,7 +690,7 @@ msgstr ""
 "administrador, piensa en algo fácil de recordar, pero al mismo tiempo "
 "difícil de adivinar para los otros. "
 
-#: FrmRootPass.class:134 FrmUserAdd.class:557
+#: FrmRootPass.class:134 FrmUserAdd.class:563
 msgid "Enter Password"
 msgstr "Ingresa contraseña"
 
@@ -717,7 +720,7 @@ msgstr "No se ha podido encontrar un medio de instalación. "
 
 #: FrmSelISO.class:87
 msgid "Select installation media from the list below"
-msgstr ""
+msgstr "Selecciona el medio de instalación de la siguiente lista "
 
 #: FrmSelISO.class:116
 msgid "Unable to identify distro."
@@ -746,16 +749,15 @@ msgstr "Resumen del proceso"
 
 #: FrmSummary.class:17 MdlSummarize.module:56
 msgid "Custom"
-msgstr "Personalisado"
+msgstr "Personalizado "
 
 #: FrmSummary.class:21 MdlSummarize.module:69
 msgid "Full"
 msgstr "Completa"
 
 #: FrmSummary.class:37
-#, fuzzy
 msgid "Preparing Installation Summary ... Please wait"
-msgstr "Resumen del proceso"
+msgstr "Preparando el resumen de la instalación ... Por favor espera "
 
 #: FrmSummary.class:39
 msgid "Partition"
@@ -771,16 +773,15 @@ msgstr "Punto de montaje"
 
 #: FrmSummary.class:46
 msgid "Format ?"
-msgstr ""
+msgstr "Formatear? "
 
 #: FrmSummary.class:52 MdlInstallSys.module:142 MdlPartSel.module:143
 msgid "Not Used"
 msgstr "Sin usar"
 
 #: FrmSummary.class:58
-#, fuzzy
 msgid "Do not Format"
-msgstr "No Formatear"
+msgstr "No Formatear "
 
 #: FrmSummary.class:99 MdlNetConf.module:245
 msgid "None"
@@ -819,9 +820,8 @@ msgid "Create User Accounts"
 msgstr "Limiar cuentas de usuario"
 
 #: FrmUserAdd.class:92
-#, fuzzy
 msgid "Creating user account ... Please wait"
-msgstr "Calculando el número de paquetes ... Por favor espere"
+msgstr "Creando la cuenta de usuario ... Por favor espera "
 
 #: FrmUserAdd.class:100
 msgid "Enter the login name that this user will user to login to this system."
@@ -847,28 +847,28 @@ msgstr "Cuenta de usuario para "
 
 #: FrmUserAdd.class:125
 msgid "already exists"
-msgstr ""
+msgstr "ya existe "
 
 #: FrmUserAdd.class:129
 msgid "Enter a password for"
 msgstr "Ingresa una contraseña para "
 
-#: FrmUserAdd.class:186
+#: FrmUserAdd.class:185
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden "
 
-#: FrmUserAdd.class:187
+#: FrmUserAdd.class:186
 msgid "Enter the same password twice"
-msgstr "Ingreasa la misma contraseña dos veces "
+msgstr "Ingresa la misma contraseña dos veces "
 
-#: FrmUserAdd.class:383
+#: FrmUserAdd.class:382
 msgid ""
 "Your password selections do not match. Please enter the same password twice"
 msgstr ""
 "Sus contraseñas no coinciden. Por favor ingrese la misma contraseña dos "
 "veces."
 
-#: FrmUserAdd.class:408
+#: FrmUserAdd.class:407
 msgid ""
 "Groups are a way of administering permissions for your users. You grant the "
 "user"
@@ -876,21 +876,21 @@ msgstr ""
 "Los Grupos son un método para administrar los permisos de los usuarios. Le "
 "garantizas a cada usuario"
 
-#: FrmUserAdd.class:408
+#: FrmUserAdd.class:407
 msgid "permission to do certain things by adding them to certain groups."
 msgstr ""
 "permisos para realizar determinadas acciones agregándolo a un grupo o a "
 "varios grupos determinados."
 
-#: FrmUserAdd.class:408
+#: FrmUserAdd.class:407
 msgid "Select which groups you want this user to be a part of here"
 msgstr "Selecciona los grupos de los que este usuario será parte"
 
-#: FrmUserAdd.class:409
+#: FrmUserAdd.class:408
 msgid "OK"
 msgstr "OK"
 
-#: FrmUserAdd.class:471
+#: FrmUserAdd.class:477
 msgid ""
 "Choose a unique name for each user. Enter the password for twice for "
 "accuracy. You can make as many users as you want, and when you are finished "
@@ -899,43 +899,41 @@ msgstr ""
 "Elige un nombre único para cada usuario. Es necesario ingresar las "
 "contraseñas dos veces. Puedes crear todas las cuentas de usuarios que desees"
 
-#: FrmUserAdd.class:515
+#: FrmUserAdd.class:521
 msgid "Use Picture ID for Login greeting"
 msgstr "Utilizar una imágen para el usuario en el gestor de sesiones"
 
-#: FrmUserAdd.class:537
+#: FrmUserAdd.class:543
 msgid "Create User"
 msgstr "Agregar Usuario"
 
-#: FrmUserAdd.class:543
+#: FrmUserAdd.class:549
 msgid "Clear Form"
 msgstr "Limpiar Formulario"
 
-#: FrmUserAdd.class:550
+#: FrmUserAdd.class:556
 msgid "Login Name"
 msgstr "Nombre de usuario"
 
-#: FrmUserAdd.class:564
+#: FrmUserAdd.class:570
 msgid "ReEnter Password"
 msgstr "Vuelva a ingresar la contraseña"
 
-#: FrmUserAdd.class:580
+#: FrmUserAdd.class:586
 msgid "Real Name"
 msgstr "Nombre Real"
 
-#: FrmUserAdd.class:586 MdlCore.module:500
+#: FrmUserAdd.class:592 MdlCore.module:500
 msgid "User Accounts"
 msgstr "Usuarios"
 
 #: FrmUsrPkgSel.class:11
-#, fuzzy
 msgid "To install them all, just click"
-msgstr "Para instalarlos todos, simplemente presiona Sigiente"
+msgstr "Para instalarlos todos, simplemente clickea "
 
 #: FrmUsrPkgSel.class:40
-#, fuzzy
 msgid "Reading available software selection ... Please wait"
-msgstr "Cargando Gparted ... Por favor espere"
+msgstr "Leyendo selección de software ... Por favor espera "
 
 #: FrmWinDrives.class:72
 msgid "Select the windows partitions you would like to mount during boot"
@@ -943,7 +941,7 @@ msgstr "Selecciona qué volumenes usados por Windows deseas acceder desde Linux"
 
 #: FrmXconf.class:25
 msgid "Uses the default (failsafe) configuration."
-msgstr ""
+msgstr "Usar la configuración por defecto (modo seguro). "
 
 #: FrmXconf.class:27
 msgid ""
@@ -963,7 +961,7 @@ msgstr "Configuración de la interfaz gráfica de usuario "
 
 #: FrmXconf.class:311
 msgid "Video Driver"
-msgstr ""
+msgstr "Driver de video "
 
 #: FrmXconf.class:322
 msgid "Color Depth"
@@ -975,19 +973,19 @@ msgstr "Resolución de la pantalla "
 
 #: FrmXconf.class:335
 msgid "24 bit True Color"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:335
 msgid "16 bit Pseudo Color"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:335
 msgid "8 bit 256 Color"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:335
 msgid "4 bit 16 Color"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:335
 msgid "1 bit Mono B/W"
@@ -995,65 +993,65 @@ msgstr "1 bit Mono "
 
 #: FrmXconf.class:340
 msgid "Vesa"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:342
 msgid "Fbdev"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:348
 msgid "1920x1280"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:348
 msgid "1600x1200"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:348
 msgid "1440x900"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:348
 msgid "1280x1024"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:348
 msgid "1280x800"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:348
 msgid "1024x768"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:348
 msgid "800x600"
-msgstr ""
+msgstr "-"
 
 #: FrmXconf.class:348
 msgid "640x480"
-msgstr ""
+msgstr "-"
 
 #: FrmZoneSet.class:21
 msgid "Timezone configuration"
 msgstr "Configuración de la Zona Horaria"
 
-#: FrmZoneSet.class:170
+#: FrmZoneSet.class:171
 msgid "Choose the correct timezone for the area in which you live."
 msgstr "Selecciona la zona horaria del área donde vives"
 
-#: FrmZoneSet.class:175
+#: FrmZoneSet.class:176
 msgid "ComboBox1"
 msgstr "-"
 
-#: FrmZoneSet.class:177
+#: FrmZoneSet.class:178
 msgid "LocalTime"
 msgstr "Hora Local"
 
-#: FrmZoneSet.class:177
+#: FrmZoneSet.class:178
 msgid "UTC"
 msgstr "UTC"
 
-#: FrmZoneSet.class:182
+#: FrmZoneSet.class:183
 msgid ""
 "Choose how\n"
 "your hardware clock is set up.\n"
@@ -1073,20 +1071,19 @@ msgstr "El cargador de arranque ha sido configurado con éxito"
 
 #: MdlConfLilo.module:124
 msgid "MBR of "
-msgstr ""
+msgstr "MBR de "
 
 #: MdlConfLilo.module:131 MdlLilo.module:98
 msgid "Bootsector of "
-msgstr ""
+msgstr "Sector de arranque de "
 
 #: MdlConfLilo.module:136 MdlLilo.module:100
 msgid "Floppy"
-msgstr ""
+msgstr "Disco Flexible "
 
 #: MdlCore.module:28
-#, fuzzy
 msgid "Working ... Please Wait"
-msgstr "Cargando Gparted ... Por favor espere"
+msgstr "Trabajando ... Por favor espera "
 
 #: MdlCore.module:221
 msgid "Scanning system for installable media. Please wait ..."
@@ -1101,9 +1098,8 @@ msgstr ""
 "Por favor inserta Vectorlinux"
 
 #: MdlCore.module:239
-#, fuzzy
 msgid "installation CD and click"
-msgstr "CD de instalación y haz click en"
+msgstr "CD de instalación y haz click. "
 
 #: MdlCore.module:239
 msgid "to try again"
@@ -1135,7 +1131,7 @@ msgstr "Preparación"
 
 #: MdlCore.module:487
 msgid "Language Selection"
-msgstr "Seleccion de idioma"
+msgstr "Selección de idioma"
 
 #: MdlCore.module:488
 msgid "Find installation media"
@@ -1167,7 +1163,7 @@ msgstr "Opciones de regionalización"
 
 #: MdlCore.module:502
 msgid "Final Hardware Configuration"
-msgstr "Configuración final"
+msgstr "Configuración final de Hardware "
 
 #: MdlDiskPart.module:46
 msgid ""
@@ -1260,7 +1256,7 @@ msgstr "Instalando"
 
 #: MdlInstallCustom.module:225
 msgid "Failed to install. Installation will stop"
-msgstr ""
+msgstr "La instalación ha fallado. "
 
 #: MdlInstallCustom.module:271
 msgid "Installing user-selected package"
@@ -1272,7 +1268,7 @@ msgstr "Error al instalar "
 
 #: MdlInstallCustom.module:423
 msgid "failed to install. Installation will stop now"
-msgstr ""
+msgstr "fallado la instalación. El instalador terminará ahora. "
 
 #: MdlInstallSys.module:118
 msgid "Writing new /etc/fstab to system"
@@ -1328,22 +1324,23 @@ msgstr "La instalación ha fallado"
 
 #: MdlLilo.module:96
 msgid "MBR of"
-msgstr ""
+msgstr "MBR de "
 
 #: MdlLilo.module:183
 msgid "Your option to boot"
-msgstr ""
+msgstr "Tu opción para iniciar "
 
 #: MdlLilo.module:183
 msgid ""
 "is too long. it has been adjusted to \"Vector-cli\". You can run vasmCC "
 "after the first boot to modify your boot options"
 msgstr ""
+"es demasiado largo. Ha sido ajustado a \"Vector-cli\". Puedes ejecutar "
+"VasmCC luego del primer inicio para modificar tus opciones de arranque. "
 
 #: MdlLilo.module:453
-#, fuzzy
 msgid "installed on"
-msgstr "Instalación "
+msgstr "instalado en "
 
 #: MdlLilo.module:471 MdlLiloOsList.module:149
 msgid "Include this installation in the boot menu"
@@ -1354,40 +1351,36 @@ msgid "Name"
 msgstr "Nombre"
 
 #: MdlLilo.module:538
-#, fuzzy
 msgid "installed in"
-msgstr "Instalando"
+msgstr "instalado en "
 
 #: MdlLilo.module:559
-#, fuzzy
 msgid "Include in boot menu"
-msgstr "Incluir esta instalación en el menú de arranque"
+msgstr "Incluir en el menú de arranque "
 
 #: MdlLilo.module:595
 msgid "Initrd"
-msgstr ""
+msgstr "-"
 
 #: MdlLilo.module:625 MdlLiloOsList.module:359
 msgid "Kernel boot options"
 msgstr "Opciones de arranque de kernel"
 
 #: MdlLilo.module:648
-#, fuzzy
 msgid "Add option to boot this operating system into text mode"
-msgstr "Añadir una opción para arrancar este sistema operativo en modo texto"
+msgstr "Agregar una opción para iniciar este sistema operativo en Modo Texto. "
 
 #: MdlLiloOsList.module:139
 msgid "Windows installation found in"
-msgstr ""
+msgstr "Instalación de Windows detectada en "
 
 #: MdlLiloOsList.module:158
 msgid "Label"
 msgstr "Etiqueta"
 
 #: MdlLiloOsList.module:290
-#, fuzzy
 msgid "Operating system installed in"
-msgstr "Sistema operativo montado en"
+msgstr "Sistema Operativo instalado en "
 
 #: MdlLiloOsList.module:302
 msgid "Include this operating system in the boot menu"
@@ -1398,18 +1391,16 @@ msgid "Initial Ram Disk"
 msgstr "Disco Ram inicial"
 
 #: MdlLiloOsList.module:396
-#, fuzzy
 msgid "Add option to boot this Operating system into Text mode."
-msgstr "Añadir una opción para arrancar este sistema operativo en modo texto"
+msgstr "Agregar una opción para iniciar este sistema operativo en Modo Texto. "
 
 #: MdlNetConf.module:60
-#, fuzzy
 msgid "Probing your networking hardware ... Please wait"
-msgstr "Cargando Gparted ... Por favor espere"
+msgstr "Detectando tu Hardware ... Por favor espera "
 
 #: MdlNetConf.module:93
 msgid "No ethernet neworking devices found"
-msgstr ""
+msgstr "No se han encontrado dispositivos de red Ethernet "
 
 #: MdlNetConf.module:120
 msgid "Wired"
@@ -1489,7 +1480,7 @@ msgstr "Máscara de subred"
 
 #: MdlNetConf.module:429
 msgid "Gateway Address"
-msgstr "Dirección de Puerta de Enlace"
+msgstr "Dirección de Puerta de Enlace (GW)"
 
 #: MdlPartFrmt.module:103
 msgid "There has been an error while trying to format "
@@ -1521,11 +1512,11 @@ msgstr "Calculando el número de paquetes ... Por favor espere"
 
 #: MdlSetup.module:255
 msgid "Total bulks to be installed = "
-msgstr ""
+msgstr "Total de suites de paquetes a instalar: "
 
 #: MdlSetup.module:258
 msgid "Total pkgs to be installed = "
-msgstr ""
+msgstr "Total de paquetes a instalar: "
 
 #: MdlSetup.module:301
 msgid "BROUGHT TO YOU BY"
@@ -1629,15 +1620,3 @@ msgstr "Hora-local-copiada-de"
 #: MdlZoneSet.module:28
 msgid "localtime"
 msgstr "Hora local"
-
-#~ msgid "Installing Final configuration files..."
-#~ msgstr "Instalando los últimos ficheros de configuración ..."
-
-#~ msgid "Network Interfaces"
-#~ msgstr "Dispositivos de red"
-
-#~ msgid "Total Progress"
-#~ msgstr "Progreso Total"
-
-#~ msgid "Total packages to be installed = "
-#~ msgstr "Paquetes a instalar = "
