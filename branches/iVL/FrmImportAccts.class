@@ -86,6 +86,7 @@ END IF
       'RETURN 
       ME.CREATE_IMPORTED_ACCOUNT
   MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS(ME.frmUsrGrps)
+  
     'ME.Close
     'ME.pbLogin.Picture.Image.Clear
 END IF
@@ -158,7 +159,6 @@ END
   DIM tl AS TextLabel
   DIM tly AS Integer
   
-  FrmUserAdd.LstUsers.Clear
   tly = 4
   FOR i = 0 TO sFile.count - 1
     sLine = sFile[i]
