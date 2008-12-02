@@ -6,8 +6,9 @@
   Icon = Picture["icon:/small/undo"]
   SkipTaskbar = True
   { tlBanner TextLabel
-    MoveScaled(1,1,40,3)
+    MoveScaled(1,1,40,4)
     Text = ("Select which settings to reset")
+    Alignment = Align.Normal
   }
   { gvSettings GridView
     MoveScaled(1,6,63,21)
