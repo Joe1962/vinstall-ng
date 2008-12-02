@@ -45,10 +45,10 @@ PUBLIC SUB Form_Open()
   Fmain.frmcurr = ME
   MdlUsrAdd.iUsrAccts = 0
   WITH FMain
-    ' .FrmCurr = ME
-    ' .tvPlan["Conf2"].Picture = MdlCore.sDonePic
-    ' .tvPlan["Conf3"].picture = MdlCore.sNowPic
-    ' .tvPlan["Conf3"].Selected = TRUE
+    .FrmCurr = ME
+    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
+    .tvPlan["Conf3"].picture = MdlCore.sNowPic
+    .tvPlan["Conf3"].Selected = TRUE
   END WITH 
     WITH ME
       .tlBanner.Text = "<h3>" & ("Create User Accounts") & "</h3>"
@@ -141,7 +141,6 @@ MdlCore.WARN_STATUS(("Creating user account ... Please wait"))
                 'Message(sGroups)
 
           SHELL "chroot /mnt/target  /usr/sbin/groupdel " & ME.tbUsername.Text WAIT '& " &> /dev/null" WAIT 
-          'SHELL "chroot /mnt/target /usr/sbin/groupadd -g " & iUID & Space(1) & ME.tbUsername.Text WAIT 
           PRINT "Creating new user group"
           SHELL "chroot /mnt/target /usr/sbin/groupadd " & "-g" & Space(1) & iUID & Space(1) & ME.tbUsername.Text WAIT '& " &> /dev/null" WAIT 
           
@@ -162,7 +161,7 @@ MdlCore.WARN_STATUS(("Creating user account ... Please wait"))
             'this next line is for kdm
             SHELL "cd " & sPicdir & "; ln -s " & Replace(tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & tbUsername.Text & ".face.icon" WAIT 
             'the next lines are for gdm
-            PRINT tbPicPath.Text
+            'PRINT tbPicPath.Text
             'SHELL "cp " & Replace(tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & ClsGlobal.sTargetMnt &/ "home/" & tbUsername.Text & "/.face" WAIT 
             COPY Trim(tbPicPath.Text) TO clsglobal.sTargetMnt &/ "home" &/ tbUsername.text &/ ".face"
             SHELL "chmod 644 " & ClsGlobal.sTargetMnt &/ "home/" & tbUsername.Text & "/.face" WAIT 
@@ -430,5 +429,12 @@ PUBLIC SUB Form_Show()
   '   .tvPlan["Conf3"].picture = MdlCore.sNowPic
   '   .tvPlan["Conf3"].Selected = TRUE
   ' END WITH 
+
+END
+
+PUBLIC SUB btImportAcct_Click()
+
+  FrmImportAccts.Reparent(FMain.pnlwinhost)
+  ME.Hide()
 
 END

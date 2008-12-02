@@ -62,7 +62,6 @@
         MoveScaled(3,41,53,3)
         { btback Button
           MoveScaled(0,0,8,3)
-          Expand = True
           Text = ("Back")
           Picture = Picture["icon:/16/left"]
         }
@@ -72,7 +71,6 @@
         }
         { btQuit Button
           MoveScaled(16,0,15,3)
-          Expand = True
           Text = ("Exit Installation")
           Picture = Picture["icon:/16/cancel"]
         }
@@ -82,7 +80,6 @@
         }
         { btnext Button
           MoveScaled(44,0,8,3)
-          Expand = True
           Text = ("Next")
           Picture = Picture["icon:/16/right"]
         }

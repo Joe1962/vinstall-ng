@@ -47,29 +47,33 @@
     MoveScaled(28,12,25,3)
     Text = ("Verify Password")
   }
-  { ScrollView1 ScrollView
+  { scrGrpHost ScrollView
     MoveScaled(1,26,66,18)
-    Expand = True
+    Arrangement = Arrange.Horizontal
     Border = False
     { frmUsrGrps Frame
       MoveScaled(0,0,65,15)
+      Expand = True
       Text = ("User Rights Management")
     }
   }
   { btResetSettings Button
     MoveScaled(1,45,23,3)
-    Text = ("Reset settings")
+    Text = ("Select Settings to reset")
     Picture = Picture["icon:/small/undo"]
+    Border = False
   }
   { btImportAccnt Button
     MoveScaled(1,49,23,3)
     Text = ("Import Account")
     Picture = Picture["icon:/small/redo"]
+    Border = False
   }
   { btcancel Button
     MoveScaled(26,49,14,3)
     Text = ("Cancel")
     Picture = Picture["icon:/16/cancel"]
+    Border = False
   }
   { tlBanner TextLabel
     MoveScaled(0,0,43,3)

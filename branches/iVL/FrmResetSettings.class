@@ -29,7 +29,7 @@ PUBLIC SUB size_grid()
     .Columns.count = 3
     .Columns[0].Width = 32
     .Columns[1].Width = 400
-    .Columns[2].Width = 1
+    '.Columns[2].Width = 1
     .Rows.Count = 1
     
   END WITH 
@@ -56,9 +56,27 @@ END
 
 PUBLIC SUB btDone_Click()
 
+ME.GENERATE_LIST
   ME.Close
 
 END
+
+PUBLIC SUB GENERATE_LIST()
+  
+  DIM I AS Integer
+  DIM sList AS String
+  FOR I = 0 TO ME.gvSettings.Rows.count - 1
+    IF gvSettings[i, 0].Picture = FrmPkgSel.pYes THEN sList = sList & gvSettings[i, 2].Text & ","
+  NEXT 
+'  INC i
+sList = Left(Trim(sList), Len(Trim(sList)) - 1)
+'Message(sList)
+FrmImportAccts.sSettingsList = sList
+'Message(FrmImportAccts.sSettingsList)
+    
+  
+END
+
 
 PUBLIC SUB Form_Resize()
 

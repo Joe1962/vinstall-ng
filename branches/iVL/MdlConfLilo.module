@@ -304,7 +304,7 @@ EXEC ["uname", "-r"] TO sArch
 IF Exist("/lib" &/ "modules" &/ Trim(sarch)) = FALSE THEN 
 ' running hosted install detected
     TRY MKDIR "/lib" &/ "modules" &/ Trim(sarch)
-    SHELL "mount -o bind /mnt/target/lib/modules" &/ Trim(sarch) & " /lib/modules" &/ Trim(sarch)" && depmod -aq"
+    SHELL "mount -o bind /mnt/target/lib/modules" &/ Trim(sarch) & " /lib/modules" &/ Trim(sarch) & " && depmod -aq"
 END IF
               
 
