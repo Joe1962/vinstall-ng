@@ -17,12 +17,18 @@
 
 PUBLIC pYes AS Picture 
 PUBLIC SUB LIST_RESETABLE_SETTINGS()
-  DIM sFile, sDesc AS String
+  DIM sFile, sDesc, sSkellPath, stargetPath AS String
   DIM i AS Integer 
+  
+  'ClsGlobal.sTargetMnt = "/"
+  'sSkellPath = ClsGlobal.sTargetMnt &/ "etc" &/ "skel"
+  sSkellPath = "/etc/skel"
+  stargetPath = User.Home
+  'stargetPath = ClsGlobal.sTargetMnt &/ "home" &/ Trim(FrmImportAccts.cbAccntList.Text)
   i = 0
   pYes = FrmPkgSel.pYes
       
-      FOR EACH sfile IN Dir(User.home, "*")
+      FOR EACH sfile IN Dir(sSkellPath, "*")
           SELECT CASE sFile
   
             CASE ".kde"
@@ -54,11 +60,13 @@ PUBLIC SUB LIST_RESETABLE_SETTINGS()
 
         END SELECT 
       IF sDesc THEN    
+      IF Exist(stargetPath &/ sFile) THEN 
            'INC i
         INC FrmResetSettings.gvSettings.Rows.Count                
         FrmResetSettings.gvSettings[i, 1].Text = sDesc
         FrmResetSettings.gvSettings[i, 2].Text = sFile   
    INC i
+   END IF
       END IF
       NEXT 
       FrmResetSettings.gvSettings.Columns[1].Width = FrmResetSettings.gvSettings.Width - (FrmResetSettings.gvSettings.Columns[0].Width * 1.75)

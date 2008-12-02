@@ -3,6 +3,8 @@
 { Form Form
   MoveScaled(0,0,69,35)
   Text = ("")
+  Icon = Picture["icon:/small/undo"]
+  SkipTaskbar = True
   { tlBanner TextLabel
     MoveScaled(1,1,40,3)
     Text = ("Select which settings to reset")
