@@ -115,7 +115,7 @@ PUBLIC SUB CREATE_IMPORTED_ACCOUNT()
   'RETURN 
   ' Prepare home dir making the requested changes
     IF Len(sSettingsList) > 0 THEN 
-      sSettings = Split(sSettings, ",")
+      sSettings = Split(sSettingsList, ",")
         FOR i = 0 TO sSettings.Count - 1
           EXEC ["rm", "-rf", ClsGlobal.sTargetMnt &/ "home" &/ Trim(ME.cbAccntList.Text) &/ Trim(sSettings[i])] WAIT 
           EXEC ["cp", "-r", ClsGlobal.sTargetMnt &/ "etc" &/ "skel" & Trim(sSettings[i]), ClsGlobal.sTargetMnt &/ "home" &/ Trim(ME.cbAccntList.Text) &/ Trim(sSettings[i])] WAIT 
