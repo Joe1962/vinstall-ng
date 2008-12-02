@@ -37,6 +37,7 @@ PUBLIC SUB LIST_LANG_CHOICES()
   WITH ME.lblangsel
     .Add("es_ES", "Spanish")
     .Add("en_US", "US English")
+    .Add("ru_RU", "Russian")
   END WITH 
   
   
@@ -102,3 +103,9 @@ END
 ' ' '         LOOP
 ' ' ' 
 ' ' ' END
+
+PUBLIC SUB lblangsel_Click()
+
+  
+
+END

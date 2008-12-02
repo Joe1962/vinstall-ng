@@ -10,1006 +10,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .project:1
-msgid "VectorLinux Installer"
-msgstr "Инсталлятор VectorLinux"
-
-#: .project:2
-msgid "GUI installer for Vector linux"
-msgstr "Графический инсталлятор Vector Linux"
-
-#: FMain.class:196 FrmDone.class:28
-msgid "Restart"
-msgstr "Перезагрузка"
-
-#: FMain.class:223
-msgid "Please select a default operating system to boot before proceeding"
-msgstr ""
-"Выберите операционную систему для загрузки по умолчанию (что будет "
-"грузиться, если включить компьютер и отойти чай там заварить, или спросонья)"
-
-#: FMain.class:224
-msgid "Select an entry from this list"
-msgstr "Выберите из списка"
-
-#: FMain.class:231
-msgid "Skipping boot loaded setup"
-msgstr "Пропускаем установку загрузчика"
-
-#: FMain.class:244
-msgid "Passwords do not match. Please enter the same password twice"
-msgstr "Пароли не совпадают. Введите ещё раз"
-
-#: FMain.class:259
-msgid ""
-"You have not created any user accounts for this system yet. There is not "
-"enough information"
-msgstr "Вы ещё не создали ни одного пользователя. Недостаточно информации"
-
-#: FMain.class:259
-msgid ""
-"to create an account here. It is recommended that you create at least one."
-msgstr ""
-"чтобы создать пользователя здесь. Мы усиленно рекомендуем создать хотя бы "
-"одного."
-
-#: FMain.class:259
-msgid "Would you like to continue anyway?"
-msgstr "Вот так. Продолжить хотите?"
-
-#: FMain.class:259 FrmSummary.class:59
-msgid "Yes"
-msgstr "Да"
-
-#: FMain.class:259 FrmSummary.class:61
-msgid "No"
-msgstr "Нет"
-
-#: FMain.class:277
-msgid "Please specify a hostname for this computer"
-msgstr "А какое имя будет у компьютера"
-
-#: FMain.class:281
-msgid "Please specify the domain this computer belongs to"
-msgstr ""
-"Выберите домен, к которому принадлежит компьютер (здесь под доменом "
-"понимается то, что идёт после имени машины в её полном имени - в vectorlinux."
-"some.net доменом будет именно some.net). Вводить без точки в начале."
-
-#: FMain.class:296
-msgid ""
-"VectorLinux will now try to detect and configure your graphics hardware."
-msgstr "VectorLinux сейчас попытается настроить видеокарту."
-
-#: FMain.class:296
-msgid ""
-"Your screen may flicker or go blank for a few seconds during this process."
-msgstr ""
-"Экран может моргать или потемнеть на несколько секунд в процессе. Это "
-"нормально."
-
-#: FMain.class:348
-msgid "Please wait while setup attampts to run the partitioning utility"
-msgstr ""
-"А сейчас установщик запускает утилиту для разбиения разделов, подождите чуть-"
-"чуть"
-
-#: FMain.class:350
-msgid "Please wait while setup analyses your current partition setup."
-msgstr ""
-"Пожалкйста, подождите капельку, пока инсталлятор смотрит на текущее "
-"разбиение разделов."
-
-#: FMain.class:350
-msgid "This may take a while ..."
-msgstr ""
-"Времени займёт порядком...\n"
-"Попробуйте пока отжаться раз 10-15.\n"
-"Без шуток, спину надо беречь, да и здоровье вообще."
-
-#: FMain.class:364
-msgid ""
-"You must select a \"/\" partition. This is the target where the system will "
-"install to"
-msgstr "Выберите \"/\" (рутовый, корневой, системный) раздел."
-
-#: FMain.class:458
-msgid "Skipping lilo setup"
-msgstr "Пропускаем установку LILO"
-
-#: FMain.class:797
-msgid "Back"
-msgstr "Назад"
-
-#: FMain.class:809
-msgid "Exit Installation"
-msgstr "Выйти из установки"
-
-#: FMain.class:821
-msgid "Next"
-msgstr "Далее"
-
-#: FMain.class:835
-msgid "Button1"
-msgstr "Кнопка"
-
-#: FrmAlsaConf.class:36
-msgid ""
-"This portion of the setup process allows you to sutup your soundcard for "
-"your new operating system."
-msgstr "На этом этапе можно настроить звуковую карту."
-
-#: FrmAlsaConf.class:36
-msgid "Please use the setup program below to setup the sound system."
-msgstr "Пожалуйста, используйте программу внизу для настройки звука."
-
-#: FrmDiskPart.class:58
-msgid ""
-"When finished making changes, exit the partitioning application to "
-"continue ..."
-msgstr ""
-"Когда закончите с разделами, продолжить установку можно будет, выйдя из "
-"программы разбиения диска."
-
-#: FrmDiskPart.class:117
-msgid "Disk Partitioning:"
-msgstr "Разбиение диска:"
-
-#: FrmDone.class:32
-msgid "Exit"
-msgstr "Выйти"
-
-#: FrmDone.class:39
-msgid ""
-"has been installed to your system. Your new system has been configured with "
-"the default factory settings."
-msgstr ""
-"установлено на вашу систему. Ваш дистрибутив сконфигурирован с настройками "
-"по умолчанию."
-
-#: FrmDone.class:39
-msgid "After reboot you can use vasm or vasmCC to fine tune your installation."
-msgstr ""
-"После перезагрузки можно использовать vasm или vasmCC, чтобы до конца "
-"настроить вашу систему."
-
-#: FrmDone.class:39
-msgid ""
-"Your computer needs to be restarted so that you can use your new operating "
-"system. Click"
-msgstr "Чтобы перегрузиться в ваш новый и блестящий VectorLinux, нажмите"
-
-#: FrmDone.class:39
-msgid "to restart your computer now or click"
-msgstr "чтобы перезагрузить ваш компьютер сейчас, нажмите"
-
-#: FrmDone.class:39
-msgid "to restart your computer at a later time"
-msgstr "чтобы перезагрузить ваш компьютер позже"
-
-#: FrmDone.class:39
-msgid ""
-"If you installed from  CD-ROM/R/RW media, please remove de disk before "
-"restarting."
-msgstr ""
-"Если вы устанавливали с диска - вытащите его из привода. Установка окончена, "
-"сейчас мы будем перегружаться, и зачем нам второй раз грузиться с диска?"
-
-#: FrmDone.class:75
-msgid "Installation is finished"
-msgstr "Установка, урррра!, окончена"
-
-#: FrmHalSwitch.class:20
-msgid "Would you like to use Vl-Hot or HAL to manage your removable devices?"
-msgstr "Что хотите использовать для съёмных устройств, VL-Hot или HAL?"
-
-#: FrmHalSwitch.class:25
-msgid "HAL"
-msgstr "HAL"
-
-#: FrmHalSwitch.class:30
-msgid "VL-Hot"
-msgstr "VL-Hot"
-
-#: FrmHostPrep.class:130
-msgid "Vectorlinux is preparing your system for installation. Please wait."
-msgstr "VectorLinux подготавливается к установке..."
-
-#: FrmHostPrep.class:135
-msgid "Current Status"
-msgstr "Состояние"
-
-#: FrmHostPrep.class:139 FrmLilo.class:236 FrmPartScheme.class:128
-#: FrmPkgSel.class:196 FrmPkgsel2.class:86 FrmSelISO.class:265
-#: FrmSummaryOld.class:87
-msgid "TextLabel1"
-msgstr "TextLabel1"
-
-#: FrmImportAccts.class:31 FrmUserAdd.class:344
-msgid "Select picture for user Login"
-msgstr "Выберите картинку для пользователя"
-
-#: FrmImportAccts.class:50
-msgid "Reset settings for"
-msgstr "Сбросить настройки для"
-
-#: FrmImportAccts.class:64
-msgid "Password fields cannot be blank. Please enter a password for"
-msgstr ""
-"Пароль пустым быть не может. Нет, после установки его вполне можно поставить "
-"пустым, просто мы не даём. Если вам так уж этого хочется, поставьте пока "
-"единичку вместо пароля, но помните, мы против! Итак, пароль для"
-
-#: FrmImportAccts.class:68
-msgid "Selected passwords dont match. Please enter the same password twice"
-msgstr "Пароли не совпадают. Введите ещё раз, пожалуйста"
-
-#: FrmImportAccts.class:132
-msgid "Account"
-msgstr "Пользователь"
-
-#: FrmImportAccts.class:144
-msgid "New Password"
-msgstr "Новый пароль"
-
-#: FrmImportAccts.class:161
-msgid "Select login Image"
-msgstr "Выберите картинку для логина"
-
-#: FrmImportAccts.class:171 FrmUserAdd.class:509
-msgid "Select"
-msgstr "Выбрать"
-
-#: FrmImportAccts.class:181
-msgid "Verify Password"
-msgstr "Подтвердите пароль"
-
-#: FrmImportAccts.class:191 FrmUserAdd.class:520
-msgid "User Rights Management"
-msgstr "Управление правами пользователя"
-
-#: FrmImportAccts.class:197
-msgid "Reset settings"
-msgstr "Сбросить настройки"
-
-#: FrmImportAccts.class:203
-msgid "Import Account"
-msgstr "Добавить существующую учётную запись"
-
-#: FrmImportAccts.class:209
-msgid "Cancel"
-msgstr "Отмена"
-
-#: FrmImportAccts.class:216 FrmUserAdd.class:596
-msgid "Import Existing User Accounts"
-msgstr "Добавить существующую учётную запись"
-
-#: FrmInstallSys.class:63
-msgid "Current Step"
-msgstr "Текущий шаг"
-
-#: FrmInstallSys.class:204
-msgid "Vectorlinux is currently being installed to your system... Please wait"
-msgstr "VectorLinux устанавливается... Подождите чуточку"
-
-#: FrmInstallSys.class:219
-msgid "Installing ..."
-msgstr "Ставим..."
-
-#: FrmInstallSys.class:230
-msgid "Current Step "
-msgstr "Текущий шаг"
-
-#: FrmInstallSys.class:252
-msgid "Total progress"
-msgstr "Степень завершения"
-
-#: FrmLangSel.class:123
-msgid "Select your language"
-msgstr "Выберите язык"
-
-#: FrmLicense.class:99
-msgid "LICENSE AGREEMENT"
-msgstr "ЛИЦЕНЗИЯ"
-
-#: FrmLicense.class:104
-msgid "TextArea1"
-msgstr "TextArea1"
-
-#: FrmLicense.class:110
-msgid "Yes, I Agree to the License Agreement"
-msgstr "Да, с лицензией я соглашаюсь"
-
-#: FrmLicense.class:115
-msgid "No, I Do Not Agree"
-msgstr "Нет, я не соглашаюсь"
-
-#: FrmLilo.class:37
-msgid ""
-"The following Operating Systems have been detected on this computer. Choose "
-"your desired option"
-msgstr "Вот какие операционки мы нашли. Выбирайте"
-
-#: FrmLilo.class:37
-msgid ""
-"for each one of them by clicking on each tab. To proceed with the default "
-"pre-set values, simply click"
-msgstr ""
-"каждую из них, кликая на отдельную ячейку. Чтобы продолжить с настройками по "
-"умолчанию, просто нажмите"
-
-#: FrmLilo.class:139 FrmLiloSetup.class:63 MdlLilo.module:50
-msgid "Standard"
-msgstr "Стандартный"
-
-#: FrmLilo.class:219
-msgid "Configure and install lilo (Linux Boot Loader)"
-msgstr "Настроить и прописать lilo (Linux Loader, загрузчик линукса)"
-
-#: FrmLilo.class:224
-msgid "Don't Install Lilo"
-msgstr "Не ставить LILO"
-
-#: FrmLilo.class:230 FrmLiloSetup.class:292 FrmNetConf.class:279
-msgid "Tab 0"
-msgstr "Tab 0"
-
-#: FrmLilo.class:248 FrmLiloSetup.class:224
-msgid "Target"
-msgstr "Цель"
-
-#: FrmLilo.class:254 FrmLiloSetup.class:203
-msgid "Video Resolution"
-msgstr "Разрешение"
-
-#: FrmLilo.class:262 FrmLiloSetup.class:64 MdlLilo.module:52
-msgid "Bootsplash Med"
-msgstr "Среднего разрешения картинка при загрузке"
-
-#: FrmLilo.class:262 FrmLiloSetup.class:65 MdlLilo.module:54
-msgid "Bootsplash High"
-msgstr "Просто высокого разрешения картинка при загрузке"
-
-#: FrmLilo.class:262
-msgid "Bootsplash Extra high"
-msgstr "Очень высокого разрешения картинка при загрузке"
-
-#: FrmLilo.class:267 FrmLiloSetup.class:263
-msgid "Prompt Timeout"
-msgstr "Время выбора"
-
-#: FrmLilo.class:278 FrmLiloSetup.class:274
-msgid "Seconds"
-msgstr "Секунд"
-
-#: FrmLilo.class:284 FrmLiloSetup.class:242
-msgid "Boot Default"
-msgstr "Загрузить по умолчанию"
-
-#: FrmLiloSetup.class:66 MdlLilo.module:56
-msgid "Bootsplash Extra High"
-msgstr "Очень высокого разрешения картинка при загрузке"
-
-#: FrmLiloSetup.class:176
-msgid "Boot Manager Configuration"
-msgstr "Конфигурация загрузчика"
-
-#: FrmLiloSetup.class:192
-msgid "Do not install LILO"
-msgstr "Не ставить LILO"
-
-#: FrmNetConf.class:184 MdlCore.module:501
-msgid "Network Configuration"
-msgstr "Конфигурация сети"
-
-#: FrmNetConf.class:199
-msgid "Computer Name"
-msgstr "Имя компьютера"
-
-#: FrmNetConf.class:211
-msgid "Domain"
-msgstr "Домен"
-
-#: FrmNetConf.class:227
-msgid "Manual DNS Server Specification"
-msgstr "Ручная настройка DNS"
-
-#: FrmNetConf.class:238
-msgid "192.168.1.254"
-msgstr "192.168.1.254"
-
-#: FrmNetConf.class:243
-msgid "Primary DNS Server"
-msgstr "Первичный DNS-сервер"
-
-#: FrmNetConf.class:256
-msgid "Secondary DNS Server"
-msgstr "Вторичный DNS-сервер"
-
-#: FrmPartScheme.class:61
-msgid ""
-"Select this option if you already have a linux installation that you wish to "
-"overwrite or if a linux partition scheme exists in your hard disk."
-msgstr ""
-"Выберите, если у вас уже есть Linux (который вы хотите перезаписать) или "
-"если вы уже разметили диск."
-
-#: FrmPartScheme.class:61
-msgid "This option will overwrite any existing data in the selected partitions"
-msgstr ""
-"При выборе этого варианта все данные в выбранных разделах (если они там "
-"есть) будут УДАЛЕНЫ БЕЗВОЗВРАТНО (практически)."
-
-#: FrmPartScheme.class:61
-msgid ""
-"Use this option if you already prepared your partitions using the "
-"VectorLinux installer"
-msgstr "Если вы уже подготовили разделы - то вам сюда"
-
-#: FrmPartScheme.class:71
-msgid ""
-"Select this option is you wish to create, more or resize partitions in order "
-"to make room for your new VectorLinux installation."
-msgstr "Выберите, если хотите поработать с разделами."
-
-#: FrmPartScheme.class:71
-msgid ""
-"This option is the safest choice if you have other existing installations "
-"that you wish to keep."
-msgstr ""
-"Если вы хотите сохранить другие установки, это самый безопасный вариант."
-
-#: FrmPartScheme.class:113
-msgid "Disk Partitioning Options"
-msgstr "Параметры разбиения диска"
-
-#: FrmPartScheme.class:118
-msgid "Use existing disk partitions"
-msgstr "Использовать существующие разделы"
-
-#: FrmPartScheme.class:123
-msgid "Modify my disk partitions to make room for new installation"
-msgstr ""
-"Изменить существующие разделы, чтобы освободить место для нашей инсталляции. "
-"Внимание! Изменять разделы, везде и всегда, чревато потерей данных. Помните!"
-
-#: FrmPartSel.class:150
-msgid "ABOUT SYSTEM PARTITIONING IN LINUX"
-msgstr "О работе с разделами в Linux"
-
-#: FrmPartSel.class:150
-msgid ""
-"Linux is a modular operating system. This means that is has the ability to "
-"store system and"
-msgstr ""
-"Linux - модульная система. Таким образом, в ней есть возможность сохранять "
-"систему и"
-
-#: FrmPartSel.class:150
-msgid ""
-"user data separately for added data security. You may install the system to "
-"a single partition"
-msgstr ""
-"пользовательские данные отдельно для дополнительной безопасности данных. И "
-"вообще, дистрибутивы (и Linux) преходящи, а фотографии любимой кошки - нет. "
-"Можно поставить систему на один раздел (тогда отделить мух от котлет при "
-"необходимости будет сложнее)"
-
-#: FrmPartSel.class:150
-msgid ""
-"by simply selecting a \"/\" value on this screen. The rest is optional. The "
-"following is a"
-msgstr ""
-"просто выбрав \"/\" на этом экране. Всё остальное необязательно, но удобно"
-
-#: FrmPartSel.class:150
-msgid "suggested setup for a typical Linux installation"
-msgstr "предполагаемые нами параметры для обычной установки"
-
-#: FrmPartSel.class:150
-msgid ""
-"Used to store system data. This particular install requires a minimum of"
-msgstr ""
-"Используется для хранения системных данных. Этой установке, в частности, "
-"надо минимум"
-
-#: FrmPartSel.class:150
-msgid "for this"
-msgstr "для этого"
-
-#: FrmPartSel.class:150
-msgid ""
-"but you should considear a higher value to make sure you have room to "
-"install additional software"
-msgstr ""
-", а лучше поставить побольше, ведь добавочный софт будет тоже ставиться "
-"сюда. Но, с другой стороны, больше 7 гигабайт обычно не так уж надо."
-
-#: FrmPartSel.class:150
-msgid "in case you wish to."
-msgstr ", если вы хотите."
-
-#: FrmPartSel.class:150
-msgid ""
-"Used to store user documents, pictures, videos. Give yourself as much room "
-"as you want"
-msgstr ""
-"Используется вами для ваших музыки, видео, документов. Настройки тоже "
-"хранятся здесь, так что можно работать из разных дистрибутивов с одними и "
-"теми же данными и не нужно каждый раз настраивать всё под себя."
-
-#: FrmPartSel.class:150
-msgid "Typically, you want to use the largest partition for this."
-msgstr "Обычно, лучше всего использовать под это самый большой раздел."
-
-#: FrmPartSel.class:150
-msgid ""
-"Using a swap partition is suggested if your total RAM is less than 1GB. "
-"Suggested ammount"
-msgstr ""
-"Раздел подкачки рекомендуется, если у вас мало оперативной памяти. Или если "
-"вы хотите использовать гибернацию (тогда размер надо чуть больше вашей "
-"оперативной памяти). Мы предлагаем "
-
-#: FrmPartSel.class:150
-msgid "for this is"
-msgstr "для этого"
-
-#: FrmPartSel.class:150
-msgid "but can also be calculated as 2 times your ammount of RAM"
-msgstr ""
-", также можно рассчитать как 2 объёма вашей оперативной памяти, но без "
-"фанатизма. Более одного гигабайта раздел подкачки обычно не нужен, кроме как "
-"для гибернации."
-
-#: FrmPartSel.class:181
-msgid "Please select the partitions you wish to use and how to use them"
-msgstr "Какие разделы будем использовать и как"
-
-#: FrmPartSel.class:186 FrmUserAdd.class:524
-msgid "Help"
-msgstr "Помощь"
-
-#: FrmPartSel.class:206
-msgid ""
-"Check this box if you have a Windows installation on your system or any "
-"other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as "
-"soon as your computer starts"
-msgstr ""
-"Нажмите здесь, если вы хотите, чтобы ваши Windows-разделы (если у вас "
-"установлена Windows или просто есть разделы с FAT, FAT32 или NTFS) были "
-"примонтированы при загрузке."
-
-#: FrmPartSel.class:207
-msgid "Detect and Setup Windows partitions for auto-mounting at boot"
-msgstr "Обнаружить Windows-разделы и добавить их монтирование при загрузке"
-
-#: FrmPkgSel.class:25
-msgid "Choose your installation mode"
-msgstr "Выберите способ инсталляции"
-
-#: FrmPkgSel.class:40
-msgid "Package"
-msgstr "Пакет"
-
-#: FrmPkgSel.class:41 FrmUsrPkgSel.class:17
-msgid "Description"
-msgstr "Описание"
-
-#: FrmPkgSel.class:42 FrmSummary.class:41 FrmUsrPkgSel.class:19
-msgid "Size"
-msgstr "Размер"
-
-#: FrmPkgSel.class:71
-msgid ""
-"Installs all optional components in your VectorLinux media to your system"
-msgstr "Поставить всё, что есть"
-
-#: FrmPkgSel.class:81
-msgid "Choose your optional components to install."
-msgstr ""
-"Эти пакеты необязательны для работы системы, но могут быть обязательными для "
-"работы вас. Выбирайте."
-
-#: FrmPkgSel.class:206
-msgid "Full Install"
-msgstr "Полная установка"
-
-#: FrmPkgSel.class:211
-msgid "Custom Install"
-msgstr "Особая установка"
-
-#: FrmPkgsel2.class:21 FrmUsrPkgSel.class:11
-msgid "Select your indivirual packages to install."
-msgstr "Выберите ваши пакеты для установки"
-
-#: FrmPkgsel2.class:21
-msgid "To install them all, just click next"
-msgstr "Чтобы поставить всё, просто кликните \"Далее\""
-
-#: FrmResetSettings.class:92
-msgid "Select which settings to reset"
-msgstr "Выберите настройки для сброса"
-
-#: FrmResetSettings.class:101
-msgid "Done"
-msgstr "Сделано"
-
-#: FrmRootPass.class:12
-msgid "System Administrator Password"
-msgstr "Пароль администратора"
-
-#: FrmRootPass.class:19
-msgid "Most other every-day taks do not require administrative priviledges."
-msgstr ""
-"Права рута нужны для настройки системы и установки/удаления софта. То есть "
-"они не нужны (и даже могут быть вредны) для использования системы "
-"практически всё время."
-
-#: FrmRootPass.class:19
-msgid ""
-"For added security, use a password that is easy for you to remember, but "
-"hard for others to guess"
-msgstr ""
-"Безопасность - всегда враг удобства. И всё же, придумывая лёгкий для вас "
-"пароль, постарайтесь сделать его трудным для других. Пример одного из "
-"методов - Ghbdtn,Rjvgm.nth! или ZK.,k.Cdj.:tyeYfnfie. А можно и строчку из "
-"любимой песни - BeQuickOrBeDead. Меньше десяти, а, тем более, восьми "
-"символов лучше не стоит - можно быстро подобрать."
-
-#: FrmRootPass.class:29
-msgid "About the root account"
-msgstr "О пользователе root (суперпользователь)"
-
-#: FrmRootPass.class:38
-msgid "Enter a Password for root."
-msgstr "Ввести пароль для root (суперпользователя):"
-
-#: FrmRootPass.class:47
-msgid ""
-"Passwords do not match. Please enter the same password twice for accuracy."
-msgstr "Пароли не совпадают. Введите, пожалуйста, ещё раз"
-
-#: FrmRootPass.class:115 MdlCore.module:499
-msgid "System Administrator"
-msgstr "Администратор системы"
-
-#: FrmRootPass.class:128
-msgid ""
-"The linux root account is pre-assigned to be used as the system "
-"administrator's account. This account is used to perform system-wide changes "
-"such as software upgrades, managing user accounts etc. \n"
-"\n"
-"Most other operations do not require administrative priviledges.\n"
-"The root password must be entered twice for ensured accuracy. When choosing "
-"a root password, think of something easy for you to remember, but hard for "
-"others to guess."
-msgstr ""
-"Итак, администратором linux-системы является root. Он может делать всё, "
-"поэтому использовать его для повседневной жизни крайне глупо. Кривой IRC или "
-"ICQ клиент дадут взломщику (даже неквалифицированному, что особо обидно) "
-"абсолютно полный доступ к вашей машине. Даже опечатки в командах могут "
-"обойтись очень дорого.\n"
-"Так что используйте root только для конфигурирования системы и установки/"
-"удаления софта и пароль подберите посложнее."
-
-#: FrmRootPass.class:134 FrmUserAdd.class:557
-msgid "Enter Password"
-msgstr "Ввести пароль"
-
-#: FrmRootPass.class:139
-msgid "Re-Enter Password"
-msgstr "Введите пароль ещё раз"
-
-#: FrmRootPass.class:156
-msgid "Set Password"
-msgstr "Ввести пароль"
-
-#: FrmSelISO.class:30 MdlCore.module:237
-msgid "No Installable Media Found"
-msgstr "Не найдено откуда устанавливать"
-
-#: FrmSelISO.class:79
-msgid "Click"
-msgstr "Клик"
-
-#: FrmSelISO.class:79
-msgid "to begin installating"
-msgstr "чтобы начать инсталлировать"
-
-#: FrmSelISO.class:81
-msgid "Unable to locate any installable media."
-msgstr "Не могу найти, куда устанавливать."
-
-#: FrmSelISO.class:87
-msgid "Select installation media from the list below"
-msgstr "Выберите установочный привод из списка"
-
-#: FrmSelISO.class:116
-msgid "Unable to identify distro."
-msgstr "Непонятный какой-то дистрибутив."
-
-#: FrmSelISO.class:151
-msgid "Minimum Disk Space Requirements"
-msgstr "Минимальные требования к месту на дисках"
-
-#: FrmSelISO.class:254
-msgid "No installable images found."
-msgstr "Не найдено откуда устанавливать"
-
-#: FrmSelISO.class:260
-msgid ""
-"Select which VectorLinux version you wish to install from the list below"
-msgstr "Выберите, какую версию VectorLinux вы хотите поставить"
-
-#: FrmSelISO.class:270
-msgid "Search Again"
-msgstr "Искать заново"
-
-#: FrmSummary.class:14 MdlCore.module:493
-msgid "Installation Summary"
-msgstr "Итог установки"
-
-#: FrmSummary.class:17 MdlSummarize.module:56
-msgid "Custom"
-msgstr "Особый"
-
-#: FrmSummary.class:21 MdlSummarize.module:69
-msgid "Full"
-msgstr "Полный"
-
-#: FrmSummary.class:37
-msgid "Preparing Installation Summary ... Please wait"
-msgstr "Подводим итог установки..."
-
-#: FrmSummary.class:39
-msgid "Partition"
-msgstr "Раздел"
-
-#: FrmSummary.class:43
-msgid "Filesystem"
-msgstr "Файловая система"
-
-#: FrmSummary.class:45
-msgid "Mount Point"
-msgstr "Точка монтирования"
-
-#: FrmSummary.class:46
-msgid "Format ?"
-msgstr "Форматировать?"
-
-#: FrmSummary.class:52 MdlInstallSys.module:142 MdlPartSel.module:143
-msgid "Not Used"
-msgstr "Не используется"
-
-#: FrmSummary.class:58
-msgid "Do not Format"
-msgstr "Не форматировать"
-
-#: FrmSummary.class:99 MdlNetConf.module:245
-msgid "None"
-msgstr "Нет"
-
-#: FrmSummary.class:121 MdlInstallSys.module:190 MdlWinDrives.module:124
-msgid "Do not mount"
-msgstr "Не монтировать"
-
-#: FrmSummary.class:174 FrmUsrPkgSel.class:16
-msgid "Package Name"
-msgstr "Имя пакеты"
-
-#: FrmSummary.class:183
-msgid "BULK PACKAGES"
-msgstr "Оптовые пакеты"
-
-#: FrmSummary.class:210
-msgid "USER-SELECTED PACKAGES"
-msgstr "Выбранные вами пакеты"
-
-#: FrmSummary.class:286
-msgid "Installation Type"
-msgstr "Тип установки"
-
-#: FrmSummary.class:296
-msgid "Partition Selection Scheme"
-msgstr "Схема выбора разделов"
-
-#: FrmSummary.class:306 FrmUsrPkgSel.class:147 MdlCore.module:490
-msgid "Software Selection"
-msgstr "Выбор софта"
-
-#: FrmUserAdd.class:54
-msgid "Create User Accounts"
-msgstr "Создать учётную запись"
-
-#: FrmUserAdd.class:92
-msgid "Creating user account ... Please wait"
-msgstr "Создаём пользователя... Подождите чуть-чуть"
-
-#: FrmUserAdd.class:100
-msgid "Enter the login name that this user will user to login to this system."
-msgstr "Ввести логин пользователя (имя для входа в систему)."
-
-#: FrmUserAdd.class:108
-msgid ""
-"Login name field contains illegal characters. Please use only lowercase "
-"letters and numbers"
-msgstr ""
-"Логин может состоять только из английских строчных букв и цифр. Начинаться с "
-"цифры логин не может."
-
-#: FrmUserAdd.class:122
-msgid "Username contains illegal characters"
-msgstr "В логине замечены недопустимые символы"
-
-#: FrmUserAdd.class:125
-msgid "User account for"
-msgstr "Учётная запись"
-
-#: FrmUserAdd.class:125
-msgid "already exists"
-msgstr "уже есть"
-
-#: FrmUserAdd.class:129
-msgid "Enter a password for"
-msgstr "Ввести пароль для"
-
-#: FrmUserAdd.class:186
-msgid "Passwords do not match"
-msgstr "Пароли не совпадают"
-
-#: FrmUserAdd.class:187
-msgid "Enter the same password twice"
-msgstr "Введите пароль ещё раз"
-
-#: FrmUserAdd.class:383
-msgid ""
-"Your password selections do not match. Please enter the same password twice"
-msgstr "Пароли не совпадают. Введите, пожалуйста, их ещё раз"
-
-#: FrmUserAdd.class:408
-msgid ""
-"Groups are a way of administering permissions for your users. You grant the "
-"user"
-msgstr ""
-"Группы - способ управлять возможностями пользователей. Вы наделяете "
-"пользователя"
-
-#: FrmUserAdd.class:408
-msgid "permission to do certain things by adding them to certain groups."
-msgstr ""
-"разрешение делать определённые вещи, добавляя их в определённые группы."
-
-#: FrmUserAdd.class:408
-msgid "Select which groups you want this user to be a part of here"
-msgstr "Выберите, в какие группы вы хотите ввести пользователя"
-
-#: FrmUserAdd.class:409
-msgid "OK"
-msgstr "Ок"
-
-#: FrmUserAdd.class:471
-msgid ""
-"Choose a unique name for each user. Enter the password for twice for "
-"accuracy. You can make as many users as you want, and when you are finished "
-"click next to continue."
-msgstr ""
-"Выберите уникальное имя каждому пользователю. Пользователей можно делать "
-"сколько угодно. Для того, чтобы случайно не поставить неправильный пароль, "
-"введите его дважды. Когда закончите, нажмите \"Далее\", чтобы продолжить "
-"настройку."
-
-#: FrmUserAdd.class:515
-msgid "Use Picture ID for Login greeting"
-msgstr "Использовать картинку для приветствия пользователя"
-
-#: FrmUserAdd.class:537
-msgid "Create User"
-msgstr "Создать пользователя"
-
-#: FrmUserAdd.class:543
-msgid "Clear Form"
-msgstr "Очистить форму"
-
-#: FrmUserAdd.class:550
-msgid "Login Name"
-msgstr "Логин"
-
-#: FrmUserAdd.class:564
-msgid "ReEnter Password"
-msgstr "Введите пароль ещё раз"
-
-#: FrmUserAdd.class:580
-msgid "Real Name"
-msgstr ""
-"Ваше имя (ни для чего особо не надо, просто софт типа OpenOffice по "
-"умолчанию берёт ваше имя для авторства документов как раз вот отсюда)"
-
-#: FrmUserAdd.class:586 MdlCore.module:500
-msgid "User Accounts"
-msgstr "Учётные записи"
-
-#: FrmUsrPkgSel.class:11
-msgid "To install them all, just click"
-msgstr "Чтобы поставить всё, просто кликните"
-
-#: FrmUsrPkgSel.class:40
-msgid "Reading available software selection ... Please wait"
-msgstr "Смотрим, что доступно из софта..."
-
-#: FrmWinDrives.class:72
-msgid "Select the windows partitions you would like to mount during boot"
-msgstr "Выберите Windows-разделы для монтирования при запуске"
-
-#: FrmXconf.class:25
-msgid "Uses the default (failsafe) configuration."
-msgstr "Использовать конфигурацию по умолчанию (зато гарантированно работает)"
-
-#: FrmXconf.class:27
-msgid ""
-"Probe hardware to setup your Graphical Environment using your preffered "
-"settings"
-msgstr "Потрогаем ваше железо, чтобы настроить графический режим"
-
-#: FrmXconf.class:29
-msgid "Use the console framebuffer driver"
-msgstr "Использовать фреймбуфер"
-
-#: FrmXconf.class:301
-msgid "Graphical Interface Settings"
-msgstr "Настройки графики"
-
-#: FrmXconf.class:311
-msgid "Video Driver"
-msgstr "Видеодрайвер"
-
-#: FrmXconf.class:322
-msgid "Color Depth"
-msgstr "Битность цвета"
-
-#: FrmXconf.class:328
-msgid "Screen Resolution"
-msgstr "Разрешение экрана"
-
-#: FrmXconf.class:335
-msgid "24 bit True Color"
-msgstr "24(32)-битный режим(лучший)"
-
-#: FrmXconf.class:335
-msgid "16 bit Pseudo Color"
-msgstr "16-битный режим"
-
-#: FrmXconf.class:335
-msgid "8 bit 256 Color"
-msgstr "256-тицветный режим"
-
-#: FrmXconf.class:335
-msgid "4 bit 16 Color"
-msgstr "16-тицветный режим"
-
 #: FrmXconf.class:335
 msgid "1 bit Mono B/W"
 msgstr "1-битный чёрно-белый"
 
-#: FrmXconf.class:340
-msgid "Vesa"
-msgstr "VESA"
-
-#: FrmXconf.class:342
-msgid "Fbdev"
-msgstr "Фреймбуфер"
-
 #: FrmXconf.class:348
-msgid "1920x1280"
-msgstr "1920x1280"
-
-#: FrmXconf.class:348
-msgid "1600x1200"
-msgstr "1600x1200"
-
-#: FrmXconf.class:348
-msgid "1440x900"
-msgstr "1440x900"
+msgid "1024x768"
+msgstr "1024x768"
 
 #: FrmXconf.class:348
 msgid "1280x1024"
@@ -1020,213 +27,336 @@ msgid "1280x800"
 msgstr "1280x800"
 
 #: FrmXconf.class:348
-msgid "1024x768"
-msgstr "1024x768"
+msgid "1440x900"
+msgstr "1440x900"
+
+#: FrmXconf.class:335
+msgid "16 bit Pseudo Color"
+msgstr "16-битный режим"
 
 #: FrmXconf.class:348
-msgid "800x600"
-msgstr "800x600"
+msgid "1600x1200"
+msgstr "1600x1200"
+
+#: FrmNetConf.class:238
+msgid "192.168.1.254"
+msgstr "192.168.1.254"
+
+#: FrmXconf.class:348
+msgid "1920x1280"
+msgstr "1920x1280"
+
+#: FrmXconf.class:335
+msgid "24 bit True Color"
+msgstr "24(32)-битный режим(лучший)"
+
+#: FrmXconf.class:335
+msgid "4 bit 16 Color"
+msgstr "16-тицветный режим"
 
 #: FrmXconf.class:348
 msgid "640x480"
 msgstr "640x480"
 
-#: FrmZoneSet.class:21
-msgid "Timezone configuration"
-msgstr "Настройка часового пояса"
+#: FrmXconf.class:335
+msgid "8 bit 256 Color"
+msgstr "256-тицветный режим"
 
-#: FrmZoneSet.class:170
-msgid "Choose the correct timezone for the area in which you live."
-msgstr "Выберите нужный вам часовой пояс."
+#: FrmXconf.class:348
+msgid "800x600"
+msgstr "800x600"
 
-#: FrmZoneSet.class:175
-msgid "ComboBox1"
-msgstr "Комбобокс"
+#: FrmPartSel.class:150
+msgid "ABOUT SYSTEM PARTITIONING IN LINUX"
+msgstr "О работе с разделами в Linux"
 
-#: FrmZoneSet.class:177
-msgid "LocalTime"
-msgstr "Местное время"
+#: FrmRootPass.class:29
+msgid "About the root account"
+msgstr "О пользователе root (суперпользователь)"
 
-#: FrmZoneSet.class:177
-msgid "UTC"
-msgstr "UTC"
+#: MdlNetConf.module:277
+msgid "Access Point"
+msgstr "Точка доступа"
 
-#: FrmZoneSet.class:182
-msgid ""
-"Choose how\n"
-"your hardware clock is set up.\n"
-"Choose UTC if you know that the clock is set up to\n"
-"the Coordinated Universal Time (UTC/GMT). Otherwise,\n"
-"Choose localtime since most PCs are setup this way."
-msgstr ""
-"Выберите,\n"
-"как настраивать ваши часы.\n"
-"Если часы на материнской плате настроены\n"
-"на UTC(универсальное координированное время),\n"
-"то выбирайте UTC. Если нет - то выбирайте местное время."
+#: FrmImportAccts.class:132
+msgid "Account"
+msgstr "Пользователь"
 
-#: MdlConfLilo.module:97
-msgid "Lilo returned an error. Please see below"
-msgstr "Lilo отработало с ошибкой. Пожалуйста, посмотрите"
+#: MdlSetup.module:317
+msgid "Activating swap space"
+msgstr "Включаем раздел подкачки"
 
-#: MdlConfLilo.module:100
-msgid "Boot loader has been setup successfully"
-msgstr "Загрузчик прописан успешно"
+#: MdlLiloOsList.module:396
+msgid "Add option to boot this Operating system into Text mode."
+msgstr "Добавить возможность загрузки в текстовом режиме"
 
-#: MdlConfLilo.module:124
-msgid "MBR of "
-msgstr "MBR"
+#: MdlLilo.module:648
+msgid "Add option to boot this operating system into text mode"
+msgstr "Добавить возможность загрузки в текстовом режиме"
 
-#: MdlConfLilo.module:131 MdlLilo.module:98
-msgid "Bootsector of "
-msgstr "Загрузочный сектор "
+#: FrmDone.class:39
+msgid "After reboot you can use vasm or vasmCC to fine tune your installation."
+msgstr "После перезагрузки можно использовать vasm или vasmCC, чтобы до конца настроить вашу систему."
 
-#: MdlConfLilo.module:136 MdlLilo.module:100
-msgid "Floppy"
-msgstr "Дисковод"
+#: MdlUsrAdd.module:74
+msgid "Allow user to mount / un-mount Pendrive (USB Sticks)"
+msgstr "Позволить пользователю подключать (и отключать) флэшки"
 
-#: MdlCore.module:28
-msgid "Working ... Please Wait"
-msgstr "Работаем для вас... Немного терпения"
+#: MdlUsrAdd.module:77
+msgid "Allow user to mount / un-mount Removable HD Storage Devices"
+msgstr "Позволить пользователю подключать (и отключать) сменные жёсткие диски"
 
-#: MdlCore.module:221
-msgid "Scanning system for installable media. Please wait ..."
-msgstr "Сканируем машину, ищем, откуда ставить Vector..."
+#: MdlNetConf.module:321
+msgid "Automatic settings via DHCP."
+msgstr "Автоматическая настройка через DHCP."
 
-#: MdlCore.module:239
-msgid ""
-"Setup was unable to find any installable media on your system. Please insert "
-"your VectorLinux "
-msgstr ""
-"Мы не смогли найти ни одного образа для установки. Может, диск поцарапан или "
-"плохо записался?"
+#: MdlNetConf.module:193
+msgid "Automatically activate this interface at start-up"
+msgstr "Включать это соединение при загрузке"
 
-#: MdlCore.module:239
-msgid "installation CD and click"
-msgstr "инсталляционный диск и нажмите"
+#: MdlSetup.module:301
+msgid "BROUGHT TO YOU BY"
+msgstr "С наилучшими пожеланиями"
 
-#: MdlCore.module:239
-msgid "to try again"
-msgstr "чтобы попробовать снова"
+#: FrmSummary.class:183
+msgid "BULK PACKAGES"
+msgstr "Оптовые пакеты"
 
-#: MdlCore.module:400
-msgid "Build Date: "
-msgstr "Дата сборки:"
+#: MdlSummarize.module:58
+msgid "BULK PACKAGES:"
+msgstr "Оптовые пакеты"
 
-#: MdlCore.module:400
-msgid "MINIMUM REQUIREMENTS"
-msgstr "Минимальные требования"
+#: FMain.class:797
+msgid "Back"
+msgstr "Назад"
 
-#: MdlCore.module:405
-msgid ""
-"Setup is unable to find SETUP.CONF in your install media. This could be "
-"symptoms of a bad burn or a bad ISO"
-msgstr ""
-"Установщик не может найти SETUP.CONF. Может, плохо записан диск или "
-"установочный образ побился при скачивании... Проверьте, пожалуйста."
+#: FrmLilo.class:284 FrmLiloSetup.class:242
+msgid "Boot Default"
+msgstr "Загрузить по умолчанию"
 
-#: MdlCore.module:478
-msgid "Cannot find SETUP.CONF"
-msgstr "Не могу найти SETUP.CONF"
-
-#: MdlCore.module:486
-msgid "Preparation"
-msgstr "Подготовка"
-
-#: MdlCore.module:487
-msgid "Language Selection"
-msgstr "Выбор языка"
-
-#: MdlCore.module:488
-msgid "Find installation media"
-msgstr "Найти, откуда будем ставить"
-
-#: MdlCore.module:489
-msgid "Disk Partitioning"
-msgstr "Разбиение диска"
-
-#: MdlCore.module:492
-msgid "Installation"
-msgstr "Установка"
-
-#: MdlCore.module:495
-msgid "Install Operating System"
-msgstr "Установить операционную систему"
-
-#: MdlCore.module:496
-msgid "System Configuration"
-msgstr "Конфигурация системы"
+#: FrmLiloSetup.class:176
+msgid "Boot Manager Configuration"
+msgstr "Конфигурация загрузчика"
 
 #: MdlCore.module:497
 msgid "Boot Menu Options"
 msgstr "Опции загрузки"
 
-#: MdlCore.module:498
-msgid "Regional Settings"
-msgstr "Настройки местности"
+#: MdlConfLilo.module:100
+msgid "Boot loader has been setup successfully"
+msgstr "Загрузчик прописан успешно"
 
-#: MdlCore.module:502
-msgid "Final Hardware Configuration"
-msgstr "Настройка железа (последняя)"
+#: MdlConfLilo.module:131 MdlLilo.module:98
+msgid "Bootsector of "
+msgstr "Загрузочный сектор "
 
-#: MdlDiskPart.module:46
-msgid ""
-"VectorLinux is unable to determine the type of hard disks on your system."
-msgstr "VectorLinux не может распознать ваши жёсткие диски. Жаль."
+#: FrmLiloSetup.class:66 MdlLilo.module:56
+msgid "Bootsplash Extra High"
+msgstr "Очень высокого разрешения картинка при загрузке"
 
-#: MdlDiskPart.module:46
-msgid ""
-"It is still possible to install VectorLinux on your system, but you need to "
-"pre-partition your disks first"
-msgstr ""
-"Поставить VectorLinux вполне возможно, но вам нужно сперва подготовить "
-"разделы"
+#: FrmLilo.class:262
+msgid "Bootsplash Extra high"
+msgstr "Очень высокого разрешения картинка при загрузке"
 
-#: MdlDiskPart.module:53
-msgid ""
-"Gparted was not found on this system. Please install gparted and try again"
-msgstr ""
-"Gparted не найден. Установите его и попробуйте заново. Если вы не "
-"разработчик - случилась какая-то мистическая хрень, вы этого никогда не "
-"должны были увидеть. Может, что-то с диском/флэшкой?"
+#: FrmLilo.class:262 FrmLiloSetup.class:65 MdlLilo.module:54
+msgid "Bootsplash High"
+msgstr "Просто высокого разрешения картинка при загрузке"
 
-#: MdlDiskPart.module:57
-msgid "Loading gparted ... Please wait"
-msgstr "Грузим gparted... Подождите чуточку"
+#: FrmLilo.class:262 FrmLiloSetup.class:64 MdlLilo.module:52
+msgid "Bootsplash Med"
+msgstr "Среднего разрешения картинка при загрузке"
 
-#: MdlDiskPart.module:90
-msgid ""
-"Setup is unable to successfully run gparted on this system. This may be a "
-"sign of "
-msgstr "Не получилось запустить gparted. Возможно, этому причиной"
+#: MdlCore.module:400
+msgid "Build Date: "
+msgstr "Дата сборки:"
 
-#: MdlDiskPart.module:90
-msgid "a bad install media. Setup cannot continue."
-msgstr ""
-"плохой установочный диск. Просто очень плохой установочный диск. Мы думали, "
-"как-то лучше это будет всё. Выходим."
+#: FMain.class:835
+msgid "Button1"
+msgstr "Кнопка"
 
-#: MdlDiskPart.module:95
-msgid "Several windows found. I will take the first one!"
-msgstr ""
-"Ух-ты, зачем вам столько Windows? Мы будем работать с первой найденной, уж "
-"извините."
+#: MdlSetup.module:199
+msgid "Calculating package count ... Please wait"
+msgstr "Считаем пакеты... Подождите, пожалуйста"
 
-#: MdlInstallCustom.module:48
-msgid "There as been an error while installing required system software. "
-msgstr "Нормально установить системный софт не удалось."
+#: FrmImportAccts.class:209
+msgid "Cancel"
+msgstr "Отмена"
 
-#: MdlInstallCustom.module:56
-msgid ""
-"There has been an error while installing optional software to your system. "
-msgstr "Плохо поставился дополнительный софт."
+#: MdlCore.module:478
+msgid "Cannot find SETUP.CONF"
+msgstr "Не могу найти SETUP.CONF"
 
-#: MdlInstallCustom.module:65
-msgid ""
-"There has been an error while installing optional software to your system."
-msgstr ""
-"Произошла трабла при установке дополнительного софта, но система жить "
-"должна, вроде."
+#: FrmPartSel.class:206
+msgid "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
+msgstr "Нажмите здесь, если вы хотите, чтобы ваши Windows-разделы (если у вас установлена Windows или просто есть разделы с FAT, FAT32 или NTFS) были примонтированы при загрузке."
+
+#: FrmUserAdd.class:471
+msgid "Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
+msgstr "Выберите уникальное имя каждому пользователю. Пользователей можно делать сколько угодно. Для того, чтобы случайно не поставить неправильный пароль, введите его дважды. Когда закончите, нажмите \"Далее\", чтобы продолжить настройку."
+
+#: FrmZoneSet.class:182
+msgid "Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way."
+msgstr "Выберите,\nкак настраивать ваши часы.\nЕсли часы на материнской плате настроены\nна UTC(универсальное координированное время),\nто выбирайте UTC. Если нет - то выбирайте местное время."
+
+#: FrmZoneSet.class:170
+msgid "Choose the correct timezone for the area in which you live."
+msgstr "Выберите нужный вам часовой пояс."
+
+#: FrmPkgSel.class:25
+msgid "Choose your installation mode"
+msgstr "Выберите способ инсталляции"
+
+#: FrmPkgSel.class:81
+msgid "Choose your optional components to install."
+msgstr "Эти пакеты необязательны для работы системы, но могут быть обязательными для работы вас. Выбирайте."
+
+#: FrmUserAdd.class:543
+msgid "Clear Form"
+msgstr "Очистить форму"
+
+#: FrmSelISO.class:79
+msgid "Click"
+msgstr "Клик"
+
+#: FrmXconf.class:322
+msgid "Color Depth"
+msgstr "Битность цвета"
+
+#: FrmZoneSet.class:175
+msgid "ComboBox1"
+msgstr "Комбобокс"
+
+#: FrmNetConf.class:199
+msgid "Computer Name"
+msgstr "Имя компьютера"
+
+#: FrmLilo.class:219
+msgid "Configure and install lilo (Linux Boot Loader)"
+msgstr "Настроить и прописать lilo (Linux Loader, загрузчик линукса)"
+
+#: FrmUserAdd.class:537
+msgid "Create User"
+msgstr "Создать пользователя"
+
+#: FrmUserAdd.class:54
+msgid "Create User Accounts"
+msgstr "Создать учётную запись"
+
+#: FrmUserAdd.class:92
+msgid "Creating user account ... Please wait"
+msgstr "Создаём пользователя... Подождите чуть-чуть"
+
+#: FrmHostPrep.class:135
+msgid "Current Status"
+msgstr "Состояние"
+
+#: FrmInstallSys.class:63
+msgid "Current Step"
+msgstr "Текущий шаг"
+
+#: FrmInstallSys.class:230
+msgid "Current Step "
+msgstr "Текущий шаг"
+
+#: FrmSummary.class:17 MdlSummarize.module:56
+msgid "Custom"
+msgstr "Особый"
+
+#: FrmPkgSel.class:211
+msgid "Custom Install"
+msgstr "Особая установка"
+
+#: FrmPkgSel.class:41 FrmUsrPkgSel.class:17
+msgid "Description"
+msgstr "Описание"
+
+#: FrmPartSel.class:207
+msgid "Detect and Setup Windows partitions for auto-mounting at boot"
+msgstr "Обнаружить Windows-разделы и добавить их монтирование при загрузке"
+
+#: MdlCore.module:489
+msgid "Disk Partitioning"
+msgstr "Разбиение диска"
+
+#: FrmPartScheme.class:113
+msgid "Disk Partitioning Options"
+msgstr "Параметры разбиения диска"
+
+#: FrmDiskPart.class:117
+msgid "Disk Partitioning:"
+msgstr "Разбиение диска:"
+
+#: FrmSummary.class:58
+msgid "Do not Format"
+msgstr "Не форматировать"
+
+#: MdlInstallSys.module:167 MdlPartFrmt.module:33 MdlPartSel.module:141
+msgid "Do not format"
+msgstr "Не форматировать"
+
+#: FrmLiloSetup.class:192
+msgid "Do not install LILO"
+msgstr "Не ставить LILO"
+
+#: FrmSummary.class:121 MdlInstallSys.module:190 MdlWinDrives.module:124
+msgid "Do not mount"
+msgstr "Не монтировать"
+
+#: FrmNetConf.class:211
+msgid "Domain"
+msgstr "Домен"
+
+#: FrmLilo.class:224
+msgid "Don't Install Lilo"
+msgstr "Не ставить LILO"
+
+#: FrmResetSettings.class:101
+msgid "Done"
+msgstr "Сделано"
+
+#: MdlNetConf.module:321
+msgid "Dynamic Host Control Protocol"
+msgstr "DHCP"
+
+#: MdlUsrAdd.module:71
+msgid "Elite user"
+msgstr "Опытный пользователь"
+
+#: MdlNetConf.module:258
+msgid "Encryption key"
+msgstr "Ключ шифрования"
+
+#: MdlNetConf.module:232
+msgid "Encryption type"
+msgstr "Тип шифрования"
+
+#: FrmRootPass.class:134 FrmUserAdd.class:557
+msgid "Enter Password"
+msgstr "Ввести пароль"
+
+#: FrmRootPass.class:38
+msgid "Enter a Password for root."
+msgstr "Ввести пароль для root (суперпользователя):"
+
+#: FrmUserAdd.class:129
+msgid "Enter a password for"
+msgstr "Ввести пароль для"
+
+#: FrmUserAdd.class:100
+msgid "Enter the login name that this user will user to login to this system."
+msgstr "Ввести логин пользователя (имя для входа в систему)."
+
+#: FrmUserAdd.class:187
+msgid "Enter the same password twice"
+msgstr "Введите пароль ещё раз"
+
+#: MdlInstallSys.module:518
+msgid "Error occurred while installing"
+msgstr "При установке произошла фигня. Разбираемся"
+
+#: MdlInstallCustom.module:354
+msgid "Error while installing "
+msgstr "Ошибка при установке"
 
 #: MdlInstallCustom.module:76
 msgid "Error while installing required system software. "
@@ -1236,153 +366,129 @@ msgstr "Что-то случилось при установке системн�
 msgid "Error while installing system configuration. "
 msgstr "Что-то стряслось при применении настроек."
 
-#: MdlInstallCustom.module:92
-msgid "Unable to install kernels. "
-msgstr "Не могу установить ядро."
+#: FrmDone.class:32
+msgid "Exit"
+msgstr "Выйти"
 
-#: MdlInstallCustom.module:111
-msgid ""
-"Vectorlinux is now installed in your system. Please click next to configure "
-"it."
-msgstr "VectorLinux установлен! Кликните \"Далее\" для настройки."
+#: FMain.class:809
+msgid "Exit Installation"
+msgstr "Выйти из установки"
 
-#: MdlInstallCustom.module:112
-msgid ""
-"packages have been Installed. Please click next to move on to System "
-"Configuration."
-msgstr "пакеты были поставлены. Нажмите \"Далее\", чтобы перейти к настройкам."
-
-#: MdlInstallCustom.module:205 MdlInstallSys.module:480
-msgid "Installing"
-msgstr "Устанавливаем"
-
-#: MdlInstallCustom.module:225
-msgid "Failed to install. Installation will stop"
-msgstr "Установить почему-то не получилось. Придётся выйти"
-
-#: MdlInstallCustom.module:271
-msgid "Installing user-selected package"
-msgstr "Ставим выбранные вами дополнительные пакеты"
-
-#: MdlInstallCustom.module:354
-msgid "Error while installing "
-msgstr "Ошибка при установке"
-
-#: MdlInstallCustom.module:423
-msgid "failed to install. Installation will stop now"
-msgstr "не смогло поставиться. Установка прекращена"
-
-#: MdlInstallSys.module:118
-msgid "Writing new /etc/fstab to system"
-msgstr "Записываем новый /etc/fstab (это список разделов)"
-
-#: MdlInstallSys.module:167 MdlPartFrmt.module:33 MdlPartSel.module:141
-msgid "Do not format"
-msgstr "Не форматировать"
-
-#: MdlInstallSys.module:370
-msgid "Vectorlinux is now installed in your system. Please click"
-msgstr "VectorLinux установлен! Кликните"
-
-#: MdlInstallSys.module:370
-msgid "to configure it."
-msgstr "чтобы настроить."
-
-#: MdlInstallSys.module:371
-msgid "Packages have been installed in your system. Please click"
-msgstr "Пакеты поставлены. Пожалуйста, кликните"
-
-#: MdlInstallSys.module:518
-msgid "Error occurred while installing"
-msgstr "При установке произошла фигня. Разбираемся"
-
-#: MdlInstallSys.module:583
-msgid "Vectorlinux is now being installed. Please wait..."
-msgstr "VectorLinux устанавливается... Подождите капельку"
-
-#: MdlInstallSys.module:627
-msgid "There has been an error extracting"
-msgstr "Ошибка при распаковке"
-
-#: MdlInstallSys.module:639
-msgid "Finished intalling Bulks"
-msgstr "Оптовые пакеты поставлены"
-
-#: MdlInstallSys.module:754
-msgid "Installation phase complete. Ready for configuration"
-msgstr "Теперь мы готовы к настройке"
-
-#: MdlInstallSys.module:757
-msgid "Installing default system configuration and required software."
-msgstr "Добавляем базовые настройки системы и требуемый софт."
-
-#: MdlInstallSys.module:799
-msgid "Installing Required Package ..."
-msgstr "Ставим необходимые пакеты..."
+#: MdlPartSel.module:92
+msgid "FILESYSTEM"
+msgstr "Файловая система"
 
 #: MdlInstallSys.module:813
 msgid "Failed to install"
 msgstr "Не удалось установить"
 
-#: MdlLilo.module:96
-msgid "MBR of"
-msgstr "MBR"
+#: MdlInstallCustom.module:225
+msgid "Failed to install. Installation will stop"
+msgstr "Установить почему-то не получилось. Придётся выйти"
 
-#: MdlLilo.module:183
-msgid "Your option to boot"
-msgstr "Вы хотите загружать"
+#: FrmXconf.class:342
+msgid "Fbdev"
+msgstr "Фреймбуфер"
 
-#: MdlLilo.module:183
-msgid ""
-"is too long. it has been adjusted to \"Vector-cli\". You can run vasmCC "
-"after the first boot to modify your boot options"
-msgstr ""
-"очень долго. Это было переправлено на \"Vector-cli\". Чтобы изменить "
-"настройки загрузки, запустите vasmCC после первого запуска."
+#: FrmSummary.class:43
+msgid "Filesystem"
+msgstr "Файловая система"
 
-#: MdlLilo.module:453
-msgid "installed on"
-msgstr "поставлено в"
+#: MdlCore.module:502
+msgid "Final Hardware Configuration"
+msgstr "Настройка железа (последняя)"
 
-#: MdlLilo.module:471 MdlLiloOsList.module:149
-msgid "Include this installation in the boot menu"
-msgstr "Добавить эту установку в загрузочное меню"
+#: MdlCore.module:488
+msgid "Find installation media"
+msgstr "Найти, откуда будем ставить"
 
-#: MdlLilo.module:481 MdlLiloOsList.module:313
-msgid "Name"
-msgstr "Имя"
+#: MdlInstallSys.module:639
+msgid "Finished intalling Bulks"
+msgstr "Оптовые пакеты поставлены"
 
-#: MdlLilo.module:538
-msgid "installed in"
-msgstr "поставлено в"
+#: MdlConfLilo.module:136 MdlLilo.module:100
+msgid "Floppy"
+msgstr "Дисковод"
+
+#: FrmRootPass.class:19
+msgid "For added security, use a password that is easy for you to remember, but hard for others to guess"
+msgstr "Безопасность - всегда враг удобства. И всё же, придумывая лёгкий для вас пароль, постарайтесь сделать его трудным для других. Пример одного из методов - Ghbdtn,Rjvgm.nth! или ZK.,k.Cdj.:tyeYfnfie. А можно и строчку из любимой песни - BeQuickOrBeDead. Меньше десяти, а, тем более, восьми символов лучше не стоит - можно быстро подобрать."
+
+#: FrmSummary.class:46
+msgid "Format ?"
+msgstr "Форматировать?"
+
+#: FrmSummary.class:21 MdlSummarize.module:69
+msgid "Full"
+msgstr "Полный"
+
+#: FrmPkgSel.class:206
+msgid "Full Install"
+msgstr "Полная установка"
+
+#: .project:2
+msgid "GUI installer for Vector linux"
+msgstr "Графический инсталлятор Vector Linux"
+
+#: MdlNetConf.module:429
+msgid "Gateway Address"
+msgstr "IP-адрес шлюза"
+
+#: MdlDiskPart.module:53
+msgid "Gparted was not found on this system. Please install gparted and try again"
+msgstr "Gparted не найден. Установите его и попробуйте заново. Если вы не разработчик - случилась какая-то мистическая хрень, вы этого никогда не должны были увидеть. Может, что-то с диском/флэшкой?"
+
+#: FrmXconf.class:301
+msgid "Graphical Interface Settings"
+msgstr "Настройки графики"
+
+#: FrmUserAdd.class:408
+msgid "Groups are a way of administering permissions for your users. You grant the user"
+msgstr "Группы - способ управлять возможностями пользователей. Вы наделяете пользователя"
+
+#: FrmHalSwitch.class:25
+msgid "HAL"
+msgstr "HAL"
+
+#: MdlNetConf.module:153
+msgid "Hardware Address"
+msgstr "MAC-адрес"
+
+#: FrmPartSel.class:186 FrmUserAdd.class:524
+msgid "Help"
+msgstr "Помощь"
+
+#: MdlSummarize.module:56
+msgid "INSTALL TYPE:"
+msgstr "Тип установки:"
+
+#: MdlNetConf.module:384
+msgid "IP Address"
+msgstr "IP-адрес"
+
+#: MdlNetConf.module:321
+msgid "If in doubt, choose this option"
+msgstr "Вот, этот вариант самый лучший и безопасный, если вы не уверены, что выбрать"
+
+#: FrmDone.class:39
+msgid "If you installed from  CD-ROM/R/RW media, please remove de disk before restarting."
+msgstr "Если вы устанавливали с диска - вытащите его из привода. Установка окончена, сейчас мы будем перегружаться, и зачем нам второй раз грузиться с диска?"
+
+#: FrmImportAccts.class:203
+msgid "Import Account"
+msgstr "Добавить существующую учётную запись"
+
+#: FrmImportAccts.class:216 FrmUserAdd.class:596
+msgid "Import Existing User Accounts"
+msgstr "Добавить существующую учётную запись"
 
 #: MdlLilo.module:559
 msgid "Include in boot menu"
 msgstr "Добавить в загрузочное меню"
 
-#: MdlLilo.module:595
-msgid "Initrd"
-msgstr "Initrd"
-
-#: MdlLilo.module:625 MdlLiloOsList.module:359
-msgid "Kernel boot options"
-msgstr "Параметры ядра при загрузке"
-
-#: MdlLilo.module:648
-msgid "Add option to boot this operating system into text mode"
-msgstr "Добавить возможность загрузки в текстовом режиме"
-
-#: MdlLiloOsList.module:139
-msgid "Windows installation found in"
-msgstr "Установленная Windows найдена на"
-
-#: MdlLiloOsList.module:158
-msgid "Label"
-msgstr "Метка"
-
-#: MdlLiloOsList.module:290
-msgid "Operating system installed in"
-msgstr "Операционная система поставлена на"
+#: MdlLilo.module:471 MdlLiloOsList.module:149
+msgid "Include this installation in the boot menu"
+msgstr "Добавить эту установку в загрузочное меню"
 
 #: MdlLiloOsList.module:302
 msgid "Include this operating system in the boot menu"
@@ -1392,166 +498,557 @@ msgstr "Добавить эту операционную систему в за�
 msgid "Initial Ram Disk"
 msgstr "Стартовый RAM-диск"
 
-#: MdlLiloOsList.module:396
-msgid "Add option to boot this Operating system into Text mode."
-msgstr "Добавить возможность загрузки в текстовом режиме"
+#: MdlLilo.module:595
+msgid "Initrd"
+msgstr "Initrd"
 
-#: MdlNetConf.module:60
-msgid "Probing your networking hardware ... Please wait"
-msgstr "Смотрим, есть ли у вас сетевые карты..."
+#: MdlCore.module:495
+msgid "Install Operating System"
+msgstr "Установить операционную систему"
 
-#: MdlNetConf.module:93
-msgid "No ethernet neworking devices found"
-msgstr "Сетевых карт не найдено"
+#: MdlCore.module:492
+msgid "Installation"
+msgstr "Установка"
 
-#: MdlNetConf.module:120
-msgid "Wired"
-msgstr "Проводной"
+#: FrmSummary.class:14 MdlCore.module:493
+msgid "Installation Summary"
+msgstr "Итог установки"
 
-#: MdlNetConf.module:123
-msgid "Wireless"
-msgstr "Беспроводный"
+#: FrmSummary.class:286
+msgid "Installation Type"
+msgstr "Тип установки"
 
-#: MdlNetConf.module:132
-msgid "Plugged-in"
-msgstr "Подключенные"
+#: FrmDone.class:75
+msgid "Installation is finished"
+msgstr "Установка, урррра!, окончена"
 
-#: MdlNetConf.module:134
-msgid "Unplugged"
-msgstr "Отключённый"
+#: MdlInstallSys.module:754
+msgid "Installation phase complete. Ready for configuration"
+msgstr "Теперь мы готовы к настройке"
 
-#: MdlNetConf.module:153
-msgid "Hardware Address"
-msgstr "MAC-адрес"
+#: MdlInstallCustom.module:205 MdlInstallSys.module:480
+msgid "Installing"
+msgstr "Устанавливаем"
+
+#: FrmInstallSys.class:219
+msgid "Installing ..."
+msgstr "Ставим..."
+
+#: MdlInstallSys.module:799
+msgid "Installing Required Package ..."
+msgstr "Ставим необходимые пакеты..."
+
+#: MdlInstallSys.module:757
+msgid "Installing default system configuration and required software."
+msgstr "Добавляем базовые настройки системы и требуемый софт."
+
+#: MdlInstallCustom.module:271
+msgid "Installing user-selected package"
+msgstr "Ставим выбранные вами дополнительные пакеты"
+
+#: FrmPkgSel.class:71
+msgid "Installs all optional components in your VectorLinux media to your system"
+msgstr "Поставить всё, что есть"
 
 #: MdlNetConf.module:174
 msgid "Interface Type"
 msgstr "Тип интерфейса"
 
-#: MdlNetConf.module:193
-msgid "Automatically activate this interface at start-up"
-msgstr "Включать это соединение при загрузке"
+#: MdlDiskPart.module:46
+msgid "It is still possible to install VectorLinux on your system, but you need to pre-partition your disks first"
+msgstr "Поставить VectorLinux вполне возможно, но вам нужно сперва подготовить разделы"
 
-#: MdlNetConf.module:206
-msgid "Setup Mode"
-msgstr "Режим настройки"
+#: MdlLilo.module:625 MdlLiloOsList.module:359
+msgid "Kernel boot options"
+msgstr "Параметры ядра при загрузке"
 
-#: MdlNetConf.module:232
-msgid "Encryption type"
-msgstr "Тип шифрования"
+#: FrmLicense.class:99
+msgid "LICENSE AGREEMENT"
+msgstr "ЛИЦЕНЗИЯ"
 
-#: MdlNetConf.module:258
-msgid "Encryption key"
-msgstr "Ключ шифрования"
+#: MdlLiloOsList.module:158
+msgid "Label"
+msgstr "Метка"
 
-#: MdlNetConf.module:277
-msgid "Access Point"
-msgstr "Точка доступа"
+#: MdlCore.module:487
+msgid "Language Selection"
+msgstr "Выбор языка"
 
-#: MdlNetConf.module:305
-msgid "STATUS:"
-msgstr "Состояние:"
+#: MdlConfLilo.module:97
+msgid "Lilo returned an error. Please see below"
+msgstr "Lilo отработало с ошибкой. Пожалуйста, посмотрите"
 
-#: MdlNetConf.module:321
-msgid "Dynamic Host Control Protocol"
-msgstr "DHCP"
+#: FrmPartSel.class:150
+msgid "Linux is a modular operating system. This means that is has the ability to store system and"
+msgstr "Linux - модульная система. Таким образом, в ней есть возможность сохранять систему и"
 
-#: MdlNetConf.module:321
-msgid "Automatic settings via DHCP."
-msgstr "Автоматическая настройка через DHCP."
+#: MdlDiskPart.module:57
+msgid "Loading gparted ... Please wait"
+msgstr "Грузим gparted... Подождите чуточку"
 
-#: MdlNetConf.module:321
-msgid "This will work if you use a cable or DSL modem on a home network."
-msgstr "Это для кабельного или DSL-подключения к интернет."
+#: FrmZoneSet.class:177
+msgid "LocalTime"
+msgstr "Местное время"
 
-#: MdlNetConf.module:321
-msgid "If in doubt, choose this option"
-msgstr ""
-"Вот, этот вариант самый лучший и безопасный, если вы не уверены, что выбрать"
+#: FrmUserAdd.class:550
+msgid "Login Name"
+msgstr "Логин"
 
-#: MdlNetConf.module:362
-msgid "Static IP Address Settings"
-msgstr "Настройки статического IP-адреса"
+#: FrmUserAdd.class:108
+msgid "Login name field contains illegal characters. Please use only lowercase letters and numbers"
+msgstr "Логин может состоять только из английских строчных букв и цифр. Начинаться с цифры логин не может."
 
-#: MdlNetConf.module:384
-msgid "IP Address"
-msgstr "IP-адрес"
+#: MdlLilo.module:96
+msgid "MBR of"
+msgstr "MBR"
 
-#: MdlNetConf.module:407
-msgid "Subnet Mask"
-msgstr "Маска подсети"
+#: MdlConfLilo.module:124
+msgid "MBR of "
+msgstr "MBR"
 
-#: MdlNetConf.module:429
-msgid "Gateway Address"
-msgstr "IP-адрес шлюза"
-
-#: MdlPartFrmt.module:103
-msgid "There has been an error while trying to format "
-msgstr "Произошла ошибка при попытке форматирования"
-
-#: MdlPartSel.module:71 MdlWinDrives.module:75
-msgid "PARTITION"
-msgstr "Раздел"
+#: MdlCore.module:400
+msgid "MINIMUM REQUIREMENTS"
+msgstr "Минимальные требования"
 
 #: MdlPartSel.module:82
 msgid "MOUNT POINT"
 msgstr "Точка монтирования"
 
-#: MdlPartSel.module:92
-msgid "FILESYSTEM"
-msgstr "Файловая система"
+#: MdlWinDrives.module:85
+msgid "MOUNT TO"
+msgstr "Монтировать в"
 
-#: MdlPartSel.module:289
-msgid "Please select only one "
-msgstr "Жаль, но выбрать можно только один вариант"
+#: FrmNetConf.class:227
+msgid "Manual DNS Server Specification"
+msgstr "Ручная настройка DNS"
 
-#: MdlPartSel.module:289
-msgid "partition"
-msgstr "раздел"
+#: FrmSelISO.class:151
+msgid "Minimum Disk Space Requirements"
+msgstr "Минимальные требования к месту на дисках"
 
-#: MdlSetup.module:199
-msgid "Calculating package count ... Please wait"
-msgstr "Считаем пакеты... Подождите, пожалуйста"
+#: FrmPartScheme.class:123
+msgid "Modify my disk partitions to make room for new installation"
+msgstr "Изменить существующие разделы, чтобы освободить место для нашей инсталляции. Внимание! Изменять разделы, везде и всегда, чревато потерей данных. Помните!"
 
-#: MdlSetup.module:255
-msgid "Total bulks to be installed = "
-msgstr "Оптовых пакетов для установки = "
+#: FrmRootPass.class:19
+msgid "Most other every-day taks do not require administrative priviledges."
+msgstr "Права рута нужны для настройки системы и установки/удаления софта. То есть они не нужны (и даже могут быть вредны) для использования системы практически всё время."
 
-#: MdlSetup.module:258
-msgid "Total pkgs to be installed = "
-msgstr "Нормальных пакетов для установки ="
+#: FrmSummary.class:45
+msgid "Mount Point"
+msgstr "Точка монтирования"
 
-#: MdlSetup.module:301
-msgid "BROUGHT TO YOU BY"
-msgstr "С наилучшими пожеланиями"
+#: MdlLilo.module:481 MdlLiloOsList.module:313
+msgid "Name"
+msgstr "Имя"
 
-#: MdlSetup.module:317
-msgid "Activating swap space"
-msgstr "Включаем раздел подкачки"
+#: FrmNetConf.class:184 MdlCore.module:501
+msgid "Network Configuration"
+msgstr "Конфигурация сети"
 
-#: MdlSetup.module:319
-msgid "Preparing filesystems"
-msgstr "Готовим файловые системы"
+#: FrmImportAccts.class:144
+msgid "New Password"
+msgstr "Новый пароль"
 
-#: MdlSummarize.module:28
-msgid "PARTITIONING LAYOUT"
-msgstr "Карта разделов"
+#: FMain.class:821
+msgid "Next"
+msgstr "Далее"
+
+#: FMain.class:259 FrmSummary.class:61
+msgid "No"
+msgstr "Нет"
+
+#: FrmSelISO.class:30 MdlCore.module:237
+msgid "No Installable Media Found"
+msgstr "Не найдено откуда устанавливать"
+
+#: MdlWinDrives.module:141
+msgid "No Windows partitions detected"
+msgstr "Windows-разделов не найдено"
+
+#: MdlNetConf.module:93
+msgid "No ethernet neworking devices found"
+msgstr "Сетевых карт не найдено"
+
+#: FrmSelISO.class:254
+msgid "No installable images found."
+msgstr "Не найдено откуда устанавливать"
+
+#: FrmLicense.class:115
+msgid "No, I Do Not Agree"
+msgstr "Нет, я не соглашаюсь"
+
+#: FrmSummary.class:99 MdlNetConf.module:245
+msgid "None"
+msgstr "Нет"
+
+#: FrmSummary.class:52 MdlInstallSys.module:142 MdlPartSel.module:143
+msgid "Not Used"
+msgstr "Не используется"
+
+#: FrmUserAdd.class:409
+msgid "OK"
+msgstr "Ок"
+
+#: MdlSummarize.module:62
+msgid "OPTIONAL PACKAGES:"
+msgstr "Необязательные пакеты:"
 
 #: MdlSummarize.module:49
 msgid "OPTIONAL WINDOWS PARTITIONS TO BE MOUNTED AT BOOT TIME."
 msgstr "Выберите Windows-разделы, к которым вы хотите иметь доступ:"
 
-#: MdlSummarize.module:56
-msgid "INSTALL TYPE:"
-msgstr "Тип установки:"
+#: MdlLiloOsList.module:290
+msgid "Operating system installed in"
+msgstr "Операционная система поставлена на"
 
-#: MdlSummarize.module:58
-msgid "BULK PACKAGES:"
-msgstr "Оптовые пакеты"
+#: MdlPartSel.module:71 MdlWinDrives.module:75
+msgid "PARTITION"
+msgstr "Раздел"
 
-#: MdlSummarize.module:62
-msgid "OPTIONAL PACKAGES:"
-msgstr "Необязательные пакеты:"
+#: MdlSummarize.module:28
+msgid "PARTITIONING LAYOUT"
+msgstr "Карта разделов"
+
+#: FrmPkgSel.class:40
+msgid "Package"
+msgstr "Пакет"
+
+#: FrmSummary.class:174 FrmUsrPkgSel.class:16
+msgid "Package Name"
+msgstr "Имя пакеты"
+
+#: MdlInstallSys.module:371
+msgid "Packages have been installed in your system. Please click"
+msgstr "Пакеты поставлены. Пожалуйста, кликните"
+
+#: FrmSummary.class:39
+msgid "Partition"
+msgstr "Раздел"
+
+#: FrmSummary.class:296
+msgid "Partition Selection Scheme"
+msgstr "Схема выбора разделов"
+
+#: FrmImportAccts.class:64
+msgid "Password fields cannot be blank. Please enter a password for"
+msgstr "Пароль пустым быть не может. Нет, после установки его вполне можно поставить пустым, просто мы не даём. Если вам так уж этого хочется, поставьте пока единичку вместо пароля, но помните, мы против! Итак, пароль для"
+
+#: FrmUserAdd.class:186
+msgid "Passwords do not match"
+msgstr "Пароли не совпадают"
+
+#: FMain.class:244
+msgid "Passwords do not match. Please enter the same password twice"
+msgstr "Пароли не совпадают. Введите ещё раз"
+
+#: FrmRootPass.class:47
+msgid "Passwords do not match. Please enter the same password twice for accuracy."
+msgstr "Пароли не совпадают. Введите, пожалуйста, ещё раз"
+
+#: FMain.class:223
+msgid "Please select a default operating system to boot before proceeding"
+msgstr "Выберите операционную систему для загрузки по умолчанию (что будет грузиться, если включить компьютер и отойти чай там заварить, или спросонья)"
+
+#: MdlPartSel.module:289
+msgid "Please select only one "
+msgstr "Жаль, но выбрать можно только один вариант"
+
+#: FrmPartSel.class:181
+msgid "Please select the partitions you wish to use and how to use them"
+msgstr "Какие разделы будем использовать и как"
+
+#: FMain.class:277
+msgid "Please specify a hostname for this computer"
+msgstr "А какое имя будет у компьютера"
+
+#: FMain.class:281
+msgid "Please specify the domain this computer belongs to"
+msgstr "Выберите домен, к которому принадлежит компьютер (здесь под доменом понимается то, что идёт после имени машины в её полном имени - в vectorlinux.some.net доменом будет именно some.net). Вводить без точки в начале."
+
+#: FrmAlsaConf.class:36
+msgid "Please use the setup program below to setup the sound system."
+msgstr "Пожалуйста, используйте программу внизу для настройки звука."
+
+#: FMain.class:350
+msgid "Please wait while setup analyses your current partition setup."
+msgstr "Пожалкйста, подождите капельку, пока инсталлятор смотрит на текущее разбиение разделов."
+
+#: FMain.class:348
+msgid "Please wait while setup attampts to run the partitioning utility"
+msgstr "А сейчас установщик запускает утилиту для разбиения разделов, подождите чуть-чуть"
+
+#: MdlNetConf.module:132
+msgid "Plugged-in"
+msgstr "Подключенные"
+
+#: MdlCore.module:486
+msgid "Preparation"
+msgstr "Подготовка"
+
+#: FrmSummary.class:37
+msgid "Preparing Installation Summary ... Please wait"
+msgstr "Подводим итог установки..."
+
+#: MdlSetup.module:319
+msgid "Preparing filesystems"
+msgstr "Готовим файловые системы"
+
+#: FrmNetConf.class:243
+msgid "Primary DNS Server"
+msgstr "Первичный DNS-сервер"
+
+#: FrmXconf.class:27
+msgid "Probe hardware to setup your Graphical Environment using your preffered settings"
+msgstr "Потрогаем ваше железо, чтобы настроить графический режим"
+
+#: MdlNetConf.module:60
+msgid "Probing your networking hardware ... Please wait"
+msgstr "Смотрим, есть ли у вас сетевые карты..."
+
+#: FrmLilo.class:267 FrmLiloSetup.class:263
+msgid "Prompt Timeout"
+msgstr "Время выбора"
+
+#: FrmRootPass.class:139
+msgid "Re-Enter Password"
+msgstr "Введите пароль ещё раз"
+
+#: FrmUserAdd.class:564
+msgid "ReEnter Password"
+msgstr "Введите пароль ещё раз"
+
+#: FrmUsrPkgSel.class:40
+msgid "Reading available software selection ... Please wait"
+msgstr "Смотрим, что доступно из софта..."
+
+#: FrmUserAdd.class:580
+msgid "Real Name"
+msgstr "Ваше имя (ни для чего особо не надо, просто софт типа OpenOffice по умолчанию берёт ваше имя для авторства документов как раз вот отсюда)"
+
+#: MdlCore.module:498
+msgid "Regional Settings"
+msgstr "Настройки местности"
+
+#: FrmImportAccts.class:197
+msgid "Reset settings"
+msgstr "Сбросить настройки"
+
+#: FrmImportAccts.class:50
+msgid "Reset settings for"
+msgstr "Сбросить настройки для"
+
+#: FMain.class:196 FrmDone.class:28
+msgid "Restart"
+msgstr "Перезагрузка"
+
+#: MdlUsrAdd.module:65
+msgid "Restricted administrator (backup)"
+msgstr "Администратор для бэкапа"
+
+#: MdlNetConf.module:305
+msgid "STATUS:"
+msgstr "Состояние:"
+
+#: MdlCore.module:221
+msgid "Scanning system for installable media. Please wait ..."
+msgstr "Сканируем машину, ищем, откуда ставить Vector..."
+
+#: FrmXconf.class:328
+msgid "Screen Resolution"
+msgstr "Разрешение экрана"
+
+#: FrmSelISO.class:270
+msgid "Search Again"
+msgstr "Искать заново"
+
+#: FrmNetConf.class:256
+msgid "Secondary DNS Server"
+msgstr "Вторичный DNS-сервер"
+
+#: FrmLilo.class:278 FrmLiloSetup.class:274
+msgid "Seconds"
+msgstr "Секунд"
+
+#: FrmImportAccts.class:171 FrmUserAdd.class:509
+msgid "Select"
+msgstr "Выбрать"
+
+#: FMain.class:224
+msgid "Select an entry from this list"
+msgstr "Выберите из списка"
+
+#: FrmSelISO.class:87
+msgid "Select installation media from the list below"
+msgstr "Выберите установочный привод из списка"
+
+#: FrmImportAccts.class:161
+msgid "Select login Image"
+msgstr "Выберите картинку для логина"
+
+#: FrmImportAccts.class:31 FrmUserAdd.class:344
+msgid "Select picture for user Login"
+msgstr "Выберите картинку для пользователя"
+
+#: FrmWinDrives.class:72
+msgid "Select the windows partitions you would like to mount during boot"
+msgstr "Выберите Windows-разделы для монтирования при запуске"
+
+#: FrmPartScheme.class:61
+msgid "Select this option if you already have a linux installation that you wish to overwrite or if a linux partition scheme exists in your hard disk."
+msgstr "Выберите, если у вас уже есть Linux (который вы хотите перезаписать) или если вы уже разметили диск."
+
+#: FrmPartScheme.class:71
+msgid "Select this option is you wish to create, more or resize partitions in order to make room for your new VectorLinux installation."
+msgstr "Выберите, если хотите поработать с разделами."
+
+#: FrmSelISO.class:260
+msgid "Select which VectorLinux version you wish to install from the list below"
+msgstr "Выберите, какую версию VectorLinux вы хотите поставить"
+
+#: FrmUserAdd.class:408
+msgid "Select which groups you want this user to be a part of here"
+msgstr "Выберите, в какие группы вы хотите ввести пользователя"
+
+#: FrmResetSettings.class:92
+msgid "Select which settings to reset"
+msgstr "Выберите настройки для сброса"
+
+#: FrmPkgsel2.class:21 FrmUsrPkgSel.class:11
+msgid "Select your indivirual packages to install."
+msgstr "Выберите ваши пакеты для установки"
+
+#: FrmLangSel.class:123
+msgid "Select your language"
+msgstr "Выберите язык"
+
+#: FrmImportAccts.class:68
+msgid "Selected passwords dont match. Please enter the same password twice"
+msgstr "Пароли не совпадают. Введите ещё раз, пожалуйста"
+
+#: FrmRootPass.class:156
+msgid "Set Password"
+msgstr "Ввести пароль"
+
+#: MdlNetConf.module:206
+msgid "Setup Mode"
+msgstr "Режим настройки"
+
+#: MdlCore.module:405
+msgid "Setup is unable to find SETUP.CONF in your install media. This could be symptoms of a bad burn or a bad ISO"
+msgstr "Установщик не может найти SETUP.CONF. Может, плохо записан диск или установочный образ побился при скачивании... Проверьте, пожалуйста."
+
+#: MdlDiskPart.module:90
+msgid "Setup is unable to successfully run gparted on this system. This may be a sign of "
+msgstr "Не получилось запустить gparted. Возможно, этому причиной"
+
+#: MdlCore.module:239
+msgid "Setup was unable to find any installable media on your system. Please insert your VectorLinux "
+msgstr "Мы не смогли найти ни одного образа для установки. Может, диск поцарапан или плохо записался?"
+
+#: MdlDiskPart.module:95
+msgid "Several windows found. I will take the first one!"
+msgstr "Ух-ты, зачем вам столько Windows? Мы будем работать с первой найденной, уж извините."
+
+#: FrmPkgSel.class:42 FrmSummary.class:41 FrmUsrPkgSel.class:19
+msgid "Size"
+msgstr "Размер"
+
+#: FMain.class:231
+msgid "Skipping boot loaded setup"
+msgstr "Пропускаем установку загрузчика"
+
+#: FMain.class:458
+msgid "Skipping lilo setup"
+msgstr "Пропускаем установку LILO"
+
+#: FrmSummary.class:306 FrmUsrPkgSel.class:147 MdlCore.module:490
+msgid "Software Selection"
+msgstr "Выбор софта"
+
+#: FrmLilo.class:139 FrmLiloSetup.class:63 MdlLilo.module:50
+msgid "Standard"
+msgstr "Стандартный"
+
+#: MdlNetConf.module:362
+msgid "Static IP Address Settings"
+msgstr "Настройки статического IP-адреса"
+
+#: MdlNetConf.module:407
+msgid "Subnet Mask"
+msgstr "Маска подсети"
+
+#: FrmRootPass.class:115 MdlCore.module:499
+msgid "System Administrator"
+msgstr "Администратор системы"
+
+#: FrmRootPass.class:12
+msgid "System Administrator Password"
+msgstr "Пароль администратора"
+
+#: MdlCore.module:496
+msgid "System Configuration"
+msgstr "Конфигурация системы"
+
+#: FrmLilo.class:230 FrmLiloSetup.class:292 FrmNetConf.class:279
+msgid "Tab 0"
+msgstr "Tab 0"
+
+#: FrmLilo.class:248 FrmLiloSetup.class:224
+msgid "Target"
+msgstr "Цель"
+
+#: FrmLicense.class:104
+msgid "TextArea1"
+msgstr "TextArea1"
+
+#: FrmSummaryOld.class:87
+msgid "TextLabel1"
+msgstr "TextLabel1"
+
+#: FrmLilo.class:37
+msgid "The following Operating Systems have been detected on this computer. Choose your desired option"
+msgstr "Вот какие операционки мы нашли. Выбирайте"
+
+#: FrmRootPass.class:128
+msgid "The linux root account is pre-assigned to be used as the system administrator's account. This account is used to perform system-wide changes such as software upgrades, managing user accounts etc. \n\nMost other operations do not require administrative priviledges.\nThe root password must be entered twice for ensured accuracy. When choosing a root password, think of something easy for you to remember, but hard for others to guess."
+msgstr "Итак, администратором linux-системы является root. Он может делать всё, поэтому использовать его для повседневной жизни крайне глупо. Кривой IRC или ICQ клиент дадут взломщику (даже неквалифицированному, что особо обидно) абсолютно полный доступ к вашей машине. Даже опечатки в командах могут обойтись очень дорого.\nТак что используйте root только для конфигурирования системы и установки/удаления софта и пароль подберите посложнее."
+
+#: MdlInstallCustom.module:48
+msgid "There as been an error while installing required system software. "
+msgstr "Нормально установить системный софт не удалось."
+
+#: MdlInstallSys.module:627
+msgid "There has been an error extracting"
+msgstr "Ошибка при распаковке"
+
+#: MdlInstallCustom.module:65
+msgid "There has been an error while installing optional software to your system."
+msgstr "Произошла трабла при установке дополнительного софта, но система жить должна, вроде."
+
+#: MdlInstallCustom.module:56
+msgid "There has been an error while installing optional software to your system. "
+msgstr "Плохо поставился дополнительный софт."
+
+#: MdlPartFrmt.module:103
+msgid "There has been an error while trying to format "
+msgstr "Произошла ошибка при попытке форматирования"
+
+#: FMain.class:350
+msgid "This may take a while ..."
+msgstr "Времени займёт порядком...\nПопробуйте пока отжаться раз 10-15.\nБез шуток, спину надо беречь, да и здоровье вообще."
+
+#: FrmPartScheme.class:71
+msgid "This option is the safest choice if you have other existing installations that you wish to keep."
+msgstr "Если вы хотите сохранить другие установки, это самый безопасный вариант."
+
+#: FrmPartScheme.class:61
+msgid "This option will overwrite any existing data in the selected partitions"
+msgstr "При выборе этого варианта все данные в выбранных разделах (если они там есть) будут УДАЛЕНЫ БЕЗВОЗВРАТНО (практически)."
+
+#: FrmAlsaConf.class:36
+msgid "This portion of the setup process allows you to sutup your soundcard for your new operating system."
+msgstr "На этом этапе можно настроить звуковую карту."
 
 #: MdlUsrAdd.module:44
 msgid "This user can access CD/DVD devices"
@@ -1561,13 +1058,13 @@ msgstr "Юзер может использовать CD/DVD устройства
 msgid "This user can access floppy disks"
 msgstr "Юзер может использовать дисководы"
 
-#: MdlUsrAdd.module:50
-msgid "This user is allowed to print"
-msgstr "Юзер может печатать"
-
 #: MdlUsrAdd.module:53
 msgid "This user can access scanner devices"
 msgstr "Юзер может использовать сканнеры"
+
+#: MdlUsrAdd.module:68
+msgid "This user is a system administrator"
+msgstr "Этот юзер - администратор"
 
 #: MdlUsrAdd.module:56
 msgid "This user is allowed to change audio settings"
@@ -1581,42 +1078,343 @@ msgstr "Юзер может менять настройки графики"
 msgid "This user is allowed to play restricted games"
 msgstr "Юзер может играть в игры"
 
-#: MdlUsrAdd.module:65
-msgid "Restricted administrator (backup)"
-msgstr "Администратор для бэкапа"
+#: MdlUsrAdd.module:50
+msgid "This user is allowed to print"
+msgstr "Юзер может печатать"
 
-#: MdlUsrAdd.module:68
-msgid "This user is a system administrator"
-msgstr "Этот юзер - администратор"
+#: MdlNetConf.module:321
+msgid "This will work if you use a cable or DSL modem on a home network."
+msgstr "Это для кабельного или DSL-подключения к интернет."
 
-#: MdlUsrAdd.module:71
-msgid "Elite user"
-msgstr "Опытный пользователь"
+#: FrmZoneSet.class:21
+msgid "Timezone configuration"
+msgstr "Настройка часового пояса"
 
-#: MdlUsrAdd.module:74
-msgid "Allow user to mount / un-mount Pendrive (USB Sticks)"
-msgstr "Позволить пользователю подключать (и отключать) флэшки"
+#: FrmUsrPkgSel.class:11
+msgid "To install them all, just click"
+msgstr "Чтобы поставить всё, просто кликните"
 
-#: MdlUsrAdd.module:77
-msgid "Allow user to mount / un-mount Removable HD Storage Devices"
-msgstr "Позволить пользователю подключать (и отключать) сменные жёсткие диски"
+#: FrmPkgsel2.class:21
+msgid "To install them all, just click next"
+msgstr "Чтобы поставить всё, просто кликните \"Далее\""
+
+#: MdlSetup.module:255
+msgid "Total bulks to be installed = "
+msgstr "Оптовых пакетов для установки = "
+
+#: MdlSetup.module:258
+msgid "Total pkgs to be installed = "
+msgstr "Нормальных пакетов для установки ="
+
+#: FrmInstallSys.class:252
+msgid "Total progress"
+msgstr "Степень завершения"
+
+#: FrmPartSel.class:150
+msgid "Typically, you want to use the largest partition for this."
+msgstr "Обычно, лучше всего использовать под это самый большой раздел."
+
+#: FrmSummary.class:210
+msgid "USER-SELECTED PACKAGES"
+msgstr "Выбранные вами пакеты"
+
+#: FrmZoneSet.class:177
+msgid "UTC"
+msgstr "UTC"
+
+#: FrmSelISO.class:116
+msgid "Unable to identify distro."
+msgstr "Непонятный какой-то дистрибутив."
+
+#: MdlInstallCustom.module:92
+msgid "Unable to install kernels. "
+msgstr "Не могу установить ядро."
+
+#: FrmSelISO.class:81
+msgid "Unable to locate any installable media."
+msgstr "Не могу найти, куда устанавливать."
+
+#: MdlNetConf.module:134
+msgid "Unplugged"
+msgstr "Отключённый"
+
+#: FrmUserAdd.class:515
+msgid "Use Picture ID for Login greeting"
+msgstr "Использовать картинку для приветствия пользователя"
+
+#: FrmPartScheme.class:118
+msgid "Use existing disk partitions"
+msgstr "Использовать существующие разделы"
+
+#: FrmXconf.class:29
+msgid "Use the console framebuffer driver"
+msgstr "Использовать фреймбуфер"
+
+#: FrmPartScheme.class:61
+msgid "Use this option if you already prepared your partitions using the VectorLinux installer"
+msgstr "Если вы уже подготовили разделы - то вам сюда"
+
+#: FrmPartSel.class:150
+msgid "Used to store system data. This particular install requires a minimum of"
+msgstr "Используется для хранения системных данных. Этой установке, в частности, надо минимум"
+
+#: FrmPartSel.class:150
+msgid "Used to store user documents, pictures, videos. Give yourself as much room as you want"
+msgstr "Используется вами для ваших музыки, видео, документов. Настройки тоже хранятся здесь, так что можно работать из разных дистрибутивов с одними и теми же данными и не нужно каждый раз настраивать всё под себя."
+
+#: FrmUserAdd.class:586 MdlCore.module:500
+msgid "User Accounts"
+msgstr "Учётные записи"
+
+#: FrmImportAccts.class:191 FrmUserAdd.class:520
+msgid "User Rights Management"
+msgstr "Управление правами пользователя"
+
+#: FrmUserAdd.class:125
+msgid "User account for"
+msgstr "Учётная запись"
+
+#: FrmUserAdd.class:122
+msgid "Username contains illegal characters"
+msgstr "В логине замечены недопустимые символы"
+
+#: FrmXconf.class:25
+msgid "Uses the default (failsafe) configuration."
+msgstr "Использовать конфигурацию по умолчанию (зато гарантированно работает)"
+
+#: FrmPartSel.class:150
+msgid "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested ammount"
+msgstr "Раздел подкачки рекомендуется, если у вас мало оперативной памяти. Или если вы хотите использовать гибернацию (тогда размер надо чуть больше вашей оперативной памяти). Мы предлагаем "
+
+#: FrmHalSwitch.class:30
+msgid "VL-Hot"
+msgstr "VL-Hot"
+
+#: .project:1
+msgid "VectorLinux Installer"
+msgstr "Инсталлятор VectorLinux"
+
+#: MdlDiskPart.module:46
+msgid "VectorLinux is unable to determine the type of hard disks on your system."
+msgstr "VectorLinux не может распознать ваши жёсткие диски. Жаль."
+
+#: FMain.class:296
+msgid "VectorLinux will now try to detect and configure your graphics hardware."
+msgstr "VectorLinux сейчас попытается настроить видеокарту."
+
+#: FrmInstallSys.class:204
+msgid "Vectorlinux is currently being installed to your system... Please wait"
+msgstr "VectorLinux устанавливается... Подождите чуточку"
+
+#: MdlInstallSys.module:583
+msgid "Vectorlinux is now being installed. Please wait..."
+msgstr "VectorLinux устанавливается... Подождите капельку"
+
+#: MdlInstallSys.module:370
+msgid "Vectorlinux is now installed in your system. Please click"
+msgstr "VectorLinux установлен! Кликните"
+
+#: MdlInstallCustom.module:111
+msgid "Vectorlinux is now installed in your system. Please click next to configure it."
+msgstr "VectorLinux установлен! Кликните \"Далее\" для настройки."
+
+#: FrmHostPrep.class:130
+msgid "Vectorlinux is preparing your system for installation. Please wait."
+msgstr "VectorLinux подготавливается к установке..."
+
+#: FrmImportAccts.class:181
+msgid "Verify Password"
+msgstr "Подтвердите пароль"
+
+#: FrmXconf.class:340
+msgid "Vesa"
+msgstr "VESA"
+
+#: FrmXconf.class:311
+msgid "Video Driver"
+msgstr "Видеодрайвер"
+
+#: FrmLilo.class:254 FrmLiloSetup.class:203
+msgid "Video Resolution"
+msgstr "Разрешение"
+
+#: FrmDiskPart.class:58
+msgid "When finished making changes, exit the partitioning application to continue ..."
+msgstr "Когда закончите с разделами, продолжить установку можно будет, выйдя из программы разбиения диска."
 
 #: MdlWinDrives.module:59
 msgid "Windows Partitions Detected"
 msgstr "Замечены Windows-разделы"
 
-#: MdlWinDrives.module:85
-msgid "MOUNT TO"
-msgstr "Монтировать в"
+#: MdlLiloOsList.module:139
+msgid "Windows installation found in"
+msgstr "Установленная Windows найдена на"
 
-#: MdlWinDrives.module:141
-msgid "No Windows partitions detected"
-msgstr "Windows-разделов не найдено"
+#: MdlNetConf.module:120
+msgid "Wired"
+msgstr "Проводной"
+
+#: MdlNetConf.module:123
+msgid "Wireless"
+msgstr "Беспроводный"
+
+#: MdlCore.module:28
+msgid "Working ... Please Wait"
+msgstr "Работаем для вас... Немного терпения"
+
+#: FMain.class:259
+msgid "Would you like to continue anyway?"
+msgstr "Вот так. Продолжить хотите?"
+
+#: FrmHalSwitch.class:20
+msgid "Would you like to use Vl-Hot or HAL to manage your removable devices?"
+msgstr "Что хотите использовать для съёмных устройств, VL-Hot или HAL?"
+
+#: MdlInstallSys.module:118
+msgid "Writing new /etc/fstab to system"
+msgstr "Записываем новый /etc/fstab (это список разделов)"
+
+#: FMain.class:259 FrmSummary.class:59
+msgid "Yes"
+msgstr "Да"
+
+#: FrmLicense.class:110
+msgid "Yes, I Agree to the License Agreement"
+msgstr "Да, с лицензией я соглашаюсь"
+
+#: FMain.class:259
+msgid "You have not created any user accounts for this system yet. There is not enough information"
+msgstr "Вы ещё не создали ни одного пользователя. Недостаточно информации"
+
+#: FMain.class:364
+msgid "You must select a \"/\" partition. This is the target where the system will install to"
+msgstr "Выберите \"/\" (рутовый, корневой, системный) раздел."
+
+#: FrmDone.class:39
+msgid "Your computer needs to be restarted so that you can use your new operating system. Click"
+msgstr "Чтобы перегрузиться в ваш новый и блестящий VectorLinux, нажмите"
+
+#: MdlLilo.module:183
+msgid "Your option to boot"
+msgstr "Вы хотите загружать"
+
+#: FrmUserAdd.class:383
+msgid "Your password selections do not match. Please enter the same password twice"
+msgstr "Пароли не совпадают. Введите, пожалуйста, их ещё раз"
+
+#: FMain.class:296
+msgid "Your screen may flicker or go blank for a few seconds during this process."
+msgstr "Экран может моргать или потемнеть на несколько секунд в процессе. Это нормально."
+
+#: MdlDiskPart.module:90
+msgid "a bad install media. Setup cannot continue."
+msgstr "плохой установочный диск. Просто очень плохой установочный диск. Мы думали, как-то лучше это будет всё. Выходим."
+
+#: FrmUserAdd.class:125
+msgid "already exists"
+msgstr "уже есть"
+
+#: FrmPartSel.class:150
+msgid "but can also be calculated as 2 times your ammount of RAM"
+msgstr ", также можно рассчитать как 2 объёма вашей оперативной памяти, но без фанатизма. Более одного гигабайта раздел подкачки обычно не нужен, кроме как для гибернации."
+
+#: FrmPartSel.class:150
+msgid "but you should considear a higher value to make sure you have room to install additional software"
+msgstr ", а лучше поставить побольше, ведь добавочный софт будет тоже ставиться сюда. Но, с другой стороны, больше 7 гигабайт обычно не так уж надо."
+
+#: FrmPartSel.class:150
+msgid "by simply selecting a \"/\" value on this screen. The rest is optional. The following is a"
+msgstr "просто выбрав \"/\" на этом экране. Всё остальное необязательно, но удобно"
+
+#: MdlInstallCustom.module:423
+msgid "failed to install. Installation will stop now"
+msgstr "не смогло поставиться. Установка прекращена"
+
+#: FrmLilo.class:37
+msgid "for each one of them by clicking on each tab. To proceed with the default pre-set values, simply click"
+msgstr "каждую из них, кликая на отдельную ячейку. Чтобы продолжить с настройками по умолчанию, просто нажмите"
+
+#: FrmPartSel.class:150
+msgid "for this"
+msgstr "для этого"
+
+#: FrmPartSel.class:150
+msgid "for this is"
+msgstr "для этого"
+
+#: FrmDone.class:39
+msgid "has been installed to your system. Your new system has been configured with the default factory settings."
+msgstr "установлено на вашу систему. Ваш дистрибутив сконфигурирован с настройками по умолчанию."
+
+#: FrmPartSel.class:150
+msgid "in case you wish to."
+msgstr ", если вы хотите."
+
+#: MdlCore.module:239
+msgid "installation CD and click"
+msgstr "инсталляционный диск и нажмите"
+
+#: MdlLilo.module:538
+msgid "installed in"
+msgstr "поставлено в"
+
+#: MdlLilo.module:453
+msgid "installed on"
+msgstr "поставлено в"
+
+#: MdlLilo.module:183
+msgid "is too long. it has been adjusted to \"Vector-cli\". You can run vasmCC after the first boot to modify your boot options"
+msgstr "очень долго. Это было переправлено на \"Vector-cli\". Чтобы изменить настройки загрузки, запустите vasmCC после первого запуска."
+
+#: MdlZoneSet.module:28
+msgid "localtime"
+msgstr "местное время"
 
 #: MdlZoneSet.module:27
 msgid "localtime-copied-from"
 msgstr "местное время скопировано из"
 
-#: MdlZoneSet.module:28
-msgid "localtime"
-msgstr "местное время"
+#: MdlInstallCustom.module:112
+msgid "packages have been Installed. Please click next to move on to System Configuration."
+msgstr "пакеты были поставлены. Нажмите \"Далее\", чтобы перейти к настройкам."
+
+#: MdlPartSel.module:289
+msgid "partition"
+msgstr "раздел"
+
+#: FrmUserAdd.class:408
+msgid "permission to do certain things by adding them to certain groups."
+msgstr "разрешение делать определённые вещи, добавляя их в определённые группы."
+
+#: FrmPartSel.class:150
+msgid "suggested setup for a typical Linux installation"
+msgstr "предполагаемые нами параметры для обычной установки"
+
+#: FrmSelISO.class:79
+msgid "to begin installating"
+msgstr "чтобы начать инсталлировать"
+
+#: MdlInstallSys.module:370
+msgid "to configure it."
+msgstr "чтобы настроить."
+
+#: FMain.class:259
+msgid "to create an account here. It is recommended that you create at least one."
+msgstr "чтобы создать пользователя здесь. Мы усиленно рекомендуем создать хотя бы одного."
+
+#: FrmDone.class:39
+msgid "to restart your computer at a later time"
+msgstr "чтобы перезагрузить ваш компьютер позже"
+
+#: FrmDone.class:39
+msgid "to restart your computer now or click"
+msgstr "чтобы перезагрузить ваш компьютер сейчас, нажмите"
+
+#: MdlCore.module:239
+msgid "to try again"
+msgstr "чтобы попробовать снова"
+
+#: FrmPartSel.class:150
+msgid "user data separately for added data security. You may install the system to a single partition"
+msgstr "пользовательские данные отдельно для дополнительной безопасности данных. И вообще, дистрибутивы (и Linux) преходящи, а фотографии любимой кошки - нет. Можно поставить систему на один раздел (тогда отделить мух от котлет при необходимости будет сложнее)"
+
