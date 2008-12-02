@@ -29,6 +29,7 @@ PUBLIC SUB Form_Open()
   MdlZoneSet.TIME_ZONES()
   'ME.lbTmZone.Index = 9
   FMain.btnext.Enabled = TRUE
+  MdlCore.warn_status_off()
 END
 
 

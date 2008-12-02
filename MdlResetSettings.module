@@ -64,7 +64,11 @@ PUBLIC SUB LIST_RESETABLE_SETTINGS()
            'INC i
         INC FrmResetSettings.gvSettings.Rows.Count                
         FrmResetSettings.gvSettings[i, 1].Text = sDesc
-        FrmResetSettings.gvSettings[i, 2].Text = sFile   
+        FrmResetSettings.gvSettings[i, 2].Text = sFile 
+            IF InStr(FrmImportAccts.sSettingsList, sFile) THEN 
+                FrmResetSettings.gvSettings[i, 0].Picture = FrmPkgSel.pYes
+            END IF
+          
    INC i
    END IF
       END IF

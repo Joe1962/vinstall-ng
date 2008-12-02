@@ -127,7 +127,7 @@ PUBLIC SUB CREATE_IMPORTED_ACCOUNT()
   
   SHELL "chroot /mnt/target  /usr/sbin/groupdel " & Trim(ME.cbAccntList.Text) WAIT
   SHELL "chroot /mnt/target /usr/sbin/groupadd " & "-g" & Space(1) & FrmUserAdd.iUID & Space(1) & Trim(ME.cbAccntList.Text) WAIT 
-  SHELL "chroot /mnt/target /usr/sbin/useradd  -g " & ME.tbUsername.text & " -p " & ME.tbPasswd1.text & " -u " & FrmUserAdd.iUID & " -G " & "\'users," & sGroups & "\' -s /bin/bash " & 'ME.tbUsername.Text WAIT 
+  SHELL "chroot /mnt/target /usr/sbin/useradd  -g " & Trim(ME.cbAccntList.Text) & " -p " & ME.tbPasswd1.text & " -u " & FrmUserAdd.iUID & " -G " & "\'users," & sGroups & "\' -s /bin/bash " & 'ME.tbUsername.Text WAIT 
   Trim(ME.cbAccntList.Text) & " -d /home/" & Trim(ME.cbAccntList.Text) WAIT 
   SHELL "chroot /mnt/target /sbin/passwdx " & Trim(ME.cbAccntList.Text) & Space(1) & ME.tbPass1.Text WAIT 
   
@@ -206,7 +206,7 @@ PUBLIC SUB Form_Resize()
   .tbPass2.Move(.tlPasswd2.Left, .tbPass1.top, 175)
   .tlPicPath.Move(4, .tbPass1.top + .tbPass1.Height + 8, MdlObjSizer.get_object_width(.tlPicPath.Text))
   .btBrowsePic.Move(.ClientWidth - .btBrowsePic.Width - 8, .tlPicPath.top + .tlPicPath.Height + 8, MdlObjSizer.get_object_width(.btBrowsePic.Text) + 36)
-  .tbPicPath.Move(4, .btBrowsePic.top, (.ClientWidth - .btBrowsePic.Width) - (.tbPicPath.Left * 2) - 8)
+  .tbPicPath.Move(4, .btBrowsePic.top, (.ClientWidth - .btBrowsePic.Width) - (.tbPicPath.Left * 2) - 24)
   .pbLogin.Move(.tbPass2.Left + .tbPass2.Width + 8, .tlPasswd2.top + 4, 48, 48)
   .scrGrpHost.Move(4, .tbPicPath.top + .tbPicPath.Height + 4, .ClientWidth - (.scrGrpHost.Left * 2), .ClientHeight - (.scrGrpHost.Top + (.btBrowsePic.Height * 4)))
   .btResetSettings.Move(4, .scrGrpHost.top + .scrGrpHost.Height + 8, MdlObjSizer.get_object_width(.btResetSettings.Text) + 36)
