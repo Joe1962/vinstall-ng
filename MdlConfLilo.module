@@ -101,10 +101,7 @@ PUBLIC FUNCTION EXECUTE_LILO() AS Integer
       Message(("Boot loader has been setup successfully"))
       RETURN 0
     END IF
-  'SHELL "umount " & ClsGlobal.sTargetMnt &/ "dev" WAIT 
-  'SHELL "umount " & ClsGlobal.sTargetMnt &/ "proc" WAIT
-  'Message("Vectorlinux has been installed click OK to reboot")
-  'SHELL "reboot"
+
 END
 
 

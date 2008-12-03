@@ -112,7 +112,7 @@ PUBLIC FUNCTION CREATE_IMPORTED_ACCOUNT(sname AS String) AS Integer
   DIM iTlY AS Integer
   DIM hproc AS Process
   
-  Message(sname)
+  'Message(sname)
 
   ' Prepare group list
   FOR EACH cb IN MdlUsrAdd.objGrps
