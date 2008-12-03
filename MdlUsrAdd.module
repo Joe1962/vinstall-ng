@@ -19,6 +19,51 @@ PUBLIC iUsrAccts AS Integer
 
 PUBLIC objGrps AS Object[]
 
+
+PUBLIC SUB LIST_NEW_USER_ACCOUNT()
+  'needs to verify with /etc/passwd to check for user account
+  DIM sFile AS String[] = Split(DConv(File.Load(clsglobal.sTargetMnt &/ "etc" &/ "passwd")))
+  DIM arrline AS String[]
+  DIM i, ii, iUID AS Integer
+  DIM sLine, sSec, sUsrLogin, sUsrRlName, sUsrHome AS String
+  DIM vuid AS Variant
+  DIM tl AS TextLabel
+  DIM tly AS Integer
+  
+  FrmUserAdd.LstUsers.Clear
+  tly = 4
+  FOR i = 0 TO sFile.count - 1
+    sLine = sFile[i]
+      ' now split each line
+        arrline = Split(sLine, ":")
+          FOR ii = 0 TO arrline.count - 1
+            sSec = Trim(arrline[ii])
+              vuid = arrline[2]
+              iUID = CInt(vuid)
+              sUsrLogin = arrline[0]
+              sUsrRlName = arrline[4]
+              sUsrHome = arrline[5]
+          NEXT 
+        IF iUID >= 500 THEN 
+          tl = NEW TextLabel(FrmUserAdd.LstUsers) AS "UserList"
+              WITH tl
+                  .Height = 21
+                  .Text = sUsrLogin
+                  .Width = MdlObjSizer.get_object_width(.Text)
+                  .ToolTip = sUsrRlName & "\n" & "<b>" & "USER ID: " & "</b > " & iUid & 
+                          "<b>" & "HOME DIRECTORY: " & "</b>" & sUsrHome
+                  .Move(0, tly)
+              END WITH 
+              tly = tly + tl.Height + 2
+          END IF
+  NEXT 
+  
+END
+
+
+
+
+
 PUBLIC FUNCTION DISPLAY_USER_GROUP_OPTIONS(frmParent AS Frame)
 DIM sGrpList AS String = "cdrom,floppy,lp,scanner,audio,video,games,adm,sys,wheel,plugdev,disk"
 DIM sGrpArr AS String[]

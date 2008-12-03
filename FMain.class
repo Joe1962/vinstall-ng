@@ -423,6 +423,7 @@ PUBLIC SUB btnext_Click()
       frmNext = FrmLiloSetup
     
     CASE "FrmLiloSetup"
+      MdlCore.WARN_STATUS("")
       IF FrmLiloSetup.cbYNLilo.Value = FALSE THEN 
           IF FrmLiloSetup.cbBootDefault.Text = "" THEN 
               Message.Warning(("Please select a default operating system to boot before proceeding"))
@@ -431,9 +432,12 @@ PUBLIC SUB btnext_Click()
               RETURN 
           END IF
             'Run the setup
-            MdlLilo.TRIGGER_LILO_SETUP()
+            IF MdlLilo.TRIGGER_LILO_SETUP() > 0 THEN 
+              RETURN 
+            END IF
       ELSE 
-      FrmLiloSetup.tlBanner.Text = "<b>" & ("Skipping boot loaded setup") & "</b>"
+      FrmLiloSetup.tlBanner.Text = "<b>" & ("Skipping boot loader setup") & "</b>"
+      MdlCore.WARN_STATUS("Skipping LILO Setup")
       END IF
           'SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
       frmNext = FrmZoneSet
