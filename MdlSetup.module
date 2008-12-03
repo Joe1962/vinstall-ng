@@ -322,3 +322,14 @@ PUBLIC SUB BEGIN_INSTALLATION()
   
 END
 
+PUBLIC FUNCTION SCAN_HOME_DIRS(sHomePartition AS String) AS String
+  
+  DIM sDump AS String
+    SHELL "ls " & sHomePartition & " | grep -v ftp | grep -v lost+found | grep -v .*" TO sDump
+    
+    sDump = Trim(sDump)
+    RETURN sDump
+  
+END
+
+
