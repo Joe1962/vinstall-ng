@@ -86,23 +86,27 @@ msgstr ""
 msgid "You must select a \"/\" partition. This is the target where the system will install to"
 msgstr ""
 
-#: FMain.class:461
+#: FMain.class:439
+msgid "Skipping boot loader setup"
+msgstr ""
+
+#: FMain.class:465
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:799
+#: FMain.class:803
 msgid "Back"
 msgstr ""
 
-#: FMain.class:810
+#: FMain.class:814
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:821
+#: FMain.class:825
 msgid "Next"
 msgstr ""
 
-#: FMain.class:835
+#: FMain.class:839
 msgid "Button1"
 msgstr ""
 

@@ -84,9 +84,14 @@ END IF
       ME.cbAccntList.Remove(ME.cbAccntList.Find(Trim(ME.cbAccntList.Text)))
       ME.cbAccntList.Sorted = TRUE
       'RETURN 
-      ME.CREATE_IMPORTED_ACCOUNT
-  MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS(ME.frmUsrGrps)
-    Message.Info(("User account for") & Space(1) & Trim(ME.cbAccntList.Text) & Space(1) & ("successfully imported"))
+      IF ME.CREATE_IMPORTED_ACCOUNT(Trim(ME.cbAccntList.Text)) > 0 THEN 
+        Message.Error(("User Unable to restore user account."))
+        RETURN 
+      ELSE 
+      MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS(ME.frmUsrGrps)
+      MdlUsrAdd.LIST_NEW_USER_ACCOUNT()
+      Message.Info(("User account for") & Space(1) & Trim(ME.cbAccntList.Text) & Space(1) & ("successfully imported"))
+    END IF
     
     'ME.Close
     'ME.pbLogin.Picture.Image.Clear
@@ -95,7 +100,7 @@ END IF
 
 END
 
-PUBLIC SUB CREATE_IMPORTED_ACCOUNT()
+PUBLIC FUNCTION CREATE_IMPORTED_ACCOUNT(sname AS String) AS Integer
   DIM sGroups AS String
   DIM cb AS CheckBox
   DIM sSettings AS String[]
@@ -103,7 +108,9 @@ PUBLIC SUB CREATE_IMPORTED_ACCOUNT()
   DIM sPicdir AS String = ClsGlobal.sTargetMnt &/ "usr/share/apps/kdm/pics/users/"
   DIM tl AS TextLabel
   DIM iTlY AS Integer
+  DIM hproc AS Process
   
+
   ' Prepare group list
   FOR EACH cb IN MdlUsrAdd.objGrps
     IF cb.Value = TRUE THEN 
@@ -119,29 +126,32 @@ PUBLIC SUB CREATE_IMPORTED_ACCOUNT()
     IF Len(sSettingsList) > 0 THEN 
       sSettings = Split(sSettingsList, ",")
         FOR i = 0 TO sSettings.Count - 1
-          EXEC ["rm", "-rf", ClsGlobal.sTargetMnt &/ "home" &/ Trim(ME.cbAccntList.Text) &/ Trim(sSettings[i])] WAIT 
-          EXEC ["cp", "-r", ClsGlobal.sTargetMnt &/ "etc" &/ "skel" & Trim(sSettings[i]), ClsGlobal.sTargetMnt &/ "home" &/ Trim(ME.cbAccntList.Text) &/ Trim(sSettings[i])] WAIT 
-          EXEC ["chown", Trim(ME.cbAccntList.Text) & ":users", ClsGlobal.sTargetMnt &/ "home" &/ Trim(ME.cbAccntList.Text) &/ Trim(sSettings[i])] WAIT 
+          hproc = EXEC ["rm", "-rf", ClsGlobal.sTargetMnt &/ "home" &/ sname &/ Trim(sSettings[i])] WAIT 
+          hproc = EXEC ["cp", "-r", ClsGlobal.sTargetMnt &/ "etc" &/ "skel" &/ Trim(sSettings[i]), ClsGlobal.sTargetMnt &/ "home" &/ sname &/ Trim(sSettings[i])] WAIT 
+          hproc = EXEC ["chown", Trim(ME.cbAccntList.Text) & ":users", ClsGlobal.sTargetMnt &/ "home" &/ sname &/ Trim(sSettings[i])] WAIT 
           IF ERROR THEN Message(Error.Where & gb.NewLine & Error.Text)
         NEXT 
       
     
     END IF
   
-  SHELL "chroot /mnt/target  /usr/sbin/groupdel " & Trim(ME.cbAccntList.Text) WAIT
-  SHELL "chroot /mnt/target /usr/sbin/groupadd " & "-g" & Space(1) & FrmUserAdd.iUID & Space(1) & Trim(ME.cbAccntList.Text) WAIT 
-  SHELL "chroot /mnt/target /usr/sbin/useradd  -g " & Trim(ME.cbAccntList.Text) & " -p " & ME.tbPass1.Text & " -u " & FrmUserAdd.iUID & " -G " & "\'users," & sGroups & "\' -s /bin/bash " & 'ME.tbUsername.Text WAIT 
-  Trim(ME.cbAccntList.Text) & " -d /home/" & Trim(ME.cbAccntList.Text) WAIT 
-  SHELL "chroot /mnt/target /sbin/passwdx " & Trim(ME.cbAccntList.Text) & Space(1) & ME.tbPass1.Text WAIT 
+  hproc = SHELL "chroot /mnt/target  /usr/sbin/groupdel " & sname WAIT
+      IF hproc.Value > 0 THEN RETURN hproc.Value
+  hproc = SHELL "chroot /mnt/target /usr/sbin/groupadd " & "-g" & Space(1) & FrmUserAdd.iUID & Space(1) &/ sname WAIT 
+    IF hproc.Value > 0 THEN RETURN hproc.Value
+  hproc = SHELL "chroot /mnt/target /usr/sbin/useradd  -g " & sname & " -p " & ME.tbPass1.Text & " -u " & FrmUserAdd.iUID & " -G " & "\'users," & sGroups & "\' -s /bin/bash " & sname & " -d /home/" & sname WAIT 
+    IF hproc.Value > 0 THEN RETURN hproc.Value
+  hproc = SHELL "chroot /mnt/target /sbin/passwdx " & sname & Space(1) & ME.tbPass1.Text WAIT 
+    IF hproc.Value > 0 THEN RETURN hproc.Value
   IF ERROR THEN Message.Error(Error.Where & gb.NewLine & Error.Text)
   ' Add the face icon
   IF Len(ME.tbPicPath.Text) > 0 THEN 
-          SHELL "cd " & sPicdir & " && ln -s " & Replace(ME.tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & Trim(ME.cbAccntList.Text) & ".face.icon" WAIT  'link for KDM
+          SHELL "cd " & sPicdir & " && ln -s " & Replace(ME.tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & sname & ".face.icon" WAIT  'link for KDM
               ' Tweak for the GDM face icon to work
-          TRY COPY Trim(tbPicPath.Text) TO clsglobal.sTargetMnt &/ "home" &/ Trim(ME.cbAccntList.Text) &/ ".face"
-          SHELL "chmod 644 " & ClsGlobal.sTargetMnt &/ "home/" & Trim(ME.cbAccntList.Text) &/ ".face" WAIT 
-          SHELL "chroot " & ClsGlobal.sTargetMnt & " chown " & Trim(ME.cbAccntList.Text) & Space(1) &/ "home" &/ Trim(ME.cbAccntList.Text) &/ ".face" WAIT
-          SHELL "chroot " & ClsGlobal.sTargetMnt & " chgrp " & Trim(ME.cbAccntList.Text) & Space(1) &/ "home/" & Trim(ME.cbAccntList.Text) &/ ".face" WAIT
+          TRY COPY Trim(tbPicPath.Text) TO clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face"
+          SHELL "chmod 644 " & ClsGlobal.sTargetMnt &/ "home/" & sname &/ ".face" WAIT 
+          SHELL "chroot " & ClsGlobal.sTargetMnt & " chown " & sname & Space(1) &/ "home" &/ sname &/ ".face" WAIT
+          SHELL "chroot " & ClsGlobal.sTargetMnt & " chgrp " & sname & Space(1) &/ "home/" & sname &/ ".face" WAIT
           IF ERROR THEN Message.Error(Error.Where & gb.NewLine & Error.Text)
   END IF
     
