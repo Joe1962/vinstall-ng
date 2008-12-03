@@ -145,24 +145,45 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
   DIM sLabel, sKernel, sInitrd, sAppend, sTag AS String
   DIM sBootPath, sHeader, sFile, sVidModeSection AS String
    
+   'Message.Info(ClsPartSel.sRoot)
+   
       FOR EACH cb IN arrLinuxIncCheckboxes
+      
+
+          ' ' This is not working well
           IF Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) = ClsPartSel.sRoot THEN 
             sBootPath = "/boot"
+            sKernel = "vmlinuz"
+            'sInitrd = "initrd"
           ELSE 
             sBootPath = "/boot/tamu"
+            sKernel = "vmlinuz-" & Right(cb.Tag, Len(cb.Tag) - RInStr(cb.Tag, "/"))
           END IF
+          
+          
         IF cb.Value = TRUE THEN 
           FOR EACH tb IN arrLinuxNametxtboxes
-                IF tb.Tag = cb.Tag THEN 
-                  sLabel = tb.Text
-                  sKernel = "vmlinuz-" & Right(tb.Tag, Len(tb.Tag) - RInStr(tb.Tag, "/"))
-                END IF
+           
+                IF tb.Tag = cb.Tag THEN sLabel = tb.Text
+                  
+                
           NEXT 
+          ' Now do the initrds
           FOR EACH cbox IN arrCbInitrds
-              IF cb.Tag = cbox.Tag AND cbox.Text = ("None") THEN 
-                sInitrd = "noinitrd"
-              ELSE 
-               sInitrd = sBootPath &/ Trim(cbox.Text) & "-" & Right(cbox.Tag, Len(cbox.Tag) - RInStr(cbox.tag, "/"))
+              IF cb.Tag = cbox.Tag THEN 'AND cbox.Text = ("None") THEN 
+                IF cbox.Text = ("None") THEN 
+                  sInitrd = "noinitrd"
+              'ELSE 
+                'IF cb.Tag = ClsPartSel.sRoot THEN 
+                'IF Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) = ClsPartSel.sRoot THEN 
+                  'sInitrd = "initrd"
+                ELSE 
+                  IF Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) = ClsPartSel.sRoot THEN 
+                    sInitrd = sBootPath &/ Trim(cbox.Text)
+                  ELSE 
+                  sInitrd = sBootPath &/ Trim(cbox.Text) & "-" & Right(cbox.Tag, Len(cbox.Tag) - RInStr(cbox.tag, "/"))
+                  END IF 
+               END IF
               END IF
           NEXT 
           FOR EACH tb IN arrLinuxAppendtxtBoxes
@@ -241,7 +262,9 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
           IF Exist(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf") THEN 
             TRY MOVE ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf" TO ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf.dist"
           END IF
-            
+            File.Save(User.home &/ "lilo.test", sFile)
+            'Message(sFile)
+            'RETURN 
         File.Save(ClsGlobal.sTargetMnt &/ "etc" &/ "lilo.conf", sFile)
         
       ' write the file to the target
@@ -278,9 +301,9 @@ PUBLIC SUB COPY_KERNELS_AND_INITRDS()
         sShortpart = Right(sPart, Len(sPart) - RInStr(sPart, "/"))
        
         IF sPart = ClsPartSel.sRoot THEN 
-            sKernelPath = "boot"
+            sKernelPath = "/boot"
           ELSE 
-            sKernelPath = "boot/tamu"
+            sKernelPath = "/boot/tamu"
         END IF
         
         ' get the initrd name  
@@ -302,10 +325,14 @@ PUBLIC SUB COPY_KERNELS_AND_INITRDS()
                       sKernelLoc = "/tmp/lilo_tmp"
                   END IF
                   ' Do not copy current kernel..
-                    IF sShortpart <> Right(ClsPartSel.sRoot, Len(ClsPartSel.sRoot) - InStr(ClsPartSel.sRoot, "/")) THEN 
+                  IF "/dev" &/ sShortpart <> ClsPartSel.sRoot THEN 
+                    'IF sShortpart <> Right(ClsPartSel.sRoot, Len(ClsPartSel.sRoot) - InStr(ClsPartSel.sRoot, "/")) THEN 
                     '  EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ "boot/tamu"] WAIT 
+                    IF sInitrd <> ("None")
                       EXEC ["cp", sKernelLoc &/ sInitrd, ClsGlobal.sTargetMnt &/ sKernelPath &/ sInitrd & "-" & sShortpart] WAIT 
+                    END IF
                       EXEC ["cp", sKernelLoc &/ "vmlinuz", ClsGlobal.sTargetMnt &/ sKernelPath &/ "vmlinuz-" & sShortpart] WAIT 
+                      'END IF
                     END IF
               
               EXEC ["sync"] WAIT 

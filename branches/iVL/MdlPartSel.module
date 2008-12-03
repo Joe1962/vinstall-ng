@@ -417,7 +417,9 @@ PUBLIC SUB SET_LINUX_PARTITION_TYPES()
   
   DIM cb AS ComboBox
   DIM cc AS ComboBox
+  MdlCore.WARN_STATUS("")
     FOR EACH cb IN oMountPoints
+      IF cb.Text = "/" THEN ClsPartSel.sRoot = cb.Tag
         FOR EACH cc IN oFsTypes
           IF cb.tag = cc.tag THEN 
             ME.SET_PARTITION_FORMAT(cb.text, cc.Text)

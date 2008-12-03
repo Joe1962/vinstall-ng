@@ -71,8 +71,8 @@
   }
   { btcancel Button
     MoveScaled(26,49,14,3)
-    Text = ("Cancel")
-    Picture = Picture["icon:/16/cancel"]
+    Text = ("Done")
+    Picture = Picture["icon:/16/first"]
     Border = False
   }
   { tlBanner TextLabel
