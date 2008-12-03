@@ -147,6 +147,7 @@ PUBLIC FUNCTION CREATE_IMPORTED_ACCOUNT(sname AS String) AS Integer
   IF ERROR THEN Message.Error(Error.Where & gb.NewLine & Error.Text)
   ' Add the face icon
   IF Len(ME.tbPicPath.Text) > 0 THEN 
+          IF Exist(clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face.icon") THEN KILL clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face.icon"
           SHELL "cd " & sPicdir & " && ln -s " & Replace(ME.tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & sname & ".face.icon" WAIT  'link for KDM
               ' Tweak for the GDM face icon to work
           TRY COPY Trim(tbPicPath.Text) TO clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face"
