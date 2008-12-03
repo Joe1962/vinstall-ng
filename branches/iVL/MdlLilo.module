@@ -37,7 +37,7 @@ PUBLIC FUNCTION TRIGGER_LILO_SETUP() AS Integer
   'MdlConfLilo.PERFORM_BINDING() ' Performs binding mounts for LILO setup  
   IRET = MdlConfLilo.EXECUTE_LILO() ' Execute lilo in chroot mode
     RETURN IRET
-  MdlCore.warn_status_off()
+  'MdlCore.warn_status_off()
   
 END
 
@@ -162,7 +162,11 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
                 END IF
           NEXT 
           FOR EACH cbox IN arrCbInitrds
-              IF cb.Tag = cbox.Tag THEN sInitrd = Trim(cbox.Text) & "-" & Right(cbox.Tag, Len(cbox.Tag) - RInStr(cbox.tag, "/"))
+              IF cb.Tag = cbox.Tag AND cbox.Text = ("None") THEN 
+                sInitrd = "noinitrd"
+              ELSE 
+               sInitrd = Trim(cbox.Text) & "-" & Right(cbox.Tag, Len(cbox.Tag) - RInStr(cbox.tag, "/"))
+              END IF
           NEXT 
           FOR EACH tb IN arrLinuxAppendtxtBoxes
             IF cb.Tag = tb.Tag THEN sAppend = Trim(tb.Text)
@@ -300,11 +304,12 @@ PUBLIC SUB COPY_KERNELS_AND_INITRDS()
                   ELSE 
                       sKernelLoc = "/tmp/lilo_tmp"
                   END IF
-                    
+                  ' Do not copy current kernel..
+                    IF sShortpart <> Right(ClsPartSel.sRoot, Len(ClsPartSel.sRoot) - InStr(ClsPartSel.sRoot, "/")) THEN 
                     '  EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ "boot/tamu"] WAIT 
                       EXEC ["cp", sKernelLoc &/ sInitrd, ClsGlobal.sTargetMnt &/ sKernelPath &/ sInitrd & "-" & sShortpart] WAIT 
                       EXEC ["cp", sKernelLoc &/ "vmlinuz", ClsGlobal.sTargetMnt &/ sKernelPath &/ "vmlinuz-" & sShortpart] WAIT 
-                      
+                    END IF
               
               EXEC ["sync"] WAIT 
               EXEC ["umount", "/tmp/lilo_tmp"] WAIT   
@@ -606,7 +611,9 @@ END
                                     .Width = 200
                                     .Height = 21
                                     .Tag = i & sHostPart
+                                     .Add(("None"))
                                             ' BROWSE FOR INITRD IMAGES
+                                           
                                                 FOR EACH sDump IN Dir(sInitrdLoc, "initrd*").Sort(gb.Ascent)
                                                     IF cbox.Find(Trim(sDump)) = -1 THEN cbox.Add(Trim(sDump))                                            
                                                 NEXT 
