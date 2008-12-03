@@ -161,7 +161,7 @@ PUBLIC FUNCTION CREATE_IMPORTED_ACCOUNT(sname AS String) AS Integer
     ' Increase the value of the iUID
     INC FrmUserAdd.iUID
     ME.LIST_IMPORTED_USER_ACCOUNT()
-  ME.cbAccntList.Remove(ME.cbAccntList.Find(SaCC))
+  ME.cbAccntList.Remove(ME.cbAccntList.Find(sname))
         
 END
 
