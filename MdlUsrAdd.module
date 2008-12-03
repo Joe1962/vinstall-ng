@@ -30,7 +30,7 @@ PUBLIC SUB LIST_NEW_USER_ACCOUNT()
   DIM tl AS TextLabel
   DIM tly AS Integer
   
-  FrmUserAdd.LstUsers.Clear
+'  FrmUserAdd.LstUsers.Clear
   tly = 4
   FOR i = 0 TO sFile.count - 1
     sLine = sFile[i]
