@@ -144,10 +144,7 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
   DIM cbox AS ComboBox
   DIM sLabel, sKernel, sInitrd, sAppend, sTag AS String
   DIM sBootPath, sHeader, sFile, sVidModeSection AS String
-  
-  
-  
-  
+   
       FOR EACH cb IN arrLinuxIncCheckboxes
           IF Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) = ClsPartSel.sRoot THEN 
             sBootPath = "/boot"
@@ -165,7 +162,7 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
               IF cb.Tag = cbox.Tag AND cbox.Text = ("None") THEN 
                 sInitrd = "noinitrd"
               ELSE 
-               sInitrd = Trim(cbox.Text) & "-" & Right(cbox.Tag, Len(cbox.Tag) - RInStr(cbox.tag, "/"))
+               sInitrd = sBootPath &/ Trim(cbox.Text) & "-" & Right(cbox.Tag, Len(cbox.Tag) - RInStr(cbox.tag, "/"))
               END IF
           NEXT 
           FOR EACH tb IN arrLinuxAppendtxtBoxes
@@ -177,7 +174,7 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
           "root = " & Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) & "\n" &
           "label = " & sLabel & "\n" &
           "append = \"" & sAppend & "\"" & "\n" &
-          "initrd = " & sBootPath &/ sInitrd & "\n" &
+          "initrd = " & sInitrd & "\n" & ' sBootPath &/ sInitrd & "\n" &
           "read-only" & "\n"
               FOR EACH chbox IN ME.arrLinuxTextBoots
                 IF chbox.Value = TRUE THEN 
@@ -192,7 +189,7 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
           "root = " & Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) & "\n" &
           "label = " & sLabel & "-tui" & "\n" &
           "append = \"2 splash=verbose\"" & "\n" &
-          "initrd = " & sBootPath &/ sInitrd & "\n" &
+          "initrd = " & sInitrd & "\n" & '& sBootPath &/ sInitrd & "\n" &
           "read-only" & "\n" 
                       ' sClisection = sSection
                       ' sClisection = Replace(sClisection, "append = " & sAppend, "append = \"2 splash=verbose\"")
@@ -611,12 +608,13 @@ END
                                     .Width = 200
                                     .Height = 21
                                     .Tag = i & sHostPart
-                                     .Add(("None"))
+                                     
                                             ' BROWSE FOR INITRD IMAGES
                                            
                                                 FOR EACH sDump IN Dir(sInitrdLoc, "initrd*").Sort(gb.Ascent)
                                                     IF cbox.Find(Trim(sDump)) = -1 THEN cbox.Add(Trim(sDump))                                            
                                                 NEXT 
+                                                .Add(("None"))
                                          .Sorted = gb.Ascent
                                          '.Sorted = TRUE     
                                   END WITH 
