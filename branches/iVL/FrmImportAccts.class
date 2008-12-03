@@ -138,8 +138,8 @@ PUBLIC FUNCTION CREATE_IMPORTED_ACCOUNT(sname AS String) AS Integer
     END IF
   
   hproc = SHELL "chroot /mnt/target  /usr/sbin/groupdel " & sname WAIT
-      IF hproc.Value > 0 THEN RETURN hproc.Value
-  hproc = SHELL "chroot /mnt/target /usr/sbin/groupadd " & "-g" & Space(1) & FrmUserAdd.iUID & Space(1) &/ sname WAIT 
+      'IF hproc.Value > 0 THEN RETURN hproc.Value
+  hproc = SHELL "chroot /mnt/target /usr/sbin/groupadd " & "-g" & Space(1) & FrmUserAdd.iUID & Space(1) & sname WAIT 
     IF hproc.Value > 0 THEN RETURN hproc.Value
   hproc = SHELL "chroot /mnt/target /usr/sbin/useradd  -g " & sname & " -p " & ME.tbPass1.Text & " -u " & FrmUserAdd.iUID & " -G " & "\'users," & sGroups & "\' -s /bin/bash " & sname & " -d /home/" & sname WAIT 
     IF hproc.Value > 0 THEN RETURN hproc.Value
