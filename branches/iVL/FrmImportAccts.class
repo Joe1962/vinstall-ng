@@ -65,6 +65,7 @@ END
 
 PUBLIC SUB btImportAccnt_Click()
 
+DIM SaCC AS String = Trim(ME.cbAccntList.Text)
 IF Len(Trim(ME.cbAccntList.Text)) = 0 THEN 
   Message(("Please select an account name from the dropdown list."))
   RETURN 
@@ -81,10 +82,10 @@ END IF
     'IF ME.pbLogin THEN ME.pbLogin.Delete
       'pbLogin = NEW PictureBox(ME)
       'me.pbLogin.Move(
-      ME.cbAccntList.Remove(ME.cbAccntList.Find(Trim(ME.cbAccntList.Text)))
+      ME.cbAccntList.Remove(ME.cbAccntList.Find(SaCC)))
       ME.cbAccntList.Sorted = TRUE
       'RETURN 
-      IF ME.CREATE_IMPORTED_ACCOUNT(Trim(ME.cbAccntList.Text)) > 0 THEN 
+      IF ME.CREATE_IMPORTED_ACCOUNT(SaCC) > 0 THEN 
         Message.Error(("User Unable to restore user account."))
         RETURN 
       ELSE 
