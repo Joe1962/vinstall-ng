@@ -49,6 +49,7 @@ PUBLIC SUB Form_Open()
     
     WITH FMain 
     .tvPlan["Conf3"].Picture = MdlCore.sDonePic
+    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
     .tvPlan["Conf4"].Picture = MdlCore.sNowPic
     .tvPlan["Conf4"].Selected = TRUE
   END WITH 

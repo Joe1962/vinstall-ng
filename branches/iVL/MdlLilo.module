@@ -37,7 +37,7 @@ PUBLIC FUNCTION TRIGGER_LILO_SETUP() AS Integer
   'MdlConfLilo.PERFORM_BINDING() ' Performs binding mounts for LILO setup  
   IRET = MdlConfLilo.EXECUTE_LILO() ' Execute lilo in chroot mode
     RETURN IRET
-  'MdlCore.warn_status_off()
+  MdlCore.warn_status_off()
   
 END
 
@@ -146,7 +146,7 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
   DIM sBootPath, sHeader, sFile, sVidModeSection AS String
    
    'Message.Info(ClsPartSel.sRoot)
-   
+   MdlCore.WARN_STATUS("")
       FOR EACH cb IN arrLinuxIncCheckboxes
       
 
@@ -285,7 +285,7 @@ PUBLIC SUB COPY_KERNELS_AND_INITRDS()
     DIM sKernelPath, sPart, sShortpart AS String
     DIM sKernel, sInitrd, sKernelLoc AS String
     
-    
+    MdlCore.WARN_STATUS("")
     ' PREPARE HOST PARTITION
       'EXEC ["mount", "/dev/sdb8", "/mnt/target"] WAIT 
       EXEC ["mount", ClsPartSel.sRoot, "/mnt/target"] WAIT 
@@ -347,6 +347,7 @@ PUBLIC SUB COPY_KERNELS_AND_INITRDS()
 END IF
 NEXT 
 'EXEC ["umount", "/mnt/target"] WAIT 
+MdlCore.warn_status_off()
 END
 
 
