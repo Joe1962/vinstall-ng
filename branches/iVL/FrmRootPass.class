@@ -89,3 +89,9 @@ FMain.FrmCurr = ME
     END WITH 
 
 END
+
+PUBLIC SUB tbPasswd2_KeyPress()
+
+  FMain.btnext.Enabled = TRUE
+
+END
