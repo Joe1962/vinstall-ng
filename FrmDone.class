@@ -46,11 +46,13 @@ DIM sText AS String
       'IF MdlConfLilo.hBgConfigProc.State = Process.Running THEN 
       IF Exist(ClsGlobal.sTargetMnt &/ "tmp" &/ "status") = FALSE THEN 
         'Message.Info("Found /tmp/status")
+        ME.tlBanner.Text = "<b>" & ("Configuration in progress") & "</b>"
             sText = "<br><br><br>" & ClsGlobal.DISTRO & Space(1) & ("is performing final system configuration. Please wait a moment.")
             FMain.btnext.Enabled = FALSE
             FMain.btQuit.Enabled = FALSE
     ELSE 
-    Message.Info("Found /tmp/status")
+    'Message.Info("Found /tmp/status")
+    ME.tlBanner.Text = "<b>" & ("Installation is complete") & "</b>"
       sText = ClsGlobal.DISTRO & Space(1) & ("has been installed to your system. Your new system has been configured with the default factory settings.") & "<br><br>" &
      ("After reboot you can use vasm or vasmCC to fine tune your installation.") & "<br><br>" &
      ("Your computer needs to be restarted so that you can use your new operating system. Click") & Space(1) & FMain.btnext.text & Space(1)&
