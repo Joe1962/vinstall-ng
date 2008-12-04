@@ -66,10 +66,11 @@ PUBLIC SUB EmbGPARTED_Close()
   
   MdlCore.WARN_STATUS("")
     FrmDiskPart.tlBanner.Text = "<h3><br>Analyzing system partitioning scheme... Please wait<br>This will take a few seconds...</h3>"
+    MdlCore.WARN_STATUS("")
     FrmDiskPart.tlBanner.Refresh
     FrmDiskPart.tlBanner.Adjust
     'Message("Exiting GParted")
-    MdlCore.warn_status_off()
+    'MdlCore.warn_status_off()
     WAIT 1
   
   bReboot = MdlSetup.CHECK_IF_REBOOT_NEEDED()
