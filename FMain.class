@@ -486,6 +486,10 @@ PUBLIC SUB btnext_Click()
       FrmRootPass.Button1_Click()
       
             ' Scan home partition for user home dirs
+            IF NOT ClsPartSel.sHome OR ClsPartSel.sHome = ClsPartSel.sRoot OR ClsPartSel.sHome = "" THEN 
+              frmNext = FrmUserAdd
+            ELSE 
+            
             IF Len(MdlSetup.SCAN_HOME_DIRS(ClsGlobal.sTargetMnt &/ "home")) > 0 THEN 
                 SELECT CASE Message.Question(("Setup has detected existing directories in the partition you selected for /home.") & "<br>" &
                 ("Would you like to import these user accounts into your new Operating System"), ("Yes"), ("No"))
@@ -495,7 +499,7 @@ PUBLIC SUB btnext_Click()
                     frmNext = FrmUserAdd
                 END SELECT 
             END IF
-       
+       END IF
        
     CASE "FrmUserAdd"
       

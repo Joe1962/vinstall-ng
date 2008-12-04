@@ -94,27 +94,27 @@ msgstr ""
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:491
+#: FMain.class:495
 msgid "Setup has detected existing directories in the partition you selected for /home."
 msgstr ""
 
-#: FMain.class:491
+#: FMain.class:495
 msgid "Would you like to import these user accounts into your new Operating System"
 msgstr ""
 
-#: FMain.class:816
+#: FMain.class:820
 msgid "Back"
 msgstr ""
 
-#: FMain.class:827
+#: FMain.class:831
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:838
+#: FMain.class:842
 msgid "Next"
 msgstr ""
 
-#: FMain.class:852
+#: FMain.class:856
 msgid "Button1"
 msgstr ""
 
