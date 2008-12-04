@@ -46,6 +46,8 @@ END
 
 PUBLIC SUB Form_Open()
   
+  DIM cb AS CheckBox
+  
   Fmain.frmcurr = ME
   MdlUsrAdd.iUsrAccts = 0
   WITH FMain
@@ -76,7 +78,12 @@ PUBLIC SUB Form_Open()
       .Add(ME.tbUsername)
     END WITH 
         
-    
+    IF MdlUsrAdd.objGrps THEN 
+      FOR EACH cb IN MdlUsrAdd.objGrps
+        cb.Delete
+      NEXT 
+    END IF
+          
     MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS(ME.fGroupSel)
     FMain.btnext.Enabled = TRUE
     ME.tbUsername.SetFocus

@@ -18,7 +18,7 @@ msgstr ""
 msgid "When finished making changes, exit the partitioning application to continue ..."
 msgstr ""
 
-#: FrmDiskPart.class:117
+#: FrmDiskPart.class:119
 msgid "Disk Partitioning:"
 msgstr ""
 

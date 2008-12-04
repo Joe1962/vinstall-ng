@@ -37,7 +37,7 @@ PUBLIC SUB TIME_ZONES()
   stz = Split(sTimeZones, ",")
 
   FOR EACH stz
-    FrmZoneSet.lbTmZone.add(stz[i])
+    FrmZoneSet.lbTmZone.add(Trim(stz[i]))
     INC i
   NEXT 
 

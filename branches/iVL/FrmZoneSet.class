@@ -40,14 +40,7 @@ PUBLIC SUB lbTmZone_Click()
 
 END
 
-' ' ' PUBLIC SUB Button1_Click()
-' ' ' ' THis is not necessary, since the next button on the main window handles this
-' ' ' 
-' ' '   MdlZoneSet.SET_ZONE(ME.lbTmZone.Text)
-' ' '   MdlZoneSet.WRITE_CONF()
-' ' '   'Message("TimeZone " & ME.lbTmZone.Text & " Was set.")
-' ' '   
-' ' ' END
+
 
 PUBLIC SUB Form_Resize()
 
@@ -96,38 +89,7 @@ PUBLIC SUB lbTmZone_KeyPress()
           RETURN 
           END IF
         LOOP 
-' ' ' ' '       
-' ' ' ' '     
-' ' ' ' '   
-' ' ' ' ' 'Message(lbTmZone[2].text)
-' ' ' ' '   
-' ' ' ' '   lbTmZone.Index = 0
-' ' ' ' '     REPEAT 
-' ' ' ' '       'INC lbTmZone.Index
-' ' ' ' '       
-' ' ' ' '         IF lbTmZone[lbTmZone.Index].text LIKE Key.Text & "*" THEN 
-' ' ' ' '         
-' ' ' ' '           'Message.Info(lbTmZone.text)
-' ' ' ' '           BREAK 
-' ' ' ' '         END IF
-' ' ' ' '         INC lbTmZone.Index
-' ' ' ' '         IF lbTmZone.Index = lbTmZone.Count THEN RETURN ' nothing found
-' ' ' ' '       UNTIL lbTmZone.Index = lbTmZone.Count
-' ' ' ' '     
 
-  ' DIM iScan AS Integer
-  '   IF Key.text > "z" OR Key.text < " " THEN RETURN '  not scannable
-  '   
-  '   iScan = lbTmZone.Index
-  '     DO
-  '       INC iScan
-  '         IF iScan >= lbTmZone.Count THEN iScan = 0 ' back to top
-  '         IF iScan = lbTmZone.Index THEN RETURN ' went back to were we started
-  '         IF lbTmZone[iScan].text LIKE Key.text & "*[*]*" THEN  ' found a match
-  '         lbTmZone.Index = iScan
-  '         END IF
-  '         RETURN 
-  '       LOOP 
       
 
 END
