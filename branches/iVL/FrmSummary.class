@@ -55,11 +55,7 @@ PUBLIC SUB prepare_partition_summary()
                   sMountPnt = cb.Text
                     FOR EACH cb1 IN MdlPartSel.oFsTypes
                       IF cb1.tag = cb.tag THEN sFsType = cb1.Text
-                      ' IF cb1.Text = ("Do not format") THEN 
-                      '   bForm = ("No")
-                      ' ELSE 
-                      '   bForm = ("Yes")
-                      ' END IF
+             
                     NEXT 
                       FOR EACH tl IN MdlPartSel.oPartLbls
                         IF tl.tag = cb.tag THEN 
@@ -111,6 +107,7 @@ PUBLIC SUB prepare_partition_summary()
             .GridView1[irow, 2].BackColor = Color.LightBackground
             .GridView1[irow, 3].Text = sMountPnt
             .GridView1[irow, 3].BackColor = Color.LightBackground
+            .GridView1[irow, 4].BackColor = Color.LightBackground
         END WITH 
         INC irow
         'INC GridView1.Rows.Count
@@ -150,6 +147,7 @@ PUBLIC SUB prepare_partition_summary()
             .GridView1[irow, 2].text = sFsType
             .GridView1[irow, 3].text = sMountPnt
             .GridView1[irow, 3].BackColor = Color.LightGray
+            .GridView1[irow, 4].Text = ("No")
           END WITH 
         INC irow
       END IF

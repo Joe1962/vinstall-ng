@@ -30,15 +30,15 @@ msgstr ""
 msgid "Do not format"
 msgstr ""
 
-#: MdlPartSel.module:143
+#: MdlPartSel.module:148
 msgid "Not Used"
 msgstr ""
 
-#: MdlPartSel.module:289
+#: MdlPartSel.module:294
 msgid "Please select only one "
 msgstr ""
 
-#: MdlPartSel.module:289
+#: MdlPartSel.module:294
 msgid "partition"
 msgstr ""
 

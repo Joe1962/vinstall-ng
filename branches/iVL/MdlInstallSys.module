@@ -289,9 +289,14 @@ END
 PUBLIC SUB ACTIVATE_SWAP_SPACE()
   
   DIM cb AS ComboBox
+  DIM sDump AS String
   
   FOR EACH cb IN MdlPartSel.oSwaps
-    SHELL "echo \'" & cb.Tag & " none swap sw 0 0 \' >> /etc/fstab" WAIT 
+      EXEC ["grep", cb.Tag, "/etc/fstab"] TO sDump
+        sDump = Trim(sDump)
+          IF Len(sDump) = 0 THEN 
+              SHELL "echo \'" & cb.Tag & " none swap sw 0 0 \' >> /etc/fstab" WAIT 
+          END IF
   NEXT 
   SHELL "swapon -a" WAIT 
   

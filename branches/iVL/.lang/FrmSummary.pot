@@ -54,47 +54,47 @@ msgstr ""
 msgid "Not Used"
 msgstr ""
 
-#: FrmSummary.class:75
+#: FrmSummary.class:71
 msgid "Do not format"
 msgstr ""
 
-#: FrmSummary.class:76
+#: FrmSummary.class:72
 msgid "No"
 msgstr ""
 
-#: FrmSummary.class:78
+#: FrmSummary.class:74
 msgid "Yes"
 msgstr ""
 
-#: FrmSummary.class:104
+#: FrmSummary.class:100
 msgid "None"
 msgstr ""
 
-#: FrmSummary.class:126
+#: FrmSummary.class:123
 msgid "Do not mount"
 msgstr ""
 
-#: FrmSummary.class:179
+#: FrmSummary.class:177
 msgid "Package Name"
 msgstr ""
 
-#: FrmSummary.class:188
+#: FrmSummary.class:186
 msgid "BULK PACKAGES"
 msgstr ""
 
-#: FrmSummary.class:215
+#: FrmSummary.class:213
 msgid "USER-SELECTED PACKAGES"
 msgstr ""
 
-#: FrmSummary.class:291
+#: FrmSummary.class:289
 msgid "Installation Type"
 msgstr ""
 
-#: FrmSummary.class:301
+#: FrmSummary.class:299
 msgid "Partition Selection Scheme"
 msgstr ""
 
-#: FrmSummary.class:311
+#: FrmSummary.class:309
 msgid "Software Selection"
 msgstr ""
 

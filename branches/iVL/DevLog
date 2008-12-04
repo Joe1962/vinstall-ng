@@ -1,5 +1,4 @@
-- Fixed typo in gparted module
-- Fixed issue with user icon now showing up after first user account.
-- Added auto-modifying of -cli lilo entry if the chosen label is too long. Added warning to user interface to warn accordingly
-- Relabeled "Sector" to "Bootsector of" in LIlo setup
-- Fine tuned lilo target options in the search for a floppy drive
+- Fixed missing format? indicator for non-linux partitions (win)
+- Extended blue background for swap partition row to the 4th column.
+- Allowed user to mount the host partition (on hosted install) to /mnt/hdxx only.
+- Fixed problem with back navigation... users getting locked out.

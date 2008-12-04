@@ -102,19 +102,19 @@ msgstr ""
 msgid "Would you like to import these user accounts into your new Operating System"
 msgstr ""
 
-#: FMain.class:815
+#: FMain.class:816
 msgid "Back"
 msgstr ""
 
-#: FMain.class:826
+#: FMain.class:827
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:837
+#: FMain.class:838
 msgid "Next"
 msgstr ""
 
-#: FMain.class:851
+#: FMain.class:852
 msgid "Button1"
 msgstr ""
 
