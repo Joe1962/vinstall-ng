@@ -420,6 +420,7 @@ PUBLIC SUB SET_LINUX_PARTITION_TYPES()
   MdlCore.WARN_STATUS("")
     FOR EACH cb IN oMountPoints
       IF cb.Text = "/" THEN ClsPartSel.sRoot = cb.Tag
+      IF cb.Text = "/home" THEN ClsPartSel.sHome = cb.Tag
         FOR EACH cc IN oFsTypes
           IF cb.tag = cc.tag THEN 
             ME.SET_PARTITION_FORMAT(cb.text, cc.Text)
