@@ -38,35 +38,3 @@ msgstr ""
 msgid "Preparing filesystems"
 msgstr ""
 
-#: MdlSetup.module:345
-msgid "is performing final system configuration. Please wait a moment."
-msgstr ""
-
-#: MdlSetup.module:353
-msgid "has been installed to your system. Your new system has been configured with the default factory settings."
-msgstr ""
-
-#: MdlSetup.module:353
-msgid "After reboot you can use vasm or vasmCC to fine tune your installation."
-msgstr ""
-
-#: MdlSetup.module:353
-msgid "Your computer needs to be restarted so that you can use your new operating system. Click"
-msgstr ""
-
-#: MdlSetup.module:353
-msgid "to restart your computer now or click"
-msgstr ""
-
-#: MdlSetup.module:353
-msgid "to restart your computer at a later time"
-msgstr ""
-
-#: MdlSetup.module:353
-msgid "If you installed from  CD-ROM/R/RW media, please remove de disk before restarting."
-msgstr ""
-
-#: MdlSetup.module:356
-msgid "Restart"
-msgstr ""
-
