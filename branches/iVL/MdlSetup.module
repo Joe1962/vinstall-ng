@@ -15,6 +15,23 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+
+PUBLIC FUNCTION QUICK_PARTITION_PROBE() AS Integer
+  
+  DIM sDump AS String
+  SHELL "probepart | grep ^/dev" TO sDump
+  sDump = Trim(sDump)
+    IF Len(sDump) > 0 THEN 
+      RETURN 1 
+    ELSE 
+      RETURN 0
+    END IF
+    
+  
+END
+
+
+ 
  
 PUBLIC SUB GO_WITH_SELECTED(sDev AS String, sISONAME AS String) ' this will mount the drive and display the license agreement
   

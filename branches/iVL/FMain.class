@@ -342,6 +342,17 @@ PUBLIC SUB btnext_Click()
         END IF
       frmNext = FrmPartScheme
       
+        ' Try to determine if partitions are available before offering to select.
+        IF MdlSetup.QUICK_PARTITION_PROBE() = 0 THEN 
+          FrmPartScheme.rbUseExisting.Enabled = FALSE
+          FrmPartScheme.rbUseExisting.ForeColor = Color.Gray
+        ELSE 
+          FrmPartScheme.rbUseExisting.Enabled = TRUE
+          FrmPartScheme.rbUseExisting.Color = Color.Black
+        END IF
+        
+      
+      
       
     CASE "FrmPartScheme"
         ' The next form is defined from the radio buttons in Frm PartScheme. But let's see if we can display some status text

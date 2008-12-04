@@ -70,55 +70,55 @@ msgstr ""
 msgid "Your screen may flicker or go blank for a few seconds during this process."
 msgstr ""
 
-#: FMain.class:353
+#: FMain.class:364
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr ""
 
-#: FMain.class:355
+#: FMain.class:366
 msgid "Please wait while setup analyses your current partition setup."
 msgstr ""
 
-#: FMain.class:355
+#: FMain.class:366
 msgid "This may take a while ..."
 msgstr ""
 
-#: FMain.class:369
+#: FMain.class:380
 msgid "You must select a \"/\" partition. This is the target where the system will install to"
 msgstr ""
 
-#: FMain.class:441
+#: FMain.class:452
 msgid "Skipping boot loader setup"
 msgstr ""
 
-#: FMain.class:467
+#: FMain.class:478
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:483
+#: FMain.class:494
 msgid "Please enter the root password. For your security purposes, do not leave this blank"
 msgstr ""
 
-#: FMain.class:501
+#: FMain.class:512
 msgid "Setup has detected existing directories in the partition you selected for /home."
 msgstr ""
 
-#: FMain.class:501
+#: FMain.class:512
 msgid "Would you like to import these user accounts into your new Operating System"
 msgstr ""
 
-#: FMain.class:828
+#: FMain.class:839
 msgid "Back"
 msgstr ""
 
-#: FMain.class:839
+#: FMain.class:850
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:850
+#: FMain.class:861
 msgid "Next"
 msgstr ""
 
-#: FMain.class:864
+#: FMain.class:875
 msgid "Button1"
 msgstr ""
 

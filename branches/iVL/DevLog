@@ -1,4 +1,3 @@
-- Fixed missing format? indicator for non-linux partitions (win)
-- Extended blue background for swap partition row to the 4th column.
-- Allowed user to mount the host partition (on hosted install) to /mnt/hdxx only.
-- Fixed problem with back navigation... users getting locked out.
+- Added test to check for existing partitions before offering to use existing partitions
+  This way if no partitions are found (unpartitioned hard drive) the user will be lead into gparted
+- Updated binary
