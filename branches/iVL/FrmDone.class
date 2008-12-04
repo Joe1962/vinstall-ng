@@ -30,29 +30,11 @@ DIM sText AS String
 
   FMain.btback.Enabled = FALSE
   FMain.btback.ForeColor = Color.Gray
-'  sText = ClsGlobal.DISTRO & Space(1) & ("is performing final system configuration. Please wait a moment.")
+
   FMain.btnext.Enabled = FALSE
   FMain.btQuit.Enabled = FALSE
-  'REPEAT 
-  ' '   IF MdlConfLilo.hBgConfigProc.State = Process.Running THEN 
-  ' '       REPEAT 
-  ' '         WAIT 
-  ' '   'IF ME.MONITOR_BACKGROUND() = 1 THEN 
-  ' '         ME.tlMsg.Text = sText
-  ' '       UNTIL MdlConfLilo.hBgConfigProc.State = Process.Stopped
-  ' '   END IF
-  ' '   
-  ' '     sText = ClsGlobal.DISTRO & Space(1) & ("has been installed to your system. Your new system has been configured with the default factory settings.") & "<br><br>" &
-  ' '    ("After reboot you can use vasm or vasmCC to fine tune your installation.") & "<br><br>" &
-  ' '   ("Your computer needs to be restarted so that you can use your new operating system. Click") & Space(1) & FMain.btnext.text & Space(1)&
-  ' '    ("to restart your computer now or click") & Space(1) & FMain.btQuit.Text & Space(1) & ("to restart your computer at a later time") & "<br><br" &
-  ' '    ("If you installed from  CD-ROM/R/RW media, please remove de disk before restarting.")
-  ' '   
-  ' ' ME.tlMsg.Text = sText
-  ' ' FMain.btnext.Enabled = TRUE
-  ' ' FMain.btQuit.Enabled = TRUE
-  'MdlSetup.END_INSTALLER()
-  
+
+ME.tmBgMon.Enabled = TRUE  
 
 END
 
@@ -61,15 +43,17 @@ PUBLIC SUB tmBgMon_Timer()
 
 DIM sText AS String
 
-      IF MdlConfLilo.hBgConfigProc.State = Process.Running THEN 
-            sText = ClsGlobal.DISTRO & Space(1) & ("is performing final system configuration. Please wait a moment.")
+      'IF MdlConfLilo.hBgConfigProc.State = Process.Running THEN 
+      IF Exist(ClsGlobal.sTargetMnt &/ "tmp" &/ "status") = FALSE THEN 
+        'Message.Info("Found /tmp/status")
+            sText = "<br><br><br>" & ClsGlobal.DISTRO & Space(1) & ("is performing final system configuration. Please wait a moment.")
             FMain.btnext.Enabled = FALSE
             FMain.btQuit.Enabled = FALSE
     ELSE 
-    
+    Message.Info("Found /tmp/status")
       sText = ClsGlobal.DISTRO & Space(1) & ("has been installed to your system. Your new system has been configured with the default factory settings.") & "<br><br>" &
      ("After reboot you can use vasm or vasmCC to fine tune your installation.") & "<br><br>" &
-    ("Your computer needs to be restarted so that you can use your new operating system. Click") & Space(1) & FMain.btnext.text & Space(1)&
+     ("Your computer needs to be restarted so that you can use your new operating system. Click") & Space(1) & FMain.btnext.text & Space(1)&
      ("to restart your computer now or click") & Space(1) & FMain.btQuit.Text & Space(1) & ("to restart your computer at a later time") & "<br><br" &
      ("If you installed from  CD-ROM/R/RW media, please remove de disk before restarting.")
      FMain.btnext.Enabled = TRUE
@@ -80,7 +64,5 @@ DIM sText AS String
     END IF
   ME.tlMsg.Text = sText
   
-  'FMain.btnext.Enabled = TRUE
-  'FMain.btQuit.Enabled = TRUE
 
 END

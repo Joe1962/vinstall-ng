@@ -85,6 +85,13 @@ PUBLIC SUB Form_Open()
     END IF
           
     MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS(ME.fGroupSel)
+    IF Len(MdlSetup.SCAN_HOME_DIRS(ClsGlobal.sTargetMnt &/ "home")) > 0 THEN 
+      ME.btImportAcct.Enabled = TRUE
+      ME.btImportAcct.ForeColor = Color.Black
+    ELSE 
+      ME.btImportAcct.Enabled = FALSE
+      ME.btImportAcct.ForeColor = Color.Gray
+    END IF
     FMain.btnext.Enabled = TRUE
     ME.tbUsername.SetFocus
 END 
