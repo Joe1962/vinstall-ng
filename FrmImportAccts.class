@@ -56,9 +56,20 @@ END
 
 PUBLIC SUB btcancel_Click()
 
-  FrmUserAdd.Reparent(FMain.pnlwinhost)
-  FrmUserAdd.Show()
-  ME.Hide()
+  SELECT CASE Message.Question(("Would you like to continue adding new user accounts now?"), ("Yes"), ("No"))
+    CASE 1
+      FrmUserAdd.Reparent(FMain.pnlwinhost)
+      MdlUsrAdd.LIST_NEW_USER_ACCOUNT()
+      FrmUserAdd.Show()
+      ME.Close()
+    CASE ELSE 
+      FMain.frmNext = FrmNetConf
+      FrmNetConf.Reparent(FMain.pnlwinhost)
+      FrmNetConf.Show()
+      'ME.Hide()
+      ME.Close()
+    END SELECT 
+      
   'ME.Close()
 
 END
@@ -93,6 +104,7 @@ END IF
       MdlUsrAdd.LIST_NEW_USER_ACCOUNT()
       Message.Info(("User account for") & Space(1) & Trim(ME.cbAccntList.Text) & Space(1) & ("successfully imported"))
       ME.cbAccntList.Remove(ME.cbAccntList.Find(Trim(ME.cbAccntList.Text)))
+      INC MdlUsrAdd.iUsrAccts
     END IF
     
     'ME.Close

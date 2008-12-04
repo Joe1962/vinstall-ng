@@ -375,7 +375,7 @@ DIM cb AS CheckBox
     FOR EACH cb IN MdlUsrAdd.objGrps
       cb.Delete
     NEXT 
-    MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS
+    MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS(ME.fGroupSel)
 
 END
 
