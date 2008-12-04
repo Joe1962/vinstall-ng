@@ -300,7 +300,7 @@ PUBLIC SUB ACTIVATE_SWAP_SPACE()
   
   FOR EACH cb IN MdlPartSel.oSwaps
   IF cb.Text = "Swap" THEN 
-      EXEC ["grep", cb.Tag, "/etc/fstab"] TO sDump
+    SHELL "cat /etc/fstab | grep ^" & cb.Tag TO sDump
         sDump = Trim(sDump)
           IF Len(sDump) < 1 THEN 
               SHELL "echo \'" & cb.Tag & " none swap sw 0 0 \' >> /etc/fstab" WAIT 
