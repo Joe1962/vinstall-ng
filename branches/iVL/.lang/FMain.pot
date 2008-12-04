@@ -94,27 +94,31 @@ msgstr ""
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:498
+#: FMain.class:483
+msgid "Please enter the root password. For your security purposes, do not leave this blank"
+msgstr ""
+
+#: FMain.class:501
 msgid "Setup has detected existing directories in the partition you selected for /home."
 msgstr ""
 
-#: FMain.class:498
+#: FMain.class:501
 msgid "Would you like to import these user accounts into your new Operating System"
 msgstr ""
 
-#: FMain.class:823
+#: FMain.class:826
 msgid "Back"
 msgstr ""
 
-#: FMain.class:834
+#: FMain.class:837
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:845
+#: FMain.class:848
 msgid "Next"
 msgstr ""
 
-#: FMain.class:859
+#: FMain.class:862
 msgid "Button1"
 msgstr ""
 
