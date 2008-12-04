@@ -25,7 +25,7 @@
 
 PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
 
- 
+ DIM cb AS ComboBox
   ' this is where we need to set the mount target
   ClsGlobal.sTargetMnt = "/mnt/target"
   
@@ -33,7 +33,9 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
     IF Exist(ClsGlobal.sTargetMnt) = FALSE THEN 
       TRY MKDIR ClsGlobal.sTargetMnt
     END IF   
-    SHELL "umount " & ClsGlobal.sTargetMnt WAIT 'clear the mount point
+    'SHELL "umount " & ClsGlobal.sTargetMnt WAIT 'clear the mount point
+    EXEC ["umount", ClsGlobal.sTargetMnt] WAIT 
+    
     
     '/DISABLED FOR TESTING INSTALL ONLY
     SHELL "mount " & ClsPartSel.sRoot & Space(1) & ClsGlobal.sTargetMnt WAIT  'moun the root partition first
@@ -76,6 +78,11 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
       ELSE 
         MdlInstallSys.PERFORM_FULL_INSTALL()
       END IF  
+      
+      FOR EACH cb IN MdlPartSel.oMountPoints
+        IF Left(cb.Text, Len("/mnt")) = "/mnt" THEN EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ cb.Text] WAIT 
+      NEXT 
+      
 END
 
 PUBLIC SUB WRITE_NEW_DISTRO_ID()
@@ -292,15 +299,17 @@ PUBLIC SUB ACTIVATE_SWAP_SPACE()
   DIM sDump AS String
   
   FOR EACH cb IN MdlPartSel.oSwaps
+  IF cb.Text = "Swap" THEN 
       EXEC ["grep", cb.Tag, "/etc/fstab"] TO sDump
         sDump = Trim(sDump)
-          IF Len(sDump) = 0 THEN 
+          IF Len(sDump) < 1 THEN 
               SHELL "echo \'" & cb.Tag & " none swap sw 0 0 \' >> /etc/fstab" WAIT 
           END IF
   NEXT 
-  SHELL "swapon -a" WAIT 
+  'SHELL "swapon -a" WAIT 
   
-  
+  END IF
+  EXEC ["swapon", "-a"] WAIT 
 END
 
 
