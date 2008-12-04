@@ -140,6 +140,11 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 .Height = tl.Height
                 .Width = MdlObjSizer.get_object_width(("Do not format")) * 1.5 'tl.Width"
                 .ReadOnly = TRUE                
+                  ' Allow the user to only mount this partition at boot time if it is the host of an ISO
+                    IF InStr(FrmSelISO.lstInstallableImg.Text, .Tag) THEN 
+                      .Add("/mnt" &/ Right(.Tag, Len(.Tag) - RInStr(.Tag, "/")))
+                      
+                  ELSE                 
                 .Add(("Not Used"))
                 .Add("/")
                 .Add("/home")
@@ -149,10 +154,10 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 .Add("/tmp")
                 .Add("/mnt" &/ Right(.tag, Len(.tag) - RInStr(.tag, "/"))) ' Add option to mount linux partitions to /mnt/xdx
                 .Add("Swap")
-                    IF InStr(FrmSelISO.lstInstallableImg.Text, .tag) THEN 
-                      .Enabled = FALSE
-                    ELSE 
-                      .Enabled = TRUE
+                    'IF InStr(FrmSelISO.lstInstallableImg.Text, .tag) THEN 
+                    '  .Enabled = FALSE
+                    'ELSE 
+                    '  .Enabled = TRUE
                     END IF
                 END WITH 
                 oMountPoints.Add(cb)

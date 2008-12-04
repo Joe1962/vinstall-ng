@@ -686,6 +686,7 @@ System.Language = sLang
   'Message(System.Language)
   MdlCore.frmInit = FrmSelISO
   MdlCore.main
+  FMain.btnext.Enabled = TRUE
 
 
 END
