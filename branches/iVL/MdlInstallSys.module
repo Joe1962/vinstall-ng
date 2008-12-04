@@ -305,10 +305,11 @@ PUBLIC SUB ACTIVATE_SWAP_SPACE()
           IF Len(sDump) < 1 THEN 
               SHELL "echo \'" & cb.Tag & " none swap sw 0 0 \' >> /etc/fstab" WAIT 
           END IF
-  NEXT 
+'  NEXT 
   'SHELL "swapon -a" WAIT 
   
   END IF
+  NEXT 
   EXEC ["swapon", "-a"] WAIT 
 END
 
