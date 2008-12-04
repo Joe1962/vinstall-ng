@@ -194,9 +194,12 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
           sSection = "image = " & sBootPath &/ sKernel & "\n" &
           "root = " & Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) & "\n" &
           "label = " & sLabel & "\n" &
-          "append = \"" & sAppend & "\"" & "\n" &
-          "initrd = " & sInitrd & "\n" & ' sBootPath &/ sInitrd & "\n" &
-          "read-only" & "\n"
+          "append = \"" & sAppend & "\"" & "\n" 
+          IF sInitrd <> "noinitrd" THEN 
+            sSection = sSection & "initrd = " & sInitrd & "\n"  ' sBootPath &/ sInitrd & "\n"
+          END IF
+          sSection = sSection & "read-only" & "\n"
+          
               FOR EACH chbox IN ME.arrLinuxTextBoots
                 IF chbox.Value = TRUE THEN 
                     IF chbox.tag = cb.Tag THEN
@@ -209,9 +212,9 @@ PUBLIC SUB GENERATE_LILO_DOT_CONF()
                     sClisection = "image = " & sBootPath &/ sKernel & "\n" &
           "root = " & Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1) & "\n" &
           "label = " & sLabel & "-tui" & "\n" &
-          "append = \"2 splash=verbose\"" & "\n" &
-          "initrd = " & sInitrd & "\n" & '& sBootPath &/ sInitrd & "\n" &
-          "read-only" & "\n" 
+          "append = \"2 splash=verbose\"" & "\n" 
+            IF sInitrd <> "noinitrd" THEN sClisection = sClisection & "initrd = " & sInitrd & "\n"  '& sBootPath &/ sInitrd & "\n" 
+            sClisection = sClisection & "read-only" & "\n" 
                       ' sClisection = sSection
                       ' sClisection = Replace(sClisection, "append = " & sAppend, "append = \"2 splash=verbose\"")
                       ' sClisection = Replace(sClisection, "label = " & sLabel, "label = " & sLabel & "-cli") & "\n"
