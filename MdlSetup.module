@@ -336,4 +336,34 @@ PUBLIC FUNCTION SCAN_HOME_DIRS(sHomePartition AS String) AS String
   
 END
 
+PUBLIC SUB END_INSTALLER()
+DIM sText AS String
+    ' Check for /tmp/status in the target installation
+      IF Exist(ClsGlobal.sTargetMnt &/ "tmp" &/ "status") = FALSE THEN 
+        REPEAT 
+          WAIT 
+        sText = ClsGlobal.DISTRO & Space(1) & ("is performing final system configuration. Please wait a moment.")
+        FrmDone.tlMsg.Text = sText
+        'FrmDone.tlMsg.Adjust
+        UNTIL Exist(ClsGlobal.sTargetMnt &/ "tmp" &/ "status") = TRUE
+        sText = ClsGlobal.DISTRO & Space(1) & ("has been installed to your system. Your new system has been configured with the default factory settings.") & "<br><br>" &
+    ("After reboot you can use vasm or vasmCC to fine tune your installation.") & "<br><br>" &
+    ("Your computer needs to be restarted so that you can use your new operating system. Click") & Space(1) & FMain.btnext.text & Space(1)&
+    ("to restart your computer now or click") & Space(1) & FMain.btQuit.Text & Space(1) & ("to restart your computer at a later time") & "<br><br" &
+    ("If you installed from  CD-ROM/R/RW media, please remove de disk before restarting.")
+    FrmDone.tlMsg.Text = sText
+    FMain.btnext.Enabled = TRUE
+    FMain.btnext.Text = ("Restart")
+    FMain.btnext.Width = MdlObjSizer.get_object_width(FMain.btnext.Text) + 36
+    
+    'FrmDone.tlBanner
+    
+      ENDIF
+
+
+  
+  
+END
+
+
 

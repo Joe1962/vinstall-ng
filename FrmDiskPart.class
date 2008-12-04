@@ -64,6 +64,7 @@ PUBLIC SUB EmbGPARTED_Close()
 
   DIM bReboot AS Boolean
   
+  MdlCore.WARN_STATUS("")
     FrmDiskPart.tlBanner.Text = "<h3><br>Analyzing system partitioning scheme... Please wait<br>This will take a few seconds...</h3>"
     FrmDiskPart.tlBanner.Refresh
     FrmDiskPart.tlBanner.Adjust
@@ -95,4 +96,5 @@ PUBLIC SUB EmbGPARTED_Close()
   FMain.btQuit.Enabled = TRUE
   FMain.btQuit.ForeColor = Color.Black
   END IF
+  MdlCore.warn_status_off()
 END
