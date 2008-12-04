@@ -109,7 +109,10 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
   FrmInstallSys.pbInstallProg2.Value = 1
   'Message.Info("packages have been installed in your system. Please click next to configure it.")
   FrmInstallSys.tlBanner.Text = ("Vectorlinux is now installed in your system. Please click next to configure it.")
-  FrmInstallSys.tlCurrPkg.Text = ("packages have been Installed. Please click next to move on to System Configuration.")
+  FrmInstallSys.tlCurrPkg.Text = ("Packages have been Installed. Please click next to move on to System Configuration.")
+    FrmCredits.Timer1.Stop
+    FrmCredits.ScrollView1.Scroll(0, 0)
+    
   WITH FMain
     .btQuit.Enabled = TRUE
     .btQuit.ForeColor = Color.Black
@@ -206,13 +209,7 @@ PUBLIC FUNCTION INSTALL_USER_PACKAGES() AS Integer
                 FrmInstallSys.pbInstallProg.Value = i / iStepTotal
           INC ClsGlobal.iPkgNum
           FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, ClsGlobal.iPkgNum)
-          
-              'hproc = EXEC ["installpkg", sBasePath &/ sLoc &/ sPkg, " -R ", ClsGlobal.sTargetMnt, " || echo \'FAILED\' 2> /tmp/installdump"]
-              'hproc = EXEC ["installpkg -R " & ClsGlobal.sTargetMnt & Space(1) & sBasePath &/ sLoc &/ sPkg & " || echo \'FAILED\' 2> /tmp/installdump"]
-              'hproc = EXEC ["installpkg " & sBasePath &/ sLoc &/ sPkg & " -R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump"]
-              'hproc = EXEC ["installpkg", sBasePath &/ sLoc &/ sPkg, "-R " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump"] WAIT 
-              'hproc = EXEC ["installpkg " & sBasePath &/ sLoc &/ sPkg & Space(1) & "-R" & Space(1) & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump"] WAIT 
-              'hproc = SHELL "installpkg " & sBasePath &/ sLoc &/ sPkg & Space(1) & "-R" & Space(1) & ClsGlobal.sTargetMnt & Space(1) & "|| echo \'FAILED\' 2> /tmp/installdump" 'WAIT
+
               hproc = EXEC ["installpkg", "-R", ClsGlobal.sTargetMnt, sBasePath &/ sLoc &/ sPkg] ' WAIT 
                   'if hpro
                     WAIT 1
@@ -486,20 +483,7 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
 END
 
 
-' PUBLIC SUB Process_read()
-'   
-'   DIM sLine AS String
-'   READ #LAST, sLine, -256
-'   sDump = sDump & gb.NewLine & sLine
-'   PRINT sLine
-' END
-' PUBLIC SUB Process_kill()
-'   
-'   DIM sDump AS String = File.Load("/tmp/installdump")
-'     IF InStr(sDump, "FAILED") > 0 THEN 
-'       Message.Error("The install process has returned an error.")
-'   
-' END
+
 
 PUBLIC SUB process_error(msg AS String)
 

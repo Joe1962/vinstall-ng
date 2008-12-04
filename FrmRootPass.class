@@ -36,6 +36,8 @@ PUBLIC SUB Button1_Click()
   MdlCore.WARN_STATUS("")
   IF ME.tbPasswd1.Text = "" THEN 
     Message(("Enter a Password for root."))
+    RETURN 
+    STOP EVENT 
   ELSE 
     IF ME.tbPasswd1.Text = ME.tbPasswd2.Text THEN 
 

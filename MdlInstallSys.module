@@ -384,6 +384,8 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
   'Message.Info("Vectorlinux is now installed in your system. Please click next to configure it.")
   FrmInstallSys.tlBanner.Text = "<h3>" & ("Vectorlinux is now installed in your system. Please click") & Space(1) & FMain.btnext.text & Space(1) & ("to configure it.") & "</h3>"
   FrmInstallSys.tlCurrPkg.Text = "<h3>" & ("Packages have been installed in your system. Please click") & Space(1) & FMain.btnext.text & Space(1) & ("to configure it.") & "</h3>"
+  FrmCredits.Timer1.Stop
+  FrmCredits.ScrollView1.Scroll(0, 0)
   WITH FMain
     .btQuit.Enabled = TRUE
     .btQuit.ForeColor = Color.Black
@@ -900,13 +902,6 @@ PUBLIC FUNCTION INSTALL_CONFIG_PACKAGES() AS Integer
 END
 
 
-' ' PUBLIC SUB Process_read()
-' '   
-' '   DIM sLine AS String
-' '   READ #LAST, sLine, -256
-' '   sDump = sDump & gb.NewLine & sLine
-' '   PRINT sLine    
-' ' END
 
 PUBLIC SUB process_error(msg AS String)
 

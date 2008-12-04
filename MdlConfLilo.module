@@ -15,10 +15,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
-
-
-' PUBLIC Vmlinuz AS Object[]
-
+PUBLIC hBgConfigProc AS Process
 PRIVATE sDotConf AS String
 
 PUBLIC FUNCTION WRITE_LILO_DOT_CONF() AS Integer
@@ -343,14 +340,15 @@ sOut = "#!/bin/bash \n" &
 "for i in /usr/share/icons/*;do cd $i 2>/dev/null && if [ -e convert.sh ];then sh convert.sh & 2>/dev/null;fi;done" & gb.NewLine &
 "sh /var/log/scripts/gsb-desktop* & 2>/dev/null" & gb.NewLine &
 "update-mime-database /usr/share/mime/" & gb.NewLine &
-"sleep 20" & gb.NewLine &
-"echo done >/tmp/status" & gb.NewLine
+"sleep 20"
+'"echo done >/tmp/status" & gb.NewLine
 
 File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng", sOut)
 'SHELL "echo \"" & sOut & "\" >" & ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng"
-SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng" WAIT 
+'SHELL "chmod +x " & ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng" WAIT 
+EXEC ["chmod", "+x", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "config-vinstall-ng"] WAIT 
 SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT 
-SHELL "chroot /mnt/target /var/log/setup/config-vinstall-ng &"
+hBgConfigProc = SHELL "chroot /mnt/target /var/log/setup/config-vinstall-ng"
 
  SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
  SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
