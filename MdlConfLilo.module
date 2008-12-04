@@ -349,6 +349,7 @@ File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng", sOut)
 EXEC ["chmod", "+x", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "config-vinstall-ng"] WAIT 
 SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT 
 hBgConfigProc = SHELL "chroot /mnt/target /var/log/setup/config-vinstall-ng"
+FrmDone.tmBgMon.Enabled = TRUE
 
  SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 
  SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup/init" WAIT 

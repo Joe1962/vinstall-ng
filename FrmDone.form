@@ -22,4 +22,8 @@
       Text = ("")
     }
   }
+  { tmBgMon #Timer
+    #X = 168
+    #Y = 217
+  }
 }

@@ -479,7 +479,10 @@ PUBLIC SUB btnext_Click()
        
     CASE "FrmRootPass"
         
-        IF FrmRootPass.tbPasswd1.Text = "" THEN RETURN 
+        IF FrmRootPass.tbPasswd1.Text = "" THEN 
+          Message.Error(("Please enter the root password. For your security purposes, do not leave this blank"))
+          RETURN 
+        END IF
         
       IF FrmRootPass.tbPasswd1.Text <> FrmRootPass.tbPasswd2.Text THEN 
           Balloon.Error(("Passwords do not match. Please enter the same password twice"), FrmRootPass.tbPasswd2)
