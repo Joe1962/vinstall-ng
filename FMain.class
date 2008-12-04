@@ -337,7 +337,7 @@ PUBLIC SUB btnext_Click()
         IF InStr(FrmSelISO.lstInstallableImg.text, ".iso") OR InStr(FrmSelISO.lstInstallableImg.text, ".ISO") THEN 
            sISONAME = Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, " ") - 1)
            MdlSetup.GO_WITH_SELECTED(sDev, sISONAME)
-        ELSE 
+        ELSE
           MdlSetup.GO_WITH_SELECTED(sDev, "")
         END IF
       frmNext = FrmPartScheme
@@ -502,6 +502,8 @@ PUBLIC SUB btnext_Click()
                   CASE 1
                     frmNext = FrmImportAccts
                   CASE 2
+                  FrmUserAdd.btImportAcct.Enabled = FALSE
+                  FrmUserAdd.btImportAcct.ForeColor = Color.Gray
                     frmNext = FrmUserAdd
                 END SELECT 
             END IF

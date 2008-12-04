@@ -332,7 +332,12 @@ PUBLIC FUNCTION SCAN_HOME_DIRS(sHomePartition AS String) AS String
     SHELL "ls " & sHomePartition & " | grep -v ftp | grep -v lost+found | grep -v .*" TO sDump
     
     sDump = Trim(sDump)
+    IF NOT ClsPartSel.sHome OR IF Len(sDump) = 0 THEN 
+    FrmUserAdd.btImportAcct.Enabled = FALSE
+    FrmUserAdd.btImportAcct.ForeColor = Color.Gray
+    END IF
     RETURN sDump
+    
   
 END
 ' 
