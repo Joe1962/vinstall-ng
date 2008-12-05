@@ -24,7 +24,7 @@ PUBLIC FUNCTION ID_LANG(LangName AS String) AS String
       CASE "Spanish"
         sRes = "es_ES"
       CASE "Russian"
-        sRes = "ru_RU"
+        sRes = "ru_RU.utf8"
     END SELECT 
     RETURN sRes
         

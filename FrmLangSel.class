@@ -37,7 +37,7 @@ PUBLIC SUB LIST_LANG_CHOICES()
   WITH ME.lblangsel
     .Add("es_ES", "Spanish")
     .Add("en_US", "US English")
-    .Add("ru_RU", "Russian")
+    .Add("ru_RU.utf8", "Russian")
   END WITH 
   
   

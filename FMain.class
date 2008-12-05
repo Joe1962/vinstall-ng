@@ -684,6 +684,7 @@ PUBLIC SUB Button1_Click()
 DIM sLang AS String = FrmLangSel.lblangsel.Current.Key
 
 IF sLang = "es" THEN sLang = "es_ES"
+IF sLang = "ru" THEN sLang = "ru_RU.utf8"
 System.Language = sLang
 
   FMain.Close
