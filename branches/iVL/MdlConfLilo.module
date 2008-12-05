@@ -116,7 +116,7 @@ PUBLIC SUB DISPLAY_LILO_TARGET_OPTIONS()
       sList = Trim(sList)
       sListarr = Split(sList, "\n").Sort(gb.Ascent)
         FOR i = 0 TO sListarr.count - 1
-          sTarget = (("MBR of ")) & Trim(sListarr[i])
+          sTarget = (("MBR of") & Space(1) & Trim(sListarr[i]))
           'FrmLilo.LiloTarget.Add(sTarget)
           FrmLiloSetup.cbLIloTarget.Add(sTarget)
         NEXT 
