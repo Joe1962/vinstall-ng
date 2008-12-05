@@ -384,8 +384,9 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
   'Message.Info("Vectorlinux is now installed in your system. Please click next to configure it.")
   FrmInstallSys.tlBanner.Text = "<h3>" & ("Vectorlinux is now installed in your system. Please click") & Space(1) & FMain.btnext.text & Space(1) & ("to configure it.") & "</h3>"
   FrmInstallSys.tlCurrPkg.Text = "<h3>" & ("Packages have been installed in your system. Please click") & Space(1) & FMain.btnext.text & Space(1) & ("to configure it.") & "</h3>"
+  Message.Info(ClsGlobal.DISTRO & Space(1) & ("installation is complete. Click next to begin system configuration"))
   FrmCredits.Timer1.Stop
-  FrmCredits.ScrollView1.Scroll(0, 0)
+  FrmCredits.ScrollView1.Scroll(0, 200)
   WITH FMain
     .btQuit.Enabled = TRUE
     .btQuit.ForeColor = Color.Black

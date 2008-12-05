@@ -12,11 +12,11 @@
     Text = ("Use existing disk partitions")
   }
   { rbEditPartitions RadioButton
-    MoveScaled(1,11,62,3.1429)
+    MoveScaled(1,11,62,6.2857)
     Text = ("Modify my disk partitions to make room for new installation")
   }
   { tlChoiceExp TextLabel
-    MoveScaled(1,16,76,27)
+    MoveScaled(1,19,76,27)
     Text = ("TextLabel1")
   }
   { hrsep Separator

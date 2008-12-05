@@ -30,23 +30,23 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: FrmPkgSel.class:71
+#: FrmPkgSel.class:75
 msgid "Installs all optional components in your VectorLinux media to your system"
 msgstr ""
 
-#: FrmPkgSel.class:81
+#: FrmPkgSel.class:85
 msgid "Choose your optional components to install."
 msgstr ""
 
-#: FrmPkgSel.class:196
+#: FrmPkgSel.class:200
 msgid "TextLabel1"
 msgstr ""
 
-#: FrmPkgSel.class:206
+#: FrmPkgSel.class:210
 msgid "Full Install"
 msgstr ""
 
-#: FrmPkgSel.class:211
+#: FrmPkgSel.class:215
 msgid "Custom Install"
 msgstr ""
 

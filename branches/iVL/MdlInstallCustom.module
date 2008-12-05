@@ -66,10 +66,7 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
     RETURN 
   END IF
       
-  'iret = ME.INSTALL_PACKAGES_REQUIRED()
-  ' Make sure we set the right value for the progress bar here
-    'MdlInstallSys.iPkgCnt = iPkgCnt
-    'MdlInstallSys.iPkgNum = iPkgNum
+
   PRINT "INSTALLING ADDITIONAL REQUIRED SOFTWARE"
   iret = MdlInstallSys.INSTALL_REQUIRED_PACKAGES()
   IF iret <> 0 THEN 
@@ -92,7 +89,8 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
     Message.Error(("Unable to install kernels. ") & gb.NewLine & sErr)
     RETURN 
   END IF
-  
+  ' write new fstab now
+  MdlInstallSys.WRITE_NEW_FSTAB()
   PRINT "Binding and config"
   MdlConfLilo.PERFORM_BINDING()
   'iret = MdlConfLilo.PERFORM_BINDING()
@@ -101,17 +99,15 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
   '  RETURN 
   'END IF
   
-  ' write new fstab now
-   MdlInstallSys.WRITE_NEW_FSTAB()
-  
   ' Installation complete....
   FrmInstallSys.pbInstallProg.Value = 1
   FrmInstallSys.pbInstallProg2.Value = 1
   'Message.Info("packages have been installed in your system. Please click next to configure it.")
-  FrmInstallSys.tlBanner.Text = ("Vectorlinux is now installed in your system. Please click next to configure it.")
+  FrmInstallSys.tlBanner.Text = "<b>" & ("Installation complete") & "</b>"
   FrmInstallSys.tlCurrPkg.Text = ("Packages have been Installed. Please click next to move on to System Configuration.")
+  Message.Info(ClsGlobal.DISTRO & Space(1) & ("installation is complete. Click next to begin system configuration"))
     FrmCredits.Timer1.Stop
-    FrmCredits.ScrollView1.Scroll(0, 0)
+    FrmCredits.ScrollView1.Scroll(0, 200)
     
   WITH FMain
     .btQuit.Enabled = TRUE

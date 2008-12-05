@@ -29,7 +29,7 @@ END
 PUBLIC SUB Form_Open()
   ME.TextLabel1.Adjust
   ME.TextLabel1.Height = ME.ScrollView1.Height * 15
-  ME.Timer1.Enabled = TRUE
+  'ME.Timer1.Enabled = TRUE
     
 END
 

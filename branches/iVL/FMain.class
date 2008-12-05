@@ -190,6 +190,7 @@ PUBLIC SUB btnext_Click()
   DIM sISONAME AS String
   DIM sDev AS String
   DIM sLang AS String
+  DIM cbox AS ComboBox
   
   'tvPlan.Refresh()
   'FMain.tlStatus.Text = ("Working ... Please wait")
@@ -377,8 +378,16 @@ PUBLIC SUB btnext_Click()
              MdlCore.warn_status_off() 
               
     CASE "FrmPartSel"
+      ClsPartSel.sRoot = ""
+      FOR EACH cbox IN MdlPartSel.oMountPoints
+        IF cbox.Text = "/" THEN 
+          ClsPartSel.sRoot = cbox.Tag
+        END IF
+      NEXT 
         IF NOT ClsPartSel.sRoot OR ClsPartSel.sRoot = "" THEN 
         Message.Error(("You must select a \"/\" partition. This is the target where the system will install to"))
+          FMain.btnext.Enabled = TRUE
+          
           STOP EVENT 
           RETURN 
         ELSE 
@@ -397,13 +406,11 @@ PUBLIC SUB btnext_Click()
     CASE "FrmPkgSel"
         'here we check what kind of install it is, simple  or custom
             'IF FrmPkgSel.rbCustom.Value = TRUE THEN 
+              'frmpkg
            ' MdlCore.WARN_STATUS(("Reading available software selection ... Please wait"))
           IF ClsPkgSel.bCustom = TRUE THEN 
               'get the list of selected bulks only
-              
-              'MdlPkgSel.GET_USER_BULK_SELECTION()
-              'frmNext = FrmPkgsel2
-              
+                          
               frmNext = FrmUsrPkgSel
               
             ELSE 
@@ -655,32 +662,7 @@ PUBLIC SUB btback_Click()
 
    DIM iKey AS Integer
    DIM frm AS Form
-'   
-'   SELECT CASE FrmCurr.Name
-'     CASE "FrmSummary"
-'       'IF FrmPkgSel.rbCustom.Value = TRUE THEN 
-'       IF ClsPkgSel.bCustom = TRUE THEN 
-'         frm = FrmUsrPkgSel
-'        'ELSE IF FrmPkgSel.rbFull.Value = TRUE THEN 
-'        ELSE 
-'         frm = FrmPkgSel
-'       END IF
-'     'FrmCurr.Close
-'   CASE "FrmUsrPkgSel"
-'   'FrmCurr.Hide
-'     frm = FrmPkgSel
-'   
-' 
-'   
-'   ' ' ' CASE ELSE 
-'   ' ' '   
-'   ' ' ' 
-' 
-' 
-' END SELECT         
-'   frm.Reparent(ME.pnlwinhost)
-'    FrmCurr.Close
-'    frm.Show
+
     
     
     iKey = ClsGlobal.sBackNav.Find(FrmCurr)
