@@ -18,107 +18,107 @@ msgstr ""
 msgid "Restart"
 msgstr ""
 
-#: FMain.class:227
+#: FMain.class:228
 msgid "Please select a default operating system to boot before proceeding"
 msgstr ""
 
-#: FMain.class:228
+#: FMain.class:229
 msgid "Select an entry from this list"
 msgstr ""
 
-#: FMain.class:236
+#: FMain.class:237
 msgid "Skipping boot loaded setup"
 msgstr ""
 
-#: FMain.class:249
+#: FMain.class:250
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
-#: FMain.class:264
+#: FMain.class:265
 msgid "You have not created any user accounts for this system yet. There is not enough information"
 msgstr ""
 
-#: FMain.class:264
+#: FMain.class:265
 msgid "to create an account here. It is recommended that you create at least one."
 msgstr ""
 
-#: FMain.class:264
+#: FMain.class:265
 msgid "Would you like to continue anyway?"
 msgstr ""
 
-#: FMain.class:264
+#: FMain.class:265
 msgid "Yes"
 msgstr ""
 
-#: FMain.class:264
+#: FMain.class:265
 msgid "No"
 msgstr ""
 
-#: FMain.class:282
+#: FMain.class:283
 msgid "Please specify a hostname for this computer"
 msgstr ""
 
-#: FMain.class:286
+#: FMain.class:287
 msgid "Please specify the domain this computer belongs to"
 msgstr ""
 
-#: FMain.class:301
+#: FMain.class:302
 msgid "VectorLinux will now try to detect and configure your graphics hardware."
 msgstr ""
 
-#: FMain.class:301
+#: FMain.class:302
 msgid "Your screen may flicker or go blank for a few seconds during this process."
 msgstr ""
 
-#: FMain.class:364
+#: FMain.class:365
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr ""
 
-#: FMain.class:366
+#: FMain.class:367
 msgid "Please wait while setup analyses your current partition setup."
 msgstr ""
 
-#: FMain.class:366
+#: FMain.class:367
 msgid "This may take a while ..."
 msgstr ""
 
-#: FMain.class:380
+#: FMain.class:381
 msgid "You must select a \"/\" partition. This is the target where the system will install to"
 msgstr ""
 
-#: FMain.class:452
+#: FMain.class:453
 msgid "Skipping boot loader setup"
 msgstr ""
 
-#: FMain.class:478
+#: FMain.class:479
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:494
+#: FMain.class:495
 msgid "Please enter the root password. For your security purposes, do not leave this blank"
 msgstr ""
 
-#: FMain.class:512
+#: FMain.class:513
 msgid "Setup has detected existing directories in the partition you selected for /home."
 msgstr ""
 
-#: FMain.class:512
+#: FMain.class:513
 msgid "Would you like to import these user accounts into your new Operating System"
 msgstr ""
 
-#: FMain.class:839
+#: FMain.class:840
 msgid "Back"
 msgstr ""
 
-#: FMain.class:850
+#: FMain.class:851
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:861
+#: FMain.class:862
 msgid "Next"
 msgstr ""
 
-#: FMain.class:875
+#: FMain.class:876
 msgid "Button1"
 msgstr ""
 
