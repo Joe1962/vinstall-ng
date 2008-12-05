@@ -348,7 +348,7 @@ PUBLIC SUB btnext_Click()
           FrmPartScheme.rbUseExisting.ForeColor = Color.Gray
         ELSE 
           FrmPartScheme.rbUseExisting.Enabled = TRUE
-          FrmPartScheme.rbUseExisting.Color = Color.Black
+          FrmPartScheme.rbUseExisting.foreColor = Color.Black
         END IF
         
       
