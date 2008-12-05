@@ -31,11 +31,13 @@ PUBLIC SUB CLEAN_MBR()
   
   DIM sTarget AS String
   
+  
   IF Left(Trim(FrmLiloSetup.cbLIloTarget.Text), Len(("MBR of"))) = ("MBR of") THEN 
           sTarget = Right(Trim(FrmLiloSetup.cbLIloTarget.Text), Len(FrmLiloSetup.cbLIloTarget.Text) - InStr(FrmLiloSetup.cbLIloTarget.text, "/"))
   
             IF Exist("/usr/bin/ms-sys") THEN 
-            'SHELL "dd if /dev/" & Trim(sTarget) & " of=/boot/MBR.$( date +"
+            'dd if=/dev/hda of=/boot/MBR.$( date '+%m%d%y') bs=512 count=1
+            SHELL "dd if /dev/" & Trim(sTarget) & " of=/boot/MBR.$( date +\'%m%d%y\') bs=512 count=1" WAIT 
             SHELL "/usr/bin/ms-sys -z " & Trim(sTarget) WAIT 
           ELSE 
             RETURN 
