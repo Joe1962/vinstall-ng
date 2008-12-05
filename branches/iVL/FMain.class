@@ -198,7 +198,8 @@ PUBLIC SUB btnext_Click()
   
   IF LAST.TEXT = ("Restart") THEN 
   'EXEC "shutdown", "-r", " now"
-  EXEC ["init", "6"]
+  'EXEC ["init", "6"]
+  SHELL "init  6"
   ELSE 
   
   IF FrmLangSel.Visible = TRUE THEN 
