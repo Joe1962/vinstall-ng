@@ -91,7 +91,7 @@ PUBLIC FUNCTION EXECUTE_LILO() AS Integer
  
   SHELL "chroot " & ClsGlobal.sTargetMnt & " /sbin/lilo -v || echo \'FAILED\' " TO sDump
     IF InStr(sDump, "FAILED") > 0 THEN 
-      Message.Error(("Lilo returned an error. Please see below") & gb.NewLine & sDump)
+      Message.Error(("Lilo returned an error. Please see below") & gb.NewLine & gb.NewLine & sDump)
       FMain.btnext.Enabled = TRUE
       RETURN 1
     ELSE 
