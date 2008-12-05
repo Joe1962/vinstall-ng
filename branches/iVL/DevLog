@@ -1,3 +1,0 @@
-- Added test to check for existing partitions before offering to use existing partitions
-  This way if no partitions are found (unpartitioned hard drive) the user will be lead into gparted
-- Updated binary
