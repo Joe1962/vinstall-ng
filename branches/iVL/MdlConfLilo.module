@@ -335,10 +335,10 @@ sOut = "#!/bin/bash \n" &
 "/sbin/vhwconf" & gb.NewLine &
 "cd /usr/lib && ln -sf preloadable_libintl.so libgnuintl.so.8 && rm libintl.so 2>/dev/null; ln -s preloadable_libintl.so libintl.so" & gb.NewLine &
 "/sbin/valsaconf-quiet" & gb.NewLine &
-"for i in /var/log/scripts/x11-fonts*;do sh $i &>/dev/null;done" & gb.NewLine &
+"cd / && for i in /var/log/scripts/x11-fonts*;do sh $i &>/dev/null;done" & gb.NewLine &
 "rm -r /root/.mc 2>/dev/null" & gb.NewLine &
 "for i in /usr/share/icons/*;do cd $i 2>/dev/null && if [ -e convert.sh ];then sh convert.sh & 2>/dev/null;fi;done" & gb.NewLine &
-"sh /var/log/scripts/gsb-desktop* & 2>/dev/null" & gb.NewLine &
+"cd / && sh /var/log/scripts/gsb-desktop* & 2>/dev/null" & gb.NewLine &
 "update-mime-database /usr/share/mime/" & gb.NewLine &
 "sleep 20"
 '"echo done >/tmp/status" & gb.NewLine

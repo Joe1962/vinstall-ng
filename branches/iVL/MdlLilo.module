@@ -37,7 +37,7 @@ PUBLIC SUB CLEAN_MBR()
   
             IF Exist("/usr/bin/ms-sys") THEN 
             'dd if=/dev/hda of=/boot/MBR.$( date '+%m%d%y') bs=512 count=1
-            SHELL "dd if /dev/" & Trim(sTarget) & " of=/boot/MBR.$( date +\'%m%d%y\') bs=512 count=1" WAIT 
+            SHELL "dd if /dev/" & Trim(sTarget) & " of=/mnt/target/boot/MBR.$( date +\'%m%d%y\') bs=512 count=1" WAIT 
             SHELL "/usr/bin/ms-sys -z " & Trim(sTarget) WAIT 
           ELSE 
             RETURN 
