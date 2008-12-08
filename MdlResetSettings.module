@@ -19,12 +19,10 @@ PUBLIC pYes AS Picture
 PUBLIC SUB LIST_RESETABLE_SETTINGS()
   DIM sFile, sDesc, sSkellPath, stargetPath AS String
   DIM i AS Integer 
-  
-  'ClsGlobal.sTargetMnt = "/"
-  'sSkellPath = ClsGlobal.sTargetMnt &/ "etc" &/ "skel"
-  sSkellPath = "/etc/skel"
-  stargetPath = User.Home
-  'stargetPath = ClsGlobal.sTargetMnt &/ "home" &/ Trim(FrmImportAccts.cbAccntList.Text)
+
+  sSkellPath = ClsGlobal.sTargetMnt &/ "etc" &/ "skel"
+  stargetPath = ClsGlobal.sTargetMnt &/ "home" &/ Trim(FrmImportAccts.cbAccntList.Text)
+
   i = 0
   pYes = FrmPkgSel.pYes
       

@@ -131,3 +131,9 @@ PUBLIC SUB cbVideoRes_Click()
     
 
 END
+
+PUBLIC SUB Form_Show()
+
+  ME.Form_Open()
+
+END

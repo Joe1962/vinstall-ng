@@ -82,13 +82,14 @@ PUBLIC SUB Form_Resize()
 END
 
 PUBLIC SUB Form_Show()
-FMain.FrmCurr = ME
-
-  WITH FMain
-      .tvPlan["Conf1"].Picture = MdlCore.sDonePic
-      .tvPlan["Conf2"].picture = MdlCore.sNowPic
-      .tvPlan["Conf2"].Selected = TRUE
-    END WITH 
+' FMain.FrmCurr = ME
+' 
+'   WITH FMain
+'       .tvPlan["Conf1"].Picture = MdlCore.sDonePic
+'       .tvPlan["Conf2"].picture = MdlCore.sNowPic
+'       .tvPlan["Conf2"].Selected = TRUE
+'     END WITH 
+ME.Form_Open()
 
 END
 

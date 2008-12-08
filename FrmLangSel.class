@@ -70,8 +70,6 @@ PUBLIC SUB Form_Resize()
   WITH ME
     .tlBanner.Move(8, 4, MdlObjSizer.get_object_width(.tlBanner.text))
     .Separator1.Move(8, .tlBanner.top + .tlBanner.Height - .Separator1.Height, .ClientWidth - (.Separator1.Left * 2))
-    '.GridView1.Move(8, .tlBanner.top + .tlBanner.Height + 4)
-    '.GridView1.Resize((ME.Width / 3), ME.Height - (.tlBanner.Height * 2))
     .lbLangSel.Move(8, .tlBanner.top + .tlBanner.Height + 4)
    .lbLangSel.Resize((ME.Width / 3), ME.Height - (.tlBanner.Height * 2))
   END WITH 
@@ -87,25 +85,14 @@ END
 
 
 
-' ' ' PUBLIC SUB lbLangSel_KeyPress()
-' ' ' 
-' ' '   DIM i AS Integer
-' ' '     IF Key.text > "z" OR Key.text < " " THEN RETURN 
-' ' '       i = LAST.index
-' ' '       DO
-' ' '         INC i
-' ' '           IF i > LAST.count - 1 THEN i = 0
-' ' '           IF i = LAST.index THEN RETURN 
-' ' '           IF LAST[i].text LIKE Key.Text & "*" THEN 
-' ' '             LAST.index = i
-' ' '             RETURN 
-' ' '           END IF
-' ' '         LOOP
-' ' ' 
-' ' ' END
-
 PUBLIC SUB lblangsel_Click()
 
   
+
+END
+
+PUBLIC SUB Form_Show()
+
+  ME.Form_Open()
 
 END
