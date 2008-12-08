@@ -210,124 +210,121 @@ PUBLIC SUB btnext_Click()
   
   END IF
     
-  IF Application.Args[1] = "-C" THEN  
-    ' navigation for configuration
-              SELECT CASE FrmCurr.Name
-                CASE "FrmPartSel"
-                MdlPartSel.SET_LINUX_PARTITION_TYPES()
-                    frmNext = FrmLiloSetup
-                IF ERROR THEN Message.Error(Error.Where & "<br>" & Error.Text)
-                CASE "FrmInstallSys"
-                    frmNext = FrmLiloSetup
-                CASE "FrmLiloSetup"
-                
-      IF FrmLiloSetup.cbYNLilo.Value = FALSE THEN 
-          IF FrmLiloSetup.cbBootDefault.Text = "" THEN  ' FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
-' FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
-' FMain.tvPlan["Inst1"].Selected = TRUE
-  'ME.tlBanner.Text = "<h3>" & tlBanner.Text & "</h3xt = "" THEN 
-              Message.Warning(("Please select a default operating system to boot before proceeding"))
-              Balloon.Info(("Select an entry from this list"), FrmLiloSetup.cbBootDefault)
-              FMain.btnext.Enabled = TRUE
-              STOP EVENT 
-              RETURN 
-          END IF
-            'Run the setup
-            MdlLilo.TRIGGER_LILO_SETUP()
-      ELSE 
-      FrmLiloSetup.tlBanner.Text = "<b>" & ("Skipping boot loaded setup") & "</b>"
-      END IF
-          'SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
-      frmNext = FrmZoneSet
-       
-    CASE "FrmZoneSet"
-       'MdlZoneSet.TIME_ZONES()
-       MdlZoneSet.SET_ZONE(Trim(FrmZoneSet.lbTmZone.text))
-       MdlZoneSet.WRITE_CONF()
-       frmNext = FrmRootPass
-       
-    CASE "FrmRootPass"
-      IF FrmRootPass.tbPasswd1.Text <> FrmRootPass.tbPasswd2.Text THEN 
-          Balloon.Error(("Passwords do not match. Please enter the same password twice"), FrmRootPass.tbPasswd2)
-          FrmRootPass.tbPasswd2.SelectAll
-                RETURN 
-      END IF
-      FrmRootPass.Button1_Click()
-       frmNext = FrmUserAdd
-       
-       
-    CASE "FrmUserAdd"
-      
-        IF MdlUsrAdd.iUsrAccts = 0 THEN 
-          'IF FrmUserAdd.tbUsername.text = "" THEN 
-          IF MdlUsrAdd.CREATE_USER_ON_A_SNAP() = FALSE THEN 
-            SELECT CASE Message.Question(("You have not created any user accounts for this system yet. There is not enough information") & "<br>" &
-            ("to create an account here. It is recommended that you create at least one.") & "<br>" &
-             "<br>" & ("Would you like to continue anyway?"), ("Yes"), ("No"))
-                       
-              CASE 2
-                RETURN 
-            END SELECT 
-            ELSE IF MdlUsrAdd.CREATE_USER_ON_A_SNAP() = TRUE THEN 
-              FrmUserAdd.Button1_Click()
-            END IF
-      END IF
-                
-      SHELL "cp /mnt/target/etc/modules.conf >/etc/modules.conf" WAIT 
-      SHELL "ifconfig eth0 up" WAIT 
-      SHELL "chmod 700 /mnt/target/home/*"
-      frmNext = FrmNetConf
-      
-      
-    CASE "FrmNetConf"
-        IF Trim(FrmNetConf.txtHostName.Text) = "" THEN 
-          Balloon.Error(("Please specify a hostname for this computer"), FrmNetConf.txtHostName) 
-          RETURN 
-        END IF
-        IF Trim(FrmNetConf.tbDomain.Text) = "" THEN 
-          Balloon.Error(("Please specify the domain this computer belongs to"), FrmNetConf.tbDomain) 
-          RETURN 
-        END IF
-        
-        IF MdlNetConf.ifaceCnt = 0 THEN 
-          MdlNetConf.SET_HOSTNAME(FrmNetConf.txtHostName.Text, FrmNetConf.tbDomain.Text)
-      ELSE ' IF MdlNetConf > 0 THEN     
-            MdlNetConf.SET_HOSTNAME(FrmNetConf.txtHostName.text, FrmNetConf.tbDomain.Text)
-            MdlNetConf.SET_DNS_ADDRESSES()
-            MdlNetConf.WRITE_INET()
-      END IF
-      
-      
-      ' CONFIGURE X QUIETLY HERE
-          Message.Warning(("VectorLinux will now try to detect and configure your graphics hardware.") & "<br>" &
-          ("Your screen may flicker or go blank for a few seconds during this process."))
-      
-        MdlXconf.QUIET_XORG_CONFIGURATION()
-      
-      frmNext = FrmDone
-      
-      CASE "FrmDone"
-          'offer to reboot here
-                   
-          SHELL ["sed", "-i", "'/^$/d'", "/root/gui.log"] WAIT 
-          SHELL ["sed", "-i", "'/^(installer/d'", "/root/gui.log"] WAIT
-          COPY "/root/gui.log" TO "/mnt/target/var/log/setup/gui.log"
-          ME.END_INSTALLER()
-          'frmNext = FrmAlsaConf
-'      frmNext = FrmLilo ' this is already done
-
-  CASE "FrmAlsaConf"
-  
-  frmNext = FrmXconf
-                    
-              END SELECT 
-              
-
-   frmNext.Reparent(FrmCurr.Parent)
-              frmNext.Show
+  ''' IF Application.Args[1] = "-C" THEN  
+' ' '     ' navigation for configuration
+' ' '               SELECT CASE FrmCurr.Name
+' ' '                 CASE "FrmPartSel"
+' ' '                 MdlPartSel.SET_LINUX_PARTITION_TYPES()
+' ' '                     frmNext = FrmLiloSetup
+' ' '                 IF ERROR THEN Message.Error(Error.Where & "<br>" & Error.Text)
+' ' '                 CASE "FrmInstallSys"
+' ' '                     frmNext = FrmLiloSetup
+' ' '                 CASE "FrmLiloSetup"
+' ' '                 
+' ' '       IF FrmLiloSetup.cbYNLilo.Value = FALSE THEN 
+' ' '           IF FrmLiloSetup.cbBootDefault.Text = "" THEN  
+' ' '               Message.Warning(("Please select a default operating system to boot before proceeding"))
+' ' '               Balloon.Info(("Select an entry from this list"), FrmLiloSetup.cbBootDefault)
+' ' '               FMain.btnext.Enabled = TRUE
+' ' '               STOP EVENT 
+' ' '               RETURN 
+' ' '           END IF
+' ' '             'Run the setup
+' ' '             MdlLilo.TRIGGER_LILO_SETUP()
+' ' '       ELSE 
+' ' '       FrmLiloSetup.tlBanner.Text = "<b>" & ("Skipping boot loaded setup") & "</b>"
+' ' '       END IF
+' ' '           'SHELL "mount -o bind /mnt/target/lib /lib && depmod -aq && /etc/rc.d/rc.udev restart"
+' ' '       frmNext = FrmZoneSet
+' ' '        
+' ' '     CASE "FrmZoneSet"
+' ' '        'MdlZoneSet.TIME_ZONES()
+' ' '        MdlZoneSet.SET_ZONE(Trim(FrmZoneSet.lbTmZone.text))
+' ' '        MdlZoneSet.WRITE_CONF()
+' ' '        frmNext = FrmRootPass
+' ' '        
+' ' '     CASE "FrmRootPass"
+' ' '       IF FrmRootPass.tbPasswd1.Text <> FrmRootPass.tbPasswd2.Text THEN 
+' ' '           Balloon.Error(("Passwords do not match. Please enter the same password twice"), FrmRootPass.tbPasswd2)
+' ' '           FrmRootPass.tbPasswd2.SelectAll
+' ' '                 RETURN 
+' ' '       END IF
+' ' '       FrmRootPass.Button1_Click()
+' ' '        frmNext = FrmUserAdd
+' ' '        
+' ' '        
+' ' '     CASE "FrmUserAdd"
+' ' '       
+' ' '         IF MdlUsrAdd.iUsrAccts = 0 THEN 
+' ' ' 
+' ' '           IF MdlUsrAdd.CREATE_USER_ON_A_SNAP() = FALSE THEN 
+' ' '             SELECT CASE Message.Question(("You have not created any user accounts for this system yet. There is not enough information") & "<br>" &
+' ' '             ("to create an account here. It is recommended that you create at least one.") & "<br>" &
+' ' '              "<br>" & ("Would you like to continue anyway?"), ("Yes"), ("No"))
+' ' '                        
+' ' '               CASE 2
+' ' '                 RETURN 
+' ' '             END SELECT 
+' ' '             ELSE IF MdlUsrAdd.CREATE_USER_ON_A_SNAP() = TRUE THEN 
+' ' '               FrmUserAdd.Button1_Click()
+' ' '             END IF
+' ' '       END IF
+' ' '                 
+' ' '       SHELL "cp /mnt/target/etc/modules.conf >/etc/modules.conf" WAIT 
+' ' '       SHELL "ifconfig eth0 up" WAIT 
+' ' '       SHELL "chmod 700 /mnt/target/home/*"
+' ' '       frmNext = FrmNetConf
+' ' '       
+' ' '       
+' ' '     CASE "FrmNetConf"
+' ' '         IF Trim(FrmNetConf.txtHostName.Text) = "" THEN 
+' ' '           Balloon.Error(("Please specify a hostname for this computer"), FrmNetConf.txtHostName) 
+' ' '           RETURN 
+' ' '         END IF
+' ' '         IF Trim(FrmNetConf.tbDomain.Text) = "" THEN 
+' ' '           Balloon.Error(("Please specify the domain this computer belongs to"), FrmNetConf.tbDomain) 
+' ' '           RETURN 
+' ' '         END IF
+' ' '         
+' ' '         IF MdlNetConf.ifaceCnt = 0 THEN 
+' ' '           MdlNetConf.SET_HOSTNAME(FrmNetConf.txtHostName.Text, FrmNetConf.tbDomain.Text)
+' ' '       ELSE ' IF MdlNetConf > 0 THEN     
+' ' '             MdlNetConf.SET_HOSTNAME(FrmNetConf.txtHostName.text, FrmNetConf.tbDomain.Text)
+' ' '             MdlNetConf.SET_DNS_ADDRESSES()
+' ' '             MdlNetConf.WRITE_INET()
+' ' '       END IF
+' ' '       
+' ' '       
+' ' '       ' CONFIGURE X QUIETLY HERE
+' ' '           Message.Warning(("VectorLinux will now try to detect and configure your graphics hardware.") & "<br>" &
+' ' '           ("Your screen may flicker or go blank for a few seconds during this process."))
+' ' '       
+' ' '         MdlXconf.QUIET_XORG_CONFIGURATION()
+' ' '       
+' ' '       frmNext = FrmDone
+' ' '       
+' ' '       CASE "FrmDone"
+' ' '           'offer to reboot here
+' ' '                    
+' ' '           SHELL ["sed", "-i", "'/^$/d'", "/root/gui.log"] WAIT 
+' ' '           SHELL ["sed", "-i", "'/^(installer/d'", "/root/gui.log"] WAIT
+' ' '           COPY "/root/gui.log" TO "/mnt/target/var/log/setup/gui.log"
+' ' '           ME.END_INSTALLER()
+' ' '           'frmNext = FrmAlsaConf
+' ' ' '      frmNext = FrmLilo ' this is already done
+' ' ' 
+' ' '   CASE "FrmAlsaConf"
+' ' '   
+' ' '   frmNext = FrmXconf
+' ' '                     
+' ' '               END SELECT 
+' ' '               
+' ' ' 
+' ' '    frmNext.Reparent(FrmCurr.Parent)
+' ' '               frmNext.Show
               
     
-  ELSE 
+  '''ELSE 
   
   IF ERROR THEN Message(Error.Where & "<br>" & Error.Text)
   
@@ -623,7 +620,7 @@ PUBLIC SUB btnext_Click()
     END IF
 
   END IF
-END IF
+'''END IF
 tvPlan.Refresh()
 ClsGlobal.sBackNav.Add(FrmCurr)
 'FMain.tlStatus.Text = ""
@@ -639,18 +636,7 @@ PUBLIC SUB END_INSTALLER()
         UNTIL Exist(ClsGlobal.sTargetMnt &/ "tmp" &/ "status") = TRUE
       END IF
 
-    ' ' ' ' ' 
-    ' ' ' ' ' SELECT CASE Message.Question(ClsGlobal.DISTRO & Space(1) & ("has been installed on your computer. Additional system configuration") & "<br>" &
-    ' ' ' ' '         ("will take place after you reboot your system.Part of this process must be done in text mode.") & "<br><br>" &
-    ' ' ' ' '         ("Would you like to reboot your computer now?"), ("Yes"), ("No"))
-    ' ' ' ' '   CASE 1
-    ' ' ' ' '     SHELL "shutdown -r now"
-    ' ' ' ' '   CASE ELSE 
-    ' ' ' ' '   RETURN 
-    ' ' ' ' '     Message.Info(("The VectorLinux installer will now exit. Enjoy your new operating system"))
-    ' ' ' ' '     QUIT ' dirty quit event 
-    ' ' ' ' '   'STOP EVENT 
-    ' ' ' ' ' END SELECT 
+
   
   
 END
@@ -664,7 +650,6 @@ PUBLIC SUB btback_Click()
    DIM frm AS Form
 
     
-    
     iKey = ClsGlobal.sBackNav.Find(FrmCurr)
       IF iKey <> -1 THEN 
         frm = ClsGlobal.sBackNav[iKey - 1]
@@ -676,6 +661,9 @@ PUBLIC SUB btback_Click()
       frm.Show
       ClsGlobal.sBackNav.Add(frm)
       END IF
+      
+      
+      
 
 END
 

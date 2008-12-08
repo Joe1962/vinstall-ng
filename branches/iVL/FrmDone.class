@@ -69,3 +69,9 @@ DIM sText AS String
   
 
 END
+
+PUBLIC SUB Form_Show()
+
+  ME.Form_Open()
+
+END
