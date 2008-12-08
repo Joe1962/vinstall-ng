@@ -242,7 +242,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                 cb = NEW ComboBox(FrmNetConf.TSNetDevices) AS "cbWifiEnc"
                   WITH cb
                   .ReadOnly = TRUE
-                    .list = [("None"), "WAP", "WEP"]
+                    .list = [("None"), "WPA", "WEP"]
                     .Width = tb.Width
                     .tag = sDev                                      
                     .Height = tl.Height
