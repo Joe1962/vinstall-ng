@@ -2,7 +2,7 @@
 # Compiled with Gambas 2.9.0
 Title=VectorLinux Installer
 Startup=MdlCore
-Version=0.1.12
+Version=0.1.13
 Library=gb.gtk
 Library=gb.form
 Library=gb.debug
@@ -12,7 +12,6 @@ Library=gb.form.mdi
 Library=gb.gtk.ext
 Description=GUI installer for Vector linux
 Authors=M0E-lnx\nuelsk8s
-Arguments=""
 TabSize=2
 Translate=1
 Language=en_US

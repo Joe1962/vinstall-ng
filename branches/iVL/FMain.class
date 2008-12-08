@@ -657,7 +657,8 @@ PUBLIC SUB btback_Click()
           WITH FMain
             .tvPlan.MoveBack
           END WITH 
-      FrmCurr.Hide
+      'FrmCurr.Hide
+      FrmCurr.Close()
       frm.Show
       ClsGlobal.sBackNav.Add(frm)
       END IF
