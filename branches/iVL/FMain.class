@@ -140,20 +140,7 @@ DIM iMid AS Integer
 'ME.pnlWinHost.Resize(ME.ClientWidth - ME.Frame1.Width - (ME.Frame1.left * 8), ME.ClientH - ME.tlBanner.Height - (ME.btback.Height * 8))
   WITH ME
     .tlBanner.width = ME.width
-    '.btback.Move(.HBox1.Left, .HBox1.top, MdlObjSizer.get_object_width(.btback.Text) + 36)
-    '.btnext.Move(.HBox1.Width - .btback.Width - 24, .btback.top, MdlObjSizer.get_object_width(.btnext.Text) + 36)
-    
-  '.Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth *1.7, .ClientHeight - .PictureBox1.Height * 1.5)
-  ''''.Frame1.Move(4, .PictureBox1.Top + .PictureBox1.Height + 4, MdlCore.iLeftWidth + 90, .ClientHeight - .PictureBox1.Height * 1.5)
-    '.Frame1.Move(4, .PictureBox1.top + .PictureBox1.Height + 4, MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 2))
-    '.Frame1.Resize(MdlCore.iLeftWidth * 1.60, .ClientHeight - tlBanner.Height - (.btback.Height * 1.5))
-  ''''.tvPlan.Move(4, 24, .Frame1.Width - 8, .Frame1.Height - 28) ' THIS WILL LEAVE 16PIX ON TOP AND BOTTOM AND 2 ON LEFT AND RIGHT
-    '.tvPlan.Move(4, 24, .Frame1.Width - 8, Frame1.Height - (.Frame1.Height / 20))
-    
-    '.pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.top + (.tlBanner.Height / 2), .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlbanner.height + (.btback.height * 3.5)))
-'''    .pnlWinHost.Move(.Frame1.left + .Frame1.Width + 4, .Frame1.Top, .tlBanner.Width - (.Frame1.Width + 8), .ClientHeight - (.tlBanner.Height + (.btback.Height * 3)))
-'''   .btback.Move(.pnlWinHost.Left, .Frame1.top + .Frame1.Height - .btback.Height, MdlObjSizer.get_object_width(.btback.text) + 36)
-    '.btback.moce(4,pnlwinhost.top + .pnlwinhost.Height +
+
     .tlStatus.Move(.ClientWidth / 2 - (.tlStatus.Width / 2), .pnlwinhost.top + .pnlwinhost.Height + 8, MdlObjSizer.get_object_width(.tlStatus.text))
     .btback.Move(4, .tlStatus.top + .tlStatus.Height + 4, MdlObjSizer.get_object_width(.btback.Text) + 36)
     .btnext.Move(.pnlWinHost.Left + .pnlWinHost.Width - (.btnext.Width + 8), .btback.Top, MdlObjSizer.get_object_width(.btnext.text) + 36)
@@ -566,12 +553,7 @@ PUBLIC SUB btnext_Click()
             MdlNetConf.WRITE_INET()
       END IF
       
-      
-      ' ' ' ' ' CONFIGURE X QUIETLY HERE
-      ' ' ' '     Message.Warning(("VectorLinux will now try to detect and configure your graphics hardware.") & "<br>" &
-      ' ' ' '     ("Your screen may flicker or go blank for a few seconds during this process."))
-      ' ' ' ' 
-      ' ' ' '   MdlXconf.QUIET_XORG_CONFIGURATION()
+
       
       frmNext = FrmDone
       

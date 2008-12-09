@@ -14,99 +14,99 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FMain.class:200
+#: FMain.class:187
 msgid "Restart"
 msgstr ""
 
-#: FMain.class:363
+#: FMain.class:350
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr ""
 
-#: FMain.class:365
+#: FMain.class:352
 msgid "Please wait while setup analyses your current partition setup."
 msgstr ""
 
-#: FMain.class:365
+#: FMain.class:352
 msgid "This may take a while ..."
 msgstr ""
 
-#: FMain.class:385
+#: FMain.class:372
 msgid "You must select a \"/\" partition. This is the target where the system will install to"
 msgstr ""
 
-#: FMain.class:447
+#: FMain.class:434
 msgid "Please select a default operating system to boot before proceeding"
 msgstr ""
 
-#: FMain.class:448
+#: FMain.class:435
 msgid "Select an entry from this list"
 msgstr ""
 
-#: FMain.class:457
+#: FMain.class:444
 msgid "Skipping boot loader setup"
 msgstr ""
 
-#: FMain.class:483
+#: FMain.class:470
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:499
+#: FMain.class:486
 msgid "Please enter the root password. For your security purposes, do not leave this blank"
 msgstr ""
 
-#: FMain.class:504
+#: FMain.class:491
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
-#: FMain.class:517
+#: FMain.class:504
 msgid "Setup has detected existing directories in the partition you selected for /home."
 msgstr ""
 
-#: FMain.class:517
+#: FMain.class:504
 msgid "Would you like to import these user accounts into your new Operating System"
 msgstr ""
 
-#: FMain.class:517
+#: FMain.class:504
 msgid "Yes"
 msgstr ""
 
-#: FMain.class:517
+#: FMain.class:504
 msgid "No"
 msgstr ""
 
-#: FMain.class:535
+#: FMain.class:522
 msgid "You have not created any user accounts for this system yet. There is not enough information"
 msgstr ""
 
-#: FMain.class:535
+#: FMain.class:522
 msgid "to create an account here. It is recommended that you create at least one."
 msgstr ""
 
-#: FMain.class:535
+#: FMain.class:522
 msgid "Would you like to continue anyway?"
 msgstr ""
 
-#: FMain.class:553
+#: FMain.class:540
 msgid "Please specify a hostname for this computer"
 msgstr ""
 
-#: FMain.class:557
+#: FMain.class:544
 msgid "Please specify the domain this computer belongs to"
 msgstr ""
 
-#: FMain.class:812
+#: FMain.class:794
 msgid "Back"
 msgstr ""
 
-#: FMain.class:823
+#: FMain.class:805
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:834
+#: FMain.class:816
 msgid "Next"
 msgstr ""
 
-#: FMain.class:848
+#: FMain.class:830
 msgid "Button1"
 msgstr ""
 
