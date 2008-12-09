@@ -370,7 +370,7 @@ EXEC ["touch", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init" &/ "c
 IF Exist(ClsGlobal.sTargetMnt &/ "tmp" &/ "status") THEN KILL ClsGlobal.sTargetMnt &/ "tmp" &/ "status"
 IF Exist("/tmp/status") THEN KILL "/tmp/status"
 
-hBgConfigProc = SHELL "chroot /mnt/target /var/log/setup/config-vinstall-ng && echo Done > /tmp/status" ' FOR READ" 
+hBgConfigProc = SHELL "chroot /mnt/target /var/log/setup/config-vinstall-ng ; echo Done > /tmp/status" ' FOR READ" 
 'FrmDone.tmBgMon.Enabled = TRUE
  
 
