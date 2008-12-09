@@ -73,7 +73,8 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     objIntTypes = NEW Object[]
        
     
-    SHELL "export res=$(ifconfig -a | grep ^[a-z] | grep -v ^lo); echo \"$res\" | tr -s \' \'" TO seths
+    'SHELL "export res=$(ifconfig -a | grep ^[a-z] | grep -v ^lo); echo \"$res\" | tr -s \' \'" TO seths
+    SHELL "ifconfig -a | grep ^[a-z]|grep -v ^lo | tr -s \' \'\"\"" TO seths
       'File.Save(Temp("eths"), Trim(seths)) 
       'Message(File.Load(Temp("eths")))
 
@@ -133,7 +134,8 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                           ELSE 
                             sStatus = ("Unplugged")
                           END IF
-                        
+                  
+  IF sType <> ("Wireless") THEN       
               
           WITH FrmNetConf.TSNetDevices
             PRINT .Count
@@ -327,22 +329,23 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                   
             
                 END WITH 
-                  
+          'END IF
                 END IF
                    
 
           
           END WITH 
-                  
+        END IF          
          
          NEXT 
   FrmNetConf.TSNetDevices[FrmNetConf.TSNetDevices.count - 1].Delete ' Ugly hack to delete the trailing blank tab
   
           IF ERROR THEN Message(Error.text & gb.newline & Error.where) 
   
-  KILL "/tmp/iwdump"
-  MdlCore.warn_status_off()
   
+  IF Exist("/tmp/iwdump") THEN KILL "/tmp/iwdump"
+  MdlCore.warn_status_off()
+
 END
 
 
@@ -612,8 +615,6 @@ PUBLIC SUB UPDATE_HOSTS_FILE(sHostName AS String, sDomain AS String)
           Message.Error(Error.where & gb.NewLine & Error.text)
                 
 END
-
-
 
 
 PUBLIC SUB SET_DNS_ADDRESSES()
