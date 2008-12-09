@@ -317,7 +317,7 @@ PUBLIC SUB Form_Resize()
     .btgrpHelp.Move(.fGroupSel.Width - (.btgrpHelp.Width + 4), 12)
     .pbUsrPic.Move(.btgrpHelp.Left, .btgrpHelp.Top + .btgrpHelp.Height + 2)
     .frmUserList.Move(iListLeft, iListTop, 160, iListBottom - iListTop)
-    .LstUsers.Move(4, 16, 150, .frmUserList.Height - (.LstUsers.Top) * 1.25)
+    .LstUsers.Move(4, 16, 150, .frmUserList.Height - (.LstUsers.Top) * 1.5)
   '  .LstUsers.Move(iListLeft, iListTop, 150, iListBottom - iListTop)
     
         icby = 16
@@ -408,7 +408,7 @@ PUBLIC SUB tbUsername_KeyRelease()
   IF Key.text = Space(1) THEN 
     tbUsername.Text = Replace(tbUsername.text, Space(1), "")
   END IF
-
+FMain.btnext.Enabled = TRUE
 END
 
 PUBLIC SUB btBrowse_Enter()
