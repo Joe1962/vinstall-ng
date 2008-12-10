@@ -52,23 +52,13 @@ FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
 FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
 FMain.tvPlan["Inst1"].Selected = TRUE
 ME.tlBanner.Text = "<h3>" & tlBanner.Text & "</h3>"
-  ME.tlBanner.Text = "<b>" & ME.tlBanner.Text & "</b>"
-'  ME.tlCurrPkg2.Text
- ' FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
-' FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
-' FMain.tvPlan["Inst1"].Selected = TRUE
-  'ME.tlBanner.Text = "<h3>" & tlBanner.Text & "</h3= "<b>" & tlCurrPkg2.Text & "</b>"
+
   
 
       ME.tlCurrStepLbl.Text = ("Current Step")
 
-'ME.ResizeScaled(ME.Parent.Width, ME.Parent.Height)
-'ME.scrlCredits.Border = Border.Sunken
-WAIT 1
-'Message("Window has been resized")
-'ME.scrlCredits.Border = Border.Plain
-WAIT 2
-'ME.BEGIN_PROCESS()  ' COMMENTED FOR TESTING PURPOSES
+
+
 PRINT "Begin installation process"
 ' ' ' MdlSetup.BEGIN_INSTALLATION()
 
@@ -76,13 +66,7 @@ PRINT "Begin installation process"
 
   FrmCredits.Reparent(ME.embCredits)
   FrmCredits.Show
-  ' temporaryli allow this
-  'FMain.btnext.Enabled = TRUE 
-  
-  ' FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
-' FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
-' FMain.tvPlan["Inst1"].Selected = TRUE
-  'ME.tlBanner.Text = "<h3>" & tlBanner.Text & "</h3
+
 
 END
 
@@ -92,37 +76,6 @@ PUBLIC SUB Form_Show()
 
 END
 
-' ' ' PUBLIC SUB Form_Resize()
-' ' ' 
-' ' '     DIM iMinFrameH AS Integer
-' ' '         iMinFrameH = ME.tlCurrPkg.Height + ME.tlCurrPkg2.Height + ME.tlCurrStepLbl.Height + ME.pbInstallProg2.Height + ME.tlCurrStepLbl.Height + 36
-' ' '     WITH ME
-' ' '       '.FrmProg.Move(4, .tlBanner.top + .tlBanner.Height + 8, .ClientWidth - (.FrmProg.Left * 2), iMinFrameH)
-' ' '       .tlBanner.Move(4, 16, .ClientWidth - (.tlBanner.Left * 2))
-' ' '       .hrsep.Move(4, .tlBanner.top + .tlBanner.Height - .hrsep.Height, .tlBanner.Width)
-' ' '       '.tlBanner.Border = Border.Plain
-' ' '       '.FrmProg.Move(4, .tlBanner.top + (.tlBanner.Height + 36), .ClientWidth - (.FrmProg.Left * 2))
-' ' '       '.FrmProg.Move(4, .hrsep.top + .hrsep.Height + .tlBanner.Height, .ClientWidth - (.FrmProg.Left * 2))
-' ' '           ' / The following objects are inside the frame
-' ' '       .tlCurrPkg.move(8, 24, .FrmProg.Width - (.tlCurrPkg.Left * 2)) 
-' ' '       .tlCurrStepLbl.Move(.tlCurrPkg.Left, .tlCurrPkg.top + (.tlCurrPkg.Height + 4), MdlObjSizer.get_object_width(.tlCurrStepLbl.Text) + 8, 27)
-' ' '       .pbInstallProg.Move(.tlCurrStepLbl.left + (.tlCurrStepLbl.Width), .tlCurrStepLbl.top, .FrmProg.Width - (.tlCurrStepLbl.Width + (.tlcurrsteplbl.left * 2)))
-' ' '       .tlCurrPkg2.Move(.tlCurrPkg.Left, .tlCurrPkg.top + (.tlCurrPkg.Height * 2.5), .FrmProg.Width - (.tlCurrPkg.Left * 2))
-' ' '       .pbInstallProg2.Move(.tlCurrPkg2.Left, .tlCurrPkg2.top + (.tlCurrPkg2.Height + 2), .tlCurrPkg2.Width, 27)
-' ' '       .FrmProg.Move(4, hrsep.top + .hrsep.Height + .tlBanner.Height, .clientw - (.FrmProg.x * 2), 32 + (.tlCurrStepLbl.H + .tlCurrPkg.h + .tlCurrPkg2.h + (.pbInstallProg2.h * 2)))
-' ' ' '      .frmCredits.Move(.FrmProg.left, .FrmProg.top + .FrmProg.Height + 16, .FrmProg.Width)
-' ' '       '.scrlCredits.move(8, 24, .FrmProg.Width - (.scrlCredits.left * 2))
-' ' '       '.scrlCredits.Move(.FrmProg.left, .FrmProg.top + FrmProg.Height + 24, .FrmProg.Width)
-' ' '       
-' ' '       '.tlCredits.Move(8, 4)
-' ' '       
-' ' '       '.pbInstallProg.Move(.tlCurrStepLbl.Left + (.tlCurrStepLbl.Width + 2), .FrmProg.Width - (.tlCurrStepLbl.Width + (.tlCurrStepLbl.left * 2))) '
-' ' '       '.pbInstallProg.Move(.tlCurrPkg.Left, .tlCurrPkg.top + (.tlCurrPkg.Height + 2), .tlCurrPkg.Width)
-' ' '       
-' ' '     END WITH 
-
-
-''''''END
 
 PUBLIC SUB HIDE_PROGRES_CONTROLS()
   
@@ -133,38 +86,4 @@ PUBLIC SUB HIDE_PROGRES_CONTROLS()
     .pbInstallProg2.Visible = FALSE
   END WITH 
   
-END
-
-
-
-
-
-
-
-' PUBLIC SUB Form_Resize()
-' 
-'   WITH ME
-'     .tlBanner.Move(4, 4, .ClientWidth - (.tlBanner.x * 2))
-'     .hrsep.Move(4, .tlBanner.top + .tlBanner.Height, .tlBanner.Width)
-'     '.FrmProg.Move(4, .hrsep.top + .hrsep.Height + .tlBanner.Height, .clientwidth - (.FrmProg.left * 2), (.tlBanner.Height * 4))
-'       ' items inside the frame
-'       .tlCurrPkg.Move(4, .hrsep.top + .hrsep.Height + 48, .hrsep.Width)
-'       
-'       '.tlCurrPkg.Move(4, 24, .FrmProg.Width - (.tlCurrPkg.Left * 2))
-'       .tlCurrStepLbl.Move(4, .tlCurrPkg.top + .tlCurrPkg.Height + 4, MdlObjSizer.get_object_width(.tlCurrStepLbl.text))
-'       '.pbInstallProg.Move(.tlCurrStepLbl.Left + .tlCurrStepLbl.Width + 8, .tlCurrStepLbl.top, .FrmProg.w - (.pbInstallProg.x + (.tlCurrStepLbl.left * 2)))
-'       '.pbInstallProg.Move(.tlCurrStepLbl.left + .tlCurrStepLbl.Width + 4, tlCurrStepLbl.top + (tlCurrStepLbl.Height / 4), .ClientWidth - (.pbInstallProg.Left - 4), .tlCurrStepLbl.Height / 2) '.hrsep.Width - (pbInstallProg.Left))
-'       .tlCurrPkg2.Move(4, .pbInstallProg.top + .pbInstallProg.Height + 24, MdlObjSizer.get_object_width(.tlCurrPkg2.text))
-'       '.pbInstallProg2.Move(8, .tlCurrPkg2.top + .tlCurrPkg2.Height + 2, .FrmProg.Width - (.pbInstallProg2.x * 2))
-'       .pbInstallProg2.Move(4, tlCurrPkg2.top + .tlCurrPkg2.Height + 2, .hrsep.Width)
-'       .embCredits.Move(.ClientWidth / 2 - (.embCredits.Width / 2), .pbInstallProg2.top + .pbInstallProg2.Height + 8)
-'       .embCredits.Height = .ClientH - .embCredits.top - 16
-'   END WITH 
-' 
-' END
-
-PUBLIC SUB Form_Activate()
-
-  
-
 END

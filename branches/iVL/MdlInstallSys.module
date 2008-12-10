@@ -18,9 +18,7 @@
  PRIVATE hproc AS Process
  PRIVATE sDump AS String
  PRIVATE sErr AS String
- 'PUBLIC iPkgCnt AS Integer
- 'PUBLIC iPkgNum AS Integer = 0
-  
+
  
 
 PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
@@ -61,17 +59,6 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
       SHELL "mount " & ClsPartSel.sTmp & Space(1) & ClsGlobal.sTargetMnt &/ "tmp -t " & ClsPartSel.fTmp WAIT 
     END IF
 
-    'WRITE THE NEW FSTAB NOW, RIGHT BEFORE INSTALLING PACKAGES.
-    
-    'ME.WRITE_NEW_FSTAB() ' do this from the install form
-      'redirect to packages install
-      'ME.INSTALL_PACKAGES()
-    ' FROM HERE, DECIDE WHICH WAY TO GO
-
-    'ClsGlobal.sTargetMnt = "/home/moises/mnt/target" ' for testing only
-    
-    
-    'MdlSetup.RUN_CREDITS() ' Begin scrolling credits
     
       IF ClsPkgSel.bCustom = TRUE THEN 
         MdlInstallCustom.PERFORM_CUSTOM_INSTALL()
