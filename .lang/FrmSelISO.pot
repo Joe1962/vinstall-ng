@@ -42,19 +42,19 @@ msgstr ""
 msgid "Minimum Disk Space Requirements"
 msgstr ""
 
-#: FrmSelISO.class:255
+#: FrmSelISO.class:256
 msgid "No installable images found."
 msgstr ""
 
-#: FrmSelISO.class:261
+#: FrmSelISO.class:262
 msgid "Select which VectorLinux version you wish to install from the list below"
 msgstr ""
 
-#: FrmSelISO.class:266
+#: FrmSelISO.class:267
 msgid "TextLabel1"
 msgstr ""
 
-#: FrmSelISO.class:271
+#: FrmSelISO.class:272
 msgid "Search Again"
 msgstr ""
 

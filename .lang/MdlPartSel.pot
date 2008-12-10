@@ -26,19 +26,19 @@ msgstr ""
 msgid "FILESYSTEM"
 msgstr ""
 
-#: MdlPartSel.module:141
+#: MdlPartSel.module:143
 msgid "Do not format"
 msgstr ""
 
-#: MdlPartSel.module:148
+#: MdlPartSel.module:150
 msgid "Not Used"
 msgstr ""
 
-#: MdlPartSel.module:294
+#: MdlPartSel.module:296
 msgid "Please select only one "
 msgstr ""
 
-#: MdlPartSel.module:294
+#: MdlPartSel.module:296
 msgid "partition"
 msgstr ""
 

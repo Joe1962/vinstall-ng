@@ -21,16 +21,12 @@ PUBLIC pNo AS Picture = picture.load("images/16px-Nocheck.png")
 
 PUBLIC SUB Form_Open()
 
+MdlCore.WARN_STATUS("")
   WITH ME
     .tlBanner.Text = "<h3>" & ("Choose your installation mode") & "</h3>"
       .rbFull_Click()
   END WITH 
-  FMain.FrmCurr = ME
-  FMain.tvPlan["Prep3"].Selected = TRUE
-  FMain.tvPlan["Prep2"].Picture = MdlCore.sDonePic
-  FMain.tvPlan["Prep3"].Picture = MdlCore.sNowPic
-  FMain.btback.Enabled = TRUE
-FMain.btback.ForeColor = Color.Black
+
 
 'ME.scrlInstallOpts.Columns.count = 4
 WITH ME.scrlInstallOpts
@@ -44,14 +40,24 @@ WITH ME.scrlInstallOpts
 .Columns[1].Width = 120
 .Columns[2].Width = 350
 END WITH 
-MdlCore.WARN_STATUS("")
+
 ME.FILL_IN_BULK_LIST()
 FMain.btnext.Enabled = TRUE
-MdlCore.warn_status_off()
 IF ME.rbCustom.Value = TRUE THEN 
   'ME.scrlInstallOpts.Enabled = TRUE
   ME.rbCustom_Click()
 END IF
+
+  FMain.FrmCurr = ME
+  FMain.tvPlan["Prep3"].Selected = TRUE
+  FMain.tvPlan["Prep2"].Picture = MdlCore.sDonePic
+  FMain.tvPlan["Prep3"].Picture = MdlCore.sNowPic
+  FMain.tvPlan.Refresh
+  FMain.btback.Enabled = TRUE
+FMain.btback.ForeColor = Color.Black
+
+
+MdlCore.warn_status_off()
 END
 
 PUBLIC SUB Form_Resize()
