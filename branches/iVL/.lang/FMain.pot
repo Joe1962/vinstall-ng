@@ -102,23 +102,23 @@ msgstr ""
 msgid "Please specify a hostname for this computer"
 msgstr ""
 
-#: FMain.class:561
+#: FMain.class:562
 msgid "Please specify the domain this computer belongs to"
 msgstr ""
 
-#: FMain.class:808
+#: FMain.class:811
 msgid "Back"
 msgstr ""
 
-#: FMain.class:819
+#: FMain.class:822
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:830
+#: FMain.class:833
 msgid "Next"
 msgstr ""
 
-#: FMain.class:844
+#: FMain.class:847
 msgid "Button1"
 msgstr ""
 
