@@ -343,15 +343,17 @@ sOut = "#!/bin/bash \n" &
 "sleep 20"
 '"echo done >/tmp/status" & gb.NewLine
 
-File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng", sOut)
-
-EXEC ["chmod", "+x", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "config-vinstall-ng"] WAIT 
-
-SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT 
-
 EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init"] WAIT 
 EXEC ["chmod", "700", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init"] WAIT 
 EXEC ["touch", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init" &/ "config-stage2"] WAIT 
+
+File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-vinstall-ng", sOut)
+
+EXEC ["chmod", "+x", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init" &/ "config-vinstall-ng"] WAIT 
+
+SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT 
+
+
 
  sOut = "#!/bin/bash \n" &
  ". /sbin/vasm-functions \n" &

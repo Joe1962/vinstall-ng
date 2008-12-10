@@ -420,8 +420,7 @@ PUBLIC SUB btnext_Click()
     CASE "FrmSummary"
       '      frmNext = FrmHostPrep ' prepare host
       frmNext = FrmInstallSys
-    
-    'POST INSTALL CONFIGURATION
+
     CASE "FrmInstallSys"
       MdlInstallSys.WRITE_NEW_DISTRO_ID()
       'moved binding to end of install in MdlInstallCustom.INSTALL_KERNELS
@@ -528,6 +527,8 @@ PUBLIC SUB btnext_Click()
                   FrmUserAdd.btImportAcct.ForeColor = Color.Gray
                     frmNext = FrmUserAdd
                 END SELECT 
+            ELSE 
+              frmNext = FrmUserAdd
             END IF
        END IF
        
@@ -617,6 +618,11 @@ PUBLIC SUB btnext_Click()
     ELSE 
       frmNext.Show
       WAIT 1
+      FrmCredits.Reparent(FrmInstallSys.embCredits)
+      FrmCredits.Show()
+      FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
+      FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
+      FMain.tvPlan["Inst1"].Selected = TRUE
       MdlSetup.BEGIN_INSTALLATION()
     END IF
 
