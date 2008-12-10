@@ -339,21 +339,27 @@ PUBLIC SUB BEGIN_INSTALLATION()
   
 END
 
-PUBLIC FUNCTION SCAN_HOME_DIRS(sHomePartition AS String) AS String
+PUBLIC FUNCTION SCAN_HOME_DIRS(sHomePartition AS String) AS Integer
   
   DIM sDump AS String
   
   IF NOT ClsPartSel.sHome THEN RETURN ""
   IF ClsPartSel.sRoot = ClsPartSel.sHome THEN RETURN ""
   
-    SHELL "ls " & sHomePartition & " | grep -v ftp | grep -v lost+found | grep -v .*" TO sDump
+    SHELL "ls " & sHomePartition & " | grep / | grep -v ftp | grep -v lost+found" TO sDump
     
     sDump = Trim(sDump)
-    IF NOT ClsPartSel.sHome OR IF Len(sDump) = 0 THEN 
+
+    IF Len(sDump) > 0 THEN 
+      RETURN 1
+    ELSE
     FrmUserAdd.btImportAcct.Enabled = FALSE
     FrmUserAdd.btImportAcct.ForeColor = Color.Gray
+      RETURN 0
+    
     END IF
-    RETURN sDump
+    
+    'RETURN sDump
     
   
 END

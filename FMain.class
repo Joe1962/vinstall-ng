@@ -177,6 +177,7 @@ PUBLIC SUB btnext_Click()
   DIM sISONAME AS String
   DIM sDev AS String
   DIM sLang AS String
+  DIM i AS Integer
   DIM cbox AS ComboBox
   
   'tvPlan.Refresh()
@@ -428,6 +429,21 @@ PUBLIC SUB btnext_Click()
       frmNext = FrmLiloSetup
     
     CASE "FrmLiloSetup"
+      FOR EACH cbox IN MdlLilo.arrLinuxIncCheckboxes
+        IF cbox.Value = TRUE THEN INC i
+      NEXT 
+      FOR EACH cbox IN MdlLilo.arrWinBootChecks
+        IF cbox.Value = TRUE THEN INC i
+      NEXT
+      
+      IF i = 0 THEN 
+        Message.error(("You have not selected any operating systems for your boot menu.") & "<br>" &
+        ("If you wish to bypass the bootloader setup, uncheck the") & Space(1) & "\"" & FrmLiloSetup.cbYNLilo.Text & "\"" & Space(1) & ("checkbox."))
+        STOP EVENT
+        RETURN 
+      END IF
+        
+      
       MdlCore.WARN_STATUS("")
       IF FrmLiloSetup.cbYNLilo.Value = FALSE THEN 
           IF FrmLiloSetup.cbBootDefault.Text = "" THEN 
@@ -499,7 +515,8 @@ PUBLIC SUB btnext_Click()
               frmNext = FrmUserAdd
             ELSE 
             
-            IF Len(MdlSetup.SCAN_HOME_DIRS(ClsGlobal.sTargetMnt &/ "home")) > 0 THEN 
+            'IF Len(MdlSetup.SCAN_HOME_DIRS(ClsGlobal.sTargetMnt &/ "home")) > 0 THEN 
+            IF MdlSetup.SCAN_HOME_DIRS(ClsGlobal.sTargetMnt &/ "home") = 1 THEN ' home dirs were found
                 SELECT CASE Message.Question(("Setup has detected existing directories in the partition you selected for /home.") & "<br>" &
                 ("Would you like to import these user accounts into your new Operating System"), ("Yes"), ("No"))
                   CASE 1
@@ -538,10 +555,13 @@ PUBLIC SUB btnext_Click()
     CASE "FrmNetConf"
         IF Trim(FrmNetConf.txtHostName.Text) = "" THEN 
           Balloon.Error(("Please specify a hostname for this computer"), FrmNetConf.txtHostName) 
+          fmain.btnext.Enabled = TRUE
           RETURN 
         END IF
         IF Trim(FrmNetConf.tbDomain.Text) = "" THEN 
           Balloon.Error(("Please specify the domain this computer belongs to"), FrmNetConf.tbDomain) 
+          fmain.btnext.Enabled = TRUE
+          
           RETURN 
         END IF
         
@@ -574,9 +594,6 @@ PUBLIC SUB btnext_Click()
   
   END SELECT 
                        
-'         IF frmNext = "" THEN frmNext = FrmSelISO  
-'IF frmNext = "" OR IsNull(FrmNetConf) OR NOT frmNext THEN frmNext = FrmSelISO
-'IF FrmCurr.text = "FrmLangSel" THEN STOP EVENT 
 
   frmNext.Reparent(ME.pnlWinHost)
   frmNext.ResizeScaled(pnlwinhost.Width, pnlwinhost.Height)
@@ -644,7 +661,7 @@ PUBLIC SUB btback_Click()
       frm.Show
       ClsGlobal.sBackNav.Add(frm)
       END IF
-      
+      fmain.btnext.Enabled = TRUE
       
       
 
