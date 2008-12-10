@@ -162,14 +162,16 @@ PUBLIC FUNCTION CREATE_IMPORTED_ACCOUNT(sname AS String) AS Integer
   ' Add the face icon
   IF Len(ME.tbPicPath.Text) > 0 THEN 
           IF Exist(clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face") THEN KILL clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face"
+          IF Exist(sPicdir &/ sname & ".face.icon") THEN KILL sPicdir &/ sname & ".face.icon"
           SHELL "cd " & sPicdir & " && ln -s " & Replace(ME.tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & sname & ".face.icon" WAIT  'link for KDM
+          'shell "cd " & sPicdir & " && ln -s " & Replace(me.tbPicPath.Text, clsglobal.sTargetMnt, "") & Space(1) &
               ' Tweak for the GDM face icon to work
        '   TRY COPY Trim(tbPicPath.Text) TO clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face"
        EXEC ["cp", Trim(tbPicPath.Text), clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face"] WAIT  ' icon for GDM login
        EXEC ["chmod", "664", clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face"] WAIT 
           'SHELL "chmod 644 " & ClsGlobal.sTargetMnt &/ "home/" & sname &/ ".face" WAIT 
-          SHELL "chroot " & ClsGlobal.sTargetMnt & " chown " & sname & Space(1) &/ "home" &/ sname &/ ".face" WAIT
-          SHELL "chroot " & ClsGlobal.sTargetMnt & " chgrp " & sname & Space(1) &/ "home/" & sname &/ ".face" WAIT
+          SHELL "chroot " & ClsGlobal.sTargetMnt & " chown -R " & sname & Space(1) &/ "home" &/ sname WAIT
+          SHELL "chroot " & ClsGlobal.sTargetMnt & " chgrp -R " & sname & Space(1) &/ "home/" & sname WAIT
           IF ERROR THEN Message.Error(Error.Where & gb.NewLine & Error.Text)
   END IF
     
