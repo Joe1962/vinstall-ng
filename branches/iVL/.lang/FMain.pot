@@ -14,99 +14,111 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FMain.class:187
+#: FMain.class:188
 msgid "Restart"
 msgstr ""
 
-#: FMain.class:350
+#: FMain.class:351
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr ""
 
-#: FMain.class:352
+#: FMain.class:353
 msgid "Please wait while setup analyses your current partition setup."
 msgstr ""
 
-#: FMain.class:352
+#: FMain.class:353
 msgid "This may take a while ..."
 msgstr ""
 
-#: FMain.class:372
+#: FMain.class:373
 msgid "You must select a \"/\" partition. This is the target where the system will install to"
 msgstr ""
 
-#: FMain.class:434
+#: FMain.class:441
+msgid "You have not selected any operating systems for your boot menu."
+msgstr ""
+
+#: FMain.class:441
+msgid "If you wish to bypass the bootloader setup, uncheck the"
+msgstr ""
+
+#: FMain.class:441
+msgid "checkbox."
+msgstr ""
+
+#: FMain.class:450
 msgid "Please select a default operating system to boot before proceeding"
 msgstr ""
 
-#: FMain.class:435
+#: FMain.class:451
 msgid "Select an entry from this list"
 msgstr ""
 
-#: FMain.class:444
+#: FMain.class:460
 msgid "Skipping boot loader setup"
 msgstr ""
 
-#: FMain.class:470
+#: FMain.class:486
 msgid "Skipping lilo setup"
 msgstr ""
 
-#: FMain.class:486
+#: FMain.class:502
 msgid "Please enter the root password. For your security purposes, do not leave this blank"
 msgstr ""
 
-#: FMain.class:491
+#: FMain.class:507
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
-#: FMain.class:504
+#: FMain.class:521
 msgid "Setup has detected existing directories in the partition you selected for /home."
 msgstr ""
 
-#: FMain.class:504
+#: FMain.class:521
 msgid "Would you like to import these user accounts into your new Operating System"
 msgstr ""
 
-#: FMain.class:504
+#: FMain.class:521
 msgid "Yes"
 msgstr ""
 
-#: FMain.class:504
+#: FMain.class:521
 msgid "No"
 msgstr ""
 
-#: FMain.class:522
+#: FMain.class:539
 msgid "You have not created any user accounts for this system yet. There is not enough information"
 msgstr ""
 
-#: FMain.class:522
+#: FMain.class:539
 msgid "to create an account here. It is recommended that you create at least one."
 msgstr ""
 
-#: FMain.class:522
+#: FMain.class:539
 msgid "Would you like to continue anyway?"
 msgstr ""
 
-#: FMain.class:540
+#: FMain.class:557
 msgid "Please specify a hostname for this computer"
 msgstr ""
 
-#: FMain.class:544
+#: FMain.class:561
 msgid "Please specify the domain this computer belongs to"
 msgstr ""
 
-#: FMain.class:794
+#: FMain.class:808
 msgid "Back"
 msgstr ""
 
-#: FMain.class:805
+#: FMain.class:819
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:816
+#: FMain.class:830
 msgid "Next"
 msgstr ""
 
-#: FMain.class:830
+#: FMain.class:844
 msgid "Button1"
 msgstr ""
 

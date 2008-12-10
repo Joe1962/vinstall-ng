@@ -134,6 +134,9 @@ END
 
 PUBLIC SUB Form_Show()
 
-  ME.Form_Open()
+    FMain.tvPlan["Conf0"].Selected = TRUE
+   FMain.tvPlan["Conf0"].Picture = MdlCore.sNowPic
+   FMain.tvPlan["Inst1"].Picture = MdlCore.sDonePic 
+  'ME.Form_Open()
 
 END

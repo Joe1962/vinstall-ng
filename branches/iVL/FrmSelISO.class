@@ -219,7 +219,8 @@ END
 
 PUBLIC SUB Form_Hide()
 
-  FMain.frmLast = ME
+  'FMain.frmLast = ME
+  'ME.Close
   'FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
   
   

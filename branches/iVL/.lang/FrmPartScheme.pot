@@ -34,19 +34,19 @@ msgstr ""
 msgid "This option is the safest choice if you have other existing installations that you wish to keep."
 msgstr ""
 
-#: FrmPartScheme.class:112
+#: FrmPartScheme.class:113
 msgid "Disk Partitioning Options"
 msgstr ""
 
-#: FrmPartScheme.class:117
+#: FrmPartScheme.class:118
 msgid "Use existing disk partitions"
 msgstr ""
 
-#: FrmPartScheme.class:122
+#: FrmPartScheme.class:123
 msgid "Modify my disk partitions to make room for new installation"
 msgstr ""
 
-#: FrmPartScheme.class:127
+#: FrmPartScheme.class:128
 msgid "TextLabel1"
 msgstr ""
 
