@@ -419,7 +419,12 @@ PUBLIC SUB btnext_Click()
         frmNext = FrmPkgSel
     CASE "FrmSummary"
       '      frmNext = FrmHostPrep ' prepare host
+            
       frmNext = FrmInstallSys
+      FrmCredits.Reparent(FrmInstallSys.embCredits)
+      FrmCredits.Show()
+      FrmInstallSys.embCredits.Visible = TRUE
+      MdlSetup.BEGIN_INSTALLATION()
 
     CASE "FrmInstallSys"
       MdlInstallSys.WRITE_NEW_DISTRO_ID()
@@ -549,7 +554,7 @@ PUBLIC SUB btnext_Click()
             END IF
       END IF
                 
-      SHELL "cp /mnt/target/etc/modules.conf >/etc/modules.conf" WAIT 
+      SHELL "cp /mnt/target/etc/modules.conf /etc/modules.conf" WAIT 
       SHELL "ifconfig eth0 up" WAIT 
       SHELL "chmod 700 /mnt/target/home/*"
       frmNext = FrmNetConf
@@ -613,18 +618,18 @@ PUBLIC SUB btnext_Click()
     '  IF ClsGlobal.sBackNav.Find(FrmCurr) = -1 THEN ClsGlobal.sBackNav.Add(FrmCurr)
     END IF
     END IF
-    IF frmNext.name <> "FrmInstallSys" THEN 
-      frmNext.Show
-    ELSE 
-      frmNext.Show
-      WAIT 1
-      FrmCredits.Reparent(FrmInstallSys.embCredits)
-      FrmCredits.Show()
-      FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
-      FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
-      FMain.tvPlan["Inst1"].Selected = TRUE
-      MdlSetup.BEGIN_INSTALLATION()
-    END IF
+    ' IF frmNext.name <> "FrmInstallSys" THEN 
+    '   frmNext.Show
+    ' ELSE 
+    '   frmNext.Show
+    '   WAIT 1
+    '   FrmCredits.Reparent(FrmInstallSys.embCredits)
+    '   FrmCredits.Show()
+    '   FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
+    '   FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
+    '   FMain.tvPlan["Inst1"].Selected = TRUE
+    '   MdlSetup.BEGIN_INSTALLATION()
+    ' END IF
 
   END IF
 '''END IF
