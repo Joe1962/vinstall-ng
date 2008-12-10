@@ -181,6 +181,7 @@ PUBLIC SUB btnext_Click()
   DIM cb AS CheckBox
   DIM cbox AS ComboBox
   
+  MdlCore.WARN_STATUS("")
   'tvPlan.Refresh()
   'FMain.tlStatus.Text = ("Working ... Please wait")
   FMain.btnext.Enabled = FALSE
@@ -421,10 +422,10 @@ PUBLIC SUB btnext_Click()
       '      frmNext = FrmHostPrep ' prepare host
             
       frmNext = FrmInstallSys
-      FrmCredits.Reparent(FrmInstallSys.embCredits)
-      FrmCredits.Show()
-      FrmInstallSys.embCredits.Visible = TRUE
-      MdlSetup.BEGIN_INSTALLATION()
+      ' ' ' ' ' ' ' FrmCredits.Reparent(FrmInstallSys.embCredits)
+      ' ' ' ' ' ' ' FrmCredits.Show()
+      ' ' ' ' ' ' ' FrmInstallSys.embCredits.Visible = TRUE
+      ' ' ' ' ' ' ' MdlSetup.BEGIN_INSTALLATION()
 
     CASE "FrmInstallSys"
       MdlInstallSys.WRITE_NEW_DISTRO_ID()
@@ -618,24 +619,26 @@ PUBLIC SUB btnext_Click()
     '  IF ClsGlobal.sBackNav.Find(FrmCurr) = -1 THEN ClsGlobal.sBackNav.Add(FrmCurr)
     END IF
     END IF
-    ' IF frmNext.name <> "FrmInstallSys" THEN 
-    '   frmNext.Show
-    ' ELSE 
-    '   frmNext.Show
-    '   WAIT 1
-    '   FrmCredits.Reparent(FrmInstallSys.embCredits)
-    '   FrmCredits.Show()
-    '   FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
-    '   FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
-    '   FMain.tvPlan["Inst1"].Selected = TRUE
-    '   MdlSetup.BEGIN_INSTALLATION()
-    ' END IF
+    IF frmNext.name <> "FrmInstallSys" THEN 
+      frmNext.Show
+    ELSE 
+      frmNext.Show
+      WAIT 1
+      FrmCredits.Reparent(FrmInstallSys.embCredits)
+      FrmCredits.Show()
+      FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
+      FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
+      FMain.tvPlan["Inst1"].Selected = TRUE
+      MdlSetup.BEGIN_INSTALLATION()
+    END IF
 
   END IF
 '''END IF
 tvPlan.Refresh()
-ClsGlobal.sBackNav.Add(FrmCurr)
+IF ClsGlobal.sBackNav.Find(FrmCurr) = -1 THEN ClsGlobal.sBackNav.Add(FrmCurr)
 'FMain.tlStatus.Text = ""
+MdlCore.warn_status_off
+ME.tvPlan.Refresh()
 END
 
 
@@ -664,6 +667,7 @@ PUBLIC SUB btback_Click()
     
     iKey = ClsGlobal.sBackNav.Find(FrmCurr)
       IF iKey <> -1 THEN 
+      IF iKey - 1 < 0 THEN RETURN 
         frm = ClsGlobal.sBackNav[iKey - 1]
         ClsGlobal.sBackNav.Delete(iKey)
           WITH FMain

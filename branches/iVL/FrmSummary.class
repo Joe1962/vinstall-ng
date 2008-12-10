@@ -39,7 +39,7 @@ PUBLIC SUB prepare_partition_summary()
         ME.GridView1.Columns[0].text = ("Partition")
         ME.GridView1.Columns[0].Width = MdlObjSizer.get_object_width("/dev/hda1***") + 36
         ME.GridView1.Columns[1].text = ("Size")
-        ME.GridView1.Columns[1].Width = MdlObjSizer.get_object_width(ME.GridView1.Columns[1].text) * 2
+        ME.GridView1.Columns[1].Width = MdlObjSizer.get_object_width("100000.00GB")
         ME.GridView1.Columns[2].text = ("Filesystem")
         ME.GridView1.Columns[2].Width = MdlObjSizer.get_object_width(("Filesystem")) * 2
         ME.GridView1.Columns[3].text = ("Mount Point")
@@ -251,8 +251,11 @@ ME.lbInstallType.Alignment = Align.Normal
       .TextBox1.Move(.lbInstallType.Left + .lbInstallType.Width + 8, .lbInstallType.top, .lbInstallType.Width)
       .Frame1.Move(4, .TextBox1.top + .TextBox1.Height + 12, .ClientWidth - (.Frame1.Left * 2), (.ClientHeight - .Frame1.top) / 2.5)
       .GridView1.Move(4, 16, .Frame1.Width - (.GridView1.Left * 2), .Frame1.Height - (.GridView1.top * 2))
-      .Frame2.Move(4, .Frame1.top + .Frame1.Height + 8, .ClientWidth - (.Frame2.Left * 2), (.ClientHeight - .Frame2.Top) - .TextBox1.Height)
-      .GridView2.Move(4, 16, .Frame2.Width - (.GridView2.Left * 2), .Frame2.Height - (.GridView2.top * 2))
+      .Frame2.Move(4, Frame1.top + .Frame1.Height + 8, .ClientWidth - (.Frame2.Left * 2), (.ClientHeight - .Frame2.Top) - (FMain.btnext.Height * 4))
+      .GridView2.Move(4, 16, .Frame2.Width - (.GridView2.Left * 2), .Frame2.Height - (.GridView2.top))
+      '.Frame2.Move(4, .Frame1.top + .Frame1.Height + 8, .ClientWidth - (.Frame2.Left * 2), (.ClientHeight - .Frame2.Top) - .TextBox1.Height)
+      
+      '.GridView2.Move(4, 16, .Frame2.Width - (.GridView2.Left * 2), .Frame2.Height - (.GridView2.top * 2) - FMain.btback.Height)
       
       
     END WITH       

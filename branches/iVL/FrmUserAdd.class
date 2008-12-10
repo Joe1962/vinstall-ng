@@ -86,7 +86,7 @@ PUBLIC SUB Form_Open()
           
     MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS(ME.fGroupSel)
 '    IF Len(MdlSetup.SCAN_HOME_DIRS(ClsGlobal.sTargetMnt &/ "home")) > 0 THEN 
-IF MdlSetup.SCAN_HOME_DIRS() = 1 THEN 
+IF MdlSetup.SCAN_HOME_DIRS(clsglobal.sTargetMnt &/ "home") = 1 THEN 
       ME.btImportAcct.Enabled = TRUE
       ME.btImportAcct.ForeColor = Color.Black
     ELSE 

@@ -57,7 +57,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
   SHELL " probepart | grep -e \" Linux$\" | cut -f 1 -d \' \' | grep /dev" TO sDump1
   sDump1 = Trim(sDump1)
   
-      
+      MdlCore.WARN_STATUS("")
     y = 8
     x = 8
   
@@ -100,6 +100,8 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
 
 
         FOR i = 0 TO sPartList.Count - 1
+           MdlCore.WARN_STATUS("")
+           FMain.tlStatus.Visible = TRUE
           sDrive = Left(sPartList[i], Len("/dev/hda"))
           sPartNo = Right(sPartList[i], Len(sPartList[i]) - Len(sDrive))
             IF Len(sPartNo) > 1 THEN 
