@@ -343,13 +343,10 @@ sOut = "#!/bin/bash \n" &
 "sleep 20"
 '"echo done >/tmp/status" & gb.NewLine
 
-EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init"] WAIT 
-EXEC ["chmod", "700", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init"] WAIT 
-EXEC ["touch", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init" &/ "config-stage2"] WAIT 
 
-File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-vinstall-ng", sOut)
+File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/config-vinstall-ng", sOut)
 
-EXEC ["chmod", "+x", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init" &/ "config-vinstall-ng"] WAIT 
+EXEC ["chmod", "+x", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "config-vinstall-ng"] WAIT 
 
 SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT 
 
@@ -367,6 +364,13 @@ SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT
  "cd / && sh /var/log/scripts/x11-fonts* \n " &
  "/sbin/vxconf \n" &
  "#/sbin/config-stage1 gui-installer" & gb.NewLine
+ 
+ 
+EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init"] WAIT 
+EXEC ["chmod", "700", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init"] WAIT 
+EXEC ["touch", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init" &/ "config-stage2"] WAIT 
+ 
+ 
  File.Save(ClsGlobal.sTargetMnt &/ "var/log/setup/init/config-stage2", sOut)
  
  EXEC ["chmod", "+x", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init" &/ "config-stage2"] WAIT 
@@ -374,7 +378,7 @@ SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT
 IF Exist(ClsGlobal.sTargetMnt &/ "tmp" &/ "status") THEN KILL ClsGlobal.sTargetMnt &/ "tmp" &/ "status"
 IF Exist("/tmp/status") THEN KILL "/tmp/status"
 
-hBgConfigProc = SHELL "chroot /mnt/target /var/log/setup/init/config-vinstall-ng ; echo Done > /tmp/status" ' FOR READ" 
+hBgConfigProc = SHELL "chroot /mnt/target /var/log/setup/config-vinstall-ng ; echo Done > /tmp/status" ' FOR READ" 
 'FrmDone.tmBgMon.Enabled = TRUE
  
 
