@@ -178,6 +178,7 @@ PUBLIC SUB btnext_Click()
   DIM sDev AS String
   DIM sLang AS String
   DIM i AS Integer
+  DIM cb AS CheckBox
   DIM cbox AS ComboBox
   
   'tvPlan.Refresh()
@@ -429,16 +430,17 @@ PUBLIC SUB btnext_Click()
       frmNext = FrmLiloSetup
     
     CASE "FrmLiloSetup"
-      FOR EACH cbox IN MdlLilo.arrLinuxIncCheckboxes
-        IF cbox.Value = TRUE THEN INC i
+      FOR EACH cb IN MdlLilo.arrLinuxIncCheckboxes
+        IF cb.Value = TRUE THEN INC i
       NEXT 
-      FOR EACH cbox IN MdlLilo.arrWinBootChecks
-        IF cbox.Value = TRUE THEN INC i
+      FOR EACH cb IN MdlLilo.arrWinBootChecks
+        IF cb.Value = TRUE THEN INC i
       NEXT
       
       IF i = 0 THEN 
         Message.error(("You have not selected any operating systems for your boot menu.") & "<br>" &
         ("If you wish to bypass the bootloader setup, uncheck the") & Space(1) & "\"" & FrmLiloSetup.cbYNLilo.Text & "\"" & Space(1) & ("checkbox."))
+        ME.btnext.Enabled = TRUE
         STOP EVENT
         RETURN 
       END IF
