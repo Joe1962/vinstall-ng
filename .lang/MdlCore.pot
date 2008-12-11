@@ -18,99 +18,99 @@ msgstr ""
 msgid "Working ... Please Wait"
 msgstr ""
 
-#: MdlCore.module:221
+#: MdlCore.module:251
 msgid "Scanning system for installable media. Please wait ..."
 msgstr ""
 
-#: MdlCore.module:237
+#: MdlCore.module:267
 msgid "No Installable Media Found"
 msgstr ""
 
-#: MdlCore.module:239
+#: MdlCore.module:269
 msgid "Setup was unable to find any installable media on your system. Please insert your VectorLinux "
 msgstr ""
 
-#: MdlCore.module:239
+#: MdlCore.module:269
 msgid "installation CD and click"
 msgstr ""
 
-#: MdlCore.module:239
+#: MdlCore.module:269
 msgid "to try again"
 msgstr ""
 
-#: MdlCore.module:400
+#: MdlCore.module:430
 msgid "Build Date: "
 msgstr ""
 
-#: MdlCore.module:400
+#: MdlCore.module:430
 msgid "MINIMUM REQUIREMENTS"
 msgstr ""
 
-#: MdlCore.module:405
+#: MdlCore.module:435
 msgid "Setup is unable to find SETUP.CONF in your install media. This could be symptoms of a bad burn or a bad ISO"
 msgstr ""
 
-#: MdlCore.module:478
+#: MdlCore.module:508
 msgid "Cannot find SETUP.CONF"
 msgstr ""
 
-#: MdlCore.module:486
+#: MdlCore.module:516
 msgid "Preparation"
 msgstr ""
 
-#: MdlCore.module:487
+#: MdlCore.module:517
 msgid "Language Selection"
 msgstr ""
 
-#: MdlCore.module:488
+#: MdlCore.module:518
 msgid "Find installation media"
 msgstr ""
 
-#: MdlCore.module:489
+#: MdlCore.module:519
 msgid "Disk Partitioning"
 msgstr ""
 
-#: MdlCore.module:490
+#: MdlCore.module:520
 msgid "Software Selection"
 msgstr ""
 
-#: MdlCore.module:492
+#: MdlCore.module:522
 msgid "Installation"
 msgstr ""
 
-#: MdlCore.module:493
+#: MdlCore.module:523
 msgid "Installation Summary"
 msgstr ""
 
-#: MdlCore.module:495
+#: MdlCore.module:525
 msgid "Install Operating System"
 msgstr ""
 
-#: MdlCore.module:496
+#: MdlCore.module:526
 msgid "System Configuration"
 msgstr ""
 
-#: MdlCore.module:497
+#: MdlCore.module:527
 msgid "Boot Menu Options"
 msgstr ""
 
-#: MdlCore.module:498
+#: MdlCore.module:528
 msgid "Regional Settings"
 msgstr ""
 
-#: MdlCore.module:499
+#: MdlCore.module:529
 msgid "System Administrator"
 msgstr ""
 
-#: MdlCore.module:500
+#: MdlCore.module:530
 msgid "User Accounts"
 msgstr ""
 
-#: MdlCore.module:501
+#: MdlCore.module:531
 msgid "Network Configuration"
 msgstr ""
 
-#: MdlCore.module:502
+#: MdlCore.module:532
 msgid "Final Hardware Configuration"
 msgstr ""
 

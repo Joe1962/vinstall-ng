@@ -46,14 +46,13 @@ PUBLIC SUB FIND_ISO_ON_DRIVE(sDrive AS String)
   ME.WARN_STATUS("")
   
   'Message(ClsGlobal.sSourceMnt)
-  SHELL "umount " & ClsGlobal.sSourceMnt WAIT 
-  SHELL "mount " & sDrive & Space(1) & ClsGlobal.sSourceMnt WAIT 
+  'SHELL "umount " & ClsGlobal.sSourceMnt WAIT 
+  EXEC ["umount", ClsGlobal.sSourceMnt] WAIT 
+  EXEC ["mount", sDrive, ClsGlobal.sSourceMnt] WAIT 
+  'SHELL "mount " & sDrive & Space(1) & ClsGlobal.sSourceMnt WAIT 
     SHELL "ls " & ClsGlobal.sSourceMnt & " | grep -i vl* | grep -i iso" TO sResults
       sResults = Trim(sResults)
-      'Message(sResults)
-          'IF sResults <> "" THEN 
-          '  IF InStr(sResults, gb.NewLine) THEN 'more than one iso was found... do a loop for each one
-              ' this loop will mount each iso and store it's SETUP.CONF to a temp file
+           ' this loop will mount each iso and store it's SETUP.CONF to a temp file
                 sISOList = Split(sResults, gb.NewLine)
                   FOR i = 0 TO sISOList.count - 1
                     sIso = Trim(sISOList[i])
@@ -61,19 +60,22 @@ PUBLIC SUB FIND_ISO_ON_DRIVE(sDrive AS String)
                           IF Exist("/mnt/loop") = FALSE THEN 
                             MKDIR "/mnt/loop"
                           END IF
-                          SHELL "umount /mnt/loop" WAIT 
-                    SHELL "mount -o loop " & ClsGlobal.sSourceMnt &/ sISO & Space(1) & "/mnt/loop" WAIT 
+                          'SHELL "umount /mnt/loop" WAIT 
+                          EXEC ["umount", "/mnt/loop"] WAIT 
+                          EXEC ["mount", "-o", "loop", ClsGlobal.sSourceMnt &/ sIso, "/mnt/loop"] WAIT 
+                    'SHELL "mount -o loop " & ClsGlobal.sSourceMnt &/ sISO & Space(1) & "/mnt/loop" WAIT 
                         IF Exist("/mnt/loop/veclinux/SETUP.CONF") = TRUE THEN 
                             IF FrmSelISO.lstInstallableImg.Find(sISO & " on " & sDrive) = -1 THEN 
                                File.Save(Temp(siso), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
                                FrmSelISO.lstInstallableImg.Add(sISO & " on " & sDrive)
                             END IF
                         END IF
-                    SHELL "umount /mnt/loop" WAIT 
-                      
+                    'SHELL "umount /mnt/loop" WAIT 
+                    EXEC ["umount", "/mnt/loop"] WAIT 
                       
                   NEXT 
-                SHELL "umount " & ClsGlobal.sSourceMnt WAIT 
+                  EXEC ["umount", ClsGlobal.sSourceMnt] WAIT 
+                'SHELL "umount " & ClsGlobal.sSourceMnt WAIT 
 
   ME.warn_status_off
 END
@@ -88,13 +90,14 @@ DIM sPartList AS String[]
 DIM i AS Integer
 DIM sPartition AS String
 
+' THIS SUB SCANS ALL PARTITIONS (LINUX AND WINDOWS) FOR ISO IMAGES
+
 ME.WARN_STATUS("")
 
   SHELL "probepart | grep -v -i \'swap\' | grep -v -i \'ext\' |grep \'/dev\'| grep -v \'Disk\'| cut -f 1 -d \' \'" TO sResults
   'Message(sResults)
   sResults = Trim(sResults)
-  'Message.Info(sResults)
-  'IF InStr(sResults, gb.NewLine) THEN 
+
     sPartList = Split(sResults, gb.NewLine)
       FOR i = 0 TO sPartList.count - 1
         sPartition = Trim(sPartList[i])
@@ -110,26 +113,53 @@ END
 
 PUBLIC SUB MEDIA_SCAN()
   
-  DIM sCmd AS String
-  DIM sList AS String
-  DIM sDrives AS String[]
-  DIM sDrive AS String
-  DIM sMountPoint AS String 
-  DIM sDump AS String
-  DIM i AS Integer
-  
-    ME.WARN_STATUS("")
-  'ClsGlobal.sSourceMnt = "/mnt/source"
-  sMountPoint = ClsGlobal.sSourceMnt
-  
-  sCmd = "cat /proc/sys/dev/cdrom/info | grep \"drive name\" |cut -f 2 -d\':\'|xargs -n 2" 
-  SHELL sCmd TO sList
-  sList = Trim(sList)
-  'PRINT sList
-      IF Len(sList) < 1 THEN RETURN 
-    'IF InStr(sList, Space(1)) > 0 THEN 'there is more than one drive
-    sDrives = Split(sList, Space(1))
+  ' ' ' ' DIM sCmd AS String
+  ' ' ' ' DIM sList AS String
+  ' ' ' ' DIM sDrives AS String[]
+  ' ' ' ' DIM sDrive AS String
+  ' ' ' ' DIM sMountPoint AS String 
+  ' ' ' ' DIM sDump AS String
+  ' ' ' ' DIM i AS Integer
+  ' ' ' ' 
+  ' ' ' '   ME.WARN_STATUS("")
+  ' ' ' ' 'ClsGlobal.sSourceMnt = "/mnt/source"
+  ' ' ' ' sMountPoint = ClsGlobal.sSourceMnt
+  ' ' ' ' 
+  ' ' ' ' sCmd = "cat /proc/sys/dev/cdrom/info | grep \"drive name\" |cut -f 2 -d\':\'|xargs -n 2" 
+  ' ' ' ' SHELL sCmd TO sList
+  ' ' ' ' sList = Trim(sList)
+  ' ' ' ' 'PRINT sList
+  ' ' ' '     IF Len(sList) < 1 THEN RETURN 
+  ' ' ' '   'IF InStr(sList, Space(1)) > 0 THEN 'there is more than one drive
+  ' ' ' '   sDrives = Split(sList, Space(1))
             
+
+DIM sCmd AS String
+DIM sResults AS String
+DIM sList AS String
+DIM sDrives AS String[]
+DIM sDrive AS String
+DIM sMountPoint AS String 
+DIM sDump AS String
+DIM i AS Integer
+
+ME.WARN_STATUS("")
+'ClsGlobal.sSourceMnt = "/mnt/source"
+sMountPoint = ClsGlobal.sSourceMnt
+
+SHELL "probepart | grep -v -i \'swap\' | grep -v -i \'ext\' |grep \'/dev\'| grep -v \'Disk\'| cut -f 1 -d \' \'|cut -d'/' -f3" TO sResults
+'sCmd = "cat /proc/sys/dev/cdrom/info | grep \"drive name\" |cut -f 2 -d\':\'|xargs -n 2" 
+sCmd = "probedisk|cut -d\'|\' -f1|cut -d\'/\' -f3"
+SHELL sCmd TO sList
+sList = sList & Space(1) & sResults
+sList = Trim(sList)
+'PRINT sList
+IF Len(sList) < 1 THEN RETURN 
+'IF InStr(sList, Space(1)) > 0 THEN 'there is more than one drive
+sDrives = Split(sList, "\n")
+
+
+
       FOR i = 0 TO sDrives.count - 1
         ' this is where we loop to find SETUP.CONF in the cd
           'first, clear the mount point (using $HOME/mnt/cdrom for now)
