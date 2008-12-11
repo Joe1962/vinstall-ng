@@ -182,7 +182,8 @@ MdlCore.WARN_STATUS(("Creating user account ... Please wait"))
             'the next lines are for gdm
             'PRINT tbPicPath.Text
             'SHELL "cp " & Replace(tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & ClsGlobal.sTargetMnt &/ "home/" & tbUsername.Text & "/.face" WAIT 
-            COPY Trim(tbPicPath.Text) TO clsglobal.sTargetMnt &/ "home" &/ tbUsername.text &/ ".face"
+            'COPY Trim(tbPicPath.Text) TO clsglobal.sTargetMnt &/ "home" &/ tbUsername.text &/ ".face"
+            EXEC ["cp", Trim(tbPicPath.Text), clsglobal.sTargetMnt &/ "home" &/ tbUsername.Text &/ ".face"] WAIT 
             SHELL "chmod 644 " & ClsGlobal.sTargetMnt &/ "home/" & tbUsername.Text & "/.face" WAIT 
             SHELL "chroot " & ClsGlobal.sTargetMnt & " chown " & tbUsername.Text & Space(1) &/ "home/" & tbUsername.Text & "/.face" WAIT
             SHELL "chroot " & ClsGlobal.sTargetMnt & " chgrp " & tbUsername.Text & Space(1) &/ "home/" & tbUsername.Text & "/.face" WAIT
