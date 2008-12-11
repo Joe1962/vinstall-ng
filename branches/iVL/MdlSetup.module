@@ -346,16 +346,18 @@ PUBLIC FUNCTION SCAN_HOME_DIRS(sHomePartition AS String) AS Integer
   IF NOT ClsPartSel.sHome THEN RETURN ""
   IF ClsPartSel.sRoot = ClsPartSel.sHome THEN RETURN ""
   
-    SHELL "ls " & sHomePartition & " | grep / | grep -v ftp | grep -v lost+found" TO sDump
+    'SHELL "ls " & sHomePartition & " | grep / | grep -v ftp | grep -v lost+found" TO sDump
+    SHELL "ls -d " & sHomePartition &/ "*/" & " | grep -v gtp | grep -v lost+found" TO sDump
+    
     
     sDump = Trim(sDump)
 
     IF Len(sDump) > 0 THEN 
-      RETURN 1
+      RETURN 1 ' user dirs are found
     ELSE
     FrmUserAdd.btImportAcct.Enabled = FALSE
     FrmUserAdd.btImportAcct.ForeColor = Color.Gray
-      RETURN 0
+      RETURN 0 ' no dirs found
     
     END IF
     
