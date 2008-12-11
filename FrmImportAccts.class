@@ -58,8 +58,8 @@ PUBLIC SUB btcancel_Click()
 
   SELECT CASE Message.Question(("Would you like to continue adding new user accounts now?"), ("Yes"), ("No"))
     CASE 1
-      FrmUserAdd.Reparent(FMain.pnlwinhost)
       MdlUsrAdd.LIST_NEW_USER_ACCOUNT()
+      FrmUserAdd.Reparent(FMain.pnlwinhost)
       FrmUserAdd.Show()
       ME.Close()
     CASE ELSE 
