@@ -78,11 +78,11 @@ PUBLIC SUB Form_Open()
       .Add(ME.tbUsername)
     END WITH 
         
-    IF MdlUsrAdd.objGrps THEN 
-      FOR EACH cb IN MdlUsrAdd.objGrps
-        cb.Delete
-      NEXT 
-    END IF
+    ' ' ' IF MdlUsrAdd.objGrps THEN 
+    ' ' '   FOR EACH cb IN MdlUsrAdd.objGrps
+    ' ' '     cb.Delete
+    ' ' '   NEXT 
+    ' ' ' END IF
           
     MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS(ME.fGroupSel)
 '    IF Len(MdlSetup.SCAN_HOME_DIRS(ClsGlobal.sTargetMnt &/ "home")) > 0 THEN 
@@ -445,15 +445,13 @@ END
 
 PUBLIC SUB Form_Show()
   ' 
-  ME.Form_Open()
-  '   Fmain.frmcurr = ME
-  ' 
-  ' WITH FMain
-  '   .FrmCurr = ME
-  '   .tvPlan["Conf2"].Picture = MdlCore.sDonePic
-  '   .tvPlan["Conf3"].picture = MdlCore.sNowPic
-  '   .tvPlan["Conf3"].Selected = TRUE
-  ' END WITH 
+  'ME.Form_Open()
+  WITH FMain
+    .FrmCurr = ME
+    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
+    .tvPlan["Conf3"].picture = MdlCore.sNowPic
+    .tvPlan["Conf3"].Selected = TRUE
+  END WITH 
 
 END
 
