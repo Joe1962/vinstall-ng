@@ -11,10 +11,10 @@
     MoveScaled(2,5,15,1)
   }
   { Frame1 Frame
-    MoveScaled(1,8,72,22)
+    MoveScaled(1,8,81,22)
     Text = ("")
     { tlAboutRoot TextLabel
-      MoveScaled(2,3,67,16)
+      MoveScaled(2,3,68,16)
       Text = ("The linux root account is pre-assigned to be used as the system administrator's account. This account is used to perform system-wide changes such as software upgrades, managing user accounts etc. \n\nMost other operations do not require administrative priviledges.\nThe root password must be entered twice for ensured accuracy. When choosing a root password, think of something easy for you to remember, but hard for others to guess.")
     }
   }
