@@ -106,6 +106,7 @@ PUBLIC SUB PERFORM_CUSTOM_INSTALL()
   FrmInstallSys.tlBanner.Text = "<b>" & ("Installation complete") & "</b>"
   FrmInstallSys.tlCurrPkg.Text = ("Packages have been Installed. Please click next to move on to System Configuration.")
   Message.Info(ClsGlobal.DISTRO & Space(1) & ("installation is complete. Click next to begin system configuration"))
+  FrmCredits.TextLabel1.Text = ""
     FrmCredits.Timer1.Stop
     FrmCredits.ScrollView1.Scroll(0, 200)
     
@@ -132,7 +133,7 @@ PUBLIC FUNCTION INSTALL_KERNELS() AS Integer
   DIM sLabel AS String
   DIM sKernelPath AS String
   DIM i AS Integer
-  ClsGlobal.sSourceMnt = "/mnt/cdrom"
+  'ClsGlobal.sSourceMnt = "/mnt/cdrom"
   
   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^ISO_KERNEL_" TO sKernames
   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^HD_KERNEL_" TO sKernVers

@@ -627,10 +627,14 @@ PUBLIC SUB btnext_Click()
       WAIT 1
       FrmCredits.Reparent(FrmInstallSys.embCredits)
       FrmCredits.Show()
-      FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
-      FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
-      FMain.tvPlan["Inst1"].Selected = TRUE
+      ' FMain.tvPlan["Inst0"].Picture = MdlCore.sDonePic
+      ' FMain.tvPlan["Inst1"].Picture = MdlCore.sNowPic
+      ' FMain.tvPlan["Inst1"].Selected = TRUE
+      fmain.Refresh
+      fmain.tvPlan.Refresh
+      MdlCore.warn_status_off()
       MdlSetup.BEGIN_INSTALLATION()
+      
     END IF
 
   END IF
