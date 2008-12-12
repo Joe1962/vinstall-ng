@@ -39,6 +39,7 @@ PUBLIC SUB btBrowsePic_Click()
     ME.pbLogin.Move(ME.tbPass2.left + ME.tbPass2.Width + 4, ME.tlPasswd2.top, 64, 64)
     ME.pbLogin.Picture = Picture[dialog.path]
     ME.pbLogin.Stretch = TRUE
+    ME.pbLogin.Visible = TRUE
     
   
 
@@ -60,14 +61,16 @@ PUBLIC SUB btcancel_Click()
     CASE 1
       MdlUsrAdd.LIST_NEW_USER_ACCOUNT()
       FrmUserAdd.Reparent(FMain.pnlwinhost)
+      ME.Hide()
       FrmUserAdd.Show()
-      ME.Close()
+      'ME.Close()
     CASE ELSE 
-      FMain.frmNext = FrmNetConf
+      'FMain.frmNext = FrmNetConf
       FrmNetConf.Reparent(FMain.pnlwinhost)
+      ME.Hide()
       FrmNetConf.Show()
       'ME.Hide()
-      ME.Close()
+      
     END SELECT 
       
   'ME.Close()
@@ -105,6 +108,9 @@ END IF
       Message.Info(("User account for") & Space(1) & Trim(ME.cbAccntList.Text) & Space(1) & ("successfully imported"))
       ME.cbAccntList.Remove(ME.cbAccntList.Find(Trim(ME.cbAccntList.Text)))
       INC MdlUsrAdd.iUsrAccts
+      ME.tbPass1.Clear
+      ME.tbPass2.Clear
+      ME.pbLogin.Visible = FALSE
     END IF
     
     'ME.Close
