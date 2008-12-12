@@ -15,6 +15,7 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
+STATIC PUBLIC iNavIdx AS Integer
 
 PRIVATE sLast AS String
 PUBLIC sNextKey AS String
@@ -664,7 +665,7 @@ PUBLIC SUB btback_Click()
    DIM iKey AS Integer
    DIM frm AS Form
 
-    
+    fmain.btback.Enabled = FALSE
     iKey = ClsGlobal.sBackNav.Find(FrmCurr)
       IF iKey <> -1 THEN 
       IF iKey - 1 < 0 THEN RETURN 
@@ -681,7 +682,7 @@ PUBLIC SUB btback_Click()
       fmain.btnext.Enabled = TRUE
       
       
-
+fmain.btback.Enabled = TRUE
 END
 
 PUBLIC SUB Button1_Click()

@@ -343,8 +343,8 @@ PUBLIC FUNCTION SCAN_HOME_DIRS(sHomePartition AS String) AS Integer
   
   DIM sDump AS String
   
-  IF NOT ClsPartSel.sHome THEN RETURN ""
-  IF ClsPartSel.sRoot = ClsPartSel.sHome THEN RETURN ""
+  IF NOT ClsPartSel.sHome THEN RETURN 0
+  IF ClsPartSel.sRoot = ClsPartSel.sHome THEN RETURN 0
   
     'SHELL "ls " & sHomePartition & " | grep / | grep -v ftp | grep -v lost+found" TO sDump
     SHELL "ls -d " & sHomePartition &/ "*/" & " | grep -v gtp | grep -v lost+found" TO sDump
