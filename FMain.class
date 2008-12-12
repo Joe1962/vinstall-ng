@@ -690,6 +690,7 @@ DIM sLang AS String = FrmLangSel.lblangsel.Current.Key
 
 IF sLang = "es" THEN sLang = "es_ES"
 IF sLang = "ru" THEN sLang = "ru_RU.utf8"
+IF sLang = "nn_NO" THEN sLang = "nn_NO.utf8"
 System.Language = sLang
 
   FMain.Close
