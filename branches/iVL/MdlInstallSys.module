@@ -26,7 +26,7 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
  DIM cb AS ComboBox
   ' this is where we need to set the mount target
   ClsGlobal.sTargetMnt = "/mnt/target"
-  
+  MdlCore.WARN_STATUS("")
   
     IF Exist(ClsGlobal.sTargetMnt) = FALSE THEN 
       TRY MKDIR ClsGlobal.sTargetMnt
@@ -69,7 +69,7 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
       FOR EACH cb IN MdlPartSel.oMountPoints
         IF Left(cb.Text, Len("/mnt")) = "/mnt" THEN EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ cb.Text] WAIT 
       NEXT 
-      
+      MdlCore.warn_status_off
 END
 
 PUBLIC SUB WRITE_NEW_DISTRO_ID()
@@ -372,6 +372,7 @@ PUBLIC SUB PERFORM_FULL_INSTALL()
   FrmInstallSys.tlBanner.Text = "<h3>" & ("Vectorlinux is now installed in your system. Please click") & Space(1) & FMain.btnext.text & Space(1) & ("to configure it.") & "</h3>"
   FrmInstallSys.tlCurrPkg.Text = "<h3>" & ("Packages have been installed in your system. Please click") & Space(1) & FMain.btnext.text & Space(1) & ("to configure it.") & "</h3>"
   Message.Info(ClsGlobal.DISTRO & Space(1) & ("installation is complete. Click next to begin system configuration"))
+  FrmCredits.TextLabel1.Text = ""
   FrmCredits.Timer1.Stop
   FrmCredits.ScrollView1.Scroll(0, 200)
   WITH FMain
