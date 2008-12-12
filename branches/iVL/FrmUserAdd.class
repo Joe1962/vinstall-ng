@@ -219,7 +219,7 @@ MdlCore.WARN_STATUS(("Creating user account ... Please wait"))
   ENDIF  
 
   ME.LstUsers.Visible = TRUE
-  ME.pbUsrPic.Visible = TRUE      
+  ME.pbUsrPic.Visible = FALSE   
   MdlCore.warn_status_off()
 END
   
@@ -371,6 +371,7 @@ PUBLIC SUB btBrowse_Click()
     IF Dialog.OpenFile() THEN RETURN 
     tbPicPath.text = Replace(Dialog.path, ClsGlobal.sSourceMnt, "")
     ME.pbUsrPic.Picture = Picture[Dialog.Path]
+    ME.pbUsrPic.Visible = TRUE
     
 '  END IF
 
