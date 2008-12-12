@@ -203,7 +203,7 @@ PUBLIC FUNCTION INSTALL_USER_PACKAGES() AS Integer
         ' install this package
         EXEC ["echo \" \" > /tmp/installdump"] WAIT 
           FrmInstallSys.tlCurrPkg.Text = ("Installing") & Space(1) & FrmUsrPkgSel.GridView1[ii, 1].Text
-                FrmInstallSys.pbInstallProg.Value = i / iStepTotal
+                FrmInstallSys.pbInstallProg.Value = i / iStepTotal 
           INC ClsGlobal.iPkgNum
           FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgTot, ClsGlobal.iPkgNum)
 
