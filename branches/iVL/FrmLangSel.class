@@ -38,7 +38,7 @@ PUBLIC SUB LIST_LANG_CHOICES()
     .Add("es_ES", "Spanish (Spain)")
     .Add("en_US", "English (U.S)")
     .Add("ru_RU.utf8", "Russian")
-    .Add("nn_NO.utf8", "Norwegian")
+    .Add("nn_NO.utf8", "Norwegian (Norway)")
   END WITH 
   
   
