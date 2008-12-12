@@ -330,7 +330,7 @@ msgstr "Current Step "
 msgid "Total progress"
 msgstr "Total progress"
 
-#: FrmLangSel.class:118
+#: FrmLangSel.class:117
 msgid "Select your language"
 msgstr "Select your language"
 
