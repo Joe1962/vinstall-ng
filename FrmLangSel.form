@@ -14,5 +14,6 @@
   }
   { lblangsel ColumnView
     MoveScaled(1,8,36,41)
+    Sorted = True
   }
 }

@@ -233,7 +233,7 @@ PUBLIC FUNCTION INSTALL_USER_PACKAGES() AS Integer
             ' ' 
     END IF
     INC ii
-  UNTIL ii = FrmUsrPkgSel.GridView1.Rows.Count - 1
+  UNTIL ii = FrmUsrPkgSel.GridView1.Rows.Count
   
     
     
