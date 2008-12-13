@@ -1,5 +1,4 @@
 #labels Featured
-
 = Screenshots =
 
 Here are some screenshots as of svn revision 401
@@ -14,5 +13,7 @@ http://upload.snelhest.org/images/0812136.png
 http://upload.snelhest.org/images/0812137.png
 http://upload.snelhest.org/images/0812138.png
 http://upload.snelhest.org/images/0812139.png
+
+= System configuration (post install) =
 http://upload.snelhest.org/images/08121310.png
 http://upload.snelhest.org/images/08121311.png
