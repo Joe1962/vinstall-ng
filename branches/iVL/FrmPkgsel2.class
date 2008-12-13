@@ -18,7 +18,7 @@
 PUBLIC SUB Form_Open()
 
   WITH ME
-    .tlbanner.Text = ("Select your indivirual packages to install.") & " <br>" & ("To install them all, just click next")
+    .tlbanner.Text = ("Select your individual packages to install.") & " <br>" & ("To install them all, just click next")
     .tlbanner.Adjust
     '.tlbanner.Border = Border.Plain
     '.tlbanner.Width = MdlObjSizer.get_object_width(.tlbanner.Text)
