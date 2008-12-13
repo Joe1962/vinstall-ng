@@ -72,9 +72,10 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     objcbWifiessid = NEW Object[]
     objIntTypes = NEW Object[]
        
-    
-    SHELL "res=$(ifconfig -a | grep ^[a-z] | grep -v ^lo); echo \"$res\" | tr -s \' \'\"\" " TO seths
-    
+    SHELL "iwconfig &>/tmp/nics; cat /tmp/nics|grep ^e|grep \"no wireles\"|cut -d \' \' -f1 >/tmp/nowifi" WAIT
+    SHELL "for i in $(cat /tmp/nowifi);do ifconfig -a | grep ^$i >>/tmp/nic;done" WAIT
+    SHELL "cat /tmp/nic| tr -s \' \'\"\" " TO seths
+    'SHELL "res=$(ifconfig -a | grep ^[a-z] | grep -v ^lo); echo \"$res\" | tr -s \' \'\"\" " TO seths
     'SHELL "ifconfig -a | grep ^[a-z]|grep -v ^lo | tr -s \' \'\"\"" TO seths
       'File.Save(Temp("eths"), Trim(seths)) 
       'Message(File.Load(Temp("eths")))
