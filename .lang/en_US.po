@@ -18,23 +18,23 @@ msgstr "VectorLinux Installer"
 msgid "GUI installer for Vector linux"
 msgstr "GUI installer for Vector linux"
 
-#: FMain.class:190 FrmDone.class:63
+#: FMain.class:191 FrmDone.class:63
 msgid "Restart"
 msgstr ""
 
-#: FMain.class:353
+#: FMain.class:354
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr "Please wait while setup attempts to run the partitioning utility"
 
-#: FMain.class:355
+#: FMain.class:356
 msgid "Please wait while setup analyses your current partition setup."
 msgstr "Please wait while setup analyses your current partition setup."
 
-#: FMain.class:355
+#: FMain.class:356
 msgid "This may take a while ..."
 msgstr "This may take a while ..."
 
-#: FMain.class:375
+#: FMain.class:376
 msgid ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
@@ -42,102 +42,102 @@ msgstr ""
 "You must select a \"/\" partition. This is the target where the system will "
 "install to"
 
-#: FMain.class:447
+#: FMain.class:448
 #, fuzzy
 msgid "You have not selected any operating systems for your boot menu."
 msgstr "Include this operating system in the boot menu"
 
-#: FMain.class:447
+#: FMain.class:448
 msgid "If you wish to bypass the bootloader setup, uncheck the"
 msgstr ""
 
-#: FMain.class:447
+#: FMain.class:448
 msgid "checkbox."
 msgstr ""
 
-#: FMain.class:457
+#: FMain.class:458
 msgid "Please select a default operating system to boot before proceeding"
 msgstr ""
 
-#: FMain.class:458
+#: FMain.class:459
 msgid "Select an entry from this list"
 msgstr ""
 
-#: FMain.class:467
+#: FMain.class:468
 msgid "Skipping boot loader setup"
 msgstr ""
 
-#: FMain.class:493
+#: FMain.class:494
 msgid "Skipping lilo setup"
 msgstr "Skipping lilo setup per user request"
 
-#: FMain.class:509
+#: FMain.class:510
 msgid ""
 "Please enter the root password. For your security purposes, do not leave "
 "this blank"
 msgstr ""
 
-#: FMain.class:514
+#: FMain.class:515
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
-#: FMain.class:528
+#: FMain.class:529
 msgid ""
 "Setup has detected existing directories in the partition you selected for /"
 "home."
 msgstr ""
 
-#: FMain.class:528
+#: FMain.class:529
 msgid ""
 "Would you like to import these user accounts into your new Operating System"
 msgstr ""
 
-#: FMain.class:528 FrmImportAccts.class:59 FrmSummary.class:75
+#: FMain.class:529 FrmImportAccts.class:60 FrmSummary.class:75
 #: FrmUserAdd.class:35
 msgid "Yes"
 msgstr ""
 
-#: FMain.class:528 FrmImportAccts.class:59 FrmSummary.class:73
+#: FMain.class:529 FrmImportAccts.class:60 FrmSummary.class:73
 #: FrmUserAdd.class:35
 msgid "No"
 msgstr ""
 
-#: FMain.class:548
+#: FMain.class:549
 msgid ""
 "You have not created any user accounts for this system yet. There is not "
 "enough information"
 msgstr ""
 
-#: FMain.class:548
+#: FMain.class:549
 msgid ""
 "to create an account here. It is recommended that you create at least one."
 msgstr ""
 
-#: FMain.class:548
+#: FMain.class:549
 msgid "Would you like to continue anyway?"
 msgstr ""
 
-#: FMain.class:566
+#: FMain.class:567
 msgid "Please specify a hostname for this computer"
 msgstr ""
 
-#: FMain.class:571
+#: FMain.class:572
 msgid "Please specify the domain this computer belongs to"
 msgstr ""
 
-#: FMain.class:828
+#: FMain.class:834
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:839
+#: FMain.class:845
 msgid "Exit Installation"
 msgstr "Exit Installation"
 
-#: FMain.class:850
+#: FMain.class:856
 msgid "Next"
 msgstr "Next"
 
-#: FMain.class:864
+#: FMain.class:870
 msgid "Button1"
 msgstr "-"
 
@@ -238,75 +238,75 @@ msgstr "-"
 msgid "Select picture for user Login"
 msgstr ""
 
-#: FrmImportAccts.class:52
+#: FrmImportAccts.class:53
 msgid "Reset settings for"
 msgstr ""
 
-#: FrmImportAccts.class:59
+#: FrmImportAccts.class:60
 msgid "Would you like to continue adding new user accounts now?"
 msgstr ""
 
-#: FrmImportAccts.class:81
+#: FrmImportAccts.class:84
 msgid "Please select an account name from the dropdown list."
 msgstr ""
 
-#: FrmImportAccts.class:86
+#: FrmImportAccts.class:89
 msgid "Password fields cannot be blank. Please enter a password for"
 msgstr ""
 
-#: FrmImportAccts.class:90
+#: FrmImportAccts.class:93
 msgid "Selected passwords dont match. Please enter the same password twice"
 msgstr ""
 
-#: FrmImportAccts.class:100
+#: FrmImportAccts.class:103
 msgid "User Unable to restore user account."
 msgstr ""
 
-#: FrmImportAccts.class:105 FrmUserAdd.class:149
+#: FrmImportAccts.class:108 FrmUserAdd.class:149
 msgid "User account for"
 msgstr ""
 
-#: FrmImportAccts.class:105
+#: FrmImportAccts.class:108
 msgid "successfully imported"
 msgstr ""
 
-#: FrmImportAccts.class:304
+#: FrmImportAccts.class:310
 msgid "Account"
 msgstr ""
 
-#: FrmImportAccts.class:316
+#: FrmImportAccts.class:322
 msgid "New Password"
 msgstr ""
 
-#: FrmImportAccts.class:333
+#: FrmImportAccts.class:339
 msgid "Select login Image"
 msgstr ""
 
-#: FrmImportAccts.class:343 FrmUserAdd.class:540
+#: FrmImportAccts.class:349 FrmUserAdd.class:539
 msgid "Select"
 msgstr ""
 
-#: FrmImportAccts.class:353
+#: FrmImportAccts.class:359
 msgid "Verify Password"
 msgstr ""
 
-#: FrmImportAccts.class:364 FrmUserAdd.class:551
+#: FrmImportAccts.class:370 FrmUserAdd.class:550
 msgid "User Rights Management"
 msgstr ""
 
-#: FrmImportAccts.class:370
+#: FrmImportAccts.class:376
 msgid "Select Settings to reset"
 msgstr ""
 
-#: FrmImportAccts.class:377
+#: FrmImportAccts.class:383
 msgid "Import Account"
 msgstr ""
 
-#: FrmImportAccts.class:384 FrmResetSettings.class:122
+#: FrmImportAccts.class:390 FrmResetSettings.class:122
 msgid "Done"
 msgstr ""
 
-#: FrmImportAccts.class:392 FrmUserAdd.class:627
+#: FrmImportAccts.class:398 FrmUserAdd.class:626
 msgid "Import Existing User Accounts"
 msgstr ""
 
@@ -330,7 +330,7 @@ msgstr "Current Step "
 msgid "Total progress"
 msgstr "Total progress"
 
-#: FrmLangSel.class:117
+#: FrmLangSel.class:118
 msgid "Select your language"
 msgstr "Select your language"
 
@@ -367,7 +367,7 @@ msgstr ""
 "for each one of them by clicking on each tab. To proceed with the default "
 "pre-set values, simply click"
 
-#: FrmLilo.class:139 FrmLiloSetup.class:63 MdlLilo.module:77
+#: FrmLilo.class:139 FrmLiloSetup.class:63 MdlLilo.module:79
 msgid "Standard"
 msgstr "Standard"
 
@@ -379,23 +379,23 @@ msgstr "Configure and install lilo (Linux Boot Loader)"
 msgid "Don't Install Lilo"
 msgstr "Don't Install Lilo"
 
-#: FrmLilo.class:230 FrmLiloSetup.class:301 FrmNetConf.class:287
+#: FrmLilo.class:230 FrmLiloSetup.class:302 FrmNetConf.class:287
 msgid "Tab 0"
 msgstr "-"
 
-#: FrmLilo.class:248 FrmLiloSetup.class:233
+#: FrmLilo.class:248 FrmLiloSetup.class:234
 msgid "Target"
 msgstr "Target"
 
-#: FrmLilo.class:254 FrmLiloSetup.class:212
+#: FrmLilo.class:254 FrmLiloSetup.class:213
 msgid "Video Resolution"
 msgstr "Video Resolution"
 
-#: FrmLilo.class:262 FrmLiloSetup.class:64 MdlLilo.module:79
+#: FrmLilo.class:262 FrmLiloSetup.class:64 MdlLilo.module:81
 msgid "Bootsplash Med"
 msgstr "Bootsplash Med"
 
-#: FrmLilo.class:262 FrmLiloSetup.class:65 MdlLilo.module:81
+#: FrmLilo.class:262 FrmLiloSetup.class:65 MdlLilo.module:83
 msgid "Bootsplash High"
 msgstr "Bootsplash High"
 
@@ -403,27 +403,27 @@ msgstr "Bootsplash High"
 msgid "Bootsplash Extra high"
 msgstr "Bootsplash Extra High"
 
-#: FrmLilo.class:267 FrmLiloSetup.class:272
+#: FrmLilo.class:267 FrmLiloSetup.class:273
 msgid "Prompt Timeout"
 msgstr "Prompt Timeout"
 
-#: FrmLilo.class:278 FrmLiloSetup.class:283
+#: FrmLilo.class:278 FrmLiloSetup.class:284
 msgid "Seconds"
 msgstr "Seconds"
 
-#: FrmLilo.class:284 FrmLiloSetup.class:251
+#: FrmLilo.class:284 FrmLiloSetup.class:252
 msgid "Boot Default"
 msgstr "Boot Default"
 
-#: FrmLiloSetup.class:66 MdlLilo.module:83
+#: FrmLiloSetup.class:66 MdlLilo.module:85
 msgid "Bootsplash Extra High"
 msgstr ""
 
-#: FrmLiloSetup.class:185
+#: FrmLiloSetup.class:186
 msgid "Boot Manager Configuration"
 msgstr ""
 
-#: FrmLiloSetup.class:201
+#: FrmLiloSetup.class:202
 msgid "Do not install LILO"
 msgstr ""
 
@@ -590,7 +590,7 @@ msgstr "but can also be calculated as 2 times your ammount of RAM"
 msgid "Please select the partitions you wish to use and how to use them"
 msgstr "Please select the partitions you wish to use and how to use them"
 
-#: FrmPartSel.class:186 FrmUserAdd.class:555
+#: FrmPartSel.class:186 FrmUserAdd.class:554
 msgid "Help"
 msgstr "Help"
 
@@ -706,7 +706,7 @@ msgstr ""
 "a root password, think of something easy for you to remember, but hard for "
 "others to guess."
 
-#: FrmRootPass.class:143 FrmUserAdd.class:588
+#: FrmRootPass.class:143 FrmUserAdd.class:587
 msgid "Enter Password"
 msgstr "Enter Password"
 
@@ -801,7 +801,7 @@ msgstr "Not Used"
 msgid "Do not format"
 msgstr "Do not format"
 
-#: FrmSummary.class:101 MdlLilo.module:201 MdlNetConf.module:248
+#: FrmSummary.class:101 MdlLilo.module:203 MdlNetConf.module:248
 msgid "None"
 msgstr "None"
 
@@ -878,30 +878,30 @@ msgstr ""
 msgid "Enter the same password twice"
 msgstr ""
 
-#: FrmUserAdd.class:407
+#: FrmUserAdd.class:408
 msgid ""
 "Your password selections do not match. Please enter the same password twice"
 msgstr ""
 
-#: FrmUserAdd.class:432
+#: FrmUserAdd.class:433
 msgid ""
 "Groups are a way of administering permissions for your users. You grant the "
 "user"
 msgstr ""
 
-#: FrmUserAdd.class:432
+#: FrmUserAdd.class:433
 msgid "permission to do certain things by adding them to certain groups."
 msgstr ""
 
-#: FrmUserAdd.class:432
+#: FrmUserAdd.class:433
 msgid "Select which groups you want this user to be a part of here"
 msgstr ""
 
-#: FrmUserAdd.class:433
+#: FrmUserAdd.class:434
 msgid "OK"
 msgstr ""
 
-#: FrmUserAdd.class:502
+#: FrmUserAdd.class:501
 msgid ""
 "Choose a unique name for each user. Enter the password for twice for "
 "accuracy. You can make as many users as you want, and when you are finished "
@@ -911,31 +911,31 @@ msgstr ""
 "accuracy. You can make as many users as you want, and when you are finished "
 "click next to continue."
 
-#: FrmUserAdd.class:546
+#: FrmUserAdd.class:545
 msgid "Use Picture ID for Login greeting"
 msgstr ""
 
-#: FrmUserAdd.class:568
+#: FrmUserAdd.class:567
 msgid "Create User"
 msgstr "Create User"
 
-#: FrmUserAdd.class:574
+#: FrmUserAdd.class:573
 msgid "Clear Form"
 msgstr ""
 
-#: FrmUserAdd.class:581
+#: FrmUserAdd.class:580
 msgid "Login Name"
 msgstr ""
 
-#: FrmUserAdd.class:595
+#: FrmUserAdd.class:594
 msgid "ReEnter Password"
 msgstr "ReEnter Password"
 
-#: FrmUserAdd.class:611
+#: FrmUserAdd.class:610
 msgid "Real Name"
 msgstr ""
 
-#: FrmUserAdd.class:617 MdlCore.module:530
+#: FrmUserAdd.class:616 MdlCore.module:530
 msgid "User Accounts"
 msgstr "User Accounts"
 
@@ -1087,11 +1087,11 @@ msgstr "Boot loader has been setup successfully"
 msgid "MBR of"
 msgstr ""
 
-#: MdlConfLilo.module:126 MdlLilo.module:125
+#: MdlConfLilo.module:126 MdlLilo.module:127
 msgid "Bootsector of "
 msgstr ""
 
-#: MdlConfLilo.module:131 MdlLilo.module:127
+#: MdlConfLilo.module:131 MdlLilo.module:129
 msgid "Floppy"
 msgstr ""
 
@@ -1262,23 +1262,23 @@ msgstr ""
 msgid "installation is complete. Click next to begin system configuration"
 msgstr "Installation phase complete. Ready for configuration"
 
-#: MdlInstallCustom.module:204 MdlInstallSys.module:485
+#: MdlInstallCustom.module:205 MdlInstallSys.module:486
 msgid "Installing"
 msgstr "Installing"
 
-#: MdlInstallCustom.module:218
+#: MdlInstallCustom.module:219
 msgid "Failed to install. Installation will stop"
 msgstr ""
 
-#: MdlInstallCustom.module:264
+#: MdlInstallCustom.module:265
 msgid "Installing user-selected package"
 msgstr ""
 
-#: MdlInstallCustom.module:347
+#: MdlInstallCustom.module:348
 msgid "Error while installing "
 msgstr "Error while installing "
 
-#: MdlInstallCustom.module:416
+#: MdlInstallCustom.module:417
 msgid "failed to install. Installation will stop now"
 msgstr ""
 
@@ -1298,77 +1298,77 @@ msgstr "to configure it."
 msgid "Packages have been installed in your system. Please click"
 msgstr "Packages have been installed to your system. Please click"
 
-#: MdlInstallSys.module:523
+#: MdlInstallSys.module:524
 msgid "Error occurred while installing"
 msgstr ""
 
-#: MdlInstallSys.module:588
+#: MdlInstallSys.module:589
 msgid "Vectorlinux is now being installed. Please wait..."
 msgstr "Vectorlinux is now being installed. Please wait..."
 
-#: MdlInstallSys.module:632
+#: MdlInstallSys.module:633
 msgid "There has been an error extracting"
 msgstr "There has been an error extracting"
 
-#: MdlInstallSys.module:644
+#: MdlInstallSys.module:645
 msgid "Finished intalling Bulks"
 msgstr "Finished intalling Bulks"
 
-#: MdlInstallSys.module:759
+#: MdlInstallSys.module:760
 msgid "Installation phase complete. Ready for configuration"
 msgstr "Installation phase complete. Ready for configuration"
 
-#: MdlInstallSys.module:762
+#: MdlInstallSys.module:763
 msgid "Installing default system configuration and required software."
 msgstr "Installing default system configuration and required software."
 
-#: MdlInstallSys.module:804
+#: MdlInstallSys.module:805
 msgid "Installing Required Package ..."
 msgstr ""
 
-#: MdlInstallSys.module:818
+#: MdlInstallSys.module:819
 msgid "Failed to install"
 msgstr ""
 
-#: MdlLilo.module:235
+#: MdlLilo.module:237
 msgid "Your option to boot"
 msgstr ""
 
-#: MdlLilo.module:235
+#: MdlLilo.module:237
 msgid ""
 "is too long. it has been adjusted to \"Vector-cli\". You can run vasmCC "
 "after the first boot to modify your boot options"
 msgstr ""
 
-#: MdlLilo.module:513
+#: MdlLilo.module:515
 msgid "installed on"
 msgstr ""
 
-#: MdlLilo.module:531 MdlLiloOsList.module:149
+#: MdlLilo.module:533 MdlLiloOsList.module:149
 msgid "Include this installation in the boot menu"
 msgstr "Include this installation in the boot menu"
 
-#: MdlLilo.module:541 MdlLiloOsList.module:313
+#: MdlLilo.module:543 MdlLiloOsList.module:313
 msgid "Name"
 msgstr "Name"
 
-#: MdlLilo.module:598
+#: MdlLilo.module:600
 msgid "installed in"
 msgstr ""
 
-#: MdlLilo.module:619
+#: MdlLilo.module:621
 msgid "Include in boot menu"
 msgstr ""
 
-#: MdlLilo.module:655
+#: MdlLilo.module:657
 msgid "Initrd"
 msgstr ""
 
-#: MdlLilo.module:688 MdlLiloOsList.module:359
+#: MdlLilo.module:690 MdlLiloOsList.module:359
 msgid "Kernel boot options"
 msgstr "Kernel boot options"
 
-#: MdlLilo.module:711
+#: MdlLilo.module:713
 msgid "Add option to boot this operating system into text mode"
 msgstr ""
 
