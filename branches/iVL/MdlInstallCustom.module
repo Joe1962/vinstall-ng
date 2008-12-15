@@ -168,6 +168,10 @@ PUBLIC FUNCTION INSTALL_KERNELS() AS Integer
               ELSE
                 RETURN 0
               END IF
+              IF hproc.Value > 0 THEN 
+                 Message.Error("Failed to install Kernels")
+                 'RETURN 1                      
+              END IF
             END IF
      END IF
      'SHELL "cp " & ClsGlobal.sSourceMnt &/ "isolinux" &/ "kernel" &/ 

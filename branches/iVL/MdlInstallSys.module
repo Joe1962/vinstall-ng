@@ -496,6 +496,10 @@ PUBLIC FUNCTION INSTALL_BULK_PACKAGES() AS Integer
                       UNTIL 
                         hproc.State = Process.Stopped
                         'error check
+                      IF hproc.Value > 0 THEN 
+                        Message.Error(sBulkPath & Space(1) & ("Failed to install"))
+                        'RETURN 1
+                      END IF
                     END IF
                 END IF  
         FrmInstallSys.pbInstallProg.Value = 1
@@ -882,6 +886,10 @@ PUBLIC FUNCTION INSTALL_CONFIG_PACKAGES() AS Integer
                       UNTIL 
                         hproc.State = Process.Stopped
                         'error check
+                      IF hproc.Value > 0 THEN 
+                        Message.Error(sBulkPath & Space(1) & ("Failed to install"))
+                        'RETURN 1
+                      END IF
                     END IF
                 END IF  
         FrmInstallSys.pbInstallProg.Value = 1
