@@ -136,7 +136,7 @@ PUBLIC SUB prepare_partition_summary()
             
             'sFsType = "Windows"
               'SHELL "l=$(probepart | grep " & cb.tag & "); echo $l | cut -f 6,7 -d \' \'" TO sFsType
-              SHELL "probepart | grep ^" & cb.Tag & " | tr -s \' \'\"\" | cut -f 6 -d \' \'" TO sFsType
+              SHELL "probepart | grep ^" & "\'" & cb.Tag & " \'| tr -s \' \'\"\" | cut -f 7-8 -d \' \'" TO sFsType
               sFsType = Trim(sFsType)
           
             WITH ME
