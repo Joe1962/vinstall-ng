@@ -26,11 +26,11 @@ msgstr ""
 msgid "MOUNT TO"
 msgstr ""
 
-#: MdlWinDrives.module:124
+#: MdlWinDrives.module:125
 msgid "Do not mount"
 msgstr ""
 
-#: MdlWinDrives.module:141
+#: MdlWinDrives.module:142
 msgid "No Windows partitions detected"
 msgstr ""
 

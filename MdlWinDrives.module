@@ -101,7 +101,8 @@ ME.tlWnParts = NEW Object[]
           IF Len(sPartNo) < 1 THEN
             BREAK 
           ENDIF 
-            SHELL "export s=$(parted " & Left(sDisks[i], Len("/dev/hda")) & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $s | cut -f 4 -d \' \'" TO sPartsize
+            'SHELL "export s=$(parted " & Left(sDisks[i], Len("/dev/hda")) & " print | grep ^\'" & sBlank & sPartNo & "\'); echo $s | cut -f 4 -d \' \'" TO sPartsize
+            SHELL "parted " & Left(sDisks[i], Len("/dev/hda")) & " print | grep ^\'" & sBlank & sPartNo & "\' | tr -s \' \'\"\" | cut -f 5 -d ' '" TO sPartsize
               tl = NEW TextLabel(FrmWinDrives.svWinDrives)
                 WITH tl
                 .y = y
