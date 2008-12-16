@@ -447,12 +447,16 @@ END
 PUBLIC SUB Form_Show()
   ' 
   'ME.Form_Open()
+  
   WITH FMain
     .FrmCurr = ME
     .tvPlan["Conf2"].Picture = MdlCore.sDonePic
     .tvPlan["Conf3"].picture = MdlCore.sNowPic
     .tvPlan["Conf3"].Selected = TRUE
   END WITH 
+
+' Display users list
+MdlUsrAdd.LIST_NEW_USER_ACCOUNT() ' This function actually reads /etc/passwd in the target installation dir.
 
 END
 
