@@ -718,7 +718,8 @@ END
 
 PUBLIC SUB tvPlan_Click()
 
-STOP EVENT 
+'Message(tvPlan.Current.Text)
+
 
 END
 
