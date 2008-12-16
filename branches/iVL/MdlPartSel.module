@@ -144,6 +144,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                 .ReadOnly = TRUE                
                   ' Allow the user to only mount this partition at boot time if it is the host of an ISO
                     IF InStr(FrmSelISO.lstInstallableImg.Text, .Tag) THEN 
+                      .Add(("Not Used"))
                       .Add("/mnt" &/ Right(.Tag, Len(.Tag) - RInStr(.Tag, "/")))
                       
                   ELSE                 
@@ -289,6 +290,8 @@ PUBLIC SUB MountPoints_CLick()
   DIM sdropdwn AS ComboBox
   'DIM sTag AS String = LAST.tag
   'DIM sText AS String = Trim(LAST.text)
+  
+  IF InStr(FrmSelISO.lstInstallableImg.Text, LAST.Tag) THEN RETURN 
   
   FOR EACH sdropdwn IN ME.oMountPoints
     IF LAST.text <> ("Not Used") AND LAST.text = sdropdwn.Text AND LAST.tag <> sdropdwn.tag THEN 

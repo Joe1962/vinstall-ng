@@ -1,0 +1,5 @@
+- Added no-format safety to host partitiong (when installing from ISO on linux host)
+- Made existing user accounts show up when navigating through the configuration
+- Fixed duble listing of network interfaces
+- Force user list on form load (frmuseradd)
+
