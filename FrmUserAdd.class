@@ -96,9 +96,9 @@ IF MdlSetup.SCAN_HOME_DIRS(clsglobal.sTargetMnt &/ "home") = 1 THEN
     FMain.btnext.Enabled = TRUE
     ME.tbUsername.SetFocus
     
-    IF Exist(clsglobal.sTargetMnt &/ "etc" &/ "passwd") THEN 
+    'IF Exist(clsglobal.sTargetMnt &/ "etc" &/ "passwd") THEN 
       MdlUsrAdd.LIST_NEW_USER_ACCOUNT()
-    END IF
+    'END IF
     
 END 
 
