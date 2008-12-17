@@ -149,12 +149,14 @@ PUBLIC FUNCTION INSTALL_KERNELS() AS Integer
     sLabel = Left(sLabel, RInStr(sLabel, "\'") - 1)
     sKernNo = Right(sKernNo) ' this is the number of the kernel
     SHELL " cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep ^HD_KERNEL_" & sKernNo TO sFoundOut
-    sFoundOut = Trim(sFoundOut)
+    sFoundOut = Trim(Replace(sFoundOut, "\'", ""))
     sKernName = Right(sFoundOut, Len(sFoundOut) - InStr(sFoundOut, "\'"))
     sKernName = Left(sKernName, RInStr(sKernName, "\'") - 1)
     'Message.Info(sLabel & " - " & sKernName)
      'now copy the kernel to the right place
+     
      sKernelPath = ClsGlobal.sSourceMnt &/ "isolinux" &/ "kernel" &/ sLabel
+      IF Exist(sKernelPath) = FALSE THEN sKernelPath = ClsGlobal.sSourceMnt &/ "syslinux" &/ "kernel" &/ sLabel
      IF Exist(sKernelPath) THEN 
        sDump = ""
        SHELL "echo \"\" > /tmp/installdump" WAIT 
