@@ -47,12 +47,12 @@ PUBLIC SUB Form_Open()
     FMain.FrmCurr = ME
     ME.tlHostNameLbl.Alignment = Align.Normal
     
-    WITH FMain 
-    .tvPlan["Conf3"].Picture = MdlCore.sDonePic
-    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
-    .tvPlan["Conf4"].Picture = MdlCore.sNowPic
-    .tvPlan["Conf4"].Selected = TRUE
-  END WITH 
+  ' ' '   WITH FMain 
+  ' ' '   .tvPlan["Conf3"].Picture = MdlCore.sDonePic
+  ' ' '   .tvPlan["Conf2"].Picture = MdlCore.sDonePic
+  ' ' '   .tvPlan["Conf4"].Picture = MdlCore.sNowPic
+  ' ' '   .tvPlan["Conf4"].Selected = TRUE
+  ' ' ' END WITH 
 
     ME.txtHostName.text = ME.GET_CURRENT_HOST_NAME()
       
@@ -151,12 +151,12 @@ PUBLIC SUB Form_Show()
       FMain.FrmCurr = ME
     ME.tlHostNameLbl.Alignment = Align.Normal
     
-    WITH FMain 
-    .tvPlan["Conf3"].Picture = MdlCore.sDonePic
-    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
-    .tvPlan["Conf4"].Picture = MdlCore.sNowPic
-    .tvPlan["Conf4"].Selected = TRUE
-  END WITH 
+  '   WITH FMain 
+  '   .tvPlan["Conf3"].Picture = MdlCore.sDonePic
+  '   .tvPlan["Conf2"].Picture = MdlCore.sDonePic
+  '   .tvPlan["Conf4"].Picture = MdlCore.sNowPic
+  '   .tvPlan["Conf4"].Selected = TRUE
+  ' END WITH 
 
   
 
