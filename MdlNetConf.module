@@ -77,7 +77,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     ' SHELL "cat /tmp/nic| tr -s \' \'\"\" " TO seths
     SHELL "res=$(ifconfig -a | grep ^[a-z] | grep -v ^lo); echo \"$res\" | tr -s \' \'\"\" " TO seths
     'SHELL "ifconfig -a | grep ^[a-z]|grep -v ^lo | tr -s \' \'\"\"" TO seths
-      File.Save(Temp("eths"), Trim(seths)) 
+      'File.Save(Temp("eths"), Trim(seths)) 
       'Message(File.Load(Temp("eths")))
 
       seths = Trim(seths)
@@ -139,8 +139,174 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                             sStatus = ("Unplugged")
                           END IF
                   
-  IF sType <> ("Wireless") THEN       
-              
+  ' ' ' IF sType <> ("Wireless") THEN       
+  ' ' '             
+  ' ' '         WITH FrmNetConf.TSNetDevices
+  ' ' '           PRINT .Count
+  ' ' '         
+  ' ' '           
+  ' ' '           .index = i 
+  ' ' '           '.text = Left(sDevList[i], 4)
+  ' ' '           .text = sDev 
+  ' ' '             IF sDevList[i] <> "" THEN 
+  ' ' '               INC .Count
+  ' ' '             END IF
+  ' ' '           .picture = pTabPic
+  ' ' '                 ' populate it with the objects
+  ' ' '                 tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DevAddresses"
+  ' ' '                   WITH tl
+  ' ' '                     .Move(4, 16)
+  ' ' '                     .text = ("Hardware Address")
+  ' ' '                     .Height = 21
+  ' ' '                     .Alignment = Align.Normal
+  ' ' '                     .Width = MdlObjSizer.get_object_width(.text)
+  ' ' '                     'y = .top + .Height + 4
+  ' ' '                   END WITH
+  ' ' '                 tb = NEW TextBox(FrmNetConf.TSNetDevices) AS "txtDevAddresses" ' MAC Address box
+  ' ' '                   WITH tb
+  ' ' '                   .Move(tl.left + tl.Width + 8, tl.top)
+  ' ' '                   .text = DConv(sDevAddr)
+  ' ' '                   .ReadOnly = TRUE
+  ' ' '                   .Width = MdlObjSizer.get_object_width(.text) + 24
+  ' ' '                   .Height = tl.Height
+  ' ' '                   x = .Left
+  ' ' '                   cbwidth = .Width
+  ' ' '                       iwifiboxwidth = .Width
+  ' ' '                   END WITH
+  ' ' '                                     
+  ' ' '                 tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DevTYpeLbl"
+  ' ' '                   WITH tl
+  ' ' '                     .Move(x + tb.Width + 8, tb.top)
+  ' ' '                     .text = ("Interface Type")
+  ' ' '                     .Height = 21
+  ' ' '                     .Width = MdlObjSizer.get_object_width(.text)
+  ' ' '                     .Alignment = Align.Normal
+  ' ' '                   END WITH 
+  ' ' '                 tb = NEW TextBox(FrmNetConf.TSNetDevices) AS "txtDevType" ' Interface Type (wireless, wired)
+  ' ' '                   WITH tb
+  ' ' '                     .Move(tl.left + tl.width + 8, tl.top)
+  ' ' '                     .text = sType
+  ' ' '                     .Width = MdlObjSizer.get_object_width(.text) + 24
+  ' ' '                     .Height = 21
+  ' ' '                     .ReadOnly = TRUE
+  ' ' '                     .tag = sDev
+  ' ' '                   END WITH
+  ' ' '                     objIntTypes.Add(tb)
+  ' ' '                         'add a box here to enable/disable the interface
+  ' ' '                 bCb = NEW CheckBox(FrmNetConf.TSNetDevices) AS "bEnableInterface" ' enable/disable interface box
+  ' ' '                   WITH bCb
+  ' ' '                     .Move(4, tb.top + tb.Height + 4)
+  ' ' '                     .text = ("Automatically activate this interface at start-up")
+  ' ' '                     .Value = TRUE
+  ' ' '                     .Height = 21
+  ' ' '                     .Width = MdlObjSizer.get_object_width(.text) + 36
+  ' ' '                     .tag = sDev
+  ' ' '                     y = .top + .Height + 8
+  ' ' '                     objCheckboxes.Add(bCb)
+  ' ' '                   END WITH  
+  ' ' '                   ' Split the design here for wireless and wired devices
+  ' ' '         'IF sType = "Wireless" THEN                     
+  ' ' '                 tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "ConfModeLbl"
+  ' ' '                   WITH tl
+  ' ' '                     .Move(4, y)
+  ' ' '                     .text = ("Setup Mode")
+  ' ' '                     .height = 21
+  ' ' '                     .Width = MdlObjSizer.get_object_width(.text)
+  ' ' '                     .Alignment = Align.BottomLeft
+  ' ' '                     'y = .top + .Height + 4
+  ' ' '                    iLeft = .Left
+  ' ' '                   END WITH 
+  ' ' '                 cb = NEW ComboBox(FrmNetConf.TSNetDevices) AS "MethodSel" ' Setup Method combobox
+  ' ' '                   WITH cb
+  ' ' '                     .Move(x, y)
+  ' ' '                     .width = cbwidth
+  ' ' '                     .Height = 21
+  ' ' '                     .ReadOnly = TRUE
+  ' ' '                     .list = ["DHCP", "STATIC"]
+  ' ' '                                           
+  ' ' '                     .tag = sDev
+  ' ' '                     '.ReadOnly = TRUE
+  ' ' '                     'itop = y
+  ' ' '                     icbleft = .Left
+  ' ' '                   END WITH 
+  ' ' '                   y = cb.top + cb.Height + 4
+  ' ' '                   itop = y
+  ' ' '                   objCombos.Add(cb)
+  ' ' '         IF StYPE = ("Wireless") THEN 
+  ' ' '               tl = NEW TextLabel(FrmNetConf.TSNetDevices)
+  ' ' '                 WITH tl
+  ' ' '                   .text = ("Encryption type")
+  ' ' '                   .Width = MdlObjSizer.get_object_width(.text)
+  ' ' '                   .Height = 21
+  ' ' '                   '.Move(x + cb.Width + 96, y - .Height - 8)
+  ' ' '                   .Move(ileft + 300 + 24, itop + 12)
+  ' ' '                   .Alignment = Align.BottomLeft
+  ' ' '                   '.Border = Border.Plain
+  ' ' '                 END WITH
+  ' ' '                 iWifix = tl.Left
+  ' ' '                 iwifiy = tl.Top
+  ' ' '               cb = NEW ComboBox(FrmNetConf.TSNetDevices) AS "cbWifiEnc"
+  ' ' '                 WITH cb
+  ' ' '                 .ReadOnly = TRUE
+  ' ' '                   .list = [("None"), "WPA", "WEP"]
+  ' ' '                   .Width = tb.Width
+  ' ' '                   .tag = sDev                                      
+  ' ' '                   .Height = tl.Height
+  ' ' '                   .Move(tl.left + tl.Width + 12, tl.top)
+  ' ' '                   
+  ' ' '                   iwifiboxleft = .Left
+  ' ' '                   
+  ' ' '                 END WITH
+  ' ' '                 objcbWifi.Add(cb)
+  ' ' '                 
+  ' ' '               tl = NEW TextLabel(FrmNetConf.TSNetDevices)
+  ' ' '                 WITH tl
+  ' ' '                   .text = ("Encryption key")
+  ' ' '                   .Width = MdlObjSizer.get_object_width(.text)
+  ' ' '                   .Height = 21
+  ' ' '                   .Move(iwifix, iwifiy + .Height + 12)
+  ' ' '                   .Alignment = Align.Normal
+  ' ' '                 END WITH 
+  ' ' '               tb = NEW TextBox(FrmNetConf.TSNetDevices)
+  ' ' '                 WITH tb
+  ' ' '                   .text = ""
+  ' ' '                   .Width = iwifiboxwidth
+  ' ' '                   .Height = 21
+  ' ' '                   .Password = TRUE
+  ' ' '                   .Move(iwifiboxleft, tl.Top)
+  ' ' '                   .Enabled = TRUE
+  ' ' '                   .tag = sDev
+  ' ' '                 END WITH 
+  ' ' '                   objtxtWifiKey.Add(tb)
+  ' ' '               tl = NEW TextLabel(FrmNetConf.TSNetDevices)
+  ' ' '                 WITH tl
+  ' ' '                   .text = ("Access Point")
+  ' ' '                   .Width = MdlObjSizer.get_object_width(.Text)
+  ' ' '                   .Height = 21
+  ' ' '                   .Alignment = Align.Normal
+  ' ' '                   .Move(iWifix, tb.top + tb.Height + 4)
+  ' ' '                   '.Enabled = TRUE
+  ' ' '                   '.ReadOnly = FALSE
+  ' ' '                 END WITH
+  ' ' '               tb = NEW TextBox(FrmNetConf.TSNetDevices)
+  ' ' '                 WITH tb
+  ' ' '                   .tag = sDev
+  ' ' '                   '.ReadOnly = TRUE
+  ' ' '                   .Width = iwifiboxwidth
+  ' ' '                   .Height = 21
+  ' ' '                   .Move(iwifiboxleft, tl.Top)
+  ' ' '                   .ReadOnly = FALSE
+  ' ' '                   
+  ' ' '                       ' add the access points here
+  ' ' '                 END WITH
+  ' ' '                 objcbWifiessid.Add(tb)
+  ' ' '               
+  ' ' '               
+  ' ' '         END IF
+  ' ' '               
+  ' ' '                   
+                IF sType = ("Wired") THEN 
+                
           WITH FrmNetConf.TSNetDevices
             PRINT .Count
           
@@ -204,108 +370,9 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
                       y = .top + .Height + 8
                       objCheckboxes.Add(bCb)
                     END WITH  
-                    ' Split the design here for wireless and wired devices
-          'IF sType = "Wireless" THEN                     
-                  tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "ConfModeLbl"
-                    WITH tl
-                      .Move(4, y)
-                      .text = ("Setup Mode")
-                      .height = 21
-                      .Width = MdlObjSizer.get_object_width(.text)
-                      .Alignment = Align.BottomLeft
-                      'y = .top + .Height + 4
-                     iLeft = .Left
-                    END WITH 
-                  cb = NEW ComboBox(FrmNetConf.TSNetDevices) AS "MethodSel" ' Setup Method combobox
-                    WITH cb
-                      .Move(x, y)
-                      .width = cbwidth
-                      .Height = 21
-                      .ReadOnly = TRUE
-                      .list = ["DHCP", "STATIC"]
-                                            
-                      .tag = sDev
-                      '.ReadOnly = TRUE
-                      'itop = y
-                      icbleft = .Left
-                    END WITH 
-                    y = cb.top + cb.Height + 4
-                    itop = y
-                    objCombos.Add(cb)
-          IF StYPE = ("Wireless") THEN 
-                tl = NEW TextLabel(FrmNetConf.TSNetDevices)
-                  WITH tl
-                    .text = ("Encryption type")
-                    .Width = MdlObjSizer.get_object_width(.text)
-                    .Height = 21
-                    '.Move(x + cb.Width + 96, y - .Height - 8)
-                    .Move(ileft + 300 + 24, itop + 12)
-                    .Alignment = Align.BottomLeft
-                    '.Border = Border.Plain
-                  END WITH
-                  iWifix = tl.Left
-                  iwifiy = tl.Top
-                cb = NEW ComboBox(FrmNetConf.TSNetDevices) AS "cbWifiEnc"
-                  WITH cb
-                  .ReadOnly = TRUE
-                    .list = [("None"), "WPA", "WEP"]
-                    .Width = tb.Width
-                    .tag = sDev                                      
-                    .Height = tl.Height
-                    .Move(tl.left + tl.Width + 12, tl.top)
-                    
-                    iwifiboxleft = .Left
-                    
-                  END WITH
-                  objcbWifi.Add(cb)
-                  
-                tl = NEW TextLabel(FrmNetConf.TSNetDevices)
-                  WITH tl
-                    .text = ("Encryption key")
-                    .Width = MdlObjSizer.get_object_width(.text)
-                    .Height = 21
-                    .Move(iwifix, iwifiy + .Height + 12)
-                    .Alignment = Align.Normal
-                  END WITH 
-                tb = NEW TextBox(FrmNetConf.TSNetDevices)
-                  WITH tb
-                    .text = ""
-                    .Width = iwifiboxwidth
-                    .Height = 21
-                    .Password = TRUE
-                    .Move(iwifiboxleft, tl.Top)
-                    .Enabled = TRUE
-                    .tag = sDev
-                  END WITH 
-                    objtxtWifiKey.Add(tb)
-                tl = NEW TextLabel(FrmNetConf.TSNetDevices)
-                  WITH tl
-                    .text = ("Access Point")
-                    .Width = MdlObjSizer.get_object_width(.Text)
-                    .Height = 21
-                    .Alignment = Align.Normal
-                    .Move(iWifix, tb.top + tb.Height + 4)
-                    '.Enabled = TRUE
-                    '.ReadOnly = FALSE
-                  END WITH
-                tb = NEW TextBox(FrmNetConf.TSNetDevices)
-                  WITH tb
-                    .tag = sDev
-                    '.ReadOnly = TRUE
-                    .Width = iwifiboxwidth
-                    .Height = 21
-                    .Move(iwifiboxleft, tl.Top)
-                    .ReadOnly = FALSE
-                    
-                        ' add the access points here
-                  END WITH
-                  objcbWifiessid.Add(tb)
                 
                 
-          END IF
                 
-                    
-                IF sType = ("Wired") THEN 
                   tl = NEW TextLabel(FrmNetConf.TSNetDevices) 
                     WITH tl
                       .text = ("STATUS:") & " <b>" & sStatus & "</b>"
@@ -334,7 +401,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
             
                 END WITH 
           'END IF
-                END IF
+'                END IF
                    
 
           
