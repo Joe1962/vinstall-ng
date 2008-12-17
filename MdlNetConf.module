@@ -82,7 +82,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
 
       seths = Trim(seths)
       
-      'IF seths = "" THEN 
+      IF seths = "" THEN 
           WITH FrmNetConf
             .cbUseManDNS.Enabled = FALSE
             .tlPrimaryDNS.Enabled = FALSE
@@ -99,7 +99,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
             FrmNetConf.TSNetDevices.Text = "Ethernet"
                 ME.ifaceCnt = 0
             RETURN 
-'      END IF      
+      END IF      
       
       
       
