@@ -38,7 +38,7 @@
     PRINT "Partition formatting complete"
   
         MdlCore.LOCK_GUI()
-      'MdlInstallSys.MOUNT_DEFINED_PARTITIONS() ' let the game begin
+      MdlInstallSys.MOUNT_DEFINED_PARTITIONS() ' let the game begin
       ' begin running the credits
 
 ' ' '   END IF
@@ -83,7 +83,7 @@ PUBLIC FUNCTION FORMAT_PARTITION(sAddr AS String, sFS AS String) AS Integer ' wi
 
     
     
-    'PRINT "Formatting " & sAddr & " to " & sFS
+    PRINT "Formatting " & sAddr & " to " & sFS
   hproc = SHELL sCommand & " || echo \'FAILED\'" WAIT 'for read
     WAIT 2
       IF hproc.State = Process.Running THEN 
