@@ -413,7 +413,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES_NEW() AS Integer
                     INC ClsGlobal.iPkgNum
                     'ME.PACKAGE_INSTALL(ClsGlobal.sSourceMnt &/ "packages" &/ sPkgPath &/ sPkgName)
                         ' move the process here locally
-                        SHELL "echo \"\" /tmp/installdump" WAIT 
+                        SHELL "echo \"\" > /tmp/installdump" WAIT 
                           'hproc = SHELL "installpkg " & ClsGlobal.sSourceMnt &/ "packages" &/ sPkgPath &/ sPkgName & " -R " & ClsGlobal.sTargetMnt & " 2> /tmp/installdump"
                           hproc = EXEC ["installpkg", ClsGlobal.sSourceMnt &/ "packages" &/ sPkgPath &/ sPkgName, "-R", ClsGlobal.sTargetMnt]
                       WAIT 
