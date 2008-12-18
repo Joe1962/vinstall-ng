@@ -440,7 +440,8 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sPackagePath AS String) AS Integer
   
   
   sDump = ""
-  SHELL "echo \"\" > /tmp/installdump" WAIT 
+  'SHELL "echo \"\" > /tmp/installdump" WAIT 
+  EXEC ["rm", "/tmp/installdump"] WAIT 
   sErr = ""
       
   SHELL "cat " & ClsGlobal.sSourceMnt &/ "veclinux" &/ "SETUP.CONF | grep " & File.Name(sPackagePath) & " | cut -f 2 -d :" TO vSize
