@@ -34,6 +34,7 @@ PUBLIC ifaceCnt AS Integer
 
 PRIVATE pWiredPic AS Picture = picture["images/ethernet.png"]
 PRIVATE pWirelessPic AS picture = picture["images/wireless.png"]
+PRIVATE iFrameTop AS Integer
 
 PUBLIC SUB LIST_NETWORK_INTERFACES()
   
@@ -128,18 +129,62 @@ WITH FrmNetConf.TSNetDevices
             .Width = MdlObjSizer.get_object_width(.Text) + 16
             .Move(tl.Left + tl.Width + 4, tl.Top)
             END WITH 
-        tl = NEW TextLabel(FrmNetConf.TSNetDevices) ' INTERFACE TYPE LABEL
-            WITH tl
-                .Text = ("Interface Type")
-                .Width = MdlObjSizer.get_object_width(.Text)
-                .Height = 21
-                .Alignment = Align.Normal
-                .Move(tb.Left + tb.Width + 4, tb.Top)
-            END WITH 
-        
-            
-            
+        ' ' ' ' ' tl = NEW TextLabel(FrmNetConf.TSNetDevices) ' INTERFACE TYPE LABEL
+        ' ' ' ' '     WITH tl
+        ' ' ' ' '         .Text = ("Interface Type")
+        ' ' ' ' '         .Width = MdlObjSizer.get_object_width(.Text)
+        ' ' ' ' '         .Height = 21
+        ' ' ' ' '         .Alignment = Align.Normal
+        ' ' ' ' '         .Move(tb.Left + tb.Width + 4, tb.Top)
+        ' ' ' ' '     END WITH 
+        ' ' ' ' ' 
             y = y + tb.Top + tb.Height + 4
+        bcb = NEW CheckBox(FrmNetConf.TSNetDevices) AS "bEnableInterface"  '************ enabled / disabled checkbox **************************
+          WITH bcb
+            .Value = TRUE
+              .Text = ("Automatically activate this interface at start-up")
+              .Height = 21
+              .Width = MdlObjSizer.get_object_width(.Text) + 36
+              .Move(4, y)
+          END WITH 
+          ME.objCheckboxes.Add(bcb)
+            y = bcb.top + bcb.Height + 8
+            
+        tl = NEW TextLabel(FrmNetConf.TSNetDevices) 
+          WITH tl
+            .Text = ("Setup Mode")
+            .Alignment = Align.Normal
+            .Height = 21
+            .Width = MdlObjSizer.get_object_width(.Text)
+            .Move(24, y) ' indent this a little
+          END WITH 
+    
+        cb = NEW ComboBox(FrmNetConf.TSNetDevices) AS "MethodSel" ' ******************************* 
+            WITH cb
+              .ReadOnly = TRUE
+              .list = ["DHCP", "STATIC"]
+              .Height = 21
+              .Width = MdlObjSizer.get_object_width("STATIC") * 2
+              .move(tl.Left + tl.Width + 4, y)
+            END WITH 
+            ME.objCombos.Add(cb)
+        
+        tl = NEW TextLabel(FrmNetConf.TSNetDevices) '***********************************************************
+            WITH tl
+              .Text = ("Current Status:") & Space(1) & "<b>" & sStatus & "</b>"
+              .Alignment = Align.Normal
+              .Height = 21
+              .Width = MdlObjSizer.get_object_width(.Text)
+              .Move(cb.Left + cb.Width + 4, y)
+            END WITH 
+            iFrameTop = tl.top + tl.Height + 8
+            
+            
+                      
+  
+            
+        
+          
   
   
   
@@ -933,136 +978,118 @@ PUBLIC SUB MethodSel_Click()
   DIM tl AS TextLabel
   DIM itxtleft, itxtwidth, imandnsleft, imandnstxtleft, itlwidth AS Integer
   
+  IF NOT LAST.text THEN RETURN 
+    iFrameTop = LAST.top + LAST.Height + 4
   IF LAST.text = "STATIC" THEN 
-  frmDetails = NEW Frame(FrmNetConf.TSNetDevices) AS "STaticDetails"
-    WITH frmDetails
-      .Move(ileft, itop + 8)
-      .text = Space(1) & ("Static IP Address Settings") & Space(1)
-          FOR EACH txtbox IN objIntTypes
-            IF txtbox.tag = LAST.tag THEN 
-              IF txtbox.text = ("Wired") THEN 
-                .Width = FrmNetConf.TSNetDevices.Width - (ileft * 3)
-              ELSE 
-                .Width = 300
-              END IF
-            END IF
-          NEXT 
-                
-        
-      '.Width = 300 '.Parent.Width - (.left * 2.5)
-      .Height = 130
-      .tag = LAST.tag
-      
-    END WITH 
-    objFrames.Add(frmDetails)
-        'populate the frame for this
-              tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
-                WITH tl
-                  .Move(8, 24)
-                  .text = ("IP Address")
-                  .Height = 21
-                  .Width = MdlObjSizer.get_object_width(.text)
-                  .Alignment = Align.Normal
-                END WITH 
-              txtbox = NEW TextBox(frmDetails) AS "txtStatisIpBoxes" ' static IP Address Box
-                WITH txtbox
-                  .tag = LAST.tag
-                  .Move((tl.left + tl.Width) * 2, tl.Top)
-                  .text = "192.168.1.100"
-                  .Height = 21
-                  .Width = MdlObjSizer.get_object_width(.text) * 2
-                  .MaxLength = 16
-                    IF objtxtIps.Find(txtbox) = -1 THEN objtxtIps.Add(txtbox) ' add to the array
-                END WITH 
-                itxtleft = (tl.Left + tl.Width) * 2 'txtbox.Left 
-                itxtwidth = txtbox.Width
-                imandnsleft = itxtleft + itxtwidth + 8
-                
-                
-                
-              tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
-                WITH tl
-                  .text = ("Subnet Mask")
-                  .width = MdlObjSizer.get_object_width(.text)
-                  .Height = 21
-                  .Alignment = Align.Normal
-                  .Move(8, txtbox.top + txtbox.Height + 4)
-                END WITH 
-              txtbox = NEW TextBox(frmDetails) AS "txtDnsMaskBoxes" ' DNS Mask Box
-                WITH txtbox
-                  .Move(itxtleft, tl.top)
-                  .text = "255.255.255.0"
-                  .tag = LAST.tag
-                  .Height = 21
-                  .Width = itxtwidth
-                  .MaxLength = 16
-                    IF objtxtNetMasks.Find(txtbox) = -1 THEN objtxtNetMasks.Add(txtbox) ' add to the array
-                END WITH 
-                
-                
-              tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
-                WITH tl
-                  .Move(8, txtbox.top + txtbox.Height + 4)
-                  .Height = 21
-                  .text = ("Gateway Address")
-                  .Width = MdlObjSizer.get_object_width(.text)
-                  .Alignment = Align.Normal
-                END WITH 
-              txtbox = NEW TextBox(frmDetails) AS "txtGatewayAddrBoxes" ' Gateway address box
-                WITH txtbox
-                  .tag = LAST.tag
-                  .Move(itxtleft, tl.top)
-                  .Height = 21
-                  .Width = itxtwidth
-                  .MaxLength = 16
-                  .text = "192.168.1.254"
-                    IF objtxtDNS.Find(txtbox) = -1 THEN objtxtDNS.Add(txtbox) ' add to the array
-                END WITH 
-                 
-                  
-      FOR EACH tl IN objtlDetails
-        IF tl.tag = LAST.tag THEN 
-          objtlDetails.Delete(objtlDetails.Find(tl))
-        END IF
-      NEXT 
-        
+                frmDetails = NEW Frame(FrmNetConf.TSNetDevices) AS "STaticDetails"
+                  WITH frmDetails
+                    '.Move(ileft, itop + 8)
+                    .Move(24, iFrameTop)
+                    .text = Space(1) & ("Static IP Address Settings") & Space(1)
+                    .Width = (.Parent.Width - (.left) * 1.5)
+                    .Height = 130
+                    .tag = LAST.tag
+                    .Raise()
+                    .Visible = TRUE
+                  END WITH 
+                  objFrames.Add(frmDetails)
+                      'populate the frame for this
+                            tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
+                              WITH tl
+                                .Move(8, 24)
+                                .text = ("IP Address")
+                                .Height = 21
+                                .Width = MdlObjSizer.get_object_width(.text)
+                                .Alignment = Align.Normal
+                              END WITH 
+                            txtbox = NEW TextBox(frmDetails) AS "txtStatisIpBoxes" ' static IP Address Box
+                              WITH txtbox
+                                .tag = LAST.tag
+                                .Move((tl.left + tl.Width) * 2, tl.Top)
+                                .text = "192.168.1.100"
+                                .Height = 21
+                                .Width = MdlObjSizer.get_object_width(.text) * 2
+                                .MaxLength = 16
+                                  IF objtxtIps.Find(txtbox) = -1 THEN objtxtIps.Add(txtbox) ' add to the array
+                              END WITH 
+                              itxtleft = (tl.Left + tl.Width) * 2 'txtbox.Left 
+                              itxtwidth = txtbox.Width
+                              imandnsleft = itxtleft + itxtwidth + 8
+                              
+                              
+                              
+                            tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
+                              WITH tl
+                                .text = ("Subnet Mask")
+                                .width = MdlObjSizer.get_object_width(.text)
+                                .Height = 21
+                                .Alignment = Align.Normal
+                                .Move(8, txtbox.top + txtbox.Height + 4)
+                              END WITH 
+                            txtbox = NEW TextBox(frmDetails) AS "txtDnsMaskBoxes" ' DNS Mask Box
+                              WITH txtbox
+                                .Move(itxtleft, tl.top)
+                                .text = "255.255.255.0"
+                                .tag = LAST.tag
+                                .Height = 21
+                                .Width = itxtwidth
+                                .MaxLength = 16
+                                  IF objtxtNetMasks.Find(txtbox) = -1 THEN objtxtNetMasks.Add(txtbox) ' add to the array
+                              END WITH 
+                              
+                              
+                            tl = NEW TextLabel(frmDetails) AS "tlStaticLabels"
+                              WITH tl
+                                .Move(8, txtbox.top + txtbox.Height + 4)
+                                .Height = 21
+                                .text = ("Gateway Address")
+                                .Width = MdlObjSizer.get_object_width(.text)
+                                .Alignment = Align.Normal
+                              END WITH 
+                            txtbox = NEW TextBox(frmDetails) AS "txtGatewayAddrBoxes" ' Gateway address box
+                              WITH txtbox
+                                .tag = LAST.tag
+                                .Move(itxtleft, tl.top)
+                                .Height = 21
+                                .Width = itxtwidth
+                                .MaxLength = 16
+                                .text = "192.168.1.254"
+                                  IF objtxtDNS.Find(txtbox) = -1 THEN objtxtDNS.Add(txtbox) ' add to the array
+                              END WITH 
+                               
+                                
+                    FOR EACH tl IN objtlDetails
+                      IF tl.tag = LAST.tag THEN 
+                        objtlDetails.Delete(objtlDetails.Find(tl))
+                      END IF
+                    NEXT 
+                      
   ELSE 
-    
+    'Message(LAST.text)
     FOR EACH frmDetails IN objFrames
       IF frmDetails.tag = LAST.tag THEN 
       frmDetails.Delete
       objFrames.Delete(objFrames.Find(frmDetails))
     END IF
-        'objFrames.Delete(objFrames.Find(frmDetails))
-        'IF ERROR THEN Message(Error.Text & "\n" & Error.Where)
     NEXT 
         ' create a text label that says the thing will get automatically configured
         
+        IF iFrameTop < 101 THEN iFrameTop = 101
       
         tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DetailLbl"
           WITH tl
-            '.Move(LAST.left - (LAST.width / 2), LAST.top + LAST.height + 12)
-            .Move(8, LAST.top + LAST.height + 12)
-              FOR EACH txtbox IN objIntTypes
-                  IF txtbox.tag = LAST.tag THEN 
-                    IF txtbox.text = ("Wired") THEN 
-                      itlwidth = FrmNetConf.TSNetDevices.Width - (tl.left * 2)
-                    ELSE 
-                      itlwidth = 250
-                    END IF
-                  END IF
-        NEXT 
-            .text = "<b>" & ("Dynamic Host Control Protocol") & "</b><br>" & ("Automatic settings via DHCP.") & "<br><br>" & ("This will work if you use a cable or DSL modem on a home network.") & "<br>" & ("If in doubt, choose this option")
+             .Move(24, iFrameTop)
+             .Width = (.Parent.Width - (.left) * 1.5)
+            .text = "<b>" & ("Dynamic Host Control Protocol") & "</b><br>" & ("Automatic settings via DHCP.") & "<br><br>" & ("This will work if you use a cable or DSL modem on a home network.") & "<br>" & ("If in doubt, choose this option.")
             .Adjust
             .border = Border.Raised
-            .Width = itlwidth  
+            '.Width = itlwidth  
             '.Width = 230 'MdlObjSizer.get_object_width(.text)
-            .Height = 21 * 6          
+            .Height = 130
             .Tag = LAST.tag
             .Visible = TRUE
             .Raise
-            
-            
+                        
           END WITH 
             objtlDetails.Add(tl)
 
