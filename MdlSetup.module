@@ -89,68 +89,6 @@ END
     
 END
 
-PUBLIC FUNCTION FORMAT_SELECTED_PARTITIONS() AS Integer
-  
-  'DIM hproc AS Process
-  DIM sDump AS String
-
-
-              
-    
-    SHELL "mkfs." & LCase(ClsPartSel.fRoot) & " || echo \'ERROR\'" TO sDump
-      
-            GOTO CHECK_OUTPUT
- 
- 
- IF ClsPartSel.sHome AND ClsPartSel.fhome <> "Do not format" THEN 
-  sDump = ""
-  SHELL "mkfs." & LCase(ClsPartSel.fhome) & " || echo \'ERROR\'" TO sDump
-    
-    GOTO CHECK_OUTPUT
-  END IF
-  
- 
- 
- IF ClsPartSel.sOpt AND ClsPartSel.fOpt <> "Do not format" THEN 
- sDump = ""
-  SHELL "mkfs." & LCase(ClsPartSel.fOpt) & " || echo \'ERROR\'" TO sDump
-     
-        GOTO CHECK_OUTPUT
- END IF
- 
- IF ClsPartSel.sUsr AND ClsPartSel.fUsr <> "Do not format" THEN 
-  sDump = ""
-  SHELL "mkfs." & LCase(ClsPartSel.fUsr) & " || echo \'ERROR\'" TO sDump
-    
-      GOTO CHECK_OUTPUT
- END IF
- 
- IF ClsPartSel.sVar AND ClsPartSel.fVar <> "Do not format" THEN 
-  sDump = ""
-  SHELL "mkfs." & LCase(ClsPartSel.fVar) & " || echo \'ERROR\'" TO sDump
-    
-    GOTO CHECK_OUTPUT
-  END IF
-  
-  IF ClsPartSel.sTmp AND ClsPartSel.fTmp <> "Do not format" THEN 
-    sDump = ""
-       SHELL "mkfs." & LCase(ClsPartSel.fTmp) & " || echo \'FAILED\'" TO sDump
-        
-          GOTO CHECK_OUTPUT
-  END IF
-  
-  
-  
-CHECK_OUTPUT:
- IF InStr(sDump, "ERROR") = TRUE THEN 
-                RETURN 1 ' not good... stop right there
-              ELSE 
-                RETURN 0
-              END IF  
-  
-END
-
-
 
 PUBLIC SUB SHOW_PROGRESS_CONTROLS()
   
@@ -334,7 +272,9 @@ PUBLIC SUB BEGIN_INSTALLATION()
     FrmInstallSys.tlCurrPkg.text = ("Activating swap space")
   MdlInstallSys.ACTIVATE_SWAP_SPACE()
     FrmInstallSys.tlCurrPkg.text = ("Preparing filesystems")
+    
   MdlPartFrmt.PREPARE_ALL_PARTITIONS() ' This will start the install process
+  MdlInstallSys.MOUNT_DEFINED_PARTITIONS()
     
   
 END
