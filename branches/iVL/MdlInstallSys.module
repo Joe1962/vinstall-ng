@@ -552,106 +552,106 @@ PUBLIC SUB PACKAGE_INSTALL(sPath_To_Package AS String)
 END
 
 
-                    ' PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
-                    '   
-                    '   'Will need to read SETUP.CONF to determine what to do here
-                    '   
-                    '   DIM sFile AS String[]
-                    '   DIM sEntry AS String[]
-                    '   DIM stlzList AS String[]
-                    '   DIM sTlz AS String
-                    '   DIM sPak AS String
-                    '   DIM sPakPath AS String
-                    '   DIM sPakSize AS Variant
-                    '   DIM sTargetSize AS Variant
-                    '   DIM iTotalSize AS Integer
-                    '   DIM iCurrSize AS Variant
-                    '   DIM sPakDesc AS String
-                    '   DIM i AS Integer
-                    '   DIM ii AS Integer
-                    '   DIM sLine AS String
-                    '   DIM sBulkPath AS String
-                    '   DIM sConfPath AS String
-                    '   DIM sOptPkgPath AS String
-                    '   DIM iVal AS Float  
-                    '   DIM sBasePath AS String = ClsGlobal.sSourceMnt &/ "veclinux"
-                    '       
-                    '       WITH FrmInstallSys
-                    '         .Resize(FMain.pnlWinHost.Width, FMain.pnlWinHost.Height)
-                    '       END WITH 
-                    '   ClsGlobal.iPkgCnt = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
-                    '     'Message.Info("Total packages = " & iPkgCnt)
-                    '   'RETURN 
-                    '   ' make sure the progress is revealed at the main window
-                    '     WITH FMain
-                    '     .tvPlan["Inst1"].Picture = MdlCore.sDonePic
-                    '     .tvPlan["Inst2"].Selected = TRUE
-                    '     .tvPlan["Inst2"].Picture = MdlCore.sNowPic
-                    '     END WITH   
-                    '   
-                    '   MdlSetup.SHOW_PROGRESS_CONTROLS()
-                    '   FrmInstallSys.tlBanner.Text = ("Vectorlinux is now being installed. Please wait...")
-                    '   ClsGlobal.sTargetMnt = "/mnt/target"
-                    '     sFile = Split(File.Load(Temp$("SETUP.CONF")), "\n")
-                    '       FOR i = 0 TO sFile.count - 1
-                    '         sLine = Trim(sFile[i])
-                    '           IF Left(sLine, Len("BULK") + 1) LIKE "BULK" & "*[0-9]*" THEN 
-                    '             sLine = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
-                    '             sLine = Left(sLine, Len(sLine) - 1)
-                    '               sPak = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
-                    '               sPak = Left(sPak, Len(sPak) - 1)
-                    '               sEntry = Split(sPak, ":")
-                    '                 sPakPath = sEntry[0]
-                    '                 sPakSize = sEntry[1]
-                    '                 sPakDesc = sEntry[2]
-                    '                   'PRINT sBasePath &/ sPakPath & " = " & sPakDesc & " size= " & CStr(sPakSize)    
-                    '                       ' figure out the sizing and the progrss meter
-                    '                         SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO sTargetSize
-                    '                           'Message(CStr(sTargetSize))
-                    '                           sTargetSize = Trim(CStr(sTargetSize))
-                    '                           sPakSize = Trim(CStr(sPakSize)) '                 
-                    '                           
-                    '                         'RETURN 
-                    '                 FrmInstallSys.tlCurrPkg.Text = "Installing " & sPakDesc & " ..."
-                    '                 FrmInstallSys.pbInstallProg.Value = 0.0
-                    '                 
-                    '                 PRINT "Installing " & sPakDesc & " Total size (KB) = " & CStr(sPakSize)
-                    '                 sDump = ""
-                    '                 sErr = ""
-                    '                   MdlCore.LOCK_GUI()
-                    '                   'inc iPkgNum
-                    '               hproc = SHELL "lzmadec <" & sBasePath &/ sPakPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ
-                    '               
-                    '                 WAIT 2
-                    '                   IF hproc.State = Process.Running THEN 
-                    '                     REPEAT 
-                    '                       WAIT 2
-                    '                            UPDATE_STEP_PROGRESS(sTargetSize, sPakSize, ClsGlobal.iPkgNum)                           
-                    '                     UNTIL 
-                    '                       hproc.State = Process.Stopped
-                    '                           ' error check
-                    '                             sDump = File.Load("/tmp/installdump")
-                    '                             IF InStr(sDump, "FAILED") > 0 THEN 
-                    '                               Message.Error(("There has been an error extracting") & Space(1) & sPakDesc & gb.NewLine &
-                    '                               "<b>ERROR</b>" & gb.NewLine &
-                    '                               sErr)
-                    '                               RETURN 1
-                    '                             ELSE 
-                    '                               FrmInstallSys.pbInstallProg.Value = 1                              
-                    '                   END IF
-                    '                 PRINT sPak & " is installed... "
-                    '                 INC ClsGlobal.iPkgNum
-                    '                               FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)
-                    '                             END IF
-                    '            'PRINT "Needs to install " & sPak
-                    '           END IF
-                    '     NEXT 
-                    '   FrmInstallSys.tlBanner.Text = ("Finished intalling Bulks")
-                    '   
-                    '         ' now to the packages individually
-                    '         ' FrmInstallSys.tlBanner.Text = "Installing additional software."
-                    '   ' ME.INSTALL_PACKAGES    
-                    ' END
+PUBLIC SUB PERFORM_FULL_INSTALL_OLD() AS Integer
+  
+  'Will need to read SETUP.CONF to determine what to do here
+  
+  DIM sFile AS String[]
+  DIM sEntry AS String[]
+  DIM stlzList AS String[]
+  DIM sTlz AS String
+  DIM sPak AS String
+  DIM sPakPath AS String
+  DIM sPakSize AS Variant
+  DIM sTargetSize AS Variant
+  DIM iTotalSize AS Integer
+  DIM iCurrSize AS Variant
+  DIM sPakDesc AS String
+  DIM i AS Integer
+  DIM ii AS Integer
+  DIM sLine AS String
+  DIM sBulkPath AS String
+  DIM sConfPath AS String
+  DIM sOptPkgPath AS String
+  DIM iVal AS Float  
+  DIM sBasePath AS String = ClsGlobal.sSourceMnt &/ "veclinux"
+      
+      WITH FrmInstallSys
+        .Resize(FMain.pnlWinHost.Width, FMain.pnlWinHost.Height)
+      END WITH 
+  ClsGlobal.iPkgCnt = MdlSetup.CALCULATE_PACKAGE_COUNT(FALSE)
+    'Message.Info("Total packages = " & iPkgCnt)
+  'RETURN 
+  ' make sure the progress is revealed at the main window
+    WITH FMain
+    .tvPlan["Inst1"].Picture = MdlCore.sDonePic
+    .tvPlan["Inst2"].Selected = TRUE
+    .tvPlan["Inst2"].Picture = MdlCore.sNowPic
+    END WITH   
+  
+  MdlSetup.SHOW_PROGRESS_CONTROLS()
+  FrmInstallSys.tlBanner.Text = ("Vectorlinux is now being installed. Please wait...")
+  ClsGlobal.sTargetMnt = "/mnt/target"
+    sFile = Split(File.Load(Temp$("SETUP.CONF")), "\n")
+      FOR i = 0 TO sFile.count - 1
+        sLine = Trim(sFile[i])
+          IF Left(sLine, Len("BULK") + 1) LIKE "BULK" & "*[0-9]*" THEN 
+            sLine = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
+            sLine = Left(sLine, Len(sLine) - 1)
+              sPak = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
+              sPak = Left(sPak, Len(sPak) - 1)
+              sEntry = Split(sPak, ":")
+                sPakPath = sEntry[0]
+                sPakSize = sEntry[1]
+                sPakDesc = sEntry[2]
+                  'PRINT sBasePath &/ sPakPath & " = " & sPakDesc & " size= " & CStr(sPakSize)    
+                      ' figure out the sizing and the progrss meter
+                        SHELL "export gsize=$(df| grep " & ClsPartSel.sRoot & " ) && echo $gsize | cut -f3 -d \' \'" TO sTargetSize
+                          'Message(CStr(sTargetSize))
+                          sTargetSize = Trim(CStr(sTargetSize))
+                          sPakSize = Trim(CStr(sPakSize)) '                 
+                          
+                        'RETURN 
+                FrmInstallSys.tlCurrPkg.Text = "Installing " & sPakDesc & " ..."
+                FrmInstallSys.pbInstallProg.Value = 0.0
+                
+                PRINT "Installing " & sPakDesc & " Total size (KB) = " & CStr(sPakSize)
+                sDump = ""
+                sErr = ""
+                  MdlCore.LOCK_GUI()
+                  'inc iPkgNum
+              hproc = SHELL "lzmadec <" & sBasePath &/ sPakPath & " | tar -xp -C " & ClsGlobal.sTargetMnt & " || echo \'FAILED\' 2> /tmp/installdump" 'FOR READ
+              
+                WAIT 2
+                  IF hproc.State = Process.Running THEN 
+                    REPEAT 
+                      WAIT 2
+                           UPDATE_STEP_PROGRESS(sTargetSize, sPakSize, ClsGlobal.iPkgNum)                           
+                    UNTIL 
+                      hproc.State = Process.Stopped
+                          ' error check
+                            sDump = File.Load("/tmp/installdump")
+                            IF InStr(sDump, "FAILED") > 0 THEN 
+                              Message.Error(("There has been an error extracting") & Space(1) & sPakDesc & gb.NewLine &
+                              "<b>ERROR</b>" & gb.NewLine &
+                              sErr)
+                              RETURN 1
+                            ELSE 
+                              FrmInstallSys.pbInstallProg.Value = 1                              
+                  END IF
+                PRINT sPak & " is installed... "
+                INC ClsGlobal.iPkgNum
+                              FrmInstallSys.pbInstallProg2.Value = MdlSetup.UPDATE_OVERALL_PROGRESS(ClsGlobal.iPkgCnt, ClsGlobal.iPkgNum)
+                            END IF
+           'PRINT "Needs to install " & sPak
+          END IF
+    NEXT 
+  FrmInstallSys.tlBanner.Text = ("Finished intalling Bulks")
+  
+        ' now to the packages individually
+        ' FrmInstallSys.tlBanner.Text = "Installing additional software."
+  ' ME.INSTALL_PACKAGES    
+END
 
 
 PUBLIC SUB UPDATE_STEP_PROGRESS(sTargetSize AS Float, sPakSize AS Float, iCurrPkg AS Integer)
