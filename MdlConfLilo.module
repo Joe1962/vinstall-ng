@@ -334,7 +334,7 @@ sOut = "#!/bin/bash \n" &
 "/sbin/vlsetup" & gb.NewLine &
 "/sbin/vhwconf" & gb.NewLine &
 "cd /usr/lib && ln -sf preloadable_libintl.so libgnuintl.so.8 && rm libintl.so 2>/dev/null; ln -s preloadable_libintl.so libintl.so" & gb.NewLine &
-"#/sbin/valsaconf-quiet" & gb.NewLine &
+"/sbin/valsaconf-quiet" & gb.NewLine &
 "cd / && for i in /var/log/scripts/x11-fonts*;do sh $i &>/dev/null;done" & gb.NewLine &
 "rm -r /root/.mc 2>/dev/null" & gb.NewLine &
 "for i in /usr/share/icons/*;do cd $i 2>/dev/null && if [ -e convert.sh ];then sh convert.sh & 2>/dev/null;fi;done" & gb.NewLine &
@@ -356,16 +356,17 @@ SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT
  ". /sbin/vasm-functions \n" &
  "TEXT=\" \n" &
  "Vector Linux Has been Installed. \n" &
- " \n" &
- "Welcome back. We will now continue with final system configuration. \n" &
- "this includes setting up sound, configuring the GUI, and choosing services \n" &
- "to run at boot time.  Enjoy AND happy Vectoring...\" \n" &
+ "Welcome back. \n" &
+ "We will now continue with final system configuration. \n" &
+ "On the next screen you can setup the GUI or use one of the preconfigured settings. \n" &
+ "any other system fine tuning can be done from VASM.  Enjoy AND happy Vectoring...\" \n" &
  "$DCMD --backtitle \"$BACKTITLE\" --title \"CONGRATULATIONS\" " &
  "--msgbox \"$TEXT\" 0 0 2>/dev/NULL  \n" &
- "cd / && sh /var/log/scripts/x11-fonts* \n " &
-  "alsaconf \n " &
+ "#cd / && sh /var/log/scripts/x11-fonts* \n " &
+ "#alsaconf \n " &
+ "alsactl store \n " &
  "/sbin/vxconf \n" &
-  "/sbin/vsrvset \n" &
+ "#/sbin/vsrvset \n" &
  "#/sbin/config-stage1 gui-installer" & gb.NewLine
  
 EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup" &/ "init"] WAIT 
