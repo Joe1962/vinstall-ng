@@ -38,7 +38,7 @@ msgstr ""
 msgid "1600x1200"
 msgstr "-"
 
-#: FrmNetConf.class:246
+#: FrmNetConf.class:262
 msgid "192.168.1.254"
 msgstr "-"
 
@@ -74,10 +74,6 @@ msgstr "ABOUT SYSTEM PARTITIONING IN LINUX"
 msgid "About the root account"
 msgstr ""
 
-#: MdlNetConf.module:280
-msgid "Access Point"
-msgstr "ESSID"
-
 #: FrmImportAccts.class:310
 msgid "Account"
 msgstr ""
@@ -106,11 +102,11 @@ msgstr ""
 msgid "Allow user to mount / un-mount Removable HD Storage Devices"
 msgstr ""
 
-#: MdlNetConf.module:324
+#: MdlNetConf.module:1083
 msgid "Automatic settings via DHCP."
 msgstr "Automatic settings via DHCP."
 
-#: MdlNetConf.module:196
+#: MdlNetConf.module:145
 msgid "Automatically activate this interface at start-up"
 msgstr "Automatically activate this interface at start-up"
 
@@ -118,7 +114,7 @@ msgstr "Automatically activate this interface at start-up"
 msgid "BROUGHT TO YOU BY"
 msgstr ""
 
-#: FrmSummary.class:187
+#: FrmSummary.class:188
 msgid "BULK PACKAGES"
 msgstr ""
 
@@ -126,7 +122,7 @@ msgstr ""
 msgid "BULK PACKAGES:"
 msgstr "BULK PACKAGES:"
 
-#: FMain.class:834
+#: FMain.class:835
 msgid "Back"
 msgstr "Back"
 
@@ -162,7 +158,7 @@ msgstr ""
 msgid "Bootsplash Extra high"
 msgstr "Bootsplash Extra High"
 
-#: FrmLilo.class:262 FrmLiloSetup.class:65 MdlLilo.module:83
+#: FrmLilo.class:262 FrmLiloSetup.class:36 MdlLilo.module:83
 msgid "Bootsplash High"
 msgstr "Bootsplash High"
 
@@ -174,7 +170,7 @@ msgstr "Bootsplash Med"
 msgid "Build Date: "
 msgstr "Build Date: "
 
-#: FMain.class:870
+#: FMain.class:871
 msgid "Button1"
 msgstr "-"
 
@@ -190,7 +186,7 @@ msgstr "Cannot find SETUP.CONF"
 msgid "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
 msgstr "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
 
-#: FrmUserAdd.class:501
+#: FrmUserAdd.class:505
 msgid "Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
 msgstr "Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
 
@@ -210,7 +206,7 @@ msgstr "Choose your installation mode"
 msgid "Choose your optional components to install."
 msgstr ""
 
-#: FrmUserAdd.class:573
+#: FrmUserAdd.class:577
 msgid "Clear Form"
 msgstr ""
 
@@ -226,7 +222,7 @@ msgstr ""
 msgid "ComboBox1"
 msgstr "-"
 
-#: FrmNetConf.class:207
+#: FrmNetConf.class:223
 msgid "Computer Name"
 msgstr "Computer Name"
 
@@ -238,7 +234,7 @@ msgstr ""
 msgid "Configure and install lilo (Linux Boot Loader)"
 msgstr "Configure and install lilo (Linux Boot Loader)"
 
-#: FrmUserAdd.class:567
+#: FrmUserAdd.class:571
 msgid "Create User"
 msgstr "Create User"
 
@@ -253,6 +249,10 @@ msgstr ""
 #: FrmHostPrep.class:135
 msgid "Current Status"
 msgstr "Current Status"
+
+#: MdlNetConf.module:174
+msgid "Current Status:"
+msgstr ""
 
 #: FrmInstallSys.class:58
 msgid "Current Step"
@@ -302,11 +302,11 @@ msgstr "Do not format"
 msgid "Do not install LILO"
 msgstr ""
 
-#: FrmSummary.class:124 MdlInstallSys.module:184 MdlWinDrives.module:124
+#: FrmSummary.class:124 MdlInstallSys.module:184 MdlWinDrives.module:125
 msgid "Do not mount"
 msgstr "Do not mount"
 
-#: FrmNetConf.class:219
+#: FrmNetConf.class:235
 msgid "Domain"
 msgstr ""
 
@@ -318,7 +318,7 @@ msgstr "Don't Install Lilo"
 msgid "Done"
 msgstr ""
 
-#: MdlNetConf.module:324
+#: MdlNetConf.module:1083
 msgid "Dynamic Host Control Protocol"
 msgstr "Dynamic Host Control Protocol"
 
@@ -326,15 +326,7 @@ msgstr "Dynamic Host Control Protocol"
 msgid "Elite user"
 msgstr ""
 
-#: MdlNetConf.module:261
-msgid "Encryption key"
-msgstr "Encryption Key"
-
-#: MdlNetConf.module:235
-msgid "Encryption type"
-msgstr "Encryption type"
-
-#: FrmRootPass.class:143 FrmUserAdd.class:587
+#: FrmRootPass.class:143 FrmUserAdd.class:591
 msgid "Enter Password"
 msgstr "Enter Password"
 
@@ -354,11 +346,11 @@ msgstr ""
 msgid "Enter the same password twice"
 msgstr ""
 
-#: MdlInstallSys.module:524
+#: MdlInstallSys.module:528
 msgid "Error occurred while installing"
 msgstr ""
 
-#: MdlInstallCustom.module:348
+#: MdlInstallCustom.module:354
 msgid "Error while installing "
 msgstr "Error while installing "
 
@@ -370,7 +362,7 @@ msgstr "Error while installing required system software. "
 msgid "Error while installing system configuration. "
 msgstr "Error while installing system configuration. "
 
-#: FMain.class:845
+#: FMain.class:846
 msgid "Exit Installation"
 msgstr "Exit Installation"
 
@@ -378,11 +370,11 @@ msgstr "Exit Installation"
 msgid "FILESYSTEM"
 msgstr "FYLESYSTEM"
 
-#: MdlInstallSys.module:819
+#: MdlInstallSys.module:500
 msgid "Failed to install"
 msgstr ""
 
-#: MdlInstallCustom.module:219
+#: MdlInstallCustom.module:225
 msgid "Failed to install. Installation will stop"
 msgstr ""
 
@@ -402,7 +394,7 @@ msgstr ""
 msgid "Find installation media"
 msgstr "Find installation media"
 
-#: MdlInstallSys.module:645
+#: MdlInstallSys.module:649
 msgid "Finished intalling Bulks"
 msgstr "Finished intalling Bulks"
 
@@ -434,7 +426,7 @@ msgstr ""
 msgid "GUI installer for Vector linux"
 msgstr "GUI installer for Vector linux"
 
-#: MdlNetConf.module:433
+#: MdlNetConf.module:1045
 msgid "Gateway Address"
 msgstr "Gateway Address"
 
@@ -458,11 +450,11 @@ msgstr ""
 msgid "HAL"
 msgstr ""
 
-#: MdlNetConf.module:156
+#: MdlNetConf.module:117
 msgid "Hardware Address"
 msgstr "Hardware Address"
 
-#: FrmPartSel.class:186 FrmUserAdd.class:554
+#: FrmPartSel.class:186 FrmUserAdd.class:558
 msgid "Help"
 msgstr "Help"
 
@@ -470,7 +462,7 @@ msgstr "Help"
 msgid "INSTALL TYPE:"
 msgstr "INSTALL TYPE:"
 
-#: MdlNetConf.module:388
+#: MdlNetConf.module:1000
 msgid "IP Address"
 msgstr "IP Address"
 
@@ -478,9 +470,9 @@ msgstr "IP Address"
 msgid "IceWM settings, preferences, menu"
 msgstr ""
 
-#: MdlNetConf.module:324
-msgid "If in doubt, choose this option"
-msgstr "If in doubt, choose this option"
+#: MdlNetConf.module:1083
+msgid "If in doubt, choose this option."
+msgstr ""
 
 #: FrmDone.class:60
 msgid "If you installed from  CD-ROM/R/RW media, please remove de disk before restarting."
@@ -494,7 +486,7 @@ msgstr ""
 msgid "Import Account"
 msgstr ""
 
-#: FrmImportAccts.class:398 FrmUserAdd.class:626
+#: FrmImportAccts.class:398 FrmUserAdd.class:630
 msgid "Import Existing User Accounts"
 msgstr ""
 
@@ -530,7 +522,7 @@ msgstr "Installation"
 msgid "Installation Summary"
 msgstr "Installation Summary"
 
-#: FrmSummary.class:293
+#: FrmSummary.class:294
 msgid "Installation Type"
 msgstr ""
 
@@ -546,11 +538,11 @@ msgstr ""
 msgid "Installation is finished"
 msgstr ""
 
-#: MdlInstallSys.module:760
+#: MdlInstallSys.module:764
 msgid "Installation phase complete. Ready for configuration"
 msgstr "Installation phase complete. Ready for configuration"
 
-#: MdlInstallCustom.module:205 MdlInstallSys.module:486
+#: MdlInstallCustom.module:211 MdlInstallSys.module:486
 msgid "Installing"
 msgstr "Installing"
 
@@ -558,25 +550,21 @@ msgstr "Installing"
 msgid "Installing ..."
 msgstr "Installing ..."
 
-#: MdlInstallSys.module:805
+#: MdlInstallSys.module:809
 msgid "Installing Required Package ..."
 msgstr ""
 
-#: MdlInstallSys.module:763
+#: MdlInstallSys.module:767
 msgid "Installing default system configuration and required software."
 msgstr "Installing default system configuration and required software."
 
-#: MdlInstallCustom.module:265
+#: MdlInstallCustom.module:271
 msgid "Installing user-selected package"
 msgstr ""
 
 #: FrmPkgSel.class:81
 msgid "Installs all optional components in your VectorLinux media to your system"
 msgstr ""
-
-#: MdlNetConf.module:177
-msgid "Interface Type"
-msgstr "Interface Type"
 
 #: MdlDiskPart.module:46
 msgid "It is still possible to install VectorLinux on your system, but you need to pre-partition your disks first"
@@ -618,7 +606,7 @@ msgstr "Loading gparted ... Please wait"
 msgid "LocalTime"
 msgstr "LocalTime"
 
-#: FrmUserAdd.class:580
+#: FrmUserAdd.class:584
 msgid "Login Name"
 msgstr ""
 
@@ -646,7 +634,7 @@ msgstr "MOUNT TO"
 msgid "MPlayer Multimedia Player Settings"
 msgstr ""
 
-#: FrmNetConf.class:235
+#: FrmNetConf.class:251
 msgid "Manual DNS Server Specification"
 msgstr "Manual DNS Server Specification"
 
@@ -670,7 +658,7 @@ msgstr ""
 msgid "Name"
 msgstr "Name"
 
-#: FrmNetConf.class:192 MdlCore.module:531
+#: FrmNetConf.class:208 MdlCore.module:531
 msgid "Network Configuration"
 msgstr "Network Configuration"
 
@@ -678,7 +666,7 @@ msgstr "Network Configuration"
 msgid "New Password"
 msgstr ""
 
-#: FMain.class:856
+#: FMain.class:857
 msgid "Next"
 msgstr "Next"
 
@@ -690,11 +678,11 @@ msgstr ""
 msgid "No Installable Media Found"
 msgstr "No Installable Media Found"
 
-#: MdlWinDrives.module:141
+#: MdlWinDrives.module:142
 msgid "No Windows partitions detected"
 msgstr "No Windows partitions detected"
 
-#: MdlNetConf.module:95
+#: MdlNetConf.module:78
 msgid "No ethernet neworking devices found"
 msgstr ""
 
@@ -706,11 +694,11 @@ msgstr "No installable images found."
 msgid "No, I Do Not Agree"
 msgstr ""
 
-#: FrmSummary.class:101 MdlLilo.module:203 MdlNetConf.module:248
+#: FrmSummary.class:101 MdlLilo.module:203 MdlNetConf.module:1241
 msgid "None"
 msgstr "None"
 
-#: FrmSummary.class:53 MdlInstallSys.module:136 MdlPartSel.module:150
+#: FrmSummary.class:53 MdlInstallSys.module:136 MdlPartSel.module:147
 msgid "Not Used"
 msgstr "Not Used"
 
@@ -742,7 +730,7 @@ msgstr "PARTITION LAYOUT"
 msgid "Package"
 msgstr ""
 
-#: FrmSummary.class:178 FrmUsrPkgSel.class:16
+#: FrmSummary.class:179 FrmUsrPkgSel.class:16
 msgid "Package Name"
 msgstr ""
 
@@ -758,7 +746,7 @@ msgstr "Packages have been installed to your system. Please click"
 msgid "Partition"
 msgstr ""
 
-#: FrmSummary.class:303
+#: FrmSummary.class:304
 msgid "Partition Selection Scheme"
 msgstr ""
 
@@ -790,7 +778,7 @@ msgstr ""
 msgid "Please select an account name from the dropdown list."
 msgstr ""
 
-#: MdlPartSel.module:296
+#: MdlPartSel.module:299
 msgid "Please select only one "
 msgstr "Please select only one "
 
@@ -818,7 +806,7 @@ msgstr "Please wait while setup analyses your current partition setup."
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr "Please wait while setup attempts to run the partitioning utility"
 
-#: MdlNetConf.module:134
+#: MdlNetConf.module:103
 msgid "Plugged-in"
 msgstr "Plugged-in"
 
@@ -834,16 +822,12 @@ msgstr ""
 msgid "Preparing filesystems"
 msgstr ""
 
-#: FrmNetConf.class:251
+#: FrmNetConf.class:267
 msgid "Primary DNS Server"
 msgstr "Primary DNS Server"
 
 #: FrmXconf.class:27
 msgid "Probe hardware to setup your Graphical Environment using your preffered settings"
-msgstr ""
-
-#: MdlNetConf.module:60
-msgid "Probing your networking hardware ... Please wait"
 msgstr ""
 
 #: FrmLilo.class:267 FrmLiloSetup.class:273
@@ -862,7 +846,7 @@ msgstr ""
 msgid "Re-Enter Password"
 msgstr "Re-Enter Password"
 
-#: FrmUserAdd.class:594
+#: FrmUserAdd.class:598
 msgid "ReEnter Password"
 msgstr "ReEnter Password"
 
@@ -870,7 +854,7 @@ msgstr "ReEnter Password"
 msgid "Reading available software selection ... Please wait"
 msgstr ""
 
-#: FrmUserAdd.class:610
+#: FrmUserAdd.class:614
 msgid "Real Name"
 msgstr ""
 
@@ -890,10 +874,6 @@ msgstr ""
 msgid "Restricted administrator (backup)"
 msgstr ""
 
-#: MdlNetConf.module:308
-msgid "STATUS:"
-msgstr "STATUS:"
-
 #: MdlCore.module:251
 msgid "Scanning system for installable media. Please wait ..."
 msgstr "Scanning system for installable media. Please wait ..."
@@ -906,7 +886,7 @@ msgstr ""
 msgid "Search Again"
 msgstr "Search Again"
 
-#: FrmNetConf.class:264
+#: FrmNetConf.class:280
 msgid "Secondary DNS Server"
 msgstr "Secondary DNS Server"
 
@@ -914,7 +894,7 @@ msgstr "Secondary DNS Server"
 msgid "Seconds"
 msgstr "Seconds"
 
-#: FrmImportAccts.class:349 FrmUserAdd.class:539
+#: FrmImportAccts.class:349 FrmUserAdd.class:543
 msgid "Select"
 msgstr ""
 
@@ -982,7 +962,7 @@ msgstr ""
 msgid "Set Password"
 msgstr "Set Password"
 
-#: MdlNetConf.module:209
+#: MdlNetConf.module:155
 msgid "Setup Mode"
 msgstr "Setup Mode"
 
@@ -1022,7 +1002,7 @@ msgstr ""
 msgid "Skipping lilo setup"
 msgstr "Skipping lilo setup per user request"
 
-#: FrmSummary.class:313 FrmUsrPkgSel.class:147 MdlCore.module:520
+#: FrmSummary.class:314 FrmUsrPkgSel.class:147 MdlCore.module:520
 msgid "Software Selection"
 msgstr "Software Selection"
 
@@ -1034,11 +1014,11 @@ msgstr ""
 msgid "Standard"
 msgstr "Standard"
 
-#: MdlNetConf.module:366
+#: MdlNetConf.module:988
 msgid "Static IP Address Settings"
 msgstr ""
 
-#: MdlNetConf.module:411
+#: MdlNetConf.module:1023
 msgid "Subnet Mask"
 msgstr "Subnet Mask"
 
@@ -1054,7 +1034,7 @@ msgstr "System Administrator Password"
 msgid "System Configuration"
 msgstr "System Configuration"
 
-#: FrmLilo.class:230 FrmLiloSetup.class:302 FrmNetConf.class:287
+#: FrmLilo.class:230 FrmLiloSetup.class:302 FrmNetConf.class:303
 msgid "Tab 0"
 msgstr "-"
 
@@ -1082,7 +1062,7 @@ msgstr "The linux root account is pre-assigned to be used as the system administ
 msgid "There as been an error while installing required system software. "
 msgstr "There as been an error while installing required system software. "
 
-#: MdlInstallSys.module:633
+#: MdlInstallSys.module:637
 msgid "There has been an error extracting"
 msgstr "There has been an error extracting"
 
@@ -1146,7 +1126,7 @@ msgstr ""
 msgid "This user is allowed to print"
 msgstr ""
 
-#: MdlNetConf.module:324
+#: MdlNetConf.module:1083
 msgid "This will work if you use a cable or DSL modem on a home network."
 msgstr "This will work if you use a cable or DSL modem on a home network."
 
@@ -1178,7 +1158,7 @@ msgstr "Total progress"
 msgid "Typically, you want to use the largest partition for this."
 msgstr "Typically, you want to use the largest partition for this."
 
-#: FrmSummary.class:214
+#: FrmSummary.class:215
 msgid "USER-SELECTED PACKAGES"
 msgstr ""
 
@@ -1198,11 +1178,11 @@ msgstr "Unable to install kernels. "
 msgid "Unable to locate any installable media."
 msgstr ""
 
-#: MdlNetConf.module:136
+#: MdlNetConf.module:105
 msgid "Unplugged"
 msgstr "Unplugged"
 
-#: FrmUserAdd.class:545
+#: FrmUserAdd.class:549
 msgid "Use Picture ID for Login greeting"
 msgstr ""
 
@@ -1226,11 +1206,11 @@ msgstr "Used to store system data. This particular install requires a minimum of
 msgid "Used to store user documents, pictures, videos. Give yourself as much room as you want"
 msgstr "Used to store user documents, pictures, videos. Give yourself as much room as you want"
 
-#: FrmUserAdd.class:616 MdlCore.module:530
+#: FrmUserAdd.class:620 MdlCore.module:530
 msgid "User Accounts"
 msgstr "User Accounts"
 
-#: FrmImportAccts.class:370 FrmUserAdd.class:550
+#: FrmImportAccts.class:370 FrmUserAdd.class:554
 msgid "User Rights Management"
 msgstr ""
 
@@ -1251,8 +1231,8 @@ msgid "Uses the default (failsafe) configuration."
 msgstr ""
 
 #: FrmPartSel.class:150
-msgid "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested ammount"
-msgstr "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested ammount"
+msgid "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested amount"
+msgstr "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested amount"
 
 #: FrmHalSwitch.class:30
 msgid "VL-Hot"
@@ -1270,7 +1250,7 @@ msgstr "VectorLinux is unable to determine the type of hard disks on your system
 msgid "Vectorlinux is currently being installed to your system... Please wait"
 msgstr "Vectorlinux is currently being installed to your system... Please wait"
 
-#: MdlInstallSys.module:589
+#: MdlInstallSys.module:593
 msgid "Vectorlinux is now being installed. Please wait..."
 msgstr "Vectorlinux is now being installed. Please wait..."
 
@@ -1310,13 +1290,9 @@ msgstr "Windows Partitions Detected"
 msgid "Windows installation found in"
 msgstr ""
 
-#: MdlNetConf.module:122
+#: MdlNetConf.module:96
 msgid "Wired"
 msgstr "Wired"
-
-#: MdlNetConf.module:125
-msgid "Wireless"
-msgstr "Wireless"
 
 #: MdlCore.module:28
 msgid "Working ... Please Wait"
@@ -1391,12 +1367,12 @@ msgid "already exists"
 msgstr ""
 
 #: FrmPartSel.class:150
-msgid "but can also be calculated as 2 times your ammount of RAM"
-msgstr "but can also be calculated as 2 times your ammount of RAM"
+msgid "but can also be calculated as 2 times your amount of RAM"
+msgstr "but can also be calculated as 2 times your amount of RAM"
 
 #: FrmPartSel.class:150
-msgid "but you should considear a higher value to make sure you have room to install additional software"
-msgstr "but you should considear a higher value to make sure you have room to install additional software"
+msgid "but you should consider a higher value to make sure you have room to install additional software"
+msgstr "but you should consider a higher value to make sure you have room to install additional software"
 
 #: FrmPartSel.class:150
 msgid "by simply selecting a \"/\" value on this screen. The rest is optional. The following is a"
@@ -1406,7 +1382,7 @@ msgstr "by simply selecting a \"/\" value on this screen. The rest is optional. 
 msgid "checkbox."
 msgstr ""
 
-#: MdlInstallCustom.module:417
+#: MdlInstallCustom.module:423
 msgid "failed to install. Installation will stop now"
 msgstr ""
 
@@ -1462,7 +1438,7 @@ msgstr "localtime"
 msgid "localtime-copied-from"
 msgstr "localtime-copied-from"
 
-#: MdlPartSel.module:296
+#: MdlPartSel.module:299
 msgid "partition"
 msgstr ""
 

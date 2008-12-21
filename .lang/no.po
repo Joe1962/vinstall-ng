@@ -38,7 +38,7 @@ msgstr "16 bit Pseudo Farge"
 msgid "1600x1200"
 msgstr "1600x1200"
 
-#: FrmNetConf.class:246
+#: FrmNetConf.class:262
 msgid "192.168.1.254"
 msgstr "192.168.1.254"
 
@@ -74,11 +74,7 @@ msgstr "Om systempartisjonering i Linux"
 msgid "About the root account"
 msgstr "Om root kontoen"
 
-#: MdlNetConf.module:280
-msgid "Access Point"
-msgstr "Tilgangspunkt"
-
-#: FrmImportAccts.class:304
+#: FrmImportAccts.class:310
 msgid "Account"
 msgstr "Konto"
 
@@ -90,7 +86,7 @@ msgstr "Aktiver veksleområde"
 msgid "Add option to boot this Operating system into Text mode."
 msgstr "Legg til opsjon for å starte dette operativ-systemet i tekst modus"
 
-#: MdlLilo.module:711
+#: MdlLilo.module:713
 msgid "Add option to boot this operating system into text mode"
 msgstr "Legg til opsjon for å starte dette operativ-systemet i tekst modus"
 
@@ -106,11 +102,11 @@ msgstr "Tillat bruker å åpne/lukke USB penner"
 msgid "Allow user to mount / un-mount Removable HD Storage Devices"
 msgstr "Tillat bruker å åpne/lukke eksterne harddisker"
 
-#: MdlNetConf.module:324
+#: MdlNetConf.module:1083
 msgid "Automatic settings via DHCP."
 msgstr "Automatiske instillinger via DHCP"
 
-#: MdlNetConf.module:196
+#: MdlNetConf.module:145
 msgid "Automatically activate this interface at start-up"
 msgstr "Automatisk aktiver dette brukersgrensesnittet ved oppstart"
 
@@ -118,7 +114,7 @@ msgstr "Automatisk aktiver dette brukersgrensesnittet ved oppstart"
 msgid "BROUGHT TO YOU BY"
 msgstr "Tilbudt til deg fra"
 
-#: FrmSummary.class:187
+#: FrmSummary.class:188
 msgid "BULK PACKAGES"
 msgstr "Samlepakker"
 
@@ -126,7 +122,7 @@ msgstr "Samlepakker"
 msgid "BULK PACKAGES:"
 msgstr "Samlepakker"
 
-#: FMain.class:828
+#: FMain.class:835
 msgid "Back"
 msgstr "Tilbake"
 
@@ -134,11 +130,11 @@ msgstr "Tilbake"
 msgid "Bash init script"
 msgstr "Bash init skript"
 
-#: FrmLilo.class:284 FrmLiloSetup.class:251
+#: FrmLilo.class:284 FrmLiloSetup.class:252
 msgid "Boot Default"
 msgstr "Standard oppstart"
 
-#: FrmLiloSetup.class:185
+#: FrmLiloSetup.class:186
 msgid "Boot Manager Configuration"
 msgstr "Konfigurasjon av oppstart behandler"
 
@@ -150,11 +146,11 @@ msgstr "Menyinstillinger oppstart"
 msgid "Boot loader has been setup successfully"
 msgstr "Oppstartinnstillinger har blitt satt opp korrekt"
 
-#: MdlConfLilo.module:126 MdlLilo.module:125
+#: MdlConfLilo.module:126 MdlLilo.module:127
 msgid "Bootsector of "
 msgstr "Oppstart sektor av"
 
-#: FrmLiloSetup.class:66 MdlLilo.module:83
+#: FrmLiloSetup.class:66 MdlLilo.module:85
 msgid "Bootsplash Extra High"
 msgstr "Oppstart-grafikk Ekstra Høy Oppløsning"
 
@@ -162,11 +158,11 @@ msgstr "Oppstart-grafikk Ekstra Høy Oppløsning"
 msgid "Bootsplash Extra high"
 msgstr "Oppstart-grafikk Ekstra Høy Oppløsning"
 
-#: FrmLilo.class:262 FrmLiloSetup.class:65 MdlLilo.module:81
+#: FrmLilo.class:262 FrmLiloSetup.class:36 MdlLilo.module:83
 msgid "Bootsplash High"
 msgstr "Oppstart-grafikk Høy Oppløsning"
 
-#: FrmLilo.class:262 FrmLiloSetup.class:64 MdlLilo.module:79
+#: FrmLilo.class:262 FrmLiloSetup.class:64 MdlLilo.module:81
 msgid "Bootsplash Med"
 msgstr "Oppstart-grafikk Middels Oppløsning"
 
@@ -174,7 +170,7 @@ msgstr "Oppstart-grafikk Middels Oppløsning"
 msgid "Build Date: "
 msgstr "Byggedato"
 
-#: FMain.class:864
+#: FMain.class:871
 msgid "Button1"
 msgstr "-"
 
@@ -190,7 +186,7 @@ msgstr "Kan ikke finne SETUP.CONF"
 msgid "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
 msgstr "Avkryss denne boksen hvis du har en windows installasjon på ditt system eller noen andre windows installasjoner (FAT, FAT32, NTFS) som du vil ha automatisk startet når datamaskinen starter"
 
-#: FrmUserAdd.class:502
+#: FrmUserAdd.class:505
 msgid "Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
 msgstr "Velg et unikt navn for hver bruker. Skriv inn passordet to ganger for nøyaktighet. Du kan lage så mange brukere du vil, og når du er ferdig klikk neste for å fortsette."
 
@@ -210,7 +206,7 @@ msgstr "Velg installasjonsmetode"
 msgid "Choose your optional components to install."
 msgstr "Velg valgfrie komponenter du vil installere"
 
-#: FrmUserAdd.class:574
+#: FrmUserAdd.class:577
 msgid "Clear Form"
 msgstr "Slett skjema"
 
@@ -226,7 +222,7 @@ msgstr "Farge Dybde"
 msgid "ComboBox1"
 msgstr "Kombinasjonsboks1"
 
-#: FrmNetConf.class:207
+#: FrmNetConf.class:223
 msgid "Computer Name"
 msgstr "Datamaskinnavn"
 
@@ -238,7 +234,7 @@ msgstr "Konfigurasjon foregår"
 msgid "Configure and install lilo (Linux Boot Loader)"
 msgstr "Konfigurer og installer LILO (Linux Boot Loader)"
 
-#: FrmUserAdd.class:568
+#: FrmUserAdd.class:571
 msgid "Create User"
 msgstr "Opprett bruker"
 
@@ -253,6 +249,10 @@ msgstr "Oppretter brukerkonto ... Vennligst vent"
 #: FrmHostPrep.class:135
 msgid "Current Status"
 msgstr "Nåværende status"
+
+#: MdlNetConf.module:174
+msgid "Current Status:"
+msgstr ""
 
 #: FrmInstallSys.class:58
 msgid "Current Step"
@@ -298,15 +298,15 @@ msgstr "Disk Partisjonering:"
 msgid "Do not format"
 msgstr "Ikke formater"
 
-#: FrmLiloSetup.class:201
+#: FrmLiloSetup.class:202
 msgid "Do not install LILO"
 msgstr "Ikke installer LILO"
 
-#: FrmSummary.class:124 MdlInstallSys.module:184 MdlWinDrives.module:124
+#: FrmSummary.class:124 MdlInstallSys.module:184 MdlWinDrives.module:125
 msgid "Do not mount"
 msgstr "Ikke åpne"
 
-#: FrmNetConf.class:219
+#: FrmNetConf.class:235
 msgid "Domain"
 msgstr "Domene"
 
@@ -314,11 +314,11 @@ msgstr "Domene"
 msgid "Don't Install Lilo"
 msgstr "Ikke installer LILO"
 
-#: FrmImportAccts.class:384 FrmResetSettings.class:122
+#: FrmImportAccts.class:390 FrmResetSettings.class:122
 msgid "Done"
 msgstr "Ferdig"
 
-#: MdlNetConf.module:324
+#: MdlNetConf.module:1083
 msgid "Dynamic Host Control Protocol"
 msgstr "Dynamisk vertskontroll protokoll"
 
@@ -326,15 +326,7 @@ msgstr "Dynamisk vertskontroll protokoll"
 msgid "Elite user"
 msgstr "Elitebruker"
 
-#: MdlNetConf.module:261
-msgid "Encryption key"
-msgstr "Krypteringsnøkkel"
-
-#: MdlNetConf.module:235
-msgid "Encryption type"
-msgstr "Krypteringstype"
-
-#: FrmRootPass.class:143 FrmUserAdd.class:588
+#: FrmRootPass.class:143 FrmUserAdd.class:591
 msgid "Enter Password"
 msgstr "Skriv inn passord"
 
@@ -354,11 +346,11 @@ msgstr "Skriv inn innloggingsnavnet som denne brukeren vil benytte for å logge 
 msgid "Enter the same password twice"
 msgstr "Skriv inn passordet to ganger"
 
-#: MdlInstallSys.module:523
+#: MdlInstallSys.module:528
 msgid "Error occurred while installing"
 msgstr "Det oppsto en feil under innstalleringen"
 
-#: MdlInstallCustom.module:347
+#: MdlInstallCustom.module:354
 msgid "Error while installing "
 msgstr "Feil under innstalleringen"
 
@@ -370,7 +362,7 @@ msgstr "Det oppsto en feil under innstallering av nødvendig systemprogramvare"
 msgid "Error while installing system configuration. "
 msgstr "Det oppsto en feil unders systemkonfigureringen"
 
-#: FMain.class:839
+#: FMain.class:846
 msgid "Exit Installation"
 msgstr "Avslutt innstallering"
 
@@ -378,11 +370,11 @@ msgstr "Avslutt innstallering"
 msgid "FILESYSTEM"
 msgstr "FILSYSTEM"
 
-#: MdlInstallSys.module:818
+#: MdlInstallSys.module:500
 msgid "Failed to install"
 msgstr "Mislykket innstallasjon"
 
-#: MdlInstallCustom.module:218
+#: MdlInstallCustom.module:225
 msgid "Failed to install. Installation will stop"
 msgstr "Mislykket installasjon. Installeringen vil stoppe"
 
@@ -402,11 +394,11 @@ msgstr "Sluttoppsett av maskinvare"
 msgid "Find installation media"
 msgstr "Søk etter installasjonsmedium"
 
-#: MdlInstallSys.module:644
+#: MdlInstallSys.module:649
 msgid "Finished intalling Bulks"
 msgstr "Samlepakker ferdig installert"
 
-#: MdlConfLilo.module:131 MdlLilo.module:127
+#: MdlConfLilo.module:131 MdlLilo.module:129
 msgid "Floppy"
 msgstr "Diskett"
 
@@ -434,7 +426,7 @@ msgstr "GTK Verktøysett tema instillinger"
 msgid "GUI installer for Vector linux"
 msgstr "Grafisk brukergrensesnitt installering for Vector Linux"
 
-#: MdlNetConf.module:433
+#: MdlNetConf.module:1045
 msgid "Gateway Address"
 msgstr "Gateway adresse"
 
@@ -450,7 +442,7 @@ msgstr "Instillinger for grafisk grensesnitt"
 msgid "Graphical inteface preferences"
 msgstr "Preferanser for grafisk grensesnitt"
 
-#: FrmUserAdd.class:432
+#: FrmUserAdd.class:433
 msgid "Groups are a way of administering permissions for your users. You grant the user"
 msgstr "Groups er en metode for å administrere tillatelser for brukerene. Du gir brukeren tillatelser"
 
@@ -458,11 +450,11 @@ msgstr "Groups er en metode for å administrere tillatelser for brukerene. Du gi
 msgid "HAL"
 msgstr "HAL"
 
-#: MdlNetConf.module:156
+#: MdlNetConf.module:117
 msgid "Hardware Address"
 msgstr "Maskinvare adresse"
 
-#: FrmPartSel.class:186 FrmUserAdd.class:555
+#: FrmPartSel.class:186 FrmUserAdd.class:558
 msgid "Help"
 msgstr "Hjelp"
 
@@ -470,7 +462,7 @@ msgstr "Hjelp"
 msgid "INSTALL TYPE:"
 msgstr "Installer TYPE"
 
-#: MdlNetConf.module:388
+#: MdlNetConf.module:1000
 msgid "IP Address"
 msgstr "IP Adresse"
 
@@ -478,31 +470,31 @@ msgstr "IP Adresse"
 msgid "IceWM settings, preferences, menu"
 msgstr "IceWM instillinger, preferanser, meny"
 
-#: MdlNetConf.module:324
-msgid "If in doubt, choose this option"
-msgstr "Hvis du er i tvil, velg dette alternativet"
+#: MdlNetConf.module:1083
+msgid "If in doubt, choose this option."
+msgstr ""
 
 #: FrmDone.class:60
 msgid "If you installed from  CD-ROM/R/RW media, please remove de disk before restarting."
 msgstr "Hvis du installerte fra CD-ROM/R/RW medium, vær så vennlig å fjern disken før gjenstart."
 
-#: FMain.class:447
+#: FMain.class:448
 msgid "If you wish to bypass the bootloader setup, uncheck the"
 msgstr ""
 
-#: FrmImportAccts.class:377
+#: FrmImportAccts.class:383
 msgid "Import Account"
 msgstr "Importer konto"
 
-#: FrmImportAccts.class:392 FrmUserAdd.class:627
+#: FrmImportAccts.class:398 FrmUserAdd.class:630
 msgid "Import Existing User Accounts"
 msgstr "Importer eksisterende bruker kontoer"
 
-#: MdlLilo.module:619
+#: MdlLilo.module:621
 msgid "Include in boot menu"
 msgstr "Innkluder i oppstart meny"
 
-#: MdlLilo.module:531 MdlLiloOsList.module:149
+#: MdlLilo.module:533 MdlLiloOsList.module:149
 msgid "Include this installation in the boot menu"
 msgstr "Inkluder denne installasjonen i oppstartsmenyen"
 
@@ -514,7 +506,7 @@ msgstr "Inkluder dette operativsystemet i oppstartsmenyen"
 msgid "Initial Ram Disk"
 msgstr "Initiell Ram Disk"
 
-#: MdlLilo.module:655
+#: MdlLilo.module:657
 msgid "Initrd"
 msgstr "Initrd"
 
@@ -530,7 +522,7 @@ msgstr "Innstallering"
 msgid "Installation Summary"
 msgstr "Innstallering oppsummert"
 
-#: FrmSummary.class:293
+#: FrmSummary.class:294
 msgid "Installation Type"
 msgstr "Installasjonstype"
 
@@ -546,11 +538,11 @@ msgstr "Installasjonen er komplett"
 msgid "Installation is finished"
 msgstr "Installering er ferdig"
 
-#: MdlInstallSys.module:759
+#: MdlInstallSys.module:764
 msgid "Installation phase complete. Ready for configuration"
 msgstr "Installasjonsfase ferdig. Klar til å konfigurere"
 
-#: MdlInstallCustom.module:204 MdlInstallSys.module:485
+#: MdlInstallCustom.module:211 MdlInstallSys.module:486
 msgid "Installing"
 msgstr "Installerer"
 
@@ -558,25 +550,21 @@ msgstr "Installerer"
 msgid "Installing ..."
 msgstr "Instalerer ..."
 
-#: MdlInstallSys.module:804
+#: MdlInstallSys.module:809
 msgid "Installing Required Package ..."
 msgstr "Instalerer nødvendige pakker ..."
 
-#: MdlInstallSys.module:762
+#: MdlInstallSys.module:767
 msgid "Installing default system configuration and required software."
 msgstr "Installerer standard systemkonfigurasjon og nødvendig programvare."
 
-#: MdlInstallCustom.module:264
+#: MdlInstallCustom.module:271
 msgid "Installing user-selected package"
 msgstr "Installerer bruker valgte pakker"
 
 #: FrmPkgSel.class:81
 msgid "Installs all optional components in your VectorLinux media to your system"
 msgstr "Installerer alle valgfrie komponenter i ditt VectorLinux medium til ditt system"
-
-#: MdlNetConf.module:177
-msgid "Interface Type"
-msgstr "Grensesnitt type"
 
 #: MdlDiskPart.module:46
 msgid "It is still possible to install VectorLinux on your system, but you need to pre-partition your disks first"
@@ -586,7 +574,7 @@ msgstr "Det er fremdeles mulig å installere VectorLinux på systemet ditt, men 
 msgid "KDE Settings (Menu, Window decorations, etc)"
 msgstr "KDE Instillinger (Meny, vindusdekorasjoner osv.)"
 
-#: MdlLilo.module:688 MdlLiloOsList.module:359
+#: MdlLilo.module:690 MdlLiloOsList.module:359
 msgid "Kernel boot options"
 msgstr "Oppstartsalternativer for kjernen"
 
@@ -618,7 +606,7 @@ msgstr "Laster gparted ... vennligst vent"
 msgid "LocalTime"
 msgstr "Lokal tid"
 
-#: FrmUserAdd.class:581
+#: FrmUserAdd.class:584
 msgid "Login Name"
 msgstr "Innloggingsnavn"
 
@@ -646,7 +634,7 @@ msgstr "Monter til"
 msgid "MPlayer Multimedia Player Settings"
 msgstr "MPlayer Multimedia Spiller Innstillinger"
 
-#: FrmNetConf.class:235
+#: FrmNetConf.class:251
 msgid "Manual DNS Server Specification"
 msgstr "Manuell DNS server spesifikasjon"
 
@@ -666,19 +654,19 @@ msgstr "De fleste daglige gjøremål trenger ikke administratorrettigheter"
 msgid "Mount Point"
 msgstr "Monteringspunkt"
 
-#: MdlLilo.module:541 MdlLiloOsList.module:313
+#: MdlLilo.module:543 MdlLiloOsList.module:313
 msgid "Name"
 msgstr "Navn"
 
-#: FrmNetConf.class:192 MdlCore.module:531
+#: FrmNetConf.class:208 MdlCore.module:531
 msgid "Network Configuration"
 msgstr "Nettverkskonfigurasjon"
 
-#: FrmImportAccts.class:316
+#: FrmImportAccts.class:322
 msgid "New Password"
 msgstr "Nytt Passord"
 
-#: FMain.class:850
+#: FMain.class:857
 msgid "Next"
 msgstr "Neste"
 
@@ -690,11 +678,11 @@ msgstr "Nei"
 msgid "No Installable Media Found"
 msgstr "Ingen installerbare media funnet"
 
-#: MdlWinDrives.module:141
+#: MdlWinDrives.module:142
 msgid "No Windows partitions detected"
 msgstr "Ingen windowspartisjon oppdaget"
 
-#: MdlNetConf.module:95
+#: MdlNetConf.module:78
 msgid "No ethernet neworking devices found"
 msgstr "Ingen ethernet nettverks-kort funnet"
 
@@ -706,15 +694,15 @@ msgstr "Ingen installerbare media funnet"
 msgid "No, I Do Not Agree"
 msgstr "Nei, jeg er ikke enig"
 
-#: FrmSummary.class:101 MdlLilo.module:201 MdlNetConf.module:248
+#: FrmSummary.class:101 MdlLilo.module:203 MdlNetConf.module:1241
 msgid "None"
 msgstr "Ingen"
 
-#: FrmSummary.class:53 MdlInstallSys.module:136 MdlPartSel.module:150
+#: FrmSummary.class:53 MdlInstallSys.module:136 MdlPartSel.module:147
 msgid "Not Used"
 msgstr "Ikke brukt"
 
-#: FrmUserAdd.class:433
+#: FrmUserAdd.class:434
 msgid "OK"
 msgstr "Ok"
 
@@ -742,7 +730,7 @@ msgstr "OPPSETT FOR PARTISJONERING"
 msgid "Package"
 msgstr "Pakke"
 
-#: FrmSummary.class:178 FrmUsrPkgSel.class:16
+#: FrmSummary.class:179 FrmUsrPkgSel.class:16
 msgid "Package Name"
 msgstr "Pakkenavn"
 
@@ -758,11 +746,11 @@ msgstr "Pakker har blitt installer på systemet ditt. Vennligst klikk"
 msgid "Partition"
 msgstr "Partisjon"
 
-#: FrmSummary.class:303
+#: FrmSummary.class:304
 msgid "Partition Selection Scheme"
 msgstr "Velg partisjonsskjema? plan?"
 
-#: FrmImportAccts.class:86
+#: FrmImportAccts.class:89
 msgid "Password fields cannot be blank. Please enter a password for"
 msgstr "Passord felt kan ikke være blankt. Vennligst skriv inn passord for"
 
@@ -770,7 +758,7 @@ msgstr "Passord felt kan ikke være blankt. Vennligst skriv inn passord for"
 msgid "Passwords do not match"
 msgstr "Passordet passer ikke"
 
-#: FMain.class:514
+#: FMain.class:515
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr "Passordet passer ikke. Vennligst skriv inn det samme passordet to ganger"
 
@@ -778,19 +766,19 @@ msgstr "Passordet passer ikke. Vennligst skriv inn det samme passordet to ganger
 msgid "Passwords do not match. Please enter the same password twice for accuracy."
 msgstr "Passordet passer ikke. Vennligst skriv inn passordet to ganger for nøyaktighet"
 
-#: FMain.class:509
+#: FMain.class:510
 msgid "Please enter the root password. For your security purposes, do not leave this blank"
 msgstr "Vennligst skriv inn passordet for root. For din sikkerhet, ikke la dette være blankt"
 
-#: FMain.class:457
+#: FMain.class:458
 msgid "Please select a default operating system to boot before proceeding"
 msgstr "Vennligst velg oppstart av standard oprerativsystem før du fortsetter"
 
-#: FrmImportAccts.class:81
+#: FrmImportAccts.class:84
 msgid "Please select an account name from the dropdown list."
 msgstr "Vennligst velg et konto navn fra dropdown menyen"
 
-#: MdlPartSel.module:296
+#: MdlPartSel.module:299
 msgid "Please select only one "
 msgstr "Vennligst velg kun ett"
 
@@ -798,11 +786,11 @@ msgstr "Vennligst velg kun ett"
 msgid "Please select the partitions you wish to use and how to use them"
 msgstr "Vennligst velg partisjonene du ønsker å bruke og hvordan du skal bruke dem"
 
-#: FMain.class:566
+#: FMain.class:567
 msgid "Please specify a hostname for this computer"
 msgstr "Vennligst spesifiser et vertsnavn for denne datamaskinen"
 
-#: FMain.class:571
+#: FMain.class:572
 msgid "Please specify the domain this computer belongs to"
 msgstr "Vennligst spesifiser domenet som denne datamaskinen tilhører"
 
@@ -810,15 +798,15 @@ msgstr "Vennligst spesifiser domenet som denne datamaskinen tilhører"
 msgid "Please use the setup program below to setup the sound system."
 msgstr "Vennligst bruk innstillingsprogrammet nedenfor for å stille inn lydsystemet"
 
-#: FMain.class:355
+#: FMain.class:356
 msgid "Please wait while setup analyses your current partition setup."
 msgstr "Vennligst vent mens nåværende partisjon analyseres av innstilligsprogrammet"
 
-#: FMain.class:353
+#: FMain.class:354
 msgid "Please wait while setup attampts to run the partitioning utility"
 msgstr "Vennligst vent mens innstillingsprogrammet prøver å kjøre partisjonsverktøyet"
 
-#: MdlNetConf.module:134
+#: MdlNetConf.module:103
 msgid "Plugged-in"
 msgstr "Innplugget"
 
@@ -834,7 +822,7 @@ msgstr "Forbereder oppsummering av installasjonen ... Vennligst vent"
 msgid "Preparing filesystems"
 msgstr "Forbereder filsystemene"
 
-#: FrmNetConf.class:251
+#: FrmNetConf.class:267
 msgid "Primary DNS Server"
 msgstr "Primær DNS Server"
 
@@ -842,11 +830,7 @@ msgstr "Primær DNS Server"
 msgid "Probe hardware to setup your Graphical Environment using your preffered settings"
 msgstr "Undersøker maskinvaren for å instille det grafiske miljøet med dine foretrukne valg"
 
-#: MdlNetConf.module:60
-msgid "Probing your networking hardware ... Please wait"
-msgstr "Leter etter maskinvare for nettverk ... Vennligst vent"
-
-#: FrmLilo.class:267 FrmLiloSetup.class:272
+#: FrmLilo.class:267 FrmLiloSetup.class:273
 msgid "Prompt Timeout"
 msgstr "Tidsslutt"
 
@@ -862,7 +846,7 @@ msgstr "ROX Filer Skrivebord instillinger"
 msgid "Re-Enter Password"
 msgstr "Skriv inn passordet på nytt"
 
-#: FrmUserAdd.class:595
+#: FrmUserAdd.class:598
 msgid "ReEnter Password"
 msgstr "Skriv inn passordet på nytt"
 
@@ -870,7 +854,7 @@ msgstr "Skriv inn passordet på nytt"
 msgid "Reading available software selection ... Please wait"
 msgstr "Leser listen av tilgjengelig programvare .. Vennligst vent"
 
-#: FrmUserAdd.class:611
+#: FrmUserAdd.class:614
 msgid "Real Name"
 msgstr "Reelt navn"
 
@@ -878,21 +862,17 @@ msgstr "Reelt navn"
 msgid "Regional Settings"
 msgstr "Regionale valg"
 
-#: FrmImportAccts.class:52
+#: FrmImportAccts.class:53
 msgid "Reset settings for"
 msgstr "Nullstill instillinger for"
 
-#: FMain.class:190 FrmDone.class:63
+#: FMain.class:191 FrmDone.class:63
 msgid "Restart"
 msgstr "Restart"
 
 #: MdlUsrAdd.module:112
 msgid "Restricted administrator (backup)"
 msgstr "Begrenset administrator (Backup)"
-
-#: MdlNetConf.module:308
-msgid "STATUS:"
-msgstr "STATUS"
 
 #: MdlCore.module:251
 msgid "Scanning system for installable media. Please wait ..."
@@ -906,23 +886,23 @@ msgstr "Sjermoppløsning"
 msgid "Search Again"
 msgstr "Undersøk igjen"
 
-#: FrmNetConf.class:264
+#: FrmNetConf.class:280
 msgid "Secondary DNS Server"
 msgstr "Sekundær DNS Server"
 
-#: FrmLilo.class:278 FrmLiloSetup.class:283
+#: FrmLilo.class:278 FrmLiloSetup.class:284
 msgid "Seconds"
 msgstr "Sekunder"
 
-#: FrmImportAccts.class:343 FrmUserAdd.class:540
+#: FrmImportAccts.class:349 FrmUserAdd.class:543
 msgid "Select"
 msgstr "Velg"
 
-#: FrmImportAccts.class:370
+#: FrmImportAccts.class:376
 msgid "Select Settings to reset"
 msgstr "Velg instillinger som skal nullstilles"
 
-#: FMain.class:458
+#: FMain.class:459
 msgid "Select an entry from this list"
 msgstr "Velg en inngang fra denne listen"
 
@@ -930,7 +910,7 @@ msgstr "Velg en inngang fra denne listen"
 msgid "Select installation media from the list below"
 msgstr "Velg installasjons-medium fra lista nedenfor"
 
-#: FrmImportAccts.class:333
+#: FrmImportAccts.class:339
 msgid "Select login Image"
 msgstr "Velg bilde for innlogging"
 
@@ -954,7 +934,7 @@ msgstr "Velg denne valgmuligheten hvis du ønsker å lage, flytte eller endre st
 msgid "Select which VectorLinux version you wish to install from the list below"
 msgstr "Velg versjon av VectorLinux som du ønsker å installere fra listen nedenfor"
 
-#: FrmUserAdd.class:432
+#: FrmUserAdd.class:433
 msgid "Select which groups you want this user to be a part of here"
 msgstr "Velg gruppe du ønsker at denne brukeren skal være del av"
 
@@ -962,15 +942,19 @@ msgstr "Velg gruppe du ønsker at denne brukeren skal være del av"
 msgid "Select which settings to reset"
 msgstr "Velg hvilke instillinger som skal nullstilles"
 
-#: FrmPkgsel2.class:21 FrmUsrPkgSel.class:11
+#: FrmPkgsel2.class:21
+msgid "Select your individual packages to install."
+msgstr ""
+
+#: FrmUsrPkgSel.class:11
 msgid "Select your indivirual packages to install."
 msgstr "Velg dine indivirual? individuelle? pakker som skal installeres"
 
-#: FrmLangSel.class:117
+#: FrmLangSel.class:118
 msgid "Select your language"
 msgstr "Velg ditt språk"
 
-#: FrmImportAccts.class:90
+#: FrmImportAccts.class:93
 msgid "Selected passwords dont match. Please enter the same password twice"
 msgstr "Passordene er forskjellige. Vennligst skriv inn samme passord to ganger"
 
@@ -978,11 +962,11 @@ msgstr "Passordene er forskjellige. Vennligst skriv inn samme passord to ganger"
 msgid "Set Password"
 msgstr "Velg passord"
 
-#: MdlNetConf.module:209
+#: MdlNetConf.module:155
 msgid "Setup Mode"
 msgstr "Installerings modus"
 
-#: FMain.class:528
+#: FMain.class:529
 msgid "Setup has detected existing directories in the partition you selected for /home."
 msgstr "Installajons-programmet har funnet eksisterende mapper i partisjonen du valgte for /home"
 
@@ -1010,15 +994,15 @@ msgstr "Flere windows funnet. Jeg vil bruke det første!"
 msgid "Size"
 msgstr "Størrelse"
 
-#: FMain.class:467
+#: FMain.class:468
 msgid "Skipping boot loader setup"
 msgstr "Hopper over oppsetting av oppstartlaster"
 
-#: FMain.class:493
+#: FMain.class:494
 msgid "Skipping lilo setup"
 msgstr "Hopper over lilo innstilling"
 
-#: FrmSummary.class:313 FrmUsrPkgSel.class:147 MdlCore.module:520
+#: FrmSummary.class:314 FrmUsrPkgSel.class:147 MdlCore.module:520
 msgid "Software Selection"
 msgstr "Programvarevalg"
 
@@ -1026,15 +1010,15 @@ msgstr "Programvarevalg"
 msgid "Sound system preferences"
 msgstr "Lyd-system preferanser"
 
-#: FrmLilo.class:139 FrmLiloSetup.class:63 MdlLilo.module:77
+#: FrmLilo.class:139 FrmLiloSetup.class:63 MdlLilo.module:79
 msgid "Standard"
 msgstr "Standard"
 
-#: MdlNetConf.module:366
+#: MdlNetConf.module:988
 msgid "Static IP Address Settings"
 msgstr "Statisk IP adresse innstillinger"
 
-#: MdlNetConf.module:411
+#: MdlNetConf.module:1023
 msgid "Subnet Mask"
 msgstr "Subnet Maske"
 
@@ -1050,11 +1034,11 @@ msgstr "Systemadministrator passord"
 msgid "System Configuration"
 msgstr "Systemkonfigurasjon"
 
-#: FrmLilo.class:230 FrmLiloSetup.class:301 FrmNetConf.class:287
+#: FrmLilo.class:230 FrmLiloSetup.class:302 FrmNetConf.class:303
 msgid "Tab 0"
 msgstr "Tab 0"
 
-#: FrmLilo.class:248 FrmLiloSetup.class:233
+#: FrmLilo.class:248 FrmLiloSetup.class:234
 msgid "Target"
 msgstr "Mål"
 
@@ -1078,7 +1062,7 @@ msgstr "Linux root konto er forhåndsinnstillt til å brukes som konto til syste
 msgid "There as been an error while installing required system software. "
 msgstr "Det oppsto en feil mens nødvendig systemprogramvare ble innstallert."
 
-#: MdlInstallSys.module:632
+#: MdlInstallSys.module:637
 msgid "There has been an error extracting"
 msgstr "Det oppsto en feil under utpakking"
 
@@ -1094,7 +1078,7 @@ msgstr "Det oppsto en feil under innstallering av valgfri programvare på system
 msgid "There has been an error while trying to format "
 msgstr "Det oppsto en feil under formatering"
 
-#: FMain.class:355
+#: FMain.class:356
 msgid "This may take a while ..."
 msgstr "Dette kan ta litt tid ..."
 
@@ -1142,7 +1126,7 @@ msgstr "Denne brukeren tillates å spille spill med restriksjoner"
 msgid "This user is allowed to print"
 msgstr "Denne brukeren tillates å skrive ut"
 
-#: MdlNetConf.module:324
+#: MdlNetConf.module:1083
 msgid "This will work if you use a cable or DSL modem on a home network."
 msgstr "Dette vil virke hvis du bruker kabel eller et DSL modem på et hjemmenettverk"
 
@@ -1174,7 +1158,7 @@ msgstr "Total progresjon"
 msgid "Typically, you want to use the largest partition for this."
 msgstr "Typisk er at du vil bruke den største partisjonen for dette."
 
-#: FrmSummary.class:214
+#: FrmSummary.class:215
 msgid "USER-SELECTED PACKAGES"
 msgstr "BRUKERVALGTE PAKKER"
 
@@ -1194,11 +1178,11 @@ msgstr "Ikke i stand til å innstallere kjerner"
 msgid "Unable to locate any installable media."
 msgstr "Ikke i stand til å lokalisere innstalerbare medier."
 
-#: MdlNetConf.module:136
+#: MdlNetConf.module:105
 msgid "Unplugged"
 msgstr "Ikke plugget inn"
 
-#: FrmUserAdd.class:546
+#: FrmUserAdd.class:549
 msgid "Use Picture ID for Login greeting"
 msgstr "Bruk bilde ID for innloggingshilsen"
 
@@ -1222,19 +1206,19 @@ msgstr "Brukes til å lagre systemdata. Denne spesielle innstalasjonen krever et
 msgid "Used to store user documents, pictures, videos. Give yourself as much room as you want"
 msgstr "Brukes til å lagre dokumenter, bilder, videoer. Tildel deg selv så plass som du ønsker"
 
-#: FrmUserAdd.class:617 MdlCore.module:530
+#: FrmUserAdd.class:620 MdlCore.module:530
 msgid "User Accounts"
 msgstr "Brukerkontoer"
 
-#: FrmImportAccts.class:364 FrmUserAdd.class:551
+#: FrmImportAccts.class:370 FrmUserAdd.class:554
 msgid "User Rights Management"
 msgstr "Behandling av brukerrettigheter"
 
-#: FrmImportAccts.class:100
+#: FrmImportAccts.class:103
 msgid "User Unable to restore user account."
 msgstr "Bruker Ikke i stand til å gjenopprette brukerkonto"
 
-#: FrmImportAccts.class:105 FrmUserAdd.class:149
+#: FrmImportAccts.class:108 FrmUserAdd.class:149
 msgid "User account for"
 msgstr "Brukerkonto for"
 
@@ -1247,7 +1231,7 @@ msgid "Uses the default (failsafe) configuration."
 msgstr "Bruker standard (feilsikre) konfigurering"
 
 #: FrmPartSel.class:150
-msgid "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested ammount"
+msgid "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested amount"
 msgstr "Bruk av en swap partisjon anbefales hvis du har mindre minne en 1GB. Anbefalt mengde"
 
 #: FrmHalSwitch.class:30
@@ -1266,7 +1250,7 @@ msgstr "VectorLinux er ikke i stand til å bestemme harddisk typer på systemet 
 msgid "Vectorlinux is currently being installed to your system... Please wait"
 msgstr "VectorLinux er under innstallasjon på systemet ditt... Vennligst vent"
 
-#: MdlInstallSys.module:588
+#: MdlInstallSys.module:593
 msgid "Vectorlinux is now being installed. Please wait..."
 msgstr "VectorLinux blir nå innstallert. Vennligst vent..."
 
@@ -1278,7 +1262,7 @@ msgstr "VectorLinux er nå innstallert på systemet ditt. Vennligst klikk"
 msgid "Vectorlinux is preparing your system for installation. Please wait."
 msgstr "VectorLinux forbereder systemet ditt for innstallering. Vennligst vent"
 
-#: FrmImportAccts.class:353
+#: FrmImportAccts.class:359
 msgid "Verify Password"
 msgstr "Verifiser passord"
 
@@ -1290,7 +1274,7 @@ msgstr "Vesa"
 msgid "Video Driver"
 msgstr "Video driver"
 
-#: FrmLilo.class:254 FrmLiloSetup.class:212
+#: FrmLilo.class:254 FrmLiloSetup.class:213
 msgid "Video Resolution"
 msgstr "Video oppløsning"
 
@@ -1306,27 +1290,23 @@ msgstr "Windows partisjoner oppdaget"
 msgid "Windows installation found in"
 msgstr "Windows installering funnet på"
 
-#: MdlNetConf.module:122
+#: MdlNetConf.module:96
 msgid "Wired"
 msgstr "Tråd"
-
-#: MdlNetConf.module:125
-msgid "Wireless"
-msgstr "trådløs"
 
 #: MdlCore.module:28
 msgid "Working ... Please Wait"
 msgstr "Arbeider ... Vennligst vent"
 
-#: FrmImportAccts.class:59
+#: FrmImportAccts.class:60
 msgid "Would you like to continue adding new user accounts now?"
 msgstr "Ønsker du å fortsette å legge til bruker kontoer nå?"
 
-#: FMain.class:548
+#: FMain.class:549
 msgid "Would you like to continue anyway?"
 msgstr "Ønsker du allikevel å fortsette?"
 
-#: FMain.class:528
+#: FMain.class:529
 msgid "Would you like to import these user accounts into your new Operating System"
 msgstr "Ønsker du å importere disse bruker kontoer til ditt nye operativ-system"
 
@@ -1354,15 +1334,15 @@ msgstr "ja"
 msgid "Yes, I Agree to the License Agreement"
 msgstr "Ja, jeg goddtar lisensavtalen"
 
-#: FMain.class:548
+#: FMain.class:549
 msgid "You have not created any user accounts for this system yet. There is not enough information"
 msgstr "Du har ikke opprettet noen brukerkontoer for dette systemet enda. Det mangler informasjon"
 
-#: FMain.class:447
+#: FMain.class:448
 msgid "You have not selected any operating systems for your boot menu."
 msgstr ""
 
-#: FMain.class:375
+#: FMain.class:376
 msgid "You must select a \"/\" partition. This is the target where the system will install to"
 msgstr "Du må velge en \"/\" partisjon. Dette er målet hvor systemet blir innstallert på"
 
@@ -1370,11 +1350,11 @@ msgstr "Du må velge en \"/\" partisjon. Dette er målet hvor systemet blir inns
 msgid "Your computer needs to be restarted so that you can use your new operating system. Click"
 msgstr "Datamaskinen din trenger å startes på nytt så du kan bruke ditt nye operativsystem. Klikk"
 
-#: MdlLilo.module:235
+#: MdlLilo.module:237
 msgid "Your option to boot"
 msgstr "Ditt valg for oppstart"
 
-#: FrmUserAdd.class:407
+#: FrmUserAdd.class:408
 msgid "Your password selections do not match. Please enter the same password twice"
 msgstr "Ditt passordvalg passer ikke. Vennligst skriv inn det samme passordet to ganger"
 
@@ -1387,22 +1367,22 @@ msgid "already exists"
 msgstr "eksisterer allerede"
 
 #: FrmPartSel.class:150
-msgid "but can also be calculated as 2 times your ammount of RAM"
+msgid "but can also be calculated as 2 times your amount of RAM"
 msgstr "kan også kalkuleres som 2 ganger din mengde RAM"
 
 #: FrmPartSel.class:150
-msgid "but you should considear a higher value to make sure you have room to install additional software"
+msgid "but you should consider a higher value to make sure you have room to install additional software"
 msgstr "du burde vurdere en større mengde for å sikre deg at du har nok plass for å innstallere ytterligere programvare"
 
 #: FrmPartSel.class:150
 msgid "by simply selecting a \"/\" value on this screen. The rest is optional. The following is a"
 msgstr "ved å velge en \"/\" verdi på denne skjermen. Resten er valgfritt. Følgende er en"
 
-#: FMain.class:447
+#: FMain.class:448
 msgid "checkbox."
 msgstr ""
 
-#: MdlInstallCustom.module:416
+#: MdlInstallCustom.module:423
 msgid "failed to install. Installation will stop now"
 msgstr "innstallasjonen feilet. Installasjons-programmet vil stoppe nå"
 
@@ -1434,11 +1414,11 @@ msgstr "installasjons-CD og klikk"
 msgid "installation is complete. Click next to begin system configuration"
 msgstr "installasjonen er komplett. Klikk neste for å begynne konfigurasjon av systemet"
 
-#: MdlLilo.module:598
+#: MdlLilo.module:600
 msgid "installed in"
 msgstr "installert i"
 
-#: MdlLilo.module:513
+#: MdlLilo.module:515
 msgid "installed on"
 msgstr "installert på"
 
@@ -1446,7 +1426,7 @@ msgstr "installert på"
 msgid "is performing final system configuration. Please wait a moment."
 msgstr "foretar endelig system konfigurasjon. Vennligst vent litt."
 
-#: MdlLilo.module:235
+#: MdlLilo.module:237
 msgid "is too long. it has been adjusted to \"Vector-cli\". You can run vasmCC after the first boot to modify your boot options"
 msgstr "er for lang. Den har blitt justert til \"Vector-cli\". Du kan bruke vasmCC etter første start for å modifisere dine oppstarts-opsjoner."
 
@@ -1458,15 +1438,15 @@ msgstr "lokal tid"
 msgid "localtime-copied-from"
 msgstr "lokal tid kopiert fra"
 
-#: MdlPartSel.module:296
+#: MdlPartSel.module:299
 msgid "partition"
 msgstr "partisjon"
 
-#: FrmUserAdd.class:432
+#: FrmUserAdd.class:433
 msgid "permission to do certain things by adding them to certain groups."
 msgstr "tillatelser for å gjøre bestemte ting ved å legge dem til en spesiell gruppe"
 
-#: FrmImportAccts.class:105
+#: FrmImportAccts.class:108
 msgid "successfully imported"
 msgstr "importert korrekt"
 
@@ -1482,7 +1462,7 @@ msgstr "for å begynne innstalering"
 msgid "to configure it."
 msgstr "for å konfigurere det"
 
-#: FMain.class:548
+#: FMain.class:549
 msgid "to create an account here. It is recommended that you create at least one."
 msgstr "for å opprette en konto her. Det anbefales at du oppretter i det minste en"
 

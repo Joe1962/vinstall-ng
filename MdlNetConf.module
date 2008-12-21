@@ -61,7 +61,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
 '     objcbWifiessid = NEW Object[]
      objIntTypes = NEW Object[]
   
-       SHELL "res=$(ifconfig -a | grep ^[a-z] | grep -v ^lo); echo \"$res\" | tr -s \' \'\"\" " TO seths
+       SHELL "res=$(ifconfig -a | grep ^eth0 | grep -v ^lo); echo \"$res\" | tr -s \' \'\"\" " TO seths
     seths = Trim(seths)
     
            IF seths = "" THEN  ' WARN IF NO NETWORK HARDWARE CAN BE DETECTED AND EXIT WITHOUT ERROR

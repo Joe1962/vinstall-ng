@@ -43,7 +43,7 @@ msgid "for this"
 msgstr ""
 
 #: FrmPartSel.class:150
-msgid "but you should considear a higher value to make sure you have room to install additional software"
+msgid "but you should consider a higher value to make sure you have room to install additional software"
 msgstr ""
 
 #: FrmPartSel.class:150
@@ -59,7 +59,7 @@ msgid "Typically, you want to use the largest partition for this."
 msgstr ""
 
 #: FrmPartSel.class:150
-msgid "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested ammount"
+msgid "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested amount"
 msgstr ""
 
 #: FrmPartSel.class:150
@@ -67,7 +67,7 @@ msgid "for this is"
 msgstr ""
 
 #: FrmPartSel.class:150
-msgid "but can also be calculated as 2 times your ammount of RAM"
+msgid "but can also be calculated as 2 times your amount of RAM"
 msgstr ""
 
 #: FrmPartSel.class:181
