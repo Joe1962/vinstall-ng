@@ -142,12 +142,12 @@ PUBLIC SUB btHelp_Click()
   ("by simply selecting a \"/\" value on this screen. The rest is optional. The following is a") & "<br>" &
   ("suggested setup for a typical Linux installation") & "<br><br>" &
   "<b>/</b> - " & ("Used to store system data. This particular install requires a minimum of") & Space(1) & "<i>" & ClsGlobal.iRootMin & "M</i> " & ("for this") & "<br>" &
-  ("but you should considear a higher value to make sure you have room to install additional software") & "<br>" &
+  ("but you should consider a higher value to make sure you have room to install additional software") & "<br>" &
   ("in case you wish to.") & "<br>" &
   "<b>/home</b> - " & ("Used to store user documents, pictures, videos. Give yourself as much room as you want") & "<br>" &
   ("Typically, you want to use the largest partition for this.") & "<br>" &
-  "<b>swap</b> - " & ("Using a swap partition is suggested if your total RAM is less than 1GB. Suggested ammount") & "<br>" &
-  ("for this is") & Space(1) & "<i>" & ClsGlobal.iSwapMin & "M </i>" & Space(1) & ("but can also be calculated as 2 times your ammount of RAM"))
+  "<b>swap</b> - " & ("Using a swap partition is suggested if your total RAM is less than 1GB. Suggested amount") & "<br>" &
+  ("for this is") & Space(1) & "<i>" & ClsGlobal.iSwapMin & "M </i>" & Space(1) & ("but can also be calculated as 2 times your amount of RAM"))
    
   
 END
