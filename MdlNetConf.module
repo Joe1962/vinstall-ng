@@ -61,7 +61,8 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
 '     objcbWifiessid = NEW Object[]
      objIntTypes = NEW Object[]
   
-       SHELL "res=$(ifconfig -a | grep ^eth0 | grep -v ^lo); echo \"$res\" | tr -s \' \'\"\" " TO seths
+       'SHELL "res=$(ifconfig -a | grep ^eth0 | grep -v ^lo); echo \"$res\" | tr -s \' \'\"\" " TO seths
+       SHELL "res=$(ifconfig -a | grep ^[a-z] | grep -v ^lo); echo \"$res\" | tr -s \' \'\"\" " TO seths
     seths = Trim(seths)
     
            IF seths = "" THEN  ' WARN IF NO NETWORK HARDWARE CAN BE DETECTED AND EXIT WITHOUT ERROR
@@ -128,24 +129,18 @@ WITH FrmNetConf.TSNetDevices
             .Height = 21
             .Width = MdlObjSizer.get_object_width(.Text) + 16
             .Move(tl.Left + tl.Width + 4, tl.Top)
+            .Tag = sDev
             END WITH 
-        ' ' ' ' ' tl = NEW TextLabel(FrmNetConf.TSNetDevices) ' INTERFACE TYPE LABEL
-        ' ' ' ' '     WITH tl
-        ' ' ' ' '         .Text = ("Interface Type")
-        ' ' ' ' '         .Width = MdlObjSizer.get_object_width(.Text)
-        ' ' ' ' '         .Height = 21
-        ' ' ' ' '         .Alignment = Align.Normal
-        ' ' ' ' '         .Move(tb.Left + tb.Width + 4, tb.Top)
-        ' ' ' ' '     END WITH 
-        ' ' ' ' ' 
-            y = y + tb.Top + tb.Height + 4
+   
+ '           y = y + tb.Top + tb.Height + 4
         bcb = NEW CheckBox(FrmNetConf.TSNetDevices) AS "bEnableInterface"  '************ enabled / disabled checkbox **************************
           WITH bcb
             .Value = TRUE
               .Text = ("Automatically activate this interface at start-up")
               .Height = 21
               .Width = MdlObjSizer.get_object_width(.Text) + 36
-              .Move(4, y)
+              .Move(4, tb.top + tb.Height + 4)
+              .Tag = sDev
           END WITH 
           ME.objCheckboxes.Add(bcb)
             y = bcb.top + bcb.Height + 8
@@ -166,6 +161,7 @@ WITH FrmNetConf.TSNetDevices
               .Height = 21
               .Width = MdlObjSizer.get_object_width("STATIC") * 2
               .move(tl.Left + tl.Width + 4, y)
+              .Tag = sDev
             END WITH 
             ME.objCombos.Add(cb)
         
@@ -192,7 +188,8 @@ WITH FrmNetConf.TSNetDevices
 END WITH  ' END JACKING WITH TABSTRIP ========================================================================
 
           
-          
+          INC FrmNetConf.TSNetDevices.Count
+          'FrmNetConf.TSNetDevices.Count = FrmNetConf.TSNetDevices.Count - 1
           
           NEXT 
 END
@@ -978,9 +975,22 @@ PUBLIC SUB MethodSel_Click()
   DIM tl AS TextLabel
   DIM itxtleft, itxtwidth, imandnsleft, imandnstxtleft, itlwidth AS Integer
   
+  IF iFrameTop < 101 THEN iFrameTop = 110
+  
   IF NOT LAST.text THEN RETURN 
-    iFrameTop = LAST.top + LAST.Height + 4
+    'iFrameTop = LAST.top + LAST.Height + 4
   IF LAST.text = "STATIC" THEN 
+  
+  ' ============== delete the label ======
+  FOR EACH tl IN objtlDetails
+    IF tl.Tag = LAST.tag THEN
+    objtlDetails.Remove(objtlDetails.Find(tl))
+    tl.Delete
+    END IF
+  NEXT 
+'  == == = CREATE NEW frame ==
+  
+  
                 frmDetails = NEW Frame(FrmNetConf.TSNetDevices) AS "STaticDetails"
                   WITH frmDetails
                     '.Move(ileft, itop + 8)
@@ -1058,11 +1068,11 @@ PUBLIC SUB MethodSel_Click()
                               END WITH 
                                
                                 
-                    FOR EACH tl IN objtlDetails
-                      IF tl.tag = LAST.tag THEN 
-                        objtlDetails.Delete(objtlDetails.Find(tl))
-                      END IF
-                    NEXT 
+                    ' FOR EACH tl IN objtlDetails
+                    '   IF tl.tag = LAST.tag THEN 
+                    '     objtlDetails.Delete(objtlDetails.Find(tl))
+                    '   END IF
+                    ' NEXT 
                       
   ELSE 
     'Message(LAST.text)
@@ -1074,7 +1084,7 @@ PUBLIC SUB MethodSel_Click()
     NEXT 
         ' create a text label that says the thing will get automatically configured
         
-        IF iFrameTop < 101 THEN iFrameTop = 101
+        IF iFrameTop < 101 THEN iFrameTop = 110
       
         tl = NEW TextLabel(FrmNetConf.TSNetDevices) AS "DetailLbl"
           WITH tl
