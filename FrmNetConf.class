@@ -41,18 +41,37 @@ PUBLIC FUNCTION GET_CURRENT_HOST_NAME() AS String
       
 END
 
+PUBLIC SUB cleanup_tabstrip()
+  
+  DIM i AS Integer
+    TSNetDevices.Index = 0
+    'Message(TSNetDevices.Count)
+    'RETURN 
+    FOR i = 0 TO TSNetDevices.Count
+      TSNetDevices.Index = i
+        IF TSNetDevices.Text = "" THEN 
+          TSNetDevices[i].Delete 
+          RETURN 
+        END IF
+    NEXT 
+    'WITH ME.TSNetDevices
+      
+  
+END
+
+
 
 PUBLIC SUB Form_Open()
   DIM cb AS ComboBox
     FMain.FrmCurr = ME
     ME.tlHostNameLbl.Alignment = Align.Normal
     
-  '   WITH FMain 
-  '   .tvPlan["Conf3"].Picture = MdlCore.sDonePic
-  '   .tvPlan["Conf2"].Picture = MdlCore.sDonePic
-  '   .tvPlan["Conf4"].Picture = MdlCore.sNowPic
-  '   .tvPlan["Conf4"].Selected = TRUE
-  ' END WITH 
+    WITH FMain 
+    .tvPlan["Conf3"].Picture = MdlCore.sDonePic
+    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
+    .tvPlan["Conf4"].Picture = MdlCore.sNowPic
+    .tvPlan["Conf4"].Selected = TRUE
+  END WITH 
 
     ME.txtHostName.text = ME.GET_CURRENT_HOST_NAME()
       
@@ -71,6 +90,7 @@ PUBLIC SUB Form_Open()
 '    ME.frmNetDevices.Text = Space(1) & ("Network Interfaces") & Space(1)
     FMain.btnext.Enabled = TRUE
     MdlCore.warn_status_off()
+    ME.cleanup_tabstrip
 END
 
 
@@ -151,12 +171,12 @@ PUBLIC SUB Form_Show()
       FMain.FrmCurr = ME
     ME.tlHostNameLbl.Alignment = Align.Normal
   '   
-  '   WITH FMain 
-  '   .tvPlan["Conf3"].Picture = MdlCore.sDonePic
-  '   .tvPlan["Conf2"].Picture = MdlCore.sDonePic
-  '   .tvPlan["Conf4"].Picture = MdlCore.sNowPic
-  '   .tvPlan["Conf4"].Selected = TRUE
-  ' END WITH 
+    WITH FMain 
+    .tvPlan["Conf3"].Picture = MdlCore.sDonePic
+    .tvPlan["Conf2"].Picture = MdlCore.sDonePic
+    .tvPlan["Conf4"].Picture = MdlCore.sNowPic
+    .tvPlan["Conf4"].Selected = TRUE
+  END WITH 
 
   
 
