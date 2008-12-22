@@ -13,10 +13,10 @@ PUBLIC SUB Form_Open()
     .tlBanner.Width = MdlObjSizer.get_object_width(.tlBanner.text)
     .tlBanner.Height = 42
     .tlBanner.Raise
-    .tlAboutRoot.text = ("The linux root account is pre-defined to be used as ths system administrator\'s account." &
+    .tlAboutRoot.text = ("The linux root account is pre-defined to be used as ths system administrator\'s account." & Space(1)&
         "This account is used to perform system-wide changes such as adding / removing software, system-wide updates," &
         "managing user accounts, etc.") & "<br><br>" & ("Most other every-day taks do not require administrative priviledges.")&
-        "<br><br>" & ("For added security, use a password that is easy for you to remember, but hard for others to guess")
+        "<br><br>" & ("For added security, use a password that is easy for you to remember, but hard for others to guess.")
     
     .tlPass1.Alignment = Align.normal
     .tlPass2.Alignment = Align.Normal
