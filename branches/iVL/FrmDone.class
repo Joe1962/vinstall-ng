@@ -52,6 +52,8 @@ DIM sText AS String
             FMain.btQuit.Enabled = FALSE
     ELSE 
     'Message.Info("Found /tmp/status")
+       FMain.btnext.Text = ("Restart")
+       FMain.btnext.Width = MdlObjSizer.get_object_width(FMain.btnext.Text) + 36
     ME.tlBanner.Text = "<b>" & ("Installation is complete") & "</b>"
       sText = ClsGlobal.DISTRO & Space(1) & ("has been installed to your system. Your new system has been configured with the default factory settings.") & "<br><br>" &
      ("After reboot you can use vasm or vasmCC to fine tune your installation.") & "<br><br>" &
@@ -60,7 +62,7 @@ DIM sText AS String
      ("If you installed from  CD-ROM/R/RW media, please remove de disk before restarting.")
      FMain.btnext.Enabled = TRUE
      FMain.btQuit.Enabled = TRUE
-     FMain.btnext.Text = ("Restart")
+  
      ME.tlMsg.Text = sText
      ME.tmBgMon.Enabled = FALSE
      
