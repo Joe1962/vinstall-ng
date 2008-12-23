@@ -355,11 +355,9 @@ SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT
  sOut = "#!/bin/bash \n" &
  ". /sbin/vasm-functions \n" &
  "TEXT=\" \n" &
- "Vector Linux Has been Installed. \n" &
- "Welcome back. \n" &
- "We will now continue with final system configuration. \n" &
- "On the next screen you can setup the GUI or use one of the preconfigured settings. \n" &
- "any other system fine tuning can be done from VASM.  Enjoy AND happy Vectoring...\" \n" &
+ "Vector Linux Has been Installed. " &
+ "We will finalize video settings on the next few screens. " &
+ "Any other system fine tuning can be done via VASM.  \n\nEnjoy AND happy Vectoring...\" \n" &
  "$DCMD --backtitle \"$BACKTITLE\" --title \"CONGRATULATIONS\" " &
  "--msgbox \"$TEXT\" 0 0 2>/dev/NULL  \n" &
  "#cd / && sh /var/log/scripts/x11-fonts* \n " &
