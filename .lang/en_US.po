@@ -187,8 +187,8 @@ msgid "Check this box if you have a Windows installation on your system or any o
 msgstr "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
 
 #: FrmUserAdd.class:505
-msgid "Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
-msgstr "Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
+msgid "Choose a unique name for each user. Enter the password twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
+msgstr "Choose a unique name for each user. Enter the password twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
 
 #: FrmZoneSet.class:146
 msgid "Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way."
@@ -827,7 +827,7 @@ msgid "Primary DNS Server"
 msgstr "Primary DNS Server"
 
 #: FrmXconf.class:27
-msgid "Probe hardware to setup your Graphical Environment using your preffered settings"
+msgid "Probe hardware to setup your Graphical Environment using your prefered settings"
 msgstr ""
 
 #: FrmLilo.class:267 FrmLiloSetup.class:273
@@ -924,10 +924,10 @@ msgstr "Select the windows partitions you would like to mount during boot"
 
 #: FrmPartScheme.class:60
 msgid "Select this option if you already have a linux installation that you wish to overwrite or if a linux partition scheme exists in your hard disk."
-msgstr "Select this option if you already have a linux installation that you wish to overwrite or if a linux parition scheme exists in your hard disk"
+msgstr "Select this option if you already have a linux installation that you wish to overwrite or if a linux parition scheme exists in your hard disk."
 
 #: FrmPartScheme.class:70
-msgid "Select this option is you wish to create, more or resize partitions in order to make room for your new VectorLinux installation."
+msgid "Select this option is you wish to create, move or resize partitions in order to make room for your new VectorLinux installation."
 msgstr "Select this option if you wish to create, move or resize partitions in order to make room for your new VectorLinux installation."
 
 #: FrmSelISO.class:262
@@ -947,7 +947,7 @@ msgid "Select your individual packages to install."
 msgstr ""
 
 #: FrmUsrPkgSel.class:11
-msgid "Select your indivirual packages to install."
+msgid "Select your individual packages to install."
 msgstr "Select your individual packages to install"
 
 #: FrmLangSel.class:118
@@ -955,8 +955,8 @@ msgid "Select your language"
 msgstr "Select your language"
 
 #: FrmImportAccts.class:93
-msgid "Selected passwords dont match. Please enter the same password twice"
-msgstr ""
+msgid "Selected passwords don't match. Please enter the same password twice"
+msgstr "Selected passwords don't match. Please enter the same password twice"
 
 #: FrmRootPass.class:165
 msgid "Set Password"
