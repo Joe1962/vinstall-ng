@@ -36,28 +36,40 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
     
     
     '/DISABLED FOR TESTING INSTALL ONLY
-    SHELL "mount " & ClsPartSel.sRoot & Space(1) & ClsGlobal.sTargetMnt WAIT  'moun the root partition first
-    IF ClsPartSel.sHome THEN 
-       SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "home" WAIT 
-       SHELL "mount " & ClsPartSel.sHome & Space(1) & ClsGlobal.sTargetMnt &/ "home -t " & LCase(ClsPartSel.fhome) WAIT 'mount the home partition if defined
-      
-    END IF
-    IF ClsPartSel.sUsr THEN 
-      SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "usr" WAIT 
-      SHELL "mount " & ClsPartSel.sUsr & Space(1) & ClsGlobal.sTargetMnt &/ "usr -t" & ClsPartSel.fUsr WAIT ' mount the user partition
-    END IF
-    IF ClsPartSel.sOpt THEN 
-      SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "opt" WAIT 
-      SHELL "mount " & ClsPartSel.sOpt & Space(1) & ClsGlobal.sTargetMnt &/ "opt -t " & ClsPartSel.fOpt WAIT 'mount the opt partitiong
-    END IF
-    IF ClsPartSel.sVar THEN 
-      SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var" WAIT 
-      SHELL "mount " & ClsPartSel.sVar & Space(1) & ClsGlobal.sTargetMnt &/ "var -t " & ClsPartSel.fVar WAIT 
-    END IF
-    IF ClsPartSel.sTmp THEN 
-      SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "tmp" WAIT 
-      SHELL "mount " & ClsPartSel.sTmp & Space(1) & ClsGlobal.sTargetMnt &/ "tmp -t " & ClsPartSel.fTmp WAIT 
-    END IF
+    'SHELL "mount " & ClsPartSel.sRoot & Space(1) & ClsGlobal.sTargetMnt WAIT  'moun the root partition first
+    EXEC ["mount", ClsPartSel.sRoot, ClsGlobal.sTargetMnt] WAIT 
+    
+      FOR EACH cb IN MdlPartSel.oMountPoints
+        IF cb.Text <> "/" THEN 
+          IF cb.Text <> ("Not Used") THEN 
+            EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ cb.Text] WAIT 
+            EXEC ["mount", cb.Tag, ClsGlobal.sTargetMnt &/ cb.Text] WAIT 
+          END IF
+        END IF
+      NEXT 
+    
+    ' 
+    ' IF ClsPartSel.sHome THEN 
+    '    SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "home" WAIT 
+    '    SHELL "mount " & ClsPartSel.sHome & Space(1) & ClsGlobal.sTargetMnt &/ "home -t " & LCase(ClsPartSel.fhome) WAIT 'mount the home partition if defined
+    '   
+    ' END IF
+    ' IF ClsPartSel.sUsr THEN 
+    '   SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "usr" WAIT 
+    '   SHELL "mount " & ClsPartSel.sUsr & Space(1) & ClsGlobal.sTargetMnt &/ "usr -t" & ClsPartSel.fUsr WAIT ' mount the user partition
+    ' END IF
+    ' IF ClsPartSel.sOpt THEN 
+    '   SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "opt" WAIT 
+    '   SHELL "mount " & ClsPartSel.sOpt & Space(1) & ClsGlobal.sTargetMnt &/ "opt -t " & ClsPartSel.fOpt WAIT 'mount the opt partitiong
+    ' END IF
+    ' IF ClsPartSel.sVar THEN 
+    '   SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "var" WAIT 
+    '   SHELL "mount " & ClsPartSel.sVar & Space(1) & ClsGlobal.sTargetMnt &/ "var -t " & ClsPartSel.fVar WAIT 
+    ' END IF
+    ' IF ClsPartSel.sTmp THEN 
+    '   SHELL "mkdir -p " & ClsGlobal.sTargetMnt &/ "tmp" WAIT 
+    '   SHELL "mount " & ClsPartSel.sTmp & Space(1) & ClsGlobal.sTargetMnt &/ "tmp -t " & ClsPartSel.fTmp WAIT 
+    ' END IF
 
     
       IF ClsPkgSel.bCustom = TRUE THEN 
@@ -66,9 +78,9 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
         MdlInstallSys.PERFORM_FULL_INSTALL()
       END IF  
       
-      FOR EACH cb IN MdlPartSel.oMountPoints
-        IF Left(cb.Text, Len("/mnt")) = "/mnt" THEN EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ cb.Text] WAIT 
-      NEXT 
+      ' FOR EACH cb IN MdlPartSel.oMountPoints
+      '   IF Left(cb.Text, Len("/mnt")) = "/mnt" THEN EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ cb.Text] WAIT 
+      ' NEXT 
       MdlCore.warn_status_off
 END
 
@@ -148,10 +160,27 @@ FOR EACH CB IN MdlPartSel.oMountPoints
              IF cb.tag = ClsPartSel.sRoot THEN 
                 FOR EACH mt IN MdlPartSel.oFsTypes
                   IF mt.tag = cb.tag THEN 
+                      IF mt.Text = ("Do not format") THEN 
+                        SHELL "sfmt=$(parted " & sDrive & " print | grep ^\'" & sBlank & spartNo & "\'); echo $sfmt | cut -f 6 -d \' \'" TO sRes
+                        sRes = Trim(sRes)
+                              ' Warn about inability to detect root partition format
+                                IF Len(sRes) = 0 THEN 
+                                  Message.Warning(("Setup is unable to detect for current filesystem for your / partition.") & gb.NewLine &
+                                  ("Please return to the partitioning stage and select a filesystem for your / partition."))
+                                  RETURN 1
+                                END IF
+                              
+                            ' write the detected format to fstab
+                            sFstab = sFstab & "\n" &
+                            mt.Tag & Space(5) & "/" & Space(5) & Trim(sRes) & Space(5) & "defaults 0 1 \n"
+                        
+                      ELSE 
+                          
                     sFstab = sFstab & "\n" & 
                     mt.tag & Space(5) & Space(5) & "/" & Space(5) & Trim(mt.text) & Space(5) & "defaults 0 1" & "\n"
 
                   END IF
+                END IF
                 NEXT 
              ELSE 
             FOR EACH mt IN MdlPartSel.oFsTypes
