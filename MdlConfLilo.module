@@ -310,14 +310,14 @@ EXEC ["mount", "-o", "bind", "/tmp", ClsGlobal.sTargetMnt &/ "tmp"] WAIT
 EXEC ["mount", "-o", "bind", "/dev", ClsGlobal.sTargetMnt &/ "dev"] WAIT 
 
 
-
-' Mount home directory for user accounts
-  FOR EACH cbox IN MdlPartSel.oMountPoints
-      IF cbox.Text = "/home" THEN 
-        EXEC ["mount", CStr(cbox.Tag), ClsGlobal.sTargetMnt &/ "home"] WAIT 
-      END IF
-  NEXT 
-      
+' ' ' 
+' ' ' ' Mount home directory for user accounts
+' ' '   FOR EACH cbox IN MdlPartSel.oMountPoints
+' ' '       IF cbox.Text = "/home" THEN 
+' ' '         EXEC ["mount", CStr(cbox.Tag), ClsGlobal.sTargetMnt &/ "home"] WAIT 
+' ' '       END IF
+' ' '   NEXT 
+' ' '       
 
 
 'We will run the commands neccisary to setup the newly installed system here
