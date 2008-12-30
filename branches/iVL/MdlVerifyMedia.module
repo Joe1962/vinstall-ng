@@ -1,0 +1,127 @@
+' Gambas module file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+' <uel_sk8s> flog="/tmp/check-bulk.log"
+' <uel_sk8s>     lzmadec <$1 > /dev/null 2>&1
+' <uel_sk8s> if [ $? = 0 ]; then
+' <uel_sk8s>    echo "check-bulk $1 OK" >> $flog
+' <uel_sk8s>    exit 0
+' <uel_sk8s> else
+' <uel_sk8s>    echo "check-bulk $1 FAILED" >> $flog
+' <uel_sk8s>    exit 1
+' <uel_sk8s> fi
+
+PUBLIC hproc AS Process
+PUBLIC iProcSig AS Integer ' 225 will indicate stop now and dont continue
+
+PUBLIC FUNCTION VERIFY_BULK(sPathToBulk AS String) AS Integer
+  
+  'DIM hproc AS Process
+  DIM iRetVal AS Integer
+  
+  PRINT "Verifying " & sPathToBulk
+  'RETURN 
+  'hproc = EXEC ["lzmadec", "< ", sPathToBulk, " >", "/dev/null"] WAIT 
+  hproc = SHELL "lzmadec < " & sPathToBulk & " > /dev/null" ' WAIT 
+    WAIT 1
+      IF hproc.State = Process.Running THEN 
+        REPEAT 
+          WAIT 
+          FrmMediaCheck.MovieBox1.Playing = TRUE
+          FrmMediaCheck.btClose.Enabled = FALSE
+          FrmMediaCheck.btstart.Enabled = FALSE
+        UNTIL 
+        iProcSig = 225 OR hproc.State = Process.Stopped
+      END IF
+
+  iRetVal = hproc.Value
+  RETURN iRetVal
+  
+END
+
+PUBLIC SUB PERFORM_MEDIA_CHECK(sEntry AS String)
+  DIM sDevice AS String
+  DIM sImage AS String
+  DIM sBulkList AS String
+  DIM sArrBulks AS String[]
+  DIM sBulk AS String
+  DIM i, iBlkCnt, iRes AS Integer
+  DIM sBulkBasePath AS String = "/mnt/loop/veclinux"
+  
+  FrmMediaCheck.ProgressBar1.Visible = TRUE
+  
+  sDevice = Right(sEntry, Len(sEntry) - InStr(sEntry, "/") + 1)
+  IF InStr(sEntry, ".iso on") THEN 
+    ' this is an iso, we must mount the drive and then the ISO
+      sDevice = Right(sEntry, Len(sEntry) - InStr(sEntry, "/"))
+      sImage = Left(sEntry, InStr(sEntry, " "))
+          ' perform the mounting
+          EXEC ["mkdir", "/mnt/loop"] WAIT 
+          EXEC ["mkdir", "/mnt/source"] WAIT 
+          EXEC ["mount", sDevice, "/mnt/source"] WAIT 
+          EXEC ["mount", "-o", "loop", "/mnt/source" &/ sImage, "/mnt/loop"] WAIT 
+  ELSE ' Actual CD Media
+      EXEC ["mkdir", "/mnt/source"] WAIT 
+      EXEC ["mount", sDevice, "/mnt/loop"] ' Mount it to loop, just to keep this consistant.
+  
+  END IF
+  
+    ' Get the list of bulks on this install
+      SHELL "cat " & sBulkBasePath &/ "SETUP.CONF" & Space(1) & "| grep \"^BULK\" | cut -f 1 -d \':\'" TO sBulkList 
+      ' ^ That produces something like "BULK0='required/veclinux.tlz", so we need to strip it still
+          sBulkList = Trim(sBulkList)
+          sArrBulks = Split(sBulkList, "\n")
+          iBlkCnt = sArrBulks.Count - 1
+            FOR i = 0 TO sArrBulks.Count - 1
+              sBulk = Right(sArrBulks[i], Len(sArrBulks[i]) - InStr(sArrBulks[i], "\'"))
+                IF Exist(sBulkBasePath &/ sBulk) AND iProcSig <> 225 THEN 
+                    FrmMediaCheck.ProgressBar1.Value = i / iBlkCnt
+                      IF ME.VERIFY_BULK(sBulkBasePath &/ sBulk) <> 0 AND iProcSig <> 225 THEN 
+                        FrmMediaCheck.MovieBox1.Playing = FALSE
+                          Message.Error(sBulk & Space(1) & ("has failed the test!") & "<br>" &
+                          ("This could either mean your download or burn process was corrupted"))
+                        BREAK 
+                      END IF
+                      'Message(ME.VERIFY_BULK(sBulkBasePath &/ sBulk))
+                    'Message(sBulk)
+                ELSE IF iProcSig = 225 THEN 
+                  FrmMediaCheck.MovieBox1.Playing = FALSE
+                  'Message.Error("Process abort signal received from user")
+                  BREAK 
+                  RETURN 
+                    
+                END IF
+                WAIT 1
+            NEXT 
+      
+      EXEC ["umount", "/mnt/source"] WAIT 
+      EXEC ["umount", "/mnt/loop"] WAIT 
+  
+  IF iProcSig = 225 THEN     
+    Message.Error("Process stopped by user")
+    FrmMediaCheck.MovieBox1.Playing = FALSE
+    FrmMediaCheck.btstart.Enabled = TRUE
+    FrmMediaCheck.btClose.Enabled = TRUE
+    RETURN 
+  END IF
+  Message.Info("All tests passed. You can continue to install safely")
+  FrmMediaCheck.MovieBox1.Playing = FALSE
+  FrmMediaCheck.btstop.Enabled = FALSE
+  FrmMediaCheck.btClose.Enabled = TRUE
+  FrmMediaCheck.btstart.Enabled = TRUE
+END
+
+

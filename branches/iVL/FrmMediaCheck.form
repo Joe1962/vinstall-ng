@@ -1,0 +1,56 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,83,53)
+  Text = ("")
+  Icon = Picture["images/throbber.gif"]
+  Arrangement = Arrange.Vertical
+  { pnlTop Panel
+    MoveScaled(1,1,78,45)
+    Expand = True
+    Arrangement = Arrange.Row
+    { tlBanner TextLabel
+      MoveScaled(1,1,32,4)
+      Background = Color.SelectedBackground
+      Foreground = Color.SelectedForeground
+      Expand = True
+      Text = ("VERIFY INSTALLATION FILES")
+      Alignment = Align.Center
+    }
+    { Separator1 Separator
+      MoveScaled(2,6,67,1)
+      Expand = True
+    }
+    { tlVerifyDetails TextLabel
+      MoveScaled(2,8,72,17)
+      Expand = True
+      Text = ("")
+    }
+    { MovieBox1 MovieBox
+      MoveScaled(30,24,5,18.2857)
+      Expand = True
+      Path = "/home/vluser/devel/installer/images/throbber.gif"
+    }
+    { ProgressBar1 ProgressBar
+      MoveScaled(2,41,74,3)
+      Visible = False
+      Expand = True
+    }
+  }
+  { Panel1 Panel
+    MoveScaled(1,46,79,4)
+    { btClose Button
+      MoveScaled(31,0,13,2)
+      Text = ("Close")
+    }
+    { btstop Button
+      MoveScaled(16,0,13,2)
+      Enabled = False
+      Text = ("Stop")
+    }
+    { btstart Button
+      MoveScaled(0,0,15,1)
+      Text = ("Start")
+    }
+  }
+}

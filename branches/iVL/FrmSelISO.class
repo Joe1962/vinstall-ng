@@ -77,12 +77,16 @@ PUBLIC SUB Form_Open()
   IF lstInstallableImg.count = 1 AND lstInstallableImg.Find(("No Installable Media Found")) = -1 THEN 
     tlBanner.Text = ("Click") & Space(1) & "\'" & FMain.btnext.text & "\'" & Space(1) & ("to begin installating") & Space(1)&
     Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, "/") - 4)
+    FrmSelISO.btVerifyInstall.Enabled = TRUE
+    FrmSelISO.btVerifyInstall.ForeColor = Color.Black
   ELSE IF lstInstallableImg.Find(("No Installable Media Found")) <> -1 THEN 
     tlBanner.Text = "<b>" & ("Unable to locate any installable media.") & "</b>"
     FMain.btnext.Enabled = FALSE
     FMain.btback.Enabled = FALSE
     FMain.btnext.ForeColor = Color.Gray
     FMain.btback.ForeColor = Color.Gray
+    FrmSelISO.btVerifyInstall.Enabled = FALSE
+    FrmSelISO.btVerifyInstall.ForeColor = Color.Gray
     ELSE 
       tlBanner.text = "<b>" & ("Select installation media from the list below") & "</b>"
       WITH FMain
@@ -91,6 +95,8 @@ PUBLIC SUB Form_Open()
           .btnext.Enabled = TRUE
           .btnext.ForeColor = Color.Black
       END WITH 
+      FrmSelISO.btVerifyInstall.Enabled = TRUE
+      FrmSelISO.btVerifyInstall.ForeColor = Color.Black
   END IF 
 
 FMain.btnext.Enabled = TRUE
@@ -204,7 +210,8 @@ PUBLIC SUB Form_Resize()
     '.lstInstallableImg.Move(4, .btResCan.top, .ClientWidth - ((.lstInstallableImg.Left * 2) + .btResCan.Left))
    ' .lstInstallableImg.Move(.left + 4, .btResCan.Top, .Width - (.btResCan.Width + 24), 21)
     '.tlDistroDesc.Move(.lstInstallableImg.Left * 2, .lstInstallableImg.top + .lstInstallableImg.Height + 48)
-    .tlDistroDesc.Move(4, .lstInstallableImg.top + .lstInstallableImg.Height + 24, .ClientWidth - (.tlDistroDesc.left * 2), .ClientHeight - (.tldistrodesc.top + .btrescan.height))
+    .tlDistroDesc.Move(4, .lstInstallableImg.top + .lstInstallableImg.Height + 24, .ClientWidth - (.tlDistroDesc.left * 2)) ', .ClientHeight - (.tldistrodesc.top + .btrescan.height))
+    .btVerifyInstall.Move(4, .tlDistroDesc.top + .tlDistroDesc.Height + 8, MdlObjSizer.get_object_width(.btVerifyInstall.Text) + 36, 21)
     '.FullScreen = TRUE
   END WITH 
 
@@ -231,5 +238,11 @@ END
 PUBLIC SUB Form_Show()
 
   Form_Open()
+
+END
+
+PUBLIC SUB btVerifyInstall_Click()
+  FrmMediaCheck.sEntry = Trim(ME.lstInstallableImg.Text)
+  FrmMediaCheck.ShowDialog()
 
 END
