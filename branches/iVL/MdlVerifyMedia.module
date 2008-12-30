@@ -66,13 +66,13 @@ PUBLIC SUB PERFORM_MEDIA_CHECK(sEntry AS String)
   sDevice = Right(sEntry, Len(sEntry) - InStr(sEntry, "/") + 1)
   IF InStr(sEntry, ".iso on") THEN 
     ' this is an iso, we must mount the drive and then the ISO
-      sDevice = Right(sEntry, Len(sEntry) - InStr(sEntry, "/"))
+      'sDevice = Right(sEntry, Len(sEntry) - InStr(sEntry, "/"))
       sImage = Left(sEntry, InStr(sEntry, " "))
           ' perform the mounting
           EXEC ["mkdir", "/mnt/loop"] WAIT 
           EXEC ["mkdir", "/mnt/source"] WAIT 
           EXEC ["mount", sDevice, "/mnt/source"] WAIT 
-          EXEC ["mount", "-o", "loop", "/mnt/source" &/ sImage, "/mnt/loop"] WAIT 
+          EXEC ["mount", "-o", "loop", "/mnt/source" &/ Trim(sImage), "/mnt/loop"] WAIT 
   ELSE ' Actual CD Media
       EXEC ["mkdir", "/mnt/source"] WAIT 
       EXEC ["mount", sDevice, "/mnt/loop"] ' Mount it to loop, just to keep this consistant.
