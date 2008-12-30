@@ -295,6 +295,7 @@ PUBLIC SUB RUN_CREDITS()
               sFile[i] = "M0E-lnx  [ vpackager, vasmCC, GUI installer ]"
       ELSE IF Left(Trim(sFile[i]), Len("Uelsk8s")) = "Uelsk8s" THEN 
           sFile[i] = "Uelks8s [ vlthemeswitch, ISO Master, Gui Installer ]"
+          
       ELSE 
         sFile[i] = sFile[i]
       END IF
@@ -323,6 +324,8 @@ PUBLIC SUB BEGIN_INSTALLATION()
                 sCredit[i] = "<b>" & "Uelsk8s" & "</b><br>" & "[ GUI Installer, ISO Master, vlthemeswitch ]"
               ELSE IF Left(sCredit[i], Len("Lost")) = "Lost" THEN 
                 sCredit[i] = "Lost-n-LovinLinux" ' " Lost " & " & " & " LovinLinux ""
+              ELSE IF Left(sCredit[i], Len("Vector")) = "Vector" THEN 
+                sCredit[i] = "<b>" & "Vector" & "</b><br>" & "[ Founder ]"
               END IF
             FrmCredits.TextLabel1.text = FrmCredits.TextLabel1.text & sCredit[i] & "<br><br><br>"
           NEXT 

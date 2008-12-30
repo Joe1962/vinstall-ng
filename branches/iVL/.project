@@ -2,7 +2,7 @@
 # Compiled with Gambas 2.10.0
 Title=VectorLinux Installer
 Startup=MdlCore
-Version=0.1.14
+Version=0.1.15
 Library=gb.gtk
 Library=gb.form
 Library=gb.debug
