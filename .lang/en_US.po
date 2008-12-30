@@ -475,7 +475,7 @@ msgid "If in doubt, choose this option."
 msgstr ""
 
 #: FrmDone.class:60
-msgid "If you installed from  CD-ROM/R/RW media, please remove de disk before restarting."
+msgid "If you installed from  CD-ROM/R/RW media, please remove de disc before restarting."
 msgstr ""
 
 #: FMain.class:448
@@ -647,8 +647,8 @@ msgid "Modify my disk partitions to make room for new installation"
 msgstr "Modify my disk partitions to make room for new installation"
 
 #: FrmRootPass.class:19
-msgid "Most other every-day taks do not require administrative priviledges."
-msgstr "Most other every-day tasks do not require administrative priviledges."
+msgid "Most other every-day tasks do not require administrative privileges."
+msgstr "Most other every-day tasks do not require administrative privileges."
 
 #: FrmSummary.class:45
 msgid "Mount Point"
@@ -683,7 +683,7 @@ msgid "No Windows partitions detected"
 msgstr "No Windows partitions detected"
 
 #: MdlNetConf.module:78
-msgid "No ethernet neworking devices found"
+msgid "No ethernet networking devices found"
 msgstr ""
 
 #: FrmSelISO.class:256
@@ -799,11 +799,11 @@ msgid "Please use the setup program below to setup the sound system."
 msgstr ""
 
 #: FMain.class:356
-msgid "Please wait while setup analyses your current partition setup."
-msgstr "Please wait while setup analyses your current partition setup."
+msgid "Please wait while setup analyzes your current partition setup."
+msgstr "Please wait while setup analyzes your current partition setup."
 
 #: FMain.class:354
-msgid "Please wait while setup attampts to run the partitioning utility"
+msgid "Please wait while setup attempts to run the partitioning utility"
 msgstr "Please wait while setup attempts to run the partitioning utility"
 
 #: MdlNetConf.module:103
@@ -827,7 +827,7 @@ msgid "Primary DNS Server"
 msgstr "Primary DNS Server"
 
 #: FrmXconf.class:27
-msgid "Probe hardware to setup your Graphical Environment using your prefered settings"
+msgid "Probe hardware to setup your Graphical Environment using your preffered settings"
 msgstr ""
 
 #: FrmLilo.class:267 FrmLiloSetup.class:273
@@ -924,7 +924,7 @@ msgstr "Select the windows partitions you would like to mount during boot"
 
 #: FrmPartScheme.class:60
 msgid "Select this option if you already have a linux installation that you wish to overwrite or if a linux partition scheme exists in your hard disk."
-msgstr "Select this option if you already have a linux installation that you wish to overwrite or if a linux parition scheme exists in your hard disk."
+msgstr "Select this option if you already have a linux installation that you wish to overwrite or if a linux partition scheme exists in your hard disk."
 
 #: FrmPartScheme.class:70
 msgid "Select this option is you wish to create, move or resize partitions in order to make room for your new VectorLinux installation."
@@ -1059,8 +1059,8 @@ msgid "The linux root account is pre-assigned to be used as the system administr
 msgstr "The linux root account is pre-assigned to be used as the system administrator's account. This account is used to perform system-wide changes such as software upgrades, managing user accounts etc. \n\nMost other operations do not require administrative priviledges.\nThe root password must be entered twice for ensured accuracy. When choosing a root password, think of something easy for you to remember, but hard for others to guess."
 
 #: MdlInstallCustom.module:48
-msgid "There as been an error while installing required system software. "
-msgstr "There as been an error while installing required system software. "
+msgid "There has been an error while installing required system software. "
+msgstr "There h as been an error while installing required system software. "
 
 #: MdlInstallSys.module:637
 msgid "There has been an error extracting"
@@ -1091,7 +1091,7 @@ msgid "This option will overwrite any existing data in the selected partitions"
 msgstr "This option will overwrite any existing data in the selected partitions"
 
 #: FrmAlsaConf.class:36
-msgid "This portion of the setup process allows you to sutup your soundcard for your new operating system."
+msgid "This portion of the setup process allows you to setup your soundcard for your new operating system."
 msgstr ""
 
 #: MdlUsrAdd.module:91
@@ -1455,8 +1455,8 @@ msgid "suggested setup for a typical Linux installation"
 msgstr "suggested setup for a typical Linux installation"
 
 #: FrmSelISO.class:79
-msgid "to begin installating"
-msgstr "to begin installating"
+msgid "to begin installation"
+msgstr "to begin installation"
 
 #: MdlInstallSys.module:372
 msgid "to configure it."
