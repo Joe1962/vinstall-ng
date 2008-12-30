@@ -27,9 +27,9 @@
       Text = ("")
     }
     { MovieBox1 MovieBox
-      MoveScaled(30,24,5,18.2857)
+      MoveScaled(30,24,5,18.1429)
       Expand = True
-      Path = "/home/vluser/devel/installer/images/throbber.gif"
+      Path = "/home/vluser/devel/installer/images/throbber.gif_old"
     }
     { ProgressBar1 ProgressBar
       MoveScaled(2,41,74,3)

@@ -18,6 +18,7 @@ PUBLIC sEntry AS String
 
 
 PUBLIC SUB Form_Open()
+ME.MovieBox1.Path = "images/throbber.gif"
 MdlVerifyMedia.iProcSig = 0
 ME.Height = ME.pnlTop.Top + ME.pnlTop.Height
 MdlCore.LOCK_GUI()
