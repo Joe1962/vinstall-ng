@@ -1,0 +1,87 @@
+' Gambas class file
+  '    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC sEntry AS String
+
+
+PUBLIC SUB Form_Open()
+MdlVerifyMedia.iProcSig = 0
+ME.Height = ME.pnlTop.Top + ME.pnlTop.Height
+MdlCore.LOCK_GUI()
+FMain.Enabled = FALSE
+ME.tlBanner.Text = "<b>" & ME.tlBanner.Text & "</b>"
+ME.tlVerifyDetails.Text = ("Verifying the installation files can help you avoid an unsuccessful install.") & "<br><br>" &
+("Keep in mind however, that this process can take a while (expect it to take just as Long as a real installation process)") & "<br><br>" &
+("Click") & Space(1) & btstart.Text & Space(1) & ("to begin. You may press") & Space(1) & btstop.Text & Space(1) & ("to stop the process" &
+Space(1) & "at any time.")
+'Message(sEntry)
+
+END
+
+
+
+
+PUBLIC SUB Form_Close()
+
+  WITH FMain
+    .btQuit.Enabled = TRUE
+    .btnext.Enabled = TRUE
+    .btnext.ForeColor = Color.Black
+    .btQuit.ForeColor = Color.Black
+    .Enabled = TRUE
+  END WITH 
+
+END
+
+PUBLIC SUB tlVerifyDetails_MouseDown()
+
+  
+
+END
+
+PUBLIC SUB btstart_Click()
+
+  
+  'ME.ProgressBar1.Visible = TRUE
+  btstart.Enabled = FALSE
+  btstop.Enabled = TRUE
+  ME.ProgressBar1.Visible = TRUE
+  WAIT 1
+  MdlVerifyMedia.PERFORM_MEDIA_CHECK(sEntry)
+
+END
+
+PUBLIC SUB btClose_Click()
+
+  ME.Close
+
+END
+
+PUBLIC SUB btstop_Click()
+  LAST.Enabled = FALSE
+  MdlVerifyMedia.iProcSig = 225 ' send the error message
+  MdlVerifyMedia.hproc.Kill
+  MdlVerifyMedia.iProcSig = 225
+  FrmMediaCheck.btClose.Enabled = TRUE
+  FrmMediaCheck.btstart.Enabled = TRUE
+
+END
+
+PUBLIC SUB Form_Resize()
+
+  
+
+END

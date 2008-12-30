@@ -137,7 +137,7 @@ PUBLIC SUB MEDIA_SCAN()
 DIM sCmd AS String
 DIM sResults AS String
 DIM sList AS String
-DIM sDrives AS String[]
+DIM sDrives, sDumparr AS String[]
 DIM sDrive AS String
 DIM sMountPoint AS String 
 DIM sDump AS String
@@ -151,6 +151,14 @@ SHELL "probepart | grep -v -i \'swap\' | grep -v -i \'ext\' |grep \'/dev\'| grep
 'sCmd = "cat /proc/sys/dev/cdrom/info | grep \"drive name\" |cut -f 2 -d\':\'|xargs -n 2" 
 sCmd = "probedisk|cut -d\'|\' -f1|cut -d\'/\' -f3"
 SHELL sCmd TO sList
+    ' additional check to make sure cdroms are detected
+      SHELL "cat /proc/sys/dev/cdrom/info | grep \"^drive name\" | cut -f 2 -d\':\'|xargs -n 2" TO sDump
+        sDump = Trim(sDump)
+          sDumparr = Split(sdump, "\n")
+            FOR i = 0 TO sDumparr.count - 1
+              IF InStr(sList, Trim(sDumparr[i])) = FALSE THEN sList = sList & Space(1) & Trim(sDumparr[i])
+            NEXT 
+              
 sList = sList & Space(1) & sResults
 sList = Trim(sList)
 'PRINT sList

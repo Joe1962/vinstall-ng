@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,63,41)
+  MoveScaled(0,0,63,52)
   Text = ("")
   FullScreen = True
   { lstInstallableImg ComboBox
@@ -14,7 +14,7 @@
     Text = ("Select which VectorLinux version you wish to install from the list below")
   }
   { tlDistroDesc TextLabel
-    MoveScaled(1,16,60,23)
+    MoveScaled(1,15,60,27)
     Text = ("TextLabel1")
   }
   { btResCan Button
@@ -24,5 +24,11 @@
   }
   { hrSep Separator
     MoveScaled(2,7,43,1)
+  }
+  { btVerifyInstall Button
+    MoveScaled(1,43,26,3)
+    Enabled = False
+    Text = ("Verify Installation Files")
+    Picture = Picture["icon:/small/apply"]
   }
 }
