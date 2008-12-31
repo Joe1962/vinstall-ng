@@ -43,7 +43,8 @@ PUBLIC FUNCTION MOUNT_DEFINED_PARTITIONS() AS Integer
         IF cb.Text <> "/" THEN 
           IF cb.Text <> ("Not Used") THEN 
             EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ cb.Text] WAIT 
-            EXEC ["mount", cb.Tag, ClsGlobal.sTargetMnt &/ cb.Text] WAIT 
+            SHELL "mount " & cb.Tag & Space(1) & ClsGlobal.sTargetMnt &/ cb.Text WAIT 
+            'EXEC ["mount", cb.Tag, ClsGlobal.sTargetMnt &/ cb.Text] WAIT 
           END IF
         END IF
       NEXT 
