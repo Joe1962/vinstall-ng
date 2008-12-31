@@ -3,7 +3,6 @@
 { Form Form
   MoveScaled(0,0,83,53)
   Text = ("")
-  Icon = Picture["images/throbber.gif"]
   Arrangement = Arrange.Vertical
   { pnlTop Panel
     MoveScaled(1,1,78,45)
@@ -27,9 +26,8 @@
       Text = ("")
     }
     { MovieBox1 MovieBox
-      MoveScaled(30,24,5,18.1429)
+      MoveScaled(30,24,5,18.125)
       Expand = True
-      Path = "/home/vluser/devel/installer/images/throbber.gif_old"
     }
     { ProgressBar1 ProgressBar
       MoveScaled(2,41,74,3)
