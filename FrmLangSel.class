@@ -39,6 +39,7 @@ PUBLIC SUB LIST_LANG_CHOICES()
     .Add("en_US", "English (U.S)")
     .Add("ru_RU.utf8", "Russian")
     .Add("nb_NO.utf8", "Norwegian (Norway)")
+    .Add("pt_PT.utf8", "Portuguese (Portugal)")
   END WITH 
   
   
