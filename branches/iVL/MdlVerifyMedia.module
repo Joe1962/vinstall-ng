@@ -14,15 +14,6 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
-' <uel_sk8s> flog="/tmp/check-bulk.log"
-' <uel_sk8s>     lzmadec <$1 > /dev/null 2>&1
-' <uel_sk8s> if [ $? = 0 ]; then
-' <uel_sk8s>    echo "check-bulk $1 OK" >> $flog
-' <uel_sk8s>    exit 0
-' <uel_sk8s> else
-' <uel_sk8s>    echo "check-bulk $1 FAILED" >> $flog
-' <uel_sk8s>    exit 1
-' <uel_sk8s> fi
 
 PUBLIC hproc AS Process
 PUBLIC iProcSig AS Integer ' 225 will indicate stop now and dont continue
