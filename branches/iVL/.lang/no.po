@@ -10,13 +10,1112 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: .project:1
+msgid "VectorLinux Installer"
+msgstr "VectorLinux innstallasjon"
+
+#: .project:2
+msgid "GUI installer for Vector linux"
+msgstr "Grafisk brukergrensesnitt installering for Vector Linux"
+
+#: FMain.class:191 FrmDone.class:55
+msgid "Restart"
+msgstr "Restart"
+
+#: FMain.class:354
+msgid "Please wait while setup attampts to run the partitioning utility"
+msgstr ""
+"Vennligst vent mens innstillingsprogrammet prøver å kjøre partisjonsverktøyet"
+
+#: FMain.class:356
+msgid "Please wait while setup analyses your current partition setup."
+msgstr ""
+"Vennligst vent mens nåværende partisjon analyseres av innstilligsprogrammet"
+
+#: FMain.class:356
+msgid "This may take a while ..."
+msgstr "Dette kan ta litt tid ..."
+
+#: FMain.class:376
+msgid ""
+"You must select a \"/\" partition. This is the target where the system will "
+"install to"
+msgstr ""
+"Du må velge en \"/\" partisjon. Dette er målet hvor systemet blir "
+"innstallert på"
+
+#: FMain.class:448
+msgid "You have not selected any operating systems for your boot menu."
+msgstr ""
+
+#: FMain.class:448
+msgid "If you wish to bypass the bootloader setup, uncheck the"
+msgstr ""
+
+#: FMain.class:448
+msgid "checkbox."
+msgstr ""
+
+#: FMain.class:458
+msgid "Please select a default operating system to boot before proceeding"
+msgstr "Vennligst velg oppstart av standard oprerativsystem før du fortsetter"
+
+#: FMain.class:459
+msgid "Select an entry from this list"
+msgstr "Velg en inngang fra denne listen"
+
+#: FMain.class:468
+msgid "Skipping boot loader setup"
+msgstr "Hopper over oppsetting av oppstartlaster"
+
+#: FMain.class:494
+msgid "Skipping lilo setup"
+msgstr "Hopper over lilo innstilling"
+
+#: FMain.class:510
+msgid ""
+"Please enter the root password. For your security purposes, do not leave "
+"this blank"
+msgstr ""
+"Vennligst skriv inn passordet for root. For din sikkerhet, ikke la dette "
+"være blankt"
+
+#: FMain.class:515
+msgid "Passwords do not match. Please enter the same password twice"
+msgstr ""
+"Passordet passer ikke. Vennligst skriv inn det samme passordet to ganger"
+
+#: FMain.class:529
+msgid ""
+"Setup has detected existing directories in the partition you selected for /"
+"home."
+msgstr ""
+"Installajons-programmet har funnet eksisterende mapper i partisjonen du "
+"valgte for /home"
+
+#: FMain.class:529
+msgid ""
+"Would you like to import these user accounts into your new Operating System"
+msgstr ""
+"Ønsker du å importere disse bruker kontoer til ditt nye operativ-system"
+
+#: FMain.class:529 FrmImportAccts.class:60 FrmSummary.class:75
+#: FrmUserAdd.class:35
+msgid "Yes"
+msgstr "ja"
+
+#: FMain.class:529 FrmImportAccts.class:60 FrmSummary.class:73
+#: FrmUserAdd.class:35
+msgid "No"
+msgstr "Nei"
+
+#: FMain.class:549
+msgid ""
+"You have not created any user accounts for this system yet. There is not "
+"enough information"
+msgstr ""
+"Du har ikke opprettet noen brukerkontoer for dette systemet enda. Det "
+"mangler informasjon"
+
+#: FMain.class:549
+msgid ""
+"to create an account here. It is recommended that you create at least one."
+msgstr ""
+"for å opprette en konto her. Det anbefales at du oppretter i det minste en"
+
+#: FMain.class:549
+msgid "Would you like to continue anyway?"
+msgstr "Ønsker du allikevel å fortsette?"
+
+#: FMain.class:567
+msgid "Please specify a hostname for this computer"
+msgstr "Vennligst spesifiser et vertsnavn for denne datamaskinen"
+
+#: FMain.class:572
+msgid "Please specify the domain this computer belongs to"
+msgstr "Vennligst spesifiser domenet som denne datamaskinen tilhører"
+
+#: FMain.class:835
+msgid "Back"
+msgstr "Tilbake"
+
+#: FMain.class:846
+msgid "Exit Installation"
+msgstr "Avslutt innstallering"
+
+#: FMain.class:857
+msgid "Next"
+msgstr "Neste"
+
+#: FMain.class:871
+msgid "Button1"
+msgstr "-"
+
+#: FrmAlsaConf.class:36
+msgid ""
+"This portion of the setup process allows you to sutup your soundcard for "
+"your new operating system."
+msgstr ""
+"Denne delen av innstillingsprosessen lar deg innstille lydkortet ditt for "
+"ditt nye operativsystem"
+
+#: FrmAlsaConf.class:36
+msgid "Please use the setup program below to setup the sound system."
+msgstr ""
+"Vennligst bruk innstillingsprogrammet nedenfor for å stille inn lydsystemet"
+
+#: FrmDiskPart.class:58
+msgid ""
+"When finished making changes, exit the partitioning application to "
+"continue ..."
+msgstr ""
+"Når du er ferdig med alle forandringene, lukk partisjonerings-programmet for "
+"å fortsette ..."
+
+#: FrmDiskPart.class:120
+msgid "Disk Partitioning:"
+msgstr "Disk Partisjonering:"
+
+#: FrmDone.class:49
+msgid "Configuration in progress"
+msgstr "Konfigurasjon foregår"
+
+#: FrmDone.class:50
+msgid "is performing final system configuration. Please wait a moment."
+msgstr "foretar endelig system konfigurasjon. Vennligst vent litt."
+
+#: FrmDone.class:57
+msgid "Installation is complete"
+msgstr "Installasjonen er komplett"
+
+#: FrmDone.class:62
+msgid ""
+"has been installed to your system. Your new system has been configured with "
+"the default factory settings."
+msgstr ""
+"har blitt innstallert på systemet ditt. Ditt nye system har blitt "
+"konfigurert med standard fabrikkinnstillinger"
+
+#: FrmDone.class:62
+msgid "After reboot you can use vasm or vasmCC to fine tune your installation."
+msgstr ""
+"Etter omstart kan du bruke vasm eller vasmCC til å finjustere din "
+"installering"
+
+#: FrmDone.class:62
+msgid ""
+"Your computer needs to be restarted so that you can use your new operating "
+"system. Click"
+msgstr ""
+"Datamaskinen din trenger å startes på nytt så du kan bruke ditt nye "
+"operativsystem. Klikk"
+
+#: FrmDone.class:62
+msgid "to restart your computer now or click"
+msgstr "for å restarte din datamaskin nå eller klikk"
+
+#: FrmDone.class:62
+msgid "to restart your computer at a later time"
+msgstr " for å restarte din datamaskin på et senere tidspunkt"
+
+#: FrmDone.class:62
+msgid ""
+"If you installed from  CD-ROM/R/RW media, please remove de disk before "
+"restarting."
+msgstr ""
+"Hvis du installerte fra CD-ROM/R/RW medium, vær så vennlig å fjern disken "
+"før gjenstart."
+
+#: FrmDone.class:100
+msgid "Installation is finished"
+msgstr "Installering er ferdig"
+
+#: FrmHalSwitch.class:20
+msgid "Would you like to use Vl-Hot or HAL to manage your removable devices?"
+msgstr ""
+"Ønsker du å bruke Vl-Hot eller HAL for å behandle dine utløsbare tilbehør"
+
+#: FrmHalSwitch.class:25
+msgid "HAL"
+msgstr "HAL"
+
+#: FrmHalSwitch.class:30
+msgid "VL-Hot"
+msgstr "VL-HOT"
+
+#: FrmHostPrep.class:130
+msgid "Vectorlinux is preparing your system for installation. Please wait."
+msgstr "VectorLinux forbereder systemet ditt for innstallering. Vennligst vent"
+
+#: FrmHostPrep.class:135
+msgid "Current Status"
+msgstr "Nåværende status"
+
+#: FrmHostPrep.class:139 FrmLilo.class:236 FrmPartScheme.class:128
+#: FrmPkgSel.class:203 FrmPkgsel2.class:86 FrmSelISO.class:281
+#: FrmSummaryOld.class:87
+msgid "TextLabel1"
+msgstr "Tekstmerking1"
+
+#: FrmImportAccts.class:33 FrmUserAdd.class:368
+msgid "Select picture for user Login"
+msgstr "Velg et bilde for brukerinnlogging"
+
+#: FrmImportAccts.class:53
+msgid "Reset settings for"
+msgstr "Nullstill instillinger for"
+
+#: FrmImportAccts.class:60
+msgid "Would you like to continue adding new user accounts now?"
+msgstr "Ønsker du å fortsette å legge til bruker kontoer nå?"
+
+#: FrmImportAccts.class:84
+msgid "Please select an account name from the dropdown list."
+msgstr "Vennligst velg et konto navn fra dropdown menyen"
+
+#: FrmImportAccts.class:89
+msgid "Password fields cannot be blank. Please enter a password for"
+msgstr "Passord felt kan ikke være blankt. Vennligst skriv inn passord for"
+
+#: FrmImportAccts.class:93
+msgid "Selected passwords dont match. Please enter the same password twice"
+msgstr ""
+"Passordene er forskjellige. Vennligst skriv inn samme passord to ganger"
+
+#: FrmImportAccts.class:103
+msgid "User Unable to restore user account."
+msgstr "Bruker Ikke i stand til å gjenopprette brukerkonto"
+
+#: FrmImportAccts.class:108 FrmUserAdd.class:149
+msgid "User account for"
+msgstr "Brukerkonto for"
+
+#: FrmImportAccts.class:108
+msgid "successfully imported"
+msgstr "importert korrekt"
+
+#: FrmImportAccts.class:310
+msgid "Account"
+msgstr "Konto"
+
+#: FrmImportAccts.class:322
+msgid "New Password"
+msgstr "Nytt Passord"
+
+#: FrmImportAccts.class:339
+msgid "Select login Image"
+msgstr "Velg bilde for innlogging"
+
+#: FrmImportAccts.class:349 FrmUserAdd.class:543
+msgid "Select"
+msgstr "Velg"
+
+#: FrmImportAccts.class:359
+msgid "Verify Password"
+msgstr "Verifiser passord"
+
+#: FrmImportAccts.class:370 FrmUserAdd.class:554
+msgid "User Rights Management"
+msgstr "Behandling av brukerrettigheter"
+
+#: FrmImportAccts.class:376
+msgid "Select Settings to reset"
+msgstr "Velg instillinger som skal nullstilles"
+
+#: FrmImportAccts.class:383
+msgid "Import Account"
+msgstr "Importer konto"
+
+#: FrmImportAccts.class:390 FrmResetSettings.class:122
+msgid "Done"
+msgstr "Ferdig"
+
+#: FrmImportAccts.class:398 FrmUserAdd.class:630
+msgid "Import Existing User Accounts"
+msgstr "Importer eksisterende bruker kontoer"
+
+#: FrmInstallSys.class:58 FrmInstallSysN.class:72
+msgid "Current Step"
+msgstr "Nåværende trinn"
+
+#: FrmInstallSys.class:123
+msgid "Vectorlinux is currently being installed to your system... Please wait"
+msgstr "VectorLinux er under innstallasjon på systemet ditt... Vennligst vent"
+
+#: FrmInstallSys.class:138
+msgid "Installing ..."
+msgstr "Instalerer ..."
+
+#: FrmInstallSys.class:149
+msgid "Current Step "
+msgstr "Nåværende trinn"
+
+#: FrmInstallSys.class:171
+msgid "Total progress"
+msgstr "Total progresjon"
+
+#: FrmInstallSysN.class:82
+#, fuzzy
+msgid "Total Progress"
+msgstr "Total progresjon"
+
+#: FrmLangSel.class:119
+msgid "Select your language"
+msgstr "Velg ditt språk"
+
+#: FrmLicense.class:99
+msgid "LICENSE AGREEMENT"
+msgstr "Lisensavtale"
+
+#: FrmLicense.class:104
+msgid "TextArea1"
+msgstr "Tekstområde1"
+
+#: FrmLicense.class:110
+msgid "Yes, I Agree to the License Agreement"
+msgstr "Ja, jeg goddtar lisensavtalen"
+
+#: FrmLicense.class:115
+msgid "No, I Do Not Agree"
+msgstr "Nei, jeg er ikke enig"
+
+#: FrmLilo.class:37
+msgid ""
+"The following Operating Systems have been detected on this computer. Choose "
+"your desired option"
+msgstr ""
+"Følgende operativsystemer har blitt oppdaget på denne datamaskinen. Velg "
+"ønsket opsjon (valg?)"
+
+#: FrmLilo.class:37
+msgid ""
+"for each one of them by clicking on each tab. To proceed with the default "
+"pre-set values, simply click"
+msgstr ""
+"for hver og en av dem ved å klikke på hver fane. For å fortsette med de "
+"forhåndsinnstilte verdiene, klikk"
+
+#: FrmLilo.class:139 FrmLiloSetup.class:63 MdlLilo.module:79
+msgid "Standard"
+msgstr "Standard"
+
+#: FrmLilo.class:219
+msgid "Configure and install lilo (Linux Boot Loader)"
+msgstr "Konfigurer og installer LILO (Linux Boot Loader)"
+
+#: FrmLilo.class:224
+msgid "Don't Install Lilo"
+msgstr "Ikke installer LILO"
+
+#: FrmLilo.class:230 FrmLiloSetup.class:302 FrmNetConf.class:323
+msgid "Tab 0"
+msgstr "Tab 0"
+
+#: FrmLilo.class:248 FrmLiloSetup.class:234
+msgid "Target"
+msgstr "Mål"
+
+#: FrmLilo.class:254 FrmLiloSetup.class:213
+msgid "Video Resolution"
+msgstr "Video oppløsning"
+
+#: FrmLilo.class:262 FrmLiloSetup.class:64 MdlLilo.module:81
+msgid "Bootsplash Med"
+msgstr "Oppstart-grafikk Middels Oppløsning"
+
+#: FrmLilo.class:262 FrmLiloSetup.class:36 MdlLilo.module:83
+msgid "Bootsplash High"
+msgstr "Oppstart-grafikk Høy Oppløsning"
+
+#: FrmLilo.class:262
+msgid "Bootsplash Extra high"
+msgstr "Oppstart-grafikk Ekstra Høy Oppløsning"
+
+#: FrmLilo.class:267 FrmLiloSetup.class:273
+msgid "Prompt Timeout"
+msgstr "Tidsslutt"
+
+#: FrmLilo.class:278 FrmLiloSetup.class:284
+msgid "Seconds"
+msgstr "Sekunder"
+
+#: FrmLilo.class:284 FrmLiloSetup.class:252
+msgid "Boot Default"
+msgstr "Standard oppstart"
+
+#: FrmLiloSetup.class:66 MdlLilo.module:85
+msgid "Bootsplash Extra High"
+msgstr "Oppstart-grafikk Ekstra Høy Oppløsning"
+
+#: FrmLiloSetup.class:186
+msgid "Boot Manager Configuration"
+msgstr "Konfigurasjon av oppstart behandler"
+
+#: FrmLiloSetup.class:202
+msgid "Do not install LILO"
+msgstr "Ikke installer LILO"
+
+#: FrmMediaCheck.class:31
+msgid ""
+"Verifying the installation files can help you avoid an unsuccessful install."
+msgstr ""
+
+#: FrmMediaCheck.class:31
+msgid ""
+"Keep in mind however, that this process can take a while (expect it to take "
+"just as Long as a real installation process)"
+msgstr ""
+
+#: FrmMediaCheck.class:31 FrmSelISO.class:79
+msgid "Click"
+msgstr "Klikk"
+
+#: FrmMediaCheck.class:31
+msgid "to begin. You may press"
+msgstr ""
+
+#: FrmMediaCheck.class:123
+msgid "VERIFY INSTALLATION FILES"
+msgstr ""
+
+#: FrmMediaCheck.class:155
+msgid "Close"
+msgstr ""
+
+#: FrmMediaCheck.class:161
+msgid "Stop"
+msgstr ""
+
+#: FrmMediaCheck.class:166
+#, fuzzy
+msgid "Start"
+msgstr "Restart"
+
+#: FrmNetConf.class:228 MdlCore.module:539
+msgid "Network Configuration"
+msgstr "Nettverkskonfigurasjon"
+
+#: FrmNetConf.class:243
+msgid "Computer Name"
+msgstr "Datamaskinnavn"
+
+#: FrmNetConf.class:255
+msgid "Domain"
+msgstr "Domene"
+
+#: FrmNetConf.class:271
+msgid "Manual DNS Server Specification"
+msgstr "Manuell DNS server spesifikasjon"
+
+#: FrmNetConf.class:282
+msgid "192.168.1.254"
+msgstr "192.168.1.254"
+
+#: FrmNetConf.class:287
+msgid "Primary DNS Server"
+msgstr "Primær DNS Server"
+
+#: FrmNetConf.class:300
+msgid "Secondary DNS Server"
+msgstr "Sekundær DNS Server"
+
+#: FrmPartScheme.class:60
+msgid ""
+"Select this option if you already have a linux installation that you wish to "
+"overwrite or if a linux partition scheme exists in your hard disk."
+msgstr ""
+"Velg denne valgmuligheten hvis du allerde har en linuksinstallasjon som du "
+"ønsker å overskrive, eller hvis en linuxpartisjonsplan eksisterer på din "
+"harddisk"
+
+#: FrmPartScheme.class:60
+msgid "This option will overwrite any existing data in the selected partitions"
+msgstr "Dette valget vil overskrive data i de valgte partisjonene"
+
+#: FrmPartScheme.class:60
+msgid ""
+"Use this option if you already prepared your partitions using the "
+"VectorLinux installer"
+msgstr ""
+"Bruk dette valget hvis du allerede har forberedt dine partisjoner med "
+"innstallereren for VectorLinux "
+
+#: FrmPartScheme.class:70
+msgid ""
+"Select this option is you wish to create, more or resize partitions in order "
+"to make room for your new VectorLinux installation."
+msgstr ""
+"Velg denne valgmuligheten hvis du ønsker å lage, flytte eller endre "
+"størrelsen på partisjoner for å skape plass til din nye VectorLinux "
+"installasjon"
+
+#: FrmPartScheme.class:70
+msgid ""
+"This option is the safest choice if you have other existing installations "
+"that you wish to keep."
+msgstr ""
+"Dette valget er det tryggeste valget hvis du har andre eksiterende "
+"innstallasjoner som du ønsker å beholde."
+
+#: FrmPartScheme.class:113
+msgid "Disk Partitioning Options"
+msgstr "Instillinger for disk partisjonering"
+
+#: FrmPartScheme.class:118
+msgid "Use existing disk partitions"
+msgstr "Bruk eksisterende diskpartisjoner"
+
+#: FrmPartScheme.class:123
+msgid "Modify my disk partitions to make room for new installation"
+msgstr ""
+"Modifiser mine disk partisjoner for å gjøre plass til en ny installering"
+
+#: FrmPartSel.class:150
+msgid "ABOUT SYSTEM PARTITIONING IN LINUX"
+msgstr "Om systempartisjonering i Linux"
+
+#: FrmPartSel.class:150
+msgid ""
+"Linux is a modular operating system. This means that is has the ability to "
+"store system and"
+msgstr ""
+"Linux er et modulært oppbygget operativsystem. Dette betyr at det har "
+"muligheten til å lagre systemet og"
+
+#: FrmPartSel.class:150
+msgid ""
+"user data separately for added data security. You may install the system to "
+"a single partition"
+msgstr ""
+"separate brukerdata for ekstra datasikkerhet. Du kan innstallere systemet på "
+"en enkel partisjon"
+
+#: FrmPartSel.class:150
+msgid ""
+"by simply selecting a \"/\" value on this screen. The rest is optional. The "
+"following is a"
+msgstr ""
+"ved å velge en \"/\" verdi på denne skjermen. Resten er valgfritt. Følgende "
+"er en"
+
+#: FrmPartSel.class:150
+msgid "suggested setup for a typical Linux installation"
+msgstr "foreslåtte innstillinger for en typisk Linux innstallasjon"
+
+#: FrmPartSel.class:150
+msgid ""
+"Used to store system data. This particular install requires a minimum of"
+msgstr ""
+"Brukes til å lagre systemdata. Denne spesielle innstalasjonen krever et "
+"minimum av"
+
+#: FrmPartSel.class:150
+msgid "for this"
+msgstr "for denne"
+
+#: FrmPartSel.class:150
+msgid ""
+"but you should consider a higher value to make sure you have room to install "
+"additional software"
+msgstr ""
+"du burde vurdere en større mengde for å sikre deg at du har nok plass for å "
+"innstallere ytterligere programvare"
+
+#: FrmPartSel.class:150
+msgid "in case you wish to."
+msgstr "i tilfelle du ønsker å"
+
+#: FrmPartSel.class:150
+msgid ""
+"Used to store user documents, pictures, videos. Give yourself as much room "
+"as you want"
+msgstr ""
+"Brukes til å lagre dokumenter, bilder, videoer. Tildel deg selv så plass som "
+"du ønsker"
+
+#: FrmPartSel.class:150
+msgid "Typically, you want to use the largest partition for this."
+msgstr "Typisk er at du vil bruke den største partisjonen for dette."
+
+#: FrmPartSel.class:150
+msgid ""
+"Using a swap partition is suggested if your total RAM is less than 1GB. "
+"Suggested amount"
+msgstr ""
+"Bruk av en swap partisjon anbefales hvis du har mindre minne en 1GB. "
+"Anbefalt mengde"
+
+#: FrmPartSel.class:150
+msgid "for this is"
+msgstr "for denne er"
+
+#: FrmPartSel.class:150
+msgid "but can also be calculated as 2 times your amount of RAM"
+msgstr "kan også kalkuleres som 2 ganger din mengde RAM"
+
+#: FrmPartSel.class:181
+msgid "Please select the partitions you wish to use and how to use them"
+msgstr ""
+"Vennligst velg partisjonene du ønsker å bruke og hvordan du skal bruke dem"
+
+#: FrmPartSel.class:186 FrmUserAdd.class:558
+msgid "Help"
+msgstr "Hjelp"
+
+#: FrmPartSel.class:206
+msgid ""
+"Check this box if you have a Windows installation on your system or any "
+"other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as "
+"soon as your computer starts"
+msgstr ""
+"Avkryss denne boksen hvis du har en windows installasjon på ditt system "
+"eller noen andre windows installasjoner (FAT, FAT32, NTFS) som du vil ha "
+"automatisk startet når datamaskinen starter"
+
+#: FrmPartSel.class:207
+msgid "Detect and Setup Windows partitions for auto-mounting at boot"
+msgstr ""
+"Søk etter og klargjør windows partisjoner for automatisk oppstart når "
+"maskinen startes"
+
+#: FrmPkgSel.class:26
+msgid "Choose your installation mode"
+msgstr "Velg installasjonsmetode"
+
+#: FrmPkgSel.class:36
+msgid "Package"
+msgstr "Pakke"
+
+#: FrmPkgSel.class:37 FrmUsrPkgSel.class:17
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: FrmPkgSel.class:38 FrmSummary.class:41 FrmUsrPkgSel.class:19
+msgid "Size"
+msgstr "Størrelse"
+
+#: FrmPkgSel.class:81
+msgid ""
+"Installs all optional components in your VectorLinux media to your system"
+msgstr ""
+"Installerer alle valgfrie komponenter i ditt VectorLinux medium til ditt "
+"system"
+
+#: FrmPkgSel.class:91
+msgid "Choose your optional components to install."
+msgstr "Velg valgfrie komponenter du vil installere"
+
+#: FrmPkgSel.class:213
+msgid "Full Install"
+msgstr "Full installering"
+
+#: FrmPkgSel.class:218
+msgid "Custom Install"
+msgstr "Tilpasset installering"
+
+#: FrmPkgsel2.class:21
+msgid "Select your individual packages to install."
+msgstr ""
+
+#: FrmPkgsel2.class:21
+msgid "To install them all, just click next"
+msgstr "For å innstallere alle, klikk neste"
+
+#: FrmResetSettings.class:112
+msgid "Select which settings to reset"
+msgstr "Velg hvilke instillinger som skal nullstilles"
+
+#: FrmRootPass.class:12
+msgid "System Administrator Password"
+msgstr "Systemadministrator passord"
+
+#: FrmRootPass.class:19
+msgid "Most other every-day taks do not require administrative priviledges."
+msgstr "De fleste daglige gjøremål trenger ikke administratorrettigheter"
+
+#: FrmRootPass.class:19
+#, fuzzy
+msgid ""
+"For added security, use a password that is easy for you to remember, but "
+"hard for others to guess."
+msgstr ""
+"For ekstra sikkerhet, bruk et passord som for deg er lett å huske, men "
+"vanskelig å gjette for andre"
+
+#: FrmRootPass.class:29
+msgid "About the root account"
+msgstr "Om root kontoen"
+
+#: FrmRootPass.class:38
+msgid "Enter a Password for root."
+msgstr "Skriv inn passord for root"
+
+#: FrmRootPass.class:49
+msgid ""
+"Passwords do not match. Please enter the same password twice for accuracy."
+msgstr ""
+"Passordet passer ikke. Vennligst skriv inn passordet to ganger for "
+"nøyaktighet"
+
+#: FrmRootPass.class:124 MdlCore.module:537
+msgid "System Administrator"
+msgstr "System administrator"
+
+#: FrmRootPass.class:137
+msgid ""
+"The linux root account is pre-assigned to be used as the system "
+"administrator's account. This account is used to perform system-wide changes "
+"such as software upgrades, managing user accounts etc. \n"
+"\n"
+"Most other operations do not require administrative priviledges.\n"
+"The root password must be entered twice for ensured accuracy. When choosing "
+"a root password, think of something easy for you to remember, but hard for "
+"others to guess."
+msgstr ""
+"Linux root konto er forhåndsinnstillt til å brukes som konto til "
+"systemadministrator. Denne kontoen brukes til å gjennomføre endringer på "
+"systemnivå, slik som oppgraderinger av programvare, håndtere brukerkontoer "
+"osv. \n"
+"\n"
+" De fleste andre operasjoner trenger ikke administrative rettigheter. \n"
+" Root passordet må skrives inn to ganger for nøyaktighet. Når du velger et "
+"passord, tenk på som er lett for deg å huske, men vanskelig for andre å "
+"gjette."
+
+#: FrmRootPass.class:143 FrmUserAdd.class:591
+msgid "Enter Password"
+msgstr "Skriv inn passord"
+
+#: FrmRootPass.class:148
+msgid "Re-Enter Password"
+msgstr "Skriv inn passordet på nytt"
+
+#: FrmRootPass.class:165
+msgid "Set Password"
+msgstr "Velg passord"
+
+#: FrmSelISO.class:30 MdlCore.module:275
+msgid "No Installable Media Found"
+msgstr "Ingen installerbare media funnet"
+
+#: FrmSelISO.class:79
+msgid "to begin installating"
+msgstr "for å begynne innstalering"
+
+#: FrmSelISO.class:83
+msgid "Unable to locate any installable media."
+msgstr "Ikke i stand til å lokalisere innstalerbare medier."
+
+#: FrmSelISO.class:91
+msgid "Select installation media from the list below"
+msgstr "Velg installasjons-medium fra lista nedenfor"
+
+#: FrmSelISO.class:122
+msgid "Unable to identify distro."
+msgstr "Ikke i stand til å identifisere distribusjon"
+
+#: FrmSelISO.class:157
+msgid "Minimum Disk Space Requirements"
+msgstr "Mininimum nødvendig diskplass"
+
+#: FrmSelISO.class:270
+msgid "No installable images found."
+msgstr "Ingen installerbare media funnet"
+
+#: FrmSelISO.class:276
+msgid ""
+"Select which VectorLinux version you wish to install from the list below"
+msgstr ""
+"Velg versjon av VectorLinux som du ønsker å installere fra listen nedenfor"
+
+#: FrmSelISO.class:286
+msgid "Search Again"
+msgstr "Undersøk igjen"
+
+#: FrmSelISO.class:297
+#, fuzzy
+msgid "Verify Installation Files"
+msgstr "Avslutt innstallering"
+
+#: FrmSummary.class:14 MdlCore.module:531
+msgid "Installation Summary"
+msgstr "Innstallering oppsummert"
+
+#: FrmSummary.class:17 MdlSummarize.module:56
+msgid "Custom"
+msgstr "Tilpasset"
+
+#: FrmSummary.class:21 MdlSummarize.module:69
+msgid "Full"
+msgstr "Full"
+
+#: FrmSummary.class:37
+msgid "Preparing Installation Summary ... Please wait"
+msgstr "Forbereder oppsummering av installasjonen ... Vennligst vent"
+
+#: FrmSummary.class:39
+msgid "Partition"
+msgstr "Partisjon"
+
+#: FrmSummary.class:43
+msgid "Filesystem"
+msgstr "Filsystem"
+
+#: FrmSummary.class:45
+msgid "Mount Point"
+msgstr "Monteringspunkt"
+
+#: FrmSummary.class:47
+msgid "Format ?"
+msgstr "Formattere?"
+
+#: FrmSummary.class:53 MdlInstallSys.module:44 MdlPartSel.module:147
+msgid "Not Used"
+msgstr "Ikke brukt"
+
+#: FrmSummary.class:72 MdlInstallSys.module:164 MdlPartFrmt.module:33
+#: MdlPartSel.module:143
+msgid "Do not format"
+msgstr "Ikke formater"
+
+#: FrmSummary.class:101 MdlLilo.module:203 MdlNetConf.module:477
+msgid "None"
+msgstr "Ingen"
+
+#: FrmSummary.class:124 MdlInstallSys.module:214 MdlWinDrives.module:125
+msgid "Do not mount"
+msgstr "Ikke åpne"
+
+#: FrmSummary.class:179 FrmUsrPkgSel.class:16
+msgid "Package Name"
+msgstr "Pakkenavn"
+
+#: FrmSummary.class:188
+msgid "BULK PACKAGES"
+msgstr "Samlepakker"
+
+#: FrmSummary.class:215
+msgid "USER-SELECTED PACKAGES"
+msgstr "BRUKERVALGTE PAKKER"
+
+#: FrmSummary.class:294
+msgid "Installation Type"
+msgstr "Installasjonstype"
+
+#: FrmSummary.class:304
+msgid "Partition Selection Scheme"
+msgstr "Velg partisjonsskjema? plan?"
+
+#: FrmSummary.class:314 FrmUsrPkgSel.class:147 MdlCore.module:528
+msgid "Software Selection"
+msgstr "Programvarevalg"
+
+#: FrmUserAdd.class:35
+msgid ""
+"Setup has detected existing user directories in your selected /home "
+"partition. Would you like to import these user accounts into your new "
+"installation?"
+msgstr ""
+"Installajons-programmet har funnet eksisterende bruker-mapper i partisjonen "
+"du valgte for /home. Vil du importere disse brukerkontoene til din nye "
+"installasjon?"
+
+#: FrmUserAdd.class:60
+msgid "Create User Accounts"
+msgstr "Opprett brukerkontoer"
+
+#: FrmUserAdd.class:116
+msgid "Creating user account ... Please wait"
+msgstr "Oppretter brukerkonto ... Vennligst vent"
+
+#: FrmUserAdd.class:124
+msgid "Enter the login name that this user will user to login to this system."
+msgstr ""
+"Skriv inn innloggingsnavnet som denne brukeren vil benytte for å logge inn "
+"på dette systemet."
+
+#: FrmUserAdd.class:132
+msgid ""
+"Login name field contains illegal characters. Please use only lowercase "
+"letters and numbers"
+msgstr ""
+"Feltet for innloggingsnavn inneholder ugyldige tegn. Vennligst bruk kun små "
+"bokstaver og tall"
+
+#: FrmUserAdd.class:146
+msgid "Username contains illegal characters"
+msgstr "Brukernavn inneholder ulovlige tegn"
+
+#: FrmUserAdd.class:149
+msgid "already exists"
+msgstr "eksisterer allerede"
+
+#: FrmUserAdd.class:153
+msgid "Enter a password for"
+msgstr "Skriv inn passord for"
+
+#: FrmUserAdd.class:210
+msgid "Passwords do not match"
+msgstr "Passordet passer ikke"
+
+#: FrmUserAdd.class:211
+msgid "Enter the same password twice"
+msgstr "Skriv inn passordet to ganger"
+
+#: FrmUserAdd.class:408
+msgid ""
+"Your password selections do not match. Please enter the same password twice"
+msgstr ""
+"Ditt passordvalg passer ikke. Vennligst skriv inn det samme passordet to "
+"ganger"
+
+#: FrmUserAdd.class:433
+msgid ""
+"Groups are a way of administering permissions for your users. You grant the "
+"user"
+msgstr ""
+"Groups er en metode for å administrere tillatelser for brukerene. Du gir "
+"brukeren tillatelser"
+
+#: FrmUserAdd.class:433
+msgid "permission to do certain things by adding them to certain groups."
+msgstr ""
+"tillatelser for å gjøre bestemte ting ved å legge dem til en spesiell gruppe"
+
+#: FrmUserAdd.class:433
+msgid "Select which groups you want this user to be a part of here"
+msgstr "Velg gruppe du ønsker at denne brukeren skal være del av"
+
+#: FrmUserAdd.class:434
+msgid "OK"
+msgstr "Ok"
+
+#: FrmUserAdd.class:505
+#, fuzzy
+msgid ""
+"Choose a unique name for each user. Enter the password twice for accuracy. "
+"You can make as many users as you want, and when you are finished click next "
+"to continue."
+msgstr ""
+"Velg et unikt navn for hver bruker. Skriv inn passordet to ganger for "
+"nøyaktighet. Du kan lage så mange brukere du vil, og når du er ferdig klikk "
+"neste for å fortsette."
+
+#: FrmUserAdd.class:549
+msgid "Use Picture ID for Login greeting"
+msgstr "Bruk bilde ID for innloggingshilsen"
+
+#: FrmUserAdd.class:571
+msgid "Create User"
+msgstr "Opprett bruker"
+
+#: FrmUserAdd.class:577
+msgid "Clear Form"
+msgstr "Slett skjema"
+
+#: FrmUserAdd.class:584
+msgid "Login Name"
+msgstr "Innloggingsnavn"
+
+#: FrmUserAdd.class:598
+msgid "ReEnter Password"
+msgstr "Skriv inn passordet på nytt"
+
+#: FrmUserAdd.class:614
+msgid "Real Name"
+msgstr "Reelt navn"
+
+#: FrmUserAdd.class:620 MdlCore.module:538
+msgid "User Accounts"
+msgstr "Brukerkontoer"
+
+#: FrmUsrPkgSel.class:11
+msgid "Select your indivirual packages to install."
+msgstr "Velg dine indivirual? individuelle? pakker som skal installeres"
+
+#: FrmUsrPkgSel.class:11
+msgid "To install them all, just click"
+msgstr "For å innstallere alle, klikk"
+
+#: FrmUsrPkgSel.class:40
+msgid "Reading available software selection ... Please wait"
+msgstr "Leser listen av tilgjengelig programvare .. Vennligst vent"
+
+#: FrmWinDrives.class:72
+msgid "Select the windows partitions you would like to mount during boot"
+msgstr "Velg en windows partisjon som du vil montere under oppstart"
+
+#: FrmXconf.class:25
+msgid "Uses the default (failsafe) configuration."
+msgstr "Bruker standard (feilsikre) konfigurering"
+
+#: FrmXconf.class:27
+msgid ""
+"Probe hardware to setup your Graphical Environment using your preffered "
+"settings"
+msgstr ""
+"Undersøker maskinvaren for å instille det grafiske miljøet med dine "
+"foretrukne valg"
+
+#: FrmXconf.class:29
+msgid "Use the console framebuffer driver"
+msgstr "Bruk console framebuffer driver"
+
+#: FrmXconf.class:301
+msgid "Graphical Interface Settings"
+msgstr "Instillinger for grafisk grensesnitt"
+
+#: FrmXconf.class:311
+msgid "Video Driver"
+msgstr "Video driver"
+
+#: FrmXconf.class:322
+msgid "Color Depth"
+msgstr "Farge Dybde"
+
+#: FrmXconf.class:328
+msgid "Screen Resolution"
+msgstr "Sjermoppløsning"
+
+#: FrmXconf.class:335
+msgid "24 bit True Color"
+msgstr "24 bit Sann Farge"
+
+#: FrmXconf.class:335
+msgid "16 bit Pseudo Color"
+msgstr "16 bit Pseudo Farge"
+
+#: FrmXconf.class:335
+msgid "8 bit 256 Color"
+msgstr "8 bit 256 Farger"
+
+#: FrmXconf.class:335
+msgid "4 bit 16 Color"
+msgstr "4 bit 16 Farger"
+
 #: FrmXconf.class:335
 msgid "1 bit Mono B/W"
 msgstr "1 bit Mono Svart/Hvit"
 
+#: FrmXconf.class:340
+msgid "Vesa"
+msgstr "Vesa"
+
+#: FrmXconf.class:342
+msgid "Fbdev"
+msgstr "Fbdev"
+
 #: FrmXconf.class:348
-msgid "1024x768"
-msgstr "1024x768"
+msgid "1920x1280"
+msgstr "1920x1280"
+
+#: FrmXconf.class:348
+msgid "1600x1200"
+msgstr "1600x1200"
+
+#: FrmXconf.class:348
+msgid "1440x900"
+msgstr "1440x900"
 
 #: FrmXconf.class:348
 msgid "1280x1024"
@@ -27,332 +1126,211 @@ msgid "1280x800"
 msgstr "1280x800"
 
 #: FrmXconf.class:348
-msgid "1440x900"
-msgstr "1440x900"
-
-#: FrmXconf.class:335
-msgid "16 bit Pseudo Color"
-msgstr "16 bit Pseudo Farge"
-
-#: FrmXconf.class:348
-msgid "1600x1200"
-msgstr "1600x1200"
-
-#: FrmNetConf.class:262
-msgid "192.168.1.254"
-msgstr "192.168.1.254"
-
-#: FrmXconf.class:348
-msgid "1920x1280"
-msgstr "1920x1280"
-
-#: FrmXconf.class:335
-msgid "24 bit True Color"
-msgstr "24 bit Sann Farge"
-
-#: FrmXconf.class:335
-msgid "4 bit 16 Color"
-msgstr "4 bit 16 Farger"
-
-#: FrmXconf.class:348
-msgid "640x480"
-msgstr "640x480"
-
-#: FrmXconf.class:335
-msgid "8 bit 256 Color"
-msgstr "8 bit 256 Farger"
+msgid "1024x768"
+msgstr "1024x768"
 
 #: FrmXconf.class:348
 msgid "800x600"
 msgstr "800x600"
 
-#: FrmPartSel.class:150
-msgid "ABOUT SYSTEM PARTITIONING IN LINUX"
-msgstr "Om systempartisjonering i Linux"
+#: FrmXconf.class:348
+msgid "640x480"
+msgstr "640x480"
 
-#: FrmRootPass.class:29
-msgid "About the root account"
-msgstr "Om root kontoen"
-
-#: FrmImportAccts.class:310
-msgid "Account"
-msgstr "Konto"
-
-#: MdlSetup.module:334
-msgid "Activating swap space"
-msgstr "Aktiver veksleområde"
-
-#: MdlLiloOsList.module:396
-msgid "Add option to boot this Operating system into Text mode."
-msgstr "Legg til opsjon for å starte dette operativ-systemet i tekst modus"
-
-#: MdlLilo.module:713
-msgid "Add option to boot this operating system into text mode"
-msgstr "Legg til opsjon for å starte dette operativ-systemet i tekst modus"
-
-#: FrmDone.class:60
-msgid "After reboot you can use vasm or vasmCC to fine tune your installation."
-msgstr "Etter omstart kan du bruke vasm eller vasmCC til å finjustere din installering"
-
-#: MdlUsrAdd.module:121
-msgid "Allow user to mount / un-mount Pendrive (USB Sticks)"
-msgstr "Tillat bruker å åpne/lukke USB penner"
-
-#: MdlUsrAdd.module:124
-msgid "Allow user to mount / un-mount Removable HD Storage Devices"
-msgstr "Tillat bruker å åpne/lukke eksterne harddisker"
-
-#: MdlNetConf.module:1083
-msgid "Automatic settings via DHCP."
-msgstr "Automatiske instillinger via DHCP"
-
-#: MdlNetConf.module:145
-msgid "Automatically activate this interface at start-up"
-msgstr "Automatisk aktiver dette brukersgrensesnittet ved oppstart"
-
-#: MdlSetup.module:318
-msgid "BROUGHT TO YOU BY"
-msgstr "Tilbudt til deg fra"
-
-#: FrmSummary.class:188
-msgid "BULK PACKAGES"
-msgstr "Samlepakker"
-
-#: MdlSummarize.module:58
-msgid "BULK PACKAGES:"
-msgstr "Samlepakker"
-
-#: FMain.class:835
-msgid "Back"
-msgstr "Tilbake"
-
-#: MdlResetSettings.module:41
-msgid "Bash init script"
-msgstr "Bash init skript"
-
-#: FrmLilo.class:284 FrmLiloSetup.class:252
-msgid "Boot Default"
-msgstr "Standard oppstart"
-
-#: FrmLiloSetup.class:186
-msgid "Boot Manager Configuration"
-msgstr "Konfigurasjon av oppstart behandler"
-
-#: MdlCore.module:527
-msgid "Boot Menu Options"
-msgstr "Menyinstillinger oppstart"
-
-#: MdlConfLilo.module:98
-msgid "Boot loader has been setup successfully"
-msgstr "Oppstartinnstillinger har blitt satt opp korrekt"
-
-#: MdlConfLilo.module:126 MdlLilo.module:127
-msgid "Bootsector of "
-msgstr "Oppstart sektor av"
-
-#: FrmLiloSetup.class:66 MdlLilo.module:85
-msgid "Bootsplash Extra High"
-msgstr "Oppstart-grafikk Ekstra Høy Oppløsning"
-
-#: FrmLilo.class:262
-msgid "Bootsplash Extra high"
-msgstr "Oppstart-grafikk Ekstra Høy Oppløsning"
-
-#: FrmLilo.class:262 FrmLiloSetup.class:36 MdlLilo.module:83
-msgid "Bootsplash High"
-msgstr "Oppstart-grafikk Høy Oppløsning"
-
-#: FrmLilo.class:262 FrmLiloSetup.class:64 MdlLilo.module:81
-msgid "Bootsplash Med"
-msgstr "Oppstart-grafikk Middels Oppløsning"
-
-#: MdlCore.module:430
-msgid "Build Date: "
-msgstr "Byggedato"
-
-#: FMain.class:871
-msgid "Button1"
-msgstr "-"
-
-#: MdlSetup.module:216
-msgid "Calculating package count ... Please wait"
-msgstr "Kalkulerer pakkeantall... vennsligst vent"
-
-#: MdlCore.module:508
-msgid "Cannot find SETUP.CONF"
-msgstr "Kan ikke finne SETUP.CONF"
-
-#: FrmPartSel.class:206
-msgid "Check this box if you have a Windows installation on your system or any other windows partition (FAT, FAT32, NTFS) that you want auto-mounted as soon as your computer starts"
-msgstr "Avkryss denne boksen hvis du har en windows installasjon på ditt system eller noen andre windows installasjoner (FAT, FAT32, NTFS) som du vil ha automatisk startet når datamaskinen starter"
-
-#: FrmUserAdd.class:505
-msgid "Choose a unique name for each user. Enter the password for twice for accuracy. You can make as many users as you want, and when you are finished click next to continue."
-msgstr "Velg et unikt navn for hver bruker. Skriv inn passordet to ganger for nøyaktighet. Du kan lage så mange brukere du vil, og når du er ferdig klikk neste for å fortsette."
-
-#: FrmZoneSet.class:146
-msgid "Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way."
-msgstr "Velg hvordan din hardware klokke skal stilles inn. Velg UTC hvis du vet at klokken skal stilles inn på koordinert universell tid (UTC/GMT). Hvis ikke, velg lokal tid siden de fleste datamaskiner er stilt inn på lokal tid."
+#: FrmZoneSet.class:21
+msgid "Timezone configuration"
+msgstr "Tidssonekonfigurering"
 
 #: FrmZoneSet.class:134
 msgid "Choose the correct timezone for the area in which you live."
 msgstr "Velg riktig tidssone for området du bor i."
 
-#: FrmPkgSel.class:26
-msgid "Choose your installation mode"
-msgstr "Velg installasjonsmetode"
-
-#: FrmPkgSel.class:91
-msgid "Choose your optional components to install."
-msgstr "Velg valgfrie komponenter du vil installere"
-
-#: FrmUserAdd.class:577
-msgid "Clear Form"
-msgstr "Slett skjema"
-
-#: FrmSelISO.class:79
-msgid "Click"
-msgstr "Klikk"
-
-#: FrmXconf.class:322
-msgid "Color Depth"
-msgstr "Farge Dybde"
-
 #: FrmZoneSet.class:139
 msgid "ComboBox1"
 msgstr "Kombinasjonsboks1"
 
-#: FrmNetConf.class:223
-msgid "Computer Name"
-msgstr "Datamaskinnavn"
+#: FrmZoneSet.class:141
+msgid "LocalTime"
+msgstr "Lokal tid"
 
-#: FrmDone.class:49
-msgid "Configuration in progress"
-msgstr "Konfigurasjon foregår"
+#: FrmZoneSet.class:141
+msgid "UTC"
+msgstr "UTC"
 
-#: FrmLilo.class:219
-msgid "Configure and install lilo (Linux Boot Loader)"
-msgstr "Konfigurer og installer LILO (Linux Boot Loader)"
-
-#: FrmUserAdd.class:571
-msgid "Create User"
-msgstr "Opprett bruker"
-
-#: FrmUserAdd.class:60
-msgid "Create User Accounts"
-msgstr "Opprett brukerkontoer"
-
-#: FrmUserAdd.class:116
-msgid "Creating user account ... Please wait"
-msgstr "Oppretter brukerkonto ... Vennligst vent"
-
-#: FrmHostPrep.class:135
-msgid "Current Status"
-msgstr "Nåværende status"
-
-#: MdlNetConf.module:174
-msgid "Current Status:"
+#: FrmZoneSet.class:146
+msgid ""
+"Choose how\n"
+"your hardware clock is set up.\n"
+"Choose UTC if you know that the clock is set up to\n"
+"the Coordinated Universal Time (UTC/GMT). Otherwise,\n"
+"Choose localtime since most PCs are setup this way."
 msgstr ""
+"Velg hvordan din hardware klokke skal stilles inn. Velg UTC hvis du vet at "
+"klokken skal stilles inn på koordinert universell tid (UTC/GMT). Hvis ikke, "
+"velg lokal tid siden de fleste datamaskiner er stilt inn på lokal tid."
 
-#: FrmInstallSys.class:58
-msgid "Current Step"
-msgstr "Nåværende trinn"
+#: MdlConfLilo.module:94
+msgid "Lilo returned an error. Please see below"
+msgstr "Lilo returnerte en feil. Vennligst se lenger nede"
 
-#: FrmInstallSys.class:149
-msgid "Current Step "
-msgstr "Nåværende trinn"
+#: MdlConfLilo.module:98
+msgid "Boot loader has been setup successfully"
+msgstr "Oppstartinnstillinger har blitt satt opp korrekt"
 
-#: FrmSummary.class:17 MdlSummarize.module:56
-msgid "Custom"
-msgstr "Tilpasset"
+#: MdlConfLilo.module:119 MdlLilo.module:35
+msgid "MBR of"
+msgstr "MBR på"
 
-#: FrmPkgSel.class:218
-msgid "Custom Install"
-msgstr "Tilpasset installering"
+#: MdlConfLilo.module:126 MdlLilo.module:127
+msgid "Bootsector of "
+msgstr "Oppstart sektor av"
 
-#: FrmPkgSel.class:37 FrmUsrPkgSel.class:17
-msgid "Description"
-msgstr "Beskrivelse"
+#: MdlConfLilo.module:131 MdlLilo.module:129
+msgid "Floppy"
+msgstr "Diskett"
 
-#: MdlResetSettings.module:47
-msgid "Desktop icons, folders, launchers"
-msgstr "Skrivebord ikoner, mapper og program-startere"
+#: MdlCore.module:28
+msgid "Working ... Please Wait"
+msgstr "Arbeider ... Vennligst vent"
 
-#: FrmPartSel.class:207
-msgid "Detect and Setup Windows partitions for auto-mounting at boot"
-msgstr "Søk etter og klargjør windows partisjoner for automatisk oppstart når maskinen startes"
+#: MdlCore.module:259
+msgid "Scanning system for installable media. Please wait ..."
+msgstr "Scanner systemet for installerbare media. Vennligst vent ..."
 
-#: MdlCore.module:519
+#: MdlCore.module:277
+msgid ""
+"Setup was unable to find any installable media on your system. Please insert "
+"your VectorLinux "
+msgstr ""
+"Innstilling var ikke i stand til å finne noe installasjonsmedia på systemet "
+"ditt. Vennligst sett inn ditt VectorLinux"
+
+#: MdlCore.module:277
+msgid "installation CD and click"
+msgstr "installasjons-CD og klikk"
+
+#: MdlCore.module:277
+msgid "to try again"
+msgstr "for å forsøke igjen"
+
+#: MdlCore.module:438
+msgid "Build Date: "
+msgstr "Byggedato"
+
+#: MdlCore.module:438
+msgid "MINIMUM REQUIREMENTS"
+msgstr "Minimumskrav"
+
+#: MdlCore.module:443
+msgid ""
+"Setup is unable to find SETUP.CONF in your install media. This could be "
+"symptoms of a bad burn or a bad ISO"
+msgstr ""
+"Instilling er ikke i stand til å finne SETUP.CONF på installasjonsmediet "
+"ditt. Dette kan skyldes feil ved brenning eller en feil i ISO filen"
+
+#: MdlCore.module:516
+msgid "Cannot find SETUP.CONF"
+msgstr "Kan ikke finne SETUP.CONF"
+
+#: MdlCore.module:524
+msgid "Preparation"
+msgstr "Forberedelse"
+
+#: MdlCore.module:525
+msgid "Language Selection"
+msgstr "Språkvalg"
+
+#: MdlCore.module:526
+msgid "Find installation media"
+msgstr "Søk etter installasjonsmedium"
+
+#: MdlCore.module:527
 msgid "Disk Partitioning"
 msgstr "Disk Partisjonering"
 
-#: FrmPartScheme.class:113
-msgid "Disk Partitioning Options"
-msgstr "Instillinger for disk partisjonering"
+#: MdlCore.module:530
+msgid "Installation"
+msgstr "Innstallering"
 
-#: FrmDiskPart.class:120
-msgid "Disk Partitioning:"
-msgstr "Disk Partisjonering:"
+#: MdlCore.module:533
+msgid "Install Operating System"
+msgstr "Installer operativsystemet"
 
-#: MdlPartSel.module:143
-msgid "Do not format"
-msgstr "Ikke formater"
+#: MdlCore.module:534
+msgid "System Configuration"
+msgstr "Systemkonfigurasjon"
 
-#: FrmLiloSetup.class:202
-msgid "Do not install LILO"
-msgstr "Ikke installer LILO"
+#: MdlCore.module:535
+msgid "Boot Menu Options"
+msgstr "Menyinstillinger oppstart"
 
-#: FrmSummary.class:124 MdlInstallSys.module:184 MdlWinDrives.module:125
-msgid "Do not mount"
-msgstr "Ikke åpne"
+#: MdlCore.module:536
+msgid "Regional Settings"
+msgstr "Regionale valg"
 
-#: FrmNetConf.class:235
-msgid "Domain"
-msgstr "Domene"
+#: MdlCore.module:540
+msgid "Final Hardware Configuration"
+msgstr "Sluttoppsett av maskinvare"
 
-#: FrmLilo.class:224
-msgid "Don't Install Lilo"
-msgstr "Ikke installer LILO"
+#: MdlDiskPart.module:46
+msgid ""
+"VectorLinux is unable to determine the type of hard disks on your system."
+msgstr ""
+"VectorLinux er ikke i stand til å bestemme harddisk typer på systemet ditt"
 
-#: FrmImportAccts.class:390 FrmResetSettings.class:122
-msgid "Done"
-msgstr "Ferdig"
+#: MdlDiskPart.module:46
+msgid ""
+"It is still possible to install VectorLinux on your system, but you need to "
+"pre-partition your disks first"
+msgstr ""
+"Det er fremdeles mulig å installere VectorLinux på systemet ditt, men du må "
+"forhåndspartisjonere disken din først"
 
-#: MdlNetConf.module:1083
-msgid "Dynamic Host Control Protocol"
-msgstr "Dynamisk vertskontroll protokoll"
+#: MdlDiskPart.module:53
+msgid ""
+"Gparted was not found on this system. Please install gparted and try again"
+msgstr ""
+"Gparted ble ikke funnet på dette systemet. Vennligst reinstaller gparted og "
+"prøv på nytt"
 
-#: MdlUsrAdd.module:118
-msgid "Elite user"
-msgstr "Elitebruker"
+#: MdlDiskPart.module:57
+msgid "Loading gparted ... Please wait"
+msgstr "Laster gparted ... vennligst vent"
 
-#: FrmRootPass.class:143 FrmUserAdd.class:591
-msgid "Enter Password"
-msgstr "Skriv inn passord"
+#: MdlDiskPart.module:90
+msgid ""
+"Setup is unable to successfully run gparted on this system. This may be a "
+"sign of "
+msgstr ""
+" Innstilling er ikke i stand til å kjøre gparted på dette systemet. Dette "
+"kan skyldes"
 
-#: FrmRootPass.class:38
-msgid "Enter a Password for root."
-msgstr "Skriv inn passord for root"
+#: MdlDiskPart.module:90
+msgid "a bad install media. Setup cannot continue."
+msgstr "feil på innstallasjonmediet. Innstallasjonen kan ikke fortsette"
 
-#: FrmUserAdd.class:153
-msgid "Enter a password for"
-msgstr "Skriv inn passord for"
+#: MdlDiskPart.module:95
+msgid "Several windows found. I will take the first one!"
+msgstr "Flere windows funnet. Jeg vil bruke det første!"
 
-#: FrmUserAdd.class:124
-msgid "Enter the login name that this user will user to login to this system."
-msgstr "Skriv inn innloggingsnavnet som denne brukeren vil benytte for å logge inn på dette systemet."
+#: MdlInstallCustom.module:48
+msgid "There as been an error while installing required system software. "
+msgstr "Det oppsto en feil mens nødvendig systemprogramvare ble innstallert."
 
-#: FrmUserAdd.class:211
-msgid "Enter the same password twice"
-msgstr "Skriv inn passordet to ganger"
+#: MdlInstallCustom.module:56
+msgid ""
+"There has been an error while installing optional software to your system. "
+msgstr ""
+"Det oppsto en feil under innstallering av valgfri programvare på systemet "
+"ditt."
 
-#: MdlInstallSys.module:528
-msgid "Error occurred while installing"
-msgstr "Det oppsto en feil under innstalleringen"
-
-#: MdlInstallCustom.module:354
-msgid "Error while installing "
-msgstr "Feil under innstalleringen"
+#: MdlInstallCustom.module:65
+msgid ""
+"There has been an error while installing optional software to your system."
+msgstr ""
+"Det oppsto en feil under innstallering av valgfri programvare på systemet "
+"ditt."
 
 #: MdlInstallCustom.module:73
 msgid "Error while installing required system software. "
@@ -362,141 +1340,161 @@ msgstr "Det oppsto en feil under innstallering av nødvendig systemprogramvare"
 msgid "Error while installing system configuration. "
 msgstr "Det oppsto en feil unders systemkonfigureringen"
 
-#: FMain.class:846
-msgid "Exit Installation"
-msgstr "Avslutt innstallering"
+#: MdlInstallCustom.module:89
+msgid "Unable to install kernels. "
+msgstr "Ikke i stand til å innstallere kjerner"
 
-#: MdlPartSel.module:92
-msgid "FILESYSTEM"
-msgstr "FILSYSTEM"
+#: MdlInstallCustom.module:106
+msgid "Installation complete"
+msgstr "Installasjon komplett"
 
-#: MdlInstallSys.module:500
-msgid "Failed to install"
-msgstr "Mislykket innstallasjon"
+#: MdlInstallCustom.module:107
+msgid ""
+"Packages have been Installed. Please click next to move on to System "
+"Configuration."
+msgstr ""
+"Pakker har blitt installert. Vennligst klikk neste for å fortsette til "
+"System Konfigurasjon."
+
+#: MdlInstallCustom.module:108 MdlInstallSys.module:404
+msgid "installation is complete. Click next to begin system configuration"
+msgstr ""
+"installasjonen er komplett. Klikk neste for å begynne konfigurasjon av "
+"systemet"
+
+#: MdlInstallCustom.module:211 MdlInstallSys.module:516
+msgid "Installing"
+msgstr "Installerer"
 
 #: MdlInstallCustom.module:225
 msgid "Failed to install. Installation will stop"
 msgstr "Mislykket installasjon. Installeringen vil stoppe"
 
-#: FrmXconf.class:342
-msgid "Fbdev"
-msgstr "Fbdev"
+#: MdlInstallCustom.module:271
+msgid "Installing user-selected package"
+msgstr "Installerer bruker valgte pakker"
 
-#: FrmSummary.class:43
-msgid "Filesystem"
-msgstr "Filsystem"
+#: MdlInstallCustom.module:354
+msgid "Error while installing "
+msgstr "Feil under innstalleringen"
 
-#: MdlCore.module:532
-msgid "Final Hardware Configuration"
-msgstr "Sluttoppsett av maskinvare"
+#: MdlInstallCustom.module:423
+msgid "failed to install. Installation will stop now"
+msgstr "innstallasjonen feilet. Installasjons-programmet vil stoppe nå"
 
-#: MdlCore.module:518
-msgid "Find installation media"
-msgstr "Søk etter installasjonsmedium"
+#: MdlInstallSys.module:125
+msgid "Writing new /etc/fstab to system"
+msgstr "skriver ny /etc/fstab til systemet"
 
-#: MdlInstallSys.module:649
+#: MdlInstallSys.module:170
+msgid "Setup is unable to detect for current filesystem for your / partition."
+msgstr ""
+
+#: MdlInstallSys.module:170
+msgid ""
+"Please return to the partitioning stage and select a filesystem for your / "
+"partition."
+msgstr ""
+
+#: MdlInstallSys.module:402
+msgid "Vectorlinux is now installed in your system. Please click"
+msgstr "VectorLinux er nå innstallert på systemet ditt. Vennligst klikk"
+
+#: MdlInstallSys.module:402
+msgid "to configure it."
+msgstr "for å konfigurere det"
+
+#: MdlInstallSys.module:403
+msgid "Packages have been installed in your system. Please click"
+msgstr "Pakker har blitt installer på systemet ditt. Vennligst klikk"
+
+#: MdlInstallSys.module:530
+msgid "Failed to install"
+msgstr "Mislykket innstallasjon"
+
+#: MdlInstallSys.module:558
+msgid "Error occurred while installing"
+msgstr "Det oppsto en feil under innstalleringen"
+
+#: MdlInstallSys.module:623
+msgid "Vectorlinux is now being installed. Please wait..."
+msgstr "VectorLinux blir nå innstallert. Vennligst vent..."
+
+#: MdlInstallSys.module:667
+msgid "There has been an error extracting"
+msgstr "Det oppsto en feil under utpakking"
+
+#: MdlInstallSys.module:679
 msgid "Finished intalling Bulks"
 msgstr "Samlepakker ferdig installert"
 
-#: MdlConfLilo.module:131 MdlLilo.module:129
-msgid "Floppy"
-msgstr "Diskett"
+#: MdlInstallSys.module:794
+msgid "Installation phase complete. Ready for configuration"
+msgstr "Installasjonsfase ferdig. Klar til å konfigurere"
 
-#: FrmRootPass.class:19
-msgid "For added security, use a password that is easy for you to remember, but hard for others to guess"
-msgstr "For ekstra sikkerhet, bruk et passord som for deg er lett å huske, men vanskelig å gjette for andre"
+#: MdlInstallSys.module:797
+msgid "Installing default system configuration and required software."
+msgstr "Installerer standard systemkonfigurasjon og nødvendig programvare."
 
-#: FrmSummary.class:47
-msgid "Format ?"
-msgstr "Formattere?"
+#: MdlInstallSys.module:839
+msgid "Installing Required Package ..."
+msgstr "Instalerer nødvendige pakker ..."
 
-#: FrmSummary.class:21 MdlSummarize.module:69
-msgid "Full"
-msgstr "Full"
+#: MdlLilo.module:237
+msgid "Your option to boot"
+msgstr "Ditt valg for oppstart"
 
-#: FrmPkgSel.class:213
-msgid "Full Install"
-msgstr "Full installering"
-
-#: MdlResetSettings.module:37
-msgid "GTK Tookit theme Settings"
-msgstr "GTK Verktøysett tema instillinger"
-
-#: .project:2
-msgid "GUI installer for Vector linux"
-msgstr "Grafisk brukergrensesnitt installering for Vector Linux"
-
-#: MdlNetConf.module:1045
-msgid "Gateway Address"
-msgstr "Gateway adresse"
-
-#: MdlDiskPart.module:53
-msgid "Gparted was not found on this system. Please install gparted and try again"
-msgstr "Gparted ble ikke funnet på dette systemet. Vennligst reinstaller gparted og prøv på nytt"
-
-#: FrmXconf.class:301
-msgid "Graphical Interface Settings"
-msgstr "Instillinger for grafisk grensesnitt"
-
-#: MdlResetSettings.module:45
-msgid "Graphical inteface preferences"
-msgstr "Preferanser for grafisk grensesnitt"
-
-#: FrmUserAdd.class:433
-msgid "Groups are a way of administering permissions for your users. You grant the user"
-msgstr "Groups er en metode for å administrere tillatelser for brukerene. Du gir brukeren tillatelser"
-
-#: FrmHalSwitch.class:25
-msgid "HAL"
-msgstr "HAL"
-
-#: MdlNetConf.module:117
-msgid "Hardware Address"
-msgstr "Maskinvare adresse"
-
-#: FrmPartSel.class:186 FrmUserAdd.class:558
-msgid "Help"
-msgstr "Hjelp"
-
-#: MdlSummarize.module:56
-msgid "INSTALL TYPE:"
-msgstr "Installer TYPE"
-
-#: MdlNetConf.module:1000
-msgid "IP Address"
-msgstr "IP Adresse"
-
-#: MdlResetSettings.module:49
-msgid "IceWM settings, preferences, menu"
-msgstr "IceWM instillinger, preferanser, meny"
-
-#: MdlNetConf.module:1083
-msgid "If in doubt, choose this option."
+#: MdlLilo.module:237
+msgid ""
+"is too long. it has been adjusted to \"Vector-cli\". You can run vasmCC "
+"after the first boot to modify your boot options"
 msgstr ""
+"er for lang. Den har blitt justert til \"Vector-cli\". Du kan bruke vasmCC "
+"etter første start for å modifisere dine oppstarts-opsjoner."
 
-#: FrmDone.class:60
-msgid "If you installed from  CD-ROM/R/RW media, please remove de disk before restarting."
-msgstr "Hvis du installerte fra CD-ROM/R/RW medium, vær så vennlig å fjern disken før gjenstart."
+#: MdlLilo.module:515
+msgid "installed on"
+msgstr "installert på"
 
-#: FMain.class:448
-msgid "If you wish to bypass the bootloader setup, uncheck the"
-msgstr ""
+#: MdlLilo.module:533 MdlLiloOsList.module:149
+msgid "Include this installation in the boot menu"
+msgstr "Inkluder denne installasjonen i oppstartsmenyen"
 
-#: FrmImportAccts.class:383
-msgid "Import Account"
-msgstr "Importer konto"
+#: MdlLilo.module:543 MdlLiloOsList.module:313
+msgid "Name"
+msgstr "Navn"
 
-#: FrmImportAccts.class:398 FrmUserAdd.class:630
-msgid "Import Existing User Accounts"
-msgstr "Importer eksisterende bruker kontoer"
+#: MdlLilo.module:600
+msgid "installed in"
+msgstr "installert i"
 
 #: MdlLilo.module:621
 msgid "Include in boot menu"
 msgstr "Innkluder i oppstart meny"
 
-#: MdlLilo.module:533 MdlLiloOsList.module:149
-msgid "Include this installation in the boot menu"
-msgstr "Inkluder denne installasjonen i oppstartsmenyen"
+#: MdlLilo.module:657
+msgid "Initrd"
+msgstr "Initrd"
+
+#: MdlLilo.module:690 MdlLiloOsList.module:359
+msgid "Kernel boot options"
+msgstr "Oppstartsalternativer for kjernen"
+
+#: MdlLilo.module:713
+msgid "Add option to boot this operating system into text mode"
+msgstr "Legg til opsjon for å starte dette operativ-systemet i tekst modus"
+
+#: MdlLiloOsList.module:139
+msgid "Windows installation found in"
+msgstr "Windows installering funnet på"
+
+#: MdlLiloOsList.module:158
+msgid "Label"
+msgstr "Merkelapp"
+
+#: MdlLiloOsList.module:290
+msgid "Operating system installed in"
+msgstr "Operativ-system installert i"
 
 #: MdlLiloOsList.module:302
 msgid "Include this operating system in the boot menu"
@@ -506,593 +1504,190 @@ msgstr "Inkluder dette operativsystemet i oppstartsmenyen"
 msgid "Initial Ram Disk"
 msgstr "Initiell Ram Disk"
 
-#: MdlLilo.module:657
-msgid "Initrd"
-msgstr "Initrd"
+#: MdlLiloOsList.module:396
+msgid "Add option to boot this Operating system into Text mode."
+msgstr "Legg til opsjon for å starte dette operativ-systemet i tekst modus"
 
-#: MdlCore.module:525
-msgid "Install Operating System"
-msgstr "Installer operativsystemet"
-
-#: MdlCore.module:522
-msgid "Installation"
-msgstr "Innstallering"
-
-#: FrmSummary.class:14 MdlCore.module:523
-msgid "Installation Summary"
-msgstr "Innstallering oppsummert"
-
-#: FrmSummary.class:294
-msgid "Installation Type"
-msgstr "Installasjonstype"
-
-#: MdlInstallCustom.module:106
-msgid "Installation complete"
-msgstr "Installasjon komplett"
-
-#: FrmDone.class:55
-msgid "Installation is complete"
-msgstr "Installasjonen er komplett"
-
-#: FrmDone.class:98
-msgid "Installation is finished"
-msgstr "Installering er ferdig"
-
-#: MdlInstallSys.module:764
-msgid "Installation phase complete. Ready for configuration"
-msgstr "Installasjonsfase ferdig. Klar til å konfigurere"
-
-#: MdlInstallCustom.module:211 MdlInstallSys.module:486
-msgid "Installing"
-msgstr "Installerer"
-
-#: FrmInstallSys.class:138
-msgid "Installing ..."
-msgstr "Instalerer ..."
-
-#: MdlInstallSys.module:809
-msgid "Installing Required Package ..."
-msgstr "Instalerer nødvendige pakker ..."
-
-#: MdlInstallSys.module:767
-msgid "Installing default system configuration and required software."
-msgstr "Installerer standard systemkonfigurasjon og nødvendig programvare."
-
-#: MdlInstallCustom.module:271
-msgid "Installing user-selected package"
-msgstr "Installerer bruker valgte pakker"
-
-#: FrmPkgSel.class:81
-msgid "Installs all optional components in your VectorLinux media to your system"
-msgstr "Installerer alle valgfrie komponenter i ditt VectorLinux medium til ditt system"
-
-#: MdlDiskPart.module:46
-msgid "It is still possible to install VectorLinux on your system, but you need to pre-partition your disks first"
-msgstr "Det er fremdeles mulig å installere VectorLinux på systemet ditt, men du må forhåndspartisjonere disken din først"
-
-#: MdlResetSettings.module:33
-msgid "KDE Settings (Menu, Window decorations, etc)"
-msgstr "KDE Instillinger (Meny, vindusdekorasjoner osv.)"
-
-#: MdlLilo.module:690 MdlLiloOsList.module:359
-msgid "Kernel boot options"
-msgstr "Oppstartsalternativer for kjernen"
-
-#: FrmLicense.class:99
-msgid "LICENSE AGREEMENT"
-msgstr "Lisensavtale"
-
-#: MdlLiloOsList.module:158
-msgid "Label"
-msgstr "Merkelapp"
-
-#: MdlCore.module:517
-msgid "Language Selection"
-msgstr "Språkvalg"
-
-#: MdlConfLilo.module:94
-msgid "Lilo returned an error. Please see below"
-msgstr "Lilo returnerte en feil. Vennligst se lenger nede"
-
-#: FrmPartSel.class:150
-msgid "Linux is a modular operating system. This means that is has the ability to store system and"
-msgstr "Linux er et modulært oppbygget operativsystem. Dette betyr at det har muligheten til å lagre systemet og"
-
-#: MdlDiskPart.module:57
-msgid "Loading gparted ... Please wait"
-msgstr "Laster gparted ... vennligst vent"
-
-#: FrmZoneSet.class:141
-msgid "LocalTime"
-msgstr "Lokal tid"
-
-#: FrmUserAdd.class:584
-msgid "Login Name"
-msgstr "Innloggingsnavn"
-
-#: FrmUserAdd.class:132
-msgid "Login name field contains illegal characters. Please use only lowercase letters and numbers"
-msgstr "Feltet for innloggingsnavn inneholder ugyldige tegn. Vennligst bruk kun små bokstaver og tall"
-
-#: MdlConfLilo.module:119 MdlLilo.module:35
-msgid "MBR of"
-msgstr "MBR på"
-
-#: MdlCore.module:430
-msgid "MINIMUM REQUIREMENTS"
-msgstr "Minimumskrav"
-
-#: MdlPartSel.module:82
-msgid "MOUNT POINT"
-msgstr "Monteringspunkt"
-
-#: MdlWinDrives.module:85
-msgid "MOUNT TO"
-msgstr "Monter til"
-
-#: MdlResetSettings.module:55
-msgid "MPlayer Multimedia Player Settings"
-msgstr "MPlayer Multimedia Spiller Innstillinger"
-
-#: FrmNetConf.class:251
-msgid "Manual DNS Server Specification"
-msgstr "Manuell DNS server spesifikasjon"
-
-#: FrmSelISO.class:151
-msgid "Minimum Disk Space Requirements"
-msgstr "Mininimum nødvendig diskplass"
-
-#: FrmPartScheme.class:123
-msgid "Modify my disk partitions to make room for new installation"
-msgstr "Modifiser mine disk partisjoner for å gjøre plass til en ny installering"
-
-#: FrmRootPass.class:19
-msgid "Most other every-day taks do not require administrative priviledges."
-msgstr "De fleste daglige gjøremål trenger ikke administratorrettigheter"
-
-#: FrmSummary.class:45
-msgid "Mount Point"
-msgstr "Monteringspunkt"
-
-#: MdlLilo.module:543 MdlLiloOsList.module:313
-msgid "Name"
-msgstr "Navn"
-
-#: FrmNetConf.class:208 MdlCore.module:531
-msgid "Network Configuration"
-msgstr "Nettverkskonfigurasjon"
-
-#: FrmImportAccts.class:322
-msgid "New Password"
-msgstr "Nytt Passord"
-
-#: FMain.class:857
-msgid "Next"
-msgstr "Neste"
-
-#: FrmUserAdd.class:35
-msgid "No"
-msgstr "Nei"
-
-#: FrmSelISO.class:30 MdlCore.module:267
-msgid "No Installable Media Found"
-msgstr "Ingen installerbare media funnet"
-
-#: MdlWinDrives.module:142
-msgid "No Windows partitions detected"
-msgstr "Ingen windowspartisjon oppdaget"
-
-#: MdlNetConf.module:78
+#: MdlNetConf.module:79
 msgid "No ethernet neworking devices found"
 msgstr "Ingen ethernet nettverks-kort funnet"
 
-#: FrmSelISO.class:256
-msgid "No installable images found."
-msgstr "Ingen installerbare media funnet"
+#: MdlNetConf.module:97
+msgid "Wired"
+msgstr "Tråd"
 
-#: FrmLicense.class:115
-msgid "No, I Do Not Agree"
-msgstr "Nei, jeg er ikke enig"
-
-#: FrmSummary.class:101 MdlLilo.module:203 MdlNetConf.module:1241
-msgid "None"
-msgstr "Ingen"
-
-#: FrmSummary.class:53 MdlInstallSys.module:136 MdlPartSel.module:147
-msgid "Not Used"
-msgstr "Ikke brukt"
-
-#: FrmUserAdd.class:434
-msgid "OK"
-msgstr "Ok"
-
-#: MdlSummarize.module:62
-msgid "OPTIONAL PACKAGES:"
-msgstr "Alternative pakker:"
-
-#: MdlSummarize.module:49
-msgid "OPTIONAL WINDOWS PARTITIONS TO BE MOUNTED AT BOOT TIME."
-msgstr "ALTERNATIVE WINDOWSPARTINSJONER SOM SKAL MONTERES UNDER OPPSTART."
-
-#: MdlLiloOsList.module:290
-msgid "Operating system installed in"
-msgstr "Operativ-system installert i"
-
-#: MdlPartSel.module:71 MdlWinDrives.module:75
-msgid "PARTITION"
-msgstr "PARTISJON"
-
-#: MdlSummarize.module:28
-msgid "PARTITIONING LAYOUT"
-msgstr "OPPSETT FOR PARTISJONERING"
-
-#: FrmPkgSel.class:36
-msgid "Package"
-msgstr "Pakke"
-
-#: FrmSummary.class:179 FrmUsrPkgSel.class:16
-msgid "Package Name"
-msgstr "Pakkenavn"
-
-#: MdlInstallCustom.module:107
-msgid "Packages have been Installed. Please click next to move on to System Configuration."
-msgstr "Pakker har blitt installert. Vennligst klikk neste for å fortsette til System Konfigurasjon."
-
-#: MdlInstallSys.module:373
-msgid "Packages have been installed in your system. Please click"
-msgstr "Pakker har blitt installer på systemet ditt. Vennligst klikk"
-
-#: FrmSummary.class:39
-msgid "Partition"
-msgstr "Partisjon"
-
-#: FrmSummary.class:304
-msgid "Partition Selection Scheme"
-msgstr "Velg partisjonsskjema? plan?"
-
-#: FrmImportAccts.class:89
-msgid "Password fields cannot be blank. Please enter a password for"
-msgstr "Passord felt kan ikke være blankt. Vennligst skriv inn passord for"
-
-#: FrmUserAdd.class:210
-msgid "Passwords do not match"
-msgstr "Passordet passer ikke"
-
-#: FMain.class:515
-msgid "Passwords do not match. Please enter the same password twice"
-msgstr "Passordet passer ikke. Vennligst skriv inn det samme passordet to ganger"
-
-#: FrmRootPass.class:49
-msgid "Passwords do not match. Please enter the same password twice for accuracy."
-msgstr "Passordet passer ikke. Vennligst skriv inn passordet to ganger for nøyaktighet"
-
-#: FMain.class:510
-msgid "Please enter the root password. For your security purposes, do not leave this blank"
-msgstr "Vennligst skriv inn passordet for root. For din sikkerhet, ikke la dette være blankt"
-
-#: FMain.class:458
-msgid "Please select a default operating system to boot before proceeding"
-msgstr "Vennligst velg oppstart av standard oprerativsystem før du fortsetter"
-
-#: FrmImportAccts.class:84
-msgid "Please select an account name from the dropdown list."
-msgstr "Vennligst velg et konto navn fra dropdown menyen"
-
-#: MdlPartSel.module:299
-msgid "Please select only one "
-msgstr "Vennligst velg kun ett"
-
-#: FrmPartSel.class:181
-msgid "Please select the partitions you wish to use and how to use them"
-msgstr "Vennligst velg partisjonene du ønsker å bruke og hvordan du skal bruke dem"
-
-#: FMain.class:567
-msgid "Please specify a hostname for this computer"
-msgstr "Vennligst spesifiser et vertsnavn for denne datamaskinen"
-
-#: FMain.class:572
-msgid "Please specify the domain this computer belongs to"
-msgstr "Vennligst spesifiser domenet som denne datamaskinen tilhører"
-
-#: FrmAlsaConf.class:36
-msgid "Please use the setup program below to setup the sound system."
-msgstr "Vennligst bruk innstillingsprogrammet nedenfor for å stille inn lydsystemet"
-
-#: FMain.class:356
-msgid "Please wait while setup analyses your current partition setup."
-msgstr "Vennligst vent mens nåværende partisjon analyseres av innstilligsprogrammet"
-
-#: FMain.class:354
-msgid "Please wait while setup attampts to run the partitioning utility"
-msgstr "Vennligst vent mens innstillingsprogrammet prøver å kjøre partisjonsverktøyet"
-
-#: MdlNetConf.module:103
+#: MdlNetConf.module:104
 msgid "Plugged-in"
 msgstr "Innplugget"
 
-#: MdlCore.module:516
-msgid "Preparation"
-msgstr "Forberedelse"
+#: MdlNetConf.module:106
+msgid "Unplugged"
+msgstr "Ikke plugget inn"
 
-#: FrmSummary.class:37
-msgid "Preparing Installation Summary ... Please wait"
-msgstr "Forbereder oppsummering av installasjonen ... Vennligst vent"
+#: MdlNetConf.module:118
+msgid "Hardware Address"
+msgstr "Maskinvare adresse"
 
-#: MdlSetup.module:336
-msgid "Preparing filesystems"
-msgstr "Forbereder filsystemene"
+#: MdlNetConf.module:139
+msgid "Automatically activate this interface at start-up"
+msgstr "Automatisk aktiver dette brukersgrensesnittet ved oppstart"
 
-#: FrmNetConf.class:267
-msgid "Primary DNS Server"
-msgstr "Primær DNS Server"
-
-#: FrmXconf.class:27
-msgid "Probe hardware to setup your Graphical Environment using your preffered settings"
-msgstr "Undersøker maskinvaren for å instille det grafiske miljøet med dine foretrukne valg"
-
-#: FrmLilo.class:267 FrmLiloSetup.class:273
-msgid "Prompt Timeout"
-msgstr "Tidsslutt"
-
-#: MdlResetSettings.module:35
-msgid "QT Toolkit settings (KDE Visual Effects)"
-msgstr "QT Verktøysett innstillinger (KDE visuelle effekter)"
-
-#: MdlResetSettings.module:53
-msgid "ROX Filer Desktop settings"
-msgstr "ROX Filer Skrivebord instillinger"
-
-#: FrmRootPass.class:148
-msgid "Re-Enter Password"
-msgstr "Skriv inn passordet på nytt"
-
-#: FrmUserAdd.class:598
-msgid "ReEnter Password"
-msgstr "Skriv inn passordet på nytt"
-
-#: FrmUsrPkgSel.class:40
-msgid "Reading available software selection ... Please wait"
-msgstr "Leser listen av tilgjengelig programvare .. Vennligst vent"
-
-#: FrmUserAdd.class:614
-msgid "Real Name"
-msgstr "Reelt navn"
-
-#: MdlCore.module:528
-msgid "Regional Settings"
-msgstr "Regionale valg"
-
-#: FrmImportAccts.class:53
-msgid "Reset settings for"
-msgstr "Nullstill instillinger for"
-
-#: FMain.class:191 FrmDone.class:63
-msgid "Restart"
-msgstr "Restart"
-
-#: MdlUsrAdd.module:112
-msgid "Restricted administrator (backup)"
-msgstr "Begrenset administrator (Backup)"
-
-#: MdlCore.module:251
-msgid "Scanning system for installable media. Please wait ..."
-msgstr "Scanner systemet for installerbare media. Vennligst vent ..."
-
-#: FrmXconf.class:328
-msgid "Screen Resolution"
-msgstr "Sjermoppløsning"
-
-#: FrmSelISO.class:272
-msgid "Search Again"
-msgstr "Undersøk igjen"
-
-#: FrmNetConf.class:280
-msgid "Secondary DNS Server"
-msgstr "Sekundær DNS Server"
-
-#: FrmLilo.class:278 FrmLiloSetup.class:284
-msgid "Seconds"
-msgstr "Sekunder"
-
-#: FrmImportAccts.class:349 FrmUserAdd.class:543
-msgid "Select"
-msgstr "Velg"
-
-#: FrmImportAccts.class:376
-msgid "Select Settings to reset"
-msgstr "Velg instillinger som skal nullstilles"
-
-#: FMain.class:459
-msgid "Select an entry from this list"
-msgstr "Velg en inngang fra denne listen"
-
-#: FrmSelISO.class:87
-msgid "Select installation media from the list below"
-msgstr "Velg installasjons-medium fra lista nedenfor"
-
-#: FrmImportAccts.class:339
-msgid "Select login Image"
-msgstr "Velg bilde for innlogging"
-
-#: FrmImportAccts.class:33 FrmUserAdd.class:368
-msgid "Select picture for user Login"
-msgstr "Velg et bilde for brukerinnlogging"
-
-#: FrmWinDrives.class:72
-msgid "Select the windows partitions you would like to mount during boot"
-msgstr "Velg en windows partisjon som du vil montere under oppstart"
-
-#: FrmPartScheme.class:60
-msgid "Select this option if you already have a linux installation that you wish to overwrite or if a linux partition scheme exists in your hard disk."
-msgstr "Velg denne valgmuligheten hvis du allerde har en linuksinstallasjon som du ønsker å overskrive, eller hvis en linuxpartisjonsplan eksisterer på din harddisk"
-
-#: FrmPartScheme.class:70
-msgid "Select this option is you wish to create, more or resize partitions in order to make room for your new VectorLinux installation."
-msgstr "Velg denne valgmuligheten hvis du ønsker å lage, flytte eller endre størrelsen på partisjoner for å skape plass til din nye VectorLinux installasjon"
-
-#: FrmSelISO.class:262
-msgid "Select which VectorLinux version you wish to install from the list below"
-msgstr "Velg versjon av VectorLinux som du ønsker å installere fra listen nedenfor"
-
-#: FrmUserAdd.class:433
-msgid "Select which groups you want this user to be a part of here"
-msgstr "Velg gruppe du ønsker at denne brukeren skal være del av"
-
-#: FrmResetSettings.class:112
-msgid "Select which settings to reset"
-msgstr "Velg hvilke instillinger som skal nullstilles"
-
-#: FrmPkgsel2.class:21
-msgid "Select your individual packages to install."
-msgstr ""
-
-#: FrmUsrPkgSel.class:11
-msgid "Select your indivirual packages to install."
-msgstr "Velg dine indivirual? individuelle? pakker som skal installeres"
-
-#: FrmLangSel.class:118
-msgid "Select your language"
-msgstr "Velg ditt språk"
-
-#: FrmImportAccts.class:93
-msgid "Selected passwords dont match. Please enter the same password twice"
-msgstr "Passordene er forskjellige. Vennligst skriv inn samme passord to ganger"
-
-#: FrmRootPass.class:165
-msgid "Set Password"
-msgstr "Velg passord"
-
-#: MdlNetConf.module:155
+#: MdlNetConf.module:150
 msgid "Setup Mode"
 msgstr "Installerings modus"
 
-#: FMain.class:529
-msgid "Setup has detected existing directories in the partition you selected for /home."
-msgstr "Installajons-programmet har funnet eksisterende mapper i partisjonen du valgte for /home"
+#: MdlNetConf.module:170
+msgid "Current Status:"
+msgstr ""
 
-#: FrmUserAdd.class:35
-msgid "Setup has detected existing user directories in your selected /home partition. Would you like to import these user accounts into your new installation?"
-msgstr "Installajons-programmet har funnet eksisterende bruker-mapper i partisjonen du valgte for /home. Vil du importere disse brukerkontoene til din nye installasjon?"
-
-#: MdlCore.module:435
-msgid "Setup is unable to find SETUP.CONF in your install media. This could be symptoms of a bad burn or a bad ISO"
-msgstr "Instilling er ikke i stand til å finne SETUP.CONF på installasjonsmediet ditt. Dette kan skyldes feil ved brenning eller en feil i ISO filen"
-
-#: MdlDiskPart.module:90
-msgid "Setup is unable to successfully run gparted on this system. This may be a sign of "
-msgstr " Innstilling er ikke i stand til å kjøre gparted på dette systemet. Dette kan skyldes"
-
-#: MdlCore.module:269
-msgid "Setup was unable to find any installable media on your system. Please insert your VectorLinux "
-msgstr "Innstilling var ikke i stand til å finne noe installasjonsmedia på systemet ditt. Vennligst sett inn ditt VectorLinux"
-
-#: MdlDiskPart.module:95
-msgid "Several windows found. I will take the first one!"
-msgstr "Flere windows funnet. Jeg vil bruke det første!"
-
-#: FrmPkgSel.class:38 FrmSummary.class:41 FrmUsrPkgSel.class:19
-msgid "Size"
-msgstr "Størrelse"
-
-#: FMain.class:468
-msgid "Skipping boot loader setup"
-msgstr "Hopper over oppsetting av oppstartlaster"
-
-#: FMain.class:494
-msgid "Skipping lilo setup"
-msgstr "Hopper over lilo innstilling"
-
-#: FrmSummary.class:314 FrmUsrPkgSel.class:147 MdlCore.module:520
-msgid "Software Selection"
-msgstr "Programvarevalg"
-
-#: MdlResetSettings.module:43
-msgid "Sound system preferences"
-msgstr "Lyd-system preferanser"
-
-#: FrmLilo.class:139 FrmLiloSetup.class:63 MdlLilo.module:79
-msgid "Standard"
-msgstr "Standard"
-
-#: MdlNetConf.module:988
+#: MdlNetConf.module:224
 msgid "Static IP Address Settings"
 msgstr "Statisk IP adresse innstillinger"
 
-#: MdlNetConf.module:1023
+#: MdlNetConf.module:236
+msgid "IP Address"
+msgstr "IP Adresse"
+
+#: MdlNetConf.module:259
 msgid "Subnet Mask"
 msgstr "Subnet Maske"
 
-#: FrmRootPass.class:124 MdlCore.module:529
-msgid "System Administrator"
-msgstr "System administrator"
+#: MdlNetConf.module:281
+msgid "Gateway Address"
+msgstr "Gateway adresse"
 
-#: FrmRootPass.class:12
-msgid "System Administrator Password"
-msgstr "Systemadministrator passord"
+#: MdlNetConf.module:319
+msgid "Dynamic Host Control Protocol"
+msgstr "Dynamisk vertskontroll protokoll"
 
-#: MdlCore.module:526
-msgid "System Configuration"
-msgstr "Systemkonfigurasjon"
+#: MdlNetConf.module:319
+msgid "Automatic settings via DHCP."
+msgstr "Automatiske instillinger via DHCP"
 
-#: FrmLilo.class:230 FrmLiloSetup.class:302 FrmNetConf.class:303
-msgid "Tab 0"
-msgstr "Tab 0"
+#: MdlNetConf.module:319
+msgid "This will work if you use a cable or DSL modem on a home network."
+msgstr ""
+"Dette vil virke hvis du bruker kabel eller et DSL modem på et hjemmenettverk"
 
-#: FrmLilo.class:248 FrmLiloSetup.class:234
-msgid "Target"
-msgstr "Mål"
-
-#: FrmLicense.class:104
-msgid "TextArea1"
-msgstr "Tekstområde1"
-
-#: FrmSummaryOld.class:87
-msgid "TextLabel1"
-msgstr "Tekstmerking1"
-
-#: FrmLilo.class:37
-msgid "The following Operating Systems have been detected on this computer. Choose your desired option"
-msgstr "Følgende operativsystemer har blitt oppdaget på denne datamaskinen. Velg ønsket opsjon (valg?)"
-
-#: FrmRootPass.class:137
-msgid "The linux root account is pre-assigned to be used as the system administrator's account. This account is used to perform system-wide changes such as software upgrades, managing user accounts etc. \n\nMost other operations do not require administrative priviledges.\nThe root password must be entered twice for ensured accuracy. When choosing a root password, think of something easy for you to remember, but hard for others to guess."
-msgstr "Linux root konto er forhåndsinnstillt til å brukes som konto til systemadministrator. Denne kontoen brukes til å gjennomføre endringer på systemnivå, slik som oppgraderinger av programvare, håndtere brukerkontoer osv. \n\n De fleste andre operasjoner trenger ikke administrative rettigheter. \n Root passordet må skrives inn to ganger for nøyaktighet. Når du velger et passord, tenk på som er lett for deg å huske, men vanskelig for andre å gjette."
-
-#: MdlInstallCustom.module:48
-msgid "There as been an error while installing required system software. "
-msgstr "Det oppsto en feil mens nødvendig systemprogramvare ble innstallert."
-
-#: MdlInstallSys.module:637
-msgid "There has been an error extracting"
-msgstr "Det oppsto en feil under utpakking"
-
-#: MdlInstallCustom.module:65
-msgid "There has been an error while installing optional software to your system."
-msgstr "Det oppsto en feil under innstallering av valgfri programvare på systemet ditt."
-
-#: MdlInstallCustom.module:56
-msgid "There has been an error while installing optional software to your system. "
-msgstr "Det oppsto en feil under innstallering av valgfri programvare på systemet ditt."
+#: MdlNetConf.module:319
+msgid "If in doubt, choose this option."
+msgstr ""
 
 #: MdlPartFrmt.module:103
 msgid "There has been an error while trying to format "
 msgstr "Det oppsto en feil under formatering"
 
-#: FMain.class:356
-msgid "This may take a while ..."
-msgstr "Dette kan ta litt tid ..."
+#: MdlPartSel.module:71 MdlWinDrives.module:75
+msgid "PARTITION"
+msgstr "PARTISJON"
 
-#: FrmPartScheme.class:70
-msgid "This option is the safest choice if you have other existing installations that you wish to keep."
-msgstr "Dette valget er det tryggeste valget hvis du har andre eksiterende innstallasjoner som du ønsker å beholde."
+#: MdlPartSel.module:82
+msgid "MOUNT POINT"
+msgstr "Monteringspunkt"
 
-#: FrmPartScheme.class:60
-msgid "This option will overwrite any existing data in the selected partitions"
-msgstr "Dette valget vil overskrive data i de valgte partisjonene"
+#: MdlPartSel.module:92
+msgid "FILESYSTEM"
+msgstr "FILSYSTEM"
 
-#: FrmAlsaConf.class:36
-msgid "This portion of the setup process allows you to sutup your soundcard for your new operating system."
-msgstr "Denne delen av innstillingsprosessen lar deg innstille lydkortet ditt for ditt nye operativsystem"
+#: MdlPartSel.module:299
+msgid "Please select only one "
+msgstr "Vennligst velg kun ett"
+
+#: MdlPartSel.module:299
+msgid "partition"
+msgstr "partisjon"
+
+#: MdlResetSettings.module:33
+msgid "KDE Settings (Menu, Window decorations, etc)"
+msgstr "KDE Instillinger (Meny, vindusdekorasjoner osv.)"
+
+#: MdlResetSettings.module:35
+msgid "QT Toolkit settings (KDE Visual Effects)"
+msgstr "QT Verktøysett innstillinger (KDE visuelle effekter)"
+
+#: MdlResetSettings.module:37
+msgid "GTK Tookit theme Settings"
+msgstr "GTK Verktøysett tema instillinger"
+
+#: MdlResetSettings.module:39
+msgid "X-window basic settings (includes xterm settings)"
+msgstr "X-windows grunnleggende instillinger (innkluderer xterm instillinger)"
+
+#: MdlResetSettings.module:41
+msgid "Bash init script"
+msgstr "Bash init skript"
+
+#: MdlResetSettings.module:43
+msgid "Sound system preferences"
+msgstr "Lyd-system preferanser"
+
+#: MdlResetSettings.module:45
+msgid "Graphical inteface preferences"
+msgstr "Preferanser for grafisk grensesnitt"
+
+#: MdlResetSettings.module:47
+msgid "Desktop icons, folders, launchers"
+msgstr "Skrivebord ikoner, mapper og program-startere"
+
+#: MdlResetSettings.module:49
+msgid "IceWM settings, preferences, menu"
+msgstr "IceWM instillinger, preferanser, meny"
+
+#: MdlResetSettings.module:51
+msgid "XMMS Audio player preferences"
+msgstr "XMMS Audio spiller innstillinger"
+
+#: MdlResetSettings.module:53
+msgid "ROX Filer Desktop settings"
+msgstr "ROX Filer Skrivebord instillinger"
+
+#: MdlResetSettings.module:55
+msgid "MPlayer Multimedia Player Settings"
+msgstr "MPlayer Multimedia Spiller Innstillinger"
+
+#: MdlSetup.module:216
+msgid "Calculating package count ... Please wait"
+msgstr "Kalkulerer pakkeantall... vennsligst vent"
+
+#: MdlSetup.module:272
+msgid "Total bulks to be installed = "
+msgstr "Totalt antall samlepakker som skal installeres = "
+
+#: MdlSetup.module:275
+msgid "Total pkgs to be installed = "
+msgstr "Totalt antall pakker som skal installeres = "
+
+#: MdlSetup.module:319
+msgid "BROUGHT TO YOU BY"
+msgstr "Tilbudt til deg fra"
+
+#: MdlSetup.module:337
+msgid "Activating swap space"
+msgstr "Aktiver veksleområde"
+
+#: MdlSetup.module:339
+msgid "Preparing filesystems"
+msgstr "Forbereder filsystemene"
+
+#: MdlSummarize.module:28
+msgid "PARTITIONING LAYOUT"
+msgstr "OPPSETT FOR PARTISJONERING"
+
+#: MdlSummarize.module:49
+msgid "OPTIONAL WINDOWS PARTITIONS TO BE MOUNTED AT BOOT TIME."
+msgstr "ALTERNATIVE WINDOWSPARTINSJONER SOM SKAL MONTERES UNDER OPPSTART."
+
+#: MdlSummarize.module:56
+msgid "INSTALL TYPE:"
+msgstr "Installer TYPE"
+
+#: MdlSummarize.module:58
+msgid "BULK PACKAGES:"
+msgstr "Samlepakker"
+
+#: MdlSummarize.module:62
+msgid "OPTIONAL PACKAGES:"
+msgstr "Alternative pakker:"
 
 #: MdlUsrAdd.module:91
 msgid "This user can access CD/DVD devices"
@@ -1102,13 +1697,13 @@ msgstr "Denne brukeren kan få tilgang på CD/DVD spillere"
 msgid "This user can access floppy disks"
 msgstr "Denne brukeren kan få tilgang på floppy disketter"
 
+#: MdlUsrAdd.module:97
+msgid "This user is allowed to print"
+msgstr "Denne brukeren tillates å skrive ut"
+
 #: MdlUsrAdd.module:100
 msgid "This user can access scanner devices"
 msgstr "Denne brukeren kan få tilgang på scannere"
-
-#: MdlUsrAdd.module:115
-msgid "This user is a system administrator"
-msgstr "Denne brukeren er en systemadministrator"
 
 #: MdlUsrAdd.module:103
 msgid "This user is allowed to change audio settings"
@@ -1122,363 +1717,50 @@ msgstr "Denne brukeren tillates å forandre på videoinnstillinger"
 msgid "This user is allowed to play restricted games"
 msgstr "Denne brukeren tillates å spille spill med restriksjoner"
 
-#: MdlUsrAdd.module:97
-msgid "This user is allowed to print"
-msgstr "Denne brukeren tillates å skrive ut"
+#: MdlUsrAdd.module:112
+msgid "Restricted administrator (backup)"
+msgstr "Begrenset administrator (Backup)"
 
-#: MdlNetConf.module:1083
-msgid "This will work if you use a cable or DSL modem on a home network."
-msgstr "Dette vil virke hvis du bruker kabel eller et DSL modem på et hjemmenettverk"
+#: MdlUsrAdd.module:115
+msgid "This user is a system administrator"
+msgstr "Denne brukeren er en systemadministrator"
 
-#: FrmZoneSet.class:21
-msgid "Timezone configuration"
-msgstr "Tidssonekonfigurering"
+#: MdlUsrAdd.module:118
+msgid "Elite user"
+msgstr "Elitebruker"
 
-#: FrmUsrPkgSel.class:11
-msgid "To install them all, just click"
-msgstr "For å innstallere alle, klikk"
+#: MdlUsrAdd.module:121
+msgid "Allow user to mount / un-mount Pendrive (USB Sticks)"
+msgstr "Tillat bruker å åpne/lukke USB penner"
 
-#: FrmPkgsel2.class:21
-msgid "To install them all, just click next"
-msgstr "For å innstallere alle, klikk neste"
+#: MdlUsrAdd.module:124
+msgid "Allow user to mount / un-mount Removable HD Storage Devices"
+msgstr "Tillat bruker å åpne/lukke eksterne harddisker"
 
-#: MdlSetup.module:272
-msgid "Total bulks to be installed = "
-msgstr "Totalt antall samlepakker som skal installeres = "
+#: MdlVerifyMedia.module:86
+msgid "has failed the test!"
+msgstr ""
 
-#: MdlSetup.module:275
-msgid "Total pkgs to be installed = "
-msgstr "Totalt antall pakker som skal installeres = "
-
-#: FrmInstallSys.class:171
-msgid "Total progress"
-msgstr "Total progresjon"
-
-#: FrmPartSel.class:150
-msgid "Typically, you want to use the largest partition for this."
-msgstr "Typisk er at du vil bruke den største partisjonen for dette."
-
-#: FrmSummary.class:215
-msgid "USER-SELECTED PACKAGES"
-msgstr "BRUKERVALGTE PAKKER"
-
-#: FrmZoneSet.class:141
-msgid "UTC"
-msgstr "UTC"
-
-#: FrmSelISO.class:116
-msgid "Unable to identify distro."
-msgstr "Ikke i stand til å identifisere distribusjon"
-
-#: MdlInstallCustom.module:89
-msgid "Unable to install kernels. "
-msgstr "Ikke i stand til å innstallere kjerner"
-
-#: FrmSelISO.class:81
-msgid "Unable to locate any installable media."
-msgstr "Ikke i stand til å lokalisere innstalerbare medier."
-
-#: MdlNetConf.module:105
-msgid "Unplugged"
-msgstr "Ikke plugget inn"
-
-#: FrmUserAdd.class:549
-msgid "Use Picture ID for Login greeting"
-msgstr "Bruk bilde ID for innloggingshilsen"
-
-#: FrmPartScheme.class:118
-msgid "Use existing disk partitions"
-msgstr "Bruk eksisterende diskpartisjoner"
-
-#: FrmXconf.class:29
-msgid "Use the console framebuffer driver"
-msgstr "Bruk console framebuffer driver"
-
-#: FrmPartScheme.class:60
-msgid "Use this option if you already prepared your partitions using the VectorLinux installer"
-msgstr "Bruk dette valget hvis du allerede har forberedt dine partisjoner med innstallereren for VectorLinux "
-
-#: FrmPartSel.class:150
-msgid "Used to store system data. This particular install requires a minimum of"
-msgstr "Brukes til å lagre systemdata. Denne spesielle innstalasjonen krever et minimum av"
-
-#: FrmPartSel.class:150
-msgid "Used to store user documents, pictures, videos. Give yourself as much room as you want"
-msgstr "Brukes til å lagre dokumenter, bilder, videoer. Tildel deg selv så plass som du ønsker"
-
-#: FrmUserAdd.class:620 MdlCore.module:530
-msgid "User Accounts"
-msgstr "Brukerkontoer"
-
-#: FrmImportAccts.class:370 FrmUserAdd.class:554
-msgid "User Rights Management"
-msgstr "Behandling av brukerrettigheter"
-
-#: FrmImportAccts.class:103
-msgid "User Unable to restore user account."
-msgstr "Bruker Ikke i stand til å gjenopprette brukerkonto"
-
-#: FrmImportAccts.class:108 FrmUserAdd.class:149
-msgid "User account for"
-msgstr "Brukerkonto for"
-
-#: FrmUserAdd.class:146
-msgid "Username contains illegal characters"
-msgstr "Brukernavn inneholder ulovlige tegn"
-
-#: FrmXconf.class:25
-msgid "Uses the default (failsafe) configuration."
-msgstr "Bruker standard (feilsikre) konfigurering"
-
-#: FrmPartSel.class:150
-msgid "Using a swap partition is suggested if your total RAM is less than 1GB. Suggested amount"
-msgstr "Bruk av en swap partisjon anbefales hvis du har mindre minne en 1GB. Anbefalt mengde"
-
-#: FrmHalSwitch.class:30
-msgid "VL-Hot"
-msgstr "VL-HOT"
-
-#: .project:1
-msgid "VectorLinux Installer"
-msgstr "VectorLinux innstallasjon"
-
-#: MdlDiskPart.module:46
-msgid "VectorLinux is unable to determine the type of hard disks on your system."
-msgstr "VectorLinux er ikke i stand til å bestemme harddisk typer på systemet ditt"
-
-#: FrmInstallSys.class:123
-msgid "Vectorlinux is currently being installed to your system... Please wait"
-msgstr "VectorLinux er under innstallasjon på systemet ditt... Vennligst vent"
-
-#: MdlInstallSys.module:593
-msgid "Vectorlinux is now being installed. Please wait..."
-msgstr "VectorLinux blir nå innstallert. Vennligst vent..."
-
-#: MdlInstallSys.module:372
-msgid "Vectorlinux is now installed in your system. Please click"
-msgstr "VectorLinux er nå innstallert på systemet ditt. Vennligst klikk"
-
-#: FrmHostPrep.class:130
-msgid "Vectorlinux is preparing your system for installation. Please wait."
-msgstr "VectorLinux forbereder systemet ditt for innstallering. Vennligst vent"
-
-#: FrmImportAccts.class:359
-msgid "Verify Password"
-msgstr "Verifiser passord"
-
-#: FrmXconf.class:340
-msgid "Vesa"
-msgstr "Vesa"
-
-#: FrmXconf.class:311
-msgid "Video Driver"
-msgstr "Video driver"
-
-#: FrmLilo.class:254 FrmLiloSetup.class:213
-msgid "Video Resolution"
-msgstr "Video oppløsning"
-
-#: FrmDiskPart.class:58
-msgid "When finished making changes, exit the partitioning application to continue ..."
-msgstr "Når du er ferdig med alle forandringene, lukk partisjonerings-programmet for å fortsette ..."
+#: MdlVerifyMedia.module:86
+msgid "This could either mean your download or burn process was corrupted"
+msgstr ""
 
 #: MdlWinDrives.module:59
 msgid "Windows Partitions Detected"
 msgstr "Windows partisjoner oppdaget"
 
-#: MdlLiloOsList.module:139
-msgid "Windows installation found in"
-msgstr "Windows installering funnet på"
+#: MdlWinDrives.module:85
+msgid "MOUNT TO"
+msgstr "Monter til"
 
-#: MdlNetConf.module:96
-msgid "Wired"
-msgstr "Tråd"
-
-#: MdlCore.module:28
-msgid "Working ... Please Wait"
-msgstr "Arbeider ... Vennligst vent"
-
-#: FrmImportAccts.class:60
-msgid "Would you like to continue adding new user accounts now?"
-msgstr "Ønsker du å fortsette å legge til bruker kontoer nå?"
-
-#: FMain.class:549
-msgid "Would you like to continue anyway?"
-msgstr "Ønsker du allikevel å fortsette?"
-
-#: FMain.class:529
-msgid "Would you like to import these user accounts into your new Operating System"
-msgstr "Ønsker du å importere disse bruker kontoer til ditt nye operativ-system"
-
-#: FrmHalSwitch.class:20
-msgid "Would you like to use Vl-Hot or HAL to manage your removable devices?"
-msgstr "Ønsker du å bruke Vl-Hot eller HAL for å behandle dine utløsbare tilbehør"
-
-#: MdlInstallSys.module:112
-msgid "Writing new /etc/fstab to system"
-msgstr "skriver ny /etc/fstab til systemet"
-
-#: MdlResetSettings.module:39
-msgid "X-window basic settings (includes xterm settings)"
-msgstr "X-windows grunnleggende instillinger (innkluderer xterm instillinger)"
-
-#: MdlResetSettings.module:51
-msgid "XMMS Audio player preferences"
-msgstr "XMMS Audio spiller innstillinger"
-
-#: FrmUserAdd.class:35
-msgid "Yes"
-msgstr "ja"
-
-#: FrmLicense.class:110
-msgid "Yes, I Agree to the License Agreement"
-msgstr "Ja, jeg goddtar lisensavtalen"
-
-#: FMain.class:549
-msgid "You have not created any user accounts for this system yet. There is not enough information"
-msgstr "Du har ikke opprettet noen brukerkontoer for dette systemet enda. Det mangler informasjon"
-
-#: FMain.class:448
-msgid "You have not selected any operating systems for your boot menu."
-msgstr ""
-
-#: FMain.class:376
-msgid "You must select a \"/\" partition. This is the target where the system will install to"
-msgstr "Du må velge en \"/\" partisjon. Dette er målet hvor systemet blir innstallert på"
-
-#: FrmDone.class:60
-msgid "Your computer needs to be restarted so that you can use your new operating system. Click"
-msgstr "Datamaskinen din trenger å startes på nytt så du kan bruke ditt nye operativsystem. Klikk"
-
-#: MdlLilo.module:237
-msgid "Your option to boot"
-msgstr "Ditt valg for oppstart"
-
-#: FrmUserAdd.class:408
-msgid "Your password selections do not match. Please enter the same password twice"
-msgstr "Ditt passordvalg passer ikke. Vennligst skriv inn det samme passordet to ganger"
-
-#: MdlDiskPart.module:90
-msgid "a bad install media. Setup cannot continue."
-msgstr "feil på innstallasjonmediet. Innstallasjonen kan ikke fortsette"
-
-#: FrmUserAdd.class:149
-msgid "already exists"
-msgstr "eksisterer allerede"
-
-#: FrmPartSel.class:150
-msgid "but can also be calculated as 2 times your amount of RAM"
-msgstr "kan også kalkuleres som 2 ganger din mengde RAM"
-
-#: FrmPartSel.class:150
-msgid "but you should consider a higher value to make sure you have room to install additional software"
-msgstr "du burde vurdere en større mengde for å sikre deg at du har nok plass for å innstallere ytterligere programvare"
-
-#: FrmPartSel.class:150
-msgid "by simply selecting a \"/\" value on this screen. The rest is optional. The following is a"
-msgstr "ved å velge en \"/\" verdi på denne skjermen. Resten er valgfritt. Følgende er en"
-
-#: FMain.class:448
-msgid "checkbox."
-msgstr ""
-
-#: MdlInstallCustom.module:423
-msgid "failed to install. Installation will stop now"
-msgstr "innstallasjonen feilet. Installasjons-programmet vil stoppe nå"
-
-#: FrmLilo.class:37
-msgid "for each one of them by clicking on each tab. To proceed with the default pre-set values, simply click"
-msgstr "for hver og en av dem ved å klikke på hver fane. For å fortsette med de forhåndsinnstilte verdiene, klikk"
-
-#: FrmPartSel.class:150
-msgid "for this"
-msgstr "for denne"
-
-#: FrmPartSel.class:150
-msgid "for this is"
-msgstr "for denne er"
-
-#: FrmDone.class:60
-msgid "has been installed to your system. Your new system has been configured with the default factory settings."
-msgstr "har blitt innstallert på systemet ditt. Ditt nye system har blitt konfigurert med standard fabrikkinnstillinger"
-
-#: FrmPartSel.class:150
-msgid "in case you wish to."
-msgstr "i tilfelle du ønsker å"
-
-#: MdlCore.module:269
-msgid "installation CD and click"
-msgstr "installasjons-CD og klikk"
-
-#: MdlInstallCustom.module:108 MdlInstallSys.module:374
-msgid "installation is complete. Click next to begin system configuration"
-msgstr "installasjonen er komplett. Klikk neste for å begynne konfigurasjon av systemet"
-
-#: MdlLilo.module:600
-msgid "installed in"
-msgstr "installert i"
-
-#: MdlLilo.module:515
-msgid "installed on"
-msgstr "installert på"
-
-#: FrmDone.class:50
-msgid "is performing final system configuration. Please wait a moment."
-msgstr "foretar endelig system konfigurasjon. Vennligst vent litt."
-
-#: MdlLilo.module:237
-msgid "is too long. it has been adjusted to \"Vector-cli\". You can run vasmCC after the first boot to modify your boot options"
-msgstr "er for lang. Den har blitt justert til \"Vector-cli\". Du kan bruke vasmCC etter første start for å modifisere dine oppstarts-opsjoner."
-
-#: MdlZoneSet.module:28
-msgid "localtime"
-msgstr "lokal tid"
+#: MdlWinDrives.module:142
+msgid "No Windows partitions detected"
+msgstr "Ingen windowspartisjon oppdaget"
 
 #: MdlZoneSet.module:27
 msgid "localtime-copied-from"
 msgstr "lokal tid kopiert fra"
 
-#: MdlPartSel.module:299
-msgid "partition"
-msgstr "partisjon"
-
-#: FrmUserAdd.class:433
-msgid "permission to do certain things by adding them to certain groups."
-msgstr "tillatelser for å gjøre bestemte ting ved å legge dem til en spesiell gruppe"
-
-#: FrmImportAccts.class:108
-msgid "successfully imported"
-msgstr "importert korrekt"
-
-#: FrmPartSel.class:150
-msgid "suggested setup for a typical Linux installation"
-msgstr "foreslåtte innstillinger for en typisk Linux innstallasjon"
-
-#: FrmSelISO.class:79
-msgid "to begin installating"
-msgstr "for å begynne innstalering"
-
-#: MdlInstallSys.module:372
-msgid "to configure it."
-msgstr "for å konfigurere det"
-
-#: FMain.class:549
-msgid "to create an account here. It is recommended that you create at least one."
-msgstr "for å opprette en konto her. Det anbefales at du oppretter i det minste en"
-
-#: FrmDone.class:60
-msgid "to restart your computer at a later time"
-msgstr " for å restarte din datamaskin på et senere tidspunkt"
-
-#: FrmDone.class:60
-msgid "to restart your computer now or click"
-msgstr "for å restarte din datamaskin nå eller klikk"
-
-#: MdlCore.module:269
-msgid "to try again"
-msgstr "for å forsøke igjen"
-
-#: FrmPartSel.class:150
-msgid "user data separately for added data security. You may install the system to a single partition"
-msgstr "separate brukerdata for ekstra datasikkerhet. Du kan innstallere systemet på en enkel partisjon"
-
+#: MdlZoneSet.module:28
+msgid "localtime"
+msgstr "lokal tid"
