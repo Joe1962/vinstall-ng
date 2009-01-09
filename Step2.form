@@ -1,0 +1,29 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,78,40)
+  Text = ("")
+  Arrangement = Arrange.Vertical
+  { HPanel1 HPanel
+    MoveScaled(2,1,60,5)
+    { tlbanner TextLabel
+      MoveScaled(12,1,19,3)
+      Expand = True
+      Text = ("TextLabel2")
+    }
+    { Separator1 Separator
+      MoveScaled(13,4,25,1)
+      Expand = True
+    }
+  }
+  { Panel1 Panel
+    MoveScaled(1,7,76,32)
+    Expand = True
+    Arrangement = Arrange.Row
+    { TextLabel1 TextLabel
+      MoveScaled(1,1,72,7)
+      Expand = True
+      Text = ("")
+    }
+  }
+}

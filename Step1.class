@@ -1,0 +1,159 @@
+' Gambas class file
+
+PUBLIC SUB _new() ' executed every time the form is instanciated.
+  
+  ME.StartUp()
+  
+END
+
+
+PUBLIC SUB Form_Open()
+
+  ME.TextLabel1.Text = "<h2>" & TextLabel1.text & "</h2>"
+  ME.FIND_CD_INSTALL_MEDIA()
+  ME.FIND_ISO_INSTALL_MEDIA()
+  'ComboBox1.ReadOnly = TRUE
+
+END
+
+PUBLIC FUNCTION GetNext() AS String
+  
+  IF bcheckmedia.Value = TRUE THEN 
+    RETURN "Step2"
+  ELSE 
+    RETURN "Step3"
+  END IF
+  
+  
+END
+
+PUBLIC SUB StartUp() ' Executed every time the Next button is pressed
+
+
+'Message("Starup sub here")
+'ME.FIND_CD_INSTALL_MEDIA
+    
+  
+END
+
+PUBLIC SUB FIND_CD_INSTALL_MEDIA()
+  
+  DIM sDump, sDrive, sOutput, sShortDrive AS String
+  DIM sName, sVersion AS String
+  DIM i AS Integer
+  DIM sDriveList AS String[]
+  
+  Step1.tlStatus.Text = ("Scanning for CD Media ... Please wait")
+  
+  SHELL "/sbin/probedisk | grep \"cdrom\" | cut -f 1 -d \'|\'" TO sOutput
+  
+  sOutput = Trim(sOutput)
+  IF Len(sOutput) < 1 THEN RETURN 
+  
+  sDriveList = Split(sOutput, "\n")
+    FOR i = 0 TO sDriveList.Count - 1
+      sShortDrive = Right(Trim(sDriveList[i]), Len(Trim(sDriveList[i])) - RInStr(Trim(sDriveList[i]), "/"))
+        EXEC ["mkdir", "-p", "/mnt" &/ sShortDrive] WAIT 
+        EXEC ["mount", "-o", "ro", Trim(sDriveList[i]), "/mnt" &/ sShortDrive] WAIT 
+        PRINT ("Scanning") & Space(1) & sDriveList[i]
+          IF Exist("/mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF") THEN 
+              SHELL "grep \"^DISTRO=\" /mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF | cut -f 2 -d \'=\'" TO sName
+              SHELL "grep \"^VERSION=\" /mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF | cut -f 2 -d \'=\'" TO sVersion
+                sName = Trim(Replace(sName, "\'", ""))
+                sVersion = Trim(Replace(sVersion, "\'", ""))
+                File.Save(Temp(sShortDrive), File.Load("/mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF"))
+                  IF ME.ComboBox1.Find(sName & Space(1) & sVersion & Space(1) & ("on") & Space(1) & Trim(sDriveList[i])) = -1 THEN 
+                    ME.ComboBox1.Add(sName & Space(1) & sVersion & Space(1) & ("on") & Space(1) & Trim(sDriveList[i]))
+                  END IF   
+                  PRINT ("... Found") & Space(1) & sName & "-" & sVersion & Space(1) & ("in") & Space(1) & sDriveList[i]         
+          END IF
+        EXEC ["umount", "/mnt" &/ sShortDrive] WAIT 
+        EXEC ["rm", "-rf", "/mnt" &/ sShortDrive] WAIT 
+        
+        'Message(sShortDrive)
+    NEXT 
+      
+Step1.tlStatus.Text = ""
+  
+  'ComboBox1.ReadOnly = TRUE
+  
+  
+END
+
+PUBLIC SUB FIND_ISO_INSTALL_MEDIA()
+  
+  DIM sOutput, sPart AS String
+  DIM sName, sVersion AS String
+  DIM i AS Integer
+  DIM sPartList AS String[]
+  
+  tlStatus.Text = ("Scanning system for installable ISO images")
+  SHELL "/sbin/probepart | grep \"^/dev\" | grep -v -i \"linux swap\" | tr -s \' \'\"\" | cut -f 1 -d \' \'" TO sOutput
+    sOutput = Trim(sOutput)
+      IF Len(sOutput) < 1 THEN RETURN 
+  sPartList = Split(sOutput, "\n")
+    FOR i = 0 TO sPartList.Count - 1
+      sPart = Trim(Right(Trim(sPartList[i]), Len(Trim(sPartList[i])) - RInStr(Trim(sPartList[i]), "/")))
+        'Message(sPart)
+    NEXT 
+          
+    tlStatus.Text = ""
+  
+END
+
+
+
+PUBLIC SUB ComboBox1_Click()
+
+  DIM sAddr AS String = Right(Trim(ComboBox1.Text), Len(Trim(ComboBox1.Text)) - RInStr(Trim(ComboBox1.Text), "/"))
+  
+    IF sAddr LIKE "[0-9]" THEN 
+      'PRINT ("Installing from") & Space(1) & Left(Trim(ComboBox1.Text), InStr(Trim(ComboBox1.Text), " "))
+    ELSE 
+      'PRINT ("Installing from") & Space(1) & sAddr
+      ME.DESCRIBE_CD_INSTALL_MEDIA(sAddr)
+      'PRINT File.Load(Temp(sAddr))
+    END IF
+  
+
+END
+
+PUBLIC SUB DESCRIBE_CD_INSTALL_MEDIA(sAddress AS String)
+  
+  DIM sDistro, sVersion, sLine AS String
+  DIM sSetup AS String[]
+  DIM sFile AS String = File.Load(Temp(sAddress))
+  DIM i, ir AS Integer
+  
+  
+  sSetup = Split(sFile, "\n")
+    FOR i = 0 TO sSetup.count - 1
+      sLine = Trim(sSetup[i])
+        IF Left(sLine, Len("DISTRO=")) = "DISTRO=" THEN 
+          sDistro = Right(sLine, Len(sLine) - InStr(sline, "\'"))
+          sDistro = Replace(sDistro, "\'", "")
+          sDistro = Trim(sDistro)
+        ELSE IF Left(sline, Len("VERSION=")) = "VERSION=" THEN 
+          sVersion = Right(sLine, Len(sLine) - InStr(sline, "\'"))
+          sVersion = Replace(sVersion, "\'", "")
+          sVersion = Trim(sVersion)
+        END IF
+      
+  
+    NEXT 
+
+    gvdistdetails.Rows.Count = 2
+    gvdistdetails.Columns.count = 2
+    gvdistdetails[0, 0].Text = ("DISTRIBUTION")
+    gvdistdetails.Columns[0].Width = 150
+    gvdistdetails[0, 1].Text = sDistro
+    gvdistdetails[1, 0].Text = ("VERSION")
+    gvdistdetails[1, 1].Text = sVersion
+  
+END
+
+
+PUBLIC SUB Form_Resize()
+
+
+END

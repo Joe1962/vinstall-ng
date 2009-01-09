@@ -1,12 +1,13 @@
 # Gambas Project File 2.0
-Title=VL-gui-installer
-Startup=Main
-Icon=vl_logo_icon2.png
-Version=0.0.335
-Library=gb.qt
-Library=gb.qt.ext
-TabSize=3
+# Compiled with Gambas 2.10.0
+Title=VectorLinux Installer
+Startup=FMain
+Version=0.0.1
+Library=gb.gtk
+Library=gb.form
+Library=gb.gtk.ext
+TabSize=2
 Translate=1
 Language=en_US
 ControlPublic=1
-ExecPath=/home/easuter/vinstall-ng.gambas
+ModulePublic=1

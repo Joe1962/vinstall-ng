@@ -1,9 +1,0 @@
-' Gambas class file
-
-PUBLIC Name AS String
-PUBLIC Category AS String 'catagories can be required, optional, and extra
-PUBLIC Comment AS String 'A comment on the package
-PUBLIC Path AS String ' the install path for the package
-PUBLIC UncompSize AS Long 'Individual package size, uncompressed!
-PUBLIC Selected AS Boolean 'This indicates if the package [i] was marked for installation. The value is always TRUE unless manually changed to FALSE
-
