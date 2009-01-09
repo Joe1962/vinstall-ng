@@ -1,0 +1,93 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2002-11-01 04:27+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: FMain.class:199
+msgid "Back"
+msgstr ""
+
+#: FMain.class:204
+msgid "Next"
+msgstr ""
+
+#: FMain.class:209
+msgid "Quit"
+msgstr ""
+
+#: Step1.class:46
+msgid "Scanning for CD Media ... Please wait"
+msgstr ""
+
+#: Step1.class:58
+msgid "Scanning"
+msgstr ""
+
+#: Step1.class:65
+msgid "on"
+msgstr ""
+
+#: Step1.class:68
+msgid "... Found"
+msgstr ""
+
+#: Step1.class:68
+msgid "in"
+msgstr ""
+
+#: Step1.class:90
+msgid "Scanning system for installable ISO images"
+msgstr ""
+
+#: Step1.class:147
+msgid "DISTRIBUTION"
+msgstr ""
+
+#: Step1.class:150
+msgid "VERSION"
+msgstr ""
+
+#: Step1.class:192
+msgid "Select Installation Source"
+msgstr ""
+
+#: Step1.class:210
+msgid "Select Installation source from the list below"
+msgstr ""
+
+#: Step1.class:220
+msgid "ComboBox1"
+msgstr ""
+
+#: Step1.class:231
+msgid "Search Again"
+msgstr ""
+
+#: Step1.class:254
+msgid "Check Installation media before installing"
+msgstr ""
+
+#: Step2.class:9
+msgid "Verify Installation Files"
+msgstr ""
+
+#: Step2.class:24
+msgid ""
+"Verifying installation files can prevent you from performing an unsuccessful "
+"install"
+msgstr ""
+
+#: Step2.class:24
+msgid "Keep in mind however, that this process can take a while to complete."
+msgstr ""
+
+#: Step2.class:61
+msgid "TextLabel2"
+msgstr ""
