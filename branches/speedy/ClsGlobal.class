@@ -1,0 +1,4 @@
+' Gambas class file
+
+STATIC PUBLIC sDistroName AS String
+STATIC PUBLIC sDistroVer AS String

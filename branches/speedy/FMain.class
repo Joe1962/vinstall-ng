@@ -1,0 +1,111 @@
+' Gambas class file
+
+PRIVATE $aPrev AS NEW Object[]
+PRIVATE $oCurrent AS Object
+
+PUBLIC SUB _new()
+
+END
+
+PUBLIC SUB Form_Open()
+
+$oCurrent = NEW Step1(pnlStack)
+btBack.Enabled = FALSE
+ME.auto_setup_for_resolution()
+END
+
+PUBLIC SUB auto_setup_for_resolution()
+  
+  SidePanel1.Visible = Desktop.Width >= 1024
+  
+  
+END
+
+
+
+PUBLIC SUB btQuit_Click()
+
+  FMain.Close
+
+END
+
+PUBLIC SUB btBack_Click()
+
+  $oCurrent = $aPrev.Pop()
+  btBack.Enabled = $aPrev.count > 0
+  btNext.Enabled = TRUE
+  $oCurrent.Raise()
+
+END
+
+PUBLIC SUB btNext_Click()
+
+  DIM o AS Object
+  DIM sTmp AS String
+  DIM bExist AS Boolean
+'Get the next One
+
+sTmp = $oCurrent.GetNext()
+$oCurrent.width = pnlStack.Width
+$oCurrent.Height = pnlStack.Height
+'$oCurrent.Form_Open()
+'$oCurrent.Startup()
+'Is this form already opened ?
+'if true it may have no been closed to preserve entries
+FOR EACH o IN pnlStack.Children
+
+ IF Object.Type(o) = sTmp THEN 
+  bExist = TRUE
+  BREAK 
+ ENDIF
+
+NEXT
+
+
+'strore the previous
+ $aPrev.Push($oCurrent)
+ btBack.Enabled = $aPrev.Count > 0
+
+
+IF NOT bExist THEN
+   $oCurrent = Object.New(sTmp, [pnlStack])
+   $oCurrent.Visible = TRUE
+ELSE
+  $OCurrent = o
+ENDIF
+ 
+ 
+ IF IsNull($oCurrent.GetNext()) THEN btNext.Enabled = FALSE
+'Push to the foreground
+ $oCurrent.Raise()
+ $oCurrent.Startup()
+
+END
+
+PUBLIC SUB Form_Resize()
+
+  $oCurrent.width = pnlStack.Width
+  $oCurrent.height = pnlStack.Height
+  ME.SidePanel1.Height = pnlStack.Height
+  'hpanel1.Width = SidePanel1.Width
+
+END
+
+
+PUBLIC SUB pnlStack_Enter()
+
+  $oCurrent.resize(pnlStack.Width, pnlStack.Height)
+
+END
+
+PUBLIC SUB SidePanel1_Show()
+
+  $oCurrent.resize(pnlStack.Width, pnlStack.Height)
+
+END
+
+PUBLIC SUB SidePanel1_Resize()
+
+  $oCurrent.resize(pnlStack.Width, pnlStack.Height)
+
+END

@@ -1,0 +1,36 @@
+' Gambas class file
+
+
+PUBLIC SUB Form_Open()
+
+  ME.Width = FMain.pnlstack.Width
+  ME.Height = FMain.pnlstack.Height
+  ME.set_label_text()
+  ME.tlbanner.Text = "<h2>" & ("Verify Installation Files") & "</h2>"
+  ME.StartUp()
+  'FMain.btNext.Enabled = FALSE
+END
+
+PUBLIC FUNCTION GetNext() AS String
+  
+  RETURN "Step1"
+  
+END
+PUBLIC SUB set_label_text()
+  
+  DIM sMsg AS String
+  
+  sMsg = ("Verifying installation files can prevent you from performing an unsuccessful install") & "<br>" &
+  ("Keep in mind however, that this process can take a while to complete.")
+  
+  ME.TextLabel1.Text = sMsg
+  ME.TextLabel1.Adjust
+ 
+  
+END
+
+PUBLIC SUB StartUp()
+  
+  FMain.btNext.Enabled = FALSE
+  
+END
