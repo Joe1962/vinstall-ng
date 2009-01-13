@@ -328,8 +328,6 @@ sOut = "#!/bin/bash \n" &
 "/sbin/valsaconf-quiet" & gb.NewLine &
 "cd / && for i in /var/log/scripts/x11-fonts*;do sh $i &>/dev/null;done" & gb.NewLine &
 "rm -r /root/.mc 2>/dev/null" & gb.NewLine &
-"for i in /usr/share/icons/*;do cd $i 2>/dev/null && if [ -e convert.sh ];then sh convert.sh & 2>/dev/null;fi;done" & gb.NewLine &
-"cd / && sh /var/log/scripts/gsb-desktop* & 2>/dev/null" & gb.NewLine &
 "update-mime-database /usr/share/mime/" & gb.NewLine &
 "sleep 20"
 '"echo done >/tmp/status" & gb.NewLine
@@ -355,6 +353,11 @@ SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT
  "#alsaconf \n " &
  "alsactl store \n " &
  "/sbin/vxconf \n" &
+ "echo \"updating database\" \n" &
+ "updatedb & \n" &
+ "sleep 10 \n" &
+ "for i in /usr/share/icons/*;do cd $i 2>/dev/null && if [ -e convert.sh ];then sh convert.sh & 2>/dev/null;fi;done" & gb.NewLine &
+ "cd / && sh /var/log/scripts/gsb-desktop* & 2>/dev/null" & gb.NewLine &
  "#/sbin/vsrvset \n" &
  "#/sbin/config-stage1 gui-installer" & gb.NewLine
  

@@ -584,7 +584,14 @@ PUBLIC SUB btnext_Click()
       END IF
       IF FrmNetConf.cbStartWicd.Value = TRUE THEN 
         SHELL "chroot /mnt/target service -s wicd 2"
+        SHELL "chroot /mnt/target service -s wicd 3"
         SHELL "chroot /mnt/target service -s wicd 4"
+        SHELL "chroot /mnt/target service -s wicd 5"
+      ELSE 
+        SHELL "chroot /mnt/target service -r wicd 2"
+        SHELL "chroot /mnt/target service -r wicd 3"
+        SHELL "chroot /mnt/target service -r wicd 4"
+        SHELL "chroot /mnt/target service -r wicd 5"
       END IF
       
       frmNext = FrmDone
