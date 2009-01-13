@@ -182,8 +182,4 @@ PUBLIC SUB Form_Show()
 
 END
 
-PUBLIC SUB tlHostNameLbl_MouseDown()
 
-  
-
-END
