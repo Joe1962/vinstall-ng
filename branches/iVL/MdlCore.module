@@ -159,7 +159,7 @@ SHELL sCmd TO sList
               IF InStr(sList, Trim(sDumparr[ii])) = FALSE THEN sList = sList & "\n" & Trim(sDumparr[ii] & "\n")
             NEXT 
               
-sList = sList & Space(1) & sResults
+sList = sList & "\n" & sResults
 sList = Trim(sList)
 'PRINT sList
 IF Len(sList) < 1 THEN RETURN 
