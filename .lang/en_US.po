@@ -24,12 +24,12 @@ msgstr ""
 
 #: FMain.class:354
 #, fuzzy
-msgid "Please wait while setup attampts to run the partitioning utility"
+msgid "Please wait while setup attempts to run the partitioning utility"
 msgstr "Please wait while setup attempts to run the partitioning utility"
 
 #: FMain.class:356
 #, fuzzy
-msgid "Please wait while setup analyses your current partition setup."
+msgid "Please wait while setup analyzes your current partition setup."
 msgstr "Please wait while setup analyzes your current partition setup."
 
 #: FMain.class:356
@@ -69,7 +69,7 @@ msgid "Skipping boot loader setup"
 msgstr ""
 
 #: FMain.class:494
-msgid "Skipping lilo setup"
+msgid "Skipping lilo setup per user request"
 msgstr "Skipping lilo setup per user request"
 
 #: FMain.class:510
@@ -144,7 +144,7 @@ msgstr "-"
 
 #: FrmAlsaConf.class:36
 msgid ""
-"This portion of the setup process allows you to sutup your soundcard for "
+"This portion of the setup process allows you to setup your soundcard for "
 "your new operating system."
 msgstr ""
 
@@ -200,7 +200,7 @@ msgstr ""
 
 #: FrmDone.class:62
 msgid ""
-"If you installed from  CD-ROM/R/RW media, please remove de disk before "
+"If you installed from CD-ROM/R/RW media, please remove de disk before "
 "restarting."
 msgstr ""
 
@@ -511,16 +511,16 @@ msgstr ""
 
 #: FrmPartScheme.class:60
 msgid ""
-"Use this option if you already prepared your partitions using the "
+"Use this option if you have already prepared your partitions using the "
 "VectorLinux installer"
 msgstr ""
-"Use this option if you already prepared your partitions using the "
+"Use this option if you have already prepared your partitions using the "
 "VectorLinux installer"
 
 #: FrmPartScheme.class:70
 #, fuzzy
 msgid ""
-"Select this option is you wish to create, more or resize partitions in order "
+"Select this option is you wish to create, move or resize partitions in order "
 "to make room for your new VectorLinux installation."
 msgstr ""
 "Select this option if you wish to create, move or resize partitions in order "
@@ -701,7 +701,7 @@ msgstr "System Administrator Password"
 
 #: FrmRootPass.class:19
 #, fuzzy
-msgid "Most other every-day taks do not require administrative priviledges."
+msgid "Most other every-day tasks do not require administrative priviledges."
 msgstr "Most other every-day tasks do not require administrative privileges."
 
 #: FrmRootPass.class:19
