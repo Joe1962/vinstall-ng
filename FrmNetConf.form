@@ -25,7 +25,7 @@
       Alignment = Align.Normal
     }
     { txtHostName TextBox
-      MoveScaled(16,0,22.8571,3)
+      MoveScaled(16,0,22.75,3)
       Text = ("")
       MaxLength = 24
     }
@@ -35,7 +35,7 @@
       Alignment = Align.Normal
     }
     { tbDomain TextBox
-      MoveScaled(52,0,22.8571,3)
+      MoveScaled(52,0,22.75,3)
       Text = ("")
       MaxLength = 24
     }
@@ -47,8 +47,13 @@
       Text = ("Manual DNS Server Specification")
     }
   }
+  { CheckBox1 CheckBox
+    MoveScaled(68,16,19,3)
+    Text = ("Start WICD at boot")
+    Value = CheckBox.True
+  }
   { Panel2 Panel
-    MoveScaled(1,16,80,6)
+    MoveScaled(1,16,65,6)
     { txtPrimaryDNS TextBox txtManDNSBoxes
       Name = "txtPrimaryDNS"
       MoveScaled(26,0,18,3)

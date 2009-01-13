@@ -156,7 +156,7 @@ SHELL sCmd TO sList
         sDump = Trim(sDump)
           sDumparr = Split(sdump, " ")
             FOR ii = 0 TO sDumparr.count - 1
-              IF InStr(sList, Trim(sDumparr[ii])) = FALSE THEN sList = sList & "\n" & Trim(sDumparr[ii])
+              IF InStr(sList, Trim(sDumparr[ii])) = FALSE THEN sList = sList & "\n" & Trim(sDumparr[ii] & "\n")
             NEXT 
               
 sList = sList & Space(1) & sResults
