@@ -47,13 +47,13 @@
       Text = ("Manual DNS Server Specification")
     }
   }
-  { CheckBox1 CheckBox
-    MoveScaled(68,16,19,3)
+  { cbStartWicd CheckBox
+    MoveScaled(66,16,19,3)
     Text = ("Start WICD at boot")
     Value = CheckBox.True
   }
   { Panel2 Panel
-    MoveScaled(1,16,65,6)
+    MoveScaled(1,16,86,6)
     { txtPrimaryDNS TextBox txtManDNSBoxes
       Name = "txtPrimaryDNS"
       MoveScaled(26,0,18,3)

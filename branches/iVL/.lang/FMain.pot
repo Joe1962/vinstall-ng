@@ -106,19 +106,19 @@ msgstr ""
 msgid "Please specify the domain this computer belongs to"
 msgstr ""
 
-#: FMain.class:835
+#: FMain.class:837
 msgid "Back"
 msgstr ""
 
-#: FMain.class:846
+#: FMain.class:848
 msgid "Exit Installation"
 msgstr ""
 
-#: FMain.class:857
+#: FMain.class:859
 msgid "Next"
 msgstr ""
 
-#: FMain.class:871
+#: FMain.class:873
 msgid "Button1"
 msgstr ""
 
