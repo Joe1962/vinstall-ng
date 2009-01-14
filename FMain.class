@@ -1,5 +1,20 @@
 ' Gambas class file
 
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
 PRIVATE $aPrev AS NEW Object[]
 PRIVATE $oCurrent AS Object
 
@@ -9,7 +24,12 @@ END
 
 PUBLIC SUB Form_Open()
 
-$oCurrent = NEW Step1(pnlStack)
+IF Application.Args[1] THEN 
+  'System.Language = Trim(Application.Args[1])
+  $oCurrent = NEW Step1(pnlStack)
+ELSE
+$oCurrent = NEW Step0(pnlStack)
+END IF
 btBack.Enabled = FALSE
 ME.auto_setup_for_resolution()
 END

@@ -14,19 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Step2.class:9
+#: Step2.class:22
 msgid "Verify Installation Files"
 msgstr ""
 
-#: Step2.class:24
+#: Step2.class:37
 msgid "Verifying installation files can prevent you from performing an unsuccessful install"
 msgstr ""
 
-#: Step2.class:24
+#: Step2.class:37
 msgid "Keep in mind however, that this process can take a while to complete."
 msgstr ""
 
-#: Step2.class:61
+#: Step2.class:74
 msgid "TextLabel2"
 msgstr ""
 

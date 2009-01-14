@@ -1,0 +1,80 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,101,55)
+  Text = ("")
+  Arrangement = Arrange.Vertical
+  { HPanel1 HPanel
+    MoveScaled(2,1,43,6)
+    { tlbanner TextLabel
+      MoveScaled(1,0,32,3)
+      Expand = True
+      Text = ("TextLabel1")
+      Alignment = Align.Normal
+    }
+    { Separator1 Separator
+      MoveScaled(1,5,20,1)
+      Expand = True
+    }
+  }
+  { Panel1 Panel
+    MoveScaled(2,10,97,43)
+    Expand = True
+    Arrangement = Arrange.Horizontal
+    { Panel3 Panel
+      MoveScaled(0,0,38,37)
+      Expand = True
+      Arrangement = Arrange.Vertical
+      { HBox1 HBox
+        MoveScaled(0,0,33,4)
+        { tlLangSel TextLabel
+          MoveScaled(1,0,28,3)
+          Expand = True
+          Text = ("Select your language")
+          Alignment = Align.Normal
+        }
+      }
+      { cvLangList ColumnView
+        MoveScaled(0,6,36,30)
+        Expand = True
+      }
+    }
+    { VPanel1 VPanel
+      MoveScaled(41,2,1,38)
+      { Separator2 Separator
+        MoveScaled(2,11,1,7)
+        Expand = True
+      }
+    }
+    { Panel2 Panel
+      MoveScaled(46,1,47,43)
+      Expand = True
+      Arrangement = Arrange.Vertical
+      { HBox2 HBox
+        MoveScaled(1,1,45,4)
+        { tlKbdSel TextLabel
+          MoveScaled(1,0,33,3)
+          Expand = True
+          Text = ("Select your keyboard layout")
+          Alignment = Align.Normal
+        }
+      }
+      { cvkbdlayout ColumnView
+        MoveScaled(1,5,42,12)
+        Expand = True
+      }
+      { HBox3 HBox
+        MoveScaled(2,18,28,4)
+        { tlkbdmod TextLabel
+          MoveScaled(0,0,24,3)
+          Expand = True
+          Text = ("Select your keyboard model")
+        }
+      }
+      { cvKbdMod ColumnView
+        MoveScaled(1,22,41,12)
+        Expand = True
+      }
+    }
+  }
+}

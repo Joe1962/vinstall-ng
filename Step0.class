@@ -1,5 +1,4 @@
 ' Gambas class file
-
 '    This file is part of vinstall-ng
 
 '    vinstall-ng is free software: you can redistribute it and/or modify
@@ -15,5 +14,17 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
-STATIC PUBLIC sDistroName AS String
-STATIC PUBLIC sDistroVer AS String
+PUBLIC SUB Form_Open()
+
+  WITH ME
+    .tlbanner.Text = "<h2>" & ("Localization Settings") & "</h2>"
+  END WITH 
+
+END
+
+PUBLIC FUNCTION GetNext() AS String
+  
+  
+  RETURN "Step1"
+  
+END
