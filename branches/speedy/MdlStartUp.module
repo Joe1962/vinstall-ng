@@ -1,4 +1,4 @@
-' Gambas class file
+' Gambas module file
 
 '    This file is part of vinstall-ng
 
@@ -15,5 +15,13 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
-STATIC PUBLIC sDistroName AS String
-STATIC PUBLIC sDistroVer AS String
+PUBLIC SUB MAIN()
+  
+  IF Application.Args[1] THEN 
+    System.Language = Trim(Application.Args[1])
+  END IF
+  
+  fmain.Show
+  
+  
+END
