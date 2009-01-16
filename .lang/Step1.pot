@@ -14,55 +14,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Step1.class:59
-msgid "Scanning for CD Media ... Please wait"
+#: Step1.class:62
+msgid "Scanning system partitions for installation files"
 msgstr ""
 
-#: Step1.class:71
-msgid "Scanning"
-msgstr ""
-
-#: Step1.class:78
+#: Step1.class:80
 msgid "on"
 msgstr ""
 
 #: Step1.class:81
-msgid "... Found"
+msgid "Found"
 msgstr ""
 
 #: Step1.class:81
+msgid "in partition"
+msgstr ""
+
+#: Step1.class:109
+msgid "Scanning for CD Media ... Please wait"
+msgstr ""
+
+#: Step1.class:122
+msgid "Scanning"
+msgstr ""
+
+#: Step1.class:132
 msgid "in"
 msgstr ""
 
-#: Step1.class:103
+#: Step1.class:156
 msgid "Scanning system for installable ISO images"
 msgstr ""
 
-#: Step1.class:160
+#: Step1.class:234
 msgid "DISTRIBUTION"
 msgstr ""
 
-#: Step1.class:163
+#: Step1.class:237
 msgid "VERSION"
 msgstr ""
 
-#: Step1.class:211
+#: Step1.class:349
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:229
+#: Step1.class:367
 msgid "Select Installation source from the list below"
 msgstr ""
 
-#: Step1.class:239
-msgid "ComboBox1"
-msgstr ""
-
-#: Step1.class:250
+#: Step1.class:388
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:273
+#: Step1.class:411
 msgid "Check Installation media before installing"
 msgstr ""
 

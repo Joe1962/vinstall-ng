@@ -32,6 +32,7 @@ $oCurrent = NEW Step0(pnlStack)
 END IF
 btBack.Enabled = FALSE
 ME.auto_setup_for_resolution()
+ME.Resize(1024, 600)
 END
 
 PUBLIC SUB auto_setup_for_resolution()
@@ -108,7 +109,7 @@ PUBLIC SUB Form_Resize()
   $oCurrent.height = pnlStack.Height
   ME.SidePanel1.Height = pnlStack.Height
   'hpanel1.Width = SidePanel1.Width
-
+  PRINT ME.ClientWidth & "X" & ME.ClientHeight
 END
 
 

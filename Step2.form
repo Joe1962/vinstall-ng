@@ -9,7 +9,7 @@
     { tlbanner TextLabel
       MoveScaled(12,1,19,3)
       Expand = True
-      Text = ("TextLabel2")
+      Text = ("")
     }
     { Separator1 Separator
       MoveScaled(13,4,25,1)

@@ -14,15 +14,15 @@ msgstr ""
 msgid "VectorLinux Installer"
 msgstr ""
 
-#: FMain.class:219
+#: FMain.class:220
 msgid "Back"
 msgstr ""
 
-#: FMain.class:224
+#: FMain.class:225
 msgid "Next"
 msgstr ""
 
-#: FMain.class:229
+#: FMain.class:230
 msgid "Quit"
 msgstr ""
 
@@ -30,71 +30,75 @@ msgstr ""
 msgid "Localization Settings"
 msgstr ""
 
-#: Step0.class:67
-msgid "TextLabel1"
-msgstr ""
-
-#: Step0.class:93
+#: Step0.class:104
 msgid "Select your language"
 msgstr ""
 
-#: Step0.class:124
+#: Step0.class:135
 msgid "Select your keyboard layout"
 msgstr ""
 
-#: Step0.class:140
+#: Step0.class:151
 msgid "Select your keyboard model"
 msgstr ""
 
-#: Step1.class:59
-msgid "Scanning for CD Media ... Please wait"
+#: Step0.class:172
+msgid "Use this box to test your keyboard settings"
 msgstr ""
 
-#: Step1.class:71
-msgid "Scanning"
+#: Step1.class:62
+msgid "Scanning system partitions for installation files"
 msgstr ""
 
-#: Step1.class:78
+#: Step1.class:80
 msgid "on"
 msgstr ""
 
 #: Step1.class:81
-msgid "... Found"
+msgid "Found"
 msgstr ""
 
 #: Step1.class:81
+msgid "in partition"
+msgstr ""
+
+#: Step1.class:109
+msgid "Scanning for CD Media ... Please wait"
+msgstr ""
+
+#: Step1.class:122
+msgid "Scanning"
+msgstr ""
+
+#: Step1.class:132
 msgid "in"
 msgstr ""
 
-#: Step1.class:103
+#: Step1.class:156
 msgid "Scanning system for installable ISO images"
 msgstr ""
 
-#: Step1.class:160
+#: Step1.class:234
 msgid "DISTRIBUTION"
 msgstr ""
 
-#: Step1.class:163
+#: Step1.class:237
 msgid "VERSION"
 msgstr ""
 
-#: Step1.class:211
+#: Step1.class:349
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:229
+#: Step1.class:367
 msgid "Select Installation source from the list below"
 msgstr ""
 
-#: Step1.class:239
-msgid "ComboBox1"
-msgstr ""
-
-#: Step1.class:250
+#: Step1.class:388
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:273
+#: Step1.class:411
 msgid "Check Installation media before installing"
 msgstr ""
 
@@ -110,8 +114,4 @@ msgstr ""
 
 #: Step2.class:37
 msgid "Keep in mind however, that this process can take a while to complete."
-msgstr ""
-
-#: Step2.class:74
-msgid "TextLabel2"
 msgstr ""

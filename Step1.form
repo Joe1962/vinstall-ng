@@ -32,7 +32,7 @@
       { ComboBox1 ComboBox
         MoveScaled(0,0,22,1)
         Expand = True
-        Text = ("ComboBox1")
+        Text = ("")
         ReadOnly = True
       }
       { TextLabel3 TextLabel

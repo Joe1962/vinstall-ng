@@ -28,3 +28,10 @@ PUBLIC FUNCTION GetNext() AS String
   RETURN "Step1"
   
 END
+
+PUBLIC SUB TextBox1_MouseDown()
+
+  TextBox1.Clear
+  
+
+END
