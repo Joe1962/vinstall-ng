@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Step1.class:81
+#: Step1.class:82
 msgid "... Found"
 msgstr "... Encontre"
 
@@ -18,21 +18,21 @@ msgstr "... Encontre"
 msgid "Back"
 msgstr "Regreso"
 
-#: Step1.class:273
+#: Step1.class:274
 msgid "Check Installation media before installing"
 msgstr "Verificar archivos de instalacion"
 
-#: Step1.class:239
+#: Step1.class:240
 msgid "ComboBox1"
 msgstr "-"
 
-#: Step1.class:160
+#: Step1.class:161
 msgid "DISTRIBUTION"
 msgstr "DISTRIBUCION"
 
 #: Step2.class:37
 msgid "Keep in mind however, that this process can take a while to complete."
-msgstr ""
+msgstr "Tenga presente que este proceso podria tomar varios minutos para terminar"
 
 #: Step0.class:20
 msgid "Localization Settings"
@@ -40,77 +40,73 @@ msgstr "Valores locales"
 
 #: FMain.class:224
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
 #: FMain.class:229
 msgid "Quit"
-msgstr ""
+msgstr "Cancelar"
 
-#: Step1.class:71
+#: Step1.class:72
 msgid "Scanning"
-msgstr ""
+msgstr "Buscando en"
 
-#: Step1.class:59
+#: Step1.class:60
 msgid "Scanning for CD Media ... Please wait"
-msgstr ""
+msgstr "Buscando medios de instalacion en CDROM. Por favor espere"
 
-#: Step1.class:103
+#: Step1.class:104
 msgid "Scanning system for installable ISO images"
-msgstr ""
+msgstr "Buscando medios de instalacion en imagenes ISO."
 
-#: Step1.class:250
+#: Step1.class:251
 msgid "Search Again"
-msgstr ""
+msgstr "Buscar Nuevamente"
 
-#: Step1.class:211
+#: Step1.class:212
 msgid "Select Installation Source"
 msgstr "Seleccione el medio de instalacion"
 
-#: Step1.class:229
+#: Step1.class:230
 msgid "Select Installation source from the list below"
-msgstr ""
+msgstr "Seleccione la fuente instalacion de esta lista"
 
 #: Step0.class:124
 msgid "Select your keyboard layout"
-msgstr ""
+msgstr "Seleccione el diseño de su teclado"
 
 #: Step0.class:140
 msgid "Select your keyboard model"
-msgstr ""
+msgstr "Seleccione el model de su teclado"
 
 #: Step0.class:93
 msgid "Select your language"
-msgstr ""
+msgstr "Seleccione su idioma"
 
 #: Step0.class:67
 msgid "TextLabel1"
-msgstr ""
+msgstr "-"
 
 #: Step2.class:74
 msgid "TextLabel2"
-msgstr ""
+msgstr "-"
 
-#: Step1.class:163
+#: Step1.class:164
 msgid "VERSION"
-msgstr ""
-
-#: .project:1
-msgid "VectorLinux Installer"
-msgstr ""
+msgstr "VERSION"
 
 #: Step2.class:22
 msgid "Verify Installation Files"
-msgstr ""
+msgstr "Verificar archivos de instalacion antes de instalar"
 
 #: Step2.class:37
 msgid "Verifying installation files can prevent you from performing an unsuccessful install"
-msgstr ""
+msgstr "Este proceso puede ayudar a asegurar que la instalacion sea exitosa."
 
-#: Step1.class:81
+#: Step1.class:82
 msgid "in"
-msgstr ""
+msgstr "en"
 
-#: Step1.class:78
+#: Step1.class:79
 msgid "on"
-msgstr ""
+msgstr "en"
 

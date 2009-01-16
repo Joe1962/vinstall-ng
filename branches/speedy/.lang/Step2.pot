@@ -26,7 +26,3 @@ msgstr ""
 msgid "Keep in mind however, that this process can take a while to complete."
 msgstr ""
 
-#: Step2.class:74
-msgid "TextLabel2"
-msgstr ""
-

@@ -9,7 +9,7 @@
     { tlbanner TextLabel
       MoveScaled(1,0,32,3)
       Expand = True
-      Text = ("TextLabel1")
+      Text = ("")
       Alignment = Align.Normal
     }
     { Separator1 Separator
@@ -74,6 +74,24 @@
       { cvKbdMod ColumnView
         MoveScaled(1,22,41,12)
         Expand = True
+      }
+      { HPanel2 HPanel
+        MoveScaled(1,33,45,8)
+        { TextLabel1 TextLabel
+          MoveScaled(25,0,9,2)
+          Expand = True
+          Text = ("")
+        }
+        { tlTestKbd TextLabel
+          MoveScaled(1,1,38,3)
+          Expand = True
+          Text = ("Use this box to test your keyboard settings")
+        }
+        { TextBox1 TextBox
+          MoveScaled(2,4,23,3)
+          Expand = True
+          Text = ("")
+        }
       }
     }
   }

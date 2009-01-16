@@ -14,15 +14,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FMain.class:219
+#: FMain.class:220
 msgid "Back"
 msgstr ""
 
-#: FMain.class:224
+#: FMain.class:225
 msgid "Next"
 msgstr ""
 
-#: FMain.class:229
+#: FMain.class:230
 msgid "Quit"
 msgstr ""
 

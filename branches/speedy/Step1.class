@@ -16,6 +16,8 @@
 PUBLIC SUB _new() ' executed every time the form is instanciated.
   
   ME.StartUp()
+      gvdistdetails.Rows.Count = 2
+    gvdistdetails.Columns.count = 2
   
 END
 
@@ -25,7 +27,9 @@ PUBLIC SUB Form_Open()
   ME.TextLabel1.Text = "<h2>" & TextLabel1.text & "</h2>"
   ME.FIND_CD_INSTALL_MEDIA()
   ME.FIND_ISO_INSTALL_MEDIA()
-  'ComboBox1.ReadOnly = TRUE
+  ME.FIND_PARTITION_INSTALL_MEDIA()
+  FMain.btNext.Enabled = ComboBox1.Count > 0
+
 
 END
 
@@ -42,12 +46,58 @@ END
 
 PUBLIC SUB StartUp() ' Executed every time the Next button is pressed
 
-
-'Message("Starup sub here")
-'ME.FIND_CD_INSTALL_MEDIA
+'FMain.btNext.Enabled = ME.ComboBox1.Count > 0
     
   
 END
+
+PUBLIC SUB FIND_PARTITION_INSTALL_MEDIA() ' This SUB will be useful when installing from USB and a pre-loaded partition
+  
+  DIM sOutput, sPart, sISoName, sFile AS String
+  DIM sName, sVersion, sKeyPath AS String
+  DIM i AS Integer
+  DIM sPartList AS String[]
+  
+  ME.ComboBox1.Enabled = FALSE
+  tlStatus.Text = ("Scanning system partitions for installation files")
+  PRINT tlStatus.Text
+  SHELL "/sbin/probepart | grep \"^/dev\" | grep -v -i \"linux swap\" | tr -s \' \'\"\" | cut -f 1 -d \' \'" TO sOutput
+    sOutput = Trim(sOutput)
+      IF Len(sOutput) < 1 THEN RETURN 
+  sPartList = Split(sOutput, "\n")
+    FOR i = 0 TO sPartList.Count - 1
+      sPart = Trim(Right(Trim(sPartList[i]), Len(Trim(sPartList[i])) - RInStr(Trim(sPartList[i]), "/")))
+      sKeyPath = "/mnt" &/ Trim(sPart)
+          TRY MKDIR sKeyPath
+          SHELL "mount /dev" &/ Trim(sPart) & " /mnt" &/ Trim(sPart) & " 2>/dev/null" WAIT 
+            IF Exist(sKeyPath &/ "veclinux" &/ "SETUP.CONF") THEN 
+              ' Must read file first before we have anything to list
+                SHELL "grep \"^DISTRO=\" " & sKeyPath &/ "veclinux" &/ "SETUP.CONF | cut -f 2 -d \"\'\"" TO sName
+                SHELL "grep \"^VERSION=\" " & sKeyPath &/ "veclinux" &/ "SETUP.CONF | cut -f 2 -d \"\'\"" TO sVersion
+                sName = Trim(sName)
+                sVersion = Trim(sVersion)
+                  File.Save(Temp(Trim(sName) & "-" & Trim(sVersion) & "-" & Trim(sPart)), File.Load(sKeyPath &/ "veclinux" &/ "SETUP.CONF"))
+                  ComboBox1.Add(Trim(sname) & "-" & Trim(sVersion) & Space(1) & ("on") & Space(1) & Trim(sPart))
+                    PRINT " \\__" & Space(1) & ("Found") & Space(1) & Trim(sname) & Space(1) & Trim(sVersion) & Space(1) & ("in partition") & Space(1) & Trim(sPart)
+                    
+
+            END IF
+          'EXEC ["umount", "/mnt" &/ Trim(sPart)] WAIT 
+          SHELL "umount /mnt" &/ Trim(sPart) & " 2>/dev/null" WAIT 
+          EXEC ["sync"] WAIT 
+          TRY RMDIR "/mnt" &/ Trim(sPart)
+
+    NEXT 
+          
+    tlStatus.Text = ""
+  ME.ComboBox1.Enabled = TRUE
+  
+  
+  
+  
+END
+
+
 
 PUBLIC SUB FIND_CD_INSTALL_MEDIA()
   
@@ -67,7 +117,8 @@ PUBLIC SUB FIND_CD_INSTALL_MEDIA()
     FOR i = 0 TO sDriveList.Count - 1
       sShortDrive = Right(Trim(sDriveList[i]), Len(Trim(sDriveList[i])) - RInStr(Trim(sDriveList[i]), "/"))
         EXEC ["mkdir", "-p", "/mnt" &/ sShortDrive] WAIT 
-        EXEC ["mount", "-o", "ro", Trim(sDriveList[i]), "/mnt" &/ sShortDrive] WAIT 
+        'EXEC ["mount", "-o", "ro", Trim(sDriveList[i]), "/mnt" &/ sShortDrive] WAIT 
+        SHELL "mount -o ro " & Trim(sDriveList[i]) & "/mnt" &/ sShortDrive & " 2>/dev/null" WAIT 
         PRINT ("Scanning") & Space(1) & sDriveList[i]
           IF Exist("/mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF") THEN 
               SHELL "grep \"^DISTRO=\" /mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF | cut -f 2 -d \'=\'" TO sName
@@ -78,9 +129,10 @@ PUBLIC SUB FIND_CD_INSTALL_MEDIA()
                   IF ME.ComboBox1.Find(sName & Space(1) & sVersion & Space(1) & ("on") & Space(1) & Trim(sDriveList[i])) = -1 THEN 
                     ME.ComboBox1.Add(sName & Space(1) & sVersion & Space(1) & ("on") & Space(1) & Trim(sDriveList[i]))
                   END IF   
-                  PRINT ("... Found") & Space(1) & sName & "-" & sVersion & Space(1) & ("in") & Space(1) & sDriveList[i]         
+                  PRINT " \\__" & Space(1) & ("Found") & Space(1) & sName & "-" & sVersion & Space(1) & ("in") & Space(1) & sDriveList[i]         
           END IF
-        EXEC ["umount", "/mnt" &/ sShortDrive] WAIT 
+        'EXEC ["umount", "/mnt" &/ sShortDrive, " 2>/dev/null"] WAIT 
+        SHELL "umount /mnt" &/ Trim(sShortDrive) & " 2>/dev/null" WAIT 
         EXEC ["rm", "-rf", "/mnt" &/ sShortDrive] WAIT 
         
         'Message(sShortDrive)
@@ -95,23 +147,48 @@ END
 
 PUBLIC SUB FIND_ISO_INSTALL_MEDIA()
   
-  DIM sOutput, sPart AS String
+  DIM sOutput, sPart, sISoName, sFile AS String
   DIM sName, sVersion AS String
   DIM i AS Integer
   DIM sPartList AS String[]
   
+  ME.ComboBox1.Enabled = FALSE
   tlStatus.Text = ("Scanning system for installable ISO images")
+  PRINT tlStatus.Text
   SHELL "/sbin/probepart | grep \"^/dev\" | grep -v -i \"linux swap\" | tr -s \' \'\"\" | cut -f 1 -d \' \'" TO sOutput
     sOutput = Trim(sOutput)
       IF Len(sOutput) < 1 THEN RETURN 
   sPartList = Split(sOutput, "\n")
     FOR i = 0 TO sPartList.Count - 1
       sPart = Trim(Right(Trim(sPartList[i]), Len(Trim(sPartList[i])) - RInStr(Trim(sPartList[i]), "/")))
+          EXEC ["mkdir", "/mnt" &/ Trim(sPart)] WAIT 
+          EXEC ["mount", "/dev" &/ Trim(sPart), "/mnt" &/ Trim(sPart)] WAIT 
+            FOR EACH sFile IN Dir("/mnt" &/ Trim(sPart), "*.iso")
+                TRY MKDIR "/mnt/loop"
+                  EXEC ["mount", "-o", "loop", "/mnt" &/ Trim(sPart) &/ Trim(sFile), "/mnt/loop"] WAIT 
+                    IF Exist("/mnt/loop/veclinux/SETUP.CONF") THEN 
+                    'PRINT "Adding temp file" & Space(1) & Temp(Trim(sFile) & "-" & Trim(sPart))
+                      File.Save(Temp(Trim(sFile) & "-" & Trim(sPart)), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
+                      ComboBox1.Add(sFile & Space(1) & ("on") & Space(1) & "/dev" &/ Trim(sPart))
+                      'Message(sFile & "-" & Trim(sPart))
+                      PRINT " \\__" & Space(1) & ("Found") & Space(1) & Trim(sFile) & Space(1) & ("on") & Space(1) & Trim(sPart)
+                      
+                    END IF
+                  EXEC ["umount", "/mnt/loop"] WAIT 
+                      
+              
+            NEXT 
+          EXEC ["umount", "/mnt" &/ Trim(sPart)] WAIT 
+          EXEC ["sync"] WAIT 
+          TRY RMDIR "/mnt" &/ Trim(sPart)
+          
+          'EXEC ["rm,", "-rf", "/mnt" &/ Trim(sPart)] WAIT 
+              
         'Message(sPart)
     NEXT 
           
     tlStatus.Text = ""
-  
+  ME.ComboBox1.Enabled = TRUE
 END
 
 
@@ -119,17 +196,79 @@ END
 PUBLIC SUB ComboBox1_Click()
 
   DIM sAddr AS String = Right(Trim(ComboBox1.Text), Len(Trim(ComboBox1.Text)) - RInStr(Trim(ComboBox1.Text), "/"))
+  DIM sDigits AS String = sAddr LIKE "*[0-9]*"
   
-    IF sAddr LIKE "[0-9]" THEN 
-      'PRINT ("Installing from") & Space(1) & Left(Trim(ComboBox1.Text), InStr(Trim(ComboBox1.Text), " "))
-    ELSE 
-      'PRINT ("Installing from") & Space(1) & sAddr
+   'IF sDigits THEN 
+   IF InStr(Trim(ComboBox1.Text), ".iso") OR InStr(Trim(ME.ComboBox1.Text), ".ISO") THEN 
+       ME.DESCRIBE_ISO_INSTALL_MEDIA(Replace(Trim(ME.ComboBox1.Text), Space(1) & ("on") & Space(1), "-"))
+   ELSE IF sDigits THEN 
+      ' Partition found with Vector Installation media
+      ME.DESCRIBE_PARTITION_INSTALL_MEDIA(Trim(ME.ComboBox1.Text))
+   ELSE 
       ME.DESCRIBE_CD_INSTALL_MEDIA(sAddr)
-      'PRINT File.Load(Temp(sAddr))
     END IF
   
 
 END
+
+PUBLIC SUB DESCRIBE_PARTITION_INSTALL_MEDIA(sTempFileName AS String)
+  
+  DIM sDump AS String[]
+  DIM sDistro, sVer, sLine AS String
+  DIM i AS Integer
+  
+    sTempFileName = Replace(sTempFileName, "/dev/", "")
+    sTempFileName = Replace(sTempFileName, Space(1) & ("on") & Space(1), "-")
+  
+  sDump = Split(File.Load(Temp(sTempFileName)), "\n")
+    FOR i = 0 TO sDump.Count - 1
+      sLine = Trim(sDump[i])
+        IF Left(sLine, Len("DISTRO=")) = "DISTRO=" THEN 
+          sDistro = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
+        ELSE IF Left(sLine, Len("VERSION=")) = "VERSION=" THEN 
+          sVer = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
+        END IF
+    NEXT 
+      sDistro = Trim(Replace(sDistro, "\'", ""))
+      sver = Trim(Replace(sver, "\'", ""))
+    gvdistdetails[0, 0].Text = ("DISTRIBUTION")
+    gvdistdetails.Columns[0].Width = 150
+    gvdistdetails[0, 1].Text = sDistro
+    gvdistdetails[1, 0].Text = ("VERSION")
+    gvdistdetails[1, 1].Text = sVer
+  
+END
+
+
+PUBLIC SUB DESCRIBE_ISO_INSTALL_MEDIA(sTempFileName AS String)
+DIM sDump AS String[]
+DIM sDistro, sVer, sLine AS String
+DIM i AS Integer
+
+sTempFileName = Replace(sTempFileName, "/dev/", "")
+  sDump = Split(File.Load(Trim(Temp(sTempFileName))), "\n")
+    FOR i = 0 TO sDump.Count - 1
+      sLine = Trim(sDump[i])
+        IF Left(sLine, Len("DISTRO=")) = "DISTRO=" THEN 
+          sDistro = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
+        ELSE IF Left(sLine, Len("VERSION=")) = "VERSION=" THEN 
+          sVer = Right(sLine, Len(sLine) - InStr(sLine, "\'"))
+        END IF
+    NEXT 
+    sDistro = Trim(Replace(sDistro, "\'", ""))
+    sVer = Trim(Replace(sver, "\'", ""))
+    'Message(sDistro & "\n" & sVer)
+    
+    gvdistdetails[0, 0].Text = ("DISTRIBUTION")
+    gvdistdetails.Columns[0].Width = 150
+    gvdistdetails[0, 1].Text = sDistro
+    gvdistdetails[1, 0].Text = ("VERSION")
+    gvdistdetails[1, 1].Text = sVer
+  
+  
+END
+
+
 
 PUBLIC SUB DESCRIBE_CD_INSTALL_MEDIA(sAddress AS String)
   
@@ -155,8 +294,7 @@ PUBLIC SUB DESCRIBE_CD_INSTALL_MEDIA(sAddress AS String)
   
     NEXT 
 
-    gvdistdetails.Rows.Count = 2
-    gvdistdetails.Columns.count = 2
+
     gvdistdetails[0, 0].Text = ("DISTRIBUTION")
     gvdistdetails.Columns[0].Width = 150
     gvdistdetails[0, 1].Text = sDistro
