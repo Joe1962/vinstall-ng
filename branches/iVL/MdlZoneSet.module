@@ -49,7 +49,7 @@ END
 PUBLIC SUB SET_ZONE(sZone AS String)
   SHELL "cd " & ClsGlobal.sTargetMnt & "/etc;rm " & sTimeLink & ";ln -s /usr/share/zoneinfo/" & Trim(sZone) & Space(1) & sTimeLink 
   PRINT "linking /usr/share/zoneinfo/" & sZone & " to /etc/" & sTimeLink
-  SHELL "cd " & ClsGlobal.sTargetMnt & "/etc;rm " & sTimeZone & ";cp /usr/share/zoneinfo/" & Trim(sZone) & Space(1) & sTimeZone
+  SHELL "cd " & ClsGlobal.sTargetMnt & "/etc;rm " & sTimeZone & ";cp " & ClsGlobal.sTargetMnt & "/usr/share/zoneinfo/" & Trim(sZone) & Space(1) & sTimeZone
   PRINT "copying /usr/share/zoneinfo/" & sZone & " to /etc/" & sTimeZone  
 END  
 
