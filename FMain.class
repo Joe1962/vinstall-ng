@@ -67,8 +67,7 @@ PUBLIC SUB btNext_Click()
 'Get the next One
 
 sTmp = $oCurrent.GetNext()
-$oCurrent.width = pnlStack.Width
-$oCurrent.Height = pnlStack.Height
+
 '$oCurrent.Form_Open()
 '$oCurrent.Startup()
 'Is this form already opened ?
@@ -91,6 +90,7 @@ NEXT
 IF NOT bExist THEN
    $oCurrent = Object.New(sTmp, [pnlStack])
    $oCurrent.Visible = TRUE
+
 ELSE
   $OCurrent = o
 ENDIF
@@ -99,7 +99,10 @@ ENDIF
  IF IsNull($oCurrent.GetNext()) THEN btNext.Enabled = FALSE
 'Push to the foreground
  $oCurrent.Raise()
- $oCurrent.Startup()
+    $oCurrent.width = pnlStack.Width
+    $oCurrent.Height = pnlStack.Height
+ $oCurrent.Startup() ' Call each form's startup sub
+ 
 
 END
 

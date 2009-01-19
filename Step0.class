@@ -19,13 +19,114 @@ PUBLIC SUB Form_Open()
   WITH ME
     .tlbanner.Text = "<h2>" & ("Localization Settings") & "</h2>"
   END WITH 
-
+ME.LIST_LANG_CHOICES()
+ME.LIST_KEYBOARD_LAYOUTS()
+ME.LIST_KEYBOARD_MODELS()
 END
+
+PUBLIC SUB LIST_KEYBOARD_LAYOUTS()
+  
+  DIM sListFile AS String[]
+  DIM sListFilePath AS String = "/etc/X11/xkb/rules/xorg.lst"
+  DIM sSymbolsList AS String = "/usr/share/X11/xkb/symbols"
+  DIM sSymbol, sdump, sFileIn, sLine, sDesc AS String
+  DIM sXorgConf AS String[]
+  DIM sXorgConfPath AS String = "/etc/X11/xorg.conf"
+  DIM sXorgVesaPath AS String = "/etc/X11/xorg.conf-vesa"
+  DIM sKeyMapPath AS String = "/etc/rc.d/rc.keymap"
+  DIM i, iAdd AS Integer
+  
+   iAdd = 1 ' we will add 1 by default
+   
+  'these are the variables we will be setting
+  ' KEY_MODEL = ""
+  ' KEY_LAYOUT = ""
+  
+  ' PREPARE A TEMP FILE WITH A LIST OF THE LAYOUT DESCRIPTIONS ONLY
+  SHELL "cat " & sListFilePath & " | tr -s \' \'\"\" > /tmp/keylist" WAIT 
+    sFileIn = File.Load("/tmp/keylist")   
+    sListFile = Split(sFileIn, "\n")
+      FOR i = 0 TO sListFile.count - 1
+        sLine = Trim(sListFile[i])
+          IF sLine LIKE "! layout" THEN 
+            REPEAT 
+            sSymbol = Left(Trim(sListFile[i + iadd]), InStr(Trim(sListFile[i + iadd]), " "))
+            'Message(sSymbol)
+            sDesc = Right(Trim(sListFile[i + iadd]), Len(Trim(sListFile[i + iadd])) - Len(sSymbol) + 1)
+            TRY cvkbdlayout.Add(sSymbol, sDesc)
+              'TRY FMain.ListView1.Add(sSymbol, sDesc)
+            '  FMain.ListView1.Add(Left(sListFile[i + iAdd], InStr(sListFile[i + iadd], " ")), sListFile[i + iadd])
+              INC iadd
+            UNTIL sListFile[i + iadd] LIKE "! variant"
+          END IF
+
+        
+      NEXT 
+
+  
+END
+
+
+PUBLIC SUB LIST_KEYBOARD_MODELS()
+  
+ DIM sFilePath AS String = "/tmp/keylist"
+  DIM sdump, sFile, sLine, skey, sdesc AS String
+  DIM i, iadd AS Integer
+  DIM sFileIn AS String[]
+  
+  iadd = 1
+  sdump = File.Load("/tmp/keylist")
+    sFileIn = Split(sdump, "\n")
+      FOR i = 0 TO sFileIn.Count - 1
+        IF Trim(sFileIn[i]) LIKE "! model" THEN 
+          REPEAT 
+            sLine = Trim(sFileIn[i + iadd])
+              skey = Left(sLine, InStr(sLine, " "))
+              sdesc = Right(sLine, Len(sLine) - Len(skey) + 1)
+                'TRY FMain.lvkbdmod.Add(skey, sdesc)
+                TRY cvkbdmod.Add(skey, sDesc)
+          INC iadd
+          UNTIL sFileIn[i + iadd] LIKE "" OR sFileIn[i + iadd] LIKE "! layout"
+        END IF
+      NEXT 
+  
+END
+
+
+PUBLIC SUB LIST_LANG_CHOICES()
+  
+  DIM sLang, sKey, sFile AS String
+    FOR EACH sFile IN Dir(Application.Dir &/ ".lang", "*.mo")
+      SELECT CASE File.BaseName(Application.dir &/ ".lang" &/ sfile)
+        CASE "es"
+          sKey = "es_ES.utf8"
+          sLang = ("Spanish")
+        CASE "en", "en_US"
+          sKey = "en_US"
+          sLang = ("English (US)")
+        CASE ELSE 
+          sKey = File.BaseName(Application.Dir &/ ".lang" &/ sfile)
+          sLang = sKey
+          
+        END SELECT 
+        cvlanglist.Add(skey, slang)
+      'ME.cvLangList.Add(File.BaseName(Application.Dir &/ ".lang" &/ sFile), sLang)
+      'Message(sFile)
+    NEXT 
+  
+  
+END
+
+
 
 PUBLIC FUNCTION GetNext() AS String
   
+  'Step1.Resize(FMain.pnlStack.Width, FMain.pnlStack.Height)
   
   RETURN "Step1"
+  'Application.Theme
+  'QUIT
+  
   
 END
 
@@ -33,5 +134,12 @@ PUBLIC SUB TextBox1_MouseDown()
 
   TextBox1.Clear
   
+
+END
+
+PUBLIC SUB cvLangList_Click()
+
+  'Message(LAST.current.key)
+  IF System.Language <> LAST.current.key THEN System.language = LAST.current.Key
 
 END

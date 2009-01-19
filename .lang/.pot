@@ -14,15 +14,15 @@ msgstr ""
 msgid "VectorLinux Installer"
 msgstr ""
 
-#: FMain.class:220
+#: FMain.class:221
 msgid "Back"
 msgstr ""
 
-#: FMain.class:225
+#: FMain.class:226
 msgid "Next"
 msgstr ""
 
-#: FMain.class:230
+#: FMain.class:231
 msgid "Quit"
 msgstr ""
 
@@ -30,19 +30,27 @@ msgstr ""
 msgid "Localization Settings"
 msgstr ""
 
-#: Step0.class:104
+#: Step0.class:103
+msgid "Spanish"
+msgstr ""
+
+#: Step0.class:106
+msgid "English (US)"
+msgstr ""
+
+#: Step0.class:212
 msgid "Select your language"
 msgstr ""
 
-#: Step0.class:135
+#: Step0.class:243
 msgid "Select your keyboard layout"
 msgstr ""
 
-#: Step0.class:151
+#: Step0.class:259
 msgid "Select your keyboard model"
 msgstr ""
 
-#: Step0.class:172
+#: Step0.class:280
 msgid "Use this box to test your keyboard settings"
 msgstr ""
 
