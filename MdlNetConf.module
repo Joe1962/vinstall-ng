@@ -66,6 +66,8 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
     seths = Trim(seths)
     
            IF seths = "" THEN  ' WARN IF NO NETWORK HARDWARE CAN BE DETECTED AND EXIT WITHOUT ERROR
+           FrmNetConf.TSNetDevices.Count = 1
+           FrmNetConf.TSNetDevices.Index = 0
           WITH FrmNetConf
             .cbUseManDNS.Enabled = FALSE
             .tlPrimaryDNS.Enabled = FALSE
@@ -82,6 +84,7 @@ PUBLIC SUB LIST_NETWORK_INTERFACES()
             FrmNetConf.TSNetDevices.Text = "Ethernet"
                 ME.ifaceCnt = 0
             RETURN 
+            STOP EVENT 
       END IF      
 '       
           sDevList = Split(seths, gb.NewLine)
