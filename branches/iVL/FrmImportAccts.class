@@ -100,7 +100,7 @@ END IF
       ME.cbAccntList.Sorted = TRUE
       'RETURN 
       IF ME.CREATE_IMPORTED_ACCOUNT(SaCC) > 0 THEN 
-        Message.Error(("User Unable to restore user account."))
+        Message.Error(("Unable to restore user account for") & Space(1) & SaCC)
         RETURN 
       ELSE 
       MdlUsrAdd.DISPLAY_USER_GROUP_OPTIONS(ME.frmUsrGrps)
@@ -129,7 +129,7 @@ PUBLIC FUNCTION CREATE_IMPORTED_ACCOUNT(sname AS String) AS Integer
   DIM tl AS TextLabel
   DIM iTlY AS Integer
   DIM hproc AS Process
-  
+  sname = Trim(ME.cbAccntList.Text)
   'Message(sname)
 
   ' Prepare group list
@@ -166,18 +166,21 @@ PUBLIC FUNCTION CREATE_IMPORTED_ACCOUNT(sname AS String) AS Integer
     IF hproc.Value > 0 THEN RETURN hproc.Value
   IF ERROR THEN Message.Error(Error.Where & gb.NewLine & Error.Text)
   ' Add the face icon
-  IF Len(ME.tbPicPath.Text) > 0 THEN 
-          IF Exist(clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face") THEN KILL clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face"
-          IF Exist(sPicdir &/ sname & ".face.icon") THEN KILL sPicdir &/ sname & ".face.icon"
+  'IF Len(ME.tbPicPath.Text) > 0 THEN 
+  IF ME.tbPicPath.Text THEN 
+          'IF Exist(clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face") THEN KILL clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face"
+          EXEC ["rm", "-rf", clsglobal.sTargetMnt &/ "home" &/ Trim(sname) &/ ".face"] WAIT 
+          EXEC ["rm", "-rf", sPicdir &/ Trim(sname) & ".face.icon"] WAIT 
+          'IF Exist(sPicdir &/ sname & ".face.icon") THEN KILL sPicdir &/ sname & ".face.icon"
           SHELL "cd " & sPicdir & " && ln -s " & Replace(ME.tbPicPath.Text, ClsGlobal.sTargetMnt, "") & Space(1) & sname & ".face.icon" WAIT  'link for KDM
           'shell "cd " & sPicdir & " && ln -s " & Replace(me.tbPicPath.Text, clsglobal.sTargetMnt, "") & Space(1) &
               ' Tweak for the GDM face icon to work
        '   TRY COPY Trim(tbPicPath.Text) TO clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face"
-       EXEC ["cp", Trim(tbPicPath.Text), clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face"] WAIT  ' icon for GDM login
-       EXEC ["chmod", "664", clsglobal.sTargetMnt &/ "home" &/ sname &/ ".face"] WAIT 
+       EXEC ["cp", Trim(tbPicPath.Text), clsglobal.sTargetMnt &/ "home" &/ Trim(sname) &/ ".face"] WAIT  ' icon for GDM login
+       EXEC ["chmod", "664", clsglobal.sTargetMnt &/ "home" &/ Trim(sname) &/ ".face"] WAIT 
           'SHELL "chmod 644 " & ClsGlobal.sTargetMnt &/ "home/" & sname &/ ".face" WAIT 
-          SHELL "chroot " & ClsGlobal.sTargetMnt & " chown -R " & sname & Space(1) &/ "home" &/ sname WAIT
-          SHELL "chroot " & ClsGlobal.sTargetMnt & " chgrp -R " & sname & Space(1) &/ "home/" & sname WAIT
+          SHELL "chroot " & ClsGlobal.sTargetMnt & " chown -R " & Trim(sname) & Space(1) &/ "home" &/ sname WAIT
+          SHELL "chroot " & ClsGlobal.sTargetMnt & " chgrp -R " & Trim(sname) & Space(1) &/ "home/" & sname WAIT
           IF ERROR THEN Message.Error(Error.Where & gb.NewLine & Error.Text)
   END IF
     
