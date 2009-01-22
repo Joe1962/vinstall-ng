@@ -47,7 +47,7 @@ PUBLIC SUB cleanup_tabstrip()
     TSNetDevices.Index = 0
     'Message(TSNetDevices.Count)
     'RETURN 
-    FOR i = 0 TO TSNetDevices.Count
+    FOR i = 0 TO TSNetDevices.Count - 1
       TSNetDevices.Index = i
         IF TSNetDevices.Text = "" THEN 
           TSNetDevices[i].Delete 
