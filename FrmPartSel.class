@@ -18,6 +18,8 @@
 
 PUBLIC sRootAddr AS String
 PUBLIC sRootFrmt AS String
+PUBLIC sBootAddr AS String
+PUBLIC sBootFrmt AS String
 PUBLIC sHomeAddr AS String
 PUBLIC sHomeFrmt AS String
 PUBLIC sUsrAddr AS String
@@ -87,7 +89,10 @@ PUBLIC FUNCTION ANALYZE_PARTITION_SETUP() AS Integer
     ClsPartSel.fRoot = sRootFrmt
     RETURN 0
   END IF 
-  
+  IF sBootAddr THEN 
+    ClsPartSel.sBoot = sBootAddr
+    ClsPartSel.fBoot = sBootFrmt
+  END IF
   IF sHomeAddr THEN 
     ClsPartSel.sHome = sHomeAddr
     ClsPartSel.fhome = sHomeFrmt

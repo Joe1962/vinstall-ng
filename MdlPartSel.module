@@ -150,6 +150,7 @@ PUBLIC SUB DISPLAY_PARTITION_OPTIONS()
                   ELSE                 
                 .Add(("Not Used"))
                 .Add("/")
+                .Add("/boot")
                 .Add("/home")
                 .Add("/opt")
                 .Add("/usr")
@@ -323,6 +324,9 @@ PUBLIC SUB MountPoints_CLick()
                   sdropdwn.Text = "reiserfs"
                 END IF
               NEXT 
+        CASE "/boot"
+          ClsPartSel.sBoot = LCase(LAST.tag)
+                          
         CASE "/home"
           ClsPartSel.sHome = LCase(LAST.tag)
                           
@@ -376,6 +380,8 @@ PUBLIC SUB fsTypes_click()
         SELECT CASE cb.Text
           CASE "/"
             ClsPartSel.fRoot = LAST.text
+          CASE "/boot"
+            ClsPartSel.fBoot = LAST.text
           CASE "/home"
             ClsPartSel.fhome = LAST.text
           CASE "/var"
@@ -401,6 +407,9 @@ PUBLIC SUB SET_SELECTED_PARTITION(SPartition AS String, sMountPoint AS String)
     CASE "/"
       FrmPartSel.sRootAddr = SPartition
       ClsPartSel.sRoot = SPartition
+    CASE "/boot"
+      FrmPartSel.sBootAddr = SPartition
+      ClsPartSel.sBoot = SPartition
     CASE "/home"
       FrmPartSel.sHomeAddr = SPartition
       ClsPartSel.sHome = SPartition
@@ -452,6 +461,9 @@ PUBLIC SUB SET_PARTITION_FORMAT(sMountPoint AS String, sFormat AS String)
       CASE "/" 
         FrmPartSel.sRootFrmt = sFormat
         ClsPartSel.fRoot = sFormat
+      CASE "/boot" 
+        FrmPartSel.sBootFrmt = sFormat
+        ClsPartSel.fBoot = sFormat
       CASE "/home"
         FrmPartSel.sHomeFrmt = sFormat
         ClsPartSel.fHome = sFormat
