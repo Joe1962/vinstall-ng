@@ -318,13 +318,14 @@ EXEC ["mkdir", "-p", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup"] WAIT
 'SHELL "chmod 700 " & ClsGlobal.sTargetMnt &/ "var/log/setup" WAIT 
 EXEC ["chmod", "700", ClsGlobal.sTargetMnt &/ "var" &/ "log" &/ "setup"] WAIT 
 sOut = "#!/bin/bash \n" &
+"for i in /usr/share/icons/*;do cd $i 2>/dev/null && if [ -e convert.sh ];then sh convert.sh & 2>/dev/null;fi;done" & gb.NewLine &
 "DISPLAY=" & gb.NewLine &
 "chmod +x /etc/rc.d/rc.udev" & gb.NewLine &
 "/etc/rc.d/rc.udev restart" & gb.NewLine &
 "/etc/rc.d/rc.modules" & gb.NewLine &
 "sleep 2" & gb.NewLine &
 "/sbin/vlsetup" & gb.NewLine &
-"/sbin/vhwconf" & gb.NewLine &
+"/sbin/vhwconf-quiet" & gb.NewLine &
 "cd /usr/lib && ln -sf preloadable_libintl.so libgnuintl.so.8 && rm libintl.so 2>/dev/null; ln -s preloadable_libintl.so libintl.so" & gb.NewLine &
 "/sbin/valsaconf-quiet" & gb.NewLine &
 "cd / && for i in /var/log/scripts/x11-fonts*;do sh $i &>/dev/null;done" & gb.NewLine &
@@ -357,7 +358,6 @@ SHELL "chroot /mnt/target /sbin/depmod -aq" WAIT
  "echo \"updating database\" \n" &
  "updatedb & \n" &
  "sleep 10 \n" &
- "for i in /usr/share/icons/*;do cd $i 2>/dev/null && if [ -e convert.sh ];then sh convert.sh & 2>/dev/null;fi;done" & gb.NewLine &
  "cd / && sh /var/log/scripts/gsb-desktop* & 2>/dev/null" & gb.NewLine &
  "#/sbin/vsrvset \n" &
  "#/sbin/config-stage1 gui-installer" & gb.NewLine
