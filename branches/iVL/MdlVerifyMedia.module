@@ -53,21 +53,18 @@ PUBLIC SUB PERFORM_MEDIA_CHECK(sEntry AS String)
   DIM sBulkBasePath AS String = "/mnt/loop/veclinux"
   
   FrmMediaCheck.ProgressBar1.Visible = TRUE
-  
   sDevice = Right(sEntry, Len(sEntry) - InStr(sEntry, "/") + 1)
+  EXEC ["mkdir", "-p", "/mnt/source"] WAIT 
+  EXEC ["mkdir", "-p", "/mnt/loop"] WAIT 
   IF InStr(sEntry, ".iso on") THEN 
     ' this is an iso, we must mount the drive and then the ISO
       'sDevice = Right(sEntry, Len(sEntry) - InStr(sEntry, "/"))
       sImage = Left(sEntry, InStr(sEntry, " "))
           ' perform the mounting
-          EXEC ["mkdir", "/mnt/loop"] WAIT 
-          EXEC ["mkdir", "/mnt/source"] WAIT 
           EXEC ["mount", sDevice, "/mnt/source"] WAIT 
           EXEC ["mount", "-o", "loop", "/mnt/source" &/ Trim(sImage), "/mnt/loop"] WAIT 
   ELSE ' Actual CD Media
-      EXEC ["mkdir", "/mnt/source"] WAIT 
       EXEC ["mount", sDevice, "/mnt/loop"] ' Mount it to loop, just to keep this consistant.
-  
   END IF
   
     ' Get the list of bulks on this install

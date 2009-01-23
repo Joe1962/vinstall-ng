@@ -46,6 +46,7 @@ PUBLIC FUNCTION WRITE_LILO_DOT_CONF() AS Integer
   "default = " & FrmLilo.cbDefBoot.Text & "\n" &
   "compact \n" &
   "prompt \n" &
+  "ignore-table \n" &
   "timeout = " & iTimeout & "\n" &
   "# \n" &
   "# Override dangerous defaults that rewrite the partition table: \n" &

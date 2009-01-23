@@ -19,6 +19,8 @@
 
 STATIC PUBLIC sRoot AS String
 STATIC PUBLIC fRoot AS String
+STATIC PUBLIC sBoot AS String
+STATIC PUBLIC fBoot AS String
 STATIC PUBLIC sHome AS String
 STATIC PUBLIC fhome AS String
 STATIC PUBLIC sUsr AS String
