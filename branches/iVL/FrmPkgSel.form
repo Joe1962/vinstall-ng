@@ -12,12 +12,13 @@
     MoveScaled(34,6,20,1)
   }
   { rbFull RadioButton
-    MoveScaled(1,10,40,3.1429)
+    MoveScaled(1,10,40,3.125)
     Text = ("Full Install")
   }
   { rbCustom RadioButton
-    MoveScaled(1,14,55,3.1429)
+    MoveScaled(1,14,55,3.125)
     Text = ("Custom Install")
+    Value = True
   }
   { tlActionDesc TextLabel
     MoveScaled(1,19,63,4)
