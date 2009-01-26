@@ -17,9 +17,9 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
-STATIC PUBLIC sRoot AS String
+STATIC PUBLIC sRoot AS String '= "/dev/hdd4"
 STATIC PUBLIC fRoot AS String
-STATIC PUBLIC sBoot AS String
+STATIC PUBLIC sBoot AS String '= "/dev/hdb8"
 STATIC PUBLIC fBoot AS String
 STATIC PUBLIC sHome AS String
 STATIC PUBLIC fhome AS String

@@ -325,8 +325,12 @@ PUBLIC SUB COPY_KERNELS_AND_INITRDS()
       TRY MKDIR ClsGlobal.sTargetMnt &/ "boot"
       TRY MKDIR ClsGlobal.sTargetMnt &/ "boot" &/ "tamu"
       'TRY MKDIR ClsGlobal.sTargetMnt &/ "etc"
-      
-
+      FOR EACH cbox IN MdlPartsel.OMountPoints
+        IF cbox.text = "/boot" THEN
+          SHELL "mount " & cbox.tag & " /mnt/target/boot" WAIT
+        END IF
+       NEXT 
+       
     FOR EACH cb IN MdlLilo.arrLinuxIncCheckboxes
       IF cb.Value = TRUE THEN 
         sPart = Right(cb.Tag, Len(cb.Tag) - InStr(cb.Tag, "/") + 1)
@@ -400,32 +404,34 @@ PUBLIC SUB LIST_LINUX_OS()
   
   
   SHELL "fdisk -l |grep -E \'83 *Linux\' | cut -f 1 -d \' \'" TO sDump
+  'sDump = "hdd4"
   sDump = Trim(sDump)
   sPartitions = Split(sDump, gb.NewLine)
       TRY MKDIR "/tmp/lilo_tmp"
           FOR i = 0 TO sPartitions.Count - 1
             sLinuxPart = Trim(sPartitions[i])
             sPart = Right(sLinuxpart, Len(sLinuxPart) - RInStr(sLinuxPart, "/"))
-              EXEC ["mount", "/dev/" & sPart, "/tmp/lilo_tmp"] WAIT 
-                      
-                               IF IsDir("/tmp/lilo_tmp/boot") THEN   
-                                  IF sPart = ClsPartSel.sRoot THEN 
-                                    sOsDesc = "VectorLinux"                                
+              IF "/dev/" & sPart <> ClsPartSel.sBoot THEN  
+                          IF IsDir("/tmp/lilo_tmp") THEN   
+                                  IF "/dev/" & sPart = ClsPartSel.sRoot THEN 
+                                    sOsDesc = "VectorLinux"
+                                    sKernelLoc = "/mnt/target/boot"
                                   ELSE 
-                                  'FOR EACH vmlinuz IN Dir("/tmp/lilo_tmp/boot", "vmlinuz*", gb.File)
-                                  sOsDesc = MdlLiloOsList.ID_DISTRO("/tmp/lilo_tmp")
-                                  END IF
-                                  'Message(sOsDesc)
+                                   EXEC ["mount", "/dev/" & sPart, "/tmp/lilo_tmp"] WAIT 
+                                   'FOR EACH vmlinuz IN Dir("/tmp/lilo_tmp/boot", "vmlinuz*", gb.File)
+                                   sOsDesc = MdlLiloOsList.ID_DISTRO("/tmp/lilo_tmp")
+                                   'Message(sOsDesc)
                                       IF sOsDesc LIKE "vector" THEN 
                                         sKernelLoc = "/tmp/lilo_tmp/boot"
                                       ELSE 
                                         sKernelLoc = "/tmp/lilo_tmp"
                                       END IF
+                                  END IF
                                   FOR EACH vmlinuz IN Dir(sKernelLoc, "vmlinuz")
                                       'IF Stat("/tmp/lilo_tmp/boot" &/ vmlinuz).Type <> 6
                                         'sOsDesc = MdlLiloOsList.ID_DISTRO("/tmp/lilo_tmp")
                                         'sOsDesc = Replace(vmlinuz, "vmlinuz", sOsDesc)
-                                        
+                                        PRINT sPart
                                       'Message(Stat("/tmp/lilo_tmp" &/ vmlinuz).Type)
                                        WITH FrmLiloSetup
                                         .tsLIloTabs.Index = .tsLIloTabs.Count - 1
@@ -438,8 +444,8 @@ PUBLIC SUB LIST_LINUX_OS()
                                        'END IF
                                   NEXT 
                           END IF
-              
-              EXEC ["umount", "/tmp/lilo_tmp"] WAIT 
+                    EXEC ["umount", "/tmp/lilo_tmp"] WAIT
+              ENDIF  
         NEXT        
   
 END
@@ -563,14 +569,7 @@ PUBLIC SUB FILL_IN_WINDOWS_TAB(sDesc AS String, sHostPart AS String)
 END
 
 
-
-
-
-
-
-
-
-  PUBLIC SUB FILL_IN_LINUX_TAB(sDesc AS String, sHostPart AS String)
+PUBLIC SUB FILL_IN_LINUX_TAB(sDesc AS String, sHostPart AS String)
   
   DIM tb AS TextBox
   DIM cb AS CheckBox
@@ -582,14 +581,17 @@ END
   DIM sInitrdLoc AS String
   'DIM i AS Integer
   'DIM sKernelStr AS String
-  IF sDesc LIKE "vector" THEN 
+  IF sHostPart = ClsPartSel.sRoot THEN 
+      sInitrdLoc = "/mnt/target/boot"
+  ELSE IF sDesc LIKE "vector" THEN 
       sInitrdLoc = "/tmp/lilo_tmp/boot" 
   ELSE 
       sInitrdLoc = "/tmp/lilo_tmp"
   END IF
   'Message(sInitrdLoc)
-  
-
+  PRINT sHostPart
+  PRINT ClsPartSel.sRoot
+  PRINT "testing LILO"
   INC i
   x = 4
   y = 12
