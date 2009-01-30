@@ -22,7 +22,26 @@ PUBLIC SUB Form_Open()
 ME.LIST_LANG_CHOICES()
 ME.LIST_KEYBOARD_LAYOUTS()
 ME.LIST_KEYBOARD_MODELS()
+ME.PRE_SELECT_US_SETTINGS()
 END
+
+PUBLIC SUB onExit()
+  
+  'Message(ME.name & Space(1) & "parting")
+  
+END
+
+
+
+PUBLIC SUB PRE_SELECT_US_SETTINGS()
+
+  ME.cvkbdlayout["us"].Selected = TRUE
+  ME.cvKbdMod["pc104"].Selected = TRUE
+  ME.cvLangList["en_US"].Selected = TRUE
+  
+END
+
+
 
 PUBLIC SUB LIST_KEYBOARD_LAYOUTS()
   
@@ -53,7 +72,7 @@ PUBLIC SUB LIST_KEYBOARD_LAYOUTS()
             sSymbol = Left(Trim(sListFile[i + iadd]), InStr(Trim(sListFile[i + iadd]), " "))
             'Message(sSymbol)
             sDesc = Right(Trim(sListFile[i + iadd]), Len(Trim(sListFile[i + iadd])) - Len(sSymbol) + 1)
-            TRY cvkbdlayout.Add(sSymbol, sDesc)
+            TRY cvkbdlayout.Add(Trim(sSymbol), sDesc)
               'TRY FMain.ListView1.Add(sSymbol, sDesc)
             '  FMain.ListView1.Add(Left(sListFile[i + iAdd], InStr(sListFile[i + iadd], " ")), sListFile[i + iadd])
               INC iadd
@@ -84,7 +103,7 @@ PUBLIC SUB LIST_KEYBOARD_MODELS()
               skey = Left(sLine, InStr(sLine, " "))
               sdesc = Right(sLine, Len(sLine) - Len(skey) + 1)
                 'TRY FMain.lvkbdmod.Add(skey, sdesc)
-                TRY cvkbdmod.Add(skey, sDesc)
+                TRY cvkbdmod.Add(Trim(skey), sDesc)
           INC iadd
           UNTIL sFileIn[i + iadd] LIKE "" OR sFileIn[i + iadd] LIKE "! layout"
         END IF
@@ -122,8 +141,12 @@ END
 PUBLIC FUNCTION GetNext() AS String
   
   'Step1.Resize(FMain.pnlStack.Width, FMain.pnlStack.Height)
-  
-  RETURN "Step1"
+  IF System.Language = "en_US" THEN 
+    RETURN "Step1"
+  ELSE 
+   FMain.Close
+   FMain0.Show
+  END IF
   'Application.Theme
   'QUIT
   
@@ -140,6 +163,19 @@ END
 PUBLIC SUB cvLangList_Click()
 
   'Message(LAST.current.key)
-  IF System.Language <> LAST.current.key THEN System.language = LAST.current.Key
+  IF System.Language <> Trim(LAST.current.key) THEN System.language = Trim(LAST.current.Key)
+
+END
+
+PUBLIC SUB cvKbdMod_Select()
+
+  'Message(LAST.key)
+  EXEC ["setxkbmap", "-model", Trim(LAST.current.key)] WAIT 
+
+END
+
+PUBLIC SUB cvkbdlayout_Select()
+
+  EXEC ["setxkbmap", Trim(LAST.current.key)] WAIT 
 
 END

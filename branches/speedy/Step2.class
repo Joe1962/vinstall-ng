@@ -14,6 +14,11 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+PUBLIC sLastChecked AS String
+PUBLIC bcheck AS Boolean
+
+PRIVATE hproc AS Process
+PRIVATE iProcSig AS Integer ' 225 will send an kill signal to abor tthe process
 PUBLIC SUB Form_Open()
 
   ME.Width = FMain.pnlstack.Width
@@ -22,11 +27,148 @@ PUBLIC SUB Form_Open()
   ME.tlbanner.Text = "<h2>" & ("Verify Installation Files") & "</h2>"
   ME.StartUp()
   'FMain.btNext.Enabled = FALSE
+  
+  'ME.mbThrobbler.Playing = TRUE
+  'ME.BEGIN_MEDIA_TESTING()
 END
+
+
+PUBLIC SUB BEGIN_MEDIA_TESTING()
+  
+  ' media is aready mounted in /mnt/source
+  DIM iretval, iTotalBulks, iReq, iOpt, i AS Integer
+  DIM iInc, iMini AS Float
+  DIM sFile, sList AS String
+  DIM sOptional AS String = "/mnt/source/veclinux/optional"
+  DIM sRequired AS String = "/mnt/source/veclinux/required"
+
+    IF ClsGlobal.sToScan = ClsGlobal.sLastScanned THEN 
+     SELECT CASE Message.Question(("This installation media has already been checked. Would you like to check it again?"), "Yes", "No")
+      CASE 1
+         ' keep going
+      CASE 2
+        RETURN 
+         STOP EVENT ' this should be unneccesary
+      END SELECT 
+    END IF
+
+    ClsGlobal.sLastScanned = ClsGlobal.sToScan
+    'Message("Setting last scanned value to " & ClsGlobal.sLastScanned)
+    
+    ME.ProgressBar1.Value = 0
+    ME.mbThrobbler.Playing = TRUE
+    
+    'Message(sLastChecked)
+  IF FMain.btNext THEN FMain.btNext.Enabled = FALSE
+  IF FMain.btBack THEN FMain.btBack.Enabled = FALSE
+  IF FMain0.btNext THEN FMain0.btNext.Enabled = FALSE
+  IF FMain0.btBack THEN FMain0.btBack.Enabled = FALSE
+  
+
+  ' get a count of the total packages  
+  SHELL "ls /mnt/source/veclinux/required | wc -w" TO iReq
+  SHELL "ls /mnt/source/veclinux/optional | wc -w" TO iOpt
+  iTotalBulks = iReq + iOpt
+   iInc = 1 / iTotalBulks '= progressbar increments(snaps FOR EACH bulk)
+    'Message(iTotalBulks)
+  
+  ' begin by doing the required bulks
+    FOR EACH sfile IN Dir(sRequired, "*.tlz")
+        
+        PRINT ("Verifying data on compressed package") & Space(1) & Trim(sfile) & " .... "
+      hproc = SHELL "lzmadec < " & sRequired &/ Trim(sfile) & " > /dev/null" ' wait
+        INC i
+        ME.tlTestingLbl.Text = ("Testing file") & Space(1) & i & Space(1) & ("of") & Space(1) & iTotalBulks & " ... " & sfile
+        WAIT 1
+          IF hproc.State = Process.Running THEN 
+            REPEAT 
+              WAIT 
+                ' do something while waiting here
+                  ME.mbThrobbler.Playing = TRUE
+                    WAIT 2
+                      ME.ProgressBar1.Value = ME.ProgressBar1.Value + 0.005
+              UNTIL 
+                iProcSig = 225 OR hproc.State = Process.Stopped
+                IF ProgressBar1.Value < iInc * i THEN ME.ProgressBar1.Value = i / iTotalBulks
+          END IF
+        iretval = hproc.Value
+          IF hproc.Value > 0 THEN 
+            ' Error in bulk
+              PRINT " \\__" & Space(1) & ("FAILED")
+              Message.Error(("The following") & Space(1) & "<b>" & ("required") & Space(1)&
+               "</b>" & ("has failed the integrity test. It is not safe to continue"))
+               tlTestingLbl.Text = ("Integrity test") & "<b>" & Space(1)("FAILED") & "</b>" & Space(1)("on") & Space(1) & sfile
+            BREAK 
+            RETURN 
+          ELSE 
+            
+          END IF
+          PRINT " \\__" & Space(1) & ("PASSED") 
+      NEXT 
+      
+  ' now check optional packages
+  
+     FOR EACH sfile IN Dir(sOptional, "*.tlz")
+        
+        PRINT ("Verifying data on compressed package") & Space(1) & Trim(sfile) & " .... "
+      hproc = SHELL "lzmadec < " & sOptional &/ Trim(sfile) & " > /dev/null" ' wait
+        INC i
+        ME.tlTestingLbl.Text = ("Testing file") & Space(1) & i & Space(1) & ("of") & Space(1) & iTotalBulks & " ... " & sfile
+        WAIT 1
+          IF hproc.State = Process.Running THEN 
+            REPEAT 
+              WAIT 
+                ' do something while waiting here
+                  ME.mbThrobbler.Playing = TRUE
+                    WAIT 2
+                      ME.ProgressBar1.Value = ME.ProgressBar1.Value + 0.005
+              UNTIL 
+                iProcSig = 225 OR hproc.State = Process.Stopped
+                IF ProgressBar1.Value < iInc * i THEN ME.ProgressBar1.Value = i / iTotalBulks
+          END IF
+        iretval = hproc.Value
+          IF hproc.Value > 0 THEN 
+            ' Error in bulk
+              PRINT " \\__" & Space(1) & ("FAILED")
+              Message.Warning(sFile & Space(1) & ("has failed the data integrity test. All required packages have passed this test") & "\n" &
+              ("Possible causes for this are a corrupted download or a badly burnt cd. You can try the following options") & "\n" &
+              ("Download a new installation image from www.vectorlinux.com") & "\n" &
+              ("Burn the image at a lower speed rate"))
+              
+              'Message.Error(("The following") & Space(1) & "<b>" & ("required") & Space(1)&
+              ' "</b>" & ("has failed the integrity test. It is not safe to continue"))
+               ME.tlTestingLbl.Text = ("Integrity test") & "<b>" & Space(1)("FAILED") & "</b>" & Space(1)("on") & Space(1) & sfile
+               btStop.Enabled = FALSE
+               
+            BREAK 
+            RETURN 
+          ELSE 
+            
+          END IF
+          PRINT " \\__" & Space(1) & ("PASSED") 
+      NEXT 
+  
+  
+      
+          
+      ' if there was an error, this would have failed by now and the following code would have not been executed
+      
+      tlTestingLbl.Text = ("Data integrity test complete... all tests passed")
+      mbThrobbler.Playing = FALSE
+      btStop.Enabled = FALSE
+      IF FMain.btNext THEN FMain.btNext.Enabled = TRUE
+      IF FMain0.btNext THEN FMain0.btNext.Enabled = TRUE
+      IF FMain.btBack THEN FMain.btBack.Enabled = TRUE
+      IF FMain0.btBack THEN FMain0.btBack.Enabled = TRUE
+      Message.Info(("All test passed. It is safe to continue with the installation process."))
+  
+END
+
+
 
 PUBLIC FUNCTION GetNext() AS String
   
-  RETURN "Step1"
+  RETURN "Step3"
   
 END
 PUBLIC SUB set_label_text()
@@ -34,7 +176,8 @@ PUBLIC SUB set_label_text()
   DIM sMsg AS String
   
   sMsg = ("Verifying installation files can prevent you from performing an unsuccessful install") & "<br>" &
-  ("Keep in mind however, that this process can take a while to complete.")
+  ("Keep in mind however, that this process can take a while to complete.") & "<br>" &
+  "<br>" & ("Click") & Space(1) & "\"" & ME.btStop.Text & "\"" & Space(1) & ("to abort this process at any time")
   
   ME.TextLabel1.Text = sMsg
   ME.TextLabel1.Adjust
@@ -44,6 +187,30 @@ END
 
 PUBLIC SUB StartUp()
   
-  FMain.btNext.Enabled = FALSE
+
+  ME.mbThrobbler.Path = "images/throbber.gif"
+  'Message("Last scanned image = " & ClsGlobal.sLastScanned)
+  IF ClsGlobal.sToScan <> ClsGlobal.sLastScanned THEN 
+    ME.ProgressBar1.Value = 0
+    ME.BEGIN_MEDIA_TESTING()
+  END IF
+
   
+END
+
+
+
+PUBLIC SUB OnExit()
+  
+  
+  
+END
+
+
+PUBLIC SUB btStop_Click()
+
+  mbThrobbler.Playing = FALSE
+    IF FMain.btNext THEN FMain.btNext.Enabled = TRUE
+    IF FMain0.btNext THEN FMain0.btNext.Enabled = TRUE
+
 END

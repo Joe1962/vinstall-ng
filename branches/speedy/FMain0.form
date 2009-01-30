@@ -12,7 +12,7 @@
       Expand = True
     }
     { PictureBox1 PictureBox
-      MoveScaled(7,1,46,5)
+      MoveScaled(1,1,46,5)
       Picture = Picture["images/installer.png"]
       Stretch = True
     }
@@ -34,7 +34,7 @@
       Orientation = Align.Left
       Resizable = False
       { HBox5 HBox
-        MoveScaled(2,-1,21,3)
+        MoveScaled(0,0,21,3)
         { TextLabel1 TextLabel
           MoveScaled(2,0,15,2)
           Expand = True
@@ -42,7 +42,7 @@
         }
       }
       { ListView1 ListView
-        MoveScaled(2,3,16,21)
+        MoveScaled(4,4,16,8)
         Expand = True
       }
     }

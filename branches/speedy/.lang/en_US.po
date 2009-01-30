@@ -12,91 +12,91 @@ msgstr ""
 
 #: FMain.class:258 FMain0.class:251
 msgid "Back"
-msgstr "Regreso"
+msgstr "Back"
 
 #: Step1.class:412
 msgid "Check Installation media before installing"
-msgstr "Verificar archivos de instalacion"
+msgstr "Check Installation media before installing"
 
 #: Step1.class:234
 msgid "DISTRIBUTION"
-msgstr "DISTRIBUCION"
+msgstr "DISTRIBUTION"
 
 #: Step0.class:116
 msgid "English (US)"
-msgstr ""
+msgstr "English (US)"
 
 #: Step1.class:81
 msgid "Found"
-msgstr "Encontre"
+msgstr "Found"
 
 #: Step2.class:37
 msgid "Keep in mind however, that this process can take a while to complete."
-msgstr "Tenga presente que este proceso podria tomar varios minutos para terminar"
+msgstr "Keep in mind however, that this process can take a while to complete."
 
 #: Step0.class:20
 msgid "Localization Settings"
-msgstr "Valores locales"
+msgstr "Localization Settings"
 
 #: FMain.class:269 FMain0.class:262
 msgid "Next"
-msgstr "Siguiente"
+msgstr "Next"
 
-#: FMain.class:221 FMain0.class:220
+#: FMain.class:221 FMain0.class:214
 msgid "Process Overview"
-msgstr "Resumen del Proceso"
+msgstr "Process Overview"
 
 #: FMain.class:280 FMain0.class:273
 msgid "Quit"
-msgstr "Cancelar"
+msgstr "Quit"
 
 #: Step1.class:122
 msgid "Scanning"
-msgstr "Buscando en"
+msgstr "Scanning"
 
 #: Step1.class:109
 msgid "Scanning for CD Media ... Please wait"
-msgstr "Buscando medios de instalacion en CDROM. Por favor espere"
+msgstr "Scanning for CD Media ... Please wait"
 
 #: Step1.class:156
 msgid "Scanning system for installable ISO images"
-msgstr "Buscando medios de instalacion en imagenes ISO."
+msgstr "Scanning system for installable ISO images"
 
 #: Step1.class:62
 msgid "Scanning system partitions for installation files"
-msgstr "Buscando medios de instalacion en particiones del sistema"
+msgstr "Scanning system partitions for installation files"
 
 #: Step1.class:388
 msgid "Search Again"
-msgstr "Buscar Nuevamente"
+msgstr "Search Again"
 
 #: Step1.class:349
 msgid "Select Installation Source"
-msgstr "Seleccione el medio de instalacion"
+msgstr "Select Installation Source"
 
 #: Step1.class:367
 msgid "Select Installation source from the list below"
-msgstr "Seleccione la fuente instalacion de esta lista"
+msgstr "Select Installation source from the list below"
 
 #: Step0.class:272
 msgid "Select your keyboard layout"
-msgstr "Seleccione el diseño de su teclado"
+msgstr "Select your keyboard layout"
 
 #: Step0.class:291
 msgid "Select your keyboard model"
-msgstr "Seleccione el model de su teclado"
+msgstr "Select your keyboard model"
 
 #: Step0.class:241
 msgid "Select your language"
-msgstr "Seleccione su idioma"
+msgstr "Select your language"
 
 #: Step0.class:113
 msgid "Spanish"
-msgstr ""
+msgstr "Spanish"
 
 #: Step0.class:317
 msgid "Use this box to test your keyboard settings"
-msgstr "Area de prueba"
+msgstr "Use this box to test your keyboard settings"
 
 #: Step1.class:237
 msgid "VERSION"
@@ -104,25 +104,25 @@ msgstr "VERSION"
 
 #: .project:1
 msgid "VectorLinux Installer"
-msgstr "Instalador de VectorLinux"
+msgstr "VectorLinux Installer"
 
 #: Step2.class:22
 msgid "Verify Installation Files"
-msgstr "Verificar archivos de instalacion antes de instalar"
+msgstr "Verify Installation Files"
 
 #: Step2.class:37
 msgid "Verifying installation files can prevent you from performing an unsuccessful install"
-msgstr "Este proceso puede ayudar a asegurar que la instalacion sea exitosa."
+msgstr "Verifying installation files can prevent you from performing an unsuccessful install"
 
 #: Step1.class:132
 msgid "in"
-msgstr "en"
+msgstr "in"
 
 #: Step1.class:81
 msgid "in partition"
-msgstr "en particion"
+msgstr "in partition"
 
 #: Step1.class:80
 msgid "on"
-msgstr "en"
+msgstr "on"
 

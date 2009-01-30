@@ -24,12 +24,12 @@ END
 
 PUBLIC SUB Form_Open()
 
-IF Application.Args[1] THEN 
-  'System.Language = Trim(Application.Args[1])
-  $oCurrent = NEW Step1(pnlStack)
-ELSE
-$oCurrent = NEW Step0(pnlStack)
-END IF
+' IF Application.Args[1] THEN 
+'   'System.Language = Trim(Application.Args[1])
+'   $oCurrent = NEW Step1(pnlStack)
+' ELSE
+$oCurrent = NEW Step1(pnlStack)
+'END IF
 btBack.Enabled = FALSE
 ME.auto_setup_for_resolution()
 ME.Resize(1024, 600)
@@ -46,7 +46,8 @@ END
 
 PUBLIC SUB btQuit_Click()
 
-  FMain.Close
+  'FMain.Close
+  FMain0.Close
 
 END
 
@@ -75,7 +76,7 @@ sTmp = $oCurrent.GetNext()
 'Is this form already opened ?
 'if true it may have no been closed to preserve entries
 
-$oCurrent.OnExit() ' execute any code that needs to be ran before moving to the next step
+$oCurrent.OnExit() ' execute some code when the window is hidden
 
 
 FOR EACH o IN pnlStack.Children
@@ -91,15 +92,6 @@ NEXT
 'strore the previous
  $aPrev.Push($oCurrent)
  btBack.Enabled = $aPrev.Count > 0
-
-IF $oCurrent.name = "Step0" THEN 
-  IF System.Language <> "en_US" THEN 
-    FMain0.Show
-    FMain.Close
-    RETURN 
-  END IF
-  
-END IF
 
 
 IF NOT bExist THEN

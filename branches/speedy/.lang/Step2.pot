@@ -14,15 +14,91 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Step2.class:22
+#: Step2.class:27
 msgid "Verify Installation Files"
 msgstr ""
 
-#: Step2.class:37
+#: Step2.class:68
+msgid "Verifying data on compressed package"
+msgstr ""
+
+#: Step2.class:71
+msgid "Testing file"
+msgstr ""
+
+#: Step2.class:71
+msgid "of"
+msgstr ""
+
+#: Step2.class:87
+msgid "FAILED"
+msgstr ""
+
+#: Step2.class:89
+msgid "The following"
+msgstr ""
+
+#: Step2.class:89
+msgid "required"
+msgstr ""
+
+#: Step2.class:89
+msgid "has failed the integrity test. It is not safe to continue"
+msgstr ""
+
+#: Step2.class:90
+msgid "Integrity test"
+msgstr ""
+
+#: Step2.class:96
+msgid "PASSED"
+msgstr ""
+
+#: Step2.class:126
+msgid "has failed the data integrity test. All required packages have passed this test"
+msgstr ""
+
+#: Step2.class:126
+msgid "Possible causes for this are a corrupted download or a badly burnt cd. You can try the following options"
+msgstr ""
+
+#: Step2.class:126
+msgid "Download a new installation image from www.vectorlinux.com"
+msgstr ""
+
+#: Step2.class:126
+msgid "Burn the image at a lower speed rate"
+msgstr ""
+
+#: Step2.class:146
+msgid "Data integrity test complete... all tests passed"
+msgstr ""
+
+#: Step2.class:153
+msgid "All test passed. It is safe to continue with the installation process."
+msgstr ""
+
+#: Step2.class:170
 msgid "Verifying installation files can prevent you from performing an unsuccessful install"
 msgstr ""
 
-#: Step2.class:37
+#: Step2.class:170
 msgid "Keep in mind however, that this process can take a while to complete."
+msgstr ""
+
+#: Step2.class:170
+msgid "Click"
+msgstr ""
+
+#: Step2.class:170
+msgid "to abort this process at any time"
+msgstr ""
+
+#: Step2.class:322
+msgid "TextLabel2"
+msgstr ""
+
+#: Step2.class:336
+msgid "Stop"
 msgstr ""
 
