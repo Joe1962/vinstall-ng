@@ -10,19 +10,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .project:1
-msgid "VectorLinux Installer"
+#: FMain.class:233 FMain0.class:225
+msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:221
+#: FMain.class:270 FMain0.class:262
 msgid "Back"
 msgstr ""
 
-#: FMain.class:226
+#: FMain.class:281 FMain0.class:273
 msgid "Next"
 msgstr ""
 
-#: FMain.class:231
+#: FMain.class:292 FMain0.class:284
 msgid "Quit"
 msgstr ""
 
@@ -30,96 +30,188 @@ msgstr ""
 msgid "Localization Settings"
 msgstr ""
 
-#: Step0.class:103
+#: Step0.class:122
 msgid "Spanish"
 msgstr ""
 
-#: Step0.class:106
+#: Step0.class:125
 msgid "English (US)"
 msgstr ""
 
-#: Step0.class:212
+#: Step0.class:249
 msgid "Select your language"
 msgstr ""
 
-#: Step0.class:243
+#: Step0.class:280
 msgid "Select your keyboard layout"
 msgstr ""
 
-#: Step0.class:259
+#: Step0.class:299
 msgid "Select your keyboard model"
 msgstr ""
 
-#: Step0.class:280
+#: Step0.class:321
 msgid "Use this box to test your keyboard settings"
 msgstr ""
 
-#: Step1.class:62
-msgid "Scanning system partitions for installation files"
-msgstr ""
-
-#: Step1.class:80
+#: Step1.class:33
 msgid "on"
 msgstr ""
 
-#: Step1.class:81
+#: Step1.class:122
+msgid "Scanning system partitions for installation files"
+msgstr ""
+
+#: Step1.class:141
 msgid "Found"
 msgstr ""
 
-#: Step1.class:81
+#: Step1.class:141
 msgid "in partition"
 msgstr ""
 
-#: Step1.class:109
+#: Step1.class:169
 msgid "Scanning for CD Media ... Please wait"
 msgstr ""
 
-#: Step1.class:122
+#: Step1.class:182
 msgid "Scanning"
 msgstr ""
 
-#: Step1.class:132
+#: Step1.class:192
 msgid "in"
 msgstr ""
 
-#: Step1.class:156
+#: Step1.class:216
 msgid "Scanning system for installable ISO images"
 msgstr ""
 
-#: Step1.class:234
+#: Step1.class:307
 msgid "DISTRIBUTION"
 msgstr ""
 
-#: Step1.class:237
+#: Step1.class:310
 msgid "VERSION"
 msgstr ""
 
-#: Step1.class:349
+#: Step1.class:387
+msgid "This feature can help you avoid an unsuccesful installation."
+msgstr ""
+
+#: Step1.class:387
+msgid "WARNING:"
+msgstr ""
+
+#: Step1.class:387
+msgid "This process can take a long time to complete."
+msgstr ""
+
+#: Step1.class:425
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:367
+#: Step1.class:443
 msgid "Select Installation source from the list below"
 msgstr ""
 
-#: Step1.class:388
+#: Step1.class:464
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:411
+#: Step1.class:488
 msgid "Check Installation media before installing"
 msgstr ""
 
-#: Step2.class:22
+#: Step2.class:27
 msgid "Verify Installation Files"
 msgstr ""
 
-#: Step2.class:37
+#: Step2.class:68
+msgid "Verifying data on compressed package"
+msgstr ""
+
+#: Step2.class:71
+msgid "Testing file"
+msgstr ""
+
+#: Step2.class:71
+msgid "of"
+msgstr ""
+
+#: Step2.class:87
+msgid "FAILED"
+msgstr ""
+
+#: Step2.class:89
+msgid "The following"
+msgstr ""
+
+#: Step2.class:89
+msgid "required"
+msgstr ""
+
+#: Step2.class:89
+msgid "has failed the integrity test. It is not safe to continue"
+msgstr ""
+
+#: Step2.class:90
+msgid "Integrity test"
+msgstr ""
+
+#: Step2.class:96
+msgid "PASSED"
+msgstr ""
+
+#: Step2.class:126
+msgid ""
+"has failed the data integrity test. All required packages have passed this "
+"test"
+msgstr ""
+
+#: Step2.class:126
+msgid ""
+"Possible causes for this are a corrupted download or a badly burnt cd. You "
+"can try the following options"
+msgstr ""
+
+#: Step2.class:126
+msgid "Download a new installation image from www.vectorlinux.com"
+msgstr ""
+
+#: Step2.class:126
+msgid "Burn the image at a lower speed rate"
+msgstr ""
+
+#: Step2.class:146
+msgid "Data integrity test complete... all tests passed"
+msgstr ""
+
+#: Step2.class:153
+msgid "All test passed. It is safe to continue with the installation process."
+msgstr ""
+
+#: Step2.class:170
 msgid ""
 "Verifying installation files can prevent you from performing an unsuccessful "
 "install"
 msgstr ""
 
-#: Step2.class:37
+#: Step2.class:170
 msgid "Keep in mind however, that this process can take a while to complete."
+msgstr ""
+
+#: Step2.class:170
+msgid "Click"
+msgstr ""
+
+#: Step2.class:170
+msgid "to abort this process at any time"
+msgstr ""
+
+#: Step2.class:322
+msgid "TextLabel2"
+msgstr ""
+
+#: Step2.class:336
+msgid "Stop"
 msgstr ""

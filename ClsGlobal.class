@@ -17,3 +17,12 @@
 
 STATIC PUBLIC sDistroName AS String
 STATIC PUBLIC sDistroVer AS String
+
+' Installatio media information
+STATIC PUBLIC sSourceName AS String
+STATIC PUBLIC sSourceAddr AS String
+
+' Media scan
+STATIC PUBLIC sToScan AS String
+STATIC PUBLIC sLastScanned AS String
+

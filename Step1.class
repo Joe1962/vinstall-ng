@@ -13,11 +13,61 @@
 
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+PRIVATE iCheckWarn AS Integer
 PUBLIC SUB _new() ' executed every time the form is instanciated.
   
   ME.StartUp()
       gvdistdetails.Rows.Count = 2
     gvdistdetails.Columns.count = 2
+  
+END
+
+PUBLIC SUB OnExit()
+  
+  
+  ' this code is ran when the window is hidden before the next step
+  DIM sname, sadd, sPart AS String
+  
+  'Message("Step1 exit")
+  
+  sname = Trim(Left(ComboBox1.Text, InStr(ComboBox1.Text, ("on")) - 1))
+    IF Right(sname, Len(".iso")) LIKE ".iso" THEN 
+      sadd = Trim(Right(ComboBox1.Text, Len(ComboBox1.Text) - InStr(ComboBox1.Text, "/") + 1))
+    ELSE 
+      sadd = Trim(Right(ComboBox1.Text, Len(ComboBox1.Text) - RInStr(ComboBox1.Text, " ") + 1))
+    END IF
+  
+  'make sure /mnt/source is not mounted
+  SHELL "umount /mnt/source 2>/dev/null" WAIT 
+  
+  
+  ' Store this information to make it available to the whole installer program
+  ClsGlobal.sSourceName = Trim(sname)
+  ClsGlobal.sSourceAddr = Trim(sadd)
+  TRY MKDIR "/mnt/source"
+  ' mount the media and get ready for testing
+  IF Right(sname, Len(".iso")) LIKE ".iso" THEN ' this is an iso image... doing hosted install i'm afraid
+    spart = Trim(Right(sadd, Len(sadd) - RInStr(sadd, "/")))
+  
+    EXEC ["mkdir", "-p", "/mnt" &/ Trim(sPart)] WAIT 
+    SHELL "mount /dev" &/ Trim(spart) & " /mnt" &/ Trim(spart) & " 2>/dev/null" WAIT 
+    ' now mount the iso
+    'EXEC ["mount -o loop", "/mnt" &/ Trim(spart) &/ Trim(sname), "/mnt/source"] WAIT 
+    SHELL "mount -o loop /mnt" &/ Trim(spart) &/ Trim(sname) & " /mnt/source" WAIT 
+  
+  ELSE 
+      PRINT "Mounting cd media"
+    SHELL "mount /dev" &/ Trim(sadd) & " /mnt/source 2>/dev/null" WAIT 
+    
+    
+  END IF
+
+  IF ME.GetNext() = "Step2" THEN ClsGlobal.sToScan = Trim(ME.ComboBox1.Text)
+   'Message("Image to scan = " & ClsGlobal.sToScan)
+    
+      
+      
+  
   
 END
 
@@ -37,17 +87,27 @@ PUBLIC FUNCTION GetNext() AS String
   
   IF bcheckmedia.Value = TRUE THEN 
     RETURN "Step2"
+      'IF Step2.sLastChecked <> Trim(ME.ComboBox1.Text) THEN 
+      IF ClsGlobal.sLastScanned <> Trim(ME.ComboBox1.Text) THEN 
+        Step2.bcheck = TRUE
+        
+      ELSE 
+        Step2.bcheck = FALSE
+      END IF
   ELSE 
     RETURN "Step3"
   END IF
+  
+  
   
   
 END
 
 PUBLIC SUB StartUp() ' Executed every time the Next button is pressed
 
-'FMain.btNext.Enabled = ME.ComboBox1.Count > 0
-    
+    ' IF Step2.sLastChecked <> ClsGlobal.sSourceName THEN 
+    '   Step2.Close ' try this
+    ' END IF
   
 END
 
@@ -108,17 +168,17 @@ PUBLIC SUB FIND_CD_INSTALL_MEDIA()
   
   Step1.tlStatus.Text = ("Scanning for CD Media ... Please wait")
   
-  SHELL "/sbin/probedisk | grep \"cdrom\" | cut -f 1 -d \'|\'" TO sOutput
-  
+  SHELL "/sbin/probedisk | grep \"cdrom\" | cut -f 1 -d \"|\"" TO sOutput
+  'Message(sOutput)
   sOutput = Trim(sOutput)
   IF Len(sOutput) < 1 THEN RETURN 
-  
+  'Message("scanning cds")
   sDriveList = Split(sOutput, "\n")
     FOR i = 0 TO sDriveList.Count - 1
       sShortDrive = Right(Trim(sDriveList[i]), Len(Trim(sDriveList[i])) - RInStr(Trim(sDriveList[i]), "/"))
         EXEC ["mkdir", "-p", "/mnt" &/ sShortDrive] WAIT 
         'EXEC ["mount", "-o", "ro", Trim(sDriveList[i]), "/mnt" &/ sShortDrive] WAIT 
-        SHELL "mount -o ro " & Trim(sDriveList[i]) & "/mnt" &/ sShortDrive & " 2>/dev/null" WAIT 
+        SHELL "mount " & Trim(sDriveList[i]) & Space(1) & "/mnt" &/ sShortDrive & " 2>/dev/null" WAIT 
         PRINT ("Scanning") & Space(1) & sDriveList[i]
           IF Exist("/mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF") THEN 
               SHELL "grep \"^DISTRO=\" /mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF | cut -f 2 -d \'=\'" TO sName
@@ -126,10 +186,10 @@ PUBLIC SUB FIND_CD_INSTALL_MEDIA()
                 sName = Trim(Replace(sName, "\'", ""))
                 sVersion = Trim(Replace(sVersion, "\'", ""))
                 File.Save(Temp(sShortDrive), File.Load("/mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF"))
-                  IF ME.ComboBox1.Find(sName & Space(1) & sVersion & Space(1) & ("on") & Space(1) & Trim(sDriveList[i])) = -1 THEN 
-                    ME.ComboBox1.Add(sName & Space(1) & sVersion & Space(1) & ("on") & Space(1) & Trim(sDriveList[i]))
+                  IF ME.ComboBox1.Find(sName & Space(1) & sVersion & Space(1) & ("on") & Space(1) & Trim(sShortDrive)) = -1 THEN 'Trim(sDriveList[i])) = -1 THEN 
+                    ME.ComboBox1.Add(sName & Space(1) & sVersion & Space(1) & ("on") & Space(1) & Trim(sShortDrive)) 'Trim(sDriveList[i]))
                   END IF   
-                  PRINT " \\__" & Space(1) & ("Found") & Space(1) & sName & "-" & sVersion & Space(1) & ("in") & Space(1) & sDriveList[i]         
+                  PRINT " \\__" & Space(1) & ("Found") & Space(1) & sName & "-" & sVersion & Space(1) & ("in") & Space(1) & Trim(sShortDrive) 'sDriveList[i]         
           END IF
         'EXEC ["umount", "/mnt" &/ sShortDrive, " 2>/dev/null"] WAIT 
         SHELL "umount /mnt" &/ Trim(sShortDrive) & " 2>/dev/null" WAIT 
@@ -195,19 +255,32 @@ END
 
 PUBLIC SUB ComboBox1_Click()
 
-  DIM sAddr AS String = Right(Trim(ComboBox1.Text), Len(Trim(ComboBox1.Text)) - RInStr(Trim(ComboBox1.Text), "/"))
-  DIM sDigits AS String = sAddr LIKE "*[0-9]*"
-  
-   'IF sDigits THEN 
-   IF InStr(Trim(ComboBox1.Text), ".iso") OR InStr(Trim(ME.ComboBox1.Text), ".ISO") THEN 
-       ME.DESCRIBE_ISO_INSTALL_MEDIA(Replace(Trim(ME.ComboBox1.Text), Space(1) & ("on") & Space(1), "-"))
-   ELSE IF sDigits THEN 
-      ' Partition found with Vector Installation media
+
+  DIM sDigits AS String ' = sAddr LIKE "*[0-9]*"
+  DIM sDist, sLoc AS String
+    sDist = Trim(Left(LAST.text, InStr(LAST.text, " ") - 1))
+    sLoc = Trim(Right(LAST.text, Len(LAST.text) - RInStr(LAST.text, " ") + 1))
+    sDigits = sLoc LIKE "*[0-9]*"
+    
+    IF Right(sDist, Len(".iso")) LIKE ".iso" THEN 
+      ME.DESCRIBE_ISO_INSTALL_MEDIA(Replace(Trim(ME.ComboBox1.Text), Space(1) & ("on") & Space(1), "-"))
+    ELSE IF sDigits THEN 
       ME.DESCRIBE_PARTITION_INSTALL_MEDIA(Trim(ME.ComboBox1.Text))
-   ELSE 
-      ME.DESCRIBE_CD_INSTALL_MEDIA(sAddr)
+    ELSE 
+      ME.DESCRIBE_CD_INSTALL_MEDIA(sLoc)
+    END IF
+    
+    ' debugging
+      'Message(Step2.sLastChecked)
+      'Message(ClsGlobal.sLastScanned)
+    IF Trim(LAST.text) <> ClsGlobal.sLastScanned THEN 
+      Step2.bcheck = TRUE
+    ELSE 
+      Step2.bcheck = FALSE
     END IF
   
+  'ClsGlobal.sToScan = Trim(ME.ComboBox1.Text)
+
 
 END
 
@@ -304,13 +377,16 @@ PUBLIC SUB DESCRIBE_CD_INSTALL_MEDIA(sAddress AS String)
 END
 
 
-PUBLIC SUB Form_Resize()
 
 
-END
+PUBLIC SUB bCheckMedia_Click()
 
-PUBLIC SUB Panel1_MouseDown()
-
-  
+  IF iCheckWarn < 1 THEN 
+    IF LAST.value = TRUE THEN 
+      Message.Warning(("This feature can help you avoid an unsuccesful installation.") & "<br>" &
+      "<b><br>" & ("WARNING:") & "</b><br>" & Space(1) & ("This process can take a long time to complete."))
+      INC iCheckWarn
+    END IF
+  END IF
 
 END

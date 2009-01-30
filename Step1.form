@@ -42,6 +42,7 @@
       { btRescan Button
         MoveScaled(30,0,19,3)
         Text = ("Search Again")
+        Picture = Picture["icon:/small/refresh"]
       }
     }
     { HBox2 HBox
