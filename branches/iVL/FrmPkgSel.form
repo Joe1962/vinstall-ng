@@ -25,7 +25,7 @@
     Text = ("")
   }
   { scrlInstallOpts GridView
-    MoveScaled(1,27,56,23)
+    MoveScaled(1,25,56,28)
     Expand = True
   }
 }

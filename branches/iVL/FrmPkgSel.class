@@ -17,7 +17,7 @@
 
 PUBLIC pYes AS picture = Picture.load("images/16px-check.png")
 PUBLIC pNo AS Picture = picture.load("images/16px-Nocheck.png")
-
+PRIVATE bWarninigShown AS Boolean = FALSE
 
 PUBLIC SUB Form_Open()
 
@@ -58,6 +58,8 @@ FMain.btback.ForeColor = Color.Black
 
 
 MdlCore.warn_status_off()
+'PRINT Message("Welcom to the Software selection. \n This consists of 2 parts: \n 1)Bulk packages selection. \n   If you do not select all bulks you may have some dependancy problems. \n   They can be resolved with gslapt or slapt-get. \n   You will need the X11 bulk for any GUI program. \n   The kernel-src Bulk is needed for the ATI or Nvidia drivers.   \n 2)Optional package selection. \n choose only the apropriate video drivers for your system.")
+
 END
 
 PUBLIC SUB Form_Resize()
@@ -131,12 +133,6 @@ PUBLIC SUB FILL_IN_BULK_LIST()
           'Message.Info(sBulk)
           END IF
 NEXT 
-          
-          
-  
-  
-  
-  
   
 END
 
@@ -165,7 +161,10 @@ PUBLIC SUB Form_Menu()
 END
 
 PUBLIC SUB scrlInstallOpts_Click()
-
+  IF bWarninigShown = FALSE THEN 
+     PRINT Message("If you dont install all Bulks you may have dependancy problems. \n \n The X11 bulk is needed for any GUI program. \n The kernel-src Bulk is needed to compile kernel drivers.")
+     bWarninigShown = TRUE
+  ENDIF 
   IF LAST.column = 0 THEN 
   IF scrlInstallOpts[LAST.row, LAST.column].Picture = pyes THEN 
     scrlInstallOpts[LAST.row, LAST.column].Picture = pNo
@@ -177,6 +176,5 @@ END IF
 
 'Message(GridView1[LAST.row, 4].Text)
 scrlInstallOpts.Refresh()
-  
 
 END

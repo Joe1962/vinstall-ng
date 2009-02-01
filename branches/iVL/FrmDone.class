@@ -20,7 +20,8 @@
 PUBLIC SUB Form_Open()
 
 DIM sText AS String
-
+ME.MovieBox1.Path = "images/throbber.gif"
+ME.icon = picture["images/throbber.gif"]
   FMain.FrmCurr = ME
   Fmain.tvPlan["Conf4"].Picture = MdlCore.sDonePic
   Fmain.tvPlan["Conf5"].Picture = MdlCore.sNowPic
@@ -50,8 +51,11 @@ DIM sText AS String
             sText = "<br><br><br>" & ClsGlobal.DISTRO & Space(1) & ("is performing final system configuration. Please wait a moment.")
             FMain.btnext.Enabled = FALSE
             FMain.btQuit.Enabled = FALSE
+            ME.MovieBox1.Playing = TRUE
     ELSE 
     'Message.Info("Found /tmp/status")
+    ME.MovieBox1.Playing = FALSE
+    ME.MovieBox1.Visible = FALSE
        FMain.btnext.Text = ("Restart")
        FMain.btnext.Width = MdlObjSizer.get_object_width(FMain.btnext.Text) + 36
     ME.tlBanner.Text = "<b>" & ("Installation is complete") & "</b>"

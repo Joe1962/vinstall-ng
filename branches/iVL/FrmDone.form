@@ -22,6 +22,9 @@
       Text = ("")
     }
   }
+  { MovieBox1 MovieBox
+    MoveScaled(4,18,17,19)
+  }
   { tmBgMon #Timer
     #X = 203
     #Y = 231
