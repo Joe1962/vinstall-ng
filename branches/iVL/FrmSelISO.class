@@ -50,7 +50,7 @@ END
 PUBLIC SUB Form_Open()
 
 
-  
+  ME.btVerifyInstall.Visible = FALSE
   ME.tlBanner.text = "<h3>" & tlBanner.text & "</h3>"
   
      FMain.tvPlan["Prep0"].Picture = MdlCore.sDonePic
@@ -96,12 +96,12 @@ PUBLIC SUB Form_Open()
           .btnext.Enabled = TRUE
           .btnext.ForeColor = Color.Black
       END WITH 
-      FrmSelISO.btVerifyInstall.Enabled = TRUE
-      FrmSelISO.btVerifyInstall.ForeColor = Color.Black
+      'FrmSelISO.btVerifyInstall.Enabled = TRUE
+      'FrmSelISO.btVerifyInstall.ForeColor = Color.Black
   END IF 
 
 FMain.btnext.Enabled = TRUE
-
+FrmSelISO.btVerifyInstall.Visible = FALSE
 END
 
 PUBLIC SUB DESCRIBE_DISTRO(sLoc AS String)
