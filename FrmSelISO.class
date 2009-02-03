@@ -77,6 +77,7 @@ PUBLIC SUB Form_Open()
   IF lstInstallableImg.count = 1 AND lstInstallableImg.Find(("No Installable Media Found")) = -1 THEN 
     tlBanner.Text = ("Click") & Space(1) & "\'" & FMain.btnext.text & "\'" & Space(1) & ("to begin installating") & Space(1)&
     Left(FrmSelISO.lstInstallableImg.text, InStr(FrmSelISO.lstInstallableImg.text, "/") - 4)
+    FrmSelISO.btVerifyInstall.Visible = FALSE
     FrmSelISO.btVerifyInstall.Enabled = TRUE
     FrmSelISO.btVerifyInstall.ForeColor = Color.Black
   ELSE IF lstInstallableImg.Find(("No Installable Media Found")) <> -1 THEN 
