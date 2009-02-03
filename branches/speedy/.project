@@ -1,11 +1,12 @@
 # Gambas Project File 2.0
 # Compiled with Gambas 2.10.2
 Title=VectorLinux Installer
-Startup=Step6
+Startup=MdlStartUp
 Version=0.0.1
 Library=gb.gtk
 Library=gb.form
 Library=gb.gtk.ext
+Arguments="en_US"
 TabSize=2
 Translate=1
 Language=en_US

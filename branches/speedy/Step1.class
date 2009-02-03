@@ -75,10 +75,15 @@ END
 PUBLIC SUB Form_Open()
 
   ME.TextLabel1.Text = "<h2>" & TextLabel1.text & "</h2>"
+  ME.mvLooking.path = "images/throbber.gif"
+  ME.mvLooking.Playing = TRUE
+  WAIT 0.25 ' a small wait time to avoid a solid blank form
   ME.FIND_CD_INSTALL_MEDIA()
   ME.FIND_ISO_INSTALL_MEDIA()
   ME.FIND_PARTITION_INSTALL_MEDIA()
   FMain.btNext.Enabled = ComboBox1.Count > 0
+  ME.mvLooking.Playing = FALSE
+  ME.mvLooking.Visible = FALSE
 
 
 END
@@ -150,6 +155,7 @@ PUBLIC SUB FIND_PARTITION_INSTALL_MEDIA() ' This SUB will be useful when install
     NEXT 
           
     tlStatus.Text = ""
+    
   ME.ComboBox1.Enabled = TRUE
   
   
@@ -166,6 +172,8 @@ PUBLIC SUB FIND_CD_INSTALL_MEDIA()
   DIM i AS Integer
   DIM sDriveList AS String[]
   
+  ME.mvLooking.Playing = TRUE
+  WAIT 1
   Step1.tlStatus.Text = ("Scanning for CD Media ... Please wait")
   
   SHELL "/sbin/probedisk | grep \"cdrom\" | cut -f 1 -d \"|\"" TO sOutput
@@ -213,6 +221,10 @@ PUBLIC SUB FIND_ISO_INSTALL_MEDIA()
   DIM sPartList AS String[]
   
   ME.ComboBox1.Enabled = FALSE
+  
+    ME.mvLooking.Playing = TRUE
+  WAIT 1
+  
   tlStatus.Text = ("Scanning system for installable ISO images")
   PRINT tlStatus.Text
   SHELL "/sbin/probepart | grep \"^/dev\" | grep -v -i \"linux swap\" | tr -s \' \'\"\" | cut -f 1 -d \' \'" TO sOutput
@@ -293,6 +305,8 @@ PUBLIC SUB DESCRIBE_PARTITION_INSTALL_MEDIA(sTempFileName AS String)
     sTempFileName = Replace(sTempFileName, "/dev/", "")
     sTempFileName = Replace(sTempFileName, Space(1) & ("on") & Space(1), "-")
   
+    ME.mvLooking.Playing = TRUE
+  WAIT 1
   sDump = Split(File.Load(Temp(sTempFileName)), "\n")
     FOR i = 0 TO sDump.Count - 1
       sLine = Trim(sDump[i])
@@ -388,5 +402,18 @@ PUBLIC SUB bCheckMedia_Click()
       INC iCheckWarn
     END IF
   END IF
+
+END
+
+PUBLIC SUB btRescan_Click()
+  ME.mvLooking.Visible = TRUE
+  ME.ComboBox1.Clear()
+  ME.FIND_CD_INSTALL_MEDIA()
+  ME.FIND_ISO_INSTALL_MEDIA()
+  ME.FIND_PARTITION_INSTALL_MEDIA()
+  ME.mvLooking.Playing = FALSE
+  ME.mvLooking.Visible = FALSE
+  FMain.btNext.Enabled = ComboBox1.Count > 0
+  
 
 END

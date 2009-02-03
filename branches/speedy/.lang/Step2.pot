@@ -26,83 +26,91 @@ msgstr ""
 msgid "Verifying data on compressed package"
 msgstr ""
 
-#: Step2.class:81
+#: Step2.class:82
 msgid "Testing file"
 msgstr ""
 
-#: Step2.class:81
+#: Step2.class:82
 msgid "of"
 msgstr ""
 
-#: Step2.class:97
+#: Step2.class:101
+msgid "Canceling data integrity tests per user request"
+msgstr ""
+
+#: Step2.class:102
+msgid "Data integrity test canceled by user."
+msgstr ""
+
+#: Step2.class:115
 msgid "FAILED"
 msgstr ""
 
-#: Step2.class:99
+#: Step2.class:117
 msgid "The following"
 msgstr ""
 
-#: Step2.class:99
+#: Step2.class:117
 msgid "required"
 msgstr ""
 
-#: Step2.class:99
+#: Step2.class:117
 msgid "has failed the integrity test. It is not safe to continue"
 msgstr ""
 
-#: Step2.class:100
+#: Step2.class:118
 msgid "Integrity test"
 msgstr ""
 
-#: Step2.class:106
+#: Step2.class:124
 msgid "PASSED"
 msgstr ""
 
-#: Step2.class:136
+#: Step2.class:154
 msgid "has failed the data integrity test. All required packages have passed this test"
 msgstr ""
 
-#: Step2.class:136
+#: Step2.class:154
 msgid "Possible causes for this are a corrupted download or a badly burnt cd. You can try the following options"
 msgstr ""
 
-#: Step2.class:136
+#: Step2.class:154
 msgid "Download a new installation image from www.vectorlinux.com"
 msgstr ""
 
-#: Step2.class:136
+#: Step2.class:154
 msgid "Burn the image at a lower speed rate"
 msgstr ""
 
-#: Step2.class:156
+#: Step2.class:174
 msgid "Data integrity test complete... all tests passed"
 msgstr ""
 
-#: Step2.class:163
+#: Step2.class:181
 msgid "All test passed. It is safe to continue with the installation process."
 msgstr ""
 
-#: Step2.class:180
+#: Step2.class:198
 msgid "Verifying installation files can prevent you from performing an unsuccessful install"
 msgstr ""
 
-#: Step2.class:180
+#: Step2.class:198
 msgid "Keep in mind however, that this process can take a while to complete."
 msgstr ""
 
-#: Step2.class:180
+#: Step2.class:198
 msgid "Click"
 msgstr ""
 
-#: Step2.class:180
+#: Step2.class:198
 msgid "to abort this process at any time"
 msgstr ""
 
-#: Step2.class:333
+#: Step2.class:352
 msgid "TextLabel2"
 msgstr ""
 
-#: Step2.class:347
+#: Step2.class:366
 msgid "Stop"
 msgstr ""
 
