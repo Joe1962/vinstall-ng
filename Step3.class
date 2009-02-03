@@ -1,0 +1,70 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+PUBLIC SUB rbGroup_Click()
+  
+    ' FMain.btNext.Enabled = TRUE
+    ' FMain0.btNext.Enabled = TRUE
+  
+END
+
+
+PUBLIC SUB Form_Open()
+
+  ME.tlbanner.Text = "<h2>" & ("Disc Partitioning Options") & "</h2>"
+  ME.tlbanner.Alignment = Align.Center
+  ME.tlbanner.Alignment = Align.Normal
+  ME.tlPartHelp.Text = ("Select the partitioning method you would like to use")
+  FMain.btNext.Enabled = TRUE
+  FMain0.btNext.Enabled = TRUE
+  
+
+END
+
+PUBLIC FUNCTION GetNext() AS String
+  
+  
+  IF ME.rbAutoPart.Value = TRUE THEN 
+    'no module for auto partition written yet
+    Message("Not ready yet")
+    RETURN 
+  END IF
+  IF ME.rbCustomPart.Value = TRUE THEN 
+    'embed gparted
+    Message("Gparted module not present yet")
+    RETURN 
+  END IF
+  IF ME.rbPrePartitioned.Value = TRUE THEN   
+    ' Use existing partitions
+    RETURN "Step6"
+  END IF
+  
+END
+PUBLIC SUB StartUp()
+  
+  FMain.btNext.Enabled = TRUE
+  FMain0.btNext.Enabled = TRUE
+  
+END
+PUBLIC SUB OnExit()
+  
+  
+  
+END
+
+
+

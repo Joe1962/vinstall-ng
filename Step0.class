@@ -115,7 +115,7 @@ END
 PUBLIC SUB LIST_LANG_CHOICES()
   
   DIM sLang, sKey, sFile AS String
-    FOR EACH sFile IN Dir(Application.Dir &/ ".lang", "*.mo")
+    FOR EACH sFile IN Dir(".lang", "*.mo")
       SELECT CASE File.BaseName(Application.dir &/ ".lang" &/ sfile)
         CASE "es"
           sKey = "es_ES.utf8"

@@ -202,7 +202,8 @@ END
 
 PUBLIC SUB OnExit()
   
-  
+  IF FMain.btNext THEN FMain.btNext.Enabled = TRUE
+  IF FMain0.btNext THEN FMain0.btNext.Enabled = TRUE
   
 END
 

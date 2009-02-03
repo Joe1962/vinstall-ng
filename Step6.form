@@ -1,0 +1,48 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,72,43)
+  Expand = True
+  Text = ("")
+  Arrangement = Arrange.Row
+  { HPanel1 HPanel
+    MoveScaled(0,0,60,5)
+    Expand = True
+    { tlbanner TextLabel
+      MoveScaled(12,0,19,3)
+      Expand = True
+      Text = ("")
+    }
+    { Separator1 Separator
+      MoveScaled(13,4,25,1)
+      Expand = True
+    }
+  }
+  { Panel1 Panel
+    MoveScaled(1,6,64,33)
+    Expand = True
+    Border = Border.Plain
+    { gvPartListing GridView
+      MoveScaled(0,0,61,25)
+      Expand = True
+      Grid = False
+    }
+    { cbMntPoint ComboBox
+      MoveScaled(12,27,7,2)
+      Visible = False
+      Text = ("")
+    }
+    { cbYN ComboBox
+      MoveScaled(22,28,7,1)
+      Visible = False
+      Text = ("")
+      ReadOnly = True
+      List = [("Yes"), ("No")]
+    }
+    { cbFs ComboBox
+      MoveScaled(3,27,8,1)
+      Visible = False
+      Text = ("")
+    }
+  }
+}
