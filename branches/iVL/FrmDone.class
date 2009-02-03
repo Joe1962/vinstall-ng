@@ -20,8 +20,8 @@
 PUBLIC SUB Form_Open()
 
 DIM sText AS String
-ME.MovieBox1.Path = "images/throbber.gif"
-ME.icon = picture["images/throbber.gif"]
+ME.MovieBox1.Path = "images/ChBltB.gif"
+ME.icon = picture["images/ChBltB.gif"]
   FMain.FrmCurr = ME
   Fmain.tvPlan["Conf4"].Picture = MdlCore.sDonePic
   Fmain.tvPlan["Conf5"].Picture = MdlCore.sNowPic

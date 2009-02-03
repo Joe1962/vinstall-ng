@@ -27,6 +27,7 @@
   }
   { btVerifyInstall Button
     MoveScaled(1,43,26,3)
+    Visible = False
     Enabled = False
     Text = ("Verify Installation Files")
     Picture = Picture["icon:/small/apply"]
