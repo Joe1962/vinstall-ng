@@ -76,6 +76,7 @@ PUBLIC SUB BEGIN_MEDIA_TESTING()
     FOR EACH sfile IN Dir(sRequired, "*.tlz")
         
         PRINT ("Verifying data on compressed package") & Space(1) & Trim(sfile) & " .... "
+      IF iProcSig <> 225 THEN 
       hproc = SHELL "lzmadec < " & sRequired &/ Trim(sfile) & " > /dev/null" ' wait
         INC i
         ME.tlTestingLbl.Text = ("Testing file") & Space(1) & i & Space(1) & ("of") & Space(1) & iTotalBulks & " ... " & sfile
@@ -91,6 +92,23 @@ PUBLIC SUB BEGIN_MEDIA_TESTING()
                 iProcSig = 225 OR hproc.State = Process.Stopped
                 IF ProgressBar1.Value < iInc * i THEN ME.ProgressBar1.Value = i / iTotalBulks
           END IF
+        END IF
+          
+          IF iProcSig = 225 THEN 'canceled by user
+              'shell 
+              'hproc.Kill
+              'SHELL "kill -9 " & hproc.Id WAIT 
+              PRINT ("Canceling data integrity tests per user request")
+            Message.Info(("Data integrity test canceled by user."))
+              ME.mbThrobbler.Playing = FALSE
+              ME.btStop.Enabled = FALSE
+              FMain.btNext.Enabled = TRUE
+              FMain0.btNext.Enabled = TRUE
+              FMain.btBack.Enabled = TRUE
+              FMain0.btBack.Enabled = TRUE
+              RETURN 
+          END IF
+          
         iretval = hproc.Value
           IF hproc.Value > 0 THEN 
             ' Error in bulk
@@ -209,9 +227,15 @@ END
 
 
 PUBLIC SUB btStop_Click()
-
-  mbThrobbler.Playing = FALSE
-    IF FMain.btNext THEN FMain.btNext.Enabled = TRUE
-    IF FMain0.btNext THEN FMain0.btNext.Enabled = TRUE
+    
+  iProcSig = 225
+  'hproc.Kill
+  EXEC ["kill", "-9", hproc.Id] WAIT 
+  EXEC ["killall", "lzmadec"] WAIT 
+    
+  
+  ' mbThrobbler.Playing = FALSE
+  '   IF FMain.btNext THEN FMain.btNext.Enabled = TRUE
+  '   IF FMain0.btNext THEN FMain0.btNext.Enabled = TRUE
 
 END

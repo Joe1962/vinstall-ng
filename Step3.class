@@ -40,7 +40,7 @@ PUBLIC FUNCTION GetNext() AS String
   
   IF ME.rbAutoPart.Value = TRUE THEN 
     'no module for auto partition written yet
-    Message("Not ready yet")
+    'Message("Not ready yet")
     RETURN 
   END IF
   IF ME.rbCustomPart.Value = TRUE THEN 

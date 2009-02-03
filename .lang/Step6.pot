@@ -30,39 +30,39 @@ msgstr ""
 msgid "File System"
 msgstr ""
 
-#: Step6.class:104
+#: Step6.class:106
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:115
+#: Step6.class:118
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:158
+#: Step6.class:161
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:158
+#: Step6.class:161
 msgid "as your"
 msgstr ""
 
-#: Step6.class:158
+#: Step6.class:161
 msgid "partition."
 msgstr ""
 
-#: Step6.class:158
+#: Step6.class:161
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:232
+#: Step6.class:214
 msgid "Select which partitions to use for installation"
 msgstr ""
 
-#: Step6.class:367
+#: Step6.class:350
 msgid "Yes"
 msgstr ""
 
-#: Step6.class:367
+#: Step6.class:350
 msgid "No"
 msgstr ""
 

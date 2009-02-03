@@ -14,19 +14,19 @@ msgstr ""
 msgid "VectorLinux Installer"
 msgstr ""
 
-#: FMain.class:233 FMain0.class:225
+#: FMain.class:234 FMain0.class:230
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:270 FMain0.class:262
+#: FMain.class:275 FMain0.class:267
 msgid "Back"
 msgstr ""
 
-#: FMain.class:281 FMain0.class:273
+#: FMain.class:286 FMain0.class:278
 msgid "Next"
 msgstr ""
 
-#: FMain.class:292 FMain0.class:284
+#: FMain.class:297 FMain0.class:289
 msgid "Quit"
 msgstr ""
 
@@ -62,67 +62,67 @@ msgstr ""
 msgid "on"
 msgstr ""
 
-#: Step1.class:122
+#: Step1.class:127
 msgid "Scanning system partitions for installation files"
 msgstr ""
 
-#: Step1.class:141
+#: Step1.class:146
 msgid "Found"
 msgstr ""
 
-#: Step1.class:141
+#: Step1.class:146
 msgid "in partition"
 msgstr ""
 
-#: Step1.class:169
+#: Step1.class:177
 msgid "Scanning for CD Media ... Please wait"
 msgstr ""
 
-#: Step1.class:182
+#: Step1.class:190
 msgid "Scanning"
 msgstr ""
 
-#: Step1.class:192
+#: Step1.class:200
 msgid "in"
 msgstr ""
 
-#: Step1.class:216
+#: Step1.class:228
 msgid "Scanning system for installable ISO images"
 msgstr ""
 
-#: Step1.class:307
+#: Step1.class:321
 msgid "DISTRIBUTION"
 msgstr ""
 
-#: Step1.class:310
+#: Step1.class:324
 msgid "VERSION"
 msgstr ""
 
-#: Step1.class:387
+#: Step1.class:401
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:387
+#: Step1.class:401
 msgid "WARNING:"
 msgstr ""
 
-#: Step1.class:387
+#: Step1.class:401
 msgid "This process can take a long time to complete."
 msgstr ""
 
-#: Step1.class:425
+#: Step1.class:453
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:443
+#: Step1.class:471
 msgid "Select Installation source from the list below"
 msgstr ""
 
-#: Step1.class:464
+#: Step1.class:492
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:488
+#: Step1.class:516
 msgid "Check Installation media before installing"
 msgstr ""
 
@@ -140,89 +140,97 @@ msgstr ""
 msgid "Verifying data on compressed package"
 msgstr ""
 
-#: Step2.class:81
+#: Step2.class:82
 msgid "Testing file"
 msgstr ""
 
-#: Step2.class:81
+#: Step2.class:82
 msgid "of"
 msgstr ""
 
-#: Step2.class:97
+#: Step2.class:101
+msgid "Canceling data integrity tests per user request"
+msgstr ""
+
+#: Step2.class:102
+msgid "Data integrity test canceled by user."
+msgstr ""
+
+#: Step2.class:115
 msgid "FAILED"
 msgstr ""
 
-#: Step2.class:99
+#: Step2.class:117
 msgid "The following"
 msgstr ""
 
-#: Step2.class:99
+#: Step2.class:117
 msgid "required"
 msgstr ""
 
-#: Step2.class:99
+#: Step2.class:117
 msgid "has failed the integrity test. It is not safe to continue"
 msgstr ""
 
-#: Step2.class:100
+#: Step2.class:118
 msgid "Integrity test"
 msgstr ""
 
-#: Step2.class:106
+#: Step2.class:124
 msgid "PASSED"
 msgstr ""
 
-#: Step2.class:136
+#: Step2.class:154
 msgid ""
 "has failed the data integrity test. All required packages have passed this "
 "test"
 msgstr ""
 
-#: Step2.class:136
+#: Step2.class:154
 msgid ""
 "Possible causes for this are a corrupted download or a badly burnt cd. You "
 "can try the following options"
 msgstr ""
 
-#: Step2.class:136
+#: Step2.class:154
 msgid "Download a new installation image from www.vectorlinux.com"
 msgstr ""
 
-#: Step2.class:136
+#: Step2.class:154
 msgid "Burn the image at a lower speed rate"
 msgstr ""
 
-#: Step2.class:156
+#: Step2.class:174
 msgid "Data integrity test complete... all tests passed"
 msgstr ""
 
-#: Step2.class:163
+#: Step2.class:181
 msgid "All test passed. It is safe to continue with the installation process."
 msgstr ""
 
-#: Step2.class:180
+#: Step2.class:198
 msgid ""
 "Verifying installation files can prevent you from performing an unsuccessful "
 "install"
 msgstr ""
 
-#: Step2.class:180
+#: Step2.class:198
 msgid "Keep in mind however, that this process can take a while to complete."
 msgstr ""
 
-#: Step2.class:180
+#: Step2.class:198
 msgid "Click"
 msgstr ""
 
-#: Step2.class:180
+#: Step2.class:198
 msgid "to abort this process at any time"
 msgstr ""
 
-#: Step2.class:333
+#: Step2.class:352
 msgid "TextLabel2"
 msgstr ""
 
-#: Step2.class:347
+#: Step2.class:366
 msgid "Stop"
 msgstr ""
 
@@ -280,38 +288,38 @@ msgstr ""
 msgid "File System"
 msgstr ""
 
-#: Step6.class:104
+#: Step6.class:106
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:115
+#: Step6.class:118
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:158
+#: Step6.class:161
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:158
+#: Step6.class:161
 msgid "as your"
 msgstr ""
 
-#: Step6.class:158
+#: Step6.class:161
 msgid "partition."
 msgstr ""
 
-#: Step6.class:158
+#: Step6.class:161
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:232
+#: Step6.class:214
 msgid "Select which partitions to use for installation"
 msgstr ""
 
-#: Step6.class:367
+#: Step6.class:350
 msgid "Yes"
 msgstr ""
 
-#: Step6.class:367
+#: Step6.class:350
 msgid "No"
 msgstr ""

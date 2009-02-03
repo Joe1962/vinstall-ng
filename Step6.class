@@ -46,7 +46,7 @@ PUBLIC SUB PREPARE_PARTITION_LISTING()
     gvPartListing[0, 0].text = ("Partition") 
     gvPartListing[0, 1].text = ("Size") 
     gvPartListing[0, 2].text = ("Mount Point") 
-    gvPartListing[0, 3].text = ("File System") 
+    gvPartListing[0, 4].text = ("File System") 
     'gvPartListing[0, 4].text = ("File System") 
     gvPartListing[0, 0].BackColor = Color.LightBackground
     gvPartListing[0, 0].Font.Bold = TRUE
@@ -57,8 +57,9 @@ PUBLIC SUB PREPARE_PARTITION_LISTING()
     gvPartListing.Columns[2].Width = 120
     gvPartListing[0, 3].BackColor = Color.LightBackground
     gvPartListing[0, 3].Font.Bold = TRUE
-    gvPartListing.Columns[3].Width = 120
+    gvPartListing.Columns[3].Width = 8
     gvPartListing[0, 4].BackColor = Color.LightBackground
+    gvPartListing.Columns[4].Width = 120
     gvPartListing[0, 4].Font.Bold = TRUE
     gvPartListing[0, 5].BackColor = Color.LightBackground
     gvPartListing[0, 5].Font.Bold = TRUE 
@@ -94,24 +95,26 @@ PUBLIC SUB LIST_PARTITIONS()
               ME.gvPartListing[irow, 0].text = Trim(sDisks[i]) & Trim(sPartNo)
               ME.gvPartListing[irow, 1].Text = Trim(sSize)
               IF sFs LIKE "linux-swap" THEN 
-                gvPartListing[irow, 3].Text = Trim(sfs)
+                gvPartListing[irow, 4].Text = Trim(sfs)
               ELSE 
               cbMntPoint = NEW ComboBox(gvPartListing.Parent) AS "MountPointSel"
                 WITH cbMntPoint
                   .Move(gvPartListing[irow, 2].left, gvPartListing[irow, 2].top)
                   .Width = gvPartListing[irow, 2].Width
                   .Height = gvPartListing[irow, 2].Height
+                  .ReadOnly = TRUE
                   .list = [("Not Used"), "/", "/home", "/usr", "/opt", "/tmp", "/var", "/boot", "/mnt" &/ Right(gvPartListing[irow, 0].text, Len(gvPartListing[irow, 0].text) - RInStr(gvPartListing[irow, 0].text, "/"))]
                   .Text = ("Not Used")
                   .tag = gvPartListing[irow, 0].Text
+                  '.ReadOnly = TRUE
                 END WITH 
                 objMntPoints.Add(cbMntPoint)
               cbfs = NEW ComboBox(gvPartListing.Parent) AS "FsSel"
                 WITH cbfs
-                  .Move(gvPartListing[irow, 3].left, gvPartListing[irow, 3].top)
-                  .Width = gvPartListing[irow, 3].Width
-                  .Height = gvPartListing[irow, 3].Height
-                  '.list = [("Not Used"), "/", "/home", "/usr", "/opt", "/tmp", "/var", "/boot", "/mnt" &/ Right(gvPartListing[irow, 0].text, Len(gvPartListing[irow, 0].text) - RInStr(gvPartListing[irow, 0].text, "/"))]
+                  .Move(gvPartListing[irow, 4].left, gvPartListing[irow, 3].top)
+                  .Width = gvPartListing[irow, 4].Width
+                  .Height = gvPartListing[irow, 4].Height
+                  .ReadOnly = TRUE
                   .list = [("Do not format"), "ext2", "ext3", "jfs", "xfs", "reiserfs"]
                   .Text = ("Do not format")
                   .tag = gvPartListing[irow, 0].Text
@@ -148,12 +151,12 @@ END
 
 PUBLIC FUNCTION CheckEntry(sEntry AS String, iCurrRow AS Integer) AS Integer
   
-  DIM irow AS Integer = 2
-    FOR irow = 2 TO ME.gvPartListing.Rows.count - 2
+  DIM irow AS Integer '= 2
+    FOR irow = 0 TO ME.gvPartListing.Rows.count - 1
       
       IF irow <> iCurrRow THEN 
-        PRINT irow & "-" & iCurrRow
-        IF gvPartListing[irow, 2].Text = sEntry THEN 
+        'PRINT irow & "-" & iCurrRow
+        IF gvPartListing[irow, 2].Text AND IF gvPartListing[irow, 2].Text = sEntry THEN 
           Message.Error(("You have already selected") & Space(1) & gvPartListing[irow, 0].Text & Space(1) & ("as your") & Space(1) & Trim(sEntry) & Space(1) & ("partition.") & gb.NewLine &
           ("Please select only one partition for this purpose"))
           
@@ -186,12 +189,9 @@ PUBLIC SUB MountPointSel_Click()
       IF cb.tag = LAST.tag THEN cb.Enabled = TRUE
     NEXT 
     ' save the text in the background to the gridview
-      'GOTO CHECK_ENTRY
       
       ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text = LAST.text
-      
-      
-      'Message(gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text)
+
   ELSE 
     FOR EACH cb IN objFS
       IF cb.tag = LAST.tag THEN cb.Enabled = FALSE
@@ -199,25 +199,7 @@ PUBLIC SUB MountPointSel_Click()
     NEXT 
   END IF
   
-  
-  ' CHECK_ENTRY:
-  '   irow = 2 ' we start at row 2, because 0 and 1 are meaningless for this
-  '   REPEAT 
-  '     'Message(irow & "," & gvPartListing.RowAt(LAST.y))
-  '       IF irow <> gvPartListing.RowAt(y) THEN 
-  '         'Message(irow, gvPartListing.RowAt(y))
-  '         IF Trim(gvPartListing[irow, 2].Text) = Trim(LAST.text) THEN 
-  '           'problem here... there is already an entry for this
-  '           Message.Error("Duplicate entry found")
-  '           RETURN 
-  '         END IF
-  '       'ELSE 
-  '       END IF
-  ' 
-  '     
-  '     INC irow
-  '   UNTIL 
-  '     irow = gvPartListing.Rows.Count - 2 ' the 2 rows we skipped to start with
+
       
         
       
