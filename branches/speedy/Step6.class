@@ -1,0 +1,306 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PRIVATE cb AS ComboBox
+PRIVATE x AS Integer
+PRIVATE y AS Integer
+PUBLIC objMntPoints AS Object[]
+PUBLIC objFS AS Object[]
+
+PUBLIC FUNCTION GetNext() AS String
+  
+  RETURN "Step7"
+  
+END
+
+PUBLIC SUB OnExit()
+  
+  
+  
+END
+
+PUBLIC SUB StartUp()
+  
+  
+  
+END
+
+PUBLIC SUB PREPARE_PARTITION_LISTING()
+  WITH ME.gvPartListing
+    .Columns.Count = 6
+    .Rows.count = 1
+  END WITH 
+    gvPartListing[0, 0].text = ("Partition") 
+    gvPartListing[0, 1].text = ("Size") 
+    gvPartListing[0, 2].text = ("Mount Point") 
+    gvPartListing[0, 3].text = ("File System") 
+    'gvPartListing[0, 4].text = ("File System") 
+    gvPartListing[0, 0].BackColor = Color.LightBackground
+    gvPartListing[0, 0].Font.Bold = TRUE
+    gvPartListing[0, 1].BackColor = Color.LightBackground
+    gvPartListing[0, 1].Font.Bold = TRUE
+    gvPartListing[0, 2].BackColor = Color.LightBackground
+    gvPartListing[0, 2].Font.Bold = TRUE
+    gvPartListing.Columns[2].Width = 120
+    gvPartListing[0, 3].BackColor = Color.LightBackground
+    gvPartListing[0, 3].Font.Bold = TRUE
+    gvPartListing.Columns[3].Width = 120
+    gvPartListing[0, 4].BackColor = Color.LightBackground
+    gvPartListing[0, 4].Font.Bold = TRUE
+    gvPartListing[0, 5].BackColor = Color.LightBackground
+    gvPartListing[0, 5].Font.Bold = TRUE 
+    
+  END
+
+
+PUBLIC SUB LIST_PARTITIONS()
+  
+  DIM sDump AS String
+  DIM sDisks, sPartitions, sPartLine AS String[]
+  DIM sDisk, sPartNo, sSize, sFs AS String
+  DIM i, ii, irow AS Integer
+  
+  objFS = NEW Object[]
+  objMntPoints = NEW Object[]
+  
+  INC ME.gvPartListing.Rows.Count
+  irow = 2
+  SHELL "probedisk | grep -v cdrom | cut -f 1 -d \'|\'" TO sDump ' This gets the list of present hard drisks
+  sDisks = Split(Trim(sDump), "\n")
+      FOR i = 0 TO sDisks.Count - 1
+        SHELL "parted " & Trim(sDisks[i]) & " print | grep \"^ [0-9]\" | tr -s \' \',\"\"" TO sDump
+          spartitions = Split(Trim(sdump), "\n")
+            FOR ii = 0 TO spartitions.count - 1
+              sPartLine = Split(Trim(spartitions[ii]), " ")
+                sPartNo = sPartLine[0]
+                sSize = sPartLine[3]
+                sFs = sPartLine[5]
+            'NEXT 
+              ' add partition to the gridview
+              INC ME.gvPartListing.Rows.Count
+              ME.gvPartListing[irow, 0].text = Trim(sDisks[i]) & Trim(sPartNo)
+              ME.gvPartListing[irow, 1].Text = Trim(sSize)
+              IF sFs LIKE "linux-swap" THEN 
+                gvPartListing[irow, 3].Text = Trim(sfs)
+              ELSE 
+              cbMntPoint = NEW ComboBox(gvPartListing.Parent) AS "MountPointSel"
+                WITH cbMntPoint
+                  .Move(gvPartListing[irow, 2].left, gvPartListing[irow, 2].top)
+                  .Width = gvPartListing[irow, 2].Width
+                  .Height = gvPartListing[irow, 2].Height
+                  .list = [("Not Used"), "/", "/home", "/usr", "/opt", "/tmp", "/var", "/boot", "/mnt" &/ Right(gvPartListing[irow, 0].text, Len(gvPartListing[irow, 0].text) - RInStr(gvPartListing[irow, 0].text, "/"))]
+                  .Text = ("Not Used")
+                  .tag = gvPartListing[irow, 0].Text
+                END WITH 
+                objMntPoints.Add(cbMntPoint)
+              cbfs = NEW ComboBox(gvPartListing.Parent) AS "FsSel"
+                WITH cbfs
+                  .Move(gvPartListing[irow, 3].left, gvPartListing[irow, 3].top)
+                  .Width = gvPartListing[irow, 3].Width
+                  .Height = gvPartListing[irow, 3].Height
+                  '.list = [("Not Used"), "/", "/home", "/usr", "/opt", "/tmp", "/var", "/boot", "/mnt" &/ Right(gvPartListing[irow, 0].text, Len(gvPartListing[irow, 0].text) - RInStr(gvPartListing[irow, 0].text, "/"))]
+                  .list = [("Do not format"), "ext2", "ext3", "jfs", "xfs", "reiserfs"]
+                  .Text = ("Do not format")
+                  .tag = gvPartListing[irow, 0].Text
+                  .Enabled = FALSE
+                END WITH 
+                objFS.Add(cbFS)
+              END IF
+              'ME.gvPartListing[irow, 2].Text = Trim(sFs)
+              INC irow
+            NEXT
+      NEXT 
+              
+        
+  
+  
+END
+
+PUBLIC SUB FsSel_Click()
+  
+  'Message(LAST.tag)
+  x = LAST.x
+  y = LAST.y
+  
+    IF LAST.text <> ("Do not format") THEN 
+      ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text = LAST.text
+    ELSE 
+      ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text = ""
+    END IF
+    
+    'IF ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text THEN Message(ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text)
+    
+  
+END
+
+PUBLIC FUNCTION CheckEntry(sEntry AS String, iCurrRow AS Integer) AS Integer
+  
+  DIM irow AS Integer = 2
+    FOR irow = 2 TO ME.gvPartListing.Rows.count - 2
+      
+      IF irow <> iCurrRow THEN 
+        PRINT irow & "-" & iCurrRow
+        IF gvPartListing[irow, 2].Text = sEntry THEN 
+          Message.Error(("You have already selected") & Space(1) & gvPartListing[irow, 0].Text & Space(1) & ("as your") & Space(1) & Trim(sEntry) & Space(1) & ("partition.") & gb.NewLine &
+          ("Please select only one partition for this purpose"))
+          
+          RETURN 1
+        END IF
+      END IF
+      INC irow
+      
+    NEXT 
+  RETURN 0
+END
+
+
+PUBLIC SUB MountPointSel_Click()
+  DIM cb AS ComboBox
+  DIM irow AS Integer
+  'Message(LAST.tag)
+  
+  x = LAST.x
+  y = LAST.y
+  
+  IF ME.CheckEntry(LAST.text, gvPartListing.RowAt(LAST.y)) > 0 THEN 
+    LAST.text = ("Not Used")
+    STOP EVENT 
+    RETURN 
+  END IF
+    
+  IF LAST.text <> ("Not Used") THEN 
+      FOR EACH cb IN objFS
+      IF cb.tag = LAST.tag THEN cb.Enabled = TRUE
+    NEXT 
+    ' save the text in the background to the gridview
+      'GOTO CHECK_ENTRY
+      
+      ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text = LAST.text
+      
+      
+      'Message(gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text)
+  ELSE 
+    FOR EACH cb IN objFS
+      IF cb.tag = LAST.tag THEN cb.Enabled = FALSE
+      ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text = ""
+    NEXT 
+  END IF
+  
+  
+  ' CHECK_ENTRY:
+  '   irow = 2 ' we start at row 2, because 0 and 1 are meaningless for this
+  '   REPEAT 
+  '     'Message(irow & "," & gvPartListing.RowAt(LAST.y))
+  '       IF irow <> gvPartListing.RowAt(y) THEN 
+  '         'Message(irow, gvPartListing.RowAt(y))
+  '         IF Trim(gvPartListing[irow, 2].Text) = Trim(LAST.text) THEN 
+  '           'problem here... there is already an entry for this
+  '           Message.Error("Duplicate entry found")
+  '           RETURN 
+  '         END IF
+  '       'ELSE 
+  '       END IF
+  ' 
+  '     
+  '     INC irow
+  '   UNTIL 
+  '     irow = gvPartListing.Rows.Count - 2 ' the 2 rows we skipped to start with
+      
+        
+      
+  
+END
+
+
+
+
+PUBLIC SUB Form_Open()
+
+  ME.tlbanner.Text = "<h2>" & ("Select which partitions to use for installation") & "</h2>"
+  ME.PREPARE_PARTITION_LISTING()
+  ME.LIST_PARTITIONS()
+  'ME.cbMntPoint.list = [("Not Used"), "/", "/home", "/usr", "/opt", "/tmp", "/var", "/boot"]
+  'ME.cbMntPoint.ReadOnly = TRUE
+END
+
+PUBLIC SUB Form_Resize()
+
+  'ME.gvPartListing.Height = gvPartListing.Parent.Height
+  ME.Panel1.Height = ME.ClientH - (ME.HPanel1.Top + ME.HPanel1.Height + 8)
+  ME.gvPartListing.Resize(gvPartListing.Parent.Width, gvPartListing.Parent.Height)
+
+END
+
+
+
+
+PUBLIC SUB gvPartListing_Click()
+
+'DIM x, y AS Integer
+
+  IF LAST.row < 2 THEN RETURN 
+x = LAST.column
+y = LAST.row
+
+IF X = 2 THEN 
+  ME.cbMntPoint.Move(gvPartListing[y, x].left, gvPartListing[y, x].top)
+  ME.cbMntPoint.Width = gvPartListing[y, x].Width
+  ME.cbMntPoint.Height = gvPartListing[y, x].Height
+  
+  ME.cbMntPoint.Visible = TRUE
+END IF
+
+
+
+' 
+ END
+
+
+PUBLIC SUB cbMntPoint_Change()
+
+  'DIM x, y AS Integer
+  
+  'x = gvPartListing.ColumnAt(LAST.x)
+  'y = gvPartListing.RowAt(LAST.y)
+  
+  IF y < 2 THEN RETURN 
+    IF LAST.text = ("Not Used") THEN LAST.text = ""
+    gvPartListing[y, x].Text = Trim(LAST.text)
+    LAST.visible = FALSE
+
+
+END
+
+
+PUBLIC SUB cbYN_Click()
+
+gvPartListing[y, x].Text = cbYN.Text
+
+WAIT 0.25
+cbYN.Visible = FALSE
+
+END
+
+
+
+
+PUBLIC SUB cbYN_Leave()
+
+  ' 'Message("leave")
+  ' gvPartListing[y, x].Text = cbYN.Text
+  ' cbYN.Visible = FALSE
+
+END

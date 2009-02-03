@@ -1,0 +1,84 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Text = ("")
+  Arrangement = Arrange.Row
+  { HPanel1 HPanel
+    MoveScaled(0,0,60,5)
+    Expand = True
+    { tlbanner TextLabel
+      MoveScaled(12,0,19,3)
+      Expand = True
+      Text = ("")
+    }
+    { Separator1 Separator
+      MoveScaled(13,4,25,1)
+      Expand = True
+    }
+  }
+  { HBox2 HBox
+    MoveScaled(49,5,9,1)
+    Expand = True
+  }
+  { HBox1 HBox
+    MoveScaled(0,7,63,4)
+    Expand = True
+    { tlPartHelp TextLabel
+      MoveScaled(0,0,62,3)
+      Expand = True
+      Text = ("TextLabel1")
+      Alignment = Align.TopLeft
+    }
+  }
+  { HPanel2 HPanel
+    MoveScaled(1,12,61,34)
+    Expand = True
+    { HBox3 HBox
+      MoveScaled(1,1,10,1)
+      Expand = True
+    }
+    { rbAutoPart RadioButton rbGroup
+      Name = "rbAutoPart"
+      MoveScaled(0,3,38,3)
+      Expand = True
+      Text = ("Automatic")
+    }
+    { Panel1 Panel
+      MoveScaled(0,6,3,3)
+    }
+    { tlautopart TextLabel
+      MoveScaled(4,6,55,4)
+      Expand = True
+      Text = ("Automatically resize your partitions to make size for your VectorLinux installation")
+    }
+    { rbCustomPart RadioButton rbGroup
+      Name = "rbCustomPart"
+      MoveScaled(0,9,28,3)
+      Expand = True
+      Text = ("Manually resize my partitions ")
+    }
+    { Panel2 Panel
+      MoveScaled(0,12,3,3)
+    }
+    { tlGparted TextLabel
+      MoveScaled(4,12,46,3)
+      Expand = True
+      Text = ("Use the partitioning tool to prepare your system partitions.")
+    }
+    { rbPrePartitioned RadioButton rbGroup
+      Name = "rbPrePartitioned"
+      MoveScaled(0,15,41,3)
+      Expand = True
+      Text = ("My hard drive is already partitioned")
+    }
+    { Panel3 Panel
+      MoveScaled(0,18,3,3)
+    }
+    { TextLabel1 TextLabel
+      MoveScaled(4,18,54,3)
+      Expand = True
+      Text = ("Install VectorLinux to existing partitions on my hard drive")
+    }
+  }
+}
