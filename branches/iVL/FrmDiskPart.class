@@ -25,9 +25,6 @@ PUBLIC SUB Form_Open()
   
   
   MdlDiskPart.EMBED_GPARTED()
-  Message.Warning(("VectorLinux is about to launch the GParted partitioning tool. Use this utility to") & gb.NewLine &
-  ("move, resize, delete or create partitions.") & "<b>" & gb.NewLine & gb.NewLine & 
-  ("When you are finished, you will need to exit the utility from the") & Space(1) & "<i>" & ("GParted") & "</i>" & Space(1) & ("menu") & "</b>")
   WITH ME
     .tlBanner.Text = "<b>Disk Partitioning:</b><br>" &
     "This portion of the setup process allows you to define an installation target for your new operating system." &
@@ -57,6 +54,10 @@ PUBLIC SUB EmbGPARTED_Embed()
   FMain.btback.ForeColor = Color.Gray
   FMain.btQuit.Enabled = FALSE
   FMain.btQuit.ForeColor = Color.Gray
+  Message.Warning(("VectorLinux is about to launch the GParted partitioning tool. Use this utility to") & gb.NewLine &
+    ("move, resize, delete or create partitions.") & "<b>" & gb.NewLine & gb.NewLine & 
+    ("When you are finished, you will need to exit the utility from the") & Space(1) & "<i>" & ("GParted") & "</i>" & Space(1) & ("menu") & "</b>")
+  
   MdlCore.WARN_STATUS(("When finished making changes, exit the partitioning application to continue ..."))
   
 
