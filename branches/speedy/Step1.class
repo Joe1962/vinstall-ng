@@ -91,6 +91,9 @@ END
 
 PUBLIC FUNCTION GetNext() AS String
   
+    ClsGlobal.fRunningMainForm.listview1["Step1"].picture = MdlStartUp.pDone
+    ClsGlobal.fRunningMainForm.listview1["Step2"].picture = MdlStartUp.pNow
+  
   IF bcheckmedia.Value = TRUE THEN 
     RETURN "Step2"
       'IF Step2.sLastChecked <> Trim(ME.ComboBox1.Text) THEN 
@@ -104,6 +107,8 @@ PUBLIC FUNCTION GetNext() AS String
     RETURN "Step3"
   END IF
   
+
+  'FMain.ListView1["step0"].pi
   
   
   

@@ -15,6 +15,8 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+STATIC PUBLIC fRunningMainForm AS Object
+
 STATIC PUBLIC sDistroName AS String
 STATIC PUBLIC sDistroVer AS String
 

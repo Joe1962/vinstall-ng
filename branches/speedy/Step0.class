@@ -141,6 +141,10 @@ END
 PUBLIC FUNCTION GetNext() AS String
   
   'Step1.Resize(FMain.pnlStack.Width, FMain.pnlStack.Height)
+  
+  ClsGlobal.fRunningMainForm.Listview1["Step0"].picture = MdlStartUp.pDone
+  ClsGlobal.fRunningMainForm.Listview1["Step1"].picture = MdlStartUp.pNow
+  
   IF System.Language = "en_US" THEN 
     RETURN "Step1"
   ELSE 

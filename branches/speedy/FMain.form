@@ -42,8 +42,9 @@
         }
       }
       { ListView1 ListView
-        MoveScaled(2,3,16,21)
+        MoveScaled(2,3,20,28)
         Expand = True
+        Mode = Select.None
       }
       { HBox6 HBox
         MoveScaled(3,34,13,1)
