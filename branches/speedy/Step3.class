@@ -45,8 +45,8 @@ PUBLIC FUNCTION GetNext() AS String
   END IF
   IF ME.rbCustomPart.Value = TRUE THEN 
     'embed gparted
-    Message("Gparted module not present yet")
-    RETURN 
+    'Message("Gparted module not present yet")
+    RETURN "Step5"
   END IF
   IF ME.rbPrePartitioned.Value = TRUE THEN   
     ' Use existing partitions

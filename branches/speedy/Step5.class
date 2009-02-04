@@ -1,0 +1,141 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC SUB Form_Open()
+
+  ME.tlbanner.Text = "<h2>" & ("Resize partitions using Gparted") & "</h2>"
+  'ME.EMBED_GPARTED()
+END
+
+PUBLIC SUB OnExit()
+  
+  
+  
+END
+
+
+PUBLIC SUB StartUp()
+  
+  ME.EMBED_GPARTED()
+  
+END
+
+
+PUBLIC FUNCTION GetNext() AS String
+  
+  RETURN "Step6"
+  
+END
+
+
+
+PUBLIC SUB EMBED_GPARTED()
+  
+  
+  DIM sTitle AS String
+  DIM sTitle1, sTitle2 AS String
+  DIM aHandle AS NEW Pointer[]
+  DIM iHandle AS Integer
+  DIM i AS Integer = 0
+  DIM sDump AS String
+  DIM sWins AS String = "gpartedbin,Gpartedbin" '" GParted, / dev / sda - GParted, / dev / hda - GParted ""
+  DIM sWons AS String[] = Split(sWins, ",")
+  DIM sType AS String
+  DIM sTypes AS String[]
+   
+  ' The window can be found on the Desktop WM_CLASS property which can be seen via the xprop application
+  ' We may need to implement this method here instead of the win window title method.
+  
+     
+    IF Exist("/usr/sbin/gparted") = FALSE THEN 
+      Message.Error(("Gparted was not found on this system. Please install gparted and try again"))
+      RETURN 
+    END IF
+  
+'  FrmDiskPart.tlBanner.Text = "<h3>" & ("Loading gparted ... Please wait") & "</h3>"
+  ME.tlEmbDone.Text = "<h3><i>" & ("Loading partitioning utility...Please Wait") & "</h3></i>"
+  ME.tlEmbDone.Visible = TRUE
+  SHELL "/usr/sbin/gparted"
+  WAIT 1
+
+  REPEAT 
+    WAIT 1
+    INC i
+      aHandle = Desktop.Find("", "*parted*", "")
+  UNTIL aHandle.Count = 1 OR i = 5
+  
+   IF aHandle.Count > 0 THEN iHandle = aHandle[0]
+
+  
+  IF iHandle THEN 
+    ME.tlEmbDone.Text = ""
+    ME.tlEmbDone.Visible = FALSE
+    TRY Embedder1.Embed(iHandle)
+      CATCH 
+        Message.Error(Error.Text & gb.NewLine & Error.Where)
+  ELSE 
+    Message.Warning(("The VectorLinux installer is unable to embed the gparted partitioning utility.") & gb.NewLine &
+    ("Please consider using the automatic partition option, or use other means of") & gb.NewLine &
+    ("partitioning your hard drives."))
+  END IF
+
+  
+
+  
+END
+
+
+PUBLIC SUB Form_Resize()
+
+  ME.Panel1.Height = ME.ClientH - ME.HPanel1.Top - ME.HPanel1.Height - 12
+
+END
+
+PUBLIC SUB Embedder1_Embed()
+
+  ME.HBox1.Visible = FALSE
+  ME.tlEmbDone.Visible = FALSE
+
+    Message.Warning(("VectorLinux is about to launch the GParted partitioning tool. Use this utility to") & gb.NewLine &
+    ("move, resize, delete or create partitions.") & "<b>" & gb.NewLine & gb.NewLine & 
+    ("When you are finished, you will need to exit the utility from the") & Space(1) & "<i>" & ("GParted") & "</i>" & Space(1) & ("menu") & "</b>")
+    FMain.btNext.Enabled = FALSE
+    FMain0.btNext.Enabled = FALSE
+    FMain.btBack.Enabled = FALSE
+    FMain0.btBack.Enabled = FALSE
+    FMain.btQuit.Enabled = FALSE
+    FMain0.btQuit.Enabled = FALSE
+
+END
+
+PUBLIC SUB Embedder1_Close()
+
+  ME.HBox1.Visible = TRUE
+  'ME.HBox2.Visible = TRUE
+  ME.tlEmbDone.Visible = TRUE
+  ME.tlEmbDone.Text = "<h3>" & ("PARTITIONING DONE") & "</h3>" & gb.NewLine & gb.NewLine &
+  ("CLick next to continue")
+  
+  
+
+  FMain.btNext.Enabled = TRUE
+    FMain0.btNext.Enabled = TRUE
+    FMain.btBack.Enabled = TRUE
+    FMain0.btBack.Enabled = TRUE
+    FMain.btQuit.Enabled = TRUE
+    FMain0.btQuit.Enabled = TRUE
+
+END
