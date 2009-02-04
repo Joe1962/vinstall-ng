@@ -62,67 +62,67 @@ msgstr ""
 msgid "on"
 msgstr ""
 
-#: Step1.class:127
+#: Step1.class:128
 msgid "Scanning system partitions for installation files"
 msgstr ""
 
-#: Step1.class:146
+#: Step1.class:147
 msgid "Found"
 msgstr ""
 
-#: Step1.class:146
+#: Step1.class:147
 msgid "in partition"
 msgstr ""
 
-#: Step1.class:177
+#: Step1.class:188
 msgid "Scanning for CD Media ... Please wait"
 msgstr ""
 
-#: Step1.class:190
+#: Step1.class:201
 msgid "Scanning"
 msgstr ""
 
-#: Step1.class:200
+#: Step1.class:211
 msgid "in"
 msgstr ""
 
-#: Step1.class:228
+#: Step1.class:239
 msgid "Scanning system for installable ISO images"
 msgstr ""
 
-#: Step1.class:321
+#: Step1.class:332
 msgid "DISTRIBUTION"
 msgstr ""
 
-#: Step1.class:324
+#: Step1.class:335
 msgid "VERSION"
 msgstr ""
 
-#: Step1.class:401
+#: Step1.class:412
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:401
+#: Step1.class:412
 msgid "WARNING:"
 msgstr ""
 
-#: Step1.class:401
+#: Step1.class:412
 msgid "This process can take a long time to complete."
 msgstr ""
 
-#: Step1.class:453
+#: Step1.class:464
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:471
+#: Step1.class:482
 msgid "Select Installation source from the list below"
 msgstr ""
 
-#: Step1.class:492
+#: Step1.class:503
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:516
+#: Step1.class:527
 msgid "Check Installation media before installing"
 msgstr ""
 
@@ -272,6 +272,68 @@ msgstr ""
 msgid "Install VectorLinux to existing partitions on my hard drive"
 msgstr ""
 
+#: Step5.class:19
+msgid "Resize partitions using Gparted"
+msgstr ""
+
+#: Step5.class:64
+msgid ""
+"Gparted was not found on this system. Please install gparted and try again"
+msgstr ""
+
+#: Step5.class:69
+msgid "Loading partitioning utility...Please Wait"
+msgstr ""
+
+#: Step5.class:92
+msgid ""
+"The VectorLinux installer is unable to embed the gparted partitioning "
+"utility."
+msgstr ""
+
+#: Step5.class:92
+msgid ""
+"Please consider using the automatic partition option, or use other means of"
+msgstr ""
+
+#: Step5.class:92
+msgid "partitioning your hard drives."
+msgstr ""
+
+#: Step5.class:114
+msgid ""
+"VectorLinux is about to launch the GParted partitioning tool. Use this "
+"utility to"
+msgstr ""
+
+#: Step5.class:114
+msgid "move, resize, delete or create partitions."
+msgstr ""
+
+#: Step5.class:114
+msgid "When you are finished, you will need to exit the utility from the"
+msgstr ""
+
+#: Step5.class:114
+msgid "GParted"
+msgstr ""
+
+#: Step5.class:114
+msgid "menu"
+msgstr ""
+
+#: Step5.class:130
+msgid "PARTITIONING DONE"
+msgstr ""
+
+#: Step5.class:130
+msgid "CLick next to continue"
+msgstr ""
+
+#: Step5.class:194
+msgid "Loading partitioning utility ... Please Wait"
+msgstr ""
+
 #: Step6.class:46
 msgid "Partition"
 msgstr ""
@@ -296,19 +358,19 @@ msgstr ""
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:161
+#: Step6.class:160
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:161
+#: Step6.class:160
 msgid "as your"
 msgstr ""
 
-#: Step6.class:161
+#: Step6.class:160
 msgid "partition."
 msgstr ""
 
-#: Step6.class:161
+#: Step6.class:160
 msgid "Please select only one partition for this purpose"
 msgstr ""
 

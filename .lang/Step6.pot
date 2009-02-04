@@ -38,19 +38,19 @@ msgstr ""
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:161
+#: Step6.class:160
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:161
+#: Step6.class:160
 msgid "as your"
 msgstr ""
 
-#: Step6.class:161
+#: Step6.class:160
 msgid "partition."
 msgstr ""
 
-#: Step6.class:161
+#: Step6.class:160
 msgid "Please select only one partition for this purpose"
 msgstr ""
 

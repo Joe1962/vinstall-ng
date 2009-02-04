@@ -77,6 +77,7 @@ PUBLIC SUB Form_Open()
   ME.TextLabel1.Text = "<h2>" & TextLabel1.text & "</h2>"
   ME.mvLooking.path = "images/throbber.gif"
   ME.mvLooking.Playing = TRUE
+  
   WAIT 0.25 ' a small wait time to avoid a solid blank form
   ME.FIND_CD_INSTALL_MEDIA()
   ME.FIND_ISO_INSTALL_MEDIA()
@@ -157,7 +158,12 @@ PUBLIC SUB FIND_PARTITION_INSTALL_MEDIA() ' This SUB will be useful when install
     tlStatus.Text = ""
     
   ME.ComboBox1.Enabled = TRUE
-  
+  FMain.btNext.Enabled = TRUE
+  'FMain.btBack.Enabled = TRUE
+  FMain0.btNext.Enabled = TRUE
+  'FMain0.btBack.Enabled = TRUE
+  FMain0.btQuit.Enabled = TRUE
+  FMain.btQuit.Enabled = TRUE
   
   
   
@@ -174,6 +180,11 @@ PUBLIC SUB FIND_CD_INSTALL_MEDIA()
   
   ME.mvLooking.Playing = TRUE
   WAIT 1
+  
+  FMain0.btNext.Enabled = FALSE
+  FMain.btNext.Enabled = FALSE
+  FMain.btQuit.Enabled = FALSE
+  FMain0.btQuit.Enabled = FALSE
   Step1.tlStatus.Text = ("Scanning for CD Media ... Please wait")
   
   SHELL "/sbin/probedisk | grep \"cdrom\" | cut -f 1 -d \"|\"" TO sOutput

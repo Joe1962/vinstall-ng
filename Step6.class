@@ -152,21 +152,19 @@ END
 PUBLIC FUNCTION CheckEntry(sEntry AS String, iCurrRow AS Integer) AS Integer
   
   DIM irow AS Integer '= 2
-    FOR irow = 0 TO ME.gvPartListing.Rows.count - 1
-      
-      IF irow <> iCurrRow THEN 
-        'PRINT irow & "-" & iCurrRow
-        IF gvPartListing[irow, 2].Text AND IF gvPartListing[irow, 2].Text = sEntry THEN 
-          Message.Error(("You have already selected") & Space(1) & gvPartListing[irow, 0].Text & Space(1) & ("as your") & Space(1) & Trim(sEntry) & Space(1) & ("partition.") & gb.NewLine &
-          ("Please select only one partition for this purpose"))
-          
-          RETURN 1
+   irow = 0
+      REPEAT 
+        IF irow <> iCurrRow THEN 
+          IF gvPartListing[irow, 2].Text AND gvPartListing[irow, 2].Text = sEntry THEN 
+            Message.Error(("You have already selected") & Space(1) & gvPartListing[irow, 0].Text & Space(1) & ("as your") & Space(1) & Trim(sEntry) & Space(1) & ("partition.") & gb.NewLine &
+           ("Please select only one partition for this purpose"))          
+            RETURN 1
+          END IF
         END IF
-      END IF
-      INC irow
-      
-    NEXT 
-  RETURN 0
+        INC irow
+    UNTIL irow = gvPartListing.Rows.count - 1
+    RETURN 0
+  
 END
 
 
@@ -178,10 +176,12 @@ PUBLIC SUB MountPointSel_Click()
   x = LAST.x
   y = LAST.y
   
-  IF ME.CheckEntry(LAST.text, gvPartListing.RowAt(LAST.y)) > 0 THEN 
+  IF LAST.text <> ("Not Used") THEN 
+    IF ME.CheckEntry(LAST.text, gvPartListing.RowAt(LAST.y)) > 0 THEN 
     LAST.text = ("Not Used")
     STOP EVENT 
     RETURN 
+  END IF
   END IF
     
   IF LAST.text <> ("Not Used") THEN 
@@ -257,11 +257,11 @@ PUBLIC SUB cbMntPoint_Change()
   
   'x = gvPartListing.ColumnAt(LAST.x)
   'y = gvPartListing.RowAt(LAST.y)
-  
-  IF y < 2 THEN RETURN 
-    IF LAST.text = ("Not Used") THEN LAST.text = ""
-    gvPartListing[y, x].Text = Trim(LAST.text)
-    LAST.visible = FALSE
+  ' 
+  ' IF y < 2 THEN RETURN 
+  '   IF LAST.text = ("Not Used") THEN LAST.text = ""
+  '   gvPartListing[y, x].Text = Trim(LAST.text)
+  '   LAST.visible = FALSE
 
 
 END
