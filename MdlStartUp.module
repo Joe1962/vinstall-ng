@@ -15,6 +15,10 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+PUBLIC pDone AS Picture
+PUBLIC pNow AS Picture
+PUBLIC pToDo AS Picture
+
 PUBLIC SUB MAIN()
   
   IF Application.Args[1] THEN 
@@ -24,4 +28,30 @@ PUBLIC SUB MAIN()
   fmain.Show
   
   
+  
 END
+
+PUBLIC SUB LAYOUT_NAVIGATION_VISUALS()
+  
+  pDone = Picture.Load("images/done.png")
+  pNow = Picture.Load("images/now.png")
+  pToDo = Picture.Load("images/square.png")
+  
+  ClsGlobal.fRunningMainForm.listview1.add("Step0", "Select Language", pNow)
+  ClsGlobal.fRunningMainForm.listview1.add("Step1", "Select Media", pToDo)
+  ClsGlobal.fRunningMainForm.listview1.add("Step2", "Disk Partitioning", pToDo)
+  ClsGlobal.fRunningMainForm.listview1.add("Step3", "Software Selection", pTodo)
+  ClsGlobal.fRunningMainForm.listview1.add("Step4", "Installation Summary", pToDo)
+  ClsGlobal.fRunningMainForm.listview1.add("Step5", "Install VectorLinux", pToDo)
+  ClsGlobal.fRunningMainForm.listview1.add("Step6", "System Boot Manager", pToDo)
+  ClsGlobal.fRunningMainForm.listview1.add("Step7", "Regional Settings", pToDo)
+  ClsGlobal.fRunningMainForm.listview1.add("Step8", "User Accounts", pToDo)
+  ClsGlobal.fRunningMainForm.listview1.add("Step9", "Network Settings", pToDo)
+  ClsGlobal.fRunningMainForm.listview1.add("Step10", "Startup Options", pToDo)
+  ClsGlobal.fRunningMainForm.listview1.add("Step11", "Final Configuration", pToDo)
+  
+  'fmain.ListView1.Add(
+  
+END
+
+

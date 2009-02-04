@@ -24,6 +24,7 @@ END
 
 PUBLIC SUB Form_Open()
 
+ClsGlobal.fRunningMainForm = ME
 IF Application.Args[1] THEN 
   'System.Language = Trim(Application.Args[1])
   $oCurrent = NEW Step1(pnlStack)
@@ -33,6 +34,12 @@ END IF
 btBack.Enabled = FALSE
 ME.auto_setup_for_resolution()
 ME.Resize(1024, 600)
+MdlStartUp.LAYOUT_NAVIGATION_VISUALS()
+  IF Application.Args[1] THEN 
+    ClsGlobal.fRunningMainForm.ListView1["Step0"].picture = MdlStartUp.pDone
+    ClsGlobal.fRunningMainForm.ListView1["Step1"].picture = MdlStartUp.pNow
+  END IF
+  
 END
 
 PUBLIC SUB auto_setup_for_resolution()
@@ -117,7 +124,8 @@ ENDIF
     $oCurrent.width = pnlStack.Width
     $oCurrent.Height = pnlStack.Height
  $oCurrent.Startup() ' Call each form's startup sub
- 
+
+ME.ListView1.Refresh 
 
 END
 
@@ -127,7 +135,7 @@ PUBLIC SUB Form_Resize()
   $oCurrent.height = pnlStack.Height
   ME.SidePanel1.Height = pnlStack.Height
   'hpanel1.Width = SidePanel1.Width
-  PRINT ME.ClientWidth & "X" & ME.ClientHeight
+  'PRINT ME.ClientWidth & "X" & ME.ClientHeight
 END
 
 

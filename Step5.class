@@ -121,14 +121,58 @@ PUBLIC SUB Embedder1_Embed()
 
 END
 
+PUBLIC FUNCTION CHECK_IF_REBOOT_NEEDED() AS Boolean
+ 
+ ' KNOWN BUG:
+ ' This will make the user restart if there are FAT* partitions anywhere on the box
+ ' even if that drive was not modified
+ ' END OF BUG -- FIX SOON
+ 
+ DIM sWinPartList AS String
+ 
+ 'SHELL "probepart | grep -e \"^/dev.*FAT32$\" | sed \'s/\\*/ /\' | grep -e \"/dev\"" TO sFAT32List
+ 'SHELL "probepart | grep -e \"^/dev.*FAT$\" | sed \'s/\\*/ /\'|grep -e \" /dev\"" TO sFATList
+ 
+ SHELL "probepart | grep \"^/dev\" | grep -i \"FAT*\" | tr -s \' \',\"\"" TO sWinPartList
+ 
+ sWinPartList = Trim(sWinPartList)
+ IF sWinPartList THEN RETURN TRUE
+ RETURN FALSE
+ 
+ ' IF sFAT32List <> "" THEN 
+ '  RETURN TRUE ' reboot needed
+ ' ELSE IF sFATList <> "" THEN 
+ '  RETURN TRUE ' reboot needed
+ ' ELSE 
+ '  RETURN FALSE ' no reboot needed
+ ' END IF
+ 
+    
+END
+
+
+
 PUBLIC SUB Embedder1_Close()
 
+  ME.Panel1.Arrangement = Arrange.Row
   ME.HBox1.Visible = TRUE
   'ME.HBox2.Visible = TRUE
   ME.tlEmbDone.Visible = TRUE
-  ME.tlEmbDone.Text = "<h3>" & ("PARTITIONING DONE") & "</h3>" & gb.NewLine & gb.NewLine &
-  ("CLick next to continue")
   
+  IF ME.CHECK_IF_REBOOT_NEEDED() = TRUE THEN 
+      ME.HBox2.Visible = TRUE
+      ME.tlEmbDone.Text = "<h3>" & ("SYSTEM RESTART SUGGESTED") & "</H3>" & GB.NewLine &
+      "\n" &
+      ("Your system still contains some non-linux partitions. If you still have a Windows operating system installed, it is recomended ")&
+      ("that you reboot your system at this time. ") & "<br><br>" &
+      ("Click the") & Space(1) & "\"" & "<b>" & ME.btRestart.Text & "</b>" & "\"" & Space(1) & ("button to restart your computer now, or click") & Space(1) & "\n" &
+      "\"" & "<b>" & ClsGlobal.fRunningMainForm.btNext.text & "</b>" & "\"" & Space(1) & ("to continue without restarting.")
+      
+    
+  ELSE 
+      ME.tlEmbDone.Text = "<h3>" & ("PARTITIONING DONE") & "</h3>" & gb.NewLine & gb.NewLine &
+        ("CLick next to continue")
+  END IF
   
 
   FMain.btNext.Enabled = TRUE
@@ -137,5 +181,12 @@ PUBLIC SUB Embedder1_Close()
     FMain0.btBack.Enabled = TRUE
     FMain.btQuit.Enabled = TRUE
     FMain0.btQuit.Enabled = TRUE
+
+END
+
+PUBLIC SUB btRestart_Click()
+    
+  SHELL "shutdown -r -t 10 &"
+  Message.Warning(("Your computer will restart in 10 seconds"))
 
 END

@@ -26,19 +26,19 @@ msgstr ""
 msgid "English (US)"
 msgstr ""
 
-#: Step0.class:249
+#: Step0.class:253
 msgid "Select your language"
 msgstr ""
 
-#: Step0.class:280
+#: Step0.class:284
 msgid "Select your keyboard layout"
 msgstr ""
 
-#: Step0.class:299
+#: Step0.class:303
 msgid "Select your keyboard model"
 msgstr ""
 
-#: Step0.class:321
+#: Step0.class:325
 msgid "Use this box to test your keyboard settings"
 msgstr ""
 
