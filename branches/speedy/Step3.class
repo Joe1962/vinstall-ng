@@ -32,16 +32,18 @@ PUBLIC SUB Form_Open()
   FMain.btNext.Enabled = TRUE
   FMain0.btNext.Enabled = TRUE
   
+  
 
 END
 
 PUBLIC FUNCTION GetNext() AS String
   
-  
+  ClsGlobal.fRunningMainForm.listview1["Step1"].picture = MdlStartUp.pDone
+  ClsGlobal.fRunningMainForm.listview1["Step2"].picture = MdlStartUp.pNow
   IF ME.rbAutoPart.Value = TRUE THEN 
     'no module for auto partition written yet
     'Message("Not ready yet")
-    RETURN 
+    RETURN "Step3a"
   END IF
   IF ME.rbCustomPart.Value = TRUE THEN 
     'embed gparted
@@ -56,8 +58,9 @@ PUBLIC FUNCTION GetNext() AS String
 END
 PUBLIC SUB StartUp()
   
-  FMain.btNext.Enabled = TRUE
-  FMain0.btNext.Enabled = TRUE
+  ME.Resize(ClsGlobal.fRunningMainForm.Pnlstack.Width, ClsGlobal.fRunningMainForm.PnlStack.Height)
+  ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
+  
   
 END
 PUBLIC SUB OnExit()

@@ -53,7 +53,7 @@ PUBLIC SUB OnExit()
     SHELL "mount /dev" &/ Trim(spart) & " /mnt" &/ Trim(spart) & " 2>/dev/null" WAIT 
     ' now mount the iso
     'EXEC ["mount -o loop", "/mnt" &/ Trim(spart) &/ Trim(sname), "/mnt/source"] WAIT 
-    SHELL "mount -o loop /mnt" &/ Trim(spart) &/ Trim(sname) & " /mnt/source" WAIT 
+    SHELL "mount -o loop /mnt" &/ Trim(spart) &/ Trim(sname) & " /mnt/source 2>/dev/null" WAIT 
   
   ELSE 
       PRINT "Mounting cd media"
@@ -64,11 +64,7 @@ PUBLIC SUB OnExit()
 
   IF ME.GetNext() = "Step2" THEN ClsGlobal.sToScan = Trim(ME.ComboBox1.Text)
    'Message("Image to scan = " & ClsGlobal.sToScan)
-    
-      
-      
-  
-  
+
 END
 
 
@@ -91,8 +87,8 @@ END
 
 PUBLIC FUNCTION GetNext() AS String
   
-    ClsGlobal.fRunningMainForm.listview1["Step1"].picture = MdlStartUp.pDone
-    ClsGlobal.fRunningMainForm.listview1["Step2"].picture = MdlStartUp.pNow
+    ClsGlobal.fRunningMainForm.listview1["Step0"].picture = MdlStartUp.pDone
+    ClsGlobal.fRunningMainForm.listview1["Step1"].picture = MdlStartUp.pNow
   
   IF bcheckmedia.Value = TRUE THEN 
     RETURN "Step2"
@@ -116,6 +112,7 @@ END
 
 PUBLIC SUB StartUp() ' Executed every time the Next button is pressed
 
+    ME.Resize(ClsGlobal.fRunningMainForm.Pnlstack.Width, ClsGlobal.fRunningMainForm.PnlStack.Height)
     ' IF Step2.sLastChecked <> ClsGlobal.sSourceName THEN 
     '   Step2.Close ' try this
     ' END IF

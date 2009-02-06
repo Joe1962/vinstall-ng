@@ -28,7 +28,7 @@ END
 
 
 PUBLIC SUB StartUp()
-  
+  ME.Resize(ClsGlobal.fRunningMainForm.Pnlstack.Width, ClsGlobal.fRunningMainForm.PnlStack.Height)
   ME.EMBED_GPARTED()
   
 END

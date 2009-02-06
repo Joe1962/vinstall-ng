@@ -1,0 +1,52 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC SUB Form_Open()
+
+  ME.tlbanner.Text = "<h2>" & ("Automatic Partitioning Options") & "</h2>"
+  ME.tlActionExp.Text = ("Select one of the following options")
+  ME.tlEntireDisc.Text = ("Allow VectorLinux to use an entire hard disk in your system.") & "<br>" &
+  "<b>" & ("This option will wipe out any data on the disk you select.") & "</b>"
+  ME.tlFreeSpace.Text = ("Locate free space on hard disk and install VectorLinux there.") & "<br>" &
+  "<i>" & ("This option will not erase any data off your hard drive") & "</i>"
+  
+
+END
+PUBLIC SUB StartUp()
+  
+  
+  
+END
+
+PUBLIC SUB OnExit()
+  
+  
+  
+END
+
+
+PUBLIC FUNCTION GetNext() AS String
+  
+  IF ME.rbEntireDisk.Value = TRUE THEN 
+    RETURN "Step3a1"
+  ELSE 
+    RETURN "Step3a2"
+  END IF
+  
+  
+  
+END
+

@@ -1,0 +1,63 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,84,47)
+  Text = ("")
+  Arrangement = Arrange.Row
+  { HPanel1 HPanel
+    MoveScaled(0,0,60,5)
+    Expand = True
+    { tlbanner TextLabel
+      MoveScaled(12,0,19,3)
+      Expand = True
+      Text = ("")
+    }
+    { Separator1 Separator
+      MoveScaled(13,4,25,1)
+      Expand = True
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(1,6,74,6)
+    Expand = True
+    { tlActionExp TextLabel
+      MoveScaled(2,1,4,3)
+      Expand = True
+      Text = ("TextLabel1")
+    }
+  }
+  { HPanel2 HPanel
+    MoveScaled(1,13,79,20)
+    Expand = True
+    { rbFreeSpace RadioButton
+      MoveScaled(1,1,22,3)
+      Expand = True
+      Text = ("Use Free space on my hard disk")
+    }
+    { Panel2 Panel
+      MoveScaled(2,4,3,3)
+    }
+    { tlFreeSpace TextLabel
+      MoveScaled(5,4,19,4)
+      Expand = True
+      Text = ("")
+    }
+    { HBox2 HBox
+      MoveScaled(1,6,6,2)
+      Expand = True
+    }
+    { rbEntireDisk RadioButton
+      MoveScaled(2,9,34,3)
+      Expand = True
+      Text = ("Use entire disk")
+    }
+    { Panel1 Panel
+      MoveScaled(2,12,3,3)
+    }
+    { tlEntireDisc TextLabel
+      MoveScaled(6,12,32,4)
+      Expand = True
+      Text = ("")
+    }
+  }
+}

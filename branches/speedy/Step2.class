@@ -205,7 +205,7 @@ END
 
 PUBLIC SUB StartUp()
   
-
+ME.Resize(ClsGlobal.fRunningMainForm.Pnlstack.Width, ClsGlobal.fRunningMainForm.PnlStack.Height)
   ME.mbThrobbler.Path = "images/throbber.gif"
   'Message("Last scanned image = " & ClsGlobal.sLastScanned)
   IF ClsGlobal.sToScan <> ClsGlobal.sLastScanned THEN 
