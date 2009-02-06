@@ -28,19 +28,31 @@ END
 
 PUBLIC SUB OnExit()
   
-  
+  DIM n AS Integer
+  DIM sFmtAs AS String
+    FOR n = 1 TO gvPartListing.Rows.Count - 1
+      IF gvPartListing[n, 2].Text THEN 
+        IF gvPartListing[n, 4].Text THEN 
+          sFmtAs = gvPartListing[n, 4].Text
+        ELSE 
+          sFmtAs = gvPartListing[n, 5].Text
+        END IF
+      END IF
+      Message(gvPartListing[n, 0].Text & gb.NewLine & gvPartListing[n, 2].Text & gb.NewLine & sFmtAs)
+      
+    NEXT 
   
 END
 
 PUBLIC SUB StartUp()
   
-  
+  ME.Resize(ClsGlobal.fRunningMainForm.Pnlstack.Width, ClsGlobal.fRunningMainForm.PnlStack.Height)
   
 END
 
 PUBLIC SUB PREPARE_PARTITION_LISTING()
   WITH ME.gvPartListing
-    .Columns.Count = 6
+    .Columns.Count = 7
     .Rows.count = 1
   END WITH 
     gvPartListing[0, 0].text = ("Partition") 
@@ -50,19 +62,22 @@ PUBLIC SUB PREPARE_PARTITION_LISTING()
     'gvPartListing[0, 4].text = ("File System") 
     gvPartListing[0, 0].BackColor = Color.LightBackground
     gvPartListing[0, 0].Font.Bold = TRUE
+    gvPartListing.Columns[0].Width = 120
     gvPartListing[0, 1].BackColor = Color.LightBackground
     gvPartListing[0, 1].Font.Bold = TRUE
+    gvPartListing.Columns[1].Width = 120
     gvPartListing[0, 2].BackColor = Color.LightBackground
     gvPartListing[0, 2].Font.Bold = TRUE
-    gvPartListing.Columns[2].Width = 120
+    gvPartListing.Columns[2].Width = 150
     gvPartListing[0, 3].BackColor = Color.LightBackground
     gvPartListing[0, 3].Font.Bold = TRUE
-    gvPartListing.Columns[3].Width = 8
+    gvPartListing.Columns[3].Width = 12
     gvPartListing[0, 4].BackColor = Color.LightBackground
-    gvPartListing.Columns[4].Width = 120
+    gvPartListing.Columns[4].Width = 150
     gvPartListing[0, 4].Font.Bold = TRUE
-    gvPartListing[0, 5].BackColor = Color.LightBackground
-    gvPartListing[0, 5].Font.Bold = TRUE 
+    'gvPartListing[0, 5].BackColor = Color.LightBackground
+    'gvPartListing[0, 5].Font.Bold = TRUE 
+    'gvPartListing[0, 5]
     
   END
 
@@ -96,17 +111,31 @@ PUBLIC SUB LIST_PARTITIONS()
               ME.gvPartListing[irow, 1].Text = Trim(sSize)
               IF sFs LIKE "linux-swap" THEN 
                 gvPartListing[irow, 4].Text = Trim(sfs)
+                gvPartListing[irow, 0].BackColor = Color.LightGray
+                gvPartListing[irow, 1].BackColor = Color.LightGray
+                gvPartListing[irow, 2].BackColor = Color.LightGray
+                gvPartListing[irow, 3].BackColor = Color.LightGray
+                gvPartListing[irow, 4].BackColor = Color.LightGray
+                
               ELSE 
+                gvPartListing[irow, 5].Text = Trim(SFS)
+                gvPartListing[irow, 5].ForeColor = Color.White
+                
               cbMntPoint = NEW ComboBox(gvPartListing.Parent) AS "MountPointSel"
                 WITH cbMntPoint
                   .Move(gvPartListing[irow, 2].left, gvPartListing[irow, 2].top)
                   .Width = gvPartListing[irow, 2].Width
                   .Height = gvPartListing[irow, 2].Height
                   .ReadOnly = TRUE
-                  .list = [("Not Used"), "/", "/home", "/usr", "/opt", "/tmp", "/var", "/boot", "/mnt" &/ Right(gvPartListing[irow, 0].text, Len(gvPartListing[irow, 0].text) - RInStr(gvPartListing[irow, 0].text, "/"))]
-                  .Text = ("Not Used")
                   .tag = gvPartListing[irow, 0].Text
-                  '.ReadOnly = TRUE
+                    IF ClsGlobal.sSourceAddr LIKE .Tag THEN 
+                      '.Enabled = FALSE
+                      .List = [("Not Used"), "/mnt" &/ Right(gvPartListing[irow, 0].text, Len(gvPartListing[irow, 0].text) - RInStr(gvPartListing[irow, 0].text, "/"))]
+                    ELSE 
+                      .list = [("Not Used"), "/", "/home", "/usr", "/opt", "/tmp", "/var", "/boot", "/mnt" &/ Right(gvPartListing[irow, 0].text, Len(gvPartListing[irow, 0].text) - RInStr(gvPartListing[irow, 0].text, "/"))]
+                      '.Enabled = TRUE
+                    END IF  
+                  .Text = ("Not Used")
                 END WITH 
                 objMntPoints.Add(cbMntPoint)
               cbfs = NEW ComboBox(gvPartListing.Parent) AS "FsSel"
@@ -115,9 +144,15 @@ PUBLIC SUB LIST_PARTITIONS()
                   .Width = gvPartListing[irow, 4].Width
                   .Height = gvPartListing[irow, 4].Height
                   .ReadOnly = TRUE
+                  .tag = gvPartListing[irow, 0].Text
+                  'Message(ClsGlobal.sSourceAddr)
+                    IF ClsGlobal.sSourceAddr LIKE .Tag THEN 
+                      .Enabled = FALSE
+                    ELSE 
+                      .Enabled = TRUE
+                    END IF  
                   .list = [("Do not format"), "ext2", "ext3", "jfs", "xfs", "reiserfs"]
                   .Text = ("Do not format")
-                  .tag = gvPartListing[irow, 0].Text
                   .Enabled = FALSE
                 END WITH 
                 objFS.Add(cbFS)
@@ -138,14 +173,18 @@ PUBLIC SUB FsSel_Click()
   x = LAST.x
   y = LAST.y
   
+  
+  
     IF LAST.text <> ("Do not format") THEN 
       ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text = LAST.text
+      ME.OnExit()
     ELSE 
       ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text = ""
     END IF
     
     'IF ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text THEN Message(ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text)
     
+    ME.MOUNT_TARGET_PARTITIONS()
   
 END
 
@@ -186,7 +225,14 @@ PUBLIC SUB MountPointSel_Click()
     
   IF LAST.text <> ("Not Used") THEN 
       FOR EACH cb IN objFS
-      IF cb.tag = LAST.tag THEN cb.Enabled = TRUE
+        
+        IF cb.tag = LAST.tag THEN 
+          IF ClsGlobal.sSourceAddr LIKE LAST.tag THEN 
+          cb.Enabled = FALSE
+          ELSE 
+          cb.Enabled = TRUE
+          END IF
+        END IF
     NEXT 
     ' save the text in the background to the gridview
       
@@ -201,10 +247,30 @@ PUBLIC SUB MountPointSel_Click()
   
 
       
-        
-      
   
 END
+
+
+PUBLIC SUB MOUNT_TARGET_PARTITIONS()
+  
+  DIM n AS Integer
+  DIM sPartAddr, sMntPoint, sFs AS String
+    FOR n = 2 TO gvPartListing.Rows.count - 1 ' rows 0 and 1 are meaningless to this sub
+      IF gvPartListing[n, 2].Text THEN ' Partition address in in column 0, mountpoint is in column 2
+        sMntPoint = Trim(gvPartListing[n, 2].Text)
+        sPartAddr = Trim(gvPartListing[n, 0].Text)
+        sfs = Trim(gvPartListing[n, 4].Text)
+          IF NOT sfs THEN sfs = Trim(gvPartListing[n, 5].Text) ' use the current filesystem.
+        ' maybe this is a good time to store these values to the future fstab file ??
+        ' use ClsFstab class to store these things until we need them in configure.
+          
+          'Message(sPartAddr & "\n" & sMntPoint & "\n" & sFs)
+        
+      END IF
+    NEXT   
+  
+END
+
 
 
 
@@ -231,7 +297,6 @@ END
 
 PUBLIC SUB gvPartListing_Click()
 
-'DIM x, y AS Integer
 
   IF LAST.row < 2 THEN RETURN 
 x = LAST.column
@@ -245,27 +310,7 @@ IF X = 2 THEN
   ME.cbMntPoint.Visible = TRUE
 END IF
 
-
-
-' 
  END
-
-
-PUBLIC SUB cbMntPoint_Change()
-
-  'DIM x, y AS Integer
-  
-  'x = gvPartListing.ColumnAt(LAST.x)
-  'y = gvPartListing.RowAt(LAST.y)
-  ' 
-  ' IF y < 2 THEN RETURN 
-  '   IF LAST.text = ("Not Used") THEN LAST.text = ""
-  '   gvPartListing[y, x].Text = Trim(LAST.text)
-  '   LAST.visible = FALSE
-
-
-END
-
 
 PUBLIC SUB cbYN_Click()
 
@@ -276,13 +321,3 @@ cbYN.Visible = FALSE
 
 END
 
-
-
-
-PUBLIC SUB cbYN_Leave()
-
-  ' 'Message("leave")
-  ' gvPartListing[y, x].Text = cbYN.Text
-  ' cbYN.Visible = FALSE
-
-END

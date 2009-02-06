@@ -1,0 +1,136 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PRIVATE lLargest AS Long
+PRIVATE sLargestDev AS String
+
+PUBLIC SUB Form_Open()
+
+  ME.tlbanner.Text = "<h2>" & ("Install VectorLinux to free space on disk") & "</H2>"
+  
+
+END
+
+PUBLIC SUB LIST_FREE_SPACE()
+  
+  DIM sDiscs, sLine AS String[]
+  DIM sDisc, sDump, sFreeDump AS String
+  DIM lFreeSpace AS Float ' free space in KB
+  DIM lTotalFreeKb, lFreeBegin, lFreeEnd AS Long
+  DIM sFreeBeinRaw, sFreeEndRaw AS String
+  DIM i AS Integer
+  DIM lTotalRam AS Long
+  
+  
+  PRINT " -*- Determing total RAM available ..."
+    SHELL "free | grep -i \"^Mem\" | tr -s \' \',\"\" | cut -f 2 -d \' \'" TO sDump
+      lTotalRam = Trim(sDump)
+      
+    PRINT " -+- Total RAM Available : " & lTotalRam & " KB"
+    PRINT " -*- Calculating available free space"
+  
+    SHELL "probedisk | grep -v cdrom | cut -f 1 -d \'|\'" TO sDump
+      sDump = Trim(sDump)
+        IF NOT sDump THEN  ' EXIT IF NO HARD DRIVES ARE FOUND
+          Message.Error(("No hard disks found on your system. Please select") & "<br>" &
+          ("Another partitioning option"))
+          RETURN 
+        END IF
+        
+    sDiscs = Split(sDump, "\n")
+      FOR i = 0 TO sDiscs.Max
+        sDisc = Trim(sDiscs[i])
+          ' get the free space from parted
+          SHELL "parted " & Trim(sDisc) & " print free | grep -i \"free space\" | tr -s \' \',\"\"" TO sDump
+            sDump = Trim(sDump)
+              IF NOT sDump THEN CONTINUE 
+            ' free space should be on the 3rd column, but it start with a blank space, so it will be 4th
+            sLine = Split(sDump, Space(1))
+              sFreeDump = Trim(sLine[2])
+              sFreeBeinRaw = Trim(sLine[0]) ' Beginning of free space
+              sFreeEndRaw = Trim(sLine[1]) ' End of free space
+              Message("Free space on " & sDisc & " begins at " & ME.ConvertToKb(sFreeBeinRaw) & "kb and ends at " & ME.ConvertToKb(sFreeEndRaw) & " kb")
+              
+              'Message(sFreeDump)
+              lFreeSpace = Left(sFreeDump, Len(sFreeDump) - 2) ' take away the KB,MB,GB,TB off the result
+                ' fix the units by converting everything to kb
+                lTotalFreeKb = ME.ConvertToKb(sFreeDump)
+                IF lTotalFreeKb > lLargest THEN 
+                   lLargest = lTotalFreeKb
+                   sLargestDev = sDisc
+                END IF
+
+                    PRINT " -+- Found " & lTotalFreeKb & " KB in " & sDisc
+
+
+'NOTES
+' root:# parted /dev/hda --script "mkpartfs primary linux-swap -512kb -1kb" ' SAMPLE PARTED LINE
+' if ram < 512MB then swap = ram*2
+' default / fs = reiserfs
+
+
+
+
+
+    NEXT 
+        
+    Message("Largest unused area found: " & sLargestDev & " with " & lLargest & " kb of unused space")
+  
+  
+  
+END
+
+
+PUBLIC SUB ConvertToKb(sRawString AS String) AS Long
+  
+  DIM fSize AS Float
+  DIM sTrimmed AS Float = Left(sRawString, Len(sRawString) - 2)
+  DIM sTotal AS Long
+    
+    IF sRawString LIKE "*mb*" THEN 
+      fSize = sTrimmed
+      sTotal = fSize * 1024
+    ELSE IF sRawString LIKE "*gb*" THEN 
+      fSize = sTrimmed
+      sTotal = (fSize * 1024) * 1024
+    END IF
+    
+  RETURN sTotal
+    
+      
+  
+  
+END
+
+
+
+
+PUBLIC FUNCTION GETNEXT() AS String
+  
+  
+  
+END
+PUBLIC SUB STARTUP()
+  
+  ME.LIST_FREE_SPACE()
+  
+END
+
+PUBLIC SUB ONEXIT()
+  
+  
+  
+END

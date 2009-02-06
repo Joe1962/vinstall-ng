@@ -112,6 +112,8 @@ END IF
 IF NOT bExist THEN
    $oCurrent = Object.New(sTmp, [pnlStack])
    $oCurrent.Visible = TRUE
+    $oCurrent.width = pnlStack.Width
+    $oCurrent.Height = pnlStack.Height
 
 ELSE
   $OCurrent = o
@@ -120,9 +122,9 @@ ENDIF
  
  IF IsNull($oCurrent.GetNext()) THEN btNext.Enabled = FALSE
 'Push to the foreground
+
  $oCurrent.Raise()
-    $oCurrent.width = pnlStack.Width
-    $oCurrent.Height = pnlStack.Height
+
  $oCurrent.Startup() ' Call each form's startup sub
 
 ME.ListView1.Refresh 

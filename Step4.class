@@ -1,0 +1,177 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC PartLabels AS Object[]
+PUBLIC PartUseages AS Object[]
+
+
+PUBLIC SUB Form_Open()
+
+  ME.tlbanner.Text = "<h2>" & ("Automatic Disc Partitioning") & "</h2>"
+  'WAIT 1
+
+  'ME.GET_PARTITION_SIZES()
+  'ME.StartUp()
+END
+
+
+PUBLIC SUB GET_PARTITION_SIZES()
+  
+  DIM sMounted, sToMount, sAdd, sDfResults, sPartType AS String
+  DIM sSize, sUsed, sFree AS Long
+  DIM sProgShade AS Variant
+  DIM sList, sLine AS String[]
+  DIM i, y, n, c AS Integer
+  
+  ME.PartUseages = NEW Object[]
+    SHELL "mount | grep \"^/dev\" | cut -f 1 -d \' \'" TO sMounted
+    SHELL "probepart | grep \"^/dev\" | grep -v swap | tr -s \' \',\"\" | cut -f 1 -d \' \'" TO sToMount
+    sMounted = Trim(sMounted)
+    sToMount = Trim(sToMount)
+      sList = Split(sToMount, "\n")
+      y = 4
+        FOR i = 0 TO sList.Max ' new trick here.. ;)
+            n = 0
+            c = 0
+          sAdd = Right(Trim(sList[i]), Len(Trim(sList[i])) - RInStr(Trim(sList[i]), "/"))
+            IF InStr(sMounted, sAdd) = FALSE THEN 
+              'mount it
+              
+              'Message("To mount " & sAdd)
+              'TRY MKDIR "/mnt" &/ Trim(sadd) & " 2>/dev/null"
+              'EXEC ["mkdir", "/mnt" &/ Trim(sadd), "2>/dev/null"] WAIT 
+              SHELL "mkdir -p /mnt" &/ Trim(sadd) & " 2>/dev/null" WAIT 
+              SHELL "mount " & Trim(sList[i]) & " /mnt" &/ Trim(sadd) & " 2>/dev/null" WAIT 
+              
+              ' get the status from df
+                SHELL "df -T | grep \"^" & Trim(sList[i]) & "\" | tr -s \' \',\"\"" TO sDfResults
+                sDfResults = Trim(sDfResults)
+                SHELL "umount /mnt" &/ Trim(sadd) & " 2>/dev/null" WAIT 
+                'Message(sDfResults)
+                'This will RETURN something LIKE 
+                ' Device   FS Type  Size     USED   AVAILA  %   MountPoint
+                '/dev/hdb1 reiserfs 7863500 4865520 2997980 62% /
+                  ' calculate useage by this formula
+                    ' Used / Size
+                  sLine = Split(sDfResults, Space(1))
+                    sSize = sLine[2]
+                    sUsed = sLine[3]
+                    sFree = sLine[4]
+                    sPartType = sLine[1]
+                      sProgShade = (sUsed / sSize) * 100
+                 ' Graphical display of partition useage
+                  sProgShade = Round(CFloat(sProgShade), 0)
+                'Message(Round(CFloat(sProgShade), 0))
+            
+            
+                tlPart = NEW TextLabel(ME.panel1)
+                  WITH tlPart
+                    .Text = Trim(sList[i])
+                    .tag = Trim(sList[i])
+                    .Width = 100
+                    .Expand = FALSE
+                    .ToolTip = sPartType
+                    .Alignment = Align.Normal
+                    .Height = 21
+                    .Move(4, y)
+                  END WITH 
+                  
+                  gvuseage = NEW GridView(ME.Panel1)
+                    WITH gvuseage
+                      .Height = 21
+                      .Expand = TRUE
+                      .ScrollBar = FALSE
+                      .Columns.Count = 100
+                      .Rows.Count = 1
+                      .Tag = Trim(sList[i])
+                      .Move(tlPart.Left + tlPart.Width + 8, y)
+                      
+                      'Message(CInt(sProgShade))
+                          REPEAT 
+                            gvuseage.Columns[c].Width = gvuseage.Width / 100
+                            INC c
+                          UNTIL c = gvuseage.Columns.Count - 1
+                          
+                        IF CInt(sProgShade) > 0 THEN 
+                            REPEAT 
+                              'gvuseage[0, n].BackColor = Color.LightBackground
+                              gvuseage[0, n].BackColor = Color.DarkGreen
+                              
+                              INC n
+                            UNTIL n = CInt(sProgShade)
+                        END IF
+                        'n = 0
+                    END WITH 
+                    ME.PartUseages.Add(gvuseage)
+                    'gvuseage[0, 0].Text = sPartType
+                  
+                  ' pbUseage = NEW ProgressBar(ME.Panel1)
+                  '   WITH pbUseage
+                  '     .Height = 21
+                  '     .Expand = TRUE
+                  '     .Width = 300
+                  '     .Tag = Trim(sList[i])
+                  '     .Move(tlPart.left + tlPart.Width + 8, y)
+                  '     .Value = sUsed / sSize
+                  '   END WITH 
+                  y = y + tlPart.Height + 8
+            END IF
+      NEXT 
+          
+END
+
+
+
+PUBLIC FUNCTION GetNext() AS String
+  
+  RETURN "Step6"
+  
+  
+END
+PUBLIC SUB StartUp()
+  
+  ME.PartUseages = NEW Object[]
+  ME.GET_PARTITION_SIZES()
+  ME.Resize(ClsGlobal.fRunningMainForm.PnlStack.width, ClsGlobal.fRunningMainForm.PnlStack.Height)
+  
+END
+PUBLIC SUB OnExit()
+  
+  
+  
+END
+
+
+
+
+PUBLIC SUB Form_Resize()
+
+  DIM gv AS GridView
+  DIM n AS Integer
+    
+    IF NOT ME.PartUseages THEN RETURN 
+    FOR EACH gv IN ME.PartUseages
+      n = 0
+      gv.Grid = FALSE
+      REPEAT 
+        gv.Columns[n].Width = gv.Width / 100
+        INC n
+      UNTIL n = gv.Columns.Count - 1
+    NEXT 
+        
+    
+
+END

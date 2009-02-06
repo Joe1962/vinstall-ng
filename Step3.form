@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,64,64)
+  MoveScaled(0,0,66,51)
   Text = ("")
   Arrangement = Arrange.Row
   { HPanel1 HPanel

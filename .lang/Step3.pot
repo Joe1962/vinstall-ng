@@ -22,31 +22,31 @@ msgstr ""
 msgid "Select the partitioning method you would like to use"
 msgstr ""
 
-#: Step3.class:129
+#: Step3.class:132
 msgid "TextLabel1"
 msgstr ""
 
-#: Step3.class:147
+#: Step3.class:150
 msgid "Automatic"
 msgstr ""
 
-#: Step3.class:157
+#: Step3.class:160
 msgid "Automatically resize your partitions to make size for your VectorLinux installation"
 msgstr ""
 
-#: Step3.class:164
+#: Step3.class:167
 msgid "Manually resize my partitions "
 msgstr ""
 
-#: Step3.class:174
+#: Step3.class:177
 msgid "Use the partitioning tool to prepare your system partitions."
 msgstr ""
 
-#: Step3.class:181
+#: Step3.class:184
 msgid "My hard drive is already partitioned"
 msgstr ""
 
-#: Step3.class:191
+#: Step3.class:194
 msgid "Install VectorLinux to existing partitions on my hard drive"
 msgstr ""
 

@@ -14,19 +14,19 @@ msgstr ""
 msgid "VectorLinux Installer"
 msgstr ""
 
-#: FMain.class:242 FMain0.class:232
+#: FMain.class:245 FMain0.class:233
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:284 FMain0.class:270
+#: FMain.class:287 FMain0.class:271
 msgid "Back"
 msgstr ""
 
-#: FMain.class:295 FMain0.class:281
+#: FMain.class:298 FMain0.class:282
 msgid "Next"
 msgstr ""
 
-#: FMain.class:306 FMain0.class:292
+#: FMain.class:309 FMain0.class:293
 msgid "Quit"
 msgstr ""
 
@@ -62,67 +62,67 @@ msgstr ""
 msgid "on"
 msgstr ""
 
-#: Step1.class:133
+#: Step1.class:130
 msgid "Scanning system partitions for installation files"
 msgstr ""
 
-#: Step1.class:152
+#: Step1.class:149
 msgid "Found"
 msgstr ""
 
-#: Step1.class:152
+#: Step1.class:149
 msgid "in partition"
 msgstr ""
 
-#: Step1.class:193
+#: Step1.class:190
 msgid "Scanning for CD Media ... Please wait"
 msgstr ""
 
-#: Step1.class:206
+#: Step1.class:203
 msgid "Scanning"
 msgstr ""
 
-#: Step1.class:216
+#: Step1.class:213
 msgid "in"
 msgstr ""
 
-#: Step1.class:244
+#: Step1.class:241
 msgid "Scanning system for installable ISO images"
 msgstr ""
 
-#: Step1.class:337
+#: Step1.class:334
 msgid "DISTRIBUTION"
 msgstr ""
 
-#: Step1.class:340
+#: Step1.class:337
 msgid "VERSION"
 msgstr ""
 
-#: Step1.class:417
+#: Step1.class:414
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:417
+#: Step1.class:414
 msgid "WARNING:"
 msgstr ""
 
-#: Step1.class:417
+#: Step1.class:414
 msgid "This process can take a long time to complete."
 msgstr ""
 
-#: Step1.class:469
+#: Step1.class:466
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:487
+#: Step1.class:484
 msgid "Select Installation source from the list below"
 msgstr ""
 
-#: Step1.class:508
+#: Step1.class:505
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:532
+#: Step1.class:529
 msgid "Check Installation media before installing"
 msgstr ""
 
@@ -242,34 +242,86 @@ msgstr ""
 msgid "Select the partitioning method you would like to use"
 msgstr ""
 
-#: Step3.class:129
+#: Step3.class:132 Step3a.class:102
 msgid "TextLabel1"
 msgstr ""
 
-#: Step3.class:147
+#: Step3.class:150
 msgid "Automatic"
 msgstr ""
 
-#: Step3.class:157
+#: Step3.class:160
 msgid ""
 "Automatically resize your partitions to make size for your VectorLinux "
 "installation"
 msgstr ""
 
-#: Step3.class:164
+#: Step3.class:167
 msgid "Manually resize my partitions "
 msgstr ""
 
-#: Step3.class:174
+#: Step3.class:177
 msgid "Use the partitioning tool to prepare your system partitions."
 msgstr ""
 
-#: Step3.class:181
+#: Step3.class:184
 msgid "My hard drive is already partitioned"
 msgstr ""
 
-#: Step3.class:191
+#: Step3.class:194
 msgid "Install VectorLinux to existing partitions on my hard drive"
+msgstr ""
+
+#: Step3a.class:19
+msgid "Automatic Partitioning Options"
+msgstr ""
+
+#: Step3a.class:20
+msgid "Select one of the following options"
+msgstr ""
+
+#: Step3a.class:22
+msgid "Allow VectorLinux to use an entire hard disk in your system."
+msgstr ""
+
+#: Step3a.class:22
+msgid "This option will wipe out any data on the disk you select."
+msgstr ""
+
+#: Step3a.class:24
+msgid "Locate free space on hard disk and install VectorLinux there."
+msgstr ""
+
+#: Step3a.class:24
+msgid "This option will not erase any data off your hard drive"
+msgstr ""
+
+#: Step3a.class:113
+msgid "Use Free space on my hard disk"
+msgstr ""
+
+#: Step3a.class:134
+msgid "Use entire disk"
+msgstr ""
+
+#: Step3a1.class:19
+msgid "Use Entire Hard Disk"
+msgstr ""
+
+#: Step3a2.class:22
+msgid "Install VectorLinux to free space on disk"
+msgstr ""
+
+#: Step3a2.class:49
+msgid "No hard disks found on your system. Please select"
+msgstr ""
+
+#: Step3a2.class:49
+msgid "Another partitioning option"
+msgstr ""
+
+#: Step4.class:23
+msgid "Automatic Disc Partitioning"
 msgstr ""
 
 #: Step5.class:19
@@ -368,54 +420,54 @@ msgstr ""
 msgid "Restart Now"
 msgstr ""
 
-#: Step6.class:46
+#: Step6.class:58
 msgid "Partition"
 msgstr ""
 
-#: Step6.class:47
+#: Step6.class:59
 msgid "Size"
 msgstr ""
 
-#: Step6.class:48
+#: Step6.class:60
 msgid "Mount Point"
 msgstr ""
 
-#: Step6.class:49
+#: Step6.class:61
 msgid "File System"
 msgstr ""
 
-#: Step6.class:106
+#: Step6.class:133
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:118
+#: Step6.class:154
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:160
+#: Step6.class:199
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:160
+#: Step6.class:199
 msgid "as your"
 msgstr ""
 
-#: Step6.class:160
+#: Step6.class:199
 msgid "partition."
 msgstr ""
 
-#: Step6.class:160
+#: Step6.class:199
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:214
+#: Step6.class:280
 msgid "Select which partitions to use for installation"
 msgstr ""
 
-#: Step6.class:350
+#: Step6.class:385
 msgid "Yes"
 msgstr ""
 
-#: Step6.class:350
+#: Step6.class:385
 msgid "No"
 msgstr ""

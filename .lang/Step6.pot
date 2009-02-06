@@ -14,55 +14,55 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Step6.class:46
+#: Step6.class:58
 msgid "Partition"
 msgstr ""
 
-#: Step6.class:47
+#: Step6.class:59
 msgid "Size"
 msgstr ""
 
-#: Step6.class:48
+#: Step6.class:60
 msgid "Mount Point"
 msgstr ""
 
-#: Step6.class:49
+#: Step6.class:61
 msgid "File System"
 msgstr ""
 
-#: Step6.class:106
+#: Step6.class:133
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:118
+#: Step6.class:154
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:160
+#: Step6.class:199
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:160
+#: Step6.class:199
 msgid "as your"
 msgstr ""
 
-#: Step6.class:160
+#: Step6.class:199
 msgid "partition."
 msgstr ""
 
-#: Step6.class:160
+#: Step6.class:199
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:214
+#: Step6.class:280
 msgid "Select which partitions to use for installation"
 msgstr ""
 
-#: Step6.class:350
+#: Step6.class:385
 msgid "Yes"
 msgstr ""
 
-#: Step6.class:350
+#: Step6.class:385
 msgid "No"
 msgstr ""
 
