@@ -16,11 +16,13 @@
 
 PRIVATE lLargest AS Long
 PRIVATE sLargestDev AS String
+PRIVATE objTargetOptions AS Object[]
 
 PUBLIC SUB Form_Open()
 
   ME.tlbanner.Text = "<h2>" & ("Install VectorLinux to free space on disk") & "</H2>"
-  
+  objTargetOptions = NEW Object[]
+  ME.LIST_FREE_SPACE()
 
 END
 
@@ -29,15 +31,24 @@ PUBLIC SUB LIST_FREE_SPACE()
   DIM sDiscs, sLine AS String[]
   DIM sDisc, sDump, sFreeDump AS String
   DIM lFreeSpace AS Float ' free space in KB
-  DIM lTotalFreeKb, lFreeBegin, lFreeEnd AS Long
+  DIM lTotalFreeKb, lFreeBegin, lFreeEnd, lNeededSwap AS Long
   DIM sFreeBeinRaw, sFreeEndRaw AS String
   DIM i AS Integer
   DIM lTotalRam AS Long
+  DIM rb AS RadioButton
   
-  
+  ME.tlSelAutoTarget.Text = ("Searching for unused space on your hard drive... please wait")
+
+  'objTargetOptions = NEW Object[]
+
   PRINT " -*- Determing total RAM available ..."
     SHELL "free | grep -i \"^Mem\" | tr -s \' \',\"\" | cut -f 2 -d \' \'" TO sDump
       lTotalRam = Trim(sDump)
+      IF lTotalRam < 512000 THEN 
+        lNeededSwap = lTotalRam * 2
+      ELSE 
+        lNeededSwap = lTotalRam
+      END IF
       
     PRINT " -+- Total RAM Available : " & lTotalRam & " KB"
     PRINT " -*- Calculating available free space"
@@ -52,6 +63,7 @@ PUBLIC SUB LIST_FREE_SPACE()
         
     sDiscs = Split(sDump, "\n")
       FOR i = 0 TO sDiscs.Max
+
         sDisc = Trim(sDiscs[i])
           ' get the free space from parted
           SHELL "parted " & Trim(sDisc) & " print free | grep -i \"free space\" | tr -s \' \',\"\"" TO sDump
@@ -62,20 +74,68 @@ PUBLIC SUB LIST_FREE_SPACE()
               sFreeDump = Trim(sLine[2])
               sFreeBeinRaw = Trim(sLine[0]) ' Beginning of free space
               sFreeEndRaw = Trim(sLine[1]) ' End of free space
-              Message("Free space on " & sDisc & " begins at " & ME.ConvertToKb(sFreeBeinRaw) & "kb and ends at " & ME.ConvertToKb(sFreeEndRaw) & " kb")
-              
-              'Message(sFreeDump)
               lFreeSpace = Left(sFreeDump, Len(sFreeDump) - 2) ' take away the KB,MB,GB,TB off the result
                 ' fix the units by converting everything to kb
                 lTotalFreeKb = ME.ConvertToKb(sFreeDump)
+'              Message("Free space on " & sDisc & " begins at " & ME.ConvertToKb(sFreeBeinRaw) & "kb and ends at " & ME.ConvertToKb(sFreeEndRaw) & " kb")
+              
+              'Message(sFreeDump)
                 IF lTotalFreeKb > lLargest THEN 
                    lLargest = lTotalFreeKb
-                   sLargestDev = sDisc
+                   sLargestDev = Trim(sDisc)
+                    FOR EACH RadioButton1 IN objTargetOptions
+                      RadioButton1.Text = Replace(RadioButton1.Text, ("(Recomended)"), "")
+                    NEXT 
                 END IF
-
                     PRINT " -+- Found " & lTotalFreeKb & " KB in " & sDisc
+                    
+                ME.RadioButton1 = NEW RadioButton(ME.hpanel3) AS "TargetOptions"
+                  IF (lTotalFreeKb - lNeededSwap) > 4194304 THEN 
+                    WITH ME.RadioButton1
+                      .Enabled = TRUE
+                        IF sLargestDev = sDisc THEN 
+                          .Text = sDisc & Space(1) & "-" & Space(1) & lTotalFreeKb & Space(1) & "Kb" & Space(1) & ("of free space") & Space(1) & ("(Recomended)")
+                          .Value = TRUE
+                        ELSE 
+                          .Text = sDisc & Space(1) & "-" & Space(1) & lTotalFreeKb & Space(1) & "Kb" & Space(1) & ("of free space")
+                        END IF
+                      .Expand = TRUE
+                      .Height = 21
+                      .Tag = sDisc
+                    END WITH 
+                  ELSE 
+                    WITH ME.RadioButton1
+                      .Enabled = FALSE
+                      .Text = sDisc & Space(1) & "-" & Space(1) & lTotalFreeKb & Space(1) & "Kb" & Space(1) & ("of free space")
+                      .Expand = TRUE
+                      .Height = 21
+                      .Tag = sDisc
+                    END WITH 
+                  END IF
+                  IF objTargetOptions.Find(ME.RadioButton1) = -1 THEN objTargetOptions.Add(ME.RadioButton1)
+                  ME.HBox2 = NEW HBox(ME.HPanel3) AS "spacers"
+                    WITH ME.HBox2
+                      .Height = 12
+                      .Expand = TRUE
+                      .Tag = sDisc
+                    END WITH  
+  '       
+  ' FOR EACH RadioButton1 IN objTargetOptions
+  '   IF RadioButton1.Tag = sLargestDev THEN 
+  '     RadioButton1.Text = RadioButton1.Text & Space(1) & ("(Recomended)")
+  '     RadioButton1.Value = TRUE
+  '   END IF
+  ' NEXT 
+          'ME.GridView1[irow, 0].Text = sDisc
+          'ME.GridView1[irow, 1].Text = lTotalFreeKb
+'          ME.GridView1[GridView1.Rows.Count - 1 + i, 0].Text = sDisc
+'          ME.GridView1[GridView1.Rows.Count - 1 + i, 1].Text = lFreeSpace
+            
+          
+          'INC ME.GridView1.Rows.Count
+          
 
-
+  
 'NOTES
 ' root:# parted /dev/hda --script "mkpartfs primary linux-swap -512kb -1kb" ' SAMPLE PARTED LINE
 ' if ram < 512MB then swap = ram*2
@@ -87,9 +147,10 @@ PUBLIC SUB LIST_FREE_SPACE()
 
     NEXT 
         
-    Message("Largest unused area found: " & sLargestDev & " with " & lLargest & " kb of unused space")
+    'Message("Largest unused area found: " & sLargestDev & " with " & lLargest & " kb of unused space")
+    PRINT " -++- Largest unused area found in :" & sLargestDev & " totaling " & lLargest & " kb of free space"
   
-  
+  ME.tlSelAutoTarget.Text = ("Select the location on your hard drive where you would like to install VectorLinux")
   
 END
 
@@ -125,7 +186,7 @@ PUBLIC FUNCTION GETNEXT() AS String
 END
 PUBLIC SUB STARTUP()
   
-  ME.LIST_FREE_SPACE()
+  'ME.LIST_FREE_SPACE()
   
 END
 
@@ -133,4 +194,10 @@ PUBLIC SUB ONEXIT()
   
   
   
+END
+
+PUBLIC SUB Form_Resize()
+
+'  ME.hpanel3.Height = ME.ClientH - ME.HPanel3.Top - 12
+
 END

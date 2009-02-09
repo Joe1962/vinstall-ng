@@ -308,16 +308,38 @@ msgstr ""
 msgid "Use Entire Hard Disk"
 msgstr ""
 
-#: Step3a2.class:22
+#: Step3a2.class:23
 msgid "Install VectorLinux to free space on disk"
 msgstr ""
 
-#: Step3a2.class:49
+#: Step3a2.class:40
+msgid "Searching for unused space on your hard drive... please wait"
+msgstr ""
+
+#: Step3a2.class:60
 msgid "No hard disks found on your system. Please select"
 msgstr ""
 
-#: Step3a2.class:49
+#: Step3a2.class:60
 msgid "Another partitioning option"
+msgstr ""
+
+#: Step3a2.class:87
+msgid "(Recomended)"
+msgstr ""
+
+#: Step3a2.class:97
+msgid "of free space"
+msgstr ""
+
+#: Step3a2.class:153
+msgid ""
+"Select the location on your hard drive where you would like to install "
+"VectorLinux"
+msgstr ""
+
+#: Step3a2.class:265
+msgid "RadioButton1"
 msgstr ""
 
 #: Step4.class:23

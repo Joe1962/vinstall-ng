@@ -17,4 +17,29 @@
       Expand = True
     }
   }
+  { HBox1 HBox
+    MoveScaled(0,5,7,2)
+    Expand = True
+  }
+  { HPanel2 HPanel
+    MoveScaled(0,7,65,7)
+    Expand = True
+    { tlSelAutoTarget TextLabel
+      MoveScaled(1,1,15,6)
+      Expand = True
+      Text = ("")
+    }
+  }
+  { HPanel3 HPanel
+    MoveScaled(1,15,65,20)
+  }
+  { RadioButton1 RadioButton
+    MoveScaled(14,38,13,2)
+    Visible = False
+    Text = ("RadioButton1")
+  }
+  { HBox2 HBox
+    MoveScaled(34,39,8,1)
+    Visible = False
+  }
 }
