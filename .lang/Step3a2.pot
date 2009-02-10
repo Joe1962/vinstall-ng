@@ -14,35 +14,55 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Step3a2.class:23
+#: Step3a2.class:25
 msgid "Install VectorLinux to free space on disk"
 msgstr ""
 
-#: Step3a2.class:40
+#: Step3a2.class:45
 msgid "Searching for unused space on your hard drive... please wait"
 msgstr ""
 
-#: Step3a2.class:60
+#: Step3a2.class:65
 msgid "No hard disks found on your system. Please select"
 msgstr ""
 
-#: Step3a2.class:60
+#: Step3a2.class:65
 msgid "Another partitioning option"
 msgstr ""
 
-#: Step3a2.class:87
+#: Step3a2.class:92
 msgid "(Recomended)"
 msgstr ""
 
-#: Step3a2.class:97
+#: Step3a2.class:102
 msgid "of free space"
 msgstr ""
 
-#: Step3a2.class:153
+#: Step3a2.class:143
 msgid "Select the location on your hard drive where you would like to install VectorLinux"
 msgstr ""
 
-#: Step3a2.class:265
+#: Step3a2.class:189
+msgid "Please wait while your hard drive is being partitioned"
+msgstr ""
+
+#: Step3a2.class:202
+msgid "Unable to find enough un-used space to perform auto-partition."
+msgstr ""
+
+#: Step3a2.class:202
+msgid "Please consider using a different partitioning option."
+msgstr ""
+
+#: Step3a2.class:204
+msgid "Unable to find enough un-used space to perform auto-partition. Please consider using a different partitioning option."
+msgstr ""
+
+#: Step3a2.class:320
+msgid "Partitioning stage complete... Click next to continue"
+msgstr ""
+
+#: Step3a2.class:433
 msgid "RadioButton1"
 msgstr ""
 
