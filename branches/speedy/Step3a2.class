@@ -15,13 +15,18 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 PRIVATE lLargest AS Long
+PRIVATE lTotalRam AS Long
+PRIVATE lNeededSwap AS Long
 PRIVATE sLargestDev AS String
 PRIVATE objTargetOptions AS Object[]
 
 PUBLIC SUB Form_Open()
 
   ME.tlbanner.Text = "<h2>" & ("Install VectorLinux to free space on disk") & "</H2>"
+  ME.MovieBox1.Path = "images/throbber.gif"
+  ME.MovieBox1.Playing = FALSE
   objTargetOptions = NEW Object[]
+  
   ME.LIST_FREE_SPACE()
 
 END
@@ -31,10 +36,10 @@ PUBLIC SUB LIST_FREE_SPACE()
   DIM sDiscs, sLine AS String[]
   DIM sDisc, sDump, sFreeDump AS String
   DIM lFreeSpace AS Float ' free space in KB
-  DIM lTotalFreeKb, lFreeBegin, lFreeEnd, lNeededSwap AS Long
+  DIM lTotalFreeKb, lFreeBegin, lFreeEnd AS Long
   DIM sFreeBeinRaw, sFreeEndRaw AS String
   DIM i AS Integer
-  DIM lTotalRam AS Long
+  'DIM lTotalRam AS Long
   DIM rb AS RadioButton
   
   ME.tlSelAutoTarget.Text = ("Searching for unused space on your hard drive... please wait")
@@ -49,7 +54,7 @@ PUBLIC SUB LIST_FREE_SPACE()
       ELSE 
         lNeededSwap = lTotalRam
       END IF
-      
+      'Message(lNeededSwap)
     PRINT " -+- Total RAM Available : " & lTotalRam & " KB"
     PRINT " -*- Calculating available free space"
   
@@ -119,21 +124,6 @@ PUBLIC SUB LIST_FREE_SPACE()
                       .Expand = TRUE
                       .Tag = sDisc
                     END WITH  
-  '       
-  ' FOR EACH RadioButton1 IN objTargetOptions
-  '   IF RadioButton1.Tag = sLargestDev THEN 
-  '     RadioButton1.Text = RadioButton1.Text & Space(1) & ("(Recomended)")
-  '     RadioButton1.Value = TRUE
-  '   END IF
-  ' NEXT 
-          'ME.GridView1[irow, 0].Text = sDisc
-          'ME.GridView1[irow, 1].Text = lTotalFreeKb
-'          ME.GridView1[GridView1.Rows.Count - 1 + i, 0].Text = sDisc
-'          ME.GridView1[GridView1.Rows.Count - 1 + i, 1].Text = lFreeSpace
-            
-          
-          'INC ME.GridView1.Rows.Count
-          
 
   
 'NOTES
@@ -155,18 +145,27 @@ PUBLIC SUB LIST_FREE_SPACE()
 END
 
 
+
+
+
 PUBLIC SUB ConvertToKb(sRawString AS String) AS Long
   
   DIM fSize AS Float
   DIM sTrimmed AS Float = Left(sRawString, Len(sRawString) - 2)
   DIM sTotal AS Long
     
-    IF sRawString LIKE "*mb*" THEN 
+    IF Right(sRawString, 2) = "MB" THEN 
       fSize = sTrimmed
       sTotal = fSize * 1024
-    ELSE IF sRawString LIKE "*gb*" THEN 
+    ELSE IF Right(sRawString, 2) = "GB" THEN 
       fSize = sTrimmed
       sTotal = (fSize * 1024) * 1024
+    ELSE IF Right(sRawString, 2) = "KB" OR Right(sRawString, 2) = "kB" THEN 
+      fSize = sTrimmed
+      sTotal = fSize
+    ELSE IF Right(sRawString, 1) = "B"
+      fSize = sTrimmed
+      sTotal = fSize
     END IF
     
   RETURN sTotal
@@ -174,6 +173,152 @@ PUBLIC SUB ConvertToKb(sRawString AS String) AS Long
       
   
   
+END
+
+
+PUBLIC SUB PERFORM_PARTITIONING()
+  
+  DIM i, iLastPartNo AS Integer
+  DIM sDrive, sPartedRes, sFreeStart, sFreeEnd, sFreeSize, sDump AS String
+  DIM sOutLine, sDumparr AS String[]
+  DIM lFreeKB, lFreeStart, lFreeEnd AS Long
+    
+    ME.HPanel3.Visible = FALSE
+    ME.HPanel4.Visible = TRUE
+    ME.MovieBox1.Playing = TRUE
+    ME.tlSelAutoTarget.Text = ("Please wait while your hard drive is being partitioned")
+    
+      FOR EACH RadioButton1 IN objTargetOptions
+        IF RadioButton1.Value = TRUE THEN 
+          IF RadioButton1.Enabled = TRUE THEN 
+          sDrive = RadioButton1.Tag
+          END IF
+        END IF
+      NEXT 
+      'Message(sDrive)
+      WAIT 1
+      IF NOT sdrive THEN 
+        Message.Error(("Unable to find enough un-used space to perform auto-partition.") & gb.NewLine &
+        ("Please consider using a different partitioning option."))
+          ME.MovieBox1.Playing = FALSE
+          ME.tlSelAutoTarget.Text = ("Unable to find enough un-used space to perform auto-partition. Please consider using a different partitioning option.")
+          ME.MovieBox1.Enabled = FALSE
+        RETURN 
+      END IF
+    ' read from parted again
+    SHELL "parted " & Trim(sDrive) & " unit kb print free | grep -i \"free space\" | tr -s \' \',\"\" | cut -f 2-4 -d \' \'" TO sPartedRes
+      'Message(sPartedRes)
+      sPartedRes = Trim(sPartedRes) ' | START | | END | | SIZE |
+        sOutLine = Split(sPartedRes, Space(1))
+          sFreeStart = sOutLine[0]
+          sFreeEnd = sOutLine[1] 
+          sFreeSize = sOutLine[2]
+      ' I need to know where the free space stars and ends to do this.
+      lFreeKB = ME.ConvertToKb(sFreeSize)
+      lFreeStart = ME.ConvertToKb(sFreeStart)
+      lFreeEnd = ME.ConvertToKb(sFreeEnd)
+      ' keep in mind that only partitions 1-4 can be primary... everything else must be extended
+      ' I need to use probepart to see the number of the last partition present in the drive
+      ' And figure out the partition numbers for the future partitions.
+      SHELL "probepart | grep \"^" & Trim(sDrive) & "\" | tr -s \' \',\"\" | cut -f 1 -d \' \'" TO sDump
+        'Message(sDump)
+        sDump = Trim(sDump)
+          IF NOT sDump THEN 'The entire disc IS not partitioned. 'Message("No partitions found ont his disk")
+              ' create new partitions on raw space.
+              ' root:# parted /dev/hda --script "mkpartfs primary linux-swap -512kb -1kb" ' SAMPLE PARTED LINE
+            
+              SHELL "parted " & Trim(sDrive) & " -s \"mkpart primary reiserfs 0kb -" & lNeededSwap & "kb\"" WAIT ' partition 1
+              'WAIT 1
+              SHELL "parted " & Trim(sDrive) & " -s \"mkpart primary linux-swap -" & lNeededSwap & "kb -1kb\"" WAIT ' partition 2
+              SHELL "mkswap " & Trim(sDrive) & 2 WAIT ' make the swap partition
+              EXEC ["swapon", Trim(sDrive) & 2] WAIT 
+                
+                ' Ready to start setting defined target partitions.
+                '###################################################################################################################
+              
+          ELSE ' There is already some partitions in the disc.... I need to know which numbers to use.
+              sDump = Replace(sDump, sDrive, "")
+              sDumparr = Split(sDump, "\n")
+                 FOR i = 0 TO sDumparr.Max
+                   'Message(sDumparr[i])
+                   iLastPartNo = Trim(sDumparr[i])
+                 NEXT 
+                  ' now that we got the last partition number, we can start creating our partitions.
+                        ' if there is room for primary partitions, make them
+                      IF iLastPartNo <= 2 THEN 
+                         'Message(lFreeEnd - lNeededSwap)
+                         'Message(lFreeStart)
+                          PRINT "start -> " & lFreeStart
+                          PRINT "end -> " & lFreeEnd
+                          PRINT "Needed swap -> " & lNeededSwap
+                          PRINT "Beginning of swap area -> " & (lFreeEnd - lNeededSwap)
+                          
+                            'PRINT "Debug: " & "parted " & Trim(sDrive) & " -s \"mkpart primary reiserfs " & lFreeStart & "kb " & (lFreeEnd - lNeededSwap) & "kb\""
+                          SHELL "parted " & Trim(sDrive) & " -s \"mkpart primary reiserfs " & lFreeStart & "kb " & (lFreeEnd - lNeededSwap) & "kb\"" WAIT 'iLastpart + 1 partition
+                          EXEC ["mkfs.reiserfs", "-fq", sDrive & (iLastPartNo + 1)] WAIT 
+                            PRINT " --- Created / partition preformatted to reiserfs " & Trim(sdrive) & (iLastPartNo + 1)
+                          SHELL "parted " & Trim(sdrive) & " -s \"mkpart primary linux-swap " & (lFreeEnd - lNeededSwap) & "kb " & lFreeEnd & "kb\"" WAIT ' ilastpart + 2 partitiong
+                            PRINT " --- Created swap partition " & Trim(sdrive) & (iLastPartNo + 2)
+                          SHELL "mkswap " & Trim(sdrive) & (iLastPartNo + 2) WAIT 
+                          SHELL "swapon " & Trim(sdrive) & (iLastPartNo + 2) WAIT 
+                 ELSE ' this method skips one number I think 
+                      ' BEGIN BY CREATING AN EXTENDED PARTITION TO HOLD LOGICAL PARTITIONS IN IT
+                      ' THIS WILL ADD 1 TO THE iLastPartition number 
+                        SHELL "parted " & Trim(sdrive) & " -s \"mkpart extended " & lFreeStart & "kb " & lFreeEnd & "kb\"" WAIT 
+                          ' I need to re-calculate the free space after this... the extended partition shaves a hair off the free space, so that can throw the whole thing off
+                            SHELL "parted " & Trim(sDrive) & " unit kb print free | grep -i \"free space\" | tr -s \' \',\"\" | cut -f 2-4 -d \' \'" TO sPartedRes
+                                          'Message(sPartedRes)
+                                    sPartedRes = Trim(sPartedRes) ' | START | | END | | SIZE |
+                                      sOutLine = Split(sPartedRes, Space(1))
+                                        sFreeStart = sOutLine[0]
+                                        sFreeEnd = sOutLine[1] 
+                                        sFreeSize = sOutLine[2]
+                                    ' I need to know where the free space stars and ends to do this.
+                                    lFreeKB = ME.ConvertToKb(sFreeSize)
+                                    lFreeStart = ME.ConvertToKb(sFreeStart)
+                                    lFreeEnd = ME.ConvertToKb(sFreeEnd)
+                            
+                            ' PROCEED TO CREATE PARTITIONS IN NEWLY CALCULATED FREE SPACE
+                          SHELL "parted " & Trim(sDrive) & " -s \"mkpart logical reiserfs " & lFreeStart & "kb " & (lFreeEnd - lNeededSwap) & "kb\"" WAIT 
+                          'SHELL "parted " & Trim(sdrive) & " mkfs reiserfs " & (iLastPartNo + 2)  WAIT 
+                          'SHELL "mkfs.reiserfs -fq " & sDrive & (iLastPartNo + 2) WAIT 
+                          'EXEC ["mkfs.reiserfs", "-fq", sDrive & (iLastPartNo + 2)] WAIT 
+                          'SHELL "parted " & Trim(sdrive) & " -s \"mkpart logical linux-swap " & (lFreeEnd - lNeededSwap) & "kb " & lFreeEnd & "kb yes\"" WAIT 
+                          SHELL "parted " & Trim(sdrive) & " mkpart logical linux-swap " & (lFreeEnd - lNeededSwap) & "kb " & lFreeEnd & "kb > echo \"Yes\"" WAIT 
+                          SHELL "mkswap " & Trim(sdrive) & (iLastPartNo + 3) WAIT 
+
+                          
+                          
+                          'SHELL "parted " & Trim(sdrive) & " -s \"mkpart logical linux-swap " & (lFreeEnd - (lNeededSwap - 1)) & "kb " & (lFreeEnd - 1) & "kb\" " WAIT 
+                          'EXEC ["mkswap", Trim(sdrive) & (iLastPartNo + 3)] WAIT 
+                          'EXEC ["swapon", Trim(sdrive) & (iLastPartNo + 3)] WAIT 
+                          
+                          
+                      
+                      
+                      
+                      END IF
+                    
+          END IF
+      
+
+      'parted /dev/hda print free | grep -i "Free space" |tr -s ' ',"" | cut -f 2-4 -d ' '
+
+    
+    ' root:# parted /dev/hda --script "mkpartfs primary linux-swap -512kb -1kb" ' SAMPLE PARTED LINE
+
+
+    
+    ' FOR i = 0 TO 20
+    '   WAIT 2
+    ' NEXT 
+    ' 
+    ' ME.MovieBox1.Playing = FALSE
+    ' Message("Finished")
+    
+    
+    ME.tlSelAutoTarget.Text = ("Partitioning stage complete... Click next to continue")
+     ME.MovieBox1.Playing = FALSE
 END
 
 
@@ -190,14 +335,23 @@ PUBLIC SUB STARTUP()
   
 END
 
+
+
 PUBLIC SUB ONEXIT()
   
-  
+  ' CREATE THE PARTITIONS NOW
   
 END
 
 PUBLIC SUB Form_Resize()
 
-'  ME.hpanel3.Height = ME.ClientH - ME.HPanel3.Top - 12
+  ME.hpanel3.Height = ME.ClientH - ME.HPanel3.Top - 12
+  ME.HPanel4.Height = ME.HPanel3.Height
+
+END
+
+PUBLIC SUB Form_Menu()
+
+  ME.PERFORM_PARTITIONING()
 
 END
