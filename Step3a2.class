@@ -182,7 +182,9 @@ PUBLIC SUB PERFORM_PARTITIONING()
   DIM sDrive, sPartedRes, sFreeStart, sFreeEnd, sFreeSize, sDump AS String
   DIM sOutLine, sDumparr AS String[]
   DIM lFreeKB, lFreeStart, lFreeEnd AS Long
-    
+  DIM sRootPart, sSwapPart AS String
+  
+      
     ME.HPanel3.Visible = FALSE
     ME.HPanel4.Visible = TRUE
     ME.MovieBox1.Playing = TRUE
@@ -224,15 +226,18 @@ PUBLIC SUB PERFORM_PARTITIONING()
         'Message(sDump)
         sDump = Trim(sDump)
           IF NOT sDump THEN 'The entire disc IS not partitioned. 'Message("No partitions found ont his disk")
+          iLastPartNo = 0
               ' create new partitions on raw space.
               ' root:# parted /dev/hda --script "mkpartfs primary linux-swap -512kb -1kb" ' SAMPLE PARTED LINE
             
               SHELL "parted " & Trim(sDrive) & " -s \"mkpart primary reiserfs 0kb -" & lNeededSwap & "kb\"" WAIT ' partition 1
               'WAIT 1
               SHELL "parted " & Trim(sDrive) & " -s \"mkpart primary linux-swap -" & lNeededSwap & "kb -1kb\"" WAIT ' partition 2
-              SHELL "mkswap " & Trim(sDrive) & 2 WAIT ' make the swap partition
-              EXEC ["swapon", Trim(sDrive) & 2] WAIT 
+              SHELL "mkswap " & Trim(sDrive) & (iLastPartNo + 2) WAIT ' make the swap partition
+              EXEC ["swapon", Trim(sDrive) & (iLastPartNo + 2)] WAIT 
                 
+          sRootPart = Trim(sdrive) & (iLastPartNo + 1)
+          sSwapPart = Trim(sdrive) & (iLastPartNo + 2)
                 ' Ready to start setting defined target partitions.
                 '###################################################################################################################
               
@@ -261,6 +266,10 @@ PUBLIC SUB PERFORM_PARTITIONING()
                             PRINT " --- Created swap partition " & Trim(sdrive) & (iLastPartNo + 2)
                           SHELL "mkswap " & Trim(sdrive) & (iLastPartNo + 2) WAIT 
                           SHELL "swapon " & Trim(sdrive) & (iLastPartNo + 2) WAIT 
+                          
+                          sRootPart = Trim(sdrive) & (iLastPartNo + 1)
+                          sSwapPart = Trim(sdrive) & (iLastPartNo + 2)
+                          
                  ELSE ' this method skips one number I think 
                       ' BEGIN BY CREATING AN EXTENDED PARTITION TO HOLD LOGICAL PARTITIONS IN IT
                       ' THIS WILL ADD 1 TO THE iLastPartition number 
@@ -292,6 +301,8 @@ PUBLIC SUB PERFORM_PARTITIONING()
                                         sFreeEnd = sOutLine[1] 
                                         sFreeSize = sOutLine[2]
                             SHELL "parted " & Trim(sdrive) & " mkpart logical linux-swap " & sFreeStart & " " & sFreeEnd WAIT 
+                            
+                            
                                 ' ^^^^^^^^ IN CASE THE ABOVE LINE DOESN'T WORK, THE FOLLOWING CODE MAY BE USED TO PERFORM THE SAME OPERATION ^^^^^^^^^^
                             
                             ' ' ' ' ' sDump = "#!/bin/bash \n" &
@@ -301,6 +312,8 @@ PUBLIC SUB PERFORM_PARTITIONING()
                             ' ' ' ' ' "EOF"
                             ' ' ' ' ' File.Save("/tmp/swapmaker", sDump)
                             ' ' ' ' ' SHELL "sh /tmp/swapmaker" WAIT 
+                          sRootPart = Trim(sdrive) & (iLastPartNo + 2)
+                          sRootPart = Trim(sdrive) & (iLastPartNo + 3)
                       END IF
                     
           END IF
@@ -308,6 +321,14 @@ PUBLIC SUB PERFORM_PARTITIONING()
     
     ME.tlSelAutoTarget.Text = ("Partitioning stage complete... Click next to continue")
      ME.MovieBox1.Playing = FALSE
+     
+     ' set the flaf for partition reading
+     ClsGlobal.bAutoPartition = TRUE
+     ClsGlobal.sTargetRoot = sRootPart
+     ClsGlobal.sTargetSwap = sSwapPart
+      
+      
+     
 END
 
 
@@ -321,6 +342,18 @@ END
 PUBLIC SUB STARTUP()
   
   'ME.LIST_FREE_SPACE()
+  DIM i AS Integer
+    FOR EACH RadioButton1 IN objTargetOptions
+      IF RadioButton1.Enabled = TRUE THEN INC i
+    NEXT 
+  
+  IF i < 1 THEN 
+    Message.Error(("We are unable to find any hard disks with enough unpartitioned space for this operation.") & "<br>" &
+    ("Please consider using another partitioning method."))
+    
+    ME.tlSelAutoTarget.Text = ("Unable to find any hard drives with enough unpartitioned space. Please go back and select  another partitioning method")
+  END IF
+  
   
 END
 

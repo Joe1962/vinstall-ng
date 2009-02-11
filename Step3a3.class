@@ -1,0 +1,93 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+PRIVATE sMountedList AS String
+
+PUBLIC SUB Form_Open()
+
+  ME.tlbanner.Text = "<h2>" & ("Claim free space from existing partitions") & "</h2>"
+  ME.DISPLAY_RESIZABLE_PARTITIONS()
+
+END
+
+PUBLIC SUB DISPLAY_RESIZABLE_PARTITIONS()
+  
+  DIM sDump, sPreMountList, sDfDump, sDrives, sPartition, sPartShort AS String
+  DIM sResults, sDumparr AS String[]
+  DIM i, n AS Integer
+  
+  SHELL "df -Th | grep \"/dev\" | tr -s \' \',\"\"" TO sPreMountList
+  'Message(sPreMountList)
+  SHELL "probepart | grep \"^/dev\" | tr -s \' \',\"\" | cut -f 1 -d \' \'" TO sDump
+    sDump = Trim(sDump)
+    sDumparr = Split(sDump, "\n")
+      FOR i = 0 TO sDumparr.Max
+        sPartition = Trim(sDumparr[i])
+        sPartShort = Right(sPartition, Len(sPartition) - RInStr(sPartition, "/"))
+        'Message(sPartShort)
+        sMountedList = sMountedList & sPartition & " "
+        IF InStr(sMountedList, sPartition) = FALSE THEN 
+          SHELL "mkdir -p /mnt" &/ sPartShort & " 2> /dev/null" WAIT 
+          SHELL "mount -o ro " & sPartition & Space(1) & "/mnt" &/ sPartShort & " 2> /dev/null" WAIT 
+        END IF
+          
+      NEXT 
+      
+      ' now that they're all mounted, get the free space on each one of them
+      SHELL "df -Th | grep \"^/dev\" | tr -s \' \',\"\"" TO sDfDump
+      'Message(sMountedList)
+      sDfDump = Trim(sDfDump)
+      Message(sDfDump)
+      
+      FOR i = 0 TO sDumparr.Max
+         sPartition = Trim(sDumparr[i])
+        sPartShort = Right(sPartition, Len(sPartition) - RInStr(sPartition, "/"))
+        IF sPartition <> ClsGlobal.sSourceAddr THEN 
+          SHELL "umount -f /mnt" &/ sPartShort & " 2> /dev/null" WAIT 
+        END IF
+      NEXT 
+        
+  
+  
+  
+  ' Filesystem    Type    Size  Used Avail Use% Mounted on
+  
+  
+
+  
+  
+END
+
+
+
+
+
+PUBLIC FUNCTION GetNExt() AS String
+  
+  
+  
+END
+PUBLIC SUB StartUp() 
+  
+  
+  
+END
+PUBLIC SUB OnExit()
+  
+  
+  
+END

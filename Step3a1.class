@@ -14,19 +14,90 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+PUBLIC objPosTargets AS Object[]
 PUBLIC SUB Form_Open()
 
-  ME.tlbanner.Text = "<h2>" & ("Use Entire Hard Disk") & "</H2>"
-
+  ME.tlbanner.Text = "<h2>" & ("Use Entire Hard Disk for VectorLinux") & "</H2>"
+  ME.TLwARNING.Text = "<b><u>" & ("WARNING:") & "</u></b><br>" &
+    "<i>" & ("All existing data in the device you select here will be destroyed.") & "</i>"
+  
+  objPosTargets = NEW Object[]
+  
+  ME.DISPLAY_POSSIBLE_DISK_TARGETS
 END
+
+PUBLIC SUB DISPLAY_POSSIBLE_DISK_TARGETS()
+  
+  DIM sDiskList AS String[]
+  DIM sDisks, sDisk, sSizeDump AS String
+  DIM i AS Integer
+  
+  PRINT " --\\__ Auto partition using full disk"
+  PRINT " --\\- Possible Targets: "
+  SHELL "probedisk | grep -v -i \"cdrom\" | cut -f 1 -d \"|\" " TO sDisks
+    
+    sDiskList = Split(Trim(sDisks), "\n")
+      FOR i = 0 TO sDiskList.Max
+        sDisk = Trim(sDiskList[i])
+          IF InStr(ClsGlobal.sSourceAddr, sDisk) = FALSE THEN 
+            'Message(sDisk)
+             ' root:# parted /dev/hda print | grep "^Disk" | tr -s ' ',"" | cut -f 2 -d ':'
+              SHELL "parted " & sDisk & " print | grep \"^Disk\" | tr -s \' \',\"\" | cut -f 2 -d \':\'" TO sSizeDump
+              sSizeDump = Trim(sSizeDump)
+
+            PRINT "  --\\+ " & sDisk & " ( " & sSizeDump & " )"
+              ' do the gui representation
+              rb = NEW RadioButton(hpanel2) AS "PossTargets"
+              
+                WITH rb
+                  .Height = 21
+                  .Expand = TRUE
+                  .Text = sDisk
+                  .Tag = sDisk
+                END WITH 
+                IF objPosTargets.Find(rb) = -1 THEN objPosTargets.Add(rb)
+                
+                pn = NEW Panel(hpanel2)
+                  WITH pn
+                    .Expand = FALSE
+                    .Width = 30
+                    .Height = 30
+                  END WITH 
+                tl = NEW TextLabel(hpanel2) ' Hard disk information
+                  WITH tl
+                    .Text = "<b>" & ("Total Disc Size") & "</b>" & Space(1) & sSizeDump
+                    .Expand = TRUE
+                    .Height = 21
+                    .Alignment = Align.Left
+                  END WITH 
+                  hb = NEW HBox(hpanel2)
+                  WITH hb
+                    .Height = 10
+                    .Expand = TRUE
+                  END WITH 
+                  
+                    
+          END IF
+      NEXT 
+  
+END
+
+
+
+
 PUBLIC FUNCTION GETNEXT() AS String
   
-  
+  RETURN "Step3a1a"
   
 END
 PUBLIC SUB ONEXIT()
   
-  
+  DIM rb AS RadioButton
+    FOR EACH rb IN objPosTargets
+      IF rb.Value = TRUE THEN 
+        ClsGlobal.sFullDiscToWipe = rb.Tag
+      END IF
+    NEXT 
   
 END
 PUBLIC SUB STARTUP()

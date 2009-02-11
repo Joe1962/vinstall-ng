@@ -1,0 +1,106 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PRIVATE hproc AS Process
+
+PUBLIC SUB Form_Open()
+  
+  ME.tlbanner.Text = "<h2>" & ("Create Linux Partition Scheme in") & Space(1) & ClsGlobal.sFullDiscToWipe & "</h2>"
+  
+    
+
+END
+
+PUBLIC SUB DESTROY_CURRENT_DATA()
+  
+  DIM sDrive AS String = Trim(ClsGlobal.sFullDiscToWipe)
+  DIM sPartitions, sPart AS String
+  DIM sPartList AS String[]
+  DIM i AS Integer
+    
+    PRINT " --\\\\-- Selected target : " & sDrive
+    'SHELL "parted " & sDrive & " print | grep \"^ [0-9]\" | tr -s \' \',\"\" | cut -f 1-2 -d \"\"" TO sPartitions
+    SHELL "parted " & sDrive & " print | grep \"^ [0-9]\" | tr -s \' \',\"\" | cut -f 1-2 -d \' \'" TO sPartitions
+    sPartitions = Trim(sPartitions)
+      
+      IF NOT sPartitions THEN 
+        PRINT "  --\\__ Target device is empty (no partitions found) "
+        RETURN 
+      END IF
+    sPartList = Split(sPartitions, "\n")
+      FOR i = 0 TO sPartList.Max
+        sPart = Trim(sPartList[i])
+        ' remove this partition
+            PRINT "   \\__- Deleting partition " & sPart 
+                hproc = SHELL "parted " & sDrive & " rm " & sPart & " 1>/dev/null " WAIT 
+                  IF hproc.Value > 0 THEN 
+                    Message.Error(("There has been an error deleting") & Space(1) & sDrive & sPart & "." & "<br>" &
+                    ("Please make sure the drive or partition is not being used by some other program"))
+                    'BREAK 
+                    PRINT "     \\- FAILED!"
+                    RETURN 
+                  END IF
+                    
+            PRINT "     \\- Done"
+      NEXT 
+      
+END
+
+
+PUBLIC SUB CREATE_NEW_PARTITIONS()
+  
+  DIM lRunningSwap, lNeededSwap, lTotalRAM AS Long
+  DIM sDump AS String
+    
+    ' First determine how much swap we need
+      SHELL "free | grep \"^Swap\" | tr -s \' \',\"\" | cut -f 2 -d \' \'" TO sDump
+      sDump = Trim(sDump)
+      Message("Total RAM " & sDump)
+    
+  
+END
+
+
+
+PUBLIC SUB StartUp()
+
+    SELECT CASE Message.Warning("<b>" & ("WARNING:") & "</b>" & Space(1) & ("All existing data in") & Space(1) & ClsGlobal.sFullDiscToWipe & Space(1) & ("is about to be deleted.") & "<br>" &
+    ("This step cannot be undone. Are you sure you want to continue?"), ("Yes"), ("No"))
+      CASE 1
+        'Message("Yes")
+        ME.tlWarning.Text = ("Preparing hard disk for new partitioning structure. Please wait")
+        ME.DESTROY_CURRENT_DATA()
+        ME.CREATE_NEW_PARTITIONS()
+      CASE 2 
+        'Message("No")
+        ME.tlWarning.Text = ("Operation cancelled by user. No changes have been made to the system")
+    END SELECT 
+
+END 
+
+PUBLIC SUB OnExit()
+  
+  
+  
+END
+
+
+
+PUBLIC FUNCTION GetNext() AS String
+  
+  
+  
+END
