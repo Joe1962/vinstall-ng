@@ -10,119 +10,533 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FMain.class:258 FMain0.class:251
+#: .project:1
+msgid "VectorLinux Installer"
+msgstr "VectorLinux Installer"
+
+#: FMain.class:245 FMain0.class:233
+msgid "Process Overview"
+msgstr "Process Overview"
+
+#: FMain.class:287 FMain0.class:271
 msgid "Back"
 msgstr "Back"
 
-#: Step1.class:412
-msgid "Check Installation media before installing"
-msgstr "Check Installation media before installing"
+#: FMain.class:298 FMain0.class:282
+msgid "Next"
+msgstr "Next"
 
-#: Step1.class:234
-msgid "DISTRIBUTION"
-msgstr "DISTRIBUTION"
-
-#: Step0.class:116
-msgid "English (US)"
-msgstr "English (US)"
-
-#: Step1.class:81
-msgid "Found"
-msgstr "Found"
-
-#: Step2.class:37
-msgid "Keep in mind however, that this process can take a while to complete."
-msgstr "Keep in mind however, that this process can take a while to complete."
+#: FMain.class:309 FMain0.class:293
+msgid "Quit"
+msgstr "Quit"
 
 #: Step0.class:20
 msgid "Localization Settings"
 msgstr "Localization Settings"
 
-#: FMain.class:269 FMain0.class:262
-msgid "Next"
-msgstr "Next"
-
-#: FMain.class:221 FMain0.class:214
-msgid "Process Overview"
-msgstr "Process Overview"
-
-#: FMain.class:280 FMain0.class:273
-msgid "Quit"
-msgstr "Quit"
-
-#: Step1.class:122
-msgid "Scanning"
-msgstr "Scanning"
-
-#: Step1.class:109
-msgid "Scanning for CD Media ... Please wait"
-msgstr "Scanning for CD Media ... Please wait"
-
-#: Step1.class:156
-msgid "Scanning system for installable ISO images"
-msgstr "Scanning system for installable ISO images"
-
-#: Step1.class:62
-msgid "Scanning system partitions for installation files"
-msgstr "Scanning system partitions for installation files"
-
-#: Step1.class:388
-msgid "Search Again"
-msgstr "Search Again"
-
-#: Step1.class:349
-msgid "Select Installation Source"
-msgstr "Select Installation Source"
-
-#: Step1.class:367
-msgid "Select Installation source from the list below"
-msgstr "Select Installation source from the list below"
-
-#: Step0.class:272
-msgid "Select your keyboard layout"
-msgstr "Select your keyboard layout"
-
-#: Step0.class:291
-msgid "Select your keyboard model"
-msgstr "Select your keyboard model"
-
-#: Step0.class:241
-msgid "Select your language"
-msgstr "Select your language"
-
-#: Step0.class:113
+#: Step0.class:122
 msgid "Spanish"
 msgstr "Spanish"
 
-#: Step0.class:317
+#: Step0.class:125
+msgid "English (US)"
+msgstr "English (US)"
+
+#: Step0.class:253
+msgid "Select your language"
+msgstr "Select your language"
+
+#: Step0.class:284
+msgid "Select your keyboard layout"
+msgstr "Select your keyboard layout"
+
+#: Step0.class:303
+msgid "Select your keyboard model"
+msgstr "Select your keyboard model"
+
+#: Step0.class:325
 msgid "Use this box to test your keyboard settings"
 msgstr "Use this box to test your keyboard settings"
 
-#: Step1.class:237
-msgid "VERSION"
-msgstr "VERSION"
-
-#: .project:1
-msgid "VectorLinux Installer"
-msgstr "VectorLinux Installer"
-
-#: Step2.class:22
-msgid "Verify Installation Files"
-msgstr "Verify Installation Files"
-
-#: Step2.class:37
-msgid "Verifying installation files can prevent you from performing an unsuccessful install"
-msgstr "Verifying installation files can prevent you from performing an unsuccessful install"
-
-#: Step1.class:132
-msgid "in"
-msgstr "in"
-
-#: Step1.class:81
-msgid "in partition"
-msgstr "in partition"
-
-#: Step1.class:80
+#: Step1.class:33
 msgid "on"
 msgstr "on"
 
+#: Step1.class:130
+msgid "Scanning system partitions for installation files"
+msgstr "Scanning system partitions for installation files"
+
+#: Step1.class:149
+msgid "Found"
+msgstr "Found"
+
+#: Step1.class:149
+msgid "in partition"
+msgstr "in partition"
+
+#: Step1.class:190
+msgid "Scanning for CD Media ... Please wait"
+msgstr "Scanning for CD Media ... Please wait"
+
+#: Step1.class:203
+msgid "Scanning"
+msgstr "Scanning"
+
+#: Step1.class:213
+msgid "in"
+msgstr "in"
+
+#: Step1.class:241
+msgid "Scanning system for installable ISO images"
+msgstr "Scanning system for installable ISO images"
+
+#: Step1.class:334
+msgid "DISTRIBUTION"
+msgstr "DISTRIBUTION"
+
+#: Step1.class:337
+msgid "VERSION"
+msgstr "VERSION"
+
+#: Step1.class:414
+msgid "This feature can help you avoid an unsuccesful installation."
+msgstr ""
+
+#: Step1.class:414
+msgid "WARNING:"
+msgstr ""
+
+#: Step1.class:414
+#, fuzzy
+msgid "This process can take a long time to complete."
+msgstr "Keep in mind however, that this process can take a while to complete."
+
+#: Step1.class:466
+msgid "Select Installation Source"
+msgstr "Select Installation Source"
+
+#: Step1.class:484
+msgid "Select Installation source from the list below"
+msgstr "Select Installation source from the list below"
+
+#: Step1.class:505
+msgid "Search Again"
+msgstr "Search Again"
+
+#: Step1.class:529
+msgid "Check Installation media before installing"
+msgstr "Check Installation media before installing"
+
+#: Step2.class:27
+msgid "Verify Installation Files"
+msgstr "Verify Installation Files"
+
+#: Step2.class:46
+msgid ""
+"This installation media has already been checked. Would you like to check it "
+"again?"
+msgstr ""
+
+#: Step2.class:78
+msgid "Verifying data on compressed package"
+msgstr ""
+
+#: Step2.class:82
+msgid "Testing file"
+msgstr ""
+
+#: Step2.class:82
+msgid "of"
+msgstr ""
+
+#: Step2.class:101
+msgid "Canceling data integrity tests per user request"
+msgstr ""
+
+#: Step2.class:102
+msgid "Data integrity test canceled by user."
+msgstr ""
+
+#: Step2.class:115
+msgid "FAILED"
+msgstr ""
+
+#: Step2.class:117
+msgid "The following"
+msgstr ""
+
+#: Step2.class:117
+msgid "required"
+msgstr ""
+
+#: Step2.class:117
+msgid "has failed the integrity test. It is not safe to continue"
+msgstr ""
+
+#: Step2.class:118
+msgid "Integrity test"
+msgstr ""
+
+#: Step2.class:124
+msgid "PASSED"
+msgstr ""
+
+#: Step2.class:154
+msgid ""
+"has failed the data integrity test. All required packages have passed this "
+"test"
+msgstr ""
+
+#: Step2.class:154
+msgid ""
+"Possible causes for this are a corrupted download or a badly burnt cd. You "
+"can try the following options"
+msgstr ""
+
+#: Step2.class:154
+msgid "Download a new installation image from www.vectorlinux.com"
+msgstr ""
+
+#: Step2.class:154
+msgid "Burn the image at a lower speed rate"
+msgstr ""
+
+#: Step2.class:174
+msgid "Data integrity test complete... all tests passed"
+msgstr ""
+
+#: Step2.class:181
+msgid "All test passed. It is safe to continue with the installation process."
+msgstr ""
+
+#: Step2.class:198
+msgid ""
+"Verifying installation files can prevent you from performing an unsuccessful "
+"install"
+msgstr ""
+"Verifying installation files can prevent you from performing an unsuccessful "
+"install"
+
+#: Step2.class:198
+msgid "Keep in mind however, that this process can take a while to complete."
+msgstr "Keep in mind however, that this process can take a while to complete."
+
+#: Step2.class:198
+msgid "Click"
+msgstr ""
+
+#: Step2.class:198
+msgid "to abort this process at any time"
+msgstr ""
+
+#: Step2.class:352
+msgid "TextLabel2"
+msgstr ""
+
+#: Step2.class:366
+msgid "Stop"
+msgstr ""
+
+#: Step3.class:28
+msgid "Disc Partitioning Options"
+msgstr ""
+
+#: Step3.class:31
+msgid "Select the partitioning method you would like to use"
+msgstr ""
+
+#: Step3.class:132 Step3a.class:110
+msgid "TextLabel1"
+msgstr ""
+
+#: Step3.class:150
+msgid "Automatic"
+msgstr ""
+
+#: Step3.class:160
+msgid ""
+"Automatically resize your partitions and / or create the correct disk space "
+"for VectorLinux."
+msgstr ""
+
+#: Step3.class:167
+msgid "Manually resize my partitions "
+msgstr ""
+
+#: Step3.class:177
+msgid "Use the partitioning tool to prepare your system partitions."
+msgstr ""
+
+#: Step3.class:184
+msgid "My hard drive is already partitioned"
+msgstr ""
+
+#: Step3.class:194
+msgid "Install VectorLinux to existing partitions on my hard drive"
+msgstr ""
+
+#: Step3a.class:19
+msgid "Automatic Partitioning Options"
+msgstr ""
+
+#: Step3a.class:20
+msgid "Select one of the following options"
+msgstr ""
+
+#: Step3a.class:22
+msgid "Allow VectorLinux to use an entire hard disk in your system."
+msgstr ""
+
+#: Step3a.class:22
+msgid "This option will wipe out any data on the disk you select."
+msgstr ""
+
+#: Step3a.class:24
+msgid ""
+"Locate free (unpartitioned) space on hard disk and install VectorLinux there."
+msgstr ""
+
+#: Step3a.class:24
+msgid "This option will not harm any data on your hard drive"
+msgstr ""
+
+#: Step3a.class:26
+msgid ""
+"Resize your existing partitions to make room for a VectorLinux partition "
+"scheme"
+msgstr ""
+
+#: Step3a.class:26
+msgid "This option will not harm any existing data on your hard drive"
+msgstr ""
+
+#: Step3a.class:121
+msgid "Use unpartitioned space on my hard disk (creates new partitions)"
+msgstr ""
+
+#: Step3a.class:142
+msgid "Use free space on existing partitions for VectorLinux"
+msgstr ""
+
+#: Step3a.class:163
+msgid "Use entire disk"
+msgstr ""
+
+#: Step3a1.class:19
+msgid "Use Entire Hard Disk"
+msgstr ""
+
+#: Step3a2.class:25
+msgid "Install VectorLinux to free space on disk"
+msgstr ""
+
+#: Step3a2.class:45
+msgid "Searching for unused space on your hard drive... please wait"
+msgstr ""
+
+#: Step3a2.class:65
+msgid "No hard disks found on your system. Please select"
+msgstr ""
+
+#: Step3a2.class:65
+msgid "Another partitioning option"
+msgstr ""
+
+#: Step3a2.class:92
+msgid "(Recomended)"
+msgstr ""
+
+#: Step3a2.class:102
+msgid "of free space"
+msgstr ""
+
+#: Step3a2.class:143
+msgid ""
+"Select the location on your hard drive where you would like to install "
+"VectorLinux"
+msgstr ""
+
+#: Step3a2.class:189
+msgid "Please wait while your hard drive is being partitioned"
+msgstr ""
+
+#: Step3a2.class:202
+msgid "Unable to find enough un-used space to perform auto-partition."
+msgstr ""
+
+#: Step3a2.class:202
+msgid "Please consider using a different partitioning option."
+msgstr ""
+
+#: Step3a2.class:204
+msgid ""
+"Unable to find enough un-used space to perform auto-partition. Please "
+"consider using a different partitioning option."
+msgstr ""
+
+#: Step3a2.class:309
+msgid "Partitioning stage complete... Click next to continue"
+msgstr ""
+
+#: Step3a2.class:422
+msgid "RadioButton1"
+msgstr ""
+
+#: Step3a3.class:6
+msgid "Claim free space from existing partitions"
+msgstr ""
+
+#: Step4.class:23
+msgid "Automatic Disc Partitioning"
+msgstr ""
+
+#: Step5.class:19
+msgid "Resize partitions using Gparted"
+msgstr ""
+
+#: Step5.class:64
+msgid ""
+"Gparted was not found on this system. Please install gparted and try again"
+msgstr ""
+
+#: Step5.class:69
+msgid "Loading partitioning utility...Please Wait"
+msgstr ""
+
+#: Step5.class:92
+msgid ""
+"The VectorLinux installer is unable to embed the gparted partitioning "
+"utility."
+msgstr ""
+
+#: Step5.class:92
+msgid ""
+"Please consider using the automatic partition option, or use other means of"
+msgstr ""
+
+#: Step5.class:92
+msgid "partitioning your hard drives."
+msgstr ""
+
+#: Step5.class:114
+msgid ""
+"VectorLinux is about to launch the GParted partitioning tool. Use this "
+"utility to"
+msgstr ""
+
+#: Step5.class:114
+msgid "move, resize, delete or create partitions."
+msgstr ""
+
+#: Step5.class:114
+msgid "When you are finished, you will need to exit the utility from the"
+msgstr ""
+
+#: Step5.class:114
+msgid "GParted"
+msgstr ""
+
+#: Step5.class:114
+msgid "menu"
+msgstr ""
+
+#: Step5.class:169
+msgid "SYSTEM RESTART SUGGESTED"
+msgstr ""
+
+#: Step5.class:169
+msgid ""
+"Your system still contains some non-linux partitions. If you still have a "
+"Windows operating system installed, it is recomended "
+msgstr ""
+
+#: Step5.class:169
+msgid "that you reboot your system at this time. "
+msgstr ""
+
+#: Step5.class:169
+msgid "Click the"
+msgstr ""
+
+#: Step5.class:169
+msgid "button to restart your computer now, or click"
+msgstr ""
+
+#: Step5.class:169
+msgid "to continue without restarting."
+msgstr ""
+
+#: Step5.class:174
+msgid "PARTITIONING DONE"
+msgstr ""
+
+#: Step5.class:174
+msgid "CLick next to continue"
+msgstr ""
+
+#: Step5.class:190
+msgid "Your computer will restart in 10 seconds"
+msgstr ""
+
+#: Step5.class:247
+msgid "Loading partitioning utility ... Please Wait"
+msgstr ""
+
+#: Step5.class:256
+msgid "Restart Now"
+msgstr ""
+
+#: Step6.class:58
+#, fuzzy
+msgid "Partition"
+msgstr "in partition"
+
+#: Step6.class:59
+msgid "Size"
+msgstr ""
+
+#: Step6.class:60
+msgid "Mount Point"
+msgstr ""
+
+#: Step6.class:61
+msgid "File System"
+msgstr ""
+
+#: Step6.class:133
+msgid "Not Used"
+msgstr ""
+
+#: Step6.class:154
+msgid "Do not format"
+msgstr ""
+
+#: Step6.class:199
+msgid "You have already selected"
+msgstr ""
+
+#: Step6.class:199
+msgid "as your"
+msgstr ""
+
+#: Step6.class:199
+#, fuzzy
+msgid "partition."
+msgstr "in partition"
+
+#: Step6.class:199
+msgid "Please select only one partition for this purpose"
+msgstr ""
+
+#: Step6.class:280
+#, fuzzy
+msgid "Select which partitions to use for installation"
+msgstr "Scanning system partitions for installation files"
+
+#: Step6.class:385
+msgid "Yes"
+msgstr ""
+
+#: Step6.class:385
+msgid "No"
+msgstr ""

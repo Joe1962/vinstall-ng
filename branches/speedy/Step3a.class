@@ -44,8 +44,10 @@ PUBLIC FUNCTION GetNext() AS String
   
   IF ME.rbEntireDisk.Value = TRUE THEN 
       RETURN "Step3a1"
-  ELSE IF ME.rbunpartitioned THEN 
+  ELSE IF ME.rbunpartitioned.Value = TRUE THEN 
     RETURN "Step3a2"
+  ELSE IF ME.rbResizeParts.Value = TRUE THEN 
+    RETURN "Step3a3"
   END IF
   
   

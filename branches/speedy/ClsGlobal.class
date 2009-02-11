@@ -28,3 +28,12 @@ STATIC PUBLIC sSourceAddr AS String
 STATIC PUBLIC sToScan AS String
 STATIC PUBLIC sLastScanned AS String
 
+
+' Partition method used
+
+STATIC PUBLIC bAutoPartition AS Boolean
+STATIC PUBLIC sTargetRoot AS String ' we know by default this is a reiserfs partition
+STATIC PUBLIC sTargetSwap AS String
+
+STATIC PUBLIC sFullDiscToWipe AS String
+

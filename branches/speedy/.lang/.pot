@@ -102,7 +102,7 @@ msgstr ""
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:414
+#: Step1.class:414 Step3a1.class:22 Step3a1a.class:81
 msgid "WARNING:"
 msgstr ""
 
@@ -242,7 +242,7 @@ msgstr ""
 msgid "Select the partitioning method you would like to use"
 msgstr ""
 
-#: Step3.class:132 Step3a.class:108
+#: Step3.class:132 Step3a.class:110 Step3a1.class:157
 msgid "TextLabel1"
 msgstr ""
 
@@ -307,20 +307,74 @@ msgstr ""
 msgid "This option will not harm any existing data on your hard drive"
 msgstr ""
 
-#: Step3a.class:119
+#: Step3a.class:121
 msgid "Use unpartitioned space on my hard disk (creates new partitions)"
 msgstr ""
 
-#: Step3a.class:140
+#: Step3a.class:143
 msgid "Use free space on existing partitions for VectorLinux"
 msgstr ""
 
-#: Step3a.class:161
+#: Step3a.class:167
 msgid "Use entire disk"
 msgstr ""
 
-#: Step3a1.class:19
-msgid "Use Entire Hard Disk"
+#: Step3a1.class:20
+msgid "Use Entire Hard Disk for VectorLinux"
+msgstr ""
+
+#: Step3a1.class:22
+msgid "All existing data in the device you select here will be destroyed."
+msgstr ""
+
+#: Step3a1.class:68
+msgid "Total Disc Size"
+msgstr ""
+
+#: Step3a1.class:179 Step3a2.class:455
+msgid "RadioButton1"
+msgstr ""
+
+#: Step3a1a.class:21
+msgid "Create Linux Partition Scheme in"
+msgstr ""
+
+#: Step3a1a.class:51
+msgid "There has been an error deleting"
+msgstr ""
+
+#: Step3a1a.class:51
+msgid ""
+"Please make sure the drive or partition is not being used by some other "
+"program"
+msgstr ""
+
+#: Step3a1a.class:81
+msgid "All existing data in"
+msgstr ""
+
+#: Step3a1a.class:81
+msgid "is about to be deleted."
+msgstr ""
+
+#: Step3a1a.class:81
+msgid "This step cannot be undone. Are you sure you want to continue?"
+msgstr ""
+
+#: Step3a1a.class:81 Step6.class:385
+msgid "Yes"
+msgstr ""
+
+#: Step3a1a.class:81 Step6.class:385
+msgid "No"
+msgstr ""
+
+#: Step3a1a.class:84
+msgid "Preparing hard disk for new partitioning structure. Please wait"
+msgstr ""
+
+#: Step3a1a.class:89
+msgid "Operation cancelled by user. No changes have been made to the system"
 msgstr ""
 
 #: Step3a2.class:25
@@ -353,30 +407,46 @@ msgid ""
 "VectorLinux"
 msgstr ""
 
-#: Step3a2.class:189
+#: Step3a2.class:191
 msgid "Please wait while your hard drive is being partitioned"
 msgstr ""
 
-#: Step3a2.class:202
+#: Step3a2.class:204
 msgid "Unable to find enough un-used space to perform auto-partition."
 msgstr ""
 
-#: Step3a2.class:202
+#: Step3a2.class:204
 msgid "Please consider using a different partitioning option."
 msgstr ""
 
-#: Step3a2.class:204
+#: Step3a2.class:206
 msgid ""
 "Unable to find enough un-used space to perform auto-partition. Please "
 "consider using a different partitioning option."
 msgstr ""
 
-#: Step3a2.class:309
+#: Step3a2.class:322
 msgid "Partitioning stage complete... Click next to continue"
 msgstr ""
 
-#: Step3a2.class:422
-msgid "RadioButton1"
+#: Step3a2.class:352
+msgid ""
+"We are unable to find any hard disks with enough unpartitioned space for "
+"this operation."
+msgstr ""
+
+#: Step3a2.class:352
+msgid "Please consider using another partitioning method."
+msgstr ""
+
+#: Step3a2.class:354
+msgid ""
+"Unable to find any hard drives with enough unpartitioned space. Please go "
+"back and select  another partitioning method"
+msgstr ""
+
+#: Step3a3.class:22
+msgid "Claim free space from existing partitions"
 msgstr ""
 
 #: Step4.class:23
@@ -521,12 +591,4 @@ msgstr ""
 
 #: Step6.class:280
 msgid "Select which partitions to use for installation"
-msgstr ""
-
-#: Step6.class:385
-msgid "Yes"
-msgstr ""
-
-#: Step6.class:385
-msgid "No"
 msgstr ""
