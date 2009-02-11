@@ -50,7 +50,7 @@
     { tlautopart TextLabel
       MoveScaled(4,6,55,4)
       Expand = True
-      Text = ("Automatically resize your partitions to make size for your VectorLinux installation")
+      Text = ("Automatically resize your partitions and / or create the correct disk space for VectorLinux.")
     }
     { rbCustomPart RadioButton rbGroup
       Name = "rbCustomPart"

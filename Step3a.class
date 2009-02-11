@@ -20,8 +20,10 @@ PUBLIC SUB Form_Open()
   ME.tlActionExp.Text = ("Select one of the following options")
   ME.tlEntireDisc.Text = ("Allow VectorLinux to use an entire hard disk in your system.") & "<br>" &
   "<b>" & ("This option will wipe out any data on the disk you select.") & "</b>"
-  ME.tlFreeSpace.Text = ("Locate free space on hard disk and install VectorLinux there.") & "<br>" &
-  "<i>" & ("This option will not erase any data off your hard drive") & "</i>"
+  ME.tlFreeSpace.Text = ("Locate free (unpartitioned) space on hard disk and install VectorLinux there.") & "<br>" &
+  "<i>" & ("This option will not harm any data on your hard drive") & "</i>"
+  ME.tlFreeSpace2.Text = ("Resize your existing partitions to make room for a VectorLinux partition scheme") & "<br>" &
+  "<i>" & ("This option will not harm any existing data on your hard drive") & "</i>"
   
 
 END
@@ -41,8 +43,8 @@ END
 PUBLIC FUNCTION GetNext() AS String
   
   IF ME.rbEntireDisk.Value = TRUE THEN 
-    RETURN "Step3a1"
-  ELSE 
+      RETURN "Step3a1"
+  ELSE IF ME.rbunpartitioned THEN 
     RETURN "Step3a2"
   END IF
   
