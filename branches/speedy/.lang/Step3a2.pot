@@ -58,11 +58,11 @@ msgstr ""
 msgid "Unable to find enough un-used space to perform auto-partition. Please consider using a different partitioning option."
 msgstr ""
 
-#: Step3a2.class:320
+#: Step3a2.class:361
 msgid "Partitioning stage complete... Click next to continue"
 msgstr ""
 
-#: Step3a2.class:433
+#: Step3a2.class:474
 msgid "RadioButton1"
 msgstr ""
 
