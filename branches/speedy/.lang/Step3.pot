@@ -31,7 +31,7 @@ msgid "Automatic"
 msgstr ""
 
 #: Step3.class:160
-msgid "Automatically resize your partitions to make size for your VectorLinux installation"
+msgid "Automatically resize your partitions and / or create the correct disk space for VectorLinux."
 msgstr ""
 
 #: Step3.class:167
