@@ -280,41 +280,30 @@ PUBLIC SUB PERFORM_PARTITIONING()
                             
                             ' PROCEED TO CREATE PARTITIONS IN NEWLY CALCULATED FREE SPACE
                           SHELL "parted " & Trim(sDrive) & " -s \"mkpart logical reiserfs " & lFreeStart & "kb " & (lFreeEnd - lNeededSwap) & "kb\"" WAIT 
-                          'SHELL "parted " & Trim(sdrive) & " mkfs reiserfs " & (iLastPartNo + 2)  WAIT 
-                          'SHELL "mkfs.reiserfs -fq " & sDrive & (iLastPartNo + 2) WAIT 
-                          'EXEC ["mkfs.reiserfs", "-fq", sDrive & (iLastPartNo + 2)] WAIT 
-                          'SHELL "parted " & Trim(sdrive) & " -s \"mkpart logical linux-swap " & (lFreeEnd - lNeededSwap) & "kb " & lFreeEnd & "kb yes\"" WAIT 
-                          SHELL "parted " & Trim(sdrive) & " mkpart logical linux-swap " & (lFreeEnd - lNeededSwap) & "kb " & lFreeEnd & "kb > echo \"Yes\"" WAIT 
-                          SHELL "mkswap " & Trim(sdrive) & (iLastPartNo + 3) WAIT 
-
+                          'SHELL "echo yes | parted " & Trim(sdrive) & " mkfs reiserfs " & (iLastPartNo + 2) WAIT 
+                          SHELL "mkfs.reiserfs -fq " & sDrive & (iLastPartNo + 2) WAIT 
                           
-                          
-                          'SHELL "parted " & Trim(sdrive) & " -s \"mkpart logical linux-swap " & (lFreeEnd - (lNeededSwap - 1)) & "kb " & (lFreeEnd - 1) & "kb\" " WAIT 
-                          'EXEC ["mkswap", Trim(sdrive) & (iLastPartNo + 3)] WAIT 
-                          'EXEC ["swapon", Trim(sdrive) & (iLastPartNo + 3)] WAIT 
-                          
-                          
-                      
-                      
-                      
+                          ' ####################### RECALCULATE FREE SPACE ########################################
+                            SHELL "parted " & Trim(sDrive) & " unit gb print free | grep -i \"free space\" | tr -s \' \',\"\" | cut -f 2-4 -d \' \'" TO sPartedRes
+                                          'Message(sPartedRes)
+                                    sPartedRes = Trim(sPartedRes) ' | START | | END | | SIZE |
+                                      sOutLine = Split(sPartedRes, Space(1))
+                                        sFreeStart = sOutLine[0]
+                                        sFreeEnd = sOutLine[1] 
+                                        sFreeSize = sOutLine[2]
+                            SHELL "parted " & Trim(sdrive) & " mkpart logical linux-swap " & sFreeStart & " " & sFreeEnd WAIT 
+                                ' ^^^^^^^^ IN CASE THE ABOVE LINE DOESN'T WORK, THE FOLLOWING CODE MAY BE USED TO PERFORM THE SAME OPERATION ^^^^^^^^^^
+                            
+                            ' ' ' ' ' sDump = "#!/bin/bash \n" &
+                            ' ' ' ' ' "parted " & Trim(sdrive) & " mkpart logical linux-swap " & sFreeStart & " " & sFreeEnd & " \n" &
+                            ' ' ' ' ' "<<EOF \n" &
+                            ' ' ' ' ' "yes \n" &
+                            ' ' ' ' ' "EOF"
+                            ' ' ' ' ' File.Save("/tmp/swapmaker", sDump)
+                            ' ' ' ' ' SHELL "sh /tmp/swapmaker" WAIT 
                       END IF
                     
           END IF
-      
-
-      'parted /dev/hda print free | grep -i "Free space" |tr -s ' ',"" | cut -f 2-4 -d ' '
-
-    
-    ' root:# parted /dev/hda --script "mkpartfs primary linux-swap -512kb -1kb" ' SAMPLE PARTED LINE
-
-
-    
-    ' FOR i = 0 TO 20
-    '   WAIT 2
-    ' NEXT 
-    ' 
-    ' ME.MovieBox1.Playing = FALSE
-    ' Message("Finished")
     
     
     ME.tlSelAutoTarget.Text = ("Partitioning stage complete... Click next to continue")
