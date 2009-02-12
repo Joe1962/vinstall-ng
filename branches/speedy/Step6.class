@@ -38,7 +38,7 @@ PUBLIC SUB OnExit()
           sFmtAs = gvPartListing[n, 5].Text
         END IF
       END IF
-      Message(gvPartListing[n, 0].Text & gb.NewLine & gvPartListing[n, 2].Text & gb.NewLine & sFmtAs)
+      'Message(gvPartListing[n, 0].Text & gb.NewLine & gvPartListing[n, 2].Text & gb.NewLine & sFmtAs)
       
     NEXT 
   

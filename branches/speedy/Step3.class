@@ -41,17 +41,20 @@ PUBLIC FUNCTION GetNext() AS String
   ClsGlobal.fRunningMainForm.listview1["Step1"].picture = MdlStartUp.pDone
   ClsGlobal.fRunningMainForm.listview1["Step2"].picture = MdlStartUp.pNow
   IF ME.rbAutoPart.Value = TRUE THEN 
-    'no module for auto partition written yet
-    'Message("Not ready yet")
+    ClsGlobal.bAutoPartition = TRUE
+      PRINT " ---> Use built-in auto partition tools for partitioning"
     RETURN "Step3a"
   END IF
   IF ME.rbCustomPart.Value = TRUE THEN 
     'embed gparted
-    'Message("Gparted module not present yet")
+      PRINT " ---> Embed GParted for partitioning"
+    ClsGlobal.bAutoPartition = FALSE
     RETURN "Step5"
   END IF
   IF ME.rbPrePartitioned.Value = TRUE THEN   
     ' Use existing partitions
+    PRINT " ---> Install to pre-partitioned hard drive"
+    ClsGlobal.bAutoPartition = FALSE
     RETURN "Step6"
   END IF
   

@@ -14,11 +14,13 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+PRIVATE sStatus AS String
 PRIVATE hproc AS Process
-
 PUBLIC SUB Form_Open()
   
   ME.tlbanner.Text = "<h2>" & ("Create Linux Partition Scheme in") & Space(1) & ClsGlobal.sFullDiscToWipe & "</h2>"
+  ME.MovieBox1.Path = "images/throbber.gif"
+  ME.MovieBox1.Playing = FALSE
   
     
 
@@ -51,6 +53,7 @@ PUBLIC SUB DESTROY_CURRENT_DATA()
                     ("Please make sure the drive or partition is not being used by some other program"))
                     'BREAK 
                     PRINT "     \\- FAILED!"
+                      sStatus = ("Error deleting existing partitions... Please try another partitioning method")
                     RETURN 
                   END IF
                     
@@ -62,14 +65,99 @@ END
 
 PUBLIC SUB CREATE_NEW_PARTITIONS()
   
-  DIM lRunningSwap, lNeededSwap, lTotalRAM AS Long
-  DIM sDump AS String
+  DIM lRunningSwap, lNeededSwap, lTotalRAM, lTotalFreekb AS Long
+  DIM sDump, sSwapList, sSwapPart, sRootpart, sDrive AS String
+  DIM sResults, sPartedDetails AS String[]
+  DIM sPartedOutput AS String
+  DIM sFreeStart, sFreeEnd, sFreeTotal AS String
+  
     
+    sDrive = Trim(ClsGlobal.sFullDiscToWipe)
     ' First determine how much swap we need
       SHELL "free | grep \"^Swap\" | tr -s \' \',\"\" | cut -f 2 -d \' \'" TO sDump
-      sDump = Trim(sDump)
-      Message("Total RAM " & sDump)
+        sDump = Trim(sDump)
+          IF sDump THEN   
+            ' swap exists
+              SELECT CASE Message.Question(("Vectorlinux has detected an existing swap partition in your system.") & "<br>" &
+                ("Would you like to let VectorLinux use this partition or create a new one?"), ("Use Existing"), ("Create New"))
+                CASE 1
+                  ' use existing partition
+                  SHELL "probepart | grep \"^/dev\" | grep -i \"linux swap\" | tr -s \' \',\"\" | cut -f 1 -d \' \'" TO sSwapList
+                    sSwapList = Trim(sSwapList)
+                      sResults = Split(sSwapList, "\n")
+                      sSwapPart = sResults[0]
+                PRINT " --- Use existing swap partition " & sSwapPart
+            ClsGlobal.sTargetSwap = sSwapPart  ' set the address to the swap partition.
+                      'Message("Using swap " & sSwapPart)
+              END SELECT 
+          ELSE ' no swap found
+          ' we take care of this outside this if  
+          END IF
+          
+  
+      
+      IF NOT sSwapPart THEN 
+        'detect ram
+        PRINT "  - Calculating system ram"
+        SHELL "free | grep \"^Mem\" |tr -s \' \',\"\" | cut -f 2 -d \' \'" TO sDump
+        sDump = Trim(sDump)
+          lTotalRAM = sDump
+        PRINT "  -\\- " & lTotalRAM & " KB found"
+        PRINT "  - Determining amount of swap space needed "
+            IF lTotalRAM <= 524288 THEN 
+              lNeededSwap = lTotalRAM * 2
+            ELSE 
+              lNeededSwap = lTotalRAM
+            END IF
+        PRINT "  -\\- " & lNeededSwap & " KB needed for swap"
+        
+        ' now create partitions for swap and /
+        SHELL "parted " & sDrive & " unit kb print free | grep -i \"free space\"" TO sPartedOutput
+          sPartedOutput = Trim(sPartedOutput)
+          'Number  Start   End         Size        Type  File system  Flags
+          sPartedDetails = Split(sPartedOutput, Space(1))
+            lTotalFreekb = Left(sPartedDetails[2], Len(sPartedDetails[2]) - 2)
+            'Message.Info("Total free space size on " & sDrive & " = " & lTotalFreekb)
+           ' create primary partition for /
+            PRINT " --- Creating / partition at " & sDrive & "1 ... Size = " & (lTotalFreekb - lNeededSwap) & " Kb as reiserfs"
+        SHELL "parted " & sDrive & " unit kb mkpart primary reiserfs " & sPartedDetails[0] & Space(1) & (lTotalFreekb - lNeededSwap) & "kb 1 > /dev/null" WAIT 
     
+          ' get the free space again to create the right size swap partition with the remainder of the free space
+        SHELL "parted " & sDrive & " unit kb print free | grep -i \"free space\"" TO sPartedOutput
+          sPartedOutput = Trim(sPartedOutput)
+          'Message(sPartedOutput)
+          'Number  Start   End         Size        Type  File system  Flags
+          sPartedDetails = Split(sPartedOutput, Space(1))
+          'Message("Start " & Trim(sPartedDetails[0]) & " End " & Trim(sPartedDetails[2]))
+          PRINT " --- Creating swap partition at " & sDrive & "2 ... Size = " & lNeededSwap & " Kb"
+        SHELL "parted " & sDrive & " mkpartfs primary linux-swap " & Trim(sPartedDetails[0]) & " " & Trim(sPartedDetails[2]) & " 1 > /dev/null " WAIT 
+        
+        ClsGlobal.sTargetRoot = sDrive & "1"
+        ClsGlobal.sTargetSwap = sDrive & "2"
+          
+        
+      ELSE 
+        ' only create a / partition... we'll be using a shared swap area
+          SHELL "parted " & sDrive & " unit gb print free | grep -i \"free space\"" TO sPartedOutput
+          sPartedOutput = Trim(sPartedOutput)
+          'Number  Start   End         Size        Type  File system  Flags
+            sPartedDetails = Split(sPartedOutput, Space(1))
+          PRINT " --- Create / partition " & sDrive & "1 Size = " & Trim(sPartedDetails[4]) & " preformatted to reiserfs"
+          SHELL "parted " & sDrive & " mkpart primary reiserfs " & Trim(sPartedDetails[0]) & Space(1) & Trim(sPartedDetails[2]) WAIT 
+            IF MdlMain.FORMAT_THIS_PARTITION(sDrive & "1", "reiserfs") > 0 THEN 
+              sStatus = ("Failed to format partitions, please try another partitioning method")
+              RETURN 
+            END IF
+            
+          ClsGlobal.sTargetRoot = sDrive & "1"
+          'SHELL "mkfs.reiserfs -q " & sDrive & "1" WAIT 
+          'Message(sPartedDetails[0])
+          'Message(sPartedDetails[1])
+          'Message(sPartedDetails[2])
+
+      END IF
+      
+      sStatus = ("Partitioning stage complete. Click") & Space(1) & "\"" & ClsGlobal.fRunningMainForm.btnext.text & "\"" & Space(1) & ("to continue")
   
 END
 
@@ -81,9 +169,25 @@ PUBLIC SUB StartUp()
     ("This step cannot be undone. Are you sure you want to continue?"), ("Yes"), ("No"))
       CASE 1
         'Message("Yes")
+        
         ME.tlWarning.Text = ("Preparing hard disk for new partitioning structure. Please wait")
+        ME.MovieBox1.Playing = TRUE
+          WITH ClsGlobal.fRunningMainForm
+            .btnext.enabled = FALSE
+            .btback.enabled = FALSE
+            .btquit.enabled = FALSE
+          END WITH 
         ME.DESTROY_CURRENT_DATA()
         ME.CREATE_NEW_PARTITIONS()
+        ME.tlWarning.Text = sStatus '("Hard drive partitioned successfully. Click") & Space(1) & ClsGlobal.fRunningMainForm.btnext.text & Space(1) & ("to continue.")
+        ME.MovieBox1.Playing = FALSE
+        ME.MovieBox1.Enabled = FALSE
+        WITH ClsGlobal.fRunningMainForm
+            .btnext.enabled = TRUE
+            .btback.enabled = TRUE
+            .btquit.enabled = TRUE
+        END WITH 
+        
       CASE 2 
         'Message("No")
         ME.tlWarning.Text = ("Operation cancelled by user. No changes have been made to the system")
@@ -101,6 +205,6 @@ END
 
 PUBLIC FUNCTION GetNext() AS String
   
-  
+  RETURN "Step7"
   
 END

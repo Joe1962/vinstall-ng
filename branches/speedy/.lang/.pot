@@ -30,6 +30,14 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
+#: MdlMain.module:33
+msgid "Unable to format"
+msgstr ""
+
+#: MdlMain.module:33
+msgid "to"
+msgstr ""
+
 #: Step0.class:20
 msgid "Localization Settings"
 msgstr ""
@@ -62,67 +70,67 @@ msgstr ""
 msgid "on"
 msgstr ""
 
-#: Step1.class:130
+#: Step1.class:132
 msgid "Scanning system partitions for installation files"
 msgstr ""
 
-#: Step1.class:149
+#: Step1.class:151
 msgid "Found"
 msgstr ""
 
-#: Step1.class:149
+#: Step1.class:151
 msgid "in partition"
 msgstr ""
 
-#: Step1.class:190
+#: Step1.class:192
 msgid "Scanning for CD Media ... Please wait"
 msgstr ""
 
-#: Step1.class:203
+#: Step1.class:205
 msgid "Scanning"
 msgstr ""
 
-#: Step1.class:213
+#: Step1.class:215
 msgid "in"
 msgstr ""
 
-#: Step1.class:241
+#: Step1.class:243
 msgid "Scanning system for installable ISO images"
 msgstr ""
 
-#: Step1.class:334
+#: Step1.class:336
 msgid "DISTRIBUTION"
 msgstr ""
 
-#: Step1.class:337
+#: Step1.class:339
 msgid "VERSION"
 msgstr ""
 
-#: Step1.class:414
+#: Step1.class:416
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:414 Step3a1.class:22 Step3a1a.class:81
+#: Step1.class:416 Step3a1.class:22 Step3a1a.class:169
 msgid "WARNING:"
 msgstr ""
 
-#: Step1.class:414
+#: Step1.class:416
 msgid "This process can take a long time to complete."
 msgstr ""
 
-#: Step1.class:466
+#: Step1.class:468
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:484
+#: Step1.class:486
 msgid "Select Installation source from the list below"
 msgstr ""
 
-#: Step1.class:505
+#: Step1.class:507
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:529
+#: Step1.class:531
 msgid "Check Installation media before installing"
 msgstr ""
 
@@ -242,33 +250,33 @@ msgstr ""
 msgid "Select the partitioning method you would like to use"
 msgstr ""
 
-#: Step3.class:132 Step3a.class:110 Step3a1.class:157
+#: Step3.class:135 Step3a.class:111 Step3a1.class:157
 msgid "TextLabel1"
 msgstr ""
 
-#: Step3.class:150
+#: Step3.class:153
 msgid "Automatic"
 msgstr ""
 
-#: Step3.class:160
+#: Step3.class:163
 msgid ""
 "Automatically resize your partitions and / or create the correct disk space "
 "for VectorLinux."
 msgstr ""
 
-#: Step3.class:167
+#: Step3.class:170
 msgid "Manually resize my partitions "
 msgstr ""
 
-#: Step3.class:177
+#: Step3.class:180
 msgid "Use the partitioning tool to prepare your system partitions."
 msgstr ""
 
-#: Step3.class:184
+#: Step3.class:187
 msgid "My hard drive is already partitioned"
 msgstr ""
 
-#: Step3.class:194
+#: Step3.class:197
 msgid "Install VectorLinux to existing partitions on my hard drive"
 msgstr ""
 
@@ -307,15 +315,15 @@ msgstr ""
 msgid "This option will not harm any existing data on your hard drive"
 msgstr ""
 
-#: Step3a.class:121
+#: Step3a.class:122
 msgid "Use unpartitioned space on my hard disk (creates new partitions)"
 msgstr ""
 
-#: Step3a.class:143
+#: Step3a.class:144
 msgid "Use free space on existing partitions for VectorLinux"
 msgstr ""
 
-#: Step3a.class:167
+#: Step3a.class:168
 msgid "Use entire disk"
 msgstr ""
 
@@ -339,41 +347,75 @@ msgstr ""
 msgid "Create Linux Partition Scheme in"
 msgstr ""
 
-#: Step3a1a.class:51
+#: Step3a1a.class:53
 msgid "There has been an error deleting"
 msgstr ""
 
-#: Step3a1a.class:51
+#: Step3a1a.class:53
 msgid ""
 "Please make sure the drive or partition is not being used by some other "
 "program"
 msgstr ""
 
-#: Step3a1a.class:81
+#: Step3a1a.class:56
+msgid ""
+"Error deleting existing partitions... Please try another partitioning method"
+msgstr ""
+
+#: Step3a1a.class:82
+msgid "Vectorlinux has detected an existing swap partition in your system."
+msgstr ""
+
+#: Step3a1a.class:82
+msgid ""
+"Would you like to let VectorLinux use this partition or create a new one?"
+msgstr ""
+
+#: Step3a1a.class:82
+msgid "Use Existing"
+msgstr ""
+
+#: Step3a1a.class:82
+msgid "Create New"
+msgstr ""
+
+#: Step3a1a.class:148
+msgid "Failed to format partitions, please try another partitioning method"
+msgstr ""
+
+#: Step3a1a.class:160
+msgid "Partitioning stage complete. Click"
+msgstr ""
+
+#: Step3a1a.class:160
+msgid "to continue"
+msgstr ""
+
+#: Step3a1a.class:169
 msgid "All existing data in"
 msgstr ""
 
-#: Step3a1a.class:81
+#: Step3a1a.class:169
 msgid "is about to be deleted."
 msgstr ""
 
-#: Step3a1a.class:81
+#: Step3a1a.class:169
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:81 Step6.class:385
+#: Step3a1a.class:169 Step6.class:385
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:81 Step6.class:385
+#: Step3a1a.class:169 Step6.class:385
 msgid "No"
 msgstr ""
 
-#: Step3a1a.class:84
+#: Step3a1a.class:173
 msgid "Preparing hard disk for new partitioning structure. Please wait"
 msgstr ""
 
-#: Step3a1a.class:89
+#: Step3a1a.class:193
 msgid "Operation cancelled by user. No changes have been made to the system"
 msgstr ""
 
