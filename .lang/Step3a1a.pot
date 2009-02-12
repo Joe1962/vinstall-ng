@@ -18,43 +18,75 @@ msgstr ""
 msgid "Create Linux Partition Scheme in"
 msgstr ""
 
-#: Step3a1a.class:51
+#: Step3a1a.class:53
 msgid "There has been an error deleting"
 msgstr ""
 
-#: Step3a1a.class:51
+#: Step3a1a.class:53
 msgid "Please make sure the drive or partition is not being used by some other program"
 msgstr ""
 
-#: Step3a1a.class:81
+#: Step3a1a.class:56
+msgid "Error deleting existing partitions... Please try another partitioning method"
+msgstr ""
+
+#: Step3a1a.class:82
+msgid "Vectorlinux has detected an existing swap partition in your system."
+msgstr ""
+
+#: Step3a1a.class:82
+msgid "Would you like to let VectorLinux use this partition or create a new one?"
+msgstr ""
+
+#: Step3a1a.class:82
+msgid "Use Existing"
+msgstr ""
+
+#: Step3a1a.class:82
+msgid "Create New"
+msgstr ""
+
+#: Step3a1a.class:148
+msgid "Failed to format partitions, please try another partitioning method"
+msgstr ""
+
+#: Step3a1a.class:160
+msgid "Partitioning stage complete. Click"
+msgstr ""
+
+#: Step3a1a.class:160
+msgid "to continue"
+msgstr ""
+
+#: Step3a1a.class:169
 msgid "WARNING:"
 msgstr ""
 
-#: Step3a1a.class:81
+#: Step3a1a.class:169
 msgid "All existing data in"
 msgstr ""
 
-#: Step3a1a.class:81
+#: Step3a1a.class:169
 msgid "is about to be deleted."
 msgstr ""
 
-#: Step3a1a.class:81
+#: Step3a1a.class:169
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:81
+#: Step3a1a.class:169
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:81
+#: Step3a1a.class:169
 msgid "No"
 msgstr ""
 
-#: Step3a1a.class:84
+#: Step3a1a.class:173
 msgid "Preparing hard disk for new partitioning structure. Please wait"
 msgstr ""
 
-#: Step3a1a.class:89
+#: Step3a1a.class:193
 msgid "Operation cancelled by user. No changes have been made to the system"
 msgstr ""
 

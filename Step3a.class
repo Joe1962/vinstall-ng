@@ -43,6 +43,7 @@ END
 PUBLIC FUNCTION GetNext() AS String
   
   IF ME.rbEntireDisk.Value = TRUE THEN 
+    
       RETURN "Step3a1"
   ELSE IF ME.rbunpartitioned.Value = TRUE THEN 
     RETURN "Step3a2"

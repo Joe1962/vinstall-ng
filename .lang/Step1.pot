@@ -18,67 +18,67 @@ msgstr ""
 msgid "on"
 msgstr ""
 
-#: Step1.class:130
+#: Step1.class:132
 msgid "Scanning system partitions for installation files"
 msgstr ""
 
-#: Step1.class:149
+#: Step1.class:151
 msgid "Found"
 msgstr ""
 
-#: Step1.class:149
+#: Step1.class:151
 msgid "in partition"
 msgstr ""
 
-#: Step1.class:190
+#: Step1.class:192
 msgid "Scanning for CD Media ... Please wait"
 msgstr ""
 
-#: Step1.class:203
+#: Step1.class:205
 msgid "Scanning"
 msgstr ""
 
-#: Step1.class:213
+#: Step1.class:215
 msgid "in"
 msgstr ""
 
-#: Step1.class:241
+#: Step1.class:243
 msgid "Scanning system for installable ISO images"
 msgstr ""
 
-#: Step1.class:334
+#: Step1.class:336
 msgid "DISTRIBUTION"
 msgstr ""
 
-#: Step1.class:337
+#: Step1.class:339
 msgid "VERSION"
 msgstr ""
 
-#: Step1.class:414
+#: Step1.class:416
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:414
+#: Step1.class:416
 msgid "WARNING:"
 msgstr ""
 
-#: Step1.class:414
+#: Step1.class:416
 msgid "This process can take a long time to complete."
 msgstr ""
 
-#: Step1.class:466
+#: Step1.class:468
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:484
+#: Step1.class:486
 msgid "Select Installation source from the list below"
 msgstr ""
 
-#: Step1.class:505
+#: Step1.class:507
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:529
+#: Step1.class:531
 msgid "Check Installation media before installing"
 msgstr ""
 

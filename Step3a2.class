@@ -322,7 +322,7 @@ PUBLIC SUB PERFORM_PARTITIONING()
     ME.tlSelAutoTarget.Text = ("Partitioning stage complete... Click next to continue")
      ME.MovieBox1.Playing = FALSE
      
-     ' set the flaf for partition reading
+     ' set the flag for partition reading
      ClsGlobal.bAutoPartition = TRUE
      ClsGlobal.sTargetRoot = sRootPart
      ClsGlobal.sTargetSwap = sSwapPart

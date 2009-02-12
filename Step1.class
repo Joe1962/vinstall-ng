@@ -44,6 +44,8 @@ PUBLIC SUB OnExit()
   ' Store this information to make it available to the whole installer program
   ClsGlobal.sSourceName = Trim(sname)
   ClsGlobal.sSourceAddr = Trim(sadd)
+  
+    PRINT " --- Use " & ClsGlobal.sSourceName & Space(1) & "from " & ClsGlobal.sSourceAddr & " for installation source"
   TRY MKDIR "/mnt/source"
   ' mount the media and get ready for testing
   IF Right(sname, Len(".iso")) LIKE ".iso" THEN ' this is an iso image... doing hosted install i'm afraid

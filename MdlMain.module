@@ -15,6 +15,29 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+
+PUBLIC FUNCTION FORMAT_THIS_PARTITION(sPartition AS String, sFilesystem AS String) AS Integer
+  
+  DIM hproc AS Process
+  DIM sFlags AS String
+  
+  SELECT CASE sFilesystem
+    CASE "reiserfs"
+    sFlags = "-f"
+  END SELECT 
+  
+  WAIT 1
+  PRINT " --+ Formatting " & sPartition & " to " & sFilesystem
+  SHELL "umount -f " & sPartition
+  hproc = SHELL "mkfs." & LCase(sFilesystem) & Space(1) & sFlags & Space(1) & sPartition WAIT 
+    IF hproc.Value > 0 THEN Message.Error(("Unable to format") & Space(1) & sPartition & Space(1) & ("to") & Space(1) & sFilesystem)
+  RETURN hproc.Value
+  
+END
+
+
+
+
 PUBLIC SUB NAVIGATION_LOCKDOWN()
   
     WITH FMain

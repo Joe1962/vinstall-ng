@@ -46,19 +46,19 @@ msgstr ""
 msgid "This option will not harm any existing data on your hard drive"
 msgstr ""
 
-#: Step3a.class:110
+#: Step3a.class:111
 msgid "TextLabel1"
 msgstr ""
 
-#: Step3a.class:121
+#: Step3a.class:122
 msgid "Use unpartitioned space on my hard disk (creates new partitions)"
 msgstr ""
 
-#: Step3a.class:143
+#: Step3a.class:144
 msgid "Use free space on existing partitions for VectorLinux"
 msgstr ""
 
-#: Step3a.class:167
+#: Step3a.class:168
 msgid "Use entire disk"
 msgstr ""
 
