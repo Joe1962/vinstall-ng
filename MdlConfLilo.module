@@ -330,6 +330,7 @@ sOut = "#!/bin/bash \n" &
 "/sbin/valsaconf-quiet" & gb.NewLine &
 "cd / && for i in /var/log/scripts/x11-fonts*;do sh $i &>/dev/null;done" & gb.NewLine &
 "rm -r /root/.mc 2>/dev/null" & gb.NewLine &
+"gconftool-2 --install-schema-file /etc/gconf/schemas/firestarter.schemas > /dev/null 2>&1" & gb.NewLine &
 "cd / && sh /var/log/scripts/gsb-desktop* 2>/dev/null" & gb.NewLine &
 "update-mime-database /usr/share/mime/" & gb.NewLine &
 "#sleep 20"
