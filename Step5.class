@@ -138,15 +138,7 @@ PUBLIC FUNCTION CHECK_IF_REBOOT_NEEDED() AS Boolean
  sWinPartList = Trim(sWinPartList)
  IF sWinPartList THEN RETURN TRUE
  RETURN FALSE
- 
- ' IF sFAT32List <> "" THEN 
- '  RETURN TRUE ' reboot needed
- ' ELSE IF sFATList <> "" THEN 
- '  RETURN TRUE ' reboot needed
- ' ELSE 
- '  RETURN FALSE ' no reboot needed
- ' END IF
- 
+
     
 END
 
