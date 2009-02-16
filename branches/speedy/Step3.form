@@ -27,7 +27,7 @@
     { tlPartHelp TextLabel
       MoveScaled(0,0,62,3)
       Expand = True
-      Text = ("TextLabel1")
+      Text = ("")
       Alignment = Align.TopLeft
     }
   }

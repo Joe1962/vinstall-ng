@@ -46,10 +46,6 @@ msgstr ""
 msgid "This option will not harm any existing data on your hard drive"
 msgstr ""
 
-#: Step3a.class:111
-msgid "TextLabel1"
-msgstr ""
-
 #: Step3a.class:122
 msgid "Use unpartitioned space on my hard disk (creates new partitions)"
 msgstr ""

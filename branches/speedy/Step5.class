@@ -171,7 +171,7 @@ PUBLIC SUB Embedder1_Close()
     
   ELSE 
       ME.tlEmbDone.Text = "<h3>" & ("PARTITIONING DONE") & "</h3>" & gb.NewLine & gb.NewLine &
-        ("CLick next to continue")
+        ("Click") & Space(1) & ClsGlobal.fRunningMainForm.btnext.text & Space(1) & ("to continue")
   END IF
   
 

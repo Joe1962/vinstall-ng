@@ -24,7 +24,7 @@
   { TLwARNING TextLabel
     MoveScaled(1,8,35,4)
     Expand = True
-    Text = ("TextLabel1")
+    Text = ("")
     Alignment = Align.Normal
   }
   { HBox2 HBox
@@ -42,7 +42,7 @@
   { rb RadioButton
     MoveScaled(4,39,12,2)
     Visible = False
-    Text = ("RadioButton1")
+    Text = ("")
   }
   { hb HBox
     MoveScaled(18,40,7,2)
@@ -55,6 +55,6 @@
   { tl TextLabel
     MoveScaled(38,41,9,2)
     Visible = False
-    Text = ("TextLabel1")
+    Text = ("")
   }
 }

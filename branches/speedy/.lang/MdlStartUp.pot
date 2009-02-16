@@ -14,3 +14,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: MdlStartUp.module:42
+msgid "Preparation"
+msgstr ""
+
+#: MdlStartUp.module:44
+msgid "Select Language"
+msgstr ""
+
+#: MdlStartUp.module:45
+msgid "Select Media"
+msgstr ""
+
+#: MdlStartUp.module:46
+msgid "Disk Partitioning"
+msgstr ""
+
+#: MdlStartUp.module:47
+msgid "Software Selection"
+msgstr ""
+
+#: MdlStartUp.module:48
+msgid "Installation"
+msgstr ""
+
+#: MdlStartUp.module:49
+msgid "Installation Summary"
+msgstr ""
+
+#: MdlStartUp.module:50
+msgid "Install VectorLinux"
+msgstr ""
+
+#: MdlStartUp.module:51
+msgid "System Configuration"
+msgstr ""
+
+#: MdlStartUp.module:52
+msgid "System Boot Manager"
+msgstr ""
+
+#: MdlStartUp.module:53
+msgid "Regional Settings"
+msgstr ""
+
+#: MdlStartUp.module:54
+msgid "User Accounts"
+msgstr ""
+
+#: MdlStartUp.module:55
+msgid "Network Settings"
+msgstr ""
+
+#: MdlStartUp.module:56
+msgid "Startup Options"
+msgstr ""
+
+#: MdlStartUp.module:57
+msgid "Final Configuration"
+msgstr ""
+

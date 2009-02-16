@@ -30,11 +30,3 @@ msgstr ""
 msgid "Total Disc Size"
 msgstr ""
 
-#: Step3a1.class:157
-msgid "TextLabel1"
-msgstr ""
-
-#: Step3a1.class:179
-msgid "RadioButton1"
-msgstr ""
-
