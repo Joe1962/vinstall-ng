@@ -67,7 +67,7 @@
       { tlTestingLbl TextLabel
         MoveScaled(1,0,40,2)
         Expand = True
-        Text = ("TextLabel2")
+        Text = ("")
       }
     }
     { HBox7 HBox

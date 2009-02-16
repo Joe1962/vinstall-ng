@@ -23,7 +23,7 @@
     { tlActionExp TextLabel
       MoveScaled(2,1,4,3)
       Expand = True
-      Text = ("TextLabel1")
+      Text = ("")
     }
   }
   { HPanel2 HPanel

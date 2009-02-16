@@ -38,6 +38,66 @@ msgstr ""
 msgid "to"
 msgstr ""
 
+#: MdlStartUp.module:42
+msgid "Preparation"
+msgstr ""
+
+#: MdlStartUp.module:44
+msgid "Select Language"
+msgstr ""
+
+#: MdlStartUp.module:45
+msgid "Select Media"
+msgstr ""
+
+#: MdlStartUp.module:46
+msgid "Disk Partitioning"
+msgstr ""
+
+#: MdlStartUp.module:47
+msgid "Software Selection"
+msgstr ""
+
+#: MdlStartUp.module:48
+msgid "Installation"
+msgstr ""
+
+#: MdlStartUp.module:49
+msgid "Installation Summary"
+msgstr ""
+
+#: MdlStartUp.module:50
+msgid "Install VectorLinux"
+msgstr ""
+
+#: MdlStartUp.module:51
+msgid "System Configuration"
+msgstr ""
+
+#: MdlStartUp.module:52
+msgid "System Boot Manager"
+msgstr ""
+
+#: MdlStartUp.module:53
+msgid "Regional Settings"
+msgstr ""
+
+#: MdlStartUp.module:54
+msgid "User Accounts"
+msgstr ""
+
+#: MdlStartUp.module:55
+msgid "Network Settings"
+msgstr ""
+
+#: MdlStartUp.module:56
+msgid "Startup Options"
+msgstr ""
+
+#: MdlStartUp.module:57
+msgid "Final Configuration"
+msgstr ""
+
 #: Step0.class:20
 msgid "Localization Settings"
 msgstr ""
@@ -226,16 +286,12 @@ msgstr ""
 msgid "Keep in mind however, that this process can take a while to complete."
 msgstr ""
 
-#: Step2.class:198
+#: Step2.class:198 Step5.class:174
 msgid "Click"
 msgstr ""
 
 #: Step2.class:198
 msgid "to abort this process at any time"
-msgstr ""
-
-#: Step2.class:352
-msgid "TextLabel2"
 msgstr ""
 
 #: Step2.class:366
@@ -248,10 +304,6 @@ msgstr ""
 
 #: Step3.class:31
 msgid "Select the partitioning method you would like to use"
-msgstr ""
-
-#: Step3.class:135 Step3a.class:111 Step3a1.class:157
-msgid "TextLabel1"
 msgstr ""
 
 #: Step3.class:153
@@ -339,10 +391,6 @@ msgstr ""
 msgid "Total Disc Size"
 msgstr ""
 
-#: Step3a1.class:179 Step3a2.class:455
-msgid "RadioButton1"
-msgstr ""
-
 #: Step3a1a.class:21
 msgid "Create Linux Partition Scheme in"
 msgstr ""
@@ -387,7 +435,7 @@ msgstr ""
 msgid "Partitioning stage complete. Click"
 msgstr ""
 
-#: Step3a1a.class:160
+#: Step3a1a.class:160 Step3a2.class:322 Step5.class:174
 msgid "to continue"
 msgstr ""
 
@@ -468,7 +516,7 @@ msgid ""
 msgstr ""
 
 #: Step3a2.class:322
-msgid "Partitioning stage complete... Click next to continue"
+msgid "Partitioning stage complete... Click"
 msgstr ""
 
 #: Step3a2.class:352
@@ -573,10 +621,6 @@ msgstr ""
 
 #: Step5.class:174
 msgid "PARTITIONING DONE"
-msgstr ""
-
-#: Step5.class:174
-msgid "CLick next to continue"
 msgstr ""
 
 #: Step5.class:190

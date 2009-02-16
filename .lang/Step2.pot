@@ -106,10 +106,6 @@ msgstr ""
 msgid "to abort this process at any time"
 msgstr ""
 
-#: Step2.class:352
-msgid "TextLabel2"
-msgstr ""
-
 #: Step2.class:366
 msgid "Stop"
 msgstr ""

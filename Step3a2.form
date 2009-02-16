@@ -46,7 +46,7 @@
   { RadioButton1 RadioButton
     MoveScaled(3,37,13,2)
     Visible = False
-    Text = ("RadioButton1")
+    Text = ("")
   }
   { HBox2 HBox
     MoveScaled(5,40,8,1)

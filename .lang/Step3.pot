@@ -22,10 +22,6 @@ msgstr ""
 msgid "Select the partitioning method you would like to use"
 msgstr ""
 
-#: Step3.class:135
-msgid "TextLabel1"
-msgstr ""
-
 #: Step3.class:153
 msgid "Automatic"
 msgstr ""

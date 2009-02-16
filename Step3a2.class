@@ -319,7 +319,7 @@ PUBLIC SUB PERFORM_PARTITIONING()
           END IF
     
     
-    ME.tlSelAutoTarget.Text = ("Partitioning stage complete... Click next to continue")
+    ME.tlSelAutoTarget.Text = ("Partitioning stage complete... Click") & Space(1) & ClsGlobal.fRunningMainForm.btnext.text & Space(1) & ("to continue")
      ME.MovieBox1.Playing = FALSE
      
      ' set the flag for partition reading

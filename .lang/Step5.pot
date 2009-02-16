@@ -87,7 +87,11 @@ msgid "PARTITIONING DONE"
 msgstr ""
 
 #: Step5.class:174
-msgid "CLick next to continue"
+msgid "Click"
+msgstr ""
+
+#: Step5.class:174
+msgid "to continue"
 msgstr ""
 
 #: Step5.class:190
