@@ -1,0 +1,148 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC objBulks AS Object[]
+PUBLIC picYes AS Picture
+PUBLIC picNo AS Picture
+PUBLIC SUB Form_Open()
+
+picYes = Picture.Load("images/16px-check.png")
+picNo = Picture.Load("images/16px-Nocheck.png")
+
+
+  ME.tlbanner.Text = "<h2>" & ("Customize Your VectorLinux Installation") & "</h2>"
+  WITH ME.gvBulkSel
+    .Columns.count = 4
+    .Rows.Count = 2
+    '.Grid = FALSE
+  END WITH 
+  'gvBulkSel[0, 0].Text = 
+  gvBulkSel[0, 1].text = ("Component")
+  gvBulkSel[0, 1].Font.Bold = TRUE
+  gvBulkSel[0, 0].BackColor = Color.LightBackground
+  gvBulkSel.Columns[0].Width = 24
+  gvBulkSel.Columns[1].Width = 150
+  gvBulkSel.Columns[2].Width = 300
+  gvBulkSel.Columns[3].Width = 1
+  'gvBulkSel.Columns[3].Resizable = FALSE
+  'gvBulkSel.Columns[2].Resizable = TRUE
+  gvBulkSel.Rows[1].Height = 5
+  'gvBulkSel[2, 0].BackColor = Color.LightBackground
+  gvBulkSel[0, 1].BackColor = Color.LightBackground
+  gvBulkSel[0, 2].BackColor = Color.LightBackground
+  gvBulkSel[0, 3].BackColor = Color.LightBackground
+  'gvBulkSel[0,3].ba
+  gvBulkSel[0, 2].Text = ("Description")
+  gvBulkSel[0, 2].Font.Bold = TRUE
+  
+  ME.LIST_OPTIONAL_BULKS
+END
+
+PUBLIC FUNCTION GetNext() AS String
+  
+  RETURN "Step7b"
+  
+END
+
+PUBLIC SUB LIST_OPTIONAL_BULKS()
+  
+  DIM sLine, sFile AS String '= File.Load("/mnt/source/veclinux/SETUP.CONF")
+  DIM sArr AS String[]
+  DIM i, irow AS Integer
+  DIM sDesc AS String
+  
+  IF Exist("/mnt/source/veclinux/SETUP.CONF") THEN 
+    sFile = File.Load("/mnt/source/veclinux/SETUP.CONF")
+    sArr = Split(sFile, "\n")
+  ELSE 
+  END IF
+  irow = 2
+  FOR EACH sLine IN Dir("/mnt/source/veclinux/")
+    IF sLine LIKE "SETUP.CONF" THEN 
+    ELSE 
+      INC gvBulkSel.Rows.Count
+      gvBulkSel[irow, 1].Text = Trim(sLine)
+      
+      gvBulkSel[irow, 0].Picture = picYes ' enabled by default
+      SHELL "grep \"" & sLine & "\" /mnt/source/veclinux/SETUP.CONF | cut -f 3 -d \':\'" TO sDesc
+      'Message(sDesc)
+      sDesc = Replace(sDesc, "\'", "")
+      sDesc = Replace(sDesc, "\"", "")
+      gvBulkSel[irow, 2].Text = Trim(sDesc)
+      ' cbBulk = NEW CheckBox(ME.Panel1) AS "cbBulkSel"
+      '   WITH cbBulk
+      '     .Move(gvBulkSel.RowAt(gvBulkSel[irow, 0].top), gvBulkSel.ColumnAt(gvBulkSel[irow, 0].Left))
+      '     '.Move(gvBulkSel.ColumnAt(gvBulkSel[irow, 0].Left), gvBulkSel.RowAt(gvBulkSel[irow, 0].top))
+      '     .Height = 21
+      '     .tag = Trim(sLine)
+      '     .Visible = TRUE
+      '     .Value = TRUE
+      '   END WITH 
+      INC irow
+    
+    END IF
+
+  NEXT 
+      
+    
+  
+  'FOR i = 0 TO sArr.Max
+   ' sLine = Trim(sArr[i])
+    
+  
+END
+
+
+PUBLIC SUB StartUp()
+  
+  
+  
+END
+
+
+PUBLIC SUB OnExit()
+  
+  
+  
+END
+
+
+PUBLIC SUB Form_Resize()
+
+  gvBulkSel.Columns[2].Width = gvBulkSel.Width - (gvBulkSel.ColumnAt(gvBulkSel[0, 2].Left) + gvBulkSel.Columns[1].Width + gvBulkSel.Columns[0].width + 4)
+  'gvBulkSel.Columns[2].Width = gvBulkSel.Width - (gvBulkSel.Columns[0].Width + gvBulkSel.Columns[2].Width - gvBulkSel.Columns[3].Width)
+
+END
+
+PUBLIC SUB gvBulkSel_Click()
+
+  'IF LAST.column > 0 THEN RETURN 
+  IF LAST.column = 0 THEN 
+    IF gvBulkSel[LAST.row, LAST.column].Picture = picYes THEN 
+      gvBulkSel[LAST.row, LAST.column].Picture = picNo
+      gvBulkSel[LAST.row, 3].Text = "no"
+    ELSE 
+      gvBulkSel[LAST.row, LAST.column].Picture = picYes
+      gvBulkSel[LAST.row, 3].Text = "yes"
+    END IF
+  ELSE IF LAST.column = 2 THEN 
+    Balloon(gvBulkSel[LAST.row, 2].Text, gvBulkSel, gvBulkSel[LAST.row, 0].picture, gvBulkSel[LAST.row, LAST.column].left + 4, gvBulkSel[LAST.row, LAST.column].y + 12)
+  END IF
+        
+  gvBulkSel.Refresh
+  'Message(gvBulkSel[LAST.row, 3].Text)
+
+END

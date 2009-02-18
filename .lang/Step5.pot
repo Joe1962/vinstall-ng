@@ -58,51 +58,51 @@ msgstr ""
 msgid "menu"
 msgstr ""
 
-#: Step5.class:169
+#: Step5.class:161
 msgid "SYSTEM RESTART SUGGESTED"
 msgstr ""
 
-#: Step5.class:169
+#: Step5.class:161
 msgid "Your system still contains some non-linux partitions. If you still have a Windows operating system installed, it is recomended "
 msgstr ""
 
-#: Step5.class:169
+#: Step5.class:161
 msgid "that you reboot your system at this time. "
 msgstr ""
 
-#: Step5.class:169
+#: Step5.class:161
 msgid "Click the"
 msgstr ""
 
-#: Step5.class:169
+#: Step5.class:161
 msgid "button to restart your computer now, or click"
 msgstr ""
 
-#: Step5.class:169
+#: Step5.class:161
 msgid "to continue without restarting."
 msgstr ""
 
-#: Step5.class:174
+#: Step5.class:166
 msgid "PARTITIONING DONE"
 msgstr ""
 
-#: Step5.class:174
+#: Step5.class:166
 msgid "Click"
 msgstr ""
 
-#: Step5.class:174
+#: Step5.class:166
 msgid "to continue"
 msgstr ""
 
-#: Step5.class:190
+#: Step5.class:182
 msgid "Your computer will restart in 10 seconds"
 msgstr ""
 
-#: Step5.class:247
+#: Step5.class:239
 msgid "Loading partitioning utility ... Please Wait"
 msgstr ""
 
-#: Step5.class:256
+#: Step5.class:248
 msgid "Restart Now"
 msgstr ""
 
