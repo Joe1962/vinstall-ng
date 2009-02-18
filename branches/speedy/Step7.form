@@ -1,0 +1,72 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,74,44)
+  Text = ("")
+  Arrangement = Arrange.Row
+  { HPanel1 HPanel
+    MoveScaled(0,0,60,5)
+    Expand = True
+    { tlbanner TextLabel
+      MoveScaled(12,0,19,3)
+      Expand = True
+      Text = ("")
+    }
+    { Separator1 Separator
+      MoveScaled(13,4,25,1)
+      Expand = True
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(1,5,6,2)
+    Expand = True
+  }
+  { HPanel2 HPanel
+    MoveScaled(2,8,69,27)
+    { rbFullInstall RadioButton
+      MoveScaled(1,2,17,3)
+      Tag = "0"
+      Expand = True
+      Text = ("Full Install")
+    }
+    { Panel1 Panel
+      MoveScaled(1,5,4,3)
+    }
+    { tlFullInstallDesc TextLabel
+      MoveScaled(7,5,38,4)
+      Expand = True
+      Text = ("Install everthing in the image (Fully Automated)")
+      Alignment = Align.TopLeft
+    }
+    { rbCustomInstall RadioButton
+      MoveScaled(1,9,17,3)
+      Tag = "1"
+      Expand = True
+      Text = ("Customized")
+    }
+    { Panel2 Panel
+      MoveScaled(1,12,4,3)
+    }
+    { tlCustom TextLabel
+      MoveScaled(7,12,57,4)
+      Expand = True
+      Text = ("Select  the components you wish to install  (Advanced)")
+      Alignment = Align.TopLeft
+    }
+    { rbMinimal RadioButton
+      MoveScaled(1,16,16,3)
+      Tag = "2"
+      Expand = True
+      Text = ("Minimal")
+    }
+    { Panel3 Panel
+      MoveScaled(1,19,4,3)
+    }
+    { tlMinimal TextLabel
+      MoveScaled(7,19,63,4)
+      Expand = True
+      Text = ("Install the most minimal working confuguration (For older hardware)")
+      Alignment = Align.TopLeft
+    }
+  }
+}

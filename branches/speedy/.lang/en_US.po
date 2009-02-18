@@ -14,19 +14,19 @@ msgstr ""
 msgid "VectorLinux Installer"
 msgstr "VectorLinux Installer"
 
-#: FMain.class:245 FMain0.class:233
+#: FMain.class:245 FMain0.class:246 FMain0Old.class:233
 msgid "Process Overview"
 msgstr "Process Overview"
 
-#: FMain.class:287 FMain0.class:271
+#: FMain.class:287 FMain0.class:288 FMain0Old.class:271
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:298 FMain0.class:282
+#: FMain.class:298 FMain0.class:299 FMain0Old.class:282
 msgid "Next"
 msgstr "Next"
 
-#: FMain.class:309 FMain0.class:293
+#: FMain.class:309 FMain0.class:310 FMain0Old.class:293
 msgid "Quit"
 msgstr "Quit"
 
@@ -110,19 +110,19 @@ msgstr "Spanish"
 msgid "English (US)"
 msgstr "English (US)"
 
-#: Step0.class:253
+#: Step0.class:254
 msgid "Select your language"
 msgstr "Select your language"
 
-#: Step0.class:284
+#: Step0.class:285
 msgid "Select your keyboard layout"
 msgstr "Select your keyboard layout"
 
-#: Step0.class:303
+#: Step0.class:304
 msgid "Select your keyboard model"
 msgstr "Select your keyboard model"
 
-#: Step0.class:325
+#: Step0.class:326
 msgid "Use this box to test your keyboard settings"
 msgstr "Use this box to test your keyboard settings"
 
@@ -130,67 +130,67 @@ msgstr "Use this box to test your keyboard settings"
 msgid "on"
 msgstr "on"
 
-#: Step1.class:132
+#: Step1.class:131
 msgid "Scanning system partitions for installation files"
 msgstr "Scanning system partitions for installation files"
 
-#: Step1.class:151
+#: Step1.class:150
 msgid "Found"
 msgstr "Found"
 
-#: Step1.class:151
+#: Step1.class:150
 msgid "in partition"
 msgstr "in partition"
 
-#: Step1.class:192
+#: Step1.class:191
 msgid "Scanning for CD Media ... Please wait"
 msgstr "Scanning for CD Media ... Please wait"
 
-#: Step1.class:205
+#: Step1.class:204
 msgid "Scanning"
 msgstr "Scanning"
 
-#: Step1.class:215
+#: Step1.class:214
 msgid "in"
 msgstr "in"
 
-#: Step1.class:243
+#: Step1.class:242
 msgid "Scanning system for installable ISO images"
 msgstr "Scanning system for installable ISO images"
 
-#: Step1.class:336
+#: Step1.class:335
 msgid "DISTRIBUTION"
 msgstr "DISTRIBUTION"
 
-#: Step1.class:339
+#: Step1.class:338
 msgid "VERSION"
 msgstr "VERSION"
 
-#: Step1.class:416
+#: Step1.class:415
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:416 Step3a1.class:22 Step3a1a.class:169
+#: Step1.class:415 Step3a1.class:22 Step3a1a.class:169
 msgid "WARNING:"
 msgstr ""
 
-#: Step1.class:416
+#: Step1.class:415
 msgid "This process can take a long time to complete."
 msgstr ""
 
-#: Step1.class:468
+#: Step1.class:467
 msgid "Select Installation Source"
 msgstr "Select Installation Source"
 
-#: Step1.class:486
+#: Step1.class:485
 msgid "Select Installation source from the list below"
 msgstr "Select Installation source from the list below"
 
-#: Step1.class:507
+#: Step1.class:506
 msgid "Search Again"
 msgstr "Search Again"
 
-#: Step1.class:531
+#: Step1.class:530
 msgid "Check Installation media before installing"
 msgstr "Check Installation media before installing"
 
@@ -288,7 +288,7 @@ msgstr ""
 msgid "Keep in mind however, that this process can take a while to complete."
 msgstr "Keep in mind however, that this process can take a while to complete."
 
-#: Step2.class:198 Step5.class:174
+#: Step2.class:198 Step5.class:166
 msgid "Click"
 msgstr ""
 
@@ -437,7 +437,7 @@ msgstr ""
 msgid "Partitioning stage complete. Click"
 msgstr ""
 
-#: Step3a1a.class:160 Step3a2.class:322 Step5.class:174
+#: Step3a1a.class:160 Step3a2.class:322 Step5.class:166
 msgid "to continue"
 msgstr ""
 
@@ -453,11 +453,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:385
+#: Step3a1a.class:169 Step6.class:386
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:385
+#: Step3a1a.class:169 Step6.class:386
 msgid "No"
 msgstr ""
 
@@ -595,88 +595,117 @@ msgstr ""
 msgid "menu"
 msgstr ""
 
-#: Step5.class:169
+#: Step5.class:161
 msgid "SYSTEM RESTART SUGGESTED"
 msgstr ""
 
-#: Step5.class:169
+#: Step5.class:161
 msgid ""
 "Your system still contains some non-linux partitions. If you still have a "
 "Windows operating system installed, it is recomended "
 msgstr ""
 
-#: Step5.class:169
+#: Step5.class:161
 msgid "that you reboot your system at this time. "
 msgstr ""
 
-#: Step5.class:169
+#: Step5.class:161
 msgid "Click the"
 msgstr ""
 
-#: Step5.class:169
+#: Step5.class:161
 msgid "button to restart your computer now, or click"
 msgstr ""
 
-#: Step5.class:169
+#: Step5.class:161
 msgid "to continue without restarting."
 msgstr ""
 
-#: Step5.class:174
+#: Step5.class:166
 msgid "PARTITIONING DONE"
 msgstr ""
 
-#: Step5.class:190
+#: Step5.class:182
 msgid "Your computer will restart in 10 seconds"
 msgstr ""
 
-#: Step5.class:247
+#: Step5.class:239
 msgid "Loading partitioning utility ... Please Wait"
 msgstr ""
 
-#: Step5.class:256
+#: Step5.class:248
 msgid "Restart Now"
 msgstr ""
 
-#: Step6.class:58
+#: Step6.class:59
 msgid "Partition"
 msgstr ""
 
-#: Step6.class:59
+#: Step6.class:60
 msgid "Size"
 msgstr ""
 
-#: Step6.class:60
+#: Step6.class:61
 msgid "Mount Point"
 msgstr ""
 
-#: Step6.class:61
+#: Step6.class:62
 msgid "File System"
 msgstr ""
 
-#: Step6.class:133
+#: Step6.class:134
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:154
+#: Step6.class:155
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:199
+#: Step6.class:200
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:199
+#: Step6.class:200
 msgid "as your"
 msgstr ""
 
-#: Step6.class:199
+#: Step6.class:200
 msgid "partition."
 msgstr ""
 
-#: Step6.class:199
+#: Step6.class:200
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:280
+#: Step6.class:281
 msgid "Select which partitions to use for installation"
+msgstr ""
+
+#: Step7.class:19
+#, fuzzy
+msgid "Select Installation Mode"
+msgstr "Select Installation Source"
+
+#: Step7.class:98
+msgid "Full Install"
+msgstr ""
+
+#: Step7.class:108
+msgid "Install everthing in the image (Fully Automated)"
+msgstr ""
+
+#: Step7.class:116
+msgid "Customized"
+msgstr ""
+
+#: Step7.class:126
+msgid "Select  the components you wish to install  (Advanced)"
+msgstr ""
+
+#: Step7.class:134
+msgid "Minimal"
+msgstr ""
+
+#: Step7.class:144
+msgid "Install the most minimal working confuguration (For older hardware)"
 msgstr ""

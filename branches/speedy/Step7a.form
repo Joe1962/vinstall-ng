@@ -1,0 +1,43 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,81,54)
+  Text = ("")
+  Arrangement = Arrange.Vertical
+  { HPanel1 HPanel
+    MoveScaled(0,0,60,5)
+    { tlbanner TextLabel
+      MoveScaled(12,0,19,3)
+      Expand = True
+      Text = ("")
+    }
+    { Separator1 Separator
+      MoveScaled(13,4,25,1)
+      Expand = True
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(0,5,10,1)
+  }
+  { HBox2 HBox
+    MoveScaled(0,7,70,4)
+    { tlWinExp TextLabel
+      MoveScaled(1,0,64,5)
+      Expand = True
+      Text = ("Major optional components available for installation. Please select which of these you want to install")
+    }
+  }
+  { Panel1 Panel
+    MoveScaled(1,12,74,31)
+    Expand = True
+    Arrangement = Arrange.Fill
+    { gvBulkSel GridView
+      MoveScaled(2,0,71,29)
+      Expand = True
+      Border = False
+    }
+  }
+  { HBox3 HBox
+    MoveScaled(8,46,14,2)
+  }
+}

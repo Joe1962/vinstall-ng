@@ -63,7 +63,7 @@ PUBLIC SUB OnExit()
     
     
   END IF
-
+  
   IF ME.GetNext() = "Step2" THEN ClsGlobal.sToScan = Trim(ME.ComboBox1.Text)
    'Message("Image to scan = " & ClsGlobal.sToScan)
 
@@ -104,7 +104,6 @@ PUBLIC FUNCTION GetNext() AS String
   ELSE 
     RETURN "Step3"
   END IF
-  
 
   'FMain.ListView1["step0"].pi
   

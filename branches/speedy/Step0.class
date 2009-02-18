@@ -180,6 +180,7 @@ END
 
 PUBLIC SUB cvkbdlayout_Select()
 
-  EXEC ["setxkbmap", Trim(LAST.current.key)] WAIT 
+  EXEC ["setxkbmap", "-layout", Trim(LAST.current.key)] WAIT 
+  'Message(LAST.current.key)
 
 END

@@ -37,3 +37,9 @@ STATIC PUBLIC sTargetSwap AS String
 
 STATIC PUBLIC sFullDiscToWipe AS String
 
+' Installation method variable
+' 0 = FULL INSTALL
+' 1 = CUSTOMIZED INSTALL
+' 2 = MINIMAL INSTALL
+STATIC PUBLIC iInstallMethod AS Integer
+

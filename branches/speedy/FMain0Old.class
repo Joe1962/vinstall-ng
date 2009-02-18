@@ -30,18 +30,12 @@ PUBLIC SUB Form_Open()
 ' ELSE
 ClsGlobal.fRunningMainForm = ME
 
-MdlStartUp.LAYOUT_NAVIGATION_VISUALS
 $oCurrent = NEW Step1(pnlStack)
 'END IF
 btBack.Enabled = FALSE
 ME.auto_setup_for_resolution()
 ME.Resize(1024, 600)
-ClsGlobal.fRunningMainForm.ListView1.Refresh
-  ClsGlobal.fRunningMainForm.ListView1["Step0"].Picture = MdlStartUp.pDone
-  ClsGlobal.fRunningMainForm.listview1["Step1"].picture = MdlStartUp.pNow
 END
-  
-
 
 PUBLIC SUB auto_setup_for_resolution()
   
@@ -54,7 +48,8 @@ END
 
 PUBLIC SUB btQuit_Click()
 
-  ME.Close
+  'FMain.Close
+  FMain0.Close
 
 END
 
@@ -83,7 +78,7 @@ sTmp = $oCurrent.GetNext()
 'Is this form already opened ?
 'if true it may have no been closed to preserve entries
 
-$oCurrent.OnExit() ' execute any code that needs to be ran before moving to the next step
+$oCurrent.OnExit() ' execute some code when the window is hidden
 
 
 FOR EACH o IN pnlStack.Children
@@ -100,21 +95,10 @@ NEXT
  $aPrev.Push($oCurrent)
  btBack.Enabled = $aPrev.Count > 0
 
-IF $oCurrent.name = "Step0" THEN 
-  IF System.Language <> "en_US" THEN 
-    FMain0.Show
-    FMain.Close
-    RETURN 
-  END IF
-  
-END IF
-
 
 IF NOT bExist THEN
    $oCurrent = Object.New(sTmp, [pnlStack])
    $oCurrent.Visible = TRUE
-    $oCurrent.width = pnlStack.Width
-    $oCurrent.Height = pnlStack.Height
 
 ELSE
   $OCurrent = o
@@ -123,13 +107,12 @@ ENDIF
  
  IF IsNull($oCurrent.GetNext()) THEN btNext.Enabled = FALSE
 'Push to the foreground
-
  $oCurrent.Raise()
-
+    $oCurrent.width = pnlStack.Width
+    $oCurrent.Height = pnlStack.Height
  $oCurrent.Startup() ' Call each form's startup sub
-
-ME.ListView1.Refresh 
-
+ 
+ME.ListView1.Refresh
 END
 
 PUBLIC SUB Form_Resize()
