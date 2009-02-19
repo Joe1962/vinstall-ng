@@ -66,19 +66,19 @@ msgstr ""
 msgid "This process can take a long time to complete."
 msgstr ""
 
-#: Step1.class:467
+#: Step1.class:468
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:485
+#: Step1.class:486
 msgid "Select Installation source from the list below"
 msgstr ""
 
-#: Step1.class:506
+#: Step1.class:507
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:530
+#: Step1.class:537
 msgid "Check Installation media before installing"
 msgstr ""
 

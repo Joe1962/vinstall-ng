@@ -14,19 +14,51 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Step7a.class:26
+#: Step7a.class:27
 msgid "Customize Your VectorLinux Installation"
 msgstr ""
 
-#: Step7a.class:33
+#: Step7a.class:34
 msgid "Component"
 msgstr ""
 
-#: Step7a.class:48
+#: Step7a.class:49
 msgid "Description"
 msgstr ""
 
-#: Step7a.class:196
-msgid "Major optional components available for installation. Please select which of these you want to install"
+#: Step7a.class:139
+msgid "WARNING:"
+msgstr ""
+
+#: Step7a.class:139
+msgid "This component is a dependancy to any graphical user interface progam on the system"
+msgstr ""
+
+#: Step7a.class:139
+msgid "Choosing not to install this may result in a command-line (text mode) installation only"
+msgstr ""
+
+#: Step7a.class:139
+msgid "Are you sure you want to disable this conponent anyway?"
+msgstr ""
+
+#: Step7a.class:139
+msgid "Yes"
+msgstr ""
+
+#: Step7a.class:139
+msgid "No"
+msgstr ""
+
+#: Step7a.class:165
+msgid "Select All"
+msgstr ""
+
+#: Step7a.class:171
+msgid "Un-Select All"
+msgstr ""
+
+#: Step7a.class:231
+msgid "Major optional components available for installation. To select / un-select a component, click it's name or the box to the left of it's name."
 msgstr ""
 
