@@ -62,7 +62,7 @@ msgstr ""
 msgid "Installation"
 msgstr ""
 
-#: MdlStartUp.module:49
+#: MdlStartUp.module:49 Step8.class:65
 msgid "Installation Summary"
 msgstr ""
 
@@ -170,7 +170,7 @@ msgstr ""
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:415 Step3a1.class:22 Step3a1a.class:169
+#: Step1.class:415 Step3a1.class:22 Step3a1a.class:169 Step7a.class:139
 msgid "WARNING:"
 msgstr ""
 
@@ -178,19 +178,19 @@ msgstr ""
 msgid "This process can take a long time to complete."
 msgstr ""
 
-#: Step1.class:467
+#: Step1.class:468
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:485
+#: Step1.class:486
 msgid "Select Installation source from the list below"
 msgstr ""
 
-#: Step1.class:506
+#: Step1.class:507
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:530
+#: Step1.class:537
 msgid "Check Installation media before installing"
 msgstr ""
 
@@ -451,11 +451,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:386
+#: Step3a1a.class:169 Step6.class:386 Step7a.class:139
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:386
+#: Step3a1a.class:169 Step6.class:386 Step7a.class:139
 msgid "No"
 msgstr ""
 
@@ -707,20 +707,56 @@ msgstr ""
 msgid "Install the most minimal working confuguration (For older hardware)"
 msgstr ""
 
-#: Step7a.class:26
+#: Step7a.class:27 Step7b.class:21
 msgid "Customize Your VectorLinux Installation"
 msgstr ""
 
-#: Step7a.class:33
+#: Step7a.class:34
 msgid "Component"
 msgstr ""
 
-#: Step7a.class:48
+#: Step7a.class:49
 msgid "Description"
 msgstr ""
 
-#: Step7a.class:196
+#: Step7a.class:139
 msgid ""
-"Major optional components available for installation. Please select which of "
-"these you want to install"
+"This component is a dependancy to any graphical user interface progam on the "
+"system"
+msgstr ""
+
+#: Step7a.class:139
+msgid ""
+"Choosing not to install this may result in a command-line (text mode) "
+"installation only"
+msgstr ""
+
+#: Step7a.class:139
+msgid "Are you sure you want to disable this conponent anyway?"
+msgstr ""
+
+#: Step7a.class:165
+msgid "Select All"
+msgstr ""
+
+#: Step7a.class:171
+msgid "Un-Select All"
+msgstr ""
+
+#: Step7a.class:231
+msgid ""
+"Major optional components available for installation. To select / un-select "
+"a component, click it's name or the box to the left of it's name."
+msgstr ""
+
+#: Step7b.class:83
+msgid ""
+"Additional optional software available. Select which software packages to "
+"include in your installation."
+msgstr ""
+
+#: Step8.class:84
+msgid ""
+"Your VectorLinux installation is about to be performed as follows. If you "
+"need to make any changes, this is your last chance."
 msgstr ""

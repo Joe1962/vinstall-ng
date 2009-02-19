@@ -1,0 +1,30 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Text = ("")
+  Arrangement = Arrange.Vertical
+  { HPanel1 HPanel
+    MoveScaled(0,0,60,5)
+    { tlbanner TextLabel
+      MoveScaled(12,0,19,3)
+      Expand = True
+      Text = ("")
+    }
+    { Separator1 Separator
+      MoveScaled(13,4,25,1)
+      Expand = True
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(0,5,10,1)
+  }
+  { HBox2 HBox
+    MoveScaled(0,7,70,8)
+    { tlWinExp TextLabel
+      MoveScaled(1,0,64,7)
+      Expand = True
+      Text = ("Additional optional software available. Select which software packages to include in your installation.")
+    }
+  }
+}

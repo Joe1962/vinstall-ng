@@ -58,8 +58,13 @@
       MoveScaled(1,11,52,9)
       Expand = True
     }
+    { HBox3 HBox
+      MoveScaled(1,20,7,2)
+      Expand = True
+    }
     { bCheckMedia CheckBox
-      MoveScaled(1,21,41,3)
+      MoveScaled(1,22,41,3)
+      Visible = False
       Expand = True
       Text = ("Check Installation media before installing")
     }

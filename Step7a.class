@@ -21,6 +21,7 @@ PUBLIC SUB Form_Open()
 
 picYes = Picture.Load("images/16px-check.png")
 picNo = Picture.Load("images/16px-Nocheck.png")
+'btTglSel.Value = FALSE
 
 
   ME.tlbanner.Text = "<h2>" & ("Customize Your VectorLinux Installation") & "</h2>"
@@ -130,12 +131,21 @@ END
 PUBLIC SUB gvBulkSel_Click()
 
   'IF LAST.column > 0 THEN RETURN 
-  IF LAST.column = 0 THEN 
-    IF gvBulkSel[LAST.row, LAST.column].Picture = picYes THEN 
-      gvBulkSel[LAST.row, LAST.column].Picture = picNo
+  IF LAST.column = 0 OR LAST.column = 1 AND LAST.row > 1 THEN 
+    IF gvBulkSel[LAST.row, 0].Picture = picYes THEN 
+        IF gvBulkSel[LAST.row, 1].text LIKE "x11" THEN 
+          SELECT CASE Message.Warning("<b>" & ("WARNING:") & "</b>" & Space(1) & ("This component is a dependancy to any graphical user interface progam on the system") & "<br>" &
+          ("Choosing not to install this may result in a command-line (text mode) installation only") & "<br>" &
+          ("Are you sure you want to disable this conponent anyway?"), ("Yes"), ("No"))
+            CASE 2
+              RETURN 
+              STOP EVENT 
+          END SELECT 
+        END IF
+      gvBulkSel[LAST.row, 0].Picture = picNo
       gvBulkSel[LAST.row, 3].Text = "no"
     ELSE 
-      gvBulkSel[LAST.row, LAST.column].Picture = picYes
+      gvBulkSel[LAST.row, 0].Picture = picYes
       gvBulkSel[LAST.row, 3].Text = "yes"
     END IF
   ELSE IF LAST.column = 2 THEN 
@@ -143,6 +153,29 @@ PUBLIC SUB gvBulkSel_Click()
   END IF
         
   gvBulkSel.Refresh
-  'Message(gvBulkSel[LAST.row, 3].Text)
+  
 
+END
+
+PUBLIC SUB btTglSel_Click()
+  
+    DIM irow AS Integer
+
+  'IF LAST.value THEN 
+  IF LAST.text = ("Select All") THEN 
+      irow = 2  
+        FOR irow = 2 TO gvBulkSel.Rows.count - 1
+          gvBulkSel[irow, 0].Picture = picyes
+          gvBulkSel[irow, 3].Text = "yes"
+        NEXT         
+    LAST.text = ("Un-Select All")
+  ELSE 
+    irow = 2
+      FOR irow = 2 TO gvBulkSel.Rows.count - 1
+        gvBulkSel[irow, 0].Picture = picno
+        gvBulkSel[irow, 3].Text = "no"
+      NEXT 
+    LAST.text = ("Select All")
+  END IF
+gvBulkSel.Refresh
 END
