@@ -27,4 +27,25 @@
       Text = ("Additional optional software available. Select which software packages to include in your installation.")
     }
   }
+  { Panel1 Panel
+    MoveScaled(1,16,59,28)
+    Expand = True
+    Arrangement = Arrange.Fill
+    { gvOptions GridView
+      MoveScaled(3,3,51,16)
+      Expand = True
+      Border = False
+    }
+  }
+  { HBox4 HBox
+    MoveScaled(1,44,7,1)
+  }
+  { HBox3 HBox
+    MoveScaled(1,46,37,3)
+    { btTglSel ToggleButton
+      MoveScaled(0,0,24,3)
+      Text = ("Un-Select All")
+      Picture = Picture["icon:/16/refresh"]
+    }
+  }
 }
