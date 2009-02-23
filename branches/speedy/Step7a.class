@@ -61,48 +61,34 @@ END
 PUBLIC SUB LIST_OPTIONAL_BULKS()
   
   DIM sLine, sFile AS String '= File.Load("/mnt/source/veclinux/SETUP.CONF")
-  DIM sArr AS String[]
+  DIM sArr, sLineArr AS String[]
   DIM i, irow AS Integer
-  DIM sDesc AS String
+  DIM sName, sDesc AS String
   
-  IF Exist("/mnt/source/veclinux/SETUP.CONF") THEN 
-    sFile = File.Load("/mnt/source/veclinux/SETUP.CONF")
+  irow = 2
+  IF Exist("/mnt/source/veclinux/VINSTALL.CONF") THEN 
+    sFile = File.Load("/mnt/source/veclinux/VINSTALL.CONF")
     sArr = Split(sFile, "\n")
+      FOR i = 0 TO sArr.Max
+        sLine = Trim(sArr[i])
+        sLine = Trim(Right(sLine, Len(sLine) - InStr(sLine, "=")))
+        sLine = Replace(sLine, "\'", "")
+          IF InStr(sLine, "OPT") THEN 
+          INC gvBulkSel.Rows.Count
+            sLineArr = Split(sLine, ":")
+            sName = Trim(sLineArr[1])
+            sDesc = Trim(sLineArr[3])
+            gvBulkSel[irow, 1].Text = Trim(sname)
+            gvBulkSel[irow, 0].Picture = picYes
+            gvBulkSel[irow, 2].Text = Trim(sDesc)
+          INC irow
+          END IF
+      NEXT   
+        
+        
   ELSE 
   END IF
-  irow = 2
-  FOR EACH sLine IN Dir("/mnt/source/veclinux/")
-    IF sLine LIKE "SETUP.CONF" THEN 
-    ELSE 
-      INC gvBulkSel.Rows.Count
-      gvBulkSel[irow, 1].Text = Trim(sLine)
-      
-      gvBulkSel[irow, 0].Picture = picYes ' enabled by default
-      SHELL "grep \"" & sLine & "\" /mnt/source/veclinux/SETUP.CONF | cut -f 3 -d \':\'" TO sDesc
-      'Message(sDesc)
-      sDesc = Replace(sDesc, "\'", "")
-      sDesc = Replace(sDesc, "\"", "")
-      gvBulkSel[irow, 2].Text = Trim(sDesc)
-      ' cbBulk = NEW CheckBox(ME.Panel1) AS "cbBulkSel"
-      '   WITH cbBulk
-      '     .Move(gvBulkSel.RowAt(gvBulkSel[irow, 0].top), gvBulkSel.ColumnAt(gvBulkSel[irow, 0].Left))
-      '     '.Move(gvBulkSel.ColumnAt(gvBulkSel[irow, 0].Left), gvBulkSel.RowAt(gvBulkSel[irow, 0].top))
-      '     .Height = 21
-      '     .tag = Trim(sLine)
-      '     .Visible = TRUE
-      '     .Value = TRUE
-      '   END WITH 
-      INC irow
-    
-    END IF
 
-  NEXT 
-      
-    
-  
-  'FOR i = 0 TO sArr.Max
-   ' sLine = Trim(sArr[i])
-    
   
 END
 

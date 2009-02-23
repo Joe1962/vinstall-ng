@@ -139,13 +139,13 @@ PUBLIC SUB FIND_PARTITION_INSTALL_MEDIA() ' This SUB will be useful when install
       sKeyPath = "/mnt" &/ Trim(sPart)
           TRY MKDIR sKeyPath
           SHELL "mount /dev" &/ Trim(sPart) & " /mnt" &/ Trim(sPart) & " 2>/dev/null" WAIT 
-            IF Exist(sKeyPath &/ "veclinux" &/ "SETUP.CONF") THEN 
+            IF Exist(sKeyPath &/ "veclinux" &/ "VINSTALL.CONF") THEN 
               ' Must read file first before we have anything to list
-                SHELL "grep \"^DISTRO=\" " & sKeyPath &/ "veclinux" &/ "SETUP.CONF | cut -f 2 -d \"\'\"" TO sName
-                SHELL "grep \"^VERSION=\" " & sKeyPath &/ "veclinux" &/ "SETUP.CONF | cut -f 2 -d \"\'\"" TO sVersion
+                SHELL "grep \"^DISTRO=\" " & sKeyPath &/ "veclinux" &/ "VINSTALL.CONF | cut -f 2 -d \"\'\"" TO sName
+                SHELL "grep \"^VERSION=\" " & sKeyPath &/ "veclinux" &/ "VINSTALL.CONF | cut -f 2 -d \"\'\"" TO sVersion
                 sName = Trim(sName)
                 sVersion = Trim(sVersion)
-                  File.Save(Temp(Trim(sName) & "-" & Trim(sVersion) & "-" & Trim(sPart)), File.Load(sKeyPath &/ "veclinux" &/ "SETUP.CONF"))
+                  File.Save(Temp(Trim(sName) & "-" & Trim(sVersion) & "-" & Trim(sPart)), File.Load(sKeyPath &/ "veclinux" &/ "VINSTALL.CONF"))
                   ComboBox1.Add(Trim(sname) & "-" & Trim(sVersion) & Space(1) & ("on") & Space(1) & Trim(sPart))
                     PRINT " \\__" & Space(1) & ("Found") & Space(1) & Trim(sname) & Space(1) & Trim(sVersion) & Space(1) & ("in partition") & Space(1) & Trim(sPart)
                     
@@ -202,12 +202,12 @@ PUBLIC SUB FIND_CD_INSTALL_MEDIA()
         'EXEC ["mount", "-o", "ro", Trim(sDriveList[i]), "/mnt" &/ sShortDrive] WAIT 
         SHELL "mount " & Trim(sDriveList[i]) & Space(1) & "/mnt" &/ sShortDrive & " 2>/dev/null" WAIT 
         PRINT ("Scanning") & Space(1) & sDriveList[i]
-          IF Exist("/mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF") THEN 
-              SHELL "grep \"^DISTRO=\" /mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF | cut -f 2 -d \'=\'" TO sName
-              SHELL "grep \"^VERSION=\" /mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF | cut -f 2 -d \'=\'" TO sVersion
+          IF Exist("/mnt" &/ sShortDrive &/ "veclinux" &/ "VINSTALL.CONF") THEN 
+              SHELL "grep \"^DISTRO=\" /mnt" &/ sShortDrive &/ "veclinux" &/ "VINSTALL.CONF | cut -f 2 -d \'=\'" TO sName
+              SHELL "grep \"^VERSION=\" /mnt" &/ sShortDrive &/ "veclinux" &/ "VINSTALL.CONF | cut -f 2 -d \'=\'" TO sVersion
                 sName = Trim(Replace(sName, "\'", ""))
                 sVersion = Trim(Replace(sVersion, "\'", ""))
-                File.Save(Temp(sShortDrive), File.Load("/mnt" &/ sShortDrive &/ "veclinux" &/ "SETUP.CONF"))
+                File.Save(Temp(sShortDrive), File.Load("/mnt" &/ sShortDrive &/ "veclinux" &/ "VINSTALL.CONF"))
                   IF ME.ComboBox1.Find(sName & Space(1) & sVersion & Space(1) & ("on") & Space(1) & Trim(sShortDrive)) = -1 THEN 'Trim(sDriveList[i])) = -1 THEN 
                     ME.ComboBox1.Add(sName & Space(1) & sVersion & Space(1) & ("on") & Space(1) & Trim(sShortDrive)) 'Trim(sDriveList[i]))
                   END IF   
@@ -252,9 +252,9 @@ PUBLIC SUB FIND_ISO_INSTALL_MEDIA()
             FOR EACH sFile IN Dir("/mnt" &/ Trim(sPart), "*.iso")
                 TRY MKDIR "/mnt/loop"
                   EXEC ["mount", "-o", "loop", "/mnt" &/ Trim(sPart) &/ Trim(sFile), "/mnt/loop"] WAIT 
-                    IF Exist("/mnt/loop/veclinux/SETUP.CONF") THEN 
+                    IF Exist("/mnt/loop/veclinux/VINSTALL.CONF") THEN 
                     'PRINT "Adding temp file" & Space(1) & Temp(Trim(sFile) & "-" & Trim(sPart))
-                      File.Save(Temp(Trim(sFile) & "-" & Trim(sPart)), File.Load("/mnt/loop/veclinux/SETUP.CONF"))
+                      File.Save(Temp(Trim(sFile) & "-" & Trim(sPart)), File.Load("/mnt/loop/veclinux/VINSTALL.CONF"))
                       ComboBox1.Add(sFile & Space(1) & ("on") & Space(1) & "/dev" &/ Trim(sPart))
                       'Message(sFile & "-" & Trim(sPart))
                       PRINT " \\__" & Space(1) & ("Found") & Space(1) & Trim(sFile) & Space(1) & ("on") & Space(1) & Trim(sPart)
