@@ -21,8 +21,9 @@ PRIVATE PicNo AS Picture
 PUBLIC SUB Form_Open()
 
   ME.tlbanner.Text = "<h2>" & ("Customize Your VectorLinux Installation") & "</h2>"
+  
     ME.gvOptions.Rows.count = 3
-    ME.gvOptions.Columns.count = 4
+    ME.gvOptions.Columns.count = 5
     ME.gvOptions[0, 1].Text = ("Package Name")
     ME.gvOptions[0, 2].Text = ("Description")
     ME.gvOptions[0, 1].Font.Bold = TRUE
@@ -34,7 +35,10 @@ PUBLIC SUB Form_Open()
     ME.gvOptions.Columns[0].Width = 24
     ME.gvOptions.Columns[1].Width = 150
     ME.gvOptions.Columns[2].Width = 300
+    ME.gvOptions.Columns[3].Width = 0
+    ME.gvOptions.Columns[4].Width = 0
     
+    ME.Resize(ClsGlobal.fRunningMainForm.pnlstack.Width, ClsGlobal.fRunningMainForm.pnlstack.height)
     picYes = Picture.Load("images/16px-check.png")
     picNo = Picture.Load("images/16px-Nocheck.png")
     ME.MovieBox1.Path = "images/throbber.gif"
@@ -54,6 +58,8 @@ PUBLIC SUB LIST_OPTIONAL_PACKAGES()
   ME.tlWinExp.Text = ("Reading software catalog... Please wait a moment")
   ME.Panel1.Visible = FALSE
   ME.HPanel2.Visible = TRUE
+  ME.HBox3.Visible = FALSE
+  ME.HBox5.Visible = TRUE
   ME.MovieBox1.Playing = TRUE
   WAIT 1
   irow = 2
@@ -61,6 +67,8 @@ PUBLIC SUB LIST_OPTIONAL_PACKAGES()
     IF Exist("/mnt/source/veclinux/OPTIONAL") = FALSE THEN RETURN 
     sArr = Split(File.Load("/mnt/source/veclinux/OPTIONAL"), "\n")
       FOR i = 0 TO sArr.Max
+      ME.MovieBox1.Playing = TRUE
+      ME.MovieBox1.Refresh
         sLine = Trim(sArr[i])
         sPkg = sLine
         SHELL "cat /mnt/source/PACKAGES.TXT | grep \"^" & sPkg & "\" | cut -f 2 -d \':\' " TO sDescDump
@@ -83,6 +91,7 @@ PUBLIC SUB LIST_OPTIONAL_PACKAGES()
         gvOptions[irow, 1].Text = sPkg
         gvOptions[irow, 2].Text = Trim(sShortDesc)
         gvOptions[irow, 3].Text = Trim(sDesc)
+        gvOptions[irow, 4].Text = "yes"
         INC gvOptions.Rows.Count
       INC irow
       NEXT 
@@ -90,6 +99,8 @@ PUBLIC SUB LIST_OPTIONAL_PACKAGES()
     ME.MovieBox1.Playing = FALSE
     ME.HPanel2.Visible = FALSE
     ME.Panel1.Visible = TRUE
+    ME.HBox3.Visible = TRUE
+    ME.HBox5.Visible = FALSE
     ME.tlWinExp.Text = ("Additional optional software available. Select which software packages to include in your installation.")
   
 END
@@ -97,12 +108,13 @@ END
 
 PUBLIC SUB OnExit()
   
-  
+  ME.Read_Optional_Pkg_Selection()
+  'Message(ClsGlobal.sPkgListToInstall)
   
 END
 PUBLIC SUB StartUp()
   
-  
+  ME.Resize(ClsGlobal.fRunningMainForm.pnlstack.Width, ClsGlobal.fRunningMainForm.pnlstack.height)
   
 END
 PUBLIC FUNCTION GetNext() AS String
@@ -125,10 +137,12 @@ PUBLIC SUB TOGGLE_SELECTION(BsELECTaLL AS Boolean)
   IF BsELECTaLL = TRUE THEN 
     FOR irow = 2 TO gvOptions.Rows.Count - 1
       gvOptions[irow, 0].Picture = PicYes
+      gvOptions[irow, 4].Text = "yes"
     NEXT 
   ELSE 
     FOR irow = 2 TO gvOptions.Rows.Count - 1
       gvOptions[irow, 0].Picture = PicNo
+      gvOptions[irow, 4].Text = "no"
     NEXT 
   END IF
   
@@ -142,8 +156,10 @@ IF LAST.row = 0 OR LAST.row = 1 THEN RETURN
 IF LAST.column = 0 OR LAST.column = 1 THEN 
   IF gvOptions[LAST.row, 0].Picture = PicYes THEN 
     gvOptions[LAST.row, 0].Picture = PicNo
+    gvOptions[LAST.row, 4].Text = "no"
   ELSE 
     gvOptions[LAST.row, 0].Picture = PicYes
+    gvOptions[LAST.row, 4].Text = "yes"
   END IF
 ELSE IF LAST.column = 2 THEN 
   IF gvOptions[LAST.row, 3].Text THEN 
@@ -168,6 +184,21 @@ PUBLIC SUB btTglSel_Click()
   END IF
   gvOptions.Refresh
 
+END
+
+PUBLIC SUB Read_Optional_Pkg_Selection()
+  
+  DIM IROW AS Integer
+  DIM sList AS String
+  
+  FOR irow = 2 TO gvOptions.Rows.count - 1
+    IF gvOptions[irow, 4].Text LIKE "yes" THEN 
+      sList = sList & Trim(gvOptions[irow, 1].Text) & ","
+    END IF
+  NEXT 
+  ClsGlobal.sPkgListToInstall = Trim(sList)
+      
+  
 END
 
 

@@ -30,19 +30,26 @@ END
 PUBLIC SUB OnExit()
   
   DIM n AS Integer
-  DIM sFmtAs AS String
+  DIM sFmtAs, sList, sPartAddr AS String
+  ClsGlobal.sVitalPartList = ""
     FOR n = 1 TO gvPartListing.Rows.Count - 1
       IF gvPartListing[n, 2].Text THEN 
+        sPartAddr = gvPartListing[n, 2].Text
         IF gvPartListing[n, 4].Text THEN 
           sFmtAs = gvPartListing[n, 4].Text
         ELSE 
           sFmtAs = gvPartListing[n, 5].Text
         END IF
       END IF
+      sList = sList & sPartAddr & "," & sFmtAs & ";"
       'Message(gvPartListing[n, 0].Text & gb.NewLine & gvPartListing[n, 2].Text & gb.NewLine & sFmtAs)
       
     NEXT 
-  
+    ME.read_partition_selection
+    Message(ClsGlobal.sVitalPartList)
+   ' sList = Trim(Left(sList, Len(sList) - 1))
+  'ClsGlobal.sVitalPartList = Trim(sList)
+  'Message(ClsGlobal.sVitalPartList)
 END
 
 PUBLIC SUB StartUp()
@@ -178,7 +185,7 @@ PUBLIC SUB FsSel_Click()
   
     IF LAST.text <> ("Do not format") THEN 
       ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text = LAST.text
-      ME.OnExit()
+      'ME.OnExit()
     ELSE 
       ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text = ""
     END IF
@@ -273,6 +280,54 @@ PUBLIC SUB MOUNT_TARGET_PARTITIONS()
 END
 
 
+PUBLIC SUB read_partition_selection()
+  
+  DIM cbox, cb AS ComboBox
+  DIM sFormat AS String
+    FOR EACH cbox IN objMntPoints
+      IF cbox.Text <> ("Not Used") THEN 
+        FOR EACH cb IN objFS
+          IF cbox.tag = cb.Tag THEN 
+            sFormat = Trim(cb.Text)
+            BREAK 
+          ELSE 
+            sFormat = ""
+          END IF
+        NEXT 
+        ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & cbox.Tag & "-" & cbox.Text & "-" & sFormat & ","
+        
+      ' SELECT CASE cbox.Text
+      '     CASE "/"
+      '       ClsGlobal.sRoot = cbox.Tag
+      '       ClsGlobal.froot = sFormat
+      '     CASE "/home"
+      '       ClsGlobal.shome = cbox.Tag      
+      '       ClsGlobal.fhome = sFormat
+      '     CASE "/usr"
+      '       ClsGlobal.susr = cbox.Tag
+      '       ClsGlobal.fusr = sFormat
+      '     CASE "/opt"
+      '       ClsGlobal.sopt = cbox.Tag
+      '       ClsGlobal.fopt = sFormat
+      '     CASE "/var"
+      '       ClsGlobal.svar = cbox.Tag
+      '       ClsGlobal.fvar = sFormat
+      '     CASE "/tmp"
+      '       ClsGlobal.stmp = cbox.Tag
+      '       ClsGlobal.ftmp = sFormat
+      '     CASE "/boot"
+      '       ClsGlobal.sboot = cbox.Tag
+      '       ClsGlobal.fboot = sFormat
+      '     CASE ELSE 
+      '       ClsGlobal.sMiscMountList = ClsGlobal.sMiscMountList & cbox.Tag & "," & Trim(cbox.Text) & ";"
+      ' END SELECT 
+    END IF
+    NEXT 
+      
+          
+      
+  
+END
 
 
 

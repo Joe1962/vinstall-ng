@@ -35,6 +35,25 @@ STATIC PUBLIC bAutoPartition AS Boolean
 STATIC PUBLIC sTargetRoot AS String ' we know by default this is a reiserfs partition
 STATIC PUBLIC sTargetSwap AS String
 
+' PARTITIONS SELECTED
+STATIC PUBLIC sRoot AS String
+STATIC PUBLIC froot AS String
+STATIC PUBLIC shome AS String
+STATIC PUBLIC fhome AS String
+STATIC PUBLIC sopt AS String
+STATIC PUBLIC fopt AS String
+STATIC PUBLIC susr AS String
+STATIC PUBLIC fusr AS String
+STATIC PUBLIC stmp AS String
+STATIC PUBLIC ftmp AS String
+STATIC PUBLIC svar AS String
+STATIC PUBLIC fvar AS String
+STATIC PUBLIC sboot AS String
+STATIC PUBLIC fboot AS String
+
+STATIC PUBLIC sVitalPartList AS String
+STATIC PUBLIC sMiscMountList AS String
+
 STATIC PUBLIC sFullDiscToWipe AS String
 
 ' Installation method variable
@@ -42,4 +61,9 @@ STATIC PUBLIC sFullDiscToWipe AS String
 ' 1 = CUSTOMIZED INSTALL
 ' 2 = MINIMAL INSTALL
 STATIC PUBLIC iInstallMethod AS Integer
+
+' INSTALLATION DETAILS
+
+STATIC PUBLIC sBulkListToInstall AS String
+STATIC PUBLIC sPkgListToInstall AS String
 

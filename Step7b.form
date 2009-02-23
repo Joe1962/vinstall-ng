@@ -20,11 +20,11 @@
     MoveScaled(0,5,10,1)
   }
   { HBox2 HBox
-    MoveScaled(0,7,70,8)
+    MoveScaled(0,7,70,6)
     { tlWinExp TextLabel
-      MoveScaled(1,0,64,7)
+      MoveScaled(1,0,64,5)
       Expand = True
-      Text = ("Additional optional software available. Select which software packages to include in your installation.")
+      Text = ("Reading software catalog... Please wait a moment")
     }
   }
   { Panel1 Panel
@@ -38,8 +38,12 @@
       Border = False
     }
   }
+  { HBox5 HBox
+    MoveScaled(1,24,11,3)
+    Visible = False
+  }
   { HPanel2 HPanel
-    MoveScaled(1,24,57,28)
+    MoveScaled(1,27,57,28)
     Expand = True
     { MovieBox1 MovieBox
       MoveScaled(11,1,37,24)
@@ -50,7 +54,7 @@
     MoveScaled(1,52,7,1)
   }
   { HBox3 HBox
-    MoveScaled(1,54,37,3)
+    MoveScaled(1,57,37,3)
     { btTglSel ToggleButton
       MoveScaled(0,0,24,3)
       Text = ("Un-Select All")
