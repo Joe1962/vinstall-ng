@@ -707,7 +707,7 @@ msgstr ""
 msgid "Install the most minimal working confuguration (For older hardware)"
 msgstr ""
 
-#: Step7a.class:27 Step7b.class:21
+#: Step7a.class:27 Step7b.class:23
 msgid "Customize Your VectorLinux Installation"
 msgstr ""
 
@@ -715,7 +715,7 @@ msgstr ""
 msgid "Component"
 msgstr ""
 
-#: Step7a.class:49
+#: Step7a.class:49 Step7b.class:27
 msgid "Description"
 msgstr ""
 
@@ -735,11 +735,11 @@ msgstr ""
 msgid "Are you sure you want to disable this conponent anyway?"
 msgstr ""
 
-#: Step7a.class:151
+#: Step7a.class:151 Step7b.class:153
 msgid "Select All"
 msgstr ""
 
-#: Step7a.class:157
+#: Step7a.class:157 Step7b.class:151
 msgid "Un-Select All"
 msgstr ""
 
@@ -749,7 +749,11 @@ msgid ""
 "a component, click it's name or the box to the left of it's name."
 msgstr ""
 
-#: Step7b.class:83
+#: Step7b.class:26
+msgid "Package Name"
+msgstr ""
+
+#: Step7b.class:210
 msgid ""
 "Additional optional software available. Select which software packages to "
 "include in your installation."

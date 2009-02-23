@@ -15,12 +15,75 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+PRIVATE PicYes AS Picture
+PRIVATE PicNo AS Picture
 
 PUBLIC SUB Form_Open()
 
   ME.tlbanner.Text = "<h2>" & ("Customize Your VectorLinux Installation") & "</h2>"
+    ME.gvOptions.Rows.count = 3
+    ME.gvOptions.Columns.count = 4
+    ME.gvOptions[0, 1].Text = ("Package Name")
+    ME.gvOptions[0, 2].Text = ("Description")
+    ME.gvOptions[0, 1].Font.Bold = TRUE
+    ME.gvOptions[0, 2].Font.Bold = TRUE
+    ME.gvOptions[0, 0].BackColor = Color.LightBackground
+    ME.gvOptions[0, 1].BackColor = Color.LightBackground
+    ME.gvOptions[0, 2].BackColor = Color.LightBackground
+    ME.gvOptions.Rows[1].Height = 5
+    ME.gvOptions.Columns[0].Width = 24
+    ME.gvOptions.Columns[1].Width = 150
+    ME.gvOptions.Columns[2].Width = 300
+    
+    picYes = Picture.Load("images/16px-check.png")
+    picNo = Picture.Load("images/16px-Nocheck.png")
+    
+    ME.LIST_OPTIONAL_PACKAGES()  
 
 END
+
+PUBLIC SUB LIST_OPTIONAL_PACKAGES()
+  
+  DIM irow, i AS Integer
+  DIM sDescDump, sFile, sLine, sPkg, sDesc, sShortDesc AS String
+  DIM sArr, sDescArr AS String[]
+  
+  irow = 2
+  
+    IF Exist("/mnt/source/veclinux/OPTIONAL") = FALSE THEN RETURN 
+    sArr = Split(File.Load("/mnt/source/veclinux/OPTIONAL"), "\n")
+      FOR i = 0 TO sArr.Max
+        sLine = Trim(sArr[i])
+        sPkg = sLine
+        SHELL "cat /mnt/source/PACKAGES.TXT | grep \"^" & sPkg & "\" | cut -f 2 -d \':\' " TO sDescDump
+          sDescDump = Trim(sDescDump)
+          IF sDescDump THEN 
+            sDescArr = Split(sDescDump, "\n")
+            sShortDesc = Trim(sDescArr[0])
+            sShortDesc = Replace(sShortDesc, sPkg, "")
+            sShortDesc = Replace(sShortDesc, "(", "")
+            sShortDesc = Replace(sShortDesc, ")", "")
+            sShortDesc = Trim(sShortDesc)
+            sShortDesc = UCase(Left(sShortDesc, 1)) & Right(sShortDesc, Len(sShortDesc) - 1)
+            sDesc = Trim(sDescDump)
+          ELSE 
+            sShortDesc = ""
+            sDesc = ""
+          END IF
+      
+        gvOptions[irow, 0].Picture = PicYes
+        gvOptions[irow, 1].Text = sPkg
+        gvOptions[irow, 2].Text = Trim(sShortDesc)
+        gvOptions[irow, 3].Text = Trim(sDesc)
+        INC gvOptions.Rows.Count
+      INC irow
+      NEXT 
+          
+    
+  
+END
+
+
 PUBLIC SUB OnExit()
   
   
@@ -35,4 +98,63 @@ PUBLIC FUNCTION GetNext() AS String
   
   RETURN "Step8"
   
+END
+
+PUBLIC SUB Form_Resize()
+
+  'gvBulkSel.Columns[2].Width = gvBulkSel.Width - (gvBulkSel.ColumnAt(gvBulkSel[0, 2].Left) + gvBulkSel.Columns[1].Width + gvBulkSel.Columns[0].width + 4)
+  gvOptions.Columns[2].Width = gvOptions.Width - (gvOptions.ColumnAt(gvOptions[0, 3].Left) + (gvOptions.Columns[0].Width + gvOptions.Columns[1].Width)) - gvOptions.Columns[0].Width + 4 ' + gvOptions.Columns[1].Width + gvOptions.Columns[0].width)
+  gvOptions.Columns[3].Width = 0
+
+END
+
+PUBLIC SUB TOGGLE_SELECTION(BsELECTaLL AS Boolean)
+  
+  DIM irow AS Integer
+  IF BsELECTaLL = TRUE THEN 
+    FOR irow = 2 TO gvOptions.Rows.Count - 1
+      gvOptions[irow, 0].Picture = PicYes
+    NEXT 
+  ELSE 
+    FOR irow = 2 TO gvOptions.Rows.Count - 1
+      gvOptions[irow, 0].Picture = PicNo
+    NEXT 
+  END IF
+  
+END
+
+
+PUBLIC SUB gvOptions_Click()
+
+IF LAST.row = 0 OR LAST.row = 1 THEN RETURN  
+
+IF LAST.column = 0 OR LAST.column = 1 THEN 
+  IF gvOptions[LAST.row, 0].Picture = PicYes THEN 
+    gvOptions[LAST.row, 0].Picture = PicNo
+  ELSE 
+    gvOptions[LAST.row, 0].Picture = PicYes
+  END IF
+ELSE IF LAST.column = 2 THEN 
+  IF gvOptions[LAST.row, 3].Text THEN 
+    Balloon(gvOptions[LAST.row, 3].Text, gvOptions, gvOptions[LAST.row, 0].picture, gvOptions[LAST.row, LAST.column].left + 4, gvOptions[LAST.row, LAST.column].y + 12)
+  END IF
+ELSE 
+  RETURN 
+  STOP EVENT 
+END IF
+
+gvOptions.Refresh
+END
+
+PUBLIC SUB btTglSel_Click()
+
+  IF LAST.text = ("Un-Select All") THEN 
+    ME.TOGGLE_SELECTION(FALSE)
+    ME.btTglSel.Text = ("Select All")
+  ELSE 
+    ME.TOGGLE_SELECTION(TRUE)
+    ME.btTglSel.Text = ("Un-Select All")
+  END IF
+  gvOptions.Refresh
+
 END

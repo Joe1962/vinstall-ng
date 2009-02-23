@@ -14,11 +14,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Step7b.class:21
+#: Step7b.class:23
 msgid "Customize Your VectorLinux Installation"
 msgstr ""
 
-#: Step7b.class:83
+#: Step7b.class:26
+msgid "Package Name"
+msgstr ""
+
+#: Step7b.class:27
+msgid "Description"
+msgstr ""
+
+#: Step7b.class:151
+msgid "Un-Select All"
+msgstr ""
+
+#: Step7b.class:153
+msgid "Select All"
+msgstr ""
+
+#: Step7b.class:210
 msgid "Additional optional software available. Select which software packages to include in your installation."
 msgstr ""
 
