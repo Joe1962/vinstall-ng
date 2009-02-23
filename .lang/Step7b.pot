@@ -26,15 +26,19 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: Step7b.class:151
+#: Step7b.class:54
+msgid "Reading software catalog... Please wait a moment"
+msgstr ""
+
+#: Step7b.class:93
+msgid "Additional optional software available. Select which software packages to include in your installation."
+msgstr ""
+
+#: Step7b.class:162
 msgid "Un-Select All"
 msgstr ""
 
-#: Step7b.class:153
+#: Step7b.class:164
 msgid "Select All"
-msgstr ""
-
-#: Step7b.class:210
-msgid "Additional optional software available. Select which software packages to include in your installation."
 msgstr ""
 

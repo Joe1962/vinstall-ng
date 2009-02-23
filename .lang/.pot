@@ -170,7 +170,7 @@ msgstr ""
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:415 Step3a1.class:22 Step3a1a.class:169 Step7a.class:125
+#: Step1.class:415 Step3a1.class:22 Step3a1a.class:169 Step7a.class:127
 msgid "WARNING:"
 msgstr ""
 
@@ -451,11 +451,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:386 Step7a.class:125
+#: Step3a1a.class:169 Step6.class:386 Step7a.class:127
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:386 Step7a.class:125
+#: Step3a1a.class:169 Step6.class:386 Step7a.class:127
 msgid "No"
 msgstr ""
 
@@ -719,31 +719,31 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: Step7a.class:125
+#: Step7a.class:127
 msgid ""
 "This component is a dependancy to any graphical user interface progam on the "
 "system"
 msgstr ""
 
-#: Step7a.class:125
+#: Step7a.class:127
 msgid ""
 "Choosing not to install this may result in a command-line (text mode) "
 "installation only"
 msgstr ""
 
-#: Step7a.class:125
+#: Step7a.class:127
 msgid "Are you sure you want to disable this conponent anyway?"
 msgstr ""
 
-#: Step7a.class:151 Step7b.class:153
+#: Step7a.class:153 Step7b.class:164
 msgid "Select All"
 msgstr ""
 
-#: Step7a.class:157 Step7b.class:151
+#: Step7a.class:159 Step7b.class:162
 msgid "Un-Select All"
 msgstr ""
 
-#: Step7a.class:217
+#: Step7a.class:219
 msgid ""
 "Major optional components available for installation. To select / un-select "
 "a component, click it's name or the box to the left of it's name."
@@ -753,7 +753,11 @@ msgstr ""
 msgid "Package Name"
 msgstr ""
 
-#: Step7b.class:210
+#: Step7b.class:54
+msgid "Reading software catalog... Please wait a moment"
+msgstr ""
+
+#: Step7b.class:93
 msgid ""
 "Additional optional software available. Select which software packages to "
 "include in your installation."

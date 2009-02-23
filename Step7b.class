@@ -37,7 +37,9 @@ PUBLIC SUB Form_Open()
     
     picYes = Picture.Load("images/16px-check.png")
     picNo = Picture.Load("images/16px-Nocheck.png")
+    ME.MovieBox1.Path = "images/throbber.gif"
     
+    WAIT 1
     ME.LIST_OPTIONAL_PACKAGES()  
 
 END
@@ -48,6 +50,12 @@ PUBLIC SUB LIST_OPTIONAL_PACKAGES()
   DIM sDescDump, sFile, sLine, sPkg, sDesc, sShortDesc AS String
   DIM sArr, sDescArr AS String[]
   
+  'ME.Panel1.Visible = FALSE
+  ME.tlWinExp.Text = ("Reading software catalog... Please wait a moment")
+  ME.Panel1.Visible = FALSE
+  ME.HPanel2.Visible = TRUE
+  ME.MovieBox1.Playing = TRUE
+  WAIT 1
   irow = 2
   
     IF Exist("/mnt/source/veclinux/OPTIONAL") = FALSE THEN RETURN 
@@ -79,7 +87,10 @@ PUBLIC SUB LIST_OPTIONAL_PACKAGES()
       INC irow
       NEXT 
           
-    
+    ME.MovieBox1.Playing = FALSE
+    ME.HPanel2.Visible = FALSE
+    ME.Panel1.Visible = TRUE
+    ME.tlWinExp.Text = ("Additional optional software available. Select which software packages to include in your installation.")
   
 END
 
@@ -158,3 +169,5 @@ PUBLIC SUB btTglSel_Click()
   gvOptions.Refresh
 
 END
+
+
