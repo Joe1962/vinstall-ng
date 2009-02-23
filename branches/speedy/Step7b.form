@@ -28,7 +28,8 @@
     }
   }
   { Panel1 Panel
-    MoveScaled(1,16,59,28)
+    MoveScaled(1,16,59,7)
+    Visible = False
     Expand = True
     Arrangement = Arrange.Fill
     { gvOptions GridView
@@ -37,11 +38,19 @@
       Border = False
     }
   }
+  { HPanel2 HPanel
+    MoveScaled(1,24,57,28)
+    Expand = True
+    { MovieBox1 MovieBox
+      MoveScaled(11,1,37,24)
+      Expand = True
+    }
+  }
   { HBox4 HBox
-    MoveScaled(1,44,7,1)
+    MoveScaled(1,52,7,1)
   }
   { HBox3 HBox
-    MoveScaled(1,46,37,3)
+    MoveScaled(1,54,37,3)
     { btTglSel ToggleButton
       MoveScaled(0,0,24,3)
       Text = ("Un-Select All")

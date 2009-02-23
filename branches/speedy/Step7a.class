@@ -48,7 +48,7 @@ picNo = Picture.Load("images/16px-Nocheck.png")
   'gvBulkSel[0,3].ba
   gvBulkSel[0, 2].Text = ("Description")
   gvBulkSel[0, 2].Font.Bold = TRUE
-  
+  'WAIT 1
   ME.LIST_OPTIONAL_BULKS
 END
 
@@ -64,6 +64,8 @@ PUBLIC SUB LIST_OPTIONAL_BULKS()
   DIM sArr, sLineArr AS String[]
   DIM i, irow AS Integer
   DIM sName, sDesc AS String
+  
+
   
   irow = 2
   IF Exist("/mnt/source/veclinux/VINSTALL.CONF") THEN 
