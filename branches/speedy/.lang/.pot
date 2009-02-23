@@ -170,7 +170,7 @@ msgstr ""
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:415 Step3a1.class:22 Step3a1a.class:169 Step7a.class:127
+#: Step1.class:415 Step3a1.class:22 Step3a1a.class:169 Step7a.class:143
 msgid "WARNING:"
 msgstr ""
 
@@ -451,11 +451,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:386 Step7a.class:127
+#: Step3a1a.class:169 Step6.class:441 Step7a.class:143
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:386 Step7a.class:127
+#: Step3a1a.class:169 Step6.class:441 Step7a.class:143
 msgid "No"
 msgstr ""
 
@@ -635,47 +635,47 @@ msgstr ""
 msgid "Restart Now"
 msgstr ""
 
-#: Step6.class:59
+#: Step6.class:66
 msgid "Partition"
 msgstr ""
 
-#: Step6.class:60
+#: Step6.class:67
 msgid "Size"
 msgstr ""
 
-#: Step6.class:61
+#: Step6.class:68
 msgid "Mount Point"
 msgstr ""
 
-#: Step6.class:62
+#: Step6.class:69
 msgid "File System"
 msgstr ""
 
-#: Step6.class:134
+#: Step6.class:141
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:155
+#: Step6.class:162
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:200
+#: Step6.class:207
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:200
+#: Step6.class:207
 msgid "as your"
 msgstr ""
 
-#: Step6.class:200
+#: Step6.class:207
 msgid "partition."
 msgstr ""
 
-#: Step6.class:200
+#: Step6.class:207
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:281
+#: Step6.class:336
 msgid "Select which partitions to use for installation"
 msgstr ""
 
@@ -715,49 +715,49 @@ msgstr ""
 msgid "Component"
 msgstr ""
 
-#: Step7a.class:49 Step7b.class:27
+#: Step7a.class:49 Step7b.class:28
 msgid "Description"
 msgstr ""
 
-#: Step7a.class:127
+#: Step7a.class:143
 msgid ""
 "This component is a dependancy to any graphical user interface progam on the "
 "system"
 msgstr ""
 
-#: Step7a.class:127
+#: Step7a.class:143
 msgid ""
 "Choosing not to install this may result in a command-line (text mode) "
 "installation only"
 msgstr ""
 
-#: Step7a.class:127
+#: Step7a.class:143
 msgid "Are you sure you want to disable this conponent anyway?"
 msgstr ""
 
-#: Step7a.class:153 Step7b.class:164
+#: Step7a.class:169 Step7b.class:180
 msgid "Select All"
 msgstr ""
 
-#: Step7a.class:159 Step7b.class:162
+#: Step7a.class:175 Step7b.class:178
 msgid "Un-Select All"
 msgstr ""
 
-#: Step7a.class:219
+#: Step7a.class:235
 msgid ""
 "Major optional components available for installation. To select / un-select "
 "a component, click it's name or the box to the left of it's name."
 msgstr ""
 
-#: Step7b.class:26
+#: Step7b.class:27
 msgid "Package Name"
 msgstr ""
 
-#: Step7b.class:54
+#: Step7b.class:58
 msgid "Reading software catalog... Please wait a moment"
 msgstr ""
 
-#: Step7b.class:93
+#: Step7b.class:104
 msgid ""
 "Additional optional software available. Select which software packages to "
 "include in your installation."

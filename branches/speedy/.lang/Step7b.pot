@@ -18,27 +18,27 @@ msgstr ""
 msgid "Customize Your VectorLinux Installation"
 msgstr ""
 
-#: Step7b.class:26
+#: Step7b.class:27
 msgid "Package Name"
 msgstr ""
 
-#: Step7b.class:27
+#: Step7b.class:28
 msgid "Description"
 msgstr ""
 
-#: Step7b.class:54
+#: Step7b.class:58
 msgid "Reading software catalog... Please wait a moment"
 msgstr ""
 
-#: Step7b.class:93
+#: Step7b.class:104
 msgid "Additional optional software available. Select which software packages to include in your installation."
 msgstr ""
 
-#: Step7b.class:162
+#: Step7b.class:178
 msgid "Un-Select All"
 msgstr ""
 
-#: Step7b.class:164
+#: Step7b.class:180
 msgid "Select All"
 msgstr ""
 

@@ -26,39 +26,39 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: Step7a.class:127
+#: Step7a.class:143
 msgid "WARNING:"
 msgstr ""
 
-#: Step7a.class:127
+#: Step7a.class:143
 msgid "This component is a dependancy to any graphical user interface progam on the system"
 msgstr ""
 
-#: Step7a.class:127
+#: Step7a.class:143
 msgid "Choosing not to install this may result in a command-line (text mode) installation only"
 msgstr ""
 
-#: Step7a.class:127
+#: Step7a.class:143
 msgid "Are you sure you want to disable this conponent anyway?"
 msgstr ""
 
-#: Step7a.class:127
+#: Step7a.class:143
 msgid "Yes"
 msgstr ""
 
-#: Step7a.class:127
+#: Step7a.class:143
 msgid "No"
 msgstr ""
 
-#: Step7a.class:153
+#: Step7a.class:169
 msgid "Select All"
 msgstr ""
 
-#: Step7a.class:159
+#: Step7a.class:175
 msgid "Un-Select All"
 msgstr ""
 
-#: Step7a.class:219
+#: Step7a.class:235
 msgid "Major optional components available for installation. To select / un-select a component, click it's name or the box to the left of it's name."
 msgstr ""
 

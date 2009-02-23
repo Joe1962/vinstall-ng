@@ -83,6 +83,7 @@ PUBLIC SUB LIST_OPTIONAL_BULKS()
             gvBulkSel[irow, 1].Text = Trim(sname)
             gvBulkSel[irow, 0].Picture = picYes
             gvBulkSel[irow, 2].Text = Trim(sDesc)
+            gvBulkSel[irow, 3].Text = "yes"
           INC irow
           END IF
       NEXT   
@@ -101,10 +102,25 @@ PUBLIC SUB StartUp()
   
 END
 
+PUBLIC SUB Get_Bulk_Selection()
+  
+  DIM irow AS Integer
+  DIM sList AS String
+    FOR irow = 2 TO gvBulkSel.Rows.count - 1
+      IF gvBulkSel[irow, 3].Text LIKE "yes" THEN 
+        sList = sList & Trim(gvBulkSel[irow, 1].Text) & ","
+      END IF
+    NEXT 
+  ClsGlobal.sBulkListToInstall = Trim(slist)
+  'Message(ClsGlobal.sBulkListToInstall)
+  
+  
+END
+
 
 PUBLIC SUB OnExit()
   
-  
+  ME.Get_Bulk_Selection()
   
 END
 
