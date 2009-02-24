@@ -14,11 +14,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Step8.class:65
+#: Step8.class:58
+msgid "Do not format"
+msgstr ""
+
+#: Step8.class:59
+msgid "Not Formatted"
+msgstr ""
+
+#: Step8.class:59
+msgid "Mount to"
+msgstr ""
+
+#: Step8.class:61
+msgid "Format to"
+msgstr ""
+
+#: Step8.class:61
+msgid "and mount to"
+msgstr ""
+
+#: Step8.class:116
 msgid "Installation Summary"
 msgstr ""
 
-#: Step8.class:84
+#: Step8.class:135
 msgid "Your VectorLinux installation is about to be performed as follows. If you need to make any changes, this is your last chance."
 msgstr ""
 

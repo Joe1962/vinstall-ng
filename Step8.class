@@ -17,6 +17,8 @@
 PUBLIC SUB Form_Open()
 
   ME.tlbanner.Text = "<h2>" & tlbanner.text & "</h2>"
+  'ME.SUMMARIZE_DISTRO_INFO()
+  'ME.SUMMARIZE_PARTITION_SELECTION()
 
 END
 PUBLIC FUNCTION GetNext() AS String
@@ -24,14 +26,63 @@ PUBLIC FUNCTION GetNext() AS String
   RETURN "Step9"
   
 END
+
+PUBLIC SUB SUMMARIZE_DISTRO_INFO()
+  
+  WITH ME.TreeView1
+    .Add("DistroInfo", "Distribution", MdlStartUp.pCategory)
+    .Add("Distro0", "Name",, "DistroInfo")
+    .Add("Distro00", Trim(ClsGlobal.sDistroName),, "Distro0")
+    .Add("Distro1", "Version",, "DistroInfo")
+    .Add("Distro10", Trim(ClsGlobal.sDistroVer),, "Distro1")
+  END WITH 
+  
+END
+
+PUBLIC SUB SUMMARIZE_PARTITION_SELECTION()
+  DIM i AS Integer
+  DIM sList AS String
+  DIM sArr, sEntry AS String[]
+  DIM sPart, sMntPnt, sFs AS String
+  
+  WITH ME.TreeView1
+    .Add("Part", "Partitions to be used", MdlStartUp.pCategory)
+      sArr = Split(ClsGlobal.sVitalPartList, ",")
+        FOR i = 0 TO sArr.Max
+          sList = Trim(sArr[i])
+        IF sList THEN 
+            sEntry = Split(sList, "-")
+            sPart = Trim(sEntry[0])
+            sMntPnt = Trim(sEntry[1])
+            sFs = Trim(sEntry[2])
+              IF sfs LIKE ("Do not format") THEN 
+                sFs = "(" & ("Not Formatted") & ")" & "," & Space(1) & ("Mount to") & Space(1)
+              ELSE 
+                sfs = ("Format to") & Space(1) & sFs & Space(1) & ("and mount to") & Space(1)
+              END IF
+          .Add("Part." & i, sPart,, "Part")
+          .add("Part." & i & "." & i, sFs & sMntPnt,, "Part." & i)
+          '.Add("Part." & i & "." & i, sMntPnt,, "Part." & i)
+          '.Add("Part." & i & "." & i & "." & i, sFs,, "Part." & i & "." & i)
+        END IF
+        NEXT 
+        
+          
+  END WITH 
+  
+END
+
+
+
 PUBLIC SUB OnExit()
   
   
   
 END
 PUBLIC SUB StartUp()
-  
-  
+  ME.TreeView1.Clear()
+  ME.SUMMARIZE_DISTRO_INFO()
+  ME.SUMMARIZE_PARTITION_SELECTION()
   
 END
 

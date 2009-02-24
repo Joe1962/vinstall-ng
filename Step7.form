@@ -23,6 +23,7 @@
   }
   { HPanel2 HPanel
     MoveScaled(2,8,69,27)
+    Expand = True
     { rbFullInstall RadioButton
       MoveScaled(1,2,17,3)
       Tag = "0"

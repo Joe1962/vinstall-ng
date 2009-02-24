@@ -61,7 +61,7 @@ PUBLIC SUB LIST_OPTIONAL_PACKAGES()
   ME.HBox3.Visible = FALSE
   ME.HBox5.Visible = TRUE
   ME.MovieBox1.Playing = TRUE
-  WAIT 1
+  WAIT 0.1
   irow = 2
   
     IF Exist("/mnt/source/veclinux/OPTIONAL") = FALSE THEN RETURN 
@@ -70,8 +70,9 @@ PUBLIC SUB LIST_OPTIONAL_PACKAGES()
       ME.MovieBox1.Playing = TRUE
       ME.MovieBox1.Refresh
         sLine = Trim(sArr[i])
-        sPkg = sLine
-        SHELL "cat /mnt/source/PACKAGES.TXT | grep \"^" & sPkg & "\" | cut -f 2 -d \':\' " TO sDescDump
+        sPkg = Trim(sLine)
+     IF sPkg THEN 
+        SHELL "cat /mnt/source/PACKAGES.TXT | grep -i \"^" & sPkg & "\" | cut -f 2 -d :" TO sDescDump
           sDescDump = Trim(sDescDump)
           IF sDescDump THEN 
             sDescArr = Split(sDescDump, "\n")
@@ -86,14 +87,16 @@ PUBLIC SUB LIST_OPTIONAL_PACKAGES()
             sShortDesc = ""
             sDesc = ""
           END IF
-      
+          WAIT 0.1
+      'Message(sPkg & "<br><br>" & sShortDesc)
         gvOptions[irow, 0].Picture = PicYes
         gvOptions[irow, 1].Text = sPkg
         gvOptions[irow, 2].Text = Trim(sShortDesc)
         gvOptions[irow, 3].Text = Trim(sDesc)
         gvOptions[irow, 4].Text = "yes"
+        INC irow
         INC gvOptions.Rows.Count
-      INC irow
+      END IF
       NEXT 
           
     ME.MovieBox1.Playing = FALSE
