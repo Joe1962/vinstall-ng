@@ -62,7 +62,7 @@ msgstr ""
 msgid "Installation"
 msgstr ""
 
-#: MdlStartUp.module:49 Step8.class:65
+#: MdlStartUp.module:49 Step8.class:116
 msgid "Installation Summary"
 msgstr ""
 
@@ -130,67 +130,113 @@ msgstr ""
 msgid "on"
 msgstr ""
 
-#: Step1.class:131
-msgid "Scanning system partitions for installation files"
+#: Step1.class:91
+msgid ""
+"No installable media was found on your system. Please insert an installation "
+"CD"
 msgstr ""
 
-#: Step1.class:150
-msgid "Found"
+#: Step1.class:91
+msgid ""
+"or move your installation images (ISO) to the top of your partitions. Then "
+"click"
 msgstr ""
 
-#: Step1.class:150
-msgid "in partition"
+#: Step1.class:92
+msgid "No installable media found on your system."
 msgstr ""
 
-#: Step1.class:191
-msgid "Scanning for CD Media ... Please wait"
+#: Step1.class:93
+msgid ""
+"Insert installation CD or move Installable (iso) images to the top directory "
+"on your partitions and click"
 msgstr ""
 
-#: Step1.class:204
-msgid "Scanning"
+#: Step1.class:93
+msgid "to search for media again"
 msgstr ""
 
-#: Step1.class:214
-msgid "in"
+#: Step1.class:98 Step2.class:198 Step5.class:166
+msgid "Click"
 msgstr ""
 
-#: Step1.class:242
-msgid "Scanning system for installable ISO images"
+#: Step1.class:98
+msgid "to begin installing"
 msgstr ""
 
-#: Step1.class:335
-msgid "DISTRIBUTION"
-msgstr ""
-
-#: Step1.class:338
-msgid "VERSION"
-msgstr ""
-
-#: Step1.class:415
-msgid "This feature can help you avoid an unsuccesful installation."
-msgstr ""
-
-#: Step1.class:415 Step3a1.class:22 Step3a1a.class:169 Step7a.class:143
-msgid "WARNING:"
-msgstr ""
-
-#: Step1.class:415
-msgid "This process can take a long time to complete."
-msgstr ""
-
-#: Step1.class:468
-msgid "Select Installation Source"
-msgstr ""
-
-#: Step1.class:486
+#: Step1.class:101
 msgid "Select Installation source from the list below"
 msgstr ""
 
-#: Step1.class:507
+#: Step1.class:103
+msgid "to continue or click"
+msgstr ""
+
+#: Step1.class:103
+msgid "to search for installation media again"
+msgstr ""
+
+#: Step1.class:149
+msgid "Scanning system partitions for installation files"
+msgstr ""
+
+#: Step1.class:168
+msgid "Found"
+msgstr ""
+
+#: Step1.class:168
+msgid "in partition"
+msgstr ""
+
+#: Step1.class:209
+msgid "Scanning for CD Media ... Please wait"
+msgstr ""
+
+#: Step1.class:222
+msgid "Scanning"
+msgstr ""
+
+#: Step1.class:232
+msgid "in"
+msgstr ""
+
+#: Step1.class:260
+msgid "Scanning system for installable ISO images"
+msgstr ""
+
+#: Step1.class:353
+msgid "DISTRIBUTION"
+msgstr ""
+
+#: Step1.class:356
+msgid "VERSION"
+msgstr ""
+
+#: Step1.class:433
+msgid "This feature can help you avoid an unsuccesful installation."
+msgstr ""
+
+#: Step1.class:433 Step3a1.class:22 Step3a1a.class:169 Step7a.class:143
+msgid "WARNING:"
+msgstr ""
+
+#: Step1.class:433
+msgid "This process can take a long time to complete."
+msgstr ""
+
+#: Step1.class:443
+msgid "Searching your system for installable media"
+msgstr ""
+
+#: Step1.class:511
+msgid "Select Installation Source"
+msgstr ""
+
+#: Step1.class:550
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:537
+#: Step1.class:580
 msgid "Check Installation media before installing"
 msgstr ""
 
@@ -284,10 +330,6 @@ msgstr ""
 
 #: Step2.class:198
 msgid "Keep in mind however, that this process can take a while to complete."
-msgstr ""
-
-#: Step2.class:198 Step5.class:166
-msgid "Click"
 msgstr ""
 
 #: Step2.class:198
@@ -451,11 +493,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:441 Step7a.class:143
+#: Step3a1a.class:169 Step6.class:446 Step7a.class:143
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:441 Step7a.class:143
+#: Step3a1a.class:169 Step6.class:446 Step7a.class:143
 msgid "No"
 msgstr ""
 
@@ -651,31 +693,31 @@ msgstr ""
 msgid "File System"
 msgstr ""
 
-#: Step6.class:141
+#: Step6.class:146
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:162
+#: Step6.class:167 Step8.class:58
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:207
+#: Step6.class:212
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:207
+#: Step6.class:212
 msgid "as your"
 msgstr ""
 
-#: Step6.class:207
+#: Step6.class:212
 msgid "partition."
 msgstr ""
 
-#: Step6.class:207
+#: Step6.class:212
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:336
+#: Step6.class:341
 msgid "Select which partitions to use for installation"
 msgstr ""
 
@@ -683,27 +725,27 @@ msgstr ""
 msgid "Select Installation Mode"
 msgstr ""
 
-#: Step7.class:107
+#: Step7.class:108
 msgid "Full Install"
 msgstr ""
 
-#: Step7.class:117
+#: Step7.class:118
 msgid "Install everthing in the image (Fully Automated)"
 msgstr ""
 
-#: Step7.class:125
+#: Step7.class:126
 msgid "Customized"
 msgstr ""
 
-#: Step7.class:135
+#: Step7.class:136
 msgid "Select  the components you wish to install  (Advanced)"
 msgstr ""
 
-#: Step7.class:143
+#: Step7.class:144
 msgid "Minimal"
 msgstr ""
 
-#: Step7.class:153
+#: Step7.class:154
 msgid "Install the most minimal working confuguration (For older hardware)"
 msgstr ""
 
@@ -735,11 +777,11 @@ msgstr ""
 msgid "Are you sure you want to disable this conponent anyway?"
 msgstr ""
 
-#: Step7a.class:169 Step7b.class:180
+#: Step7a.class:169 Step7b.class:183
 msgid "Select All"
 msgstr ""
 
-#: Step7a.class:175 Step7b.class:178
+#: Step7a.class:175 Step7b.class:181
 msgid "Un-Select All"
 msgstr ""
 
@@ -757,13 +799,29 @@ msgstr ""
 msgid "Reading software catalog... Please wait a moment"
 msgstr ""
 
-#: Step7b.class:104
+#: Step7b.class:107
 msgid ""
 "Additional optional software available. Select which software packages to "
 "include in your installation."
 msgstr ""
 
-#: Step8.class:84
+#: Step8.class:59
+msgid "Not Formatted"
+msgstr ""
+
+#: Step8.class:59
+msgid "Mount to"
+msgstr ""
+
+#: Step8.class:61
+msgid "Format to"
+msgstr ""
+
+#: Step8.class:61
+msgid "and mount to"
+msgstr ""
+
+#: Step8.class:135
 msgid ""
 "Your VectorLinux installation is about to be performed as follows. If you "
 "need to make any changes, this is your last chance."

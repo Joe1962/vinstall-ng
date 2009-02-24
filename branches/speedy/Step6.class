@@ -46,7 +46,7 @@ PUBLIC SUB OnExit()
       
     NEXT 
     ME.read_partition_selection
-    Message(ClsGlobal.sVitalPartList)
+    'Message(ClsGlobal.sVitalPartList)
    ' sList = Trim(Left(sList, Len(sList) - 1))
   'ClsGlobal.sVitalPartList = Trim(sList)
   'Message(ClsGlobal.sVitalPartList)
@@ -83,6 +83,9 @@ PUBLIC SUB PREPARE_PARTITION_LISTING()
     gvPartListing[0, 4].BackColor = Color.LightBackground
     gvPartListing.Columns[4].Width = 150
     gvPartListing[0, 4].Font.Bold = TRUE
+    gvPartListing[0, 5].BackColor = Color.LightBackground
+    gvPartListing.Columns[5].Width = 1
+    gvPartListing[0, 6].BackColor = Color.LightBackground
     'gvPartListing[0, 5].BackColor = Color.LightBackground
     'gvPartListing[0, 5].Font.Bold = TRUE 
     'gvPartListing[0, 5]
@@ -124,6 +127,8 @@ PUBLIC SUB LIST_PARTITIONS()
                 gvPartListing[irow, 2].BackColor = Color.LightGray
                 gvPartListing[irow, 3].BackColor = Color.LightGray
                 gvPartListing[irow, 4].BackColor = Color.LightGray
+                gvPartListing[irow, 5].BackColor = Color.LightGray
+                gvPartListing[irow, 6].BackColor = Color.LightGray
                 
               ELSE 
                 gvPartListing[irow, 5].Text = Trim(SFS)

@@ -44,6 +44,8 @@ PUBLIC SUB OnExit()
   ' Store this information to make it available to the whole installer program
   ClsGlobal.sSourceName = Trim(sname)
   ClsGlobal.sSourceAddr = Trim(sadd)
+  ClsGlobal.sDistroName = gvdistdetails[0, 1].Text
+  ClsGlobal.sDistroVer = gvdistdetails[1, 1].Text
   
     PRINT " --- Use " & ClsGlobal.sSourceName & Space(1) & "from " & ClsGlobal.sSourceAddr & " for installation source"
   TRY MKDIR "/mnt/source"
@@ -84,6 +86,22 @@ PUBLIC SUB Form_Open()
   ME.mvLooking.Playing = FALSE
   ME.mvLooking.Visible = FALSE
 
+  IF ComboBox1.Count = 0 THEN 
+    Message.Error(("No installable media was found on your system. Please insert an installation CD") & gb.NewLine & 
+    ("or move your installation images (ISO) to the top of your partitions. Then click") & Space(1) & "\"" & btrescan.text & "\"")
+    ME.TextLabel2.Text = ("No installable media found on your system.")
+    ME.tlNext.Text = "<i>" & ("Insert installation CD or move Installable (iso) images to the top directory on your partitions and click") & Space(1) & "\"" & ME.btrescan.text & "\"" & ("to search for media again") & "</i>"
+    ME.gvDistDetails.Visible = FALSE
+    ClsGlobal.fRunningMainForm.btNext.enabled = FALSE
+  ELSE IF ComboBox1.Count = 1 THEN 
+    ME.TextLabel2.Text = ("Click") & Space(1) & "\"" & ClsGlobal.fRunningMainForm.btNext.text & "\"" & Space(1) & ("to begin installing") & Space(1)&
+    gvdistdetails[0, 1].Text & Space(1) & gvdistdetails[1, 1].Text
+    ME.tlNext.Text = ""
+  ELSE 
+    ME.TextLabel2.Text = ("Select Installation source from the list below")
+    ME.tlNext.Text = ("Click") & Space(1) & "\"" & ClsGlobal.fRunningMainForm.btNext.text & "\"" & Space(1)&
+    ("to continue or click") & Space(1) & "\"" & ME.btRescan.Text & "\"" & Space(1) & ("to search for installation media again")
+  END IF
 
 END
 
@@ -420,6 +438,10 @@ PUBLIC SUB bCheckMedia_Click()
 END
 
 PUBLIC SUB btRescan_Click()
+
+
+  ME.TextLabel2.Text = ("Searching your system for installable media")
+  ME.tlNext.Visible = FALSE
   ME.mvLooking.Visible = TRUE
   ME.ComboBox1.Clear()
   ME.FIND_CD_INSTALL_MEDIA()
@@ -429,5 +451,25 @@ PUBLIC SUB btRescan_Click()
   ME.mvLooking.Visible = FALSE
   FMain.btNext.Enabled = ComboBox1.Count > 0
   
+  IF ComboBox1.Count = 0 THEN 
+    Message.Error(("No installable media was found on your system. Please insert an installation CD") & gb.NewLine & 
+    ("or move your installation images (ISO) to the top of your partitions. Then click") & Space(1) & "\"" & btrescan.text & "\"")
+    ME.TextLabel2.Text = ("No installable media found on your system.")
+    ME.tlNext.Text = "<i>" & ("Insert installation CD or move Installable (iso) images to the top directory on your partitions and click") & Space(1) & "\"" & ME.btrescan.text & "\"" & ("to search for media again") & "</i>"
+    ME.gvDistDetails.Visible = FALSE
+    ClsGlobal.fRunningMainForm.btNext.enabled = FALSE
+  ELSE IF ComboBox1.Count = 1 THEN 
+    ME.TextLabel2.Text = ("Click") & Space(1) & "\"" & ClsGlobal.fRunningMainForm.btNext.text & "\"" & Space(1) & ("to begin installing") & Space(1)&
+    gvdistdetails[0, 1].Text & Space(1) & gvdistdetails[1, 1].Text
+    ME.gvDistDetails.Visible = TRUE
+    ME.tlNext.Text = ""
+  ELSE 
+    ME.TextLabel2.Text = ("Select Installation source from the list below")
+    ME.tlNext.Text = ("Click") & Space(1) & "\"" & ClsGlobal.fRunningMainForm.btNext.text & "\"" & Space(1)&
+    ("to continue or click") & Space(1) & "\"" & ME.btRescan.Text & "\"" & Space(1) & ("to search for installation media again")
+    ME.gvDistDetails.Visible = TRUE
+  END IF
+  
+  ME.tlNext.Visible = TRUE  
 
 END

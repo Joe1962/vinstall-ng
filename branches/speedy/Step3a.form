@@ -68,7 +68,7 @@
       Expand = True
     }
     { rbEntireDisk RadioButton
-      MoveScaled(2,17,34,3)
+      MoveScaled(2,18,34,3)
       Expand = True
       Text = ("Use entire disk")
     }
