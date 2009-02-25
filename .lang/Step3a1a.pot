@@ -46,47 +46,47 @@ msgstr ""
 msgid "Create New"
 msgstr ""
 
-#: Step3a1a.class:148
+#: Step3a1a.class:160
 msgid "Failed to format partitions, please try another partitioning method"
 msgstr ""
 
-#: Step3a1a.class:160
+#: Step3a1a.class:177
 msgid "Partitioning stage complete. Click"
 msgstr ""
 
-#: Step3a1a.class:160
+#: Step3a1a.class:177
 msgid "to continue"
 msgstr ""
 
-#: Step3a1a.class:169
+#: Step3a1a.class:186
 msgid "WARNING:"
 msgstr ""
 
-#: Step3a1a.class:169
+#: Step3a1a.class:186
 msgid "All existing data in"
 msgstr ""
 
-#: Step3a1a.class:169
+#: Step3a1a.class:186
 msgid "is about to be deleted."
 msgstr ""
 
-#: Step3a1a.class:169
+#: Step3a1a.class:186
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:169
+#: Step3a1a.class:186
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:169
+#: Step3a1a.class:186
 msgid "No"
 msgstr ""
 
-#: Step3a1a.class:173
+#: Step3a1a.class:190
 msgid "Preparing hard disk for new partitioning structure. Please wait"
 msgstr ""
 
-#: Step3a1a.class:193
+#: Step3a1a.class:210
 msgid "Operation cancelled by user. No changes have been made to the system"
 msgstr ""
 

@@ -25,9 +25,9 @@ PUBLIC SUB Form_Open()
   ME.tlbanner.Text = "<h2>" & ("Install VectorLinux to free space on disk") & "</H2>"
   ME.MovieBox1.Path = "images/throbber.gif"
   ME.MovieBox1.Playing = FALSE
-  objTargetOptions = NEW Object[]
+  'objTargetOptions = NEW Object[]
   
-  ME.LIST_FREE_SPACE()
+  'ME.LIST_FREE_SPACE()
 
 END
 
@@ -183,6 +183,7 @@ PUBLIC SUB PERFORM_PARTITIONING()
   DIM sOutLine, sDumparr AS String[]
   DIM lFreeKB, lFreeStart, lFreeEnd AS Long
   DIM sRootPart, sSwapPart AS String
+  DIM sPart, sNum AS String
   
       
     ME.HPanel3.Visible = FALSE
@@ -232,12 +233,22 @@ PUBLIC SUB PERFORM_PARTITIONING()
             
               SHELL "parted " & Trim(sDrive) & " -s \"mkpart primary reiserfs 0kb -" & lNeededSwap & "kb\"" WAIT ' partition 1
               'WAIT 1
-              SHELL "parted " & Trim(sDrive) & " -s \"mkpart primary linux-swap -" & lNeededSwap & "kb -1kb\"" WAIT ' partition 2
-              SHELL "mkswap " & Trim(sDrive) & (iLastPartNo + 2) WAIT ' make the swap partition
-              EXEC ["swapon", Trim(sDrive) & (iLastPartNo + 2)] WAIT 
-                
+          SHELL "probepart | grep -i \"linux swap\"| cut -f 1 -d \' \'" TO sDump
+                      sDump = Trim(sDump)   ' this is possibly an array
+                        IF sDump THEN 
+                          sDumparr = Split(sDump, "\n")
+                          PRINT " ---+ Use existing swap partition -> " & sDumparr[0]
+                          sSwapPart = Trim(sDumparr[0])
+                        
+                            
+                        ELSE 
+                            SHELL "parted " & Trim(sDrive) & " -s \"mkpart primary linux-swap -" & lNeededSwap & "kb -1kb\"" WAIT ' partition 2
+                            SHELL "mkswap " & Trim(sDrive) & (iLastPartNo + 2) WAIT ' make the swap partition
+                            EXEC ["swapon", Trim(sDrive) & (iLastPartNo + 2)] WAIT 
+                              sSwapPart = Trim(sdrive) & (iLastPartNo + 2)      
+                        END IF
           sRootPart = Trim(sdrive) & (iLastPartNo + 1)
-          sSwapPart = Trim(sdrive) & (iLastPartNo + 2)
+          
                 ' Ready to start setting defined target partitions.
                 '###################################################################################################################
               
@@ -262,13 +273,26 @@ PUBLIC SUB PERFORM_PARTITIONING()
                           SHELL "parted " & Trim(sDrive) & " -s \"mkpart primary reiserfs " & lFreeStart & "kb " & (lFreeEnd - lNeededSwap) & "kb\"" WAIT 'iLastpart + 1 partition
                           EXEC ["mkfs.reiserfs", "-fq", sDrive & (iLastPartNo + 1)] WAIT 
                             PRINT " --- Created / partition preformatted to reiserfs " & Trim(sdrive) & (iLastPartNo + 1)
+                       
+                       SHELL "probepart | grep -i \"linux swap\"| cut -f 1 -d \' \'" TO sDump
+                      sDump = Trim(sDump)   ' this is possibly an array
+                        IF sDump THEN 
+                          sDumparr = Split(sDump, "\n")
+                          PRINT " ---+ Use existing swap partition -> " & sDumparr[0]
+                          sSwapPart = Trim(sDumparr[0])
+                        
+                            
+                        ELSE 
+                       
+                       
                           SHELL "parted " & Trim(sdrive) & " -s \"mkpart primary linux-swap " & (lFreeEnd - lNeededSwap) & "kb " & lFreeEnd & "kb\"" WAIT ' ilastpart + 2 partitiong
                             PRINT " --- Created swap partition " & Trim(sdrive) & (iLastPartNo + 2)
                           SHELL "mkswap " & Trim(sdrive) & (iLastPartNo + 2) WAIT 
                           SHELL "swapon " & Trim(sdrive) & (iLastPartNo + 2) WAIT 
-                          
-                          sRootPart = Trim(sdrive) & (iLastPartNo + 1)
                           sSwapPart = Trim(sdrive) & (iLastPartNo + 2)
+                        END IF
+                          sRootPart = Trim(sdrive) & (iLastPartNo + 1)
+                          
                           
                  ELSE ' this method skips one number I think 
                       ' BEGIN BY CREATING AN EXTENDED PARTITION TO HOLD LOGICAL PARTITIONS IN IT
@@ -291,7 +315,18 @@ PUBLIC SUB PERFORM_PARTITIONING()
                           SHELL "parted " & Trim(sDrive) & " -s \"mkpart logical reiserfs " & lFreeStart & "kb " & (lFreeEnd - lNeededSwap) & "kb\"" WAIT 
                           'SHELL "echo yes | parted " & Trim(sdrive) & " mkfs reiserfs " & (iLastPartNo + 2) WAIT 
                           SHELL "mkfs.reiserfs -fq " & sDrive & (iLastPartNo + 2) WAIT 
-                          
+                        
+                        ' search for existing swap partitions
+                      SHELL "probepart | grep -i \"linux swap\"| cut -f 1 -d \' \'" TO sDump
+                      sDump = Trim(sDump)   ' this is possibly an array
+                        IF sDump THEN 
+                          sDumparr = Split(sDump, "\n")
+                          PRINT " ---+ Use existing swap partition -> " & sDumparr[0]
+                          sSwapPart = Trim(sDumparr[0])
+                        
+                            
+                        ELSE 
+                                                  
                           ' ####################### RECALCULATE FREE SPACE ########################################
                             SHELL "parted " & Trim(sDrive) & " unit gb print free | grep -i \"free space\" | tr -s \' \',\"\" | cut -f 2-4 -d \' \'" TO sPartedRes
                                           'Message(sPartedRes)
@@ -312,8 +347,10 @@ PUBLIC SUB PERFORM_PARTITIONING()
                             ' ' ' ' ' "EOF"
                             ' ' ' ' ' File.Save("/tmp/swapmaker", sDump)
                             ' ' ' ' ' SHELL "sh /tmp/swapmaker" WAIT 
+                            sSwapPart = Trim(sdrive) & (iLastPartNo + 3)
+                        END IF
                           sRootPart = Trim(sdrive) & (iLastPartNo + 2)
-                          sRootPart = Trim(sdrive) & (iLastPartNo + 3)
+                          
                       END IF
                     
           END IF
@@ -324,8 +361,22 @@ PUBLIC SUB PERFORM_PARTITIONING()
      
      ' set the flag for partition reading
      ClsGlobal.bAutoPartition = TRUE
-     ClsGlobal.sTargetRoot = sRootPart
-     ClsGlobal.sTargetSwap = sSwapPart
+     
+     sPart = Left(sRootPart, Len("/dev/hda"))
+     sNum = Right(sRootPart, Len(sRootPart) - Len(sPart))
+         
+      ' get the size of the / partition that was just created.
+      SHELL "parted " & sPart & " unit GB print | grep \"^ " & sNum & "\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump      
+      
+      sDump = Trim(sDump)      
+      ClsGlobal.sTargetRoot = sRootPart & "-" & Trim(sDump)
+     
+     ' get the size of the swap partition that was just created.
+        sPart = Left(sSwapPart, Len("/dev/hda"))
+        sNum = Right(sSwapPart, Len(sSwapPart) - Len(sPart))
+      SHELL "parted " & sPart & " unit GB print | grep \"^ " & sNum & "\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump        
+        sDump = Trim(sDump)
+     ClsGlobal.sTargetSwap = sSwapPart & "-" & Trim(sDump)
       
       
      
@@ -336,13 +387,17 @@ END
 
 PUBLIC FUNCTION GETNEXT() AS String
   
-  
+  RETURN "Step7"
   
 END
 PUBLIC SUB STARTUP()
   
-  'ME.LIST_FREE_SPACE()
+
   DIM i AS Integer
+  
+      objTargetOptions = NEW Object[]
+  ME.LIST_FREE_SPACE()
+  
     FOR EACH RadioButton1 IN objTargetOptions
       IF RadioButton1.Enabled = TRUE THEN INC i
     NEXT 
@@ -362,6 +417,7 @@ END
 PUBLIC SUB ONEXIT()
   
   ' CREATE THE PARTITIONS NOW
+  ME.PERFORM_PARTITIONING()
   
 END
 
@@ -374,6 +430,6 @@ END
 
 PUBLIC SUB Form_Menu()
 
-  ME.PERFORM_PARTITIONING()
+  'ME.PERFORM_PARTITIONING()
 
 END

@@ -87,7 +87,13 @@ PUBLIC SUB CREATE_NEW_PARTITIONS()
                       sResults = Split(sSwapList, "\n")
                       sSwapPart = sResults[0]
                 PRINT " --- Use existing swap partition " & sSwapPart
-            ClsGlobal.sTargetSwap = sSwapPart  ' set the address to the swap partition.
+                
+                ' detect size of swap partition
+                SHELL "parted " & Left(sSwapPart, Len("/dev/hda")) & " unit GB print | grep \"^ " & Right(sSwapPart, Len(sSwapPart) - Len("/dev/hda")) & "\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump
+                'Message("Size dump for swap " & sDump)
+                'SHELL "echo \"" & Trim(sDump) & "\" cut -f 3 -d \' \'" TO sDump
+                
+            ClsGlobal.sTargetSwap = Trim(sSwapPart & "-" & Trim(sDump)) ' set the address to the swap partition.
                       'Message("Using swap " & sSwapPart)
               END SELECT 
           ELSE ' no swap found
@@ -132,8 +138,14 @@ PUBLIC SUB CREATE_NEW_PARTITIONS()
           PRINT " --- Creating swap partition at " & sDrive & "2 ... Size = " & lNeededSwap & " Kb"
         SHELL "parted " & sDrive & " mkpartfs primary linux-swap " & Trim(sPartedDetails[0]) & " " & Trim(sPartedDetails[2]) & " 1 > /dev/null " WAIT 
         
-        ClsGlobal.sTargetRoot = sDrive & "1"
-        ClsGlobal.sTargetSwap = sDrive & "2"
+        ' get partition sizes now
+          SHELL "parted " & sDrive & " unit GB print | grep \"^ 1\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump
+          'SHELL "parted " & Left(sSwapPart, Len("/dev/hda")) & " unit GB print | grep \"^ " & Right(sSwapPart, Len(sSwapPart) - Len("/dev/hda")) & "\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump
+'          SHELL "echo \"" & Trim(sDump) & " cut -f 3 -d \' \'" TO sDump
+             ClsGlobal.sTargetRoot = Trim(sDrive & "1" & "-" & Trim(sDump))
+          SHELL "parted " & sDrive & " unit GB print | grep \"^ 2\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump
+          'SHELL "echo \"" & Trim(sDump) & " cut -f 3 -d \' \'" TO sDump
+            ClsGlobal.sTargetSwap = Trim(sDrive & "2" & "-" & Trim(sDump))
           
         
       ELSE 
@@ -148,8 +160,13 @@ PUBLIC SUB CREATE_NEW_PARTITIONS()
               sStatus = ("Failed to format partitions, please try another partitioning method")
               RETURN 
             END IF
+          
+          SHELL "parted " & sDrive & " unit GB print | grep \"^ 1\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump
+          'SHELL "echo \"" & Trim(sDump) & " cut -f 3 -d \' \'" TO sDump
+            ClsGlobal.sTargetRoot = Trim(sDrive & "1" & "-" & Trim(sDump))
             
-          ClsGlobal.sTargetRoot = sDrive & "1"
+          '
+          'ClsGlobal.sTargetRoot = sDrive & "1"
           'SHELL "mkfs.reiserfs -q " & sDrive & "1" WAIT 
           'Message(sPartedDetails[0])
           'Message(sPartedDetails[1])

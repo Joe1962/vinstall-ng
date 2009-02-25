@@ -42,10 +42,11 @@ PUBLIC SUB SUMMARIZE_DISTRO_INFO()
   
   WITH ME.TreeView1
     .Add("DistroInfo", ("Distribution"), MdlStartUp.pCategory)
-    .Add("Distro0", ("Name"), PicInfo, "DistroInfo")
-    .Add("Distro00", Trim(ClsGlobal.sDistroName),, "Distro0")
-    .Add("Distro1", ("Version"), PicInfo, "DistroInfo")
-    .Add("Distro10", Trim(ClsGlobal.sDistroVer),, "Distro1")
+    .Add("Distro0", ClsGlobal.sDistroName & Space(1) & ClsGlobal.sDistroVer, PicInfo, "DistroInfo")
+    '.Add("Distro0", ("Name"), PicInfo, "DistroInfo")
+    '.Add("Distro00", Trim(ClsGlobal.sDistroName),, "Distro0")
+    '.Add("Distro1", ("Version"), PicInfo, "DistroInfo")
+    '.'Add("Distro10", Trim(ClsGlobal.sDistroVer),, "Distro1")
   END WITH 
   
 END
@@ -59,6 +60,7 @@ PUBLIC SUB SUMMARIZE_PARTITION_SELECTION()
   
   WITH ME.TreeView1
     .Add("Part", ("Partitions to be used"), MdlStartUp.pCategory)
+    IF ClsGlobal.bAutoPartition = FALSE THEN 
       sArr = Split(ClsGlobal.sVitalPartList, ",")
         FOR i = 0 TO sArr.Max
           sList = Trim(sArr[i])
@@ -93,7 +95,14 @@ PUBLIC SUB SUMMARIZE_PARTITION_SELECTION()
                 .Add("Swaps" & i, Left(sSwap, InStr(sSwap, "-") - 1) & Space(1) & " -- " & Right(sSwap, Len(sSwap) - InStr(sSwap, "-")), PicDisk, "Swaps")
               END IF
           NEXT 
-          
+    ELSE  ' AUTOMATIC PARTITIONING SELECTED
+      'Message("Automatic partition selection")
+      .Add("Part1", Replace(ClsGlobal.sTargetRoot, "-", " -- "), PicDisk, "Part")
+      .Add("Part1.1", ("Pre-formatted to reiserfs, and used for /"), PicTask, "Part1")
+      .Add("Swaps", ("Swap Space"),, "Part")
+      .Add("Swaps1", Replace(ClsGlobal.sTargetSwap, "-", " -- "), PicDisk, "Swaps")
+      '.Add("Swaps1.1",
+    END IF
   END WITH 
   
 END
@@ -152,11 +161,25 @@ PUBLIC SUB OnExit()
   
   
 END
+
+PUBLIC SUB Expand_Tree()
+  
+  ME.TreeView1["DistroInfo"].Expanded = TRUE
+  ME.TreeView1["Part"].Expanded = TRUE
+  ME.TreeView1["Install Type"].Expanded = TRUE
+    IF ME.TreeView1.Exist("Software") THEN 
+    ME.TreeView1["Software"].Expanded = TRUE
+  END IF
+  
+END
+
+
 PUBLIC SUB StartUp()
   ME.TreeView1.Clear()
   ME.SUMMARIZE_DISTRO_INFO()
   ME.SUMMARIZE_PARTITION_SELECTION()
   ME.SUMMARIZE_INSTALL_TYPE()
+  ME.Expand_Tree()
   
 END
 

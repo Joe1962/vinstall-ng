@@ -29,6 +29,9 @@ END
 
 PUBLIC SUB StartUp()
   ME.Resize(ClsGlobal.fRunningMainForm.Pnlstack.Width, ClsGlobal.fRunningMainForm.PnlStack.Height)
+  ME.tlEmbDone.Visible = FALSE
+  ME.tlEmbDone.Parent.Visible = FALSE
+  ME.Embedder1.Visible = TRUE
   ME.EMBED_GPARTED()
   
 END
@@ -62,6 +65,14 @@ PUBLIC SUB EMBED_GPARTED()
      
     IF Exist("/usr/sbin/gparted") = FALSE THEN 
       Message.Error(("Gparted was not found on this system. Please install gparted and try again"))
+      ME.tlEmbDone.Text = "<b>" & ("Unable to launch partitioning tool.") & "</b>" & "<br><br>" &
+      ("The gparted program was not found on this system. Please install gparted or choose another partitioning method.")
+      ClsGlobal.fRunningMainForm.btnext.Enabled = FALSE
+      Embedder1.Visible = FALSE
+      tlEmbDone.Parent.Visible = TRUE
+      tlEmbDone.Visible = TRUE
+      
+      
       RETURN 
     END IF
   
