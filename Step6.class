@@ -286,11 +286,21 @@ END
 
 
 PUBLIC SUB read_partition_selection()
-  
+
+
   DIM cbox, cb AS ComboBox
-  DIM sFormat AS String
+  DIM sFormat, sSize AS String
+  DIM i AS Integer
     FOR EACH cbox IN objMntPoints
       IF cbox.Text <> ("Not Used") THEN 
+        i = 2
+        REPEAT 
+          IF Trim(gvPartListing[i, 0].Text) = Trim(cbox.Tag) THEN 
+            sSize = Trim(gvPartListing[i, 1].Text)
+          END IF
+          INC i
+        UNTIL sSize OR i = gvPartListing.Rows.Count
+        
         FOR EACH cb IN objFS
           IF cbox.tag = cb.Tag THEN 
             sFormat = Trim(cb.Text)
@@ -299,38 +309,16 @@ PUBLIC SUB read_partition_selection()
             sFormat = ""
           END IF
         NEXT 
-        ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & cbox.Tag & "-" & cbox.Text & "-" & sFormat & ","
-        
-      ' SELECT CASE cbox.Text
-      '     CASE "/"
-      '       ClsGlobal.sRoot = cbox.Tag
-      '       ClsGlobal.froot = sFormat
-      '     CASE "/home"
-      '       ClsGlobal.shome = cbox.Tag      
-      '       ClsGlobal.fhome = sFormat
-      '     CASE "/usr"
-      '       ClsGlobal.susr = cbox.Tag
-      '       ClsGlobal.fusr = sFormat
-      '     CASE "/opt"
-      '       ClsGlobal.sopt = cbox.Tag
-      '       ClsGlobal.fopt = sFormat
-      '     CASE "/var"
-      '       ClsGlobal.svar = cbox.Tag
-      '       ClsGlobal.fvar = sFormat
-      '     CASE "/tmp"
-      '       ClsGlobal.stmp = cbox.Tag
-      '       ClsGlobal.ftmp = sFormat
-      '     CASE "/boot"
-      '       ClsGlobal.sboot = cbox.Tag
-      '       ClsGlobal.fboot = sFormat
-      '     CASE ELSE 
-      '       ClsGlobal.sMiscMountList = ClsGlobal.sMiscMountList & cbox.Tag & "," & Trim(cbox.Text) & ";"
-      ' END SELECT 
+        ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & cbox.Tag & "-" & sSize & "-" & cbox.Text & "-" & sFormat & ","
     END IF
     NEXT 
       
-          
-      
+FOR i = 2 TO gvPartListing.Rows.count - 1
+        IF gvPartListing[i, 4].Text LIKE "linux-swap" THEN 
+          ClsGlobal.sWapPartList = ClsGlobal.sWapPartList & gvPartListing[i, 0].Text & "-" & gvPartListing[i, 1].Text & ","
+        END IF
+      NEXT   
+
   
 END
 

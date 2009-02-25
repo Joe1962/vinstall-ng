@@ -14,9 +14,20 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
+PRIVATE PicInfo AS Picture
+PRIVATE PicTask AS Picture
+PRIVATE PicDisk AS Picture
+PRIVATE PicPackage AS Picture
+PRIVATE PicTlz AS Picture
+
 PUBLIC SUB Form_Open()
 
   ME.tlbanner.Text = "<h2>" & tlbanner.text & "</h2>"
+  PicInfo = Picture.load("images/info.png")
+  PicTask = Picture.load("images/task-due.png")
+  PicDisk = Picture.load("images/hdd.png")
+  PicPackage = Picture.Load("images/package.png")
+  PicTlz = Picture.Load("images/tlz.png")
   'ME.SUMMARIZE_DISTRO_INFO()
   'ME.SUMMARIZE_PARTITION_SELECTION()
 
@@ -30,10 +41,10 @@ END
 PUBLIC SUB SUMMARIZE_DISTRO_INFO()
   
   WITH ME.TreeView1
-    .Add("DistroInfo", "Distribution", MdlStartUp.pCategory)
-    .Add("Distro0", "Name",, "DistroInfo")
+    .Add("DistroInfo", ("Distribution"), MdlStartUp.pCategory)
+    .Add("Distro0", ("Name"), PicInfo, "DistroInfo")
     .Add("Distro00", Trim(ClsGlobal.sDistroName),, "Distro0")
-    .Add("Distro1", "Version",, "DistroInfo")
+    .Add("Distro1", ("Version"), PicInfo, "DistroInfo")
     .Add("Distro10", Trim(ClsGlobal.sDistroVer),, "Distro1")
   END WITH 
   
@@ -42,33 +53,95 @@ END
 PUBLIC SUB SUMMARIZE_PARTITION_SELECTION()
   DIM i AS Integer
   DIM sList AS String
-  DIM sArr, sEntry AS String[]
-  DIM sPart, sMntPnt, sFs AS String
+  DIM sArr, sEntry, sSwaps AS String[]
+  DIM sPart, sMntPnt, sFs, sSwap, sSize AS String
+  
   
   WITH ME.TreeView1
-    .Add("Part", "Partitions to be used", MdlStartUp.pCategory)
+    .Add("Part", ("Partitions to be used"), MdlStartUp.pCategory)
       sArr = Split(ClsGlobal.sVitalPartList, ",")
         FOR i = 0 TO sArr.Max
           sList = Trim(sArr[i])
         IF sList THEN 
             sEntry = Split(sList, "-")
             sPart = Trim(sEntry[0])
-            sMntPnt = Trim(sEntry[1])
-            sFs = Trim(sEntry[2])
+            sSize = Trim(sEntry[1])
+            sMntPnt = Trim(sEntry[2])
+            sFs = Trim(sEntry[3])
               IF sfs LIKE ("Do not format") THEN 
                 sFs = "(" & ("Not Formatted") & ")" & "," & Space(1) & ("Mount to") & Space(1)
               ELSE 
                 sfs = ("Format to") & Space(1) & sFs & Space(1) & ("and mount to") & Space(1)
               END IF
-          .Add("Part." & i, sPart,, "Part")
-          .add("Part." & i & "." & i, sFs & sMntPnt,, "Part." & i)
+          .Add("Part." & i, sPart & " -- " & sSize, PicDisk, "Part")
+          .add("Part." & i & "." & i, sFs & sMntPnt, PicTask, "Part." & i)
           '.Add("Part." & i & "." & i, sMntPnt,, "Part." & i)
           '.Add("Part." & i & "." & i & "." & i, sFs,, "Part." & i & "." & i)
         END IF
         NEXT 
         
+        ' summarize swap partitions
+        sSwaps = Split(Trim(ClsGlobal.sWapPartList), ",")
+          IF sSwaps THEN 
+            .Add("Swaps", ("Swap Space"),, "Part")
+          END IF
+          FOR i = 0 TO sSwaps.Max
+            sSwap = Trim(sSwaps[i])
+              IF sSwap THEN 
+                'sSwap = Left(sSwap, InStr(sSwap,"-"))
+                
+                .Add("Swaps" & i, Left(sSwap, InStr(sSwap, "-") - 1) & Space(1) & " -- " & Right(sSwap, Len(sSwap) - InStr(sSwap, "-")), PicDisk, "Swaps")
+              END IF
+          NEXT 
           
   END WITH 
+  
+END
+
+PUBLIC SUB SUMMARIZE_INSTALL_TYPE()
+  
+  DIM sInsType, sList, sPkg, sBulkList, sBulk AS String
+  DIM sBulks, sPkgs AS String[]
+  DIM i AS Integer
+  
+  SELECT CASE ClsGlobal.iInstallMethod
+    CASE 0
+      sInsType = ("Full")
+    CASE 1
+      sInsType = ("Customized")
+    CASE 2
+      sInsType = ("Minimal")
+  END SELECT 
+  
+  ME.TreeView1.Add("Install Type", ("Installation Method"), MdlStartUp.pCategory)
+  ME.TreeView1.Add("Install Type.1", sInsType, PicInfo, "Install Type")
+  
+  ' if installation is customized... provide details
+  IF ClsGlobal.iInstallMethod = 1 THEN 
+    ME.TreeView1.Add("Software", ("Software Selection"), MdlStartUp.pCategory)
+    ME.TreeView1.Add("Bulks", ("Major Components"),, "Software")
+    
+      sBulkList = ClsGlobal.sBulkListToInstall
+      sBulks = Split(sBulkList, ",")
+        FOR i = 0 TO sBulks.Max
+          sBulk = Trim(sBulks[i])
+          IF sBulk THEN 
+            ME.TreeView1.Add(sBulk, sBulk, PicTlz, "Bulks")
+          END IF
+        NEXT 
+    ME.TreeView1.Add("Pkgs", ("Additional Software"),, "Software")
+    
+      sList = ClsGlobal.sPkgListToInstall
+      sPkgs = Split(sList, ",")
+        FOR i = 0 TO sPkgs.Max
+          sPkg = Trim(sPkgs[i])
+            IF sPkg THEN 
+              ME.TreeView1.Add(sPkg, sPkg, PicPackage, "Pkgs")
+            END IF
+        NEXT 
+        
+  END IF
+    
   
 END
 
@@ -83,6 +156,7 @@ PUBLIC SUB StartUp()
   ME.TreeView1.Clear()
   ME.SUMMARIZE_DISTRO_INFO()
   ME.SUMMARIZE_PARTITION_SELECTION()
+  ME.SUMMARIZE_INSTALL_TYPE()
   
 END
 

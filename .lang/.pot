@@ -10,23 +10,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .project:1
-msgid "VectorLinux Installer"
-msgstr ""
-
-#: FMain.class:245 FMain0.class:246 FMain0Old.class:233
+#: FMain0Old.class:233 FMain0.class:246 FMain.class:245
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:287 FMain0.class:288 FMain0Old.class:271
+#: FMain0Old.class:271 FMain0.class:288 FMain.class:287
 msgid "Back"
 msgstr ""
 
-#: FMain.class:298 FMain0.class:299 FMain0Old.class:282
+#: FMain0Old.class:282 FMain0.class:299 FMain.class:298
 msgid "Next"
 msgstr ""
 
-#: FMain.class:309 FMain0.class:310 FMain0Old.class:293
+#: FMain0Old.class:293 FMain0.class:310 FMain.class:309
 msgid "Quit"
 msgstr ""
 
@@ -54,7 +50,7 @@ msgstr ""
 msgid "Disk Partitioning"
 msgstr ""
 
-#: MdlStartUp.module:47
+#: MdlStartUp.module:47 Step8.class:121
 msgid "Software Selection"
 msgstr ""
 
@@ -62,7 +58,7 @@ msgstr ""
 msgid "Installation"
 msgstr ""
 
-#: MdlStartUp.module:49 Step8.class:116
+#: MdlStartUp.module:49 Step8.class:190
 msgid "Installation Summary"
 msgstr ""
 
@@ -96,6 +92,10 @@ msgstr ""
 
 #: MdlStartUp.module:57
 msgid "Final Configuration"
+msgstr ""
+
+#: .project:1
+msgid "VectorLinux Installer"
 msgstr ""
 
 #: Step0.class:20
@@ -216,7 +216,7 @@ msgstr ""
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:433 Step3a1.class:22 Step3a1a.class:169 Step7a.class:143
+#: Step1.class:433 Step3a1a.class:169 Step3a1.class:22 Step7a.class:143
 msgid "WARNING:"
 msgstr ""
 
@@ -340,99 +340,6 @@ msgstr ""
 msgid "Stop"
 msgstr ""
 
-#: Step3.class:28
-msgid "Disc Partitioning Options"
-msgstr ""
-
-#: Step3.class:31
-msgid "Select the partitioning method you would like to use"
-msgstr ""
-
-#: Step3.class:153
-msgid "Automatic"
-msgstr ""
-
-#: Step3.class:163
-msgid ""
-"Automatically resize your partitions and / or create the correct disk space "
-"for VectorLinux."
-msgstr ""
-
-#: Step3.class:170
-msgid "Manually resize my partitions "
-msgstr ""
-
-#: Step3.class:180
-msgid "Use the partitioning tool to prepare your system partitions."
-msgstr ""
-
-#: Step3.class:187
-msgid "My hard drive is already partitioned"
-msgstr ""
-
-#: Step3.class:197
-msgid "Install VectorLinux to existing partitions on my hard drive"
-msgstr ""
-
-#: Step3a.class:19
-msgid "Automatic Partitioning Options"
-msgstr ""
-
-#: Step3a.class:20
-msgid "Select one of the following options"
-msgstr ""
-
-#: Step3a.class:22
-msgid "Allow VectorLinux to use an entire hard disk in your system."
-msgstr ""
-
-#: Step3a.class:22
-msgid "This option will wipe out any data on the disk you select."
-msgstr ""
-
-#: Step3a.class:24
-msgid ""
-"Locate free (unpartitioned) space on hard disk and install VectorLinux there."
-msgstr ""
-
-#: Step3a.class:24
-msgid "This option will not harm any data on your hard drive"
-msgstr ""
-
-#: Step3a.class:26
-msgid ""
-"Resize your existing partitions to make room for a VectorLinux partition "
-"scheme"
-msgstr ""
-
-#: Step3a.class:26
-msgid "This option will not harm any existing data on your hard drive"
-msgstr ""
-
-#: Step3a.class:122
-msgid "Use unpartitioned space on my hard disk (creates new partitions)"
-msgstr ""
-
-#: Step3a.class:144
-msgid "Use free space on existing partitions for VectorLinux"
-msgstr ""
-
-#: Step3a.class:168
-msgid "Use entire disk"
-msgstr ""
-
-#: Step3a1.class:20
-msgid "Use Entire Hard Disk for VectorLinux"
-msgstr ""
-
-#: Step3a1.class:22
-msgid "All existing data in the device you select here will be destroyed."
-msgstr ""
-
-#: Step3a1.class:68
-msgid "Total Disc Size"
-msgstr ""
-
 #: Step3a1a.class:21
 msgid "Create Linux Partition Scheme in"
 msgstr ""
@@ -493,11 +400,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:446 Step7a.class:143
+#: Step3a1a.class:169 Step6.class:499 Step7a.class:143
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:446 Step7a.class:143
+#: Step3a1a.class:169 Step6.class:499 Step7a.class:143
 msgid "No"
 msgstr ""
 
@@ -507,6 +414,18 @@ msgstr ""
 
 #: Step3a1a.class:193
 msgid "Operation cancelled by user. No changes have been made to the system"
+msgstr ""
+
+#: Step3a1.class:20
+msgid "Use Entire Hard Disk for VectorLinux"
+msgstr ""
+
+#: Step3a1.class:22
+msgid "All existing data in the device you select here will be destroyed."
+msgstr ""
+
+#: Step3a1.class:68
+msgid "Total Disc Size"
 msgstr ""
 
 #: Step3a2.class:25
@@ -579,6 +498,87 @@ msgstr ""
 
 #: Step3a3.class:22
 msgid "Claim free space from existing partitions"
+msgstr ""
+
+#: Step3a.class:19
+msgid "Automatic Partitioning Options"
+msgstr ""
+
+#: Step3a.class:20
+msgid "Select one of the following options"
+msgstr ""
+
+#: Step3a.class:22
+msgid "Allow VectorLinux to use an entire hard disk in your system."
+msgstr ""
+
+#: Step3a.class:22
+msgid "This option will wipe out any data on the disk you select."
+msgstr ""
+
+#: Step3a.class:24
+msgid ""
+"Locate free (unpartitioned) space on hard disk and install VectorLinux there."
+msgstr ""
+
+#: Step3a.class:24
+msgid "This option will not harm any data on your hard drive"
+msgstr ""
+
+#: Step3a.class:26
+msgid ""
+"Resize your existing partitions to make room for a VectorLinux partition "
+"scheme"
+msgstr ""
+
+#: Step3a.class:26
+msgid "This option will not harm any existing data on your hard drive"
+msgstr ""
+
+#: Step3a.class:122
+msgid "Use unpartitioned space on my hard disk (creates new partitions)"
+msgstr ""
+
+#: Step3a.class:144
+msgid "Use free space on existing partitions for VectorLinux"
+msgstr ""
+
+#: Step3a.class:168
+msgid "Use entire disk"
+msgstr ""
+
+#: Step3.class:28
+msgid "Disc Partitioning Options"
+msgstr ""
+
+#: Step3.class:31
+msgid "Select the partitioning method you would like to use"
+msgstr ""
+
+#: Step3.class:153
+msgid "Automatic"
+msgstr ""
+
+#: Step3.class:163
+msgid ""
+"Automatically resize your partitions and / or create the correct disk space "
+"for VectorLinux."
+msgstr ""
+
+#: Step3.class:170
+msgid "Manually resize my partitions "
+msgstr ""
+
+#: Step3.class:180
+msgid "Use the partitioning tool to prepare your system partitions."
+msgstr ""
+
+#: Step3.class:187
+msgid "My hard drive is already partitioned"
+msgstr ""
+
+#: Step3.class:197
+msgid "Install VectorLinux to existing partitions on my hard drive"
 msgstr ""
 
 #: Step4.class:23
@@ -697,7 +697,7 @@ msgstr ""
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:167 Step8.class:58
+#: Step6.class:167 Step8.class:71
 msgid "Do not format"
 msgstr ""
 
@@ -717,36 +717,8 @@ msgstr ""
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:341
+#: Step6.class:394
 msgid "Select which partitions to use for installation"
-msgstr ""
-
-#: Step7.class:19
-msgid "Select Installation Mode"
-msgstr ""
-
-#: Step7.class:108
-msgid "Full Install"
-msgstr ""
-
-#: Step7.class:118
-msgid "Install everthing in the image (Fully Automated)"
-msgstr ""
-
-#: Step7.class:126
-msgid "Customized"
-msgstr ""
-
-#: Step7.class:136
-msgid "Select  the components you wish to install  (Advanced)"
-msgstr ""
-
-#: Step7.class:144
-msgid "Minimal"
-msgstr ""
-
-#: Step7.class:154
-msgid "Install the most minimal working confuguration (For older hardware)"
 msgstr ""
 
 #: Step7a.class:27 Step7b.class:23
@@ -805,23 +777,71 @@ msgid ""
 "include in your installation."
 msgstr ""
 
-#: Step8.class:59
+#: Step7.class:19
+msgid "Select Installation Mode"
+msgstr ""
+
+#: Step7.class:108
+msgid "Full Install"
+msgstr ""
+
+#: Step7.class:118
+msgid "Install everthing in the image (Fully Automated)"
+msgstr ""
+
+#: Step7.class:126 Step8.class:111
+msgid "Customized"
+msgstr ""
+
+#: Step7.class:136
+msgid "Select  the components you wish to install  (Advanced)"
+msgstr ""
+
+#: Step7.class:144 Step8.class:113
+msgid "Minimal"
+msgstr ""
+
+#: Step7.class:154
+msgid "Install the most minimal working confuguration (For older hardware)"
+msgstr ""
+
+#: Step8.class:72
 msgid "Not Formatted"
 msgstr ""
 
-#: Step8.class:59
+#: Step8.class:72
 msgid "Mount to"
 msgstr ""
 
-#: Step8.class:61
+#: Step8.class:74
 msgid "Format to"
 msgstr ""
 
-#: Step8.class:61
+#: Step8.class:74
 msgid "and mount to"
 msgstr ""
 
-#: Step8.class:135
+#: Step8.class:86
+msgid "Swap Space"
+msgstr ""
+
+#: Step8.class:109
+msgid "Full"
+msgstr ""
+
+#: Step8.class:116
+msgid "Installation Method"
+msgstr ""
+
+#: Step8.class:122
+msgid "Major Components"
+msgstr ""
+
+#: Step8.class:132
+msgid "Additional Software"
+msgstr ""
+
+#: Step8.class:209
 msgid ""
 "Your VectorLinux installation is about to be performed as follows. If you "
 "need to make any changes, this is your last chance."

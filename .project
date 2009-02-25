@@ -13,3 +13,7 @@ Translate=1
 Language=en_US
 ControlPublic=1
 ModulePublic=1
+Maintainer=root
+Address=root@logos.linux.net
+License=General Public Licence
+UseRelease=1
