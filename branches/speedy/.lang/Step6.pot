@@ -54,15 +54,15 @@ msgstr ""
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:341
+#: Step6.class:394
 msgid "Select which partitions to use for installation"
 msgstr ""
 
-#: Step6.class:446
+#: Step6.class:499
 msgid "Yes"
 msgstr ""
 
-#: Step6.class:446
+#: Step6.class:499
 msgid "No"
 msgstr ""
 

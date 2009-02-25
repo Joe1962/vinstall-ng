@@ -14,31 +14,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Step8.class:58
+#: Step8.class:71
 msgid "Do not format"
 msgstr ""
 
-#: Step8.class:59
+#: Step8.class:72
 msgid "Not Formatted"
 msgstr ""
 
-#: Step8.class:59
+#: Step8.class:72
 msgid "Mount to"
 msgstr ""
 
-#: Step8.class:61
+#: Step8.class:74
 msgid "Format to"
 msgstr ""
 
-#: Step8.class:61
+#: Step8.class:74
 msgid "and mount to"
 msgstr ""
 
+#: Step8.class:86
+msgid "Swap Space"
+msgstr ""
+
+#: Step8.class:109
+msgid "Full"
+msgstr ""
+
+#: Step8.class:111
+msgid "Customized"
+msgstr ""
+
+#: Step8.class:113
+msgid "Minimal"
+msgstr ""
+
 #: Step8.class:116
+msgid "Installation Method"
+msgstr ""
+
+#: Step8.class:121
+msgid "Software Selection"
+msgstr ""
+
+#: Step8.class:122
+msgid "Major Components"
+msgstr ""
+
+#: Step8.class:132
+msgid "Additional Software"
+msgstr ""
+
+#: Step8.class:190
 msgid "Installation Summary"
 msgstr ""
 
-#: Step8.class:135
+#: Step8.class:209
 msgid "Your VectorLinux installation is about to be performed as follows. If you need to make any changes, this is your last chance."
 msgstr ""
 

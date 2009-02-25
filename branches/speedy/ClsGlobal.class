@@ -52,6 +52,7 @@ STATIC PUBLIC sboot AS String
 STATIC PUBLIC fboot AS String
 
 STATIC PUBLIC sVitalPartList AS String
+STATIC PUBLIC sWapPartList AS String
 STATIC PUBLIC sMiscMountList AS String
 
 STATIC PUBLIC sFullDiscToWipe AS String
