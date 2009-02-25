@@ -18,91 +18,99 @@ msgstr ""
 msgid "Resize partitions using Gparted"
 msgstr ""
 
-#: Step5.class:64
+#: Step5.class:67
 msgid "Gparted was not found on this system. Please install gparted and try again"
 msgstr ""
 
 #: Step5.class:69
+msgid "Unable to launch partitioning tool."
+msgstr ""
+
+#: Step5.class:69
+msgid "The gparted program was not found on this system. Please install gparted or choose another partitioning method."
+msgstr ""
+
+#: Step5.class:80
 msgid "Loading partitioning utility...Please Wait"
 msgstr ""
 
-#: Step5.class:92
+#: Step5.class:103
 msgid "The VectorLinux installer is unable to embed the gparted partitioning utility."
 msgstr ""
 
-#: Step5.class:92
+#: Step5.class:103
 msgid "Please consider using the automatic partition option, or use other means of"
 msgstr ""
 
-#: Step5.class:92
+#: Step5.class:103
 msgid "partitioning your hard drives."
 msgstr ""
 
-#: Step5.class:114
+#: Step5.class:125
 msgid "VectorLinux is about to launch the GParted partitioning tool. Use this utility to"
 msgstr ""
 
-#: Step5.class:114
+#: Step5.class:125
 msgid "move, resize, delete or create partitions."
 msgstr ""
 
-#: Step5.class:114
+#: Step5.class:125
 msgid "When you are finished, you will need to exit the utility from the"
 msgstr ""
 
-#: Step5.class:114
+#: Step5.class:125
 msgid "GParted"
 msgstr ""
 
-#: Step5.class:114
+#: Step5.class:125
 msgid "menu"
 msgstr ""
 
-#: Step5.class:161
+#: Step5.class:172
 msgid "SYSTEM RESTART SUGGESTED"
 msgstr ""
 
-#: Step5.class:161
+#: Step5.class:172
 msgid "Your system still contains some non-linux partitions. If you still have a Windows operating system installed, it is recomended "
 msgstr ""
 
-#: Step5.class:161
+#: Step5.class:172
 msgid "that you reboot your system at this time. "
 msgstr ""
 
-#: Step5.class:161
+#: Step5.class:172
 msgid "Click the"
 msgstr ""
 
-#: Step5.class:161
+#: Step5.class:172
 msgid "button to restart your computer now, or click"
 msgstr ""
 
-#: Step5.class:161
+#: Step5.class:172
 msgid "to continue without restarting."
 msgstr ""
 
-#: Step5.class:166
+#: Step5.class:177
 msgid "PARTITIONING DONE"
 msgstr ""
 
-#: Step5.class:166
+#: Step5.class:177
 msgid "Click"
 msgstr ""
 
-#: Step5.class:166
+#: Step5.class:177
 msgid "to continue"
 msgstr ""
 
-#: Step5.class:182
+#: Step5.class:193
 msgid "Your computer will restart in 10 seconds"
 msgstr ""
 
-#: Step5.class:239
+#: Step5.class:250
 msgid "Loading partitioning utility ... Please Wait"
 msgstr ""
 
-#: Step5.class:248
+#: Step5.class:259
 msgid "Restart Now"
 msgstr ""
 

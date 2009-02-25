@@ -42,39 +42,39 @@ msgstr ""
 msgid "Select the location on your hard drive where you would like to install VectorLinux"
 msgstr ""
 
-#: Step3a2.class:191
+#: Step3a2.class:192
 msgid "Please wait while your hard drive is being partitioned"
 msgstr ""
 
-#: Step3a2.class:204
+#: Step3a2.class:205
 msgid "Unable to find enough un-used space to perform auto-partition."
 msgstr ""
 
-#: Step3a2.class:204
+#: Step3a2.class:205
 msgid "Please consider using a different partitioning option."
 msgstr ""
 
-#: Step3a2.class:206
+#: Step3a2.class:207
 msgid "Unable to find enough un-used space to perform auto-partition. Please consider using a different partitioning option."
 msgstr ""
 
-#: Step3a2.class:322
+#: Step3a2.class:359
 msgid "Partitioning stage complete... Click"
 msgstr ""
 
-#: Step3a2.class:322
+#: Step3a2.class:359
 msgid "to continue"
 msgstr ""
 
-#: Step3a2.class:352
+#: Step3a2.class:407
 msgid "We are unable to find any hard disks with enough unpartitioned space for this operation."
 msgstr ""
 
-#: Step3a2.class:352
+#: Step3a2.class:407
 msgid "Please consider using another partitioning method."
 msgstr ""
 
-#: Step3a2.class:354
+#: Step3a2.class:409
 msgid "Unable to find any hard drives with enough unpartitioned space. Please go back and select  another partitioning method"
 msgstr ""
 
