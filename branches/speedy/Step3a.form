@@ -48,27 +48,23 @@
     }
     { rbResizeParts RadioButton
       MoveScaled(1,8,56,3)
-      Visible = False
       Expand = True
       Text = ("Use free space on existing partitions for VectorLinux")
     }
     { Panel3 Panel
       MoveScaled(2,11,3,3)
-      Visible = False
     }
     { tlFreeSpace2 TextLabel
-      MoveScaled(5,11,19,4)
-      Visible = False
+      MoveScaled(5,11,40,4)
       Expand = True
       Text = ("")
     }
     { HBox3 HBox
       MoveScaled(1,14,6,2)
-      Visible = False
       Expand = True
     }
     { rbEntireDisk RadioButton
-      MoveScaled(2,18,34,3)
+      MoveScaled(2,19,34,3)
       Expand = True
       Text = ("Use entire disk")
     }
@@ -76,7 +72,7 @@
       MoveScaled(2,20,3,3)
     }
     { tlEntireDisc TextLabel
-      MoveScaled(6,20,32,4)
+      MoveScaled(6,21,32,4)
       Expand = True
       Text = ("")
     }

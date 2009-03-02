@@ -20,47 +20,47 @@ PRIVATE sMountedList AS String
 PUBLIC SUB Form_Open()
 
   ME.tlbanner.Text = "<h2>" & ("Claim free space from existing partitions") & "</h2>"
-  ME.DISPLAY_RESIZABLE_PARTITIONS()
+  'ME.DISPLAY_RESIZABLE_PARTITIONS()
 
 END
 
 PUBLIC SUB DISPLAY_RESIZABLE_PARTITIONS()
-  
-  DIM sDump, sPreMountList, sDfDump, sDrives, sPartition, sPartShort AS String
-  DIM sResults, sDumparr AS String[]
-  DIM i, n AS Integer
-  
-  SHELL "df -Th | grep \"/dev\" | tr -s \' \',\"\"" TO sPreMountList
-  'Message(sPreMountList)
-  SHELL "probepart | grep \"^/dev\" | tr -s \' \',\"\" | cut -f 1 -d \' \'" TO sDump
-    sDump = Trim(sDump)
-    sDumparr = Split(sDump, "\n")
-      FOR i = 0 TO sDumparr.Max
-        sPartition = Trim(sDumparr[i])
-        sPartShort = Right(sPartition, Len(sPartition) - RInStr(sPartition, "/"))
-        'Message(sPartShort)
-        sMountedList = sMountedList & sPartition & " "
-        IF InStr(sMountedList, sPartition) = FALSE THEN 
-          SHELL "mkdir -p /mnt" &/ sPartShort & " 2> /dev/null" WAIT 
-          SHELL "mount -o ro " & sPartition & Space(1) & "/mnt" &/ sPartShort & " 2> /dev/null" WAIT 
-        END IF
-          
-      NEXT 
-      
-      ' now that they're all mounted, get the free space on each one of them
-      SHELL "df -Th | grep \"^/dev\" | tr -s \' \',\"\"" TO sDfDump
-      'Message(sMountedList)
-      sDfDump = Trim(sDfDump)
-      Message(sDfDump)
-      
-      FOR i = 0 TO sDumparr.Max
-         sPartition = Trim(sDumparr[i])
-        sPartShort = Right(sPartition, Len(sPartition) - RInStr(sPartition, "/"))
-        IF sPartition <> ClsGlobal.sSourceAddr THEN 
-          SHELL "umount -f /mnt" &/ sPartShort & " 2> /dev/null" WAIT 
-        END IF
-      NEXT 
-        
+  ' ' 
+  ' ' DIM sDump, sPreMountList, sDfDump, sDrives, sPartition, sPartShort AS String
+  ' ' DIM sResults, sDumparr AS String[]
+  ' ' DIM i, n AS Integer
+  ' ' 
+  ' ' SHELL "df -Th | grep \"/dev\" | tr -s \' \',\"\"" TO sPreMountList
+  ' ' 'Message(sPreMountList)
+  ' ' SHELL "probepart | grep \"^/dev\" | tr -s \' \',\"\" | cut -f 1 -d \' \'" TO sDump
+  ' '   sDump = Trim(sDump)
+  ' '   sDumparr = Split(sDump, "\n")
+  ' '     FOR i = 0 TO sDumparr.Max
+  ' '       sPartition = Trim(sDumparr[i])
+  ' '       sPartShort = Right(sPartition, Len(sPartition) - RInStr(sPartition, "/"))
+  ' '       'Message(sPartShort)
+  ' '       sMountedList = sMountedList & sPartition & " "
+  ' '       IF InStr(sMountedList, sPartition) = FALSE THEN 
+  ' '         SHELL "mkdir -p /mnt" &/ sPartShort & " 2> /dev/null" WAIT 
+  ' '         SHELL "mount -o ro " & sPartition & Space(1) & "/mnt" &/ sPartShort & " 2> /dev/null" WAIT 
+  ' '       END IF
+  ' '         
+  ' '     NEXT 
+  ' '     
+  ' '     ' now that they're all mounted, get the free space on each one of them
+  ' '     SHELL "df -Th | grep \"^/dev\" | tr -s \' \',\"\"" TO sDfDump
+  ' '     'Message(sMountedList)
+  ' '     sDfDump = Trim(sDfDump)
+  ' '     Message(sDfDump)
+  ' '     
+  ' '     FOR i = 0 TO sDumparr.Max
+  ' '        sPartition = Trim(sDumparr[i])
+  ' '       sPartShort = Right(sPartition, Len(sPartition) - RInStr(sPartition, "/"))
+  ' '       IF sPartition <> ClsGlobal.sSourceAddr THEN 
+  ' '         SHELL "umount -f /mnt" &/ sPartShort & " 2> /dev/null" WAIT 
+  ' '       END IF
+  ' '     NEXT 
+  ' '       
   
   
   
@@ -83,7 +83,7 @@ PUBLIC FUNCTION GetNExt() AS String
 END
 PUBLIC SUB StartUp() 
   
-  
+  MdlAutoPartition.DISPLAY_PARTITIONS_WITH_FREE_SPACE(ME.HpnlChoices)
   
 END
 PUBLIC SUB OnExit()

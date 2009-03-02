@@ -1,0 +1,95 @@
+' Gambas module file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+PRIVATE sMountedList AS String
+PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
+  
+  DIM sDump, sPreMountList, sDfDump, sDrives, sPartition, sPartShort AS String
+  DIM sResults, sDumparr, sLineArr AS String[]
+  DIM sPost, sFinalList AS String
+  DIM i, n AS Integer
+  DIM rb AS RadioButton
+  DIM hb AS HBox
+  
+  SHELL "df -Th | grep \"^/dev/\" | cut -f 1 -d \' \'" TO sPreMountList '| tr -s \' \',\"\"" TO sPreMountList
+  'Message(sPreMountList)
+    sDumparr = Split(sPreMountList, "\n")
+      FOR i = 0 TO sDumparr.Max
+        IF InStr(sFinalList, Trim(sDumparr[i])) = FALSE THEN 
+          SHELL "df -Tm | grep \"" & Trim(sDumparr[i]) & "\" | tr -s \' \', \"\"" TO sDump
+          sFinalList = sFinalList & sDump
+        END IF
+      NEXT        
+  
+  
+  SHELL "probepart | grep \"^/dev/\" | tr -s \' \',\"\" | cut -f 1 -d \' \'" TO sDump
+  'Message(sDump)
+    sDump = Trim(sDump)
+    sDumparr = Split(sDump, "\n")
+      FOR i = 0 TO sDumparr.Max
+        sPartition = Trim(sDumparr[i])
+        sPartShort = Right(sPartition, Len(sPartition) - RInStr(sPartition, "/"))
+        'Message(sPartShort)
+        'sMountedList = sMountedList & sPartition & " "
+        'IF InStr(sMountedList, sPartition) = FALSE THEN 
+        'IF NOT InStr(Trim(sPreMountList), Trim(sPartition)) THEN 
+        'IF InStr(Trim(sPreMountList), Trim(sPartition)) = FALSE THEN 
+        IF InStr(sFinalList, Trim(sPartition)) = FALSE THEN 
+          'Message(sPartition & " is not in the pre-mounted list")
+          SHELL "mkdir -p /mnt" &/ sPartShort & " 2> /dev/null" WAIT 
+          SHELL "mount -o ro " & sPartition & Space(1) & "/mnt" &/ sPartShort & " 2> /dev/null" WAIT 
+          'SHELL "df -Th | grep \"^" & sPartition & "\" | head -n 1 | tr -s \' \',\"\"" TO sDump
+          SHELL "df -Tm /mnt" &/ sPartShort & " | grep \"^/dev/\"| tr -s \' \',\"\"" TO sDump
+          'Message(sDump)
+          'sPost = sPost & sDump
+          IF InStr(sFinalList, sDump) = FALSE THEN 
+          IF InStr(sDump, ClsGlobal.sSourceAddr) = FALSE THEN 
+          sFinalList = sFinalList & sDump
+          END IF
+          END IF
+          SHELL "umount /mnt" & sPartShort & " 2>/dev/null" WAIT 
+          
+        END IF
+          
+      NEXT 
+      
+  
+     'Message(sFinalList)
+     sFinalList = Trim(sFinalList)
+     sResults = Split(sFinalList, "\n")
+      FOR i = 0 TO sResults.Max
+        ' Message(Trim(sResults[i]))
+        sLineArr = Split(Trim(sResults[i]), " ")
+        'Message(sLineArr[0] & Space(1) & "fREE SPACE " & sLineArr[4] & " Mb") 
+        rb = NEW RadioButton(hostContainer)
+          WITH rb
+            .Text = Trim(sLineArr[0]) & Space(1) & "-" & Trim(sLineArr[4])
+            .tag = Trim(sLineArr[0])
+            .Height = 21
+            .Expand = TRUE
+          END WITH 
+        hb = NEW HBox(hostContainer)
+          WITH hb
+            .Height = 12
+            .Expand = TRUE
+          END WITH 
+            
+            
+        
+      NEXT 
+     
+END
+

@@ -49,8 +49,11 @@
     Visible = False
   }
   { pn Panel
-    MoveScaled(28,41,5,2)
+    MoveScaled(28,40,5,3)
     Visible = False
+    { pb PictureBox
+      MoveScaled(1,0,3,3)
+    }
   }
   { tl TextLabel
     MoveScaled(38,41,9,2)

@@ -50,11 +50,11 @@ msgstr ""
 msgid "Use unpartitioned space on my hard disk (creates new partitions)"
 msgstr ""
 
-#: Step3a.class:144
+#: Step3a.class:143
 msgid "Use free space on existing partitions for VectorLinux"
 msgstr ""
 
-#: Step3a.class:168
+#: Step3a.class:164
 msgid "Use entire disk"
 msgstr ""
 

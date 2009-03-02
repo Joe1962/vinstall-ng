@@ -20,10 +20,9 @@ PUBLIC SUB Form_Open()
   ME.tlbanner.Text = "<h2>" & ("Use Entire Hard Disk for VectorLinux") & "</H2>"
   ME.TLwARNING.Text = "<b><u>" & ("WARNING:") & "</u></b><br>" &
     "<i>" & ("All existing data in the device you select here will be destroyed.") & "</i>"
-  
-  objPosTargets = NEW Object[]
-  
-  ME.DISPLAY_POSSIBLE_DISK_TARGETS
+
+ME.objPosTargets = NEW Object[]
+  ME.DISPLAY_POSSIBLE_DISK_TARGETS()
 END
 
 PUBLIC SUB DISPLAY_POSSIBLE_DISK_TARGETS()
@@ -62,6 +61,13 @@ PUBLIC SUB DISPLAY_POSSIBLE_DISK_TARGETS()
                     .Expand = FALSE
                     .Width = 30
                     .Height = 30
+                  END WITH 
+                pb = NEW PictureBox(pn)
+                  WITH pb
+                    .Picture = Picture.Load("images/hdd.png")
+                    .Expand = TRUE
+                    .Height = 22
+                    .Width = 22
                   END WITH 
                 tl = NEW TextLabel(hpanel2) ' Hard disk information
                   WITH tl
