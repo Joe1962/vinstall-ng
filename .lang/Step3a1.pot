@@ -26,7 +26,7 @@ msgstr ""
 msgid "All existing data in the device you select here will be destroyed."
 msgstr ""
 
-#: Step3a1.class:68
+#: Step3a1.class:74
 msgid "Total Disc Size"
 msgstr ""
 
