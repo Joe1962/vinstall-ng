@@ -4,6 +4,7 @@
   MoveScaled(0,0,75,51)
   Text = ("")
   Arrangement = Arrange.Row
+  Padding = 4
   { HPanel1 HPanel
     MoveScaled(0,0,60,5)
     Expand = True

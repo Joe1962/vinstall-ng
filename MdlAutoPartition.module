@@ -15,14 +15,28 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 PRIVATE sMountedList AS String
+PRIVATE objProgs AS Object[]
+PRIVATE objSliders AS Object[]
+PRIVATE objTls AS Object[]
+PRIVATE sResizableList AS String[]
+
 PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
   
   DIM sDump, sPreMountList, sDfDump, sDrives, sPartition, sPartShort AS String
   DIM sResults, sDumparr, sLineArr AS String[]
   DIM sPost, sFinalList AS String
+  DIM lFreeMB, lTotalMB, lUsedMB AS Long
   DIM i, n AS Integer
   DIM rb AS RadioButton
+  DIM pb AS ProgressBar
+  DIM sl AS Slider
   DIM hb AS HBox
+  DIM tl AS TextLabel
+  objProgs = NEW Object[]
+  objSliders = NEW Object[]
+  sResizableList = NEW String[]
+  objTls = NEW Object[]
+  
   
   SHELL "df -Th | grep \"^/dev/\" | cut -f 1 -d \' \'" TO sPreMountList '| tr -s \' \',\"\"" TO sPreMountList
   'Message(sPreMountList)
@@ -60,7 +74,7 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
           sFinalList = sFinalList & sDump
           END IF
           END IF
-          SHELL "umount /mnt" & sPartShort & " 2>/dev/null" WAIT 
+          SHELL "umount -f /mnt" &/ sPartShort & " 2> /dev/null" WAIT 
           
         END IF
           
@@ -73,7 +87,12 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
       FOR i = 0 TO sResults.Max
         ' Message(Trim(sResults[i]))
         sLineArr = Split(Trim(sResults[i]), " ")
+        lTotalMB = Trim(sLineArr[2])
+        lUsedMB = Trim(sLineArr[3])        
+        lFreeMB = Trim(sLineArr[4])
         'Message(sLineArr[0] & Space(1) & "fREE SPACE " & sLineArr[4] & " Mb") 
+        IF lFreeMB >= 10240 THEN ' only if free space is equal to or greater than 10GB
+        sResizableList.Add(Trim(sResults[i]))
         rb = NEW RadioButton(hostContainer)
           WITH rb
             .Text = Trim(sLineArr[0]) & Space(1) & "-" & Trim(sLineArr[4])
@@ -81,15 +100,96 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
             .Height = 21
             .Expand = TRUE
           END WITH 
-        hb = NEW HBox(hostContainer)
-          WITH hb
-            .Height = 12
-            .Expand = TRUE
-          END WITH 
-            
-            
-        
+          pb = NEW ProgressBar(hostContainer) AS "UseageBar"
+            WITH pb
+              .Tag = Trim(sLineArr[0])
+              .Height = 21
+              .Expand = TRUE
+              .Value = lUsedMB / lTotalMB
+              .Label = TRUE
+            END WITH 
+            objProgs.Add(pb)
+          tl = NEW TextLabel(hostContainer)
+            WITH tl
+              .Text = ("Percentage of free space to use for VectorLinux")
+              .Height = 21
+              .Alignment = Align.Left
+              .Expand = TRUE
+              .tag = Trim(sLineArr[0])
+            END WITH 
+              objTls.Add(tl)
+               
+          sl = NEW Slider(hostContainer) AS "Slider"
+            WITH sl
+              .Tag = Trim(sLineArr[0])
+              .Height = 21
+              .Expand = TRUE
+              .Value = ((lUsedMB + (4 * 1024)) + (lFreeMB / 2) / lFreeMB) / 100
+              ' IF pb.Value < 0.5 THEN 
+              ' .Value = 50
+              ' ELSE 
+              ' .Value = (pb.Value * 100) + ((pb.Value * 100) / 2) '/ 2
+              ' END IF
+              '.Value = 50
+            END WITH 
+            objSliders.Add(sl)
+              
+        ' hb = NEW HBox(hostContainer)
+        '   WITH hb
+        '     .Height = 12
+        '     .Expand = TRUE
+        '   END WITH 
+
+        END IF
       NEXT 
      
 END
+
+  
+PUBLIC SUB Slider_change()
+  
+  DIM pb AS ProgressBar
+  DIM fMin AS Long
+  DIM fVal AS Float
+  DIM i AS Integer
+  DIM sMatch AS String
+  DIM sLine AS String[]
+  DIM lFree, lMin, ltotal, lval AS Long
+  DIM tl AS TextLabel
+  
+  
+    FOR EACH pb IN objProgs
+    
+      IF pb.tag = LAST.tag THEN fMin = pb.Value * 100
+      FOR i = 0 TO sResizableList.Max
+        IF Left(Trim(sResizableList[i]), Len("/dev/hda1")) = LAST.tag THEN 
+          
+        'Message("fount match")
+          sMatch = Trim(sResizableList[i])
+          sLine = Split(sMatch, " ")
+          lFree = Trim(sLine[4])
+          lTotal = Trim(sLine[2])
+          lMin = lFree + (4 * 1024)
+          lval = (lMin / lTotal) * 10
+
+        END IF
+      NEXT 
+    NEXT 
+    
+    LAST.tooltip = ("Select the location to which we will resize") & Space(1) & LAST.tag
+    FOR EACH tl IN objTls
+      IF tl.Tag = LAST.tag THEN 
+        tl.Text = ("Percentage of free space used for VectorLinux") & Space(1) & (LAST.Value) & "%"
+      END IF
+    NEXT 
+
+  IF LAST.Value < lval THEN 
+    LAST.Value = lval
+      Message("This is the minimum we can resize this partition to.")
+    STOP EVENT 
+    RETURN 
+  END IF
+  
+END
+
 
