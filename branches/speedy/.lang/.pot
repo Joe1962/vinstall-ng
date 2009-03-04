@@ -30,16 +30,20 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: MdlAutoPartition.module:114
-msgid "Percentage of free space to use for VectorLinux"
-msgstr ""
-
-#: MdlAutoPartition.module:179
-msgid "Select the location to which we will resize"
+#: MdlAutoPartition.module:112
+msgid "MB of free space"
 msgstr ""
 
 #: MdlAutoPartition.module:182
-msgid "Percentage of free space used for VectorLinux"
+msgid "Existing Data"
+msgstr ""
+
+#: MdlAutoPartition.module:203
+msgid "Total space for VectorLinux"
+msgstr ""
+
+#: MdlAutoPartition.module:294
+msgid "Select the location to which we will resize"
 msgstr ""
 
 #: MdlMain.module:33
@@ -591,6 +595,10 @@ msgstr ""
 
 #: Step3a3.class:22
 msgid "Claim free space from existing partitions"
+msgstr ""
+
+#: Step3a3.class:144
+msgid "Select which partition to resize in order to make room for VectorLinux"
 msgstr ""
 
 #: Step4.class:23

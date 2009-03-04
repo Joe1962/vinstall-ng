@@ -18,3 +18,7 @@ msgstr ""
 msgid "Claim free space from existing partitions"
 msgstr ""
 
+#: Step3a3.class:144
+msgid "Select which partition to resize in order to make room for VectorLinux"
+msgstr ""
+

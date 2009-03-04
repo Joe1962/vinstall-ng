@@ -15,10 +15,15 @@
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 PRIVATE sMountedList AS String
-PRIVATE objProgs AS Object[]
-PRIVATE objSliders AS Object[]
-PRIVATE objTls AS Object[]
-PRIVATE sResizableList AS String[]
+PUBLIC objProgs AS Object[]
+PUBLIC objSliders AS Object[]
+PUBLIC objTls AS Object[]
+PUBLIC sResizableList AS String[]
+PUBLIC objContainters AS Object[]
+PUBLIC objRbs AS Object[]
+PRIVATE picDrive AS Picture
+PRIVATE myProgs AS Object[]
+
 
 PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
   
@@ -30,13 +35,22 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
   DIM rb AS RadioButton
   DIM pb AS ProgressBar
   DIM sl AS Slider
-  DIM hb AS HBox
+  DIM hb AS hpanel
   DIM tl AS TextLabel
+  DIM hr AS Separator
+  DIM picb AS PictureBox
+  DIM hobox AS Panel
+  
   objProgs = NEW Object[]
   objSliders = NEW Object[]
   sResizableList = NEW String[]
   objTls = NEW Object[]
+  objRbs = NEW Object[]
+  objContainters = NEW Object[]
+  myProgs = NEW Object[]
+
   
+  picDrive = Picture.Load("images/hdd.png")
   
   SHELL "df -Th | grep \"^/dev/\" | cut -f 1 -d \' \'" TO sPreMountList '| tr -s \' \',\"\"" TO sPreMountList
   'Message(sPreMountList)
@@ -93,33 +107,82 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
         'Message(sLineArr[0] & Space(1) & "fREE SPACE " & sLineArr[4] & " Mb") 
         IF lFreeMB >= 10240 THEN ' only if free space is equal to or greater than 10GB
         sResizableList.Add(Trim(sResults[i]))
-        rb = NEW RadioButton(hostContainer)
+        rb = NEW RadioButton(hostContainer) AS "PartitionOptions"
           WITH rb
-            .Text = Trim(sLineArr[0]) & Space(1) & "-" & Trim(sLineArr[4])
+            .Text = Trim(sLineArr[0]) & Space(1) & "-" & Space(1) & Trim(sLineArr[4]) & Space(1) & ("MB of free space") 
             .tag = Trim(sLineArr[0])
             .Height = 21
             .Expand = TRUE
           END WITH 
-          pb = NEW ProgressBar(hostContainer) AS "UseageBar"
-            WITH pb
-              .Tag = Trim(sLineArr[0])
-              .Height = 21
+          objRbs.Add(rb)
+
+
+        hb = NEW hpanel(hostContainer)
+          WITH hb
+            .Expand = TRUE
+            .Height = 72
+            .Tag = Trim(sLineArr[0])
+            .Visible = FALSE
+          END WITH 
+          objContainters.Add(hb)
+               
+
+          
+          hr = NEW Separator(hb)
+            WITH hr
               .Expand = TRUE
-              .Value = lUsedMB / lTotalMB
-              .Label = TRUE
+              .Height = 8
+              .tag = Trim(sLineArr[0])
             END WITH 
-            objProgs.Add(pb)
-          tl = NEW TextLabel(hostContainer)
-            WITH tl
-              .Text = ("Percentage of free space to use for VectorLinux")
+          hobox = NEW Panel(hb)
+            WITH hobox
               .Height = 21
+              '.Width = .Parent.Width / 2
+              .Tag = Trim(sLineArr[0])
+              .Expand = TRUE
+              .Arrangement = Arrange.Row
+              '.Padding = 4
+              .BackColor = Color.LightBackground
+            END WITH 
+          'panels.Add(hobox)
+          tl = NEW TextLabel(hobox)
+            WITH tl
+              .BackColor = Color.SelectedBackground
+              .Expand = FALSE
+              .Text = ("Existing Data")
+              '.Width = .Parent.Width / 2
+              '.Width = .Parent.Width - (((lUsedMB + (4 * 1024)) + (lFreeMB / 2) / lFreeMB) / 100) * 100
+              .Height = .Parent.Height
+              .Alignment = Align.Center
+              .tag = .Parent.Tag
+            END WITH 
+            myProgs.Add(tl)
+          tl = NEW TextLabel(hobox)
+            WITH tl
+              .Text = ClsGlobal.sDistroName
+              .Height = .Parent.Height
+              .Width = .Parent.Width * 0.5
+              .Expand = TRUE
+              .BackColor = Color.LightBackground
+              .Alignment = Align.Center
+              .Tag = .Parent.Tag & "R"
+            END WITH 
+ 
+          tl = NEW TextLabel(hb)
+            WITH tl
+              .Text = ("Total space for VectorLinux") & ":" & Space(1)
+              .Height = 21
+              '.Width = .Parent.Width * 0.5
               .Alignment = Align.Left
+              .BackColor = Color.Transparent
               .Expand = TRUE
               .tag = Trim(sLineArr[0])
             END WITH 
               objTls.Add(tl)
+          
+            
                
-          sl = NEW Slider(hostContainer) AS "Slider"
+          sl = NEW Slider(hb) AS "Slider"
             WITH sl
               .Tag = Trim(sLineArr[0])
               .Height = 21
@@ -133,6 +196,13 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
               '.Value = 50
             END WITH 
             objSliders.Add(sl)
+          hr = NEW Separator(hb)
+          WITH hr
+          .Expand = TRUE
+          .Height = 4
+          .Tag = Trim(sLineArr[0])
+          END WITH 
+
               
         ' hb = NEW HBox(hostContainer)
         '   WITH hb
@@ -142,46 +212,76 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
 
         END IF
       NEXT 
-     
+   
+   IF objContainters.count > 0 THEN objContainters[0].visible = TRUE
+   IF objSliders.Count > 0 THEN 
+    objSliders[0].setfocus
+   END IF
+   
+   
+END
+
+PUBLIC SUB Slider_click()
+  
+  
+  
 END
 
   
 PUBLIC SUB Slider_change()
   
   DIM pb AS ProgressBar
-  DIM fMin AS Long
+  DIM hb AS Panel
+  DIM fMin AS Float
   DIM fVal AS Float
   DIM i AS Integer
   DIM sMatch AS String
   DIM sLine AS String[]
   DIM lFree, lMin, ltotal, lval AS Long
-  DIM tl AS TextLabel
+  DIM tl, tlr AS TextLabel
+  DIM sAllocated AS Long
   
-  
-    FOR EACH pb IN objProgs
-    
-      IF pb.tag = LAST.tag THEN fMin = pb.Value * 100
+    ' FOR EACH pb IN objProgs
+    ' 
+    '   IF pb.tag = LAST.tag THEN fMin = pb.Value * 100
       FOR i = 0 TO sResizableList.Max
         IF Left(Trim(sResizableList[i]), Len("/dev/hda1")) = LAST.tag THEN 
           
         'Message("fount match")
           sMatch = Trim(sResizableList[i])
           sLine = Split(sMatch, " ")
-          lFree = Trim(sLine[4])
+          lFree = sLine[4]
           lTotal = Trim(sLine[2])
           lMin = lFree + (4 * 1024)
           lval = (lMin / lTotal) * 10
 
         END IF
       NEXT 
-    NEXT 
-    
+    'NEXT 
+    fmin = (LAST.value / 100)
+    'Message(fmin)
+    sAllocated = ltotal - (lTotal * fMin)
     LAST.tooltip = ("Select the location to which we will resize") & Space(1) & LAST.tag
     FOR EACH tl IN objTls
       IF tl.Tag = LAST.tag THEN 
-        tl.Text = ("Percentage of free space used for VectorLinux") & Space(1) & (LAST.Value) & "%"
+        tl.Text = ("Total space for VectorLinux") & ":" & Space(1) & (100 - LAST.Value) & "%" & Space(1) & "-" & " ( " & sAllocated & " MB )"
+        
       END IF
     NEXT 
+
+  FOR EACH tl IN myProgs
+    IF tl.tag = LAST.tag THEN 
+      tl.Width = tl.Parent.Width * (LAST.value / 100)      
+      
+    END IF
+      
+  NEXT 
+
+IF sAllocated <= (4 * 1024) THEN 
+  Message("We need at least 4GB for vectorlinux")
+  STOP EVENT 
+  RETURN 
+END IF
 
   IF LAST.Value < lval THEN 
     LAST.Value = lval
@@ -190,6 +290,18 @@ PUBLIC SUB Slider_change()
     RETURN 
   END IF
   
+END
+
+PUBLIC SUB PartitionOptions_Click()
+  
+  DIM hb AS HPanel
+  FOR EACH hb IN objContainters
+    IF hb.tag = LAST.tag THEN 
+      hb.visible = TRUE
+    ELSE 
+      hb.visible = FALSE
+    END IF
+  NEXT 
 END
 
 

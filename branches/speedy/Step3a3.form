@@ -4,7 +4,6 @@
   MoveScaled(0,0,75,51)
   Text = ("")
   Arrangement = Arrange.Row
-  Padding = 4
   { HPanel1 HPanel
     MoveScaled(0,0,60,5)
     Expand = True
@@ -19,11 +18,21 @@
     }
   }
   { HBox1 HBox
-    MoveScaled(0,5,10,3)
+    MoveScaled(0,5,10,2)
     Expand = True
   }
-  { HpnlChoices HPanel
-    MoveScaled(0,8,72,25)
+  { tlExp TextLabel
+    MoveScaled(1,8,67,4)
     Expand = True
+    Text = ("Select which partition to resize in order to make room for VectorLinux")
+  }
+  { ScrollView1 ScrollView
+    MoveScaled(1,13,68,33)
+    Expand = True
+    Arrangement = Arrange.Row
+    Spacing = 2
+    Padding = 4
+    Border = False
+    ScrollBar = Scroll.Vertical
   }
 }
