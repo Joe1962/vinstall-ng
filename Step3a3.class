@@ -83,11 +83,18 @@ PUBLIC FUNCTION GetNExt() AS String
 END
 PUBLIC SUB StartUp() 
   
-  MdlAutoPartition.DISPLAY_PARTITIONS_WITH_FREE_SPACE(ME.HpnlChoices)
+  MdlAutoPartition.DISPLAY_PARTITIONS_WITH_FREE_SPACE(ME.ScrollView1) '(ME.ListContainer1) '(ME.ScrollView1) '(ME.HpnlChoices)
   
 END
 PUBLIC SUB OnExit()
   
   
   
+END
+
+PUBLIC SUB Form_Resize()
+
+  'ME.HpnlChoices.Height = ME.ClientH - (ME.tlExp.top + ME.tlExp.Height + 12)
+  ME.ScrollView1.Height = ME.ClientH - (ME.tlExp.Top + ME.tlExp.Height + 12)
+
 END
