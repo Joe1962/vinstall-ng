@@ -24,6 +24,124 @@ PUBLIC objRbs AS Object[]
 PRIVATE picDrive AS Picture
 PRIVATE myProgs AS Object[]
 
+PUBLIC sPartitionToShrink AS String
+PUBLIC lMBAmmountToUseForVL AS Long
+
+
+PUBLIC FUNCTION PERFORM_AUTO_PARTITION_FROM_FREE_SPACE(sPartition AS String) AS Integer
+  
+  ' trigger the automatic partitioning process.
+  DIM hproc AS Process
+  DIM sPartitionString, sFs, sResizeCommand, sDump, sPartPrefx AS String
+  DIM sLine, partedDump, sMountDumpArr AS String[]
+  DIM lCurrentSize AS Long
+  DIM i, iPart AS Integer
+  DIM lEndMark AS Long
+  DIM bSwapNeeded AS Boolean
+  DIM sSwapPart, sRootPart AS String
+  
+  lMBAmmountToUseForVL = ClsGlobal.lTotalMBforVL
+  
+  PRINT " --- -> Preparing to allocate " & lMBAmmountToUseForVL & " MB of space for VectorLinux from " & sPartition & " <- ---"
+  WAIT 1
+    iPart = Right(sPartition, Len(sPartition) - Len("/dev/hda"))
+      IF iPart < 10 THEN 
+        sPartPrefx = " " 
+      ELSE 
+        sPartPrefx = ""
+      END IF
+      
+    ' search for the partition information
+      FOR i = 0 TO sResizableList.Max
+        IF Left(Trim(sResizableList[i]), Len("/dev/hda1")) = Trim(sPartition) THEN 
+          sPartitionString = Trim(sResizableList[i])
+        END IF
+      NEXT ' we got the partition string now
+      
+      ' Ths string is formatted like this
+      ' Filesystem    Type   1M-blocks      Used Available Use% Mounted on
+      
+      ' split it in spaces
+      sLine = Split(sPartitionString, " ")
+        sFs = Trim(sLine[1])
+        lCurrentSize = sLine[2]
+      
+      IF lMBAmmountToUseForVL <= 0 THEN 
+        Message.Error("I dont know how much space to use for VL")
+          RETURN 
+      END IF
+      
+      SELECT CASE sFs
+        CASE "ntfs", "NTFS"
+          sResizeCommand = "ntfsresize -s " & (lCurrentSize - lMBAmmountToUseForVL) & "m" & Space(1) & sPartition
+        CASE "ext2", "ext3", "*fat*", "hfsx", "hfs+", "hfs", "linux-swap"
+          SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit mb print | tr -s \' \',\"\" | grep \"^" & sPartPrefx & iPart & "\"" TO sDump
+            sDump = Trim(sDump)
+            'Number Start End     Size    Type   File system Flags
+            '1    0.03MB 12256MB 12256MB primary reiserfs 
+            partedDump = Split(sDump, " ")
+            lEndMark = Trim(partedDump[2])
+            sResizeCommand = "parted " & sPartition & " unit mb resize " & iPart & Space(1) & Trim(partedDump[1]) & "m" & Space(1) & lEndMark - lMBAmmountToUseForVL & "m"
+        CASE "reiserfs"
+           'r resize_reiserfs -s -1G /dev/hda8 ( see man resize_reiserfs )
+           sResizeCommand = "resize_reiserfs -s -" & lMBAmmountToUseForVL & "M" & Space(1) & sPartition
+           
+        CASE ELSE 
+          Message.Error("I dont know how to resize a pertition type " & sFs)
+      END SELECT 
+      
+  
+  'Message(sResizeCommand)
+      ' MAKE SURE THE PARTITION IS NOT MOUNTED BEFORE PROCEEDING
+      SHELL "mount | grep ^" & sPartition TO sDump
+      sDump = Trim(sDump)
+      sMountDumpArr = Split(sDump, "\n")
+        FOR i = 0 TO sMountDumpArr.Max
+          SHELL "umount -f " & sPartition
+        NEXT 
+  
+  ' Just to make sure
+    SHELL "mount | grep ^" & sPartition TO sDump
+      sDump = Trim(sDump
+        IF Len(sDump) > 0 THEN 
+          Message.Error(sPartition & Space(1)("is currently being used. Unable to umount it.") & "<br>" &
+          ("Try another partitioning method"))
+          RETURN 1
+        END IF
+    
+          
+  ' run the actual command
+    hproc = SHELL sResizeCommand WAIT 
+      IF hproc.Value > 0 THEN 
+        RETURN hproc.Value
+      END IF
+      
+  ' create new partitions now that we're here ============================================================================================
+    ' do we need to create a swap partition?
+      SHELL "probepart | grep -i \"linux swap\"" TO sDump
+        sDump = Trim(sDump)
+          IF sDump THEN 
+            bSwapNeeded = FALSE
+            sDumparr = Split(sDump, "\n")
+            sLine = Split(sDumparr[0], " ")
+            sSwapPart = Trim(sLine[0])
+          ELSE 
+            bSwapNeeded = TRUE
+          END IF
+          
+    
+  
+      
+    
+        
+        
+  
+  
+  
+END
+
+
+
 
 PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
   
@@ -51,7 +169,10 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
 
   
   picDrive = Picture.Load("images/hdd.png")
-  
+  PRINT " ---\\_ Shrink existing partitions to make room for VL"  
+
+  WAIT 
+    
   SHELL "df -Th | grep \"^/dev/\" | cut -f 1 -d \' \'" TO sPreMountList '| tr -s \' \',\"\"" TO sPreMountList
   'Message(sPreMountList)
     sDumparr = Split(sPreMountList, "\n")
@@ -105,7 +226,9 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
         lUsedMB = Trim(sLineArr[3])        
         lFreeMB = Trim(sLineArr[4])
         'Message(sLineArr[0] & Space(1) & "fREE SPACE " & sLineArr[4] & " Mb") 
+        
         IF lFreeMB >= 10240 THEN ' only if free space is equal to or greater than 10GB
+          IF Trim(sLineArr[1]) <> "*xfs*" OR Trim(sLineArr[1]) <> "*jfs*" THEN  'only if fs is not xfs or jfs
         sResizableList.Add(Trim(sResults[i]))
         rb = NEW RadioButton(hostContainer) AS "PartitionOptions"
           WITH rb
@@ -150,10 +273,11 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
               .BackColor = Color.SelectedBackground
               .Expand = FALSE
               .Text = ("Existing Data")
-              '.Width = .Parent.Width / 2
+              .Width = .Parent.Width / 2
               '.Width = .Parent.Width - (((lUsedMB + (4 * 1024)) + (lFreeMB / 2) / lFreeMB) / 100) * 100
               .Height = .Parent.Height
               .Alignment = Align.Center
+              '.Visible = TRUE
               .tag = .Parent.Tag
             END WITH 
             myProgs.Add(tl)
@@ -161,7 +285,7 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
             WITH tl
               .Text = ClsGlobal.sDistroName
               .Height = .Parent.Height
-              .Width = .Parent.Width * 0.5
+              '.Width = .Parent.Width * 0.5
               .Expand = TRUE
               .BackColor = Color.LightBackground
               .Alignment = Align.Center
@@ -211,21 +335,24 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
         '   END WITH 
 
         END IF
+      END IF
       NEXT 
    
    IF objContainters.count > 0 THEN objContainters[0].visible = TRUE
-   IF objSliders.Count > 0 THEN 
-    objSliders[0].setfocus
-   END IF
+    FOR EACH tl IN myProgs
+      FOR EACH sl IN objSliders
+        IF tl.Tag = sl.tag THEN 
+        'Message(sl.value)
+          tl.Width = tl.Parent.Width / 2
+        END IF
+      NEXT 
+    NEXT 
+   
    
    
 END
 
-PUBLIC SUB Slider_click()
-  
-  
-  
-END
+
 
   
 PUBLIC SUB Slider_change()
@@ -264,8 +391,10 @@ PUBLIC SUB Slider_change()
     LAST.tooltip = ("Select the location to which we will resize") & Space(1) & LAST.tag
     FOR EACH tl IN objTls
       IF tl.Tag = LAST.tag THEN 
+      
         tl.Text = ("Total space for VectorLinux") & ":" & Space(1) & (100 - LAST.Value) & "%" & Space(1) & "-" & " ( " & sAllocated & " MB )"
-        
+      'lMBAmmountToUseForVL = sAllocated  
+      ClsGlobal.lTotalMBforVL = sAllocated
       END IF
     NEXT 
 

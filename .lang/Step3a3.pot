@@ -14,11 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Step3a3.class:22
+#: Step3a3.class:23
 msgid "Claim free space from existing partitions"
 msgstr ""
 
-#: Step3a3.class:144
-msgid "Select which partition to resize in order to make room for VectorLinux"
+#: Step3a3.class:100
+msgid "Select which partition to resize and use the slider below it to adjust the ammount of space to be used by VectorLinux"
 msgstr ""
 

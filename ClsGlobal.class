@@ -68,3 +68,7 @@ STATIC PUBLIC iInstallMethod AS Integer
 STATIC PUBLIC sBulkListToInstall AS String
 STATIC PUBLIC sPkgListToInstall AS String
 
+' auto partition by shinking existing partitions
+STATIC PUBLIC lTotalMBforVL AS Long
+
+

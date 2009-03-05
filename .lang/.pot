@@ -30,19 +30,19 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: MdlAutoPartition.module:112
+#: MdlAutoPartition.module:190
 msgid "MB of free space"
 msgstr ""
 
-#: MdlAutoPartition.module:182
+#: MdlAutoPartition.module:230
 msgid "Existing Data"
 msgstr ""
 
-#: MdlAutoPartition.module:203
+#: MdlAutoPartition.module:252
 msgid "Total space for VectorLinux"
 msgstr ""
 
-#: MdlAutoPartition.module:294
+#: MdlAutoPartition.module:346
 msgid "Select the location to which we will resize"
 msgstr ""
 
@@ -493,7 +493,7 @@ msgstr ""
 msgid "Partitioning stage complete. Click"
 msgstr ""
 
-#: Step3a1a.class:177 Step3a2.class:359 Step5.class:177
+#: Step3a1a.class:177 Step3a2.class:359 Step3a3a.class:69 Step5.class:177
 msgid "to continue"
 msgstr ""
 
@@ -593,12 +593,55 @@ msgid ""
 "back and select  another partitioning method"
 msgstr ""
 
-#: Step3a3.class:22
+#: Step3a3.class:23 Step3a3a.class:113
 msgid "Claim free space from existing partitions"
 msgstr ""
 
-#: Step3a3.class:144
-msgid "Select which partition to resize in order to make room for VectorLinux"
+#: Step3a3.class:100
+msgid ""
+"Select which partition to resize and use the slider below it to adjust the "
+"ammount of space to be used by VectorLinux"
+msgstr ""
+
+#: Step3a3a.class:26
+msgid "You are about to shink"
+msgstr ""
+
+#: Step3a3a.class:26
+msgid "to make room for your vectorlinux installation."
+msgstr ""
+
+#: Step3a3a.class:26
+msgid ""
+"This is generally a safe procedure, however, you should always consider "
+"making copies of your valuable data before making changes such as this one "
+"to your system"
+msgstr ""
+
+#: Step3a3a.class:26
+msgid "When you are ready to continue, click the"
+msgstr ""
+
+#: Step3a3a.class:26
+msgid "button."
+msgstr ""
+
+#: Step3a3a.class:64
+msgid ""
+"Shrinking partitions and creating new environment for VectorLinux ... Please "
+"Wait"
+msgstr ""
+
+#: Step3a3a.class:69
+msgid "Partitions are ready for VectorLinux. Click"
+msgstr ""
+
+#: Step3a3a.class:130
+msgid "Warning"
+msgstr ""
+
+#: Step3a3a.class:160
+msgid "Shrink partitions now"
 msgstr ""
 
 #: Step4.class:23
