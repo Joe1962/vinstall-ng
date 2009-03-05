@@ -22,12 +22,12 @@
     Expand = True
   }
   { tlExp TextLabel
-    MoveScaled(1,8,67,4)
+    MoveScaled(1,8,67,6)
     Expand = True
-    Text = ("Select which partition to resize in order to make room for VectorLinux")
+    Text = ("Select which partition to resize and use the slider below it to adjust the ammount of space to be used by VectorLinux")
   }
   { ScrollView1 ScrollView
-    MoveScaled(1,13,68,33)
+    MoveScaled(1,16,73,33)
     Expand = True
     Arrangement = Arrange.Row
     Spacing = 2
