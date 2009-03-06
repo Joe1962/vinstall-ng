@@ -30,19 +30,41 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: MdlAutoPartition.module:190
+#: MdlAutoPartition.module:129
+msgid "Try another partitioning method"
+msgstr ""
+
+#: MdlAutoPartition.module:140
+msgid "Simulated resize of your ntfs partition"
+msgstr ""
+
+#: MdlAutoPartition.module:140
+msgid ""
+"It is not safe to perform this operation... Please use another partitioning "
+"method"
+msgstr ""
+
+#: MdlAutoPartition.module:165
+msgid "Error deleting the ntfs filesytem"
+msgstr ""
+
+#: MdlAutoPartition.module:170
+msgid "Error creating the ntfs filesystem after shrinking it"
+msgstr ""
+
+#: MdlAutoPartition.module:468
 msgid "MB of free space"
 msgstr ""
 
-#: MdlAutoPartition.module:230
+#: MdlAutoPartition.module:508
 msgid "Existing Data"
 msgstr ""
 
-#: MdlAutoPartition.module:252
+#: MdlAutoPartition.module:530
 msgid "Total space for VectorLinux"
 msgstr ""
 
-#: MdlAutoPartition.module:346
+#: MdlAutoPartition.module:624
 msgid "Select the location to which we will resize"
 msgstr ""
 

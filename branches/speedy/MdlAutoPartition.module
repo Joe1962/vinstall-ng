@@ -33,12 +33,14 @@ PUBLIC FUNCTION PERFORM_AUTO_PARTITION_FROM_FREE_SPACE(sPartition AS String) AS 
   ' trigger the automatic partitioning process.
   DIM hproc AS Process
   DIM sPartitionString, sFs, sResizeCommand, sDump, sPartPrefx AS String
-  DIM sLine, partedDump, sMountDumpArr AS String[]
+  DIM sLine, partedDump, sMountDumpArr, sDumparr AS String[]
   DIM lCurrentSize AS Long
-  DIM i, iPart AS Integer
+  DIM i, iPart, iPartCnt AS Integer
   DIM lEndMark AS Long
   DIM bSwapNeeded AS Boolean
-  DIM sSwapPart, sRootPart AS String
+  DIM sSwapPart, sRootPart, sSimulatedCommand AS String
+  DIM lMbStart, lMbEnd, lMbSize, lTotalRam, lTotalSwapNeeded AS Long
+  DIM bSetBoot AS Boolean
   
   lMBAmmountToUseForVL = ClsGlobal.lTotalMBforVL
   
@@ -72,8 +74,26 @@ PUBLIC FUNCTION PERFORM_AUTO_PARTITION_FROM_FREE_SPACE(sPartition AS String) AS 
       END IF
       
       SELECT CASE sFs
-        CASE "ntfs", "NTFS"
-          sResizeCommand = "ntfsresize -s " & (lCurrentSize - lMBAmmountToUseForVL) & "m" & Space(1) & sPartition
+        CASE "ntfs", "NTFS", "HPFS/NTFS"
+          'sResizeCommand = "ntfsresize -s " & (lCurrentSize - lMBAmmountToUseForVL) & "m" & Space(1) & sPartition
+          sResizeCommand = "ntfsresize -P --force --force " & spartition & Space(1) & "-s " & (lCurrentSize - lMBAmmountToUseForVL) & "M"
+          sSimulatedCommand = "ntfsresize -P --force --force " & spartition & Space(1) & "-s " & (lCurrentSize - lMBAmmountToUseForVL) & "M --no-action"
+          
+            SHELL "parted " & Left(spartition, Len("/dev/hda")) & " print | grep \"^ " & Right(spartition, Len(spartition) - Len("/dev/hda")) & "\"| tr -s \' \',\"\"" TO sDump
+              sDump = Trim(sDump)
+              'Message(sDump)
+              'sDumparr = Split(sDump, " ")
+              
+                
+                IF InStr(sDump, " boot") THEN 
+                
+                    bSetBoot = TRUE
+                    PRINT " ----- Boot flag detected on " & spartition
+               
+                END IF
+                
+              
+            
         CASE "ext2", "ext3", "*fat*", "hfsx", "hfs+", "hfs", "linux-swap"
           SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit mb print | tr -s \' \',\"\" | grep \"^" & sPartPrefx & iPart & "\"" TO sDump
             sDump = Trim(sDump)
@@ -84,7 +104,8 @@ PUBLIC FUNCTION PERFORM_AUTO_PARTITION_FROM_FREE_SPACE(sPartition AS String) AS 
             sResizeCommand = "parted " & sPartition & " unit mb resize " & iPart & Space(1) & Trim(partedDump[1]) & "m" & Space(1) & lEndMark - lMBAmmountToUseForVL & "m"
         CASE "reiserfs"
            'r resize_reiserfs -s -1G /dev/hda8 ( see man resize_reiserfs )
-           sResizeCommand = "resize_reiserfs -s -" & lMBAmmountToUseForVL & "M" & Space(1) & sPartition
+           sResizeCommand = "echo \"y\" | resize_reiserfs -fq -s -" & lMBAmmountToUseForVL & "M" & Space(1) & sPartition
+           PRINT "DEBUG: " & sResizeCommand
            
         CASE ELSE 
           Message.Error("I dont know how to resize a pertition type " & sFs)
@@ -102,7 +123,7 @@ PUBLIC FUNCTION PERFORM_AUTO_PARTITION_FROM_FREE_SPACE(sPartition AS String) AS 
   
   ' Just to make sure
     SHELL "mount | grep ^" & sPartition TO sDump
-      sDump = Trim(sDump
+      sDump = Trim(sDump)
         IF Len(sDump) > 0 THEN 
           Message.Error(sPartition & Space(1)("is currently being used. Unable to umount it.") & "<br>" &
           ("Try another partitioning method"))
@@ -110,32 +131,244 @@ PUBLIC FUNCTION PERFORM_AUTO_PARTITION_FROM_FREE_SPACE(sPartition AS String) AS 
         END IF
     
           
+          'if ntfs... then run a simulation
+          IF sfs LIKE "ntfs" THEN 
+            PRINT " ---\\-> Running ntfs resize simulation "             
+              hproc = SHELL sSimulatedCommand WAIT 
+                IF hproc.Value > 0 THEN 
+                  Message.Error(("Simulated resize of your ntfs partition") & Space(1) & "(" & spartition & ")" & "<br>" &
+                  ("It is not safe to perform this operation... Please use another partitioning method"))
+                  RETURN hproc.Value
+                END IF
+                
+              ' we need to use sectors as the units for this to work... otherwise we may lose some data
+                
+                
+            PRINT " ---\\__ Running real resize operation"
+          END IF 
+                  
+              
   ' run the actual command
     hproc = SHELL sResizeCommand WAIT 
+      PRINT " ---\\--> Shinking partition " & spartition
       IF hproc.Value > 0 THEN 
         RETURN hproc.Value
+        
       END IF
+      PRINT "Done"
+      
+      
+      IF sFs LIKE "ntfs" THEN 
+        PRINT " ----|=- Re-creating ntfs filesystem"
+          hproc = SHELL "parted " & Left(spartition, Len("/dev/hda")) & " rm " & Right(sPartition, Len(spartition) - Len("/dev/hda")) WAIT ' remove the filesystem
+            IF hproc.Value > 0 THEN 
+              Message.Error(("Error deleting the ntfs filesytem"))
+              RETURN hproc.Value
+            END IF
+          hproc = SHELL "parted " & Left(spartition, Len("/dev/hda")) & " -s \"mkpart primary ntfs 0M " & (lEndMark - lMBAmmountToUseForVL) & "M\"" WAIT ' re-create the shrunken fs
+            IF hproc.Value > 0 THEN 
+              Message.Error(("Error creating the ntfs filesystem after shrinking it"))
+              RETURN hproc.Value
+            END IF
+          PRINT " ---- Restoring boot flag"
+          hproc = SHELL "parted " & Left(spartition, Len("/dev/hda")) & " -s \" set " & Right(spartition, Len(spartition) - Len("/dev/hda")) & " boot on\"" WAIT ' set the boot flag again
+            IF hproc.Value > 0 THEN 
+              Message("Error setting the boot flag on " & spartition)
+            END IF
+    ELSE IF sfs LIKE "reiserfs" THEN 
+      
+                    ' determine where the free space is at
+            SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit mb print free | grep -i \"free space\" | tr -s \' \',\"\"" TO sDump
+            sDump = Trim(Replace(sDump, "MB", ""))
+              IF sDump THEN 
+            'Message(sDump)
+            
+            sDumparr = Split(sDump, " ")
+            lMbStart = sDumparr[0]
+            lMbEnd = sDumparr[1]
+            lMbSize = sDumparr[2]
+              ELSE 
+                DEBUG "Cant find free space"
+                RETURN 
+              END IF
+    
+      hproc = SHELL "parted " & Left(spartition, Len("/dev/hda")) & " rm " & Right(spartition, Len(spartition) - Len("/dev/hda")) WAIT ' remove the old filesystem
+        IF hproc.Value > 0 THEN 
+          PRINT "Error deleting old reiserfs filesystem"
+          RETURN hproc.Value
+        END IF
+      hproc = SHELL "parted " & Left(spartition, Len("/dev/hda")) & " -s \"mkpart primary reiserfs " & lMbStart & "M " & (lMbEnd - lMBAmmountToUseForVL) & "M\"" WAIT ' re-create the new fs"
+          DEBUG "parted " & Left(spartition, Len("/dev/hda")) & " -s \"mkpart primary reiserfs " & lMbStart & "M " & (lMbEnd - lMBAmmountToUseForVL) & "M\"" ' re-create the new fs"
+        IF hproc.Value > 0 THEN 
+          PRINT "Error restoring reiserfs filesystem."
+          RETURN hproc.Value
+        END IF
+      
+            
+          
+    END IF
+    
+          
       
   ' create new partitions now that we're here ============================================================================================
     ' do we need to create a swap partition?
+    ' the global partitions must be set as "/dev/hda1-SIZE_IN_GB"
+    
+    
       SHELL "probepart | grep -i \"linux swap\"" TO sDump
         sDump = Trim(sDump)
           IF sDump THEN 
-            bSwapNeeded = FALSE
+            bSwapNeeded = FALSE ' found a swap partition
             sDumparr = Split(sDump, "\n")
             sLine = Split(sDumparr[0], " ")
             sSwapPart = Trim(sLine[0])
+            'SHELL "parted " & lef & " unit GB print | grep \"^ " & sNum & "\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump        
+            SHELL "parted " & Left(sSwapPart, Len("/dev/hda")) & " unit GB print | grep \"^ " & Right(sSwapPart, Len(sSwapPart) - Len("/dev/hda")) & "\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump
+              sDump = Trim(sDump)
+              PRINT " --- . Use existing swap partition at " & sSwapPart
+              sSwapPart = sSwapPart & "-" & sDump 
+            
           ELSE 
             bSwapNeeded = TRUE
+            
+            
           END IF
+         
+         ' determine how many partitions are present in the drive
+          SHELL "probepart | grep \"^" & Left(sPartition, Len("/dev/hda")) & "\" |wc -l" TO sDump
+            sDump = Trim(sDump)
+            iPartCnt = sDump
           
-    
-  
+                      ' determine where the free space is at
+            SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit mb print free | grep -i \"free space\" | tr -s \' \',\"\"" TO sDump
+            sDump = Trim(Replace(sDump, "MB", ""))
+            'Message(sDump)
+            
+            sDumparr = Split(sDump, " ")
+            lMbStart = sDumparr[0]
+            lMbEnd = sDumparr[1]
+            lMbSize = sDumparr[2]
+            
+         ' determine ammount of ram available
+                  SHELL "free -m | grep \"^Mem:\" | tr -s \' \',\"\" | cut -f2 -d \' \'" TO sDump
+                    lTotalRam = sDump
+                      IF lTotalRam <= 512 THEN 
+                        lTotalSwapNeeded = (lTotalRam * 2)
+                      ELSE 
+                        lTotalSwapNeeded = lTotalRam
+                      END IF
+            
+          
+    IF iPartCnt <= 2 THEN 
+      IF bSwapNeeded = FALSE THEN 
+        ' only create the / partition
+          PRINT " ---\\__ Create / partition @ " & Left(sPartition, Len("/dev/hda")) & (iPartCnt + 1) & " size = " & lMbSize & " MB with reiserfs as filesytem"
+          PRINT "DEBUG: " & "parted " & Left(sPartition, Len("/dev/hda")) & " -s \"mkpart primary reiserfs " & lMbStart & "mb " & lMbEnd & "mb\""
+          hproc = SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " -s \"mkpart primary reiserfs " & lMbStart & "mb " & lMbEnd & "mb\"" WAIT 
+            IF hproc.Value > 0 THEN 
+              RETURN hproc.Value
+            END IF
+          SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit GB print | grep \"^ " & (iPartCnt + 1) & "\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump
+          hproc = SHELL "mkfs.reiserfs -q " & Left(spartition, Len("/dev/hda")) & (iPartCnt + 1) WAIT
+           
+          sRootPart = Left(sPartition, Len("/dev/hda")) & (iPartCnt + 1) & "-" & sDump
+      ELSE 
+        ' create root and swap
+          SHELL "parted " & Left(spartition, Len("/dev/hda")) & " -s \"mkpart extended " & lMbSize & "mb " & lMbEnd & "mb\"" WAIT 
+           ' ^ creates a wrapper around the unpartitioned space to give us room for new partitions (logical type)
+              ' **********  need to read new space location and dimensions ***************
+          SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit mb print free | grep -i \"free space\" tr -s \' \',\"\"" TO sDump
+            sDump = Trim(Replace(sDump, "MB", ""))
+            sDumparr = Split(sDump, " ")
+            lMbStart = sDumparr[0]
+            lMbEnd = sDumparr[1]
+            lMbSize = sDumparr[2]
+      ' swap partition will be iPartcnt + 2 here (because the extended is iPartcnt +1)
+      ' / partition (if needed) will be iPartcnt + 3
+              
+                
+                  ' SHELL "parted " & Trim(sdrive) & " mkpart logical linux-swap " & sFreeStart & " " & sFreeEnd WAIT 
+                  hproc = SHELL "parted " & Left(spartition, Len("/dev/hda")) & " mkpart logical linux-swap " & lMbStart & "MB " & (lMbStart + lTotalSwapNeeded) & "MB" WAIT 
+                    IF hproc.Value > 0 THEN RETURN hproc.Value
+                    PRINT " ---\\___ Created swap partition " & Left(spartition, Len("/dev/hda")) & (iPartCnt + 2) & " size = " & lTotalSwapNeeded & "MB"
+                      ' register the new swap partition to the global class
+                      SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit GB print | grep \"^ " & (iPartCnt + 2) & "\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump
+                        sSwapPart = Left(spartition, Len("/dev/hda")) & (iPartCnt + 2) & "-" & sDump
+                    
+             ' YET AGAIN
+             SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit mb print free | grep -i \"free space\" tr -s \' \',\"\"" TO sDump
+                        sDump = Trim(Replace(sDump, "MB", ""))
+                        sDumparr = Split(sDump, " ")
+                        lMbStart = sDumparr[0]
+                        lMbEnd = sDumparr[1]
+                        lMbSize = sDumparr[2]
+                  hproc = SHELL "parted " & Left(spartition, Len("/dev/hda")) & " -s \"mkpart logical reiserfs " & lMbStart & "MB " & lMbEnd & "MB\"" WAIT 
+                    IF hproc.Value > 0 THEN RETURN hproc.Value
+                  PRINT " ---\\___ Created / partition " & Left(spartition, Len("/dev/hda")) & (iPartCnt + 3) & " size = " & lMbSize & "MB"
+                  SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit GB print | grep \"^ " & (iPartCnt + 3) & "\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump
+                  sRootPart = Left(spartition, Len("/dev/hda")) & (iPartCnt + 3) & "-" & sDump
+          
+      END IF
+          
+          
+          
       
-    
-        
-        
-  
+    ELSE  
+      ' we will create an extended partition wich will be number iPartCnt +1
+        SHELL "parted " & Left(spartition, Len("/dev/hda")) & " -s \"mkpart extended " & lMbStart & "mb " & lMbEnd & "mb\"" WAIT 
+        ' ^ creates a wrapper around the unpartitioned space to give us room for new partitions (logical type)
+              ' **********  need to read new space location and dimensions ***************
+          SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit mb print free | grep -i \"free space\" tr -s \' \',\"\"" TO sDump
+            sDump = Trim(Replace(sDump, "MB", ""))
+            sDumparr = Split(sDump, " ")
+            lMbStart = sDumparr[0]
+            lMbEnd = sDumparr[1]
+            lMbSize = sDumparr[2]
+      ' swap partition will be iPartcnt + 2 here (because the extended is iPartcnt +1)
+      ' / partition (if needed) will be iPartcnt + 3
+              IF bSwapNeeded = TRUE THEN 
+                
+                  ' SHELL "parted " & Trim(sdrive) & " mkpart logical linux-swap " & sFreeStart & " " & sFreeEnd WAIT 
+                  hproc = SHELL "parted " & Left(spartition, Len("/dev/hda")) & " mkpart logical linux-swap " & lMbStart & "MB " & (lMbStart + lTotalSwapNeeded) & "MB" WAIT 
+                    IF hproc.Value > 0 THEN RETURN hproc.Value
+                    PRINT " ---\\___ Created swap partition " & Left(spartition, Len("/dev/hda")) & (iPartCnt + 2) & " size = " & lTotalSwapNeeded & "MB"
+                      ' register the new swap partition to the global class
+                      SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit GB print | grep \"^ " & (iPartCnt + 2) & "\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump
+                        sSwapPart = Left(spartition, Len("/dev/hda")) & (iPartCnt + 2) & "-" & sDump
+                    
+             ' YET AGAIN
+             SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit mb print free | grep -i \"free space\" tr -s \' \',\"\"" TO sDump
+                        sDump = Trim(Replace(sDump, "MB", ""))
+                        sDumparr = Split(sDump, " ")
+                        lMbStart = sDumparr[0]
+                        lMbEnd = sDumparr[1]
+                        lMbSize = sDumparr[2]
+                  hproc = SHELL "parted " & Left(spartition, Len("/dev/hda")) & " -s \"mkpart logical reiserfs " & lMbStart & "MB " & lMbEnd & "MB\"" WAIT 
+                    IF hproc.Value > 0 THEN RETURN hproc.Value
+                  PRINT " ---\\___ Created / partition " & Left(spartition, Len("/dev/hda")) & (iPartCnt + 3) & " size = " & lMbSize & "MB"
+                  SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit GB print | grep \"^ " & (iPartCnt + 3) & "\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump
+                  sRootPart = Left(spartition, Len("/dev/hda")) & (iPartCnt + 3) & "-" & sDump
+          ELSE ' no swap needed
+              
+              SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit mb print free | grep -i \"free space\" tr -s \' \',\"\"" TO sDump
+                        sDump = Trim(Replace(sDump, "MB", ""))
+                        sDumparr = Split(sDump, " ")
+                        lMbStart = sDumparr[0]
+                        lMbEnd = sDumparr[1]
+                        lMbSize = sDumparr[2]
+                  hproc = SHELL "parted " & Left(spartition, Len("/dev/hda")) & " -s \"mkpart logical reiserfs " & lMbStart & "MB " & lMbEnd & "MB\"" WAIT 
+                    IF hproc.Value > 0 THEN RETURN hproc.Value
+                  PRINT " ---\\___ Created / partition " & Left(spartition, Len("/dev/hda")) & (iPartCnt + 2) & " size = " & lMbSize & "MB"
+                  SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit GB print | grep \"^ " & (iPartCnt + 2) & "\" | tr -s \' \',\"\" | cut -f 5 -d \' \'" TO sDump
+                  sRootPart = Left(spartition, Len("/dev/hda")) & (iPartCnt + 2) & "-" & sDump
+                  
+                               
+              END IF
+    END IF
+              
+      
+      ClsGlobal.sTargetRoot = Trim(sRootPart)
+      ClsGlobal.sTargetSwap = Trim(sSwapPart)
   
   
 END

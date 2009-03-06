@@ -41,7 +41,7 @@ END
 
 PUBLIC FUNCTION GetNext() AS String
   
-  
+  RETURN "Step7"
   
 END
 
