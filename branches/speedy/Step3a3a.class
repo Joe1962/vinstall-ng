@@ -51,7 +51,10 @@ ME.btStart.Enabled = TRUE
 ME.HBox2.Visible = FALSE
 ME.tlWarning.Visible = TRUE
 ME.MovieBox1.Enabled = TRUE
+
 ClsGlobal.fRunningMainForm.btnext.enabled = FALSE  
+
+
   
 END
 

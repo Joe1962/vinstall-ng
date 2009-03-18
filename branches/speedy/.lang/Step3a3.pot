@@ -18,7 +18,15 @@ msgstr ""
 msgid "Claim free space from existing partitions"
 msgstr ""
 
-#: Step3a3.class:100
+#: Step3a3.class:39
+msgid "No resizable partitions found on your system. Please use the manual partitioning method."
+msgstr ""
+
+#: Step3a3.class:39
+msgid "This will allow you to use a partitioning tool to handle your partitioning needs."
+msgstr ""
+
+#: Step3a3.class:107
 msgid "Select which partition to resize and use the slider below it to adjust the ammount of space to be used by VectorLinux"
 msgstr ""
 

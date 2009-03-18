@@ -77,7 +77,7 @@ PUBLIC SUB EMBED_GPARTED()
     END IF
   
 '  FrmDiskPart.tlBanner.Text = "<h3>" & ("Loading gparted ... Please wait") & "</h3>"
-  ME.tlEmbDone.Text = "<h3><i>" & ("Loading partitioning utility...Please Wait") & "</h3></i>"
+  ME.tlEmbDone.Text = "<h3><i>" & ("Loading partitioning utility...Please Wait") & "</i></h3>"
   ME.tlEmbDone.Visible = TRUE
   SHELL "/usr/sbin/gparted"
   WAIT 1
@@ -122,14 +122,14 @@ PUBLIC SUB Embedder1_Embed()
 
     Message.Warning(("VectorLinux is about to launch the GParted partitioning tool. Use this utility to") & gb.NewLine &
     ("move, resize, delete or create partitions.") & "<b>" & gb.NewLine & gb.NewLine & 
-    ("When you are finished, you will need to exit the utility from the") & Space(1) & "<i>" & ("GParted") & "</i>" & Space(1) & ("menu") & "</b>")
-    FMain.btNext.Enabled = FALSE
-    FMain0.btNext.Enabled = FALSE
-    FMain.btBack.Enabled = FALSE
-    FMain0.btBack.Enabled = FALSE
-    FMain.btQuit.Enabled = FALSE
-    FMain0.btQuit.Enabled = FALSE
-
+    ("When you are finished, you will need to exit the utility from the") & Space(1) & ("GParted") & Space(1) & ("menu") & "</b>")
+    WITH ClsGlobal.fRunningMainForm
+      .btnext.Enabled = FALSE
+      .btBack.Enabled = FALSE
+      .btQuit.enabled = FALSE
+    END WITH 
+    Embedder1.Raise
+    Embedder1.Visible = TRUE
 END
 
 PUBLIC FUNCTION CHECK_IF_REBOOT_NEEDED() AS Boolean
