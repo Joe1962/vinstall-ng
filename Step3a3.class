@@ -34,6 +34,13 @@ PUBLIC SUB StartUp()
   
   WAIT 
   MdlAutoPartition.DISPLAY_PARTITIONS_WITH_FREE_SPACE(ME.ScrollView1) '(ME.ListContainer1) '(ME.ScrollView1) '(ME.HpnlChoices)
+  IF MdlAutoPartition.objRbs.Count <= 0 THEN 
+    ME.tlExp.Text = ("No resizable partitions found on your system. Please use the manual partitioning method.") & Space(1)&
+    ("This will allow you to use a partitioning tool to handle your partitioning needs.")
+    'ClsGlobal.fRunningMainForm.btnext.enabled = FALSE
+  END IF
+  ClsGlobal.fRunningMainForm.btnext.enabled = MdlAutoPartition.objRbs.Count >= 1
+  
   
 END
 PUBLIC SUB OnExit()

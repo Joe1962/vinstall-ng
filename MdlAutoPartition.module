@@ -94,21 +94,24 @@ PUBLIC FUNCTION PERFORM_AUTO_PARTITION_FROM_FREE_SPACE(sPartition AS String) AS 
                 
               
             
-        CASE "ext2", "ext3", "*fat*", "hfsx", "hfs+", "hfs", "linux-swap"
+        CASE "ext2", "ext3", "*fat*", "hfsx", "hfs+", "hfs", "linux-swap", "vfat", "VFAT"
           SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit mb print | tr -s \' \',\"\" | grep \"^" & sPartPrefx & iPart & "\"" TO sDump
             sDump = Trim(sDump)
             'Number Start End     Size    Type   File system Flags
             '1    0.03MB 12256MB 12256MB primary reiserfs 
             partedDump = Split(sDump, " ")
-            lEndMark = Trim(partedDump[2])
-            sResizeCommand = "parted " & sPartition & " unit mb resize " & iPart & Space(1) & Trim(partedDump[1]) & "m" & Space(1) & lEndMark - lMBAmmountToUseForVL & "m"
+            
+            'RETURN 1
+            lEndMark = Left(partedDump[2], Len(partedDump[2]) - 2)
+            sResizeCommand = "parted " & Left(sPartition, Len("/dev/hda")) & " unit mb -s \"resize " & iPart & Space(1) & Trim(partedDump[1]) & Space(1) & (lEndMark - lMBAmmountToUseForVL) & "m\""
         CASE "reiserfs"
            'r resize_reiserfs -s -1G /dev/hda8 ( see man resize_reiserfs )
            sResizeCommand = "echo \"y\" | resize_reiserfs -fq -s -" & lMBAmmountToUseForVL & "M" & Space(1) & sPartition
            PRINT "DEBUG: " & sResizeCommand
            
         CASE ELSE 
-          Message.Error("I dont know how to resize a pertition type " & sFs)
+          Message.Error("I dont know how to resize a partition type " & sFs)
+          RETURN 1
       END SELECT 
       
   
@@ -149,6 +152,9 @@ PUBLIC FUNCTION PERFORM_AUTO_PARTITION_FROM_FREE_SPACE(sPartition AS String) AS 
                   
               
   ' run the actual command
+  'DEBUG sResizeCommand
+  'RETURN 1
+    DEBUG sResizeCommand
     hproc = SHELL sResizeCommand WAIT 
       PRINT " ---\\--> Shinking partition " & spartition
       IF hproc.Value > 0 THEN 
@@ -156,6 +162,10 @@ PUBLIC FUNCTION PERFORM_AUTO_PARTITION_FROM_FREE_SPACE(sPartition AS String) AS 
         
       END IF
       PRINT "Done"
+      
+      'DEBUG "done resizing"
+      '
+      'RETURN 1
       
       
       IF sFs LIKE "ntfs" THEN 
@@ -242,8 +252,8 @@ PUBLIC FUNCTION PERFORM_AUTO_PARTITION_FROM_FREE_SPACE(sPartition AS String) AS 
                       ' determine where the free space is at
             SHELL "parted " & Left(sPartition, Len("/dev/hda")) & " unit mb print free | grep -i \"free space\" | tr -s \' \',\"\"" TO sDump
             sDump = Trim(Replace(sDump, "MB", ""))
-            'Message(sDump)
-            
+            Message(sDump)
+            IF Len(sDump) <= 0 THEN RETURN 1
             sDumparr = Split(sDump, " ")
             lMbStart = sDumparr[0]
             lMbEnd = sDumparr[1]
@@ -391,6 +401,8 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
   DIM hr AS Separator
   DIM picb AS PictureBox
   DIM hobox AS Panel
+  DIM sFs AS String
+  DIM bgc AS Integer
   
   objProgs = NEW Object[]
   objSliders = NEW Object[]
@@ -455,17 +467,34 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
       FOR i = 0 TO sResults.Max
         ' Message(Trim(sResults[i]))
         sLineArr = Split(Trim(sResults[i]), " ")
+        sFs = Trim(sLineArr[1])
         lTotalMB = Trim(sLineArr[2])
         lUsedMB = Trim(sLineArr[3])        
         lFreeMB = Trim(sLineArr[4])
         'Message(sLineArr[0] & Space(1) & "fREE SPACE " & sLineArr[4] & " Mb") 
         
         IF lFreeMB >= 10240 THEN ' only if free space is equal to or greater than 10GB
-          IF Trim(sLineArr[1]) <> "*xfs*" OR Trim(sLineArr[1]) <> "*jfs*" THEN  'only if fs is not xfs or jfs
+        'Message(sLineArr[1])
+          'IF Trim(sLineArr[1]) <> "*xfs*" OR Trim(sLineArr[1]) <> "reiserfs" OR Trim(sLineArr[1]) <> "*jfs*" THEN  'only if fs is not xfs or jfs
+            SELECT CASE sFs ' set the background color for the existing data label
+              CASE "ntfs", "NTFS"
+                bgc = &h66FF66
+              CASE "fat32", "FAT32", "vfat", "VFAT"
+                bgc = &h33FF33
+              CASE "fat16", "FAT", "FAT16"
+                bgc = &h009900
+              CASE "ext2", "EXT2"
+                bgc = &h99CCFF
+              CASE "ext3", "EXT3"
+                bgc = &h336699
+              CASE ELSE 
+                bgc = Color.LightBackground
+            END SELECT 
+          IF sFS <> "reiserfs" THEN           
         sResizableList.Add(Trim(sResults[i]))
         rb = NEW RadioButton(hostContainer) AS "PartitionOptions"
           WITH rb
-            .Text = Trim(sLineArr[0]) & Space(1) & "-" & Space(1) & Trim(sLineArr[4]) & Space(1) & ("MB of free space") 
+            .Text = Trim(sLineArr[0]) & Space(1) & "-" & Space(1) & Trim(sLineArr[4]) & Space(1) & ("MB of free space") & " [ " & sFs & " ]"
             .tag = Trim(sLineArr[0])
             .Height = 21
             .Expand = TRUE
@@ -503,7 +532,8 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
           'panels.Add(hobox)
           tl = NEW TextLabel(hobox)
             WITH tl
-              .BackColor = Color.SelectedBackground
+              '.BackColor = Color.SelectedBackground
+              .BackColor = bgc
               .Expand = FALSE
               .Text = ("Existing Data")
               .Width = .Parent.Width / 2
@@ -520,7 +550,7 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
               .Height = .Parent.Height
               '.Width = .Parent.Width * 0.5
               .Expand = TRUE
-              .BackColor = Color.LightBackground
+              '.BackColor = Color.LightBackground
               .Alignment = Align.Center
               .Tag = .Parent.Tag & "R"
             END WITH 
@@ -581,7 +611,14 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
       NEXT 
     NEXT 
    
-   
+    
+   IF objRbs.Count <= 0 THEN ' no partitions found
+    'Message.Error("No resizable partitions found")
+      Step3a3.tlExp.Text = ("No resizable partitions found on your system. Please use the manual partitioning method")
+      Step3a3.Refresh()
+      ClsGlobal.fRunningMainForm.btnext.enabled = objRbs.count >= 1
+      
+   END IF
    
 END
 

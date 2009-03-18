@@ -34,21 +34,21 @@
     Border = Border.Etched
   }
   { HBox2 HBox
-    MoveScaled(7,22,56,38)
+    MoveScaled(7,22,56,36)
     Visible = False
     Expand = True
     { MovieBox1 MovieBox
-      MoveScaled(9,3,40,34)
+      MoveScaled(9,2,40,32)
       Expand = True
       Path = "/home/vluser/devel/speedy/images/throbber.gif"
     }
   }
   { HBox3 HBox
-    MoveScaled(1,60,6,2)
+    MoveScaled(1,58,6,2)
     Expand = True
   }
   { btStart Button
-    MoveScaled(1,62,20,3)
+    MoveScaled(1,60,20,3)
     Text = ("Shrink partitions now")
   }
 }
