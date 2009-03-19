@@ -166,3 +166,9 @@ PUBLIC SUB Form_Close()
   SHELL "umount /mnt/source 2>/dev/null" WAIT 
 
 END
+
+PUBLIC SUB btHelp_Click()
+
+   MdlHelpSystem.TRIGGER_HELP($oCurrent)
+
+END
