@@ -14,21 +14,69 @@ msgstr ""
 msgid "VectorLinux Installer"
 msgstr "VectorLinux Installer"
 
-#: FMain.class:245 FMain0.class:246 FMain0Old.class:233
+#: FMain.class:247 FMain0.class:247 FMain0Old.class:233
 msgid "Process Overview"
 msgstr "Process Overview"
 
-#: FMain.class:287 FMain0.class:288 FMain0Old.class:271
+#: FMain.class:288 FMain0.class:288
+msgid "Help"
+msgstr ""
+
+#: FMain.class:301 FMain0.class:301 FMain0Old.class:271
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:298 FMain0.class:299 FMain0Old.class:282
+#: FMain.class:312 FMain0.class:312 FMain0Old.class:282
 msgid "Next"
 msgstr "Next"
 
-#: FMain.class:309 FMain0.class:310 FMain0Old.class:293
+#: FMain.class:323 FMain0.class:323 FMain0Old.class:293
 msgid "Quit"
 msgstr "Quit"
+
+#: MdlAutoPartition.module:132
+msgid "Try another partitioning method"
+msgstr ""
+
+#: MdlAutoPartition.module:143
+msgid "Simulated resize of your ntfs partition"
+msgstr ""
+
+#: MdlAutoPartition.module:143
+msgid ""
+"It is not safe to perform this operation... Please use another partitioning "
+"method"
+msgstr ""
+
+#: MdlAutoPartition.module:175
+msgid "Error deleting the ntfs filesytem"
+msgstr ""
+
+#: MdlAutoPartition.module:180
+msgid "Error creating the ntfs filesystem after shrinking it"
+msgstr ""
+
+#: MdlAutoPartition.module:497
+msgid "MB of free space"
+msgstr ""
+
+#: MdlAutoPartition.module:538
+msgid "Existing Data"
+msgstr ""
+
+#: MdlAutoPartition.module:560
+msgid "Total space for VectorLinux"
+msgstr ""
+
+#: MdlAutoPartition.module:617
+msgid ""
+"No resizable partitions found on your system. Please use the manual "
+"partitioning method"
+msgstr ""
+
+#: MdlAutoPartition.module:661
+msgid "Select the location to which we will resize"
+msgstr ""
 
 #: MdlMain.module:33
 msgid "Unable to format"
@@ -54,7 +102,7 @@ msgstr ""
 msgid "Disk Partitioning"
 msgstr ""
 
-#: MdlStartUp.module:47
+#: MdlStartUp.module:47 Step8.class:135
 msgid "Software Selection"
 msgstr ""
 
@@ -62,7 +110,7 @@ msgstr ""
 msgid "Installation"
 msgstr ""
 
-#: MdlStartUp.module:49
+#: MdlStartUp.module:49 Step8.class:218
 msgid "Installation Summary"
 msgstr ""
 
@@ -130,67 +178,115 @@ msgstr "Use this box to test your keyboard settings"
 msgid "on"
 msgstr "on"
 
-#: Step1.class:131
-msgid "Scanning system partitions for installation files"
-msgstr "Scanning system partitions for installation files"
-
-#: Step1.class:150
-msgid "Found"
-msgstr "Found"
-
-#: Step1.class:150
-msgid "in partition"
-msgstr "in partition"
-
-#: Step1.class:191
-msgid "Scanning for CD Media ... Please wait"
-msgstr "Scanning for CD Media ... Please wait"
-
-#: Step1.class:204
-msgid "Scanning"
-msgstr "Scanning"
-
-#: Step1.class:214
-msgid "in"
-msgstr "in"
-
-#: Step1.class:242
-msgid "Scanning system for installable ISO images"
-msgstr "Scanning system for installable ISO images"
-
-#: Step1.class:335
-msgid "DISTRIBUTION"
-msgstr "DISTRIBUTION"
-
-#: Step1.class:338
-msgid "VERSION"
-msgstr "VERSION"
-
-#: Step1.class:415
-msgid "This feature can help you avoid an unsuccesful installation."
+#: Step1.class:91
+msgid ""
+"No installable media was found on your system. Please insert an installation "
+"CD"
 msgstr ""
 
-#: Step1.class:415 Step3a1.class:22 Step3a1a.class:169
-msgid "WARNING:"
+#: Step1.class:91
+msgid ""
+"or move your installation images (ISO) to the top of your partitions. Then "
+"click"
 msgstr ""
 
-#: Step1.class:415
-msgid "This process can take a long time to complete."
+#: Step1.class:92
+msgid "No installable media found on your system."
 msgstr ""
 
-#: Step1.class:467
-msgid "Select Installation Source"
-msgstr "Select Installation Source"
+#: Step1.class:93
+msgid ""
+"Insert installation CD or move Installable (iso) images to the top directory "
+"on your partitions and click"
+msgstr ""
 
-#: Step1.class:485
+#: Step1.class:93
+msgid "to search for media again"
+msgstr ""
+
+#: Step1.class:98 Step2.class:198 Step5.class:177
+msgid "Click"
+msgstr ""
+
+#: Step1.class:98
+msgid "to begin installing"
+msgstr ""
+
+#: Step1.class:101
 msgid "Select Installation source from the list below"
 msgstr "Select Installation source from the list below"
 
-#: Step1.class:506
+#: Step1.class:103
+msgid "to continue or click"
+msgstr ""
+
+#: Step1.class:103
+#, fuzzy
+msgid "to search for installation media again"
+msgstr "Check Installation media before installing"
+
+#: Step1.class:149
+msgid "Scanning system partitions for installation files"
+msgstr "Scanning system partitions for installation files"
+
+#: Step1.class:168
+msgid "Found"
+msgstr "Found"
+
+#: Step1.class:168
+msgid "in partition"
+msgstr "in partition"
+
+#: Step1.class:209
+msgid "Scanning for CD Media ... Please wait"
+msgstr "Scanning for CD Media ... Please wait"
+
+#: Step1.class:222
+msgid "Scanning"
+msgstr "Scanning"
+
+#: Step1.class:232
+msgid "in"
+msgstr "in"
+
+#: Step1.class:260
+msgid "Scanning system for installable ISO images"
+msgstr "Scanning system for installable ISO images"
+
+#: Step1.class:353
+msgid "DISTRIBUTION"
+msgstr "DISTRIBUTION"
+
+#: Step1.class:356
+msgid "VERSION"
+msgstr "VERSION"
+
+#: Step1.class:433
+msgid "This feature can help you avoid an unsuccesful installation."
+msgstr ""
+
+#: Step1.class:433 Step3a1.class:22 Step3a1a.class:186 Step7a.class:143
+msgid "WARNING:"
+msgstr ""
+
+#: Step1.class:433
+msgid "This process can take a long time to complete."
+msgstr ""
+
+#: Step1.class:443
+#, fuzzy
+msgid "Searching your system for installable media"
+msgstr "Scanning system for installable ISO images"
+
+#: Step1.class:511
+msgid "Select Installation Source"
+msgstr "Select Installation Source"
+
+#: Step1.class:550
 msgid "Search Again"
 msgstr "Search Again"
 
-#: Step1.class:530
+#: Step1.class:580
 msgid "Check Installation media before installing"
 msgstr "Check Installation media before installing"
 
@@ -288,10 +384,6 @@ msgstr ""
 msgid "Keep in mind however, that this process can take a while to complete."
 msgstr "Keep in mind however, that this process can take a while to complete."
 
-#: Step2.class:198 Step5.class:166
-msgid "Click"
-msgstr ""
-
 #: Step2.class:198
 msgid "to abort this process at any time"
 msgstr ""
@@ -308,29 +400,29 @@ msgstr ""
 msgid "Select the partitioning method you would like to use"
 msgstr ""
 
-#: Step3.class:153
+#: Step3.class:175
 msgid "Automatic"
 msgstr ""
 
-#: Step3.class:163
+#: Step3.class:185
 msgid ""
 "Automatically resize your partitions and / or create the correct disk space "
 "for VectorLinux."
 msgstr ""
 
-#: Step3.class:170
+#: Step3.class:192
 msgid "Manually resize my partitions "
 msgstr ""
 
-#: Step3.class:180
+#: Step3.class:202
 msgid "Use the partitioning tool to prepare your system partitions."
 msgstr ""
 
-#: Step3.class:187
+#: Step3.class:209
 msgid "My hard drive is already partitioned"
 msgstr ""
 
-#: Step3.class:197
+#: Step3.class:219
 msgid "Install VectorLinux to existing partitions on my hard drive"
 msgstr ""
 
@@ -373,11 +465,11 @@ msgstr ""
 msgid "Use unpartitioned space on my hard disk (creates new partitions)"
 msgstr ""
 
-#: Step3a.class:144
+#: Step3a.class:143
 msgid "Use free space on existing partitions for VectorLinux"
 msgstr ""
 
-#: Step3a.class:168
+#: Step3a.class:164
 msgid "Use entire disk"
 msgstr ""
 
@@ -389,7 +481,7 @@ msgstr ""
 msgid "All existing data in the device you select here will be destroyed."
 msgstr ""
 
-#: Step3a1.class:68
+#: Step3a1.class:74
 msgid "Total Disc Size"
 msgstr ""
 
@@ -429,43 +521,43 @@ msgstr ""
 msgid "Create New"
 msgstr ""
 
-#: Step3a1a.class:148
+#: Step3a1a.class:160
 msgid "Failed to format partitions, please try another partitioning method"
 msgstr ""
 
-#: Step3a1a.class:160
+#: Step3a1a.class:177
 msgid "Partitioning stage complete. Click"
 msgstr ""
 
-#: Step3a1a.class:160 Step3a2.class:322 Step5.class:166
+#: Step3a1a.class:177 Step3a2.class:359 Step3a3a.class:72 Step5.class:177
 msgid "to continue"
 msgstr ""
 
-#: Step3a1a.class:169
+#: Step3a1a.class:186
 msgid "All existing data in"
 msgstr ""
 
-#: Step3a1a.class:169
+#: Step3a1a.class:186
 msgid "is about to be deleted."
 msgstr ""
 
-#: Step3a1a.class:169
+#: Step3a1a.class:186
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:386
+#: Step3a1a.class:186 Step6.class:467 Step7a.class:143
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:169 Step6.class:386
+#: Step3a1a.class:186 Step6.class:467 Step7a.class:143
 msgid "No"
 msgstr ""
 
-#: Step3a1a.class:173
+#: Step3a1a.class:190
 msgid "Preparing hard disk for new partitioning structure. Please wait"
 msgstr ""
 
-#: Step3a1a.class:193
+#: Step3a1a.class:210
 msgid "Operation cancelled by user. No changes have been made to the system"
 msgstr ""
 
@@ -499,47 +591,108 @@ msgid ""
 "VectorLinux"
 msgstr ""
 
-#: Step3a2.class:191
+#: Step3a2.class:192
 msgid "Please wait while your hard drive is being partitioned"
 msgstr ""
 
-#: Step3a2.class:204
+#: Step3a2.class:205
 msgid "Unable to find enough un-used space to perform auto-partition."
 msgstr ""
 
-#: Step3a2.class:204
+#: Step3a2.class:205
 msgid "Please consider using a different partitioning option."
 msgstr ""
 
-#: Step3a2.class:206
+#: Step3a2.class:207
 msgid ""
 "Unable to find enough un-used space to perform auto-partition. Please "
 "consider using a different partitioning option."
 msgstr ""
 
-#: Step3a2.class:322
+#: Step3a2.class:359
 msgid "Partitioning stage complete... Click"
 msgstr ""
 
-#: Step3a2.class:352
+#: Step3a2.class:407
 msgid ""
 "We are unable to find any hard disks with enough unpartitioned space for "
 "this operation."
 msgstr ""
 
-#: Step3a2.class:352
+#: Step3a2.class:407
 msgid "Please consider using another partitioning method."
 msgstr ""
 
-#: Step3a2.class:354
+#: Step3a2.class:409
 msgid ""
 "Unable to find any hard drives with enough unpartitioned space. Please go "
 "back and select  another partitioning method"
 msgstr ""
 
-#: Step3a3.class:22
+#: Step3a3.class:23 Step3a3a.class:116
 msgid "Claim free space from existing partitions"
 msgstr ""
+
+#: Step3a3.class:39
+msgid ""
+"No resizable partitions found on your system. Please use the manual "
+"partitioning method."
+msgstr ""
+
+#: Step3a3.class:39
+msgid ""
+"This will allow you to use a partitioning tool to handle your partitioning "
+"needs."
+msgstr ""
+
+#: Step3a3.class:107
+msgid ""
+"Select which partition to resize and use the slider below it to adjust the "
+"ammount of space to be used by VectorLinux"
+msgstr ""
+
+#: Step3a3a.class:26
+msgid "You are about to shink"
+msgstr ""
+
+#: Step3a3a.class:26
+msgid "to make room for your vectorlinux installation."
+msgstr ""
+
+#: Step3a3a.class:26
+msgid ""
+"This is generally a safe procedure, however, you should always consider "
+"making copies of your valuable data before making changes such as this one "
+"to your system"
+msgstr ""
+
+#: Step3a3a.class:26
+msgid "When you are ready to continue, click the"
+msgstr ""
+
+#: Step3a3a.class:26
+msgid "button."
+msgstr ""
+
+#: Step3a3a.class:67
+msgid ""
+"Shrinking partitions and creating new environment for VectorLinux ... Please "
+"Wait"
+msgstr ""
+
+#: Step3a3a.class:72
+msgid "Partitions are ready for VectorLinux. Click"
+msgstr ""
+
+#: Step3a3a.class:133
+#, fuzzy
+msgid "Warning"
+msgstr "Scanning"
+
+#: Step3a3a.class:163
+#, fuzzy
+msgid "Shrink partitions now"
+msgstr "in partition"
 
 #: Step4.class:23
 msgid "Automatic Disc Partitioning"
@@ -549,135 +702,149 @@ msgstr ""
 msgid "Resize partitions using Gparted"
 msgstr ""
 
-#: Step5.class:64
+#: Step5.class:67
 msgid ""
 "Gparted was not found on this system. Please install gparted and try again"
 msgstr ""
 
 #: Step5.class:69
+msgid "Unable to launch partitioning tool."
+msgstr ""
+
+#: Step5.class:69
+msgid ""
+"The gparted program was not found on this system. Please install gparted or "
+"choose another partitioning method."
+msgstr ""
+
+#: Step5.class:80
 msgid "Loading partitioning utility...Please Wait"
 msgstr ""
 
-#: Step5.class:92
+#: Step5.class:103
 msgid ""
 "The VectorLinux installer is unable to embed the gparted partitioning "
 "utility."
 msgstr ""
 
-#: Step5.class:92
+#: Step5.class:103
 msgid ""
 "Please consider using the automatic partition option, or use other means of"
 msgstr ""
 
-#: Step5.class:92
+#: Step5.class:103
 msgid "partitioning your hard drives."
 msgstr ""
 
-#: Step5.class:114
+#: Step5.class:125
 msgid ""
 "VectorLinux is about to launch the GParted partitioning tool. Use this "
 "utility to"
 msgstr ""
 
-#: Step5.class:114
+#: Step5.class:125
 msgid "move, resize, delete or create partitions."
 msgstr ""
 
-#: Step5.class:114
+#: Step5.class:125
 msgid "When you are finished, you will need to exit the utility from the"
 msgstr ""
 
-#: Step5.class:114
+#: Step5.class:125
 msgid "GParted"
 msgstr ""
 
-#: Step5.class:114
+#: Step5.class:125
 msgid "menu"
 msgstr ""
 
-#: Step5.class:161
+#: Step5.class:172
 msgid "SYSTEM RESTART SUGGESTED"
 msgstr ""
 
-#: Step5.class:161
+#: Step5.class:172
 msgid ""
 "Your system still contains some non-linux partitions. If you still have a "
 "Windows operating system installed, it is recomended "
 msgstr ""
 
-#: Step5.class:161
+#: Step5.class:172
 msgid "that you reboot your system at this time. "
 msgstr ""
 
-#: Step5.class:161
+#: Step5.class:172
 msgid "Click the"
 msgstr ""
 
-#: Step5.class:161
+#: Step5.class:172
 msgid "button to restart your computer now, or click"
 msgstr ""
 
-#: Step5.class:161
+#: Step5.class:172
 msgid "to continue without restarting."
 msgstr ""
 
-#: Step5.class:166
+#: Step5.class:177
 msgid "PARTITIONING DONE"
 msgstr ""
 
-#: Step5.class:182
+#: Step5.class:193
 msgid "Your computer will restart in 10 seconds"
 msgstr ""
 
-#: Step5.class:239
+#: Step5.class:250
 msgid "Loading partitioning utility ... Please Wait"
 msgstr ""
 
-#: Step5.class:248
+#: Step5.class:259
 msgid "Restart Now"
 msgstr ""
 
-#: Step6.class:59
+#: Step6.class:66
 msgid "Partition"
 msgstr ""
 
-#: Step6.class:60
+#: Step6.class:67
 msgid "Size"
 msgstr ""
 
-#: Step6.class:61
+#: Step6.class:68
 msgid "Mount Point"
 msgstr ""
 
-#: Step6.class:62
+#: Step6.class:69
 msgid "File System"
 msgstr ""
 
-#: Step6.class:134
+#: Step6.class:142
+msgid "Swap"
+msgstr ""
+
+#: Step6.class:142
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:155
+#: Step6.class:183 Step8.class:73
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:200
+#: Step6.class:228
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:200
+#: Step6.class:228
 msgid "as your"
 msgstr ""
 
-#: Step6.class:200
+#: Step6.class:228
 msgid "partition."
 msgstr ""
 
-#: Step6.class:200
+#: Step6.class:228
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:281
+#: Step6.class:362
 msgid "Select which partitions to use for installation"
 msgstr ""
 
@@ -686,26 +853,142 @@ msgstr ""
 msgid "Select Installation Mode"
 msgstr "Select Installation Source"
 
-#: Step7.class:98
+#: Step7.class:108
 msgid "Full Install"
 msgstr ""
 
-#: Step7.class:108
+#: Step7.class:118
 msgid "Install everthing in the image (Fully Automated)"
 msgstr ""
 
-#: Step7.class:116
+#: Step7.class:126 Step8.class:125
 msgid "Customized"
 msgstr ""
 
-#: Step7.class:126
+#: Step7.class:136
 msgid "Select  the components you wish to install  (Advanced)"
 msgstr ""
 
-#: Step7.class:134
+#: Step7.class:144 Step8.class:127
 msgid "Minimal"
 msgstr ""
 
-#: Step7.class:144
+#: Step7.class:154
 msgid "Install the most minimal working confuguration (For older hardware)"
+msgstr ""
+
+#: Step7a.class:27 Step7b.class:23
+#, fuzzy
+msgid "Customize Your VectorLinux Installation"
+msgstr "VectorLinux Installer"
+
+#: Step7a.class:34
+msgid "Component"
+msgstr ""
+
+#: Step7a.class:49 Step7b.class:28
+msgid "Description"
+msgstr ""
+
+#: Step7a.class:143
+msgid ""
+"This component is a dependancy to any graphical user interface progam on the "
+"system"
+msgstr ""
+
+#: Step7a.class:143
+msgid ""
+"Choosing not to install this may result in a command-line (text mode) "
+"installation only"
+msgstr ""
+
+#: Step7a.class:143
+msgid "Are you sure you want to disable this conponent anyway?"
+msgstr ""
+
+#: Step7a.class:169 Step7b.class:183
+msgid "Select All"
+msgstr ""
+
+#: Step7a.class:175 Step7b.class:181
+msgid "Un-Select All"
+msgstr ""
+
+#: Step7a.class:235
+msgid ""
+"Major optional components available for installation. To select / un-select "
+"a component, click it's name or the box to the left of it's name."
+msgstr ""
+
+#: Step7b.class:27
+msgid "Package Name"
+msgstr ""
+
+#: Step7b.class:58
+msgid "Reading software catalog... Please wait a moment"
+msgstr ""
+
+#: Step7b.class:107
+msgid ""
+"Additional optional software available. Select which software packages to "
+"include in your installation."
+msgstr ""
+
+#: Step8.class:44
+msgid "Distribution"
+msgstr ""
+
+#: Step8.class:62
+msgid "Partitions to be used"
+msgstr ""
+
+#: Step8.class:74
+msgid "Not Formatted"
+msgstr ""
+
+#: Step8.class:74
+msgid "Mount to"
+msgstr ""
+
+#: Step8.class:76
+msgid "Format to"
+msgstr ""
+
+#: Step8.class:76
+msgid "and mount to"
+msgstr ""
+
+#: Step8.class:88
+msgid "NO SWAP SPACE SELECTED"
+msgstr ""
+
+#: Step8.class:93
+msgid "Swap Space"
+msgstr ""
+
+#: Step8.class:106
+msgid "Pre-formatted to reiserfs, and used for /"
+msgstr ""
+
+#: Step8.class:123
+msgid "Full"
+msgstr ""
+
+#: Step8.class:130
+#, fuzzy
+msgid "Installation Method"
+msgstr "Select Installation Source"
+
+#: Step8.class:136
+msgid "Major Components"
+msgstr ""
+
+#: Step8.class:146
+msgid "Additional Software"
+msgstr ""
+
+#: Step8.class:237
+msgid ""
+"Your VectorLinux installation is about to be performed as follows. If you "
+"need to make any changes, this is your last chance."
 msgstr ""
