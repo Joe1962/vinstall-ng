@@ -43,46 +43,50 @@ msgid "and mount to"
 msgstr ""
 
 #: Step8.class:88
+msgid "NO SWAP SPACE SELECTED"
+msgstr ""
+
+#: Step8.class:93
 msgid "Swap Space"
 msgstr ""
 
-#: Step8.class:101
+#: Step8.class:106
 msgid "Pre-formatted to reiserfs, and used for /"
 msgstr ""
 
-#: Step8.class:118
+#: Step8.class:123
 msgid "Full"
 msgstr ""
 
-#: Step8.class:120
+#: Step8.class:125
 msgid "Customized"
 msgstr ""
 
-#: Step8.class:122
+#: Step8.class:127
 msgid "Minimal"
 msgstr ""
 
-#: Step8.class:125
+#: Step8.class:130
 msgid "Installation Method"
 msgstr ""
 
-#: Step8.class:130
+#: Step8.class:135
 msgid "Software Selection"
 msgstr ""
 
-#: Step8.class:131
+#: Step8.class:136
 msgid "Major Components"
 msgstr ""
 
-#: Step8.class:141
+#: Step8.class:146
 msgid "Additional Software"
 msgstr ""
 
-#: Step8.class:213
+#: Step8.class:218
 msgid "Installation Summary"
 msgstr ""
 
-#: Step8.class:232
+#: Step8.class:237
 msgid "Your VectorLinux installation is about to be performed as follows. If you need to make any changes, this is your last chance."
 msgstr ""
 

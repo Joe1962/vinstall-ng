@@ -130,6 +130,22 @@ PUBLIC SUB LIST_PARTITIONS()
                 gvPartListing[irow, 5].BackColor = Color.LightGray
                 gvPartListing[irow, 6].BackColor = Color.LightGray
                 
+                ' ---------------------- make distinction from swap partitions to regular mountable ones ------------------
+                
+                cbMntPoint = NEW ComboBox(gvPartListing.Parent) AS "MountPointSel"
+                WITH cbMntPoint
+                  .Move(gvPartListing[irow, 2].left, gvPartListing[irow, 2].top)
+                  .Width = gvPartListing[irow, 2].Width
+                  .Height = gvPartListing[irow, 2].Height
+                  .ReadOnly = TRUE
+                  .tag = gvPartListing[irow, 0].Text
+                  .List = [("Swap"), ("Not Used")]
+                END WITH 
+                objMntPoints.Add(cbMntPoint)
+                
+                ' ---- continue----
+                
+                
               ELSE 
                 gvPartListing[irow, 5].Text = Trim(SFS)
                 gvPartListing[irow, 5].ForeColor = Color.White
@@ -228,6 +244,8 @@ PUBLIC SUB MountPointSel_Click()
   x = LAST.x
   y = LAST.y
   
+  
+  
   IF LAST.text <> ("Not Used") THEN 
     IF ME.CheckEntry(LAST.text, gvPartListing.RowAt(LAST.y)) > 0 THEN 
     LAST.text = ("Not Used")
@@ -257,6 +275,15 @@ PUBLIC SUB MountPointSel_Click()
       ME.gvPartListing[gvPartListing.RowAt(y), gvPartListing.ColumnAt(x)].Text = ""
     NEXT 
   END IF
+  
+  ' find out if are good to go yet
+  FOR EACH cb IN objMntPoints
+    IF cb.Text = "/" THEN 
+      ClsGlobal.fRunningMainForm.btnext.enabled = TRUE
+      RETURN 
+    END IF
+    ClsGlobal.fRunningMainForm.btnext.enabled = FALSE
+  NEXT 
   
 
       
@@ -315,7 +342,13 @@ PUBLIC SUB read_partition_selection()
       
 FOR i = 2 TO gvPartListing.Rows.count - 1
         IF gvPartListing[i, 4].Text LIKE "linux-swap" THEN 
-          ClsGlobal.sWapPartList = ClsGlobal.sWapPartList & gvPartListing[i, 0].Text & "-" & gvPartListing[i, 1].Text & ","
+            FOR EACH cbox IN objMntPoints
+              IF cbox.tag = gvPartListing[i, 0].Text THEN 
+                IF cbox.text <> ("Not Used") THEN 
+                  ClsGlobal.sWapPartList = ClsGlobal.sWapPartList & gvPartListing[i, 0].Text & "-" & gvPartListing[i, 1].Text & ","
+                END IF
+              END IF
+            NEXT           
         END IF
       NEXT   
 

@@ -10,19 +10,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FMain.class:245 FMain0.class:246 FMain0Old.class:233
+#: FMain.class:245 FMain0.class:245 FMain0Old.class:233
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:287 FMain0.class:288 FMain0Old.class:271
+#: FMain.class:287 FMain0.class:287 FMain0Old.class:271
 msgid "Back"
 msgstr ""
 
-#: FMain.class:298 FMain0.class:299 FMain0Old.class:282
+#: FMain.class:298 FMain0.class:298 FMain0Old.class:282
 msgid "Next"
 msgstr ""
 
-#: FMain.class:309 FMain0.class:310 FMain0Old.class:293
+#: FMain.class:309 FMain0.class:309 FMain0Old.class:293
 msgid "Quit"
 msgstr ""
 
@@ -94,7 +94,7 @@ msgstr ""
 msgid "Disk Partitioning"
 msgstr ""
 
-#: MdlStartUp.module:47 Step8.class:130
+#: MdlStartUp.module:47 Step8.class:135
 msgid "Software Selection"
 msgstr ""
 
@@ -102,7 +102,7 @@ msgstr ""
 msgid "Installation"
 msgstr ""
 
-#: MdlStartUp.module:49 Step8.class:213
+#: MdlStartUp.module:49 Step8.class:218
 msgid "Installation Summary"
 msgstr ""
 
@@ -533,11 +533,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:434 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:467 Step7a.class:143
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:434 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:467 Step7a.class:143
 msgid "No"
 msgstr ""
 
@@ -802,31 +802,35 @@ msgstr ""
 msgid "File System"
 msgstr ""
 
-#: Step6.class:146
+#: Step6.class:142
+msgid "Swap"
+msgstr ""
+
+#: Step6.class:142
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:167 Step8.class:73
+#: Step6.class:183 Step8.class:73
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:212
+#: Step6.class:228
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:212
+#: Step6.class:228
 msgid "as your"
 msgstr ""
 
-#: Step6.class:212
+#: Step6.class:228
 msgid "partition."
 msgstr ""
 
-#: Step6.class:212
+#: Step6.class:228
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:329
+#: Step6.class:362
 msgid "Select which partitions to use for installation"
 msgstr ""
 
@@ -842,7 +846,7 @@ msgstr ""
 msgid "Install everthing in the image (Fully Automated)"
 msgstr ""
 
-#: Step7.class:126 Step8.class:120
+#: Step7.class:126 Step8.class:125
 msgid "Customized"
 msgstr ""
 
@@ -850,7 +854,7 @@ msgstr ""
 msgid "Select  the components you wish to install  (Advanced)"
 msgstr ""
 
-#: Step7.class:144 Step8.class:122
+#: Step7.class:144 Step8.class:127
 msgid "Minimal"
 msgstr ""
 
@@ -939,30 +943,34 @@ msgid "and mount to"
 msgstr ""
 
 #: Step8.class:88
+msgid "NO SWAP SPACE SELECTED"
+msgstr ""
+
+#: Step8.class:93
 msgid "Swap Space"
 msgstr ""
 
-#: Step8.class:101
+#: Step8.class:106
 msgid "Pre-formatted to reiserfs, and used for /"
 msgstr ""
 
-#: Step8.class:118
+#: Step8.class:123
 msgid "Full"
 msgstr ""
 
-#: Step8.class:125
+#: Step8.class:130
 msgid "Installation Method"
 msgstr ""
 
-#: Step8.class:131
+#: Step8.class:136
 msgid "Major Components"
 msgstr ""
 
-#: Step8.class:141
+#: Step8.class:146
 msgid "Additional Software"
 msgstr ""
 
-#: Step8.class:232
+#: Step8.class:237
 msgid ""
 "Your VectorLinux installation is about to be performed as follows. If you "
 "need to make any changes, this is your last chance."
