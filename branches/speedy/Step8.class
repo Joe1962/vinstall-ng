@@ -34,7 +34,8 @@ PUBLIC SUB Form_Open()
 END
 PUBLIC FUNCTION GetNext() AS String
   
-  RETURN "Step9"
+  'RETURN "Step9"
+  RETURN "Conf0"
   
 END
 
@@ -61,7 +62,7 @@ PUBLIC SUB SUMMARIZE_PARTITION_SELECTION()
   WITH ME.TreeView1
     .Add("Part", ("Partitions to be used"), MdlStartUp.pCategory)
     IF ClsGlobal.bAutoPartition = FALSE THEN 
-      sArr = Split(ClsGlobal.sVitalPartList, ",")
+      sArr = Split(ClsGlobal.sVitalPartList, "|")
         FOR i = 0 TO sArr.Max
           sList = Trim(sArr[i])
         IF sList THEN 
@@ -72,8 +73,11 @@ PUBLIC SUB SUMMARIZE_PARTITION_SELECTION()
             sFs = Trim(sEntry[3])
               IF sfs LIKE ("Do not format") THEN 
                 sFs = "(" & ("Not Formatted") & ")" & "," & Space(1) & ("Mount to") & Space(1)
+              ELSE IF sfs = ("Format to") & Space(1) & sFs & Space(1) & ("and mount to") & Space(1)
+              ELSE IF Len(sFS) <= 0 THEN 
+                sFs = "(" & ("Not Formatted") & ")" & Space(1) & ("Mount to") & Space(1)
               ELSE 
-                sfs = ("Format to") & Space(1) & sFs & Space(1) & ("and mount to") & Space(1)
+                sFs = ("Format to") & Space(1) & sFs & Space(1) & ("and mount to") & Space(1)
               END IF
           .Add("Part." & i, sPart & " -- " & sSize, PicDisk, "Part")
           .add("Part." & i & "." & i, sFs & sMntPnt, PicTask, "Part." & i)
@@ -83,7 +87,7 @@ PUBLIC SUB SUMMARIZE_PARTITION_SELECTION()
         NEXT 
         
         ' summarize swap partitions
-        sSwaps = Split(Trim(ClsGlobal.sWapPartList), ",")
+        sSwaps = Split(Trim(ClsGlobal.sWapPartList), "|")
           IF sSwaps.Count <= 0 THEN 
             .Add("Swaps", ("NO SWAP SPACE SELECTED"),, "Part")
               PRINT "No swap space selected for installation.!"

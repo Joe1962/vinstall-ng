@@ -1,0 +1,61 @@
+' Gambas class file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+'=====================================================================================
+
+PUBLIC FUNCTION GetNext() AS String
+  
+  RETURN "Conf1"
+  
+  
+END
+PUBLIC SUB StartUp()
+  
+  
+  
+END
+PUBLIC SUB OnExit()
+  
+  
+  
+END
+
+
+
+PUBLIC SUB Form_Open()
+
+  WITH ME
+    .tlbanner.Text = "<h2>" & tlbanner.text & "</h2>"
+  END WITH 
+
+END
+
+PUBLIC SUB Form_Resize()
+
+  ME.HBox2.Width = ME.Frame1.Width - (ME.HBox2.Left * 2)
+
+END
+
+PUBLIC SUB rbNone_Click()
+
+  IF LAST.value = TRUE THEN 
+    Message.Warning("<b>" & ("WARNING:") & "</b><br>" &
+    ("Selecting this option will bypass your boot manager configuration.") & "<br>" &
+    ("You may not be able to start your VectorLinux installation. Do not choose this option") & "<br>" &
+    ("unless you are fully aware of what you are doing."))
+END IF
+
+END

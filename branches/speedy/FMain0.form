@@ -4,6 +4,7 @@
   MoveScaled(0,0,146.25,85.625)
   Text = ("")
   Arrangement = Arrange.Vertical
+  Padding = 2
   { HBox2 HBox
     MoveScaled(12,1,63,7.25)
     Background = Color.SelectedBackground

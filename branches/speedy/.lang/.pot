@@ -14,23 +14,68 @@ msgstr ""
 msgid "VectorLinux Installer"
 msgstr ""
 
-#: FMain.class:253 FMain0.class:253 FMain0Old.class:233
+#: Conf0.class:58 Step1.class:433 Step3a1.class:22 Step3a1a.class:186
+#: Step7a.class:143
+msgid "WARNING:"
+msgstr ""
+
+#: Conf0.class:58
+msgid "Selecting this option will bypass your boot manager configuration."
+msgstr ""
+
+#: Conf0.class:58
+msgid ""
+"You may not be able to start your VectorLinux installation. Do not choose "
+"this option"
+msgstr ""
+
+#: Conf0.class:58
+msgid "unless you are fully aware of what you are doing."
+msgstr ""
+
+#: Conf0.class:92
+msgid "System Bootloader Configuration"
+msgstr ""
+
+#: Conf0.class:110
+msgid "Select bootloader to be used"
+msgstr ""
+
+#: Conf0.class:119
+msgid "LILO"
+msgstr ""
+
+#: Conf0.class:125
+msgid "Grub"
+msgstr ""
+
+#: Conf0.class:130
+msgid ""
+"Select this option if you want to configure your system boot manager "
+"manually at a later time"
+msgstr ""
+
+#: Conf0.class:132
+msgid "None (Experts Only)"
+msgstr ""
+
+#: FMain.class:254 FMain0.class:254
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:294 FMain0.class:294
+#: FMain.class:295 FMain0.class:295
 msgid "Help"
 msgstr ""
 
-#: FMain.class:307 FMain0.class:307 FMain0Old.class:271
+#: FMain.class:308 FMain0.class:308
 msgid "Back"
 msgstr ""
 
-#: FMain.class:318 FMain0.class:318 FMain0Old.class:282
+#: FMain.class:319 FMain0.class:319
 msgid "Next"
 msgstr ""
 
-#: FMain.class:329 FMain0.class:329 FMain0Old.class:293
+#: FMain.class:330 FMain0.class:330
 msgid "Quit"
 msgstr ""
 
@@ -102,7 +147,7 @@ msgstr ""
 msgid "Disk Partitioning"
 msgstr ""
 
-#: MdlStartUp.module:47 Step8.class:135
+#: MdlStartUp.module:47 Step8.class:139
 msgid "Software Selection"
 msgstr ""
 
@@ -110,7 +155,7 @@ msgstr ""
 msgid "Installation"
 msgstr ""
 
-#: MdlStartUp.module:49 Step8.class:218
+#: MdlStartUp.module:49 Step8.class:222
 msgid "Installation Summary"
 msgstr ""
 
@@ -262,10 +307,6 @@ msgstr ""
 
 #: Step1.class:433
 msgid "This feature can help you avoid an unsuccesful installation."
-msgstr ""
-
-#: Step1.class:433 Step3a1.class:22 Step3a1a.class:186 Step7a.class:143
-msgid "WARNING:"
 msgstr ""
 
 #: Step1.class:433
@@ -541,11 +582,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:467 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:503 Step7a.class:143
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:467 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:503 Step7a.class:143
 msgid "No"
 msgstr ""
 
@@ -794,51 +835,51 @@ msgstr ""
 msgid "Restart Now"
 msgstr ""
 
-#: Step6.class:66
+#: Step6.class:68
 msgid "Partition"
 msgstr ""
 
-#: Step6.class:67
+#: Step6.class:69
 msgid "Size"
 msgstr ""
 
-#: Step6.class:68
+#: Step6.class:70
 msgid "Mount Point"
 msgstr ""
 
-#: Step6.class:69
+#: Step6.class:71
 msgid "File System"
 msgstr ""
 
-#: Step6.class:142
+#: Step6.class:144
 msgid "Swap"
 msgstr ""
 
-#: Step6.class:142
+#: Step6.class:144
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:183 Step8.class:73
+#: Step6.class:185 Step8.class:74
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:228
+#: Step6.class:230
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:228
+#: Step6.class:230
 msgid "as your"
 msgstr ""
 
-#: Step6.class:228
+#: Step6.class:230
 msgid "partition."
 msgstr ""
 
-#: Step6.class:228
+#: Step6.class:230
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:362
+#: Step6.class:398
 msgid "Select which partitions to use for installation"
 msgstr ""
 
@@ -854,7 +895,7 @@ msgstr ""
 msgid "Install everthing in the image (Fully Automated)"
 msgstr ""
 
-#: Step7.class:126 Step8.class:125
+#: Step7.class:126 Step8.class:129
 msgid "Customized"
 msgstr ""
 
@@ -862,7 +903,7 @@ msgstr ""
 msgid "Select  the components you wish to install  (Advanced)"
 msgstr ""
 
-#: Step7.class:144 Step8.class:127
+#: Step7.class:144 Step8.class:131
 msgid "Minimal"
 msgstr ""
 
@@ -926,19 +967,19 @@ msgid ""
 "include in your installation."
 msgstr ""
 
-#: Step8.class:44
+#: Step8.class:45
 msgid "Distribution"
 msgstr ""
 
-#: Step8.class:62
+#: Step8.class:63
 msgid "Partitions to be used"
 msgstr ""
 
-#: Step8.class:74
+#: Step8.class:75
 msgid "Not Formatted"
 msgstr ""
 
-#: Step8.class:74
+#: Step8.class:75
 msgid "Mount to"
 msgstr ""
 
@@ -950,35 +991,35 @@ msgstr ""
 msgid "and mount to"
 msgstr ""
 
-#: Step8.class:88
+#: Step8.class:92
 msgid "NO SWAP SPACE SELECTED"
 msgstr ""
 
-#: Step8.class:93
+#: Step8.class:97
 msgid "Swap Space"
 msgstr ""
 
-#: Step8.class:106
+#: Step8.class:110
 msgid "Pre-formatted to reiserfs, and used for /"
 msgstr ""
 
-#: Step8.class:123
+#: Step8.class:127
 msgid "Full"
 msgstr ""
 
-#: Step8.class:130
+#: Step8.class:134
 msgid "Installation Method"
 msgstr ""
 
-#: Step8.class:136
+#: Step8.class:140
 msgid "Major Components"
 msgstr ""
 
-#: Step8.class:146
+#: Step8.class:150
 msgid "Additional Software"
 msgstr ""
 
-#: Step8.class:237
+#: Step8.class:241
 msgid ""
 "Your VectorLinux installation is about to be performed as follows. If you "
 "need to make any changes, this is your last chance."
