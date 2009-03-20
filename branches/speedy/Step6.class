@@ -101,19 +101,23 @@ PUBLIC SUB LIST_PARTITIONS()
   DIM sDisks, sPartitions, sPartLine AS String[]
   DIM sDisk, sPartNo, sSize, sFs AS String
   DIM i, ii, irow AS Integer
+  DIM hproc AS Process
   
   objFS = NEW Object[]
   objMntPoints = NEW Object[]
   
   INC ME.gvPartListing.Rows.Count
   irow = 2
-  SHELL "probedisk | grep -v cdrom | cut -f 1 -d \'|\'" TO sDump ' This gets the list of present hard drisks
+  SHELL "probedisk | grep -vi rom | cut -f 1 -d \'|\'" TO sDump ' This gets the list of present hard drisks
   sDisks = Split(Trim(sDump), "\n")
       FOR i = 0 TO sDisks.Count - 1
-        SHELL "parted " & Trim(sDisks[i]) & " print | grep \"^ [0-9]\" | tr -s \' \',\"\"" TO sDump
+        'hproc = SHELL "parted " & Trim(sDisks[i]) & " print | grep \"^ [0-9]\" | tr -s \' \',\"\"" ' just to test'
+          'IF hproc.Value > 0 THEN CONTINUE 
+                  SHELL "parted " & Trim(sDisks[i]) & " print | grep \"^ [0-9]\" | grep -vi \"extended\" | tr -s \' \',\"\"" TO sDump
           spartitions = Split(Trim(sdump), "\n")
             FOR ii = 0 TO spartitions.count - 1
               sPartLine = Split(Trim(spartitions[ii]), " ")
+              'Message(spartitions[ii])
                 sPartNo = sPartLine[0]
                 sSize = sPartLine[3]
                 sFs = sPartLine[5]
@@ -247,7 +251,7 @@ PUBLIC SUB MountPointSel_Click()
   y = LAST.y
   
   
-  
+  IF LAST.text = ("Swap") THEN RETURN 
   IF LAST.text <> ("Not Used") THEN 
     IF ME.CheckEntry(LAST.text, gvPartListing.RowAt(LAST.y)) > 0 THEN 
     LAST.text = ("Not Used")
