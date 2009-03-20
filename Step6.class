@@ -29,23 +29,25 @@ END
 
 PUBLIC SUB OnExit()
   
-  DIM n AS Integer
-  DIM sFmtAs, sList, sPartAddr AS String
+  ' DIM n AS Integer
+  ' DIM sFmtAs, sList, sPartAddr AS String
   ClsGlobal.sVitalPartList = ""
-    FOR n = 1 TO gvPartListing.Rows.Count - 1
-      IF gvPartListing[n, 2].Text THEN 
-        sPartAddr = gvPartListing[n, 2].Text
-        IF gvPartListing[n, 4].Text THEN 
-          sFmtAs = gvPartListing[n, 4].Text
-        ELSE 
-          sFmtAs = gvPartListing[n, 5].Text
-        END IF
-      END IF
-      sList = sList & sPartAddr & "," & sFmtAs & ";"
-      'Message(gvPartListing[n, 0].Text & gb.NewLine & gvPartListing[n, 2].Text & gb.NewLine & sFmtAs)
-      
-    NEXT 
-    ME.read_partition_selection
+  ClsGlobal.sWapPartList = ""
+  read_partition_selection()
+    ' FOR n = 1 TO gvPartListing.Rows.Count - 1
+    '   IF gvPartListing[n, 2].Text THEN 
+    '     sPartAddr = gvPartListing[n, 2].Text
+    '     IF gvPartListing[n, 4].Text THEN 
+    '       sFmtAs = gvPartListing[n, 4].Text
+    '     ELSE 
+    '       sFmtAs = gvPartListing[n, 5].Text
+    '     END IF
+    '   END IF
+    '   sList = sList & sPartAddr & "," & sFmtAs & ";"
+    '   'Message(gvPartListing[n, 0].Text & gb.NewLine & gvPartListing[n, 2].Text & gb.NewLine & sFmtAs)
+    '   
+    ' NEXT 
+    ' ME.read_partition_selection
     'Message(ClsGlobal.sVitalPartList)
    ' sList = Trim(Left(sList, Len(sList) - 1))
   'ClsGlobal.sVitalPartList = Trim(sList)
@@ -316,46 +318,80 @@ PUBLIC SUB read_partition_selection()
 
 
   DIM cbox, cb AS ComboBox
-  DIM sFormat, sSize AS String
-  DIM i AS Integer
-    FOR EACH cbox IN objMntPoints
-      IF cbox.Text <> ("Not Used") THEN 
-        i = 2
-        REPEAT 
-          IF Trim(gvPartListing[i, 0].Text) = Trim(cbox.Tag) THEN 
-            sSize = Trim(gvPartListing[i, 1].Text)
-          END IF
-          INC i
-        UNTIL sSize OR i = gvPartListing.Rows.Count
-        
-        FOR EACH cb IN objFS
-          IF cbox.tag = cb.Tag THEN 
-            sFormat = Trim(cb.Text)
-            BREAK 
-          ELSE 
-            sFormat = ""
-          END IF
-        NEXT 
-        ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & cbox.Tag & "-" & sSize & "-" & cbox.Text & "-" & sFormat & ","
-    END IF
-    NEXT 
-      
-FOR i = 2 TO gvPartListing.Rows.count - 1
-        IF gvPartListing[i, 4].Text LIKE "linux-swap" THEN 
-            FOR EACH cbox IN objMntPoints
-              IF cbox.tag = gvPartListing[i, 0].Text THEN 
-                IF cbox.text <> ("Not Used") THEN 
-                  ClsGlobal.sWapPartList = ClsGlobal.sWapPartList & gvPartListing[i, 0].Text & "-" & gvPartListing[i, 1].Text & ","
-                END IF
-              END IF
-            NEXT           
-        END IF
-      NEXT   
-
+  DIM sPart, sFormat, sSize, sMntPoint AS String
+  DIM i, irow AS Integer
   
-END
-
-
+  
+  ' ================= get the list of vital partitions =====================
+    FOR irow = 2 TO gvPartListing.Rows.count - 1
+      IF Trim(gvPartListing[irow, 2].Text) THEN 
+      IF Trim(gvPartListing[irow, 2].Text) <> ("Not Used") AND Trim(gvPartListing[irow, 2].Text) <> ("Swap") THEN 
+        sPart = Trim(gvPartListing[irow, 0].Text)
+        sSize = Trim(gvPartListing[irow, 1].Text)
+        sMntPoint = Trim(gvPartListing[irow, 2].Text)
+        sFormat = Trim(gvPartListing[irow, 4].Text)
+        
+      '          Message(gvPartListing[irow, 0].Text & " - (" & gvPartListing[irow, 1].Text & ") - " & gvPartListing[irow, 2].Text)
+      '         ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & cbox.Tag & "-" & sSize & "-" & cbox.Text & "-" & sFormat & ","
+      ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & sPart & "-" & sSize & "-" & sMntPoint & "-" & sFormat & "|"
+      
+        END IF
+      END IF
+      
+    NEXT 
+    
+    ' =========== get list of swap partitions selected .(if any) =====================
+    
+    FOR irow = 2 TO gvPartListing.Rows.count - 1
+      IF Trim(gvPartListing[irow, 2].Text) = ("Swap") THEN 
+        sPart = Trim(gvPartListing[irow, 0].Text)
+        sSize = Trim(gvPartListing[irow, 1].Text)
+  '                   ClsGlobal.sWapPartList = ClsGlobal.sWapPartList & gvPartListing[i, 0].Text & "-" & gvPartListing[i, 1].Text & ","
+      ClsGlobal.sWapPartList = ClsGlobal.sWapPartList & spart & "-" & sSize & "|"
+    END IF
+  NEXT 
+        
+    
+  'Message(ClsGlobal.sVitalPartList)
+'   
+'     FOR EACH cbox IN objMntPoints
+'       IF cbox.Text <> ("Not Used") THEN 
+'         i = 2
+'         REPEAT 
+'           IF Trim(gvPartListing[i, 0].Text) = Trim(cbox.Tag) THEN 
+'             sSize = Trim(gvPartListing[i, 1].Text)
+'           END IF
+'           INC i
+'         UNTIL sSize OR i = gvPartListing.Rows.Count
+'         
+'         FOR EACH cb IN objFS
+'           IF cbox.tag = cb.Tag THEN 
+'             sFormat = Trim(cb.Text)
+'             BREAK 
+'           ELSE 
+'             sFormat = ""
+'           END IF
+'         NEXT 
+'         ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & cbox.Tag & "-" & sSize & "-" & cbox.Text & "-" & sFormat & ","
+'     END IF
+'     NEXT 
+'       
+' FOR i = 2 TO gvPartListing.Rows.count - 1
+'         IF gvPartListing[i, 4].Text LIKE "linux-swap" THEN 
+'             FOR EACH cbox IN objMntPoints
+'               IF cbox.tag = gvPartListing[i, 0].Text THEN 
+'                 IF cbox.text <> ("Not Used") THEN 
+'                   ClsGlobal.sWapPartList = ClsGlobal.sWapPartList & gvPartListing[i, 0].Text & "-" & gvPartListing[i, 1].Text & ","
+'                 END IF
+'               END IF
+'             NEXT           
+'         END IF
+'       NEXT   
+' 
+'   
+ END
+' 
+' 
 
 PUBLIC SUB Form_Open()
 
