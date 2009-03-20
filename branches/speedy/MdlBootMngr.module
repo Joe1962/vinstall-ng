@@ -1,0 +1,123 @@
+' Gambas module file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+'====================================================================================================
+
+PUBLIC FUNCTION ID_LINUX(sMountedLocation AS String) AS String
+  DIM sRes AS String
+  
+  IF Exist(sMountedLocation &/ "etc/vector-version") THEN 
+    sres = "VectorLinux"
+  ELSE IF Exist(sMountedLocation &/ "etc/slackware-version") THEN 
+    sres = "Slackware"
+  ELSE IF Exist(sMountedLocation &/ "etc/Suse-release") OR Exist(sMountedLocation &/ "UnitiedLinux-release") THEN 
+    sres = "SuSE"
+  ELSE IF Exist(sMountedLocation &/ "etc/gentoo-release") THEN 
+    sres = "Gentoo"
+  ELSE IF Exist(sMountedLocation &/ "etc/debian_version") THEN 
+    SHELL "grep -m 1 cdrom " & sMountedLocation &/ "etc" &/ "apt" &/ "sources.list | cut -d \"[\" -f2 | cut -d \" \" -f 1,2" TO sres
+      IF Len(Trim(sres)) >= 0 THEN 
+        sres = Trim(Replace(sres, " ", "_"))
+      ELSE 
+        sres = "Debian"
+      END IF
+  ELSE IF Exist(sMountedLocation &/ "etc/mandrake-release") THEN ' this should be mandriva now
+    sres = "Mandrake"
+  ELSE IF Exist(sMountedLocation &/ "etc/redhat-release") THEN 
+    sres = "RedHat"
+  ELSE IF Exist(sMountedLocation &/ "etc/fedora-release") THEN 
+    sres = "Fedora"
+  ELSE 
+    sres = "Linux"
+      
+  END IF
+  
+  RETURN sres
+  
+END
+
+
+PUBLIC FUNCTION Find_Linux(sPartition AS String) AS String
+  ' None: No linux found
+  ' Linux: Unknown linux found
+  ' DISTRO_NAME: DISTRO_NAME found
+  ' Fail: Error running function
+
+DIM sAddr AS String = Right(sPartition, Len(sPartition) - RInStr(sPartition, "/"))
+DIM sTempTarget AS String = "/mnt" &/ sAddr
+DIM sres AS String
+
+
+  SHELL "mkdir -p /mnt" &/ sAddr & Space(1) & "2>/dev/null" WAIT 
+  SHELL "mount " & sPartition & Space(1) & "/mnt" &/ sAddr & Space(1) & "2>/dev/null" WAIT 
+  
+    ' perform test to see if there is a linux partition here
+    IF IsDir(sTempTarget &/ "boot") THEN ' this feels like linux here
+      IF IsDir(sTempTarget &/ "etc") THEN ' this is definitely linux
+        ' ============== IDENTIFY LINUX DISTRO ====================
+        sres = ID_LINUX(sTempTarget)
+        
+      END IF
+    END IF
+  IF Len(Trim(sres)) > 0 THEN 
+    sRes = Trim(sRes)
+  ELSE 
+    sRes = "None"
+  END IF
+  RETURN sres
+  
+  
+  
+END
+PUBLIC SUB populate_linux_entry(sLinuxRoot AS String, objTabStrip AS TabStrip)
+  
+  
+  
+END
+
+
+PUBLIC SUB List_Other_Linuxes(objTabStrip AS TabStrip) ' tell me where you want the results.
+  
+  DIM sDump, sPartitions, sPart AS String
+  DIM sPartList AS String[]
+  DIM i AS Integer
+  DIM sOutcome AS String
+  
+  
+  
+  ' First, and foremost, we will ist the recently isntalled VectorLinux
+    populate_linux_entry(ClsGlobal.sRoot, objTabStrip) ' This will list the newly isntall VL OS
+  ' Now list all other linuxes =================================================
+      SHELL "probepart | grep \"^/dev\" | grep -vi swap | grep -i linux | tr -s \' \' | cut -f 1 -d \' \'" TO sDump
+        sDump = Trim(sDump)
+          IF Len(sDump) <= 0 THEN RETURN ' nothing found, VL is the only distro in this box ... YAY!.
+        sPartList = Split(sDump, gb.NewLine)
+          FOR i = 0 TO sPartList.Max
+            sOutcome = ME.Find_Linux(Trim(sPartList[i]))
+              IF Len(sOutcome) <= 0 THEN CONTINUE 
+                ' will only list the linux if one is present
+                populate_linux_entry(Trim(sPartList[i]), objTabStrip)
+              END IF
+                
+          NEXT 
+        
+  
+  ' now list all other Windows os's ============================================
+    
+  
+END
+
+
