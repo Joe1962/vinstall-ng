@@ -251,12 +251,15 @@ PUBLIC SUB MountPointSel_Click()
   y = LAST.y
   
   
-  IF LAST.text = ("Swap") THEN RETURN 
+  'IF LAST.text = ("Swap") THEN RETURN 
   IF LAST.text <> ("Not Used") THEN 
-    IF ME.CheckEntry(LAST.text, gvPartListing.RowAt(LAST.y)) > 0 THEN 
+    IF LAST.text <> ("Swap") THEN 
+      IF ME.CheckEntry(LAST.text, gvPartListing.RowAt(LAST.y)) > 0 THEN 
+    'END IF
     LAST.text = ("Not Used")
     STOP EVENT 
     RETURN 
+  END IF
   END IF
   END IF
     

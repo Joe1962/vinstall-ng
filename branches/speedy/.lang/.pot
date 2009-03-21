@@ -582,11 +582,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:507 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:510 Step7a.class:143
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:507 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:510 Step7a.class:143
 msgid "No"
 msgstr ""
 
@@ -879,7 +879,7 @@ msgstr ""
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:402
+#: Step6.class:405
 msgid "Select which partitions to use for installation"
 msgstr ""
 
