@@ -14,68 +14,108 @@ msgstr ""
 msgid "VectorLinux Installer"
 msgstr ""
 
-#: Conf0.class:58 Step1.class:433 Step3a1.class:22 Step3a1a.class:186
+#: Conf0.class:62 Step1.class:433 Step3a1.class:22 Step3a1a.class:186
 #: Step7a.class:143
 msgid "WARNING:"
 msgstr ""
 
-#: Conf0.class:58
+#: Conf0.class:62
 msgid "Selecting this option will bypass your boot manager configuration."
 msgstr ""
 
-#: Conf0.class:58
+#: Conf0.class:62
 msgid ""
 "You may not be able to start your VectorLinux installation. Do not choose "
 "this option"
 msgstr ""
 
-#: Conf0.class:58
+#: Conf0.class:62
 msgid "unless you are fully aware of what you are doing."
 msgstr ""
 
-#: Conf0.class:92
+#: Conf0.class:119
 msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0.class:110
+#: Conf0.class:137
 msgid "Select bootloader to be used"
 msgstr ""
 
-#: Conf0.class:119
+#: Conf0.class:146
 msgid "LILO"
 msgstr ""
 
-#: Conf0.class:125
+#: Conf0.class:152
 msgid "Grub"
 msgstr ""
 
-#: Conf0.class:130
+#: Conf0.class:157
 msgid ""
 "Select this option if you want to configure your system boot manager "
 "manually at a later time"
 msgstr ""
 
-#: Conf0.class:132
+#: Conf0.class:159
 msgid "None (Experts Only)"
 msgstr ""
 
-#: FMain.class:254 FMain0.class:254
+#: Conf0.class:167
+msgid "Boot menu options"
+msgstr ""
+
+#: Conf0.class:177
+msgid "Target"
+msgstr ""
+
+#: Conf0.class:185
+msgid "ComboBox1"
+msgstr ""
+
+#: Conf0.class:196
+msgid "Video Resolution"
+msgstr ""
+
+#: Conf0.class:203
+msgid "ComboBox2"
+msgstr ""
+
+#: Conf0.class:215
+msgid "Prompt Time Out"
+msgstr ""
+
+#: Conf0.class:227
+msgid "Seconds"
+msgstr ""
+
+#: Conf0.class:240
+msgid "Boot Default"
+msgstr ""
+
+#: Conf0.class:259
+msgid "OPERATING SYSTEMS DETECTED"
+msgstr ""
+
+#: Conf0.class:270
+msgid "Tab 0"
+msgstr ""
+
+#: FMain.class:253 FMain0.class:253
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:295 FMain0.class:295
+#: FMain.class:294 FMain0.class:294
 msgid "Help"
 msgstr ""
 
-#: FMain.class:308 FMain0.class:308
+#: FMain.class:307 FMain0.class:307
 msgid "Back"
 msgstr ""
 
-#: FMain.class:319 FMain0.class:319
+#: FMain.class:318 FMain0.class:318
 msgid "Next"
 msgstr ""
 
-#: FMain.class:330 FMain0.class:330
+#: FMain.class:329 FMain0.class:329
 msgid "Quit"
 msgstr ""
 
@@ -851,31 +891,31 @@ msgstr ""
 msgid "File System"
 msgstr ""
 
-#: Step6.class:148
+#: Step6.class:149
 msgid "Swap"
 msgstr ""
 
-#: Step6.class:148
+#: Step6.class:149
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:189 Step8.class:74
+#: Step6.class:190 Step8.class:74
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:234
+#: Step6.class:235
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:234
+#: Step6.class:235
 msgid "as your"
 msgstr ""
 
-#: Step6.class:234
+#: Step6.class:235
 msgid "partition."
 msgstr ""
 
-#: Step6.class:234
+#: Step6.class:235
 msgid "Please select only one partition for this purpose"
 msgstr ""
 

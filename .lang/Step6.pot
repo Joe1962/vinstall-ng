@@ -30,31 +30,31 @@ msgstr ""
 msgid "File System"
 msgstr ""
 
-#: Step6.class:148
+#: Step6.class:149
 msgid "Swap"
 msgstr ""
 
-#: Step6.class:148
+#: Step6.class:149
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:189
+#: Step6.class:190
 msgid "Do not format"
 msgstr ""
 
-#: Step6.class:234
+#: Step6.class:235
 msgid "You have already selected"
 msgstr ""
 
-#: Step6.class:234
+#: Step6.class:235
 msgid "as your"
 msgstr ""
 
-#: Step6.class:234
+#: Step6.class:235
 msgid "partition."
 msgstr ""
 
-#: Step6.class:234
+#: Step6.class:235
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
