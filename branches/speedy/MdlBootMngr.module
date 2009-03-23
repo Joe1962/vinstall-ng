@@ -84,6 +84,14 @@ DIM sres AS String
 END
 PUBLIC SUB populate_linux_entry(sLinuxRoot AS String, objTabStrip AS TabStrip)
   
+  DIM i AS Integer
+  IF sLinuxRoot = ClsGlobal.sRoot THEN ' This is the just installed linux
+    i = 0
+      WITH objTabStrip
+        .Index = i
+        .Text = "VectorLinux"
+      END WITH 
+  END IF
   
   
 END
@@ -110,7 +118,7 @@ PUBLIC SUB List_Other_Linuxes(objTabStrip AS TabStrip) ' tell me where you want 
               IF Len(sOutcome) <= 0 THEN CONTINUE 
                 ' will only list the linux if one is present
                 populate_linux_entry(Trim(sPartList[i]), objTabStrip)
-              
+              'END IF
                 
           NEXT 
         
