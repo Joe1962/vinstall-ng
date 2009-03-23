@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,72,47)
+  MoveScaled(0,0,84,67)
   Text = ("")
   Arrangement = Arrange.Row
   Padding = 2
@@ -47,5 +47,98 @@
         Text = ("None (Experts Only)")
       }
     }
+  }
+  { Frame2 Frame
+    MoveScaled(0,14,84,11)
+    Expand = True
+    Text = ("Boot menu options")
+    { HBox3 HBox
+      MoveScaled(1,2,70,3.5)
+      Spacing = 4
+      Padding = 2
+      { tlLiloTarget TextLabel
+        MoveScaled(1,0,16.25,3)
+        AutoResize = True
+        Text = ("Target")
+        Alignment = Align.Left
+        Border = Border.Plain
+      }
+      { cbLiloTarget ComboBox
+        MoveScaled(11,0,16,3)
+        Expand = True
+        Text = ("ComboBox1")
+      }
+      { HBox4 HBox
+        MoveScaled(29,1,8,1)
+        AutoResize = True
+      }
+      { TextLabel1 TextLabel
+        MoveScaled(36,0,15,3)
+        AutoResize = True
+        Text = ("Video Resolution")
+        Alignment = Align.Right
+        Border = Border.Plain
+      }
+      { cbVidRes ComboBox
+        MoveScaled(52,0,17,3)
+        Text = ("ComboBox2")
+      }
+    }
+    { HBox5 HBox
+      MoveScaled(1,6,78,3.5)
+      Spacing = 4
+      Padding = 2
+      { tlTimeOUt TextLabel
+        MoveScaled(-1,0,16.25,3)
+        AutoResize = True
+        Text = ("Prompt Time Out")
+        Alignment = Align.Left
+      }
+      { SbTimeOut SpinBox
+        MoveScaled(17,0,8,3)
+      }
+      { TextLabel2 TextLabel
+        MoveScaled(26,0,8,3)
+        Expand = True
+        AutoResize = True
+        Text = ("Seconds")
+        Alignment = Align.Left
+      }
+      { HBox7 HBox
+        MoveScaled(39,1,5,1)
+        Visible = False
+      }
+      { tlBootDef TextLabel
+        MoveScaled(46,0,15,3)
+        Expand = True
+        AutoResize = True
+        Text = ("Boot Default")
+        Alignment = Align.Right
+      }
+      { cbBootDef ComboBox
+        MoveScaled(61,0,17,3)
+        Expand = True
+        Text = ("ComboBox1")
+      }
+    }
+  }
+  { HBox6 HBox
+    MoveScaled(16,25,44,3)
+    Expand = True
+    { tlSep TextLabel
+      MoveScaled(5,0,36,3)
+      Expand = True
+      Text = ("OPERATING SYSTEMS DETECTED")
+      Alignment = Align.Center
+      Border = Border.Etched
+    }
+  }
+  { TsOSListing TabStrip
+    MoveScaled(1,31,70,32)
+    Expand = True
+    Arrangement = Arrange.Row
+    Index = 0
+    Text = ("Tab 0")
+    Index = 0
   }
 }

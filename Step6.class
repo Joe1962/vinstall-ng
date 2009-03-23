@@ -124,6 +124,7 @@ PUBLIC SUB LIST_PARTITIONS()
             'NEXT 
               ' add partition to the gridview
               INC ME.gvPartListing.Rows.Count
+              ME.gvPartListing.Rows[irow].Height = 24
               ME.gvPartListing[irow, 0].text = Trim(sDisks[i]) & Trim(sPartNo)
               ME.gvPartListing[irow, 1].Text = Trim(sSize)
               IF sFs LIKE "linux-swap" THEN 
@@ -253,9 +254,8 @@ PUBLIC SUB MountPointSel_Click()
   
   'IF LAST.text = ("Swap") THEN RETURN 
   IF LAST.text <> ("Not Used") THEN 
-    IF LAST.text <> ("Swap") THEN 
-      IF ME.CheckEntry(LAST.text, gvPartListing.RowAt(LAST.y)) > 0 THEN 
-    'END IF
+    IF LAST.TEXT <> ("Swap") THEN 
+    IF ME.CheckEntry(LAST.text, gvPartListing.RowAt(LAST.y)) > 0 THEN 
     LAST.text = ("Not Used")
     STOP EVENT 
     RETURN 

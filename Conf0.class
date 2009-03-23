@@ -24,7 +24,7 @@ PUBLIC FUNCTION GetNext() AS String
 END
 PUBLIC SUB StartUp()
   
-  
+  MdlBootMngr.List_Other_Linuxes(ME.TsOSListing)
   
 END
 PUBLIC SUB OnExit()
@@ -39,6 +39,7 @@ PUBLIC SUB Form_Open()
 
   WITH ME
     .tlbanner.Text = "<h2>" & tlbanner.text & "</h2>"
+    .tlSep.Text = "<b>" & tlsep.Text & "</b>"
   END WITH 
 
 END
@@ -46,6 +47,9 @@ END
 PUBLIC SUB Form_Resize()
 
   ME.HBox2.Width = ME.Frame1.Width - (ME.HBox2.Left * 2)
+  ME.hbox3.Width = ME.Frame2.Width - (ME.HBox3.Left * 2)
+  ME.HBox5.Width = ME.Frame2.Width - (ME.hbox5.Left * 2)
+  ME.HBox6.Width = ME.Width
 
 END
 
@@ -57,5 +61,11 @@ PUBLIC SUB rbNone_Click()
     ("You may not be able to start your VectorLinux installation. Do not choose this option") & "<br>" &
     ("unless you are fully aware of what you are doing."))
 END IF
+
+END
+
+PUBLIC SUB tlLiloTarget_DblClick()
+
+  Balloon("This is a test" & "<br>" & "This is another string" & "<br><br><br><br><br><br>" & "to see if the baloon has been fixed", cbLiloTarget)
 
 END
