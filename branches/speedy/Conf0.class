@@ -24,7 +24,7 @@ PUBLIC FUNCTION GetNext() AS String
 END
 PUBLIC SUB StartUp()
   
-  MdlBootMngr.List_Other_Linuxes(ME.TsOSListing)
+  'MdlBootMngr.List_Other_Linuxes(ME.TsOSListing)
   
 END
 PUBLIC SUB OnExit()
@@ -50,6 +50,7 @@ PUBLIC SUB Form_Resize()
   ME.hbox3.Width = ME.Frame2.Width - (ME.HBox3.Left * 2)
   ME.HBox5.Width = ME.Frame2.Width - (ME.hbox5.Left * 2)
   ME.HBox6.Width = ME.Width
+  ME.TsOsListing.Height = ME.ClientHeight - (ME.HBox6.top + (ME.HBox6.Height + 12)) 'ME.Heigh - (ME.HBox6.top + (ME.HBox6.Height * 2))
 
 END
 

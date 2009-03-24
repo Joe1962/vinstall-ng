@@ -1,5 +1,5 @@
 # Gambas Project File 2.0
-# Compiled with Gambas 2.11.1
+# Compiled with Gambas 2.12
 Title=VectorLinux Installer
 Startup=MdlStartUp
 Version=0.0.2

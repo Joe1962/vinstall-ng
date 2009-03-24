@@ -29,7 +29,6 @@
     Text = ("Select bootloader to be used")
     { HBox2 HBox
       MoveScaled(1,3,52,3)
-      Expand = True
       { rbLilo RadioButton
         MoveScaled(1,0,11,3)
         Expand = True
@@ -54,14 +53,15 @@
     Text = ("Boot menu options")
     { HBox3 HBox
       MoveScaled(1,2,70,3.5)
+      Expand = True
       Spacing = 4
       Padding = 2
       { tlLiloTarget TextLabel
         MoveScaled(1,0,16.25,3)
+        Expand = True
         AutoResize = True
         Text = ("Target")
         Alignment = Align.Left
-        Border = Border.Plain
       }
       { cbLiloTarget ComboBox
         MoveScaled(11,0,16,3)
@@ -70,17 +70,19 @@
       }
       { HBox4 HBox
         MoveScaled(29,1,8,1)
+        Expand = True
         AutoResize = True
       }
       { TextLabel1 TextLabel
         MoveScaled(36,0,15,3)
+        Expand = True
         AutoResize = True
         Text = ("Video Resolution")
         Alignment = Align.Right
-        Border = Border.Plain
       }
       { cbVidRes ComboBox
         MoveScaled(52,0,17,3)
+        Expand = True
         Text = ("ComboBox2")
       }
     }
@@ -133,10 +135,10 @@
       Border = Border.Etched
     }
   }
-  { TsOSListing TabStrip
-    MoveScaled(1,31,70,32)
+  { TsOsListing TabStrip
+    MoveScaled(1,29,81,36)
     Expand = True
-    Arrangement = Arrange.Row
+    AutoResize = True
     Index = 0
     Text = ("Tab 0")
     Index = 0

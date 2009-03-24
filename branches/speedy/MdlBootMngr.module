@@ -82,17 +82,40 @@ DIM sres AS String
   
   
 END
-PUBLIC SUB populate_linux_entry(sLinuxRoot AS String, objTabStrip AS TabStrip)
+PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabStrip AS TabStrip)
   
   DIM i AS Integer
+  DIM tb AS TextBox
+  DIM tl AS TextLabel
+  DIM cb AS CheckBox
+  
+  IF NOT sLinux OR Len(Trim(sLinux)) <= 0 THEN RETURN 
+  'Message(sLinux)
   IF sLinuxRoot = ClsGlobal.sRoot THEN ' This is the just installed linux
     i = 0
       WITH objTabStrip
         .Index = i
         .Text = "VectorLinux"
       END WITH 
+  ELSE 
+  i = objTabStrip.Count - 1
+    WITH objTabStrip
+      .Index = i
+      .Text = sLinux
+    END WITH 
   END IF
   
+  tl = NEW TextLabel(objTabStrip) AS "Banner"
+    WITH tl
+      .Text = ("Installation found in") & Space(1) & sLinuxRoot
+      .Height = 24
+      .Width = 200
+      .Expand = TRUE
+      .Border = Border.Plain
+      '.AutoResize = TRUE
+      .Move(4, 4)
+    END WITH 
+      
   
 END
 
@@ -105,19 +128,25 @@ PUBLIC SUB List_Other_Linuxes(objTabStrip AS TabStrip) ' tell me where you want 
   DIM sOutcome AS String
   
   
+              'Message(ClsGlobal.sRoot)
+'            Message(Trim(sPartList[i]))
   
-  ' First, and foremost, we will ist the recently isntalled VectorLinux
-    populate_linux_entry(ClsGlobal.sRoot, objTabStrip) ' This will list the newly isntall VL OS
+  ' First, and foremost, we will list the recently isntalled VectorLinux
+    populate_linux_entry("VectorLinux", ClsGlobal.sRoot, objTabStrip) ' This will list the newly isntall VL OS
   ' Now list all other linuxes =================================================
       SHELL "probepart | grep \"^/dev\" | grep -vi swap | grep -i linux | tr -s \' \' | cut -f 1 -d \' \'" TO sDump
         sDump = Trim(sDump)
-          IF Len(sDump) <= 0 THEN RETURN ' nothing found, VL is the only distro in this box ... YAY!.
+          IF Len(sDump) <= 0 THEN RETURN ' nothing found, VL is the only distro in this box ... 
         sPartList = Split(sDump, gb.NewLine)
           FOR i = 0 TO sPartList.Max
-            sOutcome = ME.Find_Linux(Trim(sPartList[i]))
-              IF Len(sOutcome) <= 0 THEN CONTINUE 
-                ' will only list the linux if one is present
-                populate_linux_entry(Trim(sPartList[i]), objTabStrip)
+            sPart = Trim(Right(sPartList[i], Len(sPartList[i]) - RInStr(sPartList[i], "/")))
+
+              'IF Trim(ClsGlobal.sRoot) <> Trim(sPartList[i]) THEN 
+                sOutcome = ME.Find_Linux(Trim(sPartList[i]))
+              ' will only list the linux IF one IS present
+                IF Trim(sPartList[i]) <> Trim(ClsGlobal.sRoot) THEN
+                  populate_linux_entry(sOutcome, Trim(sPartList[i]), objTabStrip)
+                END IF
               'END IF
                 
           NEXT 
