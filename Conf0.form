@@ -57,7 +57,7 @@
       Spacing = 4
       Padding = 2
       { tlLiloTarget TextLabel
-        MoveScaled(1,0,16.25,3)
+        MoveScaled(1,0,10,3)
         Expand = True
         AutoResize = True
         Text = ("Target")
@@ -138,6 +138,7 @@
   { TsOsListing TabStrip
     MoveScaled(1,29,81,36)
     Expand = True
+    Arrangement = Arrange.Row
     AutoResize = True
     Index = 0
     Text = ("Tab 0")

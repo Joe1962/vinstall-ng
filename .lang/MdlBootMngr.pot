@@ -14,7 +14,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: MdlBootMngr.module:110
+#: MdlBootMngr.module:114
 msgid "Installation found in"
+msgstr ""
+
+#: MdlBootMngr.module:132
+msgid "Include in boot menu"
+msgstr ""
+
+#: MdlBootMngr.module:151
+msgid "Name"
+msgstr ""
+
+#: MdlBootMngr.module:167
+msgid "Initial RAM disk image"
+msgstr ""
+
+#: MdlBootMngr.module:184
+msgid "Kernel boot options"
+msgstr ""
+
+#: MdlBootMngr.module:209
+msgid "Add option to boot this operating system into text mode"
 msgstr ""
 

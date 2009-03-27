@@ -16,6 +16,8 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 '====================================================================================================
 
+PUBLIC bScanned AS Boolean
+
 PUBLIC FUNCTION ID_LINUX(sMountedLocation AS String) AS String
   DIM sRes AS String
   
@@ -88,6 +90,8 @@ PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabSt
   DIM tb AS TextBox
   DIM tl AS TextLabel
   DIM cb AS CheckBox
+  DIM hb AS HBox
+  DIM comb AS ComboBox
   
   IF NOT sLinux OR Len(Trim(sLinux)) <= 0 THEN RETURN 
   'Message(sLinux)
@@ -109,12 +113,111 @@ PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabSt
     WITH tl
       .Text = ("Installation found in") & Space(1) & sLinuxRoot
       .Height = 24
+      .Alignment = Align.Left
       .Width = 200
       .Expand = TRUE
-      .Border = Border.Plain
+      '.Border = Border.Plain
       '.AutoResize = TRUE
       .Move(4, 4)
     END WITH 
+  hb = NEW HBox(objTabStrip) ' separator space
+    WITH hb
+      .Height = 16
+      .Width = 12
+      .Expand = TRUE
+    END WITH 
+  cb = NEW CheckBox(objTabStrip) ' Inlcude/Exclude OS from boot menu
+    WITH cb
+      .Expand = TRUE
+      .Text = ("Include in boot menu")
+      .Value = TRUE
+      .Height = 24
+      .Tag = sLinuxRoot
+    END WITH 
+  hb = NEW HBox(objTabStrip) ' separator space
+    WITH hb
+      .Height = 12
+      .Expand = TRUE
+    END WITH 
+  hb = NEW HBox(objTabStrip) ' This will hold a few objects of it's own
+    WITH hb
+      .Height = 28
+      .Expand = TRUE
+      .Padding = 2
+      .Spacing = 2
+    END WITH 
+  tl = NEW TextLabel(hb) ' Name label
+    WITH tl
+      .Text = ("Name")
+      .Expand = FALSE
+      .Width = 200
+      .Adjust()
+      .AutoResize = TRUE
+      .Height = .Parent.Height
+      .Alignment = Align.Left
+    END WITH 
+  tb = NEW TextBox(hb) ' Name entry box
+    WITH tb
+      .Expand = TRUE
+      .Height = .Parent.Height
+      .Tag = sLinuxRoot
+    END WITH 
+  tl = NEW TextLabel(hb) ' initrd label
+    WITH tl
+      .text = ("Initial RAM disk image")
+      .Alignment = Align.Right
+      .Height = .Parent.Height
+      .Expand = TRUE
+    END WITH 
+  comb = NEW ComboBox(hb) ' initrd selection combobox
+    WITH comb
+      .Height = .Parent.Height
+      .Expand = TRUE
+      .READonly = TRUE
+      .Tag = sLinuxRoot
+    END WITH 
+  hb = NEW HBox(objTabStrip) ' blank space separator
+  hb.Height = 8
+  hb.Expand = TRUE
+  tl = NEW TextLabel(objTabStrip) ' append line textlabel
+    WITH tl
+      .Text = ("Kernel boot options")
+      .Height = 24
+      .Width = 200
+      .Alignment = Align.Left
+      .Expand = FALSE
+      .AutoResize = TRUE
+    END WITH 
+  tb = NEW TextBox(objTabStrip) ' append input line
+    WITH tb
+      .Text = "splash=silent"
+      .Height = 24
+      .Expand = TRUE
+      .Tag = sLinuxRoot
+    END WITH 
+    
+    ' ======================= ONLY FOR THE OS WE JUST INSTALLED ===============================
+  IF sLinuxRoot = ClsGlobal.sRoot THEN 
+    hb = NEW HBox(objTabStrip) ' yet another separator
+      WITH hb
+        .Expand = TRUE
+        .Height = 8
+      END WITH 
+    cb = NEW CheckBox(objTabStrip) AS "bCLIOption"
+      WITH cb
+        .Value = TRUE
+        .Text = ("Add option to boot this operating system into text mode")
+        .Height = 24
+        .Expand = TRUE
+        .Tag = sLinuxRoot
+      END WITH 
+    hb = NEW HBox(objTabStrip)
+      hb.Height = 4
+      hb.Expand = TRUE
+      
+  END IF
+    
+  
       
   
 END
@@ -127,7 +230,7 @@ PUBLIC SUB List_Other_Linuxes(objTabStrip AS TabStrip) ' tell me where you want 
   DIM i AS Integer
   DIM sOutcome AS String
   
-  
+  bScanned = TRUE
               'Message(ClsGlobal.sRoot)
 '            Message(Trim(sPartList[i]))
   
@@ -145,6 +248,8 @@ PUBLIC SUB List_Other_Linuxes(objTabStrip AS TabStrip) ' tell me where you want 
                 sOutcome = ME.Find_Linux(Trim(sPartList[i]))
               ' will only list the linux IF one IS present
                 IF Trim(sPartList[i]) <> Trim(ClsGlobal.sRoot) THEN
+                  INC objTabStrip.Count
+                  objTabStrip.Index = objTabStrip.Count - 1
                   populate_linux_entry(sOutcome, Trim(sPartList[i]), objTabStrip)
                 END IF
               'END IF
