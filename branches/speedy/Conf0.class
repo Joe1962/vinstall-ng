@@ -24,7 +24,7 @@ PUBLIC FUNCTION GetNext() AS String
 END
 PUBLIC SUB StartUp()
   
-  'MdlBootMngr.List_Other_Linuxes(ME.TsOSListing)
+  IF MdlBootMngr.bScanned = FALSE OR NOT MdlBootMngr.bScanned THEN MdlBootMngr.List_Other_Linuxes(ME.TsOSListing)
   
 END
 PUBLIC SUB OnExit()
@@ -40,6 +40,7 @@ PUBLIC SUB Form_Open()
   WITH ME
     .tlbanner.Text = "<h2>" & tlbanner.text & "</h2>"
     .tlSep.Text = "<b>" & tlsep.Text & "</b>"
+        
   END WITH 
 
 END
