@@ -14,83 +14,83 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Conf0.class:64
+#: Conf0.class:72
 msgid "WARNING:"
 msgstr ""
 
-#: Conf0.class:64
+#: Conf0.class:72
 msgid "Selecting this option will bypass your boot manager configuration."
 msgstr ""
 
-#: Conf0.class:64
+#: Conf0.class:72
 msgid "You may not be able to start your VectorLinux installation. Do not choose this option"
 msgstr ""
 
-#: Conf0.class:64
+#: Conf0.class:72
 msgid "unless you are fully aware of what you are doing."
 msgstr ""
 
-#: Conf0.class:121
+#: Conf0.class:129
 msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0.class:139
+#: Conf0.class:147
 msgid "Select bootloader to be used"
 msgstr ""
 
-#: Conf0.class:147
+#: Conf0.class:155
 msgid "LILO"
 msgstr ""
 
-#: Conf0.class:153
+#: Conf0.class:161
 msgid "Grub"
 msgstr ""
 
-#: Conf0.class:158
+#: Conf0.class:166
 msgid "Select this option if you want to configure your system boot manager manually at a later time"
 msgstr ""
 
-#: Conf0.class:160
+#: Conf0.class:168
 msgid "None (Experts Only)"
 msgstr ""
 
-#: Conf0.class:168
+#: Conf0.class:176
 msgid "Boot menu options"
 msgstr ""
 
-#: Conf0.class:180
+#: Conf0.class:187
 msgid "Target"
 msgstr ""
 
-#: Conf0.class:187
+#: Conf0.class:193
 msgid "ComboBox1"
 msgstr ""
 
-#: Conf0.class:200
+#: Conf0.class:206
 msgid "Video Resolution"
 msgstr ""
 
-#: Conf0.class:207
+#: Conf0.class:212
 msgid "ComboBox2"
 msgstr ""
 
-#: Conf0.class:219
+#: Conf0.class:224
 msgid "Prompt Time Out"
 msgstr ""
 
-#: Conf0.class:231
+#: Conf0.class:237
 msgid "Seconds"
 msgstr ""
 
-#: Conf0.class:244
+#: Conf0.class:250
 msgid "Boot Default"
 msgstr ""
 
-#: Conf0.class:263
+#: Conf0.class:268
 msgid "OPERATING SYSTEMS DETECTED"
 msgstr ""
 
-#: Conf0.class:275
+#: Conf0.class:279
 msgid "Tab 0"
 msgstr ""
 

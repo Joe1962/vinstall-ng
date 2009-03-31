@@ -16,7 +16,14 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 '=====================================================================================
 
+
+
+
 PUBLIC FUNCTION GetNext() AS String
+  
+  ClsGlobal.fRunningMainForm.listview1["Step6"].Picture = MdlStartUp.pNow
+  ClsGlobal.fRunningMainForm.listview1["Step5"].picture = MdlStartUp.pDone
+  ClsGlobal.fRunningMainForm.listview1["Step4"].picture = MdlStartUp.pDone
   
   RETURN "Conf1"
   
@@ -51,7 +58,8 @@ PUBLIC SUB Form_Resize()
   ME.hbox3.Width = ME.Frame2.Width - (ME.HBox3.Left * 2)
   ME.HBox5.Width = ME.Frame2.Width - (ME.hbox5.Left * 2)
   ME.HBox6.Width = ME.Width
-  ME.TsOsListing.Height = ME.ClientHeight - (ME.HBox6.top + (ME.HBox6.Height + 12)) 'ME.Heigh - (ME.HBox6.top + (ME.HBox6.Height * 2))
+  'ME.TsOsListing.Height = ME.ClientHeight - (ME.HBox6.top + (ME.HBox6.Height + 12)) 'ME.Heigh - (ME.HBox6.top + (ME.HBox6.Height * 2))
+  ME.TsOsListing.Height = ClsGlobal.fRunningMainForm.pnlstack.height - (ME.TsOsListing.Top + 230)
 
 END
 
