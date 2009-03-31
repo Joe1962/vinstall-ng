@@ -14,79 +14,79 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Step8.class:45
+#: Step8.class:48
 msgid "Distribution"
 msgstr ""
 
-#: Step8.class:63
+#: Step8.class:66
 msgid "Partitions to be used"
 msgstr ""
 
-#: Step8.class:77
+#: Step8.class:80
 msgid "Do not format"
 msgstr ""
 
-#: Step8.class:78
+#: Step8.class:81
 msgid "Not Formatted"
 msgstr ""
 
-#: Step8.class:78
+#: Step8.class:81
 msgid "Mount to"
 msgstr ""
 
-#: Step8.class:79
+#: Step8.class:82
 msgid "Format to"
 msgstr ""
 
-#: Step8.class:79
+#: Step8.class:82
 msgid "and mount to"
 msgstr ""
 
-#: Step8.class:95
+#: Step8.class:98
 msgid "NO SWAP SPACE SELECTED"
 msgstr ""
 
-#: Step8.class:100
+#: Step8.class:103
 msgid "Swap Space"
 msgstr ""
 
-#: Step8.class:113
+#: Step8.class:116
 msgid "Pre-formatted to reiserfs, and used for /"
 msgstr ""
 
-#: Step8.class:130
+#: Step8.class:133
 msgid "Full"
 msgstr ""
 
-#: Step8.class:132
+#: Step8.class:135
 msgid "Customized"
 msgstr ""
 
-#: Step8.class:134
+#: Step8.class:137
 msgid "Minimal"
 msgstr ""
 
-#: Step8.class:137
+#: Step8.class:140
 msgid "Installation Method"
 msgstr ""
 
-#: Step8.class:142
+#: Step8.class:145
 msgid "Software Selection"
 msgstr ""
 
-#: Step8.class:143
+#: Step8.class:146
 msgid "Major Components"
 msgstr ""
 
-#: Step8.class:153
+#: Step8.class:156
 msgid "Additional Software"
 msgstr ""
 
-#: Step8.class:225
+#: Step8.class:228
 msgid "Installation Summary"
 msgstr ""
 
-#: Step8.class:244
+#: Step8.class:247
 msgid "Your VectorLinux installation is about to be performed as follows. If you need to make any changes, this is your last chance."
 msgstr ""
 

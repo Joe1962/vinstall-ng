@@ -16,6 +16,11 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 '====================================================================================================
 
+PUBLIC objinitrds AS Object[]
+PUBLIC objChecks AS Object[]
+PUBLIC objappends AS Object[]
+PUBLIC objNames AS Object[]
+
 PUBLIC bScanned AS Boolean
 
 PUBLIC FUNCTION ID_LINUX(sMountedLocation AS String) AS String
@@ -134,6 +139,7 @@ PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabSt
       .Height = 24
       .Tag = sLinuxRoot
     END WITH 
+    objChecks.Add(cb)
   hb = NEW HBox(objTabStrip) ' separator space
     WITH hb
       .Height = 12
@@ -160,8 +166,10 @@ PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabSt
     WITH tb
       .Expand = TRUE
       .Height = .Parent.Height
+      .Text = sLinux '  default to the distro found
       .Tag = sLinuxRoot
     END WITH 
+    objNames.Add(tb)
   tl = NEW TextLabel(hb) ' initrd label
     WITH tl
       .text = ("Initial RAM disk image")
@@ -169,6 +177,7 @@ PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabSt
       .Height = .Parent.Height
       .Expand = TRUE
     END WITH 
+    
   comb = NEW ComboBox(hb) ' initrd selection combobox
     WITH comb
       .Height = .Parent.Height
@@ -176,6 +185,11 @@ PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabSt
       .READonly = TRUE
       .Tag = sLinuxRoot
     END WITH 
+      ' populate the initrd box
+      'Message(sLinuxRoot)
+        ME.find_initrds_for_this_linux(sLinuxRoot, comb) ' populate initrd selection
+        
+    objinitrds.Add(comb)
   hb = NEW HBox(objTabStrip) ' blank space separator
   hb.Height = 8
   hb.Expand = TRUE
@@ -195,6 +209,7 @@ PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabSt
       .Expand = TRUE
       .Tag = sLinuxRoot
     END WITH 
+      objappends.Add(tb)
     
     ' ======================= ONLY FOR THE OS WE JUST INSTALLED ===============================
   IF sLinuxRoot = ClsGlobal.sRoot THEN 
@@ -211,12 +226,12 @@ PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabSt
         .Expand = TRUE
         .Tag = sLinuxRoot
       END WITH 
-    hb = NEW HBox(objTabStrip)
-      hb.Height = 4
-      hb.Expand = TRUE
+    ' hb = NEW HBox(objTabStrip)
+    '   hb.Height = 4
+    '   hb.Expand = TRUE
       
   END IF
-    
+    objTabStrip.Refresh()
   
       
   
@@ -230,12 +245,17 @@ PUBLIC SUB List_Other_Linuxes(objTabStrip AS TabStrip) ' tell me where you want 
   DIM i AS Integer
   DIM sOutcome AS String
   
+  objappends = NEW Object[]
+  objChecks = NEW Object[]
+  objinitrds = NEW Object[]
+  objNames = NEW Object[]
+  
   bScanned = TRUE
               'Message(ClsGlobal.sRoot)
 '            Message(Trim(sPartList[i]))
   
   ' First, and foremost, we will list the recently isntalled VectorLinux
-    populate_linux_entry("VectorLinux", ClsGlobal.sRoot, objTabStrip) ' This will list the newly isntall VL OS
+    'populate_linux_entry("VectorLinux", ClsGlobal.sRoot, objTabStrip) ' This will list the newly isntall VL OS
   ' Now list all other linuxes =================================================
       SHELL "probepart | grep \"^/dev\" | grep -vi swap | grep -i linux | tr -s \' \' | cut -f 1 -d \' \'" TO sDump
         sDump = Trim(sDump)
@@ -245,20 +265,57 @@ PUBLIC SUB List_Other_Linuxes(objTabStrip AS TabStrip) ' tell me where you want 
             sPart = Trim(Right(sPartList[i], Len(sPartList[i]) - RInStr(sPartList[i], "/")))
 
               'IF Trim(ClsGlobal.sRoot) <> Trim(sPartList[i]) THEN 
-                sOutcome = ME.Find_Linux(Trim(sPartList[i]))
+                'sOutcome = Find_Linux(Trim(sPartList[i]))
+                'Message(sOutcome)
               ' will only list the linux IF one IS present
-                IF Trim(sPartList[i]) <> Trim(ClsGlobal.sRoot) THEN
-                  INC objTabStrip.Count
+                'IF Trim(sPartList[i]) <> Trim(ClsGlobal.sRoot) THEN
+                'IF Find_Linux(Trim(sPartList[i])) <> "None" THEN 
+                sOutcome = Find_Linux(Trim(sPartList[i]))
+                  IF sOutcome AND sOutcome <> "None" THEN 
+                  'INC objTabStrip.Count
                   objTabStrip.Index = objTabStrip.Count - 1
                   populate_linux_entry(sOutcome, Trim(sPartList[i]), objTabStrip)
+                  INC objTabStrip.Count
                 END IF
               'END IF
                 
           NEXT 
+        DEC objTabStrip.Count ' remove the trailing blank tab from the tabstrip.
         
   
   ' now list all other Windows os's ============================================
     
+  
+END
+
+
+PUBLIC SUB find_initrds_for_this_linux(sLinuxRoot AS String, object AS ComboBox)
+  
+  DIM sResults AS String
+  DIM slines AS String[]
+  DIM i AS Integer
+  DIM sAdd, sBootPath AS String
+    ' need to find the mounted address to this linux
+    sAdd = Replace(sLinuxRoot, "/dev/", "/mnt/")
+      IF sLinuxRoot = ClsGlobal.sRoot THEN 
+        sBootPath = sadd &/ "boot"
+      ELSE 
+        sBootPath = sAdd &/ "boot"
+      END IF
+    SHELL "ls " & sBootPath & " | grep initrd" TO sResults
+      sResults = Trim(sResults)
+      'Message(sResults)
+      IF NOT sResults THEN ' initrds are not located in the /boot directory
+        SHELL "ls " & sadd & " | grep initrd" TO sResults
+      END IF
+      
+      sResults = Trim(sResults)      
+      
+        slines = Split(sResults, "\n")
+          FOR i = 0 TO slines.Max
+            IF Len(Trim(slines[i])) > 0 THEN object.Add(Trim(slines[i]))
+          NEXT 
+          object.Add(("None"))
   
 END
 
