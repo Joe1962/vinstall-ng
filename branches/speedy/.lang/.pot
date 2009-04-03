@@ -163,31 +163,31 @@ msgstr ""
 msgid "Select the location to which we will resize"
 msgstr ""
 
-#: MdlBootMngr.module:119
+#: MdlBootMngr.module:159
 msgid "Installation found in"
 msgstr ""
 
-#: MdlBootMngr.module:137
+#: MdlBootMngr.module:177
 msgid "Include in boot menu"
 msgstr ""
 
-#: MdlBootMngr.module:157
+#: MdlBootMngr.module:197
 msgid "Name"
 msgstr ""
 
-#: MdlBootMngr.module:175
+#: MdlBootMngr.module:215
 msgid "Initial RAM disk image"
 msgstr ""
 
-#: MdlBootMngr.module:198
+#: MdlBootMngr.module:238
 msgid "Kernel boot options"
 msgstr ""
 
-#: MdlBootMngr.module:224
+#: MdlBootMngr.module:264
 msgid "Add option to boot this operating system into text mode"
 msgstr ""
 
-#: MdlBootMngr.module:318
+#: MdlBootMngr.module:358
 msgid "None"
 msgstr ""
 

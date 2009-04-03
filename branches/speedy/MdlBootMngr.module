@@ -26,14 +26,12 @@ PUBLIC bScanned AS Boolean
 PUBLIC FUNCTION ID_LINUX(sMountedLocation AS String) AS String
   DIM sRes AS String
   
-  IF Exist(sMountedLocation &/ "etc/vector-version") THEN 
-    sres = "VectorLinux"
-  ELSE IF Exist(sMountedLocation &/ "etc/slackware-version") THEN 
-    sres = "Slackware"
-  ELSE IF Exist(sMountedLocation &/ "etc/Suse-release") OR Exist(sMountedLocation &/ "UnitiedLinux-release") THEN 
-    sres = "SuSE"
-  ELSE IF Exist(sMountedLocation &/ "etc/gentoo-release") THEN 
-    sres = "Gentoo"
+  IF Exist(sMountedLocation &/ "etc/arch-release") THEN 
+    sRes = "Arch"
+  ELSE IF Exist(sMountedLocation &/ "etc/knoppix-version") THEN 
+    sRes = "Knoppix"
+  ELSE IF Exist(sMountedLocation &/ "etc/sidux-version") THEN 
+    sRes = "Sidux"
   ELSE IF Exist(sMountedLocation &/ "etc/debian_version") THEN 
     SHELL "grep -m 1 cdrom " & sMountedLocation &/ "etc" &/ "apt" &/ "sources.list | cut -d \"[\" -f2 | cut -d \" \" -f 1,2" TO sres
       IF Len(Trim(sres)) >= 0 THEN 
@@ -41,16 +39,58 @@ PUBLIC FUNCTION ID_LINUX(sMountedLocation AS String) AS String
       ELSE 
         sres = "Debian"
       END IF
-  ELSE IF Exist(sMountedLocation &/ "etc/mandrake-release") THEN ' this should be mandriva now
-    sres = "Mandrake"
-  ELSE IF Exist(sMountedLocation &/ "etc/redhat-release") THEN 
+  ELSE IF Exist(sMountedLocation &/ "/etc/gentoo-release") THEN 
+    sres = "Gentoo"
+  ELSE IF Exist(sMountedLocation &/ "/etc/redhat-release") THEN 
     sres = "RedHat"
+  ELSE IF Exist(sMountedLocation &/ "/etc/pclinuxos-release") THEN 
+    sres = "PCLinuxOS"
+  ELSE IF Exist(sMountedLocation &/ "/etc/mandriva-release") THEN 
+    sres = "Mandriva"
+  ELSE IF Exist(sMountedLocation &/ "/etc/mandrake-release") THEN 
+    sres = "Mandriva"
+  ELSE IF Exist(sMountedLocation &/ "etc/vector-version") THEN 
+    sres = "VectorLinux"
+  ELSE IF Exist(sMountedLocation &/ "etc/slackware-version") THEN 
+    sres = "Slackware"
+  ELSE IF Exist(sMountedLocation & "/etc/SuSE-release") THEN
+    sres = "SuSE"
+  ELSE IF Exist(sMountedLocation &/ "yellowdog-release") THEN 
+    sres = "YellowDog"
+  ELSE IF Exist(sMountedLocation &/ "etc/zenwalk-version") THEN 
+    sres = "Zenwalk"
   ELSE IF Exist(sMountedLocation &/ "etc/fedora-release") THEN 
     sres = "Fedora"
   ELSE 
     sres = "Linux"
-      
   END IF
+  
+  
+  ' IF Exist(sMountedLocation &/ "etc/vector-version") THEN 
+  '   sres = "VectorLinux"
+  ' ELSE IF Exist(sMountedLocation &/ "etc/slackware-version") THEN 
+  '   sres = "Slackware"
+  ' ELSE IF Exist(sMountedLocation &/ "etc/Suse-release") OR Exist(sMountedLocation &/ "UnitiedLinux-release") THEN 
+  '   sres = "SuSE"
+  ' ELSE IF Exist(sMountedLocation &/ "etc/gentoo-release") THEN 
+  '   sres = "Gentoo"
+  ' ELSE IF Exist(sMountedLocation &/ "etc/debian_version") THEN 
+  '   SHELL "grep -m 1 cdrom " & sMountedLocation &/ "etc" &/ "apt" &/ "sources.list | cut -d \"[\" -f2 | cut -d \" \" -f 1,2" TO sres
+  '     IF Len(Trim(sres)) >= 0 THEN 
+  '       sres = Trim(Replace(sres, " ", "_"))
+  '     ELSE 
+  '       sres = "Debian"
+  '     END IF
+  ' ELSE IF Exist(sMountedLocation &/ "etc/mandrake-release") THEN ' this should be mandriva now
+  '   sres = "Mandrake"
+  ' ELSE IF Exist(sMountedLocation &/ "etc/redhat-release") THEN 
+  '   sres = "RedHat"
+  ' ELSE IF Exist(sMountedLocation &/ "etc/fedora-release") THEN 
+  '   sres = "Fedora"
+  ' ELSE 
+  '   sres = "Linux"
+  '     
+  ' END IF
   
   RETURN sres
   
