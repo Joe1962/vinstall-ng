@@ -50,10 +50,9 @@
         MoveScaled(3,34,13,1)
       }
     }
-    { pnlStack Panel
-      MoveScaled(28,2,50,37)
+    { pnlStack Workspace
+      MoveScaled(32,3,37,32)
       Expand = True
-      Border = Border.Plain
     }
   }
   { HBox1 HBox

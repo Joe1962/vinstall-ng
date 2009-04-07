@@ -39,7 +39,7 @@ PUBLIC FUNCTION GetNext() AS String
 END
 PUBLIC SUB StartUp()
   
-  
+  'ClsGlobal.fRunningMainForm.btnext.enabled = TRUE
   
 END
 PUBLIC SUB OnExit()

@@ -6,6 +6,7 @@ Version=0.0.2
 Library=gb.gtk
 Library=gb.form
 Library=gb.desktop
+Library=gb.form.mdi
 Library=gb.gtk.ext
 Arguments="en_US"
 TabSize=2
