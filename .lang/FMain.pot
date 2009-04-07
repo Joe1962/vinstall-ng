@@ -18,19 +18,19 @@ msgstr ""
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:294
+#: FMain.class:293
 msgid "Help"
 msgstr ""
 
-#: FMain.class:307
+#: FMain.class:306
 msgid "Back"
 msgstr ""
 
-#: FMain.class:318
+#: FMain.class:317
 msgid "Next"
 msgstr ""
 
-#: FMain.class:329
+#: FMain.class:328
 msgid "Quit"
 msgstr ""
 

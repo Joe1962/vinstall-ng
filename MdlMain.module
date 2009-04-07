@@ -16,6 +16,7 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 PUBLIC FUNCTION FORMAT_THIS_PARTITION(sPartition AS String, sFilesystem AS String) AS Integer
   
   DIM hproc AS Process

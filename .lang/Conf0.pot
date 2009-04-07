@@ -14,83 +14,91 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Conf0.class:72
-msgid "WARNING:"
+#: Conf0.class:51
+msgid "Installation found in"
 msgstr ""
 
-#: Conf0.class:72
-msgid "Selecting this option will bypass your boot manager configuration."
+#: Conf0.class:69
+msgid "Include in boot menu"
 msgstr ""
 
-#: Conf0.class:72
-msgid "You may not be able to start your VectorLinux installation. Do not choose this option"
+#: Conf0.class:89
+msgid "Name"
 msgstr ""
 
-#: Conf0.class:72
-msgid "unless you are fully aware of what you are doing."
+#: Conf0.class:107
+msgid "Initial RAM disk image"
 msgstr ""
 
-#: Conf0.class:129
+#: Conf0.class:130
+msgid "Kernel boot options"
+msgstr ""
+
+#: Conf0.class:156
+msgid "Add option to boot this operating system into text mode"
+msgstr ""
+
+#: Conf0.class:222
+msgid "Standard"
+msgstr ""
+
+#: Conf0.class:222
+msgid "Bootplash Med"
+msgstr ""
+
+#: Conf0.class:222
+msgid "Bootsplash High"
+msgstr ""
+
+#: Conf0.class:222
+msgid "Bootsplash Extra High"
+msgstr ""
+
+#: Conf0.class:352
 msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0.class:147
-msgid "Select bootloader to be used"
+#: Conf0.class:368
+msgid "Select system boot manager to use"
 msgstr ""
 
-#: Conf0.class:155
+#: Conf0.class:376
 msgid "LILO"
 msgstr ""
 
-#: Conf0.class:161
-msgid "Grub"
+#: Conf0.class:381
+msgid "GRUB"
 msgstr ""
 
-#: Conf0.class:166
-msgid "Select this option if you want to configure your system boot manager manually at a later time"
+#: Conf0.class:386
+msgid "NONE"
 msgstr ""
 
-#: Conf0.class:168
-msgid "None (Experts Only)"
+#: Conf0.class:395
+msgid "Boot Menu Options"
 msgstr ""
 
-#: Conf0.class:176
-msgid "Boot menu options"
-msgstr ""
-
-#: Conf0.class:187
+#: Conf0.class:405
 msgid "Target"
 msgstr ""
 
-#: Conf0.class:193
-msgid "ComboBox1"
-msgstr ""
-
-#: Conf0.class:206
+#: Conf0.class:417
 msgid "Video Resolution"
 msgstr ""
 
-#: Conf0.class:212
-msgid "ComboBox2"
-msgstr ""
-
-#: Conf0.class:224
+#: Conf0.class:436
 msgid "Prompt Time Out"
 msgstr ""
 
-#: Conf0.class:237
+#: Conf0.class:446
 msgid "Seconds"
 msgstr ""
 
-#: Conf0.class:250
+#: Conf0.class:452
 msgid "Boot Default"
 msgstr ""
 
-#: Conf0.class:268
-msgid "OPERATING SYSTEMS DETECTED"
-msgstr ""
-
-#: Conf0.class:279
+#: Conf0.class:474
 msgid "Tab 0"
 msgstr ""
 

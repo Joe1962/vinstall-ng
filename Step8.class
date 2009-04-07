@@ -31,12 +31,14 @@ PUBLIC SUB Form_Open()
   'ME.SUMMARIZE_DISTRO_INFO()
   'ME.SUMMARIZE_PARTITION_SELECTION()
 
+
 END
 PUBLIC FUNCTION GetNext() AS String
   
 
   ClsGlobal.fRunningMainForm.listview1["Step4"].Picture = MdlStartUp.pNow
   ClsGlobal.fRunningMainForm.listview1["Step3"].picture = MdlStartUp.pDone
+  
   
   RETURN "Conf0"
   

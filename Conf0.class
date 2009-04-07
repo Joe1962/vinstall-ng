@@ -1,5 +1,4 @@
 ' Gambas class file
-
 '    This file is part of vinstall-ng
 
 '    vinstall-ng is free software: you can redistribute it and/or modify
@@ -16,22 +15,223 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 '=====================================================================================
 
+PRIVATE objinitrds AS NEW Object[]
+PRIVATE objChecks AS NEW Object[]
+PRIVATE objappends AS NEW Object[]
+PRIVATE objNames AS NEW Object[]
 
 
+PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabStrip AS TabStrip)
+  
+  DIM i AS Integer
+  DIM tb AS TextBox
+  DIM tl AS TextLabel
+  DIM cb AS CheckBox
+  DIM hb AS HBox
+  DIM comb AS ComboBox
+  
+  IF NOT sLinux OR Len(Trim(sLinux)) <= 0 THEN RETURN 
+  'Message(sLinux)
+  IF sLinuxRoot = ClsGlobal.sRoot THEN ' This is the just installed linux
+    i = 0
+      WITH objTabStrip
+        .Index = i
+        .Text = "VectorLinux"
+      END WITH 
+  ELSE 
+  i = objTabStrip.Count - 1
+    WITH objTabStrip
+      .Index = i
+      .Text = sLinux
+    END WITH 
+  END IF
+  
+  tl = NEW TextLabel(objTabStrip) AS "Banner"
+    WITH tl
+      .Text = ("Installation found in") & Space(1) & sLinuxRoot
+      .Height = 24
+      .Alignment = Align.Left
+      .Width = 200
+      .Expand = TRUE
+      '.Border = Border.Plain
+      '.AutoResize = TRUE
+      .Move(4, 4)
+    END WITH 
+  hb = NEW HBox(objTabStrip) ' separator space
+    WITH hb
+      .Height = 16
+      .Width = 12
+      .Expand = TRUE
+    END WITH 
+  cb = NEW CheckBox(objTabStrip) ' Inlcude/Exclude OS from boot menu
+    WITH cb
+      .Expand = TRUE
+      .Text = ("Include in boot menu")
+      .Value = TRUE
+      .Height = 24
+      .Tag = sLinuxRoot
+    END WITH 
+    objChecks.Add(cb)
+  hb = NEW HBox(objTabStrip) ' separator space
+    WITH hb
+      .Height = 12
+      .Expand = TRUE
+    END WITH 
+  hb = NEW HBox(objTabStrip) ' This will hold a few objects of it's own
+    WITH hb
+      .Height = 28
+      .Expand = TRUE
+      .Padding = 2
+      .Spacing = 2
+    END WITH 
+  tl = NEW TextLabel(hb) ' Name label
+    WITH tl
+      .Text = ("Name")
+      .Expand = FALSE
+      .Width = 200
+      .Adjust()
+      .AutoResize = TRUE
+      .Height = .Parent.Height
+      .Alignment = Align.Left
+    END WITH 
+  tb = NEW TextBox(hb) AS "tbOsLabel" ' Name entry box
+    WITH tb
+      .Expand = TRUE
+      .Height = .Parent.Height
+      .Text = sLinux '  default to the distro found
+      .Tag = sLinuxRoot
+    END WITH 
+    objNames.Add(tb)
+  tl = NEW TextLabel(hb) ' initrd label
+    WITH tl
+      .text = ("Initial RAM disk image")
+      .Alignment = Align.Right
+      .Height = .Parent.Height
+      .Expand = TRUE
+    END WITH 
+    
+  comb = NEW ComboBox(hb) ' initrd selection combobox
+    WITH comb
+      .Height = .Parent.Height
+      .Expand = TRUE
+      .READonly = TRUE
+      .Tag = sLinuxRoot
+    END WITH 
+      ' populate the initrd box
+      'Message(sLinuxRoot)
+        MdlBootMngr.find_initrds_for_this_linux(sLinuxRoot, comb) ' populate initrd selection
+        
+    objinitrds.Add(comb)
+  hb = NEW HBox(objTabStrip) ' blank space separator
+  hb.Height = 8
+  hb.Expand = TRUE
+  tl = NEW TextLabel(objTabStrip) ' append line textlabel
+    WITH tl
+      .Text = ("Kernel boot options")
+      .Height = 24
+      .Width = 200
+      .Alignment = Align.Left
+      .Expand = FALSE
+      .AutoResize = TRUE
+    END WITH 
+  tb = NEW TextBox(objTabStrip) ' append input line
+    WITH tb
+      .Text = "splash=silent"
+      .Height = 24
+      .Expand = TRUE
+      .Tag = sLinuxRoot
+    END WITH 
+      objappends.Add(tb)
+    
+    ' ======================= ONLY FOR THE OS WE JUST INSTALLED ===============================
+  IF sLinuxRoot = ClsGlobal.sRoot THEN 
+    hb = NEW HBox(objTabStrip) ' yet another separator
+      WITH hb
+        .Expand = TRUE
+        .Height = 8
+      END WITH 
+    cb = NEW CheckBox(objTabStrip) AS "bCLIOption"
+      WITH cb
+        .Value = TRUE
+        .Text = ("Add option to boot this operating system into text mode")
+        .Height = 24
+        .Expand = TRUE
+        .Tag = sLinuxRoot
+      END WITH 
+    ' hb = NEW HBox(objTabStrip)
+    '   hb.Height = 4
+    '   hb.Expand = TRUE
+      
+  END IF
+    objTabStrip.Refresh()
+  
+      
+  
+END
+
+
+
+
+PUBLIC SUB List_Other_Linuxes(objTabStrip AS TabStrip)
+ DIM sDump, sPartitions, sPart AS String
+  DIM sPartList AS String[]
+  DIM i AS Integer
+  DIM sOutcome AS String
+  
+  ' objappends = NEW Object[]
+  ' objChecks = NEW Object[]
+  ' objinitrds = NEW Object[]
+  ' objNames = NEW Object[]
+  ' 
+  MdlBootMngr.bScanned = TRUE
+
+  
+  ' First, and foremost, we will list the recently isntalled VectorLinux
+    'populate_linux_entry("VectorLinux", ClsGlobal.sRoot, objTabStrip) ' This will list the newly isntall VL OS
+  ' Now list all other linuxes =================================================
+      SHELL "probepart | grep \"^/dev\" | grep -vi swap | grep -i linux | tr -s \' \' | cut -f 1 -d \' \'" TO sDump
+        sDump = Trim(sDump)
+          IF Len(sDump) <= 0 THEN RETURN ' nothing found, VL is the only distro in this box ... 
+        sPartList = Split(sDump, gb.NewLine)
+          FOR i = 0 TO sPartList.Max
+            sPart = Trim(Right(sPartList[i], Len(sPartList[i]) - RInStr(sPartList[i], "/")))
+
+                sOutcome = MdlBootMngr.Find_Linux(Trim(sPartList[i]))
+                  IF sOutcome AND sOutcome <> "None" THEN 
+                  'INC objTabStrip.Count
+                  objTabStrip.Index = objTabStrip.Count - 1
+                  populate_linux_entry(sOutcome, Trim(sPartList[i]), objTabStrip)
+                  INC objTabStrip.Count
+                END IF
+              'END IF
+                
+          NEXT 
+        DEC objTabStrip.Count ' remove the trailing blank tab from the tabstrip.
+        
+  
+  ' now list all other Windows os's ============================================
+    
+  
+END
+
+
+PUBLIC SUB Form_Open()
+
+   WITH ME
+    .tlbanner.Text = "<h2>" & tlbanner.text & "</h2>"
+    .cbVidRes.List = [("Standard"), ("Bootplash Med"), ("Bootsplash High"), ("Bootsplash Extra High")]
+  END WITH 
+'ME.Fake_Names()
+  ME.List_Other_Linuxes(ME.TsOsList)
+  ME.Update_Default_boot_choices()
+  MdlBootMngr.Display_Bootmanager_Target_Options(ME.cbTarget)
+  
+
+END
 
 PUBLIC FUNCTION GetNext() AS String
   
-  ClsGlobal.fRunningMainForm.listview1["Step6"].Picture = MdlStartUp.pNow
-  ClsGlobal.fRunningMainForm.listview1["Step5"].picture = MdlStartUp.pDone
-  ClsGlobal.fRunningMainForm.listview1["Step4"].picture = MdlStartUp.pDone
-  
   RETURN "Conf1"
-  
-  
-END
-PUBLIC SUB StartUp()
-  
-  IF MdlBootMngr.bScanned = FALSE OR NOT MdlBootMngr.bScanned THEN MdlBootMngr.List_Other_Linuxes(ME.TsOSListing)
   
 END
 PUBLIC SUB OnExit()
@@ -39,43 +239,69 @@ PUBLIC SUB OnExit()
   
   
 END
-
-
-
-PUBLIC SUB Form_Open()
-
-  WITH ME
-    .tlbanner.Text = "<h2>" & tlbanner.text & "</h2>"
-    .tlSep.Text = "<b>" & tlsep.Text & "</b>"
-        
-  END WITH 
-
+PUBLIC SUB StartUp()
+  
+  
+  
 END
+
+PUBLIC SUB Fake_Names()
+  
+  DIM tb AS TextBox
+  DIM i AS Integer
+  
+    FOR i = 0 TO 2
+    TsOsList.Index = i
+    tb = NEW TextBox(ME.TsOsList) AS "Names"
+    tb.Height = 28
+    tb.Width = 200
+    tb.text = "Test" & i
+    tb.Tag = "Test" & i
+    objNames.Add(tb)
+    INC TsOsList.Count
+    NEXT 
+  
+END
+
+PUBLIC SUB Names_Change()
+  
+
+  
+  TsOsList.Current.Text = LAST.text
+  ME.Update_Default_boot_choices()
+  
+  
+END
+PUBLIC SUB Update_Default_boot_choices()
+  DIM tb AS TextBox
+  ME.cbDefBoot.Clear
+  FOR EACH tb IN objNames
+    cbDefBoot.Add(tb.text)
+  NEXT 
+  
+  
+END
+
+PUBLIC SUB tbOsLabel_Change()
+  
+  LAST.text = Replace(LAST.text, " ", "")  
+  IF Len(LAST.text) > 15 THEN 
+    RETURN 
+  END IF
+    
+  TsOsList.Current.Text = LAST.text
+  ME.Update_Default_boot_choices()
+  
+END
+
+
+
 
 PUBLIC SUB Form_Resize()
 
-  ME.HBox2.Width = ME.Frame1.Width - (ME.HBox2.Left * 2)
-  ME.hbox3.Width = ME.Frame2.Width - (ME.HBox3.Left * 2)
-  ME.HBox5.Width = ME.Frame2.Width - (ME.hbox5.Left * 2)
-  ME.HBox6.Width = ME.Width
-  'ME.TsOsListing.Height = ME.ClientHeight - (ME.HBox6.top + (ME.HBox6.Height + 12)) 'ME.Heigh - (ME.HBox6.top + (ME.HBox6.Height * 2))
-  ME.TsOsListing.Height = ClsGlobal.fRunningMainForm.pnlstack.height - (ME.TsOsListing.Top + 230)
-
-END
-
-PUBLIC SUB rbNone_Click()
-
-  IF LAST.value = TRUE THEN 
-    Message.Warning("<b>" & ("WARNING:") & "</b><br>" &
-    ("Selecting this option will bypass your boot manager configuration.") & "<br>" &
-    ("You may not be able to start your VectorLinux installation. Do not choose this option") & "<br>" &
-    ("unless you are fully aware of what you are doing."))
-END IF
-
-END
-
-PUBLIC SUB tlLiloTarget_DblClick()
-
-  Balloon("This is a test" & "<br>" & "This is another string" & "<br><br><br><br><br><br>" & "to see if the baloon has been fixed", cbLiloTarget)
+  hbox4.Height = ME.ClientH - (hbox4.top + 30)
+  hbox1.Width = hbox1.Parent.Width - (hbox1.Left * 2)
+  hbox2.Width = hbox2.Parent.Width - (hbox2.Left * 2)
+  hbox3.Width = hbox3.Parent.Width - (hbox3.Left * 2)
 
 END
