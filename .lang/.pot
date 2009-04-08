@@ -38,113 +38,91 @@ msgstr ""
 msgid "Add option to boot this operating system into text mode"
 msgstr ""
 
-#: Conf0.class:222 Conf0Old.class:67 MdlBootMngr.module:373
+#: Conf0.class:222 MdlBootMngr.module:373
 msgid "Standard"
 msgstr ""
 
-#: Conf0.class:222 Conf0Old.class:67
+#: Conf0.class:222
 msgid "Bootplash Med"
 msgstr ""
 
-#: Conf0.class:222 Conf0Old.class:67 MdlBootMngr.module:377
+#: Conf0.class:222 MdlBootMngr.module:377
 msgid "Bootsplash High"
 msgstr ""
 
-#: Conf0.class:222 Conf0Old.class:67 MdlBootMngr.module:379
+#: Conf0.class:222 MdlBootMngr.module:379
 msgid "Bootsplash Extra High"
 msgstr ""
 
-#: Conf0.class:352 Conf0Old.class:166
-msgid "System Bootloader Configuration"
-msgstr ""
-
-#: Conf0.class:368
-msgid "Select system boot manager to use"
-msgstr ""
-
-#: Conf0.class:376 Conf0Old.class:192
-msgid "LILO"
-msgstr ""
-
-#: Conf0.class:381
-msgid "GRUB"
-msgstr ""
-
-#: Conf0.class:386
-msgid "NONE"
-msgstr ""
-
-#: Conf0.class:395
-msgid "Boot Menu Options"
-msgstr ""
-
-#: Conf0.class:405 Conf0Old.class:224
-msgid "Target"
-msgstr ""
-
-#: Conf0.class:417 Conf0Old.class:238
-msgid "Video Resolution"
-msgstr ""
-
-#: Conf0.class:436 Conf0Old.class:257
-msgid "Prompt Time Out"
-msgstr ""
-
-#: Conf0.class:446 Conf0Old.class:270
-msgid "Seconds"
-msgstr ""
-
-#: Conf0.class:452 Conf0Old.class:278
-msgid "Boot Default"
-msgstr ""
-
-#: Conf0.class:474 Conf0Old.class:308
-msgid "Tab 0"
-msgstr ""
-
-#: Conf0Old.class:88 Step1.class:433 Step3a1.class:22 Step3a1a.class:186
+#: Conf0.class:332 Step1.class:433 Step3a1.class:22 Step3a1a.class:186
 #: Step7a.class:143
 msgid "WARNING:"
 msgstr ""
 
-#: Conf0Old.class:88
+#: Conf0.class:332
 msgid "Selecting this option will bypass your boot manager configuration."
 msgstr ""
 
-#: Conf0Old.class:88
+#: Conf0.class:332
 msgid ""
 "You may not be able to start your VectorLinux installation. Do not choose "
 "this option"
 msgstr ""
 
-#: Conf0Old.class:88
+#: Conf0.class:332
 msgid "unless you are fully aware of what you are doing."
 msgstr ""
 
-#: Conf0Old.class:184
-msgid "Select bootloader to be used"
+#: Conf0.class:395
+msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0Old.class:198
-msgid "Grub"
+#: Conf0.class:411
+msgid "Select system boot manager to use"
 msgstr ""
 
-#: Conf0Old.class:203
-msgid ""
-"Select this option if you want to configure your system boot manager "
-"manually at a later time"
+#: Conf0.class:420
+msgid "LILO"
 msgstr ""
 
-#: Conf0Old.class:205
-msgid "None (Experts Only)"
+#: Conf0.class:426
+msgid "GRUB"
 msgstr ""
 
-#: Conf0Old.class:213
-msgid "Boot menu options"
+#: Conf0.class:432
+msgid "NONE"
 msgstr ""
 
-#: Conf0Old.class:297
-msgid "OPERATING SYSTEMS DETECTED"
+#: Conf0.class:441
+msgid "Boot Menu Options"
+msgstr ""
+
+#: Conf0.class:451
+msgid "Target"
+msgstr ""
+
+#: Conf0.class:463
+msgid "Video Resolution"
+msgstr ""
+
+#: Conf0.class:482
+msgid "Prompt Time Out"
+msgstr ""
+
+#: Conf0.class:493
+msgid "Seconds"
+msgstr ""
+
+#: Conf0.class:499
+msgid "Boot Default"
+msgstr ""
+
+#: Conf0.class:518
+msgid "DETECTED OPERATING SYSTEMS."
+msgstr ""
+
+#: Conf0.class:534
+msgid "Tab 0"
 msgstr ""
 
 #: FMain.class:253 FMain0.class:253

@@ -220,6 +220,7 @@ PUBLIC SUB Form_Open()
    WITH ME
     .tlbanner.Text = "<h2>" & tlbanner.text & "</h2>"
     .cbVidRes.List = [("Standard"), ("Bootplash Med"), ("Bootsplash High"), ("Bootsplash Extra High")]
+    .TLoSlIST.Text = "<b>" & UCase(.TLoSlIST.Text) & "</b>"
   END WITH 
 'ME.Fake_Names()
   ME.List_Other_Linuxes(ME.TsOsList)
@@ -303,5 +304,45 @@ PUBLIC SUB Form_Resize()
   hbox1.Width = hbox1.Parent.Width - (hbox1.Left * 2)
   hbox2.Width = hbox2.Parent.Width - (hbox2.Left * 2)
   hbox3.Width = hbox3.Parent.Width - (hbox3.Left * 2)
+
+END
+
+PUBLIC SUB Toggle_window_controls(bval AS Boolean)
+  
+  DIM obj AS Object
+  'DIM rb AS RadioButton
+  
+  FOR EACH obj IN ME.Children
+    IF obj.Name <> "HPanel2" THEN 
+     TRY obj.enabled = bval
+    END IF
+  NEXT 
+  'FOR EACH obj IN ME.HPanel2.Children
+  '  TRY obj.enabled = TRUE
+  'NEXT 
+END
+
+
+PUBLIC SUB rbNone_Click()
+
+    IF LAST.value = TRUE THEN 
+   Message.Warning("<b>" & ("WARNING:") & "</b><br>" &
+    ("Selecting this option will bypass your boot manager configuration.") & "<br>" &
+    ("You may not be able to start your VectorLinux installation. Do not choose this option") & "<br>" &
+    ("unless you are fully aware of what you are doing."))
+  END IF
+  ME.Toggle_window_controls(FALSE)
+
+END
+
+PUBLIC SUB rbGrub_Click()
+
+  ME.Toggle_window_controls(TRUE)
+
+END
+
+PUBLIC SUB rbLilo_Click()
+
+  ME.Toggle_window_controls(TRUE)
 
 END
