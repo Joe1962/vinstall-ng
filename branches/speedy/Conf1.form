@@ -1,0 +1,68 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,81,55)
+  Text = ("")
+  Arrangement = Arrange.Row
+  Padding = 2
+  { HPanel1 HPanel
+    MoveScaled(0,0,60,5)
+    Expand = True
+    { tlbanner TextLabel
+      MoveScaled(12,0,33,3)
+      Expand = True
+      Text = ("Regional Settings")
+    }
+    { Separator1 Separator
+      MoveScaled(13,4,25,1)
+      Expand = True
+    }
+  }
+  { TextLabel1 TextLabel
+    MoveScaled(1,7,74,8)
+    Expand = True
+    AutoResize = True
+    Text = ("Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way.")
+  }
+  { HBox2 HBox
+    MoveScaled(1,15,67,1)
+    Expand = True
+  }
+  { HBox1 HBox
+    MoveScaled(2,19,65,3.5)
+    Expand = True
+    Padding = 2
+    { TextLabel2 TextLabel
+      MoveScaled(0,0,41,3)
+      Expand = True
+      Text = ("Choose the correct timezone for the area in which you live.")
+      Alignment = Align.Left
+    }
+  }
+  { HBox5 HBox
+    MoveScaled(1,24,48,3.5)
+    Expand = True
+    { cbHwClock ComboBox
+      MoveScaled(0,0,34,3.5)
+      Text = ("ComboBox1")
+      ReadOnly = True
+      List = [("LocalTime"), ("UTC")]
+    }
+  }
+  { HBox3 HBox
+    MoveScaled(2,28,27,1)
+    Expand = True
+  }
+  { HBox4 HBox
+    MoveScaled(4,30,50,24)
+    Expand = True
+    { lbTmZone ListBox
+      MoveScaled(0,0,31,27)
+      Expand = True
+    }
+    { Panel1 Panel
+      MoveScaled(39,8,6,5)
+      Expand = True
+    }
+  }
+}

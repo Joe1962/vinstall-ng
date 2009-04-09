@@ -125,6 +125,35 @@ msgstr ""
 msgid "Tab 0"
 msgstr ""
 
+#: Conf1.class:141 MdlStartUp.module:53
+msgid "Regional Settings"
+msgstr ""
+
+#: Conf1.class:154
+msgid ""
+"Choose how\n"
+"your hardware clock is set up.\n"
+"Choose UTC if you know that the clock is set up to\n"
+"the Coordinated Universal Time (UTC/GMT). Otherwise,\n"
+"Choose localtime since most PCs are setup this way."
+msgstr ""
+
+#: Conf1.class:170
+msgid "Choose the correct timezone for the area in which you live."
+msgstr ""
+
+#: Conf1.class:181
+msgid "ComboBox1"
+msgstr ""
+
+#: Conf1.class:183
+msgid "LocalTime"
+msgstr ""
+
+#: Conf1.class:183
+msgid "UTC"
+msgstr ""
+
 #: FMain.class:253 FMain0.class:253
 msgid "Process Overview"
 msgstr ""
@@ -263,10 +292,6 @@ msgstr ""
 
 #: MdlStartUp.module:52
 msgid "System Boot Manager"
-msgstr ""
-
-#: MdlStartUp.module:53
-msgid "Regional Settings"
 msgstr ""
 
 #: MdlStartUp.module:54
