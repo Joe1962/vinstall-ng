@@ -1,0 +1,106 @@
+' Gambas class file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+PUBLIC SUB Form_Open()
+
+    ME.tlbanner.Text = "<h3>" & tlbanner.Text & "</h3>"
+    MdlMain.DISPLAY_TIME_ZONES(ME.lbTmZone)
+      
+      ' default the time zone to us/central
+    ME.lbTmZone[ME.lbTmZone.Find("US/Central")].Selected = TRUE
+
+END
+
+PUBLIC FUNCTION GetNext() AS String
+  
+  RETURN "Conf2"
+  
+  
+END
+PUBLIC SUB StartUp()
+  
+  
+  
+END
+PUBLIC SUB OnExit()
+  
+  MdlMain.SET_TIME_ZONE(Trim(ME.lbTmZone.Text), Trim(ME.cbHwClock.Text))
+  
+  
+END
+
+
+
+PUBLIC SUB lbTmZone_Click()
+
+  'Message(ME.lbTmZone.Text)
+  FMain.btnext.Enabled = TRUE
+
+END
+
+
+
+PUBLIC SUB Form_Resize()
+
+ ME.hbox4.Height = ME.ClientHeight - (ME.HBox4.Top + 24)
+
+END
+
+PUBLIC SUB cbHwClock_Click()
+
+  
+
+END
+
+PUBLIC SUB lbTmZone_KeyPress()
+
+
+ 
+  DIM i AS Integer
+  
+  'i = 0
+  IF Key.text > "z" OR Key.text < " " THEN RETURN  ' not searchable
+  
+    i = lbTmZone.Index
+      DO
+        INC i
+          IF i >= lbTmZone.Count THEN i = 0 'back to top
+          IF i = lbTmZone.Index THEN RETURN  ' no other match found
+          IF lbTmZone[i].text LIKE Key.Text & "*" THEN 
+          lbTmZone.Index = i
+          RETURN 
+          END IF
+        LOOP 
+
+      
+
+END
+
+PUBLIC SUB Form_Show()
+
+ME.Form_Open()
+  ' Fmain.frmcurr = ME
+  '   ME.tlbanner.Text = "<h3>" & ("Timezone configuration") & "</h3>"
+  '   WITH FMain
+  '     .tvPlan["Conf0"].Picture = MdlCore.sDonePic
+  '     .tvPlan["Conf1"].picture = MdlCore.sNowPic
+  '     .tvPlan["Conf1"].Selected = TRUE
+  '   END WITH 
+  ' 
+
+END
