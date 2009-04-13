@@ -25,9 +25,18 @@ PUBLIC SUB Form_Open()
         .tlTxt.Text = tlTxt.Text &
           ("When finished, Click") & Space(1) & "\"" & ClsGlobal.fRunningMainForm.btnext.text & "\"" & Space(1) & ("to continue")
       END IF
+     .btPicSel.Picture = Picture.Load("/usr/share/apps/kdm/pics/users/default2.png")
   END WITH 
+  WAIT 0.1
+  'MdlMain.Display_User_Group_Choices(ME.lbUsrGrps)
 
 END
+PUBLIC FUNCTION GetNext() AS String
+  
+  RETURN "Conf4"
+  
+END
+
 PUBLIC SUB OnExit()
   
   
@@ -35,9 +44,111 @@ PUBLIC SUB OnExit()
 END
 PUBLIC SUB StartUp()
   
-  
+  DIM obj AS Object
+    FOR EACH obj IN lbUsrGrps.Children
+      obj.delete
+    NEXT 
+  MdlMain.Display_User_Group_Choices(ME.lbUsrGrps)
   
 END
 
 
 
+
+PUBLIC SUB Form_Resize()
+
+  ME.scrlConts.Height = ME.ClientH - (ME.scrlConts.Top + 8)
+  ME.lbUsrGrps.Width = ME.lbUsrGrps.Parent.Width - (ME.lbUsrGrps.Left * 2)
+  ME.lbUsrGrps.Height = ME.lbUsrGrps.Parent.Height - (ME.lbUsrGrps.Top * 1.25)
+
+END
+
+PUBLIC SUB TextBox4_KeyPress()
+
+  
+
+END
+
+
+PUBLIC SUB btPicSel_Click()
+  Dialog.Path = "/usr/share/apps/kdm/pics/users"
+  IF NOT (txtLogin.Text) THEN 
+    Dialog.Title = ("Select picture ID")
+  ELSE 
+    Dialog.Title = ("Select picture ID for") & Space(1) & ME.txtLogin.Text
+  END IF
+  Dialog.Filter = ["*.png;*.jpg;*.jpeg", "Picture Files"]
+  IF Dialog.OpenFile() THEN RETURN 
+      LAST.Picture = Picture.Load(Dialog.Path)
+
+END
+
+PUBLIC SUB Button2_Click()
+  DIM obj AS Object
+  ' clear this form
+    ME.txtLogin.Clear
+    ME.txtRealName.Clear
+    ME.txtPass1.Clear
+    ME.txtPass2.Clear
+    
+    FOR EACH obj IN ME.lbUsrGrps.Children
+      obj.delete
+    NEXT 
+    MdlMain.Display_User_Group_Choices(ME.lbUsrGrps)
+    ' default the picture
+    ME.btPicSel.Picture = Picture.Load("/usr/share/apps/kdm/pics/users/default2.png")
+
+END
+
+PRIVATE FUNCTION Check_Text_Entry() AS Boolean
+  
+  ' will return true for faulty entry, false for clear
+  ' tHIS FUNCTION WILL MAKE SURE EVERYTHING IS CLEAR FOR USER ACCOUNT TO BE CREATED.
+  IF NOT (txtLogin.Text) THEN 
+    Balloon.Error(("You must enter a login name first."), txtLogin)
+    RETURN TRUE
+  ELSE IF NOT (txtPass1.Text) THEN 
+    Balloon.Error(("Please select a password for") & Space(1) & txtLogin.Text & Space(1) & ("before continuing"), txtPass1)
+    RETURN TRUE
+  ELSE IF NOT (txtPass2.Text) THEN 
+    Balloon.Error(("You must enter the password twice for added security"), txtPass2)
+    RETURN TRUE
+  END IF
+  RETURN FALSE
+END
+
+PUBLIC SUB btAddUsr_Click()
+
+  
+  '1) Check to make sure all entries are filled in
+  '2) Check to see if the user does not already exist
+  '3) If conditions 1 & 2 are passed, then create the account.
+  '4) Check for errors during account creation ^^^^^^^^^^^^^ (done in step3)
+  
+  IF Check_Text_Entry() = FALSE THEN 
+    IF MdlMain.CHECK_EXISTING_USER(Trim(ME.txtLogin.Text)) = FALSE THEN 
+      MdlMain.CREATE_NEW_USER_ACCOUNT() ' create new account
+    ELSE ' user exists
+      Message.Error(("User") & Space(1) & "\"" & Trim(ME.txtLogin.Text) & "\"" & Space(1) & ("already exists in the system.") & "<br>" &
+      ("Please select another user login name"))
+      RETURN 
+      STOP EVENT 
+    END IF
+  END IF
+
+END
+
+
+
+PUBLIC SUB txtLogin_KeyPress()
+  
+
+  IF Key.Text LIKE "*[a-z]*" OR Key.Text LIKE "*[0-9]*" THEN 
+    ' legal characters
+  ELSE 
+  ' illegal characters
+    Balloon.Info(("Use only lowercase letters and numbers for this field"), LAST)
+    STOP EVENT 
+  END IF
+  
+END

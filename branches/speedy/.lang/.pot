@@ -180,27 +180,27 @@ msgstr ""
 msgid "DO NOT LEAVE THIS BLANK"
 msgstr ""
 
-#: Conf2.class:56
+#: Conf2.class:58
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
-#: Conf2.class:62
+#: Conf2.class:64
 msgid "Password was not set. See error log below"
 msgstr ""
 
-#: Conf2.class:116
+#: Conf2.class:132
 msgid "System Administrator Account"
 msgstr ""
 
-#: Conf2.class:133
+#: Conf2.class:149
 msgid "About the linux root account"
 msgstr ""
 
-#: Conf2.class:165
+#: Conf2.class:181
 msgid "Enter Passwrord"
 msgstr ""
 
-#: Conf2.class:182
+#: Conf2.class:198 Conf3.class:311
 msgid "Re-enter Password"
 msgstr ""
 
@@ -221,8 +221,80 @@ msgstr ""
 msgid "to continue"
 msgstr ""
 
-#: Conf3.class:70
+#: Conf3.class:76
+msgid "Select picture ID"
+msgstr ""
+
+#: Conf3.class:78
+msgid "Select picture ID for"
+msgstr ""
+
+#: Conf3.class:108
+msgid "You must enter a login name first."
+msgstr ""
+
+#: Conf3.class:111
+msgid "Please select a password for"
+msgstr ""
+
+#: Conf3.class:111
+msgid "before continuing"
+msgstr ""
+
+#: Conf3.class:114
+msgid "You must enter the password twice for added security"
+msgstr ""
+
+#: Conf3.class:133
+msgid "User"
+msgstr ""
+
+#: Conf3.class:133
+msgid "already exists in the system."
+msgstr ""
+
+#: Conf3.class:133
+msgid "Please select another user login name"
+msgstr ""
+
+#: Conf3.class:150
+msgid "Use only lowercase letters and numbers for this field"
+msgstr ""
+
+#: Conf3.class:212
 msgid "Create User Accounts"
+msgstr ""
+
+#: Conf3.class:262
+msgid "Login Name"
+msgstr ""
+
+#: Conf3.class:278
+msgid "Real Name"
+msgstr ""
+
+#: Conf3.class:294
+msgid "Enter Password"
+msgstr ""
+
+#: Conf3.class:339
+msgid "Click here to select user Login picture"
+msgstr ""
+
+#: Conf3.class:349
+msgid "Create User"
+msgstr ""
+
+#: Conf3.class:366
+msgid "Import Existing User"
+msgstr ""
+
+#: Conf3.class:382
+msgid "Clear Form"
+msgstr ""
+
+#: Conf3.class:397
+msgid "User Rights Management"
 msgstr ""
 
 #: FMain.class:253 FMain0.class:253
