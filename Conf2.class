@@ -23,6 +23,7 @@ PUBLIC SUB Form_Open()
     ("Most oter every-day tasks do not require administrative priviledges.") & "<br>" & "<br>" &
     ("For added security, use a password that is easy for you to remember, but hard for others to guess.") & "<br><br>" & ("DO NOT LEAVE THIS BLANK")
   END WITH 
+  ClsGlobal.fRunningMainForm.btnext.enabled = FALSE
 
 END
 
@@ -39,14 +40,15 @@ PUBLIC FUNCTION GetNext() AS String
 END
 PUBLIC SUB StartUp()
   
-  ClsGlobal.fRunningMainForm.btnext.enabled = Len(textbox1.Text) > 0
+  ClsGlobal.fRunningMainForm.btnext.enabled = FALSE
   
 END
 
 PUBLIC SUB OnExit()
-  
-  IF compare_passwords() = FALSE THEN RETURN 
-  
+  ' -== Commented for testing purposers ==-
+  'IF compare_passwords() = FALSE THEN RETURN 
+  ME.TextBox1.Clear
+  ME.TextBox2.Clear
 END
 
 PUBLIC FUNCTION compare_passwords() AS Boolean
@@ -74,5 +76,19 @@ END
 PUBLIC SUB TextBox2_KeyRelease()
 
   ClsGlobal.fRunningMainForm.btnext.enabled = textbox2.Text = textbox1.Text
+
+END
+
+PUBLIC SUB Form_Enter()
+
+  IF Len(ME.TextBox1.Text) > 0 THEN 
+    IF textbox2.Text = textbox1.Text THEN 
+      ClsGlobal.fRunningMainForm.btnext.enabled = TRUE
+    ELSE 
+      ClsGlobal.fRunningMainForm.btnext.enabled = FALSE
+    END IF
+  ELSE 
+    ClsGlobal.fRunningMainForm.btnext.enabled = FALSE
+  END IF
 
 END
