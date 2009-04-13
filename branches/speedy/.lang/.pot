@@ -154,6 +154,77 @@ msgstr ""
 msgid "UTC"
 msgstr ""
 
+#: Conf2.class:24
+msgid ""
+"The linux root account is pre-defined to be used as the system "
+"administrator's account. "
+msgstr ""
+
+#: Conf2.class:24
+msgid ""
+"This account is used to perform system-wide changes such as adding / "
+"removing software, system-qide updates, managing user accounts, etc."
+msgstr ""
+
+#: Conf2.class:24
+msgid "Most oter every-day tasks do not require administrative priviledges."
+msgstr ""
+
+#: Conf2.class:24
+msgid ""
+"For added security, use a password that is easy for you to remember, but "
+"hard for others to guess."
+msgstr ""
+
+#: Conf2.class:24
+msgid "DO NOT LEAVE THIS BLANK"
+msgstr ""
+
+#: Conf2.class:56
+msgid "Passwords do not match. Please enter the same password twice"
+msgstr ""
+
+#: Conf2.class:62
+msgid "Password was not set. See error log below"
+msgstr ""
+
+#: Conf2.class:116
+msgid "System Administrator Account"
+msgstr ""
+
+#: Conf2.class:133
+msgid "About the linux root account"
+msgstr ""
+
+#: Conf2.class:165
+msgid "Enter Passwrord"
+msgstr ""
+
+#: Conf2.class:182
+msgid "Re-enter Password"
+msgstr ""
+
+#: Conf3.class:22
+msgid "Create as many user accounts as you want / need here."
+msgstr ""
+
+#: Conf3.class:22
+msgid "Choose a unique login name for each user account."
+msgstr ""
+
+#: Conf3.class:26
+msgid "When finished, Click"
+msgstr ""
+
+#: Conf3.class:26 Step3a1a.class:177 Step3a2.class:359 Step3a3a.class:72
+#: Step5.class:177
+msgid "to continue"
+msgstr ""
+
+#: Conf3.class:70
+msgid "Create User Accounts"
+msgstr ""
+
 #: FMain.class:253 FMain0.class:253
 msgid "Process Overview"
 msgstr ""
@@ -683,10 +754,6 @@ msgstr ""
 
 #: Step3a1a.class:177
 msgid "Partitioning stage complete. Click"
-msgstr ""
-
-#: Step3a1a.class:177 Step3a2.class:359 Step3a3a.class:72 Step5.class:177
-msgid "to continue"
 msgstr ""
 
 #: Step3a1a.class:186

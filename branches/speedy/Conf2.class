@@ -1,0 +1,78 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PUBLIC SUB Form_Open()
+
+  WITH ME
+    .tlbanner.Text = "<b>" & .tlbanner.Text & "</b>"
+    .TextLabel1.Text = ("The linux root account is pre-defined to be used as the system administrator's account. ")&
+    ("This account is used to perform system-wide changes such as adding / removing software, system-qide updates, managing user accounts, etc.") & "<br><br>" &
+    ("Most oter every-day tasks do not require administrative priviledges.") & "<br>" & "<br>" &
+    ("For added security, use a password that is easy for you to remember, but hard for others to guess.") & "<br><br>" & ("DO NOT LEAVE THIS BLANK")
+  END WITH 
+
+END
+
+PUBLIC SUB Form_Resize()
+
+  hbox2.Width = hbox2.Parent.Width - (hbox2.Left * 2)
+
+END
+PUBLIC FUNCTION GetNext() AS String
+  
+  RETURN "Conf3"
+  
+  
+END
+PUBLIC SUB StartUp()
+  
+  ClsGlobal.fRunningMainForm.btnext.enabled = Len(textbox1.Text) > 0
+  
+END
+
+PUBLIC SUB OnExit()
+  
+  IF compare_passwords() = FALSE THEN RETURN 
+  
+END
+
+PUBLIC FUNCTION compare_passwords() AS Boolean
+  'DIM hlproc AS Process
+  DIM sRes AS String
+  IF textbox1.Text <> textbox2.Text THEN 
+    Message.Error(("Passwords do not match. Please enter the same password twice"))
+    STOP EVENT 
+    RETURN FALSE
+  ELSE 
+    SHELL "chroot /mnt/target /sbin/passwdx root " & Trim(textbox1.Text) & " || echo ERROR" TO sRes 
+      IF InStr(sRes, "ERROR") THEN 
+        Message.Error(("Password was not set. See error log below") & "<br>" & Trim(sRes))
+        RETURN FALSE
+        STOP EVENT 
+      END IF
+  END IF
+  textbox1.Clear
+  textbox2.Clear
+END
+
+
+
+
+PUBLIC SUB TextBox2_KeyRelease()
+
+  ClsGlobal.fRunningMainForm.btnext.enabled = textbox2.Text = textbox1.Text
+
+END
