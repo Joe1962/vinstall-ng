@@ -1,0 +1,200 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+' ========= import user accounts =================
+PRIVATE $UserProps AS NEW Object[]
+PRIVATE pyes AS Picture
+PRIVATE pno AS Picture
+PUBLIC sListToReset AS String
+
+PUBLIC SUB LIST_USER_ACCOUNTS()
+  
+  DIM sList AS String
+  DIM sFile, sDump AS String
+    FOR EACH sFile IN Dir("/home", "*", gb.Directory)
+      IF sFile <> "ftp" THEN 
+        ' -== search /etc/group to make sure this user does not already exist ==-
+        SHELL "grep ^" & sFile & Space(1) & ClsGlobal.sTargetPath &/ "etc/group" TO sDump
+          sDump = Trim(sDump)
+            IF NOT (sDump) THEN ' user does not exist in the system yet              
+                cbAcctLst.Add(sFile)
+            END IF
+      END IF
+    NEXT 
+  
+  
+END
+
+PUBLIC SUB List_Resetable_settings()
+  
+  DIM cb AS CheckBox
+  DIM sSetting, sDesc, sFile AS String
+  DIM irow AS Integer
+  DIM sSkelPath AS String = ClsGlobal.sTargetPath &/ "etc/skel"
+  DIM sTargetPath AS String = ClsGlobal.sTargetPath &/ "home" &/ Trim(cbAcctLst.Text)
+  
+  ' load the pictures
+  pyes = Picture.Load("images/16px-check.png")
+  'pno = Picture.Load("images/16px-Nocheck.png")
+  irow = 1
+  FOR EACH sFile IN Dir(sSkelPath, "*")
+    SELECT CASE sFile
+            CASE ".kde"
+              sDesc = ("KDE Settings (Menu, Window decorations, etc)")
+            CASE ".qt"
+              sDesc = ("QT Toolkit settings (KDE Visual Effects)")
+            CASE ".gtkrc-*"
+              sDesc = ("GTK Tookit theme Settings")
+            CASE ".Xdefaults"
+              sDesc = ("X-window basic settings (includes xterm settings)")
+            CASE ".bashrc"
+              sDesc = ("Bash init script")
+            CASE ".asoundrc"
+              sDesc = ("Sound system preferences")
+            CASE ".xinitrc"
+              sDesc = ("Graphical inteface preferences")
+            CASE "Desktop"
+              sDesc = ("Desktop icons, folders, launchers")
+            CASE ".IceWM", ".icewm"
+              sDesc = ("IceWM settings, preferences, menu")
+            CASE ".xmms"
+              sDesc = ("XMMS Audio player preferences")
+            CASE ".Choices", "Choices"
+              sDesc = ("ROX Filer Desktop settings")
+            CASE ".mplayer"
+              sDesc = ("MPlayer Multimedia Player Settings")
+            CASE ".xsession"
+              sDesc = ("Default graphical session settings")
+          CASE ELSE 
+            sDesc = ""
+      END SELECT 
+      
+    IF Exist(sTargetPath &/ sFile) THEN 
+      ' add to the list
+      IF sDesc THEN 
+      INC irow
+      gvSettingsList.Rows.Count = irow + 1
+        ME.gvSettingsList[irow, 0].Picture = pyes
+        ME.gvSettingsList[irow, 0].Alignment = Align.Center
+        ME.gvSettingsList[irow, 1].Text = sFile
+        ME.gvSettingsList[irow, 2].Text = sDesc
+        'INC irow
+        
+      END IF 
+    END IF
+  NEXT 
+    
+  
+  
+END
+
+
+PUBLIC SUB Form_Open()
+
+  WITH ME
+    .tlbanner.Text = "<b>" & tlbanner.text & "</b>"
+    .gvSettingsList.Rows.Count = 3
+    .gvSettingsList.Columns.Count = 3
+    .gvSettingsList.Columns[0].Width = 32
+    .gvSettingsList.Columns[2].Width = 150
+    .gvSettingsList.Rows[1].Height = 12
+    .gvSettingsList[0, 0].BackColor = Color.SelectedBackground
+    .gvSettingsList[0, 1].BackColor = Color.SelectedBackground
+    .gvSettingsList[0, 2].BackColor = Color.SelectedBackground
+    .gvSettingsList[0, 1].Text = ("Setting")
+    .gvSettingsList[0, 2].Text = ("Description")
+    .gvSettingsList[0, 1].Font.Bold = TRUE
+    .gvSettingsList[0, 1].Alignment = Align.Center
+    .gvSettingsList[0, 2].Font.Bold = TRUE
+    .gvSettingsList[0, 2].Alignment = Align.Center
+    
+  END WITH 
+  ME.LIST_USER_ACCOUNTS()
+END
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .hbox2.Width = .HBox2.Parent.Width - (.HBox2.Left * 2)
+    .Frame1.Height = ME.ClientH - (.Frame1.Top + hbox5.Height + 8)
+    .HBox2.Height = .HBox2.Parent.Height - (.HBox2.top * 1.25)
+  END WITH 
+
+END
+
+PUBLIC SUB cbAcctLst_Click()
+
+  List_Resetable_settings()
+
+END
+
+PUBLIC SUB gvSettingsList_Click()
+
+  IF LAST.Column > 1 THEN RETURN 
+'  PRINT gvSettingsList[LAST.row, 1].text
+  IF gvSettingsList[LAST.row, 0].Picture = pyes THEN 
+    gvSettingsList[LAST.row, 0].Picture = pno
+  ELSE IF gvSettingsList[LAST.row, 0].Picture = pno THEN 
+    gvSettingsList[LAST.row, 0].Picture = pyes
+  END IF
+  
+  gvSettingsList.Refresh
+  
+
+END
+
+PUBLIC SUB btCancel_Click()
+
+  sListToReset = ""
+  ME.Close
+
+END
+
+PUBLIC SUB Get_Selected_Settings_For_Reset()
+  
+  DIM irow AS Integer 
+  DIM sList AS String
+    FOR irow = 2 TO gvSettingsList.Rows.Count - 1
+      IF gvSettingsList[irow, 0].Picture = pyes THEN 
+        sList = sList & Space(1) & gvSettingsList[irow, 1].Text
+      END IF
+    NEXT 
+    sList = Trim(sList)
+    ' IF sList THEN 
+    '    Message(sList)
+    ' ELSE 
+    '   Message("No settings to reset")
+    ' END IF
+  
+  
+END
+
+
+PUBLIC SUB btOK_Click()
+
+  Get_Selected_Settings_For_Reset()
+  Conf3.txtLogin.Text = Trim(ME.cbAcctLst.Text)
+  Conf3.sListToReset = sListToReset
+  ME.Close
+
+END
+PUBLIC FUNCTION Import_User() AS String
+  
+  
+  ME.Show()
+  
+END
+

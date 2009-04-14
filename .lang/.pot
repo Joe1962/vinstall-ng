@@ -200,101 +200,188 @@ msgstr ""
 msgid "Enter Passwrord"
 msgstr ""
 
-#: Conf2.class:198 Conf3.class:324
+#: Conf2.class:198 Conf3.class:379
 msgid "Re-enter Password"
 msgstr ""
 
-#: Conf3.class:22
+#: Conf3.class:43
 msgid "Create as many user accounts as you want / need here."
 msgstr ""
 
-#: Conf3.class:22
+#: Conf3.class:43
 msgid "Choose a unique login name for each user account."
 msgstr ""
 
-#: Conf3.class:26
+#: Conf3.class:47
 msgid "When finished, Click"
 msgstr ""
 
-#: Conf3.class:26 Step3a1a.class:177 Step3a2.class:359 Step3a3a.class:72
+#: Conf3.class:47 Step3a1a.class:177 Step3a2.class:359 Step3a3a.class:72
 #: Step5.class:177
 msgid "to continue"
 msgstr ""
 
-#: Conf3.class:76
+#: Conf3.class:98
 msgid "Select picture ID"
 msgstr ""
 
-#: Conf3.class:78
+#: Conf3.class:100
 msgid "Select picture ID for"
 msgstr ""
 
-#: Conf3.class:109
+#: Conf3.class:132
 msgid "You must enter a login name first."
 msgstr ""
 
-#: Conf3.class:112
+#: Conf3.class:135
 msgid "Please select a password for"
 msgstr ""
 
-#: Conf3.class:112
+#: Conf3.class:135
 msgid "before continuing"
 msgstr ""
 
-#: Conf3.class:115
+#: Conf3.class:138
 msgid "You must enter the password twice for added security"
 msgstr ""
 
-#: Conf3.class:145
+#: Conf3.class:165
 msgid "User"
 msgstr ""
 
-#: Conf3.class:145
+#: Conf3.class:165
 msgid "already exists in the system."
 msgstr ""
 
-#: Conf3.class:145
+#: Conf3.class:165
 msgid "Please select another user login name"
 msgstr ""
 
-#: Conf3.class:162
+#: Conf3.class:210
 msgid "Use only lowercase letters and numbers for this field"
 msgstr ""
 
-#: Conf3.class:225
+#: Conf3.class:280
 msgid "Create User Accounts"
 msgstr ""
 
-#: Conf3.class:275
+#: Conf3.class:330
 msgid "Login Name"
 msgstr ""
 
-#: Conf3.class:291
+#: Conf3.class:346
 msgid "Real Name"
 msgstr ""
 
-#: Conf3.class:307
+#: Conf3.class:362
 msgid "Enter Password"
 msgstr ""
 
-#: Conf3.class:352
+#: Conf3.class:407
 msgid "Click here to select user Login picture"
 msgstr ""
 
-#: Conf3.class:362
+#: Conf3.class:417
 msgid "Create User"
 msgstr ""
 
-#: Conf3.class:379
+#: Conf3.class:434
 msgid "Import Existing User"
 msgstr ""
 
-#: Conf3.class:395
+#: Conf3.class:450
 msgid "Clear Form"
 msgstr ""
 
-#: Conf3.class:410
+#: Conf3.class:465
 msgid "User Rights Management"
+msgstr ""
+
+#: Conf3a.class:56
+msgid "KDE Settings (Menu, Window decorations, etc)"
+msgstr ""
+
+#: Conf3a.class:58
+msgid "QT Toolkit settings (KDE Visual Effects)"
+msgstr ""
+
+#: Conf3a.class:60
+msgid "GTK Tookit theme Settings"
+msgstr ""
+
+#: Conf3a.class:62
+msgid "X-window basic settings (includes xterm settings)"
+msgstr ""
+
+#: Conf3a.class:64
+msgid "Bash init script"
+msgstr ""
+
+#: Conf3a.class:66
+msgid "Sound system preferences"
+msgstr ""
+
+#: Conf3a.class:68
+msgid "Graphical inteface preferences"
+msgstr ""
+
+#: Conf3a.class:70
+msgid "Desktop icons, folders, launchers"
+msgstr ""
+
+#: Conf3a.class:72
+msgid "IceWM settings, preferences, menu"
+msgstr ""
+
+#: Conf3a.class:74
+msgid "XMMS Audio player preferences"
+msgstr ""
+
+#: Conf3a.class:76
+msgid "ROX Filer Desktop settings"
+msgstr ""
+
+#: Conf3a.class:78
+msgid "MPlayer Multimedia Player Settings"
+msgstr ""
+
+#: Conf3a.class:80
+msgid "Default graphical session settings"
+msgstr ""
+
+#: Conf3a.class:117
+msgid "Setting"
+msgstr ""
+
+#: Conf3a.class:118 Step7a.class:49 Step7b.class:28
+msgid "Description"
+msgstr ""
+
+#: Conf3a.class:237
+msgid "Import user accounts into VectorLinux"
+msgstr ""
+
+#: Conf3a.class:250
+msgid ""
+"Select which user account to import, and which settings to reset. Un-checked "
+"items will be carried over, while checked items will be reset to factory "
+"defaults."
+msgstr ""
+
+#: Conf3a.class:260
+msgid "User account to import"
+msgstr ""
+
+#: Conf3a.class:279
+msgid "Account Contents to reset"
+msgstr ""
+
+#: Conf3a.class:306
+msgid "Accept"
+msgstr ""
+
+#: Conf3a.class:312
+msgid "Cancel"
 msgstr ""
 
 #: FMain.class:253 FMain0.class:253
@@ -1179,10 +1266,6 @@ msgstr ""
 
 #: Step7a.class:34
 msgid "Component"
-msgstr ""
-
-#: Step7a.class:49 Step7b.class:28
-msgid "Description"
 msgstr ""
 
 #: Step7a.class:143
