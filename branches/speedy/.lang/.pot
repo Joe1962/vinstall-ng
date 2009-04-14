@@ -200,7 +200,7 @@ msgstr ""
 msgid "Enter Passwrord"
 msgstr ""
 
-#: Conf2.class:198 Conf3.class:311
+#: Conf2.class:198 Conf3.class:324
 msgid "Re-enter Password"
 msgstr ""
 
@@ -229,71 +229,71 @@ msgstr ""
 msgid "Select picture ID for"
 msgstr ""
 
-#: Conf3.class:108
+#: Conf3.class:109
 msgid "You must enter a login name first."
 msgstr ""
 
-#: Conf3.class:111
+#: Conf3.class:112
 msgid "Please select a password for"
 msgstr ""
 
-#: Conf3.class:111
+#: Conf3.class:112
 msgid "before continuing"
 msgstr ""
 
-#: Conf3.class:114
+#: Conf3.class:115
 msgid "You must enter the password twice for added security"
 msgstr ""
 
-#: Conf3.class:133
+#: Conf3.class:145
 msgid "User"
 msgstr ""
 
-#: Conf3.class:133
+#: Conf3.class:145
 msgid "already exists in the system."
 msgstr ""
 
-#: Conf3.class:133
+#: Conf3.class:145
 msgid "Please select another user login name"
 msgstr ""
 
-#: Conf3.class:150
+#: Conf3.class:162
 msgid "Use only lowercase letters and numbers for this field"
 msgstr ""
 
-#: Conf3.class:212
+#: Conf3.class:225
 msgid "Create User Accounts"
 msgstr ""
 
-#: Conf3.class:262
+#: Conf3.class:275
 msgid "Login Name"
 msgstr ""
 
-#: Conf3.class:278
+#: Conf3.class:291
 msgid "Real Name"
 msgstr ""
 
-#: Conf3.class:294
+#: Conf3.class:307
 msgid "Enter Password"
 msgstr ""
 
-#: Conf3.class:339
+#: Conf3.class:352
 msgid "Click here to select user Login picture"
 msgstr ""
 
-#: Conf3.class:349
+#: Conf3.class:362
 msgid "Create User"
 msgstr ""
 
-#: Conf3.class:366
+#: Conf3.class:379
 msgid "Import Existing User"
 msgstr ""
 
-#: Conf3.class:382
+#: Conf3.class:395
 msgid "Clear Form"
 msgstr ""
 
-#: Conf3.class:397
+#: Conf3.class:410
 msgid "User Rights Management"
 msgstr ""
 
@@ -389,12 +389,16 @@ msgstr ""
 msgid "Bootsector of"
 msgstr ""
 
-#: MdlMain.module:34
+#: MdlMain.module:35
 msgid "Unable to format"
 msgstr ""
 
-#: MdlMain.module:34
+#: MdlMain.module:35
 msgid "to"
+msgstr ""
+
+#: MdlMain.module:193
+msgid "Failed to create user account. See error below."
 msgstr ""
 
 #: MdlStartUp.module:42

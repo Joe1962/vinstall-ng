@@ -14,11 +14,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: MdlMain.module:34
+#: MdlMain.module:35
 msgid "Unable to format"
 msgstr ""
 
-#: MdlMain.module:34
+#: MdlMain.module:35
 msgid "to"
+msgstr ""
+
+#: MdlMain.module:193
+msgid "Failed to create user account. See error below."
 msgstr ""
 

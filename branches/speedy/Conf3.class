@@ -97,6 +97,7 @@ PUBLIC SUB Button2_Click()
     MdlMain.Display_User_Group_Choices(ME.lbUsrGrps)
     ' default the picture
     ME.btPicSel.Picture = Picture.Load("/usr/share/apps/kdm/pics/users/default2.png")
+    Dialog.Path = ""
 
 END
 
@@ -119,22 +120,35 @@ END
 
 PUBLIC SUB btAddUsr_Click()
 
-  
+  DIM sPicpath AS String
   '1) Check to make sure all entries are filled in
   '2) Check to see if the user does not already exist
   '3) If conditions 1 & 2 are passed, then create the account.
   '4) Check for errors during account creation ^^^^^^^^^^^^^ (done in step3)
   
+  '-== Get the right picture path ==-
+    IF NOT (Dialog.Path) THEN 
+      sPicpath = "/usr/share/apps/kdm/pics/users/default2.png"
+    ELSE 
+      sPicpath = Dialog.Path
+    END IF
+
+  '-== Make sure we have valid entries before trying to create a user account ==-  
   IF Check_Text_Entry() = FALSE THEN 
     IF MdlMain.CHECK_EXISTING_USER(Trim(ME.txtLogin.Text)) = FALSE THEN 
-      MdlMain.CREATE_NEW_USER_ACCOUNT() ' create new account
+      MdlMain.CREATE_NEW_USER_ACCOUNT(Trim(txtLogin.Text), Trim(txtRealName.Text), btPicSel.Picture, Trim(txtPass2.Text)) ' create new account
     ELSE ' user exists
       Message.Error(("User") & Space(1) & "\"" & Trim(ME.txtLogin.Text) & "\"" & Space(1) & ("already exists in the system.") & "<br>" &
       ("Please select another user login name"))
       RETURN 
       STOP EVENT 
     END IF
+  ELSE 
+    RETURN 
+    STOP EVENT 
   END IF
+  ' clear the form now
+  Button2_Click()
 
 END
 
@@ -152,3 +166,4 @@ PUBLIC SUB txtLogin_KeyPress()
   END IF
   
 END
+
