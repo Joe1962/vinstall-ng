@@ -17,6 +17,7 @@
 
 STATIC PUBLIC fRunningMainForm AS Object
 
+STATIC PUBLIC sTargetPath AS String
 STATIC PUBLIC sDistroName AS String
 STATIC PUBLIC sDistroVer AS String
 

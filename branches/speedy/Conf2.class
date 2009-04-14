@@ -59,7 +59,7 @@ PUBLIC FUNCTION compare_passwords() AS Boolean
     STOP EVENT 
     RETURN FALSE
   ELSE 
-    SHELL "chroot /mnt/target /sbin/passwdx root " & Trim(textbox1.Text) & " || echo ERROR" TO sRes 
+    SHELL "chroot " & ClsGlobal.sTargetPath & " /sbin/passwdx root " & Trim(textbox1.Text) & " || echo ERROR" TO sRes 
       IF InStr(sRes, "ERROR") THEN 
         Message.Error(("Password was not set. See error log below") & "<br>" & Trim(sRes))
         RETURN FALSE

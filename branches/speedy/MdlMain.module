@@ -98,7 +98,7 @@ PUBLIC SUB DISPLAY_TIME_ZONES(objLb AS ListBox)
 END
 
 PUBLIC SUB SET_TIME_ZONE(sTimeZone AS String, hwclock AS String)
-  DIM sTarget AS String = "/mnt/target"
+  DIM sTarget AS String = ClsGlobal.sTargetPath
   DIM sCfg AS String
   
   TRY KILL sTarget &/ "etc" &/ "localtime-copied-from"
@@ -148,7 +148,7 @@ PUBLIC FUNCTION CHECK_EXISTING_USER(sName AS String) AS Boolean
   
   DIM sDump AS String
   
-  SHELL "grep ^\"" & sName & "\" /mnt/target/etc/group" TO sDump
+  SHELL "grep ^\"" & sName & "\" " & ClsGlobal.sTargetPath &/ "etc/group" TO sDump
   sDump = Trim(sDump)
   IF Len(sDump) > 0 THEN 
     RETURN TRUE
@@ -180,11 +180,11 @@ PUBLIC FUNCTION CREATE_NEW_USER_ACCOUNT(sUsrLogIn AS String, sUsrRlName AS Strin
     
    
   '-== Just to be safe, make sure the group user does not exist before trying to create a new user ==-
-  SHELL "chroot /mnt/target /usr/sbin/groupdel " & sUsrLogIn & " > /dev/null " WAIT 
+  SHELL "chroot " & ClsGlobal.sTargetPath & " /usr/sbin/groupdel " & sUsrLogIn & " > /dev/null " WAIT 
   '-== Create new group for user ==-
-  SHELL "chroot /mnt/target /usr/sbin/groupadd -g " & (1000 + iUID) & Space(1) & sUsrLogIn & " > /dev/null" WAIT 
+  SHELL "chroot " & ClsGlobal.sTargetPath & " /usr/sbin/groupadd -g " & (1000 + iUID) & Space(1) & sUsrLogIn & " > /dev/null" WAIT 
   '-== Create new user account ==-
-  SHELL "chroot /mnt/target /usr/sbin/useradd -m -c \'" & sUsrRlName & "\' -g " & sUsrLogIn &
+  SHELL "chroot " & ClsGlobal.sTargetPath & " /usr/sbin/useradd -m -c \'" & sUsrRlName & "\' -g " & sUsrLogIn &
         " -p " & Trim(sPass) & " -u " & (1000 + iUID) & " -G \'" & "users," & sGrpLst & "\' -s /bin/bash " &
         Trim(sUsrLogIn) & " || echo FAILED" TO sDump
           ' [Quick error check]
@@ -194,18 +194,18 @@ PUBLIC FUNCTION CREATE_NEW_USER_ACCOUNT(sUsrLogIn AS String, sUsrRlName AS Strin
                 RETURN 1
               END IF
   ' -== Just to be sure... re-run the password to make sure it's set ==-'
-  SHELL "chroot /mnt/target /sbin/passwdx " & sUsrLogIn & Space(1) & sPass & " >/dev/null " WAIT 
+  SHELL "chroot " & ClsGlobal.sTargetPath & " /sbin/passwdx " & sUsrLogIn & Space(1) & sPass & " >/dev/null " WAIT 
   ' -== Set the face icon ==-
         IF sPicPath THEN 
           ' -= fix for KDM login (KDE3) =-
-            TRY LINK "/mnt/target/usr/share/apps/kdm/pics/users" &/ sUsrLogIn & ".face.icon" TO sPicPath
+            TRY LINK ClsGlobal.sTargetPath &/ "usr/share/apps/kdm/pics/users" &/ sUsrLogIn & ".face.icon" TO sPicPath
 '              CATCH  
 '                SHELL "ln -s " & sPicPath & Space(1) & "/mnt/target/usr/share/apps/kdm/pics/users" &/ sUsrLogIn &/ ".face.icon" 
           ' -= fix for GDM login =-
-            TRY COPY sPicPath TO "/mnt/target/home" &/ sUsrLogIn &/ ".face"
-            SHELL "chmod 664 /mnt/target/home" &/ sUsrLogIn &/ ".face 2>/dev/null" WAIT 
-            SHELL "chroot /mnt/target /bin/chown " & sUsrLogIn & Space(1) & "/home/" &/ sUsrLogIn &/ ".face 2> /dev/null" WAIT 
-            SHELL "chroot /mnt/target /bin/chgrp " & sUsrLogIn & Space(1) & "/home" &/ sUsrLogIn &/ ".face 2> /dev/null" WAIT 
+            TRY COPY sPicPath TO ClsGlobal.sTargetPath &/ "home" &/ sUsrLogIn &/ ".face"
+            SHELL "chmod 664 " & ClsGlobal.sTargetPath &/ "home" &/ sUsrLogIn &/ ".face 2>/dev/null" WAIT 
+            SHELL "chroot " & ClsGlobal.sTargetPath & " /bin/chown " & sUsrLogIn & Space(1) & "/home/" &/ sUsrLogIn &/ ".face 2> /dev/null" WAIT 
+            SHELL "chroot " & ClsGlobal.sTargetPath & " /bin/chgrp " & sUsrLogIn & Space(1) & "/home" &/ sUsrLogIn &/ ".face 2> /dev/null" WAIT 
       END IF
   
   ' USER ACCOUNT HAS BEEN CREATED      

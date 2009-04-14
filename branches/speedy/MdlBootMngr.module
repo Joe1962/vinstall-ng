@@ -447,7 +447,7 @@ PUBLIC SUB Display_Bootmanager_Target_Options(objCB AS ComboBox)
     NEXT 
     
     'Determine how the root partition was formatted
-      SHELL "df -hT /mnt/target | tr -s \' \' | grep \"^/dev\" | cut -f 2 -d \' \'" TO sDump
+      SHELL "df -hT " & ClsGlobal.sTargetPath & " | tr -s \' \' | grep \"^/dev\" | cut -f 2 -d \' \'" TO sDump
       sDump = Trim(sDump)
     IF LCase(sDump) <> "xfs" THEN 
       objCB.Add(("Bootsector of") & Space(1) & ClsGlobal.sRoot)

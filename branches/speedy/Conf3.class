@@ -13,6 +13,27 @@
 
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+PUBLIC sListToReset AS String
+
+PUBLIC FUNCTION check_for_impartable_accounts() AS Boolean
+
+  DIM sFile AS String
+  DIM sDump AS String
+  DIM sMajorDump AS String
+    FOR EACH sFile IN Dir(ClsGlobal.sTargetPath &/ "home/", "*", gb.Directory)
+      IF sFile <> "ftp" THEN 
+        SHELL "grep ^" & Trim(sFile) & ClsGlobal.sTargetPath &/ "etc/group" TO sDump
+          sDump = Trim(sDump)
+        IF sDump THEN sMajorDump = sMajorDump & sDump
+      END IF
+      
+    NEXT 
+  sMajorDump = Trim(sMajorDump)
+  IF sMajorDump THEN RETURN TRUE
+  
+  
+END
+
 
 PUBLIC SUB Form_Open()
 
@@ -28,6 +49,7 @@ PUBLIC SUB Form_Open()
      .btPicSel.Picture = Picture.Load("/usr/share/apps/kdm/pics/users/default2.png")
   END WITH 
   WAIT 0.1
+  Button1.Enabled = ME.check_for_impartable_accounts()
   'MdlMain.Display_User_Group_Choices(ME.lbUsrGrps)
 
 END
@@ -98,6 +120,7 @@ PUBLIC SUB Button2_Click()
     ' default the picture
     ME.btPicSel.Picture = Picture.Load("/usr/share/apps/kdm/pics/users/default2.png")
     Dialog.Path = ""
+    sListToReset = ""
 
 END
 
@@ -148,10 +171,33 @@ PUBLIC SUB btAddUsr_Click()
     STOP EVENT 
   END IF
   ' clear the form now
+    IF sListToReset THEN 
+      ' user account is being imported
+      Reset_Accounts_Settings(Trim(ME.txtLogin.Text))
+    END IF
+      
   Button2_Click()
 
 END
 
+PUBLIC SUB Reset_Accounts_Settings(sUsrLogin AS String)
+  
+  DIM sSkelPath AS String = ClsGlobal.sTargetPath &/ "etc/skel"
+  DIM sTargetPath AS String = ClsGlobal.sTargetPath &/ "home" &/ sUsrLogin
+  DIM sSettings AS String[] = Split(Replace(Trim(sListToReset), " ", ","), ",")
+  DIM sFile AS String
+  DIM i AS Integer
+  
+    FOR i = 0 TO sSettings.Max
+      sFile = Trim(sSettings[i])
+      TRY KILL sTargetPath &/ sFile
+      SHELL "cp -r " & sSkelPath &/ sFile & Space(1) & sTargetPath WAIT 
+      SHELL "chroot " & ClsGlobal.sTargetPath & " /bin/chown " & sUsrLogin & ":users " & sTargetPath &/ sFile WAIT 
+    NEXT 
+
+  
+  
+END
 
 
 PUBLIC SUB txtLogin_KeyPress()
@@ -167,3 +213,10 @@ PUBLIC SUB txtLogin_KeyPress()
   
 END
 
+
+PUBLIC SUB Button1_Click()
+  
+  Button2_Click()
+  Conf3a.Import_User()
+  
+END
