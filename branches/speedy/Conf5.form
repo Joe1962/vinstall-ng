@@ -44,5 +44,6 @@
   { gvSvcList GridView
     MoveScaled(1,18,56,19)
     Expand = True
+    Scrollbar = Scroll.Vertical
   }
 }

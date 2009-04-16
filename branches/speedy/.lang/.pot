@@ -200,7 +200,7 @@ msgstr ""
 msgid "Enter Passwrord"
 msgstr ""
 
-#: Conf2.class:198 Conf3.class:379
+#: Conf2.class:198 Conf3.class:380
 msgid "Re-enter Password"
 msgstr ""
 
@@ -221,79 +221,79 @@ msgstr ""
 msgid "to continue"
 msgstr ""
 
-#: Conf3.class:98
+#: Conf3.class:99
 msgid "Select picture ID"
 msgstr ""
 
-#: Conf3.class:100
+#: Conf3.class:101
 msgid "Select picture ID for"
 msgstr ""
 
-#: Conf3.class:132
+#: Conf3.class:133
 msgid "You must enter a login name first."
 msgstr ""
 
-#: Conf3.class:135
+#: Conf3.class:136
 msgid "Please select a password for"
 msgstr ""
 
-#: Conf3.class:135
+#: Conf3.class:136
 msgid "before continuing"
 msgstr ""
 
-#: Conf3.class:138
+#: Conf3.class:139
 msgid "You must enter the password twice for added security"
 msgstr ""
 
-#: Conf3.class:165
+#: Conf3.class:166
 msgid "User"
 msgstr ""
 
-#: Conf3.class:165
+#: Conf3.class:166
 msgid "already exists in the system."
 msgstr ""
 
-#: Conf3.class:165
+#: Conf3.class:166
 msgid "Please select another user login name"
 msgstr ""
 
-#: Conf3.class:210
+#: Conf3.class:211
 msgid "Use only lowercase letters and numbers for this field"
 msgstr ""
 
-#: Conf3.class:280
+#: Conf3.class:281
 msgid "Create User Accounts"
 msgstr ""
 
-#: Conf3.class:330
+#: Conf3.class:331
 msgid "Login Name"
 msgstr ""
 
-#: Conf3.class:346
+#: Conf3.class:347
 msgid "Real Name"
 msgstr ""
 
-#: Conf3.class:362
+#: Conf3.class:363
 msgid "Enter Password"
 msgstr ""
 
-#: Conf3.class:407
+#: Conf3.class:408
 msgid "Click here to select user Login picture"
 msgstr ""
 
-#: Conf3.class:417
+#: Conf3.class:418
 msgid "Create User"
 msgstr ""
 
-#: Conf3.class:434
+#: Conf3.class:435
 msgid "Import Existing User"
 msgstr ""
 
-#: Conf3.class:450
+#: Conf3.class:451
 msgid "Clear Form"
 msgstr ""
 
-#: Conf3.class:465
+#: Conf3.class:466
 msgid "User Rights Management"
 msgstr ""
 
@@ -388,11 +388,11 @@ msgstr ""
 msgid "Network Settings"
 msgstr ""
 
-#: Conf5.class:58
+#: Conf5.class:59
 msgid "Service"
 msgstr ""
 
-#: Conf5.class:87
+#: Conf5.class:88
 msgid "System task scheduler"
 msgstr ""
 
@@ -400,59 +400,59 @@ msgstr ""
 msgid "Bluetooth device manager"
 msgstr ""
 
-#: Conf5.class:95
+#: Conf5.class:94
 msgid "Secure Shell remote access"
 msgstr ""
 
-#: Conf5.class:99
+#: Conf5.class:97
 msgid "Software update notifications"
 msgstr ""
 
-#: Conf5.class:103
+#: Conf5.class:100
 msgid "Wireless network scanner"
 msgstr ""
 
-#: Conf5.class:107
+#: Conf5.class:103
 msgid "Printing service"
 msgstr ""
 
-#: Conf5.class:111
+#: Conf5.class:106
 msgid "File in userspace daemon"
 msgstr ""
 
-#: Conf5.class:114
+#: Conf5.class:109
 msgid "Internet Super Server"
 msgstr ""
 
-#: Conf5.class:117
+#: Conf5.class:112
 msgid "RPC Port Mapper"
 msgstr ""
 
-#: Conf5.class:120
+#: Conf5.class:115
 msgid "Windows networking service"
 msgstr ""
 
-#: Conf5.class:123
+#: Conf5.class:118
 msgid "VMWare modules"
 msgstr ""
 
-#: Conf5.class:126
+#: Conf5.class:121
 msgid "Network interface manager"
 msgstr ""
 
-#: Conf5.class:129
+#: Conf5.class:124
 msgid "Enhanced network security"
 msgstr ""
 
-#: Conf5.class:132
+#: Conf5.class:127
 msgid "Mouse driver for Text Mode interface"
 msgstr ""
 
-#: Conf5.class:206
+#: Conf5.class:202
 msgid "System Services"
 msgstr ""
 
-#: Conf5.class:227
+#: Conf5.class:223
 msgid "Select the system services to be launched at start-up."
 msgstr ""
 
