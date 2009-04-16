@@ -1,0 +1,175 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+' ==================== services configuration settings =================
+PRIVATE picStatus AS Picture
+PUBLIC SUB Form_Open()
+
+  WITH ME
+    .tlbanner.Text = "<h2>" & tlbanner.Text & "</h2>"
+  END WITH 
+  ME.Prepare_Grid()
+  ME.lIST_SERVICES()
+END
+PUBLIC FUNCTION GetNext() AS String
+  
+  RETURN "FDone"
+  
+END
+PUBLIC SUB StartUp()
+  
+  
+  
+END
+PUBLIC SUB OnExit()
+  
+  
+  
+END
+
+
+PUBLIC SUB Form_Resize()
+
+  WITH ME
+    .gvSvcList.Height = .ClientH - (.gvSvcList.Top + 12)
+  END WITH 
+
+END
+PUBLIC SUB Prepare_Grid()
+  DIM i AS Integer
+  WITH ME
+    .gvSvcList.Rows.Count = 3
+    .gvSvcList.columns.Count = 3
+    .gvheader.rows.Count = 1
+    .gvheader.Columns.Count = 3
+    .gvheader[0, 2].Text = UCase(("Service"))
+      FOR i = 0 TO gvSvcList.columns.Count - 1
+        .gvheader[0, i].BackColor = Color.SelectedBackground
+        
+        .gvheader[0, i].Alignment = Align.Center
+      NEXT 
+    .gvSvcList.columns[0].Width = 24
+    .gvheader.Columns[0].Width = 24
+    .gvSvcList.Columns[1].Width = 64
+    .gvheader.Columns[1].Width = 64
+  END WITH 
+    
+  
+END
+
+
+PUBLIC SUB lIST_SERVICES()
+  
+  DIM irow AS Integer
+  DIM sService, sDesc AS String
+  DIM sPic AS Picture
+  DIM sLogo AS Image
+  DIM sSvcPath AS String = "/etc/rc.d/init.d" 'ClsGlobal.sTargetPath &/ "etc" &/ "rc.d" &/ "init.d"
+  
+  picStatus = Picture.Load("images/16px-check.png")
+  
+  FOR EACH sService IN Dir(sSvcPath, "*", gb.File)
+      SELECT CASE sService
+        CASE "cron"
+          sDesc = ("System task scheduler")
+          sPic = picStatus
+          'sLogo = Image.Load("images/cron.svg")
+        CASE "bluetooth"
+          sDesc = ("Bluetooth device manager")
+          sPic = ""
+          'sLogo = Image.Load("images/bluetooth.svg")
+        CASE "sshd"
+          sDesc = ("Secure Shell remote access")
+          sPic = ""
+          'sLogo = Image.Load("images/sshd.svg")
+        CASE "gslaptd"
+          sDesc = ("Software update notifications")
+          sPic = picStatus
+          'sLogo = Image.Load("images/gslaptd.svg")
+        CASE "wifi-radar"
+          sDesc = ("Wireless network scanner")
+          sPic = ""
+          'sLogo = Image.Load("images/wifi-radar.svg")
+        CASE "cups"
+          sDesc = ("Printing service")
+          sPic = picStatus
+          
+        CASE "fuse"
+          sDesc = ("File in userspace daemon")
+          sPic = ""
+        CASE "inetd"
+          sDesc = ("Internet Super Server")
+          sPic = ""
+        CASE "portmap"
+          sDesc = ("RPC Port Mapper")
+          sPic = ""
+        CASE "samba"
+          sDesc = ("Windows networking service")
+          sPic = ""
+        CASE "vmware"
+          sDesc = ("VMWare modules")
+          sPic = ""
+        CASE "wicd"
+          sDesc = ("Network interface manager")
+          sPic = picStatus
+        CASE "firewall"
+          sDesc = ("Enhanced network security")
+          sPic = ""
+        CASE "gpm"
+          sDesc = ("Mouse driver for Text Mode interface")
+          sPic = ""
+      END SELECT 
+      IF Exist("images" &/ sService & ".svg") THEN 
+        sLogo = Image.Load("images" &/ sService & ".svg")
+      ELSE 
+        sLogo = Image.Load("images" &/ "service.svg")
+      END IF
+      
+          
+    IF sDesc THEN 
+      ME.gvSvcList[irow, 0].Picture = sPic
+        IF sLogo THEN 
+          ME.gvSvcList[irow, 1].Picture = sLogo.Picture
+          ME.gvSvcList[irow, 1].Alignment = Align.Center
+        END IF
+      ME.gvSvcList.rows[irow].Height = 64 'sLogo.Height
+      ME.gvSvcList[irow, 0].Alignment = Align.Center
+      ME.gvSvcList[irow, 2].Text = UCase(sService) & gb.NewLine & gb.NewLine & sDesc
+      INC irow
+      INC gvSvcList.Rows.Count
+    END IF
+  NEXT 
+    
+    DEC gvSvcList.Rows.Count
+    DEC gvSvcList.Rows.Count
+    DEC gvSvcList.Rows.Count
+  
+  
+END
+
+
+PUBLIC SUB gvSvcList_Click()
+
+  IF LAST.column > 0 THEN RETURN 
+  IF gvSvcList[LAST.row, 0].Picture = picStatus THEN 
+    gvSvcList[LAST.row, 0].Picture = ""
+  ELSE 
+    gvSvcList[LAST.row, 0].Picture = picStatus
+  END IF
+  
+  gvSvcList.Refresh()
+
+END

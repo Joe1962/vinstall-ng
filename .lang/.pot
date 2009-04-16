@@ -357,31 +357,103 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: Conf3a.class:237
+#: Conf3a.class:233
 msgid "Import user accounts into VectorLinux"
 msgstr ""
 
-#: Conf3a.class:250
+#: Conf3a.class:246
 msgid ""
 "Select which user account to import, and which settings to reset. Un-checked "
 "items will be carried over, while checked items will be reset to factory "
 "defaults."
 msgstr ""
 
-#: Conf3a.class:260
+#: Conf3a.class:256
 msgid "User account to import"
 msgstr ""
 
-#: Conf3a.class:279
+#: Conf3a.class:275
 msgid "Account Contents to reset"
 msgstr ""
 
-#: Conf3a.class:306
+#: Conf3a.class:302
 msgid "Accept"
 msgstr ""
 
-#: Conf3a.class:312
+#: Conf3a.class:308
 msgid "Cancel"
+msgstr ""
+
+#: Conf4.class:68 MdlStartUp.module:55
+msgid "Network Settings"
+msgstr ""
+
+#: Conf5.class:58
+msgid "Service"
+msgstr ""
+
+#: Conf5.class:87
+msgid "System task scheduler"
+msgstr ""
+
+#: Conf5.class:91
+msgid "Bluetooth device manager"
+msgstr ""
+
+#: Conf5.class:95
+msgid "Secure Shell remote access"
+msgstr ""
+
+#: Conf5.class:99
+msgid "Software update notifications"
+msgstr ""
+
+#: Conf5.class:103
+msgid "Wireless network scanner"
+msgstr ""
+
+#: Conf5.class:107
+msgid "Printing service"
+msgstr ""
+
+#: Conf5.class:111
+msgid "File in userspace daemon"
+msgstr ""
+
+#: Conf5.class:114
+msgid "Internet Super Server"
+msgstr ""
+
+#: Conf5.class:117
+msgid "RPC Port Mapper"
+msgstr ""
+
+#: Conf5.class:120
+msgid "Windows networking service"
+msgstr ""
+
+#: Conf5.class:123
+msgid "VMWare modules"
+msgstr ""
+
+#: Conf5.class:126
+msgid "Network interface manager"
+msgstr ""
+
+#: Conf5.class:129
+msgid "Enhanced network security"
+msgstr ""
+
+#: Conf5.class:132
+msgid "Mouse driver for Text Mode interface"
+msgstr ""
+
+#: Conf5.class:206
+msgid "System Services"
+msgstr ""
+
+#: Conf5.class:227
+msgid "Select the system services to be launched at start-up."
 msgstr ""
 
 #: FMain.class:253 FMain0.class:253
@@ -530,10 +602,6 @@ msgstr ""
 
 #: MdlStartUp.module:54
 msgid "User Accounts"
-msgstr ""
-
-#: MdlStartUp.module:55
-msgid "Network Settings"
 msgstr ""
 
 #: MdlStartUp.module:56

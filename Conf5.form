@@ -1,0 +1,48 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,94,47)
+  Text = ("")
+  Arrangement = Arrange.Row
+  Padding = 2
+  { HPanel1 HPanel
+    MoveScaled(0,0,60,5)
+    Expand = True
+    { tlbanner TextLabel
+      MoveScaled(12,0,33,3)
+      Expand = True
+      Text = ("System Services")
+    }
+    { Separator1 Separator
+      MoveScaled(13,4,25,1)
+      Expand = True
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(4,5,6,2)
+    Expand = True
+  }
+  { HBox2 HBox
+    MoveScaled(0,7,59,3.5)
+    Expand = True
+    { tlExp TextLabel
+      MoveScaled(1,0,21,3.5)
+      Expand = True
+      Text = ("Select the system services to be launched at start-up.")
+    }
+  }
+  { HBox3 HBox
+    MoveScaled(1,11,4,2)
+    Expand = True
+  }
+  { gvheader GridView
+    MoveScaled(1,13,56,3)
+    Expand = True
+    Scrollbar = Scroll.None
+    Border = False
+  }
+  { gvSvcList GridView
+    MoveScaled(1,18,56,19)
+    Expand = True
+  }
+}
