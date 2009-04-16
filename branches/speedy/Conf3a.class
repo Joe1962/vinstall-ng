@@ -173,11 +173,7 @@ PUBLIC SUB Get_Selected_Settings_For_Reset()
       END IF
     NEXT 
     sList = Trim(sList)
-    ' IF sList THEN 
-    '    Message(sList)
-    ' ELSE 
-    '   Message("No settings to reset")
-    ' END IF
+
   
   
 END
