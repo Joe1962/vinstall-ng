@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,67,59)
+  MoveScaled(0,0,67,69)
   Text = ("")
   Arrangement = Arrange.Vertical
   { HPanel1 HPanel
@@ -18,7 +18,7 @@
     }
   }
   { Panel1 Panel
-    MoveScaled(1,8,60,45)
+    MoveScaled(1,8,60,56)
     Expand = True
     Arrangement = Arrange.Row
     { TextLabel2 TextLabel
@@ -68,14 +68,14 @@
       Expand = True
       Text = ("Check Installation media before installing")
     }
-    { mvLooking MovieBox
-      MoveScaled(5,24,11,25)
-      Expand = True
-    }
     { tlNext TextLabel
       MoveScaled(2,26,45,6)
       Expand = True
       Text = ("")
+    }
+    { mvLooking MovieBox
+      MoveScaled(4,27,11,28)
+      Expand = True
     }
   }
 }

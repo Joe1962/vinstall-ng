@@ -50,7 +50,7 @@ PUBLIC SUB Form_Open()
   END WITH 
   WAIT 0.1
   Button1.Enabled = ME.check_for_impartable_accounts()
-  'MdlMain.Display_User_Group_Choices(ME.lbUsrGrps)
+  ClsGlobal.fRunningMainForm.btnext.Enabled = TRUE
 
 END
 PUBLIC FUNCTION GetNext() AS String
@@ -71,6 +71,7 @@ PUBLIC SUB StartUp()
       obj.delete
     NEXT 
   MdlMain.Display_User_Group_Choices(ME.lbUsrGrps)
+  ClsGlobal.fRunningMainForm.btnext.Enabled = TRUE
   
 END
 
