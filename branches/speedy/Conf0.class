@@ -232,6 +232,10 @@ END
 
 PUBLIC FUNCTION GetNext() AS String
   
+  ClsGlobal.fRunningMainForm.listview1["Step5"].picture = MdlStartUp.pDone
+  ClsGlobal.fRunningMainForm.listview1["Step4"].picture = MdlStartUp.pDone
+  ClsGlobal.fRunningMainForm.listview1["Step6"].picture = MdlStartUp.pNow
+  
   RETURN "Conf1"
   
 END

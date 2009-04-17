@@ -26,6 +26,8 @@ PUBLIC SUB Form_Open()
 END
 PUBLIC FUNCTION GetNext() AS String
   
+  ClsGlobal.fRunningMainForm.listview1["Step9"].picture = MdlStartUp.pDone
+  ClsGlobal.fRunningMainForm.listview1["Step10"].picture = MdlStartUp.pNow
   RETURN "FDone"
   
 END
@@ -36,7 +38,7 @@ PUBLIC SUB StartUp()
 END
 PUBLIC SUB OnExit()
   
-  
+  ME.SAVE_SERVICES_LIST()
   
 END
 
@@ -159,7 +161,7 @@ END
 
 PUBLIC SUB gvSvcList_Click()
 
-  IF LAST.column > 0 THEN RETURN 
+  IF LAST.column > 1 THEN RETURN 
   IF gvSvcList[LAST.row, 0].Picture = picStatus THEN 
     gvSvcList[LAST.row, 0].Picture = ""
   ELSE 
@@ -167,5 +169,29 @@ PUBLIC SUB gvSvcList_Click()
   END IF
   
   gvSvcList.Refresh()
+
+END
+PUBLIC SUB SAVE_SERVICES_LIST()
+  
+  DIM irow AS Integer
+  DIM sSVc AS String
+  
+  ' We will default to runlevel 4 (GUI Mode) for services.
+  FOR irow = 0 TO ME.gvSvcList.Rows.Count - 1
+      sSVc = gvSvcList[irow, 3].Text
+      IF gvSvcList[irow, 0].Picture = picStatus THEN 
+        PRINT " \\__ Setting up services" & gb.NewLine 
+        PRINT "   \\- " & sSVc
+          SHELL "chroot " & ClsGlobal.sTargetPath & " /sbin/service -s " & sSVc & " 4" WAIT 
+      END IF
+          
+  NEXT 
+  
+END
+
+
+PUBLIC SUB gvSvcList_Menu()
+
+  ME.SAVE_SERVICES_LIST()
 
 END

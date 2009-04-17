@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,94,47)
+  MoveScaled(0,0,92,59)
   Text = ("")
   Arrangement = Arrange.Row
   Padding = 2

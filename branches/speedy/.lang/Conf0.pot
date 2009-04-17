@@ -54,71 +54,71 @@ msgstr ""
 msgid "Bootsplash Extra High"
 msgstr ""
 
-#: Conf0.class:332
+#: Conf0.class:336
 msgid "WARNING:"
 msgstr ""
 
-#: Conf0.class:332
+#: Conf0.class:336
 msgid "Selecting this option will bypass your boot manager configuration."
 msgstr ""
 
-#: Conf0.class:332
+#: Conf0.class:336
 msgid "You may not be able to start your VectorLinux installation. Do not choose this option"
 msgstr ""
 
-#: Conf0.class:332
+#: Conf0.class:336
 msgid "unless you are fully aware of what you are doing."
 msgstr ""
 
-#: Conf0.class:395
+#: Conf0.class:399
 msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0.class:411
+#: Conf0.class:415
 msgid "Select system boot manager to use"
 msgstr ""
 
-#: Conf0.class:420
+#: Conf0.class:424
 msgid "LILO"
 msgstr ""
 
-#: Conf0.class:426
+#: Conf0.class:430
 msgid "GRUB"
 msgstr ""
 
-#: Conf0.class:432
+#: Conf0.class:436
 msgid "NONE"
 msgstr ""
 
-#: Conf0.class:441
+#: Conf0.class:445
 msgid "Boot Menu Options"
 msgstr ""
 
-#: Conf0.class:451
+#: Conf0.class:455
 msgid "Target"
 msgstr ""
 
-#: Conf0.class:463
+#: Conf0.class:467
 msgid "Video Resolution"
 msgstr ""
 
-#: Conf0.class:482
+#: Conf0.class:486
 msgid "Prompt Time Out"
 msgstr ""
 
-#: Conf0.class:493
+#: Conf0.class:497
 msgid "Seconds"
 msgstr ""
 
-#: Conf0.class:499
+#: Conf0.class:503
 msgid "Boot Default"
 msgstr ""
 
-#: Conf0.class:518
+#: Conf0.class:522
 msgid "DETECTED OPERATING SYSTEMS."
 msgstr ""
 
-#: Conf0.class:534
+#: Conf0.class:538
 msgid "Tab 0"
 msgstr ""
 

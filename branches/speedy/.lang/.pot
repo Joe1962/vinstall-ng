@@ -54,82 +54,82 @@ msgstr ""
 msgid "Bootsplash Extra High"
 msgstr ""
 
-#: Conf0.class:332 Step1.class:433 Step3a1.class:22 Step3a1a.class:186
+#: Conf0.class:336 Step1.class:453 Step3a1.class:22 Step3a1a.class:186
 #: Step7a.class:143
 msgid "WARNING:"
 msgstr ""
 
-#: Conf0.class:332
+#: Conf0.class:336
 msgid "Selecting this option will bypass your boot manager configuration."
 msgstr ""
 
-#: Conf0.class:332
+#: Conf0.class:336
 msgid ""
 "You may not be able to start your VectorLinux installation. Do not choose "
 "this option"
 msgstr ""
 
-#: Conf0.class:332
+#: Conf0.class:336
 msgid "unless you are fully aware of what you are doing."
 msgstr ""
 
-#: Conf0.class:395
+#: Conf0.class:399
 msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0.class:411
+#: Conf0.class:415
 msgid "Select system boot manager to use"
 msgstr ""
 
-#: Conf0.class:420
+#: Conf0.class:424
 msgid "LILO"
 msgstr ""
 
-#: Conf0.class:426
+#: Conf0.class:430
 msgid "GRUB"
 msgstr ""
 
-#: Conf0.class:432
+#: Conf0.class:436
 msgid "NONE"
 msgstr ""
 
-#: Conf0.class:441
+#: Conf0.class:445
 msgid "Boot Menu Options"
 msgstr ""
 
-#: Conf0.class:451
+#: Conf0.class:455
 msgid "Target"
 msgstr ""
 
-#: Conf0.class:463
+#: Conf0.class:467
 msgid "Video Resolution"
 msgstr ""
 
-#: Conf0.class:482
+#: Conf0.class:486
 msgid "Prompt Time Out"
 msgstr ""
 
-#: Conf0.class:493
+#: Conf0.class:497
 msgid "Seconds"
 msgstr ""
 
-#: Conf0.class:499
+#: Conf0.class:503
 msgid "Boot Default"
 msgstr ""
 
-#: Conf0.class:518
+#: Conf0.class:522
 msgid "DETECTED OPERATING SYSTEMS."
 msgstr ""
 
-#: Conf0.class:534
+#: Conf0.class:538
 msgid "Tab 0"
 msgstr ""
 
-#: Conf1.class:141 MdlStartUp.module:53
+#: Conf1.class:145 MdlStartUp.module:53
 msgid "Regional Settings"
 msgstr ""
 
-#: Conf1.class:154
+#: Conf1.class:158
 msgid ""
 "Choose how\n"
 "your hardware clock is set up.\n"
@@ -138,19 +138,19 @@ msgid ""
 "Choose localtime since most PCs are setup this way."
 msgstr ""
 
-#: Conf1.class:170
+#: Conf1.class:174
 msgid "Choose the correct timezone for the area in which you live."
 msgstr ""
 
-#: Conf1.class:181
+#: Conf1.class:185
 msgid "ComboBox1"
 msgstr ""
 
-#: Conf1.class:183
+#: Conf1.class:187
 msgid "LocalTime"
 msgstr ""
 
-#: Conf1.class:183
+#: Conf1.class:187
 msgid "UTC"
 msgstr ""
 
@@ -180,27 +180,27 @@ msgstr ""
 msgid "DO NOT LEAVE THIS BLANK"
 msgstr ""
 
-#: Conf2.class:58
+#: Conf2.class:60
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
-#: Conf2.class:64
+#: Conf2.class:66
 msgid "Password was not set. See error log below"
 msgstr ""
 
-#: Conf2.class:132
+#: Conf2.class:134
 msgid "System Administrator Account"
 msgstr ""
 
-#: Conf2.class:149
+#: Conf2.class:151
 msgid "About the linux root account"
 msgstr ""
 
-#: Conf2.class:181
+#: Conf2.class:183
 msgid "Enter Passwrord"
 msgstr ""
 
-#: Conf2.class:198 Conf3.class:380
+#: Conf2.class:200 Conf3.class:380
 msgid "Re-enter Password"
 msgstr ""
 
@@ -384,76 +384,106 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: Conf4.class:68 MdlStartUp.module:55
+#: Conf4.class:70 MdlStartUp.module:55
 msgid "Network Settings"
 msgstr ""
 
-#: Conf5.class:59
+#: Conf5.class:61
 msgid "Service"
 msgstr ""
 
-#: Conf5.class:88
+#: Conf5.class:90
 msgid "System task scheduler"
 msgstr ""
 
-#: Conf5.class:91
+#: Conf5.class:93
 msgid "Bluetooth device manager"
 msgstr ""
 
-#: Conf5.class:94
+#: Conf5.class:96
 msgid "Secure Shell remote access"
 msgstr ""
 
-#: Conf5.class:97
+#: Conf5.class:99
 msgid "Software update notifications"
 msgstr ""
 
-#: Conf5.class:100
+#: Conf5.class:102
 msgid "Wireless network scanner"
 msgstr ""
 
-#: Conf5.class:103
+#: Conf5.class:105
 msgid "Printing service"
 msgstr ""
 
-#: Conf5.class:106
+#: Conf5.class:108
 msgid "File in userspace daemon"
 msgstr ""
 
-#: Conf5.class:109
+#: Conf5.class:111
 msgid "Internet Super Server"
 msgstr ""
 
-#: Conf5.class:112
+#: Conf5.class:114
 msgid "RPC Port Mapper"
 msgstr ""
 
-#: Conf5.class:115
+#: Conf5.class:117
 msgid "Windows networking service"
 msgstr ""
 
-#: Conf5.class:118
+#: Conf5.class:120
 msgid "VMWare modules"
 msgstr ""
 
-#: Conf5.class:121
+#: Conf5.class:123
 msgid "Network interface manager"
 msgstr ""
 
-#: Conf5.class:124
+#: Conf5.class:126
 msgid "Enhanced network security"
 msgstr ""
 
-#: Conf5.class:127
+#: Conf5.class:129
 msgid "Mouse driver for Text Mode interface"
 msgstr ""
 
-#: Conf5.class:202
+#: Conf5.class:228
 msgid "System Services"
 msgstr ""
 
-#: Conf5.class:223
+#: Conf5.class:249
 msgid "Select the system services to be launched at start-up."
+msgstr ""
+
+#: FDone.class:23 FMain.class:317 FMain0.class:318
+msgid "Next"
+msgstr ""
+
+#: FDone.class:31
+msgid "VectorLinux has been installed in your system."
+msgstr ""
+
+#: FDone.class:31
+msgid ""
+"After your computer restarts, you may use VasmCC to perform any additional "
+"configuration."
+msgstr ""
+
+#: FDone.class:31 Step1.class:98 Step2.class:198 Step5.class:177
+msgid "Click"
+msgstr ""
+
+#: FDone.class:31
+msgid "to restart your computer now."
+msgstr ""
+
+#: FDone.class:73
+msgid "Installation Complete"
+msgstr ""
+
+#: FDone.class:90
+msgid "About your VectorLinux installation"
 msgstr ""
 
 #: FMain.class:253 FMain0.class:253
@@ -466,10 +496,6 @@ msgstr ""
 
 #: FMain.class:306 FMain0.class:307
 msgid "Back"
-msgstr ""
-
-#: FMain.class:317 FMain0.class:318
-msgid "Next"
 msgstr ""
 
 #: FMain.class:328 FMain0.class:329
@@ -670,10 +696,6 @@ msgstr ""
 msgid "to search for media again"
 msgstr ""
 
-#: Step1.class:98 Step2.class:198 Step5.class:177
-msgid "Click"
-msgstr ""
-
 #: Step1.class:98
 msgid "to begin installing"
 msgstr ""
@@ -706,47 +728,47 @@ msgstr ""
 msgid "Scanning for CD Media ... Please wait"
 msgstr ""
 
-#: Step1.class:222
+#: Step1.class:223
 msgid "Scanning"
 msgstr ""
 
-#: Step1.class:232
+#: Step1.class:242
 msgid "in"
 msgstr ""
 
-#: Step1.class:260
+#: Step1.class:270
 msgid "Scanning system for installable ISO images"
 msgstr ""
 
-#: Step1.class:353
+#: Step1.class:373
 msgid "DISTRIBUTION"
 msgstr ""
 
-#: Step1.class:356
+#: Step1.class:376
 msgid "VERSION"
 msgstr ""
 
-#: Step1.class:433
+#: Step1.class:453
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:433
+#: Step1.class:453
 msgid "This process can take a long time to complete."
 msgstr ""
 
-#: Step1.class:443
+#: Step1.class:463
 msgid "Searching your system for installable media"
 msgstr ""
 
-#: Step1.class:511
+#: Step1.class:531
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:550
+#: Step1.class:570
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:580
+#: Step1.class:600
 msgid "Check Installation media before installing"
 msgstr ""
 
@@ -999,11 +1021,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:510 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:540 Step7a.class:143
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:510 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:540 Step7a.class:143
 msgid "No"
 msgstr ""
 
@@ -1296,7 +1318,7 @@ msgstr ""
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:405
+#: Step6.class:433
 msgid "Select which partitions to use for installation"
 msgstr ""
 
