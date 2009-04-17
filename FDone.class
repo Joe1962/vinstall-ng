@@ -13,34 +13,32 @@
 
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
-'
-' ================ network setup window ========
 
 PUBLIC SUB Form_Open()
-
+  
+  DIM sTxt AS String
+  IF ClsGlobal.fRunningMainForm THEN 
+    sTxt = ClsGlobal.fRunningMainForm.btnext.text
+  ELSE 
+    sTxt = ("Next")
+  END IF
+    
+  
   WITH ME
     .tlbanner.Text = "<h2>" & tlbanner.Text & "</h2>"
+    .TextLabel1.Text = ("VectorLinux has been installed in your system.") & "<br><br>" &
+    "<br>" & ("After your computer restarts, you may use VasmCC to perform any additional configuration.") & "<br>" & "<br>" &
+    ("Click") & Space(1) & "\"" & sTxt & "\"" & Space(1) & ("to restart your computer now.")
+    
   END WITH 
 
+ClsGlobal.fRunningMainForm.listview1["Step9"].picture = MdlStartUp.pDone
+ClsGlobal.fRunningMainForm.listview1["Step10"].picture = MdlStartUp.pNow
+
 END
 
-PUBLIC FUNCTION GetNext() AS String
-  
-  ClsGlobal.fRunningMainForm.listview1["Step8"].picture = MdlStartUp.pDone
-  ClsGlobal.fRunningMainForm.listview1["Step9"].picture = MdlStartUp.pNow
-  
-  RETURN "Conf5"
-  
-END
-PUBLIC SUB StartUp()
-  
-  
-  
-END
-PUBLIC SUB OnExit()
-  
-  
-  
-END
+PUBLIC SUB Form_Resize()
 
+  ME.HBox2.Width = hbox2.Parent.Width - (hbox2.Left * 2)
 
+END
