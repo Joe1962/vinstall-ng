@@ -760,15 +760,15 @@ msgstr ""
 msgid "Searching your system for installable media"
 msgstr ""
 
-#: Step1.class:531
+#: Step1.class:537
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:570
+#: Step1.class:576
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:600
+#: Step1.class:606
 msgid "Check Installation media before installing"
 msgstr ""
 
@@ -1021,11 +1021,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:540 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:462 Step7a.class:143
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:540 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:462 Step7a.class:143
 msgid "No"
 msgstr ""
 
@@ -1318,7 +1318,7 @@ msgstr ""
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:433
+#: Step6.class:355
 msgid "Select which partitions to use for installation"
 msgstr ""
 
