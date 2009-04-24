@@ -54,82 +54,106 @@ msgstr ""
 msgid "Bootsplash Extra High"
 msgstr ""
 
-#: Conf0.class:336 Step1.class:453 Step3a1.class:22 Step3a1a.class:186
+#: Conf0.class:332 Step1.class:433 Step3a1.class:22 Step3a1a.class:186
 #: Step7a.class:143
 msgid "WARNING:"
 msgstr ""
 
-#: Conf0.class:336
+#: Conf0.class:332
 msgid "Selecting this option will bypass your boot manager configuration."
 msgstr ""
 
-#: Conf0.class:336
+#: Conf0.class:332
 msgid ""
 "You may not be able to start your VectorLinux installation. Do not choose "
 "this option"
 msgstr ""
 
-#: Conf0.class:336
+#: Conf0.class:332
 msgid "unless you are fully aware of what you are doing."
 msgstr ""
 
-#: Conf0.class:399
+#: Conf0.class:400
+msgid "Unable to find boot arguments for OS in"
+msgstr ""
+
+#: Conf0.class:407
+msgid "Offer"
+msgstr ""
+
+#: Conf0.class:407
+msgid "as a bootable choice"
+msgstr ""
+
+#: Conf0.class:441
+msgid "Title"
+msgstr ""
+
+#: Conf0.class:462
+msgid "Initial RAM Disk"
+msgstr ""
+
+#: Conf0.class:514
+msgid "Include this Operating System in boot menu"
+msgstr ""
+
+#: Conf0.class:567
 msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0.class:415
+#: Conf0.class:583
 msgid "Select system boot manager to use"
 msgstr ""
 
-#: Conf0.class:424
+#: Conf0.class:592
 msgid "LILO"
 msgstr ""
 
-#: Conf0.class:430
+#: Conf0.class:598
 msgid "GRUB"
 msgstr ""
 
-#: Conf0.class:436
+#: Conf0.class:604
 msgid "NONE"
 msgstr ""
 
-#: Conf0.class:445
+#: Conf0.class:613
 msgid "Boot Menu Options"
 msgstr ""
 
-#: Conf0.class:455
+#: Conf0.class:623
 msgid "Target"
 msgstr ""
 
-#: Conf0.class:467
+#: Conf0.class:635
 msgid "Video Resolution"
 msgstr ""
 
-#: Conf0.class:486
+#: Conf0.class:654
 msgid "Prompt Time Out"
 msgstr ""
 
-#: Conf0.class:497
+#: Conf0.class:665
 msgid "Seconds"
 msgstr ""
 
-#: Conf0.class:503
+#: Conf0.class:671
 msgid "Boot Default"
 msgstr ""
 
-#: Conf0.class:522
+#: Conf0.class:690
 msgid "DETECTED OPERATING SYSTEMS."
 msgstr ""
 
-#: Conf0.class:538
+#: Conf0.class:706
 msgid "Tab 0"
 msgstr ""
 
-#: Conf1.class:145 MdlStartUp.module:53
+#: Conf1.class:141 MdlStartUp.module:53
 msgid "Regional Settings"
 msgstr ""
 
-#: Conf1.class:158
+#: Conf1.class:154
 msgid ""
 "Choose how\n"
 "your hardware clock is set up.\n"
@@ -138,19 +162,19 @@ msgid ""
 "Choose localtime since most PCs are setup this way."
 msgstr ""
 
-#: Conf1.class:174
+#: Conf1.class:170
 msgid "Choose the correct timezone for the area in which you live."
 msgstr ""
 
-#: Conf1.class:185
+#: Conf1.class:181
 msgid "ComboBox1"
 msgstr ""
 
-#: Conf1.class:187
+#: Conf1.class:183
 msgid "LocalTime"
 msgstr ""
 
-#: Conf1.class:187
+#: Conf1.class:183
 msgid "UTC"
 msgstr ""
 
@@ -180,27 +204,27 @@ msgstr ""
 msgid "DO NOT LEAVE THIS BLANK"
 msgstr ""
 
-#: Conf2.class:60
+#: Conf2.class:58
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
-#: Conf2.class:66
+#: Conf2.class:64
 msgid "Password was not set. See error log below"
 msgstr ""
 
-#: Conf2.class:134
+#: Conf2.class:132
 msgid "System Administrator Account"
 msgstr ""
 
-#: Conf2.class:151
+#: Conf2.class:149
 msgid "About the linux root account"
 msgstr ""
 
-#: Conf2.class:183
+#: Conf2.class:181
 msgid "Enter Passwrord"
 msgstr ""
 
-#: Conf2.class:200 Conf3.class:380
+#: Conf2.class:198 Conf3.class:381
 msgid "Re-enter Password"
 msgstr ""
 
@@ -221,79 +245,85 @@ msgstr ""
 msgid "to continue"
 msgstr ""
 
-#: Conf3.class:99
+#: Conf3.class:98
 msgid "Select picture ID"
 msgstr ""
 
-#: Conf3.class:101
+#: Conf3.class:100
 msgid "Select picture ID for"
 msgstr ""
 
-#: Conf3.class:133
+#: Conf3.class:132
 msgid "You must enter a login name first."
 msgstr ""
 
-#: Conf3.class:136
+#: Conf3.class:135
 msgid "Please select a password for"
 msgstr ""
 
-#: Conf3.class:136
+#: Conf3.class:135
 msgid "before continuing"
 msgstr ""
 
-#: Conf3.class:139
+#: Conf3.class:138
 msgid "You must enter the password twice for added security"
 msgstr ""
 
-#: Conf3.class:166
+#: Conf3.class:163
+msgid ""
+"Unable to successfully create user account. Please run VasmCC after "
+"installation is done."
+msgstr ""
+
+#: Conf3.class:167
 msgid "User"
 msgstr ""
 
-#: Conf3.class:166
+#: Conf3.class:167
 msgid "already exists in the system."
 msgstr ""
 
-#: Conf3.class:166
+#: Conf3.class:167
 msgid "Please select another user login name"
 msgstr ""
 
-#: Conf3.class:211
+#: Conf3.class:212
 msgid "Use only lowercase letters and numbers for this field"
 msgstr ""
 
-#: Conf3.class:281
+#: Conf3.class:282
 msgid "Create User Accounts"
 msgstr ""
 
-#: Conf3.class:331
+#: Conf3.class:332
 msgid "Login Name"
 msgstr ""
 
-#: Conf3.class:347
+#: Conf3.class:348
 msgid "Real Name"
 msgstr ""
 
-#: Conf3.class:363
+#: Conf3.class:364
 msgid "Enter Password"
 msgstr ""
 
-#: Conf3.class:408
+#: Conf3.class:409
 msgid "Click here to select user Login picture"
 msgstr ""
 
-#: Conf3.class:418
+#: Conf3.class:419
 msgid "Create User"
 msgstr ""
 
-#: Conf3.class:435
+#: Conf3.class:436
 msgid "Import Existing User"
 msgstr ""
 
-#: Conf3.class:451
+#: Conf3.class:452
 msgid "Clear Form"
 msgstr ""
 
-#: Conf3.class:466
+#: Conf3.class:467
 msgid "User Rights Management"
 msgstr ""
 
@@ -353,107 +383,67 @@ msgstr ""
 msgid "Setting"
 msgstr ""
 
-#: Conf3a.class:118 Step7a.class:49 Step7b.class:28
+#: Conf3a.class:118 Conf5.class:34 Step7a.class:49 Step7b.class:28
 msgid "Description"
 msgstr ""
 
-#: Conf3a.class:233
+#: Conf3a.class:237
 msgid "Import user accounts into VectorLinux"
 msgstr ""
 
-#: Conf3a.class:246
+#: Conf3a.class:250
 msgid ""
 "Select which user account to import, and which settings to reset. Un-checked "
 "items will be carried over, while checked items will be reset to factory "
 "defaults."
 msgstr ""
 
-#: Conf3a.class:256
+#: Conf3a.class:260
 msgid "User account to import"
 msgstr ""
 
-#: Conf3a.class:275
+#: Conf3a.class:279
 msgid "Account Contents to reset"
 msgstr ""
 
-#: Conf3a.class:302
+#: Conf3a.class:306
 msgid "Accept"
 msgstr ""
 
-#: Conf3a.class:308
+#: Conf3a.class:312
 msgid "Cancel"
 msgstr ""
 
-#: Conf4.class:70 MdlStartUp.module:55
-msgid "Network Settings"
+#: Conf4.class:69
+msgid "Network Configuration"
 msgstr ""
 
-#: Conf5.class:61
+#: Conf4.class:91
+msgid "Computer Name"
+msgstr ""
+
+#: Conf4.class:97
+msgid "VLocity"
+msgstr ""
+
+#: Conf4.class:109
+msgid "Domain"
+msgstr ""
+
+#: Conf4.class:115
+msgid "Linux.net"
+msgstr ""
+
+#: Conf5.class:33
 msgid "Service"
 msgstr ""
 
-#: Conf5.class:90
-msgid "System task scheduler"
+#: Conf5.class:124
+msgid "System Serices"
 msgstr ""
 
-#: Conf5.class:93
-msgid "Bluetooth device manager"
-msgstr ""
-
-#: Conf5.class:96
-msgid "Secure Shell remote access"
-msgstr ""
-
-#: Conf5.class:99
-msgid "Software update notifications"
-msgstr ""
-
-#: Conf5.class:102
-msgid "Wireless network scanner"
-msgstr ""
-
-#: Conf5.class:105
-msgid "Printing service"
-msgstr ""
-
-#: Conf5.class:108
-msgid "File in userspace daemon"
-msgstr ""
-
-#: Conf5.class:111
-msgid "Internet Super Server"
-msgstr ""
-
-#: Conf5.class:114
-msgid "RPC Port Mapper"
-msgstr ""
-
-#: Conf5.class:117
-msgid "Windows networking service"
-msgstr ""
-
-#: Conf5.class:120
-msgid "VMWare modules"
-msgstr ""
-
-#: Conf5.class:123
-msgid "Network interface manager"
-msgstr ""
-
-#: Conf5.class:126
-msgid "Enhanced network security"
-msgstr ""
-
-#: Conf5.class:129
-msgid "Mouse driver for Text Mode interface"
-msgstr ""
-
-#: Conf5.class:228
-msgid "System Services"
-msgstr ""
-
-#: Conf5.class:249
-msgid "Select the system services to be launched at start-up."
+#: Conf5.class:145
+msgid "Select system services to run on start-up"
 msgstr ""
 
 #: FDone.class:23 FMain.class:317 FMain0.class:318
@@ -630,6 +620,10 @@ msgstr ""
 msgid "User Accounts"
 msgstr ""
 
+#: MdlStartUp.module:55
+msgid "Network Settings"
+msgstr ""
+
 #: MdlStartUp.module:56
 msgid "Startup Options"
 msgstr ""
@@ -728,47 +722,47 @@ msgstr ""
 msgid "Scanning for CD Media ... Please wait"
 msgstr ""
 
-#: Step1.class:223
+#: Step1.class:222
 msgid "Scanning"
 msgstr ""
 
-#: Step1.class:242
+#: Step1.class:232
 msgid "in"
 msgstr ""
 
-#: Step1.class:270
+#: Step1.class:260
 msgid "Scanning system for installable ISO images"
 msgstr ""
 
-#: Step1.class:373
+#: Step1.class:353
 msgid "DISTRIBUTION"
 msgstr ""
 
-#: Step1.class:376
+#: Step1.class:356
 msgid "VERSION"
 msgstr ""
 
-#: Step1.class:453
+#: Step1.class:433
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr ""
 
-#: Step1.class:453
+#: Step1.class:433
 msgid "This process can take a long time to complete."
 msgstr ""
 
-#: Step1.class:463
+#: Step1.class:443
 msgid "Searching your system for installable media"
 msgstr ""
 
-#: Step1.class:537
+#: Step1.class:511
 msgid "Select Installation Source"
 msgstr ""
 
-#: Step1.class:576
+#: Step1.class:550
 msgid "Search Again"
 msgstr ""
 
-#: Step1.class:606
+#: Step1.class:580
 msgid "Check Installation media before installing"
 msgstr ""
 
@@ -1021,11 +1015,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:462 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:510 Step7a.class:143
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:462 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:510 Step7a.class:143
 msgid "No"
 msgstr ""
 
@@ -1318,7 +1312,7 @@ msgstr ""
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:355
+#: Step6.class:405
 msgid "Select which partitions to use for installation"
 msgstr ""
 
