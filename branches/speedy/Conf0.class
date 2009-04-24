@@ -223,18 +223,14 @@ PUBLIC SUB Form_Open()
     .TLoSlIST.Text = "<b>" & UCase(.TLoSlIST.Text) & "</b>"
   END WITH 
 'ME.Fake_Names()
-  ME.List_Other_Linuxes(ME.TsOsList)
-  ME.Update_Default_boot_choices()
+  'ME.List_Other_Linuxes(ME.TsOsList)
+  'ME.Update_Default_boot_choices()
   MdlBootMngr.Display_Bootmanager_Target_Options(ME.cbTarget)
   
 
 END
 
 PUBLIC FUNCTION GetNext() AS String
-  
-  ClsGlobal.fRunningMainForm.listview1["Step5"].picture = MdlStartUp.pDone
-  ClsGlobal.fRunningMainForm.listview1["Step4"].picture = MdlStartUp.pDone
-  ClsGlobal.fRunningMainForm.listview1["Step6"].picture = MdlStartUp.pNow
   
   RETURN "Conf1"
   
@@ -340,13 +336,185 @@ PUBLIC SUB rbNone_Click()
 END
 
 PUBLIC SUB rbGrub_Click()
-
+  DIM i AS Integer
+  DIM $ob AS Object
+  
   ME.Toggle_window_controls(TRUE)
+    FOR i = 0 TO TsOsList.Count - 1
+      FOR EACH $ob IN TsOsList[i].Children
+        $ob.Delete
+      NEXT 
+    TRY TsOsList[i].Delete
+  NEXT 
+  TsOsList.Count = 1
+  ME.PROBE_SYSTEM_FOR_OS(LCase(LAST.text))
 
 END
 
 PUBLIC SUB rbLilo_Click()
-
+  DIM i AS Integer
+  DIM $ob AS Object
   ME.Toggle_window_controls(TRUE)
+    FOR i = 0 TO TsOsList.Count - 1 
+        FOR EACH $ob IN TsOsList[i].Children
+          $ob.Delete
+        NEXT 
+      TRY TsOsList[i].Delete
+    NEXT 
+    TsOsList.Count = 1
+  ME.PROBE_SYSTEM_FOR_OS(LCase(LAST.text))
 
 END
+
+PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
+  
+  DIM sDump, sOs, sRoot, sLongDesc, sType, sTitle AS String
+  DIM i AS Integer
+  DIM sOsList, sOsLine, sBootLine, sDumparr AS String[]
+  DIM sKernel, sInitrd, sAppendLine AS String
+  DIM sBootargs AS String
+  
+  sOsList = Split(Trim(File.Load("/tmp/os.lst")), gb.NewLine)
+    FOR i = 0 TO sOsList.Max
+      sOsLine = Split(Trim(sOsList[i]), ":")
+       sType = Trim(sOsLine[3])
+       sLongDesc = Trim(sOsLine[1])
+       sOs = Trim(sOsLine[2])
+       sRoot = Trim(sOsLine[0])
+        IF sBootManager LIKE "lilo" THEN 
+          sTitle = sOs
+        ELSE 
+          sTitle = sLongDesc
+        END IF
+       
+        '  Message(sLongDesc & " was found in " & sRoot)
+        ' -= NOW I NEED TO GET THE KERNEL, INITRD AND APPEND LINES FOR THIS OS. =-
+          IF sType LIKE "linux" THEN 
+            ' this function will return an array separated by "," in this order
+            ' /path/to/kernel, /path/to/initrd, appendline here
+            
+            sBootargs = MdlBootMngr.Get_OS_Boot_Params(sRoot)
+              
+              IF NOT (sBootargs) THEN 
+                '= CAN NOT FIND BOOT ARGUMENTS FOR THIS OS ='
+                  PRINT ("Unable to find boot arguments for OS in") & Space(1) & sRoot
+                RETURN 
+              ELSE 
+                sBootLine = Split(sbootargs, ",")
+                  sKernel = sBootLine[0]
+                  sInitrd = sBootLine[1]
+                  sAppendLine = sBootLine[2]
+                PRINT ("Offer") & Space(1) & sTitle & Space(1) & ("as a bootable choice")
+                  PRINT " --\\ Kernel=" & sKernel
+                  PRINT " --\\ Initrd=" & sInitrd
+                  'print " --\ Options=" &
+                    TsOsList.Current.Text = sRoot
+                Populate_linux_tab(sRoot, sTitle, sKernel, sInitrd, sAppendLine, sBootManager)
+              END IF
+              
+          END IF
+            
+    NEXT 
+  
+END
+
+PUBLIC SUB Populate_linux_tab($OsRoot AS String, $Title AS String, $kernel AS String, $initrd AS String, $appendline AS String, sBootLoader AS String)
+  
+  DIM $tb AS TextBox
+  DIM $tl AS textlabel
+  DIM $cb AS ComboBox
+  DIM $cont AS HBox
+  DIM $chk AS CheckBox
+  
+  
+  $cont = NEW HBox(ME.TsOsList)
+    $cont.Height = 12
+    $cont.Expand = TRUE
+  $cont = NEW HBox(ME.TsOsList)
+    $cont.Height = 28
+    $cont.Expand = TRUE
+    $cont.Spacing = 4
+    $cont.Padding = 2
+    
+    $tl = NEW TextLabel($cont)
+      WITH $tl
+        .text = ("Title") '--------------- title label -----------
+        .Expand = FALSE
+        .height = 28
+        .Width = 64
+        .Alignment = Align.Left
+      END WITH 
+    $tb = NEW TextBox($cont) AS "OsNameBox" ' ------------ Title text box ------------
+      WITH $tb
+        .Height = 28
+        .Tag = $OsRoot
+        .Expand = TRUE
+        .Text = $Title
+          IF sBootLoader LIKE "lilo" THEN 
+            .MaxLength = 15
+          ELSE 
+            .MaxLength = 64
+          END IF
+      END WITH 
+    $tl = NEW TextLabel($cont) '---------------------------- initrd label -------------
+      WITH $tl
+        .Height = 28
+        .Text = ("Initial RAM Disk")
+        .Alignment = Align.Left
+        .Width = 100
+        .Expand = FALSE
+      END WITH 
+    $cb = NEW ComboBox($cont) '-------------------------- initrd combobox --------------
+      WITH $cb
+      .ReadOnly = TRUE
+      .Tag = $OsRoot
+      .List = [$initrd]
+      .Height = 28
+      .Expand = FALSE
+      .Width = 200
+      END WITH 
+      
+    $cont = NEW HBox(TsOsList) ' --------------------------- new container (hbox) ----------
+    $cont.Height = 28
+    $cont.Expand = TRUE
+    
+    $tl = NEW TextLabel($cont) ' ------------------------ append label ----------------------
+      WITH $tl
+        .Text = ("Kernel boot options")
+        .Width = 150
+        .Height = 28
+        .Expand = FALSE
+        .Alignment = Align.Left
+      END WITH 
+    $tb = NEW TextBox($cont)
+      WITH $tb
+        .Height = 28
+        .Tag = $OsRoot
+          IF InStr($AppendLine, "append") THEN 
+            .Text = Right($appendline, Len($appendline) - Len("append"))
+              
+          ELSE 
+            .Text = $appendline
+          END IF
+          .Text = Trim(Replace(.Text, "\"", ""))
+          IF Left(Trim(.Text)) = "=" THEN 
+                .Text = Right(.Text, Len(.Text) - 1)
+          END IF
+          .Text = Trim(.Text)
+          
+        .Expand = TRUE
+      END WITH 
+        
+    $chk = NEW CheckBox(TsOsList) AS "IncludeOs"
+      WITH $chk
+        .Expand = TRUE
+        .Value = TRUE
+        .Height = 28
+        .Tag = $OsRoot
+        .Text = ("Include this Operating System in boot menu")
+      END WITH 
+        
+        
+  
+END
+

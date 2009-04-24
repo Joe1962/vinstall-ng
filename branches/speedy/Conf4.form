@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,83,54)
+  MoveScaled(0,0,89,48)
   Text = ("")
   Arrangement = Arrange.Row
   { HPanel1 HPanel
@@ -10,11 +10,45 @@
     { tlbanner TextLabel
       MoveScaled(12,0,33,3)
       Expand = True
-      Text = ("Network Settings")
+      Text = ("Network Configuration")
     }
     { Separator1 Separator
       MoveScaled(13,4,25,1)
       Expand = True
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(0,5,6,1)
+    Expand = True
+  }
+  { HBox2 HBox
+    MoveScaled(0,7,88,3.5)
+    Expand = True
+    Spacing = 4
+    Padding = 2
+    { TextLabel1 TextLabel
+      MoveScaled(1,0,18.75,3.5)
+      Text = ("Computer Name")
+      Alignment = Align.Left
+    }
+    { txtHostname TextBox
+      MoveScaled(20,0,25,3.5)
+      Text = ("VLocity")
+    }
+  }
+  { HBox4 HBox
+    MoveScaled(0,10,53,3.5)
+    Expand = True
+    Spacing = 4
+    Padding = 2
+    { TextLabel2 TextLabel
+      MoveScaled(1,0,18.75,3.5)
+      Text = ("Domain")
+      Alignment = Align.Left
+    }
+    { txtDomain TextBox
+      MoveScaled(24,0,25,3.5)
+      Text = ("Linux.net")
     }
   }
 }

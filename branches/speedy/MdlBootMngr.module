@@ -456,23 +456,74 @@ PUBLIC SUB Display_Bootmanager_Target_Options(objCB AS ComboBox)
   
 END
 
-PUBLIC FUNCTION convert_to_grub_format(sPartitionAddr AS String) AS String
-  
-  DIM sAlpha AS String[] = Split("a b c d e f g h i k l m n o p q r s t u v w x y z", Space(1))
-  DIM sDrive, sPartAlpha, sRetVal AS String
-  DIM i, iPartNu AS Integer
-  
-  
-  'IF InStr(sPartitionAddr, "/") < 2 THEN RETURN ' invalid entry
-  'IF InStr(sPartitionAddr, "*[0-9]*") = FALSE THEN RETURN 'invalid entry
-  sPartAlpha = Left(sPartitionAddr, Len("/dev/hda")) ' trim this out
-  iPartNu = Right(sPartitionAddr, Len(sPartitionAddr) - Len("/dev/hda")) ' cut the partition number from the string
-  i = sAlpha.Find(Right(sPartAlpha))
-  
-  ' To grub, it's always "hd" even if the drive is a sata interface
-  sRetVal = "(hd" & i & "," & iPartNu & ")"
-  RETURN sRetVal
+' PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
+'   
+'   DIM sDump, sOs, sRoot, sLongDesc, sType, sTitle AS String
+'   DIM i AS Integer
+'   DIM sOsList, sOsLine, sBootLine, sDumparr AS String[]
+'   DIM sKernel, sInitrd, sAppendLine AS String
+'   DIM sBootargs AS String
+'   
+'   sOsList = Split(Trim(File.Load("/tmp/os.lst")), gb.NewLine)
+'     FOR i = 0 TO sOsList.Max
+'       sOsLine = Split(Trim(sOsList[i]), ":")
+'        sType = Trim(sOsLine[3])
+'        sLongDesc = Trim(sOsLine[1])
+'        sOs = Trim(sOsLine[2])
+'        sRoot = Trim(sOsLine[0])
+'         IF sBootManager LIKE "lilo" THEN 
+'           sTitle = sOs
+'         ELSE 
+'           sTitle = sLongDesc
+'         END IF
+'        
+'         '  Message(sLongDesc & " was found in " & sRoot)
+'         ' -= NOW I NEED TO GET THE KERNEL, INITRD AND APPEND LINES FOR THIS OS. =-
+'           IF sType LIKE "linux" THEN 
+'             ' this function will return an array separated by "," in this order
+'             ' /path/to/kernel, /path/to/initrd, appendline here
+'             
+'             sBootargs = Get_OS_Boot_Params(sRoot)
+'               IF NOT (sBootargs) THEN 
+'                 '= CAN NOT FIND BOOT ARGUMENTS FOR THIS OS ='
+'                   PRINT ("Unable to find boot arguments for OS in") & Space(1) & sRoot
+'                 RETURN 
+'               ELSE 
+'                 Message(sTitle & "<br>" & sBootargs)
+'               END IF
+'               
+'           END IF
+'             
+'     NEXT 
+'   
+' END
 
+PUBLIC FUNCTION Get_OS_Boot_Params(sOsRoot AS String) AS String
+  
+  DIM $kern, $initrd, $append, sDump AS String
+  DIM i AS Integer
+  DIM $dumparr, $linearr AS String[]
+  DIM $file AS String = "/tmp/bootargs.lst"
+  DIM $line AS String
+  'dim sListarr as String[] = Split(Trim(File.Load("/tmp/bootargs.
+  
+  SHELL "cat " & $file & " | grep ^" & sOsRoot TO sDump
+    sDump = Trim(sDump)
+      $dumparr = Split(sDump, gb.NewLine)
+      ' always grab the first line only for each os
+      $line = Trim($dumparr[0])
+        IF NOT ($line) THEN RETURN 
+      $append = Right($line, Len($line) - InStr($line, "append") + 1) & "\""
+      $linearr = Split($line, ":")
+        $kern = Trim($linearr[3])
+        $initrd = Trim($linearr[4])
+        
+  
+  RETURN $kern & "," & $initrd & "," & $append
+        
+      
+  
+    
   
 END
 
