@@ -13,21 +13,15 @@
 
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
-'
-' ================ network setup window ========
+
+'-= network configuration window =-
 
 PUBLIC SUB Form_Open()
 
-  WITH ME
-    .tlbanner.Text = "<h2>" & tlbanner.Text & "</h2>"
-  END WITH 
+  
 
 END
-
 PUBLIC FUNCTION GetNext() AS String
-  
-  ClsGlobal.fRunningMainForm.listview1["Step8"].picture = MdlStartUp.pDone
-  ClsGlobal.fRunningMainForm.listview1["Step9"].picture = MdlStartUp.pNow
   
   RETURN "Conf5"
   
@@ -42,5 +36,3 @@ PUBLIC SUB OnExit()
   
   
 END
-
-

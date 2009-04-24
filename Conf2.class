@@ -34,8 +34,6 @@ PUBLIC SUB Form_Resize()
 END
 PUBLIC FUNCTION GetNext() AS String
   
-  ClsGlobal.fRunningMainForm.listview1["Step7"].picture = MdlStartUp.pDone
-  ClsGlobal.fRunningMainForm.listview1["Step8"].picture = MdlStartUp.pNow
   RETURN "Conf3"
   
   

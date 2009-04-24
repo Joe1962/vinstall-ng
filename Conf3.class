@@ -50,7 +50,7 @@ PUBLIC SUB Form_Open()
   END WITH 
   WAIT 0.1
   Button1.Enabled = ME.check_for_impartable_accounts()
-  ClsGlobal.fRunningMainForm.btnext.Enabled = TRUE
+  'MdlMain.Display_User_Group_Choices(ME.lbUsrGrps)
 
 END
 PUBLIC FUNCTION GetNext() AS String
@@ -71,7 +71,6 @@ PUBLIC SUB StartUp()
       obj.delete
     NEXT 
   MdlMain.Display_User_Group_Choices(ME.lbUsrGrps)
-  ClsGlobal.fRunningMainForm.btnext.Enabled = TRUE
   
 END
 
@@ -160,7 +159,9 @@ PUBLIC SUB btAddUsr_Click()
   '-== Make sure we have valid entries before trying to create a user account ==-  
   IF Check_Text_Entry() = FALSE THEN 
     IF MdlMain.CHECK_EXISTING_USER(Trim(ME.txtLogin.Text)) = FALSE THEN 
-      MdlMain.CREATE_NEW_USER_ACCOUNT(Trim(txtLogin.Text), Trim(txtRealName.Text), btPicSel.Picture, Trim(txtPass2.Text)) ' create new account
+      IF MdlMain.CREATE_NEW_USER_ACCOUNT(Trim(txtLogin.Text), Trim(txtRealName.Text), btPicSel.Picture, Trim(txtPass2.Text)) > 0 THEN ' create new account while checking for errors
+        Message.Error(("Unable to successfully create user account. Please run VasmCC after installation is done."))
+      END IF
     ELSE ' user exists
       Message.Error(("User") & Space(1) & "\"" & Trim(ME.txtLogin.Text) & "\"" & Space(1) & ("already exists in the system.") & "<br>" &
       ("Please select another user login name"))

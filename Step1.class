@@ -195,9 +195,9 @@ END
 PUBLIC SUB FIND_CD_INSTALL_MEDIA()
   
   DIM sDump, sDrive, sOutput, sShortDrive AS String
-  DIM sName, sVersion, sMntPnt AS String
+  DIM sName, sVersion AS String
   DIM i AS Integer
-  DIM sDriveList, sDumparr AS String[]
+  DIM sDriveList AS String[]
   
   ME.mvLooking.Playing = TRUE
   WAIT 1
@@ -216,23 +216,13 @@ PUBLIC SUB FIND_CD_INSTALL_MEDIA()
   sDriveList = Split(sOutput, "\n")
     FOR i = 0 TO sDriveList.Count - 1
       sShortDrive = Right(Trim(sDriveList[i]), Len(Trim(sDriveList[i])) - RInStr(Trim(sDriveList[i]), "/"))
-        sMntPnt = "/mnt" &/ sShortDrive
-          IF IsDir(sMntPnt) = FALSE THEN 
-            EXEC ["mkdir", "-p", sMntPnt] WAIT 
-          END IF
+        EXEC ["mkdir", "-p", "/mnt" &/ sShortDrive] WAIT 
+        'EXEC ["mount", "-o", "ro", Trim(sDriveList[i]), "/mnt" &/ sShortDrive] WAIT 
+        SHELL "mount " & Trim(sDriveList[i]) & Space(1) & "/mnt" &/ sShortDrive & " 2>/dev/null" WAIT 
         PRINT ("Scanning") & Space(1) & sDriveList[i]
-          SHELL "mount | grep \"^" & Trim(sDriveList[i]) & "\" | cut -f 3 -d \' \'" TO sDump
-            sDump = Trim(sDump)
-              IF NOT (sDump) THEN           
-                SHELL "mount " & Trim(sDriveList[i]) & Space(1) & sMntPnt & " 2>/dev/null" WAIT 
-              ELSE 
-                sDumparr = Split(sDump, gb.NewLine)
-                sMntPnt = Trim(sDumparr[0])
-              END IF
-        
-          IF Exist(sMntPnt &/ "veclinux" &/ "VINSTALL.CONF") THEN 
-              SHELL "grep \"^DISTRO=\"" & sMntPnt &/ "veclinux" &/ "VINSTALL.CONF | cut -f 2 -d \'=\'" TO sName
-              SHELL "grep \"^VERSION=\"" & sMntPnt &/ "veclinux" &/ "VINSTALL.CONF | cut -f 2 -d \'=\'" TO sVersion
+          IF Exist("/mnt" &/ sShortDrive &/ "veclinux" &/ "VINSTALL.CONF") THEN 
+              SHELL "grep \"^DISTRO=\" /mnt" &/ sShortDrive &/ "veclinux" &/ "VINSTALL.CONF | cut -f 2 -d \'=\'" TO sName
+              SHELL "grep \"^VERSION=\" /mnt" &/ sShortDrive &/ "veclinux" &/ "VINSTALL.CONF | cut -f 2 -d \'=\'" TO sVersion
                 sName = Trim(Replace(sName, "\'", ""))
                 sVersion = Trim(Replace(sVersion, "\'", ""))
                 File.Save(Temp(sShortDrive), File.Load("/mnt" &/ sShortDrive &/ "veclinux" &/ "VINSTALL.CONF"))
@@ -257,10 +247,10 @@ END
 
 PUBLIC SUB FIND_ISO_INSTALL_MEDIA()
   
-  DIM sOutput, sPart, sISoName, sFile, sDump AS String
-  DIM sName, sVersion, sMntPnt AS String
+  DIM sOutput, sPart, sISoName, sFile AS String
+  DIM sName, sVersion AS String
   DIM i AS Integer
-  DIM sPartList, sDumparr AS String[]
+  DIM sPartList AS String[]
   
   ME.ComboBox1.Enabled = FALSE
   
@@ -275,21 +265,11 @@ PUBLIC SUB FIND_ISO_INSTALL_MEDIA()
   sPartList = Split(sOutput, "\n")
     FOR i = 0 TO sPartList.Count - 1
       sPart = Trim(Right(Trim(sPartList[i]), Len(Trim(sPartList[i])) - RInStr(Trim(sPartList[i]), "/")))
-      sMntPnt = "/mnt" &/ sPart
-          IF IsDir(sMntPnt) = FALSE THEN 
-            EXEC ["mkdir", "-p", sMntPnt] WAIT 
-          END IF
-            SHELL "mount | grep \"^/dev" &/ Trim(spart) & "\" | cut -f 3 -d \' \'" TO sDump
-              sDump = Trim(sDump)
-                IF sDump THEN 
-                  sDumparr = Split(sDump, gb.NewLine)
-                  sMntPnt = Trim(sDumparr[0])
-                ELSE 
-                  EXEC ["mount", "/dev" &/ Trim(sPart), sMntPnt] WAIT 
-                END IF
-            FOR EACH sFile IN Dir(sMntPnt, "*.iso", gb.File)
+          EXEC ["mkdir", "/mnt" &/ Trim(sPart)] WAIT 
+          EXEC ["mount", "/dev" &/ Trim(sPart), "/mnt" &/ Trim(sPart)] WAIT 
+            FOR EACH sFile IN Dir("/mnt" &/ Trim(sPart), "*.iso")
                 TRY MKDIR "/mnt/loop"
-                  EXEC ["mount", "-o", "loop", sMntPnt &/ Trim(sFile), "/mnt/loop"] WAIT 
+                  EXEC ["mount", "-o", "loop", "/mnt" &/ Trim(sPart) &/ Trim(sFile), "/mnt/loop"] WAIT 
                     IF Exist("/mnt/loop/veclinux/VINSTALL.CONF") THEN 
                     'PRINT "Adding temp file" & Space(1) & Temp(Trim(sFile) & "-" & Trim(sPart))
                       File.Save(Temp(Trim(sFile) & "-" & Trim(sPart)), File.Load("/mnt/loop/veclinux/VINSTALL.CONF"))
@@ -302,9 +282,9 @@ PUBLIC SUB FIND_ISO_INSTALL_MEDIA()
                       
               
             NEXT 
-          EXEC ["umount", sMntPnt] WAIT 
+          EXEC ["umount", "/mnt" &/ Trim(sPart)] WAIT 
           EXEC ["sync"] WAIT 
-          TRY RMDIR sMntPnt
+          TRY RMDIR "/mnt" &/ Trim(sPart)
           
           'EXEC ["rm,", "-rf", "/mnt" &/ Trim(sPart)] WAIT 
               
@@ -493,5 +473,3 @@ PUBLIC SUB btRescan_Click()
   ME.tlNext.Visible = TRUE  
 
 END
-
-

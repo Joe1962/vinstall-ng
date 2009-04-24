@@ -1,4 +1,5 @@
 ' Gambas class file
+
 '    This file is part of vinstall-ng
 
 '    vinstall-ng is free software: you can redistribute it and/or modify
@@ -13,22 +14,56 @@
 
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+'
+'-= system services window =-
 
-' ==================== services configuration settings =================
-PRIVATE picStatus AS Picture
 PUBLIC SUB Form_Open()
 
-  WITH ME
-    .tlbanner.Text = "<h2>" & tlbanner.Text & "</h2>"
-  END WITH 
-  ME.Prepare_Grid()
-  ME.lIST_SERVICES()
+  ME.prepare_grid()
+  ME.LIST_AVAILABLE_SERVICES()
 END
+PUBLIC SUB prepare_grid()
+  
+  ME.svServiceList.Columns.count = 4
+  ME.svServiceList.Rows.Count = 3
+  ME.svServiceList.Columns[0].Width = 24
+  ME.svServiceList.Columns[1].Width = 32
+  ME.svServiceList.Columns[2].Width = 200
+  ME.svServiceList.Rows[1].Height = 12
+  ME.svServiceList[0, 2].Text = ("Service")
+  ME.svServiceList[0, 3].Text = ("Description")
+  ME.svServiceList[0, 2].Alignment = Align.Center
+  ME.svServiceList[0, 3].Alignment = Align.Center
+  ME.svServiceList[0, 2].Font.Bold = TRUE
+  ME.svServiceList[0, 3].Font.Bold = TRUE
+  ME.svServiceList[0, 0].BackColor = Color.SelectedBackground
+  ME.svServiceList[0, 1].BackColor = Color.SelectedBackground
+  ME.svServiceList[0, 2].BackColor = Color.SelectedBackground
+  ME.svServiceList[0, 3].BackColor = Color.SelectedBackground
+  
+END
+
+PUBLIC SUB LIST_AVAILABLE_SERVICES()
+  
+  DIM irow AS Integer = 2
+  DIM sFile AS String
+  
+  'FOR EACH sFile IN Dir(ClsGlobal.sTargetPath &/ "etc" &/ "rc.d" &/ "init.d", "*", gb.File)
+  FOR EACH sFile IN Dir("/etc/rc.d/init.d", "*", gb.File) 
+    svServiceList[irow, 2].Text = sFile
+    INC irow
+    INC svServiceList.Rows.Count
+  NEXT 
+    DEC svServiceList.Rows.Count
+  'Message("Done")
+  
+END
+
+
 PUBLIC FUNCTION GetNext() AS String
   
-  ClsGlobal.fRunningMainForm.listview1["Step9"].picture = MdlStartUp.pDone
-  ClsGlobal.fRunningMainForm.listview1["Step10"].picture = MdlStartUp.pNow
   RETURN "FDone"
+  
   
 END
 PUBLIC SUB StartUp()
@@ -38,160 +73,22 @@ PUBLIC SUB StartUp()
 END
 PUBLIC SUB OnExit()
   
-  ME.SAVE_SERVICES_LIST()
+  
   
 END
+
 
 
 PUBLIC SUB Form_Resize()
 
   WITH ME
-    .gvSvcList.Height = .ClientH - (.gvSvcList.Top + 12)
-    .gvSvcList.Columns[2].Width = .gvSvcList.Width - (.gvSvcList.Columns[2].Left + 12)
+    .svServiceList.Height = .ClientH - (.svServiceList.top + 12)
   END WITH 
 
 END
-PUBLIC SUB Prepare_Grid()
-  DIM i AS Integer
-  WITH ME
-    .gvSvcList.Rows.Count = 3
-    .gvSvcList.columns.Count = 4
-    .gvheader.rows.Count = 1
-    .gvheader.Columns.Count = 3
-    .gvheader[0, 2].Text = UCase(("Service"))
-      FOR i = 0 TO gvheader.columns.Count - 1
-        .gvheader[0, i].BackColor = Color.SelectedBackground
-        .gvheader[0, i].Alignment = Align.Center
-      NEXT 
-    .gvSvcList.columns[0].Width = 24
-    .gvheader.Columns[0].Width = 24
-    .gvSvcList.Columns[1].Width = 64
-    .gvheader.Columns[1].Width = 64
-    .gvSvcList.Columns[3].Width = 1
-  END WITH 
-    
-  
-END
 
+PUBLIC SUB TextLabel1_Menu()
 
-PUBLIC SUB lIST_SERVICES()
-  
-  DIM irow AS Integer
-  DIM sService, sDesc AS String
-  DIM sPic AS Picture
-  DIM sLogo AS Image
-  DIM sSvcPath AS String = "/etc/rc.d/init.d" 'ClsGlobal.sTargetPath &/ "etc" &/ "rc.d" &/ "init.d"
-  
-  picStatus = Picture.Load("images/16px-check.png")
-  
-  FOR EACH sService IN Dir(sSvcPath, "*", gb.File)
-      SELECT CASE sService
-        CASE "cron"
-          sDesc = ("System task scheduler")
-          sPic = picStatus
-        CASE "bluetooth"
-          sDesc = ("Bluetooth device manager")
-          sPic = ""
-        CASE "sshd"
-          sDesc = ("Secure Shell remote access")
-          sPic = ""
-        CASE "gslaptd"
-          sDesc = ("Software update notifications")
-          sPic = picStatus
-        CASE "wifi-radar"
-          sDesc = ("Wireless network scanner")
-          sPic = ""
-        CASE "cups"
-          sDesc = ("Printing service")
-          sPic = picStatus
-        CASE "fuse"
-          sDesc = ("File in userspace daemon")
-          sPic = ""
-        CASE "inetd"
-          sDesc = ("Internet Super Server")
-          sPic = ""
-        CASE "portmap"
-          sDesc = ("RPC Port Mapper")
-          sPic = ""
-        CASE "samba"
-          sDesc = ("Windows networking service")
-          sPic = ""
-        CASE "vmware"
-          sDesc = ("VMWare modules")
-          sPic = ""
-        CASE "wicd"
-          sDesc = ("Network interface manager")
-          sPic = picStatus
-        CASE "firewall"
-          sDesc = ("Enhanced network security")
-          sPic = ""
-        CASE "gpm"
-          sDesc = ("Mouse driver for Text Mode interface")
-          sPic = ""
-      END SELECT 
-      IF Exist("images" &/ sService & ".svg") THEN 
-        sLogo = Image.Load("images" &/ sService & ".svg")
-      ELSE 
-        sLogo = Image.Load("images" &/ "service.svg")
-      END IF
-      
-          
-    IF sDesc THEN 
-      ME.gvSvcList[irow, 0].Picture = sPic
-        IF sLogo THEN 
-          ME.gvSvcList[irow, 1].Picture = sLogo.Picture
-          ME.gvSvcList[irow, 1].Alignment = Align.Center
-        END IF
-      ME.gvSvcList.rows[irow].Height = 64 'sLogo.Height
-      ME.gvSvcList[irow, 0].Alignment = Align.Center
-      ME.gvSvcList[irow, 2].Text = UCase(sService) & gb.NewLine & gb.NewLine & sDesc
-      ME.gvSvcList[irow, 3].Text = sService
-      INC irow
-      INC gvSvcList.Rows.Count
-    END IF
-  NEXT 
-    
-    DEC gvSvcList.Rows.Count
-    DEC gvSvcList.Rows.Count
-    DEC gvSvcList.Rows.Count
-  
-  
-END
-
-
-PUBLIC SUB gvSvcList_Click()
-
-  IF LAST.column > 1 THEN RETURN 
-  IF gvSvcList[LAST.row, 0].Picture = picStatus THEN 
-    gvSvcList[LAST.row, 0].Picture = ""
-  ELSE 
-    gvSvcList[LAST.row, 0].Picture = picStatus
-  END IF
-  
-  gvSvcList.Refresh()
-
-END
-PUBLIC SUB SAVE_SERVICES_LIST()
-  
-  DIM irow AS Integer
-  DIM sSVc AS String
-  
-  ' We will default to runlevel 4 (GUI Mode) for services.
-  FOR irow = 0 TO ME.gvSvcList.Rows.Count - 1
-      sSVc = gvSvcList[irow, 3].Text
-      IF gvSvcList[irow, 0].Picture = picStatus THEN 
-        PRINT " \\__ Setting up services" & gb.NewLine 
-        PRINT "   \\- " & sSVc
-          SHELL "chroot " & ClsGlobal.sTargetPath & " /sbin/service -s " & sSVc & " 4" WAIT 
-      END IF
-          
-  NEXT 
-  
-END
-
-
-PUBLIC SUB gvSvcList_Menu()
-
-  ME.SAVE_SERVICES_LIST()
+  MdlBootMngr.PROBE_SYSTEM_FOR_OS("LILO")
 
 END

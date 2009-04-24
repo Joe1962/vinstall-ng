@@ -255,12 +255,12 @@ PUBLIC SUB MountPointSel_Click()
   'IF LAST.text = ("Swap") THEN RETURN 
   IF LAST.text <> ("Not Used") THEN 
     IF LAST.TEXT <> ("Swap") THEN 
-      IF ME.CheckEntry(LAST.text, gvPartListing.RowAt(LAST.y)) > 0 THEN 
-        LAST.text = ("Not Used")
-        STOP EVENT 
-        RETURN 
-      END IF
-    END IF
+    IF ME.CheckEntry(LAST.text, gvPartListing.RowAt(LAST.y)) > 0 THEN 
+    LAST.text = ("Not Used")
+    STOP EVENT 
+    RETURN 
+  END IF
+  END IF
   END IF
     
   IF LAST.text <> ("Not Used") THEN 
@@ -328,27 +328,77 @@ PUBLIC SUB read_partition_selection()
   DIM sPart, sFormat, sSize, sMntPoint AS String
   DIM i, irow AS Integer
   
-  FOR EACH cb IN ME.objMntPoints
-    IF cb.Text <> ("Not Used") THEN 
-      FOR irow = 0 TO gvPartListing.Rows.Count - 1
+  
+  ' ================= get the list of vital partitions =====================
+    FOR irow = 2 TO gvPartListing.Rows.count - 1
+      IF Trim(gvPartListing[irow, 2].Text) THEN 
+      IF Trim(gvPartListing[irow, 2].Text) <> ("Not Used") AND Trim(gvPartListing[irow, 2].Text) <> ("Swap") THEN 
         sPart = Trim(gvPartListing[irow, 0].Text)
         sSize = Trim(gvPartListing[irow, 1].Text)
         sMntPoint = Trim(gvPartListing[irow, 2].Text)
         sFormat = Trim(gvPartListing[irow, 4].Text)
-          IF sPart = cb.Tag THEN ' we found a match.
-            IF cb.Text <> ("Swap") THEN 
-              ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & sPart & "-" & sSize & "-" & sMntPoint & "-" & sFormat & "|"
-            ELSE 
-              ClsGlobal.sWapPartList = ClsGlobal.sWapPartList & sPart & "-" & sSize & "|"
-          END IF
-        END IF
         
-      NEXT 
+      '          Message(gvPartListing[irow, 0].Text & " - (" & gvPartListing[irow, 1].Text & ") - " & gvPartListing[irow, 2].Text)
+      '         ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & cbox.Tag & "-" & sSize & "-" & cbox.Text & "-" & sFormat & ","
+      ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & sPart & "-" & sSize & "-" & sMntPoint & "-" & sFormat & "|"
+      
+        END IF
+      END IF
+      
+    NEXT 
+    
+    ' =========== get list of swap partitions selected .(if any) =====================
+    
+    FOR irow = 2 TO gvPartListing.Rows.count - 1
+      IF Trim(gvPartListing[irow, 2].Text) = ("Swap") THEN 
+        sPart = Trim(gvPartListing[irow, 0].Text)
+        sSize = Trim(gvPartListing[irow, 1].Text)
+  '                   ClsGlobal.sWapPartList = ClsGlobal.sWapPartList & gvPartListing[i, 0].Text & "-" & gvPartListing[i, 1].Text & ","
+      ClsGlobal.sWapPartList = ClsGlobal.sWapPartList & spart & "-" & sSize & "|"
     END IF
   NEXT 
-
+        
+    
+  'Message(ClsGlobal.sVitalPartList)
+'   
+'     FOR EACH cbox IN objMntPoints
+'       IF cbox.Text <> ("Not Used") THEN 
+'         i = 2
+'         REPEAT 
+'           IF Trim(gvPartListing[i, 0].Text) = Trim(cbox.Tag) THEN 
+'             sSize = Trim(gvPartListing[i, 1].Text)
+'           END IF
+'           INC i
+'         UNTIL sSize OR i = gvPartListing.Rows.Count
+'         
+'         FOR EACH cb IN objFS
+'           IF cbox.tag = cb.Tag THEN 
+'             sFormat = Trim(cb.Text)
+'             BREAK 
+'           ELSE 
+'             sFormat = ""
+'           END IF
+'         NEXT 
+'         ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & cbox.Tag & "-" & sSize & "-" & cbox.Text & "-" & sFormat & ","
+'     END IF
+'     NEXT 
+'       
+' FOR i = 2 TO gvPartListing.Rows.count - 1
+'         IF gvPartListing[i, 4].Text LIKE "linux-swap" THEN 
+'             FOR EACH cbox IN objMntPoints
+'               IF cbox.tag = gvPartListing[i, 0].Text THEN 
+'                 IF cbox.text <> ("Not Used") THEN 
+'                   ClsGlobal.sWapPartList = ClsGlobal.sWapPartList & gvPartListing[i, 0].Text & "-" & gvPartListing[i, 1].Text & ","
+'                 END IF
+'               END IF
+'             NEXT           
+'         END IF
+'       NEXT   
+' 
+'   
  END
-
+' 
+' 
 
 PUBLIC SUB Form_Open()
 
@@ -395,6 +445,4 @@ WAIT 0.25
 cbYN.Visible = FALSE
 
 END
-
-
 

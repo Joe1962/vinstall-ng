@@ -23,14 +23,10 @@ PUBLIC SUB Form_Open()
       
       ' default the time zone to us/central
     ME.lbTmZone[ME.lbTmZone.Find("US/Central")].Selected = TRUE
-    
 
 END
 
 PUBLIC FUNCTION GetNext() AS String
-  
-  ClsGlobal.fRunningMainForm.listview1["Step6"].picture = MdlStartUp.pDone
-  ClsGlobal.fRunningMainForm.listview1["Step7"].picture = MdlStartUp.pNow
   
   RETURN "Conf2"
   
