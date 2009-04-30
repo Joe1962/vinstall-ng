@@ -359,7 +359,7 @@ PUBLIC SUB GENERATE_LILO_HEADER()
   DIM sTarget, sVidMod, sDefBoot, sVGA, sVidImput, sVidText, sOutput AS String
   DIM iTimeOut AS Integer
   
-  sTarget = Trim(Conf0.cbLiloTarget.Text)
+  sTarget = Trim(Conf0.cbTarget.Text)
     IF InStr(sTarget, ("MBR Of")) THEN 
       sTarget = Right(sTarget, Len(sTarget) - InStr(sTarget, "/") + 1)
     ELSE IF sTarget = ("Bootsector Of") & Space(1) & ClsGlobal.sRoot THEN 
@@ -405,7 +405,7 @@ PUBLIC SUB GENERATE_LILO_HEADER()
 "# Begin listing OS Choices \n" 
 
     
-    
+  sDefBoot = Conf0.cbDefBoot.Tag  
   iTimeOut = Conf0.SbTimeOut.Value * 10
   
   sOutput = "# LILO Configuration File \n" &
@@ -421,7 +421,7 @@ PUBLIC SUB GENERATE_LILO_HEADER()
   "change-rules \n" &
   "reset \n" &
   "bitmap = /boot/bitmap/boot.bmp \n" &
-  "#\n#\n#\n" &
+  "#\n\n" &
   sVidText
   
   File.Save(Temp("lilo.in"), sOutput)
@@ -429,6 +429,58 @@ PUBLIC SUB GENERATE_LILO_HEADER()
   'Message(File.Load(Temp("lilo.in")))
 
 END
+
+PUBLIC SUB GENERATE_LILO_OS_LIST()
+  
+  DIM ckb AS CheckBox
+  DIM cb AS ComboBox
+  DIM tb AS TextBox
+  DIM tl AS TextLabel
+  DIM sTitle, sRoot, sInitrd, sKernel, sAppend AS String
+  DIM sBody AS String
+  DIM sHeader, sFullFile AS String
+  
+  FOR EACH ckb IN Conf0.objMenuObjects
+    IF ckb.Value = TRUE THEN 
+      sRoot = ckb.Tag
+      FOR EACH tb IN Conf0.objNames
+        IF tb.Tag = ckb.Tag THEN sTitle = tb.Text
+      NEXT 
+      ' get the initrd
+      FOR EACH cb IN Conf0.objinitrds
+        IF cb.Tag = sRoot THEN sInitrd = Trim(cb.Text)
+      NEXT 
+      ' get the append line
+      FOR EACH tb IN Conf0.objappends
+        IF tb.tag = sRoot THEN sAppend = tb.Text
+      NEXT 
+      FOR EACH tl IN Conf0.objKernels
+        IF tl.Name = sRoot THEN sKernel = tl.Tag
+      NEXT
+          sBody = sBody & gb.NewLine & 
+          "# Menu entry for " & sTitle & "\n" &
+          "image = " & Trim(sKernel) & "\n" &
+          "root = " & sRoot & "\n" &
+          "label = " & sTitle & "\n" &
+          "append = \"" & sAppend & "\"\n" &
+          "read-only \n"
+          'IF sBody THEN Message(Trim(sBody))
+    END IF
+    
+    ' Reset these variables for future use
+    sKernel = ""
+    sRoot = ""
+    sTitle = ""
+    sAppend = ""
+  NEXT 
+  'IF sBody THEN Message(sBody)
+  'load the header
+    sHeader = File.Load(Temp("lilo.in"))
+    sFullFile = sHeader & sBody
+    Message(sFullFile)
+END
+
+
 
 PUBLIC SUB Display_Bootmanager_Target_Options(objCB AS ComboBox)
   
@@ -521,10 +573,38 @@ PUBLIC FUNCTION Get_OS_Boot_Params(sOsRoot AS String) AS String
   
   RETURN $kern & "," & $initrd & "," & $append
         
-      
+END
+
+PUBLIC FUNCTION CHECK_LILO_VALUES() AS Integer
   
+  ' will return 0 for clear
+  ' 1 for error
+  DIM tb, tb1, tb2 AS TextBox
+  DIM cb AS CheckBox
+  DIM sTag AS String = Conf0.TsOsList.Current.Text
+    IF NOT (Conf0.cbDefBoot.tag) THEN 
+      Message.Error(("You must select one operating system to be started by default"))
+        FOR EACH cb IN Conf0.objDefOs
+          IF cb.Tag = sTag THEN 
+            Balloon.Error(("Check this box to make this your default operating system, or select another tab."), cb, cb.Left + 24)
+          END IF
+        NEXT 
+      RETURN 1
+    END IF
+  FOR EACH tb IN Conf0.objNames
+    FOR EACH tb1 IN Conf0.objNames
+      IF tb.Text = tb1.Text THEN 
+        Message.Error(("Found duplicate operating system names. Please use unique labels for each menu entry"))
+          FOR EACH tb2 IN Conf0.objNames
+            IF tb2.Tag = sTag THEN 
+              Balloon.Error(("Check these boxes to make sure they have unique names"), tb2, tb2.Left + 24)
+            END IF
+          NEXT 
+        RETURN 1
+      END IF
+    NEXT 
+  NEXT 
     
   
 END
-
 

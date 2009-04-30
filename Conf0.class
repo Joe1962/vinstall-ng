@@ -15,10 +15,13 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 '=====================================================================================
 
-PRIVATE objinitrds AS NEW Object[]
-PRIVATE objChecks AS NEW Object[]
-PRIVATE objappends AS NEW Object[]
-PRIVATE objNames AS NEW Object[]
+PUBLIC objinitrds AS NEW Object[]
+PUBLIC objChecks AS NEW Object[]
+PUBLIC objappends AS NEW Object[]
+PUBLIC objNames AS NEW Object[]
+PUBLIC objDefOs AS NEW Object[]
+PUBLIC objMenuObjects AS NEW Object[]
+PUBLIC objKernels AS NEW Object[]
 
 
 PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabStrip AS TabStrip)
@@ -226,6 +229,7 @@ PUBLIC SUB Form_Open()
   'ME.List_Other_Linuxes(ME.TsOsList)
   'ME.Update_Default_boot_choices()
   MdlBootMngr.Display_Bootmanager_Target_Options(ME.cbTarget)
+  ME.PROBE_SYSTEM_FOR_OS("lilo")
   
 
 END
@@ -363,6 +367,7 @@ PUBLIC SUB rbLilo_Click()
     NEXT 
     TsOsList.Count = 1
   ME.PROBE_SYSTEM_FOR_OS(LCase(LAST.text))
+  
 
 END
 
@@ -376,6 +381,7 @@ PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
   
   sOsList = Split(Trim(File.Load("/tmp/os.lst")), gb.NewLine)
     FOR i = 0 TO sOsList.Max
+      TsOsList.Index = TsOsList.Count - 1
       sOsLine = Split(Trim(sOsList[i]), ":")
        sType = Trim(sOsLine[3])
        sLongDesc = Trim(sOsLine[1])
@@ -407,15 +413,17 @@ PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
                 PRINT ("Offer") & Space(1) & sTitle & Space(1) & ("as a bootable choice")
                   PRINT " --\\ Kernel=" & sKernel
                   PRINT " --\\ Initrd=" & sInitrd
+                  PRINT " --\\ Root=" & sRoot
                   'print " --\ Options=" &
                     TsOsList.Current.Text = sRoot
                 Populate_linux_tab(sRoot, sTitle, sKernel, sInitrd, sAppendLine, sBootManager)
+                INC TsOsList.Count
               END IF
               
           END IF
             
     NEXT 
-  
+  DEC TsOsList.Count ' remove trailing empty tab
 END
 
 PUBLIC SUB Populate_linux_tab($OsRoot AS String, $Title AS String, $kernel AS String, $initrd AS String, $appendline AS String, sBootLoader AS String)
@@ -456,6 +464,7 @@ PUBLIC SUB Populate_linux_tab($OsRoot AS String, $Title AS String, $kernel AS St
             .MaxLength = 64
           END IF
       END WITH 
+      objNames.Add($tb)
     $tl = NEW TextLabel($cont) '---------------------------- initrd label -------------
       WITH $tl
         .Height = 28
@@ -473,19 +482,22 @@ PUBLIC SUB Populate_linux_tab($OsRoot AS String, $Title AS String, $kernel AS St
       .Expand = FALSE
       .Width = 200
       END WITH 
-      
+      objinitrds.Add($cb)
     $cont = NEW HBox(TsOsList) ' --------------------------- new container (hbox) ----------
     $cont.Height = 28
     $cont.Expand = TRUE
     
-    $tl = NEW TextLabel($cont) ' ------------------------ append label ----------------------
+    $tl = NEW TextLabel($cont) ' ------------------------ append label (holds the kernel path (hidden))----------------------
       WITH $tl
         .Text = ("Kernel boot options")
         .Width = 150
         .Height = 28
+        .Name = $OsRoot
         .Expand = FALSE
+        .Tag = $kernel ' set the kernel path here..
         .Alignment = Align.Left
       END WITH 
+      objKernels.Add($tl)
     $tb = NEW TextBox($cont)
       WITH $tb
         .Height = 28
@@ -504,6 +516,7 @@ PUBLIC SUB Populate_linux_tab($OsRoot AS String, $Title AS String, $kernel AS St
           
         .Expand = TRUE
       END WITH 
+        objappends.Add($tb)
         
     $chk = NEW CheckBox(TsOsList) AS "IncludeOs"
       WITH $chk
@@ -513,8 +526,56 @@ PUBLIC SUB Populate_linux_tab($OsRoot AS String, $Title AS String, $kernel AS St
         .Tag = $OsRoot
         .Text = ("Include this Operating System in boot menu")
       END WITH 
+      objMenuObjects.Add($chk) ' Add to array of bootable OS's
+    $chk = NEW CheckBox(TsOsList) AS "DefOS"
+      WITH $chk
+        .Expand = TRUE
+        .Value = FALSE
+        .Height = 28
+        .Tag = $OsRoot
+        .Text = ("Boot this operating system by default")
+      END WITH 
+      objDefOs.Add($chk)
         
         
+  
+END
+
+PUBLIC SUB DefOS_Click()
+  
+  DIM cb AS CheckBox
+  DIM tb AS TextBox
+    FOR EACH cb IN objDefOs
+      IF cb <> LAST THEN cb.Value = FALSE
+    NEXT
+  FOR EACH tb IN objNames
+    IF tb.Tag = LAST.tag THEN 
+      cbDefBoot.Tag = tb.Text
+    END IF
+  NEXT 
+    
+    
+
+END
+
+
+PUBLIC SUB TLoSlIST_MouseDown()
+  
+  IF MdlBootMngr.CHECK_LILO_VALUES() > 0 THEN RETURN 
+  MdlBootMngr.GENERATE_LILO_HEADER()
+  MdlBootMngr.GENERATE_LILO_OS_LIST()
+
+END
+PUBLIC SUB OsNameBox_KeyRelease()
+  
+  DIM cb AS CheckBox
+    FOR EACH cb IN objDefOs
+      IF cb.Value = TRUE THEN 
+        IF cb.Tag = LAST.tag THEN ' we are modifying the default OS value
+          cbDefBoot.Tag = LAST.text
+        END IF
+      END IF
+    NEXT 
   
 END
 
