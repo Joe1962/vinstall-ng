@@ -35,6 +35,7 @@
         }
         { rbGrub RadioButton
           MoveScaled(16,1,14,3.5)
+          Enabled = False
           Expand = True
           Text = ("GRUB")
         }
@@ -85,7 +86,7 @@
         MoveScaled(1,0,16,3.5)
         Text = ("Prompt Time Out")
       }
-      { SpinBox1 SpinBox
+      { sbTimeOut SpinBox
         MoveScaled(18,0,6,3.5)
         Value = 5
       }
@@ -97,11 +98,13 @@
       }
       { TextLabel4 TextLabel
         MoveScaled(38,0,15,3.5)
+        Visible = False
         Text = ("Boot Default")
         Alignment = Align.Right
       }
       { cbDefBoot ComboBox
         MoveScaled(56,0,25,3.5)
+        Visible = False
         Text = ("")
         ReadOnly = True
       }
