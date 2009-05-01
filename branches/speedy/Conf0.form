@@ -110,6 +110,10 @@
       }
     }
   }
+  { Timer1 #Timer
+    #X = 608
+    #Y = 208
+  }
   { HBox5 HBox
     MoveScaled(1,27,58,3.5)
     Expand = True

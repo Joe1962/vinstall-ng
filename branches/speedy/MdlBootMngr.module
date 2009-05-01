@@ -430,6 +430,55 @@ PUBLIC SUB GENERATE_LILO_HEADER()
 
 END
 
+PUBLIC SUB SETUP_LILO_BOOT_MANAGER()
+  
+  DIM cbx AS CheckBox
+  DIM cb AS ComboBox
+  DIM tl AS TextLabel
+  DIM sKernel, sInitrd, sArch AS String
+  
+  ' find kernels and initrds, copy them to /boot on the target dir
+  ' can't use /boot/tamu anymore... all has to go into /boot
+  FOR EACH cbx IN Conf0.objMenuObjects
+    IF cbx.Value = TRUE THEN 
+      FOR EACH tl IN Conf0.objKernels
+        IF cbx.Tag = tl.Name THEN sKernel = tl.Tag
+      NEXT 
+      FOR EACH cb IN Conf0.objinitrds
+        IF cb.tag = tl.Name THEN sInitrd = cb.Text
+
+      NEXT 
+      
+      ' now that we got kernel and initrd, copy them over
+      IF sKernel AND IF sInitrd THEN 
+        SHELL "cp " & sKernel & Space(1) & ClsGlobal.sTargetPath &/ "boot"
+        SHELL "cp " & sInitrd & Space(1) & ClsGlobal.sTargetPath &/ "boot"
+      END IF
+      
+  NEXT 
+  
+  ' determine wether we need to update modules
+  EXEC ["uname", "-r"] TO sArch
+    IF Exist("/lib" &/ "modules" &/ Trim(sArch)) = FALSE THEN ' hosted install detected
+      EXEC ["mkdir", "-p", "/lib" &/ "modules" &/ Trim(sArch)] WAIT 
+      SHELL "mount -o bind " & ClsGlobal.sTargetPath &/ "lib/modules" &/ Trim(sArch) & Space(1) & "/lib/modules" &/ Trim(sarch) & " && depmod -aq" WAIT 
+    END IF
+      
+  
+  ' now that kernels have been copied, I need to run lilo
+  ' Bind mount the target /tmp and sys dirs  now
+  ' See PUBLIC SUB_PERFORM_BINDING on iVL branch
+  EXEC ["mount", "-o", "bind", "/sys", ClsGlobal.sTargetPath &/ "sys"] WAIT 
+  EXEC ["mount", "-o", "bind", "/proc", ClsGlobal.sTargetPath &/ "proc"] WAIT 
+  EXEC ["mount", "-o", "bind", "/tmp", ClsGlobal.sTargetPath &/ "tmp"] WAIT 
+  EXEC ["mount", "-o", "bind", "/dev", ClsGlobal.sTargetPath &/ "dev"] WAIT 
+  
+  ' now, we need to run the lilo command itself
+  SHELL "chroot " & ClsGlobal.sTargetPath & " && /sbin/depmod -aq && lilo " WAIT 
+  
+END
+
+
 PUBLIC SUB GENERATE_LILO_OS_LIST()
   
   DIM ckb AS CheckBox
@@ -477,7 +526,10 @@ PUBLIC SUB GENERATE_LILO_OS_LIST()
   'load the header
     sHeader = File.Load(Temp("lilo.in"))
     sFullFile = sHeader & sBody
-    Message(sFullFile)
+    'Message(sFullFile)
+    IF Exist(ClsGlobal.sTargetPath &/ "etc/lilo.conf") THEN MOVE ClsGlobal.sTargetPath &/ "etc/lilo.conf" TO ClsGlobal.sTargetPath &/ "etc/lilo.old"
+    
+    File.Save(ClsGlobal.sTargetPath &/ "etc/lilo.conf", Trim(sFullFile))
 END
 
 
@@ -575,7 +627,7 @@ PUBLIC FUNCTION Get_OS_Boot_Params(sOsRoot AS String) AS String
         
 END
 
-PUBLIC FUNCTION CHECK_LILO_VALUES() AS Integer
+PUBLIC FUNCTION CHECK_LILO_VALUES(bquiet AS Boolean) AS Integer
   
   ' will return 0 for clear
   ' 1 for error
@@ -583,21 +635,23 @@ PUBLIC FUNCTION CHECK_LILO_VALUES() AS Integer
   DIM cb AS CheckBox
   DIM sTag AS String = Conf0.TsOsList.Current.Text
     IF NOT (Conf0.cbDefBoot.tag) THEN 
+      IF bquiet = FALSE THEN 
       Message.Error(("You must select one operating system to be started by default"))
+      END IF
         FOR EACH cb IN Conf0.objDefOs
           IF cb.Tag = sTag THEN 
-            Balloon.Error(("Check this box to make this your default operating system, or select another tab."), cb, cb.Left + 24)
+            IF bquiet = FALSE THEN Balloon.Error(("Check this box to make this your default operating system, or select another tab."), cb, cb.Left + 24)
           END IF
         NEXT 
       RETURN 1
     END IF
   FOR EACH tb IN Conf0.objNames
     FOR EACH tb1 IN Conf0.objNames
-      IF tb.Text = tb1.Text THEN 
-        Message.Error(("Found duplicate operating system names. Please use unique labels for each menu entry"))
+      IF tb <> tb1 AND IF tb.Text = tb1.Text THEN 
+        IF bquiet = FALSE THEN Message.Error(("Found duplicate operating system names. Please use unique labels for each menu entry"))
           FOR EACH tb2 IN Conf0.objNames
             IF tb2.Tag = sTag THEN 
-              Balloon.Error(("Check these boxes to make sure they have unique names"), tb2, tb2.Left + 24)
+              IF bquiet = FALSE THEN Balloon.Error(("Check these boxes to make sure they have unique names"), tb2, tb2.Left + 24)
             END IF
           NEXT 
         RETURN 1

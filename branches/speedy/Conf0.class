@@ -231,6 +231,7 @@ PUBLIC SUB Form_Open()
   MdlBootMngr.Display_Bootmanager_Target_Options(ME.cbTarget)
   ME.PROBE_SYSTEM_FOR_OS("lilo")
   
+  ME.Timer1.Enabled = TRUE  
 
 END
 
@@ -241,7 +242,21 @@ PUBLIC FUNCTION GetNext() AS String
 END
 PUBLIC SUB OnExit()
   
-  
+    IF MdlBootMngr.CHECK_LILO_VALUES(FALSE) > 0 THEN 
+      RETURN 
+      STOP EVENT 
+    END IF
+  MdlBootMngr.GENERATE_LILO_HEADER()
+  MdlBootMngr.GENERATE_LILO_OS_LIST()
+  ' after that's done, we need to run lilo. The config file has already been saved to /mnt/target/etc/lilo.conf
+    IF Exist(ClsGlobal.sTargetPath &/ "etc" &/ "lilo.conf") THEN 
+      MdlBootMngr.SETUP_LILO_BOOT_MANAGER()
+      PRINT " \\ --> Lilo boot manager installed successfully."
+    ELSE 
+      DEBUG ClsGlobal.sTargetPath &/ "etc/lilo.conf not found...cannot install lilo."
+      RETURN 
+    END IF
+    
   
 END
 PUBLIC SUB StartUp()
@@ -379,6 +394,8 @@ PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
   DIM sKernel, sInitrd, sAppendLine AS String
   DIM sBootargs AS String
   
+  SHELL "/bin/os-prober > /tmp/os.lst"
+  
   sOsList = Split(Trim(File.Load("/tmp/os.lst")), gb.NewLine)
     FOR i = 0 TO sOsList.Max
       TsOsList.Index = TsOsList.Count - 1
@@ -398,7 +415,7 @@ PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
           IF sType LIKE "linux" THEN 
             ' this function will return an array separated by "," in this order
             ' /path/to/kernel, /path/to/initrd, appendline here
-            
+              SHELL "/bin/linux-boot-prober " & sRoot & " >/tmp/bootargs.lst" WAIT ' we need to hunt these arguments for every OS found
             sBootargs = MdlBootMngr.Get_OS_Boot_Params(sRoot)
               
               IF NOT (sBootargs) THEN 
@@ -553,6 +570,16 @@ PUBLIC SUB DefOS_Click()
       cbDefBoot.Tag = tb.Text
     END IF
   NEXT 
+  IF LAST.value = FALSE THEN 
+    FOR EACH tb IN objNames
+      IF tb.Tag = LAST.tag THEN 
+        IF cbDefBoot.Tag = tb.Text THEN 
+          cbDefBoot.Tag = ""
+        END IF
+      END IF
+    NEXT 
+  END IF
+    
     
     
 
@@ -561,9 +588,7 @@ END
 
 PUBLIC SUB TLoSlIST_MouseDown()
   
-  IF MdlBootMngr.CHECK_LILO_VALUES() > 0 THEN RETURN 
-  MdlBootMngr.GENERATE_LILO_HEADER()
-  MdlBootMngr.GENERATE_LILO_OS_LIST()
+
 
 END
 PUBLIC SUB OsNameBox_KeyRelease()
@@ -579,3 +604,9 @@ PUBLIC SUB OsNameBox_KeyRelease()
   
 END
 
+
+PUBLIC SUB Timer1_Timer()
+
+  ClsGlobal.fRunningMainForm.btnext.enabled = MdlBootMngr.CHECK_LILO_VALUES(TRUE) < 1
+  
+END

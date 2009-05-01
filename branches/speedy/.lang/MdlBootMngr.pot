@@ -54,19 +54,19 @@ msgstr ""
 msgid "Bootsector of"
 msgstr ""
 
-#: MdlBootMngr.module:586
+#: MdlBootMngr.module:587
 msgid "You must select one operating system to be started by default"
 msgstr ""
 
-#: MdlBootMngr.module:589
+#: MdlBootMngr.module:591
 msgid "Check this box to make this your default operating system, or select another tab."
 msgstr ""
 
-#: MdlBootMngr.module:597
+#: MdlBootMngr.module:599
 msgid "Found duplicate operating system names. Please use unique labels for each menu entry"
 msgstr ""
 
-#: MdlBootMngr.module:600
+#: MdlBootMngr.module:602
 msgid "Check these boxes to make sure they have unique names"
 msgstr ""
 
