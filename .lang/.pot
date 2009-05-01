@@ -54,102 +54,102 @@ msgstr ""
 msgid "Bootsplash Extra High"
 msgstr ""
 
-#: Conf0.class:336 Step1.class:433 Step3a1.class:22 Step3a1a.class:186
+#: Conf0.class:337 Step1.class:433 Step3a1.class:22 Step3a1a.class:186
 #: Step7a.class:143
 msgid "WARNING:"
 msgstr ""
 
-#: Conf0.class:336
+#: Conf0.class:337
 msgid "Selecting this option will bypass your boot manager configuration."
 msgstr ""
 
-#: Conf0.class:336
+#: Conf0.class:337
 msgid ""
 "You may not be able to start your VectorLinux installation. Do not choose "
 "this option"
 msgstr ""
 
-#: Conf0.class:336
+#: Conf0.class:337
 msgid "unless you are fully aware of what you are doing."
 msgstr ""
 
-#: Conf0.class:406
+#: Conf0.class:407
 msgid "Unable to find boot arguments for OS in"
 msgstr ""
 
-#: Conf0.class:413
+#: Conf0.class:414
 msgid "Offer"
 msgstr ""
 
-#: Conf0.class:413
+#: Conf0.class:414
 msgid "as a bootable choice"
 msgstr ""
 
-#: Conf0.class:449
+#: Conf0.class:450
 msgid "Title"
 msgstr ""
 
-#: Conf0.class:471
+#: Conf0.class:472
 msgid "Initial RAM Disk"
 msgstr ""
 
-#: Conf0.class:527
+#: Conf0.class:528
 msgid "Include this Operating System in boot menu"
 msgstr ""
 
-#: Conf0.class:536
+#: Conf0.class:537
 msgid "Boot this operating system by default"
 msgstr ""
 
-#: Conf0.class:628
+#: Conf0.class:646
 msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0.class:644
+#: Conf0.class:662
 msgid "Select system boot manager to use"
 msgstr ""
 
-#: Conf0.class:653
+#: Conf0.class:671
 msgid "LILO"
 msgstr ""
 
-#: Conf0.class:660
+#: Conf0.class:678
 msgid "GRUB"
 msgstr ""
 
-#: Conf0.class:666
+#: Conf0.class:684
 msgid "NONE"
 msgstr ""
 
-#: Conf0.class:675
+#: Conf0.class:693
 msgid "Boot Menu Options"
 msgstr ""
 
-#: Conf0.class:685
+#: Conf0.class:703
 msgid "Target"
 msgstr ""
 
-#: Conf0.class:697
+#: Conf0.class:715
 msgid "Video Resolution"
 msgstr ""
 
-#: Conf0.class:716
+#: Conf0.class:734
 msgid "Prompt Time Out"
 msgstr ""
 
-#: Conf0.class:727
+#: Conf0.class:745
 msgid "Seconds"
 msgstr ""
 
-#: Conf0.class:734
+#: Conf0.class:752
 msgid "Boot Default"
 msgstr ""
 
-#: Conf0.class:754
+#: Conf0.class:775
 msgid "DETECTED OPERATING SYSTEMS."
 msgstr ""
 
-#: Conf0.class:770
+#: Conf0.class:791
 msgid "Tab 0"
 msgstr ""
 
@@ -568,23 +568,23 @@ msgstr ""
 msgid "Bootsector of"
 msgstr ""
 
-#: MdlBootMngr.module:586
+#: MdlBootMngr.module:587
 msgid "You must select one operating system to be started by default"
 msgstr ""
 
-#: MdlBootMngr.module:589
+#: MdlBootMngr.module:591
 msgid ""
 "Check this box to make this your default operating system, or select another "
 "tab."
 msgstr ""
 
-#: MdlBootMngr.module:597
+#: MdlBootMngr.module:599
 msgid ""
 "Found duplicate operating system names. Please use unique labels for each "
 "menu entry"
 msgstr ""
 
-#: MdlBootMngr.module:600
+#: MdlBootMngr.module:602
 msgid "Check these boxes to make sure they have unique names"
 msgstr ""
 
