@@ -119,208 +119,6 @@ DIM sres AS String
   
   
 END
-' PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabStrip AS TabStrip)
-'   
-'   DIM i AS Integer
-'   DIM tb AS TextBox
-'   DIM tl AS TextLabel
-'   DIM cb AS CheckBox
-'   DIM hb AS HBox
-'   DIM comb AS ComboBox
-'   
-'   IF NOT sLinux OR Len(Trim(sLinux)) <= 0 THEN RETURN 
-'   'Message(sLinux)
-'   IF sLinuxRoot = ClsGlobal.sRoot THEN ' This is the just installed linux
-'     i = 0
-'       WITH objTabStrip
-'         .Index = i
-'         .Text = "VectorLinux"
-'       END WITH 
-'   ELSE 
-'   i = objTabStrip.Count - 1
-'     WITH objTabStrip
-'       .Index = i
-'       .Text = sLinux
-'     END WITH 
-'   END IF
-'   
-'   tl = NEW TextLabel(objTabStrip) AS "Banner"
-'     WITH tl
-'       .Text = ("Installation found in") & Space(1) & sLinuxRoot
-'       .Height = 24
-'       .Alignment = Align.Left
-'       .Width = 200
-'       .Expand = TRUE
-'       '.Border = Border.Plain
-'       '.AutoResize = TRUE
-'       .Move(4, 4)
-'     END WITH 
-'   hb = NEW HBox(objTabStrip) ' separator space
-'     WITH hb
-'       .Height = 16
-'       .Width = 12
-'       .Expand = TRUE
-'     END WITH 
-'   cb = NEW CheckBox(objTabStrip) ' Inlcude/Exclude OS from boot menu
-'     WITH cb
-'       .Expand = TRUE
-'       .Text = ("Include in boot menu")
-'       .Value = TRUE
-'       .Height = 24
-'       .Tag = sLinuxRoot
-'     END WITH 
-'     objChecks.Add(cb)
-'   hb = NEW HBox(objTabStrip) ' separator space
-'     WITH hb
-'       .Height = 12
-'       .Expand = TRUE
-'     END WITH 
-'   hb = NEW HBox(objTabStrip) ' This will hold a few objects of it's own
-'     WITH hb
-'       .Height = 28
-'       .Expand = TRUE
-'       .Padding = 2
-'       .Spacing = 2
-'     END WITH 
-'   tl = NEW TextLabel(hb) ' Name label
-'     WITH tl
-'       .Text = ("Name")
-'       .Expand = FALSE
-'       .Width = 200
-'       .Adjust()
-'       .AutoResize = TRUE
-'       .Height = .Parent.Height
-'       .Alignment = Align.Left
-'     END WITH 
-'   tb = NEW TextBox(hb) AS "tbOsLabel" ' Name entry box
-'     WITH tb
-'       .Expand = TRUE
-'       .Height = .Parent.Height
-'       .Text = sLinux '  default to the distro found
-'       .Tag = sLinuxRoot
-'     END WITH 
-'     objNames.Add(tb)
-'   tl = NEW TextLabel(hb) ' initrd label
-'     WITH tl
-'       .text = ("Initial RAM disk image")
-'       .Alignment = Align.Right
-'       .Height = .Parent.Height
-'       .Expand = TRUE
-'     END WITH 
-'     
-'   comb = NEW ComboBox(hb) ' initrd selection combobox
-'     WITH comb
-'       .Height = .Parent.Height
-'       .Expand = TRUE
-'       .READonly = TRUE
-'       .Tag = sLinuxRoot
-'     END WITH 
-'       ' populate the initrd box
-'       'Message(sLinuxRoot)
-'         ME.find_initrds_for_this_linux(sLinuxRoot, comb) ' populate initrd selection
-'         
-'     objinitrds.Add(comb)
-'   hb = NEW HBox(objTabStrip) ' blank space separator
-'   hb.Height = 8
-'   hb.Expand = TRUE
-'   tl = NEW TextLabel(objTabStrip) ' append line textlabel
-'     WITH tl
-'       .Text = ("Kernel boot options")
-'       .Height = 24
-'       .Width = 200
-'       .Alignment = Align.Left  objappends = NEW Object[]
-  ' objChecks = NEW Object[]
-  ' objinitrds = NEW Object[]
-  ' objNames = NEW Object[]
-  
-'       .Expand = FALSE
-'       .AutoResize = TRUE
-'     END WITH 
-'   tb = NEW TextBox(objTabStrip) ' append input line
-'     WITH tb
-'       .Text = "splash=silent"
-'       .Height = 24
-'       .Expand = TRUE
-'       .Tag = sLinuxRoot
-'     END WITH 
-'       objappends.Add(tb)
-'     
-'     ' ======================= ONLY FOR THE OS WE JUST INSTALLED ===============================
-'   IF sLinuxRoot = ClsGlobal.sRoot THEN 
-'     hb = NEW HBox(objTabStrip) ' yet another separator
-'       WITH hb
-'         .Expand = TRUE
-'         .Height = 8
-'       END WITH 
-'     cb = NEW CheckBox(objTabStrip) AS "bCLIOption"
-'       WITH cb
-'         .Value = TRUE
-'         .Text = ("Add option to boot this operating system into text mode")
-'         .Height = 24
-'         .Expand = TRUE
-'         .Tag = sLinuxRoot
-'       END WITH 
-'     ' hb = NEW HBox(objTabStrip)
-'     '   hb.Height = 4
-'     '   hb.Expand = TRUE
-'       
-'   END IF
-'     objTabStrip.Refresh()
-'   
-'       
-'   
-' END
-
-
-' PUBLIC SUB List_Other_Linuxes(objTabStrip AS TabStrip) ' tell me where you want the results.
-  
-'   DIM sDump, sPartitions, sPart AS String
-'   DIM sPartList AS String[]
-'   DIM i AS Integer
-'   DIM sOutcome AS String
-'   
-'   objappends = NEW Object[]
-'   objChecks = NEW Object[]
-'   objinitrds = NEW Object[]
-'   objNames = NEW Object[]
-'   
-'   bScanned = TRUE
-'               'Message(ClsGlobal.sRoot)
-' '            Message(Trim(sPartList[i]))
-'   
-'   ' First, and foremost, we will list the recently isntalled VectorLinux
-'     'populate_linux_entry("VectorLinux", ClsGlobal.sRoot, objTabStrip) ' This will list the newly isntall VL OS
-'   ' Now list all other linuxes =================================================
-'       SHELL "probepart | grep \"^/dev\" | grep -vi swap | grep -i linux | tr -s \' \' | cut -f 1 -d \' \'" TO sDump
-'         sDump = Trim(sDump)
-'           IF Len(sDump) <= 0 THEN RETURN ' nothing found, VL is the only distro in this box ... 
-'         sPartList = Split(sDump, gb.NewLine)
-'           FOR i = 0 TO sPartList.Max
-'             sPart = Trim(Right(sPartList[i], Len(sPartList[i]) - RInStr(sPartList[i], "/")))
-' 
-'               'IF Trim(ClsGlobal.sRoot) <> Trim(sPartList[i]) THEN 
-'                 'sOutcome = Find_Linux(Trim(sPartList[i]))
-'                 'Message(sOutcome)
-'               ' will only list the linux IF one IS present
-'                 'IF Trim(sPartList[i]) <> Trim(ClsGlobal.sRoot) THEN
-'                 'IF Find_Linux(Trim(sPartList[i])) <> "None" THEN 
-'                 sOutcome = Find_Linux(Trim(sPartList[i]))
-'                   IF sOutcome AND sOutcome <> "None" THEN 
-'                   'INC objTabStrip.Count
-'                   objTabStrip.Index = objTabStrip.Count - 1
-'                   populate_linux_entry(sOutcome, Trim(sPartList[i]), objTabStrip)
-'                   INC objTabStrip.Count
-'                 END IF
-'               'END IF
-'                 
-'           NEXT 
-'         DEC objTabStrip.Count ' remove the trailing blank tab from the tabstrip.
-'         
-'   
-'   ' now list all other Windows os's ============================================
-'     
-'   
-' END
 
 
 PUBLIC SUB find_initrds_for_this_linux(sLinuxRoot AS String, object AS ComboBox)
@@ -405,7 +203,7 @@ PUBLIC SUB GENERATE_LILO_HEADER()
 "# Begin listing OS Choices \n" 
 
     
-  sDefBoot = Conf0.cbDefBoot.Tag  
+  sDefBoot = ClsGlobal.sDefBoot
   iTimeOut = Conf0.SbTimeOut.Value * 10
   
   sOutput = "# LILO Configuration File \n" &
@@ -448,7 +246,7 @@ PUBLIC SUB SETUP_LILO_BOOT_MANAGER()
         IF cb.tag = tl.Name THEN sInitrd = cb.Text
 
       NEXT 
-      
+    END IF
       ' now that we got kernel and initrd, copy them over
       IF sKernel AND IF sInitrd THEN 
         SHELL "cp " & sKernel & Space(1) & ClsGlobal.sTargetPath &/ "boot"
@@ -560,48 +358,6 @@ PUBLIC SUB Display_Bootmanager_Target_Options(objCB AS ComboBox)
   
 END
 
-' PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
-'   
-'   DIM sDump, sOs, sRoot, sLongDesc, sType, sTitle AS String
-'   DIM i AS Integer
-'   DIM sOsList, sOsLine, sBootLine, sDumparr AS String[]
-'   DIM sKernel, sInitrd, sAppendLine AS String
-'   DIM sBootargs AS String
-'   
-'   sOsList = Split(Trim(File.Load("/tmp/os.lst")), gb.NewLine)
-'     FOR i = 0 TO sOsList.Max
-'       sOsLine = Split(Trim(sOsList[i]), ":")
-'        sType = Trim(sOsLine[3])
-'        sLongDesc = Trim(sOsLine[1])
-'        sOs = Trim(sOsLine[2])
-'        sRoot = Trim(sOsLine[0])
-'         IF sBootManager LIKE "lilo" THEN 
-'           sTitle = sOs
-'         ELSE 
-'           sTitle = sLongDesc
-'         END IF
-'        
-'         '  Message(sLongDesc & " was found in " & sRoot)
-'         ' -= NOW I NEED TO GET THE KERNEL, INITRD AND APPEND LINES FOR THIS OS. =-
-'           IF sType LIKE "linux" THEN 
-'             ' this function will return an array separated by "," in this order
-'             ' /path/to/kernel, /path/to/initrd, appendline here
-'             
-'             sBootargs = Get_OS_Boot_Params(sRoot)
-'               IF NOT (sBootargs) THEN 
-'                 '= CAN NOT FIND BOOT ARGUMENTS FOR THIS OS ='
-'                   PRINT ("Unable to find boot arguments for OS in") & Space(1) & sRoot
-'                 RETURN 
-'               ELSE 
-'                 Message(sTitle & "<br>" & sBootargs)
-'               END IF
-'               
-'           END IF
-'             
-'     NEXT 
-'   
-' END
-
 PUBLIC FUNCTION Get_OS_Boot_Params(sOsRoot AS String) AS String
   
   DIM $kern, $initrd, $append, sDump AS String
@@ -614,11 +370,17 @@ PUBLIC FUNCTION Get_OS_Boot_Params(sOsRoot AS String) AS String
   SHELL "cat " & $file & " | grep ^" & sOsRoot TO sDump
     sDump = Trim(sDump)
       $dumparr = Split(sDump, gb.NewLine)
+      IF NOT ($dumparr) THEN RETURN 
       ' always grab the first line only for each os
       $line = Trim($dumparr[0])
         IF NOT ($line) THEN RETURN 
-      $append = Right($line, Len($line) - InStr($line, "append") + 1) & "\""
+
       $linearr = Split($line, ":")
+                IF InStr($line, "append") THEN 
+            $append = Right($line, Len($line) - InStr($line, "append") + 1) & "\"" ' this works for LILO booted os's only.
+          ELSE 
+            $append = Trim($linearr[5]) ' for grub botted os's
+          END IF
         $kern = Trim($linearr[3])
         $initrd = Trim($linearr[4])
         
@@ -634,17 +396,23 @@ PUBLIC FUNCTION CHECK_LILO_VALUES(bquiet AS Boolean) AS Integer
   DIM tb, tb1, tb2 AS TextBox
   DIM cb AS CheckBox
   DIM sTag AS String = Conf0.TsOsList.Current.Text
-    IF NOT (Conf0.cbDefBoot.tag) THEN 
-      IF bquiet = FALSE THEN 
-      Message.Error(("You must select one operating system to be started by default"))
-      END IF
-        FOR EACH cb IN Conf0.objDefOs
-          IF cb.Tag = sTag THEN 
-            IF bquiet = FALSE THEN Balloon.Error(("Check this box to make this your default operating system, or select another tab."), cb, cb.Left + 24)
+    IF NOT (ClsGlobal.sDefBoot) THEN 
+          IF bquiet = FALSE THEN 
+            Message.Error(("You must select one operating system to be started by default"))
           END IF
-        NEXT 
+        ' FOR EACH cb IN Conf0.objDefOs
+        '   IF cb.Tag = sTag THEN 
+        '     IF bquiet = FALSE THEN 
+        '       Balloon.Error(("Check this box to make this your default operating system, or select another tab."), cb, cb.Left + 24)
+        '       'RETURN 1
+        '     END IF
+        '   END IF
+        ' NEXT 
+        'DEBUG "No default OS selected"
+        
       RETURN 1
     END IF
+  IF Conf0.objNames.Count > 1 THEN 
   FOR EACH tb IN Conf0.objNames
     FOR EACH tb1 IN Conf0.objNames
       IF tb <> tb1 AND IF tb.Text = tb1.Text THEN 
@@ -658,7 +426,7 @@ PUBLIC FUNCTION CHECK_LILO_VALUES(bquiet AS Boolean) AS Integer
       END IF
     NEXT 
   NEXT 
-    
+END IF
+    RETURN 0
   
 END
-

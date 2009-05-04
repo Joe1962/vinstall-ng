@@ -35,9 +35,9 @@ PUBLIC SUB Form_Open()
 END
 PUBLIC FUNCTION GetNext() AS String
   
-
-  ClsGlobal.fRunningMainForm.listview1["Step4"].Picture = MdlStartUp.pNow
-  ClsGlobal.fRunningMainForm.listview1["Step3"].picture = MdlStartUp.pDone
+  MdlMain.ADVANCE_STATUS_TREE("Step3", "Step4")
+  ' ClsGlobal.fRunningMainForm.listview1["Step4"].Picture = MdlStartUp.pNow
+  ' ClsGlobal.fRunningMainForm.listview1["Step3"].picture = MdlStartUp.pDone
   
   
   RETURN "Conf0"

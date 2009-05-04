@@ -14,27 +14,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Conf1.class:141
+#: Conf1.class:144
 msgid "Regional Settings"
 msgstr ""
 
-#: Conf1.class:154
+#: Conf1.class:157
 msgid "Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way."
 msgstr ""
 
-#: Conf1.class:170
+#: Conf1.class:173
 msgid "Choose the correct timezone for the area in which you live."
 msgstr ""
 
-#: Conf1.class:181
+#: Conf1.class:184
 msgid "ComboBox1"
 msgstr ""
 
-#: Conf1.class:183
+#: Conf1.class:186
 msgid "LocalTime"
 msgstr ""
 
-#: Conf1.class:183
+#: Conf1.class:186
 msgid "UTC"
 msgstr ""
 

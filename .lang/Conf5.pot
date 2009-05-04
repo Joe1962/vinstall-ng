@@ -14,19 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Conf5.class:33
+#: Conf5.class:35
 msgid "Service"
 msgstr ""
 
-#: Conf5.class:34
+#: Conf5.class:36
 msgid "Description"
 msgstr ""
 
-#: Conf5.class:124
+#: Conf5.class:126
 msgid "System Serices"
 msgstr ""
 
-#: Conf5.class:145
+#: Conf5.class:147
 msgid "Select system services to run on start-up"
 msgstr ""
 

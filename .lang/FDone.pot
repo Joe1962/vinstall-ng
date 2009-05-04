@@ -34,11 +34,11 @@ msgstr ""
 msgid "to restart your computer now."
 msgstr ""
 
-#: FDone.class:73
+#: FDone.class:72
 msgid "Installation Complete"
 msgstr ""
 
-#: FDone.class:90
+#: FDone.class:89
 msgid "About your VectorLinux installation"
 msgstr ""
 

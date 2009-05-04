@@ -232,6 +232,13 @@ PUBLIC SUB Form_Open()
   ME.PROBE_SYSTEM_FOR_OS("lilo")
   
   ME.Timer1.Enabled = TRUE  
+  
+  ' Update status tree
+    MdlMain.ADVANCE_STATUS_TREE("Step4", "Step5")
+    MdlMain.ADVANCE_STATUS_TREE("Step5", "Step6")
+    'ClsGlobal.fRunningMainForm.listview1["Step4"].picture = MdlStartUp.pDone
+    'ClsGlobal.fRunningMainForm.listview1["Step5"].picture = MdlStartUp.pDone
+    'ClsGlobal.fRunningMainForm.listview1["Step6"].picture = MdlStartUp.pNow
 
 END
 
@@ -241,6 +248,8 @@ PUBLIC FUNCTION GetNext() AS String
   
 END
 PUBLIC SUB OnExit()
+  
+  IF rbNone.Value = TRUE THEN RETURN 
   
     IF MdlBootMngr.CHECK_LILO_VALUES(FALSE) > 0 THEN 
       RETURN 
@@ -350,6 +359,8 @@ PUBLIC SUB rbNone_Click()
     ("You may not be able to start your VectorLinux installation. Do not choose this option") & "<br>" &
     ("unless you are fully aware of what you are doing."))
   END IF
+  Timer1.Enabled = FALSE
+  ClsGlobal.fRunningMainForm.btnext.enabled = TRUE
   ME.Toggle_window_controls(FALSE)
 
 END
@@ -374,6 +385,7 @@ PUBLIC SUB rbLilo_Click()
   DIM i AS Integer
   DIM $ob AS Object
   ME.Toggle_window_controls(TRUE)
+  
     FOR i = 0 TO TsOsList.Count - 1 
         FOR EACH $ob IN TsOsList[i].Children
           $ob.Delete
@@ -382,7 +394,7 @@ PUBLIC SUB rbLilo_Click()
     NEXT 
     TsOsList.Count = 1
   ME.PROBE_SYSTEM_FOR_OS(LCase(LAST.text))
-  
+  Timer1.Enabled = TRUE
 
 END
 
@@ -562,19 +574,25 @@ PUBLIC SUB DefOS_Click()
   
   DIM cb AS CheckBox
   DIM tb AS TextBox
+  
+  IF objDefOs.Count > 1 THEN 
     FOR EACH cb IN objDefOs
       IF cb <> LAST THEN cb.Value = FALSE
     NEXT
+  END IF
   FOR EACH tb IN objNames
     IF tb.Tag = LAST.tag THEN 
-      cbDefBoot.Tag = tb.Text
+      'cbDefBoot.Tag = tb.Text
+      ClsGlobal.sDefBoot = tb.Text
     END IF
   NEXT 
+  'END IF
   IF LAST.value = FALSE THEN 
     FOR EACH tb IN objNames
       IF tb.Tag = LAST.tag THEN 
         IF cbDefBoot.Tag = tb.Text THEN 
-          cbDefBoot.Tag = ""
+        IF ClsGlobal.sDefBoot = tb.Text THEN ClsGlobal.sDefBoot = ""
+        '  cbDefBoot.Tag = ""
         END IF
       END IF
     NEXT 
@@ -608,5 +626,7 @@ END
 PUBLIC SUB Timer1_Timer()
 
   ClsGlobal.fRunningMainForm.btnext.enabled = MdlBootMngr.CHECK_LILO_VALUES(TRUE) < 1
+  'DEBUG "Timer tick"
+  'PRINT MdlBootMngr.CHECK_LILO_VALUES(TRUE)
   
 END

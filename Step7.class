@@ -18,8 +18,9 @@ PUBLIC SUB Form_Open()
 
   ME.tlbanner.Text = "<h2>" & ("Select Installation Mode") & "</h2>"
   
-  ClsGlobal.fRunningMainForm.listview1["Step2"].picture = MdlStartUp.pDone
-  ClsGlobal.fRunningMainForm.listview1["Step3"].picture = MdlStartUp.pNow
+  MdlMain.ADVANCE_STATUS_TREE("Step2", "Step3")
+  ' ClsGlobal.fRunningMainForm.listview1["Step2"].picture = MdlStartUp.pDone
+  ' ClsGlobal.fRunningMainForm.listview1["Step3"].picture = MdlStartUp.pNow
 
 END
 

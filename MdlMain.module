@@ -216,3 +216,11 @@ PUBLIC FUNCTION CREATE_NEW_USER_ACCOUNT(sUsrLogIn AS String, sUsrRlName AS Strin
   
 END
 
+PUBLIC SUB ADVANCE_STATUS_TREE(sPrev AS String, sNow AS String)
+  
+  ClsGlobal.fRunningMainForm.listview1[sPrev].picture = MdlStartUp.pDone
+  ClsGlobal.fRunningMainForm.listview1[sNow].picture = MdlStartUp.pNow
+  
+END
+
+

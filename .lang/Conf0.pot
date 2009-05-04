@@ -54,99 +54,99 @@ msgstr ""
 msgid "Bootsplash Extra High"
 msgstr ""
 
-#: Conf0.class:337
+#: Conf0.class:360
 msgid "WARNING:"
 msgstr ""
 
-#: Conf0.class:337
+#: Conf0.class:360
 msgid "Selecting this option will bypass your boot manager configuration."
 msgstr ""
 
-#: Conf0.class:337
+#: Conf0.class:360
 msgid "You may not be able to start your VectorLinux installation. Do not choose this option"
 msgstr ""
 
-#: Conf0.class:337
+#: Conf0.class:360
 msgid "unless you are fully aware of what you are doing."
 msgstr ""
 
-#: Conf0.class:407
+#: Conf0.class:435
 msgid "Unable to find boot arguments for OS in"
 msgstr ""
 
-#: Conf0.class:414
+#: Conf0.class:442
 msgid "Offer"
 msgstr ""
 
-#: Conf0.class:414
+#: Conf0.class:442
 msgid "as a bootable choice"
 msgstr ""
 
-#: Conf0.class:450
+#: Conf0.class:478
 msgid "Title"
 msgstr ""
 
-#: Conf0.class:472
+#: Conf0.class:500
 msgid "Initial RAM Disk"
 msgstr ""
 
-#: Conf0.class:528
+#: Conf0.class:556
 msgid "Include this Operating System in boot menu"
 msgstr ""
 
-#: Conf0.class:537
+#: Conf0.class:565
 msgid "Boot this operating system by default"
 msgstr ""
 
-#: Conf0.class:646
+#: Conf0.class:680
 msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0.class:662
+#: Conf0.class:696
 msgid "Select system boot manager to use"
 msgstr ""
 
-#: Conf0.class:671
+#: Conf0.class:705
 msgid "LILO"
 msgstr ""
 
-#: Conf0.class:678
+#: Conf0.class:712
 msgid "GRUB"
 msgstr ""
 
-#: Conf0.class:684
+#: Conf0.class:718
 msgid "NONE"
 msgstr ""
 
-#: Conf0.class:693
+#: Conf0.class:727
 msgid "Boot Menu Options"
 msgstr ""
 
-#: Conf0.class:703
+#: Conf0.class:737
 msgid "Target"
 msgstr ""
 
-#: Conf0.class:715
+#: Conf0.class:749
 msgid "Video Resolution"
 msgstr ""
 
-#: Conf0.class:734
+#: Conf0.class:768
 msgid "Prompt Time Out"
 msgstr ""
 
-#: Conf0.class:745
+#: Conf0.class:779
 msgid "Seconds"
 msgstr ""
 
-#: Conf0.class:752
+#: Conf0.class:786
 msgid "Boot Default"
 msgstr ""
 
-#: Conf0.class:775
+#: Conf0.class:809
 msgid "DETECTED OPERATING SYSTEMS."
 msgstr ""
 
-#: Conf0.class:791
+#: Conf0.class:825
 msgid "Tab 0"
 msgstr ""
 
