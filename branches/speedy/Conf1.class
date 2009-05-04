@@ -23,6 +23,9 @@ PUBLIC SUB Form_Open()
       
       ' default the time zone to us/central
     ME.lbTmZone[ME.lbTmZone.Find("US/Central")].Selected = TRUE
+      
+      ' update status tree
+      MdlMain.ADVANCE_STATUS_TREE("Step6", "Step7")
 
 END
 

@@ -25,6 +25,8 @@ PUBLIC SUB Form_Open()
   END WITH 
   ClsGlobal.fRunningMainForm.btnext.enabled = FALSE
 
+'   update status tree
+  MdlMain.ADVANCE_STATUS_TREE("Step7", "Step8")
 END
 
 PUBLIC SUB Form_Resize()

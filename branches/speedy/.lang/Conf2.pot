@@ -34,27 +34,27 @@ msgstr ""
 msgid "DO NOT LEAVE THIS BLANK"
 msgstr ""
 
-#: Conf2.class:58
+#: Conf2.class:60
 msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
-#: Conf2.class:64
+#: Conf2.class:66
 msgid "Password was not set. See error log below"
 msgstr ""
 
-#: Conf2.class:132
+#: Conf2.class:134
 msgid "System Administrator Account"
 msgstr ""
 
-#: Conf2.class:149
+#: Conf2.class:151
 msgid "About the linux root account"
 msgstr ""
 
-#: Conf2.class:181
+#: Conf2.class:183
 msgid "Enter Passwrord"
 msgstr ""
 
-#: Conf2.class:198
+#: Conf2.class:200
 msgid "Re-enter Password"
 msgstr ""
 

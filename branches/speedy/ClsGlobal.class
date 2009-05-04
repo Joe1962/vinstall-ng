@@ -72,4 +72,6 @@ STATIC PUBLIC sPkgListToInstall AS String
 ' auto partition by shinking existing partitions
 STATIC PUBLIC lTotalMBforVL AS Long
 
+STATIC PUBLIC sDefBoot AS String
+
 

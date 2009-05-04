@@ -37,9 +37,10 @@ PUBLIC SUB Form_Open()
 END
 
 PUBLIC FUNCTION GetNext() AS String
-  
-  ClsGlobal.fRunningMainForm.listview1["Step1"].picture = MdlStartUp.pDone
-  ClsGlobal.fRunningMainForm.listview1["Step2"].picture = MdlStartUp.pNow
+
+  MdlMain.ADVANCE_STATUS_TREE("Step1", "Step2")
+  ' ClsGlobal.fRunningMainForm.listview1["Step1"].picture = MdlStartUp.pDone
+  ' ClsGlobal.fRunningMainForm.listview1["Step2"].picture = MdlStartUp.pNow
   IF ME.rbAutoPart.Value = TRUE THEN 
     
     RETURN "Step3a"

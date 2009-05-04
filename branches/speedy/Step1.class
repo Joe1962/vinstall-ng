@@ -107,8 +107,9 @@ END
 
 PUBLIC FUNCTION GetNext() AS String
   
-    ClsGlobal.fRunningMainForm.listview1["Step0"].picture = MdlStartUp.pDone
-    ClsGlobal.fRunningMainForm.listview1["Step1"].picture = MdlStartUp.pNow
+    MdlMain.ADVANCE_STATUS_TREE("Step0", "Step1")
+    ' ClsGlobal.fRunningMainForm.listview1["Step0"].picture = MdlStartUp.pDone
+    ' ClsGlobal.fRunningMainForm.listview1["Step1"].picture = MdlStartUp.pNow
   
   IF bcheckmedia.Value = TRUE THEN 
     RETURN "Step2"
