@@ -387,7 +387,7 @@ msgstr ""
 msgid "Setting"
 msgstr ""
 
-#: Conf3a.class:118 Conf5.class:36 Step7a.class:49 Step7b.class:28
+#: Conf3a.class:118 Step7a.class:49 Step7b.class:28
 msgid "Description"
 msgstr ""
 
@@ -438,16 +438,72 @@ msgstr ""
 msgid "Linux.net"
 msgstr ""
 
-#: Conf5.class:35
+#: Conf5.class:60
 msgid "Service"
 msgstr ""
 
-#: Conf5.class:126
-msgid "System Serices"
+#: Conf5.class:89
+msgid "System task scheduler"
 msgstr ""
 
-#: Conf5.class:147
-msgid "Select system services to run on start-up"
+#: Conf5.class:92
+msgid "Bluetooth device manager"
+msgstr ""
+
+#: Conf5.class:95
+msgid "Secure Shell remote access"
+msgstr ""
+
+#: Conf5.class:98
+msgid "Software update notifications"
+msgstr ""
+
+#: Conf5.class:101
+msgid "Wireless network scanner"
+msgstr ""
+
+#: Conf5.class:104
+msgid "Printing service"
+msgstr ""
+
+#: Conf5.class:107
+msgid "File in userspace daemon"
+msgstr ""
+
+#: Conf5.class:110
+msgid "Internet Super Server"
+msgstr ""
+
+#: Conf5.class:113
+msgid "RPC Port Mapper"
+msgstr ""
+
+#: Conf5.class:116
+msgid "Windows networking service"
+msgstr ""
+
+#: Conf5.class:119
+msgid "VMWare modules"
+msgstr ""
+
+#: Conf5.class:122
+msgid "Network interface manager"
+msgstr ""
+
+#: Conf5.class:125
+msgid "Enhanced network security"
+msgstr ""
+
+#: Conf5.class:128
+msgid "Mouse driver for Text Mode interface"
+msgstr ""
+
+#: Conf5.class:227
+msgid "System Services"
+msgstr ""
+
+#: Conf5.class:248
+msgid "Select the system services to be launched at start-up."
 msgstr ""
 
 #: FDone.class:23 FMain.class:317 FMain0.class:318
