@@ -18,27 +18,27 @@ msgstr ""
 msgid "Select Installation Mode"
 msgstr ""
 
-#: Step7.class:109
+#: Step7.class:113
 msgid "Full Install"
 msgstr ""
 
-#: Step7.class:119
+#: Step7.class:123
 msgid "Install everthing in the image (Fully Automated)"
 msgstr ""
 
-#: Step7.class:127
+#: Step7.class:131
 msgid "Customized"
 msgstr ""
 
-#: Step7.class:137
+#: Step7.class:141
 msgid "Select  the components you wish to install  (Advanced)"
 msgstr ""
 
-#: Step7.class:145
+#: Step7.class:149
 msgid "Minimal"
 msgstr ""
 
-#: Step7.class:155
+#: Step7.class:159
 msgid "Install the most minimal working confuguration (For older hardware)"
 msgstr ""
 

@@ -223,4 +223,232 @@ PUBLIC SUB ADVANCE_STATUS_TREE(sPrev AS String, sNow AS String)
   
 END
 
+PUBLIC FUNCTION PERFORM_PARTITIONING() AS Integer
+  
+  DIM sReqs AS String[] = Split(Trim(ClsGlobal.sVitalPartList), "|") ' partition list is a string separated by "|" (/dev/hda1-/mnt/point/-reiserfs|/dev/hda2-/mnt/point-ext3)
+  DIM sPart, sFmt, scommand AS String
+  DIM sPartEntry AS String[]
+  DIM i, iretval AS Integer
+  DIM $hproc AS Process
+  
+    FOR i = 0 TO sReqs.Max
+      sPart = Trim(Left(sReqs[i], Len("/dev/hda1")))
+      sFmt = Trim(Right(sReqs[i], Len(sReqs[i]) - RInStr(sReqs[i], "-")))
+        IF Trim(sFmt) THEN 
+          SELECT CASE Trim(sFmt)
+             CASE "ext2"
+                sCommand = "mke2fs -q " & sPart
+             CASE "ext3"
+                'sCommand = "mke2fs -q -j " & saddr
+                scommand = "mkfs.ext3 -1 -j " & sPart
+             CASE "reiserfs"
+                sCommand = "mkreiserfs --format 3.6 -q " & sPart
+             CASE "xfs"    
+                sCommand = "mkfs.xfs -f " & sPart
+             CASE "jfs"
+                sCommand = "mkfs.jfs -q " & sPart  
+             CASE "swap"
+              sCommand = "mkswap -L swap-space " & sPart
+          END SELECT 
+              DEBUG "Formatting " & sPart & " with " & sFmt
+            $hproc = SHELL scommand WAIT 
+              IF $hproc.Value > 1 THEN 
+                DEBUG sPart & " failed to format to " & sFmt
+                iretval = 1
+                BREAK 
+              ELSE 
+                DEBUG "Success!"
+              END IF
+      END IF
+    NEXT 
+    
+    IF NOT (ClsGlobal.sTargetPath) THEN ClsGlobal.sTargetPath = "/mnt/target"
+    ' =---------- MOUNT THE PARTITIONS NOW ----------------
+      SHELL "umount /mnt/target" WAIT 
+    IF iretval < 1 THEN ' if everything is OK, we should be mounting partitions here now.
+      TRY MKDIR "/mnt/target"
+        FOR i = 0 TO sReqs.Max
+          IF Trim(sReqs[i]) THEN 
+          'Message(sReqs[i])
+          sPartEntry = Split(sReqs[i], "-")
+            IF Trim(sPartEntry[2]) AND IF Exist(ClsGlobal.sTargetPath &/ sPartEntry[2]) = FALSE THEN TRY MKDIR ClsGlobal.sTargetPath &/ sPartEntry[2]
+              SELECT CASE Trim(sPartEntry[2])
+                CASE "/" 
+                  $hproc = SHELL "mount " & Trim(sPartEntry[0]) & Space(1) & ClsGlobal.sTargetPath & " > /dev/null" WAIT 
+                    IF $hproc.Value > 0 THEN 
+                      DEBUG sPartEntry[0] & " failed to mount to " & ClsGlobal.sTargetPath &/ sPartEntry[2]
+                      iretval = 1
+                      BREAK 
+                    ELSE 
+                      PRINT " + Mounted " & sPartEntry[0] & " to " & ClsGlobal.sTargetPath &/ sPartEntry[2]
+                    END IF
+                CASE ELSE 
+                  $hproc = SHELL "mount " & Trim(sPartEntry[0]) & ClsGlobal.sTargetPath &/ sPartEntry[2] & " > /dev/null" WAIT 
+                    IF $hproc.Value > 0 THEN 
+                      DEBUG sPartEntry[0] & " failed to mount to " & sPartEntry[2]
+                      iretval = 1
+                      BREAK 
+                    ELSE 
+                      PRINT " + Mounted " & sPartEntry[0] & " to " & ClsGlobal.sTargetPath &/ sPartEntry[2]
+                    END IF
+            END SELECT 
+       END IF
+      NEXT 
+                    
+  END IF         
+        
+    
+  RETURN iretval
+END
 
+
+PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, iInstallType AS Integer) AS Integer
+  
+  DIM $pkg, $bulk, $bulkfile, $file, $path AS String
+  DIM $BulkArr, $PkgArr, $filearr AS String[]
+  DIM $pkgcnt, i, ii, iii, ires AS Integer
+  DIM sDump AS String
+  ' Load file that defines package paths into a temp file
+  SHELL "cat /mnt/source/packages/CHECKSUMS.md5 | cut -f 2-10 -d \'.\'" TO sDump
+  File.Save(Temp("pkgpaths"), Trim(sDump))
+  
+  ClsGlobal.fRunningMainForm.btNext.enabled = FALSE
+    SELECT CASE iInstallType
+      CASE 0
+        GOTO FULL_INSTALL
+      CASE 1
+        ' perform partitioning as requested.
+        IF ME.PERFORM_PARTITIONING() > 0 THEN RETURN 
+       GOTO CUSTOM_INSTALL
+      CASE 2
+        GOTO MINIMAL_INSTALL
+    END SELECT 
+  
+  
+  
+  CUSTOM_INSTALL:
+    ' PRE-SET BULKS ARE IN CLSGLOBAL.SBULKLISTTOINSTALL
+      ' X11,LXDE,DEV,ETC
+    ' SOFTWARE SELECTION IN CLSGLOBAL.SPKGLISTTOINSTALL
+      ' PKG1,PKG2,PKG3,PKG4,ETC
+        $BulkArr = Split(Trim(ClsGlobal.sBulkListToInstall), ",")
+        $PkgArr = Split(Trim(ClsGlobal.sPkgListToInstall), ",")
+          
+        ' Get to total number of package to be installed... this will be used for the progressbar
+            FOR i = 0 TO $BulkArr.Max 
+              IF Trim($BulkArr[i]) THEN 
+              'PRINT "  -- Installing bulk-preset " & $BulkArr[i]
+                TRY $file = Trim(File.Load("/mnt/source/veclinux" &/ $BulkArr[i])) ' read definition file
+                 $filearr = Split(Trim($file), gb.NewLine)
+                  $pkgcnt = $pkgcnt + $filearr.Count
+              END IF
+            NEXT 
+              ' Add the number of packages individually selected to the count
+              $pkgcnt = $pkgcnt + $PkgArr.Count
+          
+          'This will loop through each bulk definition file, read it, and process it's contents.
+            FOR i = 0 TO $BulkArr.Max 
+              IF Trim($BulkArr[i]) THEN 
+              PRINT "  -- Installing bulk-preset " & $BulkArr[i]
+              TRY $file = Trim(File.Load("/mnt/source/veclinux" &/ $BulkArr[i])) ' read definition file
+                $filearr = Split($file, gb.NewLine)
+                  FOR ii = 0 TO $filearr.Max ' read each line in the file.
+                    INC iii
+                      ' install this package
+                          pbProg.Value = iii / $pkgcnt
+                          $path = ME.GET_PACKAGE_FULL_PATH($filearr[ii])
+                          IF $path THEN 
+                            IF Exist("/mnt/source/packages" &/ Trim($path)) THEN 
+                              tlStatus.Text = $path
+                                ires = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim($path))
+                                  IF ires > 0 THEN 
+                                    ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
+                                    RETURN 1
+                                    BREAK ' this will never get executed
+                                  END IF
+                            END IF
+                          END IF
+                    'WAIT 1
+                  NEXT 
+              END IF
+            NEXT 
+                
+        ' and now we do the packages. (THESE ARE LISTED IN THE 'OPTIONAL' BULK DEF)
+        DEBUG "  --- Installing optional individual packages"
+        $filearr = Split(ClsGlobal.sPkgListToInstall, ",")
+          FOR i = 0 TO $filearr.Max
+            $path = ME.GET_PACKAGE_FULL_PATH(Trim($filearr[i]))
+            INC iii
+            pbProg.Value = iii / $pkgcnt
+              IF Trim($path) THEN 
+                IF Exist("/mnt/source/packages" &/ Trim($path)) THEN 
+                  ires = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim($path))
+                    IF ires > 0 THEN 
+                      ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
+                      RETURN 1
+                    END IF
+                END IF
+              END IF
+                        
+                tlStatus.Text = "Optional package " & $path
+                
+            'WAIT 1
+          NEXT 
+          ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
+    RETURN 
+  
+  FULL_INSTALL:
+    Message("Full install not programmed yet")
+    RETURN 
+  MINIMAL_INSTALL:
+    Message("Minimal install not yet programmed")
+    RETURN 
+  
+END
+
+PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sFullPkgPath AS String) AS Integer
+  
+  DIM $hproc AS Process
+    
+    '$hproc = EXEC ["/sbin/installpkg ", "-R", ClsGlobal.sTargetPath, sFullPkgPath] WAIT 
+    $hproc = SHELL "/sbin/installpkg -R " & ClsGlobal.sTargetPath & Space(1) & sFullPkgPath WAIT 
+      IF $hproc.Value > 0 THEN 
+        DEBUG sFullPkgPath & Space(1) & "failed to install"
+        RETURN 1
+      END IF
+    RETURN 0
+  
+END
+
+
+
+PUBLIC FUNCTION GET_PACKAGE_FULL_PATH(sPkgname AS String) AS String
+  
+  DIM sList AS String[]
+  DIM sPkg, sShortname, sParentDir AS String
+  DIM sDump1, sDump, sRetval AS String
+  DIM i AS Integer
+  
+  sdump1 = Trim(File.Load(Temp("pkgpaths")))
+  sList = Split(Trim(sdump1), gb.NewLine)
+  
+    FOR i = 0 TO sList.Max
+     
+      IF InStr(sList[i], sPkgname) THEN 
+      sParentDir = Left(sList[i], RInStr(sList[i], "/"))
+      sPkg = Right(sList[i], Len(sList[i]) - Len(sParentDir))
+        SHELL "pkgname " & sPkg TO sDump
+          IF Trim(sdump) = Trim(sPkgname) THEN 
+            'PRINT "looking for " & sPkgname & Space(5) & sDump
+             sRetval = sList[i]
+             BREAK ' I've found a match... no need to keep looking
+          END IF
+      END IF
+    NEXT 
+    
+  IF Trim(sRetval) THEN 
+    RETURN Trim(sRetval)
+  ELSE 
+    DEBUG sPkgname & " not found"
+  END IF
+END

@@ -55,7 +55,7 @@ msgid "Bootsplash Extra High"
 msgstr ""
 
 #: Conf0.class:360 Step1.class:434 Step3a1.class:22 Step3a1a.class:186
-#: Step7a.class:143
+#: Step7a.class:144
 msgid "WARNING:"
 msgstr ""
 
@@ -498,11 +498,11 @@ msgstr ""
 msgid "Mouse driver for Text Mode interface"
 msgstr ""
 
-#: Conf5.class:227
+#: Conf5.class:221
 msgid "System Services"
 msgstr ""
 
-#: Conf5.class:248
+#: Conf5.class:242
 msgid "Select the system services to be launched at start-up."
 msgstr ""
 
@@ -1089,11 +1089,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:510 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:510 Step7a.class:144
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:510 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:510 Step7a.class:144
 msgid "No"
 msgstr ""
 
@@ -1394,27 +1394,27 @@ msgstr ""
 msgid "Select Installation Mode"
 msgstr ""
 
-#: Step7.class:109
+#: Step7.class:113
 msgid "Full Install"
 msgstr ""
 
-#: Step7.class:119
+#: Step7.class:123
 msgid "Install everthing in the image (Fully Automated)"
 msgstr ""
 
-#: Step7.class:127 Step8.class:137
+#: Step7.class:131 Step8.class:137
 msgid "Customized"
 msgstr ""
 
-#: Step7.class:137
+#: Step7.class:141
 msgid "Select  the components you wish to install  (Advanced)"
 msgstr ""
 
-#: Step7.class:145 Step8.class:139
+#: Step7.class:149 Step8.class:139
 msgid "Minimal"
 msgstr ""
 
-#: Step7.class:155
+#: Step7.class:159
 msgid "Install the most minimal working confuguration (For older hardware)"
 msgstr ""
 
@@ -1426,31 +1426,31 @@ msgstr ""
 msgid "Component"
 msgstr ""
 
-#: Step7a.class:143
+#: Step7a.class:144
 msgid ""
 "This component is a dependancy to any graphical user interface progam on the "
 "system"
 msgstr ""
 
-#: Step7a.class:143
+#: Step7a.class:144
 msgid ""
 "Choosing not to install this may result in a command-line (text mode) "
 "installation only"
 msgstr ""
 
-#: Step7a.class:143
+#: Step7a.class:144
 msgid "Are you sure you want to disable this conponent anyway?"
 msgstr ""
 
-#: Step7a.class:169 Step7b.class:183
+#: Step7a.class:170 Step7b.class:183
 msgid "Select All"
 msgstr ""
 
-#: Step7a.class:175 Step7b.class:181
+#: Step7a.class:176 Step7b.class:181
 msgid "Un-Select All"
 msgstr ""
 
-#: Step7a.class:235
+#: Step7a.class:236
 msgid ""
 "Major optional components available for installation. To select / un-select "
 "a component, click it's name or the box to the left of it's name."
@@ -1526,4 +1526,12 @@ msgstr ""
 msgid ""
 "Your VectorLinux installation is about to be performed as follows. If you "
 "need to make any changes, this is your last chance."
+msgstr ""
+
+#: Step9.class:22
+msgid "is being installed to your computer. Please wait."
+msgstr ""
+
+#: Step9.class:80
+msgid "Installation in progress"
 msgstr ""

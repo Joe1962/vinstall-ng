@@ -74,11 +74,11 @@ msgstr ""
 msgid "Mouse driver for Text Mode interface"
 msgstr ""
 
-#: Conf5.class:227
+#: Conf5.class:221
 msgid "System Services"
 msgstr ""
 
-#: Conf5.class:248
+#: Conf5.class:242
 msgid "Select the system services to be launched at start-up."
 msgstr ""
 

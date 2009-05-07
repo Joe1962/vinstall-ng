@@ -107,7 +107,8 @@ PUBLIC SUB Get_Bulk_Selection()
   DIM irow AS Integer
   DIM sList AS String
     FOR irow = 2 TO gvBulkSel.Rows.count - 1
-      IF gvBulkSel[irow, 3].Text LIKE "yes" THEN 
+      'IF gvBulkSel[irow, 3].Text LIKE "yes" THEN 
+      IF gvBulkSel[irow, 0].Picture = picyes THEN 
         sList = sList & Trim(gvBulkSel[irow, 1].Text) & ","
       END IF
     NEXT 
