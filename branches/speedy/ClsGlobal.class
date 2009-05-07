@@ -73,5 +73,5 @@ STATIC PUBLIC sPkgListToInstall AS String
 STATIC PUBLIC lTotalMBforVL AS Long
 
 STATIC PUBLIC sDefBoot AS String
-
+STATIC PUBLIC sInstallType AS String ' type of installation to be done (Full, Custom, Minimal)
 

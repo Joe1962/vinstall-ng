@@ -40,7 +40,7 @@ PUBLIC FUNCTION GetNext() AS String
   ' ClsGlobal.fRunningMainForm.listview1["Step3"].picture = MdlStartUp.pDone
   
   
-  RETURN "Conf0"
+  RETURN "Step9"
   
 END
 

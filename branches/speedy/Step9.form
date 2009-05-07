@@ -1,0 +1,62 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,73,48)
+  Text = ("")
+  Arrangement = Arrange.Row
+  { HPanel1 HPanel
+    MoveScaled(0,0,60,5)
+    Expand = True
+    { tlbanner TextLabel
+      MoveScaled(12,0,19,3)
+      Expand = True
+      Text = ("Installation in progress")
+    }
+    { Separator1 Separator
+      MoveScaled(13,4,25,1)
+      Expand = True
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(0,5,12,2)
+    Expand = True
+  }
+  { HBox2 HBox
+    MoveScaled(0,8,65,6)
+    Expand = True
+    Padding = 2
+    { tlInstallWarn TextLabel
+      MoveScaled(0,0,20,5)
+      Expand = True
+      Text = ("")
+      Alignment = Align.Left
+    }
+  }
+  { HBox3 HBox
+    MoveScaled(0,14,15,2)
+    Expand = True
+  }
+  { HBox4 HBox
+    MoveScaled(0,17,72,3.5)
+    Expand = True
+    Padding = 2
+    { tlCurrPkg TextLabel
+      MoveScaled(1,0,23,3.5)
+      Expand = True
+      Text = ("")
+    }
+  }
+  { HBox5 HBox
+    MoveScaled(0,21,7,2)
+    Expand = True
+  }
+  { HPanel2 HPanel
+    MoveScaled(0,23,73,3.25)
+    Expand = True
+    Padding = 2
+    { pbInstall ProgressBar
+      MoveScaled(0,0,21,3)
+      Expand = True
+    }
+  }
+}

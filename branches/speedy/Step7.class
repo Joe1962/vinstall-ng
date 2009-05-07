@@ -45,6 +45,10 @@ PUBLIC SUB StartUp()
 END
 PUBLIC SUB OnExit()
   
+  ' set the install type to clsglobal.
+  IF ME.rbFullInstall.Value = TRUE THEN ClsGlobal.sInstallType = rbFullInstall.Tag
+  IF ME.rbCustomInstall.Value = TRUE THEN ClsGlobal.sInstallType = rbCustomInstall.Tag
+  IF ME.rbMinimal.Value = TRUE THEN ClsGlobal.sInstallType = rbMinimal.Tag
   
   
 END
