@@ -251,6 +251,7 @@ PUBLIC FUNCTION PERFORM_PARTITIONING() AS Integer
               sCommand = "mkswap -L swap-space " & sPart
           END SELECT 
               DEBUG "Formatting " & sPart & " with " & sFmt
+              Step9.tlCurrPkg.Text = ("Formatting") & Space(1) & sPart & Space(1) & ("with") & Space(1) & sFmt
             $hproc = SHELL scommand WAIT 
               IF $hproc.Value > 1 THEN 
                 DEBUG sPart & " failed to format to " & sFmt
@@ -313,12 +314,14 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
   File.Save(Temp("pkgpaths"), Trim(sDump))
   
   ClsGlobal.fRunningMainForm.btNext.enabled = FALSE
+   ' perform partitioning as requested.
+   tlStatus.Text = ("Preparing system partitions")
+   IF ME.PERFORM_PARTITIONING() > 0 THEN RETURN 
+  
     SELECT CASE iInstallType
       CASE 0
         GOTO FULL_INSTALL
       CASE 1
-        ' perform partitioning as requested.
-        IF ME.PERFORM_PARTITIONING() > 0 THEN RETURN 
        GOTO CUSTOM_INSTALL
       CASE 2
         GOTO MINIMAL_INSTALL
@@ -355,11 +358,15 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
                   FOR ii = 0 TO $filearr.Max ' read each line in the file.
                     INC iii
                       ' install this package
-                          pbProg.Value = iii / $pkgcnt
+                       
                           $path = ME.GET_PACKAGE_FULL_PATH($filearr[ii])
                           IF $path THEN 
+                            'PRINT $path
                             IF Exist("/mnt/source/packages" &/ Trim($path)) THEN 
+                              PRINT $path
                               tlStatus.Text = $path
+                              pbProg.Value = iii / $pkgcnt ' supposed to update the progressbar
+                              WAIT 0.5
                                 ires = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim($path))
                                   IF ires > 0 THEN 
                                     ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
@@ -368,7 +375,8 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
                                   END IF
                             END IF
                           END IF
-                    'WAIT 1
+                    'WAIT 0.5
+                    'pbProg.Refresh
                   NEXT 
               END IF
             NEXT 
@@ -380,8 +388,9 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
             $path = ME.GET_PACKAGE_FULL_PATH(Trim($filearr[i]))
             INC iii
             pbProg.Value = iii / $pkgcnt
-              IF Trim($path) THEN 
+              IF $path THEN 
                 IF Exist("/mnt/source/packages" &/ Trim($path)) THEN 
+                  WAIT 0.5
                   ires = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim($path))
                     IF ires > 0 THEN 
                       ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
@@ -389,12 +398,13 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
                     END IF
                 END IF
               END IF
-                        
-                tlStatus.Text = "Optional package " & $path
+                        IF $path THEN tlStatus.Text = "Optional package " & $path
                 
             'WAIT 1
           NEXT 
+          Message.Info(("Installation is complete. Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue"))
           ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
+          tlStatus.Text = ("Installation complete... Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue.")
     RETURN 
   
   FULL_INSTALL:
@@ -409,9 +419,10 @@ END
 PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sFullPkgPath AS String) AS Integer
   
   DIM $hproc AS Process
+  DIM sBuff AS String
     
     '$hproc = EXEC ["/sbin/installpkg ", "-R", ClsGlobal.sTargetPath, sFullPkgPath] WAIT 
-    $hproc = SHELL "/sbin/installpkg -R " & ClsGlobal.sTargetPath & Space(1) & sFullPkgPath WAIT 
+    $hproc = SHELL "/sbin/installpkg -R " & ClsGlobal.sTargetPath & Space(1) & sFullPkgPath WAIT 'TO sBuff
       IF $hproc.Value > 0 THEN 
         DEBUG sFullPkgPath & Space(1) & "failed to install"
         RETURN 1

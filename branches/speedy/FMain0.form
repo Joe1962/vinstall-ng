@@ -71,7 +71,7 @@
       { btHelp Button
         MoveScaled(6,0,12,3)
         Text = ("Help")
-        Picture = Picture["icon:/small/help"]
+        Picture = Picture["icon:/16/help"]
       }
     }
     { Panel6 Panel

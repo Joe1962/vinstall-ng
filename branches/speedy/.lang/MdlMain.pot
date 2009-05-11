@@ -26,3 +26,31 @@ msgstr ""
 msgid "Failed to create user account. See error below."
 msgstr ""
 
+#: MdlMain.module:254
+msgid "Formatting"
+msgstr ""
+
+#: MdlMain.module:254
+msgid "with"
+msgstr ""
+
+#: MdlMain.module:318
+msgid "Preparing system partitions"
+msgstr ""
+
+#: MdlMain.module:405
+msgid "Installation is complete. Click"
+msgstr ""
+
+#: MdlMain.module:405
+msgid "to continue"
+msgstr ""
+
+#: MdlMain.module:407
+msgid "Installation complete... Click"
+msgstr ""
+
+#: MdlMain.module:407
+msgid "to continue."
+msgstr ""
+

@@ -244,8 +244,8 @@ msgstr ""
 msgid "When finished, Click"
 msgstr ""
 
-#: Conf3.class:47 Step3a1a.class:177 Step3a2.class:359 Step3a3a.class:72
-#: Step5.class:177
+#: Conf3.class:47 MdlMain.module:405 Step3a1a.class:177 Step3a2.class:359
+#: Step3a3a.class:72 Step5.class:177
 msgid "to continue"
 msgstr ""
 
@@ -648,6 +648,30 @@ msgstr ""
 
 #: MdlMain.module:193
 msgid "Failed to create user account. See error below."
+msgstr ""
+
+#: MdlMain.module:254
+msgid "Formatting"
+msgstr ""
+
+#: MdlMain.module:254
+msgid "with"
+msgstr ""
+
+#: MdlMain.module:318
+msgid "Preparing system partitions"
+msgstr ""
+
+#: MdlMain.module:405
+msgid "Installation is complete. Click"
+msgstr ""
+
+#: MdlMain.module:407
+msgid "Installation complete... Click"
+msgstr ""
+
+#: MdlMain.module:407
+msgid "to continue."
 msgstr ""
 
 #: MdlStartUp.module:42
@@ -1532,6 +1556,6 @@ msgstr ""
 msgid "is being installed to your computer. Please wait."
 msgstr ""
 
-#: Step9.class:80
+#: Step9.class:81
 msgid "Installation in progress"
 msgstr ""
