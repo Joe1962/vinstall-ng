@@ -23,7 +23,8 @@ PUBLIC SUB Form_Open()
   
   WAIT 1
   ME.Refresh
-  MdlMain.INSTALL_PACKAGES(ME.tlCurrPkg, ME.pbInstall, ClsGlobal.iInstallMethod)
+  WAIT 0.1
+  MdlMain.INSTALL_PACKAGES(tlcurrpkg, pbinstall, ClsGlobal.iInstallMethod)
 
 END
 PUBLIC FUNCTION GetNExt() AS String

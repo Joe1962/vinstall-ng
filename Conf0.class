@@ -452,7 +452,7 @@ PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
           END IF
             
     NEXT 
-  DEC TsOsList.Count ' remove trailing empty tab
+TRY DEC TsOsList.Count ' remove trailing empty tab
 END
 
 PUBLIC SUB Populate_linux_tab($OsRoot AS String, $Title AS String, $kernel AS String, $initrd AS String, $appendline AS String, sBootLoader AS String)
@@ -499,7 +499,7 @@ PUBLIC SUB Populate_linux_tab($OsRoot AS String, $Title AS String, $kernel AS St
         .Height = 28
         .Text = ("Initial RAM Disk")
         .Alignment = Align.Left
-        .Width = 100
+        .Width = 150
         .Expand = FALSE
       END WITH 
     $cb = NEW ComboBox($cont) '-------------------------- initrd combobox --------------
