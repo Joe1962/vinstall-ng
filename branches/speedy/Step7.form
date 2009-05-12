@@ -22,7 +22,7 @@
     Expand = True
   }
   { HPanel2 HPanel
-    MoveScaled(2,8,69,27)
+    MoveScaled(2,8,69,35)
     Expand = True
     { rbFullInstall RadioButton
       MoveScaled(1,2,17,3)
@@ -68,6 +68,27 @@
       Expand = True
       Text = ("Install the most minimal working confuguration (For older hardware)")
       Alignment = Align.TopLeft
+    }
+    { Panel4 Panel
+      MoveScaled(1,22,9,3.5)
+    }
+    { rbCliMin CheckBox
+      MoveScaled(12,22,50,3)
+      Visible = False
+      Tag = "DEV"
+      Expand = True
+      Text = ("Include Development Tools")
+    }
+    { Panel5 Panel GrpMinOpts
+      Name = "Panel5"
+      MoveScaled(1,25,9,3.5)
+    }
+    { rbMinDev CheckBox
+      MoveScaled(12,25,48,3)
+      Visible = False
+      Tag = "X11"
+      Expand = True
+      Text = ("Include Light-weight graphical environment")
     }
   }
 }
