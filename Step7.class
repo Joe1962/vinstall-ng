@@ -54,3 +54,42 @@ PUBLIC SUB OnExit()
 END
 
 
+
+PUBLIC SUB Panel4_MouseDown()
+
+  
+
+END
+
+PUBLIC SUB rbMinimal_Click()
+
+ME.rbCliMin.Visible = TRUE
+ME.rbMinDev.Visible = TRUE
+
+END
+
+PUBLIC SUB rbCustomInstall_Click()
+
+  ME.rbCliMin.Visible = FALSE
+ME.rbMinDev.Visible = FALSE
+
+END
+
+PUBLIC SUB rbFullInstall_Click()
+
+  ME.rbCliMin.Visible = FALSE
+ME.rbMinDev.Visible = FALSE
+
+END
+
+PUBLIC SUB rbCliMin_Click()
+
+  ClsGlobal.bInstallX11 = LAST.Value
+
+END
+
+PUBLIC SUB rbMinDev_Click()
+
+  ClsGlobal.bInstallDev = LAST.Value
+
+END

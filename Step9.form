@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,73,48)
+  MoveScaled(0,0,78,60)
   Text = ("")
   Arrangement = Arrange.Row
   { HPanel1 HPanel
@@ -18,26 +18,26 @@
     }
   }
   { HBox1 HBox
-    MoveScaled(0,5,12,2)
+    MoveScaled(0,5,12,1)
     Expand = True
   }
   { HBox2 HBox
-    MoveScaled(0,8,65,6)
+    MoveScaled(0,8,65,3.5)
     Expand = True
     Padding = 2
     { tlInstallWarn TextLabel
-      MoveScaled(0,0,20,5)
+      MoveScaled(0,0,20,3.5)
       Expand = True
       Text = ("")
       Alignment = Align.Left
     }
   }
   { HBox3 HBox
-    MoveScaled(0,14,15,2)
+    MoveScaled(0,12,15,1)
     Expand = True
   }
   { HBox4 HBox
-    MoveScaled(0,17,72,3.5)
+    MoveScaled(-1,14,72,3.5)
     Expand = True
     Padding = 2
     { tlCurrPkg TextLabel
@@ -47,16 +47,48 @@
     }
   }
   { HBox5 HBox
-    MoveScaled(0,21,7,2)
+    MoveScaled(0,18,7,1)
     Expand = True
   }
   { HPanel2 HPanel
-    MoveScaled(0,23,73,3.25)
+    MoveScaled(0,19,73,4)
     Expand = True
     Padding = 2
     { pbInstall ProgressBar
       MoveScaled(0,0,21,3)
       Expand = True
+    }
+    { HBox6 HBox
+      MoveScaled(0,3,7,1)
+      Expand = True
+    }
+  }
+  { Separator2 Separator
+    MoveScaled(19,24,27,2)
+    Expand = True
+  }
+  { hbBottomPanel HBox
+    MoveScaled(0,26,72,31)
+    Expand = True
+    Spacing = 4
+    Padding = 4
+    { Frame1 Frame
+      MoveScaled(1,1,33,29)
+      Expand = True
+      Text = ("Install Process")
+      { svInstallProc ScrollView
+        MoveScaled(1,3,31,24)
+        Expand = True
+        Arrangement = Arrange.Row
+        Spacing = 2
+        Padding = 2
+        Border = False
+      }
+    }
+    { Frame2 Frame
+      MoveScaled(37,1,33,28)
+      Expand = True
+      Text = ("The development Crew")
     }
   }
 }

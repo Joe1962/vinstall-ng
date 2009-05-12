@@ -14,7 +14,7 @@
 
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
-
+PUBLIC $objPboxes AS NEW Object[]
 PUBLIC $objUsrGroups AS NEW Object[]
 PRIVATE iUID AS Integer
 
@@ -302,6 +302,82 @@ PUBLIC FUNCTION PERFORM_PARTITIONING() AS Integer
   RETURN iretval
 END
 
+PUBLIC FUNCTION INSTALL_INITIAL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar) AS Integer
+  
+  ' This function will install the initial packages necessary for installation before anything else.
+  DIM sList AS String[] = ["/x/fontconfig-*.tlz"]
+  DIM sRes, sLine, $listarr AS String[]
+  DIM i, ii, iret, ires AS Integer
+  DIM hproc AS Process
+  DIM sDump, $path, $line, sPkg, MajorDesc, sFileList AS String
+  
+  
+  ' this part will isntall the bulks defined as REQUIRED
+    SHELL "cat /mnt/source/veclinux/VINSTALL.CONF | grep REQ:" TO sdump
+      sDump = Trim(sdump)
+      sRes = Split(sDump, gb.NewLine)
+        FOR i = 0 TO sRes.Max
+        $line = Right(sRes[i], Len(sRes[i]) - InStr(sRes[i], "-"))
+          $line = Replace($line, "\'", "")
+          sLine = Split($line, ":")
+          MajorDesc = sLine[3]
+          sPkg = sLine[1]
+            sFileList = Trim(File.Load("/mnt/source/veclinux" &/ Trim(sPKG)))
+            $listarr = Split(Trim(sFileList), gb.NewLine)
+              FOR ii = 0 TO $listarr.Max
+                $path = ME.GET_PACKAGE_FULL_PATH(Trim($listarr[ii]))
+                  IF $path THEN 
+                    WAIT 0.5
+                    tlStatus.Text = ("Installing required package") & Space(1) & $path
+                      ires = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim($path))
+                        IF ires > 0 THEN 
+                          Message.Error(("Problem while installing") & Space(1) & File.Name($path))
+                          RETURN ires
+                        END IF
+                    pbProg.Value = (ii + 1) / $listarr.Count
+                  END IF
+              NEXT 
+                    
+        NEXT 
+            
+            
+          
+  
+    tlStatus.Text = ("Extracting basic system structure.")
+    FOR i = 0 TO sList.Max 
+        iret = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim(sList[i]))
+          IF iret > 0 THEN RETURN iret
+        pbProg.Value = (i + 1) / sList.Count
+        WAIT 0.5
+    NEXT 
+    RETURN 0
+          
+      
+  
+END
+
+
+PUBLIC SUB ADVANCE_INSTALL_PROGRESS(iStep AS Integer)
+  
+  DIM pb AS PictureBox
+  DIM pb1 AS PictureBox
+  
+  
+  FOR EACH pb IN $objPboxes
+    IF pb.Tag = iStep THEN pb.Picture = Picture.Load("images/16px-check.png")
+      FOR EACH pb1 IN $objPboxes
+        IF pb1.Tag = (iStep + 1) THEN 
+          pb1.Picture = picture.Load("images/category.png")
+        END IF
+      NEXT 
+    'WAIT 5
+  NEXT 
+  
+    
+  
+END
+
+
 
 PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, iInstallType AS Integer) AS Integer
   
@@ -316,8 +392,22 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
   ClsGlobal.fRunningMainForm.btNext.enabled = FALSE
    ' perform partitioning as requested.
    tlStatus.Text = ("Preparing system partitions")
-   IF ME.PERFORM_PARTITIONING() > 0 THEN RETURN 
-  
+   IF ME.PERFORM_PARTITIONING() > 0 THEN 
+    Message.Error(("An error occurred while preparing partitions. Unable to continue"))
+    RETURN 1
+   ELSE 
+    ' Update Status and continue to next step
+      ME.ADVANCE_INSTALL_PROGRESS(0)
+   END IF 
+  ' Install initial directory structure for the target /
+    IF ME.INSTALL_INITIAL_PACKAGES(tlStatus, pbProg) > 0 THEN 
+      Message.Error(("Error during installation of required software. Unable to continue"))
+      RETURN 1
+    ELSE 
+      'uPDATE STATUS AND CONTINUE TO NEXT STEP
+        ME.ADVANCE_INSTALL_PROGRESS(1)
+    END IF
+   
     SELECT CASE iInstallType
       CASE 0
         GOTO FULL_INSTALL
@@ -402,19 +492,62 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
                 
             'WAIT 1
           NEXT 
+          ME.ADVANCE_INSTALL_PROGRESS(2)
           Message.Info(("Installation is complete. Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue"))
           ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
           tlStatus.Text = ("Installation complete... Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue.")
+          
     RETURN 
   
   FULL_INSTALL:
     Message("Full install not programmed yet")
     RETURN 
   MINIMAL_INSTALL:
-    Message("Minimal install not yet programmed")
-    RETURN 
+    'Message("Minimal install not yet programmed")
+      IF ClsGlobal.bInstallDev = TRUE THEN 
+        IF ME.INSTALL_THIS_BULK(tlStatus, pbProg, "DEV") > 0 THEN 
+          Message.Error(("Unable to install the software in the development group. Cannot continue."))
+          RETURN 1
+        END IF
+      END IF
+      IF ClsGlobal.bInstallX11 = TRUE THEN 
+        IF ME.INSTALL_THIS_BULK(tlStatus, pbProg, "X11") > 0 THEN 
+          Message.Error(("Unable to install the software in the Graphical Interface group. Cannot continue"))
+        RETURN 1
+        END IF 
+      END IF
+      RETURN 0
+              
+    RETURN 0
   
 END
+
+PUBLIC FUNCTION INSTALL_THIS_BULK(tlStatus AS TextLabel, pbProg AS ProgressBar, sBulkName AS String) AS Integer
+  
+  DIM $list AS String[] = Split(Trim(File.Load("/mnt/source/veclinux" &/ sBulkName)), gb.NewLine)
+  DIM $pkg, $path AS String
+  DIM i AS Integer
+  
+    FOR i = 0 TO $list.Max
+      $path = ME.GET_PACKAGE_FULL_PATH($list[i])
+        IF $path THEN 
+          WAIT 0.5
+            tlStatus.Text = ("Installing") & Space(1) & $path & Space(1) & "(" & ("Part of") & sBulkName & ")"
+              IF ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ $path) > 0 THEN 
+                Message.Error(("Error installing") & Space(1) & $path)
+                RETURN 1
+              ELSE 
+                pbProg.Value = (i + 1) / $list.Max
+              END IF
+        END IF
+    NEXT 
+          
+            
+        
+  
+  
+END
+
 
 PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sFullPkgPath AS String) AS Integer
   

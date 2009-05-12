@@ -34,23 +34,63 @@ msgstr ""
 msgid "with"
 msgstr ""
 
-#: MdlMain.module:318
+#: MdlMain.module:331
+msgid "Installing required package"
+msgstr ""
+
+#: MdlMain.module:334
+msgid "Problem while installing"
+msgstr ""
+
+#: MdlMain.module:346
+msgid "Extracting basic system structure."
+msgstr ""
+
+#: MdlMain.module:394
 msgid "Preparing system partitions"
 msgstr ""
 
-#: MdlMain.module:405
+#: MdlMain.module:396
+msgid "An error occurred while preparing partitions. Unable to continue"
+msgstr ""
+
+#: MdlMain.module:404
+msgid "Error during installation of required software. Unable to continue"
+msgstr ""
+
+#: MdlMain.module:496
 msgid "Installation is complete. Click"
 msgstr ""
 
-#: MdlMain.module:405
+#: MdlMain.module:496
 msgid "to continue"
 msgstr ""
 
-#: MdlMain.module:407
+#: MdlMain.module:498
 msgid "Installation complete... Click"
 msgstr ""
 
-#: MdlMain.module:407
+#: MdlMain.module:498
 msgid "to continue."
+msgstr ""
+
+#: MdlMain.module:509
+msgid "Unable to install the software in the development group. Cannot continue."
+msgstr ""
+
+#: MdlMain.module:515
+msgid "Unable to install the software in the Graphical Interface group. Cannot continue"
+msgstr ""
+
+#: MdlMain.module:535
+msgid "Installing"
+msgstr ""
+
+#: MdlMain.module:535
+msgid "Part of"
+msgstr ""
+
+#: MdlMain.module:537
+msgid "Error installing"
 msgstr ""
 

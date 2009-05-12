@@ -244,7 +244,7 @@ msgstr ""
 msgid "When finished, Click"
 msgstr ""
 
-#: Conf3.class:47 MdlMain.module:405 Step3a1a.class:177 Step3a2.class:359
+#: Conf3.class:47 MdlMain.module:496 Step3a1a.class:177 Step3a2.class:359
 #: Step3a3a.class:72 Step5.class:177
 msgid "to continue"
 msgstr ""
@@ -658,20 +658,63 @@ msgstr ""
 msgid "with"
 msgstr ""
 
-#: MdlMain.module:318
+#: MdlMain.module:331
+msgid "Installing required package"
+msgstr ""
+
+#: MdlMain.module:334
+msgid "Problem while installing"
+msgstr ""
+
+#: MdlMain.module:346
+msgid "Extracting basic system structure."
+msgstr ""
+
+#: MdlMain.module:394
 msgid "Preparing system partitions"
 msgstr ""
 
-#: MdlMain.module:405
+#: MdlMain.module:396
+msgid "An error occurred while preparing partitions. Unable to continue"
+msgstr ""
+
+#: MdlMain.module:404
+msgid "Error during installation of required software. Unable to continue"
+msgstr ""
+
+#: MdlMain.module:496
 msgid "Installation is complete. Click"
 msgstr ""
 
-#: MdlMain.module:407
+#: MdlMain.module:498
 msgid "Installation complete... Click"
 msgstr ""
 
-#: MdlMain.module:407
+#: MdlMain.module:498
 msgid "to continue."
+msgstr ""
+
+#: MdlMain.module:509
+msgid ""
+"Unable to install the software in the development group. Cannot continue."
+msgstr ""
+
+#: MdlMain.module:515
+msgid ""
+"Unable to install the software in the Graphical Interface group. Cannot "
+"continue"
+msgstr ""
+
+#: MdlMain.module:535
+msgid "Installing"
+msgstr ""
+
+#: MdlMain.module:535
+msgid "Part of"
+msgstr ""
+
+#: MdlMain.module:537
+msgid "Error installing"
 msgstr ""
 
 #: MdlStartUp.module:42
@@ -1418,28 +1461,36 @@ msgstr ""
 msgid "Select Installation Mode"
 msgstr ""
 
-#: Step7.class:113
+#: Step7.class:156
 msgid "Full Install"
 msgstr ""
 
-#: Step7.class:123
+#: Step7.class:166
 msgid "Install everthing in the image (Fully Automated)"
 msgstr ""
 
-#: Step7.class:131 Step8.class:137
+#: Step7.class:174 Step8.class:137
 msgid "Customized"
 msgstr ""
 
-#: Step7.class:141
+#: Step7.class:184
 msgid "Select  the components you wish to install  (Advanced)"
 msgstr ""
 
-#: Step7.class:149 Step8.class:139
+#: Step7.class:192 Step8.class:139
 msgid "Minimal"
 msgstr ""
 
-#: Step7.class:159
+#: Step7.class:202
 msgid "Install the most minimal working confuguration (For older hardware)"
+msgstr ""
+
+#: Step7.class:215
+msgid "Include Development Tools"
+msgstr ""
+
+#: Step7.class:228
+msgid "Include Light-weight graphical environment"
 msgstr ""
 
 #: Step7a.class:27 Step7b.class:23
@@ -1552,10 +1603,30 @@ msgid ""
 "need to make any changes, this is your last chance."
 msgstr ""
 
-#: Step9.class:22
+#: Step9.class:24
 msgid "is being installed to your computer. Please wait."
 msgstr ""
 
-#: Step9.class:81
+#: Step9.class:62
+msgid "Prepare Partitions"
+msgstr ""
+
+#: Step9.class:62
+msgid "Install Base System (required)"
+msgstr ""
+
+#: Step9.class:62
+msgid "Install User-Selected Software"
+msgstr ""
+
+#: Step9.class:145
 msgid "Installation in progress"
+msgstr ""
+
+#: Step9.class:224
+msgid "Install Process"
+msgstr ""
+
+#: Step9.class:239
+msgid "The development Crew"
 msgstr ""

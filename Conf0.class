@@ -234,7 +234,7 @@ PUBLIC SUB Form_Open()
   ME.Timer1.Enabled = TRUE  
   
   ' Update status tree
-    MdlMain.ADVANCE_STATUS_TREE("Step4", "Step5")
+    'MdlMain.ADVANCE_STATUS_TREE("Step4", "Step5")
     MdlMain.ADVANCE_STATUS_TREE("Step5", "Step6")
     'ClsGlobal.fRunningMainForm.listview1["Step4"].picture = MdlStartUp.pDone
     'ClsGlobal.fRunningMainForm.listview1["Step5"].picture = MdlStartUp.pDone

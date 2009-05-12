@@ -15,20 +15,24 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 PUBLIC SUB Form_Open()
 
+  
   ME.tlbanner.Text = "<h2>" & tlbanner.Text & "</h2>"
   ME.tlInstallWarn.Text = ClsGlobal.sDistroName & Space(1) & ClsGlobal.sDistroVer & Space(1)&
   ("is being installed to your computer. Please wait.")
   
   WAIT 1
   ME.Refresh
-  WAIT 0.1
-  MdlMain.INSTALL_PACKAGES(tlcurrpkg, pbinstall, ClsGlobal.iInstallMethod)
+  WAIT 1
+  ME.create_installation_process_layout()
+  
 
 END
 PUBLIC FUNCTION GetNExt() AS String
   
+
   RETURN "Conf0"
   
 END
@@ -37,12 +41,66 @@ PUBLIC SUB OnExit()
   
   
   
+  
 END
 PUBLIC SUB StartUp()
   
-  
+  MdlMain.ADVANCE_STATUS_TREE("Step4", "Step5")
+  ME.Resize(ME.Parent.Width, ME.Parent.Height)
+  ME.Refresh()
   
 END
 
 
 
+
+PUBLIC SUB create_installation_process_layout()
+  
+  DIM tl AS TextLabel
+  DIM pb AS PictureBox
+  DIM i AS Integer
+  DIM sStages AS String[] = [("Prepare Partitions"), ("Install Base System (required)"), ("Install User-Selected Software")]
+  
+  MdlMain.ADVANCE_STATUS_TREE("Step4", "Step5")
+  ClsGlobal.fRunningMainForm.Refresh()
+    FOR i = 0 TO sStages.Max
+      pb = NEW PictureBox(ME.svInstallProc)
+        WITH pb
+          .Expand = FALSE
+          .Resize(28, 28)
+          .Picture = Picture.Load("images/square.png")
+          .Tag = i
+          '.Stretch = TRUE
+        END WITH 
+        MdlMain.$objPboxes.Add(pb)
+      tl = NEW TextLabel(ME.svInstallProc)
+        WITH tl
+          .Text = sStages[i]
+          .Height = 28
+          '.Width = .Parent.Width - (.X * 2)
+          .Alignment = Align.TopLeft
+          .Expand = TRUE
+          .Visible = TRUE
+        END WITH 
+  NEXT 
+  
+  ' Now start the installation process
+  MdlMain.INSTALL_PACKAGES(tlcurrpkg, pbinstall, ClsGlobal.iInstallMethod)
+  
+END
+
+
+
+PUBLIC SUB Form_Resize()
+
+  ME.hbBottomPanel.Height = ME.ClientH - (ME.hbBottomPanel.top + 24)
+  ME.svInstallProc.Width = svinstallproc.Parent.Width - (svinstallproc.left * 2)
+  ME.svInstallProc.Height = svinstallproc.Parent.Height - (svinstallproc.top * 1.25)
+
+END
+
+PUBLIC SUB Frame2_MouseDown()
+
+  ME.fake_progress()
+
+END
