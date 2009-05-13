@@ -83,6 +83,7 @@
         Spacing = 2
         Padding = 2
         Border = False
+        ScrollBar = Scroll.None
       }
     }
     { Frame2 Frame

@@ -21,7 +21,8 @@ PUBLIC SUB Form_Open()
   MdlMain.ADVANCE_STATUS_TREE("Step2", "Step3")
   ' ClsGlobal.fRunningMainForm.listview1["Step2"].picture = MdlStartUp.pDone
   ' ClsGlobal.fRunningMainForm.listview1["Step3"].picture = MdlStartUp.pNow
-
+  ClsGlobal.objMinComponents.Add(ME.rbCliMin)
+  ClsGlobal.objMinComponents.Add(ME.rbMinDev)
 END
 
 PUBLIC FUNCTION GetNext() AS String
@@ -82,14 +83,3 @@ ME.rbMinDev.Visible = FALSE
 
 END
 
-PUBLIC SUB rbCliMin_Click()
-
-  ClsGlobal.bInstallX11 = LAST.Value
-
-END
-
-PUBLIC SUB rbMinDev_Click()
-
-  ClsGlobal.bInstallDev = LAST.Value
-
-END

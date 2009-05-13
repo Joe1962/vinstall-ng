@@ -244,7 +244,7 @@ msgstr ""
 msgid "When finished, Click"
 msgstr ""
 
-#: Conf3.class:47 MdlMain.module:496 Step3a1a.class:177 Step3a2.class:359
+#: Conf3.class:47 MdlMain.module:502 Step3a1a.class:177 Step3a2.class:359
 #: Step3a3a.class:72 Step5.class:177
 msgid "to continue"
 msgstr ""
@@ -624,96 +624,97 @@ msgstr ""
 msgid "Bootsector of"
 msgstr ""
 
-#: MdlBootMngr.module:401
+#: MdlBootMngr.module:404
 msgid "You must select one operating system to be started by default"
 msgstr ""
 
-#: MdlBootMngr.module:419
+#: MdlBootMngr.module:422
 msgid ""
 "Found duplicate operating system names. Please use unique labels for each "
 "menu entry"
 msgstr ""
 
-#: MdlBootMngr.module:422
+#: MdlBootMngr.module:425
 msgid "Check these boxes to make sure they have unique names"
 msgstr ""
 
-#: MdlMain.module:35
+#: MdlMain.module:37
 msgid "Unable to format"
 msgstr ""
 
-#: MdlMain.module:35
+#: MdlMain.module:37
 msgid "to"
 msgstr ""
 
-#: MdlMain.module:193
+#: MdlMain.module:195
 msgid "Failed to create user account. See error below."
 msgstr ""
 
-#: MdlMain.module:254
+#: MdlMain.module:256
 msgid "Formatting"
 msgstr ""
 
-#: MdlMain.module:254
+#: MdlMain.module:256
 msgid "with"
 msgstr ""
 
-#: MdlMain.module:331
+#: MdlMain.module:333
 msgid "Installing required package"
 msgstr ""
 
-#: MdlMain.module:334
+#: MdlMain.module:336
 msgid "Problem while installing"
 msgstr ""
 
-#: MdlMain.module:346
-msgid "Extracting basic system structure."
-msgstr ""
-
-#: MdlMain.module:394
+#: MdlMain.module:382
 msgid "Preparing system partitions"
 msgstr ""
 
-#: MdlMain.module:396
+#: MdlMain.module:384
 msgid "An error occurred while preparing partitions. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:404
+#: MdlMain.module:392
 msgid "Error during installation of required software. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:496
+#: MdlMain.module:440
+msgid "Unable to install contents of"
+msgstr ""
+
+#: MdlMain.module:440
+msgid "Cannot continue"
+msgstr ""
+
+#: MdlMain.module:502
 msgid "Installation is complete. Click"
 msgstr ""
 
-#: MdlMain.module:498
+#: MdlMain.module:504
 msgid "Installation complete... Click"
 msgstr ""
 
-#: MdlMain.module:498
+#: MdlMain.module:504
 msgid "to continue."
 msgstr ""
 
-#: MdlMain.module:509
-msgid ""
-"Unable to install the software in the development group. Cannot continue."
+#: MdlMain.module:524
+msgid "Unable to install the components of"
 msgstr ""
 
-#: MdlMain.module:515
-msgid ""
-"Unable to install the software in the Graphical Interface group. Cannot "
-"continue"
+#: MdlMain.module:524
+msgid "Unable to continue."
 msgstr ""
 
-#: MdlMain.module:535
+#: MdlMain.module:591
 msgid "Installing"
 msgstr ""
 
-#: MdlMain.module:535
+#: MdlMain.module:591
 msgid "Part of"
 msgstr ""
 
-#: MdlMain.module:537
+#: MdlMain.module:593
 msgid "Error installing"
 msgstr ""
 
@@ -1461,35 +1462,35 @@ msgstr ""
 msgid "Select Installation Mode"
 msgstr ""
 
-#: Step7.class:156
+#: Step7.class:146
 msgid "Full Install"
 msgstr ""
 
-#: Step7.class:166
+#: Step7.class:156
 msgid "Install everthing in the image (Fully Automated)"
 msgstr ""
 
-#: Step7.class:174 Step8.class:137
+#: Step7.class:164 Step8.class:137
 msgid "Customized"
 msgstr ""
 
-#: Step7.class:184
+#: Step7.class:174
 msgid "Select  the components you wish to install  (Advanced)"
 msgstr ""
 
-#: Step7.class:192 Step8.class:139
+#: Step7.class:182 Step8.class:139
 msgid "Minimal"
 msgstr ""
 
-#: Step7.class:202
+#: Step7.class:192
 msgid "Install the most minimal working confuguration (For older hardware)"
 msgstr ""
 
-#: Step7.class:215
+#: Step7.class:205
 msgid "Include Development Tools"
 msgstr ""
 
-#: Step7.class:228
+#: Step7.class:218
 msgid "Include Light-weight graphical environment"
 msgstr ""
 
@@ -1627,6 +1628,6 @@ msgstr ""
 msgid "Install Process"
 msgstr ""
 
-#: Step9.class:239
+#: Step9.class:240
 msgid "The development Crew"
 msgstr ""

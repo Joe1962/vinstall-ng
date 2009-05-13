@@ -74,6 +74,5 @@ STATIC PUBLIC lTotalMBforVL AS Long
 
 STATIC PUBLIC sDefBoot AS String
 STATIC PUBLIC sInstallType AS String ' type of installation to be done (Full, Custom, Minimal)
-STATIC PUBLIC bInstallX11 AS Boolean
-STATIC PUBLIC bInstallDev AS Boolean
+STATIC PUBLIC objMinComponents AS NEW Object[]
 
