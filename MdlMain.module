@@ -14,6 +14,8 @@
 
 '    You should have received a copy of the GNU General Public License
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+PRIVATE $pkgtotal AS Integer
+PRIVATE $currpkg AS Integer
 PUBLIC $objPboxes AS NEW Object[]
 PUBLIC $objUsrGroups AS NEW Object[]
 PRIVATE iUID AS Integer
@@ -339,20 +341,6 @@ PUBLIC FUNCTION INSTALL_INITIAL_PACKAGES(tlStatus AS TextLabel, pbProg AS Progre
               NEXT 
                     
         NEXT 
-            
-            
-          
-  
-    tlStatus.Text = ("Extracting basic system structure.")
-    FOR i = 0 TO sList.Max 
-        iret = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim(sList[i]))
-          IF iret > 0 THEN RETURN iret
-        pbProg.Value = (i + 1) / sList.Count
-        WAIT 0.5
-    NEXT 
-    RETURN 0
-          
-      
   
 END
 
@@ -361,8 +349,7 @@ PUBLIC SUB ADVANCE_INSTALL_PROGRESS(iStep AS Integer)
   
   DIM pb AS PictureBox
   DIM pb1 AS PictureBox
-  
-  
+    
   FOR EACH pb IN $objPboxes
     IF pb.Tag = iStep THEN pb.Picture = Picture.Load("images/16px-check.png")
       FOR EACH pb1 IN $objPboxes
@@ -385,6 +372,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
   DIM $BulkArr, $PkgArr, $filearr AS String[]
   DIM $pkgcnt, i, ii, iii, ires AS Integer
   DIM sDump AS String
+  DIM cb AS CheckBox ' for the minimal install options
   ' Load file that defines package paths into a temp file
   SHELL "cat /mnt/source/packages/CHECKSUMS.md5 | cut -f 2-10 -d \'.\'" TO sDump
   File.Save(Temp("pkgpaths"), Trim(sDump))
@@ -424,50 +412,67 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
       ' X11,LXDE,DEV,ETC
     ' SOFTWARE SELECTION IN CLSGLOBAL.SPKGLISTTOINSTALL
       ' PKG1,PKG2,PKG3,PKG4,ETC
+      ' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CUSTOMIZED INSTALLATION BEGINS HERE <<<<<<<<<<<<<<<<<<<<<<<<
         $BulkArr = Split(Trim(ClsGlobal.sBulkListToInstall), ",")
         $PkgArr = Split(Trim(ClsGlobal.sPkgListToInstall), ",")
           
         ' Get to total number of package to be installed... this will be used for the progressbar
-            FOR i = 0 TO $BulkArr.Max 
-              IF Trim($BulkArr[i]) THEN 
+
+                'WAIT 0.0125
               'PRINT "  -- Installing bulk-preset " & $BulkArr[i]
+        FOR i = 0 TO $BulkArr.Max
+          IF Trim($BulkArr[i]) THEN 
                 TRY $file = Trim(File.Load("/mnt/source/veclinux" &/ $BulkArr[i])) ' read definition file
                  $filearr = Split(Trim($file), gb.NewLine)
                   $pkgcnt = $pkgcnt + $filearr.Count
               END IF
             NEXT 
-              ' Add the number of packages individually selected to the count
-              $pkgcnt = $pkgcnt + $PkgArr.Count
+            $pkgtotal = $pkgcnt + $PkgArr.Count
+        '   
+    
+        ' add individual packages to count
+        $pkgtotal = $pkgtotal + $PkgArr.Count
           
-          'This will loop through each bulk definition file, read it, and process it's contents.
-            FOR i = 0 TO $BulkArr.Max 
+          
+        FOR i = 0 TO $BulkArr.Max 
               IF Trim($BulkArr[i]) THEN 
-              PRINT "  -- Installing bulk-preset " & $BulkArr[i]
-              TRY $file = Trim(File.Load("/mnt/source/veclinux" &/ $BulkArr[i])) ' read definition file
-                $filearr = Split($file, gb.NewLine)
-                  FOR ii = 0 TO $filearr.Max ' read each line in the file.
-                    INC iii
-                      ' install this package
-                       
-                          $path = ME.GET_PACKAGE_FULL_PATH($filearr[ii])
-                          IF $path THEN 
-                            'PRINT $path
-                            IF Exist("/mnt/source/packages" &/ Trim($path)) THEN 
-                              PRINT $path
-                              tlStatus.Text = $path
-                              pbProg.Value = iii / $pkgcnt ' supposed to update the progressbar
-                              WAIT 0.5
-                                ires = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim($path))
-                                  IF ires > 0 THEN 
-                                    ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
-                                    RETURN 1
-                                    BREAK ' this will never get executed
-                                  END IF
-                            END IF
-                          END IF
-                    'WAIT 0.5
-                    'pbProg.Refresh
-                  NEXT 
+                IF ME.INSTALL_THIS_BULK(tlStatus, pbProg, Trim($BulkArr[i])) > 0 THEN 
+                  Message.Error(("Unable to install contents of") & Space(1) & Trim($BulkArr[i]) & "." & Space(1) & ("Cannot continue"))
+                  RETURN 1
+                  BREAK 
+          END IF
+          '     ' Add the number of packages individually selected to the count
+          '     $pkgcnt = $pkgcnt + $PkgArr.Count
+          ' 
+          ' 'This will loop through each bulk definition file, read it, and process it's contents.
+          '   FOR i = 0 TO $BulkArr.Max 
+          '     IF Trim($BulkArr[i]) THEN 
+          '     PRINT "  -- Installing bulk-preset " & $BulkArr[i]
+          '     TRY $file = Trim(File.Load("/mnt/source/veclinux" &/ $BulkArr[i])) ' read definition file
+          '       $filearr = Split($file, gb.NewLine)
+          '         FOR ii = 0 TO $filearr.Max ' read each line in the file.
+          '           INC iii
+          '             ' install this package
+          '              
+          '                 $path = ME.GET_PACKAGE_FULL_PATH($filearr[ii])
+          '                 IF $path THEN 
+          '                   'PRINT $path
+          '                   IF Exist("/mnt/source/packages" &/ Trim($path)) THEN 
+          '                     PRINT $path
+          '                     tlStatus.Text = $path
+          '                     pbProg.Value = iii / $pkgcnt ' supposed to update the progressbar
+          '                     WAIT 0.5
+          '                       ires = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim($path))
+          '                         IF ires > 0 THEN 
+          '                           ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
+          '                           RETURN 1
+          '                           BREAK ' this will never get executed
+          '                         END IF
+          '                   END IF
+          '                 END IF
+          '           'WAIT 0.5
+          '           'pbProg.Refresh
+          '         NEXT 
               END IF
             NEXT 
                 
@@ -480,7 +485,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
             pbProg.Value = iii / $pkgcnt
               IF $path THEN 
                 IF Exist("/mnt/source/packages" &/ Trim($path)) THEN 
-                  WAIT 0.5
+                  WAIT 0.125
                   ires = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim($path))
                     IF ires > 0 THEN 
                       ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
@@ -492,31 +497,82 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
                 
             'WAIT 1
           NEXT 
+          pbProg.Value = 1
           ME.ADVANCE_INSTALL_PROGRESS(2)
           Message.Info(("Installation is complete. Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue"))
           ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
           tlStatus.Text = ("Installation complete... Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue.")
           
-    RETURN 
+    RETURN 0
   
   FULL_INSTALL:
-    Message("Full install not programmed yet")
-    RETURN 
+    ' >>>>>>>>>>>> FULL INSTALLATION BEGINS HERE <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+      
+      ' get package count first
+        FOR EACH $bulk IN Dir("/mnt/source/veclinux")
+          IF $bulk = "VINSTALL.CONF" THEN CONTINUE 
+          IF $bulk = "VECLINUX" THEN CONTINUE 
+          $BulkArr = Split(Trim(File.Load("/mnt/source/veclinux" &/ $bulk)), gb.NewLine)
+          $pkgtotal = $pkgtotal + $BulkArr.Count
+        NEXT 
+    
+    FOR EACH $bulk IN Dir("/mnt/source/veclinux")
+      IF $bulk = "VINSTALL.CONF" THEN CONTINUE ' skip the conf file
+      IF $bulk = "VECLINUX" THEN CONTINUE ' we already did veclinux
+        DEBUG "Processing " & $bulk
+          IF ME.INSTALL_THIS_BULK(tlStatus, pbProg, $bulk) > 0 THEN 
+            Message.Error(("Unable to install the components of") & Space(1) & $bulk & Space(1) & ("Unable to continue."))
+            RETURN 1
+            BREAK 
+          END IF
+    NEXT 
+      ME.ADVANCE_INSTALL_PROGRESS(2)
+      
+      Message.Info(("Installation is complete. Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue"))
+          ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
+          tlStatus.Text = ("Installation complete... Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue.")
+      
+    
+    RETURN 0
   MINIMAL_INSTALL:
-    'Message("Minimal install not yet programmed")
-      IF ClsGlobal.bInstallDev = TRUE THEN 
-        IF ME.INSTALL_THIS_BULK(tlStatus, pbProg, "DEV") > 0 THEN 
-          Message.Error(("Unable to install the software in the development group. Cannot continue."))
-          RETURN 1
+    
+    ' >>>>>>>>>>>>>> MINIMAL INSTALLATION BEGINS HERE <<<<<<<<<<<<<<<<<<<<<<<<
+    ' count extra packages
+    FOR EACH cb IN ClsGlobal.objMinComponents
+      IF cb.Value = TRUE THEN 
+        $BulkArr = Split(Trim(File.Load("/mnt/source/veclinux" &/ cb.Tag)), gb.NewLine)
+        $pkgtotal = $pkgtotal + $BulkArr.Count
+      END IF
+    NEXT 
+    
+      FOR EACH cb IN ClsGlobal.objMinComponents
+        IF cb.Value = TRUE THEN 
+          IF ME.INSTALL_THIS_BULK(tlStatus, pbProg, cb.Tag) > 0 THEN 
+            Message.Error(("Unable to install the components of") & Space(1) & cb.Tag & Space(1) & ("Unable to continue."))
+            RETURN 1
+            BREAK 
+          END IF
         END IF
-      END IF
-      IF ClsGlobal.bInstallX11 = TRUE THEN 
-        IF ME.INSTALL_THIS_BULK(tlStatus, pbProg, "X11") > 0 THEN 
-          Message.Error(("Unable to install the software in the Graphical Interface group. Cannot continue"))
-        RETURN 1
-        END IF 
-      END IF
-      RETURN 0
+      NEXT 
+      ME.ADVANCE_INSTALL_PROGRESS(2)
+      Message.Info(("Installation is complete. Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue"))
+          ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
+          tlStatus.Text = ("Installation complete... Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue.")
+      
+      
+      ' IF ClsGlobal.bInstallDev = TRUE THEN 
+      '   IF ME.INSTALL_THIS_BULK(tlStatus, pbProg, "DEV") > 0 THEN 
+      '     Message.Error(("Unable to install the software in the development group. Cannot continue."))
+      '     RETURN 1
+      '   END IF
+      ' END IF
+      ' IF ClsGlobal.bInstallX11 = TRUE THEN 
+      '   IF ME.INSTALL_THIS_BULK(tlStatus, pbProg, "X11") > 0 THEN 
+      '     Message.Error(("Unable to install the software in the Graphical Interface group. Cannot continue"))
+      '   RETURN 1
+      '   END IF 
+      ' END IF
+      ' RETURN 0
               
     RETURN 0
   
@@ -531,15 +587,20 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(tlStatus AS TextLabel, pbProg AS ProgressBar, 
     FOR i = 0 TO $list.Max
       $path = ME.GET_PACKAGE_FULL_PATH($list[i])
         IF $path THEN 
-          WAIT 0.5
-            tlStatus.Text = ("Installing") & Space(1) & $path & Space(1) & "(" & ("Part of") & sBulkName & ")"
+          'WAIT 0.05
+            tlStatus.Text = ("Installing") & Space(1) & $path & Space(1) & "(" & ("Part of") & Space(1) & sBulkName & ")"
               IF ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ $path) > 0 THEN 
                 Message.Error(("Error installing") & Space(1) & $path)
                 RETURN 1
               ELSE 
-                pbProg.Value = (i + 1) / $list.Max
+                'pbProg.Value = (i + 1) / $list.Max
+                pbProg.Value = $currpkg / $pkgtotal
               END IF
+              tlStatus.Parent.Parent.Refresh()
+              ClsGlobal.fRunningMainForm.Refresh()
+              WAIT 0.035
         END IF
+        INC $currpkg
     NEXT 
           
             
@@ -555,7 +616,8 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sFullPkgPath AS String) AS Integer
   DIM sBuff AS String
     
     '$hproc = EXEC ["/sbin/installpkg ", "-R", ClsGlobal.sTargetPath, sFullPkgPath] WAIT 
-    $hproc = SHELL "/sbin/installpkg -R " & ClsGlobal.sTargetPath & Space(1) & sFullPkgPath WAIT 'TO sBuff
+    '$hproc = SHELL "/sbin/installpkg -R " & ClsGlobal.sTargetPath & Space(1) & sFullPkgPath WAIT 'TO sBuff
+    $hproc = EXEC ["/sbin/installpkg", "-q", "-R", ClsGlobal.sTargetPath, sFullPkgPath] WAIT 
       IF $hproc.Value > 0 THEN 
         DEBUG sFullPkgPath & Space(1) & "failed to install"
         RETURN 1

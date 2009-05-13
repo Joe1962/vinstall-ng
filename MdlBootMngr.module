@@ -370,8 +370,11 @@ PUBLIC FUNCTION Get_OS_Boot_Params(sOsRoot AS String) AS String
   SHELL "cat " & $file & " | grep ^" & sOsRoot TO sDump
     sDump = Trim(sDump)
       $dumparr = Split(sDump, gb.NewLine)
-      IF NOT ($dumparr) THEN RETURN 
+      'IF NOT ($dumparr) THEN RETURN 
+      IF $dumparr.Count <= 0 THEN RETURN 
+      
       ' always grab the first line only for each os
+        'IF NOT Trim($dumparr[0]) THEN RETURN 
       $line = Trim($dumparr[0])
         IF NOT ($line) THEN RETURN 
 
