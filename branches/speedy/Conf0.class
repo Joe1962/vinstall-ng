@@ -228,17 +228,16 @@ PUBLIC SUB Form_Open()
 'ME.Fake_Names()
   'ME.List_Other_Linuxes(ME.TsOsList)
   'ME.Update_Default_boot_choices()
+  ' Write /etc/vector-version
+  MdlMain.WRITE_ETC_VECTOR_VERSION()
+  
   MdlBootMngr.Display_Bootmanager_Target_Options(ME.cbTarget)
   ME.PROBE_SYSTEM_FOR_OS("lilo")
   
   ME.Timer1.Enabled = TRUE  
   
   ' Update status tree
-    'MdlMain.ADVANCE_STATUS_TREE("Step4", "Step5")
     MdlMain.ADVANCE_STATUS_TREE("Step5", "Step6")
-    'ClsGlobal.fRunningMainForm.listview1["Step4"].picture = MdlStartUp.pDone
-    'ClsGlobal.fRunningMainForm.listview1["Step5"].picture = MdlStartUp.pDone
-    'ClsGlobal.fRunningMainForm.listview1["Step6"].picture = MdlStartUp.pNow
 
 END
 
@@ -398,6 +397,80 @@ PUBLIC SUB rbLilo_Click()
 
 END
 
+
+
+
+PUBLIC FUNCTION determine_boot_parameters(sRoot AS String) AS String
+  
+  ' needs to return a string[] containing the kernel, initrd, and append lines for an OS
+  DIM sShortPart AS String = Right(sRoot, Len(sRoot) - Len("/dev/"))
+  DIM sBootPath AS String
+  DIM skernel, sinitrd, sAppend AS String
+  DIM sDump AS String
+  DIM sDumparr AS String[]
+    TRY MKDIR "/mnt/hd"
+    SHELL "mount " & sRoot & " /mnt/hd 2>/dev/null" WAIT 
+    
+      IF Exist("/mnt/hd/vmlinuz") THEN 
+        sBootPath = "/"
+      ELSE IF Exist("/mnt/hd/boot/vmlinuz") THEN 
+        sBootPath = "/boot"
+      END IF
+      
+      IF NOT (sBootPath) THEN ' the above lines did not find anything
+        SHELL "ls -B /mnt/hd | grep vmlinuz" TO sDump
+          sDump = Trim(sDump)
+            IF sDump THEN 
+              sBootPath = "/"
+            ELSE ' not found in the roots dir of the distro, look in /boot
+              SHELL "ls -B /mnt/hd/boot | grep vmlinuz" TO sDump
+                sDump = Trim(sDump)
+                  IF sDump THEN sBootPath = "/boot"
+            END IF
+      END IF
+                  
+        ' now get the real path
+        
+        sdump = Trim(sdump)
+        Message(sdump)
+          IF sdump THEN sDumparr = Split(Trim(sDump), gb.NewLine) ' found something
+               ' this will either pick up the link to the default kernel, or the first kernel that comes up from that partition.
+        IF sDumparr THEN 
+          skernel = Trim(Replace(sDumparr[0], "@", ""))
+            IF skernel THEN PRINT "Found kernel " & skernel & " for " & sRoot
+      ' now get the initrd
+      SHELL "ls -B " & sBootPath & " | grep initrd" TO sDump
+        sDump = Trim(sDump)
+          IF sDump THEN 
+            sDumparr = Split(Trim(sdump), gb.NewLine) ' found something for initrd
+              sinitrd = Trim(Replace(sDumparr[0], "@", ""))
+              IF sinitrd THEN PRINT "Found initrd " & sinitrd & " for " & sRoot
+          END IF
+      
+      TRY MKDIR ClsGlobal.sTargetPath &/ "boot" &/ "tamu"
+      TRY COPY "/mnt/hd" &/ sBootPath &/ skernel TO ClsGlobal.sTargetPath &/ "boot" &/ "tamu" &/ skernel & "-" & sShortPart
+      TRY COPY "/mnt/hd" &/ sBootPath &/ sinitrd TO ClsGlobal.sTargetPath &/ "boot" &/ "tamu" &/ sinitrd & "-" & sShortPart
+      
+    SHELL "umount -f /mnt/hd >/dev/null" WAIT 
+    
+    skernel = "/boot/tamu" &/ skernel & "-" & sShortPart
+    sinitrd = "/boot/tamu" &/ sinitrd & "-" & sShortPart
+        
+      
+      ' IF Exist(sBootPath &/ "initrd") THEN 
+      '   sinitrd = sBootPath &/ "initrd"
+      ' END IF
+       sAppend = "splash=silent" 'generic kernel arguments.
+      
+      RETURN skernel & "," & sinitrd & "," & sAppend
+    'END IF
+    ELSE 
+      RETURN 
+    END IF
+  
+END
+
+
 PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
   
   DIM sDump, sOs, sRoot, sLongDesc, sType, sTitle AS String
@@ -429,11 +502,16 @@ PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
             ' /path/to/kernel, /path/to/initrd, appendline here
               SHELL "/bin/linux-boot-prober " & sRoot & " >/tmp/bootargs.lst" WAIT ' we need to hunt these arguments for every OS found
             sBootargs = MdlBootMngr.Get_OS_Boot_Params(sRoot)
+              IF NOT (sBootargs) THEN 
+                DEBUG "Attempting to detect boot parameters for " & sRoot
+                sBootargs = ME.determine_boot_parameters(sRoot) ' manually search for boot parameters.
+              END IF
               
               IF NOT (sBootargs) THEN 
-                '= CAN NOT FIND BOOT ARGUMENTS FOR THIS OS ='
+                '= CAN NOT FIND BOOT ARGUMENTS FOR THIS OS =' <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DO SOMETHING ABOUT THIS.... WE NEED TO FIND THESE VALUES IN CASE THE PROBER FAILS >>>>>>>>>>>>>>>>>>>>>>>>>>>>
                   PRINT ("Unable to find boot arguments for OS in") & Space(1) & sRoot
-                RETURN 
+                  PRINT "WARNING: default values filled in... this might not work"
+                'RETURN 
               ELSE 
                 sBootLine = Split(sbootargs, ",")
                   sKernel = sBootLine[0]
@@ -444,10 +522,11 @@ PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
                   PRINT " --\\ Initrd=" & sInitrd
                   PRINT " --\\ Root=" & sRoot
                   'print " --\ Options=" &
-                    TsOsList.Current.Text = sRoot
+                    
+              END IF
+              TsOsList.Current.Text = sRoot
                 Populate_linux_tab(sRoot, sTitle, sKernel, sInitrd, sAppendLine, sBootManager)
                 INC TsOsList.Count
-              END IF
               
           END IF
             

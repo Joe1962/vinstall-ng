@@ -365,6 +365,49 @@ PUBLIC SUB ADVANCE_INSTALL_PROGRESS(iStep AS Integer)
 END
 
 
+PUBLIC FUNCTION INSTALL_KERNEL_AND_INITRD() AS Integer
+  
+  DIM sfile, sdump, sname, sversion AS String
+  DIM sList AS String[]
+  DIM i AS Integer
+  DIM $hproc AS Process
+  
+  DEBUG "Copying kernels and intrd now ..."
+  EXEC ["mkdir", "-p", ClsGlobal.sTargetPath &/ "boot"] WAIT 
+  
+    SHELL "cat /mnt/source/veclinux/VINSTALL.CONF | grep ^ ISO_KERNEL_ | cut -f 2 -d =" TO sdump
+    sdump = Trim(Replace(sdump, "\'", ""))
+    sdump = Trim(Replace(sdump, "\"", ""))
+    sList = Split(sdump, gb.NewLine)
+    FOR i = 0 TO sList.Max
+    sfile = Trim(sList[i])
+      IF Exist("/mnt/source/isolinux/kernel" &/ sfile) THEN 
+        sname = sfile
+        ' find out which version this is
+          SHELL "grep \'" & sname & "\' /mnt/source/veclinux/VINSTALL.CONF | cut -f 1 -d =" TO sdump
+          SHELL "grep \'" & Replace(sdump, "ISO", "HD") & "\' /mnt/source/veclinux/VINSTALL.CONF | cut -f 2 -d =" TO sversion
+          sversion = Replace(sversion, "\'", "")
+          sversion = Replace(sversion, "\"", "")
+          sversion = Trim(sversion)
+      END IF
+      'IF sversion THEN TRY COPY "/mnt/source/isolinux/kernel" &/ sfile TO ClsGlobal.sTargetPath &/ "boot" &/ "vmlinuz-" & sversion
+      $hproc = EXEC ["cp", "/mnt/source/isolinux/kernel" &/ sfile, ClsGlobal.sTargetPath &/ "boot" &/ "vmlinux-" & sversion] WAIT 
+        IF $hproc.Value > 0 THEN 
+        DEBUG "Error copying kernel " & sname & Space(1) & "(" & sversion & ")"
+         RETURN 1
+        END IF
+    NEXT
+    
+    'TRY COPY "/mnt/source/isolinux/initrd.img" TO ClsGlobal.sTargetPath &/ "boot" &/ "initrd"
+      $hproc = EXEC ["cp", "/mnt/source/isolinux/initrd.img", ClsGlobal.sTargetPath &/ "boot" &/ "initrd"] WAIT 
+        IF $hproc.Value > 0 THEN 
+        DEBUG "Error copying initrd"
+        RETURN 1
+        END IF
+     
+  RETURN 0
+END
+
 
 PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, iInstallType AS Integer) AS Integer
   
@@ -441,38 +484,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
                   RETURN 1
                   BREAK 
           END IF
-          '     ' Add the number of packages individually selected to the count
-          '     $pkgcnt = $pkgcnt + $PkgArr.Count
-          ' 
-          ' 'This will loop through each bulk definition file, read it, and process it's contents.
-          '   FOR i = 0 TO $BulkArr.Max 
-          '     IF Trim($BulkArr[i]) THEN 
-          '     PRINT "  -- Installing bulk-preset " & $BulkArr[i]
-          '     TRY $file = Trim(File.Load("/mnt/source/veclinux" &/ $BulkArr[i])) ' read definition file
-          '       $filearr = Split($file, gb.NewLine)
-          '         FOR ii = 0 TO $filearr.Max ' read each line in the file.
-          '           INC iii
-          '             ' install this package
-          '              
-          '                 $path = ME.GET_PACKAGE_FULL_PATH($filearr[ii])
-          '                 IF $path THEN 
-          '                   'PRINT $path
-          '                   IF Exist("/mnt/source/packages" &/ Trim($path)) THEN 
-          '                     PRINT $path
-          '                     tlStatus.Text = $path
-          '                     pbProg.Value = iii / $pkgcnt ' supposed to update the progressbar
-          '                     WAIT 0.5
-          '                       ires = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim($path))
-          '                         IF ires > 0 THEN 
-          '                           ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
-          '                           RETURN 1
-          '                           BREAK ' this will never get executed
-          '                         END IF
-          '                   END IF
-          '                 END IF
-          '           'WAIT 0.5
-          '           'pbProg.Refresh
-          '         NEXT 
+         
               END IF
             NEXT 
                 
@@ -502,6 +514,11 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
           Message.Info(("Installation is complete. Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue"))
           ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
           tlStatus.Text = ("Installation complete... Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue.")
+        IF ME.INSTALL_KERNEL_AND_INITRD > 0 THEN 
+            Message.Error(("Error while installing kernels and initrds"))
+              DEBUG "Something wrong in the kernel installation module"
+              RETURN 1
+        END IF
           
     RETURN 0
   
@@ -532,6 +549,12 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
           ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
           tlStatus.Text = ("Installation complete... Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue.")
       
+      IF ME.INSTALL_KERNEL_AND_INITRD > 0 THEN 
+    Message.Error(("Error while installing kernels and initrds"))
+    DEBUG "Something wrong in the kernel installation module"
+    RETURN 1
+  END IF
+      
     
     RETURN 0
   MINIMAL_INSTALL:
@@ -559,24 +582,34 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
           ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
           tlStatus.Text = ("Installation complete... Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue.")
       
-      
-      ' IF ClsGlobal.bInstallDev = TRUE THEN 
-      '   IF ME.INSTALL_THIS_BULK(tlStatus, pbProg, "DEV") > 0 THEN 
-      '     Message.Error(("Unable to install the software in the development group. Cannot continue."))
-      '     RETURN 1
-      '   END IF
-      ' END IF
-      ' IF ClsGlobal.bInstallX11 = TRUE THEN 
-      '   IF ME.INSTALL_THIS_BULK(tlStatus, pbProg, "X11") > 0 THEN 
-      '     Message.Error(("Unable to install the software in the Graphical Interface group. Cannot continue"))
-      '   RETURN 1
-      '   END IF 
-      ' END IF
-      ' RETURN 0
+    IF ME.INSTALL_KERNEL_AND_INITRD() > 0 THEN 
+      Message.Error(("Error while installing kernels and initrds"))
+      DEBUG "Something wrong in the kernel installation module"
+      RETURN 1
+  END IF
               
     RETURN 0
   
 END
+
+PUBLIC SUB WRITE_ETC_VECTOR_VERSION()
+
+  DIM builddate AS String
+  DIM sLine AS String
+  
+  ' Get the build date from the CONF file
+  SHELL "cat /mnt/source/veclinux/VINSTALL.CONF | grep ^builddate" TO builddate
+    IF builddate THEN builddate = Right(builddate, Len(builddate) - InStr(builddate, "="))
+    IF builddate THEN builddate = Replace(builddate, "\"", "")
+    IF builddate THEN builddate = Replace(builddate, "\'", "")
+    
+    sLine = ClsGlobal.sDistroName & Space(1) & ClsGlobal.sDistroVer & Space(1) & "built on" & Space(1) & builddate
+    'Message(sLine)
+    TRY File.Save("/mnt/target/etc/vector-version", sLine)
+  
+END
+
+
 
 PUBLIC FUNCTION INSTALL_THIS_BULK(tlStatus AS TextLabel, pbProg AS ProgressBar, sBulkName AS String) AS Integer
   

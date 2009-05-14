@@ -85,7 +85,15 @@ PUBLIC SUB create_installation_process_layout()
   NEXT 
   
   ' Now start the installation process
-  MdlMain.INSTALL_PACKAGES(tlcurrpkg, pbinstall, ClsGlobal.iInstallMethod)
+  IF MdlMain.INSTALL_PACKAGES(tlcurrpkg, pbinstall, ClsGlobal.iInstallMethod) > 0 THEN 
+    Message.Error(("Something went wrong during installation. Please try again"))
+  ELSE 
+    ' IF IsDir(ClsGlobal.sTargetPath &/ "boot") = FALSE THEN TRY MKDIR ClsGlobal.sTargetPath &/ "boot"
+    ' IF MdlMain.INSTALL_KERNEL_AND_INITRD() THEN 
+    '   Message.Error(("Error during kernel installation. Please see error log"))
+    ' END IF
+  END IF
+  
   
 END
 
