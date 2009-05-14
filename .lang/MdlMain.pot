@@ -42,59 +42,63 @@ msgstr ""
 msgid "Problem while installing"
 msgstr ""
 
-#: MdlMain.module:382
+#: MdlMain.module:425
 msgid "Preparing system partitions"
 msgstr ""
 
-#: MdlMain.module:384
+#: MdlMain.module:427
 msgid "An error occurred while preparing partitions. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:392
+#: MdlMain.module:435
 msgid "Error during installation of required software. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:440
+#: MdlMain.module:483
 msgid "Unable to install contents of"
 msgstr ""
 
-#: MdlMain.module:440
+#: MdlMain.module:483
 msgid "Cannot continue"
 msgstr ""
 
-#: MdlMain.module:502
+#: MdlMain.module:514
 msgid "Installation is complete. Click"
 msgstr ""
 
-#: MdlMain.module:502
+#: MdlMain.module:514
 msgid "to continue"
 msgstr ""
 
-#: MdlMain.module:504
+#: MdlMain.module:516
 msgid "Installation complete... Click"
 msgstr ""
 
-#: MdlMain.module:504
+#: MdlMain.module:516
 msgid "to continue."
 msgstr ""
 
-#: MdlMain.module:524
+#: MdlMain.module:518
+msgid "Error while installing kernels and initrds"
+msgstr ""
+
+#: MdlMain.module:541
 msgid "Unable to install the components of"
 msgstr ""
 
-#: MdlMain.module:524
+#: MdlMain.module:541
 msgid "Unable to continue."
 msgstr ""
 
-#: MdlMain.module:591
+#: MdlMain.module:624
 msgid "Installing"
 msgstr ""
 
-#: MdlMain.module:591
+#: MdlMain.module:624
 msgid "Part of"
 msgstr ""
 
-#: MdlMain.module:593
+#: MdlMain.module:626
 msgid "Error installing"
 msgstr ""
 
