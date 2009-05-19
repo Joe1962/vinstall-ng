@@ -60,7 +60,7 @@
           Text = ("")
         }
         { HBox4 HBox
-          MoveScaled(40,1,9,1)
+          MoveScaled(40,1,9,0.5)
           Expand = True
         }
         { TextLabel2 TextLabel
@@ -73,7 +73,7 @@
           Text = ("")
         }
         { HBox5 HBox
-          MoveScaled(41,5,8,1)
+          MoveScaled(41,5,8,0.5)
           Expand = True
         }
         { TextLabel3 TextLabel
@@ -87,7 +87,7 @@
           Password = True
         }
         { HBox6 HBox
-          MoveScaled(41,11,10,1)
+          MoveScaled(41,11,10,0.5)
           Expand = True
         }
         { TextLabel4 TextLabel
@@ -101,7 +101,7 @@
           Password = True
         }
         { HBox7 HBox
-          MoveScaled(47,14,7,1)
+          MoveScaled(47,14,7,0.5)
           Expand = True
         }
         { HBox9 HBox

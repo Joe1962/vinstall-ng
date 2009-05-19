@@ -14,12 +14,36 @@ msgstr ""
 msgid "(Recomended)"
 msgstr "(Sugerido)"
 
-#: Step8.class:146
+#: Conf2.class:151
+msgid "About the linux root account"
+msgstr ""
+
+#: FDone.class:89
+msgid "About your VectorLinux installation"
+msgstr ""
+
+#: Conf3a.class:306
+msgid "Accept"
+msgstr ""
+
+#: Conf3a.class:279
+msgid "Account Contents to reset"
+msgstr ""
+
+#: Conf0.class:159
+msgid "Add option to boot this operating system into text mode"
+msgstr ""
+
+#: Step8.class:158
 msgid "Additional Software"
 msgstr ""
 
 #: Step7b.class:107
 msgid "Additional optional software available. Select which software packages to include in your installation."
+msgstr ""
+
+#: FDone.class:31
+msgid "After your computer restarts, you may use VasmCC to perform any additional configuration."
 msgstr ""
 
 #: Step3a1a.class:186
@@ -38,15 +62,19 @@ msgstr "Todos los archivos pasaron la prueba de integridad. Ya puede continuar c
 msgid "Allow VectorLinux to use an entire hard disk in your system."
 msgstr "Quiero que VectorLinux utilize el disco completo."
 
+#: MdlMain.module:484
+msgid "An error occurred while preparing partitions. Unable to continue"
+msgstr ""
+
 #: Step3a2.class:65
 msgid "Another partitioning option"
 msgstr "Otra opción para particionar."
 
-#: Step7a.class:143
+#: Step7a.class:144
 msgid "Are you sure you want to disable this conponent anyway?"
 msgstr ""
 
-#: Step3.class:175
+#: Step3.class:176
 msgid "Automatic"
 msgstr "Automático"
 
@@ -58,27 +86,95 @@ msgstr "Crear las particiones necesarias automáticamente"
 msgid "Automatic Partitioning Options"
 msgstr "Opciones de particionado automático"
 
-#: Step3.class:185
+#: Step3.class:186
 msgid "Automatically resize your partitions and / or create the correct disk space for VectorLinux."
 msgstr "Automáticamente encoger particiones existentes al tamaño adecuado para dejar espacio para VectorLinux"
 
-#: FMain.class:301 FMain0.class:301 FMain0Old.class:271
+#: FMain.class:310 FMain0.class:313
 msgid "Back"
 msgstr "Regreso"
+
+#: Conf3a.class:64
+msgid "Bash init script"
+msgstr ""
+
+#: Conf5.class:92
+msgid "Bluetooth device manager"
+msgstr ""
+
+#: Conf0.class:866
+msgid "Boot Default"
+msgstr ""
+
+#: Conf0.class:807
+msgid "Boot Menu Options"
+msgstr ""
+
+#: Conf0.class:645
+msgid "Boot this operating system by default"
+msgstr ""
+
+#: Conf0.class:225
+msgid "Bootplash Med"
+msgstr ""
+
+#: MdlBootMngr.module:163
+msgid "Bootsector Of"
+msgstr ""
+
+#: MdlBootMngr.module:355
+msgid "Bootsector of"
+msgstr ""
+
+#: Conf0.class:225 MdlBootMngr.module:177
+msgid "Bootsplash Extra High"
+msgstr ""
+
+#: Conf0.class:225 MdlBootMngr.module:175
+msgid "Bootsplash High"
+msgstr ""
+
+#: MdlBootMngr.module:173
+msgid "Bootsplash Med"
+msgstr ""
 
 #: Step2.class:154
 msgid "Burn the image at a lower speed rate"
 msgstr "Quemar la imagen  ISO a un ritmo de velocidad mas lento"
 
+#: Conf3a.class:312
+msgid "Cancel"
+msgstr ""
+
 #: Step2.class:101
 msgid "Canceling data integrity tests per user request"
 msgstr "Proceso de verificacion de integridad cancelado a instancias del usuario"
 
-#: Step1.class:580
+#: MdlMain.module:540
+msgid "Cannot continue"
+msgstr ""
+
+#: Step1.class:581
 msgid "Check Installation media before installing"
 msgstr "Verificar archivos de instalacion"
 
-#: Step7a.class:143
+#: MdlBootMngr.module:425
+msgid "Check these boxes to make sure they have unique names"
+msgstr ""
+
+#: Conf3.class:43
+msgid "Choose a unique login name for each user account."
+msgstr ""
+
+#: Conf1.class:157
+msgid "Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way."
+msgstr ""
+
+#: Conf1.class:173
+msgid "Choose the correct timezone for the area in which you live."
+msgstr ""
+
+#: Step7a.class:144
 msgid "Choosing not to install this may result in a command-line (text mode) installation only"
 msgstr ""
 
@@ -86,16 +182,32 @@ msgstr ""
 msgid "Claim free space from existing partitions"
 msgstr "Utilizar espacio libre en las particiones que ya existen"
 
-#: Step1.class:98 Step2.class:198 Step5.class:177
+#: Conf3.class:452
+msgid "Clear Form"
+msgstr ""
+
+#: FDone.class:31 Step1.class:98 Step2.class:198 Step5.class:177
 msgid "Click"
 msgstr "Haz click en"
+
+#: Conf3.class:409
+msgid "Click here to select user Login picture"
+msgstr ""
 
 #: Step5.class:172
 msgid "Click the"
 msgstr "Haz click en"
 
+#: Conf1.class:184
+msgid "ComboBox1"
+msgstr ""
+
 #: Step7a.class:34
 msgid "Component"
+msgstr ""
+
+#: Conf4.class:91
+msgid "Computer Name"
 msgstr ""
 
 #: Step3a1a.class:21
@@ -106,17 +218,37 @@ msgstr "Crear nueva estructura de particiones en"
 msgid "Create New"
 msgstr "Crear Nueva"
 
+#: Conf3.class:419
+msgid "Create User"
+msgstr ""
+
+#: Conf3.class:282
+msgid "Create User Accounts"
+msgstr ""
+
+#: Conf3.class:43
+msgid "Create as many user accounts as you want / need here."
+msgstr ""
+
 #: Step7a.class:27 Step7b.class:23
 msgid "Customize Your VectorLinux Installation"
 msgstr ""
 
-#: Step7.class:126 Step8.class:125
+#: Step7.class:164 Step8.class:137
 msgid "Customized"
 msgstr ""
 
-#: Step1.class:353
+#: Conf0.class:889
+msgid "DETECTED OPERATING SYSTEMS."
+msgstr ""
+
+#: Step1.class:354
 msgid "DISTRIBUTION"
 msgstr "DISTRIBUCION"
+
+#: Conf2.class:24
+msgid "DO NOT LEAVE THIS BLANK"
+msgstr ""
 
 #: Step2.class:102
 msgid "Data integrity test canceled by user."
@@ -126,8 +258,16 @@ msgstr "Prueba de integridad de archivos cancelado por el usuario"
 msgid "Data integrity test complete... all tests passed"
 msgstr "Prueba de integridad de los archivos completa . . . Todos los archivos pasaron."
 
-#: Step7a.class:49 Step7b.class:28
+#: Conf3a.class:80
+msgid "Default graphical session settings"
+msgstr ""
+
+#: Conf3a.class:118 Step7a.class:49 Step7b.class:28
 msgid "Description"
+msgstr ""
+
+#: Conf3a.class:70
+msgid "Desktop icons, folders, launchers"
 msgstr ""
 
 #: Step3.class:28
@@ -138,13 +278,17 @@ msgstr "Opciones de particionado"
 msgid "Disk Partitioning"
 msgstr "Particiones"
 
-#: Step8.class:44
+#: Step8.class:50
 msgid "Distribution"
 msgstr ""
 
-#: Step6.class:183 Step8.class:73
+#: Step6.class:190 Step8.class:82
 msgid "Do not format"
 msgstr "Sin formatear"
+
+#: Conf4.class:109
+msgid "Domain"
+msgstr ""
 
 #: Step2.class:154
 msgid "Download a new installation image from www.vectorlinux.com"
@@ -153,6 +297,18 @@ msgstr "Adquiera una nueva imagen de instalación en www.vectorlinux.com"
 #: Step0.class:125
 msgid "English (US)"
 msgstr "Inglés (EE.UU)"
+
+#: Conf5.class:125
+msgid "Enhanced network security"
+msgstr ""
+
+#: Conf3.class:364
+msgid "Enter Password"
+msgstr ""
+
+#: Conf2.class:183
+msgid "Enter Passwrord"
+msgstr ""
 
 #: MdlAutoPartition.module:180
 msgid "Error creating the ntfs filesystem after shrinking it"
@@ -166,6 +322,18 @@ msgstr "Ha ocurrido un error mientras borraba las particiones existentes. Por fa
 msgid "Error deleting the ntfs filesytem"
 msgstr ""
 
+#: MdlMain.module:492
+msgid "Error during installation of required software. Unable to continue"
+msgstr ""
+
+#: MdlMain.module:683
+msgid "Error installing"
+msgstr ""
+
+#: MdlMain.module:575
+msgid "Error while installing kernels and initrds"
+msgstr ""
+
 #: MdlAutoPartition.module:538
 msgid "Existing Data"
 msgstr ""
@@ -174,31 +342,55 @@ msgstr ""
 msgid "FAILED"
 msgstr "ERROR"
 
+#: MdlMain.module:195
+msgid "Failed to create user account. See error below."
+msgstr ""
+
 #: Step3a1a.class:160
 msgid "Failed to format partitions, please try another partitioning method"
 msgstr "El intento a formatear las particiones ha fallado, intente con otra manera de particionado"
 
-#: Step6.class:69
+#: Step6.class:71
 msgid "File System"
 msgstr "Systema de Archivos"
+
+#: Conf5.class:107
+msgid "File in userspace daemon"
+msgstr ""
 
 #: MdlStartUp.module:57
 msgid "Final Configuration"
 msgstr "Configuración Final"
 
-#: Step8.class:76
+#: MdlBootMngr.module:165
+msgid "Floppy"
+msgstr ""
+
+#: Conf2.class:24
+msgid "For added security, use a password that is easy for you to remember, but hard for others to guess."
+msgstr ""
+
+#: Step8.class:84
 msgid "Format to"
 msgstr ""
 
-#: Step1.class:168
+#: MdlMain.module:256
+msgid "Formatting"
+msgstr ""
+
+#: Step1.class:169
 msgid "Found"
 msgstr "Encontre"
 
-#: Step8.class:123
+#: MdlBootMngr.module:422
+msgid "Found duplicate operating system names. Please use unique labels for each menu entry"
+msgstr ""
+
+#: Step8.class:135
 msgid "Full"
 msgstr ""
 
-#: Step7.class:108
+#: Step7.class:146
 msgid "Full Install"
 msgstr ""
 
@@ -206,23 +398,83 @@ msgstr ""
 msgid "GParted"
 msgstr "GParted"
 
+#: Conf0.class:792
+msgid "GRUB"
+msgstr ""
+
+#: Conf3a.class:60
+msgid "GTK Tookit theme Settings"
+msgstr ""
+
 #: Step5.class:67
 msgid "Gparted was not found on this system. Please install gparted and try again"
 msgstr "No se pudo encontrar GParted en este sistema. Por favor instale gparted e intente otra vez."
 
-#: FMain.class:288 FMain0.class:288
+#: Conf3a.class:68
+msgid "Graphical inteface preferences"
+msgstr ""
+
+#: FMain.class:297 FMain0.class:300
 msgid "Help"
 msgstr "Ayuda"
 
+#: Conf3a.class:72
+msgid "IceWM settings, preferences, menu"
+msgstr ""
+
+#: Conf3.class:436
+msgid "Import Existing User"
+msgstr ""
+
+#: Conf3a.class:237
+msgid "Import user accounts into VectorLinux"
+msgstr ""
+
+#: Step7.class:205
+msgid "Include Development Tools"
+msgstr ""
+
+#: Step7.class:218
+msgid "Include Light-weight graphical environment"
+msgstr ""
+
+#: Conf0.class:72
+msgid "Include in boot menu"
+msgstr ""
+
+#: Conf0.class:636
+msgid "Include this Operating System in boot menu"
+msgstr ""
+
+#: Conf0.class:580
+msgid "Initial RAM Disk"
+msgstr ""
+
+#: Conf0.class:110
+msgid "Initial RAM disk image"
+msgstr ""
+
 #: Step1.class:93
 msgid "Insert installation CD or move Installable (iso) images to the top directory on your partitions and click"
+msgstr ""
+
+#: Step9.class:62
+msgid "Install Base System (required)"
+msgstr ""
+
+#: Step9.class:227
+msgid "Install Process"
+msgstr ""
+
+#: Step9.class:62
+msgid "Install User-Selected Software"
 msgstr ""
 
 #: MdlStartUp.module:50
 msgid "Install VectorLinux"
 msgstr "Instalar VectorLinux"
 
-#: Step3.class:219
+#: Step3.class:220
 msgid "Install VectorLinux to existing partitions on my hard drive"
 msgstr "Instalar VectorLinux en particiones ya existentes en mi disco duro"
 
@@ -230,11 +482,11 @@ msgstr "Instalar VectorLinux en particiones ya existentes en mi disco duro"
 msgid "Install VectorLinux to free space on disk"
 msgstr "Instalar VectorLinux en el espacio vacío de mi disco duro"
 
-#: Step7.class:118
+#: Step7.class:156
 msgid "Install everthing in the image (Fully Automated)"
 msgstr ""
 
-#: Step7.class:154
+#: Step7.class:192
 msgid "Install the most minimal working confuguration (For older hardware)"
 msgstr ""
 
@@ -242,25 +494,77 @@ msgstr ""
 msgid "Installation"
 msgstr "Instalación"
 
-#: Step8.class:130
+#: FDone.class:72
+msgid "Installation Complete"
+msgstr ""
+
+#: Step8.class:142
 msgid "Installation Method"
 msgstr ""
 
-#: MdlStartUp.module:49 Step8.class:218
+#: MdlStartUp.module:49 Step8.class:230
 msgid "Installation Summary"
 msgstr "Resumen de la instalación"
+
+#: FMain.class:123 FMain0.class:89
+msgid "Installation complete. Need to reboot now to test the system."
+msgstr ""
+
+#: MdlMain.module:573
+msgid "Installation complete... Click"
+msgstr ""
+
+#: Conf0.class:54
+msgid "Installation found in"
+msgstr ""
+
+#: Step9.class:148
+msgid "Installation in progress"
+msgstr ""
+
+#: MdlMain.module:571
+msgid "Installation is complete. Click"
+msgstr ""
+
+#: MdlMain.module:681
+msgid "Installing"
+msgstr ""
+
+#: MdlMain.module:333
+msgid "Installing required package"
+msgstr ""
 
 #: Step2.class:118
 msgid "Integrity test"
 msgstr "Prueba de integridad"
 
+#: Conf5.class:110
+msgid "Internet Super Server"
+msgstr ""
+
 #: MdlAutoPartition.module:143
 msgid "It is not safe to perform this operation... Please use another partitioning method"
+msgstr ""
+
+#: Conf3a.class:56
+msgid "KDE Settings (Menu, Window decorations, etc)"
 msgstr ""
 
 #: Step2.class:198
 msgid "Keep in mind however, that this process can take a while to complete."
 msgstr "Tenga presente que este proceso podria tomar varios minutos para terminar"
+
+#: Conf0.class:133
+msgid "Kernel boot options"
+msgstr ""
+
+#: Conf0.class:785
+msgid "LILO"
+msgstr ""
+
+#: Conf4.class:115
+msgid "Linux.net"
+msgstr ""
 
 #: Step5.class:250
 msgid "Loading partitioning utility ... Please Wait"
@@ -270,6 +574,10 @@ msgstr "Cargando herramienta de particionar (gparted) ... Por favor espere."
 msgid "Loading partitioning utility...Please Wait"
 msgstr "Cargando herramienta de particionar (gparted) ... Por favor espere."
 
+#: Conf1.class:186
+msgid "LocalTime"
+msgstr ""
+
 #: Step0.class:20
 msgid "Localization Settings"
 msgstr "Valores locales"
@@ -278,51 +586,91 @@ msgstr "Valores locales"
 msgid "Locate free (unpartitioned) space on hard disk and install VectorLinux there."
 msgstr "Utilizar espacio vacío en mi disco duro para intalar VectorLinux allí"
 
+#: Conf3.class:332
+msgid "Login Name"
+msgstr ""
+
 #: MdlAutoPartition.module:497
 msgid "MB of free space"
 msgstr ""
 
-#: Step8.class:136
+#: MdlBootMngr.module:161
+msgid "MBR Of"
+msgstr ""
+
+#: MdlBootMngr.module:347
+msgid "MBR of"
+msgstr ""
+
+#: Conf3a.class:78
+msgid "MPlayer Multimedia Player Settings"
+msgstr ""
+
+#: Step8.class:148
 msgid "Major Components"
 msgstr ""
 
-#: Step7a.class:235
+#: Step7a.class:236
 msgid "Major optional components available for installation. To select / un-select a component, click it's name or the box to the left of it's name."
 msgstr ""
 
-#: Step3.class:192
+#: Step3.class:193
 msgid "Manually resize my partitions "
 msgstr "Encoger mis particiones manualmente"
 
-#: Step7.class:144 Step8.class:127
+#: Step7.class:182 Step8.class:139
 msgid "Minimal"
 msgstr ""
 
-#: Step6.class:68
+#: Conf2.class:24
+msgid "Most oter every-day tasks do not require administrative priviledges."
+msgstr ""
+
+#: Step6.class:70
 msgid "Mount Point"
 msgstr "Punto de Montage"
 
-#: Step8.class:74
+#: Step8.class:83
 msgid "Mount to"
 msgstr ""
 
-#: Step3.class:209
+#: Conf5.class:128
+msgid "Mouse driver for Text Mode interface"
+msgstr ""
+
+#: Step3.class:210
 msgid "My hard drive is already partitioned"
 msgstr "Mi disco duro ya esta particionado"
 
-#: Step8.class:88
+#: Step8.class:100
 msgid "NO SWAP SPACE SELECTED"
+msgstr ""
+
+#: Conf0.class:798
+msgid "NONE"
+msgstr ""
+
+#: Conf0.class:92
+msgid "Name"
+msgstr ""
+
+#: Conf4.class:69
+msgid "Network Configuration"
 msgstr ""
 
 #: MdlStartUp.module:55
 msgid "Network Settings"
 msgstr "Valores de Red"
 
-#: FMain.class:312 FMain0.class:312 FMain0Old.class:282
+#: Conf5.class:122
+msgid "Network interface manager"
+msgstr ""
+
+#: FDone.class:23 FMain.class:321 FMain0.class:324
 msgid "Next"
 msgstr "Siguiente"
 
-#: Step3a1a.class:186 Step6.class:467 Step7a.class:143
+#: Step3a1a.class:186 Step6.class:510 Step7a.class:144
 msgid "No"
 msgstr "No"
 
@@ -346,13 +694,21 @@ msgstr ""
 msgid "No resizable partitions found on your system. Please use the manual partitioning method."
 msgstr ""
 
-#: Step8.class:74
+#: MdlBootMngr.module:150
+msgid "None"
+msgstr ""
+
+#: Step8.class:83
 msgid "Not Formatted"
 msgstr ""
 
-#: Step6.class:142
+#: Step6.class:149
 msgid "Not Used"
 msgstr "Sin Utilizar"
+
+#: Conf0.class:521
+msgid "Offer"
+msgstr ""
 
 #: Step3a1a.class:210
 msgid "Operation cancelled by user. No changes have been made to the system"
@@ -370,7 +726,11 @@ msgstr "PASÓ"
 msgid "Package Name"
 msgstr ""
 
-#: Step6.class:66
+#: MdlMain.module:681
+msgid "Part of"
+msgstr ""
+
+#: Step6.class:68
 msgid "Partition"
 msgstr "Partición"
 
@@ -386,8 +746,16 @@ msgstr "Proceso de particionado completo. Haz click en "
 msgid "Partitions are ready for VectorLinux. Click"
 msgstr ""
 
-#: Step8.class:62
+#: Step8.class:68
 msgid "Partitions to be used"
+msgstr ""
+
+#: Conf2.class:66
+msgid "Password was not set. See error log below"
+msgstr ""
+
+#: Conf2.class:60
+msgid "Passwords do not match. Please enter the same password twice"
 msgstr ""
 
 #: Step3a2.class:205
@@ -406,7 +774,15 @@ msgstr "Le sugerimos que utilize la opción de particionado automático, ó cual
 msgid "Please make sure the drive or partition is not being used by some other program"
 msgstr "Por favor asegúrese que el disco ó la partición seleccionada no esté siendo utilizado por otro programa."
 
-#: Step6.class:228
+#: Conf3.class:135
+msgid "Please select a password for"
+msgstr ""
+
+#: Conf3.class:167
+msgid "Please select another user login name"
+msgstr ""
+
+#: Step6.class:235
 msgid "Please select only one partition for this purpose"
 msgstr "Por favor seleccione solo una partición para este propósito"
 
@@ -418,7 +794,7 @@ msgstr "Por favor espere mientras particionamos el disco duro"
 msgid "Possible causes for this are a corrupted download or a badly burnt cd. You can try the following options"
 msgstr "Posibles causas de este problema son: una imágen ISO corrupta or no grabado en CD correctamente. Intente las siguientes sugerencias."
 
-#: Step8.class:106
+#: Step8.class:118
 msgid "Pre-formatted to reiserfs, and used for /"
 msgstr ""
 
@@ -426,23 +802,67 @@ msgstr ""
 msgid "Preparation"
 msgstr "Preparación"
 
+#: Step9.class:62
+msgid "Prepare Partitions"
+msgstr ""
+
 #: Step3a1a.class:190
 msgid "Preparing hard disk for new partitioning structure. Please wait"
 msgstr "Preparando su disco duro para la nueva estructura de particiones... Por favor espere un momento."
 
-#: FMain.class:247 FMain0.class:247 FMain0Old.class:233
+#: MdlMain.module:482
+msgid "Preparing system partitions"
+msgstr ""
+
+#: Conf5.class:104
+msgid "Printing service"
+msgstr ""
+
+#: MdlMain.module:336
+msgid "Problem while installing"
+msgstr ""
+
+#: FMain.class:257 FMain0.class:259
 msgid "Process Overview"
 msgstr "Resumen del Proceso"
 
-#: FMain.class:323 FMain0.class:323 FMain0Old.class:293
+#: Conf0.class:848
+msgid "Prompt Time Out"
+msgstr ""
+
+#: Conf3a.class:58
+msgid "QT Toolkit settings (KDE Visual Effects)"
+msgstr ""
+
+#: FMain.class:332 FMain0.class:335
 msgid "Quit"
 msgstr "Cancelar"
+
+#: Conf3a.class:76
+msgid "ROX Filer Desktop settings"
+msgstr ""
+
+#: Conf5.class:113
+msgid "RPC Port Mapper"
+msgstr ""
+
+#: Conf2.class:200 Conf3.class:381
+msgid "Re-enter Password"
+msgstr ""
 
 #: Step7b.class:58
 msgid "Reading software catalog... Please wait a moment"
 msgstr ""
 
-#: MdlStartUp.module:53
+#: Conf3.class:348
+msgid "Real Name"
+msgstr ""
+
+#: FMain.class:124 FMain0.class:90
+msgid "Reboot"
+msgstr ""
+
+#: Conf1.class:144 MdlStartUp.module:53
 msgid "Regional Settings"
 msgstr "Valores Regionales"
 
@@ -462,23 +882,23 @@ msgstr "Reiniciar Ahora"
 msgid "SYSTEM RESTART SUGGESTED"
 msgstr "SUGERENCIA: RE-INICIE SU SYSTEMA"
 
-#: Step1.class:222
+#: Step1.class:223
 msgid "Scanning"
 msgstr "Buscando en"
 
-#: Step1.class:209
+#: Step1.class:210
 msgid "Scanning for CD Media ... Please wait"
 msgstr "Buscando medios de instalación en CDROM. Por favor espere"
 
-#: Step1.class:260
+#: Step1.class:261
 msgid "Scanning system for installable ISO images"
 msgstr "Buscando medios de instalación en imagenes ISO."
 
-#: Step1.class:149
+#: Step1.class:150
 msgid "Scanning system partitions for installation files"
 msgstr "Buscando medios de instalación en particiones del sistema"
 
-#: Step1.class:550
+#: Step1.class:551
 msgid "Search Again"
 msgstr "Buscar Nuevamente"
 
@@ -486,15 +906,23 @@ msgstr "Buscar Nuevamente"
 msgid "Searching for unused space on your hard drive... please wait"
 msgstr "Buscando espacio libre en su disco duro ... Por favor espere un momento."
 
-#: Step1.class:443
+#: Step1.class:444
 msgid "Searching your system for installable media"
 msgstr ""
 
-#: Step7.class:136
+#: Conf0.class:859
+msgid "Seconds"
+msgstr ""
+
+#: Conf5.class:95
+msgid "Secure Shell remote access"
+msgstr ""
+
+#: Step7.class:174
 msgid "Select  the components you wish to install  (Advanced)"
 msgstr ""
 
-#: Step7a.class:169 Step7b.class:183
+#: Step7a.class:170 Step7b.class:183
 msgid "Select All"
 msgstr ""
 
@@ -502,7 +930,7 @@ msgstr ""
 msgid "Select Installation Mode"
 msgstr ""
 
-#: Step1.class:511
+#: Step1.class:512
 msgid "Select Installation Source"
 msgstr "Seleccione el medio de instalación"
 
@@ -512,7 +940,7 @@ msgstr "Seleccione la fuente instalacion de esta lista"
 
 #: MdlStartUp.module:44
 msgid "Select Language"
-msgstr "Selección de Lenguage"
+msgstr "Selección de Idioma"
 
 #: MdlStartUp.module:45
 msgid "Select Media"
@@ -521,6 +949,18 @@ msgstr "Medio de Instalación"
 #: Step3a.class:20
 msgid "Select one of the following options"
 msgstr "Elija una de las siguentes opciones"
+
+#: Conf3.class:98
+msgid "Select picture ID"
+msgstr ""
+
+#: Conf3.class:100
+msgid "Select picture ID for"
+msgstr ""
+
+#: Conf0.class:776
+msgid "Select system boot manager to use"
+msgstr ""
 
 #: Step3a2.class:143
 msgid "Select the location on your hard drive where you would like to install VectorLinux"
@@ -534,13 +974,21 @@ msgstr ""
 msgid "Select the partitioning method you would like to use"
 msgstr "Seleccione el método de particionado que desea utilizar"
 
+#: Conf5.class:242
+msgid "Select the system services to be launched at start-up."
+msgstr ""
+
 #: Step3a3.class:107
 msgid "Select which partition to resize and use the slider below it to adjust the ammount of space to be used by VectorLinux"
 msgstr ""
 
-#: Step6.class:362
+#: Step6.class:405
 msgid "Select which partitions to use for installation"
 msgstr "Elija las partiiones que se utilizarán en la instalación"
+
+#: Conf3a.class:250
+msgid "Select which user account to import, and which settings to reset. Un-checked items will be carried over, while checked items will be reset to factory defaults."
+msgstr ""
 
 #: Step0.class:285
 msgid "Select your keyboard layout"
@@ -554,6 +1002,18 @@ msgstr "Seleccione el model de su teclado"
 msgid "Select your language"
 msgstr "Seleccione su idioma"
 
+#: Conf0.class:359
+msgid "Selecting this option will bypass your boot manager configuration."
+msgstr ""
+
+#: Conf5.class:60
+msgid "Service"
+msgstr ""
+
+#: Conf3a.class:117
+msgid "Setting"
+msgstr ""
+
 #: Step3a3a.class:163
 msgid "Shrink partitions now"
 msgstr ""
@@ -566,17 +1026,33 @@ msgstr ""
 msgid "Simulated resize of your ntfs partition"
 msgstr ""
 
-#: Step6.class:67
+#: Step6.class:69
 msgid "Size"
 msgstr "Tamaño"
 
-#: MdlStartUp.module:47 Step8.class:135
+#: MdlStartUp.module:47 Step8.class:147
 msgid "Software Selection"
 msgstr "Selección de Software"
+
+#: Conf5.class:98
+msgid "Software update notifications"
+msgstr ""
+
+#: Step9.class:89
+msgid "Something went wrong during installation. Please try again"
+msgstr ""
+
+#: Conf3a.class:66
+msgid "Sound system preferences"
+msgstr ""
 
 #: Step0.class:122
 msgid "Spanish"
 msgstr "Español (España)"
+
+#: Conf0.class:225 MdlBootMngr.module:171
+msgid "Standard"
+msgstr ""
 
 #: MdlStartUp.module:56
 msgid "Startup Options"
@@ -586,21 +1062,45 @@ msgstr "Opciones de Arranque"
 msgid "Stop"
 msgstr "Alto"
 
-#: Step6.class:142
+#: Step6.class:149
 msgid "Swap"
 msgstr ""
 
-#: Step8.class:93
+#: Step8.class:105
 msgid "Swap Space"
+msgstr ""
+
+#: Conf2.class:134
+msgid "System Administrator Account"
 msgstr ""
 
 #: MdlStartUp.module:52
 msgid "System Boot Manager"
 msgstr "Gestor de Arranque"
 
+#: Conf0.class:760
+msgid "System Bootloader Configuration"
+msgstr ""
+
 #: MdlStartUp.module:51
 msgid "System Configuration"
 msgstr "Configuración del Sistema"
+
+#: Conf5.class:221
+msgid "System Services"
+msgstr ""
+
+#: Conf5.class:89
+msgid "System task scheduler"
+msgstr ""
+
+#: Conf0.class:905
+msgid "Tab 0"
+msgstr ""
+
+#: Conf0.class:817
+msgid "Target"
+msgstr ""
 
 #: Step2.class:82
 msgid "Testing file"
@@ -610,6 +1110,10 @@ msgstr "Probando fichero"
 msgid "The VectorLinux installer is unable to embed the gparted partitioning utility."
 msgstr "No se pudo incorporar la herramienta de particionado (gparted)."
 
+#: Step9.class:243
+msgid "The development Crew"
+msgstr ""
+
 #: Step2.class:117
 msgid "The following"
 msgstr "Lo siguiente"
@@ -618,15 +1122,23 @@ msgstr "Lo siguiente"
 msgid "The gparted program was not found on this system. Please install gparted or choose another partitioning method."
 msgstr ""
 
+#: Conf2.class:24
+msgid "The linux root account is pre-defined to be used as the system administrator's account. "
+msgstr ""
+
 #: Step3a1a.class:53
 msgid "There has been an error deleting"
 msgstr "Ha ocurrido un error borrando"
 
-#: Step7a.class:143
+#: Conf2.class:24
+msgid "This account is used to perform system-wide changes such as adding / removing software, system-qide updates, managing user accounts, etc."
+msgstr ""
+
+#: Step7a.class:144
 msgid "This component is a dependancy to any graphical user interface progam on the system"
 msgstr ""
 
-#: Step1.class:433
+#: Step1.class:434
 msgid "This feature can help you avoid an unsuccesful installation."
 msgstr "Esta función puede ayudarle a evitar una instalacion inservible."
 
@@ -650,7 +1162,7 @@ msgstr "Esta opción no dañará la información contenida en su disco duro"
 msgid "This option will wipe out any data on the disk you select."
 msgstr "Esta opción eliminará toda la información contenida en el disco que usted seleccione."
 
-#: Step1.class:433
+#: Step1.class:434
 msgid "This process can take a long time to complete."
 msgstr "Este proceso puede ser lento y tomar varios minutos para terminar."
 
@@ -660,6 +1172,10 @@ msgstr "Este paso de la instalación no se puede deshacer. ¿Esta seguro de que 
 
 #: Step3a3.class:39
 msgid "This will allow you to use a partitioning tool to handle your partitioning needs."
+msgstr ""
+
+#: Conf0.class:558
+msgid "Title"
 msgstr ""
 
 #: Step3a1.class:74
@@ -674,13 +1190,25 @@ msgstr ""
 msgid "Try another partitioning method"
 msgstr ""
 
-#: Step7a.class:175 Step7b.class:181
+#: Conf1.class:186
+msgid "UTC"
+msgstr ""
+
+#: Step7a.class:176 Step7b.class:181
 msgid "Un-Select All"
+msgstr ""
+
+#: MdlMain.module:598
+msgid "Unable to continue."
 msgstr ""
 
 #: Step3a2.class:409
 msgid "Unable to find any hard drives with enough unpartitioned space. Please go back and select  another partitioning method"
 msgstr "No se ha encontrado ningún disco que contenga suficiento espacio libre para continuar. Por favor regrese y elija otro método de particionado"
+
+#: Conf0.class:513
+msgid "Unable to find boot arguments for OS in"
+msgstr ""
 
 #: Step3a2.class:205
 msgid "Unable to find enough un-used space to perform auto-partition."
@@ -690,12 +1218,24 @@ msgstr "No hay suficiente espacio vacío en su sistema para particionar automát
 msgid "Unable to find enough un-used space to perform auto-partition. Please consider using a different partitioning option."
 msgstr "No se encontró suficiente espacio libre para particionar el sistema automáticamente. Por favor utilize otro modo de particionado."
 
-#: MdlMain.module:33
+#: MdlMain.module:37
 msgid "Unable to format"
 msgstr "No se pudo formatear"
 
+#: MdlMain.module:540
+msgid "Unable to install contents of"
+msgstr ""
+
+#: MdlMain.module:598
+msgid "Unable to install the components of"
+msgstr ""
+
 #: Step5.class:69
 msgid "Unable to launch partitioning tool."
+msgstr ""
+
+#: Conf3.class:163
+msgid "Unable to successfully create user account. Please run VasmCC after installation is done."
 msgstr ""
 
 #: Step3a1.class:20
@@ -714,7 +1254,11 @@ msgstr "Disco Completo"
 msgid "Use free space on existing partitions for VectorLinux"
 msgstr "Instalar VectorLinux en el espacio libre de mis partitiones actuales"
 
-#: Step3.class:202
+#: Conf3.class:212
+msgid "Use only lowercase letters and numbers for this field"
+msgstr ""
+
+#: Step3.class:203
 msgid "Use the partitioning tool to prepare your system partitions."
 msgstr "Utilizar la herramienta de particionado (gparted) para prepara mi sistema."
 
@@ -726,17 +1270,41 @@ msgstr "Area de prueba"
 msgid "Use unpartitioned space on my hard disk (creates new partitions)"
 msgstr "Utilizar espacio vacío en mi disco para instalar VectorLinux (Crear particiones nuevas)"
 
+#: Conf3.class:167
+msgid "User"
+msgstr ""
+
 #: MdlStartUp.module:54
 msgid "User Accounts"
 msgstr "Usuarios"
 
-#: Step1.class:356
+#: Conf3.class:467
+msgid "User Rights Management"
+msgstr ""
+
+#: Conf3a.class:260
+msgid "User account to import"
+msgstr ""
+
+#: Step1.class:357
 msgid "VERSION"
 msgstr "VERSION"
+
+#: Conf4.class:97
+msgid "VLocity"
+msgstr ""
+
+#: Conf5.class:119
+msgid "VMWare modules"
+msgstr ""
 
 #: .project:1
 msgid "VectorLinux Installer"
 msgstr "Instalador de VectorLinux"
+
+#: FDone.class:31
+msgid "VectorLinux has been installed in your system."
+msgstr ""
 
 #: Step5.class:125
 msgid "VectorLinux is about to launch the GParted partitioning tool. Use this utility to"
@@ -758,7 +1326,11 @@ msgstr "Verificando la informacion en el paquete comprimido"
 msgid "Verifying installation files can prevent you from performing an unsuccessful install"
 msgstr "Este proceso puede ayudar a asegurar que la instalacion sea exitosa."
 
-#: Step1.class:433 Step3a1.class:22 Step3a1a.class:186 Step7a.class:143
+#: Conf0.class:829
+msgid "Video Resolution"
+msgstr ""
+
+#: Step7a.class:144
 msgid "WARNING:"
 msgstr "ADVERTENCIA:"
 
@@ -770,6 +1342,10 @@ msgstr ""
 msgid "We are unable to find any hard disks with enough unpartitioned space for this operation."
 msgstr "No se ha encontrado ningún disco con suficiente espacio vacío para utilizar esta función"
 
+#: Conf3.class:47
+msgid "When finished, Click"
+msgstr ""
+
 #: Step5.class:125
 msgid "When you are finished, you will need to exit the utility from the"
 msgstr "Cuando haya terminado, necesitará cerrar la aplicacion del menú"
@@ -778,11 +1354,27 @@ msgstr "Cuando haya terminado, necesitará cerrar la aplicacion del menú"
 msgid "When you are ready to continue, click the"
 msgstr ""
 
+#: Conf5.class:116
+msgid "Windows networking service"
+msgstr ""
+
+#: Conf5.class:101
+msgid "Wireless network scanner"
+msgstr ""
+
 #: Step3a1a.class:82
 msgid "Would you like to let VectorLinux use this partition or create a new one?"
 msgstr "¿Desea que VectorLinux utilize esta partición, ó crear una nueva?"
 
-#: Step3a1a.class:186 Step6.class:467 Step7a.class:143
+#: Conf3a.class:62
+msgid "X-window basic settings (includes xterm settings)"
+msgstr ""
+
+#: Conf3a.class:74
+msgid "XMMS Audio player preferences"
+msgstr ""
+
+#: Step3a1a.class:186 Step6.class:510 Step7a.class:144
 msgid "Yes"
 msgstr "Sí"
 
@@ -790,11 +1382,27 @@ msgstr "Sí"
 msgid "You are about to shink"
 msgstr ""
 
-#: Step6.class:228
+#: Step6.class:235
 msgid "You have already selected"
 msgstr "Ya se ha seleccionado"
 
-#: Step8.class:237
+#: Conf0.class:359
+msgid "You may not be able to start your VectorLinux installation. Do not choose this option"
+msgstr ""
+
+#: Conf3.class:132
+msgid "You must enter a login name first."
+msgstr ""
+
+#: Conf3.class:138
+msgid "You must enter the password twice for added security"
+msgstr ""
+
+#: MdlBootMngr.module:404
+msgid "You must select one operating system to be started by default"
+msgstr ""
+
+#: Step8.class:249
 msgid "Your VectorLinux installation is about to be performed as follows. If you need to make any changes, this is your last chance."
 msgstr ""
 
@@ -806,13 +1414,25 @@ msgstr "Su sistema re-iniciará en 10 segundos"
 msgid "Your system still contains some non-linux partitions. If you still have a Windows operating system installed, it is recomended "
 msgstr "Su sistema aún contiene particiones propias de otros sistemas operativos. Si alguna de estas aún tiene una instalacion de Windows, le recomendamos"
 
-#: Step8.class:76
+#: Conf3.class:167
+msgid "already exists in the system."
+msgstr ""
+
+#: Step8.class:84
 msgid "and mount to"
 msgstr ""
 
-#: Step6.class:228
+#: Conf0.class:521
+msgid "as a bootable choice"
+msgstr ""
+
+#: Step6.class:235
 msgid "as your"
 msgstr "como su"
+
+#: Conf3.class:135
+msgid "before continuing"
+msgstr ""
 
 #: Step5.class:172
 msgid "button to restart your computer now, or click"
@@ -830,17 +1450,21 @@ msgstr "falló la prueba de integridad. Todos los paquetes requeridos (vitales) 
 msgid "has failed the integrity test. It is not safe to continue"
 msgstr "falló la prueba de integridad. El futuro de esta instalacion no está asegurado"
 
-#: Step1.class:232
+#: Step1.class:233
 msgid "in"
 msgstr "en"
 
-#: Step1.class:168
+#: Step1.class:169
 msgid "in partition"
 msgstr "en particion"
 
 #: Step3a1a.class:186
 msgid "is about to be deleted."
 msgstr "será borrado completamente"
+
+#: Step9.class:24
+msgid "is being installed to your computer. Please wait."
+msgstr ""
 
 #: Step5.class:125
 msgid "menu"
@@ -866,7 +1490,7 @@ msgstr "en"
 msgid "or move your installation images (ISO) to the top of your partitions. Then click"
 msgstr ""
 
-#: Step6.class:228
+#: Step6.class:235
 msgid "partition."
 msgstr "particion."
 
@@ -882,7 +1506,7 @@ msgstr "requerido"
 msgid "that you reboot your system at this time. "
 msgstr "que re-inicie su sistema ahora"
 
-#: MdlMain.module:33
+#: MdlMain.module:37
 msgid "to"
 msgstr "a"
 
@@ -894,7 +1518,7 @@ msgstr "Para detener este proceso"
 msgid "to begin installing"
 msgstr ""
 
-#: Step3a1a.class:177 Step3a2.class:359 Step3a3a.class:72 Step5.class:177
+#: Step3a3a.class:72 Step5.class:177
 msgid "to continue"
 msgstr "para continuar"
 
@@ -906,8 +1530,16 @@ msgstr ""
 msgid "to continue without restarting."
 msgstr "para continue sin re-iniciar."
 
+#: MdlMain.module:573
+msgid "to continue."
+msgstr ""
+
 #: Step3a3a.class:26
 msgid "to make room for your vectorlinux installation."
+msgstr ""
+
+#: FDone.class:31
+msgid "to restart your computer now."
 msgstr ""
 
 #: Step1.class:103
@@ -916,5 +1548,13 @@ msgstr ""
 
 #: Step1.class:93
 msgid "to search for media again"
+msgstr ""
+
+#: Conf0.class:359
+msgid "unless you are fully aware of what you are doing."
+msgstr ""
+
+#: MdlMain.module:256
+msgid "with"
 msgstr ""
 
