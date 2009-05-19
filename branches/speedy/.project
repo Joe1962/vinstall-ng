@@ -2,19 +2,19 @@
 # Compiled with Gambas 2.12
 Title=VectorLinux Installer
 Startup=MdlStartUp
-Version=0.0.2
+Version=0.0.3
 Library=gb.gtk
 Library=gb.form
 Library=gb.desktop
 Library=gb.form.mdi
 Library=gb.gtk.ext
-Arguments="en_US"
 TabSize=2
 Translate=1
 Language=en_US
 ControlPublic=1
 ModulePublic=1
-Maintainer=root
-Address=root@logos.linux.net
+ExecPath=/home/lightuser/devel/speedy/vinstall-ng.gambas
+Maintainer=M0E-lnx
+Address=M0E.lnx@gmail.com
 License=General Public Licence
 UseRelease=1

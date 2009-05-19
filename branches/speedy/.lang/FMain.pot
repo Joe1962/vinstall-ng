@@ -14,23 +14,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FMain.class:253
+#: FMain.class:76
+msgid "Reboot"
+msgstr ""
+
+#: FMain.class:127
+msgid "Installation complete. Need to reboot now to test the system."
+msgstr ""
+
+#: FMain.class:261
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:293
+#: FMain.class:301
 msgid "Help"
 msgstr ""
 
-#: FMain.class:306
+#: FMain.class:314
 msgid "Back"
 msgstr ""
 
-#: FMain.class:317
+#: FMain.class:325
 msgid "Next"
 msgstr ""
 
-#: FMain.class:328
+#: FMain.class:336
 msgid "Quit"
 msgstr ""
 

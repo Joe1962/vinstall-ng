@@ -70,83 +70,83 @@ msgstr ""
 msgid "unless you are fully aware of what you are doing."
 msgstr ""
 
-#: Conf0.class:512
+#: Conf0.class:513
 msgid "Unable to find boot arguments for OS in"
 msgstr ""
 
-#: Conf0.class:520
+#: Conf0.class:521
 msgid "Offer"
 msgstr ""
 
-#: Conf0.class:520
+#: Conf0.class:521
 msgid "as a bootable choice"
 msgstr ""
 
-#: Conf0.class:557
+#: Conf0.class:558
 msgid "Title"
 msgstr ""
 
-#: Conf0.class:579
+#: Conf0.class:580
 msgid "Initial RAM Disk"
 msgstr ""
 
-#: Conf0.class:635
+#: Conf0.class:636
 msgid "Include this Operating System in boot menu"
 msgstr ""
 
-#: Conf0.class:644
+#: Conf0.class:645
 msgid "Boot this operating system by default"
 msgstr ""
 
-#: Conf0.class:759
+#: Conf0.class:760
 msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0.class:775
+#: Conf0.class:776
 msgid "Select system boot manager to use"
 msgstr ""
 
-#: Conf0.class:784
+#: Conf0.class:785
 msgid "LILO"
 msgstr ""
 
-#: Conf0.class:791
+#: Conf0.class:792
 msgid "GRUB"
 msgstr ""
 
-#: Conf0.class:797
+#: Conf0.class:798
 msgid "NONE"
 msgstr ""
 
-#: Conf0.class:806
+#: Conf0.class:807
 msgid "Boot Menu Options"
 msgstr ""
 
-#: Conf0.class:816
+#: Conf0.class:817
 msgid "Target"
 msgstr ""
 
-#: Conf0.class:828
+#: Conf0.class:829
 msgid "Video Resolution"
 msgstr ""
 
-#: Conf0.class:847
+#: Conf0.class:848
 msgid "Prompt Time Out"
 msgstr ""
 
-#: Conf0.class:858
+#: Conf0.class:859
 msgid "Seconds"
 msgstr ""
 
-#: Conf0.class:865
+#: Conf0.class:866
 msgid "Boot Default"
 msgstr ""
 
-#: Conf0.class:888
+#: Conf0.class:889
 msgid "DETECTED OPERATING SYSTEMS."
 msgstr ""
 
-#: Conf0.class:904
+#: Conf0.class:905
 msgid "Tab 0"
 msgstr ""
 

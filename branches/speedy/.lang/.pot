@@ -73,83 +73,83 @@ msgstr ""
 msgid "unless you are fully aware of what you are doing."
 msgstr ""
 
-#: Conf0.class:512
+#: Conf0.class:513
 msgid "Unable to find boot arguments for OS in"
 msgstr ""
 
-#: Conf0.class:520
+#: Conf0.class:521
 msgid "Offer"
 msgstr ""
 
-#: Conf0.class:520
+#: Conf0.class:521
 msgid "as a bootable choice"
 msgstr ""
 
-#: Conf0.class:557
+#: Conf0.class:558
 msgid "Title"
 msgstr ""
 
-#: Conf0.class:579
+#: Conf0.class:580
 msgid "Initial RAM Disk"
 msgstr ""
 
-#: Conf0.class:635
+#: Conf0.class:636
 msgid "Include this Operating System in boot menu"
 msgstr ""
 
-#: Conf0.class:644
+#: Conf0.class:645
 msgid "Boot this operating system by default"
 msgstr ""
 
-#: Conf0.class:759
+#: Conf0.class:760
 msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0.class:775
+#: Conf0.class:776
 msgid "Select system boot manager to use"
 msgstr ""
 
-#: Conf0.class:784
+#: Conf0.class:785
 msgid "LILO"
 msgstr ""
 
-#: Conf0.class:791
+#: Conf0.class:792
 msgid "GRUB"
 msgstr ""
 
-#: Conf0.class:797
+#: Conf0.class:798
 msgid "NONE"
 msgstr ""
 
-#: Conf0.class:806
+#: Conf0.class:807
 msgid "Boot Menu Options"
 msgstr ""
 
-#: Conf0.class:816
+#: Conf0.class:817
 msgid "Target"
 msgstr ""
 
-#: Conf0.class:828
+#: Conf0.class:829
 msgid "Video Resolution"
 msgstr ""
 
-#: Conf0.class:847
+#: Conf0.class:848
 msgid "Prompt Time Out"
 msgstr ""
 
-#: Conf0.class:858
+#: Conf0.class:859
 msgid "Seconds"
 msgstr ""
 
-#: Conf0.class:865
+#: Conf0.class:866
 msgid "Boot Default"
 msgstr ""
 
-#: Conf0.class:888
+#: Conf0.class:889
 msgid "DETECTED OPERATING SYSTEMS."
 msgstr ""
 
-#: Conf0.class:904
+#: Conf0.class:905
 msgid "Tab 0"
 msgstr ""
 
@@ -244,7 +244,7 @@ msgstr ""
 msgid "When finished, Click"
 msgstr ""
 
-#: Conf3.class:47 MdlMain.module:514 Step3a1a.class:177 Step3a2.class:359
+#: Conf3.class:47 MdlMain.module:571 Step3a1a.class:177 Step3a2.class:359
 #: Step3a3a.class:72 Step5.class:177
 msgid "to continue"
 msgstr ""
@@ -506,7 +506,7 @@ msgstr ""
 msgid "Select the system services to be launched at start-up."
 msgstr ""
 
-#: FDone.class:23 FMain.class:317 FMain0.class:318
+#: FDone.class:23 FMain.class:325 FMain0.class:331
 msgid "Next"
 msgstr ""
 
@@ -536,19 +536,27 @@ msgstr ""
 msgid "About your VectorLinux installation"
 msgstr ""
 
-#: FMain.class:253 FMain0.class:253
+#: FMain.class:76 FMain0.class:78
+msgid "Reboot"
+msgstr ""
+
+#: FMain.class:127 FMain0.class:132
+msgid "Installation complete. Need to reboot now to test the system."
+msgstr ""
+
+#: FMain.class:261 FMain0.class:266
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:293 FMain0.class:294
+#: FMain.class:301 FMain0.class:307
 msgid "Help"
 msgstr ""
 
-#: FMain.class:306 FMain0.class:307
+#: FMain.class:314 FMain0.class:320
 msgid "Back"
 msgstr ""
 
-#: FMain.class:328 FMain0.class:329
+#: FMain.class:336 FMain0.class:342
 msgid "Quit"
 msgstr ""
 
@@ -666,59 +674,59 @@ msgstr ""
 msgid "Problem while installing"
 msgstr ""
 
-#: MdlMain.module:425
+#: MdlMain.module:482
 msgid "Preparing system partitions"
 msgstr ""
 
-#: MdlMain.module:427
+#: MdlMain.module:484
 msgid "An error occurred while preparing partitions. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:435
+#: MdlMain.module:492
 msgid "Error during installation of required software. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:483
+#: MdlMain.module:540
 msgid "Unable to install contents of"
 msgstr ""
 
-#: MdlMain.module:483
+#: MdlMain.module:540
 msgid "Cannot continue"
 msgstr ""
 
-#: MdlMain.module:514
+#: MdlMain.module:571
 msgid "Installation is complete. Click"
 msgstr ""
 
-#: MdlMain.module:516
+#: MdlMain.module:573
 msgid "Installation complete... Click"
 msgstr ""
 
-#: MdlMain.module:516
+#: MdlMain.module:573
 msgid "to continue."
 msgstr ""
 
-#: MdlMain.module:518
+#: MdlMain.module:575
 msgid "Error while installing kernels and initrds"
 msgstr ""
 
-#: MdlMain.module:541
+#: MdlMain.module:598
 msgid "Unable to install the components of"
 msgstr ""
 
-#: MdlMain.module:541
+#: MdlMain.module:598
 msgid "Unable to continue."
 msgstr ""
 
-#: MdlMain.module:624
+#: MdlMain.module:681
 msgid "Installing"
 msgstr ""
 
-#: MdlMain.module:624
+#: MdlMain.module:681
 msgid "Part of"
 msgstr ""
 
-#: MdlMain.module:626
+#: MdlMain.module:683
 msgid "Error installing"
 msgstr ""
 
@@ -1628,14 +1636,14 @@ msgstr ""
 msgid "Something went wrong during installation. Please try again"
 msgstr ""
 
-#: Step9.class:153
+#: Step9.class:148
 msgid "Installation in progress"
 msgstr ""
 
-#: Step9.class:232
+#: Step9.class:227
 msgid "Install Process"
 msgstr ""
 
-#: Step9.class:248
+#: Step9.class:243
 msgid "The development Crew"
 msgstr ""

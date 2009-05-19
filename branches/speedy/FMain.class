@@ -73,7 +73,11 @@ PUBLIC SUB btNext_Click()
   DIM bExist AS Boolean
 'Get the next One
 
-
+IF LAST.text = ("Reboot") THEN 
+  DEBUG "Insert reboot command in this line here"
+  Message.Error("Reboot not yet allowed")
+  RETURN 
+END IF
 
 sTmp = $oCurrent.GetNext()
     
@@ -119,7 +123,11 @@ ELSE
   $OCurrent = o
 ENDIF
  
- 
+  IF $oCurrent.name = "FDone" THEN 
+    Message.Info(("Installation complete. Need to reboot now to test the system."))
+    ClsGlobal.fRunningMainForm.btNext.text = ("Reboot")      
+    RETURN  
+  END IF
  IF IsNull($oCurrent.GetNext()) THEN btNext.Enabled = FALSE
 'Push to the foreground
 

@@ -107,8 +107,3 @@ PUBLIC SUB Form_Resize()
 
 END
 
-PUBLIC SUB Frame2_MouseDown()
-
-  ME.fake_progress()
-
-END

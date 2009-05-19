@@ -385,10 +385,11 @@ PUBLIC SUB rbLilo_Click()
   DIM $ob AS Object
   ME.Toggle_window_controls(TRUE)
   
-    FOR i = 0 TO TsOsList.Count - 1 
+    FOR i = 0 TO TsOsList.Count - 1
         FOR EACH $ob IN TsOsList[i].Children
           $ob.Delete
         NEXT 
+        
       TRY TsOsList[i].Delete
     NEXT 
     TsOsList.Count = 1
@@ -432,7 +433,7 @@ PUBLIC FUNCTION determine_boot_parameters(sRoot AS String) AS String
         ' now get the real path
         
         sdump = Trim(sdump)
-        Message(sdump)
+        'Message(sdump)
           IF sdump THEN sDumparr = Split(Trim(sDump), gb.NewLine) ' found something
                ' this will either pick up the link to the default kernel, or the first kernel that comes up from that partition.
         IF sDumparr THEN 

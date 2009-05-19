@@ -242,7 +242,7 @@ PUBLIC FUNCTION PERFORM_PARTITIONING() AS Integer
                 sCommand = "mke2fs -q " & sPart
              CASE "ext3"
                 'sCommand = "mke2fs -q -j " & saddr
-                scommand = "mkfs.ext3 -1 -j " & sPart
+                scommand = "mkfs.ext3 -q -j " & sPart
              CASE "reiserfs"
                 sCommand = "mkreiserfs --format 3.6 -q " & sPart
              CASE "xfs"    
@@ -368,42 +368,99 @@ END
 PUBLIC FUNCTION INSTALL_KERNEL_AND_INITRD() AS Integer
   
   DIM sfile, sdump, sname, sversion AS String
-  DIM sList AS String[]
+  DIM sList, sdumparr, sVersArr, sLinearr AS String[]
   DIM i AS Integer
+  DIM sverstring, sKernString AS String
   DIM $hproc AS Process
   
   DEBUG "Copying kernels and intrd now ..."
   EXEC ["mkdir", "-p", ClsGlobal.sTargetPath &/ "boot"] WAIT 
-  
-    SHELL "cat /mnt/source/veclinux/VINSTALL.CONF | grep ^ ISO_KERNEL_ | cut -f 2 -d =" TO sdump
-    sdump = Trim(Replace(sdump, "\'", ""))
-    sdump = Trim(Replace(sdump, "\"", ""))
-    sList = Split(sdump, gb.NewLine)
-    FOR i = 0 TO sList.Max
-    sfile = Trim(sList[i])
-      IF Exist("/mnt/source/isolinux/kernel" &/ sfile) THEN 
-        sname = sfile
-        ' find out which version this is
-          SHELL "grep \'" & sname & "\' /mnt/source/veclinux/VINSTALL.CONF | cut -f 1 -d =" TO sdump
-          SHELL "grep \'" & Replace(sdump, "ISO", "HD") & "\' /mnt/source/veclinux/VINSTALL.CONF | cut -f 2 -d =" TO sversion
-          sversion = Replace(sversion, "\'", "")
-          sversion = Replace(sversion, "\"", "")
-          sversion = Trim(sversion)
-      END IF
-      'IF sversion THEN TRY COPY "/mnt/source/isolinux/kernel" &/ sfile TO ClsGlobal.sTargetPath &/ "boot" &/ "vmlinuz-" & sversion
-      $hproc = EXEC ["cp", "/mnt/source/isolinux/kernel" &/ sfile, ClsGlobal.sTargetPath &/ "boot" &/ "vmlinux-" & sversion] WAIT 
-        IF $hproc.Value > 0 THEN 
-        DEBUG "Error copying kernel " & sname & Space(1) & "(" & sversion & ")"
-         RETURN 1
-        END IF
-    NEXT
-    
-    'TRY COPY "/mnt/source/isolinux/initrd.img" TO ClsGlobal.sTargetPath &/ "boot" &/ "initrd"
+    SHELL "grep ^\'ISO_KERNEL_\' /mnt/source/veclinux/VINSTALL.CONF" TO sdump
+      sdump = Replace(sdump, "\'", "")
+      sdump = Replace(sdump, "\"", "")
+      sdump = Replace(sdump, "(", "")
+      sdump = Replace(sdump, ")", "")
+      sList = Split(Trim(sdump), gb.NewLine)
+      FOR i = 0 TO sList.Max
+        sLinearr = Split(sList[i], "=")
+        sKernString = sLinearr[0]
+        sname = sLinearr[1]
+          ' check to see if the kernel is included and then copy it
+          IF Exist("/mnt/source/isolinux/kernel" &/ Trim(sname)) THEN 
+            ' now find the version, so we have a complete file name to save it
+            sverstring = Replace(sKernString, "ISO", "HD")
+              SHELL "grep ^\'" & sverstring & "\' /mnt/source/veclinux/VINSTALL.CONF | cut -f 2 -d \'=\'" TO sdump
+                sdump = Trim(sdump)
+                  IF sdump THEN 
+                    sversion = Replace(sdump, "\'", "")
+                    sversion = Replace(sversion, "\"", "")
+                    sversion = Replace(sversion, "(", "")
+                    sversion = Replace(sversion, ")", "")
+                  END IF
+                IF sversion THEN 'TRY COPY "/mnt/source/isolinux/kernel" &/ Trim(sname) TO ClsGlobal.sTargetPath &/ "boot" &/ "veclinux-" & Trim(sversion)
+                  $hproc = SHELL "cp /mnt/source/isolinux/kernel" &/ Trim(sname) & Space(1) & ClsGlobal.sTargetPath &/ "boot" &/ "veclinux-" & Trim(sversion) WAIT 
+                    IF $hproc.value > 0 THEN 
+                      DEBUG "Error copying " & sname & Space(1) & "to" & Space(1) & ClsGlobal.sTargetPath &/ "boot" &/ "veclinux-" & sversion
+                      Message.Error("Error while trying to copy veclinux-" & sversion) '&/ "boot" &/ "veclinux-" & sversion)
+                      RETURN 1
+                    END IF
+                END IF
+                
+          END IF
+      NEXT        
+      
+      '';'''''''''''''''' NOW COPY THE INITRD '''''''''''''''''''''
       $hproc = EXEC ["cp", "/mnt/source/isolinux/initrd.img", ClsGlobal.sTargetPath &/ "boot" &/ "initrd"] WAIT 
         IF $hproc.Value > 0 THEN 
-        DEBUG "Error copying initrd"
-        RETURN 1
+          DEBUG "Error copying initrd"
+          RETURN 1
         END IF
+               
+                    
+            
+            
+        
+        
+    
+      
+    
+  
+    ' SHELL "grep ^\"ISO_KERNEL_\" /mnt/source/veclinux/VINSTALL.CONF | cut -f 2 -d \'=\'" TO sdump
+    '   Message("Kernel search results: " & sdump)
+    ' 'SHELL "cat /mnt/source/veclinux/VINSTALL.CONF | grep ^\'ISO_KERNEL_\' | cut -f 2 -d =" TO sdump
+    ' sdump = Trim(Replace(sdump, "\'", ""))
+    ' sdump = Trim(Replace(sdump, "\"", ""))
+    ' sList = Split(sdump, gb.NewLine)
+    ' FOR i = 0 TO sList.Max
+    ' sfile = Trim(sList[i])
+    '   IF Exist("/mnt/source/isolinux/kernel" &/ Trim(sfile)) THEN 
+    '     sname = sfile
+    '     ' find out which version this is
+    '       SHELL "grep \'" & sname & "\' /mnt/source/veclinux/VINSTALL.CONF | cut -f 1 -d =" TO sdump
+    '       sdump = Trim(sdump)
+    '       SHELL "grep ^\'" & Replace(sdump, "ISO", "HD") & "\' /mnt/source/veclinux/VINSTALL.CONF | cut -f 2 -d =" TO sversion
+    '       
+    '       'Message("Kernel version results: " & sversion)
+    '       sversion = Replace(sversion, "\'", "")
+    '       sversion = Replace(sversion, "\"", "")
+    '       sversion = Replace(sversion, ")", "")
+    '       sversion = Trim(sversion)
+    '   END IF
+    '     PRINT "Copying " & sname & Space(1) & sversion & " to target install" 'Message(sname & "-" & sversion & " found")
+    '   'IF sversion THEN TRY COPY "/mnt/source/isolinux/kernel" &/ sfile TO ClsGlobal.sTargetPath &/ "boot" &/ "vmlinuz-" & sversion
+    '   $hproc = EXEC ["cp", "/mnt/source/isolinux/kernel" &/ sfile, ClsGlobal.sTargetPath &/ "boot" &/ "vmlinux-" & sversion] WAIT 
+    '     IF $hproc.Value > 0 THEN 
+    '     DEBUG "Error copying kernel " & sname & Space(1) & "(" & sversion & ")"
+    '      RETURN 1
+    '     END IF
+    ' NEXT
+    ' 
+    ' 'TRY COPY "/mnt/source/isolinux/initrd.img" TO ClsGlobal.sTargetPath &/ "boot" &/ "initrd"
+    '   $hproc = EXEC ["cp", "/mnt/source/isolinux/initrd.img", ClsGlobal.sTargetPath &/ "boot" &/ "initrd"] WAIT 
+    '     IF $hproc.Value > 0 THEN 
+    '     DEBUG "Error copying initrd"
+    '     RETURN 1
+    '     END IF
      
   RETURN 0
 END
