@@ -16,35 +16,35 @@ msgstr "(Sugerido)"
 
 #: Conf2.class:151
 msgid "About the linux root account"
-msgstr ""
+msgstr "Acerca de la cuenta de administrador en Linux"
 
 #: FDone.class:89
 msgid "About your VectorLinux installation"
-msgstr ""
+msgstr "Acerca de su instalacion de Vectorlinux"
 
 #: Conf3a.class:306
 msgid "Accept"
-msgstr ""
+msgstr "Aceptar"
 
 #: Conf3a.class:279
 msgid "Account Contents to reset"
-msgstr ""
+msgstr "Valores de la cuenta a restaurar"
 
 #: Conf0.class:159
 msgid "Add option to boot this operating system into text mode"
-msgstr ""
+msgstr "Agregar opcion de arranque en modo de texto para este systema operativo"
 
 #: Step8.class:158
 msgid "Additional Software"
-msgstr ""
+msgstr "Paquetes adicionales"
 
 #: Step7b.class:107
 msgid "Additional optional software available. Select which software packages to include in your installation."
-msgstr ""
+msgstr "Paquetes adicionales disponibles. Seleccione cuales de estos paquetes debemos incluir en su instalacion."
 
 #: FDone.class:31
 msgid "After your computer restarts, you may use VasmCC to perform any additional configuration."
-msgstr ""
+msgstr "Luego que su maquina reinicie, puede utilizar la herramienta de configuracion VasmCC o vasm para hacer ajustes adicionales a su sistema."
 
 #: Step3a1a.class:186
 msgid "All existing data in"
@@ -64,7 +64,7 @@ msgstr "Quiero que VectorLinux utilize el disco completo."
 
 #: MdlMain.module:484
 msgid "An error occurred while preparing partitions. Unable to continue"
-msgstr ""
+msgstr "Un error ha ocurrido mientras preparaba las particiones. No puedo continuar."
 
 #: Step3a2.class:65
 msgid "Another partitioning option"
@@ -72,7 +72,7 @@ msgstr "Otra opción para particionar."
 
 #: Step7a.class:144
 msgid "Are you sure you want to disable this conponent anyway?"
-msgstr ""
+msgstr "Esta seguro que quiere des-habilitar este componente de todos modos?"
 
 #: Step3.class:176
 msgid "Automatic"
@@ -90,7 +90,7 @@ msgstr "Opciones de particionado automático"
 msgid "Automatically resize your partitions and / or create the correct disk space for VectorLinux."
 msgstr "Automáticamente encoger particiones existentes al tamaño adecuado para dejar espacio para VectorLinux"
 
-#: FMain.class:310 FMain0.class:313
+#: FMain.class:314 FMain0.class:320
 msgid "Back"
 msgstr "Regreso"
 
@@ -144,7 +144,7 @@ msgstr "Quemar la imagen  ISO a un ritmo de velocidad mas lento"
 
 #: Conf3a.class:312
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: Step2.class:101
 msgid "Canceling data integrity tests per user request"
@@ -152,7 +152,7 @@ msgstr "Proceso de verificacion de integridad cancelado a instancias del usuario
 
 #: MdlMain.module:540
 msgid "Cannot continue"
-msgstr ""
+msgstr "No puedo continuar"
 
 #: Step1.class:581
 msgid "Check Installation media before installing"
@@ -160,11 +160,11 @@ msgstr "Verificar archivos de instalacion"
 
 #: MdlBootMngr.module:425
 msgid "Check these boxes to make sure they have unique names"
-msgstr ""
+msgstr "Por favor, asegurese de que estas cajillas tienes valores unicos."
 
 #: Conf3.class:43
 msgid "Choose a unique login name for each user account."
-msgstr ""
+msgstr "Elija un nombre unico para cada usuario del sistema."
 
 #: Conf1.class:157
 msgid "Choose how\nyour hardware clock is set up.\nChoose UTC if you know that the clock is set up to\nthe Coordinated Universal Time (UTC/GMT). Otherwise,\nChoose localtime since most PCs are setup this way."
@@ -172,11 +172,11 @@ msgstr ""
 
 #: Conf1.class:173
 msgid "Choose the correct timezone for the area in which you live."
-msgstr ""
+msgstr "Seleccione la zona de tiempo correcta para el area donde usted vive."
 
 #: Step7a.class:144
 msgid "Choosing not to install this may result in a command-line (text mode) installation only"
-msgstr ""
+msgstr "Si des-habilita este componente resultara en una instalacion de modo texto solamente. Sin interfaz grafica."
 
 #: Step3a3.class:23 Step3a3a.class:116
 msgid "Claim free space from existing partitions"
@@ -184,19 +184,19 @@ msgstr "Utilizar espacio libre en las particiones que ya existen"
 
 #: Conf3.class:452
 msgid "Clear Form"
-msgstr ""
+msgstr "Comenzar de nuevo"
 
 #: FDone.class:31 Step1.class:98 Step2.class:198 Step5.class:177
 msgid "Click"
-msgstr "Haz click en"
+msgstr "Pulse"
 
 #: Conf3.class:409
 msgid "Click here to select user Login picture"
-msgstr ""
+msgstr "Pulse aqui para seleccionar una fotografia para este usuario."
 
 #: Step5.class:172
 msgid "Click the"
-msgstr "Haz click en"
+msgstr "Pulse"
 
 #: Conf1.class:184
 msgid "ComboBox1"
@@ -204,11 +204,11 @@ msgstr ""
 
 #: Step7a.class:34
 msgid "Component"
-msgstr ""
+msgstr "Componente"
 
 #: Conf4.class:91
 msgid "Computer Name"
-msgstr ""
+msgstr "Nombre de maquina"
 
 #: Step3a1a.class:21
 msgid "Create Linux Partition Scheme in"
@@ -220,27 +220,27 @@ msgstr "Crear Nueva"
 
 #: Conf3.class:419
 msgid "Create User"
-msgstr ""
+msgstr "Crear Usuario"
 
 #: Conf3.class:282
 msgid "Create User Accounts"
-msgstr ""
+msgstr "Cuentas de Usuarios"
 
 #: Conf3.class:43
 msgid "Create as many user accounts as you want / need here."
-msgstr ""
+msgstr "Puede crear cuantas cuentas de usuario necesite or quiera en esta seccion."
 
 #: Step7a.class:27 Step7b.class:23
 msgid "Customize Your VectorLinux Installation"
-msgstr ""
+msgstr "Personalize su VectorLinux"
 
 #: Step7.class:164 Step8.class:137
 msgid "Customized"
-msgstr ""
+msgstr "Personalizado"
 
 #: Conf0.class:889
 msgid "DETECTED OPERATING SYSTEMS."
-msgstr ""
+msgstr "OTROS SYSTEMAS OPERATIVOS DETECTADOS"
 
 #: Step1.class:354
 msgid "DISTRIBUTION"
@@ -248,7 +248,7 @@ msgstr "DISTRIBUCION"
 
 #: Conf2.class:24
 msgid "DO NOT LEAVE THIS BLANK"
-msgstr ""
+msgstr "POR FAVOR, NO DEJE ESTOS VALORES EN BLANCO"
 
 #: Step2.class:102
 msgid "Data integrity test canceled by user."
@@ -260,11 +260,11 @@ msgstr "Prueba de integridad de los archivos completa . . . Todos los archivos p
 
 #: Conf3a.class:80
 msgid "Default graphical session settings"
-msgstr ""
+msgstr "Valor de la sesion grafica por defecto"
 
 #: Conf3a.class:118 Step7a.class:49 Step7b.class:28
 msgid "Description"
-msgstr ""
+msgstr "Descripcion"
 
 #: Conf3a.class:70
 msgid "Desktop icons, folders, launchers"
@@ -414,7 +414,7 @@ msgstr "No se pudo encontrar GParted en este sistema. Por favor instale gparted 
 msgid "Graphical inteface preferences"
 msgstr ""
 
-#: FMain.class:297 FMain0.class:300
+#: FMain.class:301 FMain0.class:307
 msgid "Help"
 msgstr "Ayuda"
 
@@ -506,7 +506,7 @@ msgstr ""
 msgid "Installation Summary"
 msgstr "Resumen de la instalación"
 
-#: FMain.class:123 FMain0.class:89
+#: FMain.class:127 FMain0.class:132
 msgid "Installation complete. Need to reboot now to test the system."
 msgstr ""
 
@@ -666,7 +666,7 @@ msgstr "Valores de Red"
 msgid "Network interface manager"
 msgstr ""
 
-#: FDone.class:23 FMain.class:321 FMain0.class:324
+#: FDone.class:23 FMain.class:325 FMain0.class:331
 msgid "Next"
 msgstr "Siguiente"
 
@@ -822,7 +822,7 @@ msgstr ""
 msgid "Problem while installing"
 msgstr ""
 
-#: FMain.class:257 FMain0.class:259
+#: FMain.class:261 FMain0.class:266
 msgid "Process Overview"
 msgstr "Resumen del Proceso"
 
@@ -834,7 +834,7 @@ msgstr ""
 msgid "QT Toolkit settings (KDE Visual Effects)"
 msgstr ""
 
-#: FMain.class:332 FMain0.class:335
+#: FMain.class:336 FMain0.class:342
 msgid "Quit"
 msgstr "Cancelar"
 
@@ -858,7 +858,7 @@ msgstr ""
 msgid "Real Name"
 msgstr ""
 
-#: FMain.class:124 FMain0.class:90
+#: FMain.class:76 FMain0.class:78
 msgid "Reboot"
 msgstr ""
 

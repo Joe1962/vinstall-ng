@@ -507,7 +507,7 @@ msgstr ""
 msgid "Select the system services to be launched at start-up."
 msgstr ""
 
-#: FDone.class:23 FMain.class:321 FMain0.class:324
+#: FDone.class:23 FMain.class:325 FMain0.class:331
 msgid "Next"
 msgstr "Next"
 
@@ -539,27 +539,27 @@ msgstr "Select Installation Source"
 msgid "About your VectorLinux installation"
 msgstr "VectorLinux Installer"
 
-#: FMain.class:123 FMain0.class:89
-msgid "Installation complete. Need to reboot now to test the system."
-msgstr ""
-
-#: FMain.class:124 FMain0.class:90
+#: FMain.class:76 FMain0.class:78
 msgid "Reboot"
 msgstr ""
 
-#: FMain.class:257 FMain0.class:259
+#: FMain.class:127 FMain0.class:132
+msgid "Installation complete. Need to reboot now to test the system."
+msgstr ""
+
+#: FMain.class:261 FMain0.class:266
 msgid "Process Overview"
 msgstr "Process Overview"
 
-#: FMain.class:297 FMain0.class:300
+#: FMain.class:301 FMain0.class:307
 msgid "Help"
 msgstr ""
 
-#: FMain.class:310 FMain0.class:313
+#: FMain.class:314 FMain0.class:320
 msgid "Back"
 msgstr "Back"
 
-#: FMain.class:332 FMain0.class:335
+#: FMain.class:336 FMain0.class:342
 msgid "Quit"
 msgstr "Quit"
 

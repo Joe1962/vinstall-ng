@@ -571,7 +571,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
           Message.Info(("Installation is complete. Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue"))
           ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
           tlStatus.Text = ("Installation complete... Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue.")
-        IF ME.INSTALL_KERNEL_AND_INITRD > 0 THEN 
+        IF ME.INSTALL_KERNEL_AND_INITRD() > 0 THEN 
             Message.Error(("Error while installing kernels and initrds"))
               DEBUG "Something wrong in the kernel installation module"
               RETURN 1
@@ -606,7 +606,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
           ClsGlobal.fRunningMainForm.btNext.enabled = TRUE
           tlStatus.Text = ("Installation complete... Click") & Space(1) & ClsGlobal.fRunningMainForm.btNext.text & Space(1) & ("to continue.")
       
-      IF ME.INSTALL_KERNEL_AND_INITRD > 0 THEN 
+      IF ME.INSTALL_KERNEL_AND_INITRD() > 0 THEN 
     Message.Error(("Error while installing kernels and initrds"))
     DEBUG "Something wrong in the kernel installation module"
     RETURN 1
