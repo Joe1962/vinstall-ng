@@ -26,7 +26,12 @@ PUBLIC SUB Form_Open()
   WAIT 1
   ME.Refresh
   WAIT 1
-  ME.create_installation_process_layout()
+  ' MdlMain.CREATE_CREDIT_LABELS(ME.ScrlCredits) ' Fill out credits list
+  'ME.tmScroll.Enabled = TRUE ' Start scrolling
+  FrmCredits.Reparent(ME.wsScroll)
+  FrmCredits.Show()
+  ME.create_installation_process_layout() ' triggers installation process
+  
   
 
 END
@@ -104,6 +109,22 @@ PUBLIC SUB Form_Resize()
   ME.hbBottomPanel.Height = ME.ClientH - (ME.hbBottomPanel.top + 24)
   ME.svInstallProc.Width = svinstallproc.Parent.Width - (svinstallproc.left * 2)
   ME.svInstallProc.Height = svinstallproc.Parent.Height - (svinstallproc.top * 1.25)
+  'ME.ScrlCredits.Move(4, 36, ScrlCredits.Parent.Width - (ScrlCredits.x * 2), ScrlCredits.Parent.Height - (ScrlCredits.Top * 1.5))
+  ME.wsScroll.Move(4, 36, wsScroll.Parent.Width - (wsscroll.x * 2), wsscroll.Parent.Height - (wsscroll.top * 1.5))
 
 END
 
+
+' PUBLIC SUB tmScroll_Timer()
+' 
+'   'INC ScrollView1.ScrollY
+'   'PRINT ScrollView1.scrolly & " |" & ScrollView1.ScrollH & " | " & ScrollView1.Height
+'     'IF ScrollView1.ScrollY = ScrollView1.scrollh - ScrollView1.Height THEN ScrollView1.Scroll(0, 0)
+'     INC ScrlCredits.ScrollY
+'     IF ScrlCredits.ScrollY = ScrlCredits.ScrollH - ScrlCredits.Height THEN 
+'       WAIT 2
+'       ScrlCredits.Scroll(0, 0)
+'     END IF
+' 
+' 
+' END

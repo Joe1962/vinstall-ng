@@ -7,13 +7,13 @@
   Padding = 2
   { HBox2 HBox
     MoveScaled(12,1,63,7.25)
-    Background = Color.SelectedBackground
     { Panel2 Panel
       MoveScaled(1,3,4,2)
       Expand = True
     }
     { PictureBox1 PictureBox
       MoveScaled(7,1,46,5)
+      Picture = Picture["images/vlocity.png"]
       Stretch = True
     }
     { Panel3 Panel

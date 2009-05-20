@@ -153,32 +153,30 @@ msgstr ""
 msgid "Tab 0"
 msgstr ""
 
-#: Conf1.class:144 MdlStartUp.module:53
+#: Conf1.class:150 MdlStartUp.module:53
 msgid "Regional Settings"
 msgstr ""
 
-#: Conf1.class:157
+#: Conf1.class:163
 msgid ""
-"Choose how\n"
-"your hardware clock is set up.\n"
-"Choose UTC if you know that the clock is set up to\n"
-"the Coordinated Universal Time (UTC/GMT). Otherwise,\n"
+"Choose how your hardware clock is set up. Choose UTC if you know that the "
+"clock is set up to the Coordinated Universal Time (UTC/GMT). Otherwise, "
 "Choose localtime since most PCs are setup this way."
 msgstr ""
 
-#: Conf1.class:173
+#: Conf1.class:179
 msgid "Choose the correct timezone for the area in which you live."
 msgstr ""
 
-#: Conf1.class:184
+#: Conf1.class:190
 msgid "ComboBox1"
 msgstr ""
 
-#: Conf1.class:186
+#: Conf1.class:192
 msgid "LocalTime"
 msgstr ""
 
-#: Conf1.class:186
+#: Conf1.class:192
 msgid "UTC"
 msgstr ""
 
@@ -191,11 +189,11 @@ msgstr ""
 #: Conf2.class:24
 msgid ""
 "This account is used to perform system-wide changes such as adding / "
-"removing software, system-qide updates, managing user accounts, etc."
+"removing software, system-wide updates, managing user accounts, etc."
 msgstr ""
 
 #: Conf2.class:24
-msgid "Most oter every-day tasks do not require administrative priviledges."
+msgid "Most other every-day tasks do not require administrative priviledges."
 msgstr ""
 
 #: Conf2.class:24
@@ -244,7 +242,7 @@ msgstr ""
 msgid "When finished, Click"
 msgstr ""
 
-#: Conf3.class:47 MdlMain.module:571 Step3a1a.class:177 Step3a2.class:359
+#: Conf3.class:47 MdlMain.module:572 Step3a1a.class:177 Step3a2.class:359
 #: Step3a3a.class:72 Step5.class:177
 msgid "to continue"
 msgstr ""
@@ -506,7 +504,7 @@ msgstr ""
 msgid "Select the system services to be launched at start-up."
 msgstr ""
 
-#: FDone.class:23 FMain.class:325 FMain0.class:331
+#: FDone.class:23 FMain.class:327 FMain0.class:331
 msgid "Next"
 msgstr ""
 
@@ -536,27 +534,27 @@ msgstr ""
 msgid "About your VectorLinux installation"
 msgstr ""
 
-#: FMain.class:76 FMain0.class:78
+#: FMain.class:77 FMain0.class:78
 msgid "Reboot"
 msgstr ""
 
-#: FMain.class:127 FMain0.class:132
+#: FMain.class:128 FMain0.class:132
 msgid "Installation complete. Need to reboot now to test the system."
 msgstr ""
 
-#: FMain.class:261 FMain0.class:266
+#: FMain.class:263 FMain0.class:266
 msgid "Process Overview"
 msgstr ""
 
-#: FMain.class:301 FMain0.class:307
+#: FMain.class:303 FMain0.class:307
 msgid "Help"
 msgstr ""
 
-#: FMain.class:314 FMain0.class:320
+#: FMain.class:316 FMain0.class:320
 msgid "Back"
 msgstr ""
 
-#: FMain.class:336 FMain0.class:342
+#: FMain.class:338 FMain0.class:342
 msgid "Quit"
 msgstr ""
 
@@ -646,87 +644,87 @@ msgstr ""
 msgid "Check these boxes to make sure they have unique names"
 msgstr ""
 
-#: MdlMain.module:37
+#: MdlMain.module:38
 msgid "Unable to format"
 msgstr ""
 
-#: MdlMain.module:37
+#: MdlMain.module:38
 msgid "to"
 msgstr ""
 
-#: MdlMain.module:195
+#: MdlMain.module:196
 msgid "Failed to create user account. See error below."
 msgstr ""
 
-#: MdlMain.module:256
+#: MdlMain.module:257
 msgid "Formatting"
 msgstr ""
 
-#: MdlMain.module:256
+#: MdlMain.module:257
 msgid "with"
 msgstr ""
 
-#: MdlMain.module:333
+#: MdlMain.module:334
 msgid "Installing required package"
 msgstr ""
 
-#: MdlMain.module:336
+#: MdlMain.module:337
 msgid "Problem while installing"
 msgstr ""
 
-#: MdlMain.module:482
+#: MdlMain.module:483
 msgid "Preparing system partitions"
 msgstr ""
 
-#: MdlMain.module:484
+#: MdlMain.module:485
 msgid "An error occurred while preparing partitions. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:492
+#: MdlMain.module:493
 msgid "Error during installation of required software. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:540
+#: MdlMain.module:541
 msgid "Unable to install contents of"
 msgstr ""
 
-#: MdlMain.module:540
+#: MdlMain.module:541
 msgid "Cannot continue"
 msgstr ""
 
-#: MdlMain.module:571
+#: MdlMain.module:572
 msgid "Installation is complete. Click"
 msgstr ""
 
-#: MdlMain.module:573
+#: MdlMain.module:574
 msgid "Installation complete... Click"
 msgstr ""
 
-#: MdlMain.module:573
+#: MdlMain.module:574
 msgid "to continue."
 msgstr ""
 
-#: MdlMain.module:575
+#: MdlMain.module:576
 msgid "Error while installing kernels and initrds"
 msgstr ""
 
-#: MdlMain.module:598
+#: MdlMain.module:599
 msgid "Unable to install the components of"
 msgstr ""
 
-#: MdlMain.module:598
+#: MdlMain.module:599
 msgid "Unable to continue."
 msgstr ""
 
-#: MdlMain.module:681
+#: MdlMain.module:682
 msgid "Installing"
 msgstr ""
 
-#: MdlMain.module:681
+#: MdlMain.module:682
 msgid "Part of"
 msgstr ""
 
-#: MdlMain.module:683
+#: MdlMain.module:684
 msgid "Error installing"
 msgstr ""
 
@@ -1620,30 +1618,30 @@ msgstr ""
 msgid "is being installed to your computer. Please wait."
 msgstr ""
 
-#: Step9.class:62
+#: Step9.class:67
 msgid "Prepare Partitions"
 msgstr ""
 
-#: Step9.class:62
+#: Step9.class:67
 msgid "Install Base System (required)"
 msgstr ""
 
-#: Step9.class:62
+#: Step9.class:67
 msgid "Install User-Selected Software"
 msgstr ""
 
-#: Step9.class:89
+#: Step9.class:94
 msgid "Something went wrong during installation. Please try again"
 msgstr ""
 
-#: Step9.class:148
+#: Step9.class:171
 msgid "Installation in progress"
 msgstr ""
 
-#: Step9.class:227
+#: Step9.class:254
 msgid "Install Process"
 msgstr ""
 
-#: Step9.class:243
+#: Step9.class:270
 msgid "The development Crew"
 msgstr ""

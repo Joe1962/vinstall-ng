@@ -18,31 +18,31 @@ msgstr ""
 msgid "is being installed to your computer. Please wait."
 msgstr ""
 
-#: Step9.class:62
+#: Step9.class:67
 msgid "Prepare Partitions"
 msgstr ""
 
-#: Step9.class:62
+#: Step9.class:67
 msgid "Install Base System (required)"
 msgstr ""
 
-#: Step9.class:62
+#: Step9.class:67
 msgid "Install User-Selected Software"
 msgstr ""
 
-#: Step9.class:89
+#: Step9.class:94
 msgid "Something went wrong during installation. Please try again"
 msgstr ""
 
-#: Step9.class:148
+#: Step9.class:171
 msgid "Installation in progress"
 msgstr ""
 
-#: Step9.class:227
+#: Step9.class:254
 msgid "Install Process"
 msgstr ""
 
-#: Step9.class:243
+#: Step9.class:270
 msgid "The development Crew"
 msgstr ""
 
