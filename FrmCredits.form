@@ -1,0 +1,18 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,57,43)
+  Text = ("")
+  Arrangement = Arrange.Fill
+  { ScrollView1 ScrollView
+    MoveScaled(1,2,53,39)
+    Expand = True
+    Arrangement = Arrange.Row
+    Border = False
+  }
+  { Timer1 #Timer
+    #X = 384
+    #Y = 96
+    Delay = 25
+  }
+}

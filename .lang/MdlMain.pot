@@ -14,91 +14,91 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: MdlMain.module:37
+#: MdlMain.module:38
 msgid "Unable to format"
 msgstr ""
 
-#: MdlMain.module:37
+#: MdlMain.module:38
 msgid "to"
 msgstr ""
 
-#: MdlMain.module:195
+#: MdlMain.module:196
 msgid "Failed to create user account. See error below."
 msgstr ""
 
-#: MdlMain.module:256
+#: MdlMain.module:257
 msgid "Formatting"
 msgstr ""
 
-#: MdlMain.module:256
+#: MdlMain.module:257
 msgid "with"
 msgstr ""
 
-#: MdlMain.module:333
+#: MdlMain.module:334
 msgid "Installing required package"
 msgstr ""
 
-#: MdlMain.module:336
+#: MdlMain.module:337
 msgid "Problem while installing"
 msgstr ""
 
-#: MdlMain.module:482
+#: MdlMain.module:483
 msgid "Preparing system partitions"
 msgstr ""
 
-#: MdlMain.module:484
+#: MdlMain.module:485
 msgid "An error occurred while preparing partitions. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:492
+#: MdlMain.module:493
 msgid "Error during installation of required software. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:540
+#: MdlMain.module:541
 msgid "Unable to install contents of"
 msgstr ""
 
-#: MdlMain.module:540
+#: MdlMain.module:541
 msgid "Cannot continue"
 msgstr ""
 
-#: MdlMain.module:571
+#: MdlMain.module:572
 msgid "Installation is complete. Click"
 msgstr ""
 
-#: MdlMain.module:571
+#: MdlMain.module:572
 msgid "to continue"
 msgstr ""
 
-#: MdlMain.module:573
+#: MdlMain.module:574
 msgid "Installation complete... Click"
 msgstr ""
 
-#: MdlMain.module:573
+#: MdlMain.module:574
 msgid "to continue."
 msgstr ""
 
-#: MdlMain.module:575
+#: MdlMain.module:576
 msgid "Error while installing kernels and initrds"
 msgstr ""
 
-#: MdlMain.module:598
+#: MdlMain.module:599
 msgid "Unable to install the components of"
 msgstr ""
 
-#: MdlMain.module:598
+#: MdlMain.module:599
 msgid "Unable to continue."
 msgstr ""
 
-#: MdlMain.module:681
+#: MdlMain.module:682
 msgid "Installing"
 msgstr ""
 
-#: MdlMain.module:681
+#: MdlMain.module:682
 msgid "Part of"
 msgstr ""
 
-#: MdlMain.module:683
+#: MdlMain.module:684
 msgid "Error installing"
 msgstr ""
 

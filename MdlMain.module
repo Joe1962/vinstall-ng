@@ -19,6 +19,7 @@ PRIVATE $currpkg AS Integer
 PUBLIC $objPboxes AS NEW Object[]
 PUBLIC $objUsrGroups AS NEW Object[]
 PRIVATE iUID AS Integer
+PRIVATE $hproc AS Process
 
 PUBLIC FUNCTION FORMAT_THIS_PARTITION(sPartition AS String, sFilesystem AS String) AS Integer
   
@@ -312,7 +313,7 @@ PUBLIC FUNCTION INSTALL_INITIAL_PACKAGES(tlStatus AS TextLabel, pbProg AS Progre
   DIM i, ii, iret, ires AS Integer
   DIM hproc AS Process
   DIM sDump, $path, $line, sPkg, MajorDesc, sFileList AS String
-  
+
   
   ' this part will isntall the bulks defined as REQUIRED
     SHELL "cat /mnt/source/veclinux/VINSTALL.CONF | grep REQ:" TO sdump
@@ -702,19 +703,36 @@ END
 
 PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sFullPkgPath AS String) AS Integer
   
-  DIM $hproc AS Process
+  'DIM $hproc AS Process
   DIM sBuff AS String
     
     '$hproc = EXEC ["/sbin/installpkg ", "-R", ClsGlobal.sTargetPath, sFullPkgPath] WAIT 
     '$hproc = SHELL "/sbin/installpkg -R " & ClsGlobal.sTargetPath & Space(1) & sFullPkgPath WAIT 'TO sBuff
-    $hproc = EXEC ["/sbin/installpkg", "-q", "-R", ClsGlobal.sTargetPath, sFullPkgPath] WAIT 
+    '$hproc = EXEC ["/sbin/installpkg", "-q", "-R", ClsGlobal.sTargetPath, sFullPkgPath] FOR READ 'WAIT 
+    $hproc = EXEC ["/sbin/installpkg", "-R", ClsGlobal.sTargetPath, sFullPkgPath] WAIT FOR OUTPUT 
+    
       IF $hproc.Value > 0 THEN 
         DEBUG sFullPkgPath & Space(1) & "failed to install"
+        'Message.Error($hproc.State)
         RETURN 1
       END IF
     RETURN 0
   
 END
+
+PUBLIC SUB Process_Read()
+  
+  DIM sLine AS String
+  READ #LAST, sLine, -256
+  PRINT sLine
+  
+END
+PUBLIC SUB Process_Error(Errormessage AS String)
+  
+  PRINT Errormessage
+  
+END
+
 
 
 
@@ -733,7 +751,8 @@ PUBLIC FUNCTION GET_PACKAGE_FULL_PATH(sPkgname AS String) AS String
       IF InStr(sList[i], sPkgname) THEN 
       sParentDir = Left(sList[i], RInStr(sList[i], "/"))
       sPkg = Right(sList[i], Len(sList[i]) - Len(sParentDir))
-        SHELL "pkgname " & sPkg TO sDump
+        'SHELL "pkgname " & sPkg TO sDump
+        EXEC ["/sbin/pkgname", sPkg] TO sDump
           IF Trim(sdump) = Trim(sPkgname) THEN 
             'PRINT "looking for " & sPkgname & Space(5) & sDump
              sRetval = sList[i]
@@ -748,3 +767,51 @@ PUBLIC FUNCTION GET_PACKAGE_FULL_PATH(sPkgname AS String) AS String
     DEBUG sPkgname & " not found"
   END IF
 END
+
+PUBLIC SUB CREATE_CREDIT_LABELS(sHostScroll AS ScrollView)
+  
+  DIM hb AS HBox
+  DIM tl AS TextLabel
+  DIM sFile AS String
+  DIM sCredits AS String[]
+  DIM i AS Integer
+  
+  hb = NEW HBox(sHostScroll)
+    hb.Height = sHostScroll.Height * 1.25
+    hb.Expand = TRUE
+  sFile = "/mnt/source/CREDIT" ' "/mnt/loop/CREDIT" '"/mnt/source/CREDIT"
+  sCredits = Split(Trim(File.Load(sFile)), gb.NewLine)
+    FOR i = 0 TO sCredits.Max
+      tl = NEW TextLabel(sHostScroll)
+        WITH tl
+          .Alignment = Align.Center
+          .Height = 28
+          .Expand = TRUE
+            IF InStr(Trim(sCredits[i]), "M0E-lnx") THEN 
+              .Height = 28 * 2
+              sCredits[i] = "<b>" & "M0E-lnx" & "</b>" & "<br>" & "[ GUI Installer, vpackager, vasmCC ]"
+            ELSE IF InStr(Trim(sCredits[i]), "Uelsk8s") THEN 
+              .Height = 28 * 2
+              sCredits[i] = "<b>" & "Uelsk8s" & "</b><br>" & "[ ISO Master, GUI installer ]"
+            ELSE IF InStr(Trim(sCredits[i]), "Vector") THEN 
+              .Height = 28 * 2
+              sCredits[i] = "<b>" & "Vector" & "</b><br>" & "[ Founder ]"
+            ELSE IF InStr(Trim(sCredits[i]), "(") THEN 
+              .Height = 28 * 2
+              sCredits[i] = Left(sCredits[i], InStr(sCredits[i], "(") - 1) & "<br>" & Right(sCredits[i], Len(sCredits[i]) - InStr(sCredits[i], "(") + 1)              
+              sCredits[i] = Replace(sCredits[i], "(", "[ ")
+              sCredits[i] = Replace(sCredits[i], ")", " ]")
+            
+            END IF
+          .Text = sCredits[i]
+        END WITH 
+      hb = NEW HBox(sHostScroll)
+        hb.Height = 14
+        hb.Expand = TRUE
+  NEXT 
+  
+END
+
+
+
+

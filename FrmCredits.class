@@ -1,0 +1,17 @@
+' Gambas class file
+
+
+PUBLIC SUB Form_Open()
+
+  MdlMain.CREATE_CREDIT_LABELS(ME.ScrollView1)
+  ME.Timer1.Enabled = TRUE
+
+END
+
+PUBLIC SUB Timer1_Timer()
+
+    INC ScrollView1.ScrollY
+  'PRINT ScrollView1.scrolly & " |" & ScrollView1.ScrollH & " | " & ScrollView1.Height
+    IF ScrollView1.ScrollY = ScrollView1.scrollh - ScrollView1.Height THEN ScrollView1.Scroll(0, 0)
+
+END

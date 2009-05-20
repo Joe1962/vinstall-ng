@@ -32,6 +32,11 @@
       Alignment = Align.Left
     }
   }
+  { tmScroll #Timer
+    #X = 576
+    #Y = 64
+    Delay = 25
+  }
   { HBox3 HBox
     MoveScaled(0,12,15,1)
     Expand = True
@@ -90,6 +95,9 @@
       MoveScaled(37,1,33,28)
       Expand = True
       Text = ("The development Crew")
+      { wsScroll Workspace
+        MoveScaled(1,3,31,24)
+      }
     }
   }
 }

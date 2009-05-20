@@ -107,3 +107,9 @@ ME.Form_Open()
   ' 
 
 END
+
+PUBLIC SUB TextLabel1_MouseDown()
+
+  
+
+END

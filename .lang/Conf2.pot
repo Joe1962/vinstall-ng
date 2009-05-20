@@ -19,11 +19,11 @@ msgid "The linux root account is pre-defined to be used as the system administra
 msgstr ""
 
 #: Conf2.class:24
-msgid "This account is used to perform system-wide changes such as adding / removing software, system-qide updates, managing user accounts, etc."
+msgid "This account is used to perform system-wide changes such as adding / removing software, system-wide updates, managing user accounts, etc."
 msgstr ""
 
 #: Conf2.class:24
-msgid "Most oter every-day tasks do not require administrative priviledges."
+msgid "Most other every-day tasks do not require administrative priviledges."
 msgstr ""
 
 #: Conf2.class:24

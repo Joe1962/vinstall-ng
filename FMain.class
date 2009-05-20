@@ -39,6 +39,7 @@ MdlStartUp.LAYOUT_NAVIGATION_VISUALS()
     ClsGlobal.fRunningMainForm.ListView1["Step0"].picture = MdlStartUp.pDone
     ClsGlobal.fRunningMainForm.ListView1["Step1"].picture = MdlStartUp.pNow
   END IF
+  ME.PictureBox1.BackColor = Color.Transparent
   
 END
 
@@ -144,7 +145,8 @@ PUBLIC SUB Form_Resize()
   $oCurrent.width = pnlStack.Width
   $oCurrent.height = pnlStack.Height
   ME.SidePanel1.Height = pnlStack.Height
-  'hpanel1.Width = SidePanel1.Width
+  'PANEL1.Width = ME.ClientWidth - (panel1.left * 2)
+  'panel1.Height = ME.ClientHeight - (panel1.top + 12)
   'PRINT ME.ClientWidth & "X" & ME.ClientHeight
 END
 
