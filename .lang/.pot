@@ -64,9 +64,11 @@ msgid "Selecting this option will bypass your boot manager configuration."
 msgstr ""
 
 #: Conf0.class:359
-msgid ""
-"You may not be able to start your VectorLinux installation. Do not choose "
-"this option"
+msgid "You may not be able to start your"
+msgstr ""
+
+#: Conf0.class:359
+msgid "installation. Do not choose this option"
 msgstr ""
 
 #: Conf0.class:359
@@ -242,7 +244,7 @@ msgstr ""
 msgid "When finished, Click"
 msgstr ""
 
-#: Conf3.class:47 MdlMain.module:572 Step3a1a.class:177 Step3a2.class:359
+#: Conf3.class:47 MdlMain.module:576 Step3a1a.class:177 Step3a2.class:359
 #: Step3a3a.class:72 Step5.class:177
 msgid "to continue"
 msgstr ""
@@ -509,7 +511,7 @@ msgid "Next"
 msgstr ""
 
 #: FDone.class:31
-msgid "VectorLinux has been installed in your system."
+msgid "has been installed in your system."
 msgstr ""
 
 #: FDone.class:31
@@ -518,7 +520,8 @@ msgid ""
 "configuration."
 msgstr ""
 
-#: FDone.class:31 Step1.class:98 Step2.class:198 Step5.class:177
+#: FDone.class:31 Step1.class:98 Step2.class:198 Step3a3a.class:72
+#: Step5.class:177
 msgid "Click"
 msgstr ""
 
@@ -589,7 +592,7 @@ msgid "Existing Data"
 msgstr ""
 
 #: MdlAutoPartition.module:560
-msgid "Total space for VectorLinux"
+msgid "Total space for"
 msgstr ""
 
 #: MdlAutoPartition.module:617
@@ -672,59 +675,59 @@ msgstr ""
 msgid "Problem while installing"
 msgstr ""
 
-#: MdlMain.module:483
+#: MdlMain.module:487
 msgid "Preparing system partitions"
 msgstr ""
 
-#: MdlMain.module:485
+#: MdlMain.module:489
 msgid "An error occurred while preparing partitions. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:493
+#: MdlMain.module:497
 msgid "Error during installation of required software. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:541
+#: MdlMain.module:545
 msgid "Unable to install contents of"
 msgstr ""
 
-#: MdlMain.module:541
+#: MdlMain.module:545
 msgid "Cannot continue"
 msgstr ""
 
-#: MdlMain.module:572
+#: MdlMain.module:576
 msgid "Installation is complete. Click"
 msgstr ""
 
-#: MdlMain.module:574
+#: MdlMain.module:578
 msgid "Installation complete... Click"
 msgstr ""
 
-#: MdlMain.module:574
+#: MdlMain.module:578
 msgid "to continue."
 msgstr ""
 
-#: MdlMain.module:576
+#: MdlMain.module:580
 msgid "Error while installing kernels and initrds"
 msgstr ""
 
-#: MdlMain.module:599
+#: MdlMain.module:603
 msgid "Unable to install the components of"
 msgstr ""
 
-#: MdlMain.module:599
+#: MdlMain.module:603
 msgid "Unable to continue."
 msgstr ""
 
-#: MdlMain.module:682
+#: MdlMain.module:686
 msgid "Installing"
 msgstr ""
 
-#: MdlMain.module:682
+#: MdlMain.module:686
 msgid "Part of"
 msgstr ""
 
-#: MdlMain.module:684
+#: MdlMain.module:688
 msgid "Error installing"
 msgstr ""
 
@@ -748,7 +751,7 @@ msgstr ""
 msgid "Software Selection"
 msgstr ""
 
-#: MdlStartUp.module:48
+#: MdlStartUp.module:48 Step7a.class:27 Step7b.class:23
 msgid "Installation"
 msgstr ""
 
@@ -757,7 +760,7 @@ msgid "Installation Summary"
 msgstr ""
 
 #: MdlStartUp.module:50
-msgid "Install VectorLinux"
+msgid "Copy Operating System Files"
 msgstr ""
 
 #: MdlStartUp.module:51
@@ -1026,29 +1029,37 @@ msgstr ""
 msgid "Select the partitioning method you would like to use"
 msgstr ""
 
-#: Step3.class:176
+#: Step3.class:32
+msgid ""
+"Automatically resize your partitions and / or create the correct disk space "
+"for"
+msgstr ""
+
+#: Step3.class:33 Step3a2.class:25
+msgid "Install"
+msgstr ""
+
+#: Step3.class:33
+msgid "to existing partitions on my hard drive"
+msgstr ""
+
+#: Step3.class:178
 msgid "Automatic"
 msgstr ""
 
-#: Step3.class:186
-msgid ""
-"Automatically resize your partitions and / or create the correct disk space "
-"for VectorLinux."
-msgstr ""
-
-#: Step3.class:193
+#: Step3.class:195
 msgid "Manually resize my partitions "
 msgstr ""
 
-#: Step3.class:203
+#: Step3.class:205
 msgid "Use the partitioning tool to prepare your system partitions."
 msgstr ""
 
-#: Step3.class:210
+#: Step3.class:212
 msgid "My hard drive is already partitioned"
 msgstr ""
 
-#: Step3.class:220
+#: Step3.class:222
 msgid "Install VectorLinux to existing partitions on my hard drive"
 msgstr ""
 
@@ -1061,7 +1072,11 @@ msgid "Select one of the following options"
 msgstr ""
 
 #: Step3a.class:22
-msgid "Allow VectorLinux to use an entire hard disk in your system."
+msgid "Allow"
+msgstr ""
+
+#: Step3a.class:22
+msgid "to use an entire hard disk in your system."
 msgstr ""
 
 #: Step3a.class:22
@@ -1069,8 +1084,11 @@ msgid "This option will wipe out any data on the disk you select."
 msgstr ""
 
 #: Step3a.class:24
-msgid ""
-"Locate free (unpartitioned) space on hard disk and install VectorLinux there."
+msgid "Locate free (unpartitioned) space on hard disk and install"
+msgstr ""
+
+#: Step3a.class:24
+msgid "there."
 msgstr ""
 
 #: Step3a.class:24
@@ -1078,9 +1096,11 @@ msgid "This option will not harm any data on your hard drive"
 msgstr ""
 
 #: Step3a.class:26
-msgid ""
-"Resize your existing partitions to make room for a VectorLinux partition "
-"scheme"
+msgid "Resize your existing partitions to make room for a"
+msgstr ""
+
+#: Step3a.class:26
+msgid "partition scheme"
 msgstr ""
 
 #: Step3a.class:26
@@ -1100,7 +1120,7 @@ msgid "Use entire disk"
 msgstr ""
 
 #: Step3a1.class:20
-msgid "Use Entire Hard Disk for VectorLinux"
+msgid "Use Entire Hard Disk for"
 msgstr ""
 
 #: Step3a1.class:22
@@ -1131,12 +1151,15 @@ msgid ""
 msgstr ""
 
 #: Step3a1a.class:82
-msgid "Vectorlinux has detected an existing swap partition in your system."
+msgid "has detected an existing swap partition in your system."
 msgstr ""
 
 #: Step3a1a.class:82
-msgid ""
-"Would you like to let VectorLinux use this partition or create a new one?"
+msgid "Would you like to let"
+msgstr ""
+
+#: Step3a1a.class:82
+msgid "use this partition or create a new one?"
 msgstr ""
 
 #: Step3a1a.class:82
@@ -1184,7 +1207,7 @@ msgid "Operation cancelled by user. No changes have been made to the system"
 msgstr ""
 
 #: Step3a2.class:25
-msgid "Install VectorLinux to free space on disk"
+msgid "to free space on disk"
 msgstr ""
 
 #: Step3a2.class:45
@@ -1208,9 +1231,7 @@ msgid "of free space"
 msgstr ""
 
 #: Step3a2.class:143
-msgid ""
-"Select the location on your hard drive where you would like to install "
-"VectorLinux"
+msgid "Select the location on your hard drive where you would like to install"
 msgstr ""
 
 #: Step3a2.class:192
@@ -1278,7 +1299,11 @@ msgid "You are about to shink"
 msgstr ""
 
 #: Step3a3a.class:26
-msgid "to make room for your vectorlinux installation."
+msgid "to make room for your"
+msgstr ""
+
+#: Step3a3a.class:26
+msgid "installation."
 msgstr ""
 
 #: Step3a3a.class:26
@@ -1297,13 +1322,15 @@ msgid "button."
 msgstr ""
 
 #: Step3a3a.class:67
-msgid ""
-"Shrinking partitions and creating new environment for VectorLinux ... Please "
-"Wait"
+msgid "Shrinking partitions and creating new environment for"
+msgstr ""
+
+#: Step3a3a.class:67
+msgid "Please Wait"
 msgstr ""
 
 #: Step3a3a.class:72
-msgid "Partitions are ready for VectorLinux. Click"
+msgid "Partitions are ready for"
 msgstr ""
 
 #: Step3a3a.class:133
@@ -1342,9 +1369,11 @@ msgid "Loading partitioning utility...Please Wait"
 msgstr ""
 
 #: Step5.class:103
-msgid ""
-"The VectorLinux installer is unable to embed the gparted partitioning "
-"utility."
+msgid "The"
+msgstr ""
+
+#: Step5.class:103
+msgid "installer is unable to embed the gparted partitioning utility."
 msgstr ""
 
 #: Step5.class:103
@@ -1357,9 +1386,7 @@ msgid "partitioning your hard drives."
 msgstr ""
 
 #: Step5.class:125
-msgid ""
-"VectorLinux is about to launch the GParted partitioning tool. Use this "
-"utility to"
+msgid "is about to launch the GParted partitioning tool. Use this utility to"
 msgstr ""
 
 #: Step5.class:125
@@ -1505,7 +1532,7 @@ msgid "Include Light-weight graphical environment"
 msgstr ""
 
 #: Step7a.class:27 Step7b.class:23
-msgid "Customize Your VectorLinux Installation"
+msgid "Customize Your"
 msgstr ""
 
 #: Step7a.class:34
@@ -1634,14 +1661,14 @@ msgstr ""
 msgid "Something went wrong during installation. Please try again"
 msgstr ""
 
-#: Step9.class:171
+#: Step9.class:179
 msgid "Installation in progress"
 msgstr ""
 
-#: Step9.class:254
+#: Step9.class:262
 msgid "Install Process"
 msgstr ""
 
-#: Step9.class:270
+#: Step9.class:279
 msgid "The development Crew"
 msgstr ""

@@ -98,7 +98,7 @@ PUBLIC SUB EMBED_GPARTED()
       CATCH 
         Message.Error(Error.Text & gb.NewLine & Error.Where)
   ELSE 
-    Message.Warning(("The VectorLinux installer is unable to embed the gparted partitioning utility.") & gb.NewLine &
+    Message.Warning(("The") & Space(1) & ClsGlobal.sDistroName & Space(1) & ("installer is unable to embed the gparted partitioning utility.") & gb.NewLine &
     ("Please consider using the automatic partition option, or use other means of") & gb.NewLine &
     ("partitioning your hard drives."))
   END IF
@@ -120,7 +120,7 @@ PUBLIC SUB Embedder1_Embed()
   ME.HBox1.Visible = FALSE
   ME.tlEmbDone.Visible = FALSE
 
-    Message.Warning(("VectorLinux is about to launch the GParted partitioning tool. Use this utility to") & gb.NewLine &
+    Message.Warning(ClsGlobal.sDistroName & Space(1) & ("is about to launch the GParted partitioning tool. Use this utility to") & gb.NewLine &
     ("move, resize, delete or create partitions.") & "<b>" & gb.NewLine & gb.NewLine & 
     ("When you are finished, you will need to exit the utility from the") & Space(1) & ("GParted") & Space(1) & ("menu") & "</b>")
     WITH ClsGlobal.fRunningMainForm

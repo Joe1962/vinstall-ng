@@ -20,7 +20,7 @@ PRIVATE PicNo AS Picture
 
 PUBLIC SUB Form_Open()
 
-  ME.tlbanner.Text = "<h2>" & ("Customize Your VectorLinux Installation") & "</h2>"
+  ME.tlbanner.Text = "<h2>" & ("Customize Your") & Space(1) & ClsGlobal.sDistroName & Space(1) & ("Installation") & "</h2>"
   
     ME.gvOptions.Rows.count = 3
     ME.gvOptions.Columns.count = 5

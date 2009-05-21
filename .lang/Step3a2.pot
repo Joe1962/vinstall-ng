@@ -15,7 +15,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: Step3a2.class:25
-msgid "Install VectorLinux to free space on disk"
+msgid "Install"
+msgstr ""
+
+#: Step3a2.class:25
+msgid "to free space on disk"
 msgstr ""
 
 #: Step3a2.class:45
@@ -39,7 +43,7 @@ msgid "of free space"
 msgstr ""
 
 #: Step3a2.class:143
-msgid "Select the location on your hard drive where you would like to install VectorLinux"
+msgid "Select the location on your hard drive where you would like to install"
 msgstr ""
 
 #: Step3a2.class:192

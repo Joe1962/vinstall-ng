@@ -19,7 +19,7 @@ msgid "Next"
 msgstr ""
 
 #: FDone.class:31
-msgid "VectorLinux has been installed in your system."
+msgid "has been installed in your system."
 msgstr ""
 
 #: FDone.class:31

@@ -19,7 +19,11 @@ msgid "You are about to shink"
 msgstr ""
 
 #: Step3a3a.class:26
-msgid "to make room for your vectorlinux installation."
+msgid "to make room for your"
+msgstr ""
+
+#: Step3a3a.class:26
+msgid "installation."
 msgstr ""
 
 #: Step3a3a.class:26
@@ -35,11 +39,19 @@ msgid "button."
 msgstr ""
 
 #: Step3a3a.class:67
-msgid "Shrinking partitions and creating new environment for VectorLinux ... Please Wait"
+msgid "Shrinking partitions and creating new environment for"
+msgstr ""
+
+#: Step3a3a.class:67
+msgid "Please Wait"
 msgstr ""
 
 #: Step3a3a.class:72
-msgid "Partitions are ready for VectorLinux. Click"
+msgid "Partitions are ready for"
+msgstr ""
+
+#: Step3a3a.class:72
+msgid "Click"
 msgstr ""
 
 #: Step3a3a.class:72

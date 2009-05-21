@@ -22,7 +22,7 @@ PRIVATE objTargetOptions AS Object[]
 
 PUBLIC SUB Form_Open()
 
-  ME.tlbanner.Text = "<h2>" & ("Install VectorLinux to free space on disk") & "</H2>"
+  ME.tlbanner.Text = "<h2>" & ("Install") & Space(1) & ClsGlobal.sDistroName & Space(1) & ("to free space on disk") & "</H2>"
   ME.MovieBox1.Path = "images/throbber.gif"
   ME.MovieBox1.Playing = FALSE
   'objTargetOptions = NEW Object[]
@@ -140,7 +140,7 @@ PUBLIC SUB LIST_FREE_SPACE()
     'Message("Largest unused area found: " & sLargestDev & " with " & lLargest & " kb of unused space")
     PRINT " -++- Largest unused area found in :" & sLargestDev & " totaling " & lLargest & " kb of free space"
   
-  ME.tlSelAutoTarget.Text = ("Select the location on your hard drive where you would like to install VectorLinux")
+  ME.tlSelAutoTarget.Text = ("Select the location on your hard drive where you would like to install") & Space(1) & ClsGlobal.sDistroName
   
 END
 

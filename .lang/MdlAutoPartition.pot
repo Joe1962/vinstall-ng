@@ -43,7 +43,7 @@ msgid "Existing Data"
 msgstr ""
 
 #: MdlAutoPartition.module:560
-msgid "Total space for VectorLinux"
+msgid "Total space for"
 msgstr ""
 
 #: MdlAutoPartition.module:617

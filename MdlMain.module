@@ -416,6 +416,10 @@ PUBLIC FUNCTION INSTALL_KERNEL_AND_INITRD() AS Integer
           DEBUG "Error copying initrd"
           RETURN 1
         END IF
+        
+      ' Activate credits now
+    ' MdlMain.CREATE_CREDIT_LABELS(Step9.svInstallProc)
+    ' Step9.tmScroll.Enabled = TRUE
                
                     
             
@@ -709,7 +713,7 @@ PUBLIC FUNCTION INSTALL_THIS_PACKAGE(sFullPkgPath AS String) AS Integer
     '$hproc = EXEC ["/sbin/installpkg ", "-R", ClsGlobal.sTargetPath, sFullPkgPath] WAIT 
     '$hproc = SHELL "/sbin/installpkg -R " & ClsGlobal.sTargetPath & Space(1) & sFullPkgPath WAIT 'TO sBuff
     '$hproc = EXEC ["/sbin/installpkg", "-q", "-R", ClsGlobal.sTargetPath, sFullPkgPath] FOR READ 'WAIT 
-    $hproc = EXEC ["/sbin/installpkg", "-R", ClsGlobal.sTargetPath, sFullPkgPath] WAIT FOR OUTPUT 
+    $hproc = EXEC ["/sbin/installpkg", "-q", "-R", ClsGlobal.sTargetPath, sFullPkgPath] WAIT FOR OUTPUT 
     
       IF $hproc.Value > 0 THEN 
         DEBUG sFullPkgPath & Space(1) & "failed to install"

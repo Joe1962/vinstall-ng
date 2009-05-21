@@ -35,7 +35,11 @@ msgid "Loading partitioning utility...Please Wait"
 msgstr ""
 
 #: Step5.class:103
-msgid "The VectorLinux installer is unable to embed the gparted partitioning utility."
+msgid "The"
+msgstr ""
+
+#: Step5.class:103
+msgid "installer is unable to embed the gparted partitioning utility."
 msgstr ""
 
 #: Step5.class:103
@@ -47,7 +51,7 @@ msgid "partitioning your hard drives."
 msgstr ""
 
 #: Step5.class:125
-msgid "VectorLinux is about to launch the GParted partitioning tool. Use this utility to"
+msgid "is about to launch the GParted partitioning tool. Use this utility to"
 msgstr ""
 
 #: Step5.class:125

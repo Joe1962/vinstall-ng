@@ -17,7 +17,7 @@
 PUBLIC objPosTargets AS Object[]
 PUBLIC SUB Form_Open()
 
-  ME.tlbanner.Text = "<h2>" & ("Use Entire Hard Disk for VectorLinux") & "</H2>"
+  ME.tlbanner.Text = "<h2>" & ("Use Entire Hard Disk for") & Space(1) & ClsGlobal.sDistroName & "</H2>"
   ME.TLwARNING.Text = "<b><u>" & ("WARNING:") & "</u></b><br>" &
     "<i>" & ("All existing data in the device you select here will be destroyed.") & "</i>"
 

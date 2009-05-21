@@ -34,15 +34,15 @@ msgstr ""
 msgid "Something went wrong during installation. Please try again"
 msgstr ""
 
-#: Step9.class:171
+#: Step9.class:179
 msgid "Installation in progress"
 msgstr ""
 
-#: Step9.class:254
+#: Step9.class:262
 msgid "Install Process"
 msgstr ""
 
-#: Step9.class:270
+#: Step9.class:279
 msgid "The development Crew"
 msgstr ""
 

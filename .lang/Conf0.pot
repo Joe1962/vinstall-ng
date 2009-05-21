@@ -63,7 +63,11 @@ msgid "Selecting this option will bypass your boot manager configuration."
 msgstr ""
 
 #: Conf0.class:359
-msgid "You may not be able to start your VectorLinux installation. Do not choose this option"
+msgid "You may not be able to start your"
+msgstr ""
+
+#: Conf0.class:359
+msgid "installation. Do not choose this option"
 msgstr ""
 
 #: Conf0.class:359

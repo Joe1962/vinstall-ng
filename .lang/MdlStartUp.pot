@@ -43,7 +43,7 @@ msgid "Installation Summary"
 msgstr ""
 
 #: MdlStartUp.module:50
-msgid "Install VectorLinux"
+msgid "Copy Operating System Files"
 msgstr ""
 
 #: MdlStartUp.module:51

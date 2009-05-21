@@ -31,11 +31,15 @@ msgid "Error deleting existing partitions... Please try another partitioning met
 msgstr ""
 
 #: Step3a1a.class:82
-msgid "Vectorlinux has detected an existing swap partition in your system."
+msgid "has detected an existing swap partition in your system."
 msgstr ""
 
 #: Step3a1a.class:82
-msgid "Would you like to let VectorLinux use this partition or create a new one?"
+msgid "Would you like to let"
+msgstr ""
+
+#: Step3a1a.class:82
+msgid "use this partition or create a new one?"
 msgstr ""
 
 #: Step3a1a.class:82
