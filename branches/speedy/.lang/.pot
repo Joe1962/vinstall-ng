@@ -244,7 +244,7 @@ msgstr ""
 msgid "When finished, Click"
 msgstr ""
 
-#: Conf3.class:47 MdlMain.module:577 Step3a1a.class:177 Step3a2.class:359
+#: Conf3.class:47 MdlMain.module:580 Step3a1a.class:177 Step3a2.class:359
 #: Step3a3a.class:72 Step5.class:177
 msgid "to continue"
 msgstr ""
@@ -667,67 +667,67 @@ msgstr ""
 msgid "with"
 msgstr ""
 
-#: MdlMain.module:335
+#: MdlMain.module:336
 msgid "Installing required package"
 msgstr ""
 
-#: MdlMain.module:338
+#: MdlMain.module:339
 msgid "Problem while installing"
 msgstr ""
 
-#: MdlMain.module:488
+#: MdlMain.module:489
 msgid "Preparing system partitions"
 msgstr ""
 
-#: MdlMain.module:490
+#: MdlMain.module:491
 msgid "An error occurred while preparing partitions. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:498
+#: MdlMain.module:499
 msgid "Error during installation of required software. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:546
+#: MdlMain.module:549
 msgid "Unable to install contents of"
 msgstr ""
 
-#: MdlMain.module:546
+#: MdlMain.module:549
 msgid "Cannot continue"
 msgstr ""
 
-#: MdlMain.module:577
+#: MdlMain.module:580
 msgid "Installation is complete. Click"
 msgstr ""
 
-#: MdlMain.module:579
+#: MdlMain.module:582
 msgid "Installation complete... Click"
 msgstr ""
 
-#: MdlMain.module:579
+#: MdlMain.module:582
 msgid "to continue."
 msgstr ""
 
-#: MdlMain.module:581
+#: MdlMain.module:584
 msgid "Error while installing kernels and initrds"
 msgstr ""
 
-#: MdlMain.module:604
+#: MdlMain.module:607
 msgid "Unable to install the components of"
 msgstr ""
 
-#: MdlMain.module:604
+#: MdlMain.module:607
 msgid "Unable to continue."
 msgstr ""
 
-#: MdlMain.module:688
+#: MdlMain.module:691
 msgid "Installing"
 msgstr ""
 
-#: MdlMain.module:688
+#: MdlMain.module:691
 msgid "Part of"
 msgstr ""
 
-#: MdlMain.module:690
+#: MdlMain.module:693
 msgid "Error installing"
 msgstr ""
 
@@ -1657,18 +1657,18 @@ msgstr ""
 msgid "Install User-Selected Software"
 msgstr ""
 
-#: Step9.class:94
+#: Step9.class:96
 msgid "Something went wrong during installation. Please try again"
 msgstr ""
 
-#: Step9.class:179
+#: Step9.class:181
 msgid "Installation in progress"
 msgstr ""
 
-#: Step9.class:262
+#: Step9.class:264
 msgid "Install Process"
 msgstr ""
 
-#: Step9.class:279
+#: Step9.class:281
 msgid "The development Crew"
 msgstr ""
