@@ -89,6 +89,8 @@ PUBLIC SUB create_installation_process_layout()
         END WITH 
   NEXT 
   
+  WAIT 1
+  
   ' Now start the installation process
   IF MdlMain.INSTALL_PACKAGES(tlcurrpkg, pbinstall, ClsGlobal.iInstallMethod) > 0 THEN 
     Message.Error(("Something went wrong during installation. Please try again"))

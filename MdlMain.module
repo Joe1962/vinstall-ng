@@ -328,10 +328,11 @@ PUBLIC FUNCTION INSTALL_INITIAL_PACKAGES(tlStatus AS TextLabel, pbProg AS Progre
             sFileList = Trim(File.Load("/mnt/source/veclinux" &/ Trim(sPKG)))
             $listarr = Split(Trim(sFileList), gb.NewLine)
               FOR ii = 0 TO $listarr.Max
-                '$path = ME.GET_PACKAGE_FULL_PATH(Trim($listarr[ii]))' Old method uses pkgname (slow)
-                $path = ME.Get_FULL_TLZ_PACKAGE(Trim($listarr[ii])) ' new method sans pkgname
+                $path = ME.GET_PACKAGE_FULL_PATH(Trim($listarr[ii])) ' Old method uses pkgname (slow)
+                '$path = ME.Get_FULL_TLZ_PACKAGE(Trim($listarr[ii])) ' new method sans pkgname
                   IF $path THEN 
-                    WAIT 0.5
+                  ClsGlobal.fRunningMainForm.Refresh
+                    'WAIT 0.5
                     tlStatus.Text = ("Installing required package") & Space(1) & $path
                       ires = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim($path))
                         IF ires > 0 THEN 
@@ -501,6 +502,8 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
       'uPDATE STATUS AND CONTINUE TO NEXT STEP
         ME.ADVANCE_INSTALL_PROGRESS(1)
     END IF
+   
+   WAIT 1 ' brace yourselves... installation is about to begin
    
     SELECT CASE iInstallType
       CASE 0
@@ -681,8 +684,8 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(tlStatus AS TextLabel, pbProg AS ProgressBar, 
   DIM i AS Integer
   
     FOR i = 0 TO $list.Max
-      '$path = ME.GET_PACKAGE_FULL_PATH($list[i]) ' Old method using pkgname.
-      $path = ME.Get_FULL_TLZ_PACKAGE($list[i]) ' New method not using pkgname
+      $path = ME.GET_PACKAGE_FULL_PATH($list[i]) ' Old method using pkgname.
+      '$path = ME.Get_FULL_TLZ_PACKAGE($list[i]) ' New method not using pkgname
         IF $path THEN 
           'WAIT 0.05
             tlStatus.Text = ("Installing") & Space(1) & $path & Space(1) & "(" & ("Part of") & Space(1) & sBulkName & ")"
