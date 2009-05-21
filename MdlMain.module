@@ -328,7 +328,8 @@ PUBLIC FUNCTION INSTALL_INITIAL_PACKAGES(tlStatus AS TextLabel, pbProg AS Progre
             sFileList = Trim(File.Load("/mnt/source/veclinux" &/ Trim(sPKG)))
             $listarr = Split(Trim(sFileList), gb.NewLine)
               FOR ii = 0 TO $listarr.Max
-                $path = ME.GET_PACKAGE_FULL_PATH(Trim($listarr[ii]))
+                '$path = ME.GET_PACKAGE_FULL_PATH(Trim($listarr[ii]))' Old method uses pkgname (slow)
+                $path = ME.Get_FULL_TLZ_PACKAGE(Trim($listarr[ii])) ' new method sans pkgname
                   IF $path THEN 
                     WAIT 0.5
                     tlStatus.Text = ("Installing required package") & Space(1) & $path
@@ -680,7 +681,8 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(tlStatus AS TextLabel, pbProg AS ProgressBar, 
   DIM i AS Integer
   
     FOR i = 0 TO $list.Max
-      $path = ME.GET_PACKAGE_FULL_PATH($list[i])
+      '$path = ME.GET_PACKAGE_FULL_PATH($list[i]) ' Old method using pkgname.
+      $path = ME.Get_FULL_TLZ_PACKAGE($list[i]) ' New method not using pkgname
         IF $path THEN 
           'WAIT 0.05
             tlStatus.Text = ("Installing") & Space(1) & $path & Space(1) & "(" & ("Part of") & Space(1) & sBulkName & ")"
@@ -734,6 +736,48 @@ END
 PUBLIC SUB Process_Error(Errormessage AS String)
   
   PRINT Errormessage
+  
+END
+
+PUBLIC SUB Get_FULL_TLZ_PACKAGE(sPkgname AS String) AS String
+  
+  DIM sNameArr, sList AS String[]
+  DIM sPkg, sTlzName, sShortName, sParentDir AS String
+  DIM sDump, sDump1, sRetval AS String
+  DIM i, ii AS Integer
+  
+  sDump1 = Trim(File.Load(Temp("pkgpaths")))
+  sList = Split(Trim(sDump1), gb.NewLine)
+  
+    FOR i = 0 TO sList.Max
+      IF InStr(sList[i], sPkgname) THEN ' only jack with the strings that actually contain the pkgname in them
+        
+        sParentDir = Left(sList[i], RInStr(sList[i], "/"))
+        sPkg = Right(sList[i], Len(sList[i]) - Len(sParentDir))
+        'PRINT "Found possibel match " & sPkg & " in " & sParentDir
+          ' now find out if the left of the string is the same as the package name and it is a hit for what we are looking for.
+          sNameArr = Split(sPkg, "-")
+          FOR ii = 0 TO (sNameArr.Count - 4)
+            sTlzName = sTlzName & sNameArr[ii] & "-"
+          NEXT 
+            sTlzName = Left(Trim(sTlzName), Len(Trim(sTlzName)) - 1)
+            'PRINT sTlzName
+            IF Trim(sTlzName) = sPkgname THEN
+              sRetval = sList[i] 'sParentDir &/ sPkg 'Trim(sTlzName)
+              RETURN sRetval
+            
+              ELSE 
+                sTlzName = ""
+            END IF
+            
+      END IF
+    NEXT 
+    
+    DEBUG sPkgname & " not found in ISO"
+    'Message("Looking for " & sPkgname)
+    'sRetval = sTlzName
+    'Message(sTlzName)
+    
   
 END
 
