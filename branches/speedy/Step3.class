@@ -34,7 +34,6 @@ PUBLIC SUB Form_Open()
   FMain.btNext.Enabled = TRUE
   FMain0.btNext.Enabled = TRUE
   
-  
 
 END
 
@@ -96,6 +95,5 @@ PUBLIC SUB OnExit()
   
   
 END
-
 
 
