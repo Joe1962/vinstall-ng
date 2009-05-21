@@ -15,7 +15,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: Step7a.class:27
-msgid "Customize Your VectorLinux Installation"
+msgid "Customize Your"
+msgstr ""
+
+#: Step7a.class:27
+msgid "Installation"
 msgstr ""
 
 #: Step7a.class:34

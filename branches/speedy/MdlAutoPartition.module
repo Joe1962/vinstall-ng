@@ -44,7 +44,7 @@ PUBLIC FUNCTION PERFORM_AUTO_PARTITION_FROM_FREE_SPACE(sPartition AS String) AS 
   
   lMBAmmountToUseForVL = ClsGlobal.lTotalMBforVL
   
-  PRINT " --- -> Preparing to allocate " & lMBAmmountToUseForVL & " MB of space for VectorLinux from " & sPartition & " <- ---"
+  PRINT " --- -> Preparing to allocate " & lMBAmmountToUseForVL & " MB of space for" & Space(1) & ClsGlobal.sDistroName & Space(1) & "from " & sPartition & " <- ---"
   WAIT 1
     iPart = Right(sPartition, Len(sPartition) - Len("/dev/hda"))
       IF iPart < 10 THEN 
@@ -557,7 +557,7 @@ PUBLIC SUB DISPLAY_PARTITIONS_WITH_FREE_SPACE(hostContainer AS Container)
  
           tl = NEW TextLabel(hb)
             WITH tl
-              .Text = ("Total space for VectorLinux") & ":" & Space(1)
+              .Text = ("Total space for") & Space(1) & ClsGlobal.sDistroName & Space(1) & ":" & Space(1)
               .Height = 21
               '.Width = .Parent.Width * 0.5
               .Alignment = Align.Left
@@ -662,7 +662,7 @@ PUBLIC SUB Slider_change()
     FOR EACH tl IN objTls
       IF tl.Tag = LAST.tag THEN 
       
-        tl.Text = ("Total space for VectorLinux") & ":" & Space(1) & (100 - LAST.Value) & "%" & Space(1) & "-" & " ( " & sAllocated & " MB )"
+        tl.Text = ("Total space for") & ClsGlobal.sDistroName & ":" & Space(1) & (100 - LAST.Value) & "%" & Space(1) & "-" & " ( " & sAllocated & " MB )"
       'lMBAmmountToUseForVL = sAllocated  
       ClsGlobal.lTotalMBforVL = sAllocated
       END IF
@@ -677,7 +677,7 @@ PUBLIC SUB Slider_change()
   NEXT 
 
 IF sAllocated <= (4 * 1024) THEN 
-  Message("We need at least 4GB for vectorlinux")
+  Message("We need at least 4GB for" & Space(1) & ClsGlobal.sDistroName)
   STOP EVENT 
   RETURN 
 END IF

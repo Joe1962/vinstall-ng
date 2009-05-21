@@ -21,7 +21,7 @@ PUBLIC SUB Form_Open()
   
   ME.tlExp.Text = "<h2>" & ME.tlExp.text & "</h2>"
   
-    sText = ("You are about to shink") & Space(1) & MdlAutoPartition.sPartitionToShrink & Space(1) & ("to make room for your vectorlinux installation.") & Space(1)&
+    sText = ("You are about to shink") & Space(1) & MdlAutoPartition.sPartitionToShrink & Space(1) & ("to make room for your") & Space(1) & ClsGlobal.sDistroName & Space(1) & ("installation.") & Space(1)&
     ("This is generally a safe procedure, however, you should always consider making copies of your valuable data before making changes such as this one to your system")& 
     "<br><br>" & ("When you are ready to continue, click the") & Space(1) & "\"<b>" & btstart.Text & "\" </b>" & Space(1) & ("button.")
     ClsGlobal.fRunningMainForm.btnext.enabled = FALSE
@@ -64,12 +64,12 @@ PUBLIC SUB btStart_Click()
   ME.tlWarning.Visible = FALSE
   ME.HBox2.Visible = TRUE
   ME.MovieBox1.path = "images/throbber.gif"
-  ME.tlExp.Text = ("Shrinking partitions and creating new environment for VectorLinux ... Please Wait")
+  ME.tlExp.Text = ("Shrinking partitions and creating new environment for") & Space(1) & ClsGlobal.sDistroName & Space(1) & "..." & ("Please Wait")
   ME.MovieBox1.Playing = TRUE
   LAST.enabled = FALSE
   MdlAutoPartition.PERFORM_AUTO_PARTITION_FROM_FREE_SPACE(MdlAutoPartition.sPartitionToShrink)
   
-  ME.tlExp.Text = ("Partitions are ready for VectorLinux. Click") & Space(1) & "\"" & ClsGlobal.fRunningMainForm.btnext.text & "\"" & Space(1) & ("to continue")    
+  ME.tlExp.Text = ("Partitions are ready for") & Space(1) & ClsGlobal.sDistroName & Space(1) & ". " & ("Click") & Space(1) & "\"" & ClsGlobal.fRunningMainForm.btnext.text & "\"" & Space(1) & ("to continue")    
   MovieBox1.Playing = FALSE
   ME.MovieBox1.Enabled = FALSE
   ClsGlobal.fRunningMainForm.btnext.enabled = TRUE

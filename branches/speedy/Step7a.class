@@ -24,7 +24,7 @@ picNo = Picture.Load("images/16px-Nocheck.png")
 'btTglSel.Value = FALSE
 
 
-  ME.tlbanner.Text = "<h2>" & ("Customize Your VectorLinux Installation") & "</h2>"
+  ME.tlbanner.Text = "<h2>" & ("Customize Your") & Space(1) & ClsGlobal.sDistroName & Space(1) & ("Installation") & "</h2>"
   WITH ME.gvBulkSel
     .Columns.count = 4
     .Rows.Count = 2

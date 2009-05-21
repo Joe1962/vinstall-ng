@@ -23,7 +23,11 @@ msgid "Select one of the following options"
 msgstr ""
 
 #: Step3a.class:22
-msgid "Allow VectorLinux to use an entire hard disk in your system."
+msgid "Allow"
+msgstr ""
+
+#: Step3a.class:22
+msgid "to use an entire hard disk in your system."
 msgstr ""
 
 #: Step3a.class:22
@@ -31,7 +35,11 @@ msgid "This option will wipe out any data on the disk you select."
 msgstr ""
 
 #: Step3a.class:24
-msgid "Locate free (unpartitioned) space on hard disk and install VectorLinux there."
+msgid "Locate free (unpartitioned) space on hard disk and install"
+msgstr ""
+
+#: Step3a.class:24
+msgid "there."
 msgstr ""
 
 #: Step3a.class:24
@@ -39,7 +47,11 @@ msgid "This option will not harm any data on your hard drive"
 msgstr ""
 
 #: Step3a.class:26
-msgid "Resize your existing partitions to make room for a VectorLinux partition scheme"
+msgid "Resize your existing partitions to make room for a"
+msgstr ""
+
+#: Step3a.class:26
+msgid "partition scheme"
 msgstr ""
 
 #: Step3a.class:26

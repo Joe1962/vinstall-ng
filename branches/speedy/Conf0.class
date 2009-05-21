@@ -39,7 +39,7 @@ PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabSt
     i = 0
       WITH objTabStrip
         .Index = i
-        .Text = "VectorLinux"
+        .Text = ClsGlobal.sDistroName
       END WITH 
   ELSE 
   i = objTabStrip.Count - 1
@@ -355,7 +355,7 @@ PUBLIC SUB rbNone_Click()
     IF LAST.value = TRUE THEN 
    Message.Warning("<b>" & ("WARNING:") & "</b><br>" &
     ("Selecting this option will bypass your boot manager configuration.") & "<br>" &
-    ("You may not be able to start your VectorLinux installation. Do not choose this option") & "<br>" &
+    ("You may not be able to start your") & Space(1) & ClsGlobal.sDistroName & Space(1) & ("installation. Do not choose this option") & "<br>" &
     ("unless you are fully aware of what you are doing."))
   END IF
   Timer1.Enabled = FALSE

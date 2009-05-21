@@ -93,6 +93,7 @@
     }
     { Frame2 Frame
       MoveScaled(37,1,33,28)
+      Visible = False
       Expand = True
       Text = ("The development Crew")
       { wsScroll Workspace

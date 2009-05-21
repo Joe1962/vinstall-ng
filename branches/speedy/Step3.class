@@ -29,6 +29,8 @@ PUBLIC SUB Form_Open()
   ME.tlbanner.Alignment = Align.Center
   ME.tlbanner.Alignment = Align.Normal
   ME.tlPartHelp.Text = ("Select the partitioning method you would like to use")
+  ME.tlautopart.Text = ("Automatically resize your partitions and / or create the correct disk space for") & Space(1) & ClsGlobal.sDistroName
+  ME.TextLabel1.Text = ("Install") & Space(1) & ClsGlobal.sDistroName & Space(1) & ("to existing partitions on my hard drive")
   FMain.btNext.Enabled = TRUE
   FMain0.btNext.Enabled = TRUE
   

@@ -26,7 +26,7 @@ PUBLIC SUB Form_Open()
   
   WITH ME
     .tlbanner.Text = "<h2>" & tlbanner.Text & "</h2>"
-    .TextLabel1.Text = ("VectorLinux has been installed in your system.") & "<br><br>" &
+    .TextLabel1.Text = ClsGlobal.sDistroName & Space(1) & ("has been installed in your system.") & "<br><br>" &
     "<br>" & ("After your computer restarts, you may use VasmCC to perform any additional configuration.") & "<br>" & "<br>" &
     ("Click") & Space(1) & "\"" & sTxt & "\"" & Space(1) & ("to restart your computer now.")
     

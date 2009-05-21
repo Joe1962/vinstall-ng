@@ -78,8 +78,8 @@ PUBLIC SUB CREATE_NEW_PARTITIONS()
         sDump = Trim(sDump)
           IF sDump THEN   
             ' swap exists
-              SELECT CASE Message.Question(("Vectorlinux has detected an existing swap partition in your system.") & "<br>" &
-                ("Would you like to let VectorLinux use this partition or create a new one?"), ("Use Existing"), ("Create New"))
+              SELECT CASE Message.Question(ClsGlobal.sDistroName & Space(1) & ("has detected an existing swap partition in your system.") & "<br>" &
+                ("Would you like to let") & Space(1) & ClsGlobal.sDistroName & Space(1) & ("use this partition or create a new one?"), ("Use Existing"), ("Create New"))
                 CASE 1
                   ' use existing partition
                   SHELL "probepart | grep \"^/dev\" | grep -i \"linux swap\" | tr -s \' \',\"\" | cut -f 1 -d \' \'" TO sSwapList
