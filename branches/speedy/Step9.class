@@ -17,22 +17,39 @@
 
 
 PUBLIC SUB Form_Open()
-
+'DIM i AS Integer
   
   ME.tlbanner.Text = "<h2>" & tlbanner.Text & "</h2>"
   ME.tlInstallWarn.Text = ClsGlobal.sDistroName & Space(1) & ClsGlobal.sDistroVer & Space(1)&
   ("is being installed to your computer. Please wait.")
-  
-  WAIT 1
+   
   ME.Refresh
-  WAIT 1
-  ' MdlMain.CREATE_CREDIT_LABELS(ME.ScrlCredits) ' Fill out credits list
-  'ME.tmScroll.Enabled = TRUE ' Start scrolling
-  'FrmCredits.Reparent(ME.wsScroll)
-  'FrmCredits.Show()
-  ME.create_installation_process_layout() ' triggers installation process
+  ME.create_installation_process_layout() 
+WAIT 1
   
-  
+  ME.tmScroll.Enabled = TRUE
+  '  ' perform partitioning as requested.
+  '  ME.tlCurrPkg.Text = ("Preparing system partitions")
+  '  IF MdlMain.PERFORM_PARTITIONING() > 0 THEN 
+  '   Message.Error(("An error occurred while preparing partitions. Unable to continue"))
+  '   RETURN 
+  '   'RETURN 1
+  '  ELSE 
+  '   ' Update Status and continue to next step
+  '     MdlMain.ADVANCE_INSTALL_PROGRESS(0)
+  '  END IF 
+  '  
+  '  ' Count number of packages to be installed.
+  ' MdlMain.COUNT_PACKAGES_TO_BE_INSTALLED()
+  ' 
+  '   i = MdlMain.INSTALL_PACKAGES(tlcurrpkg, pbinstall, ClsGlobal.iInstallMethod) 
+  ' 
+  ' IF i > 0 THEN 
+  '   Message.Error(("Something went wrong during installation. Please try again"))
+  ' ELSE 
+  '   RETURN 
+  ' END IF
+
 
 END
 PUBLIC FUNCTION GetNExt() AS String
@@ -49,10 +66,11 @@ PUBLIC SUB OnExit()
   
 END
 PUBLIC SUB StartUp()
+
   
   MdlMain.ADVANCE_STATUS_TREE("Step4", "Step5")
-  ME.Resize(ME.Parent.Width, ME.Parent.Height)
-  ME.Refresh()
+
+  
   
 END
 
@@ -91,15 +109,7 @@ PUBLIC SUB create_installation_process_layout()
   
   WAIT 1
   
-  ' Now start the installation process
-  IF MdlMain.INSTALL_PACKAGES(tlcurrpkg, pbinstall, ClsGlobal.iInstallMethod) > 0 THEN 
-    Message.Error(("Something went wrong during installation. Please try again"))
-  ELSE 
-    ' IF IsDir(ClsGlobal.sTargetPath &/ "boot") = FALSE THEN TRY MKDIR ClsGlobal.sTargetPath &/ "boot"
-    ' IF MdlMain.INSTALL_KERNEL_AND_INITRD() THEN 
-    '   Message.Error(("Error during kernel installation. Please see error log"))
-    ' END IF
-  END IF
+  
   
   
 END
@@ -112,7 +122,7 @@ PUBLIC SUB Form_Resize()
   ME.svInstallProc.Width = svinstallproc.Parent.Width - (svinstallproc.left * 2)
   ME.svInstallProc.Height = svinstallproc.Parent.Height - (svinstallproc.top * 1.25)
   'ME.ScrlCredits.Move(4, 36, ScrlCredits.Parent.Width - (ScrlCredits.x * 2), ScrlCredits.Parent.Height - (ScrlCredits.Top * 1.5))
-  ME.wsScroll.Move(4, 36, wsScroll.Parent.Width - (wsscroll.x * 2), wsscroll.Parent.Height - (wsscroll.top * 1.5))
+  ME.wsScroll.Move(4, 36, wsScroll.Parent.Width - (wsscroll.x * 2), wsscroll.Parent.Height - (wsscroll.top + 12))
 
 END
 
@@ -133,8 +143,22 @@ END
 
 PUBLIC SUB tmScroll_Timer()
 
-  INC svInstallProc.ScrollY
-  'IF ScrollView1.ScrollY = ScrollView1.scrollh - ScrollView1.Height THEN ScrollView1.Scroll(0, 0)
-  IF svinstallproc.scrolly = svinstallproc.ScrollH - svinstallproc.Height THEN svinstallproc.Scroll(0, 0)
+DIM i AS Integer
+tmScroll.Enabled = FALSE ' fist kill this so that the process doesn't run all over again
+WAIT 5 ' wait 5 seconds.
+DEBUG ("Starting installation process")
+  ' perform partitioning as requested.
+
+  
+    i = MdlMain.INSTALL_PACKAGES(tlcurrpkg, pbinstall, ClsGlobal.iInstallMethod) 
+  
+  IF i > 0 THEN 
+    Message.Error(("Something went wrong during installation. Please try again"))
+  ELSE 
+    RETURN 
+  END IF
+  
 
 END
+
+
