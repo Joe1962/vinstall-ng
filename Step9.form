@@ -35,7 +35,6 @@
   { tmScroll #Timer
     #X = 576
     #Y = 64
-    Delay = 25
   }
   { HBox3 HBox
     MoveScaled(0,12,15,1)
