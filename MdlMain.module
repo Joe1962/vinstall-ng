@@ -756,6 +756,10 @@ PUBLIC FUNCTION INSTALL_THIS_BULK(tlStatus AS TextLabel, pbProg AS ProgressBar, 
       '$path = ME.GET_PACKAGE_FULL_PATH($list[i]) ' Old method using pkgname.
       $path = ME.Get_FULL_TLZ_PACKAGE($list[i]) ' New method not using pkgname
         IF $path THEN 
+        
+        'WAIT 0.12
+        'WAIT 0.025
+        'WAIT 0.0512
           WAIT 0.125
           'INC $currpkg
             tlStatus.Text = ("Installing") & Space(1) & $path & Space(1) & "(" & ("Part of") & Space(1) & sBulkName & ")"
