@@ -1,0 +1,98 @@
+' Gambas class file
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+PUBLIC SUB _new()
+
+END
+
+PUBLIC SUB Form_Open()
+
+
+prepare_array()
+Timer1.Enabled = TRUE
+
+END
+PUBLIC SUB prepare_array()
+  
+  'DIM sList AS String[] = ["Moises", "linux", "vluser", "uelsk8s", "", "is", "an", "array", "with", "tons", "of", "scrolling", "stuff", "on", "it", "and", "we", "ware", "running", "a", "test"]
+  DIM sFile AS String
+  DIM sList AS String[]
+  DIM i AS Integer
+  DIM tl AS TextLabel
+  DIM sText, strline AS String
+  
+  'sList = Split(Trim(File.Load(Application.Args[2])), gb.NewLine) ' The path to the credit file must be fed trhough the 2nd argument to the scroller
+  sList = Split(File.Load("/mnt/source/CREDIT"), gb.NewLine)
+
+tl = NEW TextLabel(scrollview1)
+tl.Height = scrollview1.Height
+tl.Expand = TRUE
+
+  FOR i = 0 TO sList.Max
+  'FOR EACH strline IN sList
+  tl = NEW TextLabel(scrollview1)
+  tl.Expand = TRUE
+  tl.Height = 28
+  tl.Alignment = Align.Center
+    sText = Replace(sList[i], "(", "[ ")
+    sText = Replace(sText, ")", " ]")
+      IF InStr(sText, "M0E-lnx") THEN 
+        tl.Height = 28 * 2
+        'tl.Text = "<b>" & Left(sText, InStr(sText, "[") - 1) & "</b><br>" & Right(sText, Len(sText) - InStr(sText, "[") + 1)
+        tl.Text = "<b>" & Left(sText, InStr(sText, "[") - 1) & "</b><br>" & "[ Gui Installer, vpackager, vasmCC ]"
+      ELSE IF InStr(sText, "Uelsk8s") THEN 
+        tl.Height = 28 * 2
+        tl.Text = "<b>" & Left(sText, InStr(sText, "[") - 1) & "</b><br>" & "[ ISO Master, Gui Istaller ]"
+      ELSE IF InStr(sText, "Vector") THEN 
+        tl.Height = 28 * 2
+        tl.Text = "<b>" & Left(sText, InStr(sText, "[") - 1) & "</b><br>" & Right(sText, Len(sText) - InStr(sText, "[") + 1)
+      ELSE IF InStr(sText, "[") THEN 
+      tl.Height = 28 * 2
+        tl.Text = Left(sText, InStr(sText, "[") - 1) & "<br>" & Right(sText, Len(sText) - InStr(sText, "[") + 1)
+      ELSE 
+        tl.Text = sText
+      END IF
+        
+      ' IF InStr(sText, "(") THEN 
+      '   sText = "<b>" & Left(sList[i], InStr(sList[i], "(") - 1) & "</b><br>" & gb.NewLine & "[ " & Replace(Right(sList[i], Len(sList[i]) - InStr(sList[i], "(")), ")", " ]")
+      '   tl.Height = 28 * 2.5
+      ' 
+  
+  
+  NEXT 
+  
+  
+END
+
+PUBLIC SUB Timer1_Timer()
+
+  INC scrollview1.ScrollY
+  IF scrollview1.ScrollY = ScrollView1.Scrollh - scrollview1.h THEN 
+    Timer1.Enabled = FALSE
+    REPEAT 
+      DEC ScrollView1.ScrollY
+    UNTIL scrollview1.ScrollY = 0
+  END IF
+  Timer1.Enabled = TRUE
+    
+  
+  '   INC ScrollView1.ScrollY
+  ' 'PRINT ScrollView1.scrolly & " |" & ScrollView1.ScrollH & " | " & ScrollView1.Height
+  '   IF ScrollView1.ScrollY = ScrollView1.scrollh - ScrollView1.Height THEN ScrollView1.Scroll(0, 0)
+
+
+END

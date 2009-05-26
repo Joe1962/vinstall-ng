@@ -49,6 +49,12 @@ WAIT 1
   ' ELSE 
   '   RETURN 
   ' END IF
+  
+  ' Embed the credits scroller
+'  EXEC ["scroller/scroller.gambas", Embedder1.Id, "/mnt/source/CREDIT"]
+SHELL "scroller/scroller.gambas " & Embedder1.Id
+'ME.Embedder1.Raise()
+
 
 
 END
@@ -122,7 +128,8 @@ PUBLIC SUB Form_Resize()
   ME.svInstallProc.Width = svinstallproc.Parent.Width - (svinstallproc.left * 2)
   ME.svInstallProc.Height = svinstallproc.Parent.Height - (svinstallproc.top * 1.25)
   'ME.ScrlCredits.Move(4, 36, ScrlCredits.Parent.Width - (ScrlCredits.x * 2), ScrlCredits.Parent.Height - (ScrlCredits.Top * 1.5))
-  ME.wsScroll.Move(4, 36, wsScroll.Parent.Width - (wsscroll.x * 2), wsscroll.Parent.Height - (wsscroll.top + 12))
+'  ME.wsScroll.Move(4, 36, wsScroll.Parent.Width - (wsscroll.x * 2), wsscroll.Parent.Height - (wsscroll.top + 12))
+  ME.Embedder1.Move(4, 36, Embedder1.Parent.Width - (Embedder1.x * 2), Embedder1.Parent.Height - (Embedder1.Top + 24))
 
 END
 
@@ -150,7 +157,7 @@ DEBUG ("Starting installation process")
   ' perform partitioning as requested.
 
   
-    i = MdlMain.INSTALL_PACKAGES(tlcurrpkg, pbinstall, ClsGlobal.iInstallMethod) 
+    i = MdlMain.INSTALL_PACKAGES(tlcurrpkg, pbInstall, ClsGlobal.iInstallMethod) 
   
   IF i > 0 THEN 
     Message.Error(("Something went wrong during installation. Please try again"))

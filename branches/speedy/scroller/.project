@@ -1,0 +1,9 @@
+# Gambas Project File 2.0
+# Compiled with Gambas 2.12
+Title=scroller
+Startup=StartUp
+Version=0.0.6
+Library=gb.gtk
+Library=gb.form
+Library=gb.gtk.ext
+TabSize=2

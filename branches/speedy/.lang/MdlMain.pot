@@ -82,15 +82,15 @@ msgstr ""
 msgid "Unable to continue."
 msgstr ""
 
-#: MdlMain.module:761
+#: MdlMain.module:765
 msgid "Installing"
 msgstr ""
 
-#: MdlMain.module:761
+#: MdlMain.module:765
 msgid "Part of"
 msgstr ""
 
-#: MdlMain.module:764
+#: MdlMain.module:768
 msgid "Error installing"
 msgstr ""
 

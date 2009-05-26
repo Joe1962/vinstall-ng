@@ -1,7 +1,7 @@
 # Gambas Form File 2.0
 
 { Form Form
-  MoveScaled(0,0,78,60)
+  MoveScaled(0,0,95,60)
   Text = ("")
   Arrangement = Arrange.Row
   { HPanel1 HPanel
@@ -92,11 +92,10 @@
     }
     { Frame2 Frame
       MoveScaled(37,1,33,28)
-      Visible = False
       Expand = True
       Text = ("The development Crew")
-      { wsScroll Workspace
-        MoveScaled(1,3,31,24)
+      { Embedder1 Embedder
+        MoveScaled(1,2,31,25)
       }
     }
   }
