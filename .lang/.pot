@@ -38,120 +38,132 @@ msgstr ""
 msgid "Add option to boot this operating system into text mode"
 msgstr ""
 
-#: Conf0.class:225 MdlBootMngr.module:171
-msgid "Standard"
+#: Conf0.class:258
+msgid "Found on"
 msgstr ""
 
-#: Conf0.class:225
-msgid "Bootplash Med"
+#: Conf0.class:262
+msgid "Label"
 msgstr ""
 
-#: Conf0.class:225 MdlBootMngr.module:175
-msgid "Bootsplash High"
+#: Conf0.class:277
+msgid "Include this operating system in boot menu"
 msgstr ""
 
-#: Conf0.class:225 MdlBootMngr.module:177
-msgid "Bootsplash Extra High"
+#: Conf0.class:281
+msgid "Make this the default operating system to boot"
 msgstr ""
 
-#: Conf0.class:359 Step1.class:434 Step3a1.class:22 Step3a1a.class:186
+#: Conf0.class:423 Step1.class:434 Step3a1.class:22 Step3a1a.class:186
 #: Step7a.class:144
 msgid "WARNING:"
 msgstr ""
 
-#: Conf0.class:359
+#: Conf0.class:423
 msgid "Selecting this option will bypass your boot manager configuration."
 msgstr ""
 
-#: Conf0.class:359
+#: Conf0.class:423
 msgid "You may not be able to start your"
 msgstr ""
 
-#: Conf0.class:359
+#: Conf0.class:423
 msgid "installation. Do not choose this option"
 msgstr ""
 
-#: Conf0.class:359
+#: Conf0.class:423
 msgid "unless you are fully aware of what you are doing."
 msgstr ""
 
-#: Conf0.class:513
+#: Conf0.class:578
 msgid "Unable to find boot arguments for OS in"
 msgstr ""
 
-#: Conf0.class:521
+#: Conf0.class:586
 msgid "Offer"
 msgstr ""
 
-#: Conf0.class:521
+#: Conf0.class:586
 msgid "as a bootable choice"
 msgstr ""
 
-#: Conf0.class:558
+#: Conf0.class:633
 msgid "Title"
 msgstr ""
 
-#: Conf0.class:580
+#: Conf0.class:655
 msgid "Initial RAM Disk"
 msgstr ""
 
-#: Conf0.class:636
+#: Conf0.class:711
 msgid "Include this Operating System in boot menu"
 msgstr ""
 
-#: Conf0.class:645
+#: Conf0.class:720
 msgid "Boot this operating system by default"
 msgstr ""
 
-#: Conf0.class:760
+#: Conf0.class:814
+msgid "Bootsector"
+msgstr ""
+
+#: Conf0.class:816 MdlBootMngr.module:164
+msgid "MBR Of"
+msgstr ""
+
+#: Conf0.class:818 MdlBootMngr.module:170
+msgid "Floppy"
+msgstr ""
+
+#: Conf0.class:872
 msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0.class:776
+#: Conf0.class:888
 msgid "Select system boot manager to use"
 msgstr ""
 
-#: Conf0.class:785
+#: Conf0.class:897
 msgid "LILO"
 msgstr ""
 
-#: Conf0.class:792
+#: Conf0.class:904
 msgid "GRUB"
 msgstr ""
 
-#: Conf0.class:798
+#: Conf0.class:910
 msgid "NONE"
 msgstr ""
 
-#: Conf0.class:807
+#: Conf0.class:919
 msgid "Boot Menu Options"
 msgstr ""
 
-#: Conf0.class:817
+#: Conf0.class:929
 msgid "Target"
 msgstr ""
 
-#: Conf0.class:829
+#: Conf0.class:941
 msgid "Video Resolution"
 msgstr ""
 
-#: Conf0.class:848
+#: Conf0.class:960
 msgid "Prompt Time Out"
 msgstr ""
 
-#: Conf0.class:859
+#: Conf0.class:971
 msgid "Seconds"
 msgstr ""
 
-#: Conf0.class:866
+#: Conf0.class:978
 msgid "Boot Default"
 msgstr ""
 
-#: Conf0.class:889
+#: Conf0.class:1001
 msgid "DETECTED OPERATING SYSTEMS."
 msgstr ""
 
-#: Conf0.class:905
+#: Conf0.class:1017
 msgid "Tab 0"
 msgstr ""
 
@@ -244,7 +256,7 @@ msgstr ""
 msgid "When finished, Click"
 msgstr ""
 
-#: Conf3.class:47 MdlMain.module:649 Step3a1a.class:177 Step3a2.class:359
+#: Conf3.class:47 MdlMain.module:652 Step3a1a.class:177 Step3a2.class:359
 #: Step3a3a.class:72 Step5.class:177
 msgid "to continue"
 msgstr ""
@@ -605,45 +617,49 @@ msgstr ""
 msgid "Select the location to which we will resize"
 msgstr ""
 
-#: MdlBootMngr.module:150
+#: MdlBootMngr.module:152
 msgid "None"
 msgstr ""
 
-#: MdlBootMngr.module:161
-msgid "MBR Of"
-msgstr ""
-
-#: MdlBootMngr.module:163
+#: MdlBootMngr.module:166
 msgid "Bootsector Of"
 msgstr ""
 
-#: MdlBootMngr.module:165
-msgid "Floppy"
+#: MdlBootMngr.module:176
+msgid "Standard"
 msgstr ""
 
-#: MdlBootMngr.module:173
+#: MdlBootMngr.module:178
 msgid "Bootsplash Med"
 msgstr ""
 
-#: MdlBootMngr.module:347
+#: MdlBootMngr.module:180
+msgid "Bootsplash High"
+msgstr ""
+
+#: MdlBootMngr.module:182
+msgid "Bootsplash Extra High"
+msgstr ""
+
+#: MdlBootMngr.module:425
 msgid "MBR of"
 msgstr ""
 
-#: MdlBootMngr.module:355
+#: MdlBootMngr.module:433
 msgid "Bootsector of"
 msgstr ""
 
-#: MdlBootMngr.module:404
+#: MdlBootMngr.module:482
 msgid "You must select one operating system to be started by default"
 msgstr ""
 
-#: MdlBootMngr.module:422
+#: MdlBootMngr.module:500
 msgid ""
 "Found duplicate operating system names. Please use unique labels for each "
 "menu entry"
 msgstr ""
 
-#: MdlBootMngr.module:425
+#: MdlBootMngr.module:503
 msgid "Check these boxes to make sure they have unique names"
 msgstr ""
 
@@ -679,47 +695,47 @@ msgstr ""
 msgid "Error during installation of required software. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:618
+#: MdlMain.module:621
 msgid "Unable to install contents of"
 msgstr ""
 
-#: MdlMain.module:618
+#: MdlMain.module:621
 msgid "Cannot continue"
 msgstr ""
 
-#: MdlMain.module:649
+#: MdlMain.module:652
 msgid "Installation is complete. Click"
 msgstr ""
 
-#: MdlMain.module:651
+#: MdlMain.module:654
 msgid "Installation complete... Click"
 msgstr ""
 
-#: MdlMain.module:651
+#: MdlMain.module:654
 msgid "to continue."
 msgstr ""
 
-#: MdlMain.module:653
+#: MdlMain.module:656
 msgid "Error while installing kernels and initrds"
 msgstr ""
 
-#: MdlMain.module:676
+#: MdlMain.module:679
 msgid "Unable to install the components of"
 msgstr ""
 
-#: MdlMain.module:676
+#: MdlMain.module:679
 msgid "Unable to continue."
 msgstr ""
 
-#: MdlMain.module:765
+#: MdlMain.module:768
 msgid "Installing"
 msgstr ""
 
-#: MdlMain.module:765
+#: MdlMain.module:768
 msgid "Part of"
 msgstr ""
 
-#: MdlMain.module:768
+#: MdlMain.module:771
 msgid "Error installing"
 msgstr ""
 
@@ -739,7 +755,7 @@ msgstr ""
 msgid "Disk Partitioning"
 msgstr ""
 
-#: MdlStartUp.module:47 Step8.class:147
+#: MdlStartUp.module:47 Step8.class:150
 msgid "Software Selection"
 msgstr ""
 
@@ -747,7 +763,7 @@ msgstr ""
 msgid "Installation"
 msgstr ""
 
-#: MdlStartUp.module:49 Step8.class:230
+#: MdlStartUp.module:49 Step8.class:233
 msgid "Installation Summary"
 msgstr ""
 
@@ -1182,11 +1198,11 @@ msgstr ""
 msgid "This step cannot be undone. Are you sure you want to continue?"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:510 Step7a.class:144
+#: Step3a1a.class:186 Step6.class:518 Step7a.class:144
 msgid "Yes"
 msgstr ""
 
-#: Step3a1a.class:186 Step6.class:510 Step7a.class:144
+#: Step3a1a.class:186 Step6.class:518 Step7a.class:144
 msgid "No"
 msgstr ""
 
@@ -1463,7 +1479,7 @@ msgstr ""
 msgid "Not Used"
 msgstr ""
 
-#: Step6.class:190 Step8.class:82
+#: Step6.class:190 Step8.class:85
 msgid "Do not format"
 msgstr ""
 
@@ -1483,7 +1499,7 @@ msgstr ""
 msgid "Please select only one partition for this purpose"
 msgstr ""
 
-#: Step6.class:405
+#: Step6.class:413
 msgid "Select which partitions to use for installation"
 msgstr ""
 
@@ -1499,7 +1515,7 @@ msgstr ""
 msgid "Install everthing in the image (Fully Automated)"
 msgstr ""
 
-#: Step7.class:164 Step8.class:137
+#: Step7.class:164 Step8.class:140
 msgid "Customized"
 msgstr ""
 
@@ -1507,7 +1523,7 @@ msgstr ""
 msgid "Select  the components you wish to install  (Advanced)"
 msgstr ""
 
-#: Step7.class:182 Step8.class:139
+#: Step7.class:182 Step8.class:142
 msgid "Minimal"
 msgstr ""
 
@@ -1583,51 +1599,51 @@ msgstr ""
 msgid "Partitions to be used"
 msgstr ""
 
-#: Step8.class:83
+#: Step8.class:86
 msgid "Not Formatted"
 msgstr ""
 
-#: Step8.class:83
+#: Step8.class:86
 msgid "Mount to"
 msgstr ""
 
-#: Step8.class:84
+#: Step8.class:87
 msgid "Format to"
 msgstr ""
 
-#: Step8.class:84
+#: Step8.class:87
 msgid "and mount to"
 msgstr ""
 
-#: Step8.class:100
+#: Step8.class:103
 msgid "NO SWAP SPACE SELECTED"
 msgstr ""
 
-#: Step8.class:105
+#: Step8.class:108
 msgid "Swap Space"
 msgstr ""
 
-#: Step8.class:118
+#: Step8.class:121
 msgid "Pre-formatted to reiserfs, and used for /"
 msgstr ""
 
-#: Step8.class:135
+#: Step8.class:138
 msgid "Full"
 msgstr ""
 
-#: Step8.class:142
+#: Step8.class:145
 msgid "Installation Method"
 msgstr ""
 
-#: Step8.class:148
+#: Step8.class:151
 msgid "Major Components"
 msgstr ""
 
-#: Step8.class:158
+#: Step8.class:161
 msgid "Additional Software"
 msgstr ""
 
-#: Step8.class:249
+#: Step8.class:252
 msgid ""
 "Your VectorLinux installation is about to be performed as follows. If you "
 "need to make any changes, this is your last chance."
@@ -1637,34 +1653,34 @@ msgstr ""
 msgid "is being installed to your computer. Please wait."
 msgstr ""
 
-#: Step9.class:91
+#: Step9.class:121
 msgid "Prepare Partitions"
 msgstr ""
 
-#: Step9.class:91
+#: Step9.class:121
 msgid "Install Base System (required)"
 msgstr ""
 
-#: Step9.class:91
+#: Step9.class:121
 msgid "Install User-Selected Software"
 msgstr ""
 
-#: Step9.class:156
+#: Step9.class:186
 msgid "Starting installation process"
 msgstr ""
 
-#: Step9.class:163
+#: Step9.class:193
 msgid "Something went wrong during installation. Please try again"
 msgstr ""
 
-#: Step9.class:212
+#: Step9.class:242
 msgid "Installation in progress"
 msgstr ""
 
-#: Step9.class:294
+#: Step9.class:324
 msgid "Install Process"
 msgstr ""
 
-#: Step9.class:310
+#: Step9.class:340
 msgid "The development Crew"
 msgstr ""

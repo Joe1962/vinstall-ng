@@ -327,6 +327,8 @@ PUBLIC SUB read_partition_selection()
   DIM cbox, cb AS ComboBox
   DIM sPart, sFormat, sSize, sMntPoint AS String
   DIM i, irow AS Integer
+  DIM sarr, scomp AS String[]
+  'DIM scomp AS String
   
   
   ' ================= get the list of vital partitions =====================
@@ -341,11 +343,17 @@ PUBLIC SUB read_partition_selection()
       '          Message(gvPartListing[irow, 0].Text & " - (" & gvPartListing[irow, 1].Text & ") - " & gvPartListing[irow, 2].Text)
       '         ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & cbox.Tag & "-" & sSize & "-" & cbox.Text & "-" & sFormat & ","
       ClsGlobal.sVitalPartList = ClsGlobal.sVitalPartList & sPart & "-" & sSize & "-" & sMntPoint & "-" & sFormat & "|"
+          'CATCH THE ROOT PARTITIONG HERE
+          IF sMntPoint = "/" THEN ClsGlobal.sRoot = sPart
       
         END IF
       END IF
       
     NEXT 
+    
+
+      
+      
     
     ' =========== get list of swap partitions selected .(if any) =====================
     
