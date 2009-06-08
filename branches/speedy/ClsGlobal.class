@@ -76,3 +76,5 @@ STATIC PUBLIC sDefBoot AS String
 STATIC PUBLIC sInstallType AS String ' type of installation to be done (Full, Custom, Minimal)
 STATIC PUBLIC objMinComponents AS NEW Object[]
 
+STATIC PUBLIC BootMngrTarget AS String
+

@@ -1,0 +1,161 @@
+' Gambas class file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PROPERTY Label AS String
+PROPERTY Root AS String
+PROPERTY initrd AS String
+PROPERTY kernel AS String
+PROPERTY StartupOptions AS String
+PROPERTY Enabled AS Boolean
+PROPERTY IsDefault AS Boolean
+PROPERTY sLIloLabel AS String
+PROPERTY sGrubLabel AS String
+PROPERTY osType AS String
+
+
+PRIVATE $Label AS String
+PRIVATE $Root AS String
+PRIVATE $initrd AS String
+PRIVATE $kernel AS String
+PRIVATE $StartupOptions AS String
+PRIVATE $Enabled AS Boolean
+PRIVATE $IsDefault AS Boolean
+PRIVATE $sLiloLabel AS String
+PRIVATE $sGrubLabel AS String
+PRIVATE $type AS String
+
+
+
+PRIVATE FUNCTION Label_Read() AS String
+
+  RETURN $Label
+
+END
+
+PRIVATE SUB Label_Write(Value AS String)
+
+  $Label = Value
+
+END
+
+PRIVATE FUNCTION Root_Read() AS String
+
+  RETURN $Root
+
+END
+
+PRIVATE SUB Root_Write(Value AS String)
+
+ $Root = Value
+
+END
+
+PRIVATE FUNCTION kernel_Read() AS String
+
+  RETURN $kernel
+
+END
+
+PRIVATE SUB kernel_Write(Value AS String)
+
+  $kernel = Value
+
+END
+
+PRIVATE FUNCTION initrd_Read() AS String
+
+RETURN $initrd
+
+END
+
+PRIVATE SUB initrd_Write(Value AS String)
+
+$initrd = Value
+
+END
+
+PRIVATE FUNCTION StartupOptions_Read() AS String
+
+  RETURN $StartupOptions
+
+END
+
+PRIVATE SUB StartupOptions_Write(Value AS String)
+
+  $StartupOptions = Value
+
+END
+
+PRIVATE FUNCTION Enabled_Read() AS Boolean
+
+  RETURN $Enabled
+
+END
+
+PRIVATE SUB Enabled_Write(Value AS Boolean)
+
+  $Enabled = Value
+
+END
+
+PRIVATE FUNCTION IsDefault_Read() AS Boolean
+
+  RETURN $IsDefault
+
+END
+
+PRIVATE SUB IsDefault_Write(Value AS Boolean)
+
+  $IsDefault = Value
+
+END
+
+PRIVATE FUNCTION sLIloLabel_Read() AS String
+
+  RETURN $sLiloLabel
+
+END
+
+PRIVATE SUB sLIloLabel_Write(Value AS String)
+
+  $sLiloLabel = Value
+
+END
+
+PRIVATE FUNCTION sGrubLabel_Read() AS String
+
+  RETURN $sGrubLabel
+
+END
+
+PRIVATE SUB sGrubLabel_Write(Value AS String)
+
+  $sGrubLabel = Value
+
+END
+
+PRIVATE FUNCTION osType_Read() AS String
+
+  RETURN $type
+
+END
+
+PRIVATE SUB osType_Write(Value AS String)
+
+  $type = Value
+
+END

@@ -218,28 +218,92 @@ PUBLIC SUB List_Other_Linuxes(objTabStrip AS TabStrip)
 END
 
 
-PUBLIC SUB Form_Open()
+' PUBLIC SUB Form_Open()
+' 
+'    WITH ME
+'     .tlbanner.Text = "<h2>" & tlbanner.text & "</h2>"
+'     .cbVidRes.List = [("Standard"), ("Bootplash Med"), ("Bootsplash High"), ("Bootsplash Extra High")]
+'     .TLoSlIST.Text = "<b>" & UCase(.TLoSlIST.Text) & "</b>"
+'   END WITH 
+' 'ME.Fake_Names()
+'   'ME.List_Other_Linuxes(ME.TsOsList)
+'   'ME.Update_Default_boot_choices()
+'   ' Write /etc/vector-version
+'   MdlMain.WRITE_ETC_VECTOR_VERSION()
+'   
+'   MdlBootMngr.Display_Bootmanager_Target_Options(ME.cbTarget)
+'   ME.PROBE_SYSTEM_FOR_OS("lilo")
+'   
+'   ME.Timer1.Enabled = TRUE  
+'   
+'   ' Update status tree
+'     MdlMain.ADVANCE_STATUS_TREE("Step5", "Step6")
+' 
+' END
 
-   WITH ME
-    .tlbanner.Text = "<h2>" & tlbanner.text & "</h2>"
-    .cbVidRes.List = [("Standard"), ("Bootplash Med"), ("Bootsplash High"), ("Bootsplash Extra High")]
-    .TLoSlIST.Text = "<b>" & UCase(.TLoSlIST.Text) & "</b>"
-  END WITH 
-'ME.Fake_Names()
-  'ME.List_Other_Linuxes(ME.TsOsList)
-  'ME.Update_Default_boot_choices()
-  ' Write /etc/vector-version
-  MdlMain.WRITE_ETC_VECTOR_VERSION()
+PUBLIC SUB POPULATE_MENU_TABSTRIP()
   
-  MdlBootMngr.Display_Bootmanager_Target_Options(ME.cbTarget)
-  ME.PROBE_SYSTEM_FOR_OS("lilo")
+  DIM entry AS BootMenuEntry
+  DIM i AS Integer
+  DIM tl AS TextLabel
+  DIM tb AS TextBox
+  DIM chk AS CheckBox
+  DIM cb AS ComboBox
   
-  ME.Timer1.Enabled = TRUE  
   
-  ' Update status tree
-    MdlMain.ADVANCE_STATUS_TREE("Step5", "Step6")
-
+  FOR EACH entry IN MdlBootMngr.objMenuEntries
+    ME.TsOsList.Index = ME.TsOsList.Count - 1
+    TsOsList.Text = entry.Root
+    tl = NEW TextLabel(TsOsList)
+    tl.Text = entry.sLIloLabel & Space(1) & ("Found on") & Space(1) & entry.Root
+    tl.Height = 24
+    tl.Expand = TRUE
+    tl = NEW TextLabel(ME.TsOsList)
+    tl.Text = ("Label")
+    tl.Height = 24
+    tl.Width = 100
+    tl.Expand = FALSE
+    tl.Alignment = Align.Left
+      
+      tb = NEW TextBox(ME.TsOsList) AS "NameBox"
+      tb.Height = 24
+      tb.Expand = TRUE
+      tb.Text = entry.sLIloLabel
+      
+      chk = NEW CheckBox(ME.TsOsList) AS "IncludeBox"
+      chk.Height = 24
+      chk.Value = entry.Enabled
+      chk.Expand = TRUE
+      chk.Text = ("Include this operating system in boot menu")
+      
+      chk = NEW CheckBox(ME.TsOsList) AS "DefOs"
+      chk.Expand = TRUE
+      chk.Text = ("Make this the default operating system to boot")
+      chk.Value = entry.IsDefault
+      chk.Height = 24
+      
+      
+      
+    INC ME.TsOsList.Count
+      
+  NEXT 
+    TRY DEC ME.TsOsList.Count
+    
+    
+    
+  
 END
+
+
+PUBLIC SUB Form_Open()
+  DIM ent AS BootMenuEntry
+  'MdlBootMngr.CREATE_MENU_ENTRY_OBJECTS()
+  FOR EACH ent IN MdlBootMngr.objMenuEntries
+    PRINT ent.sGrubLabel & " on " & ent.Root
+  NEXT 
+  ME.POPULATE_MENU_TABSTRIP()
+END
+
 
 PUBLIC FUNCTION GetNext() AS String
   
@@ -479,8 +543,9 @@ PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
   DIM sOsList, sOsLine, sBootLine, sDumparr AS String[]
   DIM sKernel, sInitrd, sAppendLine AS String
   DIM sBootargs AS String
+  DIM entry AS BootMenuEntry
   
-  SHELL "/bin/os-prober > /tmp/os.lst"
+  SHELL "/bin/os-prober > /tmp/os.lst" WAIT 
   
   sOsList = Split(Trim(File.Load("/tmp/os.lst")), gb.NewLine)
     FOR i = 0 TO sOsList.Max
@@ -527,6 +592,16 @@ PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
               END IF
               TsOsList.Current.Text = sRoot
                 Populate_linux_tab(sRoot, sTitle, sKernel, sInitrd, sAppendLine, sBootManager)
+                  ' create object for global configuration
+                  entry = NEW BootMenuEntry
+                  entry.Enabled = TRUE
+                  entry.Root = sRoot
+                  entry.Label = sTitle
+                  entry.kernel = skernel
+                  entry.initrd = sInitrd
+                  entry.StartupOptions = sAppendLine
+                  
+                  MdlBootMngr.objMenuEntries.Add(entry) ' add this to the global variable
                 INC TsOsList.Count
               
           END IF
@@ -654,6 +729,7 @@ PUBLIC SUB DefOS_Click()
   
   DIM cb AS CheckBox
   DIM tb AS TextBox
+  DIM entry AS BootMenuEntry
   
   IF objDefOs.Count > 1 THEN 
     FOR EACH cb IN objDefOs
@@ -677,9 +753,25 @@ PUBLIC SUB DefOS_Click()
       END IF
     NEXT 
   END IF
+  
+  FOR EACH entry IN MdlBootMngr.objMenuEntries
+    entry.IsDefault = FALSE
+  NEXT 
     
-    
-    
+    IF LAST.value = TRUE THEN 
+      FOR EACH entry IN MdlBootMngr.objMenuEntries
+        IF entry.root = LAST.tag THEN 
+          entry.IsDefault = TRUE
+        ELSE 
+          entry.IsDefault = FALSE
+        END IF
+      NEXT 
+    ELSE 
+      FOR EACH entry IN MdlBootMngr.objMenuEntries
+        IF entry.root = LAST.tag THEN entry.IsDefault = FALSE
+      NEXT 
+    END IF
+        
 
 END
 
@@ -692,6 +784,7 @@ END
 PUBLIC SUB OsNameBox_KeyRelease()
   
   DIM cb AS CheckBox
+  DIM menu AS BootMenuEntry
     FOR EACH cb IN objDefOs
       IF cb.Value = TRUE THEN 
         IF cb.Tag = LAST.tag THEN ' we are modifying the default OS value
@@ -699,7 +792,11 @@ PUBLIC SUB OsNameBox_KeyRelease()
         END IF
       END IF
     NEXT 
-  
+    FOR EACH menu IN MdlBootMngr.objMenuEntries
+      IF menu.Root = LAST.tag THEN 
+        menu.Label = LAST.text
+      END IF
+    NEXT 
 END
 
 
@@ -710,3 +807,18 @@ PUBLIC SUB Timer1_Timer()
   'PRINT MdlBootMngr.CHECK_LILO_VALUES(TRUE)
   
 END
+
+PUBLIC SUB cbTarget_Click()
+
+  'ClsGlobal.BootMngrTarget = Trim(LAST.text)
+  IF InStr(LAST.text, ("Bootsector")) THEN 
+    ClsGlobal.BootMngrTarget = Right(Trim(LAST.text), Len("/dev/sda1"))
+  ELSE IF InStr(LAST.text, ("MBR Of")) THEN 
+    ClsGlobal.BootMngrTarget = Right(Trim(LAST.text), Len("/dev/sda"))
+  ELSE IF InStr(LAST.text, ("Floppy")) THEN 
+    ClsGlobal.BootMngrTarget = "/dev/fd0"
+  END IF
+
+END
+
+

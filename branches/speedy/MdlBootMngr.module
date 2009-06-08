@@ -20,7 +20,9 @@
 ' PUBLIC objChecks AS Object[]
 ' PUBLIC objappends AS Object[]
 ' PUBLIC objNames AS Object[]
+PRIVATE $chroot AS Process
 PUBLIC bScanned AS Boolean
+PUBLIC objMenuEntries AS NEW Object[]
 
 PUBLIC FUNCTION ID_LINUX(sMountedLocation AS String) AS String
   DIM sRes AS String
@@ -156,12 +158,15 @@ PUBLIC SUB GENERATE_LILO_HEADER()
   DIM sTmp AS String
   DIM sTarget, sVidMod, sDefBoot, sVGA, sVidImput, sVidText, sOutput AS String
   DIM iTimeOut AS Integer
+  DIM sOsList AS String
   
-  sTarget = Trim(Conf0.cbTarget.Text)
+  sTarget = Trim(ClsGlobal.BootMngrTarget)
     IF InStr(sTarget, ("MBR Of")) THEN 
       sTarget = Right(sTarget, Len(sTarget) - InStr(sTarget, "/") + 1)
     ELSE IF sTarget = ("Bootsector Of") & Space(1) & ClsGlobal.sRoot THEN 
-      sTarget = ClsGlobal.sRoot
+      'sTarget = ClsGlobal.sRoot
+      sTarget = Right(Trim(sTarget), Len("/dev/sda1"))
+      'Message.Info(sTarget)
     ELSE IF sTarget = ("Floppy") THEN 
       sTarget = "/dev/df0"
     END IF
@@ -200,9 +205,9 @@ PUBLIC SUB GENERATE_LILO_HEADER()
 "#vga = 784 \n" &
 "#VESA framebuffer console @ 640 x480x256 \n" &
 "#vga = 769 \n" &
-"# Begin listing OS Choices \n" 
+"# Begin listing OS Choices \n" & gb.NewLine
 
-    
+    sOsList = ME.get_Final_OS_list_for_lilo()
   sDefBoot = ClsGlobal.sDefBoot
   iTimeOut = Conf0.SbTimeOut.Value * 10
   
@@ -220,13 +225,69 @@ PUBLIC SUB GENERATE_LILO_HEADER()
   "reset \n" &
   "bitmap = /boot/bitmap/boot.bmp \n" &
   "#\n\n" &
-  sVidText
+  sVidText & gb.NewLine & sOsList & gb.NewLine
+  
+  
   
   File.Save(Temp("lilo.in"), sOutput)
   
   'Message(File.Load(Temp("lilo.in")))
 
 END
+
+PUBLIC FUNCTION get_Final_OS_list_for_lilo() AS String
+  
+  DIM sOutput AS String
+  DIM cb AS CheckBox
+  DIM tb AS TextBox
+  DIM comb AS ComboBox
+  DIM tl AS TextLabel
+  DIM ThisEntry AS String
+  DIM entry AS BootMenuEntry
+  DIM Entries AS NEW Object[]
+  
+  FOR EACH cb IN Conf0.objMenuObjects
+    entry = NEW BootMenuEntry
+      entry.Enabled = cb.Value
+      entry.Root = cb.Tag
+        FOR EACH tl IN Conf0.objNames
+          IF tl.Name = cb.Tag THEN entry.kernel = tl.tag
+        NEXT 
+        FOR EACH comb IN Conf0.objinitrds
+          IF comb.Tag = cb.Tag THEN entry.initrd = comb.Text
+        NEXT 
+        FOR EACH tb IN Conf0.objappends
+          IF tb.tag = cb.tag THEN entry.StartupOptions = tb.Text
+        NEXT 
+    Entries.Add(entry)
+  NEXT 
+    
+    ' generate the list
+    FOR EACH entry IN Entries
+      IF entry.Enabled = TRUE THEN 
+        ThisEntry = "# Menu entry for " & entry.Label & "\n" &
+        "image = " & entry.kernel & "\n" &
+        "root = " & entry.Root & "\n" &
+        "label = " & entry.Label & "\n" &
+        "initrd = " & entry.initrd & "\n" &
+        "append = " & entry.StartupOptions & "\n" & 
+        "read-only" & gb.NewLine
+        sOutput = sOutput & ThisEntry
+      END IF
+    NEXT 
+    
+    RETURN sOutput
+        
+        
+        
+    
+        
+            
+      
+  
+END
+
+
 
 PUBLIC SUB SETUP_LILO_BOOT_MANAGER()
   
@@ -272,9 +333,26 @@ PUBLIC SUB SETUP_LILO_BOOT_MANAGER()
   EXEC ["mount", "-o", "bind", "/dev", ClsGlobal.sTargetPath &/ "dev"] WAIT 
   
   ' now, we need to run the lilo command itself
-  SHELL "chroot " & ClsGlobal.sTargetPath & " && /sbin/depmod -aq && lilo " WAIT 
+  DEBUG "Chroot into target, load modules and execute lilo"
+  'SHELL "chroot " & ClsGlobal.sTargetPath & "; sleep 1; echo \' Done chrooting\'; /sbin/depmod -aq ; lilo " WAIT 
+  DEBUG "Opening chroot shell for lilo setup."
+  $chroot = SHELL "chroot " & ClsGlobal.sTargetPath FOR READ WRITE 
+  
+  'PRINT #$chroot, "echo \"test\""
+  PRINT #$chroot, "/sbin/depmod -aq"
+  PRINT #$chroot, "/sbin/lilo -v"
+  PRINT #$chroot, "echo \"Done\""
   
 END
+
+PUBLIC SUB Process_Read()
+  
+  DIM sLine AS String
+  READ #LAST, sLine, -256
+  PRINT sLine
+  
+END
+
 
 
 PUBLIC SUB GENERATE_LILO_OS_LIST()
@@ -433,3 +511,43 @@ END IF
     RETURN 0
   
 END
+
+PUBLIC SUB CREATE_MENU_ENTRY_OBJECTS()
+  
+  DIM sRawList, sRawEntry, sRawLine, sOptions AS String[]
+  
+  DIM sDump AS String
+  DIM i, ii AS Integer
+  DIM entry AS BootMenuEntry
+  
+  
+  SHELL "/bin/os-prober" TO sDump
+  sDump = Trim(sDump)
+  sRawList = Split(sDump, gb.NewLine)
+  
+  FOR i = 0 TO sRawList.Max
+    sRawLine = Split(Trim(sRawList[i]), ":")
+      IF NOT (sRawLine) THEN CONTINUE 
+      entry = NEW BootMenuEntry
+      entry.Root = sRawLine[0]
+      entry.sLIloLabel = sRawLine[2]
+      entry.sGrubLabel = sRawLine[1]
+      entry.osType = sRawEntry[3]
+      entry.Label = entry.sLIloLabel
+      ' now we try to find out details about this linux
+      IF sRawLine[3] LIKE "linux" THEN 
+        SHELL "/bin/linux-boot-prober " & entry.Root TO sDump
+          IF Trim(sDump) THEN 
+            sOptions = Split(Trim(sDump), ":")
+            entry.kernel = sOptions[3]
+            entry.initrd = sOptions[4]
+            entry.StartupOptions = Replace(sOptions[5], "root=" & entry.Root, "")
+          END IF
+          
+      END IF
+      ME.objMenuEntries.Add(entry)
+    NEXT
+
+  
+END
+

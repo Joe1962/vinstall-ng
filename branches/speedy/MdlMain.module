@@ -574,6 +574,9 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
    
    WAIT 1 ' brace yourselves... installation is about to begin
    
+   ' prepare boot menu entry objects for boot menu (this will only do existing OS's ... we will need to create a new object for the isntalled system after this process is done)
+   MdlBootMngr.CREATE_MENU_ENTRY_OBJECTS()
+   
     SELECT CASE iInstallType
       CASE 0
         GOTO FULL_INSTALL

@@ -67,10 +67,40 @@ END
 
 PUBLIC SUB OnExit()
   
-  
+  ME.Create_New_install_menu_entry()
   
   
 END
+
+PUBLIC SUB Create_New_install_menu_entry()
+  
+  DIM entry AS BootMenuEntry
+  DIM target AS BootMenuEntry
+  DIM bFound AS Boolean
+    FOR EACH entry IN MdlBootMngr.objMenuEntries
+      IF entry.Root = ClsGlobal.sRoot THEN ' I found an existing object for this
+        target = entry
+        bFound = TRUE
+      END IF
+    NEXT 
+    
+      target.Root = ClsGlobal.sRoot
+      target.initrd = "/boot/initrd"
+      target.kernel = "/boot/vmlinuz"
+      target.sGrubLabel = ClsGlobal.sDistroName & Space(1) & ClsGlobal.sDistroVer
+      target.sLIloLabel = ClsGlobal.sDistroName
+      target.Label = target.sLIloLabel
+      target.StartupOptions = "4 vga=791 ro"
+      target.Enabled = TRUE
+      target.IsDefault = TRUE
+      IF bFound = FALSE THEN 
+        MdlBootMngr.objMenuEntries.Add(target)
+      END IF
+    
+  
+END
+
+
 PUBLIC SUB StartUp()
 
   

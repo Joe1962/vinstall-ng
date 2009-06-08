@@ -77,7 +77,10 @@ PUBLIC SUB SUMMARIZE_PARTITION_SELECTION()
             sMntPnt = Trim(sEntry[2])
             sFs = Trim(sEntry[3])
         ' set partition addresses to global class
-          IF sMntPnt = "/" THEN ClsGlobal.sRoot = sPart
+          
+            IF sMntPnt = "/" THEN 
+              IF NOT (ClsGlobal.sRoot) THEN ClsGlobal.sRoot = sPart
+            END IF
           IF sMntPnt = "/home" THEN ClsGlobal.shome = sPart
               IF sfs LIKE ("Do not format") THEN 
                 sFs = "(" & ("Not Formatted") & ")" & "," & Space(1) & ("Mount to") & Space(1)
