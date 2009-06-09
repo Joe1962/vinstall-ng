@@ -22,6 +22,7 @@
 ' PUBLIC objNames AS Object[]
 PRIVATE $chroot AS Process
 PUBLIC bScanned AS Boolean
+PUBLIC sVidMode AS String
 PUBLIC objMenuEntries AS NEW Object[]
 
 PUBLIC FUNCTION ID_LINUX(sMountedLocation AS String) AS String
@@ -159,6 +160,7 @@ PUBLIC SUB GENERATE_LILO_HEADER()
   DIM sTarget, sVidMod, sDefBoot, sVGA, sVidImput, sVidText, sOutput AS String
   DIM iTimeOut AS Integer
   DIM sOsList AS String
+  DIM entry AS BootMenuEntry
   
   sTarget = Trim(ClsGlobal.BootMngrTarget)
     IF InStr(sTarget, ("MBR Of")) THEN 
@@ -171,10 +173,10 @@ PUBLIC SUB GENERATE_LILO_HEADER()
       sTarget = "/dev/df0"
     END IF
     
-  sVidImput = Trim(Conf0.cbVidRes.Text)
+  sVidImput = Trim(ME.sVidMode)
     SELECT CASE sVidImput
       CASE ("Standard")
-        sVGA = "normal"
+        svga = "normal"
       CASE ("Bootsplash Med")
         svga = "788"
       CASE ("Bootsplash High")
@@ -184,7 +186,7 @@ PUBLIC SUB GENERATE_LILO_HEADER()
       END SELECT 
       
     sVidText = "# VESA framebuffer console @ 1024x768x64k \n" &
-"vga = " & sVga & "\n" &
+"vga = " & svga & "\n" &
 "# Normal VGA console \n" &
 "#vga = normal \n" &
 "#VESA framebuffer console @ 1024 x768x64k \n" &
@@ -205,10 +207,18 @@ PUBLIC SUB GENERATE_LILO_HEADER()
 "#vga = 784 \n" &
 "#VESA framebuffer console @ 640 x480x256 \n" &
 "#vga = 769 \n" &
-"# Begin listing OS Choices \n" & gb.NewLine
+"# Begin listing OS Choices \n"
 
-    sOsList = ME.get_Final_OS_list_for_lilo()
-  sDefBoot = ClsGlobal.sDefBoot
+    IF Conf0.rbLilo.Value = TRUE THEN 
+      sOsList = ME.GENERATE_LILO_OS_LIST("lilo")
+    ELSE 
+      'sOsList = ME.GENERATE_LILO_OS_LIST("grub")
+    END IF
+  FOR EACH entry IN MdlBootMngr.objMenuEntries
+    IF entry.IsDefault = TRUE THEN 
+      sDefBoot = entry.Label
+    END IF
+  NEXT 
   iTimeOut = Conf0.SbTimeOut.Value * 10
   
   sOutput = "# LILO Configuration File \n" &
@@ -222,14 +232,18 @@ PUBLIC SUB GENERATE_LILO_HEADER()
   "#\n#\n#\n" &
   "# Override dangerous defaults that require the partition table: \n" &
   "change-rules \n" &
-  "reset \n" &
-  "bitmap = /boot/bitmap/boot.bmp \n" &
-  "#\n\n" &
-  sVidText & gb.NewLine & sOsList & gb.NewLine
+  "reset \n"
+  IF Exist(ClsGlobal.sTargetPath &/ "boot" &/ "bitmap" &/ "boot.bmp") THEN 
+   sOutput = sOutput & "bitmap = /boot/bitmap/boot.bmp \n \n"
+  END IF
+
+  sOutput = sOutput & sVidText & gb.NewLine & sOsList & gb.NewLine
   
   
   
   File.Save(Temp("lilo.in"), sOutput)
+  File.Save(ClsGlobal.sTargetPath &/ "etc" &/ "lilo.conf", sOutput)
+  
   
   'Message(File.Load(Temp("lilo.in")))
 
@@ -294,27 +308,25 @@ PUBLIC SUB SETUP_LILO_BOOT_MANAGER()
   DIM cbx AS CheckBox
   DIM cb AS ComboBox
   DIM tl AS TextLabel
-  DIM sKernel, sInitrd, sArch AS String
+  DIM sKernel, sInitrd, sArch, sTmpMnt, sHostPart AS String
+  DIM entry AS BootMenuEntry
   
   ' find kernels and initrds, copy them to /boot on the target dir
   ' can't use /boot/tamu anymore... all has to go into /boot
-  FOR EACH cbx IN Conf0.objMenuObjects
-    IF cbx.Value = TRUE THEN 
-      FOR EACH tl IN Conf0.objKernels
-        IF cbx.Tag = tl.Name THEN sKernel = tl.Tag
-      NEXT 
-      FOR EACH cb IN Conf0.objinitrds
-        IF cb.tag = tl.Name THEN sInitrd = cb.Text
-
-      NEXT 
-    END IF
-      ' now that we got kernel and initrd, copy them over
-      IF sKernel AND IF sInitrd THEN 
-        SHELL "cp " & sKernel & Space(1) & ClsGlobal.sTargetPath &/ "boot"
-        SHELL "cp " & sInitrd & Space(1) & ClsGlobal.sTargetPath &/ "boot"
+    FOR EACH entry IN MdlBootMngr.objMenuEntries
+      IF entry.Enabled = TRUE THEN 
+        sTmpMnt = Right(entry.Root, Len(entry.Root) - Len("/dev/"))
+        sHostPart = sTmpMnt
+        sTmpMnt = "/mnt" &/ sTmpMnt
+        
+          SHELL "mount -o ro " & entry.Root & Space(1) & sTmpMnt WAIT 
+          DEBUG "Importing kernel for " & entry.Label
+          SHELL "cp " & sTmpMnt &/ entry.kernel & Space(1) & ClsGlobal.sTargetPath &/ entry.kernel & "-" & sHostPart WAIT 
+          entry.kernel = entry.kernel & "-" & sHostPart
+          SHELL "umount " & sTmpMnt WAIT 
       END IF
-      
-  NEXT 
+    NEXT 
+            
   
   ' determine wether we need to update modules
   EXEC ["uname", "-r"] TO sArch
@@ -352,60 +364,41 @@ PUBLIC SUB Process_Read()
   PRINT sLine
   
 END
+PUBLIC SUB Process_Error(Errormessage AS String)
 
-
-
-PUBLIC SUB GENERATE_LILO_OS_LIST()
+  PRINT Errormessage
   
-  DIM ckb AS CheckBox
-  DIM cb AS ComboBox
-  DIM tb AS TextBox
-  DIM tl AS TextLabel
-  DIM sTitle, sRoot, sInitrd, sKernel, sAppend AS String
-  DIM sBody AS String
-  DIM sHeader, sFullFile AS String
   
-  FOR EACH ckb IN Conf0.objMenuObjects
-    IF ckb.Value = TRUE THEN 
-      sRoot = ckb.Tag
-      FOR EACH tb IN Conf0.objNames
-        IF tb.Tag = ckb.Tag THEN sTitle = tb.Text
-      NEXT 
-      ' get the initrd
-      FOR EACH cb IN Conf0.objinitrds
-        IF cb.Tag = sRoot THEN sInitrd = Trim(cb.Text)
-      NEXT 
-      ' get the append line
-      FOR EACH tb IN Conf0.objappends
-        IF tb.tag = sRoot THEN sAppend = tb.Text
-      NEXT 
-      FOR EACH tl IN Conf0.objKernels
-        IF tl.Name = sRoot THEN sKernel = tl.Tag
-      NEXT
-          sBody = sBody & gb.NewLine & 
-          "# Menu entry for " & sTitle & "\n" &
-          "image = " & Trim(sKernel) & "\n" &
-          "root = " & sRoot & "\n" &
-          "label = " & sTitle & "\n" &
-          "append = \"" & sAppend & "\"\n" &
-          "read-only \n"
-          'IF sBody THEN Message(Trim(sBody))
+END
+
+
+
+PUBLIC SUB GENERATE_LILO_OS_LIST(sBootManager AS String) AS String
+
+  DIM entry AS BootMenuEntry
+  DIM sRet AS String
+  DIM tempentry AS String
+  
+  IF sBootManager LIKE "lilo" THEN 
+  FOR EACH entry IN MdlBootMngr.objMenuEntries
+    IF entry.Enabled = TRUE THEN 
+      tempentry = "# Menu entry for " & entry.sGrubLabel & "\n" &
+      "image = " & Trim(entry.kernel) & "\n" &
+      Space(5) & "root = " & entry.Root & "\n" &
+      Space(5) & "label = " & entry.Label & "\n" &
+      Space(5) & "read-only" & "\n"
+      'Space(5) & "# append = " & entry.StartupOptions & "\n" & ' commented by default because this may be wrong.
+      
     END IF
-    
-    ' Reset these variables for future use
-    sKernel = ""
-    sRoot = ""
-    sTitle = ""
-    sAppend = ""
+    sRet = sRet & tempentry
   NEXT 
-  'IF sBody THEN Message(sBody)
-  'load the header
-    sHeader = File.Load(Temp("lilo.in"))
-    sFullFile = sHeader & sBody
-    'Message(sFullFile)
-    IF Exist(ClsGlobal.sTargetPath &/ "etc/lilo.conf") THEN MOVE ClsGlobal.sTargetPath &/ "etc/lilo.conf" TO ClsGlobal.sTargetPath &/ "etc/lilo.old"
-    
-    File.Save(ClsGlobal.sTargetPath &/ "etc/lilo.conf", Trim(sFullFile))
+  ELSE ' in the case of grub
+  ' no code for this yet.
+  END IF
+      RETURN Trim(sRet)
+      
+      
+
 END
 
 
@@ -532,7 +525,7 @@ PUBLIC SUB CREATE_MENU_ENTRY_OBJECTS()
       entry.Root = sRawLine[0]
       entry.sLIloLabel = sRawLine[2]
       entry.sGrubLabel = sRawLine[1]
-      entry.osType = sRawEntry[3]
+      entry.osType = sRawLine[sRawLine.Max]
       entry.Label = entry.sLIloLabel
       ' now we try to find out details about this linux
       IF sRawLine[3] LIKE "linux" THEN 
@@ -541,7 +534,7 @@ PUBLIC SUB CREATE_MENU_ENTRY_OBJECTS()
             sOptions = Split(Trim(sDump), ":")
             entry.kernel = sOptions[3]
             entry.initrd = sOptions[4]
-            entry.StartupOptions = Replace(sOptions[5], "root=" & entry.Root, "")
+            entry.StartupOptions = Replace(sOptions[5], "append", "")
           END IF
           
       END IF

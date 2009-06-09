@@ -15,207 +15,203 @@
 '    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
 '=====================================================================================
 
-PUBLIC objinitrds AS NEW Object[]
-PUBLIC objChecks AS NEW Object[]
-PUBLIC objappends AS NEW Object[]
-PUBLIC objNames AS NEW Object[]
-PUBLIC objDefOs AS NEW Object[]
-PUBLIC objMenuObjects AS NEW Object[]
-PUBLIC objKernels AS NEW Object[]
+PUBLIC objIncludes AS NEW Object[]
+PUBLIC objLabels AS NEW Object[]
+PUBLIC objAppends AS NEW Object[]
 
 
-PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabStrip AS TabStrip)
-  
-  DIM i AS Integer
-  DIM tb AS TextBox
-  DIM tl AS TextLabel
-  DIM cb AS CheckBox
-  DIM hb AS HBox
-  DIM comb AS ComboBox
-  
-  IF NOT sLinux OR Len(Trim(sLinux)) <= 0 THEN RETURN 
-  'Message(sLinux)
-  IF sLinuxRoot = ClsGlobal.sRoot THEN ' This is the just installed linux
-    i = 0
-      WITH objTabStrip
-        .Index = i
-        .Text = ClsGlobal.sDistroName
-      END WITH 
-  ELSE 
-  i = objTabStrip.Count - 1
-    WITH objTabStrip
-      .Index = i
-      .Text = sLinux
-    END WITH 
-  END IF
-  
-  tl = NEW TextLabel(objTabStrip) AS "Banner"
-    WITH tl
-      .Text = ("Installation found in") & Space(1) & sLinuxRoot
-      .Height = 24
-      .Alignment = Align.Left
-      .Width = 200
-      .Expand = TRUE
-      '.Border = Border.Plain
-      '.AutoResize = TRUE
-      .Move(4, 4)
-    END WITH 
-  hb = NEW HBox(objTabStrip) ' separator space
-    WITH hb
-      .Height = 16
-      .Width = 12
-      .Expand = TRUE
-    END WITH 
-  cb = NEW CheckBox(objTabStrip) ' Inlcude/Exclude OS from boot menu
-    WITH cb
-      .Expand = TRUE
-      .Text = ("Include in boot menu")
-      .Value = TRUE
-      .Height = 24
-      .Tag = sLinuxRoot
-    END WITH 
-    objChecks.Add(cb)
-  hb = NEW HBox(objTabStrip) ' separator space
-    WITH hb
-      .Height = 12
-      .Expand = TRUE
-    END WITH 
-  hb = NEW HBox(objTabStrip) ' This will hold a few objects of it's own
-    WITH hb
-      .Height = 28
-      .Expand = TRUE
-      .Padding = 2
-      .Spacing = 2
-    END WITH 
-  tl = NEW TextLabel(hb) ' Name label
-    WITH tl
-      .Text = ("Name")
-      .Expand = FALSE
-      .Width = 200
-      .Adjust()
-      .AutoResize = TRUE
-      .Height = .Parent.Height
-      .Alignment = Align.Left
-    END WITH 
-  tb = NEW TextBox(hb) AS "tbOsLabel" ' Name entry box
-    WITH tb
-      .Expand = TRUE
-      .Height = .Parent.Height
-      .Text = sLinux '  default to the distro found
-      .Tag = sLinuxRoot
-    END WITH 
-    objNames.Add(tb)
-  tl = NEW TextLabel(hb) ' initrd label
-    WITH tl
-      .text = ("Initial RAM disk image")
-      .Alignment = Align.Right
-      .Height = .Parent.Height
-      .Expand = TRUE
-    END WITH 
-    
-  comb = NEW ComboBox(hb) ' initrd selection combobox
-    WITH comb
-      .Height = .Parent.Height
-      .Expand = TRUE
-      .READonly = TRUE
-      .Tag = sLinuxRoot
-    END WITH 
-      ' populate the initrd box
-      'Message(sLinuxRoot)
-        MdlBootMngr.find_initrds_for_this_linux(sLinuxRoot, comb) ' populate initrd selection
-        
-    objinitrds.Add(comb)
-  hb = NEW HBox(objTabStrip) ' blank space separator
-  hb.Height = 8
-  hb.Expand = TRUE
-  tl = NEW TextLabel(objTabStrip) ' append line textlabel
-    WITH tl
-      .Text = ("Kernel boot options")
-      .Height = 24
-      .Width = 200
-      .Alignment = Align.Left
-      .Expand = FALSE
-      .AutoResize = TRUE
-    END WITH 
-  tb = NEW TextBox(objTabStrip) ' append input line
-    WITH tb
-      .Text = "splash=silent"
-      .Height = 24
-      .Expand = TRUE
-      .Tag = sLinuxRoot
-    END WITH 
-      objappends.Add(tb)
-    
-    ' ======================= ONLY FOR THE OS WE JUST INSTALLED ===============================
-  IF sLinuxRoot = ClsGlobal.sRoot THEN 
-    hb = NEW HBox(objTabStrip) ' yet another separator
-      WITH hb
-        .Expand = TRUE
-        .Height = 8
-      END WITH 
-    cb = NEW CheckBox(objTabStrip) AS "bCLIOption"
-      WITH cb
-        .Value = TRUE
-        .Text = ("Add option to boot this operating system into text mode")
-        .Height = 24
-        .Expand = TRUE
-        .Tag = sLinuxRoot
-      END WITH 
-    ' hb = NEW HBox(objTabStrip)
-    '   hb.Height = 4
-    '   hb.Expand = TRUE
-      
-  END IF
-    objTabStrip.Refresh()
-  
-      
-  
-END
+' PUBLIC SUB populate_linux_entry(sLinux AS String, sLinuxRoot AS String, objTabStrip AS TabStrip)
+'   
+'   DIM i AS Integer
+'   DIM tb AS TextBox
+'   DIM tl AS TextLabel
+'   DIM cb AS CheckBox
+'   DIM hb AS HBox
+'   DIM comb AS ComboBox
+'   
+'   IF NOT sLinux OR Len(Trim(sLinux)) <= 0 THEN RETURN 
+'   'Message(sLinux)
+'   IF sLinuxRoot = ClsGlobal.sRoot THEN ' This is the just installed linux
+'     i = 0
+'       WITH objTabStrip
+'         .Index = i
+'         .Text = ClsGlobal.sDistroName
+'       END WITH 
+'   ELSE 
+'   i = objTabStrip.Count - 1
+'     WITH objTabStrip
+'       .Index = i
+'       .Text = sLinux
+'     END WITH 
+'   END IF
+'   
+'   tl = NEW TextLabel(objTabStrip) AS "Banner"
+'     WITH tl
+'       .Text = ("Installation found in") & Space(1) & sLinuxRoot
+'       .Height = 24
+'       .Alignment = Align.Left
+'       .Width = 200
+'       .Expand = TRUE
+'       '.Border = Border.Plain
+'       '.AutoResize = TRUE
+'       .Move(4, 4)
+'     END WITH 
+'   hb = NEW HBox(objTabStrip) ' separator space
+'     WITH hb
+'       .Height = 16
+'       .Width = 12
+'       .Expand = TRUE
+'     END WITH 
+'   cb = NEW CheckBox(objTabStrip) ' Inlcude/Exclude OS from boot menu
+'     WITH cb
+'       .Expand = TRUE
+'       .Text = ("Include in boot menu")
+'       .Value = TRUE
+'       .Height = 24
+'       .Tag = sLinuxRoot
+'     END WITH 
+'     objChecks.Add(cb)
+'   hb = NEW HBox(objTabStrip) ' separator space
+'     WITH hb
+'       .Height = 12
+'       .Expand = TRUE
+'     END WITH 
+'   hb = NEW HBox(objTabStrip) ' This will hold a few objects of it's own
+'     WITH hb
+'       .Height = 28
+'       .Expand = TRUE
+'       .Padding = 2
+'       .Spacing = 2
+'     END WITH 
+'   tl = NEW TextLabel(hb) ' Name label
+'     WITH tl
+'       .Text = ("Name")
+'       .Expand = FALSE
+'       .Width = 200
+'       .Adjust()
+'       .AutoResize = TRUE
+'       .Height = .Parent.Height
+'       .Alignment = Align.Left
+'     END WITH 
+'   tb = NEW TextBox(hb) AS "tbOsLabel" ' Name entry box
+'     WITH tb
+'       .Expand = TRUE
+'       .Height = .Parent.Height
+'       .Text = sLinux '  default to the distro found
+'       .Tag = sLinuxRoot
+'     END WITH 
+'     objNames.Add(tb)
+'   tl = NEW TextLabel(hb) ' initrd label
+'     WITH tl
+'       .text = ("Initial RAM disk image")
+'       .Alignment = Align.Right
+'       .Height = .Parent.Height
+'       .Expand = TRUE
+'     END WITH 
+'     
+'   comb = NEW ComboBox(hb) ' initrd selection combobox
+'     WITH comb
+'       .Height = .Parent.Height
+'       .Expand = TRUE
+'       .READonly = TRUE
+'       .Tag = sLinuxRoot
+'     END WITH 
+'       ' populate the initrd box
+'       'Message(sLinuxRoot)
+'         MdlBootMngr.find_initrds_for_this_linux(sLinuxRoot, comb) ' populate initrd selection
+'         
+'     objinitrds.Add(comb)
+'   hb = NEW HBox(objTabStrip) ' blank space separator
+'   hb.Height = 8
+'   hb.Expand = TRUE
+'   tl = NEW TextLabel(objTabStrip) ' append line textlabel
+'     WITH tl
+'       .Text = ("Kernel boot options")
+'       .Height = 24
+'       .Width = 200
+'       .Alignment = Align.Left
+'       .Expand = FALSE
+'       .AutoResize = TRUE
+'     END WITH 
+'   tb = NEW TextBox(objTabStrip) ' append input line
+'     WITH tb
+'       .Text = "splash=silent"
+'       .Height = 24
+'       .Expand = TRUE
+'       .Tag = sLinuxRoot
+'     END WITH 
+'       objappends.Add(tb)
+'     
+'     ' ======================= ONLY FOR THE OS WE JUST INSTALLED ===============================
+'   IF sLinuxRoot = ClsGlobal.sRoot THEN 
+'     hb = NEW HBox(objTabStrip) ' yet another separator
+'       WITH hb
+'         .Expand = TRUE
+'         .Height = 8
+'       END WITH 
+'     cb = NEW CheckBox(objTabStrip) AS "bCLIOption"
+'       WITH cb
+'         .Value = TRUE
+'         .Text = ("Add option to boot this operating system into text mode")
+'         .Height = 24
+'         .Expand = TRUE
+'         .Tag = sLinuxRoot
+'       END WITH 
+'     ' hb = NEW HBox(objTabStrip)
+'     '   hb.Height = 4
+'     '   hb.Expand = TRUE
+'       
+'   END IF
+'     objTabStrip.Refresh()
+'   
+'       
+'   
+' END
 
 
 
 
-PUBLIC SUB List_Other_Linuxes(objTabStrip AS TabStrip)
- DIM sDump, sPartitions, sPart AS String
-  DIM sPartList AS String[]
-  DIM i AS Integer
-  DIM sOutcome AS String
-  
-  ' objappends = NEW Object[]
-  ' objChecks = NEW Object[]
-  ' objinitrds = NEW Object[]
-  ' objNames = NEW Object[]
-  ' 
-  MdlBootMngr.bScanned = TRUE
-
-  
-  ' First, and foremost, we will list the recently isntalled VectorLinux
-    'populate_linux_entry("VectorLinux", ClsGlobal.sRoot, objTabStrip) ' This will list the newly isntall VL OS
-  ' Now list all other linuxes =================================================
-      SHELL "probepart | grep \"^/dev\" | grep -vi swap | grep -i linux | tr -s \' \' | cut -f 1 -d \' \'" TO sDump
-        sDump = Trim(sDump)
-          IF Len(sDump) <= 0 THEN RETURN ' nothing found, VL is the only distro in this box ... 
-        sPartList = Split(sDump, gb.NewLine)
-          FOR i = 0 TO sPartList.Max
-            sPart = Trim(Right(sPartList[i], Len(sPartList[i]) - RInStr(sPartList[i], "/")))
-
-                sOutcome = MdlBootMngr.Find_Linux(Trim(sPartList[i]))
-                  IF sOutcome AND sOutcome <> "None" THEN 
-                  'INC objTabStrip.Count
-                  objTabStrip.Index = objTabStrip.Count - 1
-                  populate_linux_entry(sOutcome, Trim(sPartList[i]), objTabStrip)
-                  INC objTabStrip.Count
-                END IF
-              'END IF
-                
-          NEXT 
-        DEC objTabStrip.Count ' remove the trailing blank tab from the tabstrip.
-        
-  
-  ' now list all other Windows os's ============================================
-    
-  
-END
+' PUBLIC SUB List_Other_Linuxes(objTabStrip AS TabStrip)
+'  DIM sDump, sPartitions, sPart AS String
+'   DIM sPartList AS String[]
+'   DIM i AS Integer
+'   DIM sOutcome AS String
+'   
+'   ' objappends = NEW Object[]
+'   ' objChecks = NEW Object[]
+'   ' objinitrds = NEW Object[]
+'   ' objNames = NEW Object[]
+'   ' 
+'   MdlBootMngr.bScanned = TRUE
+' 
+'   
+'   ' First, and foremost, we will list the recently isntalled VectorLinux
+'     'populate_linux_entry("VectorLinux", ClsGlobal.sRoot, objTabStrip) ' This will list the newly isntall VL OS
+'   ' Now list all other linuxes =================================================
+'       SHELL "probepart | grep \"^/dev\" | grep -vi swap | grep -i linux | tr -s \' \' | cut -f 1 -d \' \'" TO sDump
+'         sDump = Trim(sDump)
+'           IF Len(sDump) <= 0 THEN RETURN ' nothing found, VL is the only distro in this box ... 
+'         sPartList = Split(sDump, gb.NewLine)
+'           FOR i = 0 TO sPartList.Max
+'             sPart = Trim(Right(sPartList[i], Len(sPartList[i]) - RInStr(sPartList[i], "/")))
+' 
+'                 sOutcome = MdlBootMngr.Find_Linux(Trim(sPartList[i]))
+'                   IF sOutcome AND sOutcome <> "None" THEN 
+'                   'INC objTabStrip.Count
+'                   objTabStrip.Index = objTabStrip.Count - 1
+'                   populate_linux_entry(sOutcome, Trim(sPartList[i]), objTabStrip)
+'                   INC objTabStrip.Count
+'                 END IF
+'               'END IF
+'                 
+'           NEXT 
+'         DEC objTabStrip.Count ' remove the trailing blank tab from the tabstrip.
+'         
+'   
+'   ' now list all other Windows os's ============================================
+'     
+'   
+' END
 
 
 ' PUBLIC SUB Form_Open()
@@ -255,33 +251,51 @@ PUBLIC SUB POPULATE_MENU_TABSTRIP()
     ME.TsOsList.Index = ME.TsOsList.Count - 1
     TsOsList.Text = entry.Root
     tl = NEW TextLabel(TsOsList)
-    tl.Text = entry.sLIloLabel & Space(1) & ("Found on") & Space(1) & entry.Root
+    tl.Text = entry.sGrubLabel & Space(1) & ("Found on") & Space(1) & entry.Root
     tl.Height = 24
     tl.Expand = TRUE
     tl = NEW TextLabel(ME.TsOsList)
     tl.Text = ("Label")
     tl.Height = 24
-    tl.Width = 100
+    tl.Width = 150
     tl.Expand = FALSE
     tl.Alignment = Align.Left
       
       tb = NEW TextBox(ME.TsOsList) AS "NameBox"
       tb.Height = 24
       tb.Expand = TRUE
+      tb.tag = entry.Root
       tb.Text = entry.sLIloLabel
+        objLabels.Add(tb)
+      
+      ' tl = NEW textlabel(TsOsList)
+      ' tl.text = ("Startup Options")
+      ' tl.Height = 24
+      ' tl.Width = 150
+      ' tl.Expand = FALSE
+      ' tl.Alignment = align.Left
+      
+      ' tb = NEW TextBox(ME.TsOsList) AS "BootOptions"
+      ' tb.height = 24
+      ' tb.text = entry.StartupOptions
+      ' tb.tag = entry.Root
+      ' tb.Expand = TRUE
+      '   objappends.Add(tb)
+
       
       chk = NEW CheckBox(ME.TsOsList) AS "IncludeBox"
       chk.Height = 24
-      chk.Value = entry.Enabled
+      chk.Value = TRUE
+      entry.Enabled = chk.Value
       chk.Expand = TRUE
+      chk.Tag = entry.Root
       chk.Text = ("Include this operating system in boot menu")
+      objIncludes.Add(chk)
+
       
-      chk = NEW CheckBox(ME.TsOsList) AS "DefOs"
-      chk.Expand = TRUE
-      chk.Text = ("Make this the default operating system to boot")
-      chk.Value = entry.IsDefault
-      chk.Height = 24
-      
+      IF entry.osType = "linux" THEN 
+        TsOsList.Picture = Picture.Load("images/tux.png")
+      END IF
       
       
     INC ME.TsOsList.Count
@@ -294,14 +308,73 @@ PUBLIC SUB POPULATE_MENU_TABSTRIP()
   
 END
 
+PUBLIC SUB IncludeBox_Click()
+  
+  DIM entry AS BootMenuEntry
+    FOR EACH entry IN MdlBootMngr.objMenuEntries
+      IF entry.root = LAST.tag THEN entry.Enabled = LAST.value
+    NEXT 
+  
+END
+
+
+PUBLIC SUB BootOptions_Change()
+  
+  DIM entry AS BootMenuEntry
+    FOR EACH entry IN MdlBootMngr.objMenuEntries
+      IF entry.Root = LAST.tag THEN 
+        entry.StartupOptions = LAST.text
+      END IF
+    NEXT 
+  
+END
+
+
+
+PUBLIC SUB NameBox_KeyRelease()
+  
+  DIM entry AS BootMenuEntry
+  
+  IF ME.rbLilo.Value = TRUE THEN 
+    ' do nt allow spaces
+    IF Key.Text = " " THEN LAST.text = Left(LAST.text, Len(LAST.text) - 1)
+    
+  END IF
+  
+    FOR EACH entry IN MdlBootMngr.objMenuEntries
+      IF entry.root = LAST.tag THEN 
+        entry.Label = LAST.text
+      END IF
+    NEXT 
+    
+    ME.cbDefBoot.Clear
+    ME.List_Def_Boot_Options()
+    
+    
+    
+  
+END
+
+
+
 
 PUBLIC SUB Form_Open()
   DIM ent AS BootMenuEntry
-  'MdlBootMngr.CREATE_MENU_ENTRY_OBJECTS()
-  FOR EACH ent IN MdlBootMngr.objMenuEntries
-    PRINT ent.sGrubLabel & " on " & ent.Root
-  NEXT 
+
+  ME.cbVidRes.List = [("Standard"), ("Bootplash Med"), ("Bootsplash High"), ("Bootsplash Extra High")]
+  MdlBootMngr.Display_Bootmanager_Target_Options(ME.cbTarget)
+  ME.List_Def_Boot_Options()
   ME.POPULATE_MENU_TABSTRIP()
+  ME.rbLilo_Click()
+END
+
+PUBLIC SUB List_Def_Boot_Options()
+
+DIM entry AS BootMenuEntry
+  FOR EACH entry IN MdlBootMngr.objMenuEntries
+    ME.cbDefBoot.Add(entry.Label)
+  NEXT 
+  
 END
 
 
@@ -313,13 +386,13 @@ END
 PUBLIC SUB OnExit()
   
   IF rbNone.Value = TRUE THEN RETURN 
-  
-    IF MdlBootMngr.CHECK_LILO_VALUES(FALSE) > 0 THEN 
-      RETURN 
-      STOP EVENT 
-    END IF
+    ' 
+    ' IF MdlBootMngr.CHECK_LILO_VALUES(FALSE) > 0 THEN 
+    '   RETURN 
+    '   STOP EVENT 
+    ' END IF
   MdlBootMngr.GENERATE_LILO_HEADER()
-  MdlBootMngr.GENERATE_LILO_OS_LIST()
+  'MdlBootMngr.GENERATE_LILO_OS_LIST()
   ' after that's done, we need to run lilo. The config file has already been saved to /mnt/target/etc/lilo.conf
     IF Exist(ClsGlobal.sTargetPath &/ "etc" &/ "lilo.conf") THEN 
       MdlBootMngr.SETUP_LILO_BOOT_MANAGER()
@@ -337,23 +410,23 @@ PUBLIC SUB StartUp()
   
 END
 
-PUBLIC SUB Fake_Names()
-  
-  DIM tb AS TextBox
-  DIM i AS Integer
-  
-    FOR i = 0 TO 2
-    TsOsList.Index = i
-    tb = NEW TextBox(ME.TsOsList) AS "Names"
-    tb.Height = 28
-    tb.Width = 200
-    tb.text = "Test" & i
-    tb.Tag = "Test" & i
-    objNames.Add(tb)
-    INC TsOsList.Count
-    NEXT 
-  
-END
+' PUBLIC SUB Fake_Names()
+'   
+'   DIM tb AS TextBox
+'   DIM i AS Integer
+'   
+'     FOR i = 0 TO 2
+'     TsOsList.Index = i
+'     tb = NEW TextBox(ME.TsOsList) AS "Names"
+'     tb.Height = 28
+'     tb.Width = 200
+'     tb.text = "Test" & i
+'     tb.Tag = "Test" & i
+'     objNames.Add(tb)
+'     INC TsOsList.Count
+'     NEXT 
+'   
+' END
 
 PUBLIC SUB Names_Change()
   
@@ -364,15 +437,15 @@ PUBLIC SUB Names_Change()
   
   
 END
-PUBLIC SUB Update_Default_boot_choices()
-  DIM tb AS TextBox
-  ME.cbDefBoot.Clear
-  FOR EACH tb IN objNames
-    cbDefBoot.Add(tb.text)
-  NEXT 
-  
-  
-END
+' PUBLIC SUB Update_Default_boot_choices()
+'   DIM tb AS TextBox
+'   ME.cbDefBoot.Clear
+'   FOR EACH tb IN objNames
+'     cbDefBoot.Add(tb.text)
+'   NEXT 
+'   
+'   
+' END
 
 PUBLIC SUB tbOsLabel_Change()
   
@@ -445,20 +518,28 @@ PUBLIC SUB rbGrub_Click()
 END
 
 PUBLIC SUB rbLilo_Click()
-  DIM i AS Integer
-  DIM $ob AS Object
-  ME.Toggle_window_controls(TRUE)
-  
-    FOR i = 0 TO TsOsList.Count - 1
-        FOR EACH $ob IN TsOsList[i].Children
-          $ob.Delete
+ DIM entry AS BootMenuEntry
+ DIM tb AS TextBox
+  IF MdlBootMngr.objMenuEntries THEN 
+    FOR EACH entry IN MdlBootMngr.objMenuEntries
+      entry.Label = Replace(entry.Label, " ", "")
+      entry.Label = Trim(entry.Label)
+      entry.Label = Left(entry.Label, 15)
+        FOR EACH tb IN objLabels
+          IF tb.tag = entry.root THEN 
+            tb.Text = entry.Label
+            tb.MaxLength = 15
+          END IF
         NEXT 
-        
-      TRY TsOsList[i].Delete
     NEXT 
-    TsOsList.Count = 1
-  ME.PROBE_SYSTEM_FOR_OS(LCase(LAST.text))
-  Timer1.Enabled = TRUE
+    
+    FOR EACH tb IN objLabels
+      tb.Text = Replace(tb.Text, " ", "")
+    NEXT 
+  END IF
+  
+  
+  
 
 END
 
@@ -536,244 +617,244 @@ PUBLIC FUNCTION determine_boot_parameters(sRoot AS String) AS String
 END
 
 
-PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
-  
-  DIM sDump, sOs, sRoot, sLongDesc, sType, sTitle AS String
-  DIM i AS Integer
-  DIM sOsList, sOsLine, sBootLine, sDumparr AS String[]
-  DIM sKernel, sInitrd, sAppendLine AS String
-  DIM sBootargs AS String
-  DIM entry AS BootMenuEntry
-  
-  SHELL "/bin/os-prober > /tmp/os.lst" WAIT 
-  
-  sOsList = Split(Trim(File.Load("/tmp/os.lst")), gb.NewLine)
-    FOR i = 0 TO sOsList.Max
-      TsOsList.Index = TsOsList.Count - 1
-      sOsLine = Split(Trim(sOsList[i]), ":")
-       sType = Trim(sOsLine[3])
-       sLongDesc = Trim(sOsLine[1])
-       sOs = Trim(sOsLine[2])
-       sRoot = Trim(sOsLine[0])
-        IF sBootManager LIKE "lilo" THEN 
-          sTitle = sOs
-        ELSE 
-          sTitle = sLongDesc
-        END IF
-       
-        '  Message(sLongDesc & " was found in " & sRoot)
-        ' -= NOW I NEED TO GET THE KERNEL, INITRD AND APPEND LINES FOR THIS OS. =-
-          IF sType LIKE "linux" THEN 
-            ' this function will return an array separated by "," in this order
-            ' /path/to/kernel, /path/to/initrd, appendline here
-              SHELL "/bin/linux-boot-prober " & sRoot & " >/tmp/bootargs.lst" WAIT ' we need to hunt these arguments for every OS found
-            sBootargs = MdlBootMngr.Get_OS_Boot_Params(sRoot)
-              IF NOT (sBootargs) THEN 
-                DEBUG "Attempting to detect boot parameters for " & sRoot
-                sBootargs = ME.determine_boot_parameters(sRoot) ' manually search for boot parameters.
-              END IF
-              
-              IF NOT (sBootargs) THEN 
-                '= CAN NOT FIND BOOT ARGUMENTS FOR THIS OS =' <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DO SOMETHING ABOUT THIS.... WE NEED TO FIND THESE VALUES IN CASE THE PROBER FAILS >>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                  PRINT ("Unable to find boot arguments for OS in") & Space(1) & sRoot
-                  PRINT "WARNING: default values filled in... this might not work"
-                'RETURN 
-              ELSE 
-                sBootLine = Split(sbootargs, ",")
-                  sKernel = sBootLine[0]
-                  sInitrd = sBootLine[1]
-                  sAppendLine = sBootLine[2]
-                PRINT ("Offer") & Space(1) & sTitle & Space(1) & ("as a bootable choice")
-                  PRINT " --\\ Kernel=" & sKernel
-                  PRINT " --\\ Initrd=" & sInitrd
-                  PRINT " --\\ Root=" & sRoot
-                  'print " --\ Options=" &
-                    
-              END IF
-              TsOsList.Current.Text = sRoot
-                Populate_linux_tab(sRoot, sTitle, sKernel, sInitrd, sAppendLine, sBootManager)
-                  ' create object for global configuration
-                  entry = NEW BootMenuEntry
-                  entry.Enabled = TRUE
-                  entry.Root = sRoot
-                  entry.Label = sTitle
-                  entry.kernel = skernel
-                  entry.initrd = sInitrd
-                  entry.StartupOptions = sAppendLine
-                  
-                  MdlBootMngr.objMenuEntries.Add(entry) ' add this to the global variable
-                INC TsOsList.Count
-              
-          END IF
-            
-    NEXT 
-TRY DEC TsOsList.Count ' remove trailing empty tab
-END
+' PUBLIC SUB PROBE_SYSTEM_FOR_OS(sBootManager AS String)
+'   
+'   DIM sDump, sOs, sRoot, sLongDesc, sType, sTitle AS String
+'   DIM i AS Integer
+'   DIM sOsList, sOsLine, sBootLine, sDumparr AS String[]
+'   DIM sKernel, sInitrd, sAppendLine AS String
+'   DIM sBootargs AS String
+'   DIM entry AS BootMenuEntry
+'   
+'   SHELL "/bin/os-prober > /tmp/os.lst" WAIT 
+'   
+'   sOsList = Split(Trim(File.Load("/tmp/os.lst")), gb.NewLine)
+'     FOR i = 0 TO sOsList.Max
+'       TsOsList.Index = TsOsList.Count - 1
+'       sOsLine = Split(Trim(sOsList[i]), ":")
+'        sType = Trim(sOsLine[3])
+'        sLongDesc = Trim(sOsLine[1])
+'        sOs = Trim(sOsLine[2])
+'        sRoot = Trim(sOsLine[0])
+'         IF sBootManager LIKE "lilo" THEN 
+'           sTitle = sOs
+'         ELSE 
+'           sTitle = sLongDesc
+'         END IF
+'        
+'         '  Message(sLongDesc & " was found in " & sRoot)
+'         ' -= NOW I NEED TO GET THE KERNEL, INITRD AND APPEND LINES FOR THIS OS. =-
+'           IF sType LIKE "linux" THEN 
+'             ' this function will return an array separated by "," in this order
+'             ' /path/to/kernel, /path/to/initrd, appendline here
+'               SHELL "/bin/linux-boot-prober " & sRoot & " >/tmp/bootargs.lst" WAIT ' we need to hunt these arguments for every OS found
+'             sBootargs = MdlBootMngr.Get_OS_Boot_Params(sRoot)
+'               IF NOT (sBootargs) THEN 
+'                 DEBUG "Attempting to detect boot parameters for " & sRoot
+'                 sBootargs = ME.determine_boot_parameters(sRoot) ' manually search for boot parameters.
+'               END IF
+'               
+'               IF NOT (sBootargs) THEN 
+'                 '= CAN NOT FIND BOOT ARGUMENTS FOR THIS OS =' <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DO SOMETHING ABOUT THIS.... WE NEED TO FIND THESE VALUES IN CASE THE PROBER FAILS >>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'                   PRINT ("Unable to find boot arguments for OS in") & Space(1) & sRoot
+'                   PRINT "WARNING: default values filled in... this might not work"
+'                 'RETURN 
+'               ELSE 
+'                 sBootLine = Split(sbootargs, ",")
+'                   sKernel = sBootLine[0]
+'                   sInitrd = sBootLine[1]
+'                   sAppendLine = sBootLine[2]
+'                 PRINT ("Offer") & Space(1) & sTitle & Space(1) & ("as a bootable choice")
+'                   PRINT " --\\ Kernel=" & sKernel
+'                   PRINT " --\\ Initrd=" & sInitrd
+'                   PRINT " --\\ Root=" & sRoot
+'                   'print " --\ Options=" &
+'                     
+'               END IF
+'               TsOsList.Current.Text = sRoot
+'                 Populate_linux_tab(sRoot, sTitle, sKernel, sInitrd, sAppendLine, sBootManager)
+'                   ' create object for global configuration
+'                   entry = NEW BootMenuEntry
+'                   entry.Enabled = TRUE
+'                   entry.Root = sRoot
+'                   entry.Label = sTitle
+'                   entry.kernel = skernel
+'                   entry.initrd = sInitrd
+'                   entry.StartupOptions = sAppendLine
+'                   
+'                   MdlBootMngr.objMenuEntries.Add(entry) ' add this to the global variable
+'                 INC TsOsList.Count
+'               
+'           END IF
+'             
+'     NEXT 
+' TRY DEC TsOsList.Count ' remove trailing empty tab
+' END
 
-PUBLIC SUB Populate_linux_tab($OsRoot AS String, $Title AS String, $kernel AS String, $initrd AS String, $appendline AS String, sBootLoader AS String)
-  
-  DIM $tb AS TextBox
-  DIM $tl AS textlabel
-  DIM $cb AS ComboBox
-  DIM $cont AS HBox
-  DIM $chk AS CheckBox
-  
-  
-  $cont = NEW HBox(ME.TsOsList)
-    $cont.Height = 12
-    $cont.Expand = TRUE
-  $cont = NEW HBox(ME.TsOsList)
-    $cont.Height = 28
-    $cont.Expand = TRUE
-    $cont.Spacing = 4
-    $cont.Padding = 2
-    
-    $tl = NEW TextLabel($cont)
-      WITH $tl
-        .text = ("Title") '--------------- title label -----------
-        .Expand = FALSE
-        .height = 28
-        .Width = 64
-        .Alignment = Align.Left
-      END WITH 
-    $tb = NEW TextBox($cont) AS "OsNameBox" ' ------------ Title text box ------------
-      WITH $tb
-        .Height = 28
-        .Tag = $OsRoot
-        .Expand = TRUE
-        .Text = $Title
-          IF sBootLoader LIKE "lilo" THEN 
-            .MaxLength = 15
-          ELSE 
-            .MaxLength = 64
-          END IF
-      END WITH 
-      objNames.Add($tb)
-    $tl = NEW TextLabel($cont) '---------------------------- initrd label -------------
-      WITH $tl
-        .Height = 28
-        .Text = ("Initial RAM Disk")
-        .Alignment = Align.Left
-        .Width = 150
-        .Expand = FALSE
-      END WITH 
-    $cb = NEW ComboBox($cont) '-------------------------- initrd combobox --------------
-      WITH $cb
-      .ReadOnly = TRUE
-      .Tag = $OsRoot
-      .List = [$initrd]
-      .Height = 28
-      .Expand = FALSE
-      .Width = 200
-      END WITH 
-      objinitrds.Add($cb)
-    $cont = NEW HBox(TsOsList) ' --------------------------- new container (hbox) ----------
-    $cont.Height = 28
-    $cont.Expand = TRUE
-    
-    $tl = NEW TextLabel($cont) ' ------------------------ append label (holds the kernel path (hidden))----------------------
-      WITH $tl
-        .Text = ("Kernel boot options")
-        .Width = 150
-        .Height = 28
-        .Name = $OsRoot
-        .Expand = FALSE
-        .Tag = $kernel ' set the kernel path here..
-        .Alignment = Align.Left
-      END WITH 
-      objKernels.Add($tl)
-    $tb = NEW TextBox($cont)
-      WITH $tb
-        .Height = 28
-        .Tag = $OsRoot
-          IF InStr($AppendLine, "append") THEN 
-            .Text = Right($appendline, Len($appendline) - Len("append"))
-              
-          ELSE 
-            .Text = $appendline
-          END IF
-          .Text = Trim(Replace(.Text, "\"", ""))
-          IF Left(Trim(.Text)) = "=" THEN 
-                .Text = Right(.Text, Len(.Text) - 1)
-          END IF
-          .Text = Trim(.Text)
-          
-        .Expand = TRUE
-      END WITH 
-        objappends.Add($tb)
-        
-    $chk = NEW CheckBox(TsOsList) AS "IncludeOs"
-      WITH $chk
-        .Expand = TRUE
-        .Value = TRUE
-        .Height = 28
-        .Tag = $OsRoot
-        .Text = ("Include this Operating System in boot menu")
-      END WITH 
-      objMenuObjects.Add($chk) ' Add to array of bootable OS's
-    $chk = NEW CheckBox(TsOsList) AS "DefOS"
-      WITH $chk
-        .Expand = TRUE
-        .Value = FALSE
-        .Height = 28
-        .Tag = $OsRoot
-        .Text = ("Boot this operating system by default")
-      END WITH 
-      objDefOs.Add($chk)
-        
-        
-  
-END
+' PUBLIC SUB Populate_linux_tab($OsRoot AS String, $Title AS String, $kernel AS String, $initrd AS String, $appendline AS String, sBootLoader AS String)
+'   
+'   DIM $tb AS TextBox
+'   DIM $tl AS textlabel
+'   DIM $cb AS ComboBox
+'   DIM $cont AS HBox
+'   DIM $chk AS CheckBox
+'   
+'   
+'   $cont = NEW HBox(ME.TsOsList)
+'     $cont.Height = 12
+'     $cont.Expand = TRUE
+'   $cont = NEW HBox(ME.TsOsList)
+'     $cont.Height = 28
+'     $cont.Expand = TRUE
+'     $cont.Spacing = 4
+'     $cont.Padding = 2
+'     
+'     $tl = NEW TextLabel($cont)
+'       WITH $tl
+'         .text = ("Title") '--------------- title label -----------
+'         .Expand = FALSE
+'         .height = 28
+'         .Width = 64
+'         .Alignment = Align.Left
+'       END WITH 
+'     $tb = NEW TextBox($cont) AS "OsNameBox" ' ------------ Title text box ------------
+'       WITH $tb
+'         .Height = 28
+'         .Tag = $OsRoot
+'         .Expand = TRUE
+'         .Text = $Title
+'           IF sBootLoader LIKE "lilo" THEN 
+'             .MaxLength = 15
+'           ELSE 
+'             .MaxLength = 64
+'           END IF
+'       END WITH 
+'       objNames.Add($tb)
+'     $tl = NEW TextLabel($cont) '---------------------------- initrd label -------------
+'       WITH $tl
+'         .Height = 28
+'         .Text = ("Initial RAM Disk")
+'         .Alignment = Align.Left
+'         .Width = 150
+'         .Expand = FALSE
+'       END WITH 
+'     $cb = NEW ComboBox($cont) '-------------------------- initrd combobox --------------
+'       WITH $cb
+'       .ReadOnly = TRUE
+'       .Tag = $OsRoot
+'       .List = [$initrd]
+'       .Height = 28
+'       .Expand = FALSE
+'       .Width = 200
+'       END WITH 
+'       objinitrds.Add($cb)
+'     $cont = NEW HBox(TsOsList) ' --------------------------- new container (hbox) ----------
+'     $cont.Height = 28
+'     $cont.Expand = TRUE
+'     
+'     $tl = NEW TextLabel($cont) ' ------------------------ append label (holds the kernel path (hidden))----------------------
+'       WITH $tl
+'         .Text = ("Kernel boot options")
+'         .Width = 150
+'         .Height = 28
+'         .Name = $OsRoot
+'         .Expand = FALSE
+'         .Tag = $kernel ' set the kernel path here..
+'         .Alignment = Align.Left
+'       END WITH 
+'       objKernels.Add($tl)
+'     $tb = NEW TextBox($cont)
+'       WITH $tb
+'         .Height = 28
+'         .Tag = $OsRoot
+'           IF InStr($AppendLine, "append") THEN 
+'             .Text = Right($appendline, Len($appendline) - Len("append"))
+'               
+'           ELSE 
+'             .Text = $appendline
+'           END IF
+'           .Text = Trim(Replace(.Text, "\"", ""))
+'           IF Left(Trim(.Text)) = "=" THEN 
+'                 .Text = Right(.Text, Len(.Text) - 1)
+'           END IF
+'           .Text = Trim(.Text)
+'           
+'         .Expand = TRUE
+'       END WITH 
+'         objappends.Add($tb)
+'         
+'     $chk = NEW CheckBox(TsOsList) AS "IncludeOs"
+'       WITH $chk
+'         .Expand = TRUE
+'         .Value = TRUE
+'         .Height = 28
+'         .Tag = $OsRoot
+'         .Text = ("Include this Operating System in boot menu")
+'       END WITH 
+'       objMenuObjects.Add($chk) ' Add to array of bootable OS's
+'     $chk = NEW CheckBox(TsOsList) AS "DefOS"
+'       WITH $chk
+'         .Expand = TRUE
+'         .Value = FALSE
+'         .Height = 28
+'         .Tag = $OsRoot
+'         .Text = ("Boot this operating system by default")
+'       END WITH 
+'       objDefOs.Add($chk)
+'         
+'         
+'   
+' END
 
-PUBLIC SUB DefOS_Click()
-  
-  DIM cb AS CheckBox
-  DIM tb AS TextBox
-  DIM entry AS BootMenuEntry
-  
-  IF objDefOs.Count > 1 THEN 
-    FOR EACH cb IN objDefOs
-      IF cb <> LAST THEN cb.Value = FALSE
-    NEXT
-  END IF
-  FOR EACH tb IN objNames
-    IF tb.Tag = LAST.tag THEN 
-      'cbDefBoot.Tag = tb.Text
-      ClsGlobal.sDefBoot = tb.Text
-    END IF
-  NEXT 
-  'END IF
-  IF LAST.value = FALSE THEN 
-    FOR EACH tb IN objNames
-      IF tb.Tag = LAST.tag THEN 
-        IF cbDefBoot.Tag = tb.Text THEN 
-        IF ClsGlobal.sDefBoot = tb.Text THEN ClsGlobal.sDefBoot = ""
-        '  cbDefBoot.Tag = ""
-        END IF
-      END IF
-    NEXT 
-  END IF
-  
-  FOR EACH entry IN MdlBootMngr.objMenuEntries
-    entry.IsDefault = FALSE
-  NEXT 
-    
-    IF LAST.value = TRUE THEN 
-      FOR EACH entry IN MdlBootMngr.objMenuEntries
-        IF entry.root = LAST.tag THEN 
-          entry.IsDefault = TRUE
-        ELSE 
-          entry.IsDefault = FALSE
-        END IF
-      NEXT 
-    ELSE 
-      FOR EACH entry IN MdlBootMngr.objMenuEntries
-        IF entry.root = LAST.tag THEN entry.IsDefault = FALSE
-      NEXT 
-    END IF
-        
-
-END
+' PUBLIC SUB DefOS_Click()
+'   
+'   DIM cb AS CheckBox
+'   DIM tb AS TextBox
+'   DIM entry AS BootMenuEntry
+'   
+'   IF objDefOs.Count > 1 THEN 
+'     FOR EACH cb IN objDefOs
+'       IF cb <> LAST THEN cb.Value = FALSE
+'     NEXT
+'   END IF
+'   FOR EACH tb IN objNames
+'     IF tb.Tag = LAST.tag THEN 
+'       'cbDefBoot.Tag = tb.Text
+'       ClsGlobal.sDefBoot = tb.Text
+'     END IF
+'   NEXT 
+'   'END IF
+'   IF LAST.value = FALSE THEN 
+'     FOR EACH tb IN objNames
+'       IF tb.Tag = LAST.tag THEN 
+'         IF cbDefBoot.Tag = tb.Text THEN 
+'         IF ClsGlobal.sDefBoot = tb.Text THEN ClsGlobal.sDefBoot = ""
+'         '  cbDefBoot.Tag = ""
+'         END IF
+'       END IF
+'     NEXT 
+'   END IF
+'   
+'   FOR EACH entry IN MdlBootMngr.objMenuEntries
+'     entry.IsDefault = FALSE
+'   NEXT 
+'     
+'     IF LAST.value = TRUE THEN 
+'       FOR EACH entry IN MdlBootMngr.objMenuEntries
+'         IF entry.root = LAST.tag THEN 
+'           entry.IsDefault = TRUE
+'         ELSE 
+'           entry.IsDefault = FALSE
+'         END IF
+'       NEXT 
+'     ELSE 
+'       FOR EACH entry IN MdlBootMngr.objMenuEntries
+'         IF entry.root = LAST.tag THEN entry.IsDefault = FALSE
+'       NEXT 
+'     END IF
+'         
+' 
+' END
 
 
 PUBLIC SUB TLoSlIST_MouseDown()
@@ -781,23 +862,23 @@ PUBLIC SUB TLoSlIST_MouseDown()
 
 
 END
-PUBLIC SUB OsNameBox_KeyRelease()
-  
-  DIM cb AS CheckBox
-  DIM menu AS BootMenuEntry
-    FOR EACH cb IN objDefOs
-      IF cb.Value = TRUE THEN 
-        IF cb.Tag = LAST.tag THEN ' we are modifying the default OS value
-          cbDefBoot.Tag = LAST.text
-        END IF
-      END IF
-    NEXT 
-    FOR EACH menu IN MdlBootMngr.objMenuEntries
-      IF menu.Root = LAST.tag THEN 
-        menu.Label = LAST.text
-      END IF
-    NEXT 
-END
+' PUBLIC SUB OsNameBox_KeyRelease()
+'   
+'   DIM cb AS CheckBox
+'   DIM menu AS BootMenuEntry
+'     FOR EACH cb IN objDefOs
+'       IF cb.Value = TRUE THEN 
+'         IF cb.Tag = LAST.tag THEN ' we are modifying the default OS value
+'           cbDefBoot.Tag = LAST.text
+'         END IF
+'       END IF
+'     NEXT 
+'     FOR EACH menu IN MdlBootMngr.objMenuEntries
+'       IF menu.Root = LAST.tag THEN 
+'         menu.Label = LAST.text
+'       END IF
+'     NEXT 
+' END
 
 
 PUBLIC SUB Timer1_Timer()
@@ -822,3 +903,34 @@ PUBLIC SUB cbTarget_Click()
 END
 
 
+
+PUBLIC SUB TextLabel4_MouseDown()
+
+  
+
+END
+
+PUBLIC SUB cbDefBoot_Click()
+
+  DIM entry AS BootMenuEntry
+    FOR EACH entry IN MdlBootMngr.objMenuEntries
+      entry.IsDefault = FALSE
+    NEXT 
+  
+    FOR EACH entry IN MdlBootMngr.objMenuEntries
+      IF entry.Label = Trim(LAST.text) THEN 
+        entry.IsDefault = TRUE
+        'PRINT "Default OS is now set to " & entry.Label
+      END IF
+    NEXT 
+    
+    
+
+
+END
+
+PUBLIC SUB cbVidRes_Click()
+
+  MdlBootMngr.sVidMode = LAST.text
+
+END

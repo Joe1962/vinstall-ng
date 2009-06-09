@@ -1,0 +1,46 @@
+' Gambas class file
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PRIVATE $Name AS String
+PRIVATE $Contents AS String[]
+
+PROPERTY Name AS String
+PROPERTY Contents AS String[]
+
+
+PRIVATE FUNCTION Name_Read() AS String
+
+  RETURN $Name
+
+END
+
+PRIVATE SUB Name_Write(Value AS String)
+
+  $Name = Value
+
+END
+
+PRIVATE FUNCTION Contents_Read() AS String[]
+
+  RETURN $Contents
+
+END
+
+PRIVATE SUB Contents_Write(Value AS String[])
+
+  $Contents = Value
+
+END

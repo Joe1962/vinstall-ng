@@ -14,156 +14,116 @@ msgstr ""
 msgid "VectorLinux Installer"
 msgstr ""
 
-#: Conf0.class:54
-msgid "Installation found in"
-msgstr ""
-
-#: Conf0.class:72
-msgid "Include in boot menu"
-msgstr ""
-
-#: Conf0.class:92
-msgid "Name"
-msgstr ""
-
-#: Conf0.class:110
-msgid "Initial RAM disk image"
-msgstr ""
-
-#: Conf0.class:133
-msgid "Kernel boot options"
-msgstr ""
-
-#: Conf0.class:159
-msgid "Add option to boot this operating system into text mode"
-msgstr ""
-
-#: Conf0.class:258
+#: Conf0.class:254
 msgid "Found on"
 msgstr ""
 
-#: Conf0.class:262
+#: Conf0.class:258
 msgid "Label"
 msgstr ""
 
-#: Conf0.class:277
+#: Conf0.class:292
 msgid "Include this operating system in boot menu"
 msgstr ""
 
-#: Conf0.class:281
-msgid "Make this the default operating system to boot"
+#: Conf0.class:364 MdlBootMngr.module:178
+msgid "Standard"
 msgstr ""
 
-#: Conf0.class:423 Step1.class:434 Step3a1.class:22 Step3a1a.class:186
+#: Conf0.class:364
+msgid "Bootplash Med"
+msgstr ""
+
+#: Conf0.class:364 MdlBootMngr.module:182
+msgid "Bootsplash High"
+msgstr ""
+
+#: Conf0.class:364 MdlBootMngr.module:184
+msgid "Bootsplash Extra High"
+msgstr ""
+
+#: Conf0.class:496 Step1.class:434 Step3a1.class:22 Step3a1a.class:186
 #: Step7a.class:144
 msgid "WARNING:"
 msgstr ""
 
-#: Conf0.class:423
+#: Conf0.class:496
 msgid "Selecting this option will bypass your boot manager configuration."
 msgstr ""
 
-#: Conf0.class:423
+#: Conf0.class:496
 msgid "You may not be able to start your"
 msgstr ""
 
-#: Conf0.class:423
+#: Conf0.class:496
 msgid "installation. Do not choose this option"
 msgstr ""
 
-#: Conf0.class:423
+#: Conf0.class:496
 msgid "unless you are fully aware of what you are doing."
 msgstr ""
 
-#: Conf0.class:578
-msgid "Unable to find boot arguments for OS in"
-msgstr ""
-
-#: Conf0.class:586
-msgid "Offer"
-msgstr ""
-
-#: Conf0.class:586
-msgid "as a bootable choice"
-msgstr ""
-
-#: Conf0.class:633
-msgid "Title"
-msgstr ""
-
-#: Conf0.class:655
-msgid "Initial RAM Disk"
-msgstr ""
-
-#: Conf0.class:711
-msgid "Include this Operating System in boot menu"
-msgstr ""
-
-#: Conf0.class:720
-msgid "Boot this operating system by default"
-msgstr ""
-
-#: Conf0.class:814
+#: Conf0.class:895
 msgid "Bootsector"
 msgstr ""
 
-#: Conf0.class:816 MdlBootMngr.module:164
+#: Conf0.class:897 MdlBootMngr.module:166
 msgid "MBR Of"
 msgstr ""
 
-#: Conf0.class:818 MdlBootMngr.module:170
+#: Conf0.class:899 MdlBootMngr.module:172
 msgid "Floppy"
 msgstr ""
 
-#: Conf0.class:872
+#: Conf0.class:984
 msgid "System Bootloader Configuration"
 msgstr ""
 
-#: Conf0.class:888
+#: Conf0.class:1000
 msgid "Select system boot manager to use"
 msgstr ""
 
-#: Conf0.class:897
+#: Conf0.class:1009
 msgid "LILO"
 msgstr ""
 
-#: Conf0.class:904
+#: Conf0.class:1016
 msgid "GRUB"
 msgstr ""
 
-#: Conf0.class:910
+#: Conf0.class:1022
 msgid "NONE"
 msgstr ""
 
-#: Conf0.class:919
+#: Conf0.class:1031
 msgid "Boot Menu Options"
 msgstr ""
 
-#: Conf0.class:929
+#: Conf0.class:1041
 msgid "Target"
 msgstr ""
 
-#: Conf0.class:941
+#: Conf0.class:1053
 msgid "Video Resolution"
 msgstr ""
 
-#: Conf0.class:960
+#: Conf0.class:1072
 msgid "Prompt Time Out"
 msgstr ""
 
-#: Conf0.class:971
+#: Conf0.class:1083
 msgid "Seconds"
 msgstr ""
 
-#: Conf0.class:978
+#: Conf0.class:1089
 msgid "Boot Default"
 msgstr ""
 
-#: Conf0.class:1001
+#: Conf0.class:1111
 msgid "DETECTED OPERATING SYSTEMS."
 msgstr ""
 
-#: Conf0.class:1017
+#: Conf0.class:1127
 msgid "Tab 0"
 msgstr ""
 
@@ -256,7 +216,7 @@ msgstr ""
 msgid "When finished, Click"
 msgstr ""
 
-#: Conf3.class:47 MdlMain.module:652 Step3a1a.class:177 Step3a2.class:359
+#: Conf3.class:47 MdlMain.module:630 Step3a1a.class:177 Step3a2.class:359
 #: Step3a3a.class:72 Step5.class:177
 msgid "to continue"
 msgstr ""
@@ -617,49 +577,37 @@ msgstr ""
 msgid "Select the location to which we will resize"
 msgstr ""
 
-#: MdlBootMngr.module:152
+#: MdlBootMngr.module:153
 msgid "None"
 msgstr ""
 
-#: MdlBootMngr.module:166
+#: MdlBootMngr.module:168
 msgid "Bootsector Of"
 msgstr ""
 
-#: MdlBootMngr.module:176
-msgid "Standard"
-msgstr ""
-
-#: MdlBootMngr.module:178
+#: MdlBootMngr.module:180
 msgid "Bootsplash Med"
 msgstr ""
 
-#: MdlBootMngr.module:180
-msgid "Bootsplash High"
-msgstr ""
-
-#: MdlBootMngr.module:182
-msgid "Bootsplash Extra High"
-msgstr ""
-
-#: MdlBootMngr.module:425
+#: MdlBootMngr.module:418
 msgid "MBR of"
 msgstr ""
 
-#: MdlBootMngr.module:433
+#: MdlBootMngr.module:426
 msgid "Bootsector of"
 msgstr ""
 
-#: MdlBootMngr.module:482
+#: MdlBootMngr.module:475
 msgid "You must select one operating system to be started by default"
 msgstr ""
 
-#: MdlBootMngr.module:500
+#: MdlBootMngr.module:493
 msgid ""
 "Found duplicate operating system names. Please use unique labels for each "
 "menu entry"
 msgstr ""
 
-#: MdlBootMngr.module:503
+#: MdlBootMngr.module:496
 msgid "Check these boxes to make sure they have unique names"
 msgstr ""
 
@@ -683,59 +631,59 @@ msgstr ""
 msgid "with"
 msgstr ""
 
-#: MdlMain.module:551
+#: MdlMain.module:528
 msgid "Preparing system partitions"
 msgstr ""
 
-#: MdlMain.module:553
+#: MdlMain.module:530
 msgid "An error occurred while preparing partitions. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:568
+#: MdlMain.module:546
 msgid "Error during installation of required software. Unable to continue"
 msgstr ""
 
-#: MdlMain.module:621
+#: MdlMain.module:599
 msgid "Unable to install contents of"
 msgstr ""
 
-#: MdlMain.module:621
+#: MdlMain.module:599
 msgid "Cannot continue"
 msgstr ""
 
-#: MdlMain.module:652
+#: MdlMain.module:630
 msgid "Installation is complete. Click"
 msgstr ""
 
-#: MdlMain.module:654
+#: MdlMain.module:632
 msgid "Installation complete... Click"
 msgstr ""
 
-#: MdlMain.module:654
+#: MdlMain.module:632
 msgid "to continue."
 msgstr ""
 
-#: MdlMain.module:656
+#: MdlMain.module:634
 msgid "Error while installing kernels and initrds"
 msgstr ""
 
-#: MdlMain.module:679
+#: MdlMain.module:657
 msgid "Unable to install the components of"
 msgstr ""
 
-#: MdlMain.module:679
+#: MdlMain.module:657
 msgid "Unable to continue."
 msgstr ""
 
-#: MdlMain.module:768
+#: MdlMain.module:746
 msgid "Installing"
 msgstr ""
 
-#: MdlMain.module:768
+#: MdlMain.module:746
 msgid "Part of"
 msgstr ""
 
-#: MdlMain.module:771
+#: MdlMain.module:749
 msgid "Error installing"
 msgstr ""
 
@@ -1507,35 +1455,35 @@ msgstr ""
 msgid "Select Installation Mode"
 msgstr ""
 
-#: Step7.class:146
+#: Step7.class:143
 msgid "Full Install"
 msgstr ""
 
-#: Step7.class:156
+#: Step7.class:153
 msgid "Install everthing in the image (Fully Automated)"
 msgstr ""
 
-#: Step7.class:164 Step8.class:140
+#: Step7.class:161 Step8.class:140
 msgid "Customized"
 msgstr ""
 
-#: Step7.class:174
+#: Step7.class:171
 msgid "Select  the components you wish to install  (Advanced)"
 msgstr ""
 
-#: Step7.class:182 Step8.class:142
+#: Step7.class:179 Step8.class:142
 msgid "Minimal"
 msgstr ""
 
-#: Step7.class:192
+#: Step7.class:189
 msgid "Install the most minimal working confuguration (For older hardware)"
 msgstr ""
 
-#: Step7.class:205
+#: Step7.class:202
 msgid "Include Development Tools"
 msgstr ""
 
-#: Step7.class:218
+#: Step7.class:215
 msgid "Include Light-weight graphical environment"
 msgstr ""
 

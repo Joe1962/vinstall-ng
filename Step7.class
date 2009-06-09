@@ -50,10 +50,7 @@ PUBLIC SUB OnExit()
   IF ME.rbFullInstall.Value = TRUE THEN ClsGlobal.sInstallType = rbFullInstall.Tag
   IF ME.rbCustomInstall.Value = TRUE THEN ClsGlobal.sInstallType = rbCustomInstall.Tag
   IF ME.rbMinimal.Value = TRUE THEN ClsGlobal.sInstallType = rbMinimal.Tag
-  
-  
 END
-
 
 
 PUBLIC SUB Panel4_MouseDown()
