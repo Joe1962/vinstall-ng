@@ -1,0 +1,42 @@
+' Gambas module file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+PUBLIC Bulks AS NEW Object[]
+PUBLIC tlzs AS NEW Object[]
+
+PUBLIC FUNCTION Install()
+  
+  DIM item AS Bulk
+  DIM pkg AS Package
+  DIM stlz AS String
+  DIM i AS Integer
+  
+  FOR EACH item IN Bulks
+    FOR EACH stlz IN item.Contents
+    INC i
+      pkg = NEW Package
+      pkg.FullPath = MdlMain.Get_FULL_TLZ_PACKAGE(stlz)
+      Step9.tlCurrPkg.Text = "Installing " & pkg.FullPath
+      pkg.Install
+      Step9.pbInstall.Value = i / item.Contents.Count
+    NEXT 
+    i = 0
+  NEXT 
+      
+    
+    
+  
+END

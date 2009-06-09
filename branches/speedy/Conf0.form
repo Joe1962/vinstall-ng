@@ -98,13 +98,11 @@
       }
       { TextLabel4 TextLabel
         MoveScaled(38,0,15,3.5)
-        Visible = False
         Text = ("Boot Default")
         Alignment = Align.Right
       }
       { cbDefBoot ComboBox
         MoveScaled(56,0,25,3.5)
-        Visible = False
         Text = ("")
         ReadOnly = True
       }

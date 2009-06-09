@@ -1,0 +1,66 @@
+' Gambas class file
+
+'    This file is part of vinstall-ng
+
+'    vinstall-ng is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 2 of the License, or
+'    (at your option) any later version.
+
+'    vinstall-ng  is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+
+'    You should have received a copy of the GNU General Public License
+'    along with vinstall-ng.  If not, see <http://www.gnu.org/licenses/>.
+
+PRIVATE $FullPath AS String
+
+PROPERTY FullPath AS String
+PRIVATE hproc AS Process
+
+
+PUBLIC SUB _new()
+  
+  
+  
+END
+
+PUBLIC FUNCTION Install() AS Integer
+  
+  hproc = EXEC ["/sbin/installpkg", "-q", "-R", ClsGlobal.sTargetPath, $FullPath] WAIT 
+    IF hproc.Value > 0 THEN 
+      RETURN 1
+    END IF
+    
+  
+  
+END
+
+PUBLIC SUB Process_Kill()
+  
+  
+  
+END
+
+
+PUBLIC SUB Process_Read()
+  
+  
+  
+END
+
+
+PRIVATE FUNCTION FullPath_Read() AS String
+
+  RETURN $FullPath
+
+END
+
+PRIVATE SUB FullPath_Write(Value AS String)
+
+  $FullPath = Value
+
+END
+

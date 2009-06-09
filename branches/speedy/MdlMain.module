@@ -381,30 +381,7 @@ PUBLIC FUNCTION INSTALL_INITIAL_PACKAGES(tlStatus AS TextLabel, pbProg AS Progre
           MajorDesc = sLine[3]
           sPkg = sLine[1]
             IF ME.INSTALL_THIS_BULK(tlStatus, pbProg, sPkg) > 0 THEN RETURN 1
-              
-              
-            ' sFileList = Trim(File.Load("/mnt/source/veclinux" &/ Trim(sPKG)))
-            ' $listarr = Split(Trim(sFileList), gb.NewLine)
-            '   FOR ii = 0 TO $listarr.Max
-            '     '$path = ME.GET_PACKAGE_FULL_PATH(Trim($listarr[ii])) ' Old method uses pkgname (slow)
-            '     $path = ME.Get_FULL_TLZ_PACKAGE(Trim($listarr[ii])) ' new method sans pkgname
-            '       IF $path THEN 
-            '       
-            '       pbProg.Value = (ii + 1) / $listarr.Count
-            '         WAIT 0.2598
-            '         tlStatus.Text = ("Installing required package") & Space(1) & $path
-            '       
-            '           ires = ME.INSTALL_THIS_PACKAGE("/mnt/source/packages" &/ Trim($path))
-            '             IF ires > 0 THEN 
-            '               Message.Error(("Problem while installing") & Space(1) & File.Name($path))
-            '               RETURN ires
-            '             END IF
-            '         'pbProg.Value = (ii + 1) / $listarr.Count
-            '       END IF
-            '       
-            '       
-            '   NEXT 
-                    
+
         NEXT 
   
 END
@@ -565,6 +542,7 @@ PUBLIC FUNCTION INSTALL_PACKAGES(tlStatus AS TextLabel, pbProg AS ProgressBar, i
   
   ' Install initial directory structure for the target /
     IF ME.INSTALL_INITIAL_PACKAGES(tlStatus, pbProg) > 0 THEN 
+'IF ME.INSTALL_INITIAL_PACKAGES() > 0 THEN 
       Message.Error(("Error during installation of required software. Unable to continue"))
       RETURN 1
     ELSE 
